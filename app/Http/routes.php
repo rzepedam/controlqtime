@@ -27,5 +27,7 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::group(['prefix' => 'maintainers'], function() {
+        Route::resource('countries', 'CountryController');
+    });
 });

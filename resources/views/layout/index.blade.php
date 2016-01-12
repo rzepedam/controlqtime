@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
+
 <html>
 <head>
   <meta charset="UTF-8">
@@ -42,18 +39,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
+        <h1>
+            @yield('title_header')
+        </h1>
+        <ol class="breadcrumb">
+            @yield('breadcumb')
+            <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>-->
+        </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-
-      @yield('content')
-
+        @yield('content')
     </section><!-- /.content -->
+
   </div><!-- /.content-wrapper -->
 
   <!-- Main Footer -->
