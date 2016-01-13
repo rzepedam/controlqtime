@@ -10,6 +10,19 @@
     <li class="active">Países</li>
 @stop
 
+@section('search')
+    <div class="box-tools breadcrumb2">
+        {!! Form::open(['route' => 'maintainers.countries.index', 'method' => 'GET']) !!}
+            <div class="input-group input-group-sm" style="width: 250px;">
+                {{ Form::text('table_search', null, ['class' => 'form-control pull-right', 'placeholder' => 'Buscar...']) }}
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        {!! Form::close() !!}
+    </div>
+@stop
+
 @section('content')
 
     @include('layout.messages.errors')

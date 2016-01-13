@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <title>ControlQTime</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Favicon -->
+  <link rel="shortcut icon" href="{{ asset('me/img/favicon.ico') }}" type="image/x-icon" />
   <!-- Bootstrap 3.3.2 -->
   <link href="{{ asset("/bower_components/adminLTE/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
   <!-- Font Awesome Icons -->
@@ -26,7 +28,7 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="skin-blue">
+<body class="skin-blue sidebar-mini sidebar-collapse">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -44,9 +46,9 @@
         </h1>
         <ol class="breadcrumb">
             @yield('breadcumb')
-            <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>-->
         </ol>
+        <!-- Solamente en vistas index para insertar buscador -->
+        @yield('search')
     </section>
 
     <!-- Main content -->

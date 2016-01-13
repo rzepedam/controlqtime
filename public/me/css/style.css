@@ -1,0 +1,42 @@
+
+.content-header > .breadcrumb2 {
+    float: right;
+    background: transparent;
+    margin-top: 22px;
+    margin-bottom: 0;
+    font-size: 12px;
+    padding: 7px 5px;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    border-radius: 2px;
+}
+
+.content-header > .breadcrumb2 > li > a {
+    color: #444;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.content-header > .breadcrumb2 > li > a > .fa,
+.content-header > .breadcrumb2 > li > a > .glyphicon,
+.content-header > .breadcrumb2 > li > a > .ion {
+    margin-right: 5px;
+}
+.content-header > .breadcrumb2 > li + li:before {
+    content: '>\00a0';
+}
+@media (max-width: 991px) {
+    .content-header > .breadcrumb2 {
+        position: relative;
+        margin-top: 5px;
+        top: 0;
+        right: 0;
+        float: none;
+        background: #d2d6de;
+        padding-left: 10px;
+    }
+    .content-header > .breadcrumb2 li:before {
+        color: #97a0b3;
+    }
+}

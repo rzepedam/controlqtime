@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Route;
 use Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -9,13 +10,12 @@ use App\Country;
 use App\Http\Requests\CountryRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CountryController extends Controller
 {
     public function index()
     {
-        $countries = Country::orderBy('name')->paginate(20);
+        $countries = Country::name(\Request::get('table_search'))->orderBy('name')->paginate(20);
         return view('maintainers.countries.index', compact('countries'));
     }
 
