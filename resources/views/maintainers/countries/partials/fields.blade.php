@@ -1,7 +1,7 @@
 
 <div class="row">
     <div class="col-md-3">
-        {!! Form::label('id', 'Sigla') !!}
+        {!! Form::label('id', 'ID') !!}
         {!! Form::text('id', null, ['class' => 'form-control', 'autofocus']) !!}
     </div>
 

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Country;
-use App\Http\Requests\CreateCountryRequest;
+use App\Http\Requests\CountryRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CountryController extends Controller
 {
@@ -23,21 +24,35 @@ class CountryController extends Controller
         return view('maintainers.countries.create');
     }
 
-    public function store(CreateCountryRequest $request)
+    public function store(CountryRequest $request)
     {
         $country = Country::create($request->all());
         Session::flash('success', 'El registro fue almacenado satisfactoriamente');
         return Redirect::route('maintainers.countries.index');
     }
 
-    public function destroy($id, Request $request)
+    public function edit($id)
     {
-        $country = Country::find($id)->delete();
-        $message = ' fue eliminado de nuestros registros';
-        if ($request->ajax())
-        {
-            Session::flash('success', $message);
-            return redirect()->route('maintainers.countries.index');
-        }
+        $country = Country::findOrFail($id);
+        return view('maintainers.countries.edit', compact('country'));
+    }
+
+    public function update(CountryRequest $request, $id)
+    {
+        $country = Country::findOrFail($id);
+        $message = $country->name . ' fue actualizado satisfactoriamente';
+        $country->fill(Request::all());
+        $country->save();
+        Session::flash('success', $message);
+        return Redirect::route('maintainers.countries.index');
+    }
+
+    public function destroy($id)
+    {
+        $country = Country::findOrFail($id);
+        $country->delete();
+        Session::flash('success', $country->name . ' fue eliminado de nuestros registros');
+        return Redirect::route('maintainers.countries.index');
+
     }
 }

@@ -14,8 +14,7 @@
                     <td>{{ $country->id }}</td>
                     <td>{{ $country->name }}</td>
                     <td class="text-center">
-                        <a href="#" class="btn btn-success"><i class="fa fa-pencil"></i> Editar</a>
-                        <a href="#" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i> Eliminar</a>
+                        <a href="{{ route('maintainers.countries.edit', $country) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i> Editar</a>
                     </td>
                 </tr>
             @endforeach
