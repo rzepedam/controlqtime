@@ -6,13 +6,13 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><span><i class="fa fa-home"></i> Inicio</span></a></li>
-            <li><a href="#"><span><i class="fa fa-users"></i> RRHH</span></a></li>
-            <li><a href="#"><span><i class="fa fa-life-ring"></i> Seguridad</span></a></li>
-            <li><a href="#"><span><i class="fa fa-rss"></i> Operaciones</span></a></li>
-            <li><a href="#"><span><i class="fa fa-gavel"></i> Jurídica</span></a></li>
+            <li class="active"><a href="#"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+            <li><a href="#"><i class="fa fa-users"></i> <span>RRHH</span></a></li>
+            <li><a href="#"><i class="fa fa-life-ring"></i> <span>Seguridad</span></a></li>
+            <li><a href="#"><i class="fa fa-rss"></i> <span>Operaciones</span></a></li>
+            <li><a href="#"><i class="fa fa-gavel"></i> <span>Jurídica</span></a></li>
             <li class="treeview">
-                <a href="#"><span><i class="fa fa-cogs"></i> Mantenedores</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class="fa fa-cogs"></i> <span>Mantenedores</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-sitemap"></i> Áreas</a></li>
                     <li><a href="#"><i class="fa fa-archive"></i> Bodegas</a></li>
@@ -27,7 +27,8 @@
                     <li><a href="#"><i class="fa fa-road"></i> Terminales</a></li>
                 </ul>
             </li>
-        </ul><!-- /.sidebar-menu -->
+        </ul>
+        <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
 </aside>
