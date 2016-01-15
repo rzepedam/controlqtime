@@ -1,7 +1,3 @@
-/**
- * Created by Raul on 13-01-2016.
- */
-
 $(document).ready(function(){
 
     var id;
