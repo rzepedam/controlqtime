@@ -28,6 +28,9 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'maintainers'], function() {
+        Route::get('/', function(){
+            return view('maintainers.index');
+        });
         Route::resource('countries', 'CountryController');
     });
 });
