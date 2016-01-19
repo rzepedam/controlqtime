@@ -28,7 +28,7 @@
                     <li><a href="#"><i class="fa fa-star"></i> Licencias Profesionales</a></li>
                     <li><a href="#"><i class="fa fa-money"></i> Monedas</a></li>
                     <li><a href="{{ route('maintainers.countries.index') }}"><i class="fa fa-flag"></i> Países</a></li>
-                    <li><a href="#"><i class="fa fa-child"></i> Parentescos Familiares</a></li>
+                    <li><a href="{{ route('maintainers.kins.index') }}"><i class="fa fa-child"></i> Parentescos Familiares</a></li>
                     <li><a href="#"><i class="fa fa-heart"></i> Previsiones</a></li>
                     <li><a href="#"><i class="fa fa-cubes"></i> Productos</a></li>
                     <li><a href="#"><i class="fa fa-briefcase"></i> Profesiones</a></li>
