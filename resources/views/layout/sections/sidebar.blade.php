@@ -34,7 +34,7 @@
                     <li><a href="#"><i class="fa fa-briefcase"></i> Profesiones</a></li>
                     <li><a href="#"><i class="fa fa-steam"></i> Talleres</a></li>
                     <li><a href="#"><i class="fa fa-road"></i> Terminales</a></li>
-                    <li><a href="#"><i class="fa fa-university"></i> Tipos de Institución</a></li>
+                    <li><a href="{{ route('maintainers.type-institutions.index') }}"><i class="fa fa-university"></i> Tipos de Institución</a></li>
                 </ul>
             </li>
         </ul>

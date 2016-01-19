@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layout.index');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,10 +23,16 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
+
+    Route::get('/', function () {
+        return view('layout.index');
+    });
+
     Route::group(['prefix' => 'maintainers'], function() {
         Route::get('/', function(){
             return view('maintainers.index');
         });
         Route::resource('countries', 'CountryController');
+        Route::resource('type-institutions', 'TypeInstitutionController');
     });
 });
