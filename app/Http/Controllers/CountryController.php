@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Session;
 
 class CountryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $countries = Country::name(\Request::get('table_search'))->orderBy('name')->paginate(20);
+        $countries = Country::name($request->get('table_search'))->orderBy('name')->paginate(20);
         return view('maintainers.countries.index', compact('countries'));
     }
 
@@ -26,9 +26,9 @@ class CountryController extends Controller
 
     public function store(CountryRequest $request)
     {
-        $country = Country::create($request->all());
+        Country::create($request->all());
         Session::flash('success', 'El registro fue almacenado satisfactoriamente');
-        return Redirect::route('maintainers.countries.index');
+        return redirect()->route('maintainers.countries.index');
     }
 
     public function edit($id)
@@ -41,10 +41,10 @@ class CountryController extends Controller
     {
         $country = Country::findOrFail($id);
         $message = $country->name . ' fue actualizado satisfactoriamente';
-        $country->fill(Request::all());
+        $country->fill($request->all());
         $country->save();
         Session::flash('success', $message);
-        return Redirect::route('maintainers.countries.index');
+        return redirect()->route('maintainers.countries.index');
     }
 
     public function destroy($id)
@@ -52,7 +52,6 @@ class CountryController extends Controller
         $country = Country::findOrFail($id);
         $country->delete();
         Session::flash('success', $country->name . ' fue eliminado de nuestros registros');
-        return Redirect::route('maintainers.countries.index');
-
+        return redirect()->route('maintainers.countries.index');
     }
 }

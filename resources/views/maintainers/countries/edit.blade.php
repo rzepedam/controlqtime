@@ -10,8 +10,6 @@
 
 @section('content')
 
-    @include('layout.messages.errors')
-
     <div class="box box-success">
         {!! Form::model($country, array('route' => ['maintainers.countries.update', $country], 'method' => 'PUT' )) !!}
             <div class="box-body">

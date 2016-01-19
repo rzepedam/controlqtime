@@ -34,5 +34,6 @@ Route::group(['middleware' => ['web']], function () {
         });
         Route::resource('countries', 'CountryController');
         Route::resource('type-institutions', 'TypeInstitutionController');
+        Route::resource('institutions', 'InstitutionController');
     });
 });

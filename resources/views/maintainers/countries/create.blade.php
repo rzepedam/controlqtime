@@ -7,9 +7,8 @@
     <li><a href="{{ route('maintainers.countries.index') }}"><i class="fa fa-flag"></i> Países</a></li>
     <li class="active">Nuevo</li>
 @stop
-@section('content')
 
-    @include('layout.messages.errors')
+@section('content')
 
     <div class="box box-primary">
         {!! Form::open(array('route' => 'maintainers.countries.store', 'method' => 'POST')) !!}
@@ -22,7 +21,6 @@
             </div>
         {!! Form::close() !!}
     </div>
-
 
 @stop
 
