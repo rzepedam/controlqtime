@@ -24,7 +24,7 @@
                     <li><a href="#"><i class="fa fa-bed"></i> Enfermedades</a></li>
                     <li><a href="#"><i class="fa fa-shield"></i> EPP's</a></li>
                     <li><a href="#"><i class="fa fa-wrench"></i> Especialidades</a></li>
-                    <li><a href="#"><i class="fa fa-graduation-cap"></i> Instituciones</a></li>
+                    <li><a href="{{ route('maintainers.institutions.index') }}"><i class="fa fa-graduation-cap"></i> Instituciones</a></li>
                     <li><a href="#"><i class="fa fa-star"></i> Licencias Profesionales</a></li>
                     <li><a href="#"><i class="fa fa-money"></i> Monedas</a></li>
                     <li><a href="{{ route('maintainers.countries.index') }}"><i class="fa fa-flag"></i> Países</a></li>
