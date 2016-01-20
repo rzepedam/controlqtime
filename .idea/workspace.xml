@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8335df91-d9bc-49a5-8fce-f3541bdfee87" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DML.sql" afterPath="$PROJECT_DIR$/DML.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CertificationRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CertificationRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CountryRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CountryRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/ForecastRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/ForecastRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/InstitutionRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/InstitutionRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/KinRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/KinRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/RatingRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/RatingRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/TypeInstitutionRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/TypeInstitutionRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/me/css/style.css" afterPath="$PROJECT_DIR$/public/me/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layout/sections/sidebar.blade.php" afterPath="$PROJECT_DIR$/resources/views/layout/sections/sidebar.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Disease.php" afterPath="$PROJECT_DIR$/app/Disease.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DiseaseController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DiseaseController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/maintainers/diseases/partials/delete.blade.php" afterPath="$PROJECT_DIR$/resources/views/maintainers/diseases/partials/delete.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/maintainers/diseases/partials/fields.blade.php" afterPath="$PROJECT_DIR$/resources/views/maintainers/diseases/partials/fields.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/maintainers/diseases/partials/table.blade.php" afterPath="$PROJECT_DIR$/resources/views/maintainers/diseases/partials/table.blade.php" />
     </list>
     <ignored path="controlqtime.loc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,8 +39,8 @@
       <file leaf-file-name="Disease.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Disease.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.0">
-              <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+            <state vertical-scroll-proportion="-8.0">
+              <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -55,21 +49,11 @@
       <file leaf-file-name="DiseaseController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DiseaseController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1865285">
-              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.87564766">
+              <caret line="50" column="91" selection-start-line="50" selection-start-column="91" selection-end-line="50" selection-end-column="91" />
               <folding>
                 <element signature="e#40#68#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/maintainers/diseases/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.0">
-              <caret line="21" column="65" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -90,13 +74,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/maintainers/forecasts/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/maintainers/forecasts/partials/delete.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ForecastController.php" />
-        <option value="$PROJECT_DIR$/resources/views/maintainers/ratings/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/maintainers/forecasts/index.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2016_01_20_113815_create_ratings_table.php" />
-        <option value="$PROJECT_DIR$/resources/views/maintainers/ratings/partials/table.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/maintainers/ratings/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/maintainers/ratings/partials/fields.blade.php" />
         <option value="$PROJECT_DIR$/app/Rating.php" />
@@ -121,7 +98,6 @@
         <option value="$PROJECT_DIR$/resources/views/maintainers/countries/partials/fields.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/maintainers/disabilities/partials/fields.blade.php" />
         <option value="$PROJECT_DIR$/public/me/css/style.css" />
-        <option value="$PROJECT_DIR$/DML.sql" />
         <option value="$PROJECT_DIR$/resources/views/maintainers/disabilities/partials/table.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/maintainers/disabilities/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/maintainers/disabilities/partials/delete.blade.php" />
@@ -139,7 +115,15 @@
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/layout/sections/sidebar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/maintainers/diseases/index.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_01_20_165326_create_diseases_table.php" />
+        <option value="$PROJECT_DIR$/DML.sql" />
+        <option value="$PROJECT_DIR$/resources/views/maintainers/diseases/partials/table.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/maintainers/diseases/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/maintainers/diseases/partials/fields.blade.php" />
         <option value="$PROJECT_DIR$/app/Disease.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/DiseaseRequest.php" />
+        <option value="$PROJECT_DIR$/resources/views/maintainers/diseases/edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/maintainers/diseases/partials/delete.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DiseaseController.php" />
       </list>
     </option>
@@ -331,11 +315,11 @@
       <recent name="D:\virtualhost\controlqtime.loc\resources\views\layout\messages" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\virtualhost\controlqtime.loc\resources\views\maintainers\diseases\partials" />
       <recent name="D:\virtualhost\controlqtime.loc\resources\views\maintainers\diseases" />
       <recent name="D:\virtualhost\controlqtime.loc\resources\views\maintainers\disabilities" />
       <recent name="D:\virtualhost\controlqtime.loc\resources\views\maintainers\certifications" />
       <recent name="D:\virtualhost\controlqtime.loc\resources\views\maintainers\ratings" />
-      <recent name="D:\virtualhost\controlqtime.loc\resources\views\maintainers\forecasts" />
     </key>
   </component>
   <component name="RunManager">
@@ -423,62 +407,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/bower_components/AdminLTE/plugins/select2/select2.full.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34887737">
-          <caret line="1" column="5384" selection-start-line="1" selection-start-column="5384" selection-end-line="1" selection-end-column="5384" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_12_112947_create_countries_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43523315">
-          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_19_104535_create_type_institutions_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_19_133402_create_institutions_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5284974">
-          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_19_164355_create_kins_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_20_102205_create_forecasts_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34196892">
-          <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_20_113815_create_ratings_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46632123">
@@ -562,22 +490,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_20_132705_create_disabilities_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34196892">
-          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/countries/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.031088082">
-          <caret line="1" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="24" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/maintainers/countries/partials/fields.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.373057">
@@ -590,14 +502,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9067358">
           <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/disabilities/partials/fields.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31088084">
-          <caret line="10" column="89" selection-start-line="10" selection-start-column="89" selection-end-line="10" selection-end-column="89" />
           <folding />
         </state>
       </provider>
@@ -626,14 +530,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/countries/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8704663">
-          <caret line="28" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/maintainers/disabilities/partials/delete.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -647,16 +543,6 @@
         <state vertical-scroll-proportion="0.5595855">
           <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CountryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68911916">
-          <caret line="50" column="91" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="91" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -695,14 +581,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/CertificationRequest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12435233">
-          <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Requests/CountryRequest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12435233">
           <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
@@ -760,28 +638,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Requests/DisabilityRequest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12435233">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="45" />
-          <folding>
-            <element signature="e#37#82#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/Forms/SanitizedRequest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09326425">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DML.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.90217394">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -802,26 +662,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/diseases/partials/table.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/maintainers/countries/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.062176164">
           <caret line="2" column="34" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/diseases/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.0">
-          <caret line="21" column="65" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
           <folding />
         </state>
       </provider>
@@ -834,18 +678,160 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_20_132705_create_disabilities_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34196892">
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="13" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DML.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8043478">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/diseases/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65284973">
+          <caret line="21" column="65" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/factories/ModelFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/countries/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6666667">
+          <caret line="1" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="24" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/diseases/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5284974">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/diseases/partials/table.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4974093">
+          <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/disabilities/partials/fields.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31088084">
+          <caret line="10" column="89" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/diseases/partials/fields.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43523315">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/CountryRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.93264246">
+          <caret line="39" column="9" selection-start-line="22" selection-start-column="8" selection-end-line="39" selection-end-column="9" />
+          <folding>
+            <element signature="e#37#82#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/DisabilityRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21761657">
+          <caret line="7" column="48" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="48" />
+          <folding>
+            <element signature="e#37#82#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_20_165326_create_diseases_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.373057">
+          <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/DiseaseRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43868738">
+          <caret line="27" column="64" selection-start-line="27" selection-start-column="64" selection-end-line="27" selection-end-column="64" />
+          <folding>
+            <element signature="e#37#82#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/countries/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8704663">
+          <caret line="28" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Disease.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.0">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        <state vertical-scroll-proportion="-8.0">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/diseases/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8082902">
+          <caret line="28" column="41" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/maintainers/diseases/partials/delete.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="68" selection-start-line="0" selection-start-column="68" selection-end-line="0" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CountryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68911916">
+          <caret line="50" column="91" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="91" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DiseaseController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1865285">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.87564766">
+          <caret line="50" column="91" selection-start-line="50" selection-start-column="91" selection-end-line="50" selection-end-column="91" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
           </folding>
