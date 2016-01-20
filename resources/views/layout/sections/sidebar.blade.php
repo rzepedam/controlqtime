@@ -16,7 +16,7 @@
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-sitemap"></i> Áreas</a></li>
                     <li><a href="#"><i class="fa fa-archive"></i> Bodegas</a></li>
-                    <li><a href="#"><i class="fa fa-male"></i> Cargos</a></li>
+                    <li><a href="{{ route('maintainers.ratings.index') }}"><i class="fa fa-male"></i> Cargos</a></li>
                     <li><a href="#"><i class="fa fa-certificate"></i> Certificaciones</a></li>
                     <li><a href="#"><i class="fa fa-wheelchair"></i> Discapacidades</a></li>
                     <li><a href="#"><i class="fa fa-file-text"></i> Documentos</a></li>

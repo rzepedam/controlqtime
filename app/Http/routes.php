@@ -37,5 +37,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('institutions', 'InstitutionController');
         Route::resource('kins', 'KinController');
         Route::resource('forecasts', 'ForecastController');
+        Route::resource('ratings', 'RatingController');
     });
 });

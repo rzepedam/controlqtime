@@ -19,7 +19,7 @@
     @if($forecasts->count())
         @include('maintainers.forecasts.partials.table')
     @else
-        <h3 class="text-center">No se han encontrado Países</h3>
+        <h3 class="text-center">No se han encontrado Previsiones</h3>
     @endif
 
     {{ $forecasts->links() }}

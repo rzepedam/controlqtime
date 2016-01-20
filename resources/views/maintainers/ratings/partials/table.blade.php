@@ -9,12 +9,12 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($countries as $country)
-                <tr data-id="{{ $country->id }}">
-                    <td>{{ $country->id }}</td>
-                    <td>{{ $country->name }}</td>
+            @foreach($ratings as $rating)
+                <tr data-id="{{ $rating->id }}">
+                    <td>{{ $rating->id }}</td>
+                    <td>{{ $rating->name }}</td>
                     <td class="text-center">
-                        <a href="{{ route('maintainers.countries.edit', $country) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i> Editar</a>
+                        <a href="{{ route('maintainers.ratings.edit', $rating) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i> Editar</a>
                     </td>
                 </tr>
             @endforeach
