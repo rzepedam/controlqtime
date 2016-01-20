@@ -18,10 +18,10 @@
                     <li><a href="#"><i class="fa fa-archive"></i> Bodegas</a></li>
                     <li><a href="{{ route('maintainers.ratings.index') }}"><i class="fa fa-male"></i> Cargos</a></li>
                     <li><a href="{{ route('maintainers.certifications.index') }}"><i class="fa fa-certificate"></i> Certificaciones</a></li>
-                    <li><a href="#"><i class="fa fa-wheelchair"></i> Discapacidades</a></li>
+                    <li><a href="{{ route('maintainers.disabilities.index') }}"><i class="fa fa-wheelchair"></i> Discapacidades</a></li>
                     <li><a href="#"><i class="fa fa-file-text"></i> Documentos</a></li>
                     <li><a href="#"><i class="fa fa-building-o"></i> Empresas</a></li>
-                    <li><a href="#"><i class="fa fa-bed"></i> Enfermedades</a></li>
+                    <li><a href="{{ route('maintainers.diseases.index') }}"><i class="fa fa-bed"></i> Enfermedades</a></li>
                     <li><a href="#"><i class="fa fa-shield"></i> EPP's</a></li>
                     <li><a href="#"><i class="fa fa-wrench"></i> Especialidades</a></li>
                     <li><a href="{{ route('maintainers.institutions.index') }}"><i class="fa fa-graduation-cap"></i> Instituciones</a></li>

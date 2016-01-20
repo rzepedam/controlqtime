@@ -29,15 +29,19 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::group(['prefix' => 'maintainers'], function() {
+
         Route::get('/', function(){
             return view('maintainers.index');
         });
+
+        Route::resource('certifications', 'CertificationController');
         Route::resource('countries', 'CountryController');
-        Route::resource('type-institutions', 'TypeInstitutionController');
+        Route::resource('disabilities', 'DisabilityController');
+        Route::resource('diseases', 'DiseaseController');
+        Route::resource('forecasts', 'ForecastController');
         Route::resource('institutions', 'InstitutionController');
         Route::resource('kins', 'KinController');
-        Route::resource('forecasts', 'ForecastController');
         Route::resource('ratings', 'RatingController');
-        Route::resource('certifications', 'CertificationController');
+        Route::resource('type-institutions', 'TypeInstitutionController');
     });
 });

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use App\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class RatingRequest extends Request
+class RatingRequest extends SanitizedRequest
 {
     /**
      * RatingRequest constructor.

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class InstitutionRequest extends SanitizedRequest
+class DisabilityRequest extends SanitizedRequest
 {
 
     public function __construct(Route $route)
@@ -25,16 +25,14 @@ class InstitutionRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'                  => 'required|max:75|unique:institutions',
-                    'type_institution_id'   => 'required'
+                    'name'  => 'required|max:120|unique:disabilities',
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'                  => 'required|max:75|unique:institutions,name,' . $this->route->getParameter('institutions'),
-                    'type_institution_id'   => 'required'
+                    'name'  => 'required|max:120|unique:disabilities,name,' . $this->route->getParameter('disabilities')
                 ];
             }
         }

@@ -40,3 +40,7 @@
         color: #97a0b3;
     }
 }
+
+textarea {
+    resize: none;
+}

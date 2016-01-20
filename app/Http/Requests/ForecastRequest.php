@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use App\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class ForecastRequest extends Request
+class ForecastRequest extends SanitizedRequest
 {
 
     public function __construct(Route $route)
