@@ -1,0 +1,24 @@
+<div class="box box-primary">
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($forecasts as $forecast)
+                <tr data-id="{{ $forecast->id }}">
+                    <td>{{ $forecast->id }}</td>
+                    <td>{{ $forecast->name }}</td>
+                    <td class="text-center">
+                        <a href="{{ route('maintainers.forecasts.edit', $forecast) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i> Editar</a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
