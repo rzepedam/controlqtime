@@ -13,7 +13,10 @@ class CreateInstitutionsTable extends Migration
             $table->string('name', 80);
             $table->integer('type_institution_id')->unsigned();
 
-            $table->foreign('type_institution_id')->references('id')->on('type_institutions')->onUpdate('cascade');
+            $table->foreign('type_institution_id')
+                ->references('id')
+                ->on('type_institutions')
+                ->onUpdate('cascade');
         });
     }
 
