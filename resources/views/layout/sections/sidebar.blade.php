@@ -31,7 +31,7 @@
                     <li><a href="{{ route('maintainers.kins.index') }}"><i class="fa fa-child"></i> Parentescos Familiares</a></li>
                     <li><a href="{{ route('maintainers.forecasts.index') }}"><i class="fa fa-heart"></i> Previsiones</a></li>
                     <li><a href="#"><i class="fa fa-cubes"></i> Productos</a></li>
-                    <li><a href="#"><i class="fa fa-briefcase"></i> Profesiones</a></li>
+                    <li><a href="{{ route('maintainers.professions.index') }}"><i class="fa fa-briefcase"></i> Profesiones</a></li>
                     <li><a href="#"><i class="fa fa-steam"></i> Talleres</a></li>
                     <li><a href="#"><i class="fa fa-road"></i> Terminales</a></li>
                     <li><a href="{{ route('maintainers.type-institutions.index') }}"><i class="fa fa-university"></i> Tipos de Institución</a></li>

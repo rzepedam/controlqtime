@@ -48,3 +48,11 @@ INSERT INTO licenses(name) VALUES ('Licencia A-1');
 INSERT INTO licenses(name) VALUES ('Licencia A-2');
 INSERT INTO licenses(name) VALUES ('Licencia B');
 INSERT INTO licenses(name) VALUES ('Licencia D');
+
+
+<!-- professions -->
+INSERT INTO professions(name) VALUES ('Ingeniería Civil Industrial');
+INSERT INTO professions(name) VALUES ('Derecho');
+INSERT INTO professions(name) VALUES ('Ingeniería Informática');
+INSERT INTO professions(name) VALUES ('Servicio Social');
+INSERT INTO professions(name) VALUES ('Teatro');
