@@ -28,6 +28,10 @@ Route::group(['middleware' => ['web']], function () {
         return view('layout.index');
     });
 
+    Route::get('manpowers', function(){
+        return view('manpowers.index');
+    });
+
     Route::group(['prefix' => 'maintainers'], function() {
 
         Route::get('/', function(){

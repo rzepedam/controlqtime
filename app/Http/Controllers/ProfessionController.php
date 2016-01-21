@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Session;
 use App\Profession;
 use App\Http\Requests\ProfessionRequest;
@@ -11,6 +12,7 @@ use App\Http\Requests\ProfessionRequest;
 
 class ProfessionController extends Controller
 {
+
     public function index(Request $request)
     {
         $professions = Profession::name($request->get('table_search'))->orderBy('name')->paginate(20);

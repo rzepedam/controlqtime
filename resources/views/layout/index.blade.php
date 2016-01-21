@@ -76,18 +76,7 @@ desired effect
                 @yield('breadcumb')
             </ol>
             <!-- Solamente en vistas index para insertar buscador -->
-            @if (last(explode('/', Request::path())) != '' && last(explode('/', Request::path())) != 'create' && last(explode('/', Request::path())) != 'edit' && is_numeric(last(explode('/', Request::path()))) != 1)
-                <div class="box-tools breadcrumb2">
-                    @yield('form_search')   <!-- Abrimos Form solamente en vista -->
-                    <div class="input-group input-group-sm" style="width: 250px;">
-                        {{ Form::text('table_search', null, ['class' => 'form-control pull-right', 'placeholder' => 'Buscar...', 'autofocus']) }}
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
-                </div>
-            @endif
+            @yield('form_search')
         </section>
 
         <!-- Main content -->
