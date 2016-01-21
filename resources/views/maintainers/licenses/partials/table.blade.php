@@ -9,13 +9,12 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($disabilities as $disability)
-                <tr data-id="{{ $disability->id }}">
-                    <td>{{ $disability->id }}</td>
-                    <td>{{ $disability->name }}</td>
+            @foreach($licenses as $license)
+                <tr data-id="{{ $license->id }}">
+                    <td>{{ $license->id }}</td>
+                    <td>{{ $license->name }}</td>
                     <td class="text-center">
-                        <a href="{{ route('maintainers.disabilities.show', $disability) }}" class="btn bg-navy btn-flat"><i class="fa fa-search"></i></a>
-                        <a href="{{ route('maintainers.disabilities.edit', $disability) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i></a>
+                        <a href="{{ route('maintainers.licenses.edit', $license) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i> Editar</a>
                     </td>
                 </tr>
             @endforeach

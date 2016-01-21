@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Certification extends Model
+class License extends Model
 {
     protected $fillable = [
         'name'

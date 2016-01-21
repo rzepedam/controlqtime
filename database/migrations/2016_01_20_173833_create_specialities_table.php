@@ -3,12 +3,12 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCertificationsTable extends Migration
+class CreateSpecialitiesTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('certifications', function (Blueprint $table) {
+        Schema::create('specialities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
         });
@@ -17,6 +17,6 @@ class CreateCertificationsTable extends Migration
 
     public function down()
     {
-        Schema::drop('certifications');
+        Schema::drop('specialities');
     }
 }

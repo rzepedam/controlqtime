@@ -28,6 +28,12 @@ class DiseaseController extends Controller
         return redirect()->route('maintainers.diseases.index');
     }
 
+    public function show($id)
+    {
+        $disease = Disease::findOrFail($id);
+        return view('maintainers.diseases.show', compact('disease'));
+    }
+
     public function edit($id)
     {
         $disease = Disease::findOrFail($id);

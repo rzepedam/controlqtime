@@ -19,8 +19,7 @@ class CertificationController extends Controller
 
     public function create()
     {
-        $institutions = Institution::lists('name', 'id');
-        return view('maintainers.certifications.create', compact('institutions'));
+        return view('maintainers.certifications.create');
     }
 
     public function store(CertificationRequest $request)
@@ -32,9 +31,8 @@ class CertificationController extends Controller
 
     public function edit($id)
     {
-        $institutions = Institution::lists('name', 'id');
         $certification = Certification::findOrFail($id);
-        return view('maintainers.certifications.edit', compact('certification', 'institutions'));
+        return view('maintainers.certifications.edit', compact('certification'));
     }
 
     public function update(CertificationRequest $request, $id)

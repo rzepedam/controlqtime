@@ -29,6 +29,12 @@ class DisabilityController extends Controller
         return redirect()->route('maintainers.disabilities.index');
     }
 
+    public function show($id)
+    {
+        $disability = Disability::findOrFail($id);
+        return view('maintainers.disabilities.show', compact('disability'));
+    }
+
     public function edit($id)
     {
         $disability = Disability::findOrFail($id);

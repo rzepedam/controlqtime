@@ -6,7 +6,7 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+            <li class="active"><a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
             <li><a href="#"><i class="fa fa-users"></i> <span>RRHH</span></a></li>
             <li><a href="#"><i class="fa fa-life-ring"></i> <span>Seguridad</span></a></li>
             <li><a href="#"><i class="fa fa-rss"></i> <span>Operaciones</span></a></li>
@@ -23,9 +23,9 @@
                     <li><a href="#"><i class="fa fa-building-o"></i> Empresas</a></li>
                     <li><a href="{{ route('maintainers.diseases.index') }}"><i class="fa fa-bed"></i> Enfermedades</a></li>
                     <li><a href="#"><i class="fa fa-shield"></i> EPP's</a></li>
-                    <li><a href="#"><i class="fa fa-wrench"></i> Especialidades</a></li>
+                    <li><a href="{{ route('maintainers.specialities.index') }}"><i class="fa fa-wrench"></i> Especialidades</a></li>
                     <li><a href="{{ route('maintainers.institutions.index') }}"><i class="fa fa-graduation-cap"></i> Instituciones</a></li>
-                    <li><a href="#"><i class="fa fa-star"></i> Licencias Profesionales</a></li>
+                    <li><a href="{{ route('maintainers.licenses.index') }}"><i class="fa fa-star"></i> Licencias Profesionales</a></li>
                     <li><a href="#"><i class="fa fa-money"></i> Monedas</a></li>
                     <li><a href="{{ route('maintainers.countries.index') }}"><i class="fa fa-flag"></i> Países</a></li>
                     <li><a href="{{ route('maintainers.kins.index') }}"><i class="fa fa-child"></i> Parentescos Familiares</a></li>

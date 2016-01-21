@@ -36,3 +36,15 @@ INSERT INTO diseases(name, description) VALUES ('Dolor de Espalda', 'Lorem ipsum
 INSERT INTO diseases(name, description) VALUES ('Estrés', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu.');
 INSERT INTO diseases(name, description) VALUES ('El Síndrome de la Fatiga Crónica', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu.');
 INSERT INTO diseases(name, description) VALUES ('Síndorme de Tunel Carpiano', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu.');
+
+<!-- specialities -->
+INSERT INTO specialities(name) VALUES ('Administración');
+INSERT INTO specialities(name) VALUES ('Mecánica automotriz');
+INSERT INTO specialities(name) VALUES ('Muebles y terminaciones de la madera');
+INSERT INTO specialities(name) VALUES ('Vestuario y confección textil');
+
+<!-- licenses -->
+INSERT INTO licenses(name) VALUES ('Licencia A-1');
+INSERT INTO licenses(name) VALUES ('Licencia A-2');
+INSERT INTO licenses(name) VALUES ('Licencia B');
+INSERT INTO licenses(name) VALUES ('Licencia D');

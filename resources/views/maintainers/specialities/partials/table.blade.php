@@ -5,17 +5,18 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($disabilities as $disability)
-                <tr data-id="{{ $disability->id }}">
-                    <td>{{ $disability->id }}</td>
-                    <td>{{ $disability->name }}</td>
+            @foreach($specialities as $speciality)
+                <tr data-id="{{ $speciality->id }}">
+                    <td>{{ $speciality->id }}</td>
+                    <td>{{ $speciality->name }}</td>
+
                     <td class="text-center">
-                        <a href="{{ route('maintainers.disabilities.show', $disability) }}" class="btn bg-navy btn-flat"><i class="fa fa-search"></i></a>
-                        <a href="{{ route('maintainers.disabilities.edit', $disability) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i></a>
+                        <a href="{{ route('maintainers.specialities.edit', $speciality) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i> Editar</a>
                     </td>
                 </tr>
             @endforeach

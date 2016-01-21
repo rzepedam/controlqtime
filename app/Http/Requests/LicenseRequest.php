@@ -5,14 +5,13 @@ namespace App\Http\Requests;
 use App\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class CertificationRequest extends SanitizedRequest
+class LicenseRequest extends SanitizedRequest
 {
 
     public function __construct(Route $route)
     {
         $this->route = $route;
     }
-
 
     public function authorize()
     {
@@ -26,14 +25,15 @@ class CertificationRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'              => 'required|max:100|unique:certifications'
+                    'name'  => 'required|max:50|unique:licenses',
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'              => 'required|max:100|unique:certifications,name,' . $this->route->getParameter('certifications')
+
+                    'name'  => 'required|max:50|unique:licenses,name,' . $this->route->getParameter('licenses')
                 ];
             }
         }
