@@ -7,7 +7,7 @@
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
-            <li><a href="{{ url('manpowers') }}"><i class="fa fa-users"></i> <span>RRHH</span></a></li>
+            <li><a href="{{ url('human-resources') }}"><i class="fa fa-users"></i> <span>RRHH</span></a></li>
             <li><a href="#"><i class="fa fa-life-ring"></i> <span>Seguridad</span></a></li>
             <li><a href="#"><i class="fa fa-rss"></i> <span>Operaciones</span></a></li>
             <li><a href="#"><i class="fa fa-gavel"></i> <span>Jurídica</span></a></li>
