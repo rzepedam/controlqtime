@@ -11,7 +11,7 @@ class Manpower extends Model
         $not_space_name = trim($name);
 
         if(!empty($not_space_name)) {
-            $query->where("name", "LIKE", "%$not_space_name%");
+            $query->where("full_name", "LIKE", "%$not_space_name%");
         }
     }
 }

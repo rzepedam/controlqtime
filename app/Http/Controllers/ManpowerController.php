@@ -11,12 +11,23 @@ class ManpowerController extends Controller
 {
     public function index(Request $request)
     {
-        $manpowers = Manpower::name($request->get('table_search'))->orderBy('name')->paginate(50);
+        $manpowers = Manpower::name($request->get('table_search'))->orderBy('full_name')->paginate(25);
         return view('human-resources.manpowers.index', compact('manpowers'));
     }
 
     public function create()
     {
 
+    }
+
+    public function store()
+    {
+
+    }
+
+    public function show($id)
+    {
+        $manpower = Manpower::findOrFail($id);
+        return view('human-resources.manpowers.show', compact('manpower'));
     }
 }
