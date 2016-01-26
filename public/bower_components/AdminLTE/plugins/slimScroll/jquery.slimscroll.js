@@ -47,7 +47,7 @@
         wrapperClass: 'slimScrollDiv',
         // check if mousewheel should scroll the window if we reach top/bottom
         allowPageScroll: false,
-        // scroll amount applied to each mouse wheel step
+        // scroll amount applied to each mouse wheel step3
         wheelStep: 20,
         // scroll amount applied when user is using gestures
         touchScrollStep: 200,

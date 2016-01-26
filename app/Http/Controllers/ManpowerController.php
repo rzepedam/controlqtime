@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Manpower;
+use App\Gender;
+use App\Rating;
+use App\Region;
+use App\Province;
+use App\Commune;
 
 class ManpowerController extends Controller
 {
@@ -17,7 +22,12 @@ class ManpowerController extends Controller
 
     public function create()
     {
-        return view('human-resources.manpowers.create');
+        $genders = Gender::lists('name', 'id');
+        $ratings = Rating::lists('name', 'id');
+        $regions = Region::lists('name', 'id');
+        $provinces = Province::lists('name', 'id');
+        $communes = Commune::lists('name', 'id');
+        return view('human-resources.manpowers.create', compact('genders', 'ratings', 'regions', 'provinces', 'communes'));
     }
 
     public function store()

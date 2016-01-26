@@ -12,5 +12,9 @@
             <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
             <p class="text-primary"><strong>Paso 3</strong></p>
         </div>
+        <div class="stepwizard-step">
+            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+            <p class="text-primary"><strong>Paso 4</strong></p>
+        </div>
     </div>
 </div>

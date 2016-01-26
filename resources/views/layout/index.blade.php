@@ -93,7 +93,7 @@ desired effect
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    @include('layout.sections.footer')
+    {{--@include('layout.sections.footer')--}}
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->

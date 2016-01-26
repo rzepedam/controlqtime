@@ -3883,8 +3883,8 @@ function Datepicker() {
 		onClose: null, // Define a callback function when the datepicker is closed
 		numberOfMonths: 1, // Number of months to show at a time
 		showCurrentAtPos: 0, // The position in multipe months at which to show the current month (starting at 0)
-		stepMonths: 1, // Number of months to step back/forward
-		stepBigMonths: 12, // Number of months to step back/forward for the big links
+		stepMonths: 1, // Number of months to step3 back/forward
+		stepBigMonths: 12, // Number of months to step3 back/forward for the big links
 		altField: "", // Selector for an alternate field to store selected dates into
 		altFormat: "", // The date format to use for the alternate field
 		constrainInput: true, // The input is constrained by the current date format
@@ -7727,7 +7727,7 @@ $.ui.plugin.add("resizable", "animate", {
 						$(pr[0]).css({ width: data.width, height: data.height });
 					}
 
-					// propagating resize, and updating values for each animation step
+					// propagating resize, and updating values for each animation step3
 					that._updateCache(data);
 					that._propagate("resize", event);
 
@@ -9935,7 +9935,7 @@ each( spaces, function( spaceName, space ) {
 	});
 });
 
-// add cssHook and .fx.step function for each named hook.
+// add cssHook and .fx.step3 function for each named hook.
 // accept a space separated string of properties
 color.hook = function( hook ) {
 	var hooks = hook.split( " " );
@@ -13259,7 +13259,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 	},
 
 	//internal value getter
-	// _value() returns value trimmed by min and max, aligned by step
+	// _value() returns value trimmed by min and max, aligned by step3
 	_value: function() {
 		var val = this.options.value;
 		val = this._trimAlignValue( val );
@@ -13268,8 +13268,8 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 	},
 
 	//internal values getter
-	// _values() returns array of values trimmed by min and max, aligned by step
-	// _values( index ) returns single value trimmed by min and max, aligned by step
+	// _values() returns array of values trimmed by min and max, aligned by step3
+	// _values( index ) returns single value trimmed by min and max, aligned by step3
 	_values: function( index ) {
 		var val,
 			vals,
@@ -13294,7 +13294,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 		}
 	},
 
-	// returns the step-aligned value that val is closest to, between (inclusive) min and max
+	// returns the step3-aligned value that val is closest to, between (inclusive) min and max
 	_trimAlignValue: function( val ) {
 		if ( val <= this._valueMin() ) {
 			return this._valueMin();
@@ -15106,11 +15106,11 @@ var spinner = $.widget( "ui.spinner", {
 		var base, aboveMin,
 			options = this.options;
 
-		// make sure we're at a valid step
+		// make sure we're at a valid step3
 		// - find out where we are relative to the base (min or 0)
 		base = options.min !== null ? options.min : 0;
 		aboveMin = value - base;
-		// - round to the nearest step
+		// - round to the nearest step3
 		aboveMin = Math.round(aboveMin / options.step) * options.step;
 		// - rounding is based on 0, so adjust back to our base
 		value = base + aboveMin;
