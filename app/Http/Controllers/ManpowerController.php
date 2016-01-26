@@ -17,7 +17,7 @@ class ManpowerController extends Controller
 
     public function create()
     {
-
+        return view('human-resources.manpowers.create');
     }
 
     public function store()
