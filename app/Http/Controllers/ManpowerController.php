@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Manpower;
 use App\Gender;
 use App\Rating;
-use App\Region;
-use App\Province;
 use App\Commune;
+use App\Http\Requests\ManpowerStep1Request;
 
 class ManpowerController extends Controller
 {
@@ -24,13 +22,31 @@ class ManpowerController extends Controller
     {
         $genders = Gender::lists('name', 'id');
         $ratings = Rating::lists('name', 'id');
-        $regions = Region::lists('name', 'id');
-        $provinces = Province::lists('name', 'id');
         $communes = Commune::lists('name', 'id');
-        return view('human-resources.manpowers.create', compact('genders', 'ratings', 'regions', 'provinces', 'communes'));
+        return view('human-resources.manpowers.create', compact('genders', 'ratings', 'communes'));
     }
 
-    public function store()
+    public function step1(ManpowerStep1Request $request)
+    {
+        $rules = [
+            'male_surname'      => 'require|max:30',
+            'female_surname'    => 'require|max:30',
+            'first_name'        => 'require|max:30',
+            'second_name'       => 'max:30',
+            'rut'               => 'require|integer|max:12',
+            'birthday'          => 'require|date_format:d/m/Y|before:' . $today,
+            'gender_id'         => 'require',
+            'area_id'           => 'require',
+            'rating_id'         => 'require',
+            'commune_id'        => 'require',
+            'address'           => 'require',
+            'email'             => 'require|unique:manpowers,email',
+            'phone1'            => 'require|max:20',
+            'phone2'            => 'max:20'
+        ];
+    }
+
+    public function store(Request $request)
     {
 
     }

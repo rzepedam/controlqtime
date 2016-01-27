@@ -28,6 +28,9 @@ Route::group(['middleware' => ['web']], function () {
         return view('layout.index');
     });
 
+    /*
+     * Humans-Resources
+     */
     Route::group(['prefix' => 'human-resources'], function(){
 
         Route::get('/', function(){
@@ -36,9 +39,16 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::resource('manpowers', 'ManpowerController');
 
+        //Routes for Form Wizard
+        Route::group(['prefix' => 'manpowers'], function(){
+            Route::post('step1', 'ManpowerController@step1');
+        });
     });
 
 
+    /*
+     * Maintainers
+     */
     Route::group(['prefix' => 'maintainers'], function() {
 
         Route::get('/', function(){
