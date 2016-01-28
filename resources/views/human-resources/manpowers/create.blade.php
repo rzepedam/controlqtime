@@ -2,6 +2,7 @@
 
 @section('css')
     {{ Html::style('me/css/style.css') }}
+    {{ Html::style('assets/css/jquery-validate/screen.css') }}
 @stop
 
 @section('title_header') Crear Nuevo Trabajador @stop
@@ -46,5 +47,6 @@
 @section('scripts')
     {{ Html::script('assets/js/jquery.inputmask.js') }}
     {{ Html::script('assets/js/jquery.bootstrap.wizard.js') }}
-    {{ Html::script('me/js/twitterBootstrapWizard.js') }}
+    {{ Html::script('assets/js/jquery.validate.js') }}
+    {{ Html::script('me/js/manpowers/twitterBootstrapWizard.js') }}
 @stop

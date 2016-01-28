@@ -20,9 +20,9 @@ class CreateManpowersTable extends Migration
             $table->string('second_name', 30);
             $table->string('full_name', 120);
             $table->string('rut', 12);
-            $table->string('dv', 1);
             $table->integer('birthday')->unsigned();
             $table->integer('country_id')->unsigned();
+            $table->integer('gender_id')->unsingned();
             $table->integer('forecast_id')->unsigned();
             $table->integer('subarea_id')->unsigned();
             $table->integer('rating_id')->unsigned();
@@ -38,6 +38,10 @@ class CreateManpowersTable extends Migration
             $table->foreign('country_id')
                 ->references('id')
                 ->on('countries')
+                ->onUpdate('cascade');
+
+            $table->foreign('gender_id')
+                ->references('id')
                 ->onUpdate('cascade');
 
             $table->foreign('forecast_id')

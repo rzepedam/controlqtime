@@ -1,3 +1,7 @@
+/* genders | Género */
+INSERT INTO genders(name) VALUES ('Masculino');
+INSERT INTO genders(name) VALUES ('Femenino');
+
 /* countries | Países */
 INSERT INTO countries(name) VALUES ('Argentina');
 INSERT INTO countries(name) VALUES ('Bolivia');
