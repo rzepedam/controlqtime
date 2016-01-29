@@ -69,7 +69,7 @@ $(document).ready(function() {
                 email: true,
                 maxlength: 100
             }
-        },
+        }
     });
 
 });
