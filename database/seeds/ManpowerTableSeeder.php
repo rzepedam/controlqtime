@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
-class ManpowerSeeder extends Seeder
+class ManpowerTableSeeder extends Seeder
 {
 
     public function run()
@@ -24,9 +24,9 @@ class ManpowerSeeder extends Seeder
                 'second_name'    => $secondName,
                 'full_name'      => "$firstName $secondName $maleSurname $femaleSurname",
                 'rut'            => $faker->numberBetween($min = 10000000, $max = 20000000),
-                'dv'             => rand(1,9),
                 'birthday'       => $faker->unixTime,
                 'country_id'     => rand(1,9),
+                'gender_id'      => rand(1,2),
                 'forecast_id'    => rand(1,4),
                 'subarea_id'     => rand(1,8),
                 'rating_id'      => rand(1,4),

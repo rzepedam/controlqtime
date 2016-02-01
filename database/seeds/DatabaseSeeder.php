@@ -7,6 +7,6 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        $this->call(ManpowerSeeder::class);
+        $this->call(ManpowerTableSeeder::class);
     }
 }
