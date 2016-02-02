@@ -10,6 +10,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>ControlQTime</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Font -->
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('me/img/favicon.ico') }}" type="image/x-icon" />
     <!-- Bootstrap 3.3.5 -->

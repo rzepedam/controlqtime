@@ -39,6 +39,11 @@ class ManpowerController extends Controller
 
     }
 
+    public function step3(Request $request)
+    {
+        dd($request->all());
+    }
+
     public function show($id)
     {
         $manpower = Manpower::findOrFail($id);

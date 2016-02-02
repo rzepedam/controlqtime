@@ -42,6 +42,7 @@ Route::group(['middleware' => ['web']], function () {
         //Routes for Form Wizard
         Route::group(['prefix' => 'manpowers'], function(){
             Route::post('step1', 'ManpowerController@step1');
+            Route::post('step3', ['as' => 'human-resources.manpowers.step3', 'uses' => 'ManpowerController@step3']);
         });
     });
 

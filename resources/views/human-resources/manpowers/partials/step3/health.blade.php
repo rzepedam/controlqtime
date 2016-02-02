@@ -1,4 +1,4 @@
-
+{{ Form::open(['route' => 'human-resources.manpowers.step3', 'method' => 'POST', 'files' => true, 'id' => 'step3']) }}
     <!-- disabilities -->
     <div class="box box-solid box-default">
         <div class="box-header with-border">
@@ -9,8 +9,6 @@
         </div><!-- /.box-header -->
         <div class="box-body">
 
-            {!! Form::open(['route' => 'human-resources.manpowers.store', 'method' => 'POST']) !!}
-
                 <span id="disabilities">
                     <div class="col-md-12 text-center">
                         {!! Form::label('disability', 'Posee carnet de discapacidad ?') !!}<br>
@@ -20,10 +18,8 @@
                         {!! Form::radio('disability', 'no', true) !!}
                     </div>
                 </span>
-
-            {!! Form::close() !!}
-
-
+            <a id="addElementDisability" onclick="$(this).addElementDisability(this)" href="javascript: void(0)" class="font-up add-element text-primary pull-right hide disabled"><i class="fa fa-plus"></i> Agregar Discapacidad</a>
+            <button type="submit" class="btn btn-default">Submit</button>
         </div>
     </div><!-- /.box -->
     <br>
@@ -38,11 +34,8 @@
         <div class="box-body">
 
             <span class="diseases">
-                <h2 class="text-center text-primary">No existen Enfermedades Asociadas <br />
-                    <small>(Pulse "Agregar Enfermedad" para comenzar su adición)</small></h2>
-                <hr />
+
             </span>
-            <a href="" class="text-primary pull-right"><i class="fa fa-plus"></i> <strong>Agregar Enfermedad</strong></a>
 
         </div>
     </div><!-- /.box -->
@@ -51,3 +44,5 @@
         <li class="previous"><a href="#" class="btn btn-default btn-lg btn-flat"><i class="fa fa-angle-left"></i> Paso 2</a></li>
         <li class="next"><a href="#" type="submit" class="btn bg-orange btn-flat btn-lg pull-right">Paso 4 <i class="fa fa-forward"></i></a></li>
     </ul>
+
+{{ Form::close() }}

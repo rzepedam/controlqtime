@@ -1,9 +1,9 @@
 @extends('layout.index')
 
 @section('css')
-    {{ Html::style('me/css/style.css') }}
     {{ Html::style('assets/css/jquery-validate/screen.css') }}
     {{ Html::Style('assets/css/bwizard-steps.css') }}
+    {{ Html::Style('assets/css/dropzone.css') }}
 @stop
 
 @section('title_header') Crear Nuevo Trabajador @stop
@@ -23,8 +23,8 @@
             <li><a href="#tab3" data-toggle="tab"><i id="paso3" class="fa fa-clock-o"></i> Paso 3</a></li>
             <li><a href="#tab4" data-toggle="tab"><i id="paso4" class="fa fa-clock-o"></i> Paso 4</a></li>
         </ul>
-
         <div class="tab-content">
+
             <div class="tab-pane" id="tab1">
                 <br>
                 @include('human-resources.manpowers.partials.step1.personal_data')
@@ -47,16 +47,24 @@
 @stop
 
 @section('scripts')
+
     {{ Html::script('assets/js/jquery.inputmask.js') }}
     {{ Html::script('assets/js/jquery.bootstrap.wizard.js') }}
     {{ Html::script('assets/js/jquery.validate.js') }}
     {{ Html::script('assets/js/messages_es.js') }}
     {{ Html::script('assets/js/dropzone.js') }}
 
-    <script>
+    <script type="text/javascript">
+
         $(document).ready(function(){
 
+
             $.getScript("/me/js/manpowers/validate_base.js", function(){});
+
+
+            /****************************************************
+             ******** Configure Twitter Bootstrap Wizard ********
+             ****************************************************/
 
             $('#rootwizard').bootstrapWizard({
 
@@ -81,10 +89,34 @@
                             break;
 
                         case 3:
-                            var $html = '<div class="row"><div class="col-md-6">{!! Form::label("disability", "Enfermedad") !!}{!! Form::select("disability", $disabilities, null, ["class" => "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment", "si", false) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment", "no", true) !!}</div></div><br><div class="row"><div class="col-md-12">{!! Form::label("detail", "Detalle") !!}{!! Form::textarea("detail", null, ["class" => "form-control", "rows" => "3"]) !!}</div></div><br><div class="row"><div class="col-md-12">{!! Form::label("images", "Seleccione Imagen...") !!}{!! Form::file("images[]", array("multiple" => true)) !!}</div></div>';
+
+                            var $html = '<div class="row"><div class="col-md-6">{!! Form::label("disability", "Enfermedad") !!}{!! Form::select("disability[]", $disabilities, null, ["class" => "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment[]", "si", false) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment[]", "no", true) !!}</div></div><p></p><div class="row"><div class="col-md-12">{!! Form::label("detail", "Detalle") !!}{!! Form::textarea("detail[]", null, ["class" => "form-control", "rows" => "3"]) !!}</div></div><p></p><div class="row"><div class="col-md-12">{!! Form::label("images", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone"><div class="dz-default dz-message"></div></div></div></div><hr>';
 
                             $('input[name="disability"]').change(function(){
                                 $('#disabilities').html($html);
+                                $('#addElementDisability').removeClass('hide');
+
+                                /* Load Dropzone */
+                                $("div#dZUpload").dropzone({
+                                    url: "/human-resources/manpowers/step3",
+
+                                    init: function() {
+                                        var dz = this;
+
+                                        $("form#form-guest-upload button[type=submit]").click(
+                                                function(e) {
+                                                    // I want the form to actually go to the page
+                                                    // so that I can see the input data, therefore I
+                                                    // have commented the two lines below
+
+                                                    //e.preventDefault();
+                                                    //e.stopPropagation();
+                                                    dz.processQueue();
+                                                }
+                                        );
+                                    }
+
+                                });
                             });
 
                             $('#paso2').replaceWith('<i id="paso2" class="fa fa-check"></i>');
@@ -134,7 +166,17 @@
                      }*/
                 },
             });
+
+
+            /****************************************************
+             ******************* Function Zone ******************
+             ****************************************************/
+
+            $.fn.addElementDisability = function(element) {
+                $("#disabilities").clone().insertAfter("span hr");
+            }
+
         });
+
     </script>
 @stop
-

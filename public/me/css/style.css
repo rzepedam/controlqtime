@@ -44,3 +44,11 @@
 textarea {
     resize: none;
 }
+
+.font-up{
+    font-size: 1.1em;
+}
+
+.add-element:hover{
+    color: black;
+}
