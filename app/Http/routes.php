@@ -28,9 +28,9 @@ Route::group(['middleware' => ['web']], function () {
         return view('layout.index');
     });
 
-    /*
-     * Humans-Resources
-     */
+    /***************************************
+     *********** Humans-Resources **********
+     ***************************************/
     Route::group(['prefix' => 'human-resources'], function(){
 
         Route::get('/', function(){
@@ -41,15 +41,15 @@ Route::group(['middleware' => ['web']], function () {
 
         //Routes for Form Wizard
         Route::group(['prefix' => 'manpowers'], function(){
-            Route::post('step1', 'ManpowerController@step1');
-            Route::post('step3', ['as' => 'human-resources.manpowers.step3', 'uses' => 'ManpowerController@step3']);
+            Route::post('step1', ['as' => 'human-resources.manpowers.step1', 'uses' => 'ManpowerController@step1']);
+            Route::post('step2', ['as' => 'human-resources.manpowers.step2', 'uses' => 'ManpowerController@step2']);
         });
     });
 
 
-    /*
-     * Maintainers
-     */
+    /**********************************
+     *********** Maintainers **********
+     **********************************/
     Route::group(['prefix' => 'maintainers'], function() {
 
         Route::get('/', function(){

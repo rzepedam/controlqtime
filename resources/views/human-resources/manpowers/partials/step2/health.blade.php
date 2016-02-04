@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'human-resources.manpowers.step3', 'method' => 'POST', 'files' => true, 'id' => 'step3']) }}
+
     <!-- disabilities -->
     <div class="box box-solid box-default">
         <div class="box-header with-border">
@@ -18,8 +18,8 @@
                         {!! Form::radio('disability', 'no', true) !!}
                     </div>
                 </span>
-            <a id="addElementDisability" onclick="$(this).addElementDisability(this)" href="javascript: void(0)" class="font-up add-element text-primary pull-right hide disabled"><i class="fa fa-plus"></i> Agregar Discapacidad</a>
-            <button type="submit" class="btn btn-default">Submit</button>
+
+                <a id="addElementDisability" onclick="$(this).addElementDisability(this)" href="javascript: void(0)" class="font-up add-element text-primary pull-right hide disabled"><i class="fa fa-plus"></i> Agregar Discapacidad</a>
         </div>
     </div><!-- /.box -->
     <br>
@@ -41,8 +41,6 @@
     </div><!-- /.box -->
 
     <ul class="pager wizard">
-        <li class="previous"><a href="#" class="btn btn-default btn-lg btn-flat"><i class="fa fa-angle-left"></i> Paso 2</a></li>
-        <li class="next"><a href="#" type="submit" class="btn bg-orange btn-flat btn-lg pull-right">Paso 4 <i class="fa fa-forward"></i></a></li>
+        <li class="previous"><a class="btn btn-default btn-lg btn-flat"><i class="fa fa-angle-left"></i> Paso 1</a></li>
+        <li class="next"><a type="submit" class="btn bg-orange btn-flat btn-lg pull-right">Paso 3 <i class="fa fa-forward"></i></a></li>
     </ul>
-
-{{ Form::close() }}
