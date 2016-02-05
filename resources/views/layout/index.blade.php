@@ -33,8 +33,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @yield('css')
     <!-- My styles -->
     {{ Html::style('me/css/style.css') }}
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -173,7 +171,8 @@ desired effect
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <!-- jQuery 2.1.4 -->
 <script src="{{ asset('bower_components/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
 <!-- Bootstrap 3.3.5 -->

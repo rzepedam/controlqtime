@@ -1,4 +1,3 @@
-{{ Form::open(['route' => 'human-resources.manpowers.step1', 'method' => 'POST', 'id' => 'step1']) }}
 
     <div class="box box-solid box-default">
         <div class="box-header with-border">
@@ -122,9 +121,3 @@
 
         </div>
     </div><!-- /.box -->
-
-    <ul class="pager wizard">
-        <li class="next"><a type="submit" class="btn bg-orange btn-flat btn-lg pull-right">Paso 2 <i class="fa fa-forward"></i></a></li>
-    </ul>
-
-{{ Form::close() }}
