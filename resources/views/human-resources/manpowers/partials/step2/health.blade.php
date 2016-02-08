@@ -15,8 +15,10 @@
                         {!! Form::radio('disability', 'no', true) !!}
                     </div>
                 </div>
+                <a id="add_disability" href="javascript: void(0)" onclick="$(this).addElementDisability(this)" class="text-primary pull-right"><i class="fa fa-plus"></i> Agregar Discapacidad</a>
+
         </div>
-    </div><!-- /.box -->
+    </div>
     <br>
     
     <!-- diseases -->
