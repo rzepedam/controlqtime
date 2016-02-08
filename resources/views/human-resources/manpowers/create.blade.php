@@ -76,12 +76,11 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function(){
+        $(document).ready(function() {
 
             //$("#birthday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 
             $('#wizard').smartWizard({
-                transitionEffect: 'slideleft',
                 labelNext:'Siguiente',
                 labelPrevious:'Anterior',
                 labelFinish:'Guardar',
@@ -110,13 +109,19 @@
                 return isStepValid;
             }
 
-            var $html = '<div class="row"><div class="col-md-6">{!! Form::label("disability", "Enfermedad") !!}{!! Form::select("disability[]", $disabilities, null, ["class" => "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment[]", "si", false) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment[]", "no", true) !!}</div></div><p></p><div class="row"><div class="col-md-12">{!! Form::label("detail", "Detalle") !!}{!! Form::textarea("detail[]", null, ["class" => "form-control", "rows" => "3"]) !!}</div></div><p></p><div class="row"><div class="col-md-12">{!! Form::label("images", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone"><div class="dz-default dz-message"><h3 class="text-primary">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div><hr>';
+            var $content_disabilities = '<div class="row"><div class="col-md-6">{!! Form::label("disability", "Enfermedad") !!}{!! Form::select("disability[]", $disabilities, null, ["class" => "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment[]", "si", false) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment[]", "no", true) !!}</div></div><p></p><div class="row"><div class="col-md-12">{!! Form::label("detail", "Detalle") !!}{!! Form::textarea("detail[]", null, ["class" => "form-control", "rows" => "3"]) !!}</div></div><p></p><div class="row"><div class="col-md-12">{!! Form::label("images", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone"><div class="dz-default dz-message"><h3 class="text-primary">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div><hr><a href="javascript: void(0)" onclick="$(this).addElementDisability(this)" class="text-primary pull-right"><i class="fa fa-plus"></i> Agregar Discapacidad</a>';
 
             $('input[type=radio][name=disability]').change(function() {
 
-                $('#disabilities').html($html);
+                $('#disabilities').html($content_disabilities);
+                $("#wizard").smartWizard("fixHeight");
 
             });
+
+            $.fn.addElementDisability = function() {
+
+            }
+
 
         });
 

@@ -7,13 +7,14 @@
   http://tech-laboratory.blogspot.com
 */
 .swMain {
-  position:relative;
-  display:block;
-  margin:0;
-  padding:0;
-  border: 0 solid #CCC;
-  overflow:visible;
-  width:980px;
+    position:relative;
+    display:block;
+    margin:0;
+    padding:0;
+    border: 0 solid #CCC;
+    overflow:visible;
+    width:auto;
+    height: auto;
 }
 .swMain .stepContainer {
   display:block;
@@ -23,26 +24,24 @@
   border: 0 solid #CCC;
   overflow-x: hidden;
   clear:both;
-
 }
 
 .swMain .stepContainer div.content {
-  display:block;
-  position: absolute;  
-  float:left;
-  margin: 0;
-  padding:5px;    
-  border: 1px solid #ECF0F5;
-  font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
-  color:#5A5655;   
-  background-color:#ECF0F5;
-  text-align:left;
-  overflow:visible;    
-  z-index:88; 
-  -webkit-border-radius: 5px;
-  -moz-border-radius  : 5px;
-  width:980px;
-  clear:both;
+    display:block;
+    position: relative;
+    margin: 0;
+    padding:5px;
+    border: 1px solid #ECF0F5;
+    font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+    color:#5A5655;
+    background-color:#ECF0F5;
+    text-align:left;
+    overflow-y: hidden;
+    z-index:88;
+    -webkit-border-radius: 5px;
+    -moz-border-radius  : 5px;
+    width:auto;
+    clear:both;
 }
 
 .swMain div.actionBar {
