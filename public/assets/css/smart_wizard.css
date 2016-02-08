@@ -32,10 +32,10 @@
   float:left;
   margin: 0;
   padding:5px;    
-  border: 1px solid #CCC; 
+  border: 1px solid #ECF0F5;
   font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
   color:#5A5655;   
-  background-color:#F8F8F8;
+  background-color:#ECF0F5;
   text-align:left;
   overflow:visible;    
   z-index:88; 
@@ -50,11 +50,10 @@
   position: relative; 
   clear:both;
   margin:             3px 0 0 0;   
-  border:             1px solid #CCC;
+  border:             1px solid #ECF0F5;
   padding:            0;    
   color:              #5A5655;   
-  background-color:   #F8F8F8;
-  height:40px;
+  background-color:   #ECF0F5;
   text-align:left;
   overflow:auto;    
   z-index:88; 
@@ -190,7 +189,7 @@
   width:100px;
   color:#FFF;
   outline-style:none;
-  background-color:   #5A5655;
+  background-color:   #3C8DBC;
   border: 1px solid #5A5655;
   -moz-border-radius  : 5px; 
   -webkit-border-radius: 5px;    

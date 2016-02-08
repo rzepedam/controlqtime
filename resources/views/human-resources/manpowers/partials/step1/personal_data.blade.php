@@ -37,8 +37,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        {{ Form::text('birthday', Session::get('birthday'), ['class' => 'form-control required']) }}
-                        {{--<input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">--}}
+                        {{ Form::text('birthday', Session::get('birthday'), ['class' => 'form-control required', 'data-inputmask' => 'alias": "dd/mm/yyyy', 'data-mask' => '']) }}
                     </div>
                 </div>
                 <div class="col-md-3 form-group">
@@ -55,7 +54,7 @@
             <div class="row">
                 <div class="col-md-3 form-group">
                     {{ Form::label('gender_id', 'Sexo') }}
-                    {{ Form::select('gender_id', $genders, Session::get('gender_id'), ['class' => 'form-control required required'] ) }}
+                    {{ Form::select('gender_id', $genders, Session::get('gender_id'), ['class' => 'form-control required'] ) }}
                 </div>
                 <div class="col-md-3 form-group">
                     {{ Form::label('rating_id', 'Cargo') }}
@@ -103,21 +102,14 @@
             <div class="row">
                 <div class="col-md-6 form-group">
                     {{ Form::label('email', 'Email') }}
-                    {{ Form::email('email', Session::get('email'), ['class' => 'form-control required']) }}
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        {{ Form::email('email', Session::get('email'), ['class' => 'form-control required']) }}
+                    </div>
                 </div>
             </div>
 
         </div><!-- /.box-body -->
-    </div><!-- /.box -->
-
-    <div class="box box-solid box-default">
-        <div class="box-header with-border">
-            <h3 class="box-title">Datos de Autenticación</h3>
-            <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            </div><!-- /.box-tools -->
-        </div><!-- /.box-header -->
-        <div class="box-body">
-
-        </div>
     </div><!-- /.box -->

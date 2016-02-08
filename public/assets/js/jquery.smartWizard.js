@@ -17,7 +17,7 @@ function SmartWizard(target, options) {
     this.curStepIdx   = options.selected;
     this.steps        = $(target).children("ul").children("li").children("a"); // Get all anchors
     this.contentWidth = 0;
-    this.msgBox = $('<div class="msgBox"><div class="content"></div><a href="#" class="close">X</a></div>');
+    //this.msgBox = $('<div class="msgBox"><div class="content"></div><a href="#" class="close">X</a></div>');
     this.elmStepContainer = $('<div></div>').addClass("stepContainer");
     this.loader = $('<div>Loading</div>').addClass("loader");
     this.buttons = {
@@ -32,11 +32,11 @@ function SmartWizard(target, options) {
 
     var _init = function($this) {
         var elmActionBar = $('<div></div>').addClass("actionBar");
-        elmActionBar.append($this.msgBox);
+        /*elmActionBar.append($this.msgBox);
         $('.close',$this.msgBox).click(function() {
             $this.msgBox.fadeOut("normal");
             return false;
-        });
+        });*/
 
         var allDivs = $this.target.children('div');
         // CHeck if ul with steps has been added by user, if not add them
@@ -367,8 +367,8 @@ function SmartWizard(target, options) {
     }
 
     SmartWizard.prototype.showMessage = function (msg) {
-        $('.content', this.msgBox).html(msg);
-        this.msgBox.show();
+        //$('.content', this.msgBox).html(msg);
+        //this.msgBox.show();
     }
 
     SmartWizard.prototype.enableFinish = function (enable) {
@@ -391,9 +391,9 @@ function SmartWizard(target, options) {
         return this.options.enableFinishButton;
     }
 
-    SmartWizard.prototype.hideMessage = function () {
+    /*SmartWizard.prototype.hideMessage = function () {
         this.msgBox.fadeOut("normal");
-    }
+    }*/
     SmartWizard.prototype.showError = function(stepnum) {
         this.setError(stepnum, true);
     }

@@ -28,9 +28,9 @@ class CreateManpowersTable extends Migration
             $table->integer('rating_id')->unsigned();
             $table->integer('commune_id')->unsigned();
             $table->string('address');
-            $table->string('email', 100)->unique();
             $table->string('phone1', 20);
             $table->string('phone2', 20);
+            $table->string('email', 100)->unique();
             $table->string('name', 120);
             $table->string('phone3', 20);
             $table->timestamps();

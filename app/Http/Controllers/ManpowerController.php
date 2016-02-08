@@ -44,7 +44,7 @@ class ManpowerController extends Controller
         if($request->ajax()) {
 
             $this->validate($request, [
-                'male_surname'   => 'required',
+                'male_surname'   => 'required|max:30',
                 'female_surname' => 'required'
             ]);
 
