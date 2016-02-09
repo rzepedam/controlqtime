@@ -116,7 +116,7 @@
 
                 $('#disabilities').html($content_disabilities);
                 $('#add_disability').removeClass('hide');
-                $("div#dZUpload").dropzone({
+                $("div.dropzone").dropzone({
                     url: "/human-resources/manpowers/store",
                 });
                 $("#wizard").smartWizard("fixHeight");
@@ -124,9 +124,10 @@
             });
 
             $.fn.addElementDisability = function() {
+                Dropzone.options.dropzone = false;
                 $('#disabilities').append($content_disabilities);
                 $("#wizard").smartWizard("fixHeight");
-                $("div#dZUpload").dropzone({
+                $("div.dropzone").dropzone({
                     url: "/human-resources/manpowers/store",
                 });
             }

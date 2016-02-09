@@ -1,4 +1,4 @@
-
+{{ Form::open(['route' => 'human-resources.manpowers.store', 'method' => 'POST']) }}
     <!-- disabilities -->
     <div class="box box-solid box-default">
         <div class="box-header with-border">
@@ -6,19 +6,22 @@
         </div><!-- /.box-header -->
         <div class="box-body">
 
-                <div id="disabilities">
-                    <div class="col-md-12 text-center">
-                        {!! Form::label('disability', 'Posee carnet de discapacidad ?') !!}<br>
-                        {!! Form::label('si', 'Si') !!}
-                        {!! Form::radio('disability', 'si', false) !!}
-                        {!! Form::label('no', 'No') !!}
-                        {!! Form::radio('disability', 'no', true) !!}
-                    </div>
+            <div id="disabilities">
+                <div class="col-md-12 text-center">
+                    {!! Form::label('disability', 'Posee carnet de discapacidad ?') !!}<br>
+                    {!! Form::label('si', 'Si') !!}
+                    {!! Form::radio('disability', 'si', false) !!}
+                    {!! Form::label('no', 'No') !!}
+                    {!! Form::radio('disability', 'no', true) !!}
                 </div>
-                <a id="add_disability" href="javascript: void(0)" onclick="$(this).addElementDisability(this)" class="text-primary pull-right"><i class="fa fa-plus"></i> Agregar Discapacidad</a>
+            </div>
+            <a id="add_disability" href="javascript: void(0)" onclick="$(this).addElementDisability(this)" class="text-primary hide pull-right"><i class="fa fa-plus"></i> Agregar Discapacidad</a>
 
         </div>
     </div>
+
+    <button type="submit">Enviar</button>
+{{ Form::close() }}
     <br>
     
     <!-- diseases -->
