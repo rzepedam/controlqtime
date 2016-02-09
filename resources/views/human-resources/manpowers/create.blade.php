@@ -79,7 +79,16 @@
 
         $(document).ready(function() {
 
-            //$("#birthday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+            /******************************************************************
+            *************************** Variables *****************************
+            ******************************************************************/
+
+            var count_disabilities = 0;
+
+
+            /******************************************************************
+            ******* Configure and validations SmartWizardJquery Section *******
+            ******************************************************************/
 
             $('#wizard').smartWizard({
                 labelNext:'Siguiente',
@@ -110,26 +119,71 @@
                 return isStepValid;
             }
 
-            var $content_disabilities = '<div class="row"><div class="col-md-6">{!! Form::label("disability", "Enfermedad") !!}{!! Form::select("disability[]", $disabilities, null, ["class" => "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment[]", "si", false) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment[]", "no", true) !!}</div></div><p></p><div class="row"><div class="col-md-12">{!! Form::label("detail", "Detalle") !!}{!! Form::textarea("detail[]", null, ["class" => "form-control", "rows" => "3"]) !!}</div></div><p></p><div class="row"><div class="col-md-12">{!! Form::label("images", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone"><div class="dz-default dz-message"><h3 class="text-primary">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div><hr>';
 
-            $('input[type=radio][name=disability]').change(function() {
-
-                $('#disabilities').html($content_disabilities);
-                $('#add_disability').removeClass('hide');
-                $("div.dropzone").dropzone({
-                    url: "/human-resources/manpowers/store",
-                });
-                $("#wizard").smartWizard("fixHeight");
-
-            });
+            /*****************************************************************
+            *********************** Add Disability zone **********************
+            ******************************************************************/
 
             $.fn.addElementDisability = function() {
-                Dropzone.options.dropzone = false;
-                $('#disabilities').append($content_disabilities);
-                $("#wizard").smartWizard("fixHeight");
-                $("div.dropzone").dropzone({
-                    url: "/human-resources/manpowers/store",
+
+                $disability = '<span id="disability"><div class="row"><div class="col-md-6">{!! Form::label("disability", "Enfermedad") !!}{!! Form::select("disability", $disabilities, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment", "Está en tratamiento?") !!}<br />{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment", "si", false, ['class' => 'treatment']) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment", "no", true, ['class' => 'treatment']) !!}</div></div><br /><div class="row"><div class="col-md-12">{!! Form::label("detail", "Detalle") !!}{!! Form::textarea("detail", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br /><div class="row"><div class="col-md-12">{!! Form::label("images", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone dropzone-previews"><div class="dz-default dz-message"><h3 class="text-primary">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div></span><hr>';
+
+                if (count_disabilities == 0) {
+                    $('#content_disabilities').html($disability);
+                    $("#wizard").smartWizard("fixHeight");
+                    $("div#dZUpload").dropzone({
+
+                        url: "{{  route('human-resources.manpowers.store') }}",
+
+                        init: function () {
+                            var myDropzone = this;
+
+                            var submitButton = document.getElementById('submitForm');
+                            myDropzone = this; // closure
+
+                            submitButton.addEventListener("click", function (e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                if (myDropzone.getQueuedFiles().length === 0) {
+                                    $('#step2').submit();
+                                }
+                                else {
+                                    myDropzone.processQueue();
+                                    $('#step2').submit();
+                                }
+                            });
+                        },
+
+                        sending: function(file, xhr, formData) {
+                            formData.append("_token", $('[name=_token]').val());
+                        }
+                    });
+                }else {
+
+                    $('#content_disabilities').append($disability);
+                    $("#wizard").smartWizard("fixHeight");
+                }
+
+                //Refresh N° element
+                $('span#disability').attr('id', 'disability' + count_disabilities);
+                $('label[for="disability"]').attr('for', 'disability' + count_disabilities);
+                $('select#disability').each(function(i){
+                    $(this).attr('name', 'disability' + count_disabilities);
+                    $(this).attr('id', 'disability' + count_disabilities);
                 });
+
+                $('label[for="treatment"]').attr('for', 'treatment' + count_disabilities);
+                $('input:radio.treatment').each(function(i){
+                    $(this).attr('name', 'treatment' + count_disabilities);
+                    $(this).attr('id', 'treatment' + count_disabilities);
+                });
+
+                $('label[for="detail"]').attr('for', 'detail' + count_disabilities);
+                $('textarea#detail').attr('name', 'detail' + count_disabilities);
+                $('textarea#detail').attr('id', 'detail' + count_disabilities);
+
+
+                count_disabilities++;
             }
 
 

@@ -74,7 +74,7 @@ class ManpowerController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        dd($request->get('files'));
     }
 
     public function show($id)
