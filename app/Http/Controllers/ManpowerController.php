@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Disability;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 
@@ -14,7 +12,13 @@ use App\Rating;
 use App\Commune;
 use App\Country;
 use App\Forecast;
-use Illuminate\Support\Facades\Validator;
+use App\Disability;
+use App\Disease;
+use App\Kin;
+use App\Certification;
+use App\Institution;
+use App\License;
+use App\Speciality;
 
 
 class ManpowerController extends Controller
@@ -33,9 +37,17 @@ class ManpowerController extends Controller
         $ratings = Rating::lists('name', 'id');
         $communes = Commune::lists('name', 'id');
         $disabilities = Disability::lists('name', 'id');
+        $diseases = Disease::lists('name', 'id');
+        $kins = Kin::lists('name', 'id');
+        $certifications = Certification::lists('name', 'id');
+        $institutions = Institution::lists('name', 'id');
+        $licenses = License::lists('name', 'id');
+        $specialities = Speciality::lists('name', 'id');
+        $manpowers = Manpower::lists('full_name', 'id');
 
         return view('human-resources.manpowers.create', compact(
-            'genders', 'ratings', 'communes', 'countries', 'forecasts', 'disabilities'
+            'genders', 'ratings', 'communes', 'countries', 'forecasts', 'disabilities', 'diseases', 'kins',
+            'certifications', 'institutions', 'licenses', 'specialities', 'manpowers'
         ));
     }
 

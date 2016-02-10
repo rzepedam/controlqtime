@@ -49,6 +49,16 @@ textarea {
     font-size: 1.1em;
 }
 
-.add-element:hover{
-    color: black;
+.title-elements {
+    font-size: 1.8em;
+}
+
+.delete-elements {
+    color: red;
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+.delete-elements:hover {
+    color: red;
 }
