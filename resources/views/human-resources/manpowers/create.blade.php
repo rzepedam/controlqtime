@@ -48,19 +48,19 @@
             </li>
         </ul>
         <div id="step-1">
-
-            @include('human-resources.manpowers.partials.step1.personal_data')
+            {{ Form::open(["route" => "human-resources.manpowers.store", "method" => "POST", "files" => true, "id" => "step2"]) }}
+                @include('human-resources.manpowers.partials.step1.personal_data')
 
         </div>
         <div id="step-2">
 
-            @include('human-resources.manpowers.partials.step2.health')
+                @include('human-resources.manpowers.partials.step2.health')
 
         </div>
         <div id="step-3">
 
-            @include('human-resources.manpowers.partials.step3.job_skills')
-
+                @include('human-resources.manpowers.partials.step3.job_skills')
+            {{ Form::close() }}
         </div>
     </div>
 
@@ -141,43 +141,38 @@
 
             $.fn.addElementDisability = function() {
 
-                $disability = '<span id="disability"><div class="row"><div class="col-md-12"><span class="title-elements text-primary">Discapacidad #' + (count_disabilities + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("name", "Enfermedad") !!}{!! Form::select("name", $disabilities, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disability", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "si", false, ['class'=> 'treatment_disability']) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "no", true, ['class'=> 'treatment_disability']) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disability", "Detalle") !!}{!! Form::textarea("detail_disability", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("img_disability", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone"><div class="dz-default dz-message"><h3 class="text-primary">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div></span><hr />';
+                $disability = '<span id="disability"><div class="row"><div class="col-md-12"><span class="title-elements text-primary">Discapacidad #' + (count_disabilities + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("name", "Enfermedad") !!}{!! Form::select("name", $disabilities, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disability", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "si", false, ['class'=> 'treatment_disability']) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "no", true, ['class'=> 'treatment_disability']) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disability", "Detalle") !!}{!! Form::textarea("detail_disability", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div id="myId" class="dropzone"><div class="dz-message"> <h3 class="text-primary">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div></span><hr />';
 
                 if (count_disabilities == 0) {
                     $('#content_disabilities').html($disability);
-
-                    $("div#dZUpload").dropzone({
-
-                        url: "{{  route('human-resources.manpowers.store') }}",
-
-                        init: function () {
-                            var myDropzone = this;
-
-                            var submitButton = document.getElementById('submitForm');
-                            myDropzone = this; // closure
-
-                            submitButton.addEventListener("click", function (e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                if (myDropzone.getQueuedFiles().length === 0) {
-                                    $('#step2').submit();
-                                }
-                                else {
-                                    myDropzone.processQueue();
-                                    $('#step2').submit();
-                                }
-                            });
-                        },
-
-                        sending: function(file, xhr, formData) {
-                            formData.append("_token", $('[name=_token]').val());
-                        }
-                    });
                 }else {
                     $('#content_disabilities').append($disability);
                 }
 
                 $("#wizard").smartWizard("fixHeight");
+
+                var myDropzone = new Dropzone("div#myId", {
+                    url: "{{ route('human-resources.manpowers.store') }}",
+
+                    init: function() {
+                        var myDropzone = this;
+                        var submit = document.querySelector('#submit-all');
+
+                        // First change the button to actually tell Dropzone to process the queue.
+                        submit.addEventListener("click", function (e) {
+                            // Make sure that the form isn't actually being sent.
+                            e.preventDefault();
+                            e.stopPropagation();
+                            //myDropzone.processQueue();
+                        });
+                    },
+
+                    sending: function(file, xhr, formData) {
+                        formData.append("_token", $('[name=_token').val());
+                    }
+
+                });
+
 
                 //Refresh N° element disability
                 $('#content_disabilities span#disability').attr('id', 'disability' + count_disabilities);

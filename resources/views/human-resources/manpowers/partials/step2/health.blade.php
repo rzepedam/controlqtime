@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'human-resources.manpowers.store', 'method' => 'POST', 'files' => true, 'id' => 'step2']) }}
+
 
     <!-- disabilities -->
     <div class="box box-solid box-default">
@@ -19,11 +19,10 @@
                 </div>
             </div>
             <p></p>
-            {{--<button type="submit" id="submitForm"> enviar</button>--}}
+
         </div>
     </div>
 
-{{ Form::close() }}
     <br />
     
     <!-- diseases -->
