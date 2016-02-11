@@ -153,6 +153,8 @@
 
                 var myDropzone = new Dropzone("div#myId", {
                     url: "{{ route('human-resources.manpowers.store') }}",
+                    autoProcessQueue: true,
+                    paramName: "disabilities",
 
                     init: function() {
                         var myDropzone = this;
@@ -163,7 +165,7 @@
                             // Make sure that the form isn't actually being sent.
                             e.preventDefault();
                             e.stopPropagation();
-                            //myDropzone.processQueue();
+                            myDropzone.processQueue();
                         });
                     },
 
@@ -428,6 +430,8 @@
                 count_family_relationship++;
                 $('.mitooltip').tooltip();
             }
+
+
         });
 
     </script>

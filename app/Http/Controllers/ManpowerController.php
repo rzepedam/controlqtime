@@ -84,9 +84,29 @@ class ManpowerController extends Controller
 
     }
 
+    public function saveTempImg($request)
+    {
+        if ($request->file('disabilities')) {
+            $files = $request->file('disabilities');
+            $dir = public_path() . '/imgs/disabilities';
+
+
+            foreach($files as $file) {
+                $filename = $file->getClientOriginalName();
+                $file->move($dir, $filename);
+            }
+        }
+
+
+
+
+
+    }
+
     public function store(Request $request)
     {
-        dd($request->all());
+        $this->saveTempImg($request);
+
     }
 
     public function show($id)
