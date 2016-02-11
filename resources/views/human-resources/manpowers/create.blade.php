@@ -450,13 +450,17 @@
                     data: $('#step1').serialize(),
                     dataType: "json",
                     success: function (data) {
-                        console.log('success()...');
-                        flag = 1;
+
                     },
 
-                    error: function (data) {
+                    error: function (data)  {
+                        var errors = $.parseJSON(data.responseText);
+                        console.log(errors);
 
-
+                        $.each(errors, function(index, value) {
+                            $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
+                            $('#' + index).focus();
+                        });
                     }
                 });
             }

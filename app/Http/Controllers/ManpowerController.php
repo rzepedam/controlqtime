@@ -54,11 +54,11 @@ class ManpowerController extends Controller
     public function step1(Request $request)
     {
         $this->validate($request, [
-            'male_surname'   => 'required|max:30',
-            'female_surname' => 'required'
+            'female_surname' => 'required|max:30',
+            'male_surname'   => 'required|max:30'
         ]);
 
-        Session::put('male_surname', $request->get('male_surname'));
+        /*Session::put('male_surname', $request->get('male_surname'));
         Session::put('female_surname', $request->get('female_surname'));
         Session::put('first_name', $request->get('first_name'));
         Session::put('second_name', $request->get('second_name'));
@@ -73,7 +73,9 @@ class ManpowerController extends Controller
         Session::put('address', $request->get('address'));
         Session::put('phone1', $request->get('phone1'));
         Session::put('phone2', $request->get('phone2'));
-        Session::put('email', $request->get('email'));
+        Session::put('email', $request->get('email'));*/
+
+
 
     }
 

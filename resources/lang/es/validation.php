@@ -106,7 +106,9 @@ return [
     */
 
     'attributes' => [
-        'name'      => 'nombre'
+        'name'              => 'nombre',
+        'male_surname'      => 'apellido paterno',
+        'female_surname'    => 'apellido materno',
     ],
 
 ];
