@@ -53,30 +53,28 @@ class ManpowerController extends Controller
 
     public function step1(Request $request)
     {
-        if($request->ajax()) {
+        $this->validate($request, [
+            'male_surname'   => 'required|max:30',
+            'female_surname' => 'required'
+        ]);
 
-            $this->validate($request, [
-                'male_surname'   => 'required|max:30',
-                'female_surname' => 'required'
-            ]);
+        Session::put('male_surname', $request->get('male_surname'));
+        Session::put('female_surname', $request->get('female_surname'));
+        Session::put('first_name', $request->get('first_name'));
+        Session::put('second_name', $request->get('second_name'));
+        Session::put('rut', $request->get('rut'));
+        Session::put('birthday', $request->get('birthday'));
+        Session::put('forecast_id', $request->get('forecast_id'));
+        Session::put('country_id', $request->get('country_id'));
+        Session::put('gender_id', $request->get('gender_id'));
+        Session::put('rating_id', $request->get('rating_id'));
+        Session::put('subarea_id', $request->get('subarea_id'));
+        Session::put('commune_id', $request->get('commune_id'));
+        Session::put('address', $request->get('address'));
+        Session::put('phone1', $request->get('phone1'));
+        Session::put('phone2', $request->get('phone2'));
+        Session::put('email', $request->get('email'));
 
-            Session::put('male_surname', $request->get('male_surname'));
-            Session::put('female_surname', $request->get('female_surname'));
-            Session::put('first_name', $request->get('first_name'));
-            Session::put('second_name', $request->get('second_name'));
-            Session::put('rut', $request->get('rut'));
-            Session::put('birthday', $request->get('birthday'));
-            Session::put('forecast_id', $request->get('forecast_id'));
-            Session::put('country_id', $request->get('country_id'));
-            Session::put('gender_id', $request->get('gender_id'));
-            Session::put('rating_id', $request->get('rating_id'));
-            Session::put('subarea_id', $request->get('subarea_id'));
-            Session::put('commune_id', $request->get('commune_id'));
-            Session::put('address', $request->get('address'));
-            Session::put('phone1', $request->get('phone1'));
-            Session::put('phone2', $request->get('phone2'));
-            Session::put('email', $request->get('email'));
-        }
     }
 
     public function step2()
@@ -84,29 +82,9 @@ class ManpowerController extends Controller
 
     }
 
-    public function saveTempImg($request)
-    {
-        if ($request->file('disabilities')) {
-            $files = $request->file('disabilities');
-            $dir = public_path() . '/imgs/disabilities';
-
-
-            foreach($files as $file) {
-                $filename = $file->getClientOriginalName();
-                $file->move($dir, $filename);
-            }
-        }
-
-
-
-
-
-    }
-
     public function store(Request $request)
     {
-        $this->saveTempImg($request);
-
+        dd($request->all());
     }
 
     public function show($id)

@@ -43,6 +43,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'manpowers'], function(){
             Route::post('step1', ['as' => 'human-resources.manpowers.step1', 'uses' => 'ManpowerController@step1']);
             Route::post('step2', ['as' => 'human-resources.manpowers.step2', 'uses' => 'ManpowerController@step2']);
+            Route::post('step3', ['as' => 'human-resources.manpowers.step3', 'uses' => 'ManpowerController@step3']);
+            Route::post('storage', ['as' => 'human-resources.manpowers.storage', 'uses' => 'StorageController@saveTempImg']);
         });
     });
 
@@ -69,4 +71,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('licenses', 'LicenseController');
         Route::resource('professions', 'ProfessionController');
     });
+
+
+
 });
+
