@@ -15,7 +15,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 pull-right">
-                    <a id="add_disability" href="javascript: void(0)" onclick="$(this).addElementDisability(this)" class="text-light-blue pull-right"><i class="fa fa-plus"></i> Agregar Discapacidad</a>
+                    <a href="javascript: void(0)" class="addElementDisability text-light-blue pull-right"><i class="fa fa-plus"></i> Agregar Discapacidad</a>
                 </div>
             </div>
             <p></p>

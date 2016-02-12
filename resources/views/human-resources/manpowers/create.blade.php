@@ -72,12 +72,24 @@
     {{ Html::script('assets/js/jquery.inputmask.js') }}
     {{ Html::script('assets/js/dropzone.js') }}
     {{ Html::script('assets/js/config.js') }}
-    {{-- Html::script('me/js/manpowers/validation_step1.js') --}}
-
 
     <script type="text/javascript">
 
         $(document).ready(function() {
+
+            /******************************************************************
+             *************************** Variables ****************************
+             ******************************************************************/
+
+            var count_family_relationship = 0;
+            var count_disabilities = 0;
+            var count_diseases = 0;
+            var count_family_responsability = 0;
+            var count_certification = 0;
+            var count_licence = 0;
+            var count_speciality = 0;
+
+
 
             /******************************************************************
             ********************* Initialize components ***********************
@@ -85,54 +97,47 @@
 
             $('.mitooltip').tooltip();
 
-
-
-            /******************************************************************
-             *************************** Variables ****************************
-             ******************************************************************/
-
-            var count_disabilities = 0;
-            var count_diseases = 0;
-            var count_family_responsability = 0;
-            var count_certification = 0;
-            var count_licence = 0;
-            var count_speciality = 0;
-            var count_family_relationship = 0;
-
-
-            /******************************************************************
-             ******* Configure and validations SmartWizardJquery Section ******
-             ******************************************************************/
-
             $('#wizard').smartWizard({
                 labelNext:'Siguiente',
                 labelPrevious:'Anterior',
                 labelFinish:'Guardar',
-                transitionEffect: '',
-                //onLeaveStep: leaveAStepCallback,
+                transitionEffect: 'slideLeft',
 
             });
 
-            function leaveAStepCallback(obj, context){
-                return validateSteps(obj.attr('rel'));
-            }
 
-            function validateSteps(step){
-                var isStepValid = true;
+            /*****************************************************************
+             **************** Add Family Relationship zone ***************
+             *****************************************************************/
 
-                if(step == 1) {
+            $.fn.addElementFamilyRelationship = function() {
+                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span class="title-elements text-light-blue">Parentesco Familiar #' + (count_family_relationship + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship', $kins, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower', $manpowers, null, ['class'=> 'form-control'])}}</div></div></span><hr/>';
 
-                    /* validateStep1() => me/js/manpowers/validation_step1.js */
-                    if(validateStep1() == false ) {
-                        isStepValid = false;
-                        $('#wizard').smartWizard('showMessage','Please correct the errors in step'+step+ ' and click next.');
-                        $('#wizard').smartWizard('setError',{stepnum:step,iserror:true});
-                    }else {
-                        $('#wizard').smartWizard('setError',{stepnum:step,iserror:false});
-                    }
-                }
+                if (count_family_relationship == 0)
+                    $('#content_family_relationships').html($family_relationship);
+                else
+                    $('#content_family_relationships').append($family_relationship);
 
-                return isStepValid;
+
+                $("#wizard").smartWizard("fixHeight");
+
+                //Refresh N° element family_relationships
+                $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationship);
+
+                $('label[for="family_relationship"]').attr('for', 'family_relationship' + count_family_relationship);
+                $('select#family_relationship').each(function(i) {
+                    $(this).attr('id', 'family_relationship' + count_family_relationship);
+                    $(this).attr('name', 'family_relationship' + count_family_relationship);
+                });
+
+                $('label[for="manpower"]').attr('for', 'manpower' + count_family_relationship);
+                $('select#manpower').each(function(i) {
+                    $(this).attr('id', 'manpower' + count_family_relationship);
+                    $(this).attr('name', 'manpower' + count_family_relationship);
+                });
+
+                count_family_relationship++;
+                $('.mitooltip').tooltip();
             }
 
 
@@ -142,7 +147,7 @@
              *****************************************************************/
 
 
-            $.fn.addElementDisability = function() {
+            $('body').on('click', '.addElementDisability', function() {
 
                 $disability = '<span id="disability"><div class="row"><div class="col-md-12"><span class="title-elements text-primary">Discapacidad #' + (count_disabilities + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("disability", "Discapacidad") !!}{!! Form::select("disability", $disabilities, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disability", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "si", false, ['class'=> 'treatment_disability']) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "no", true) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disability", "Detalle") !!}{!! Form::textarea("detail_disability", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div id="myId" class="dropzone"><div class="dz-message"> <h3 class="text-primary">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div></span><hr />';
 
@@ -199,7 +204,8 @@
 
                 count_disabilities++;
                 $('.mitooltip').tooltip();
-            }
+
+            });
 
 
 
@@ -399,76 +405,335 @@
 
 
             /*****************************************************************
-             **************** Add Family Responsabilities zone ***************
+             ************************** Submit Steps *************************
              *****************************************************************/
 
+            //Steps Forward
+            $('#sendElement').on('click', function() {
+                event.stopImmediatePropagation();
+                var currentStep = $("#wizard").smartWizard("currentStep");
 
-            $.fn.addElementFamilyRelationship = function() {
+                //Validate fields
+                //if (validateStep1() != false) {
 
-                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span class="title-elements text-light-blue">Parentesco Familiar #' + (count_family_relationship + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship', $kins, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower', $manpowers, null, ['class'=> 'form-control'])}}</div></div></span><hr/>';
+                    if (currentStep == 1) {
+                        //Step 1
+                        /*$.ajax({
+                            type: 'POST',
+                            url: '{{ route("human-resources.manpowers.step1") }}',
+                            data: $('#step' + currentStep).serialize(),
+                            dataType: "json",
+                            success: function (data) {
+                                $('#js').addClass('hide');
+                                $("#wizard").smartWizard("goForward");
+                            },
 
-                if (count_family_relationship == 0)
-                    $('#content_family_relationships').html($family_relationship);
-                else
-                    $('#content_family_relationships').append($family_relationship);
+                            error: function (data) {
+                                var errors = $.parseJSON(data.responseText);
+                                $.each(errors.errors, function (index, value) {
+                                    $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
+                                    $('#' + index).focus();
+                                });
+                            }
+                        });*/
+                        $("#wizard").smartWizard("goForward");
+                    } else {
+                        //Step 2
+                        if (validateStep2() != false) {
 
-
-                $("#wizard").smartWizard("fixHeight");
-
-                //Refresh N° element family_relationships
-                $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationship);
-
-                $('label[for="family_relationship"]').attr('for', 'family_relationship' + count_family_relationship);
-                $('select#family_relationship').each(function(i) {
-                    $(this).attr('id', 'family_relationship' + count_family_relationship);
-                    $(this).attr('name', 'family_relationship' + count_family_relationship);
-                });
-
-                $('label[for="manpower"]').attr('for', 'manpower' + count_family_relationship);
-                $('select#manpower').each(function(i) {
-                    $(this).attr('id', 'manpower' + count_family_relationship);
-                    $(this).attr('name', 'manpower' + count_family_relationship);
-                });
-
-                count_family_relationship++;
-                $('.mitooltip').tooltip();
-            }
-
+                        }
+                    }
+                //}
+            });
 
 
             /*****************************************************************
              ************************** Submit form **************************
              *****************************************************************/
 
-            $.fn.sendElement = function(){
-                event.stopImmediatePropagation();
-                var currentStep = $("#wizard").smartWizard("currentStep");
+            $('#submit-all').click(function(){
 
-                $.ajax ({
-                    type: 'POST',
-                    url: "{{ route('human-resources.manpowers.step1') }}",
-                    data: $('#step1').serialize(),
-                    dataType: "json",
-                    success: function (data) {
 
-                    },
 
-                    error: function (data)  {
-                        var errors = $.parseJSON(data.responseText);
-                        console.log(errors);
+            });
 
-                        $.each(errors, function(index, value) {
-                            $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
-                            $('#' + index).focus();
-                        });
+
+            /*****************************************************************
+             ************************** Validations **************************
+             *****************************************************************/
+
+            function validateStep1() {
+
+                /* male_surname */
+                if ($('#male_surname').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#male_surname').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#male_surname').focus();
+                }
+
+
+                if ($('#male_surname').val().length > 30) {
+                    $('#js').removeClass('hide');
+                    $('#male_surname').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> no debe ser mayor que 30 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#male_surname').focus();
+                }
+
+                /* female_surname */
+                if ($('#female_surname').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#female_surname').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#female_surname').focus();
+                }
+
+
+                if ($('#female_surname').val().length > 30) {
+                    $('#js').removeClass('hide');
+                    $('#female_surname').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> no debe ser mayor que 30 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#female_surname').focus();
+                }
+
+                /* first_name */
+                if ($('#first_name').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#first_name').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#first_name').focus();
+                }
+
+
+                if ($('#first_name').val().length > 30) {
+                    $('#js').removeClass('hide');
+                    $('#first_name').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> no debe ser mayor que 30 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#first_name').focus();
+                }
+
+                /* second_name */
+                if ($('#second_name').val().length > 30) {
+                    $('#js').removeClass('hide');
+                    $('#second_name').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Segundo Nombre</strong> no debe ser mayor que 30 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#second_name').focus();
+                }
+
+                /* rut */
+                if ($('#rut').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#rut').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#rut').focus();
+                }
+
+                /* birthday */
+                if ($('#birthday').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#birthday').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Fecha de Nacimiento</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#birthday').focus();
+                }
+
+                /* forecast */
+                if ($('#forecast_id').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#forecast_id').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Previsión</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#forecast_id').focus();
+                }
+
+                /* country */
+                if ($('#country_id').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#country_id').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nacionalidad</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#country_id').focus();
+                }
+
+                /* gender */
+                if ($('#gender_id').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#gender_id').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Sexo</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#gender_id').focus();
+                }
+
+                /* rating */
+                if ($('#rating_id').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#rating_id').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Cargo</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#rating_id').focus();
+                }
+
+                /* subarea */
+                if ($('#subarea_id').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#subarea_id').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Subárea</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#subarea_id').focus();
+                }
+
+                /* commune */
+                if ($('#commune_id').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#commune_id').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Comuna</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#commune_id').focus();
+                }
+
+                /* address */
+                if ($('#address').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#address').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Dirección</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#address').focus();
+                }
+
+                /* phone1 */
+                if ($('#phone1').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#phone1').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#phone1').focus();
+                }
+
+                if ($('#phone1').val().length > 20) {
+                    $('#js').removeClass('hide');
+                    $('#phone1').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> no debe ser mayor que 20 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#phone1').focus();
+                }
+
+                /* phone2 */
+                if ($('#phone2').val().length > 20) {
+                    $('#js').removeClass('hide');
+                    $('#phone2').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 2</strong> no debe ser mayor que 20 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#phone2').focus();
+                }
+
+                /* email */
+                if ($('#email').val() == '') {
+                    $('#js').removeClass('hide');
+                    $('#email').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#email').focus();
+                }
+
+                if ($('#email').val().length > 100) {
+                    $('#js').removeClass('hide');
+                    $('#email').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email</strong> no debe ser mayor que 100 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#email').focus();
+                }
+
+                alert($('#family_relationship0').val());
+                if ($('#family_relationship0').val() == '') {
+                    $('#family_relationship0').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Parentesco Familiar</strong> es obligatorio').removeClass('hide');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#family_relationship0').focus();
+                }
+
+
+                for(var i = 0; i < count_family_relationship; i++) {
+
+                    if ($('#family_relationship' + i).val() == '') {
+                        $('#family_relationship' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Parentesco Familiar</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#family_relationship' + i).focus();
                     }
-                });
+                }
+
             }
 
 
-            $('#submit-all').click(function(){
-               $('#step2').submit();
-            });
+            function validateStep2()
+            {
+                for(var i = 0; i < count_disabilities; i++) {
+                        $( "body" ).on('focus', ":input#disability" + i, function() {
+                            alert($('#disability' + i).val());
+                            $('#disability' + i).focus();
+                        });
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nombre Discapacidad</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    /*} else {
+                        $('#js').addClass('hide');
+                        $('#disability' + i).focus();
+                    }*/
+                }
+            }
 
         });
 

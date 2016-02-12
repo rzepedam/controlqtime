@@ -19,6 +19,7 @@ use App\Certification;
 use App\Institution;
 use App\License;
 use App\Speciality;
+use Illuminate\Support\Facades\Validator;
 
 
 class ManpowerController extends Controller
@@ -53,10 +54,35 @@ class ManpowerController extends Controller
 
     public function step1(Request $request)
     {
-        $this->validate($request, [
-            'female_surname' => 'required|max:30',
-            'male_surname'   => 'required|max:30'
-        ]);
+        $rules = [
+            'email'             => 'required|email|unique:manpowers|max:100',
+            'phone2'            => 'max:20',
+            'phone1'            => 'required|max:20',
+            'address'           => 'required',
+            'commune_id'        => 'required',
+            'subarea_id'        => 'required',
+            'rating_id'         => 'required',
+            'gender_id'         => 'required',
+            'forecast_id'       => 'required',
+            'country_id'        => 'required',
+            'birthday'          => 'required',
+            'rut'               => 'required',
+            'second_name'       => 'max:30',
+            'first_name'        => 'required|max:30',
+            'female_surname'    => 'required|max:30',
+            'male_surname'      => 'required|max:30',
+        ];
+
+        $v = Validator::make($request->all(), $rules);
+
+        if($v->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $v->getMessageBag()->toArray()
+            ], 400);
+        }
+
+        return response()->json(['status' => 'success'], 200);
 
         /*Session::put('male_surname', $request->get('male_surname'));
         Session::put('female_surname', $request->get('female_surname'));
@@ -74,9 +100,6 @@ class ManpowerController extends Controller
         Session::put('phone1', $request->get('phone1'));
         Session::put('phone2', $request->get('phone2'));
         Session::put('email', $request->get('email'));*/
-
-
-
     }
 
     public function step2()

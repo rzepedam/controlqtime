@@ -41,12 +41,12 @@
                     </div>
                 </div>
                 <div class="col-md-3 form-group">
-                    {{ Form::label('forecast_id', 'Previsión') }}
-                    {{ Form::select('forecast_id', $forecasts, Session::get('forecast_id'), ['class' => 'form-control required'] ) }}
-                </div>
-                <div class="col-md-3 form-group">
                     {{ Form::label('country_id', 'Nacionalidad') }}
                     {{ Form::select('country_id', $countries, Session::get('country_id'), ['class' => 'form-control required']) }}
+                </div>
+                <div class="col-md-3 form-group">
+                    {{ Form::label('forecast_id', 'Previsión') }}
+                    {{ Form::select('forecast_id', $forecasts, Session::get('forecast_id'), ['class' => 'form-control required'] ) }}
                 </div>
             </div>
 

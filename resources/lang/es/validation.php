@@ -34,7 +34,7 @@ return [
     'different'            => ':attribute y :other deben ser diferentes.',
     'digits'               => ':attribute debe tener :digits dígitos.',
     'digits_between'       => ':attribute debe tener entre :min y :max dígitos.',
-    'email'                => ':attribute no es un correo válido',
+    'email'                => 'El <strong>:attribute</strong> no es un correo válido',
     'exists'               => ':attribute es inválido.',
     'filled'               => 'El campo :attribute es obligatorio.',
     'image'                => ':attribute debe ser una imagen.',
@@ -58,7 +58,7 @@ return [
     'not_in'               => ':attribute es inválido.',
     'numeric'              => ':attribute debe ser numérico.',
     'regex'                => 'El formato de :attribute es inválido.',
-    'required'             => 'El campo :attribute es obligatorio.',
+    'required'             => 'El campo <strong>:attribute</strong> es obligatorio.',
     'required_if'          => 'El campo :attribute es obligatorio cuando :other es :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'El campo :attribute es obligatorio cuando :values está presente.',
@@ -74,7 +74,7 @@ return [
     ],
     'string'               => 'El campo :attribute debe ser una cadena de caracteres.',
     'timezone'             => 'El :attribute debe ser una zona válida.',
-    'unique'               => 'El :attribute ya ha sido registrado.',
+    'unique'               => 'El <strong>:attribute</strong> ya ha sido registrado.',
     'url'                  => 'El formato :attribute es inválido.',
 
     /*
@@ -106,9 +106,21 @@ return [
     */
 
     'attributes' => [
-        'name'              => 'nombre',
-        'male_surname'      => 'apellido paterno',
-        'female_surname'    => 'apellido materno',
+        'name'              => 'Nombre',
+        'male_surname'      => 'Apellido Paterno',
+        'female_surname'    => 'Apellido Materno',
+        'first_name'        => 'Primer Nombre',
+        'second_name'       => 'Segundo Nombre',
+        'birthday'          => 'Fecha de Nacimiento',
+        'country_id'        => 'Nacionalidad',
+        'forecast_id'       => 'Previsión',
+        'gender_id'         => 'Sexo',
+        'rating_id'         => 'Cargo',
+        'subarea_id'        => 'Subárea',
+        'commune_id'        => 'Comuna',
+        'address'           => 'Dirección',
+        'phone1'            => 'Teléfono 1',
+        'phone2'            => 'Teléfono 2',
     ],
 
 ];
