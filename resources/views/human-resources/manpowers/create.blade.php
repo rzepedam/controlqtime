@@ -105,6 +105,8 @@
 
             });
 
+            //Cancel next step event in click event, necesary for validation
+            $('#sendElement').unbind('click');
 
             /*****************************************************************
              **************** Add Family Relationship zone ***************
@@ -402,19 +404,17 @@
                 $('.mitooltip').tooltip();
             }
 
-
-
             /*****************************************************************
              ************************** Submit Steps *************************
              *****************************************************************/
 
             //Steps Forward
-            $('#sendElement').on('click', function() {
-                event.stopImmediatePropagation();
+            $('#sendElement').click(function(e) {
+
                 var currentStep = $("#wizard").smartWizard("currentStep");
 
                 //Validate fields
-                //if (validateStep1() != false) {
+                if (validateStep1() != false) {
 
                     if (currentStep == 1) {
                         //Step 1
@@ -443,7 +443,7 @@
 
                         }
                     }
-                //}
+                }
             });
 
 
@@ -462,8 +462,8 @@
              ************************** Validations **************************
              *****************************************************************/
 
-            function validateStep1() {
-
+            function validateStep1()
+            {
                 /* male_surname */
                 if ($('#male_surname').val() == '') {
                     $('#js').removeClass('hide');
@@ -474,7 +474,6 @@
                     $('#js').addClass('hide');
                     $('#male_surname').focus();
                 }
-
 
                 if ($('#male_surname').val().length > 30) {
                     $('#js').removeClass('hide');
@@ -693,47 +692,21 @@
                     $('#email').focus();
                 }
 
-                alert($('#family_relationship0').val());
-                if ($('#family_relationship0').val() == '') {
-                    $('#family_relationship0').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Parentesco Familiar</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#family_relationship0').focus();
-                }
-
-
                 for(var i = 0; i < count_family_relationship; i++) {
 
-                    if ($('#family_relationship' + i).val() == '') {
-                        $('#family_relationship' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Parentesco Familiar</strong> es obligatorio').removeClass('hide');
+                    if ($('select#family_relationship' + i).val() == null) {
+                        $('#js').removeClass('hide');
+                        $('select#family_relationship' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Parentesco Familiar ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
                         return false;
-                    } else {
+                    }else {
                         $('#js').addClass('hide');
-                        $('#family_relationship' + i).focus();
+                        $('select#family_relationship' + i).focus();
                     }
                 }
-
             }
 
 
-            function validateStep2()
-            {
-                for(var i = 0; i < count_disabilities; i++) {
-                        $( "body" ).on('focus', ":input#disability" + i, function() {
-                            alert($('#disability' + i).val());
-                            $('#disability' + i).focus();
-                        });
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nombre Discapacidad</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    /*} else {
-                        $('#js').addClass('hide');
-                        $('#disability' + i).focus();
-                    }*/
-                }
-            }
 
         });
 
