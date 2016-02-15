@@ -58,7 +58,7 @@
             {{ Form::close() }}
         </div>
         <div id="step-3">
-            {{ Form::open(["route" => "human-resources.manpowers.step3", "method" => "POST", "files" => true, "id" => "step3"]) }}
+            {{ Form::open(["route" => "human-resources.manpowers.store", "method" => "POST", "files" => true, "id" => "step3"]) }}
                 @include('human-resources.manpowers.partials.step3.job_skills')
             {{ Form::close() }}
         </div>
@@ -86,7 +86,7 @@
             var count_diseases = 0;
             var count_family_responsability = 0;
             var count_certification = 0;
-            var count_licence = 0;
+            var count_license = 0;
             var count_speciality = 0;
 
 
@@ -108,12 +108,196 @@
             //Cancel next step event in click event, necesary for validation
             $('#sendElement').unbind('click');
 
+
+            /******************************************************************
+             ************************ Delete elements *************************
+             ******************************************************************/
+
+            //Verifico último número para saber elemento actual
+            function verificaUltimosNumeros(element){
+
+                var aux = element.charAt(element.length - 2);
+
+                //Verificamos si penúltimo dígito es letra, si lo es solamente me quedo con último N°
+                //Sino, retorno 2 últimos N°s
+                if(isNaN(aux) == true){
+                    num_element = element.charAt(element.length - 1);
+                }else{
+                    var temp    = element.charAt(element.length - 2);
+                    var temp2   = element.charAt(element.length - 1);
+                    num_element = temp + temp2;
+                }
+
+                return num_element;
+            }
+
+
+            $(document).on('click','.delete-elements',function() {
+
+                var element = $(this).attr('id');
+                var padre = $(this).parent().parent().parent().parent();
+                $(this).parent().parent().parent().remove();
+                var span = padre.children("span");
+
+                switch (element)
+                {
+                    case 'family_relationship':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_family_relationship' + item).text('Parentesco Familiar #' + (i + 1));
+                            $('span#num_family_relationship' + item).attr('id', 'num_family_relationship' + i);
+                            $('span#family_relationship' + item).attr('id', 'family_relationship' + i);
+                            $('label[for="family_relationship' + item + '"]').attr('for', "family_relationship" + i);
+                            $('select#family_relationship' + item).each(function(j) {
+                                $(this).attr('id', 'family_relationship' + i);
+                                $(this).attr('name', 'family_relationship' + i);
+                            });
+
+                            $('label[for="manpower' + item + '"]').attr('for', 'manpower' + i);
+                            $('select#manpower' + item).each(function(j) {
+                                $(this).attr('id', 'manpower' + i);
+                                $(this).attr('name', 'manpower' + i);
+                            });
+                        }
+
+                        count_family_relationship--;
+                        if (count_family_relationship == 0) {
+                            var html = '<h2 class="text-center text-light-blue">No existen Parentescos Familiares Asociados <br /><small class="text-muted">(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h2><br /><hr />'
+                            $('#content_family_relationships').html(html);
+                        }
+
+                    break;
+
+                    case 'disability':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_disability' + item).text('Discapacidad #' + (i + 1));
+                            $('span#num_disability' + item).attr('id', 'num_disability' + i);
+                            $('span#disability' + item).attr('id', 'disability' + i);
+
+                            $('label[for="disability' + item + '"]').attr('for', "disability" + i);
+                            $('select#disability' + item).each(function(j) {
+                                $(this).attr('id', 'disability' + i);
+                                $(this).attr('name', 'disability' + i);
+                            });
+
+                            $('label[for="treatment_disability' + item + '"]').attr('for', 'treatment_disability' + i);
+                            $('input:radio[name="treatment_disability' + item + '"]').each(function(j){
+                                $(this).attr('name', 'treatment_disability' + i);
+                                $(this).attr('id', 'treatment_disability' + i);
+                            });
+
+                            $('label[for="detail_disability' + item + '"]').attr('for', 'detail_disability' + i);
+                            $('textarea#detail_disability' + item).attr('name', 'detail_disability' + i);
+                            $('textarea#detail_disability' + item).attr('id', 'detail_disability' + i);
+                        }
+
+                        count_disabilities--;
+                        if (count_disabilities == 0) {
+                            var html = '<h2 class="text-center text-light-blue">No existen Discapacidades asociadas <br /><small class="text-muted">(Pulse "Agregar Discapacidad" para comenzar su adición)</small></h2><br /><hr />'
+                            $('#content_disabilities').html(html);
+                        }
+
+                    break;
+
+                    case 'disease':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_disease' + item).text('Enfermedad #' + (i + 1));
+                            $('span#num_disease' + item).attr('id', 'num_disease' + i);
+                            $('span#disease' + item).attr('id', 'disease' + i);
+
+                            $('label[for="disease' + item + '"]').attr('for', "disease" + i);
+                            $('select#disease' + item).each(function(j) {
+                                $(this).attr('id', 'disease' + i);
+                                $(this).attr('name', 'disease' + i);
+                            });
+
+                            $('label[for="treatment_disease' + item + '"]').attr('for', 'treatment_disease' + i);
+                            $('input:radio[name="treatment_disease' + item + '"]').each(function(j){
+                                $(this).attr('name', 'treatment_disease' + i);
+                                $(this).attr('id', 'treatment_disease' + i);
+                            });
+
+                            $('label[for="detail_disease' + item + '"]').attr('for', 'detail_disease' + i);
+                            $('textarea#detail_disease' + item).attr('name', 'detail_disease' + i);
+                            $('textarea#detail_disease' + item).attr('id', 'detail_disease' + i);
+
+                        }
+
+                        count_diseases--;
+                        if (count_diseases == 0) {
+                            var html = '<h2 class="text-center text-green">No existen Enfermedades asociadas <br /><small class="text-muted">(Pulse "Agregar Enfermedad" para comenzar su adición)</small></h2><br /><hr />'
+                            $('#content_diseases').html(html);
+                        }
+
+                    break;
+
+                    case 'family_responsability':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_family_responsability' + item).text('Carga Familiar #' + (i + 1));
+                            $('span#num_family_responsability' + item).attr('id', 'num_family_responsability' + i);
+                            $('span#family_responsability' + item).attr('id', 'family_responsability' + i);
+
+                            $('label[for="name_responsability' + item + '"]').attr('for', 'name_responsability' + i);
+                            $('input#name_responsability' + item).attr('name', 'name_responsability' + i);
+                            $('input#name_responsability' + item).attr('id', 'name_responsability' + i);
+
+                            $('label[for="rut' + item + '"]').attr('for', 'rut' + i);
+                            $('input#rut' + item).attr('name', 'rut' + i);
+                            $('input#rut' + item).attr('id', 'rut' + i);
+
+                            $('label[for="kin_id' + item + '"]').attr('for', "kin_id" + i);
+                            $('select#kin_id' + item).each(function(j) {
+                                $(this).attr('id', 'kin_id' + i);
+                                $(this).attr('name', 'kin_id' + i);
+                            });
+                        }
+
+                        count_family_responsability--;
+                        if (count_family_responsability == 0) {
+                            var html = '<h2 class="text-center text-yellow">No existen Cargas Familiares asociadas <br /><small class="text-muted">(Pulse "Agregar Carga Familiar" para comenzar su adición)</small></h2><br /><hr />'
+                            $('#content_family_responsabilities').html(html);
+                        }
+
+                    break;
+
+                    case 'certification':
+
+
+                        count_certification--;
+                        if (count_certification == 0) {
+                            var html = '<h2 class="text-center text-red">No existen Certificaciones asociadas <br /><small class="text-muted">(Pulse "Agregar Certificación" para comenzar su adición)</small></h2><br /><hr />'
+                            $('#content_certifications').html(html);
+                        }
+
+                        break;
+
+                }
+
+            });
+
+
+
             /*****************************************************************
              **************** Add Family Relationship zone ***************
              *****************************************************************/
 
             $.fn.addElementFamilyRelationship = function() {
-                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span class="title-elements text-light-blue">Parentesco Familiar #' + (count_family_relationship + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship', $kins, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower', $manpowers, null, ['class'=> 'form-control'])}}</div></div></span><hr/>';
+                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="title-elements text-light-blue">Parentesco Familiar #' + (count_family_relationship + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship', $kins, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower', $manpowers, null, ['class'=> 'form-control'])}}</div></div><hr/></span>';
 
                 if (count_family_relationship == 0)
                     $('#content_family_relationships').html($family_relationship);
@@ -125,6 +309,7 @@
 
                 //Refresh N° element family_relationships
                 $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationship);
+                $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationship);
 
                 $('label[for="family_relationship"]').attr('for', 'family_relationship' + count_family_relationship);
                 $('select#family_relationship').each(function(i) {
@@ -151,7 +336,7 @@
 
             $('body').on('click', '.addElementDisability', function() {
 
-                $disability = '<span id="disability"><div class="row"><div class="col-md-12"><span class="title-elements text-primary">Discapacidad #' + (count_disabilities + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("disability", "Discapacidad") !!}{!! Form::select("disability", $disabilities, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disability", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "si", false, ['class'=> 'treatment_disability']) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "no", true) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disability", "Detalle") !!}{!! Form::textarea("detail_disability", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div id="myId" class="dropzone"><div class="dz-message"> <h3 class="text-primary">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div></span><hr />';
+                $disability = '<span id="disability"><div class="row"><div class="col-md-12"><span id="num_disability" class="title-elements text-primary">Discapacidad #' + (count_disabilities + 1) + '</span><a id="disability" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("disability", "Discapacidad") !!}{!! Form::select("disability", $disabilities, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disability", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "si", false, ['class'=> 'treatment_disability']) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "no", true) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disability", "Detalle") !!}{!! Form::textarea("detail_disability", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div id="myId" class="dropzone"><div class="dz-message"> <h3 class="text-primary">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><hr /></span>';
 
                 if (count_disabilities == 0) {
                     $('#content_disabilities').html($disability);
@@ -188,6 +373,8 @@
 
                 //Refresh N° element disability
                 $('#content_disabilities span#disability').attr('id', 'disability' + count_disabilities);
+                $('span#num_disability').attr('id', 'num_disability' + count_disabilities);
+
                 $('#content_disabilities label[for="disability"]').attr('for', 'disability' + count_disabilities);
                 $('#content_disabilities select#disability').each(function(i){
                     $(this).attr('name', 'disability' + count_disabilities);
@@ -218,7 +405,7 @@
 
             $.fn.addElementDisease = function() {
 
-                $disease = '<span id="disease"><div class="row"><div class="col-md-12"><span class="title-elements text-success">Enfermedad #' + (count_diseases + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Enfermedad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("disease", "Enfermedad") !!}{!! Form::select("disease", $diseases, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disease", "Está en tratamiento?") !!}<br/>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disease", "si", false) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disease", "no", true, ['class'=> 'treatment_disease']) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disease", "Detalle") !!}{!! Form::textarea("detail_disease", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("img_disease", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone dropzone-previews"><div class="dz-default dz-message"><h3 class="text-primary">Arrastre sus archivos hasta aquí</h3><span class="note">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div></span><hr />';
+                $disease = '<span id="disease"><div class="row"><div class="col-md-12"><span id="num_disease" class="title-elements text-success">Enfermedad #' + (count_diseases + 1) + '</span><a id="disease" class="delete-elements pull-right mitooltip" title="Eliminar Enfermedad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("disease", "Enfermedad") !!}{!! Form::select("disease", $diseases, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disease", "Está en tratamiento?") !!}<br/>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disease", "si", false) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disease", "no", true, ['class'=> 'treatment_disease']) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disease", "Detalle") !!}{!! Form::textarea("detail_disease", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("img_disease", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone dropzone-previews"><div class="dz-default dz-message"><h3 class="text-green">Arrastre sus archivos hasta aquí</h3><span class="note">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div><hr /></span>';
 
                 if (count_diseases == 0)
                     $('#content_diseases').html($disease);
@@ -230,6 +417,8 @@
 
                 //Refresh N° element disease
                 $('#content_diseases span#disease').attr('id', 'disease' + count_diseases);
+                $('span#num_disease').attr('id', 'num_disease' + count_diseases);
+
                 $('#content_diseases label[for="disease"]').attr('for', 'disease' + count_diseases);
                 $('#content_diseases select#disease').each(function(i){
                     $(this).attr('name', 'disease' + count_diseases);
@@ -259,7 +448,7 @@
 
             $.fn.addElementFamilyResponsability = function() {
 
-                $family_responsability = '<span id="family_responsability"><div class="row"><div class="col-md-12"><span class="title-elements text-warning">Carga Familiar #' + (count_family_responsability + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Carga Familiar"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{{Form::label('name_responsability', 'Nombre Completo')}}{{Form::text('name_responsability', null, ['class'=> 'form-control'])}}</div><div class="col-md-3">{{Form::label('rut', 'Rut')}}{{Form::text('rut', null, ['class'=> 'form-control'])}}</div><div class="col-md-3">{{Form::label('kin_id', 'Parentesco')}}{{Form::select('kin_id', $kins, null, ['class'=> 'form-control'])}}</div></div></span><hr />';
+                $family_responsability = '<span id="family_responsability"><div class="row"><div class="col-md-12"><span id="num_family_responsability" class="title-elements text-yellow">Carga Familiar #' + (count_family_responsability + 1) + '</span><a id="family_responsability" class="delete-elements pull-right mitooltip" title="Eliminar Carga Familiar"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{{Form::label('name_responsability', 'Nombre Completo')}}{{Form::text('name_responsability', null, ['class'=> 'form-control'])}}</div><div class="col-md-3">{{Form::label('rut', 'Rut')}}{{Form::text('rut', null, ['class'=> 'form-control'])}}</div><div class="col-md-3">{{Form::label('kin_id', 'Parentesco')}}{{Form::select('kin_id', $kins, null, ['class'=> 'form-control'])}}</div></div><hr /></span>';
 
                 if (count_family_responsability == 0)
                     $('#content_family_responsabilities').html($family_responsability);
@@ -271,6 +460,8 @@
 
                 //Refresh N° element family_responsabilities
                 $('#content_family_responsabilities span#family_responsability').attr('id', 'family_responsability' + count_family_responsability);
+                $('#content_family_responsabilities span#num_family_responsability').attr('id', 'num_family_responsability' + count_family_responsability);
+
                 $('#content_family_responsabilities label[for="name_responsability"]').attr('for', 'name_responsability' + count_family_responsability);
                 $('#content_family_responsabilities input:text#name_responsability').attr('name', 'name_responsability' + count_family_responsability);
                 $('#content_family_responsabilities input:text#name_responsability').attr('id', 'name_responsability' + count_family_responsability);
@@ -296,7 +487,7 @@
 
             $.fn.addElementCertification = function() {
 
-                $certification = '<span id="certification"><div class="row"><div class="col-md-12"><span class="title-elements text-red">Certificación #' + (count_certification + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-7">{{Form::label('certification', 'Nombre')}}{{Form::select('certification', $certifications, null, ['class'=> 'form-control'])}}</div><div class="col-md-5">{{Form::label('institution', 'Institución')}}{{Form::select('institution', $institutions, null, ['class'=> 'form-control'])}}</div></div><br /><div class="row"><div class="col-md-12">{!! Form::label("img_certification", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone dropzone-previews"><div class="dz-default dz-message"><h3 class="text-primary">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div></span><hr />';
+                $certification = '<span id="certification"><div class="row"><div class="col-md-12"><span id="num_certification" class="title-elements text-red">Certificación #' + (count_certification + 1) + '</span><a id="certification" class="delete-elements pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-7">{{Form::label('certification', 'Nombre')}}{{Form::select('certification', $certifications, null, ['class'=> 'form-control'])}}</div><div class="col-md-5">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id', $institutions, null, ['class'=> 'form-control'])}}</div></div><br /><div class="row"><div class="col-md-12">{!! Form::label("img_certification", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone dropzone-previews"><div class="dz-default dz-message"><h3 class="text-red">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div></span><hr />';
 
                 if (count_certification == 0)
                     $('#content_certifications').html($certification);
@@ -308,16 +499,18 @@
 
                 //Refresh N° element certifications
                 $('span#certification').attr('id', 'certification' + count_certification);
+                $('span#num_certification').attr('id', 'num_certification' + count_certification);
+
                 $('label[for="certification"]').attr('for', 'certification' + count_certification);
                 $('select#certification').each(function(i) {
                     $(this).attr('id', 'certification' + count_certification);
                     $(this).attr('name', 'certification' + count_certification);
                 });
 
-                $('label[for="institution"]').attr('for', 'institution' + count_certification);
-                $('#content_certifications select#institution').each(function(i) {
-                    $(this).attr('id', 'institution' + count_certification);
-                    $(this).attr('name', 'institution' + count_certification);
+                $('label[for="institution_id"]').attr('for', 'institution_id' + count_certification);
+                $('#content_certifications select#institution_id').each(function(i) {
+                    $(this).attr('id', 'institution_id' + count_certification);
+                    $(this).attr('name', 'institution_id' + count_certification);
                 });
 
 
@@ -334,9 +527,9 @@
 
             $.fn.addElementLicense = function() {
 
-                $license = '<span id="license"><div class="row"><div class="col-md-12"><span class="title-elements text-yellow">Licencia #' + (count_licence + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-4">{{Form::label('license', 'Tipo Licencia')}}{{Form::select('license', $licenses, null, ['class'=> 'form-control'])}}</div><div class="col-md-2">{{Form::label('expired', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div></div><br/><div class="row"><div class="col-md-12">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div><br /><div class="row"><div class="col-md-12">{!! Form::label("img_license", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone dropzone-previews"><div class="dz-default dz-message"><h3 class="text-primary">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div></span><hr />';
+                $license = '<span id="license"><div class="row"><div class="col-md-12"><span class="title-elements text-yellow">Licencia #' + (count_license + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-4">{{Form::label('license', 'Tipo Licencia')}}{{Form::select('license', $licenses, null, ['class'=> 'form-control'])}}</div><div class="col-md-2">{{Form::label('expired', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div></div><br/><div class="row"><div class="col-md-12">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div><br /><div class="row"><div class="col-md-12">{!! Form::label("img_license", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone dropzone-previews"><div class="dz-default dz-message"><h3 class="text-yellow">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div></span><hr />';
 
-                if (count_licence == 0)
+                if (count_license == 0)
                     $('#content_licenses').html($license);
                 else
                     $('#content_licenses').append($license);
@@ -345,24 +538,24 @@
                 $("#wizard").smartWizard("fixHeight");
 
                 //Refresh N° element licenses
-                $('span#license').attr('id', 'license' + count_licence);
+                $('span#license').attr('id', 'license' + count_license);
 
-                $('label[for="license"]').attr('for', 'license' + count_licence);
+                $('label[for="license"]').attr('for', 'license' + count_license);
                 $('select#license').each(function(i) {
-                    $(this).attr('id', 'license' + count_licence);
-                    $(this).attr('name', 'license' + count_licence);
+                    $(this).attr('id', 'license' + count_license);
+                    $(this).attr('name', 'license' + count_license);
                 });
 
-                $('label[for="expired"]').attr('for', 'expired' + count_licence);
-                $('input#expired').attr('name', 'expired' + count_licence);
-                $('input#expired').attr('id', 'expired' + count_licence);
+                $('label[for="expired"]').attr('for', 'expired' + count_license);
+                $('input#expired').attr('name', 'expired' + count_license);
+                $('input#expired').attr('id', 'expired' + count_license);
 
-                $('label[for="detail_license"]').attr('for', 'detail_license' + count_licence);
-                $('textarea#detail_license').attr('name', 'detail_license' + count_licence);
-                $('textarea#detail_license').attr('id', 'detail_license' + count_licence);
+                $('label[for="detail_license"]').attr('for', 'detail_license' + count_license);
+                $('textarea#detail_license').attr('name', 'detail_license' + count_license);
+                $('textarea#detail_license').attr('id', 'detail_license' + count_license);
 
 
-                count_licence++;
+                count_license++;
                 $('.mitooltip').tooltip();
             }
 
@@ -375,7 +568,7 @@
 
             $.fn.addElementSpeciality = function() {
 
-                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><span class="title-elements text-green">Especialidad #' + (count_speciality + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('speciality', 'Especialidad')}}{{Form::select('speciality', $specialities, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('institution', 'Institución')}}{{Form::select('institution', $institutions, null, ['class'=> 'form-control'])}}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("img_speciality", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone dropzone-previews"><div class="dz-default dz-message"><h3 class="text-primary">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div></span><hr/>';
+                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><span class="title-elements text-green">Especialidad #' + (count_speciality + 1) + '</span><a class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('speciality', 'Especialidad')}}{{Form::select('speciality', $specialities, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id', $institutions, null, ['class'=> 'form-control'])}}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("img_speciality", "Seleccione Imágenes...") !!}<div id="dZUpload" class="dropzone dropzone-previews"><div class="dz-default dz-message"><h3 class="text-green">Arrastre sus archivos hasta aquí</h3><span class="text-muted">(También puede hacer click y seleccionarlos manualmente)</span></div></div></div></div></span><hr/>';
 
                 if (count_speciality == 0)
                     $('#content_specialities').html($speciality);
@@ -394,10 +587,10 @@
                     $(this).attr('name', 'speciality' + count_speciality);
                 });
 
-                $('label[for="institution"]').attr('for', 'institution' + count_speciality);
-                $('#content_specialities select#institution').each(function(i) {
-                    $(this).attr('id', 'institution' + count_speciality);
-                    $(this).attr('name', 'institution' + count_speciality);
+                $('label[for="institution_id"]').attr('for', 'institution_id' + count_speciality);
+                $('#content_specialities select#institution_id').each(function(i) {
+                    $(this).attr('id', 'institution_id' + count_speciality);
+                    $(this).attr('name', 'institution_id' + count_speciality);
                 });
 
                 count_speciality++;
@@ -413,12 +606,11 @@
 
                 var currentStep = $("#wizard").smartWizard("currentStep");
 
-                //Validate fields
-                if (validateStep1() != false) {
+                //Step 1
+                if (currentStep == 1) {
+                    /*if (validateStep1() != false) {
 
-                    if (currentStep == 1) {
-                        //Step 1
-                        /*$.ajax({
+                        $.ajax({
                             type: 'POST',
                             url: '{{ route("human-resources.manpowers.step1") }}',
                             data: $('#step' + currentStep).serialize(),
@@ -435,15 +627,19 @@
                                     $('#' + index).focus();
                                 });
                             }
-                        });*/
-                        $("#wizard").smartWizard("goForward");
-                    } else {
-                        //Step 2
-                        if (validateStep2() != false) {
-
-                        }
-                    }
+                        });
+                    }*/
+                    $("#wizard").smartWizard("goForward");
                 }
+
+                //Step 2
+                if (currentStep == 2) {
+                    /*if (validateStep2() != false) {
+
+                    }*/
+                    $("#wizard").smartWizard("goForward");
+                }
+
             });
 
 
@@ -453,7 +649,15 @@
 
             $('#submit-all').click(function(){
 
+                //Validation Step 3
+                if ($("#wizard").smartWizard("currentStep") == 3) {
 
+                    if (validateStep3() != false) {
+
+                        $('form#step3').submit();
+
+                    }
+                }
 
             });
 
@@ -706,7 +910,182 @@
                 }
             }
 
+            function validateStep2()
+            {
+                //disabilities
+                for(var i = 0; i < count_disabilities; i++) {
 
+                    //disability
+                    if ($('select#disability' + i).val() == null) {
+                        $('#js').removeClass('hide');
+                        $('select#disability' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Discapacidad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('select#disability' + i).focus();
+                    }
+
+                    //detail_disability
+                    if ($('#detail_disability' + i).val() == '') {
+                        $('#js').removeClass('hide');
+                        $('#detail_disability' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Detalle Discapacidad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#detail_disability' + i).focus();
+                    }
+                }
+
+                //diseases
+                for(var i = 0; i < count_diseases; i++) {
+
+                    //disease
+                    if ($('select#disease' + i).val() == null) {
+                        $('#js').removeClass('hide');
+                        $('select#disease' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Enfermedad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('select#disease' + i).focus();
+                    }
+
+                    //detalle disease
+                    if ($('#detail_disease' + i).val() == '') {
+                        $('#js').removeClass('hide');
+                        $('#detail_disease' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Detalle Enfermedad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#detail_disease' + i).focus();
+                    }
+                }
+
+                //family_responsabilities
+                for (var i = 0; i < count_family_responsability; i++) {
+
+                    //full_name
+                    if ($('#name_responsability' + i).val() == '') {
+                        $('#js').removeClass('hide');
+                        $('#name_responsability' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nombre Completo ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#name_responsability' + i).focus();
+                    }
+
+                    //rut
+                    if ($('#rut' + i).val() == '') {
+                        $('#js').removeClass('hide');
+                        $('#rut' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#rut' + i).focus();
+                    }
+
+                    //kin_id
+                    if ($('select#kin_id' + i).val() == null) {
+                        $('#js').removeClass('hide');
+                        $('select#kin_id' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Parentesco ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('select#kin_id' + i).focus();
+                    }
+                }
+            }
+
+            function validateStep3()
+            {
+                //certifications
+                for(var i = 0; i < count_certification; i++) {
+
+                    //certification
+                    if ($('select#certification' + i).val() == null) {
+                        $('#js').removeClass('hide');
+                        $('select#certification' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Certificación ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('select#certification' + i).focus();
+                    }
+
+                    //institution certification
+                    if ($('#content_certifications select#institution_id' + i).val() == null) {
+                        $('#js').removeClass('hide');
+                        $('#content_certifications select#institution_id' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Institución ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#content_certifications select#institution_id' + i).focus();
+                    }
+                }
+
+                //licenses
+                for(var i = 0; i < count_license; i++) {
+
+                    //type licence
+                    if ($('select#license' + i).val() == null) {
+                        $('#js').removeClass('hide');
+                        $('select#license' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Tipo Licencia ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('select#license' + i).focus();
+                    }
+
+                    //expired
+                    if ($('#expired' + i).val() == '') {
+                        $('#js').removeClass('hide');
+                        $('#expired' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Fecha de Vencimiento ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#expired' + i).focus();
+                    }
+                }
+
+                //specialities
+                for(var i = 0; i < count_speciality; i++) {
+
+                    //speciality
+                    if ($('select#speciality' + i).val() == null) {
+                        $('#js').removeClass('hide');
+                        $('select#speciality' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Especialidad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('select#speciality' + i).focus();
+                    }
+
+                    //institution specialities
+                    if ($('#content_specialities select#institution_id' + i).val() == null) {
+                        $('#js').removeClass('hide');
+                        $('#content_specialities select#institution_id' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Institución ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#content_specialities select#institution_id' + i).focus();
+                    }
+                }
+            }
+
+            /*****************************************************************
+             ************************ Fin Validations ************************
+             *****************************************************************/
 
         });
 
