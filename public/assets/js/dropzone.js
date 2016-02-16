@@ -117,7 +117,7 @@
       url: null,
       method: "post",
       withCredentials: false,
-      parallelUploads: 100,
+      parallelUploads: 1,
       uploadMultiple: true,
       maxFilesize: 256,
       paramName: "files",

@@ -45,6 +45,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('step2', ['as' => 'human-resources.manpowers.step2', 'uses' => 'ManpowerController@step2']);
             Route::post('step3', ['as' => 'human-resources.manpowers.step3', 'uses' => 'ManpowerController@step3']);
             Route::post('storage', ['as' => 'human-resources.manpowers.storage', 'uses' => 'StorageController@saveTempImg']);
+            Route::post('deleteImg/{id}', ['as' => 'human-resources.manpowers.deleteImg/{id}', 'uses' => 'StorageController@deleteImg']);
         });
     });
 
