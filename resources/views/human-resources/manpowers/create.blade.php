@@ -81,6 +81,8 @@
              *************************** Variables ****************************
              ******************************************************************/
 
+
+
             var count_family_relationship = 0;
             var count_disabilities = 0;
             var count_diseases = 0;
@@ -89,9 +91,13 @@
             var count_license = 0;
             var count_speciality = 0;
 
+
+
             /******************************************************************
             ********************* Initialize components ***********************
             ******************************************************************/
+
+
 
             $('.mitooltip').tooltip();
 
@@ -106,17 +112,16 @@
             //Cancel next step event in click event automatically, necesary for validation
             $('#sendElement').unbind('click');
 
-            var cleanFilename = function (name) {
-                return name.toLowerCase().replace(/[^\w]/gi, '');
-            };
+
+
 
             /******************************************************************
              ************************ Delete elements *************************
              ******************************************************************/
 
-            //Verifico último número para saber elemento actual
-            function verificaUltimosNumeros(element){
 
+            function verificaUltimosNumeros(element)
+            {
                 var aux = element.charAt(element.length - 2);
 
                 //Verificamos si penúltimo dígito es letra, si lo es solamente me quedo con último N°
@@ -381,6 +386,42 @@
 
 
 
+            /******************************************************************
+             *********************** Dropzone methods *************************
+             ******************************************************************/
+
+            //get name file for delete
+            function removedFile(file, fileList) {
+
+                var rmvFile = '';
+
+                for (var f = 0; f < fileList.length; f++) {
+
+                    if (fileList[f].fileName == file.name)
+                        rmvFile = fileList[f].serverFileName;
+
+                }
+
+                return rmvFile;
+            }
+
+
+            //delete file in server
+            function deleteImg(name)
+            {
+                $.ajax({
+                    url: "{{ route('human-resources.manpowers.deleteImg') }}",
+                    type: "POST",
+                    data: {"element": name},
+
+                    error: function (data) {
+                        alert('Hubo un error. Porfavor intente nuevamente.');
+                    }
+                });
+            }
+
+
+
             /*****************************************************************
              **************** Add Family Relationship zone ***************
              *****************************************************************/
@@ -455,6 +496,8 @@
 
                 $('div#img_disability').attr('id', 'img_disability' + count_disabilities);
 
+                var fileList = new Array;
+                var i =0;
                 var myDropzone = new Dropzone("#img_disability" + count_disabilities, {
                     url: "{{ route('human-resources.manpowers.storage') }}",
                     autoProcessQueue: true,
@@ -465,22 +508,24 @@
 
                     init: function() {
 
-                        this.on("sending", function(file, xhr, formData) {
+                        this.on("sending", function (file, xhr, formData) {
                             formData.append("_token", $('[name=_token]').val());
                             $("#wizard").smartWizard("fixHeight");
                         });
 
-                        this.on('success', function(file, response) {
-                            var aa = file.previewElement.querySelector("[data-dz-name]");
-                            aa.fileName = response;
+                        this.on('success', function (file, serverFileName) {
+                            fileList[i] = {"serverFileName": serverFileName, "fileName": file.name, "fileId": i};
+                            i++;
                         });
 
                         this.on("removedfile", function (file) {
-                            alert(file.innerHTML);
-                            $.post("" + encodeURIComponent(file.serverFileName));
+                            var rmvFile = removedFile(file, fileList);
+
+                            if (rmvFile)
+                                deleteImg(rmvFile);
+
                         });
                     }
-
                 });
 
                 count_disabilities++;
@@ -528,6 +573,8 @@
 
                 $('div#img_disease').attr('id', 'img_disease' + count_diseases);
 
+                var fileList = new Array;
+                var i =0;
                 var myDropzone = new Dropzone("#img_disease" + count_diseases, {
                     url: "{{ route('human-resources.manpowers.storage') }}",
                     autoProcessQueue: true,
@@ -536,9 +583,25 @@
                         element: count_diseases
                     },
 
-                    sending: function(file, xhr, formData) {
-                        formData.append("_token", $('[name=_token]').val());
-                        $("#wizard").smartWizard("fixHeight");
+                    init: function() {
+
+                        this.on("sending", function (file, xhr, formData) {
+                            formData.append("_token", $('[name=_token]').val());
+                            $("#wizard").smartWizard("fixHeight");
+                        });
+
+                        this.on('success', function (file, serverFileName) {
+                            fileList[i] = {"serverFileName": serverFileName, "fileName": file.name, "fileId": i};
+                            i++;
+                        });
+
+                        this.on("removedfile", function (file) {
+                            var rmvFile = removedFile(file, fileList);
+
+                            if (rmvFile)
+                                deleteImg(rmvFile);
+
+                        });
                     }
 
                 });
@@ -621,6 +684,8 @@
 
                 $('div#img_certification').attr('id', 'img_certification' + count_certification);
 
+                var fileList = new Array;
+                var i =0;
                 var myDropzone = new Dropzone("#img_certification" + count_certification, {
                     url: "{{ route('human-resources.manpowers.storage') }}",
                     autoProcessQueue: true,
@@ -629,9 +694,25 @@
                         element: count_certification
                     },
 
-                    sending: function(file, xhr, formData) {
-                        formData.append("_token", $('[name=_token]').val());
-                        $("#wizard").smartWizard("fixHeight");
+                    init: function() {
+
+                        this.on("sending", function (file, xhr, formData) {
+                            formData.append("_token", $('[name=_token]').val());
+                            $("#wizard").smartWizard("fixHeight");
+                        });
+
+                        this.on('success', function (file, serverFileName) {
+                            fileList[i] = {"serverFileName": serverFileName, "fileName": file.name, "fileId": i};
+                            i++;
+                        });
+
+                        this.on("removedfile", function (file) {
+                            var rmvFile = removedFile(file, fileList);
+
+                            if (rmvFile)
+                                deleteImg(rmvFile);
+
+                        });
                     }
 
                 });
@@ -678,6 +759,8 @@
 
                 $('div#img_license').attr('id', 'img_license' + count_license);
 
+                var fileList = new Array;
+                var i =0;
                 var myDropzone = new Dropzone("#img_license" + count_license, {
                     url: "{{ route('human-resources.manpowers.storage') }}",
                     autoProcessQueue: true,
@@ -686,12 +769,26 @@
                         element: count_license
                     },
 
-                    sending: function(file, xhr, formData) {
-                        formData.append("_token", $('[name=_token]').val());
-                        $("#wizard").smartWizard("fixHeight");
-                    },
+                    init: function() {
 
+                        this.on("sending", function (file, xhr, formData) {
+                            formData.append("_token", $('[name=_token]').val());
+                            $("#wizard").smartWizard("fixHeight");
+                        });
 
+                        this.on('success', function (file, serverFileName) {
+                            fileList[i] = {"serverFileName": serverFileName, "fileName": file.name, "fileId": i};
+                            i++;
+                        });
+
+                        this.on("removedfile", function (file) {
+                            var rmvFile = removedFile(file, fileList);
+
+                            if (rmvFile)
+                                deleteImg(rmvFile);
+
+                        });
+                    }
 
                 });
 
@@ -735,6 +832,8 @@
 
                 $('div#img_speciality').attr('id', 'img_speciality' + count_speciality);
 
+                var fileList = new Array;
+                var i =0;
                 var myDropzone = new Dropzone("#img_speciality" + count_speciality, {
                     url: "{{ route('human-resources.manpowers.storage') }}",
                     autoProcessQueue: true,
@@ -743,24 +842,26 @@
                         element: count_speciality
                     },
 
-
                     init: function() {
 
-                        this.on("sending", function(file, xhr, formData) {
+                        this.on("sending", function (file, xhr, formData) {
                             formData.append("_token", $('[name=_token]').val());
                             $("#wizard").smartWizard("fixHeight");
                         });
 
-                        this.on("success", function (file, serverFileName) {
-                            file.serverFileName = serverFileName;
+                        this.on('success', function (file, serverFileName) {
+                            fileList[i] = {"serverFileName": serverFileName, "fileName": file.name, "fileId": i};
+                            i++;
                         });
 
                         this.on("removedfile", function (file) {
-                            alert(file.serverFileName);
-                            //$.post("process.php?deleteFile=" + encodeURIComponent(file.serverFileName));
+                            var rmvFile = removedFile(file, fileList);
+
+                            if (rmvFile)
+                                deleteImg(rmvFile);
+
                         });
                     }
-
                 });
 
                 count_speciality++;

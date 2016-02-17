@@ -145,9 +145,9 @@
       dictInvalidFileType: "You can't upload files of this type.",
       dictResponseError: "Server responded with {{statusCode}} code.",
       dictCancelUpload: "Cancel upload",
-      dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
+      dictCancelUploadConfirmation: 'Are you sure you want to cancel this upload?',
       dictRemoveFile: "Eliminar elemento",
-      dictRemoveFileConfirmation: "Estás seguro de eliminar el elemento ?",
+      dictRemoveFileConfirmation: '',
       dictMaxFilesExceeded: "You can not upload any more files.",
       accept: function(file, done) {
         return done();
