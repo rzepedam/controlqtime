@@ -82,8 +82,7 @@
              ******************************************************************/
 
 
-
-            var count_family_relationship = 0;
+            var count_family_relationship = "{{ Session::get('count_family_relationship') ? Session::get('count_family_relationship') : 0  }}";
             var count_disabilities = 0;
             var count_diseases = 0;
             var count_family_responsability = 0;
@@ -111,8 +110,6 @@
 
             //Cancel next step event in click event automatically, necesary for validation
             $('#sendElement').unbind('click');
-
-
 
 
             /******************************************************************
@@ -868,39 +865,50 @@
                 $('.mitooltip').tooltip();
             }
 
+
+
             /*****************************************************************
              ************************** Submit Steps *************************
              *****************************************************************/
 
+
             //Steps Forward
             $('#sendElement').click(function(e) {
-
+                alert(count_family_relationship);
                 var currentStep = $("#wizard").smartWizard("currentStep");
 
                 //Step 1
                 if (currentStep == 1) {
-                    /*if (validateStep1() != false) {
+                    if (validateStep1() != false) {
 
                         $.ajax({
                             type: 'POST',
                             url: '{{ route("human-resources.manpowers.step1") }}',
-                            data: $('#step' + currentStep).serialize(),
+                            data: $('#step' + currentStep).serialize() + "&count_family_relationship=" + count_family_relationship,
                             dataType: "json",
+
+                            beforeSend: function() {
+                                $('#sendElement').html('<i class="fa fa-spinner fa-pulse"></i>');
+                            },
+
                             success: function (data) {
+                                $('#sendElement').html('Siguiente');
                                 $('#js').addClass('hide');
                                 $("#wizard").smartWizard("goForward");
                             },
 
                             error: function (data) {
+
                                 var errors = $.parseJSON(data.responseText);
+
                                 $.each(errors.errors, function (index, value) {
+                                    $('#sendElement').html('Siguiente');
                                     $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
                                     $('#' + index).focus();
                                 });
                             }
                         });
-                    }*/
-                    $("#wizard").smartWizard("goForward");
+                    }
                 }
 
                 //Step 2

@@ -82,24 +82,10 @@ class ManpowerController extends Controller
             ], 400);
         }
 
+        $this->saveSessionStep1($request);
+
         return response()->json(['status' => 'success'], 200);
 
-        /*Session::put('male_surname', $request->get('male_surname'));
-        Session::put('female_surname', $request->get('female_surname'));
-        Session::put('first_name', $request->get('first_name'));
-        Session::put('second_name', $request->get('second_name'));
-        Session::put('rut', $request->get('rut'));
-        Session::put('birthday', $request->get('birthday'));
-        Session::put('forecast_id', $request->get('forecast_id'));
-        Session::put('country_id', $request->get('country_id'));
-        Session::put('gender_id', $request->get('gender_id'));
-        Session::put('rating_id', $request->get('rating_id'));
-        Session::put('subarea_id', $request->get('subarea_id'));
-        Session::put('commune_id', $request->get('commune_id'));
-        Session::put('address', $request->get('address'));
-        Session::put('phone1', $request->get('phone1'));
-        Session::put('phone2', $request->get('phone2'));
-        Session::put('email', $request->get('email'));*/
     }
 
     public function step2()
@@ -117,4 +103,31 @@ class ManpowerController extends Controller
         $manpower = Manpower::findOrFail($id);
         return view('human-resources.manpowers.show', compact('manpower'));
     }
+
+    public function saveSessionStep1($request)
+    {
+        Session::put('male_surname', $request->get('male_surname'));
+        Session::put('female_surname', $request->get('female_surname'));
+        Session::put('first_name', $request->get('first_name'));
+        Session::put('second_name', $request->get('second_name'));
+        Session::put('rut', $request->get('rut'));
+        Session::put('birthday', $request->get('birthday'));
+        Session::put('forecast_id', $request->get('forecast_id'));
+        Session::put('country_id', $request->get('country_id'));
+        Session::put('gender_id', $request->get('gender_id'));
+        Session::put('rating_id', $request->get('rating_id'));
+        Session::put('subarea_id', $request->get('subarea_id'));
+        Session::put('commune_id', $request->get('commune_id'));
+        Session::put('address', $request->get('address'));
+        Session::put('phone1', $request->get('phone1'));
+        Session::put('phone2', $request->get('phone2'));
+        Session::put('email', $request->get('email'));
+
+        Session::put('count_family_relationship', $request->get('count_family_relationship'));
+        for ($i = 0; $i < $request->get('count_family_relationship'); $i++) {
+            Session::put('family_relationship' . $i, $request->get('family_relationship' . $i));
+            Session::put('manpower' . $i, $request->get('manpower' . $i));
+        }
+    }
+
 }

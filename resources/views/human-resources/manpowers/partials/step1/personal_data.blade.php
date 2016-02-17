@@ -132,10 +132,18 @@
         <div class="box-body">
 
             <div id="content_family_relationships">
-                <h2 class="text-center text-light-blue">No existen Parentescos Familiares Asociados <br />
-                    <small class="text-muted">(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h2>
-                <br />
-                <hr />
+                @if (Session::get('count_family_relationship') > 0)
+                    @for($i = 0; $i < Session::get('count_family_relationship'); $i++)
+
+                        @include('human-resources.manpowers.partials.step1.fields')
+
+                    @endfor
+                @else
+                    <h2 class="text-center text-light-blue">No existen Parentescos Familiares Asociados <br />
+                        <small class="text-muted">(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h2>
+                    <br />
+                    <hr />
+                @endif
             </div>
             <div class="row">
                 <div class="col-md-12 pull-right">
