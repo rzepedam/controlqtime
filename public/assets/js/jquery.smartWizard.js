@@ -22,7 +22,7 @@ function SmartWizard(target, options) {
     this.loader = $('<div>Loading</div>').addClass("loader");
     this.buttons = {
         next : $('<a>'+options.labelNext+' <i class="fa fa-chevron-right"></i></a>').attr({id: "sendElement", href: "javascript: void(0)"}).addClass("btn bg-navy btn-flat pull-right btn-form-wizard"),
-        previous : $('<a><i class="fa fa-chevron-left"></i> '+options.labelPrevious+'</a>').attr("href", "javascript: void(0)").addClass("btn bg-purple btn-flat pull-right btn-form-wizard"),
+        previous : $('<a><i class="fa fa-chevron-left"></i> '+options.labelPrevious+'</a>').attr({id: "previousElement", href: "javascript: void(0)"}).addClass("btn bg-purple btn-flat pull-right btn-form-wizard"),
         finish  : $('<a><i class="fa fa-floppy-o"></i> '+options.labelFinish+'</a>').attr({id: "submit-all", type: "submit", href: "javascript: void(0)"}).addClass("btn bg-olive btn-flat pull-right btn-form-wizard"),
         clean  : $('<a><i class="fa fa-recycle"></i> '+options.labelClean+'</a>').attr({id: "clean", href: "javascript: void(0)"}).addClass("btn btn-default btn-flat btnClean-form-wizard")
     };

@@ -11,7 +11,7 @@
                 @if (Session::get('count_disabilities') > 0)
                     @for($i = 0; $i < Session::get('count_disabilities'); $i++)
 
-                        @include('human-resources.manpowers.partials.step2.fields')
+                        @include('human-resources.manpowers.partials.step2.disability')
 
                     @endfor
                 @else
@@ -40,10 +40,18 @@
         <div class="box-body">
 
             <div id="content_diseases">
-                <h2 class="text-center text-green">No existen Enfermedades Asociadas <br />
-                    <small class="text-muted">(Pulse "Agregar Enfermedad" para comenzar su adición)</small></h2>
-                <br />
-                <hr />
+                @if (Session::get('count_diseases') > 0)
+                    @for($i = 0; $i < Session::get('count_diseases'); $i++)
+
+                        @include('human-resources.manpowers.partials.step2.disease')
+
+                    @endfor
+                @else
+                    <h2 class="text-center text-green">No existen Enfermedades Asociadas <br />
+                        <small class="text-muted">(Pulse "Agregar Enfermedad" para comenzar su adición)</small></h2>
+                    <br />
+                    <hr />
+                @endif
             </div>
             <div class="row">
                 <div class="col-md-12 pull-right">
@@ -64,10 +72,19 @@
         <div class="box-body">
 
             <div id="content_family_responsabilities">
-                <h2 class="text-center text-yellow">No existen Cargas Familiares Asociadas <br />
-                    <small class="text-muted">(Pulse "Agregar Carga Familiar" para comenzar su adición)</small></h2>
-                <br />
-                <hr />
+                @if (Session::get('count_family_responsabilities') > 0)
+                    @for($i = 0; $i < Session::get('count_family_responsabilities'); $i++)
+
+                        @include('human-resources.manpowers.partials.step2.family_responsability')
+
+                    @endfor
+                @else
+                    <h1>{{ Session::get('count_family_responsabilities') }}</h1>
+                    <h2 class="text-center text-yellow">No existen Cargas Familiares Asociadas <br />
+                        <small class="text-muted">(Pulse "Agregar Carga Familiar" para comenzar su adición)</small></h2>
+                    <br />
+                    <hr />
+                @endif
             </div>
             <div class="row">
                 <div class="col-md-12 pull-right">

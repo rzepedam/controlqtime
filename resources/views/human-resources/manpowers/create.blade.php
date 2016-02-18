@@ -84,8 +84,8 @@
 
             var count_family_relationship = {{ Session::get('count_family_relationship') ? Session::get('count_family_relationship') : 0  }};
             var count_disabilities = {{ Session::get('count_disabilities') ? Session::get('count_disabilities') : 0  }};
-            var count_diseases = 0;
-            var count_family_responsability = 0;
+            var count_diseases = {{ Session::get('count_diseases') ? Session::get('count_diseases') : 0  }};
+            var count_family_responsabilities = {{ Session::get('count_family_responsabilities') ? Session::get('count_family_responsabilities') : 0  }};
             var count_certification = 0;
             var count_license = 0;
             var count_speciality = 0;
@@ -273,8 +273,8 @@
                             });
                         }
 
-                        count_family_responsability--;
-                        if (count_family_responsability == 0) {
+                        count_family_responsabilities--;
+                        if (count_family_responsabilities == 0) {
                             var html = '<h2 class="text-center text-yellow">No existen Cargas Familiares asociadas <br /><small class="text-muted">(Pulse "Agregar Carga Familiar" para comenzar su adición)</small></h2><br /><hr />'
                             $('#content_family_responsabilities').html(html);
                         }
@@ -418,7 +418,7 @@
             }
 
 
-            function initializeDropzoneDisabilities()
+            function initializeDropzoneDisabilities(count_disabilities)
             {
                 var fileList = new Array;
                 var i =0;
@@ -452,6 +452,15 @@
                     }
                 });
             }
+
+
+            if(count_disabilities > 0){
+                Dropzone.autoDiscover = false;
+                for (var i = 0; i < count_disabilities; i++)
+                    initializeDropzoneDisabilities(i)
+            }
+
+
 
 
             /*****************************************************************
@@ -530,7 +539,7 @@
                 $('div#img_disability').attr('id', 'img_disability' + count_disabilities);
 
                 //Initialize dropzone
-                initializeDropzoneDisabilities();
+                initializeDropzoneDisabilities(count_disabilities);
 
                 count_disabilities++;
                 $('.mitooltip').tooltip();
@@ -623,9 +632,9 @@
 
             $.fn.addElementFamilyResponsability = function() {
 
-                $family_responsability = '<span id="family_responsability"><div class="row"><div class="col-md-12"><span id="num_family_responsability" class="title-elements text-yellow">Carga Familiar #' + (count_family_responsability + 1) + '</span><a id="family_responsability" class="delete-elements pull-right mitooltip" title="Eliminar Carga Familiar"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{{Form::label('name_responsability', 'Nombre Completo')}}{{Form::text('name_responsability', null, ['class'=> 'form-control'])}}</div><div class="col-md-3">{{Form::label('rut', 'Rut')}}{{Form::text('rut', null, ['class'=> 'form-control'])}}</div><div class="col-md-3">{{Form::label('kin_id', 'Parentesco')}}{{Form::select('kin_id', $kins, null, ['class'=> 'form-control'])}}</div></div><hr /></span>';
+                $family_responsability = '<span id="family_responsability"><div class="row"><div class="col-md-12"><span id="num_family_responsability" class="title-elements text-yellow">Carga Familiar #' + (count_family_responsabilities + 1) + '</span><a id="family_responsability" class="delete-elements pull-right mitooltip" title="Eliminar Carga Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{!! Form::label('name_responsability', 'Nombre Completo') !!}{!! Form::text('name_responsability', null, ['class'=> 'form-control']) !!}</div><div class="col-md-3">{!! Form::label('rut', 'Rut') !!}{!! Form::text('rut', null, ['class'=> 'form-control']) !!}</div><div class="col-md-3">{!! Form::label('kin_id', 'Parentesco') !!}{!! Form::select('kin_id', $kins, null, ['class'=> 'form-control']) !!}</div></div><hr/></span>';
 
-                if (count_family_responsability == 0)
+                if (count_family_responsabilities == 0)
                     $('#content_family_responsabilities').html($family_responsability);
                 else
                     $('#content_family_responsabilities').append($family_responsability);
@@ -633,22 +642,22 @@
                 $("#wizard").smartWizard("fixHeight");
 
                 //Refresh N° element family_responsabilities
-                $('#content_family_responsabilities span#family_responsability').attr('id', 'family_responsability' + count_family_responsability);
-                $('#content_family_responsabilities span#num_family_responsability').attr('id', 'num_family_responsability' + count_family_responsability);
+                $('#content_family_responsabilities span#family_responsability').attr('id', 'family_responsability' + count_family_responsabilities);
+                $('#content_family_responsabilities span#num_family_responsability').attr('id', 'num_family_responsability' + count_family_responsabilities);
 
-                $('#content_family_responsabilities label[for="name_responsability"]').attr('for', 'name_responsability' + count_family_responsability);
-                $('#content_family_responsabilities input:text#name_responsability').attr('name', 'name_responsability' + count_family_responsability);
-                $('#content_family_responsabilities input:text#name_responsability').attr('id', 'name_responsability' + count_family_responsability);
+                $('#content_family_responsabilities label[for="name_responsability"]').attr('for', 'name_responsability' + count_family_responsabilities);
+                $('#content_family_responsabilities input:text#name_responsability').attr('name', 'name_responsability' + count_family_responsabilities);
+                $('#content_family_responsabilities input:text#name_responsability').attr('id', 'name_responsability' + count_family_responsabilities);
 
-                $('#content_family_responsabilities label[for="rut"]').attr('for', 'rut' + count_family_responsability);
-                $('#content_family_responsabilities input#rut').attr('name', 'rut' + count_family_responsability);
-                $('#content_family_responsabilities input#rut').attr('id', 'rut' + count_family_responsability);
+                $('#content_family_responsabilities label[for="rut"]').attr('for', 'rut' + count_family_responsabilities);
+                $('#content_family_responsabilities input#rut').attr('name', 'rut' + count_family_responsabilities);
+                $('#content_family_responsabilities input#rut').attr('id', 'rut' + count_family_responsabilities);
 
-                $('label[for="kin_id"]').attr('for', 'kin_id' + count_family_responsability);
-                $('#content_family_responsabilities select#kin_id').attr('name', 'kin_id' + count_family_responsability);
-                $('#content_family_responsabilities select#kin_id').attr('id', 'kin_id' + count_family_responsability);
+                $('label[for="kin_id"]').attr('for', 'kin_id' + count_family_responsabilities);
+                $('#content_family_responsabilities select#kin_id').attr('name', 'kin_id' + count_family_responsabilities);
+                $('#content_family_responsabilities select#kin_id').attr('id', 'kin_id' + count_family_responsabilities);
 
-                count_family_responsability++;
+                count_family_responsabilities++;
                 $('.mitooltip').tooltip();
             }
 
@@ -875,6 +884,18 @@
 
 
             /*****************************************************************
+             ************************ Previous Element ***********************
+             *****************************************************************/
+
+
+
+            $('#previousElement').click(function(){
+                $("#wizard").smartWizard("fixHeight");
+            });
+
+
+
+            /*****************************************************************
              ************************** Submit Steps *************************
              *****************************************************************/
 
@@ -927,7 +948,7 @@
                         $.ajax({
                             type: 'POST',
                             url: '{{ route("human-resources.manpowers.step2") }}',
-                            data: $('#step' + currentStep).serialize() + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_family_responsability=" + count_family_responsability,
+                            data: $('#step' + currentStep).serialize() + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_family_responsabilities=" + count_family_responsabilities,
                             dataType: "json",
 
                             beforeSend: function() {
@@ -938,6 +959,7 @@
                                 $('#sendElement').html('Siguiente <i class="fa fa-chevron-right"></i>');
                                 $('#js').addClass('hide');
                                 $("#wizard").smartWizard("goForward");
+                                $("#wizard").smartWizard("fixHeight");
                             },
 
                             error: function (data) {
@@ -1278,7 +1300,7 @@
                 }
 
                 //family_responsabilities
-                for (var i = 0; i < count_family_responsability; i++) {
+                for (var i = 0; i < count_family_responsabilities; i++) {
 
                     //full_name
                     if ($('#name_responsability' + i).val() == '') {

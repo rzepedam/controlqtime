@@ -141,17 +141,18 @@ class ManpowerController extends Controller
             Session::put('detail_disability' . $i, $request->get('detail_disability' . $i));
         }
 
+        Session::put('count_diseases', $request->get('count_diseases'));
         for ($i = 0; $i < $request->get('count_diseases'); $i++) {
             Session::put('disease' . $i, $request->get('disease' . $i));
             Session::put('treatment_disease' . $i, $request->get('treatment_disease' . $i));
             Session::put('detail_disease' . $i, $request->get('detail_disease' . $i));
         }
 
-        for ($i = 0; $i < $request->get('count_family_responsability'); $i++) {
+        Session::put('count_family_responsabilities', $request->get('count_family_responsabilities'));
+        for ($i = 0; $i < $request->get('count_family_responsabilities'); $i++) {
             Session::put('name_responsability' . $i, $request->get('name_responsability' . $i));
             Session::put('rut' . $i, $request->get('rut' . $i));
             Session::put('kin_id' . $i, $request->get('kin_id' . $i));
         }
-
     }
 }
