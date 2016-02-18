@@ -62,3 +62,25 @@ textarea {
 .delete-elements:hover {
     color: red;
 }
+
+.btn-form-wizard {
+    margin-right: 5px;
+    width:100px;
+    font-size: 1.1em;
+}
+
+.btnClean-form-wizard {
+    margin-left: 5px;
+    width:100px;
+    font-size: 1.1em;
+}
+
+.add_family_relationship {
+    font-size: 1.1em;
+}
+
+.add_family_relationship:hover {
+    text-decoration: none;
+    display: block;
+    color: black;
+}

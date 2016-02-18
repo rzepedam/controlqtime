@@ -82,7 +82,7 @@
              ******************************************************************/
 
 
-            var count_family_relationship = "{{ Session::get('count_family_relationship') ? Session::get('count_family_relationship') : 0  }}";
+            var count_family_relationship = {{ Session::get('count_family_relationship') ? Session::get('count_family_relationship') : 0  }};
             var count_disabilities = 0;
             var count_diseases = 0;
             var count_family_responsability = 0;
@@ -104,7 +104,7 @@
                 labelNext:'Siguiente',
                 labelPrevious:'Anterior',
                 labelFinish:'Guardar',
-                transitionEffect: 'slideLeft',
+                transitionEffect: 'slideleft',
 
             });
 
@@ -424,6 +424,7 @@
              *****************************************************************/
 
             $.fn.addElementFamilyRelationship = function() {
+
                 $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="title-elements text-light-blue">Parentesco Familiar #' + (count_family_relationship + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship', $kins, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower', $manpowers, null, ['class'=> 'form-control'])}}</div></div><hr/></span>';
 
                 if (count_family_relationship == 0)
@@ -874,7 +875,7 @@
 
             //Steps Forward
             $('#sendElement').click(function(e) {
-                alert(count_family_relationship);
+
                 var currentStep = $("#wizard").smartWizard("currentStep");
 
                 //Step 1
@@ -892,9 +893,43 @@
                             },
 
                             success: function (data) {
-                                $('#sendElement').html('Siguiente');
+                                $('#sendElement').html('Siguiente <i class="fa fa-chevron-right"></i>');
                                 $('#js').addClass('hide');
-                                $("#wizard").smartWizard("goForward");
+                            },
+
+                            error: function (data) {
+
+                                var errors = $.parseJSON(data.responseText);
+
+                                $.each(errors.errors, function (index, value) {
+                                    $('#sendElement').html('Siguiente');
+                                    $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
+                                    $('#' + index).focus();
+                                });
+                            }
+                        });
+                    }else {
+                        return false;
+                    }
+
+                }
+
+                //Step 2
+                if (currentStep == 2) {
+                    if (validateStep2() != false) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '{{ route("human-resources.manpowers.step2") }}',
+                            data: $('#step' + currentStep).serialize() + "&count_disabilities=" + count_disabilities,
+                            dataType: "json",
+
+                            beforeSend: function() {
+                                $('#sendElement').html('<i class="fa fa-spinner fa-pulse"></i>');
+                            },
+
+                            success: function (data) {
+                                $('#sendElement').html('Siguiente <i class="fa fa-chevron-right"></i>');
+                                $('#js').addClass('hide');
                             },
 
                             error: function (data) {
@@ -911,14 +946,8 @@
                     }
                 }
 
-                //Step 2
-                if (currentStep == 2) {
-                    /*if (validateStep2() != false) {
-
-                    }*/
-                    $("#wizard").smartWizard("goForward");
-                }
-
+                $("#wizard").smartWizard("goForward");
+                $("#wizard").smartWizard("fixHeight");
             });
 
 

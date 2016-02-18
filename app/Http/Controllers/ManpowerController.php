@@ -88,9 +88,9 @@ class ManpowerController extends Controller
 
     }
 
-    public function step2()
+    public function step2(Request $request)
     {
-
+        dd($request->all());
     }
 
     public function store(Request $request)

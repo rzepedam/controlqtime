@@ -21,9 +21,10 @@ function SmartWizard(target, options) {
     this.elmStepContainer = $('<div></div>').addClass("stepContainer");
     this.loader = $('<div>Loading</div>').addClass("loader");
     this.buttons = {
-        next : $('<a>'+options.labelNext+'</a>').attr({id: "sendElement", href: "javascript: void(0)"}).addClass("buttonNext"),
-        previous : $('<a>'+options.labelPrevious+'</a>').attr("href", "javascript: void(0)").addClass("buttonPrevious"),
-        finish  : $('<a>'+options.labelFinish+'</a>').attr({id: "submit-all", href: "javascript: void(0)"}).addClass("buttonFinish")
+        next : $('<a>'+options.labelNext+' <i class="fa fa-chevron-right"></i></a>').attr({id: "sendElement", type: "submit", href: "javascript: void(0)"}).addClass("btn bg-navy btn-flat pull-right btn-form-wizard"),
+        previous : $('<a><i class="fa fa-chevron-left"></i> '+options.labelPrevious+'</a>').attr("href", "javascript: void(0)").addClass("btn bg-purple btn-flat pull-right btn-form-wizard"),
+        finish  : $('<a><i class="fa fa-floppy-o"></i> '+options.labelFinish+'</a>').attr({id: "submit-all", type: "submit", href: "javascript: void(0)"}).addClass("btn bg-olive btn-flat pull-right btn-form-wizard"),
+        clean  : $('<a><i class="fa fa-recycle"></i> '+options.labelClean+'</a>').attr({id: "clean", href: "javascript: void(0)"}).addClass("btn btn-default btn-flat btnClean-form-wizard")
     };
 
     /*
@@ -79,7 +80,8 @@ function SmartWizard(target, options) {
         }
 
         elmActionBar.append($this.buttons.next)
-            .append($this.buttons.previous);
+            .append($this.buttons.previous)
+            .append($this.buttons.clean);
         $this.target.append(elmActionBar);
         this.contentWidth = $this.elmStepContainer.width();
 
@@ -109,6 +111,7 @@ function SmartWizard(target, options) {
         });
 
         $($this.steps).bind("click", function(e){
+            return false;
             if($this.steps.index(this) == $this.curStepIdx){
                 return false;
             }
@@ -121,7 +124,7 @@ function SmartWizard(target, options) {
         });
 
         // Enable keyboard navigation
-        if($this.options.keyNavigation){
+        /*if($this.options.keyNavigation){
             $(document).keyup(function(e){
                 if(e.which==39){ // Right Arrow
                     $this.goForward();
@@ -129,7 +132,7 @@ function SmartWizard(target, options) {
                     $this.goBackward();
                 }
             });
-        }
+        }*/
         //  Prepare the steps
         _prepareSteps($this);
         // Show the first slected step
@@ -478,6 +481,7 @@ function SmartWizard(target, options) {
         labelNext:'Next',
         labelPrevious:'Previous',
         labelFinish:'Finish',
+        labelClean: 'Limpiar',
         noForwardJumping: false,
         ajaxType: "POST",
         onLeaveStep: null, // triggers when leaving a step

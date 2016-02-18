@@ -135,7 +135,7 @@
   color:#F8F8F8;
   background: #4e9fce;  /* EA8511 */
   border: 1px solid #134e70;
-  cursor:text;
+  cursor: pointer;
   -moz-box-shadow: 5px 5px 8px #888;
   -webkit-box-shadow: 5px 5px 8px #888;
   box-shadow: 5px 5px 8px #888;
@@ -151,6 +151,7 @@
   background: #8CC63F;  
   border: 1px solid #8CC63F;   
   z-index:99;
+  cursor: not-allowed;
 }
 .swMain ul.anchor li a.done:hover {
   color:#5A5655;  
@@ -161,7 +162,7 @@
   color:#CCCCCC;  
   background: #F8F8F8;
   border: 1px solid #CCC;  
-  cursor:text;   
+  cursor: not-allowed;
 }
 .swMain ul.anchor li a.disabled:hover {
   color:#CCCCCC;  
@@ -189,15 +190,12 @@
   color:#FFF;
   outline-style:none;
   background-color:   #3C8DBC;
-  border: 1px solid #5A5655;
-  -moz-border-radius  : 5px; 
-  -webkit-border-radius: 5px;    
 }
 .swMain .buttonDisabled {
   color:#F8F8F8  !important;
   background-color: #CCCCCC !important;
   border: 1px solid #CCCCCC  !important;
-  cursor:text;    
+  cursor: not-allowed;
 }
 .swMain .buttonPrevious {
   display:block;
@@ -215,6 +213,7 @@
   -moz-border-radius  : 5px; 
   -webkit-border-radius: 5px;    
 }
+
 .swMain .buttonFinish {
   display:block;
   float:right;

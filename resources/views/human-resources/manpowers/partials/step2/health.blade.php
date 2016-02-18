@@ -22,7 +22,6 @@
 
         </div>
     </div>
-
     <br />
     
     <!-- diseases -->
@@ -47,7 +46,6 @@
 
         </div>
     </div><!-- /.box -->
-
     <br />
 
     <!-- family_responsabilities -->
@@ -72,5 +70,4 @@
 
         </div>
     </div><!-- /.box -->
-
     <br />

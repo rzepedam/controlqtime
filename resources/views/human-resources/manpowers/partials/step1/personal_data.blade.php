@@ -147,10 +147,11 @@
             </div>
             <div class="row">
                 <div class="col-md-12 pull-right">
-                    <a id="add_family_relationship" href="javascript: void(0)" onclick="$(this).addElementFamilyRelationship(this)" class="text-light-blue pull-right"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</a>
+                    <a id="add_family_relationship" href="javascript: void(0)" onclick="$(this).addElementFamilyRelationship(this)" class="text-light-blue add_family_relationship pull-right"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</a>
                 </div>
             </div>
             <p></p>
 
         </div>
     </div><!-- /.box -->
+    <br />
