@@ -90,7 +90,9 @@ class ManpowerController extends Controller
 
     public function step2(Request $request)
     {
-        dd($request->all());
+        $this->saveSessionStep2($request);
+
+        return response()->json(['status' => 'success'], 200);
     }
 
     public function store(Request $request)
@@ -130,4 +132,26 @@ class ManpowerController extends Controller
         }
     }
 
+    public function saveSessionStep2($request)
+    {
+        Session::put('count_disabilities', $request->get('count_disabilities'));
+        for ($i = 0; $i < $request->get('count_disabilities'); $i++ ) {
+            Session::put('disability' . $i, $request->get('disability' . $i));
+            Session::put('treatment_disability' . $i, $request->get('treatment_disability' . $i));
+            Session::put('detail_disability' . $i, $request->get('detail_disability' . $i));
+        }
+
+        for ($i = 0; $i < $request->get('count_diseases'); $i++) {
+            Session::put('disease' . $i, $request->get('disease' . $i));
+            Session::put('treatment_disease' . $i, $request->get('treatment_disease' . $i));
+            Session::put('detail_disease' . $i, $request->get('detail_disease' . $i));
+        }
+
+        for ($i = 0; $i < $request->get('count_family_responsability'); $i++) {
+            Session::put('name_responsability' . $i, $request->get('name_responsability' . $i));
+            Session::put('rut' . $i, $request->get('rut' . $i));
+            Session::put('kin_id' . $i, $request->get('kin_id' . $i));
+        }
+
+    }
 }

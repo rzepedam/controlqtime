@@ -7,12 +7,12 @@
     <br/>
     <div class="row">
         <div class="col-md-6">
-            {{ Form::label('family_relationship' . $i, 'Parentesco Familiar') }}
-            {{ Form::select('family_relationship' . $i, $kins, Session::get('family_relationship' . $i), ['class'=> 'form-control']) }}
+            {!! Form::label('family_relationship' . $i, 'Parentesco Familiar') !!}
+            {!! Form::select('family_relationship' . $i, $kins, Session::get('family_relationship' . $i), ['class'=> 'form-control']) !!}
         </div>
         <div class="col-md-6">
-            {{ Form::label('manpower' . $i, 'Nombre') }}
-            {{ Form::select('manpower' . $i, $manpowers, Session::get('manpower' . $i), ['class'=> 'form-control']) }}
+            {!! Form::label('manpower' . $i, 'Nombre') !!}
+            {!! Form::select('manpower' . $i, $manpowers, Session::get('manpower' . $i), ['class'=> 'form-control']) !!}
         </div>
     </div>
     <hr/>

@@ -83,7 +83,7 @@
 
 
             var count_family_relationship = {{ Session::get('count_family_relationship') ? Session::get('count_family_relationship') : 0  }};
-            var count_disabilities = 0;
+            var count_disabilities = {{ Session::get('count_disabilities') ? Session::get('count_disabilities') : 0  }};
             var count_diseases = 0;
             var count_family_responsability = 0;
             var count_certification = 0;
@@ -418,6 +418,41 @@
             }
 
 
+            function initializeDropzoneDisabilities()
+            {
+                var fileList = new Array;
+                var i =0;
+                var myDropzone = new Dropzone("#img_disability" + count_disabilities, {
+                    url: "{{ route('human-resources.manpowers.storage') }}",
+                    autoProcessQueue: true,
+                    paramName: "disabilities",
+                    params: {
+                        element: count_disabilities
+                    },
+
+                    init: function() {
+
+                        this.on("sending", function (file, xhr, formData) {
+                            formData.append("_token", $('[name=_token]').val());
+                            $("#wizard").smartWizard("fixHeight");
+                        });
+
+                        this.on('success', function (file, serverFileName) {
+                            fileList[i] = {"serverFileName": serverFileName, "fileName": file.name, "fileId": i};
+                            i++;
+                        });
+
+                        this.on("removedfile", function (file) {
+                            var rmvFile = removedFile(file, fileList);
+
+                            if (rmvFile)
+                                deleteImg(rmvFile);
+
+                        });
+                    }
+                });
+            }
+
 
             /*****************************************************************
              **************** Add Family Relationship zone ***************
@@ -494,37 +529,8 @@
 
                 $('div#img_disability').attr('id', 'img_disability' + count_disabilities);
 
-                var fileList = new Array;
-                var i =0;
-                var myDropzone = new Dropzone("#img_disability" + count_disabilities, {
-                    url: "{{ route('human-resources.manpowers.storage') }}",
-                    autoProcessQueue: true,
-                    paramName: "disabilities",
-                    params: {
-                        element: count_disabilities
-                    },
-
-                    init: function() {
-
-                        this.on("sending", function (file, xhr, formData) {
-                            formData.append("_token", $('[name=_token]').val());
-                            $("#wizard").smartWizard("fixHeight");
-                        });
-
-                        this.on('success', function (file, serverFileName) {
-                            fileList[i] = {"serverFileName": serverFileName, "fileName": file.name, "fileId": i};
-                            i++;
-                        });
-
-                        this.on("removedfile", function (file) {
-                            var rmvFile = removedFile(file, fileList);
-
-                            if (rmvFile)
-                                deleteImg(rmvFile);
-
-                        });
-                    }
-                });
+                //Initialize dropzone
+                initializeDropzoneDisabilities();
 
                 count_disabilities++;
                 $('.mitooltip').tooltip();
@@ -895,14 +901,15 @@
                             success: function (data) {
                                 $('#sendElement').html('Siguiente <i class="fa fa-chevron-right"></i>');
                                 $('#js').addClass('hide');
+                                $("#wizard").smartWizard("goForward");
+                                $("#wizard").smartWizard("fixHeight");
                             },
 
                             error: function (data) {
-
                                 var errors = $.parseJSON(data.responseText);
 
                                 $.each(errors.errors, function (index, value) {
-                                    $('#sendElement').html('Siguiente');
+                                    $('#sendElement').html('Siguiente <i class="fa fa-chevron-right"></i>');
                                     $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
                                     $('#' + index).focus();
                                 });
@@ -920,7 +927,7 @@
                         $.ajax({
                             type: 'POST',
                             url: '{{ route("human-resources.manpowers.step2") }}',
-                            data: $('#step' + currentStep).serialize() + "&count_disabilities=" + count_disabilities,
+                            data: $('#step' + currentStep).serialize() + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_family_responsability=" + count_family_responsability,
                             dataType: "json",
 
                             beforeSend: function() {
@@ -930,6 +937,7 @@
                             success: function (data) {
                                 $('#sendElement').html('Siguiente <i class="fa fa-chevron-right"></i>');
                                 $('#js').addClass('hide');
+                                $("#wizard").smartWizard("goForward");
                             },
 
                             error: function (data) {
@@ -945,9 +953,6 @@
                         });
                     }
                 }
-
-                $("#wizard").smartWizard("goForward");
-                $("#wizard").smartWizard("fixHeight");
             });
 
 

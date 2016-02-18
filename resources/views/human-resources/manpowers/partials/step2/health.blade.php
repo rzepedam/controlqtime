@@ -8,10 +8,18 @@
         <div class="box-body">
 
             <div id="content_disabilities">
-                <h2 class="text-center text-light-blue">No existen Discapacidades Asociadas <br />
-                    <small class="text-muted">(Pulse "Agregar Discapacidad" para comenzar su adición)</small></h2>
-                <br />
-                <hr />
+                @if (Session::get('count_disabilities') > 0)
+                    @for($i = 0; $i < Session::get('count_disabilities'); $i++)
+
+                        @include('human-resources.manpowers.partials.step2.fields')
+
+                    @endfor
+                @else
+                    <h2 class="text-center text-light-blue">No existen Discapacidades Asociadas <br />
+                        <small class="text-muted">(Pulse "Agregar Discapacidad" para comenzar su adición)</small></h2>
+                    <br />
+                    <hr />
+                @endif
             </div>
             <div class="row">
                 <div class="col-md-12 pull-right">
