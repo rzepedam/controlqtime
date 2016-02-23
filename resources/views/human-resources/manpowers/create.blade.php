@@ -49,7 +49,7 @@
         </ul>
         <div id="step-1">
             {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
-                @include('human-resources.manpowers.partials.step1.personal_data')
+                @include('human-resources.manpowers.partials.step1.personal_information')
             {{ Form::close() }}
         </div>
         <div id="step-2">
@@ -70,8 +70,8 @@
 
     {{ Html::script('assets/js/jquery.smartWizard.js') }}
     {{ Html::script('assets/js/jquery.inputmask.js') }}
-    {{ Html::script('assets/js/dropzone.js') }}
     {{ Html::script('assets/js/config.js') }}
+    {{ Html::script('assets/js/dropzone.js') }}
 
     <script type="text/javascript">
 
@@ -86,17 +86,19 @@
             var count_disabilities = {{ Session::get('count_disabilities') ? Session::get('count_disabilities') : 0  }};
             var count_diseases = {{ Session::get('count_diseases') ? Session::get('count_diseases') : 0  }};
             var count_family_responsabilities = {{ Session::get('count_family_responsabilities') ? Session::get('count_family_responsabilities') : 0  }};
-            var count_certification = 0;
-            var count_license = 0;
-            var count_speciality = 0;
+            var count_exams = 0;
+            var count_certifications = 0;
+            var count_licenses = 0;
+            var count_specialities = 0;
 
+            var count_img_disabilities = "{{ Session::get('count_img_disabilities') ? Session::get('count_img_disabilities') : 0  }}";
 
 
             /******************************************************************
             ********************* Initialize components ***********************
             ******************************************************************/
 
-
+            Dropzone.autoDiscover = false;
 
             $('.mitooltip').tooltip();
 
@@ -104,8 +106,7 @@
                 labelNext:'Siguiente',
                 labelPrevious:'Anterior',
                 labelFinish:'Guardar',
-                transitionEffect: 'slideleft',
-
+                transitionEffect: 'slideleft'
             });
 
             //Cancel next step event in click event automatically, necesary for validation
@@ -205,7 +206,7 @@
 
                         count_disabilities--;
                         if (count_disabilities == 0) {
-                            var html = '<h2 class="text-center text-light-blue">No existen Discapacidades asociadas <br /><small class="text-muted">(Pulse "Agregar Discapacidad" para comenzar su adición)</small></h2><br /><hr />'
+                            var html = '<h2 class="text-center text-light-blue">No existen Discapacidades Asociadas <br /><small class="text-muted">(Pulse "Agregar Discapacidad" para comenzar su adición)</small></h2><br /><hr />'
                             $('#content_disabilities').html(html);
                         }
 
@@ -242,7 +243,7 @@
 
                         count_diseases--;
                         if (count_diseases == 0) {
-                            var html = '<h2 class="text-center text-green">No existen Enfermedades asociadas <br /><small class="text-muted">(Pulse "Agregar Enfermedad" para comenzar su adición)</small></h2><br /><hr />'
+                            var html = '<h2 class="text-center text-green">No existen Enfermedades Asociadas <br /><small class="text-muted">(Pulse "Agregar Enfermedad" para comenzar su adición)</small></h2><br /><hr />'
                             $('#content_diseases').html(html);
                         }
 
@@ -275,8 +276,39 @@
 
                         count_family_responsabilities--;
                         if (count_family_responsabilities == 0) {
-                            var html = '<h2 class="text-center text-yellow">No existen Cargas Familiares asociadas <br /><small class="text-muted">(Pulse "Agregar Carga Familiar" para comenzar su adición)</small></h2><br /><hr />'
+                            var html = '<h2 class="text-center text-yellow">No existen Cargas Familiares Asociadas <br /><small class="text-muted">(Pulse "Agregar Carga Familiar" para comenzar su adición)</small></h2><br /><hr />'
                             $('#content_family_responsabilities').html(html);
+                        }
+
+                    break;
+
+                    case 'exam':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_exam' + item).text('Examen Preocupacional #' + (i + 1));
+                            $('span#num_exam' + item).attr('id', 'num_exam' + i);
+                            $('span#exam' + item).attr('id', 'exam' + i);
+
+                            $('label[for="exam' + item + '"]').attr('for', 'exam' + i);
+                            $('select#exam' + item).each(function(i) {
+                                $(this).attr('id', 'exam' + i);
+                                $(this).attr('name', 'exam' + i);
+                            });
+
+                            $('label[for="expired_exam' + item + '"]').attr('for', 'expired_exam' + i);
+                            $('input#expired_exam' + item).attr('name', 'expired_exam' + i);
+                            $('input#expired_exam' + item).attr('id', 'expired_exam' + i);
+
+                            $('div#img_exam' + item).attr('id', 'img_exam' + i);
+                        }
+
+                        count_exams--;
+                        if (count_exams == 0) {
+                            var html = '<h2 class="text-center text-muted">No existen Exámenes Preocupacionales Asociados <br /><small class="text-muted">(Pulse "Agregar Examen Preocupacional" para comenzar su adición)</small></h2><br /><hr />'
+                            $('#content_exams').html(html);
                         }
 
                     break;
@@ -303,11 +335,15 @@
                                 $(this).attr('name', 'institution_id' + i);
                             });
 
+                            $('label[for="expired_certification' +  item + '"]').attr('for', 'expired_certification' + i);
+                            $('input#expired_certification' + item).attr('name', 'expired_certification' + i);
+                            $('input#expired_certification' + item).attr('id', 'expired_certification' + i);
+
                             $('div#img_certification' + item).attr('id', 'img_certification' + i);
                         }
 
-                        count_certification--;
-                        if (count_certification == 0) {
+                        count_certifications--;
+                        if (count_certifications == 0) {
                             var html = '<h2 class="text-center text-red">No existen Certificaciones Asociadas <br /><small class="text-muted">(Pulse "Agregar Certificación" para comenzar su adición)</small></h2><br /><hr />';
                             $('#content_certifications').html(html);
                         }
@@ -335,8 +371,8 @@
                             $('div#img_license' + item).attr('id', 'img_license' + i);
                         }
 
-                        count_license--;
-                        if (count_license == 0) {
+                        count_licenses--;
+                        if (count_licenses == 0) {
                             var html = '<h2 class="text-center text-yellow">No existen Licencias Asociadas <br /><small class="text-muted">(Pulse "Agregar Licencia" para comenzar su adición)</small></h2><br /><hr />';
                             $('#content_licenses').html(html);
                         }
@@ -359,6 +395,10 @@
                                 $(this).attr('name', 'speciality' + i);
                             });
 
+                            $('label[for="expired_speciality' + item + '"]').attr('for', 'expired_speciality' + i);
+                            $('input#expired_speciality' + item).attr('name', 'expired_speciality' + i);
+                            $('input#expired_speciality' + item).attr('id', 'expired_speciality' + i);
+
                             $('label[for="institution_id' + item + '"]').attr('for', "institution_id" + i);
                             $('#content_specialities select#institution_id' + item).each(function(j) {
                                 $(this).attr('id', 'institution_id' + i);
@@ -368,8 +408,8 @@
                             $('div#img_speciality' + item).attr('id', 'img_speciality' + i);
                         }
 
-                        count_speciality--;
-                        if (count_speciality == 0) {
+                        count_specialities--;
+                        if (count_specialities == 0) {
                             var html = '<h2 class="text-center text-green">No existen Especialidades Asociadas <br /><small class="text-muted">(Pulse "Agregar Especialidad" para comenzar su adición)</small></h2><br /><hr />';
                             $('#content_specialities').html(html);
                         }
@@ -418,10 +458,11 @@
             }
 
 
+            //initialize Dropzone
             function initializeDropzoneDisabilities(count_disabilities)
             {
                 var fileList = new Array;
-                var i =0;
+                var i = 0;
                 var myDropzone = new Dropzone("#img_disability" + count_disabilities, {
                     url: "{{ route('human-resources.manpowers.storage') }}",
                     autoProcessQueue: true,
@@ -439,25 +480,42 @@
 
                         this.on('success', function (file, serverFileName) {
                             fileList[i] = {"serverFileName": serverFileName, "fileName": file.name, "fileId": i};
+                            $('<input>').attr({id: 'img_disability' + i, name: count_disabilities + 'img_disability' + i, type: 'hidden', value: serverFileName}).appendTo('span#img_disabilities' + count_disabilities);
                             i++;
                         });
 
                         this.on("removedfile", function (file) {
                             var rmvFile = removedFile(file, fileList);
 
-                            if (rmvFile)
+                            if (rmvFile) {
+                                $('input[type="hidden"][value="' + rmvFile + '"]').remove();
                                 deleteImg(rmvFile);
+                            }
 
                         });
+
+                        if (count_img_disabilities[count_disabilities] > 0) {
+                            $.post("{{ route('human-resources.manpowers.loadImagesDropzone') }}",
+                                    { element: count_disabilities, count_img_element: count_img_disabilities, type: "disabilities" },
+                                    function(data) {
+                                        $.each(JSON.parse(data), function(key,value){
+                                            var mockFile = { name: value.name, size: value.size };
+                                            myDropzone.options.addedfile.call(myDropzone, mockFile);
+                                            myDropzone.options.thumbnail.call(myDropzone, mockFile, '/storage/temp/disabilities/' + count_disabilities + '/' + value.name);
+                                            myDropzone.emit("complete", mockFile);
+                                            myDropzone.files.push(mockFile);
+                                        });
+                                    }
+                            );
+                        }
                     }
                 });
             }
 
-
-            if(count_disabilities > 0){
-                Dropzone.autoDiscover = false;
-                for (var i = 0; i < count_disabilities; i++)
-                    initializeDropzoneDisabilities(i)
+            //initialize and load image in case exists
+            if (count_disabilities > 0) {
+                for (var i = 0; i < count_disabilities; i++){
+                    initializeDropzoneDisabilities(i);}
             }
 
 
@@ -507,7 +565,7 @@
 
             $('body').on('click', '.addElementDisability', function() {
 
-                $disability = '<span id="disability"><div class="row"><div class="col-md-12"><span id="num_disability" class="title-elements text-primary">Discapacidad #' + (count_disabilities + 1) + '</span><a id="disability" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("disability", "Nombre") !!}{!! Form::select("disability", $disabilities, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disability", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "si", false, ['class'=> 'treatment_disability']) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "no", true) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disability", "Detalle") !!}{!! Form::textarea("detail_disability", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div id="img_disability" class="dropzone"><div class="dz-message"> <h3 class="text-primary">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><hr /></span>';
+                $disability = '<span id="disability"><div class="row"><div class="col-md-12"><span id="num_disability" class="title-elements text-primary">Discapacidad #' + (count_disabilities + 1) + '</span><a id="disability" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("disability", "Nombre") !!}{!! Form::select("disability", $disabilities, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disability", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "si", false, ['class'=> 'treatment_disability']) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "no", true) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disability", "Detalle") !!}{!! Form::textarea("detail_disability", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div id="img_disability" class="dropzone"><div class="dz-message"> <h3 class="text-primary">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><span id="img_disabilities"></span><hr /></span>';
 
                 if (count_disabilities == 0)
                     $('#content_disabilities').html($disability);
@@ -537,6 +595,7 @@
                 $('textarea#detail_disability').attr('id', 'detail_disability' + count_disabilities);
 
                 $('div#img_disability').attr('id', 'img_disability' + count_disabilities);
+                $('span#img_disabilities').attr('id', 'img_disabilities'+ count_disabilities)
 
                 //Initialize dropzone
                 initializeDropzoneDisabilities(count_disabilities);
@@ -662,6 +721,41 @@
             }
 
 
+            /*****************************************************************
+             ************************* Add Exams zone ************************
+             *****************************************************************/
+
+            $.fn.addElementExam = function() {
+
+                $exam = '<span id="exam"><div class="row"><div class="col-md-12"><span id="num_exam" class="title-elements text-muted">Examen Preocupacional #' + (count_exams + 1) + '</span><a id="exam" class="delete-elements pull-right mitooltip" title="Eliminar Examen Preocupacional"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-4">{{Form::label('exam', 'Nombre Examen')}}{{Form::select('exam', $exams, null, ['class'=> 'form-control'])}}</div><div class="col-md-2">{{Form::label('expired_exam', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_exam', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div></div><br/><div id="img_exam" class="dropzone"><div class="dz-message"> <h3 class="text-muted">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><hr/></span>';
+
+                if (count_exams == 0)
+                    $('#content_exams').html($exam);
+                else
+                    $('#content_exams').append($exam);
+
+                $("#wizard").smartWizard("fixHeight");
+
+                //Refresh N° element licenses
+                $('span#exam').attr('id', 'exam' + count_exams);
+                $('span#num_exam').attr('id', 'num_exam' + count_exams);
+
+                $('label[for="exam"]').attr('for', 'exam' + count_exams);
+                $('select#exam').each(function(i) {
+                    $(this).attr('id', 'exam' + count_exams);
+                    $(this).attr('name', 'exam' + count_exams);
+                });
+
+                $('label[for="expired_exam"]').attr('for', 'expired_exam' + count_exams);
+                $('input#expired_exam').attr('name', 'expired_exam' + count_exams);
+                $('input#expired_exam').attr('id', 'expired_exam' + count_exams);
+
+                $('div#img_exam').attr('id', 'img_exam' + count_exams);
+
+                count_exams++;
+                $('.mitooltip').tooltip();
+            }
+
 
             /*****************************************************************
              ********************* Add Certifications zone *******************
@@ -670,9 +764,9 @@
 
             $.fn.addElementCertification = function() {
 
-                $certification = '<span id="certification"><div class="row"><div class="col-md-12"><span id="num_certification" class="title-elements text-red">Certificación #' + (count_certification + 1) + '</span><a id="certification" class="delete-elements pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-7">{{Form::label('certification', 'Nombre')}}{{Form::select('certification', $certifications, null, ['class'=> 'form-control'])}}</div><div class="col-md-5">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id', $institutions, null, ['class'=> 'form-control'])}}</div></div><br /><div id="img_certification" class="dropzone"><div class="dz-message"> <h3 class="text-red">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><hr /></span>';
+                $certification = '<span id="certification"><div class="row"><div class="col-md-12"><span id="num_certification" class="title-elements text-red">Certificación #' + (count_certifications + 1) + '</span><a id="certification" class="delete-elements pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{{Form::label('certification', 'Nombre')}}{{Form::select('certification', $certifications, null, ['class'=> 'form-control'])}}</div><div class="col-md-2">{{Form::label('expired_certification', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_certification', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div><div class="col-md-4">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id', $institutions, null, ['class'=> 'form-control'])}}</div></div><br /><div id="img_certification" class="dropzone"><div class="dz-message"> <h3 class="text-red">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><hr /></span>';
 
-                if (count_certification == 0)
+                if (count_certifications == 0)
                     $('#content_certifications').html($certification);
                 else
                     $('#content_certifications').append($certification);
@@ -680,31 +774,35 @@
                 $("#wizard").smartWizard("fixHeight");
 
                 //Refresh N° element certifications
-                $('span#certification').attr('id', 'certification' + count_certification);
-                $('span#num_certification').attr('id', 'num_certification' + count_certification);
+                $('span#certification').attr('id', 'certification' + count_certifications);
+                $('span#num_certification').attr('id', 'num_certification' + count_certifications);
 
-                $('label[for="certification"]').attr('for', 'certification' + count_certification);
+                $('label[for="certification"]').attr('for', 'certification' + count_certifications);
                 $('select#certification').each(function(i) {
-                    $(this).attr('id', 'certification' + count_certification);
-                    $(this).attr('name', 'certification' + count_certification);
+                    $(this).attr('id', 'certification' + count_certifications);
+                    $(this).attr('name', 'certification' + count_certifications);
                 });
 
-                $('label[for="institution_id"]').attr('for', 'institution_id' + count_certification);
+                $('label[for="expired_certification"]').attr('for', 'expired_certification' + count_certifications);
+                $('input#expired_certification').attr('name', 'expired_certification' + count_certifications);
+                $('input#expired_certification').attr('id', 'expired_certification' + count_certifications);
+
+                $('label[for="institution_id"]').attr('for', 'institution_id' + count_certifications);
                 $('#content_certifications select#institution_id').each(function(i) {
-                    $(this).attr('id', 'institution_id' + count_certification);
-                    $(this).attr('name', 'institution_id' + count_certification);
+                    $(this).attr('id', 'institution_id' + count_certifications);
+                    $(this).attr('name', 'institution_id' + count_certifications);
                 });
 
-                $('div#img_certification').attr('id', 'img_certification' + count_certification);
+                $('div#img_certification').attr('id', 'img_certification' + count_certifications);
 
                 var fileList = new Array;
                 var i =0;
-                var myDropzone = new Dropzone("#img_certification" + count_certification, {
+                var myDropzone = new Dropzone("#img_certification" + count_certifications, {
                     url: "{{ route('human-resources.manpowers.storage') }}",
                     autoProcessQueue: true,
                     paramName: "certifications",
                     params: {
-                        element: count_certification
+                        element: count_certifications
                     },
 
                     init: function() {
@@ -730,7 +828,7 @@
 
                 });
 
-                count_certification++;
+                count_certifications++;
                 $('.mitooltip').tooltip();
             }
 
@@ -743,9 +841,9 @@
 
             $.fn.addElementLicense = function() {
 
-                $license = '<span id="license"><div class="row"><div class="col-md-12"><span id="num_license" class="title-elements text-yellow">Licencia #' + (count_license + 1) + '</span><a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-4">{{Form::label('license', 'Tipo Licencia')}}{{Form::select('license', $licenses, null, ['class'=> 'form-control'])}}</div><div class="col-md-2">{{Form::label('expired', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div></div><br/><div class="row"><div class="col-md-12">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div><br /><div id="img_license" class="dropzone"><div class="dz-message"> <h3 class="text-yellow">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><hr /></span>';
+                $license = '<span id="license"><div class="row"><div class="col-md-12"><span id="num_license" class="title-elements text-yellow">Licencia #' + (count_licenses + 1) + '</span><a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-4">{{Form::label('license', 'Tipo Licencia')}}{{Form::select('license', $licenses, null, ['class'=> 'form-control'])}}</div><div class="col-md-2">{{Form::label('expired', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div></div><br/><div class="row"><div class="col-md-12">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div><br /><div id="img_license" class="dropzone"><div class="dz-message"> <h3 class="text-yellow">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><hr /></span>';
 
-                if (count_license == 0)
+                if (count_licenses == 0)
                     $('#content_licenses').html($license);
                 else
                     $('#content_licenses').append($license);
@@ -753,33 +851,33 @@
                 $("#wizard").smartWizard("fixHeight");
 
                 //Refresh N° element licenses
-                $('span#license').attr('id', 'license' + count_license);
-                $('span#num_license').attr('id', 'num_license' + count_license);
+                $('span#license').attr('id', 'license' + count_licenses);
+                $('span#num_license').attr('id', 'num_license' + count_licenses);
 
-                $('label[for="license"]').attr('for', 'license' + count_license);
+                $('label[for="license"]').attr('for', 'license' + count_licenses);
                 $('select#license').each(function(i) {
-                    $(this).attr('id', 'license' + count_license);
-                    $(this).attr('name', 'license' + count_license);
+                    $(this).attr('id', 'license' + count_licenses);
+                    $(this).attr('name', 'license' + count_licenses);
                 });
 
-                $('label[for="expired"]').attr('for', 'expired' + count_license);
-                $('input#expired').attr('name', 'expired' + count_license);
-                $('input#expired').attr('id', 'expired' + count_license);
+                $('label[for="expired"]').attr('for', 'expired' + count_licenses);
+                $('input#expired').attr('name', 'expired' + count_licenses);
+                $('input#expired').attr('id', 'expired' + count_licenses);
 
-                $('label[for="detail_license"]').attr('for', 'detail_license' + count_license);
-                $('textarea#detail_license').attr('name', 'detail_license' + count_license);
-                $('textarea#detail_license').attr('id', 'detail_license' + count_license);
+                $('label[for="detail_license"]').attr('for', 'detail_license' + count_licenses);
+                $('textarea#detail_license').attr('name', 'detail_license' + count_licenses);
+                $('textarea#detail_license').attr('id', 'detail_license' + count_licenses);
 
-                $('div#img_license').attr('id', 'img_license' + count_license);
+                $('div#img_license').attr('id', 'img_license' + count_licenses);
 
                 var fileList = new Array;
                 var i =0;
-                var myDropzone = new Dropzone("#img_license" + count_license, {
+                var myDropzone = new Dropzone("#img_license" + count_licenses, {
                     url: "{{ route('human-resources.manpowers.storage') }}",
                     autoProcessQueue: true,
                     paramName: "licenses",
                     params: {
-                        element: count_license
+                        element: count_licenses
                     },
 
                     init: function() {
@@ -805,7 +903,7 @@
 
                 });
 
-                count_license++;
+                count_licenses++;
                 $('.mitooltip').tooltip();
             }
 
@@ -818,9 +916,9 @@
 
             $.fn.addElementSpeciality = function() {
 
-                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><span id="num_speciality" class="title-elements text-green">Especialidad #' + (count_speciality + 1) + '</span><a id="speciality" class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('speciality', 'Especialidad')}}{{Form::select('speciality', $specialities, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id', $institutions, null, ['class'=> 'form-control'])}}</div></div><br/><div id="img_speciality" class="dropzone"><div class="dz-message"> <h3 class="text-green">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><hr /></span>';
+                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><span id="num_speciality" class="title-elements text-green">Especialidad #' + (count_specialities + 1) + '</span><a id="speciality" class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('speciality', 'Especialidad')}}{{Form::select('speciality', $specialities, null, ['class'=> 'form-control'])}}</div><div class="col-md-2">{{Form::label('expired_speciality', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_speciality', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div><div class="col-md-4">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id', $institutions, null, ['class'=> 'form-control'])}}</div></div><br/><div id="img_speciality" class="dropzone"><div class="dz-message"> <h3 class="text-green">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><hr /></span>';
 
-                if (count_speciality == 0)
+                if (count_specialities == 0)
                     $('#content_specialities').html($speciality);
                 else
                     $('#content_specialities').append($speciality);
@@ -828,31 +926,35 @@
                 $("#wizard").smartWizard("fixHeight");
 
                 //Refresh N° element specialities
-                $('span#speciality').attr('id', 'speciality' + count_speciality);
-                $('span#num_speciality').attr('id', 'num_speciality' + count_speciality);
+                $('span#speciality').attr('id', 'speciality' + count_specialities);
+                $('span#num_speciality').attr('id', 'num_speciality' + count_specialities);
 
-                $('label[for="speciality"]').attr('for', 'speciality' + count_speciality);
+                $('label[for="speciality"]').attr('for', 'speciality' + count_specialities);
                 $('#content_specialities select#speciality').each(function(i) {
-                    $(this).attr('id', 'speciality' + count_speciality);
-                    $(this).attr('name', 'speciality' + count_speciality);
+                    $(this).attr('id', 'speciality' + count_specialities);
+                    $(this).attr('name', 'speciality' + count_specialities);
                 });
 
-                $('label[for="institution_id"]').attr('for', 'institution_id' + count_speciality);
+                $('label[for="expired_speciality"]').attr('for', 'expired_speciality' + count_specialities);
+                $('input#expired_speciality').attr('name', 'expired_speciality' + count_specialities);
+                $('input#expired_speciality').attr('id', 'expired_speciality' + count_specialities);
+
+                $('label[for="institution_id"]').attr('for', 'institution_id' + count_specialities);
                 $('#content_specialities select#institution_id').each(function(i) {
-                    $(this).attr('id', 'institution_id' + count_speciality);
-                    $(this).attr('name', 'institution_id' + count_speciality);
+                    $(this).attr('id', 'institution_id' + count_specialities);
+                    $(this).attr('name', 'institution_id' + count_specialities);
                 });
 
-                $('div#img_speciality').attr('id', 'img_speciality' + count_speciality);
+                $('div#img_speciality').attr('id', 'img_speciality' + count_specialities);
 
                 var fileList = new Array;
                 var i =0;
-                var myDropzone = new Dropzone("#img_speciality" + count_speciality, {
+                var myDropzone = new Dropzone("#img_speciality" + count_specialities, {
                     url: "{{ route('human-resources.manpowers.storage') }}",
                     autoProcessQueue: true,
                     paramName: "specialities",
                     params: {
-                        element: count_speciality
+                        element: count_specialities
                     },
 
                     init: function() {
@@ -877,7 +979,7 @@
                     }
                 });
 
-                count_speciality++;
+                count_specialities++;
                 $('.mitooltip').tooltip();
             }
 
@@ -944,11 +1046,16 @@
 
                 //Step 2
                 if (currentStep == 2) {
+                    var count_img_disabilities = [];
+
+                    for(var i = 0; i < count_disabilities; i++)
+                        count_img_disabilities[i] = $('span#img_disabilities' + i).find("input").length;
+
                     if (validateStep2() != false) {
                         $.ajax({
                             type: 'POST',
                             url: '{{ route("human-resources.manpowers.step2") }}',
-                            data: $('#step' + currentStep).serialize() + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_family_responsabilities=" + count_family_responsabilities,
+                            data: $('#step' + currentStep).serialize() + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_family_responsabilities=" + count_family_responsabilities + "&count_img_disabilities=" + count_img_disabilities,
                             dataType: "json",
 
                             beforeSend: function() {
@@ -1340,7 +1447,7 @@
             function validateStep3()
             {
                 //certifications
-                for(var i = 0; i < count_certification; i++) {
+                for(var i = 0; i < count_certifications; i++) {
 
                     //certification
                     if ($('select#certification' + i).val() == null) {
@@ -1366,7 +1473,7 @@
                 }
 
                 //licenses
-                for(var i = 0; i < count_license; i++) {
+                for(var i = 0; i < count_licenses; i++) {
 
                     //type licence
                     if ($('select#license' + i).val() == null) {
@@ -1392,7 +1499,7 @@
                 }
 
                 //specialities
-                for(var i = 0; i < count_speciality; i++) {
+                for(var i = 0; i < count_specialities; i++) {
 
                     //speciality
                     if ($('select#speciality' + i).val() == null) {

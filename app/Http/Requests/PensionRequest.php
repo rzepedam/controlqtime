@@ -2,17 +2,17 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Forms\SanitizedRequest;
+use App\Http\Requests\Request;
 use Illuminate\Routing\Route;
+use App\Http\Requests\Forms\SanitizedRequest;
 
-class ProfessionRequest extends SanitizedRequest
+class PensionRequest extends SanitizedRequest
 {
 
     public function __construct(Route $route)
     {
         $this->route = $route;
     }
-
 
     public function authorize()
     {
@@ -27,14 +27,14 @@ class ProfessionRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:100|unique:professions'
+                    'name'  => 'required|max:75|unique:pensions'
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:100|unique:professions,name,' . $this->route->getParameter('professions')
+                    'name'  => 'required|max:75|unique:pensions,name,' . $this->route->getParameter('pensions')
                 ];
             }
         }

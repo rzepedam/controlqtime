@@ -144,6 +144,26 @@ INSERT INTO certifications(name) VALUES ('Certificación Conducción a la Defens
 INSERT INTO certifications(name) VALUES ('Certificación Cero Daño');
 
 
+/* mutualities | mutualidades */
+INSERT INTO mutualities(name) VALUES ('Asociación Chilena de Seguridad');
+INSERT INTO mutualities(name) VALUES ('Hospital Clínico Mutual de Seguridad');
+
+
+/* pensions | fondos de pensiones */
+INSERT INTO pensions(name) VALUES ('Hábitat');
+INSERT INTO pensions(name) VALUES ('Capital');
+INSERT INTO pensions(name) VALUES ('Modelo');
+INSERT INTO pensions(name) VALUES ('CUPRUM');
+
+
+/* exams | exámenes preocupacionales */
+INSERT INTO exams(name) VALUES ('Antropometría');
+INSERT INTO exams(name) VALUES ('Test Visual');
+INSERT INTO exams(name) VALUES ('Glicemia');
+INSERT INTO exams(name) VALUES ('Hemograma');
+INSERT INTO exams(name) VALUES ('Declaración de salud');
+
+
 /* disabilities | Discapacidades */
 INSERT INTO disabilities(name, description) VALUES ('Lesión Medular', 'Es un daño que se presenta en la medula espinal puede ser por una enfermedad o por un accidente y origína perdida en algunas de las funciones movimientos y/o sensibilidad, estas perdidas se presentan por debajo del lugar donde ocurrió la lesión.');
 INSERT INTO disabilities(name, description) VALUES ('Esclerosis Múltiple', 'Es una enfermedad fundamentalmente inmunológica, en la cual se produce una suerte de alergia de una parte del sistema nervioso central, afectando los nervios que están recubiertos por la capa de mielina. Se llama esclerosis porque hay endurecimiento o cicatriz del tejido en las áreas dañadas y múltiple porque se afectan zonas salpicadas del sistema nervioso central, donde los síntomas pueden ser severos o leves, los cuales pueden manifestarse con una periodicidad impredecible y errática, diferente en cada paciente. Existen dos formas básicas de EM: La más corriente se manifiesta con brotes (síntomas) espaciados que pueden durar días o semanas. Los brotes no son necesariamente acumulativos y entre uno y otro pueden pasar meses o años. La segunda es crónica, más compleja, con brotes progresivos. Además, la EM puede expresarse de otras formas mixtas.');

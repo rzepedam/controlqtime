@@ -22,8 +22,10 @@ class CreateManpowersTable extends Migration
             $table->string('rut', 12);
             $table->integer('birthday')->unsigned();
             $table->integer('country_id')->unsigned();
-            $table->integer('forecast_id')->unsigned();
             $table->integer('gender_id')->unsigned();
+            $table->integer('forecast_id')->unsigned();
+            $table->integer('mutuality_id')->unsigned();
+            $table->integer('pension_id')->unsigned();
             $table->integer('rating_id')->unsigned();
             $table->integer('subarea_id')->unsigned();
             $table->integer('commune_id')->unsigned();
@@ -43,6 +45,16 @@ class CreateManpowersTable extends Migration
             $table->foreign('gender_id')
                 ->references('id')
                 ->on('genders')
+                ->onUpdate('cascade');
+
+            $table->foreign('mutuality_id')
+                ->references('id')
+                ->on('mutualities')
+                ->onUpdate('cascade');
+
+            $table->foreign('pension_id')
+                ->references('id')
+                ->on('pensions')
                 ->onUpdate('cascade');
 
             $table->foreign('forecast_id')

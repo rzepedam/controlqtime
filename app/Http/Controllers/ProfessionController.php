@@ -12,7 +12,6 @@ use App\Http\Requests\ProfessionRequest;
 
 class ProfessionController extends Controller
 {
-
     public function index(Request $request)
     {
         $professions = Profession::name($request->get('table_search'))->orderBy('name')->paginate(20);

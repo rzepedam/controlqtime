@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class StorageController extends Controller
@@ -51,7 +52,6 @@ class StorageController extends Controller
         }
 
         return $filename;
-
     }
 
     public function deleteImg(Request $request)
@@ -64,4 +64,19 @@ class StorageController extends Controller
         }
     }
 
+    public function loadImagesDropzone(Request $request)
+    {
+        $count_img_element = $request->get('count_img_element');
+        $element           = $request->get('element');
+        $type              = $request->get('type');
+        $result            = array();
+
+        for ($i = 0; $i < $count_img_element[$element]; $i++) {
+            $obj['name'] = Session::get($element . 'img_' . $type . $i);
+            $obj['size'] = filesize(public_path() . '/storage/temp/' . $type . '/' . $element . '/' . $obj['name']);
+            $result[]    = $obj;
+        }
+
+        return json_encode($result);
+    }
 }

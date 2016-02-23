@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 use App\Manpower;
 use App\Gender;
@@ -19,7 +20,9 @@ use App\Certification;
 use App\Institution;
 use App\License;
 use App\Speciality;
-use Illuminate\Support\Facades\Validator;
+use App\Mutuality;
+use App\Pension;
+use App\Exam;
 
 
 class ManpowerController extends Controller
@@ -32,24 +35,24 @@ class ManpowerController extends Controller
 
     public function create()
     {
-        $genders = Gender::lists('name', 'id');
-        $forecasts = Forecast::lists('name', 'id');
-        $countries = Country::lists('name', 'id');
-        $ratings = Rating::lists('name', 'id');
-        $communes = Commune::lists('name', 'id');
-        $disabilities = Disability::lists('name', 'id');
-        $diseases = Disease::lists('name', 'id');
-        $kins = Kin::lists('name', 'id');
+        $genders        = Gender::lists('name', 'id');
+        $forecasts      = Forecast::lists('name', 'id');
+        $countries      = Country::lists('name', 'id');
+        $ratings        = Rating::lists('name', 'id');
+        $communes       = Commune::lists('name', 'id');
+        $disabilities   = Disability::lists('name', 'id');
+        $diseases       = Disease::lists('name', 'id');
+        $kins           = Kin::lists('name', 'id');
         $certifications = Certification::lists('name', 'id');
-        $institutions = Institution::lists('name', 'id');
-        $licenses = License::lists('name', 'id');
-        $specialities = Speciality::lists('name', 'id');
-        $manpowers = Manpower::lists('full_name', 'id');
+        $institutions   = Institution::lists('name', 'id');
+        $licenses       = License::lists('name', 'id');
+        $specialities   = Speciality::lists('name', 'id');
+        $manpowers      = Manpower::lists('full_name', 'id');
+        $mutualities    = Mutuality::lists('name', 'id');
+        $pensions       = Pension::lists('name', 'id');
+        $exams          = Exam::lists('name', 'id');
 
-        return view('human-resources.manpowers.create', compact(
-            'genders', 'ratings', 'communes', 'countries', 'forecasts', 'disabilities', 'diseases', 'kins',
-            'certifications', 'institutions', 'licenses', 'specialities', 'manpowers'
-        ));
+        return view('human-resources.manpowers.create', compact('genders', 'ratings', 'communes', 'countries', 'forecasts', 'disabilities', 'diseases', 'kins', 'certifications', 'institutions', 'licenses', 'specialities', 'manpowers', 'mutualities', 'pensions', 'exams'));
     }
 
     public function step1(Request $request)
@@ -83,7 +86,6 @@ class ManpowerController extends Controller
         }
 
         $this->saveSessionStep1($request);
-
         return response()->json(['status' => 'success'], 200);
 
     }
@@ -91,7 +93,6 @@ class ManpowerController extends Controller
     public function step2(Request $request)
     {
         $this->saveSessionStep2($request);
-
         return response()->json(['status' => 'success'], 200);
     }
 
@@ -134,6 +135,16 @@ class ManpowerController extends Controller
 
     public function saveSessionStep2($request)
     {
+        //delete "," in string from view
+        $count_img_disabilities = str_replace(',', '', $request->get('count_img_disabilities'));
+
+        Session::put('count_img_disabilities', $count_img_disabilities);
+        for ($i = 0; $i < $request->get('count_disabilities'); $i++) {
+            for ($j = 0; $j < $count_img_disabilities[$i]; $j++) {
+                Session::put($i . 'img_disabilities' . $j, $request->get($i . 'img_disability' . $j) );
+            }
+        }
+
         Session::put('count_disabilities', $request->get('count_disabilities'));
         for ($i = 0; $i < $request->get('count_disabilities'); $i++ ) {
             Session::put('disability' . $i, $request->get('disability' . $i));
