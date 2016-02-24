@@ -66,8 +66,8 @@
 <!-- four row -->
 <div class="row">
     <div class="col-md-3 form-group">
-        {{ Form::label('subarea_id', 'Subárea') }}
-        {{ Form::select('subarea_id', ['Administración', 'Mantenimiento', 'Operaciones'], Session::get('subarea_id'), ['class' => 'form-control required'] ) }}
+        {{ Form::label('company_id', 'Empresa') }}
+        {{ Form::select('company_id', $companies, Session::get('company_id'), ['class' => 'form-control required'] ) }}
     </div>
     <div class="col-md-6 form-group">
         {{ Form::label('address', 'Dirección') }}

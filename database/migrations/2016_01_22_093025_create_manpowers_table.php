@@ -27,7 +27,7 @@ class CreateManpowersTable extends Migration
             $table->integer('mutuality_id')->unsigned();
             $table->integer('pension_id')->unsigned();
             $table->integer('rating_id')->unsigned();
-            $table->integer('subarea_id')->unsigned();
+            $table->integer('company_id')->unsigned();
             $table->integer('commune_id')->unsigned();
             $table->string('address');
             $table->string('phone1', 20);
@@ -47,6 +47,11 @@ class CreateManpowersTable extends Migration
                 ->on('genders')
                 ->onUpdate('cascade');
 
+            $table->foreign('forecast_id')
+                ->references('id')
+                ->on('forecasts')
+                ->onUpdate('cascade');
+
             $table->foreign('mutuality_id')
                 ->references('id')
                 ->on('mutualities')
@@ -57,19 +62,14 @@ class CreateManpowersTable extends Migration
                 ->on('pensions')
                 ->onUpdate('cascade');
 
-            $table->foreign('forecast_id')
-                ->references('id')
-                ->on('forecasts')
-                ->onUpdate('cascade');
-
-            $table->foreign('subarea_id')
-                ->references('id')
-                ->on('subareas')
-                ->onUpdate('cascade');
-
             $table->foreign('rating_id')
                 ->references('id')
                 ->on('ratings')
+                ->onUpdate('cascade');
+
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('subareas')
                 ->onUpdate('cascade');
 
             $table->foreign('commune_id')
