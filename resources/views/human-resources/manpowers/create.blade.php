@@ -82,7 +82,8 @@
              ******************************************************************/
 
 
-            var count_family_relationship = {{ Session::get('count_family_relationship') ? Session::get('count_family_relationship') : 0  }};
+            var count_family_relationships = {{ Session::get('count_family_relationships') ? Session::get('count_family_relationships') : 0  }};
+            var count_studies = 0;
             var count_disabilities = {{ Session::get('count_disabilities') ? Session::get('count_disabilities') : 0  }};
             var count_diseases = {{ Session::get('count_diseases') ? Session::get('count_diseases') : 0  }};
             var count_family_responsabilities = {{ Session::get('count_family_responsabilities') ? Session::get('count_family_responsabilities') : 0  }};
@@ -105,8 +106,7 @@
             $('#wizard').smartWizard({
                 labelNext:'Siguiente',
                 labelPrevious:'Anterior',
-                labelFinish:'Guardar',
-                transitionEffect: 'slideleft'
+                labelFinish:'Guardar'
             });
 
             //Cancel next step event in click event automatically, necesary for validation
@@ -167,10 +167,49 @@
                             });
                         }
 
-                        count_family_relationship--;
-                        if (count_family_relationship == 0) {
+                        count_family_relationships--;
+                        if (count_family_relationships == 0) {
                             var html = '<h2 class="text-center text-light-blue">No existen Parentescos Familiares Asociados <br /><small class="text-muted">(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h2><br /><hr />'
                             $('#content_family_relationships').html(html);
+                        }
+
+                    break;
+
+                    case 'study':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#study' + item).attr('id', 'study' + i);
+                            $('span#num_study' + item).text('Estudio #' + (i + 1));
+                            $('span#num_study' + item).attr('id', 'num_study' + i);
+
+                            $('label[for="degree' + item + '"]').attr('for', "degree" + i);
+                            $('select#degree' + item).each(function(j) {
+                                $(this).attr('id', 'degree' + i);
+                                $(this).attr('name', 'degree' + i);
+                            });
+
+                            $('label[for="name_study' + item + '"]').attr('for', 'name_study' + i);
+                            $('input#name_study' + item).attr('name', 'name_study' + i);
+                            $('input#name_study' + item).attr('id', 'name_study' + i);
+
+                            $('label[for="institution_id' + item + '"]').attr('for', "institution_id" + i);
+                            $('#content_studies select#institution_id' + item).each(function(j) {
+                                $(this).attr('id', 'institution_id' + i);
+                                $(this).attr('name', 'institution_id' + i);
+                            });
+
+                            $('label[for="date' + item + '"]').attr('for', 'date' + i);
+                            $('input#date' + item).attr('name', 'date' + i);
+                            $('input#date' + item).attr('id', 'date' + i);
+                        }
+
+                        count_studies--;
+                        if (count_studies == 0) {
+                            var html = '<h2 class="text-center text-green">No existen Estudios Asociados <br /><small class="text-muted">(Pulse "Agregar Estudio" para comenzar su adición)</small></h2><br /><hr />'
+                            $('#content_studies').html(html);
                         }
 
                     break;
@@ -527,9 +566,9 @@
 
             $.fn.addElementFamilyRelationship = function() {
 
-                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="title-elements text-light-blue">Parentesco Familiar #' + (count_family_relationship + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship', $kins, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower', $manpowers, null, ['class'=> 'form-control'])}}</div></div><hr/></span>';
+                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="title-elements text-light-blue">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship', $kins, null, ['class'=> 'form-control'])}}</div><div class="col-md-6">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower', $manpowers, null, ['class'=> 'form-control'])}}</div></div><hr/></span>';
 
-                if (count_family_relationship == 0)
+                if (count_family_relationships == 0)
                     $('#content_family_relationships').html($family_relationship);
                 else
                     $('#content_family_relationships').append($family_relationship);
@@ -537,26 +576,68 @@
                 $("#wizard").smartWizard("fixHeight");
 
                 //Refresh N° element family_relationships
-                $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationship);
-                $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationship);
+                $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationships);
+                $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
 
-                $('label[for="family_relationship"]').attr('for', 'family_relationship' + count_family_relationship);
+                $('label[for="family_relationship"]').attr('for', 'family_relationship' + count_family_relationships);
                 $('select#family_relationship').each(function(i) {
-                    $(this).attr('id', 'family_relationship' + count_family_relationship);
-                    $(this).attr('name', 'family_relationship' + count_family_relationship);
+                    $(this).attr('id', 'family_relationship' + count_family_relationships);
+                    $(this).attr('name', 'family_relationship' + count_family_relationships);
                 });
 
-                $('label[for="manpower"]').attr('for', 'manpower' + count_family_relationship);
+                $('label[for="manpower"]').attr('for', 'manpower' + count_family_relationships);
                 $('select#manpower').each(function(i) {
-                    $(this).attr('id', 'manpower' + count_family_relationship);
-                    $(this).attr('name', 'manpower' + count_family_relationship);
+                    $(this).attr('id', 'manpower' + count_family_relationships);
+                    $(this).attr('name', 'manpower' + count_family_relationships);
                 });
 
-                count_family_relationship++;
+                count_family_relationships++;
                 $('.mitooltip').tooltip();
             }
 
 
+            /*****************************************************************
+             ************************ Add Studies zone ***********************
+             *****************************************************************/
+
+            $.fn.addElementStudy = function() {
+
+                $study = '<span id="study"><div class="row"><div class="col-md-12"><span id="num_study" class="title-elements text-green">Estudio #' + (count_studies + 1) + '</span><a id="study" class="delete-elements pull-right mitooltip" title="Eliminar Estudio"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-3">{!! Form::label("degree", "Grado Académico") !!}{!! Form::select("degree", $degrees, null, ["class"=> "form-control"]) !!}</div><div class="col-md-4">{!! Form::label("name_study", "Nombre Estudio") !!}{!! Form::text("name_study", null, ["class"=> "form-control"]) !!}</div><div class="col-md-3">{!! Form::label("institution_id", "Institución") !!}{!! Form::select("institution_id", $institutions, null, ["class"=> "form-control"]) !!}</div><div class="col-md-2">{!! Form::label("date", "Fecha Obtención") !!}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text("date", null, ["class"=> "form-control required", "data-inputmask"=> 'alias": "dd/mm/yyyy', "data-mask"=> ""])}}</div></div></div><hr/></span>';
+
+                if (count_studies == 0)
+                    $('#content_studies').html($study);
+                else
+                    $('#content_studies').append($study);
+
+                $("#wizard").smartWizard("fixHeight");
+
+                //Refresh N° element family_relationships
+                $('span#study').attr('id', 'study' + count_studies);
+                $('span#num_study').attr('id', 'num_study' + count_studies);
+
+                $('label[for="degree"]').attr('for', 'degree' + count_studies);
+                $('select#degree').each(function(i) {
+                    $(this).attr('id', 'degree' + count_studies);
+                    $(this).attr('name', 'degree' + count_studies);
+                });
+
+                $('label[for="name_study"]').attr('for', 'name_study' + count_studies);
+                $('input#name_study').attr('name', 'name_study' + count_studies);
+                $('input#name_study').attr('id', 'name_study' + count_studies);
+
+                $('label[for="institution_id"]').attr('for', 'institution_id' + count_studies);
+                $('#content_studies select#institution_id').each(function(i) {
+                    $(this).attr('id', 'institution_id' + count_studies);
+                    $(this).attr('name', 'institution_id' + count_studies);
+                });
+
+                $('label[for="date"]').attr('for', 'date' + count_studies);
+                $('input#date').attr('name', 'date' + count_studies);
+                $('input#date').attr('id', 'date' + count_studies);
+
+                count_studies++;
+                $('.mitooltip').tooltip();
+            }
 
             /*****************************************************************
              ********************** Add Disability zone **********************
@@ -1014,7 +1095,7 @@
                         $.ajax({
                             type: 'POST',
                             url: '{{ route("human-resources.manpowers.step1") }}',
-                            data: $('#step' + currentStep).serialize() + "&count_family_relationship=" + count_family_relationship,
+                            data: $('#step' + currentStep).serialize() + "&count_family_relationships=" + count_family_relationships,
                             dataType: "json",
 
                             beforeSend: function() {
@@ -1252,15 +1333,15 @@
                     $('#rating_id').focus();
                 }
 
-                /* subarea */
-                if ($('#subarea_id').val() == '') {
+                /* company */
+                if ($('#company_id').val() == '') {
                     $('#js').removeClass('hide');
-                    $('#subarea_id').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Subárea</strong> es obligatorio').removeClass('hide');
+                    $('#company_id').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Empresa</strong> es obligatorio').removeClass('hide');
                     return false;
                 } else {
                     $('#js').addClass('hide');
-                    $('#subarea_id').focus();
+                    $('#company_id').focus();
                 }
 
                 /* commune */
@@ -1338,7 +1419,7 @@
                     $('#email').focus();
                 }
 
-                for(var i = 0; i < count_family_relationship; i++) {
+                for(var i = 0; i < count_family_relationships; i++) {
 
                     if ($('select#family_relationship' + i).val() == null) {
                         $('#js').removeClass('hide');

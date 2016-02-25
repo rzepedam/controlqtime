@@ -112,22 +112,21 @@ INSERT INTO areas(name, terminal_id) VALUES ('Operaciones', 3);
 INSERT INTO areas(name, terminal_id) VALUES ('Operaciones', 4);
 
 
-/* subáreas | Subáreas */
-INSERT INTO subareas(name, area_id) VALUES ('Subárea 1', 1);
-INSERT INTO subareas(name, area_id) VALUES ('Subárea 1', 2);
-INSERT INTO subareas(name, area_id) VALUES ('Subárea 1', 3);
-INSERT INTO subareas(name, area_id) VALUES ('Subárea 1', 4);
-INSERT INTO subareas(name, area_id) VALUES ('Subárea 1', 5);
-INSERT INTO subareas(name, area_id) VALUES ('Subárea 1', 6);
-INSERT INTO subareas(name, area_id) VALUES ('Subárea 1', 7);
-INSERT INTO subareas(name, area_id) VALUES ('Subárea 1', 8);
-
-
 /* forescats | Previsión de Salud */
-INSERT INTO forecasts(name) VALUES ('Banmédica');
-INSERT INTO forecasts(name) VALUES ('Isapre Colmena Golden Cross');
-INSERT INTO forecasts(name) VALUES ('Isapre Cruz Blanca');
+INSERT INTO forecasts(name) VALUES ('Banmédica S.A');
+INSERT INTO forecasts(name) VALUES ('Chuquicamata Ltda.');
+INSERT INTO forecasts(name) VALUES ('Colmena Golden Cross');
+INSERT INTO forecasts(name) VALUES ('Consalud');
+INSERT INTO forecasts(name) VALUES ('Cruz Blanca');
+INSERT INTO forecasts(name) VALUES ('Cruz del Norte');
 INSERT INTO forecasts(name) VALUES ('Fonasa');
+INSERT INTO forecasts(name) VALUES ('Fundación Ltda.');
+INSERT INTO forecasts(name) VALUES ('Fusat Ltda.');
+INSERT INTO forecasts(name) VALUES ('Masvida S.A');
+INSERT INTO forecasts(name) VALUES ('Óptima S.A');
+INSERT INTO forecasts(name) VALUES ('Río Blanco Ltda.');
+INSERT INTO forecasts(name) VALUES ('San Lorenzo Ltda.');
+INSERT INTO forecasts(name) VALUES ('Vida Tres S.A');
 
 
 /* ratings | Cargos */
@@ -145,15 +144,20 @@ INSERT INTO certifications(name) VALUES ('Certificación Cero Daño');
 
 
 /* mutualities | mutualidades */
-INSERT INTO mutualities(name) VALUES ('Asociación Chilena de Seguridad');
-INSERT INTO mutualities(name) VALUES ('Hospital Clínico Mutual de Seguridad');
+INSERT INTO mutualities(name) VALUES ('Instituto de Seguridad del Trabajo');
+INSERT INTO mutualities(name) VALUES ('Asociación Chilena de Seguridad (ACHS)');
+INSERT INTO mutualities(name) VALUES ('Mutual de Seguridad');
+INSERT INTO mutualities(name) VALUES ('Instituto de Seguridad Laboral');
 
 
-/* pensions | fondos de pensiones */
+
+/* pensions | AFP  */
 INSERT INTO pensions(name) VALUES ('Hábitat');
 INSERT INTO pensions(name) VALUES ('Capital');
 INSERT INTO pensions(name) VALUES ('Modelo');
 INSERT INTO pensions(name) VALUES ('CUPRUM');
+INSERT INTO pensions(name) VALUES ('PlanVital');
+INSERT INTO pensions(name) VALUES ('Provida');
 
 
 /* exams | exámenes preocupacionales */
@@ -162,6 +166,23 @@ INSERT INTO exams(name) VALUES ('Test Visual');
 INSERT INTO exams(name) VALUES ('Glicemia');
 INSERT INTO exams(name) VALUES ('Hemograma');
 INSERT INTO exams(name) VALUES ('Declaración de salud');
+
+
+/* companies | empresas */
+INSERT INTO companies(name, area_id) VALUES ('Empresa 1', 1);
+INSERT INTO companies(name, area_id) VALUES ('Empresa 2', 1);
+INSERT INTO companies(name, area_id) VALUES ('Empresa 3', 1);
+INSERT INTO companies(name, area_id) VALUES ('Empresa 4', 2);
+INSERT INTO companies(name, area_id) VALUES ('Empresa 5', 2);
+INSERT INTO companies(name, area_id) VALUES ('Empresa 6', 3);
+INSERT INTO companies(name, area_id) VALUES ('Empresa 7', 3);
+
+
+/* degrees | grados académicos */
+INSERT INTO degrees(name) VALUES ('Licenciado');
+INSERT INTO degrees(name) VALUES ('Título Profesional');
+INSERT INTO degrees(name) VALUES ('Magister');
+INSERT INTO degrees(name) VALUES ('Doctorado');
 
 
 /* disabilities | Discapacidades */
@@ -214,11 +235,178 @@ INSERT INTO type_institutions(name) VALUES ('Instituto Profesional');
 
 
 /* institutions | Instituciones */
-INSERT INTO institutions(name, type_institution_id) VALUES ('Universidad de Chile', 1);
-INSERT INTO institutions(name, type_institution_id) VALUES ('La Araucana', 2);
-INSERT INTO institutions(name, type_institution_id) VALUES ('Los Leones', 3);
-INSERT INTO institutions(name, type_institution_id) VALUES ('Universidad Tecnológica Metropolitana', 1);
-INSERT INTO institutions(name, type_institution_id) VALUES ('Universidad de Chile', 1);
+/* univerisities | universidades */
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Católica de Chile", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Católica de Valparaíso", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Adolfo Ibáñez", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Academia de Humanismo Cristiano", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Adventista de Chile", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Alberto Hurtado", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Andrés Bello", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Arturo Prat", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Austral de Chile", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Autónoma de Chile", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Bernardo O'Higgins", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Bolivariana", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Católica Cardenal Raúl Silva Henríquez", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Católica de la Santísima Concepción", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Católica de Temuco", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Católica del Maule", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Católica del Norte", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Central de Chile", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Chileno Británica de Cultura", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Aconcagua", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Antofagasta", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Arte y Ciencias Sociales Arcis", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Artes, Ciencias y Comunicación Uniacc", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Atacama", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Chile", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Ciencias de la Informática UCINF", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Concepción", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de La Frontera", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de La Serena", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Las Américas", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Los Andes", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Los Lagos", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Magallanes", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Playa Ancha de Ciencias de la Educación", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Santiago de Chile", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Talca", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Tarapacá", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Valparaíso", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad de Viña del Mar", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad del Bío-Bío", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad del Desarrollo", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad del Pacífico", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Diego Portales", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Finis Terrae", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Gabriela Mistral", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Iberoamericana de Ciencias y Tecnología, UNICYT", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Internacional Sek", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad La Araucana", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad La República", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Los Leones", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Mayor", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Metropolitana de Ciencias de la Educación", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Miguel de Cervantes", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Pedro de Valdivia", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad San Sebastián", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Santo Tomás", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Técnica Federico Santa María", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Tecnológica de Chile INACAP", 1);
+INSERT INTO institutions(name, type_institution_id) VALUES("Universidad Tecnológica Metropolitana", 1);
+
+
+/* cft */
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Alexander Von Humboldt", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT ALFA", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Alpes", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Andrés Bello", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Barros Arana ex Pitagoras", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Cámara de Comercio de Santiago", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT CEDUC – UCN", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT CEITEC", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT CENCO", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Centro de Enseñanza de Alta Costura Paulina Diard", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Centro Tecnológico Superior INFOMED", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT CEPA de la III Región", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT CEPONAL", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT CRECIC", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT CROWNLIET", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT de ENAC o de los Establecimientos Nacionales de Educación Caritas-Chile", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT de la Industria Gráfica o CFT INGRAF", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT de Tarapacá", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT del Medio Ambiente", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Diego Portales (Santiago sede 5)", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT DUOC UC", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT EDUCAP", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Escuela Culinaria Francesa ECOLE", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Escuela de Altos Estudios de la Comunicación y Educación EACE", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Escuela de Artes Aplicadas Oficios del Fuego", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Escuela de Interpretes INCENI", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Escuela Superior de Administración de Negocios del Norte - ESANE DEL NORTE", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Estudio Profesor Valero", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Finning", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT ICEL", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT INACAP ex INACAP Santiago Centro", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Instituto Central de Capacitación Educacional ICCE", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Instituto de Secretariado INSEC", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Instituto INTEC", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Instituto Superior Alemán de Comercio INSALCO", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Instituto Superior de Estudios Jurídicos CANON", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Instituto Tecnológico de Chile", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT IPROSEC", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Jorge Alvarez Echeverría", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Juan Bohon", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT La Araucana", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT LAPLACE o de Estudios Superiores y Capacitación Profesional LAPLACE", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Los Leones", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Lota-Arauco", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Luis Alberto Vera", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Magnos", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Manpower", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Massachusetts", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT PRODATA", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT PROFASOC", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT PROTEC", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT San Agustín de Talca", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Santo Tomás", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Simón Bolivar", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT SOEDUC Aconcagua", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT Teodoro Wickel Kluwen", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT U. Valpo", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT UCEVALPO", 2);
+INSERT INTO institutions(name, type_institution_id) VALUES("CFT UDA", 2);
+
+
+/* institutions */
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Adventista", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Agrario Adolfo Matthei", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Aiep", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Alemán Wilhelm Von Humboldt", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Alpes", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Arturo Prat", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP CAMPUS", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Carlos Casanueva", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP CENAFOM", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Chileno Norteamericano", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Chileno-Britanico de Cultura", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP CIISA", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP de Arte y Comunicación ARCOS", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP de Chile", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP de Ciencias de la Computación Acuario Data", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP de Ciencias y Artes INCACEA", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP de Ciencias y Educación Helen Keller", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP de ENAC", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP de Los Ángeles", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP de Providencia", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP del Valle Central", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Diego Portales", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Dr. Virginio Gómez", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP DUOC UC", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP EATRI", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Escuela de Cine de Chile", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Escuela de Contadores Auditores de Santiago", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Escuela Moderna de Música", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Escuela Nacional de Relaciones Públicas", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Esucomex", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Hogar Catequístico", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Inacap", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Instituto de Estudios Bancarios Guillermo Subercaseaux", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Instituto Internacional de Artes Culinarias y Servicios", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Instituto Nacional del Fútbol", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Instituto Superior de Artes y Ciencias de la Comunicación", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP La Araucana", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Latinoamericano de Comercio Exterior", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Libertador de Los Andes", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Los Lagos", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Los Leones", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Luis Galdames", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Mar Futuro", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP PROJAZZ", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Santo Tomás", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Teatro la Casa", 3);
+INSERT INTO institutions(name, type_institution_id) VALUES("IP Vertical Instituto Profesional", 3);
 
 
 /* regions | Regiones */

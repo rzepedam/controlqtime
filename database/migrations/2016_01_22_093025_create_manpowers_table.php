@@ -69,7 +69,7 @@ class CreateManpowersTable extends Migration
 
             $table->foreign('company_id')
                 ->references('id')
-                ->on('subareas')
+                ->on('companies')
                 ->onUpdate('cascade');
 
             $table->foreign('commune_id')

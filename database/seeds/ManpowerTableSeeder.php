@@ -12,10 +12,10 @@ class ManpowerTableSeeder extends Seeder
 
         for ($i = 0; $i < 50; $i++) {
 
-            $maleSurname = $faker->lastName;
+            $maleSurname   = $faker->lastName;
             $femaleSurname = $faker->lastName;
-            $firstName = $faker->firstName;
-            $secondName = $faker->firstName;
+            $firstName     = $faker->firstName;
+            $secondName    = $faker->firstName;
 
             \DB::table('manpowers')->insert(array(
                 'male_surname'   => $maleSurname,
@@ -28,15 +28,15 @@ class ManpowerTableSeeder extends Seeder
                 'country_id'     => rand(1,9),
                 'gender_id'      => rand(1,2),
                 'forecast_id'    => rand(1,4),
-                'subarea_id'     => rand(1,8),
+                'mutuality_id'   => rand(1,4),
+                'pension_id'     => rand(1,6),
                 'rating_id'      => rand(1,4),
-                'commune_id'     => rand(1,53),
+                'company_id'     => rand(1,7),
                 'address'        => $faker->address,
+                'commune_id'     => rand(1,53),
                 'email'          => $faker->unique()->email,
                 'phone1'         => $faker->phoneNumber,
                 'phone2'         => $faker->phoneNumber,
-                'name'           => $faker->name,
-                'phone3'         => $faker->phoneNumber
             ));
         }
     }

@@ -10,7 +10,7 @@ class CreateAreasTable extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 120);
+            $table->string('name', 50);
             $table->integer('terminal_id')->unsigned();
 
             $table->foreign('terminal_id')

@@ -23,6 +23,7 @@ use App\Speciality;
 use App\Mutuality;
 use App\Pension;
 use App\Exam;
+use App\Degree;
 
 
 class ManpowerController extends Controller
@@ -51,8 +52,9 @@ class ManpowerController extends Controller
         $mutualities    = Mutuality::lists('name', 'id');
         $pensions       = Pension::lists('name', 'id');
         $exams          = Exam::lists('name', 'id');
+        $degrees        = Degree::lists('name', 'id');
 
-        return view('human-resources.manpowers.create', compact('genders', 'ratings', 'communes', 'countries', 'forecasts', 'disabilities', 'diseases', 'kins', 'certifications', 'institutions', 'licenses', 'specialities', 'manpowers', 'mutualities', 'pensions', 'exams'));
+        return view('human-resources.manpowers.create', compact('genders', 'ratings', 'communes', 'countries', 'forecasts', 'disabilities', 'diseases', 'kins', 'certifications', 'institutions', 'licenses', 'specialities', 'manpowers', 'mutualities', 'pensions', 'exams', 'degrees'));
     }
 
     public function step1(Request $request)
@@ -61,12 +63,14 @@ class ManpowerController extends Controller
             'email'             => 'required|email|unique:manpowers|max:100',
             'phone2'            => 'max:20',
             'phone1'            => 'required|max:20',
-            'address'           => 'required',
             'commune_id'        => 'required',
-            'subarea_id'        => 'required',
+            'address'           => 'required',
+            'company_id'        => 'required',
             'rating_id'         => 'required',
-            'gender_id'         => 'required',
+            'pension_id'        => 'required',
+            'mutuality_id'      => 'required',
             'forecast_id'       => 'required',
+            'gender_id'         => 'required',
             'country_id'        => 'required',
             'birthday'          => 'required',
             'rut'               => 'required',

@@ -51,3 +51,27 @@
         </div>
     </div><!-- /.box -->
     <br />
+
+    <div class="box box-solid box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-book"></i> Estudios Académicos</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+
+            <div id="content_studies">
+                <h2 class="text-center text-green">No existen Estudios Asociados<br />
+                    <small class="text-muted">(Pulse "Agregar Estudio" para comenzar su adición)</small>
+                </h2>
+                <br />
+                <hr />
+            </div>
+            <div class="row">
+                <div class="col-md-12 pull-right">
+                    <a id="add_study" href="javascript: void(0)" onclick="$(this).addElementStudy(this)" class="text-green add_study pull-right"><i class="fa fa-plus"></i> Agregar Estudio</a>
+                </div>
+            </div>
+            <p></p>
+
+        </div>
+    </div><!-- /.box -->
+    <br />

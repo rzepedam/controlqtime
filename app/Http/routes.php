@@ -60,21 +60,32 @@ Route::group(['middleware' => ['web']], function () {
             return view('maintainers.index');
         });
 
+        Route::resource('areas', 'AreaController');
         Route::resource('certifications', 'CertificationController');
+        Route::resource('cities', 'CityController');
+        Route::resource('companies', 'CompanyController');
         Route::resource('countries', 'CountryController');
+        Route::resource('degrees', 'DegreeController');
         Route::resource('disabilities', 'DisabilityController');
         Route::resource('diseases', 'DiseaseController');
+        Route::resource('exams', 'ExamController');
         Route::resource('forecasts', 'ForecastController');
         Route::resource('institutions', 'InstitutionController');
         Route::resource('kins', 'KinController');
-        Route::resource('ratings', 'RatingController');
-        Route::resource('type-institutions', 'TypeInstitutionController');
-        Route::resource('specialities', 'SpecialityController');
         Route::resource('licenses', 'LicenseController');
-        Route::resource('professions', 'ProfessionController');
         Route::resource('mutualities', 'MutualityController');
         Route::resource('pensions', 'PensionController');
-        Route::resource('exams', 'ExamController');
+        Route::resource('professions', 'ProfessionController');
+        Route::resource('ratings', 'RatingController');
+        Route::resource('specialities', 'SpecialityController');
+        Route::resource('type-institutions', 'TypeInstitutionController');
     });
+
+
+    /**********************************
+     ********** Ajax Functions ********
+     **********************************/
+    Route::get('loadProvinces', 'AjaxLoadController@loadProvinces');
+    Route::get('loadCommunes', 'AjaxLoadController@loadCommunes');
 });
 

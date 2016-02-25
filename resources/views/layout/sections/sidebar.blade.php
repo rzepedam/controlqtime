@@ -14,18 +14,20 @@
             <li class="treeview">
                 <a href="{{ url('maintainers.index') }}"><i class="fa fa-cogs"></i> <span>Mantenedores</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-sitemap"></i> Áreas</a></li>
+                    <li><a href="{{ route('maintainers.areas.index') }}"><i class="fa fa-sitemap"></i> Áreas</a></li>
                     <li><a href="#"><i class="fa fa-archive"></i> Bodegas</a></li>
                     <li><a href="{{ route('maintainers.ratings.index') }}"><i class="fa fa-male"></i> Cargos</a></li>
+                    <li><a href="{{ route('maintainers.cities.index') }}"><i class="fa fa-flag-o"></i> Ciudades</a></li>
                     <li><a href="{{ route('maintainers.certifications.index') }}"><i class="fa fa-certificate"></i> Certificaciones</a></li>
                     <li><a href="{{ route('maintainers.disabilities.index') }}"><i class="fa fa-wheelchair"></i> Discapacidades</a></li>
                     <li><a href="#"><i class="fa fa-file-text"></i> Documentos</a></li>
-                    <li><a href="#"><i class="fa fa-building-o"></i> Empresas</a></li>
+                    <li><a href="{{ route('maintainers.companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
                     <li><a href="{{ route('maintainers.diseases.index') }}"><i class="fa fa-bed"></i> Enfermedades</a></li>
                     <li><a href="#"><i class="fa fa-shield"></i> EPP's</a></li>
                     <li><a href="{{ route('maintainers.specialities.index') }}"><i class="fa fa-wrench"></i> Especialidades</a></li>
                     <li><a href="{{ route('maintainers.exams.index') }}"><i class="fa fa-stethoscope"></i> Exámenes Preocupacionales</a></li>
                     <li><a href="{{ route('maintainers.pensions.index') }}"><i class="fa fa-tags"></i> Fondos de Pensión</a></li>
+                    <li><a href="{{ route('maintainers.degrees.index') }}"><i class="fa fa-star-half-o"></i> Grados Académicos</a></li>
                     <li><a href="{{ route('maintainers.institutions.index') }}"><i class="fa fa-graduation-cap"></i> Instituciones</a></li>
                     <li><a href="{{ route('maintainers.licenses.index') }}"><i class="fa fa-star"></i> Licencias Profesionales</a></li>
                     <li><a href="#"><i class="fa fa-money"></i> Monedas</a></li>
