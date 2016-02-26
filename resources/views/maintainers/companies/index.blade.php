@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Listado de Empresas
+@section('title_header') Listado de Empresas Roberto
     <br>
     <a href="{{ route('maintainers.companies.create') }}" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Crear Nueva Empresa</a>
 @stop
