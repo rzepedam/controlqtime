@@ -103,13 +103,9 @@ INSERT INTO terminals(name, city_id) VALUES ('Huechuraba', 22);
 
 /* areas | Áreas */
 INSERT INTO areas(name, terminal_id) VALUES ('Administración', 1);
-INSERT INTO areas(name, terminal_id) VALUES ('Administración', 2);
 INSERT INTO areas(name, terminal_id) VALUES ('Mantenimiento', 1);
-INSERT INTO areas(name, terminal_id) VALUES ('Mantenimiento', 2);
 INSERT INTO areas(name, terminal_id) VALUES ('Operaciones', 1);
-INSERT INTO areas(name, terminal_id) VALUES ('Operaciones', 2);
-INSERT INTO areas(name, terminal_id) VALUES ('Operaciones', 3);
-INSERT INTO areas(name, terminal_id) VALUES ('Operaciones', 4);
+INSERT INTO areas(name, terminal_id) VALUES ('Comercial', 1);
 
 
 /* forescats | Previsión de Salud */

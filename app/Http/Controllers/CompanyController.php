@@ -12,6 +12,7 @@ use App\Rating;
 use App\Region;
 use App\Province;
 use App\Commune;
+use App\Area;
 use App\Http\Requests\CompanyRequest;
 
 
@@ -30,7 +31,8 @@ class CompanyController extends Controller
         $regions   = Region::lists('name', 'id');
         $provinces = Province::lists('name', 'id');
         $communes  = Commune::lists('name', 'id');
-        return view('maintainers.companies.create', compact('countries', 'ratings', 'regions', 'provinces', 'communes'));
+        $areas     = Area::lists('name', 'id');
+        return view('maintainers.companies.create', compact('countries', 'ratings', 'regions', 'provinces', 'communes', 'areas'));
     }
 
     public function store(CompanyRequest $request)
