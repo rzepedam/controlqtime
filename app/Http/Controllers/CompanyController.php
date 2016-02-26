@@ -12,6 +12,8 @@ use App\Rating;
 use App\Region;
 use App\Province;
 use App\Commune;
+use App\Http\Requests\CompanyRequest;
+
 
 class CompanyController extends Controller
 {
@@ -33,6 +35,7 @@ class CompanyController extends Controller
 
     public function store(CompanyRequest $request)
     {
+        dd($request->all());
         Company::create($request->all());
         Session::flash('success', 'El registro fue almacenado satisfactoriamente');
         return redirect()->route('maintainers.companies.index');

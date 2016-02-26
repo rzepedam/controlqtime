@@ -514,7 +514,6 @@
 
                         this.on("sending", function (file, xhr, formData) {
                             formData.append("_token", $('[name=_token]').val());
-                            $("#wizard").smartWizard("fixHeight");
                         });
 
                         this.on('success', function (file, serverFileName) {
@@ -644,7 +643,7 @@
              *****************************************************************/
 
 
-            $('body').on('click', '.addElementDisability', function() {
+            $.fn.addElementDisability = function() {
 
                 $disability = '<span id="disability"><div class="row"><div class="col-md-12"><span id="num_disability" class="title-elements text-primary">Discapacidad #' + (count_disabilities + 1) + '</span><a id="disability" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-6">{!! Form::label("disability", "Nombre") !!}{!! Form::select("disability", $disabilities, null, ["class"=> "form-control"]) !!}</div><div class="col-md-6 text-center">{!! Form::label("treatment_disability", "Está en tratamiento?") !!}<br>{!! Form::label("si", "Si") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "si", false, ['class'=> 'treatment_disability']) !!}&nbsp&nbsp{!! Form::label("no", "No") !!}&nbsp&nbsp{!! Form::radio("treatment_disability", "no", true) !!}</div></div><br/><div class="row"><div class="col-md-12">{!! Form::label("detail_disability", "Detalle") !!}{!! Form::textarea("detail_disability", null, ["class"=> "form-control", "rows"=> "3"]) !!}</div></div><br/><div id="img_disability" class="dropzone"><div class="dz-message"> <h3 class="text-primary">Arrastre sus archivos hasta aquí</h3> <span class="note">(También puede hacer click y seleccionarlos manualmente)</span> </div></div><span id="img_disabilities"></span><hr /></span>';
 
@@ -676,7 +675,7 @@
                 $('textarea#detail_disability').attr('id', 'detail_disability' + count_disabilities);
 
                 $('div#img_disability').attr('id', 'img_disability' + count_disabilities);
-                $('span#img_disabilities').attr('id', 'img_disabilities'+ count_disabilities)
+                $('span#img_disabilities').attr('id', 'img_disabilities'+ count_disabilities);
 
                 //Initialize dropzone
                 initializeDropzoneDisabilities(count_disabilities);
@@ -684,7 +683,7 @@
                 count_disabilities++;
                 $('.mitooltip').tooltip();
 
-            });
+            };
 
 
 

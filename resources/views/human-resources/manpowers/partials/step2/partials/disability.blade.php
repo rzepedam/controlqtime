@@ -10,7 +10,6 @@
             {!! Form::label("disability" . $i, "Nombre") !!}
             {!! Form::select("disability" . $i, $disabilities, Session::get('disability' . $i), ["class"=> "form-control"]) !!}
         </div>
-
         <div class="col-md-6 text-center">
             {!! Form::label("treatment_disability" . $i, "Está en tratamiento?") !!}<br />
             {!! Form::label("si", "Si") !!}&nbsp&nbsp

@@ -53,6 +53,10 @@ textarea {
     font-size: 1.8em;
 }
 
+.title-elements-panel2 {
+    font-size: 1.4em;
+}
+
 .delete-elements {
     color: red;
     font-size: 1.8em;
@@ -60,6 +64,16 @@ textarea {
 }
 
 .delete-elements:hover {
+    color: red;
+}
+
+.delete-elements-panel2 {
+    color: red;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.delete-elements-panel2:hover {
     color: red;
 }
 
@@ -82,5 +96,21 @@ textarea {
 .add_family_relationship:hover {
     text-decoration: none;
     display: block;
+    color: black;
+}
+
+a.black {
+    color: black;
+}
+
+a.black:hover {
+    color: black;
+}
+
+a.black:visited {
+    color: black;
+}
+
+a.black:active {
     color: black;
 }
