@@ -46,7 +46,7 @@
     <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
         <div class="box-body">
 
-            <div id="content_admin_representatives">
+            <div id="content_contract_managers">
                 <h2 class="text-center text-red">No existen Administradores de Contrato Asociados <br />
                     <small class="text-muted">(Pulse "Agregar Administrador de Contrato" para comenzar su adición)</small></h2>
                 <br />
@@ -54,7 +54,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 pull-right">
-                    <a id="add_admin_representative" href="javascript: void(0)" onclick="$(this).addAdminRepresentative(this)" class="text-red add_admin_representative pull-right"><i class="fa fa-plus"></i> Agregar Administrador de Contrato</a>
+                    <a id="add_contract_manager" href="javascript: void(0)" onclick="$(this).addContractManager(this)" class="text-red add_contract_manager pull-right"><i class="fa fa-plus"></i> Agregar Administrador de Contrato</a>
                 </div>
             </div>
 
