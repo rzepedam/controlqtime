@@ -11,11 +11,11 @@ class CreateAreasTable extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
-            $table->integer('terminal_id')->unsigned();
+            $table->integer('subsidiary_id')->unsigned();
 
-            $table->foreign('terminal_id')
+            $table->foreign('subsidiary_id')
                 ->references('id')
-                ->on('terminals')
+                ->on('subsidiaries')
                 ->onUpdate('cascade');
         });
     }

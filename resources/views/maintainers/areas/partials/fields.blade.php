@@ -5,8 +5,8 @@
         {!! Form::text('name', null, ['class' => 'form-control', 'autofocus']) !!}
     </div>
     <div class="col-md-5">
-    	{!! Form::label('terminal_id', 'Terminal') !!}
-    	{!! Form::select('terminal_id', $terminals, null, ['class' => 'form-control']) !!}
+    	{!! Form::label('subsidiary_id', 'Sucursal') !!}
+    	{!! Form::select('subsidiary_id', $subsidiaries, null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <br><br>

@@ -1,7 +1,7 @@
 <div class="panel box box-primary">
 	<div class="box-header with-border">
 		<h4 class="box-title">
-		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed black">Datos Empresa</a>
+		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed black">Datos Empresa <small>(Información Casa Matriz)</small></a>
 		</h4>
 	</div>
 	<div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
@@ -13,13 +13,38 @@
 	</div>
 </div>
 
+<div class="panel box box-warning">
+	<div class="box-header with-border">
+		<h4 class="box-title">
+		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" class="collapsed black">Datos Sucursal</a>
+		</h4>
+	</div>
+	<div id="collapseFour" class="panel-collapse collapse in" aria-expanded="false">
+		<div class="box-body">
+
+			<div id="content_subsidiaries">
+				<h2 class="text-center text-yellow">No existen Sucursales Asociadas <br />
+		            <small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
+		        <br />
+		        <hr />
+			</div>
+			<div class="row">
+				<div class="col-md-12 pull-right">
+				    <a id="add_subsidiary" href="javascript: void(0)" onclick="$(this).addSubsidiary(this)" class="text-yellow add_subsidiary pull-right"><i class="fa fa-plus"></i> Agregar Sucursal</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
 <div class="panel box box-success">
 	<div class="box-header with-border">
 		<h4 class="box-title">
 		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" class="collapsed black">Datos Representante Legal</a>
 		</h4>
 	</div>
-	<div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">
+	<div id="collapseTwo" class="panel-collapse collapse in" aria-expanded="false">
 		<div class="box-body">
 
 			<div id="content_legal_representatives">
@@ -32,46 +57,6 @@
 				    <a id="add_legal_representative" href="javascript: void(0)" onclick="$(this).addLegalRepresentative(this)" class="text-green add_legal_representative pull-right"><i class="fa fa-plus"></i> Agregar Representante Legal</a>
 				</div>
 			</div>
-
-		</div>
-	</div>
-</div>
-
-<div class="panel box box-danger">
-    <div class="box-header with-border">
-        <h4 class="box-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" class="collapsed black">Datos Administrador de Contrato</a>
-        </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
-        <div class="box-body">
-
-            <div id="content_contract_managers">
-                <h2 class="text-center text-red">No existen Administradores de Contrato Asociados <br />
-                    <small class="text-muted">(Pulse "Agregar Administrador de Contrato" para comenzar su adición)</small></h2>
-                <br />
-                <hr />
-            </div>
-            <div class="row">
-                <div class="col-md-12 pull-right">
-                    <a id="add_contract_manager" href="javascript: void(0)" onclick="$(this).addContractManager(this)" class="text-red add_contract_manager pull-right"><i class="fa fa-plus"></i> Agregar Administrador de Contrato</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="panel box box-warning">
-	<div class="box-header with-border">
-		<h4 class="box-title">
-		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" class="collapsed black">Datos Casa Matriz</a>
-		</h4>
-	</div>
-	<div id="collapseFour" class="panel-collapse collapse" aria-expanded="false">
-		<div class="box-body">
-
-			@include('maintainers.companies.partials.forms.data_head_quarter')
 
 		</div>
 	</div>

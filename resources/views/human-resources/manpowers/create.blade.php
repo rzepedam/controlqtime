@@ -72,6 +72,7 @@
     {{ Html::script('assets/js/jquery.inputmask.js') }}
     {{ Html::script('assets/js/config.js') }}
     {{ Html::script('assets/js/dropzone.js') }}
+    {{ Html::script('me/js/verificaUltimosNumeros.js') }}
 
     <script type="text/javascript">
 
@@ -82,17 +83,17 @@
              ******************************************************************/
 
 
-            var count_family_relationships = {{ Session::get('count_family_relationships') ? Session::get('count_family_relationships') : 0  }};
-            var count_studies = 0;
-            var count_disabilities = {{ Session::get('count_disabilities') ? Session::get('count_disabilities') : 0  }};
-            var count_diseases = {{ Session::get('count_diseases') ? Session::get('count_diseases') : 0  }};
+            var count_family_relationships    = {{ Session::get('count_family_relationships') ? Session::get('count_family_relationships') : 0  }};
+            var count_studies                 = 0;
+            var count_disabilities            = {{ Session::get('count_disabilities') ? Session::get('count_disabilities') : 0  }};
+            var count_diseases                = {{ Session::get('count_diseases') ? Session::get('count_diseases') : 0  }};
             var count_family_responsabilities = {{ Session::get('count_family_responsabilities') ? Session::get('count_family_responsabilities') : 0  }};
-            var count_exams = 0;
-            var count_certifications = 0;
-            var count_licenses = 0;
-            var count_specialities = 0;
+            var count_exams                   = 0;
+            var count_certifications          = 0;
+            var count_licenses                = 0;
+            var count_specialities            = 0;
 
-            var count_img_disabilities = "{{ Session::get('count_img_disabilities') ? Session::get('count_img_disabilities') : 0  }}";
+            var count_img_disabilities        = "{{ Session::get('count_img_disabilities') ? Session::get('count_img_disabilities') : 0  }}";
 
 
             /******************************************************************
@@ -117,31 +118,12 @@
              ************************ Delete elements *************************
              ******************************************************************/
 
-
-            function verificaUltimosNumeros(element)
-            {
-                var aux = element.charAt(element.length - 2);
-
-                //Verificamos si penúltimo dígito es letra, si lo es solamente me quedo con último N°
-                //Sino, retorno 2 últimos N°s
-                if(isNaN(aux) == true){
-                    num_element = element.charAt(element.length - 1);
-                }else{
-                    var temp    = element.charAt(element.length - 2);
-                    var temp2   = element.charAt(element.length - 1);
-                    num_element = temp + temp2;
-                }
-
-                return num_element;
-            }
-
-
             $(document).on('click','.delete-elements',function() {
 
                 var element = $(this).attr('id');
-                var padre = $(this).parent().parent().parent().parent();
+                var padre   = $(this).parent().parent().parent().parent();
                 $(this).parent().parent().parent().remove();
-                var span = padre.children("span");
+                var span    = padre.children("span");
 
                 switch (element)
                 {
