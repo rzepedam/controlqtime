@@ -94,20 +94,6 @@ INSERT INTO cities(name, country_id) VALUES ('Margarita', 9);
 INSERT INTO cities(name, country_id) VALUES ('Caracas', 9);
 
 
-/* terminals | Terminales */
-INSERT INTO terminals(name, city_id) VALUES ('La Florida', 22);
-INSERT INTO terminals(name, city_id) VALUES ('Recoleta', 22);
-INSERT INTO terminals(name, city_id) VALUES ('Maipú', 22);
-INSERT INTO terminals(name, city_id) VALUES ('Huechuraba', 22);
-
-
-/* areas | Áreas */
-INSERT INTO areas(name, terminal_id) VALUES ('Administración', 1);
-INSERT INTO areas(name, terminal_id) VALUES ('Mantenimiento', 1);
-INSERT INTO areas(name, terminal_id) VALUES ('Operaciones', 1);
-INSERT INTO areas(name, terminal_id) VALUES ('Comercial', 1);
-
-
 /* forescats | Previsión de Salud */
 INSERT INTO forecasts(name) VALUES ('Banmédica S.A');
 INSERT INTO forecasts(name) VALUES ('Chuquicamata Ltda.');
@@ -146,7 +132,6 @@ INSERT INTO mutualities(name) VALUES ('Mutual de Seguridad');
 INSERT INTO mutualities(name) VALUES ('Instituto de Seguridad Laboral');
 
 
-
 /* pensions | AFP  */
 INSERT INTO pensions(name) VALUES ('Hábitat');
 INSERT INTO pensions(name) VALUES ('Capital');
@@ -162,16 +147,6 @@ INSERT INTO exams(name) VALUES ('Test Visual');
 INSERT INTO exams(name) VALUES ('Glicemia');
 INSERT INTO exams(name) VALUES ('Hemograma');
 INSERT INTO exams(name) VALUES ('Declaración de salud');
-
-
-/* companies | empresas */
-INSERT INTO companies(name, area_id) VALUES ('Empresa 1', 1);
-INSERT INTO companies(name, area_id) VALUES ('Empresa 2', 1);
-INSERT INTO companies(name, area_id) VALUES ('Empresa 3', 1);
-INSERT INTO companies(name, area_id) VALUES ('Empresa 4', 2);
-INSERT INTO companies(name, area_id) VALUES ('Empresa 5', 2);
-INSERT INTO companies(name, area_id) VALUES ('Empresa 6', 3);
-INSERT INTO companies(name, area_id) VALUES ('Empresa 7', 3);
 
 
 /* degrees | grados académicos */

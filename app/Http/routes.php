@@ -87,5 +87,7 @@ Route::group(['middleware' => ['web']], function () {
      **********************************/
     Route::get('loadProvinces', 'AjaxLoadController@loadProvinces');
     Route::get('loadCommunes', 'AjaxLoadController@loadCommunes');
+    Route::post('verificaEmail/', 'AjaxLoadController@verificaEmail');
+
 });
 

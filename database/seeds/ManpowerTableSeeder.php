@@ -31,7 +31,6 @@ class ManpowerTableSeeder extends Seeder
                 'mutuality_id'   => rand(1,4),
                 'pension_id'     => rand(1,6),
                 'rating_id'      => rand(1,4),
-                'company_id'     => rand(1,7),
                 'address'        => $faker->address,
                 'commune_id'     => rand(1,53),
                 'email'          => $faker->unique()->email,
