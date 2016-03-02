@@ -2,13 +2,13 @@
     	<div class="col-md-2">
             <div class="form-group">
         		{{ Form::label('rut', 'Rut') }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
-                {{ Form::text('rut', null, ['class' => 'form-control', 'autofocus']) }}
+                {{ Form::text('rut', null, ['class' => 'form-control', 'autofocus', 'onBlur' => '$(this).checkRut(this)']) }}
             </div>
     	</div>
     	<div class="col-md-4">
             <div class="form-group">
-        		{{ Form::label('name', 'Razón Social') }}
-        		{{ Form::text('name', null, ['class' => 'form-control']) }}
+        		{{ Form::label('firm_name', 'Razón Social') }}
+        		{{ Form::text('firm_name', null, ['class' => 'form-control']) }}
             </div>
     	</div>
     	<div class="col-md-4">
@@ -19,17 +19,16 @@
     	</div>
         <div class="col-md-2">
             <div class="form-group">
-                {{ Form::label('from', 'Inicio Act.') }}
+                {{ Form::label('start_act', 'Inicio Act.') }}
                 <div class="input-group">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{ Form::text('from', null, ['class' => 'form-control', 'data-inputmask' => 'alias": "dd/mm/yyyy', 'data-mask' => '']) }}
+                    {{ Form::text('start_act', null, ['class' => 'form-control', 'data-inputmask' => 'alias": "dd/mm/yyyy', 'data-mask' => '']) }}
                 </div>
             </div>
         </div>
     </div>
-    <br />
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -56,7 +55,6 @@
             </div>
         </div>
     </div>
-    <br />
     <div class="row">
         <div class="col-md-1">
             <div class="form-group">
@@ -95,12 +93,11 @@
                     <div class="input-group-addon">
                         <i class="fa fa-envelope"></i>
                     </div>
-                    {{ Form::email('email', null, ['class' => 'form-control']) }}
+                    {{ Form::email('email', null, ['class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
                 </div>
             </div>
         </div>
     </div>
-    <br />
     <div class="row">
         <div class="col-md-2">
             <div class="form-group">

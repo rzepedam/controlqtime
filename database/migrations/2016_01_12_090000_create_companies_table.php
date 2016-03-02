@@ -11,9 +11,9 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('rut', 15);
-            $table->string('name');
+            $table->string('firm_name');
             $table->string('gyre');
-            $table->integer('from')->unsigned();
+            $table->integer('start_act')->unsigned();
             $table->string('muni_license');
             $table->string('address');
             $table->integer('commune_id')->unsigned();

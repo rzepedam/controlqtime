@@ -19,21 +19,24 @@ class CreateManpowersTable extends Migration
             $table->string('first_name', 30);
             $table->string('second_name', 30);
             $table->string('full_name', 120);
-            $table->string('rut', 12);
+            $table->string('rut', 15);
             $table->integer('birthday')->unsigned();
             $table->integer('country_id')->unsigned();
             $table->integer('gender_id')->unsigned();
+            $table->string('address');
+            $table->integer('commune_id')->unsigned();
+            $table->string('email', 100)->unique();
+            $table->string('phone1', 20);
+            $table->string('phone2', 20);
             $table->integer('forecast_id')->unsigned();
             $table->integer('mutuality_id')->unsigned();
             $table->integer('pension_id')->unsigned();
             $table->integer('rating_id')->unsigned();
-            $table->integer('commune_id')->unsigned();
-            $table->string('address');
-            $table->string('phone1', 20);
-            $table->string('phone2', 20);
-            $table->string('email', 100)->unique();
-            $table->string('name', 120);
-            $table->string('phone3', 20);
+
+            /*
+            *   Agregar foránea empresa
+            */
+
             $table->timestamps();
 
             $table->foreign('country_id')

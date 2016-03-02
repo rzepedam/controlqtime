@@ -31,12 +31,11 @@
 			</div>
 		</div>
 	</div>
-    <br />
     <div class="row">
         <div class="col-md-2">
         	<div class="form-group">
 	            {{ Form::label('rut0', 'Rut') }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
-	            {{ Form::text('rut0', null, ['class' => 'form-control']) }}
+	            {{ Form::text('rut0', null, ['class' => 'form-control', 'onBlur' => '$(this).checkRut(this)']) }}
             </div>
         </div>
         <div class="col-md-3">
@@ -52,7 +51,7 @@
 	                <div class="input-group-addon">
 	                    <i class="fa fa-envelope"></i>
 	                </div>
-	                {{ Form::email('email0', null, ['class' => 'form-control']) }}
+	                {{ Form::email('email0', null, ['class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
 	            </div>
             </div>
         </div>
@@ -68,7 +67,6 @@
 	        </div>
 		</div>
     </div>
-	<br />
 	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
