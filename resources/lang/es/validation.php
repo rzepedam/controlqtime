@@ -107,7 +107,7 @@ return [
 
     'attributes' => [
         'address'           => '<strong>Dirección</strong>',
-        'birthday'          => '<strong>Fecha de Nacimiento</strong>',
+        'birthday'          => '<strong>Fecha de Nac.</strong>',
         'commune_id'        => '<strong>Comuna</strong>',
         'company_id'        => '<strong>Empresa</strong>',
         'email'             => '<strong>Email</strong>',

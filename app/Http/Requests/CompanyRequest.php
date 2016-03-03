@@ -46,6 +46,7 @@ class CompanyRequest extends SanitizedRequest
                     $rules['first_name' . $i]     = 'required|max:30';
                     $rules['second_name' . $i]    = 'max:30';
                     $rules['rut' . $i]            = 'required|max:15';
+                    $rules['birthday' . $i]       = 'required';
                     $rules['nationality_id' . $i] = 'required|integer';
                     $rules['email' . $i]          = 'required|email|unique:legal_representatives,email|max:100';
                     $rules['phone1-' . $i]        = 'required|max:20';

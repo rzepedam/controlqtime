@@ -37,6 +37,31 @@
 		</div>
 	</div>
 </div>
+
+<div class="panel box box-warning">
+	<div class="box-header with-border">
+		<h4 class="box-title">
+		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" class="collapsed black">Datos Sucursales</a>
+		</h4>
+	</div>
+	<div id="collapseThree" class="panel-collapse collapse in" aria-expanded="false">
+		<div class="box-body">
+
+			<div id="content_subsidiaries">
+				<h2 class="text-center text-yellow">No existen Sucursales Asociadas <br />
+		            <small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
+		        <br />
+		        <hr />
+			</div>
+			<div class="row">
+				<div class="col-md-12 pull-right">
+				    <a id="add_subsidiary" href="javascript: void(0)" onclick="$(this).addSubsidiary(this)" class="text-yellow add_subsidiary pull-right"><i class="fa fa-plus"></i> Agregar Sucursal</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
 <br />
 <div class="row">
 	<div class="col-md-6">

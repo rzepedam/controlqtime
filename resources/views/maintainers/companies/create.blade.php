@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Crear Nueva Empresa <i class="fa fa-info-circle mitooltip" title="Si la empresa tiene sucursales, debe asociarlas en el mantenedor de sucursales, una vez creada la empresa" data-placement="right"></i> @stop
+@section('title_header') Crear Nueva Empresa @stop
 
 @section('breadcumb')
     <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -15,6 +15,7 @@
         @include('maintainers.companies.partials.fields')
 
         {{ Form::hidden('count_legal_representative', '1', ['id' => 'count_legal_representative']) }}
+        {{ Form::hidden('count_subsidiary', '0', ['id' => 'count_subsidiary']) }}
 	{{ Form::close() }}
 
 @stop
@@ -39,6 +40,7 @@
 
             var year                       = new Date();
             var count_legal_representative = 1;
+            var count_subsidiary           = 0;
 
 
             /**************************************************
@@ -46,6 +48,8 @@
             **************************************************/
 
             initializeComponents();
+
+
 
             /**************************************************
             ********************* Methods *********************
@@ -203,10 +207,10 @@
                             $('input#dv' + item).attr('name', 'dv' + i);
                             $('input#dv' + item).attr('id', 'dv' + i);
 
-                            $('label[for="country_id' + item + '"]').attr('for', "country_id" + i);
-                            $('select#country_id' + item).each(function(j) {
-                                $(this).attr('id', 'country_id' + i);
-                                $(this).attr('name', 'country_id' + i);
+                            $('label[for="nationality_id' + item + '"]').attr('for', "nationality_id" + i);
+                            $('select#nationality_id' + item).each(function(j) {
+                                $(this).attr('id', 'nationality_id' + i);
+                                $(this).attr('name', 'nationality_id' + i);
                             });
 
                             $('label[for="email' + item + '"]').attr('for', 'email' + i);
@@ -225,6 +229,81 @@
 
                         count_legal_representative--;
                         $('#count_legal_representative').attr('value', count_legal_representative);
+
+                    break;
+
+                    case 'subsidiary':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#subsidiary' + item).attr('id', 'subsidiary' + i);
+                            $('span#num_subsidiary' + item).text('Sucursal#' + (i + 1));
+                            $('span#num_subsidiary' + item).attr('id', 'num_subsidiary' + i);
+
+                            $('label[for="address_suc' + item + '"]').attr('for', 'address_suc' + i);
+                            $('#content_subsidiaries #address_suc' + item).attr('name', 'address_suc' + i);
+                            $('#content_subsidiaries #address_suc' + item).attr('id', 'address_suc' + i);
+
+                            $('label[for="region_suc_id' + item + '"]').attr('for', 'region_suc_id' + i);
+                            $('#content_subsidiaries #region_suc_id' + item).each(function(i){
+                                $(this).attr('name', 'region_suc_id' + i);
+                                $(this).attr('id', 'region_suc_id' + i);
+                            });
+
+                            $('label[for="province_suc_id' + item + '"]').attr('for', 'province_suc_id' + i);
+                            $('#content_subsidiaries #province_suc_id' + item).each(function(i){
+                                $(this).attr('name', 'province_suc_id' + i);
+                                $(this).attr('id', 'province_suc_id' + i);
+                            });
+
+                            $('label[for="commune_suc_id' + item + '"]').attr('for', 'commune_suc_id' + i);
+                            $('#content_subsidiaries #commune_suc_id' + item).each(function(i){
+                                $(this).attr('name', 'commune_suc_id' + i);
+                                $(this).attr('id', 'commune_suc_id' + i);
+                            });
+
+                            $('label[for="muni_license_suc' + item + '"]').attr('for', 'muni_license_suc' + i);
+                            $('#content_subsidiaries #muni_license_suc' + item).attr('name', 'muni_license_suc' + i);
+                            $('#content_subsidiaries #muni_license_suc' + item).attr('id', 'muni_license_suc' + i);
+
+                            $('label[for="num_suc' + item + '"]').attr('for', 'num_suc' + i);
+                            $('#content_subsidiaries #num_suc' + item).attr('name', 'num_suc' + i);
+                            $('#content_subsidiaries #num_suc' + item).attr('id', 'num_suc' + i);
+
+                            $('label[for="lot_suc' + item + '"]').attr('for', 'lot_suc' + i);
+                            $('#content_subsidiaries #lot_suc' + item).attr('name', 'lot_suc' + i);
+                            $('#content_subsidiaries #lot_suc' + item).attr('id', 'lot_suc' + i);
+
+                            $('label[for="ofi_suc' + item + '"]').attr('for', 'ofi_suc' + i);
+                            $('#content_subsidiaries #ofi_suc' + item).attr('name', 'ofi_suc' + i);
+                            $('#content_subsidiaries #ofi_suc' + item).attr('id', 'ofi_suc' + i);
+
+                            $('label[for="floor_suc' + item + '"]').attr('for', 'floor_suc' + i);
+                            $('#content_subsidiaries #floor_suc' + item).attr('name', 'floor_suc' + i);
+                            $('#content_subsidiaries #floor_suc' + item).attr('id', 'floor_suc' + i);
+
+                            $('label[for="email_suc' + item + '"]').attr('for', 'email_suc' + i);
+                            $('#content_subsidiaries #email_suc' + item).attr('name', 'email_suc' + i);
+                            $('#content_subsidiaries #email_suc' + item).attr('id', 'email_suc' + i);
+
+                            $('label[for="phone1_suc-' + item + '"]').attr('for', 'phone1_suc-' + i);
+                            $('#content_subsidiaries #phone1_suc-' + item).attr('name', 'phone1_suc-' + i);
+                            $('#content_subsidiaries #phone1_suc-' + item).attr('id', 'phone1_suc-' + i);
+
+                            $('label[for="phone2_suc-' + item + '"]').attr('for', 'phone2_suc-' + i);
+                            $('#content_subsidiaries #phone2_suc-' + item).attr('name', 'phone2_suc-' + i);
+                            $('#content_subsidiaries #phone2_suc-' + item).attr('id', 'phone2_suc-' + i);
+
+                        }
+
+                        count_subsidiary--;
+                        if (count_subsidiary == 0) {
+                            var html = '<h2 class="text-center text-yellow">No existen Sucursales Asociadas <br /><small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2><br /><hr />'
+                            $('#content_subsidiaries').html(html);
+                        }
+
                     break;
                 }
             });
@@ -294,13 +373,85 @@
             };
 
 
+            $.fn.addSubsidiary = function() {
+
+                $add_subsidiary = '<span id="subsidiary"> <div class="row"> <div class="col-md-12"> <span id="num_subsidiary" class="title-elements-panel2 text-yellow">Sucursal #' + (count_subsidiary + 1) + '</span><a id="subsidiary" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Sucursal"><i class="fa fa-trash"></i></a> </div></div><br /><div class="row"> <div class="col-md-6">{{Form::label("address_suc", "Dirección")}}{{Form::text("address_suc", null, ["class"=> "form-control"])}}</div><div class="col-md-2">{{Form::label("region_suc_id", "Región")}}{{Form::select("region_suc_id", $regions, null, ["class"=> "form-control"])}}</div><div class="col-md-2">{{Form::label("province_suc_id", "Provincia")}}{{Form::select("province_suc_id", $provinces, null, ["class"=> "form-control"])}}</div><div class="col-md-2">{{Form::label("commune_suc_id", "Comuna")}}{{Form::select("commune_suc_id", $communes, null, ["class"=> "form-control"])}}</div></div><br/> <div class="row"> <div class="col-md-2">{{Form::label("muni_license_suc", "Patente Municipal")}}{{Form::text("muni_license_suc", null, ["class"=> "form-control text-center"])}}</div><div class="col-md-1">{{Form::label("num_suc", "N°")}}{{Form::text("num_suc", null, ["class"=> "form-control text-center"])}}</div><div class="col-md-1">{{Form::label("lot_suc", "Lote")}}{{Form::text("lot_suc", null, ["class"=> "form-control text-center"])}}</div><div class="col-md-1">{{Form::label("ofi_suc", "Oficina")}}{{Form::text("ofi_suc", null, ["class"=> "form-control text-center"])}}</div><div class="col-md-1">{{Form::label("floor_suc", "Piso")}}{{Form::text("floor_suc", null, ["class"=> "form-control text-center"])}}</div><div class="col-md-6">{{Form::label("email_suc", "Email")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{Form::email("email_suc", null, ["class"=> "form-control"])}}</div></div></div><br/> <div class="row"> <div class="col-md-2">{{Form::label("phone1_suc-", "Teléfono 1")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1_suc-", null, ["class"=> "form-control"])}}</div></div><div class="col-md-2">{{Form::label("phone2_suc-", "Teléfono 2")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2_suc-", null, ["class"=> "form-control"])}}</div></div></div><hr /></span>';
+
+                if (count_subsidiary == 0)
+                    $('#content_subsidiaries').html($add_subsidiary);
+                else
+                    $('#content_subsidiaries').append($add_subsidiary);
+
+
+                $('span#subsidiary').attr('id', 'subsidiary' + count_subsidiary);
+                $('span#num_subsidiary').attr('id', 'num_subsidiary' + count_subsidiary);
+
+                $('label[for="address_suc"]').attr('for', 'address_suc' + count_subsidiary);
+                $('#content_subsidiaries #address_suc').attr('name', 'address_suc' + count_subsidiary);
+                $('#content_subsidiaries #address_suc').attr('id', 'address_suc' + count_subsidiary);
+
+                $('label[for="region_suc_id"]').attr('for', 'region_suc_id' + count_subsidiary);
+                $('#content_subsidiaries #region_suc_id').each(function(i){
+                    $(this).attr('name', 'region_suc_id' + count_subsidiary);
+                    $(this).attr('id', 'region_suc_id' + count_subsidiary);
+                });
+
+                $('label[for="province_suc_id"]').attr('for', 'province_suc_id' + count_subsidiary);
+                $('#content_subsidiaries #province_suc_id').each(function(i){
+                    $(this).attr('name', 'province_suc_id' + count_subsidiary);
+                    $(this).attr('id', 'province_suc_id' + count_subsidiary);
+                });
+
+                $('label[for="commune_suc_id"]').attr('for', 'commune_suc_id' + count_subsidiary);
+                $('#content_subsidiaries #commune_suc_id').each(function(i){
+                    $(this).attr('name', 'commune_suc_id' + count_subsidiary);
+                    $(this).attr('id', 'commune_suc_id' + count_subsidiary);
+                });
+
+                $('label[for="muni_license_suc"]').attr('for', 'muni_license_suc' + count_subsidiary);
+                $('#content_subsidiaries #muni_license_suc').attr('name', 'muni_license_suc' + count_subsidiary);
+                $('#content_subsidiaries #muni_license_suc').attr('id', 'muni_license_suc' + count_subsidiary);
+
+                $('label[for="num_suc"]').attr('for', 'num_suc' + count_subsidiary);
+                $('#content_subsidiaries #num_suc').attr('name', 'num_suc' + count_subsidiary);
+                $('#content_subsidiaries #num_suc').attr('id', 'num_suc' + count_subsidiary);
+
+                $('label[for="lot_suc"]').attr('for', 'lot_suc' + count_subsidiary);
+                $('#content_subsidiaries #lot_suc').attr('name', 'lot_suc' + count_subsidiary);
+                $('#content_subsidiaries #lot_suc').attr('id', 'lot_suc' + count_subsidiary);
+
+                $('label[for="ofi_suc"]').attr('for', 'ofi_suc' + count_subsidiary);
+                $('#content_subsidiaries #ofi_suc').attr('name', 'ofi_suc' + count_subsidiary);
+                $('#content_subsidiaries #ofi_suc').attr('id', 'ofi_suc' + count_subsidiary);
+
+                $('label[for="floor_suc"]').attr('for', 'floor_suc' + count_subsidiary);
+                $('#content_subsidiaries #floor_suc').attr('name', 'floor_suc' + count_subsidiary);
+                $('#content_subsidiaries #floor_suc').attr('id', 'floor_suc' + count_subsidiary);
+
+                $('label[for="email_suc"]').attr('for', 'email_suc' + count_subsidiary);
+                $('#content_subsidiaries #email_suc').attr('name', 'email_suc' + count_subsidiary);
+                $('#content_subsidiaries #email_suc').attr('id', 'email_suc' + count_subsidiary);
+
+                $('label[for="phone1_suc-"]').attr('for', 'phone1_suc-' + count_subsidiary);
+                $('#content_subsidiaries #phone1_suc-').attr('name', 'phone1_suc-' + count_subsidiary);
+                $('#content_subsidiaries #phone1_suc-').attr('id', 'phone1_suc-' + count_subsidiary);
+
+                $('label[for="phone2_suc-"]').attr('for', 'phone2_suc-' + count_subsidiary);
+                $('#content_subsidiaries #phone2_suc-').attr('name', 'phone2_suc-' + count_subsidiary);
+                $('#content_subsidiaries #phone2_suc-').attr('id', 'phone2_suc-' + count_subsidiary);
+
+                count_subsidiary++;
+                $('.mitooltip').tooltip();
+            }
+
+
             /**************************************************
             ******************* Validations *******************
             **************************************************/
 
             $('#btn-submit').click(function(e) {
 
-                /*if ($('#rut').parent().hasClass('has-error')) {
+                if ($('#rut').parent().hasClass('has-error')) {
                     $("#collapseOne").collapse("show");
                     $('#rut').focus();
                     return false;
@@ -676,16 +827,28 @@
                         $('#rut' + i).focus();
                     }
 
-                    if ($('#country_id' + i).val() == '') {
+                    if ($('#birthday' + i).val() == '') {
                         $("#collapseTwo").collapse("show");
-                        $('#country_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
-                        $('#country_id' + i).closest('.form-group').find('i.fa-check').remove();
-                        $('#country_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
-                        $('#country_id' + i).focus();
+                        $('#birthday' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#birthday' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#birthday' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#birthday' + i).focus();
                         return false;
                     }else {
-                        $('#country_id' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
-                        $('#country_id' + i).closest('.form-group').find('i.fa-times').remove();
+                        $('#birthday' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#birthday' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#nationality_id' + i).val() == '') {
+                        $("#collapseTwo").collapse("show");
+                        $('#nationality_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#nationality_id' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#nationality_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#nationality_id' + i).focus();
+                        return false;
+                    }else {
+                        $('#nationality_id' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#nationality_id' + i).closest('.form-group').find('i.fa-times').remove();
                     }
 
                     if ($('#email' + i).parent().parent().hasClass('has-error')) {
@@ -747,7 +910,7 @@
                         $('#js').addClass('hide');
                         $('#phone2-' + i).focus();
                     }
-                }*/
+                }
 
                 e.submit();
 
