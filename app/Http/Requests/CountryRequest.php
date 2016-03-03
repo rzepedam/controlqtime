@@ -25,15 +25,13 @@ class CountryRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'id'    => 'required|unique:countries',
-                    'name'  => 'required|max:50|unique:countries',
+                    'name'  => 'required|max:50|unique:countries'
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'id'        => 'required|unique:countries,id,' . $this->route->getParameter('countries'),
                     'name'      => 'required|max:50|unique:countries,name,' . $this->route->getParameter('countries')
                 ];
             }

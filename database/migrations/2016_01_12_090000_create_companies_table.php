@@ -14,13 +14,13 @@ class CreateCompaniesTable extends Migration
             $table->string('firm_name');
             $table->string('gyre');
             $table->integer('start_act')->unsigned();
-            $table->string('muni_license');
             $table->string('address');
             $table->integer('commune_id')->unsigned();
-            $table->string('num', 10);
-            $table->string('lot', 25);
+            $table->string('num', 8);
+            $table->string('lot', 20);
             $table->string('ofi', 5);
             $table->string('floor', 3);
+            $table->string('muni_license', 50);
             $table->string('email', 100)->unique();
             $table->string('phone1', 20);
             $table->string('phone2', 20);

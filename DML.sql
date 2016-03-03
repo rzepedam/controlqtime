@@ -13,6 +13,17 @@ INSERT INTO countries(name) VALUES ('Paraguay');
 INSERT INTO countries(name) VALUES ('Uruguay');
 INSERT INTO countries(name) VALUES ('Venezuela');
 
+/* nationalities | Nacionalidades */
+INSERT INTO nationalities(name) VALUES ('Argentina');
+INSERT INTO nationalities(name) VALUES ('Bolivia');
+INSERT INTO nationalities(name) VALUES ('Colombia');
+INSERT INTO nationalities(name) VALUES ('Chile');
+INSERT INTO nationalities(name) VALUES ('Ecuador');
+INSERT INTO nationalities(name) VALUES ('Peru');
+INSERT INTO nationalities(name) VALUES ('Paraguay');
+INSERT INTO nationalities(name) VALUES ('Uruguay');
+INSERT INTO nationalities(name) VALUES ('Venezuela');
+
 
 /* cities | Ciudades */
 

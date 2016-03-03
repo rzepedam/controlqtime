@@ -2,7 +2,7 @@
     	<div class="col-md-2">
             <div class="form-group">
         		{{ Form::label('rut', 'Rut') }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
-                {{ Form::text('rut', null, ['class' => 'form-control', 'autofocus', 'onBlur' => '$(this).checkRut(this)']) }}
+                {{ Form::text('rut', null, ['class' => 'form-control check_rut']) }}
             </div>
     	</div>
     	<div class="col-md-4">
@@ -24,7 +24,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{ Form::text('start_act', null, ['class' => 'form-control', 'data-inputmask' => 'alias": "dd/mm/yyyy', 'data-mask' => '']) }}
+                    {{ Form::text('start_act', null, ['class' => 'form-control data_mask']) }}
                 </div>
             </div>
         </div>

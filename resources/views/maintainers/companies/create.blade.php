@@ -22,9 +22,12 @@
 @section('scripts')
 
     {{ Html::script('me/js/verificaUltimosNumeros.js') }}
-    {{ Html::script('assets/js/jquery.Rut.min.js') }}
+    {{ Html::script('assets/js/jquery.Rut.js') }}
     {{ Html::script('assets/js/config.js') }}
     {{ Html::script('me/js/validations/validaEmail.js') }}
+    {{ Html::script('assets/js/inputmask.js') }}
+    {{ Html::script('assets/js/inputmask.date.extensions.js') }}
+    {{ Html::script('assets/js/jquery.inputmask.js') }}
 
     <script type="text/javascript">
 
@@ -34,6 +37,7 @@
             ******************** Variables ********************
             **************************************************/
 
+            var year                       = new Date();
             var count_legal_representative = 1;
 
 
@@ -41,13 +45,23 @@
             ************** Initialize components **************
             **************************************************/
 
-            $('.mitooltip').tooltip();
-
+            initializeComponents();
 
             /**************************************************
             ********************* Methods *********************
             **************************************************/
 
+            function initializeComponents()
+            {
+                $('.mitooltip').tooltip();
+
+                $('.data_mask').inputmask({
+                    placeholder: 'dd/mm/yyyy',
+                    alias: "dd/mm/yyyy",
+                    "clearIncomplete": true,
+                    yearrange: { minyear: 1900, maxyear: (new Date()).getFullYear() }
+                });
+            }
 
             $.fn.checkEmail = function(input) {
 
@@ -89,9 +103,9 @@
                 }
             }
 
-            $.fn.checkRut = function(input) {
+            $(document).on('blur', '.check_rut', function(input) {
 
-                var element = $('#' + input.id);
+                var element = $('#' + $(this).attr('id'));
 
                 element.Rut({
                     on_success: function(){
@@ -106,7 +120,7 @@
                         element.closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
                     }
                 });
-            }
+            });
 
             $('#region_id').change(function(){
                 $.get('{{ url("loadProvinces")}}',
@@ -142,7 +156,7 @@
             **************************************************/
 
 
-            $(document).on('click','.delete-elements-panel2',function() {
+            $(document).on('click', '.delete-elements-panel2', function() {
 
                 var element = $(this).attr('id');
                 var padre   = $(this).parent().parent().parent().parent();
@@ -180,6 +194,10 @@
                             $('label[for="rut' + item + '"]').attr('for', 'rut' + i);
                             $('input#rut' + item).attr('name', 'rut' + i);
                             $('input#rut' + item).attr('id', 'rut' + i);
+
+                            $('label[for="birthday' + item + '"]').attr('for', 'birthday' + i);
+                            $('input#birthday' + item).attr('name', 'birthday' + i);
+                            $('input#birthday' + item).attr('id', 'birthday' + i);
 
                             $('label[for="dv' + item + '"]').attr('for', 'dv' + i);
                             $('input#dv' + item).attr('name', 'dv' + i);
@@ -220,7 +238,7 @@
 
             $.fn.addLegalRepresentative = function() {
 
-                $add_representative_legal = '<span id="legal_representative"><div class="row"><div class="col-md-12"><span id="num_legal_representative" class="title-elements-panel2 text-green">Representante Legal #' + (count_legal_representative + 1) + '</span><a id="legal_representative" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Representante Legal"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-3"><div class="form-group">{{ Form::label("male_surname", "Apellido Paterno") }}{{ Form::text("male_surname", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("female_surname", "Apellido Materno") }}{{ Form::text("female_surname", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("first_name", "Primer Nombre") }}{{ Form::text("first_name", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("second_name", "Segundo Nombre") }}{{ Form::text("second_name", null, ["class"=> "form-control"]) }}</div></div></div><div class="row"> <div class="col-md-2"><div class="form-group">{{ Form::label("rut", "Rut") }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin guión ni dígito verificador. Ej: 80900568"></i>{{ Form::text("rut", null, ["class"=> "form-control", "onBlur" => "$(this).checkRut(this)"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("country_id", "Nacionalidad") }}{{ Form::select("country_id", $countries, null, ["class"=> "form-control"]) }}</div></div><div class="col-md-5"><div class="form-group">{{ Form::label("email", "Email") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{ Form::email("email", null, ["class"=> "form-control", "onBlur" => "$(this).checkEmail(this)"]) }}</div></div></div><div class="col-md-2"><div class="form-group">{{ Form::label("phone1-", "Teléfono 1") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1-", null, ["class"=> "form-control"])}}</div></div></div></div><div class="row"><div class="col-md-2"><div class="form-group">{{ Form::label("phone2-", "Teléfono 2") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2-", null, ["class"=> "form-control"])}}</div></div></div></div><hr/></span>';
+                $add_representative_legal = '<span id="legal_representative"><div class="row"><div class="col-md-12"><span id="num_legal_representative" class="title-elements-panel2 text-green">Representante Legal #' + (count_legal_representative + 1) + '</span><a id="legal_representative" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Representante Legal"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-3"><div class="form-group">{{ Form::label("male_surname", "Apellido Paterno") }}{{ Form::text("male_surname", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("female_surname", "Apellido Materno") }}{{ Form::text("female_surname", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("first_name", "Primer Nombre") }}{{ Form::text("first_name", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("second_name", "Segundo Nombre") }}{{ Form::text("second_name", null, ["class"=> "form-control"]) }}</div></div></div><div class="row"> <div class="col-md-2"><div class="form-group">{{ Form::label("rut", "Rut") }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin guión ni dígito verificador. Ej: 80900568"></i>{{ Form::text("rut", null, ["class"=> "form-control check_rut"]) }}</div></div><div class="col-md-2"> <div class="form-group">{!! Form::label("birthday", "Fecha de Nac.") !!}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{!! Form::text("birthday", null, ["class"=> "form-control data_mask"]) !!}</div></div></div><div class="col-md-3"><div class="form-group">{{ Form::label("nationality_id", "Nacionalidad") }}{{ Form::select("nationality_id", $nationalities, null, ["class"=> "form-control"]) }}</div></div><div class="col-md-5"><div class="form-group">{{ Form::label("email", "Email") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{ Form::email("email", null, ["class"=> "form-control", "onBlur" => "$(this).checkEmail(this)"]) }}</div></div></div></div><div class="row"><div class="col-md-2"><div class="form-group">{{ Form::label("phone1-", "Teléfono 1") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1-", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-2"><div class="form-group">{{ Form::label("phone2-", "Teléfono 2") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2-", null, ["class"=> "form-control"])}}</div></div></div></div><hr/></span>';
 
                 $('#content_legal_representatives').append($add_representative_legal);
 
@@ -244,13 +262,17 @@
                 $('input#second_name').attr('id', 'second_name' + count_legal_representative);
 
                 $('label[for="rut"]').attr('for', 'rut' + count_legal_representative);
-                $('input#rut').attr('name', 'rut' + count_legal_representative);
-                $('input#rut').attr('id', 'rut' + count_legal_representative);
+                $('#content_legal_representatives input#rut').attr('name', 'rut' + count_legal_representative);
+                $('#content_legal_representatives input#rut').attr('id', 'rut' + count_legal_representative);
 
-                $('label[for="country_id"]').attr('for', 'country_id' + count_legal_representative);
-                $('select#country_id').each(function(i){
-                    $(this).attr('name', 'country_id' + count_legal_representative);
-                    $(this).attr('id', 'country_id' + count_legal_representative);
+                $('label[for="birthday"]').attr('for', 'birthday' + count_legal_representative);
+                $('input#birthday').attr('name', 'birthday' + count_legal_representative);
+                $('input#birthday').attr('id', 'birthday' + count_legal_representative);
+
+                $('label[for="nationality_id"]').attr('for', 'nationality_id' + count_legal_representative);
+                $('select#nationality_id').each(function(i){
+                    $(this).attr('name', 'nationality_id' + count_legal_representative);
+                    $(this).attr('id', 'nationality_id' + count_legal_representative);
                 });
 
                 $('label[for="email"]').attr('for', 'email' + count_legal_representative);
@@ -267,7 +289,8 @@
 
                 count_legal_representative++;
                 $('#count_legal_representative').attr('value', count_legal_representative);
-                $('.mitooltip').tooltip();
+
+                initializeComponents();
             };
 
 
@@ -277,7 +300,7 @@
 
             $('#btn-submit').click(function(e) {
 
-                if ($('#rut').parent().hasClass('has-error')) {
+                /*if ($('#rut').parent().hasClass('has-error')) {
                     $("#collapseOne").collapse("show");
                     $('#rut').focus();
                     return false;
@@ -293,6 +316,16 @@
                 }else {
                     $('#rut').closest('.form-group').removeClass('has-error').addClass('has-feedback');
                     $('#rut').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#rut').val().length > 15) {
+                    $('#js').removeClass('hide');
+                    $('#rut').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> no debe ser mayor que 15 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#rut').focus();
                 }
 
                 if ($('#firm_name').val() == '') {
@@ -403,6 +436,36 @@
                     $('#num').closest('.form-group').find('i.fa-times').remove();
                 }
 
+                if ($('#num').val().length > 8) {
+                    $('#js').removeClass('hide');
+                    $('#num').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>N°</strong> no debe ser mayor que 8 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#num').focus();
+                }
+
+                if ($('#lot').val().length > 20) {
+                    $('#js').removeClass('hide');
+                    $('#lot').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Lote</strong> no debe ser mayor que 20 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#lot').focus();
+                }
+
+                if ($('#ofi').val().length > 5) {
+                    $('#js').removeClass('hide');
+                    $('#ofi').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Oficina</strong> no debe ser mayor que 5 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#ofi').focus();
+                }
+
                 if (isNaN($('#floor').val())){
                     $("#collapseOne").collapse("show");
                     $('#floor').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
@@ -415,6 +478,16 @@
                     $('#floor').closest('.form-group').find('i.fa-times').remove();
                 }
 
+                if ($('#floor').val().length > 3) {
+                    $('#js').removeClass('hide');
+                    $('#floor').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Piso</strong> no debe ser mayor que 3 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#floor').focus();
+                }
+
                 if ($('#muni_license').val() == '') {
                     $("#collapseOne").collapse("show");
                     $('#muni_license').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
@@ -425,6 +498,16 @@
                 }else {
                     $('#muni_license').closest('.form-group').removeClass('has-error').addClass('has-feedback');
                     $('#muni_license').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#muni_license').val().length > 50) {
+                    $('#js').removeClass('hide');
+                    $('#muni_license').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Patente Municipal</strong> no debe ser mayor que 50 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#muni_license').focus();
                 }
 
                 if ($('#email').parent().parent().hasClass('has-error')) {
@@ -445,6 +528,16 @@
                     $('#email').closest('.form-group').find('i.fa-times').remove();
                 }
 
+                if ($('#email').val().length > 100) {
+                    $('#js').removeClass('hide');
+                    $('#email').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email</strong> no debe ser mayor que 100 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#email').focus();
+                }
+
                 if ($('#phone1').val() == '') {
                     $("#collapseOne").collapse("show");
                     $('#phone1').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
@@ -455,6 +548,26 @@
                 }else {
                     $('#phone1').closest('.form-group').removeClass('has-error').addClass('has-feedback');
                     $('#phone1').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#phone1').val().length > 20) {
+                    $('#js').removeClass('hide');
+                    $('#phone1').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> no debe ser mayor que 20 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#phone1').focus();
+                }
+
+                if ($('#phone2').val().length > 20) {
+                    $('#js').removeClass('hide');
+                    $('#phone2').focus();
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 2</strong> no debe ser mayor que 20 caracteres.');
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#phone2').focus();
                 }
 
                 for (i = 0; i < count_legal_representative; i++) {
@@ -471,6 +584,16 @@
                         $('#male_surname' + i).closest('.form-group').find('i.fa-times').remove();
                     }
 
+                    if ($('#male_surname' + i).val().length > 30) {
+                        $('#js').removeClass('hide');
+                        $('#male_surname' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> no debe ser mayor que 30 caracteres.');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#male_surname' + i).focus();
+                    }
+
                     if ($('#female_surname' + i).val() == '') {
                         $("#collapseTwo").collapse("show");
                         $('#female_surname' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
@@ -481,6 +604,16 @@
                     }else {
                         $('#female_surname' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
                         $('#female_surname' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#female_surname' + i).val().length > 30) {
+                        $('#js').removeClass('hide');
+                        $('#female_surname' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> no debe ser mayor que 30 caracteres.');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#female_surname' + i).focus();
                     }
 
                     if ($('#first_name' + i).val() == '') {
@@ -495,9 +628,29 @@
                         $('#first_name' + i).closest('.form-group').find('i.fa-times').remove();
                     }
 
+                    if ($('#first_name' + i).val().length > 30) {
+                        $('#js').removeClass('hide');
+                        $('#first_name' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> no debe ser mayor que 30 caracteres.');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#first_name' + i).focus();
+                    }
+
+                    if ($('#second_name' + i).val().length > 30) {
+                        $('#js').removeClass('hide');
+                        $('#second_name' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Segundo Nombre</strong> no debe ser mayor que 30 caracteres.');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#second_name' + i).focus();
+                    }
+
                     if ($('#rut' + i).parent().hasClass('has-error')) {
                         $("#collapseTwo").collapse("show");
-                        $('#rut').focus();
+                        $('#rut' + i).focus();
                         return false;
                     }
 
@@ -511,6 +664,16 @@
                     }else {
                         $('#rut' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
                         $('#rut' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#rut' + i).val().length > 15) {
+                        $('#js').removeClass('hide');
+                        $('#rut' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> no debe ser mayor que 15 caracteres.');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#rut' + i).focus();
                     }
 
                     if ($('#country_id' + i).val() == '') {
@@ -543,6 +706,16 @@
                         $('#email' + i).closest('.form-group').find('i.fa-times').remove();
                     }
 
+                    if ($('#email' + i).val().length > 100) {
+                        $('#js').removeClass('hide');
+                        $('#email' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email</strong> no debe ser mayor que 100 caracteres.');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#email' + i).focus();
+                    }
+
                     if ($('#phone1-' + i).val() == '') {
                         $("#collapseTwo").collapse("show");
                         $('#phone1-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
@@ -554,7 +727,27 @@
                         $('#phone1-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
                         $('#phone1-' + i).closest('.form-group').find('i.fa-times').remove();
                     }
-                }
+
+                    if ($('#phone1-' + i).val().length > 20) {
+                        $('#js').removeClass('hide');
+                        $('#phone1-' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> no debe ser mayor que 20 caracteres.');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#phone1-' + i).focus();
+                    }
+
+                    if ($('#phone2-' + i).val().length > 20) {
+                        $('#js').removeClass('hide');
+                        $('#phone2-' + i).focus();
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 2</strong> no debe ser mayor que 20 caracteres.');
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#phone2-' + i).focus();
+                    }
+                }*/
 
                 e.submit();
 

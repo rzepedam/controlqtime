@@ -18,35 +18,38 @@ class CompanyRequest extends SanitizedRequest
         return true;
     }
 
-
     public function rules()
     {
         switch($this->method())
         {
             case 'POST':
             {
-                $rules['rut']          = 'required|unique:companies,rut';
+                $rules['rut']          = 'required|unique:companies,rut|max:15';
                 $rules['firm_name']    = 'required';
                 $rules['gyre']         = 'required';
                 $rules['start_act']    = 'required';
                 $rules['address']      = 'required';
                 $rules['commune_id']   = 'required|integer';
-                $rules['num']          = 'required|integer';
-                $rules['floor']        = 'integer';
-                $rules['muni_license'] = 'required';
-                $rules['email']        = 'required|email|unique:companies,email';
-                $rules['phone1']       = 'required';
+                $rules['num']          = 'required|integer|digits_between:1,8';
+                $rules['lot']          = 'max:20';
+                $rules['ofi']          = 'max:5';
+                $rules['floor']        = 'integer|digits_between:1,3';
+                $rules['muni_license'] = 'required|max:50';
+                $rules['email']        = 'required|email|unique:companies,email|max:100';
+                $rules['phone1']       = 'required|max:20';
+                $rules['phone2']       = 'max:20';
 
                 for ($i = 0; $i < Request::get('count_legal_representative'); $i++){
 
-                    $rules['male_surname' . $i]   = 'required';
-                    $rules['female_surname' . $i] = 'required';
-                    $rules['first_name' . $i]     = 'required';
-                    $rules['rut' . $i]            = 'required';
-                    $rules['country_id' . $i]     = 'required|integer';
-                    $rules['email' . $i]          = 'required|email|unique:legal_representatives,email';
-                    $rules['phone1-' . $i]        = 'required';
-                    $rules['phone2-' . $i]        = 'required';
+                    $rules['male_surname' . $i]   = 'required|max:30';
+                    $rules['female_surname' . $i] = 'required|max:30';
+                    $rules['first_name' . $i]     = 'required|max:30';
+                    $rules['second_name' . $i]    = 'max:30';
+                    $rules['rut' . $i]            = 'required|max:15';
+                    $rules['nationality_id' . $i] = 'required|integer';
+                    $rules['email' . $i]          = 'required|email|unique:legal_representatives,email|max:100';
+                    $rules['phone1-' . $i]        = 'required|max:20';
+                    $rules['phone2-' . $i]        = 'max:20';
 
                 }
 

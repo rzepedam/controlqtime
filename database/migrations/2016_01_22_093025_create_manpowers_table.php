@@ -21,7 +21,7 @@ class CreateManpowersTable extends Migration
             $table->string('full_name', 120);
             $table->string('rut', 15);
             $table->integer('birthday')->unsigned();
-            $table->integer('country_id')->unsigned();
+            $table->integer('nationality_id')->unsigned();
             $table->integer('gender_id')->unsigned();
             $table->string('address');
             $table->integer('commune_id')->unsigned();
@@ -39,9 +39,9 @@ class CreateManpowersTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('country_id')
+            $table->foreign('nationality_id')
                 ->references('id')
-                ->on('countries')
+                ->on('nationalities')
                 ->onUpdate('cascade');
 
             $table->foreign('gender_id')

@@ -5,7 +5,7 @@
         <h4><i class="icon fa fa-ban"></i> Por favor corrige los siguientes errores: </h4>
         <ul>
             @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <li>{!! $error !!}</li>
             @endforeach
         </ul>
     </div>

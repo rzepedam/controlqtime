@@ -9,6 +9,7 @@ class CreateLegalRepresentativesTable extends Migration
     public function up()
     {
         Schema::create('legal_representatives', function (Blueprint $table) {
+
             $table->increments('id');
             $table->integer('company_id')->unsigned();
             $table->string('male_surname', 30);
@@ -16,14 +17,16 @@ class CreateLegalRepresentativesTable extends Migration
             $table->string('first_name', 30);
             $table->string('second_name', 30);
             $table->string('rut', 15);
-            $table->integer('country_id')->unsigned();
+            $table->integer('birthday')->unsigned();
+            $table->integer('nationality_id')->unsigned();
             $table->string('email', 100)->unique();
             $table->string('phone1', 20);
+            $table->string('phone2', 20);
             $table->timestamps();
 
-            $table->foreign('country_id')
+            $table->foreign('nationality_id')
                 ->references('id')
-                ->on('countries')
+                ->on('nationalities')
                 ->onUpdate('cascade');
 
             $table->foreign('company_id')

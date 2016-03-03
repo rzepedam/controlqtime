@@ -25,7 +25,7 @@ class ManpowerTableSeeder extends Seeder
                 'full_name'      => "$firstName $secondName $maleSurname $femaleSurname",
                 'rut'            => $faker->numberBetween($min = 10000000, $max = 20000000),
                 'birthday'       => $faker->unixTime,
-                'country_id'     => rand(1,9),
+                'nationality_id' => rand(1,9),
                 'gender_id'      => rand(1,2),
                 'forecast_id'    => rand(1,4),
                 'mutuality_id'   => rand(1,4),

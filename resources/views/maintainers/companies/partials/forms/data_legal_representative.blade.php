@@ -35,13 +35,24 @@
         <div class="col-md-2">
         	<div class="form-group">
 	            {{ Form::label('rut0', 'Rut') }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
-	            {{ Form::text('rut0', null, ['class' => 'form-control', 'onBlur' => '$(this).checkRut(this)']) }}
+	            {{ Form::text('rut0', null, ['class' => 'form-control check_rut']) }}
             </div>
         </div>
+        <div class="col-md-2">
+        	<div class="form-group">
+		        {!! Form::label("birthday0", "Fecha de Nac.")  !!}
+		        <div class="input-group">
+		            <div class="input-group-addon">
+		                <i class="fa fa-calendar"></i>
+		            </div>
+		            {!! Form::text("birthday0", null, ["class" => "form-control data_mask"])  !!}
+		        </div>
+		    </div>
+	    </div>
         <div class="col-md-3">
         	<div class="form-group">
-	            {{ Form::label('country_id0', 'Nacionalidad')  }}
-	            {{ Form::select('country_id0', $countries, null, ['class' => 'form-control']) }}
+	            {{ Form::label('nationality_id0', 'Nacionalidad')  }}
+	            {{ Form::select('nationality_id0', $nationalities, null, ['class' => 'form-control']) }}
             </div>
         </div>
         <div class="col-md-5">
@@ -55,7 +66,9 @@
 	            </div>
             </div>
         </div>
-        <div class="col-md-2">
+    </div>
+	<div class="row">
+		<div class="col-md-2">
         	<div class="form-group">
 				{{ Form::label('phone1-0', 'Teléfono 1') }}
 				<div class="input-group">
@@ -66,8 +79,6 @@
 		        </div>
 	        </div>
 		</div>
-    </div>
-	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				{{ Form::label('phone2-0', 'Teléfono 2') }}
