@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     protected $fillable = [
-        'name',
+        'id', 'rut', 'firm_name', 'gyre', 'start_act', 'address', 'commune_id', 'num', 'lot', 'ofi', 'floor', 'muni_license', 'email', 'phone1', 'phone2'
     ];
 
     public $timestamps   = false;
-    public $incrementing = false;
 
     public function scopeFirmName($query, $name)
     {
@@ -22,7 +21,11 @@ class Company extends Model
         }
     }
 
-    public function areas() {
-        return $this->belongsToMany('App\Area');
+    public function legalRepresentatives() {
+        return $this->hasMany('App\LegalRepresentative');
+    }
+
+    public function setStartActAttribute($value) {
+        $this->attributes['start_act'] = strtotime($value);
     }
 }

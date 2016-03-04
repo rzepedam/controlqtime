@@ -135,7 +135,11 @@ return [
         'start_act'         => '<strong>Inicio Act</strong>.',
 
         /* Set array attributes in fields within loop */
-
+        'birthday0'         => '<strong>Fecha de Nac. 1</strong>',
+        'birthday1'         => '<strong>Fecha de Nac. 2</strong>',
+        'birthday2'         => '<strong>Fecha de Nac. 3</strong>',
+        'birthday3'         => '<strong>Fecha de Nac. 4</strong>',
+        'birthday4'         => '<strong>Fecha de Nac. 5</strong>',
         'email0'            => '<strong>Email 1</strong>',
         'email1'            => '<strong>Email 2</strong>',
         'email2'            => '<strong>Email 3</strong>',

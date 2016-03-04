@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 use App\Company;
 use App\Nationality;
 use App\Region;
 use App\Province;
 use App\Commune;
+use App\LegalRepresentative;
 use App\Http\Requests\CompanyRequest;
 
 
@@ -33,8 +35,26 @@ class CompanyController extends Controller
 
     public function store(CompanyRequest $request)
     {
-        dd($request->all());
-        Company::create($request->all());
+        $company = Company::create($request->all());
+
+        for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {
+
+            $legal                 = new LegalRepresentative();
+            $legal->male_surname   = $request->get('male_surname' . $i);
+            $legal->female_surname = $request->get('female_surname' . $i);
+            $legal->first_name     = $request->get('first_name' . $i);
+            $legal->second_name    = $request->get('second_name' . $i);
+            $legal->rut            = $request->get('rut' . $i);
+            $legal->birthday       = $request->get('birthday' . $i);
+            $legal->nationality_id = $request->get('nationality_id' . $i);
+            $legal->email          = $request->get('email' . $i);
+            $legal->phone1         = $request->get('phone1-' . $i);
+            $legal->phone2         = $request->get('phone2-' . $i);
+
+            $legal->company()->associate($company);
+            $legal->save();
+        }
+
         Session::flash('success', 'El registro fue almacenado satisfactoriamente');
         return redirect()->route('maintainers.companies.index');
     }

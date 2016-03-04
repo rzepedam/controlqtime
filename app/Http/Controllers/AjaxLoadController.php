@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Region;
 use App\Province;
 use App\Company;
+use App\LegalRepresentative;
+use App\Subsidiary;
 
 class AjaxLoadController extends Controller
 {
@@ -28,6 +30,14 @@ class AjaxLoadController extends Controller
 		{
 			case 'Company':
 				$first = Company::where('email', $request->get('email'))->first();
+			break;
+
+			case 'Representative':
+				$first = LegalRepresentative::where('email', $request->get('email'))->first();
+			break;
+
+			case 'Subersive':
+				$first = Subersive::where('email', $request->get('email'))->first();
 			break;
 		}
 

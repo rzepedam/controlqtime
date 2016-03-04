@@ -5,7 +5,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Área</th>
+                    <th>Email</th>
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -13,7 +13,8 @@
             @foreach($companies as $company)
                 <tr data-id="{{ $company->id }}">
                     <td>{{ $company->id }}</td>
-                    <td>{{ $company->name }}</td>
+                    <td>{{ $company->firm_name }}</td>
+                    <td>{{ $company->email }}</td>
                     <td></td>
                     <td class="text-center">
                         <a href="{{ route('maintainers.companies.show', $company) }}" class="btn bg-navy btn-flat"><i class="fa fa-search"></i></a>
