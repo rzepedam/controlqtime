@@ -36,6 +36,7 @@
     {{ Html::script('assets/js/inputmask.date.extensions.js') }}
     {{ Html::script('assets/js/jquery.inputmask.js') }}
     {{ Html::script('assets/js/dropzone.js') }}
+    {{ HTml::script('me/js/validations/validaCompanies.js') }}
 
     <script type="text/javascript">
 
@@ -1123,10 +1124,261 @@
                         $('#phone2-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
                         $('#phone2-' + i).closest('.form-group').find('i.fa-times').remove();
                     }
+                }
 
+
+                for(var i = 0; i < count_subsidiary; i++) {
+
+                    if ($('#address_suc' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Dirección Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#address_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#address_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#address_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#address_suc' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#address_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#address_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#commune_suc_id' + i).text() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Comuna Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#commune_suc_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#commune_suc_id' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#commune_suc_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#commune_suc_id' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#commune_suc_id' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#commune_suc_id' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if (isNaN($('#commune_suc_id' + i).val())){
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Comuna Sucursal ' + (i + 1) + '</strong> debe ser un número entero.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#commune_suc_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#commune_suc_id' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#commune_suc_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#commune_suc_id' + i).focus();
+                        return false;
+                    }else{
+                        $('#js').addClass('hide');
+                        $('#commune_suc_id' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#commune_suc_id' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#num_suc' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>N° Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#num_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#num_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#num_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#num_suc' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#num_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#num_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if (isNaN($('#num_suc' + i).val())){
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>N° Sucursal ' + (i + 1) + '</strong> debe ser un número entero.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#num_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#num_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#num_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#num_suc' + i).focus();
+                        return false;
+                    }else{
+                        $('#js').addClass('hide');
+                        $('#num_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#num_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#num_suc' + i).val().length > 8) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>N° Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 8 caracteres.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#num_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#num_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#num_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#num_suc' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#num_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#num_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#lot_suc' + i).val().length > 20) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Lote Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#lot_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#lot_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#lot_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#lot_suc' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#lot_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#lot_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#ofi_suc' + i).val().length > 5) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Oficina Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 5 caracteres.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#ofi_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#ofi_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#ofi_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#ofi_suc' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#ofi_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#ofi_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if (isNaN($('#floor_suc' + i).val())){
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Piso Sucursal ' + (i + 1) + '</strong> debe ser un número entero.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#floor_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#floor_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#floor_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#floor_suc' + i).focus();
+                        return false;
+                    }else{
+                        $('#js').addClass('hide');
+                        $('#floor_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#floor_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#floor_suc' + i).val().length > 3) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Piso Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 3 caracteres.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#floor_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#floor_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#floor_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#floor_suc' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#floor_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#floor_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#muni_license_suc' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Patente Municipal Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#muni_license_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#muni_license_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#muni_license_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#muni_license_suc' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#muni_license_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#muni_license_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#muni_license_suc' + i).val().length > 50) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Patente Municipal Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 50 caracteres.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#muni_license_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#muni_license_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#muni_license_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#muni_license_suc' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#muni_license_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#muni_license_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#email_suc' + i).parent().parent().hasClass('has-error')) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Sucursal ' + (i + 1) + '</strong> contiene un valor incorrecto.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#email_suc' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#email_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#email_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#email_suc' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#email_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#email_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#email_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#email_suc' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#email_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#email_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#email_suc' + i).val().length > 100) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 100 caracteres.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#email_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#email_suc' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#email_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#email_suc' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#email_suc' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#email_suc' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#phone1_suc-' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1 Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#phone1_suc-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#phone1_suc-' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#phone1_suc-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#phone1_suc-' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#phone1_suc-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#phone1_suc-' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#phone1_suc-' + i).val().length > 20) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1 Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#phone1_suc-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#phone1_suc-' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#phone1_suc-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#phone1_suc-' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#phone1_suc-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#phone1_suc-' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#phone2_suc-' + i).val().length > 20) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 2 Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
+                        $("#collapseFour").collapse("show");
+                        $('#phone2_suc-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#phone2_suc-' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#phone2_suc-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#phone2_suc-' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#phone2_suc-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#phone2_suc-' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
                 }
             }
-
 
 
 
