@@ -36,7 +36,6 @@
     {{ Html::script('assets/js/inputmask.date.extensions.js') }}
     {{ Html::script('assets/js/jquery.inputmask.js') }}
     {{ Html::script('assets/js/dropzone.js') }}
-    {{ HTml::script('me/js/validations/validaCompanies.js') }}
 
     <script type="text/javascript">
 
@@ -532,7 +531,7 @@
 
             function validationForm() {
 
-                if ($('#rut').parent().hasClass('has-error')) {
+                /*if ($('#rut').parent().hasClass('has-error')) {
                     $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> contiene un valor incorrecto.').removeClass('hide');
                     $("#collapseOne").collapse("show");
                     $('#rut').focus();
@@ -1377,7 +1376,7 @@
                         $('#phone2_suc-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
                         $('#phone2_suc-' + i).closest('.form-group').find('i.fa-times').remove();
                     }
-                }
+                }*/
             }
 
 
@@ -1413,8 +1412,12 @@
                             var errors = data.responseJSON;
 
                             $.each(errors, function (index, value) {
-                                $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
+                                $('#js').html('<i class="fa fa-times"></i> ' + value[0]).removeClass('hide');
+                                $('#' + index).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                                $('#' + index).closest('.form-group').find('i.fa-check').remove();
+                                $('#' + index).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
                                 $('#' + index).focus();
+                                return false;
                             });
                         }
                     });
@@ -1425,3 +1428,4 @@
     </script>
 
 @stop
+

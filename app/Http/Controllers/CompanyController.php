@@ -29,8 +29,8 @@ class CompanyController extends Controller
     {
         $nationalities = Nationality::lists('name', 'id');
         $regions       = Region::lists('name', 'id');
-        $provinces     = Province::lists('name', 'id');
-        $communes      = Commune::lists('name', 'id');
+        $provinces     = Region::first()->provinces->lists('name', 'id');
+        $communes      = Province::first()->communes->lists('name', 'id');
         return view('maintainers.companies.create', compact('nationalities', 'regions', 'provinces', 'communes'));
     }
 
