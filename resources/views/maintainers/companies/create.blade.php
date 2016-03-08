@@ -542,7 +542,7 @@
                     $('#rut').closest('.form-group').find('i.fa-times').remove();
                 }
 
-                if($('#rut').val() == '') {
+                if ($('#rut').val() == '') {
                     $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> es obligatorio.').removeClass('hide');
                     $("#collapseOne").collapse("show");
                     $('#rut').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
@@ -859,6 +859,271 @@
                     $('#js').addClass('hide');
                     $('#phone2').closest('.form-group').removeClass('has-error').addClass('has-feedback');
                     $('#phone2').closest('.form-group').find('i.fa-times').remove();
+                }
+
+
+                for(var i = 0; i < count_legal_representative; i++) {
+
+                    if ($('#male_surname' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Paterno Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#male_surname' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#male_surname' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#male_surname' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#male_surname' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#male_surname' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#male_surname' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#male_surname' + i).val().length > 30) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Paterno Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 30 caracteres.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#male_surname' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#male_surname' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#male_surname' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#male_surname' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#male_surname' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#male_surname' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#female_surname' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Materno Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#female_surname' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#female_surname' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#female_surname' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#female_surname' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#female_surname' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#female_surname' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#female_surname' + i).val().length > 30) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Materno Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 30 caracteres.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#female_surname' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#female_surname' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#female_surname' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#female_surname' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#female_surname' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#female_surname' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#first_name' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Primer Nombre Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#first_name' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#first_name' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#first_name' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#first_name' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#first_name' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#first_name' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#first_name' + i).val().length > 30) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Primer Nombre Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 30 caracteres.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#first_name' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#first_name' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#first_name' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#first_name' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#first_name' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#first_name' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#second_name' + i).val().length > 30) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Segundo Nombre Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 30 caracteres.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#second_name' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#second_name' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#second_name' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#second_name' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#second_name' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#second_name' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#rut' + i).parent().hasClass('has-error')) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut Rep. Legal ' + (i + 1) + '</strong> contiene un valor incorrecto.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#rut' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#rut' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#rut' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#rut' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#rut' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#rut' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#rut' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#rut' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#rut' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#rut' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#rut' + i).val().length > 15) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 15 caracteres.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#rut' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#rut' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#rut' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#rut' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#rut' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#rut' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#birthday' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Fecha de Nac Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#birthday' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#birthday' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#birthday' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#birthday' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#birthday' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#birthday' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#nationality_id' + i).text() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nacionalidad Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#nationality_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#nationality_id' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#nationality_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#nationality_id' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#nationality_id' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#nationality_id' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if (isNaN($('#nationality_id' + i).val())){
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nacionalidad Rep. Legal ' + (i + 1) + '</strong> debe ser un número entero.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#nationality_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#nationality_id' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#nationality_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#nationality_id' + i).focus();
+                        return false;
+                    }else{
+                        $('#js').addClass('hide');
+                        $('#nationality_id' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#nationality_id' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#email' + i).parent().parent().hasClass('has-error')) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Rep. Legal ' + (i + 1) + '</strong> contiene un valor incorrecto.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#email' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#email' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#email' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#email' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#email' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#email' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#email' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#email' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#email' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#email' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#email' + i).val().length > 100) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 100 caracteres.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#email' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#email' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#email' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#email' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#email' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#email' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#phone1-' + i).val() == '') {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1 Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#phone1-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#phone1-' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#phone1-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#phone1-' + i).focus();
+                        return false;
+                    }else {
+                        $('#js').addClass('hide');
+                        $('#phone1-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#phone1-' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#phone1-' + i).val().length > 20) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1 Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#phone1-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#phone1-' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#phone1-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#phone1-' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#phone1-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#phone1-' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
+                    if ($('#phone2-' + i).val().length > 20) {
+                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 2 Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
+                        $("#collapseThree").collapse("show");
+                        $('#phone2-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        $('#phone2-' + i).closest('.form-group').find('i.fa-check').remove();
+                        $('#phone2-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                        $('#phone2-' + i).focus();
+                        return false;
+                    } else {
+                        $('#js').addClass('hide');
+                        $('#phone2-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                        $('#phone2-' + i).closest('.form-group').find('i.fa-times').remove();
+                    }
+
                 }
             }
 
