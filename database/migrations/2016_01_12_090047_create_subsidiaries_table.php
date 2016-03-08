@@ -9,7 +9,9 @@ class CreateSubsidiariesTable extends Migration
     public function up()
     {
         Schema::create('subsidiaries', function (Blueprint $table) {
+
             $table->increments('id');
+            $table->integer('company_id')->unsigned();
             $table->string('address');
             $table->integer('commune_id')->unsigned();
             $table->string('num', 8);
@@ -22,10 +24,16 @@ class CreateSubsidiariesTable extends Migration
             $table->string('phone2', 20);
             $table->timestamps();
 
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onUpdate('cascade');
+
             $table->foreign('commune_id')
                 ->references('id')
                 ->on('communes')
                 ->onUpdate('cascade');
+
         });
     }
 

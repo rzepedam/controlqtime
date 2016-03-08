@@ -28,4 +28,8 @@ class Company extends Model
     public function setStartActAttribute($value) {
         $this->attributes['start_act'] = strtotime($value);
     }
+
+    public function setEmailAttribute($value) {
+        $this->attributes['email'] = strtolower($value);
+    }
 }

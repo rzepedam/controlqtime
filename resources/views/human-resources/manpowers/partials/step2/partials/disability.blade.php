@@ -7,23 +7,23 @@
 	<br />
 	<div class="row">
         <div class="col-md-6">
-            {!! Form::label("disability" . $i, "Nombre") !!}
-            {!! Form::select("disability" . $i, $disabilities, Session::get('disability' . $i), ["class"=> "form-control"]) !!}
+            {{ Form::label("disability" . $i, "Nombre") }}
+            {{ Form::select("disability" . $i, $disabilities, Session::get('disability' . $i), ["class"=> "form-control"]) }}
         </div>
         <div class="col-md-6 text-center">
-            {!! Form::label("treatment_disability" . $i, "Está en tratamiento?") !!}<br />
-            {!! Form::label("si", "Si") !!}&nbsp&nbsp
-            {!! Form::radio("treatment_disability" . $i, "si", (Session::get('treatment_disability' . $i) == 'si') ? true : false, ['class'=> 'treatment_disability']) !!}&nbsp&nbsp
-            {!! Form::label("no", "No") !!}&nbsp&nbsp
-            {!! Form::radio("treatment_disability" . $i, "no", (Session::get('treatment_disability' . $i) == 'no') ? true : false) !!}
+            {{ Form::label("treatment_disability" . $i, "Está en tratamiento?") }}<br />
+            {{ Form::label("si", "Si") }}&nbsp&nbsp
+            {{ Form::radio("treatment_disability" . $i, "si", (Session::get('treatment_disability' . $i) == 'si') ? true : false, ['class'=> 'treatment_disability']) }}&nbsp&nbsp
+            {{ Form::label("no", "No") }}&nbsp&nbsp
+            {{ Form::radio("treatment_disability" . $i, "no", (Session::get('treatment_disability' . $i) == 'no') ? true : false) }}
 
         </div>
     </div>
 	<br/>
 	<div class="row">
         <div class="col-md-12">
-            {!! Form::label("detail_disability" . $i, "Detalle") !!}
-            {!! Form::textarea("detail_disability" . $i, Session::get('detail_disability' . $i), ["class"=> "form-control", "rows"=> "3"]) !!}
+            {{ Form::label("detail_disability" . $i, "Detalle") }}
+            {{ Form::textarea("detail_disability" . $i, Session::get('detail_disability' . $i), ["class"=> "form-control", "rows"=> "3"]) }}
         </div>
     </div>
 	<br/>

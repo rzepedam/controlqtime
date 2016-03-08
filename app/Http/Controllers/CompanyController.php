@@ -7,13 +7,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Requests\CompanyRequest;
 use App\Company;
 use App\Nationality;
 use App\Region;
 use App\Province;
 use App\Commune;
 use App\LegalRepresentative;
-use App\Http\Requests\CompanyRequest;
+use App\Subsidiary;
 
 
 class CompanyController extends Controller
@@ -55,8 +56,31 @@ class CompanyController extends Controller
             $legal->save();
         }
 
+        for ($i = 0; $i < $request->get('count_subsidiary'); $i++) {
+
+            $subsidiary                 = new Subsidiary();
+            $subsidiary->address        = $request->get('address_suc' . $i);
+            $subsidiary->commune_id     = $request->get('commune_suc_id' . $i);
+            $subsidiary->num            = $request->get('num_suc' . $i);
+            $subsidiary->lot            = $request->get('lot_suc' . $i);
+            $subsidiary->ofi            = $request->get('ofi_suc' . $i);
+            $subsidiary->floor          = $request->get('floor_suc' . $i);
+            $subsidiary->muni_license   = $request->get('muni_license_suc' . $i);
+            $subsidiary->email          = $request->get('email_suc' . $i);
+            $subsidiary->phone1         = $request->get('phone1_suc-' . $i);
+            $subsidiary->phone2         = $request->get('phone2_suc-' . $i);
+
+            $subsidiary->company()->associate($company);
+            $subsidiary->save();
+        }
+
         Session::flash('success', 'El registro fue almacenado satisfactoriamente');
-        return redirect()->route('maintainers.companies.index');
+        $response = array(
+            'status'    => 'success',
+            'url'       => '/maintainers/companies'
+        );
+
+        return response()->json([$response], 200);
     }
 
     public function edit($id)

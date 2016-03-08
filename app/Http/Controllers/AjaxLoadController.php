@@ -36,8 +36,8 @@ class AjaxLoadController extends Controller
 				$first = LegalRepresentative::where('email', $request->get('email'))->first();
 			break;
 
-			case 'Subersive':
-				$first = Subersive::where('email', $request->get('email'))->first();
+			case 'Subsidiary':
+				$first = Subsidiary::where('email', $request->get('email'))->first();
 			break;
 		}
 

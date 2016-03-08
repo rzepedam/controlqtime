@@ -33,4 +33,8 @@ class LegalRepresentative extends Model
 	public function setBirthdayAttribute($value) {
 		$this->attributes['birthday'] = strtotime($value);
 	}
+
+	public function setEmailAttribute($value) {
+		$this->attributes['email'] = strtolower($value);
+	}
 }

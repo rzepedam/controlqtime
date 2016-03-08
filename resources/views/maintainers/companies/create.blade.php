@@ -1,5 +1,9 @@
 @extends('layout.index')
 
+@section('css')
+    {{ Html::style('assets/css/dropzone.css') }}
+@stop
+
 @section('title_header') Crear Nueva Empresa @stop
 
 @section('breadcumb')
@@ -9,6 +13,8 @@
 @stop
 
 @section('content')
+
+    <span class="col-md-12 alert alert-danger hide" id="js"></span>
 
     {{ Form::open(array('route' => 'maintainers.companies.store', 'method' => 'POST', 'id' => 'form-company')) }}
 
@@ -29,6 +35,7 @@
     {{ Html::script('assets/js/inputmask.js') }}
     {{ Html::script('assets/js/inputmask.date.extensions.js') }}
     {{ Html::script('assets/js/jquery.inputmask.js') }}
+    {{ Html::script('assets/js/dropzone.js') }}
 
     <script type="text/javascript">
 
@@ -38,7 +45,6 @@
             ******************** Variables ********************
             **************************************************/
 
-            var year                       = new Date();
             var count_legal_representative = 1;
             var count_subsidiary           = 0;
 
@@ -61,17 +67,6 @@
                 });
             }
 
-            function checkElementEmail(input) {
-
-                if (input.length == 5)
-                    return "Company";
-
-                if(input.length == 6)
-                    return "Representative";
-
-                if(input.length == 10)
-                    return "Subsidiary";
-            }
 
 
             /**************************************************
@@ -82,6 +77,9 @@
 
                 var element = $('#' + $(this).attr('id'));
                 var input   = checkElementEmail($(this).attr('id'));
+
+                if ($(this).val() == '')
+                    return false;
 
                 if (!validaEmail(element.val())) {
                     element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
@@ -321,15 +319,18 @@
                             $('#content_subsidiaries #phone2_suc-' + item).attr('name', 'phone2_suc-' + i);
                             $('#content_subsidiaries #phone2_suc-' + item).attr('id', 'phone2_suc-' + i);
 
-                           }
+                        }
 
                         count_subsidiary--;
+                        $('#count_subsidiary').attr('value', count_subsidiary);
                         if (count_subsidiary == 0) {
                             var html = '<h2 class="text-center text-yellow">No existen Sucursales Asociadas <br /><small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2><br /><hr />'
                             $('#content_subsidiaries').html(html);
                         }
 
                     break;
+
+
                 }
             });
 
@@ -337,6 +338,18 @@
             /**************************************************
             ******************* functions *********************
             **************************************************/
+
+            function checkElementEmail(input) {
+
+                if (input.length == 5)
+                    return "Company";
+
+                if(input.length == 6)
+                    return "Representative";
+
+                if(input.length == 10)
+                    return "Subsidiary";
+            }
 
             $('#region_id').change(function(){
                 $.get('{{ url("loadProvinces")}}',
@@ -439,7 +452,7 @@
 
             $.fn.addSubsidiary = function() {
 
-                $add_subsidiary = '<span id="subsidiary"> <div class="row"> <div class="col-md-12"> <span id="num_subsidiary" class="title-elements-panel2 text-yellow">Sucursal #' + (count_subsidiary + 1) + '</span><a id="subsidiary" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Sucursal"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"> <div class="col-md-6"><div class="form-group">{{Form::label("address_suc", "Dirección")}}{{Form::text("address_suc", null, ["class"=> "form-control"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("region_suc_id", "Región")}}{{Form::select("region_suc_id", $regions, null, ["class"=> "form-control", "onChange"=> "$(this).changeRegion()"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("province_suc_id", "Provincia")}}{{Form::select("province_suc_id", $provinces, null, ["class"=> "form-control", "onChange"=> "$(this).changeProvince()"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("commune_suc_id", "Comuna")}}{{Form::select("commune_suc_id", $communes, null, ["class"=> "form-control"])}}</div></div></div><br/> <div class="row"><div class="col-md-1"><div class="form-group">{{Form::label("num_suc", "N°")}}{{Form::text("num_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("lot_suc", "Lote")}}{{Form::text("lot_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("ofi_suc", "Oficina")}}{{Form::text("ofi_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("floor_suc", "Piso")}}{{Form::text("floor_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("muni_license_suc", "Patente Municipal")}}{{Form::text("muni_license_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label("email_suc", "Email")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{Form::email("email_suc", null, ["class"=> "form-control", "onBlur"=> "$(this).checkEmail()"])}}</div></div></div></div><br/> <div class="row"> <div class="col-md-2"><div class="form-group">{{Form::label("phone1_suc-", "Teléfono 1")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1_suc-", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-2"><div class="form-group">{{Form::label("phone2_suc-", "Teléfono 2")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2_suc-", null, ["class"=> "form-control"])}}</div></div></div></div><hr/></span>';
+                $add_subsidiary = '<span id="subsidiary"> <div class="row"> <div class="col-md-12"> <span id="num_subsidiary" class="title-elements-panel2 text-yellow">Sucursal #' + (count_subsidiary + 1) + '</span><a id="subsidiary" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Sucursal"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"> <div class="col-md-6"><div class="form-group">{{Form::label("address_suc", "Dirección")}}{{Form::text("address_suc", null, ["class"=> "form-control"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("region_suc_id", "Región")}}{{Form::select("region_suc_id", $regions, null, ["class"=> "form-control", "onChange"=> "$(this).changeRegion()"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("province_suc_id", "Provincia")}}{{Form::select("province_suc_id", $provinces, null, ["class"=> "form-control", "onChange"=> "$(this).changeProvince()"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("commune_suc_id", "Comuna")}}{{Form::select("commune_suc_id", $communes, null, ["class"=> "form-control"])}}</div></div></div> <div class="row"><div class="col-md-1"><div class="form-group">{{Form::label("num_suc", "N°")}}{{Form::text("num_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("lot_suc", "Lote")}}{{Form::text("lot_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("ofi_suc", "Oficina")}}{{Form::text("ofi_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("floor_suc", "Piso")}}{{Form::text("floor_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("muni_license_suc", "Patente Municipal")}}{{Form::text("muni_license_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label("email_suc", "Email")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{Form::email("email_suc", null, ["class"=> "form-control", "onBlur"=> "$(this).checkEmail()"])}}</div></div></div></div> <div class="row"> <div class="col-md-2"><div class="form-group">{{Form::label("phone1_suc-", "Teléfono 1")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1_suc-", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-2"><div class="form-group">{{Form::label("phone2_suc-", "Teléfono 2")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2_suc-", null, ["class"=> "form-control"])}}</div></div></div></div><hr/></span>';
 
                 if (count_subsidiary == 0)
                     $('#content_subsidiaries').html($add_subsidiary);
@@ -505,7 +518,9 @@
                 $('#content_subsidiaries #phone2_suc-').attr('id', 'phone2_suc-' + count_subsidiary);
 
                 count_subsidiary++;
-                $('.mitooltip').tooltip();
+                $('#count_subsidiary').attr('value', count_subsidiary);
+
+                initializeComponents();
             }
 
 
@@ -513,12 +528,381 @@
             ******************* Validations *******************
             **************************************************/
 
+
+            function validationForm() {
+
+                if ($('#rut').parent().hasClass('has-error')) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> contiene un valor incorrecto.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#rut').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#rut').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#rut').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if($('#rut').val() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#rut').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#rut').closest('.form-group').find('i.fa-check').remove();
+                    $('#rut').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#rut').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#rut').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#rut').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#rut').val().length > 15) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> no debe ser mayor que 15 caracteres.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#rut').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#rut').closest('.form-group').find('i.fa-check').remove();
+                    $('#rut').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#rut').focus();
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#rut').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#rut').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#firm_name').val() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Razón Social</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#firm_name').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#firm_name').closest('.form-group').find('i.fa-check').remove();
+                    $('#firm_name').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#firm_name').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#firm_name').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#firm_name').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#gyre').val() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Giro</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#gyre').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#gyre').closest('.form-group').find('i.fa-check').remove();
+                    $('#gyre').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#gyre').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#gyre').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#gyre').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#start_act').val() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Inicio Act</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#start_act').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#start_act').closest('.form-group').find('i.fa-check').remove();
+                    $('#start_act').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#start_act').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#start_act').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#start_act').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#address').val() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Dirección</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#address').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#address').closest('.form-group').find('i.fa-check').remove();
+                    $('#address').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#address').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#address').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#address').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#commune_id').text() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Comuna</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#commune_id').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#commune_id').closest('.form-group').find('i.fa-check').remove();
+                    $('#commune_id').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#commune_id').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#commune_id').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#commune_id').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if (isNaN($('#commune_id').val())){
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Comuna</strong> debe ser un número entero.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#commune_id').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#commune_id').closest('.form-group').find('i.fa-check').remove();
+                    $('#commune_id').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#commune_id').focus();
+                    return false;
+                }else{
+                    $('#js').addClass('hide');
+                    $('#commune_id').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#commune_id').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#num').val() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>N°</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#num').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#num').closest('.form-group').find('i.fa-check').remove();
+                    $('#num').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#num').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#num').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#num').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if (isNaN($('#num').val())){
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>N°</strong> debe ser un número entero.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#num').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#num').closest('.form-group').find('i.fa-check').remove();
+                    $('#num').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#num').focus();
+                    return false;
+                }else{
+                    $('#js').addClass('hide');
+                    $('#num').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#num').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#num').val().length > 8) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>N°</strong> no debe ser mayor que 8 caracteres.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#num').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#num').closest('.form-group').find('i.fa-check').remove();
+                    $('#num').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#num').focus();
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#num').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#num').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#lot').val().length > 20) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Lote</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#lot').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#lot').closest('.form-group').find('i.fa-check').remove();
+                    $('#lot').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#lot').focus();
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#lot').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#lot').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#ofi').val().length > 5) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Oficina</strong> no debe ser mayor que 5 caracteres.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#ofi').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#ofi').closest('.form-group').find('i.fa-check').remove();
+                    $('#ofi').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#ofi').focus();
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#ofi').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#ofi').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if (isNaN($('#floor').val())){
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Piso</strong> debe ser un número entero.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#floor').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#floor').closest('.form-group').find('i.fa-check').remove();
+                    $('#floor').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#floor').focus();
+                    return false;
+                }else{
+                    $('#js').addClass('hide');
+                    $('#floor').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#floor').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#floor').val().length > 3) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Piso</strong> no debe ser mayor que 3 caracteres.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#floor').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#floor').closest('.form-group').find('i.fa-check').remove();
+                    $('#floor').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#floor').focus();
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#floor').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#floor').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#muni_license').val() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Patente Municipal</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#muni_license').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#muni_license').closest('.form-group').find('i.fa-check').remove();
+                    $('#muni_license').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#muni_license').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#muni_license').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#muni_license').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#muni_license').val().length > 50) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Patente Municipal</strong> no debe ser mayor que 50 caracteres.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#muni_license').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#muni_license').closest('.form-group').find('i.fa-check').remove();
+                    $('#muni_license').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#muni_license').focus();
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#muni_license').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#muni_license').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#email').parent().parent().hasClass('has-error')) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email</strong> contiene un valor incorrecto.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#email').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#email').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#email').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#email').val() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#email').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#email').closest('.form-group').find('i.fa-check').remove();
+                    $('#email').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#email').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#email').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#email').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#email').val().length > 100) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email</strong> no debe ser mayor que 100 caracteres.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#email').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#email').closest('.form-group').find('i.fa-check').remove();
+                    $('#email').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#email').focus();
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#email').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#email').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#phone1').val() == '') {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> es obligatorio.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#phone1').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#phone1').closest('.form-group').find('i.fa-check').remove();
+                    $('#phone1').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#phone1').focus();
+                    return false;
+                }else {
+                    $('#js').addClass('hide');
+                    $('#phone1').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#phone1').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#phone1').val().length > 20) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#phone1').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#phone1').closest('.form-group').find('i.fa-check').remove();
+                    $('#phone1').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#phone1').focus();
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#phone1').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#phone1').closest('.form-group').find('i.fa-times').remove();
+                }
+
+                if ($('#phone2').val().length > 20) {
+                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 2</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
+                    $("#collapseOne").collapse("show");
+                    $('#phone2').closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    $('#phone2').closest('.form-group').find('i.fa-check').remove();
+                    $('#phone2').closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                    $('#phone2').focus();
+                    return false;
+                } else {
+                    $('#js').addClass('hide');
+                    $('#phone2').closest('.form-group').removeClass('has-error').addClass('has-feedback');
+                    $('#phone2').closest('.form-group').find('i.fa-times').remove();
+                }
+            }
+
+
+
+
+            /**************************************************
+             ******************* Form submit ******************
+             **************************************************/
+
+
             $('#form-company').submit(function(e) {
 
+                e.preventDefault();
 
-                $('#form-company').submit();
+                if(validationForm() != false) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route("maintainers.companies.store") }}',
+                        data: $('#form-company').serialize(),
+                        dataType: "json",
+
+                        beforeSend: function () {
+                            $('.ajax').html('<i class="fa fa-spinner fa-pulse fa-3x"></i>').removeClass('hide');
+                        },
+
+                        success: function (data) {
+                            $('.ajax').addClass('hide');
+                            window.location.href = data[0].url;
+                        },
+
+                        error: function (data) {
+                            $('.ajax').addClass('hide');
+                            var errors = data.responseJSON;
+
+                            $.each(errors, function (index, value) {
+                                $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
+                                $('#' + index).focus();
+                            });
+                        }
+                    });
+                }
             });
-
         });
 
     </script>

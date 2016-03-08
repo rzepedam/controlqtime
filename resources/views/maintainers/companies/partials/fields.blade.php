@@ -17,10 +17,10 @@
 <div class="panel box box-success">
 	<div class="box-header with-border">
 		<h4 class="box-title">
-		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" class="collapsed black">Datos Representante Legal</a>
+		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" class="collapsed black">Datos Representante Legal</a>
 		</h4>
 	</div>
-	<div id="collapseTwo" class="panel-collapse collapse in" aria-expanded="false">
+	<div id="collapseThree" class="panel-collapse collapse in" aria-expanded="false">
 		<div class="box-body">
 
 			<div id="content_legal_representatives">
@@ -41,10 +41,10 @@
 <div class="panel box box-warning">
 	<div class="box-header with-border">
 		<h4 class="box-title">
-		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" class="collapsed black">Datos Sucursales</a>
+		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" class="collapsed black">Datos Sucursales</a>
 		</h4>
 	</div>
-	<div id="collapseThree" class="panel-collapse collapse in" aria-expanded="false">
+	<div id="collapseFour" class="panel-collapse collapse in" aria-expanded="false">
 		<div class="box-body">
 
 			<div id="content_subsidiaries">
@@ -66,6 +66,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<a href="{{ route('maintainers.companies.index') }}">Volver</a>
+        <span class="ajax pull-right text-green"></span>
 	</div>
 	<div class="col-md-6 pull-right">
 		<button id="btn-submit" type="submit" class="btn btn-primary btn-flat btn-lg pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>

@@ -114,3 +114,8 @@ a.black:visited {
 a.black:active {
     color: black;
 }
+
+.box {
+    float: left;
+}
+
