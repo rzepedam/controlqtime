@@ -24,7 +24,7 @@ class CompanyRequest extends SanitizedRequest
         {
             case 'POST':
             {
-                $rules['rut']          = 'required|unique:companies,rut|max:15';
+                /*$rules['rut']          = 'required|unique:companies,rut|max:15';
                 $rules['firm_name']    = 'required';
                 $rules['gyre']         = 'required';
                 $rules['start_act']    = 'required';
@@ -69,7 +69,7 @@ class CompanyRequest extends SanitizedRequest
 
                 }
 
-                return $rules;
+                return $rules;*/
             }
 
             case 'PUT':

@@ -36,6 +36,7 @@ class CompanyController extends Controller
 
     public function store(CompanyRequest $request)
     {
+        dd($request->all());
         $company = Company::create($request->all());
 
         for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {

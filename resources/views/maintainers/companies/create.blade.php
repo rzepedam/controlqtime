@@ -1,9 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-    {{ Html::style('assets/css/dropzone.css') }}
-@stop
-
 @section('title_header') Crear Nueva Empresa @stop
 
 @section('breadcumb')
@@ -14,14 +10,17 @@
 
 @section('content')
 
-    <span class="col-md-12 alert alert-danger hide" id="js"></span>
+    <div class="clearfix">
+        <span class="col-md-12 col-xs-12 alert alert-danger hide" id="js"></span>
+    </div>
 
-    {{ Form::open(array('route' => 'maintainers.companies.store', 'method' => 'POST', 'id' => 'form-company')) }}
+    {{ Form::open(array('route' => 'maintainers.companies.store', 'method' => 'POST', 'id' => 'form-company', 'files' => true)) }}
 
         @include('maintainers.companies.partials.fields')
 
         {{ Form::hidden('count_legal_representative', '1', ['id' => 'count_legal_representative']) }}
         {{ Form::hidden('count_subsidiary', '0', ['id' => 'count_subsidiary']) }}
+
 	{{ Form::close() }}
 
 @stop
@@ -35,7 +34,6 @@
     {{ Html::script('assets/js/inputmask.js') }}
     {{ Html::script('assets/js/inputmask.date.extensions.js') }}
     {{ Html::script('assets/js/jquery.inputmask.js') }}
-    {{ Html::script('assets/js/dropzone.js') }}
 
     <script type="text/javascript">
 
@@ -65,6 +63,7 @@
                     "clearIncomplete": true,
                     yearrange: { minyear: 1900, maxyear: (new Date()).getFullYear() }
                 });
+
             }
 
 
@@ -162,6 +161,7 @@
             /**************************************************
             ************** $(document) Methods ****************
             **************************************************/
+
 
             $(document).on('blur', '.check_rut', function(input) {
 
@@ -531,7 +531,7 @@
 
             function validationForm() {
 
-                /*if ($('#rut').parent().hasClass('has-error')) {
+                if ($('#rut').parent().hasClass('has-error')) {
                     $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> contiene un valor incorrecto.').removeClass('hide');
                     $("#collapseOne").collapse("show");
                     $('#rut').focus();
@@ -1376,7 +1376,7 @@
                         $('#phone2_suc-' + i).closest('.form-group').removeClass('has-error').addClass('has-feedback');
                         $('#phone2_suc-' + i).closest('.form-group').find('i.fa-times').remove();
                     }
-                }*/
+                }
             }
 
 
@@ -1423,6 +1423,8 @@
                     });
                 }
             });
+
+
         });
 
     </script>
