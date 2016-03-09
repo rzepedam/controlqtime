@@ -35,3 +35,23 @@
 
 @stop
 
+@section('scripts')
+
+    <script>
+
+        $(document).ready(function(){
+
+
+            /**************************************************
+             ************** Initialize components **************
+             **************************************************/
+
+            $('.mitooltip').tooltip();
+
+
+
+        });
+
+    </script>
+
+@stop

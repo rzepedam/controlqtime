@@ -24,6 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('email', 100)->unique();
             $table->string('phone1', 20);
             $table->string('phone2', 20);
+            $table->boolean('status')->default(false);
             $table->timestamps();
 
             $table->foreign('commune_id')

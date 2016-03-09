@@ -39,6 +39,7 @@
 
         $(document).ready(function(){
 
+
             /**************************************************
             ******************** Variables ********************
             **************************************************/
@@ -866,7 +867,7 @@
 
                     if ($('#male_surname' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Paterno Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#male_surname' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#male_surname' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#male_surname' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -880,7 +881,7 @@
 
                     if ($('#male_surname' + i).val().length > 30) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Paterno Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 30 caracteres.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#male_surname' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#male_surname' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#male_surname' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -894,7 +895,7 @@
 
                     if ($('#female_surname' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Materno Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#female_surname' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#female_surname' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#female_surname' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -908,7 +909,7 @@
 
                     if ($('#female_surname' + i).val().length > 30) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Materno Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 30 caracteres.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#female_surname' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#female_surname' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#female_surname' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -922,7 +923,7 @@
 
                     if ($('#first_name' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Primer Nombre Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#first_name' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#first_name' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#first_name' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -936,7 +937,7 @@
 
                     if ($('#first_name' + i).val().length > 30) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Primer Nombre Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 30 caracteres.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#first_name' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#first_name' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#first_name' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -950,7 +951,7 @@
 
                     if ($('#second_name' + i).val().length > 30) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Segundo Nombre Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 30 caracteres.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#second_name' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#second_name' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#second_name' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -964,7 +965,7 @@
 
                     if ($('#rut' + i).parent().hasClass('has-error')) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut Rep. Legal ' + (i + 1) + '</strong> contiene un valor incorrecto.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#rut' + i).focus();
                         return false;
                     }else {
@@ -975,7 +976,7 @@
 
                     if ($('#rut' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#rut' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#rut' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#rut' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -989,7 +990,7 @@
 
                     if ($('#rut' + i).val().length > 15) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 15 caracteres.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#rut' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#rut' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#rut' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1003,7 +1004,7 @@
 
                     if ($('#birthday' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Fecha de Nac Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#birthday' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#birthday' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#birthday' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1017,7 +1018,7 @@
 
                     if ($('#nationality_id' + i).text() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nacionalidad Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#nationality_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#nationality_id' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#nationality_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1031,7 +1032,7 @@
 
                     if (isNaN($('#nationality_id' + i).val())){
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nacionalidad Rep. Legal ' + (i + 1) + '</strong> debe ser un número entero.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#nationality_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#nationality_id' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#nationality_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1045,7 +1046,7 @@
 
                     if ($('#email' + i).parent().parent().hasClass('has-error')) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Rep. Legal ' + (i + 1) + '</strong> contiene un valor incorrecto.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#email' + i).focus();
                         return false;
                     }else {
@@ -1056,7 +1057,7 @@
 
                     if ($('#email' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#email' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#email' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#email' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1070,7 +1071,7 @@
 
                     if ($('#email' + i).val().length > 100) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 100 caracteres.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#email' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#email' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#email' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1084,7 +1085,7 @@
 
                     if ($('#phone1-' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1 Rep. Legal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#phone1-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#phone1-' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#phone1-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1098,7 +1099,7 @@
 
                     if ($('#phone1-' + i).val().length > 20) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1 Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#phone1-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#phone1-' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#phone1-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1112,7 +1113,7 @@
 
                     if ($('#phone2-' + i).val().length > 20) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 2 Rep. Legal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
-                        $("#collapseThree").collapse("show");
+                        $("#collapseTwo").collapse("show");
                         $('#phone2-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#phone2-' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#phone2-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1130,7 +1131,7 @@
 
                     if ($('#address_suc' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Dirección Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#address_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#address_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#address_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1144,7 +1145,7 @@
 
                     if ($('#commune_suc_id' + i).text() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Comuna Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#commune_suc_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#commune_suc_id' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#commune_suc_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1158,7 +1159,7 @@
 
                     if (isNaN($('#commune_suc_id' + i).val())){
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Comuna Sucursal ' + (i + 1) + '</strong> debe ser un número entero.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#commune_suc_id' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#commune_suc_id' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#commune_suc_id' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1172,7 +1173,7 @@
 
                     if ($('#num_suc' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>N° Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#num_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#num_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#num_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1186,7 +1187,7 @@
 
                     if (isNaN($('#num_suc' + i).val())){
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>N° Sucursal ' + (i + 1) + '</strong> debe ser un número entero.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#num_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#num_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#num_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1200,7 +1201,7 @@
 
                     if ($('#num_suc' + i).val().length > 8) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>N° Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 8 caracteres.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#num_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#num_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#num_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1214,7 +1215,7 @@
 
                     if ($('#lot_suc' + i).val().length > 20) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Lote Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#lot_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#lot_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#lot_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1228,7 +1229,7 @@
 
                     if ($('#ofi_suc' + i).val().length > 5) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Oficina Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 5 caracteres.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#ofi_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#ofi_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#ofi_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1242,7 +1243,7 @@
 
                     if (isNaN($('#floor_suc' + i).val())){
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Piso Sucursal ' + (i + 1) + '</strong> debe ser un número entero.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#floor_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#floor_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#floor_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1256,7 +1257,7 @@
 
                     if ($('#floor_suc' + i).val().length > 3) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Piso Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 3 caracteres.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#floor_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#floor_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#floor_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1270,7 +1271,7 @@
 
                     if ($('#muni_license_suc' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Patente Municipal Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#muni_license_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#muni_license_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#muni_license_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1284,7 +1285,7 @@
 
                     if ($('#muni_license_suc' + i).val().length > 50) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Patente Municipal Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 50 caracteres.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#muni_license_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#muni_license_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#muni_license_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1298,7 +1299,7 @@
 
                     if ($('#email_suc' + i).parent().parent().hasClass('has-error')) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Sucursal ' + (i + 1) + '</strong> contiene un valor incorrecto.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#email_suc' + i).focus();
                         return false;
                     }else {
@@ -1309,7 +1310,7 @@
 
                     if ($('#email_suc' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#email_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#email_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#email_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1323,7 +1324,7 @@
 
                     if ($('#email_suc' + i).val().length > 100) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 100 caracteres.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#email_suc' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#email_suc' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#email_suc' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1337,7 +1338,7 @@
 
                     if ($('#phone1_suc-' + i).val() == '') {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1 Sucursal ' + (i + 1) + '</strong> es obligatorio.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#phone1_suc-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#phone1_suc-' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#phone1_suc-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1351,7 +1352,7 @@
 
                     if ($('#phone1_suc-' + i).val().length > 20) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1 Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#phone1_suc-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#phone1_suc-' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#phone1_suc-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
@@ -1365,7 +1366,7 @@
 
                     if ($('#phone2_suc-' + i).val().length > 20) {
                         $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 2 Sucursal ' + (i + 1) + '</strong> no debe ser mayor que 20 caracteres.').removeClass('hide');
-                        $("#collapseFour").collapse("show");
+                        $("#collapseThree").collapse("show");
                         $('#phone2_suc-' + i).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
                         $('#phone2_suc-' + i).closest('.form-group').find('i.fa-check').remove();
                         $('#phone2_suc-' + i).closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');

@@ -64,6 +64,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('certifications', 'CertificationController');
         Route::resource('cities', 'CityController');
         Route::resource('companies', 'CompanyController');
+            Route::get('companies/attachFiles/{id}', ['as' => 'maintainers.companies.attachFiles', 'uses' => 'CompanyController@getUpload']);
+            Route::post('companies/attachFiles', ['as' => 'maintainers.companies.attachFiles', 'uses' => 'CompanyController@saveFiles']);
         Route::resource('countries', 'CountryController');
         Route::resource('degrees', 'DegreeController');
         Route::resource('disabilities', 'DisabilityController');

@@ -36,7 +36,6 @@ class CompanyController extends Controller
 
     public function store(CompanyRequest $request)
     {
-        dd($request->all());
         $company = Company::create($request->all());
 
         for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {
@@ -106,5 +105,15 @@ class CompanyController extends Controller
         $company->delete();
         Session::flash('success', $company->name . ' fue eliminado de nuestros registros');
         return redirect()->route('maintainers.companies.index');
+    }
+
+    public function getUpload($id)
+    {
+        return view('maintainers.companies.upload');
+    }
+
+    public function saveFiles(Request $request)
+    {
+        dd($request->all());
     }
 }

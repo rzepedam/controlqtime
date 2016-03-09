@@ -2,7 +2,6 @@ $(document).ready(function(){
 
     var id;
     var form;
-    var row;
 
     $('.btn-delete').click(function(e){
         e.preventDefault();
