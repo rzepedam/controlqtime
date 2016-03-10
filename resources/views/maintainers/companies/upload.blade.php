@@ -78,45 +78,55 @@
 
             $("#rut").fileinput({
 
+                browseClass: "btn btn-primary mitooltip",
+                browseLabel: "Seleccione..",
+                browseIcon: "<i class='fa fa-folder-open'></i>",
+                deleteExtraData: {
+                    company: {{ $id }},
+                    type: 'rut'
+                },
+
                 initialPreview: [
                     @foreach($imagesRut as $image)
-                        "<img style='height:160px' src='{{ asset("/storage/companies/" . $id . "/rut/" . $image->name) }}' />",
+                            "<img style='height:160px' src='{{ asset("/storage/companies/" . $id . "/rut/" . $image->name) }}' />",
                     @endforeach
                 ],
 
                 initialPreviewConfig: [
 
-                    @foreach($imagesRut as $image)
-                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
+                        @foreach($imagesRut as $image)
+                    { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
                     @endforeach
                 ],
 
-                uploadUrl: '{{ url("maintainers/companies/attachFiles") }}',
                 language: "es",
-                browseClass: "btn btn-primary mitooltip",
-                browseLabel: "Seleccione..",
-                browseIcon: "<i class='fa fa-folder-open'></i>",
                 minFileCount: 1,
+                overwriteInitial: false,
                 removeClass: "btn btn-danger",
                 removeLabel: "",
                 removeTitle: "",
                 removeIcon: "<i class='glyphicon glyphicon-trash'></i> ",
-                uploadClass: "btn btn-info",
-                uploadLabel: "",
-                uploadTitle: "",
-                uploadIcon: "<i class='fa fa-cloud-upload'></i>",
                 uploadAsync: true,
+                uploadClass: "btn btn-info",
                 uploadExtraData:  {
                     id: {{ $id }},
                     type: 'rut'
                 },
-                deleteExtraData: {
-                    company: {{ $id }},
-                    type: 'rut'
-                }
+                uploadIcon: "<i class='fa fa-cloud-upload'></i>",
+                uploadLabel: "",
+                uploadTitle: "",
+                uploadUrl: '{{ url("maintainers/companies/attachFiles") }}'
             });
 
             $("#license").fileinput({
+
+                browseClass: "btn btn-primary mitooltip",
+                browseLabel: "Seleccione..",
+                browseIcon: "<i class='fa fa-folder-open'></i>",
+                deleteExtraData: {
+                    company: {{ $id }},
+                    type: 'license'
+                },
 
                 initialPreview: [
                     @foreach($imagesLicense as $image)
@@ -131,30 +141,23 @@
                     @endforeach
                 ],
 
-                uploadUrl: '{{ url("maintainers/companies/attachFiles") }}',
                 language: "es",
-                browseClass: "btn btn-primary mitooltip",
-                browseLabel: "Seleccione..",
-                browseIcon: "<i class='fa fa-folder-open'></i>",
                 minFileCount: 1,
+                overwriteInitial: false,
                 removeClass: "btn btn-danger",
                 removeLabel: "",
                 removeTitle: "",
                 removeIcon: "<i class='glyphicon glyphicon-trash'></i> ",
-                uploadClass: "btn btn-info",
-                uploadLabel: "",
-                uploadTitle: "",
-                uploadIcon: "<i class='fa fa-cloud-upload'></i>",
                 uploadAsync: true,
+                uploadClass: "btn btn-info",
                 uploadExtraData:  {
                     id: {{ $id }},
                     type: 'license'
                 },
-                deleteExtraData: {
-                    company: {{ $id }},
-                    type: 'license'
-                }
-
+                uploadIcon: "<i class='fa fa-cloud-upload'></i>",
+                uploadLabel: "",
+                uploadTitle: "",
+                uploadUrl: '{{ url("maintainers/companies/attachFiles") }}'
             });
 
         });
