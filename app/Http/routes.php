@@ -65,7 +65,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('cities', 'CityController');
         Route::resource('companies', 'CompanyController');
             Route::get('companies/attachFiles/{id}', ['as' => 'maintainers.companies.attachFiles', 'uses' => 'CompanyController@getUpload']);
-            Route::post('companies/attachFiles', ['as' => 'maintainers.companies.attachFiles', 'uses' => 'CompanyController@saveFiles']);
+            Route::post('companies/attachFiles', ['as' => 'maintainers.companies.attachFiles', 'uses' => 'CompanyController@addFiles']);
             Route::post('companies/deleteFiles', ['as' => 'maintainers.companies.deleteFiles', 'uses' => 'CompanyController@deleteFiles']);
         Route::resource('countries', 'CountryController');
         Route::resource('degrees', 'DegreeController');

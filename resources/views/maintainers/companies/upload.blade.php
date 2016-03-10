@@ -16,64 +16,50 @@
 
 @section('content')
 
-    <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab_1" data-toggle="tab">Subir imágenes</a></li>
-            <li><a href="#tab_2" data-toggle="tab">Imágenes existentes</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="tab_1">
-                <br />
-                <br />
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10">
-                        <div class="box box-solid box-primary">
-                            <div class="box-header">
-                                <h3 class="box-title">Rut Empresa</h3>
-                                <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            </div>
-                            <div class="box-body">
-                                <br />
-
-                                <input id="rut" type="file" class="file-loading" multiple>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="box box-solid box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><strong>#</strong> Rut Empresa</h3>
+                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
-                <br />
-                <br />
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10">
-                        <div class="box box-solid box-success">
-                            <div class="box-header">
-                                <h3 class="box-title">Patente Municipal</h3>
-                                <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            </div>
-                            <div class="box-body">
-                                <br />
+                <div class="box-body">
+                    <br />
 
-                                <input id="license" type="file" class="file-loading" multiple>
+                    <input id="rut" type="file" class="file-loading" multiple>
 
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <br />
-                <br />
             </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <br />
+    <br />
 
-            <div class="tab-pane" id="tab_2">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="box box-solid box-warning">
+                <div class="box-header">
+                    <h3 class="box-title"><strong>#</strong> Patente Municipal</h3>
+                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div>
+                <div class="box-body">
+                    <br />
 
+                    <input id="license" type="file" class="file-loading" multiple>
+
+                </div>
             </div>
         </div>
     </div>
     <br />
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
             <a href="{{ route('maintainers.companies.index') }}">Volver</a>
         </div>
     </div>
@@ -93,15 +79,15 @@
             $("#rut").fileinput({
 
                 initialPreview: [
-                    @foreach($images as $image)
-                        "<img style='height:160px' src='{{ asset("/storage/companies/2/rut/" . $image->name) }}' />",
+                    @foreach($imagesRut as $image)
+                        "<img style='height:160px' src='{{ asset("/storage/companies/" . $id . "/rut/" . $image->name) }}' />",
                     @endforeach
                 ],
 
                 initialPreviewConfig: [
 
-                    @foreach($images as $image)
-                        {caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
+                    @foreach($imagesRut as $image)
+                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
                     @endforeach
                 ],
 
@@ -121,7 +107,8 @@
                 uploadIcon: "<i class='fa fa-cloud-upload'></i>",
                 uploadAsync: true,
                 uploadExtraData:  {
-                    id: {{ $id }}
+                    id: {{ $id }},
+                    type: 'rut'
                 },
                 deleteExtraData: {
                     company: {{ $id }},
@@ -132,15 +119,15 @@
             $("#license").fileinput({
 
                 initialPreview: [
-                    @foreach($images as $image)
-                        "<img style='height:160px' src='{{ asset("/storage/companies/2/rut/" . $image->name) }}' />",
+                    @foreach($imagesLicense as $image)
+                            "<img style='height:160px' src='{{ asset("/storage/companies/" . $id . "/license/" . $image->name) }}' />",
                     @endforeach
                 ],
 
                 initialPreviewConfig: [
 
-                    @foreach($images as $image)
-                        {caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
+                    @foreach($imagesLicense as $image)
+                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
                     @endforeach
                 ],
 
@@ -160,12 +147,14 @@
                 uploadIcon: "<i class='fa fa-cloud-upload'></i>",
                 uploadAsync: true,
                 uploadExtraData:  {
-                    id: {{ $id }}
+                    id: {{ $id }},
+                    type: 'license'
                 },
                 deleteExtraData: {
                     company: {{ $id }},
-                    type: 'rut'
+                    type: 'license'
                 }
+
             });
 
         });

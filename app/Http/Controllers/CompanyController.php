@@ -16,7 +16,8 @@ use App\Region;
 use App\Province;
 use App\LegalRepresentative;
 use App\Subsidiary;
-use App\ImageCompany;
+use App\ImageRutCompany;
+use App\ImageLicenseCompany;
 
 
 class CompanyController extends Controller
@@ -111,28 +112,35 @@ class CompanyController extends Controller
 
     public function getUpload($id)
     {
-        $images = Company::findOrFail($id)->imageCompanies;
-        return view('maintainers.companies.upload', compact('id', 'images'));
+        $imagesRut      = Company::findOrFail($id)->imageRutCompanies;
+        $imagesLicense  = Company::findOrFail($id)->imageLicenseCompanies;
+        return view('maintainers.companies.upload', compact('id', 'imagesRut', 'imagesLicense'));
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function saveFiles(Request $request)
+    public function addFiles(Request $request)
     {
         $id                     = $request->get('id');
-        $path                   = public_path() . '/storage/companies/' . $id . '/rut/';
+        $type                   = $request->get('type');
+        $path                   = public_path() . '/storage/companies/' . $id . '/' . $type . '/';
         $company                = Company::findOrFail($id);
         $file                   = $request->file('file_data');
         $extension              = $file->getClientOriginalExtension();
         $filename               = Str::random(15) . '.' . $extension;
-        $imgCompany             = new ImageCompany();
+
+        if ($type == 'rut')
+            $imgCompany = new ImageRutCompany();
+        else
+            $imgCompany = new ImageLicenseCompany();
+
         $imgCompany->name       = $filename;
         $imgCompany->orig_name  = $file->getClientOriginalName();
         $imgCompany->mime       = $file->getClientMimeType();
-
         $imgCompany->company()->associate($company);
+
         File::makeDirectory($path, $mode = 0777, true, true);
         $file->move($path, $filename);
 
@@ -152,12 +160,15 @@ class CompanyController extends Controller
         $company    = $request->get('company');
         $type       = $request->get('type');
         $id         = $request->get('key');
-        $image      = ImageCompany::find($id);
+
+        if ($type == 'rut')
+            $image  = ImageRutCompany::find($id);
+        else
+            $image  = ImageLicenseCompany::find($id);
 
         if ($image->delete()) {
             $path = public_path() . '/storage/companies/' . $company . '/' . $type . '/' . $image->name;
             File::delete($path);
-
             return response()->json(['success' => true], 200);
         }
 

@@ -33,10 +33,16 @@ class Company extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function imageCompanies() {
-        return $this->hasMany('App\ImageCompany');
+    public function imageRutCompanies() {
+        return $this->hasMany('App\ImageRutCompany');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function imageLicenseCompanies() {
+        return $this->hasMany('App\ImageLicenseCompany');
+    }
 
     /**
      * @param string $value
