@@ -25,15 +25,15 @@
                     <li><a href="{{ route('maintainers.diseases.index') }}"><i class="fa fa-bed"></i> Enfermedades</a></li>
                     <li><a href="#"><i class="fa fa-shield"></i> EPP's</a></li>
                     <li><a href="{{ route('maintainers.specialities.index') }}"><i class="fa fa-wrench"></i> Especialidades</a></li>
-                    <li><a href="{{ route('maintainers.exams.index') }}"><i class="fa fa-stethoscope"></i> Exámenes Preocupacionales</a></li>
+                    <li><a href="{{ route('maintainers.exams.index') }}"><i class="fa fa-stethoscope"></i> Ex. Preocupacionales</a></li>
                     <li><a href="{{ route('maintainers.pensions.index') }}"><i class="fa fa-tags"></i> Fondos de Pensión</a></li>
                     <li><a href="{{ route('maintainers.degrees.index') }}"><i class="fa fa-star-half-o"></i> Grados Académicos</a></li>
                     <li><a href="{{ route('maintainers.institutions.index') }}"><i class="fa fa-graduation-cap"></i> Instituciones</a></li>
-                    <li><a href="{{ route('maintainers.licenses.index') }}"><i class="fa fa-star"></i> Licencias Profesionales</a></li>
+                    <li><a href="{{ route('maintainers.licenses.index') }}"><i class="fa fa-star"></i> Lic. Profesionales</a></li>
                     <li><a href="#"><i class="fa fa-money"></i> Monedas</a></li>
                     <li><a href="{{ route('maintainers.mutualities.index') }}"><i class="fa fa-ambulance"></i> Mutualidades</a></li>
                     <li><a href="{{ route('maintainers.countries.index') }}"><i class="fa fa-flag"></i> Países</a></li>
-                    <li><a href="{{ route('maintainers.kins.index') }}"><i class="fa fa-child"></i> Parentescos Familiares</a></li>
+                    <li><a href="{{ route('maintainers.kins.index') }}"><i class="fa fa-child"></i> Parentescos Fam.</a></li>
                     <li><a href="{{ route('maintainers.forecasts.index') }}"><i class="fa fa-heart"></i> Previsiones</a></li>
                     <li><a href="#"><i class="fa fa-cubes"></i> Productos</a></li>
                     <li><a href="{{ route('maintainers.professions.index') }}"><i class="fa fa-briefcase"></i> Profesiones</a></li>

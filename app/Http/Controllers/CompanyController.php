@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 use App\Http\Requests\CompanyRequest;
 use App\Company;
 use App\Nationality;
 use App\Region;
 use App\Province;
-use App\Commune;
 use App\LegalRepresentative;
 use App\Subsidiary;
+use App\ImageCompany;
 
 
 class CompanyController extends Controller
@@ -109,11 +111,56 @@ class CompanyController extends Controller
 
     public function getUpload($id)
     {
-        return view('maintainers.companies.upload');
+        $images = Company::findOrFail($id)->imageCompanies;
+        return view('maintainers.companies.upload', compact('id', 'images'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function saveFiles(Request $request)
     {
-        dd($request->all());
+        $id                     = $request->get('id');
+        $path                   = public_path() . '/storage/companies/' . $id . '/rut/';
+        $company                = Company::findOrFail($id);
+        $file                   = $request->file('file_data');
+        $extension              = $file->getClientOriginalExtension();
+        $filename               = Str::random(15) . '.' . $extension;
+        $imgCompany             = new ImageCompany();
+        $imgCompany->name       = $filename;
+        $imgCompany->orig_name  = $file->getClientOriginalName();
+        $imgCompany->mime       = $file->getClientMimeType();
+
+        $imgCompany->company()->associate($company);
+        File::makeDirectory($path, $mode = 0777, true, true);
+        $file->move($path, $filename);
+
+        if (!$imgCompany->save())
+            return response()->json(['success' => false], 400);
+
+        return response()->json(['success' => true], 200);
+
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteFiles(Request $request) {
+
+        $company    = $request->get('company');
+        $type       = $request->get('type');
+        $id         = $request->get('key');
+        $image      = ImageCompany::find($id);
+
+        if ($image->delete()) {
+            $path = public_path() . '/storage/companies/' . $company . '/' . $type . '/' . $image->name;
+            File::delete($path);
+
+            return response()->json(['success' => true], 200);
+        }
+
+        return response()->json(['success' => false], 400);
     }
 }

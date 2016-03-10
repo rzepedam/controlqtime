@@ -21,15 +21,36 @@ class Company extends Model
         }
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function legalRepresentatives() {
         return $this->hasMany('App\LegalRepresentative');
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function imageCompanies() {
+        return $this->hasMany('App\ImageCompany');
+    }
+
+
+    /**
+     * @param string $value
+     */
     public function setStartActAttribute($value) {
         $this->attributes['start_act'] = strtotime($value);
     }
 
+
+    /**
+     * @param string $value
+     */
     public function setEmailAttribute($value) {
         $this->attributes['email'] = strtolower($value);
     }
+
 }

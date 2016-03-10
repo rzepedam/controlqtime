@@ -36,7 +36,7 @@
                             <div class="box-body">
                                 <br />
 
-                                <input type="file" class="file-loading input-id" multiple>
+                                <input id="rut" type="file" class="file-loading" multiple>
 
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                             <div class="box-body">
                                 <br />
 
-                                <input type="file" name="files[]" class="file-loading input-id" multiple>
+                                <input id="license" type="file" class="file-loading" multiple>
 
                             </div>
                         </div>
@@ -90,14 +90,27 @@
 
         $(document).ready(function(){
 
-            $(".input-id").fileinput({
+            $("#rut").fileinput({
 
-                uploadUrl: "{{ url('maintainers/companies/attachFiles') }}",
-                uploadAsync: true,
+                initialPreview: [
+                    @foreach($images as $image)
+                        "<img style='height:160px' src='{{ asset("/storage/companies/2/rut/" . $image->name) }}' />",
+                    @endforeach
+                ],
+
+                initialPreviewConfig: [
+
+                    @foreach($images as $image)
+                        {caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
+                    @endforeach
+                ],
+
+                uploadUrl: '{{ url("maintainers/companies/attachFiles") }}',
                 language: "es",
                 browseClass: "btn btn-primary mitooltip",
                 browseLabel: "Seleccione..",
                 browseIcon: "<i class='fa fa-folder-open'></i>",
+                minFileCount: 1,
                 removeClass: "btn btn-danger",
                 removeLabel: "",
                 removeTitle: "",
@@ -105,10 +118,55 @@
                 uploadClass: "btn btn-info",
                 uploadLabel: "",
                 uploadTitle: "",
-                uploadIcon: "<i class='fa fa-cloud-upload'></i>"
-
+                uploadIcon: "<i class='fa fa-cloud-upload'></i>",
+                uploadAsync: true,
+                uploadExtraData:  {
+                    id: {{ $id }}
+                },
+                deleteExtraData: {
+                    company: {{ $id }},
+                    type: 'rut'
+                }
             });
 
+            $("#license").fileinput({
+
+                initialPreview: [
+                    @foreach($images as $image)
+                        "<img style='height:160px' src='{{ asset("/storage/companies/2/rut/" . $image->name) }}' />",
+                    @endforeach
+                ],
+
+                initialPreviewConfig: [
+
+                    @foreach($images as $image)
+                        {caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
+                    @endforeach
+                ],
+
+                uploadUrl: '{{ url("maintainers/companies/attachFiles") }}',
+                language: "es",
+                browseClass: "btn btn-primary mitooltip",
+                browseLabel: "Seleccione..",
+                browseIcon: "<i class='fa fa-folder-open'></i>",
+                minFileCount: 1,
+                removeClass: "btn btn-danger",
+                removeLabel: "",
+                removeTitle: "",
+                removeIcon: "<i class='glyphicon glyphicon-trash'></i> ",
+                uploadClass: "btn btn-info",
+                uploadLabel: "",
+                uploadTitle: "",
+                uploadIcon: "<i class='fa fa-cloud-upload'></i>",
+                uploadAsync: true,
+                uploadExtraData:  {
+                    id: {{ $id }}
+                },
+                deleteExtraData: {
+                    company: {{ $id }},
+                    type: 'rut'
+                }
+            });
 
         });
 
