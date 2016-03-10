@@ -78,6 +78,7 @@
 
             $("#rut").fileinput({
 
+                allowedFileExtensions: ["jpg", "png", "jpeg"],
                 browseClass: "btn btn-primary mitooltip",
                 browseLabel: "Seleccione..",
                 browseIcon: "<i class='fa fa-folder-open'></i>",
@@ -120,6 +121,7 @@
 
             $("#license").fileinput({
 
+                allowedFileExtensions: ["jpg", "png", "gif"],
                 browseClass: "btn btn-primary mitooltip",
                 browseLabel: "Seleccione..",
                 browseIcon: "<i class='fa fa-folder-open'></i>",
