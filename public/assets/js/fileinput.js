@@ -2620,7 +2620,7 @@
         language: 'en',
         showCaption: true,
         showPreview: true,
-        showRemove: true,
+        showRemove: false,
         showUpload: true,
         showCancel: true,
         showClose: true,

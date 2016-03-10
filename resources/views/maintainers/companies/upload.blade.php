@@ -63,6 +63,7 @@
             <a href="{{ route('maintainers.companies.index') }}">Volver</a>
         </div>
     </div>
+    <br />
 
 @stop
 
