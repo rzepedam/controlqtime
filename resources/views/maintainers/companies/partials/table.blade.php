@@ -17,7 +17,7 @@
                     <td>{{ $company->firm_name }}</td>
                     <td>{{ $company->email }}</td>
                     @if (!$company->status)
-                        <td class="text-center"><a href="{{ url('maintainers/companies/attachFiles/' . $company->id) }}" class="label label-danger mitooltip upload-files" data-html="true" title="Para activar Empresa, debe adjuntar imágenes. Haga click!">No Activada</a></td>
+                        <td class="text-center"><a href="{{ url('maintainers/companies/attachFiles/' . $company->id) }}" class="label label-danger upload-files">Activación pendiente</a></td>
                     @else
                         <td></td>
                     @endif
