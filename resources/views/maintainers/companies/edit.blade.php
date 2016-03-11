@@ -1,11 +1,11 @@
 @extends('layout.index')
 
-@section('title_header') Crear Nueva Empresa @stop
+@section('title_header') Editar Registro @stop
 
 @section('breadcumb')
     <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
-    <li class="active">Nuevo</li>
+    <li class="active">Editar</li>
 @stop
 
 @section('content')
@@ -14,14 +14,15 @@
         <span class="col-md-12 col-xs-12 alert alert-danger hide" id="js"></span>
     </div>
 
-    {{ Form::open(array('route' => 'maintainers.companies.store', 'method' => 'POST', 'id' => 'form-company', 'files' => true)) }}
+    {{ Form::model($company, array('route' => ['maintainers.companies.update', $company], 'method' => 'PUT', 'id' => 'form-company')) }}
 
         @include('maintainers.companies.partials.fields')
 
-        {{ Form::hidden('count_legal_representative', '1', ['id' => 'count_legal_representative']) }}
-        {{ Form::hidden('count_subsidiary', '0', ['id' => 'count_subsidiary']) }}
+        {{ Form::hidden('count_legal_representative', $company->num_representative, ['id' => 'count_legal_representative']) }}
+        {{ Form::hidden('count_subsidiary', $company->num_subsidiary, ['id' => 'count_subsidiary']) }}
 
-	{{ Form::close() }}
+
+    {{ Form::close() }}
 
 @stop
 
@@ -36,27 +37,26 @@
     {{ Html::script('assets/js/inputmask.js') }}
     {{ Html::script('assets/js/inputmask.date.extensions.js') }}
     {{ Html::script('assets/js/jquery.inputmask.js') }}
+    {{ Html::script('me/js/delete.js') }}
 
     <script type="text/javascript">
 
         $(document).ready(function(){
 
-
             /**************************************************
-            ******************** Variables ********************
-            **************************************************/
+             ******************** Variables ********************
+             **************************************************/
 
-            var count_legal_representative = 1;
-            var count_subsidiary           = 0;
-
+            var count_legal_representative = {{ $company->num_representative }};
+            var count_subsidiary           = {{ $company->num_subsidiary }};
 
 
             /**************************************************
-            ************** Initialize components **************
-            **************************************************/
+             ************** Initialize components **************
+             **************************************************/
+
 
             initializeComponents();
-
 
             function initializeComponents() {
 
@@ -68,13 +68,30 @@
                     "clearIncomplete": true,
                     yearrange: { minyear: 1900, maxyear: (new Date()).getFullYear() }
                 });
+            }
 
+            /** added class success ans icon check to rut ans email */
+            $('#rut').closest('.form-group').addClass('has-success has-feedback');
+            $('#rut').closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+            $('#email').closest('.form-group').addClass('has-success has-feedback');
+            $('#email').closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+
+            for(var i = 0; i < count_legal_representative; i++) {
+                $('#rut' + i).closest('.form-group').addClass('has-success has-feedback');
+                $('#rut' + i).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+                $('#email' + i).closest('.form-group').addClass('has-success has-feedback');
+                $('#email' + i).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+            }
+
+            for(var i = 0; i < count_subsidiary; i++) {
+                $('#email_suc' + i).closest('.form-group').addClass('has-success has-feedback');
+                $('#email_suc' + i).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
             }
 
 
             /**************************************************
-            ************** $(document) Methods ****************
-            **************************************************/
+             ************** $(document) Methods ****************
+             **************************************************/
 
 
             $(document).on('click', '.delete-elements-panel2', function() {
@@ -147,7 +164,7 @@
                         count_legal_representative--;
                         $('#count_legal_representative').attr('value', count_legal_representative);
 
-                    break;
+                        break;
 
                     case 'subsidiary':
 
@@ -222,16 +239,17 @@
                             $('#content_subsidiaries').html(html);
                         }
 
-                    break;
+                        break;
 
 
                 }
             });
 
 
+
             /**************************************************
-            ****************** Add elements *******************
-            **************************************************/
+             ****************** Add elements *******************
+             **************************************************/
 
 
             $.fn.addLegalRepresentative = function() {
@@ -366,10 +384,9 @@
             }
 
 
-
             /**************************************************
-            ******************* Validations *******************
-            **************************************************/
+             ******************* Validations *******************
+             **************************************************/
 
 
             function validationForm() {
@@ -1223,7 +1240,6 @@
             }
 
 
-
             /**************************************************
              ******************* Form submit ******************
              **************************************************/
@@ -1236,8 +1252,8 @@
                 if(validationForm() != false) {
 
                     $.ajax({
-                        type: 'POST',
-                        url: '{{ route("maintainers.companies.store") }}',
+                        type: 'PUT',
+                        url: '/maintainers/companies/{{ $company->id }}',
                         data: $('#form-company').serialize(),
                         dataType: "json",
 
@@ -1267,10 +1283,7 @@
                 }
             });
 
-
         });
 
     </script>
-
 @stop
-

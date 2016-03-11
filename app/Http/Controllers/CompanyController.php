@@ -18,6 +18,7 @@ use App\LegalRepresentative;
 use App\Subsidiary;
 use App\ImageRutCompany;
 use App\ImageLicenseCompany;
+use App\Commune;
 
 
 class CompanyController extends Controller
@@ -30,11 +31,13 @@ class CompanyController extends Controller
 
     public function create()
     {
-        $nationalities = Nationality::lists('name', 'id');
-        $regions       = Region::lists('name', 'id');
-        $provinces     = Region::first()->provinces->lists('name', 'id');
-        $communes      = Province::first()->communes->lists('name', 'id');
-        return view('maintainers.companies.create', compact('nationalities', 'regions', 'provinces', 'communes'));
+        $nationalities  = Nationality::lists('name', 'id');
+        $regions        = Region::lists('name', 'id');
+        $region         = Region::first();
+        $provinces      = Region::find($region->id)->provinces->lists('name', 'id');
+        $province       = Province::first();
+        $communes       = Province::find($province->id)->communes->lists('name', 'id');
+        return view('maintainers.companies.create', compact('nationalities', 'regions', 'region', 'provinces', 'province', 'communes'));
     }
 
     public function store(CompanyRequest $request)
@@ -88,12 +91,31 @@ class CompanyController extends Controller
 
     public function edit($id)
     {
-        $company = Company::findOrFail($id);
-        return view('maintainers.companies.edit', compact('company'));
+        $company        = Company::findOrFail($id);
+        $regions        = Region::lists('name', 'id');
+        $region         = Commune::find($company->commune_id)->province->region;
+        $provinces      = Region::find($region->id)->provinces->lists('name', 'id');
+        $province       = Commune::find($company->commune_id)->province;
+        $communes       = Province::find($province->id)->communes->lists('name', 'id');
+        $nationalities  = Nationality::lists('name', 'id');
+
+        /* load provinces and commune to subsidiaries */
+        if(count($company->subsidiaries) >0) {
+            $subsidiary = $company->subsidiaries;
+            for($i = 0; $i < count($company->subsidiaries); $i++) {
+                $region_sub[$i]     = Commune::find($subsidiary[$i]->commune_id)->province->region;
+                $provinces_sub[$i]  = Region::find($region_sub[$i]->id)->provinces->lists('name', 'id');
+                $province_sub[$i]   = Commune::find($subsidiary[$i]->commune_id)->province;
+                $communes_sub[$i]   = Province::find($province_sub[$i]->id)->communes->lists('name', 'id');
+            }
+        }
+
+        return view('maintainers.companies.edit', compact('company', 'regions', 'region', 'provinces', 'province', 'communes', 'nationalities', 'region_sub', 'provinces_sub', 'province_sub', 'communes_sub'));
     }
 
     public function update(CompanyRequest $request, $id)
     {
+        dd($request->all());
         $company = Company::findOrFail($id);
         $message = $company->name . ' fue actualizado satisfactoriamente';
         $company->fill($request->all());
@@ -116,6 +138,7 @@ class CompanyController extends Controller
         $imagesLicense  = Company::findOrFail($id)->imageLicenseCompanies;
         return view('maintainers.companies.upload', compact('id', 'imagesRut', 'imagesLicense'));
     }
+
 
     /**
      * @param Request $request

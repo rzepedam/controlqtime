@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
+
+    /*
+     * Properties
+     */
+
     protected $fillable = [
         'id', 'rut', 'firm_name', 'gyre', 'start_act', 'address', 'commune_id', 'num', 'lot', 'ofi', 'floor', 'muni_license', 'email', 'phone1', 'phone2'
     ];
@@ -22,41 +27,54 @@ class Company extends Model
     }
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    /*
+     * Relationships
      */
+
     public function legalRepresentatives() {
         return $this->hasMany('App\LegalRepresentative');
     }
 
+    public function subsidiaries() {
+        return $this->hasMany('App\Subsidiary');
+    }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function imageRutCompanies() {
         return $this->hasMany('App\ImageRutCompany');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function imageLicenseCompanies() {
         return $this->hasMany('App\ImageLicenseCompany');
     }
 
-    /**
-     * @param string $value
+
+    /*
+     * Set methods (Mutators)
      */
+
     public function setStartActAttribute($value) {
         $this->attributes['start_act'] = strtotime($value);
     }
 
 
-    /**
-     * @param string $value
-     */
     public function setEmailAttribute($value) {
         $this->attributes['email'] = strtolower($value);
     }
 
+
+    /*
+     * Get methods (Accesors)
+     */
+
+    public function getStartActAttribute($value) {
+        return date('d-m-Y', $value);
+    }
+
+    public function getNumSubsidiaryAttribute() {
+        return count($this->subsidiaries);
+    }
+
+    public function getNumRepresentativeAttribute() {
+        return count($this->legalRepresentatives);
+    }
 }

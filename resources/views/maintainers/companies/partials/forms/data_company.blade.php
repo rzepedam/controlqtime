@@ -39,13 +39,13 @@
         <div class="col-md-2">
             <div class="form-group">
                     {{ Form::label('region_id', 'Región') }}
-                    {{ Form::select('region_id', $regions, null, ['class' => 'form-control']) }}
+                    {{ Form::select('region_id', $regions, $region->id, ['class' => 'form-control']) }}
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 {{ Form::label('province_id', 'Provincia')}}
-                {{ Form::select('province_id', $provinces, null, ['class' => 'form-control']) }}
+                {{ Form::select('province_id', $provinces, $province->id, ['class' => 'form-control']) }}
             </div>
         </div>
         <div class="col-md-2">
@@ -93,7 +93,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-envelope"></i>
                     </div>
-                    {{ Form::email('email', null, ['class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+                    {{ Form::text('email', null, ['class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@
 @section('content')
 
     <div class="box box-success">
-        {!! Form::model($country, array('route' => ['maintainers.countries.update', $country], 'method' => 'PUT' )) !!}
+        {{ Form::model($country, array('route' => ['maintainers.countries.update', $country], 'method' => 'PUT' )) }}
             <div class="box-body">
                 @include('maintainers.countries.partials.fields')
             </div>
@@ -19,10 +19,12 @@
                 <a href="{{ route('maintainers.countries.index') }}">Volver</a>
                 <button type="submit" class="btn btn-success btn-flat btn-lg pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
             </div>
-        {!! Form::close() !!}
+        {{ Form::close() }}
     </div>
     <br><br><br>
+
     @include('maintainers.countries.partials.delete')
+
 @stop
 
 @section('scripts')
