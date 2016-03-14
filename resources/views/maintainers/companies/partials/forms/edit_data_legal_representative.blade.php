@@ -12,6 +12,12 @@
         </div>
         <br />
         <div class="row">
+            <div class="col-md-1 hide">
+                <div class="form-group">
+                    {{ Form::label('id' . $i, 'ID') }}
+                    {{ Form::text('id' . $i, $legal_representative->id, ['class' => 'form-control']) }}
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="form-group">
                     {{ Form::label('male_surname' . $i, 'Apellido Paterno') }}

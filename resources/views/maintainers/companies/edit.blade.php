@@ -21,7 +21,6 @@
         {{ Form::hidden('count_legal_representative', $company->num_representative, ['id' => 'count_legal_representative']) }}
         {{ Form::hidden('count_subsidiary', $company->num_subsidiary, ['id' => 'count_subsidiary']) }}
 
-
     {{ Form::close() }}
 
 @stop
@@ -32,7 +31,6 @@
     {{ Html::script('assets/js/jquery.Rut.js') }}
     {{ Html::script('me/js/validations/validaRut.js') }}
     {{ Html::script('assets/js/config.js') }}
-    {{ Html::script('me/js/validations/validaEmail.js') }}
     {{ Html::script('me/js/changeMethods/changeRegionProvince.js') }}
     {{ Html::script('assets/js/inputmask.js') }}
     {{ Html::script('assets/js/inputmask.date.extensions.js') }}
@@ -43,12 +41,16 @@
 
         $(document).ready(function(){
 
+
             /**************************************************
-             ******************** Variables ********************
+             ******************** Variables *******************
              **************************************************/
 
-            var count_legal_representative = {{ $company->num_representative }};
-            var count_subsidiary           = {{ $company->num_subsidiary }};
+
+            var count_legal_representative  = {{ $company->num_representative }};
+            var count_subsidiary            = {{ $company->num_subsidiary }};
+            var id_deletes_legal            = [];
+            var id_deletes_subsidiary       = [];
 
 
             /**************************************************
@@ -96,10 +98,20 @@
 
             $(document).on('click', '.delete-elements-panel2', function() {
 
-                var element = $(this).attr('id');
-                var padre   = $(this).parent().parent().parent().parent();
+                var element     = $(this).attr('id');
+                var padre       = $(this).parent().parent().parent().parent();
+                var num_element = verificaUltimosNumeros($(this).parent().parent().parent().attr('id'));
+
+                if (element == 'legal_representative') {
+                    if ($('#id' + num_element).val() != 0)
+                        id_deletes_legal.push($('#id' + num_element).val());
+                }else {
+                    if ($('#id_suc' + num_element).val() != 0)
+                        id_deletes_subsidiary.push($('#id_suc' + num_element).val());
+                }
+
                 $(this).parent().parent().parent().remove();
-                var span    = padre.children("span");
+                var span        = padre.children("span");
 
                 switch (element)
                 {
@@ -112,6 +124,10 @@
                             $('span#legal_representative' + item).attr('id', 'legal_representative' + i);
                             $('span#num_legal_representative' + item).text('Representante Legal#' + (i + 1));
                             $('span#num_legal_representative' + item).attr('id', 'num_legal_representative' + i);
+
+                            $('label[for="id' + item + '"]').attr('for', 'id' + i);
+                            $('input#id' + item).attr('name', 'id' + i);
+                            $('input#id' + item).attr('id', 'id' + i);
 
                             $('label[for="male_surname' + item + '"]').attr('for', 'male_surname' + i);
                             $('input#male_surname' + item).attr('name', 'male_surname' + i);
@@ -175,6 +191,10 @@
                             $('span#subsidiary' + item).attr('id', 'subsidiary' + i);
                             $('span#num_subsidiary' + item).text('Sucursal#' + (i + 1));
                             $('span#num_subsidiary' + item).attr('id', 'num_subsidiary' + i);
+
+                            $('label[for="id_suc' + item + '"]').attr('for', 'id_suc' + i);
+                            $('#content_subsidiaries #id_suc' + item).attr('name', 'id_suc' + i);
+                            $('#content_subsidiaries #id_suc' + item).attr('id', 'id_suc' + i);
 
                             $('label[for="address_suc' + item + '"]').attr('for', 'address_suc' + i);
                             $('#content_subsidiaries #address_suc' + item).attr('name', 'address_suc' + i);
@@ -254,12 +274,17 @@
 
             $.fn.addLegalRepresentative = function() {
 
-                $add_representative_legal = '<span id="legal_representative"><div class="row"><div class="col-md-12"><span id="num_legal_representative" class="title-elements-panel2 text-green">Representante Legal #' + (count_legal_representative + 1) + '</span><a id="legal_representative" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Representante Legal"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-3"><div class="form-group">{{ Form::label("male_surname", "Apellido Paterno") }}{{ Form::text("male_surname", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("female_surname", "Apellido Materno") }}{{ Form::text("female_surname", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("first_name", "Primer Nombre") }}{{ Form::text("first_name", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("second_name", "Segundo Nombre") }}{{ Form::text("second_name", null, ["class"=> "form-control"]) }}</div></div></div><div class="row"> <div class="col-md-2"><div class="form-group">{{ Form::label("rut", "Rut") }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin guión ni dígito verificador. Ej: 80900568"></i>{{ Form::text("rut", null, ["class"=> "form-control check_rut"]) }}</div></div><div class="col-md-2"> <div class="form-group">{!! Form::label("birthday", "Fecha de Nac.") !!}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{!! Form::text("birthday", null, ["class"=> "form-control data_mask"]) !!}</div></div></div><div class="col-md-3"><div class="form-group">{{ Form::label("nationality_id", "Nacionalidad") }}{{ Form::select("nationality_id", $nationalities, null, ["class"=> "form-control"]) }}</div></div><div class="col-md-5"><div class="form-group">{{ Form::label("email", "Email") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{ Form::text("email", null, ["class"=> "form-control", "onBlur" => "$(this).checkEmail()"]) }}</div></div></div></div><div class="row"><div class="col-md-2"><div class="form-group">{{ Form::label("phone1-", "Teléfono 1") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1-", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-2"><div class="form-group">{{ Form::label("phone2-", "Teléfono 2") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2-", null, ["class"=> "form-control"])}}</div></div></div></div><hr/></span>';
+                $add_representative_legal = '<span id="legal_representative"><div class="row"><div class="col-md-12"><span id="num_legal_representative" class="title-elements-panel2 text-green">Representante Legal #' + (count_legal_representative + 1) + '</span><a id="legal_representative" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Representante Legal"><i class="fa fa-trash"></i></a></div></div><br /><div class="row"><div class="col-md-1 hide"> <div class="form-group">{{Form::label("id", "ID")}}{{Form::text("id", null, ["class"=> "form-control"])}}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("male_surname", "Apellido Paterno") }}{{ Form::text("male_surname", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("female_surname", "Apellido Materno") }}{{ Form::text("female_surname", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("first_name", "Primer Nombre") }}{{ Form::text("first_name", null, ["class"=> "form-control"]) }}</div></div><div class="col-md-3"><div class="form-group">{{ Form::label("second_name", "Segundo Nombre") }}{{ Form::text("second_name", null, ["class"=> "form-control"]) }}</div></div></div><div class="row"> <div class="col-md-2"><div class="form-group">{{ Form::label("rut", "Rut") }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin guión ni dígito verificador. Ej: 80900568"></i>{{ Form::text("rut", null, ["class"=> "form-control check_rut"]) }}</div></div><div class="col-md-2"> <div class="form-group">{!! Form::label("birthday", "Fecha de Nac.") !!}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{!! Form::text("birthday", null, ["class"=> "form-control data_mask"]) !!}</div></div></div><div class="col-md-3"><div class="form-group">{{ Form::label("nationality_id", "Nacionalidad") }}{{ Form::select("nationality_id", $nationalities, null, ["class"=> "form-control"]) }}</div></div><div class="col-md-5"><div class="form-group">{{ Form::label("email", "Email") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{ Form::text("email", null, ["class"=> "form-control", "onBlur" => "$(this).checkEmail()"]) }}</div></div></div></div><div class="row"><div class="col-md-2"><div class="form-group">{{ Form::label("phone1-", "Teléfono 1") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1-", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-2"><div class="form-group">{{ Form::label("phone2-", "Teléfono 2") }}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2-", null, ["class"=> "form-control"])}}</div></div></div></div><hr/></span>';
 
                 $('#content_legal_representatives').append($add_representative_legal);
 
                 $('span#legal_representative').attr('id', 'legal_representative' + count_legal_representative);
                 $('span#num_legal_representative').attr('id', 'num_legal_representative' + count_legal_representative);
+
+                $('label[for="id"]').attr('for', 'id' + count_legal_representative);
+                $('input#id').attr('name', 'id' + count_legal_representative);
+                $('input#id').attr('value', '0');
+                $('input#id').attr('id', 'id' + count_legal_representative);
 
                 $('label[for="male_surname"]').attr('for', 'male_surname' + count_legal_representative);
                 $('input#male_surname').attr('name', 'male_surname' + count_legal_representative);
@@ -312,7 +337,7 @@
 
             $.fn.addSubsidiary = function() {
 
-                $add_subsidiary = '<span id="subsidiary"> <div class="row"> <div class="col-md-12"> <span id="num_subsidiary" class="title-elements-panel2 text-yellow">Sucursal #' + (count_subsidiary + 1) + '</span><a id="subsidiary" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Sucursal"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"> <div class="col-md-6"><div class="form-group">{{Form::label("address_suc", "Dirección")}}{{Form::text("address_suc", null, ["class"=> "form-control"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("region_suc_id", "Región")}}{{Form::select("region_suc_id", $regions, null, ["class"=> "form-control", "onChange"=> "$(this).changeRegion()"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("province_suc_id", "Provincia")}}{{Form::select("province_suc_id", $provinces, null, ["class"=> "form-control", "onChange"=> "$(this).changeProvince()"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("commune_suc_id", "Comuna")}}{{Form::select("commune_suc_id", $communes, null, ["class"=> "form-control"])}}</div></div></div> <div class="row"><div class="col-md-1"><div class="form-group">{{Form::label("num_suc", "N°")}}{{Form::text("num_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("lot_suc", "Lote")}}{{Form::text("lot_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("ofi_suc", "Oficina")}}{{Form::text("ofi_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("floor_suc", "Piso")}}{{Form::text("floor_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("muni_license_suc", "Patente Municipal")}}{{Form::text("muni_license_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label("email_suc", "Email")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{Form::text("email_suc", null, ["class"=> "form-control", "onBlur"=> "$(this).checkEmail()"])}}</div></div></div></div> <div class="row"> <div class="col-md-2"><div class="form-group">{{Form::label("phone1_suc-", "Teléfono 1")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1_suc-", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-2"><div class="form-group">{{Form::label("phone2_suc-", "Teléfono 2")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2_suc-", null, ["class"=> "form-control"])}}</div></div></div></div><hr/></span>';
+                $add_subsidiary = '<span id="subsidiary"> <div class="row"> <div class="col-md-12"> <span id="num_subsidiary" class="title-elements-panel2 text-yellow">Sucursal #' + (count_subsidiary + 1) + '</span><a id="subsidiary" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Sucursal"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_suc", "ID")}}{{Form::text("id_suc", null, ["class"=> "form-control"])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label("address_suc", "Dirección")}}{{Form::text("address_suc", null, ["class"=> "form-control"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("region_suc_id", "Región")}}{{Form::select("region_suc_id", $regions, null, ["class"=> "form-control", "onChange"=> "$(this).changeRegion()"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("province_suc_id", "Provincia")}}{{Form::select("province_suc_id", $provinces, null, ["class"=> "form-control", "onChange"=> "$(this).changeProvince()"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("commune_suc_id", "Comuna")}}{{Form::select("commune_suc_id", $communes, null, ["class"=> "form-control"])}}</div></div></div> <div class="row"><div class="col-md-1"><div class="form-group">{{Form::label("num_suc", "N°")}}{{Form::text("num_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("lot_suc", "Lote")}}{{Form::text("lot_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("ofi_suc", "Oficina")}}{{Form::text("ofi_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"><div class="form-group">{{Form::label("floor_suc", "Piso")}}{{Form::text("floor_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("muni_license_suc", "Patente Municipal")}}{{Form::text("muni_license_suc", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label("email_suc", "Email")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{Form::text("email_suc", null, ["class"=> "form-control", "onBlur"=> "$(this).checkEmail()"])}}</div></div></div></div> <div class="row"> <div class="col-md-2"><div class="form-group">{{Form::label("phone1_suc-", "Teléfono 1")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1_suc-", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-2"><div class="form-group">{{Form::label("phone2_suc-", "Teléfono 2")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2_suc-", null, ["class"=> "form-control"])}}</div></div></div></div><hr/></span>';
 
                 if (count_subsidiary == 0)
                     $('#content_subsidiaries').html($add_subsidiary);
@@ -322,6 +347,11 @@
 
                 $('span#subsidiary').attr('id', 'subsidiary' + count_subsidiary);
                 $('span#num_subsidiary').attr('id', 'num_subsidiary' + count_subsidiary);
+
+                $('label[for="id_suc"]').attr('for', 'id_suc' + count_subsidiary);
+                $('#id_suc').attr('name', 'id_suc' + count_subsidiary);
+                $('#id_suc').attr('value', '0');
+                $('#id_suc').attr('id', 'id_suc' + count_subsidiary);
 
                 $('label[for="address_suc"]').attr('for', 'address_suc' + count_subsidiary);
                 $('#content_subsidiaries #address_suc').attr('name', 'address_suc' + count_subsidiary);
@@ -384,9 +414,39 @@
             }
 
 
+
             /**************************************************
              ******************* Validations *******************
              **************************************************/
+
+
+            function validaEmail(email) {
+
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+                return re.test(email);
+
+            }
+
+
+            $.fn.checkEmail = function() {
+
+                var element = $('#' + $(this).attr('id'));
+
+                if ($(this).val() == '')
+                    return false;
+
+                if (!validaEmail(element.val())) {
+                    element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    element.closest('.form-group').find('i.fa-check').remove();
+                    element.closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+                }else {
+                    element.closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+                    element.closest('.form-group').find('i.fa-spinner').remove();
+                    element.closest('.form-group').find('i.fa-times').remove();
+                    element.closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+                }
+            }
 
 
             function validationForm() {
@@ -1254,7 +1314,7 @@
                     $.ajax({
                         type: 'PUT',
                         url: '/maintainers/companies/{{ $company->id }}',
-                        data: $('#form-company').serialize(),
+                        data: $('#form-company').serialize() + "&id_deletes_legal=" + id_deletes_legal + "&id_deletes_subsidiary=" + id_deletes_subsidiary,
                         dataType: "json",
 
                         beforeSend: function () {
@@ -1283,7 +1343,9 @@
                 }
             });
 
+
         });
+
 
     </script>
 @stop

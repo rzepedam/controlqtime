@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -23,11 +22,13 @@ use App\Commune;
 
 class CompanyController extends Controller
 {
+
 	public function index(Request $request)
     {
         $companies = Company::firmName($request->get('table_search'))->orderBy('firm_name')->paginate(20);
         return view('maintainers.companies.index', compact('companies'));
     }
+
 
     public function create()
     {
@@ -39,6 +40,7 @@ class CompanyController extends Controller
         $communes       = Province::find($province->id)->communes->lists('name', 'id');
         return view('maintainers.companies.create', compact('nationalities', 'regions', 'region', 'provinces', 'province', 'communes'));
     }
+
 
     public function store(CompanyRequest $request)
     {
@@ -89,6 +91,7 @@ class CompanyController extends Controller
         return response()->json([$response], 200);
     }
 
+
     public function edit($id)
     {
         $company        = Company::findOrFail($id);
@@ -113,16 +116,79 @@ class CompanyController extends Controller
         return view('maintainers.companies.edit', compact('company', 'regions', 'region', 'provinces', 'province', 'communes', 'nationalities', 'region_sub', 'provinces_sub', 'province_sub', 'communes_sub'));
     }
 
+
     public function update(CompanyRequest $request, $id)
     {
-        dd($request->all());
         $company = Company::findOrFail($id);
-        $message = $company->name . ' fue actualizado satisfactoriamente';
         $company->fill($request->all());
         $company->save();
+
+        /*** Delete Legal Representatives before save or update */
+        if($request->get('id_deletes_legal') != '')
+            $this->deleteLegalRepresentative($request->get('id_deletes_legal'));
+
+        for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {
+
+            /** New legal representative */
+            if ($request->get('id' . $i) == '0') {
+                $legal = new LegalRepresentative();
+                $legal->company()->associate($company);
+            }else {
+                $legal = LegalRepresentative::find($request->get('id' . $i));
+            }
+
+            $legal->male_surname    = $request->get('male_surname' . $i);
+            $legal->female_surname  = $request->get('female_surname' . $i);
+            $legal->first_name      = $request->get('first_name' . $i);
+            $legal->second_name     = $request->get('second_name' . $i);
+            $legal->rut             = $request->get('rut' . $i);
+            $legal->birthday        = $request->get('birthday' . $i);
+            $legal->nationality_id  = $request->get('nationality_id' . $i);
+            $legal->email           = $request->get('email' . $i);
+            $legal->phone1          = $request->get('phone1-' . $i);
+            $legal->phone2          = $request->get('phone2-' . $i);
+            $legal->save();
+        }
+
+
+        /*** Delete Subsidiaries before save or update */
+        if($request->get('id_deletes_subsidiary') != '')
+            $this->deleteSubsidiary($request->get('id_deletes_subsidiary'));
+
+        for($i = 0; $i < $request->get('count_subsidiary'); $i++) {
+
+            /** New Subsidiary */
+            if ($request->get('id_suc' . $i) == '0') {
+                $subsidiary = new Subsidiary();
+                $subsidiary->company()->associate($company);
+            }else {
+                $subsidiary = Subsidiary::find($request->get('id_suc' . $i));
+            }
+
+            $subsidiary->address        = $request->get('address_suc' . $i);
+            $subsidiary->commune_id     = $request->get('commune_suc_id' . $i);
+            $subsidiary->num            = $request->get('num_suc' . $i);
+            $subsidiary->lot            = $request->get('lot_suc' . $i);
+            $subsidiary->ofi            = $request->get('ofi_suc' . $i);
+            $subsidiary->floor          = $request->get('floor_suc' . $i);
+            $subsidiary->muni_license   = $request->get('muni_license_suc' . $i);
+            $subsidiary->email          = $request->get('email_suc' . $i);
+            $subsidiary->phone1         = $request->get('phone1_suc-' . $i);
+            $subsidiary->phone2         = $request->get('phone2_suc-' . $i);
+            $subsidiary->save();
+        }
+
+        $message = $company->firm_name . ' fue actualizado satisfactoriamente';
         Session::flash('success', $message);
-        return redirect()->route('maintainers.companies.index');
+
+        $response = array(
+            'status'    => 'success',
+            'url'       => '/maintainers/companies'
+        );
+
+        return response()->json([$response], 200);
     }
+
 
     public function destroy($id)
     {
@@ -132,6 +198,27 @@ class CompanyController extends Controller
         return redirect()->route('maintainers.companies.index');
     }
 
+
+    public function deleteLegalRepresentative($ids)
+    {
+        $delete = explode(',', $ids);
+        for ($i = 0; $i < count($delete); $i++) {
+            $legal = LegalRepresentative::find($delete[$i]);
+            $legal->delete();
+        }
+    }
+
+
+    public function deleteSubsidiary($ids)
+    {
+        $delete = explode(',', $ids);
+        for ($i = 0; $i < count($delete); $i++) {
+            $subsidiary = Subsidiary::find($delete[$i]);
+            $subsidiary->delete();
+        }
+    }
+
+
     public function getUpload($id)
     {
         $imagesRut      = Company::findOrFail($id)->imageRutCompanies;
@@ -140,10 +227,6 @@ class CompanyController extends Controller
     }
 
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function addFiles(Request $request)
     {
         $id                     = $request->get('id');
@@ -174,10 +257,7 @@ class CompanyController extends Controller
 
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function deleteFiles(Request $request) {
 
         $company    = $request->get('company');
@@ -197,4 +277,5 @@ class CompanyController extends Controller
 
         return response()->json(['success' => false], 400);
     }
+
 }
