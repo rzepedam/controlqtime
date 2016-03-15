@@ -17,7 +17,7 @@ class CreateLegalRepresentativesTable extends Migration
             $table->string('first_name', 30);
             $table->string('second_name', 30);
             $table->string('rut', 15);
-            $table->integer('birthday')->unsigned();
+            $table->string('birthday', 11);
             $table->integer('nationality_id')->unsigned();
             $table->string('email', 100)->unique();
             $table->string('phone1', 20);

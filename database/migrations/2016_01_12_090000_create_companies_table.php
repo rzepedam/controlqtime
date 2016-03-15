@@ -13,7 +13,7 @@ class CreateCompaniesTable extends Migration
             $table->string('rut', 15);
             $table->string('firm_name');
             $table->string('gyre');
-            $table->integer('start_act')->unsigned();
+            $table->string('start_act', 11);
             $table->string('address');
             $table->integer('commune_id')->unsigned();
             $table->string('num', 8);

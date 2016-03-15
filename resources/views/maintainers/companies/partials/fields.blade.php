@@ -59,8 +59,7 @@
 						<small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
 					<br />
 					<hr />
-
-				@elseif(count($company->num_subsidiary) == 0)
+				@elseif($company->num_subsidiary == 0)
 					<h2 class="text-center text-yellow">No existen Sucursales Asociadas <br />
 						<small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
 					<br />

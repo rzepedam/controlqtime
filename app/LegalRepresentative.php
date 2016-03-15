@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class LegalRepresentative extends Model
@@ -20,6 +21,11 @@ class LegalRepresentative extends Model
      * Relationships
      */
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
 	public function company() {
 		return $this->belongsTo('App\Company');
 	}
@@ -29,37 +35,43 @@ class LegalRepresentative extends Model
      * Set methods (Mutators)
      */
 
+
+    /**
+     * @param string $value
+     */
 	public function setMaleSurnameAttribute($value) {
 		$this->attributes['male_surname'] = ucfirst($value);
 	}
 
+
+    /**
+     * @param string $value
+     */
 	public function setFemaleSurnameAttribute($value) {
 		$this->attributes['female_surname'] = ucfirst($value);
 	}
 
+
+    /**
+     * @param string $value
+     */
 	public function setFirstNameAttribute($value) {
 		$this->attributes['first_name'] = ucfirst($value);
 	}
 
+
+    /**
+     * @param string $value
+     */
 	public function setSecondNameAttribute($value) {
 		$this->attributes['second_name'] = ucfirst($value);
 	}
 
-	public function setBirthdayAttribute($value) {
-		$this->attributes['birthday'] = strtotime($value);
-	}
 
+    /**
+     * @param string $value
+     */
 	public function setEmailAttribute($value) {
 		$this->attributes['email'] = strtolower($value);
 	}
-
-
-	/*
-     * Get methods (Accesors)
-     */
-
-	public function getBirthdayAttribute($value) {
-		return date('d-m-Y', $value);
-	}
-
 }

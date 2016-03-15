@@ -52,10 +52,6 @@ class Company extends Model
      * Set methods (Mutators)
      */
 
-    public function setStartActAttribute($value) {
-        $this->attributes['start_act'] = strtotime($value);
-    }
-
 
     public function setEmailAttribute($value) {
         $this->attributes['email'] = strtolower($value);
@@ -66,9 +62,6 @@ class Company extends Model
      * Get methods (Accesors)
      */
 
-    public function getStartActAttribute($value) {
-        return date('d-m-Y', $value);
-    }
 
     public function getNumSubsidiaryAttribute() {
         return count($this->subsidiaries);

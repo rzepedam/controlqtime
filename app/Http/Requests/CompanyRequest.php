@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Forms\SanitizedRequest;
-use App\LegalRepresentative;
 use Illuminate\Routing\Route;
 
 class CompanyRequest extends SanitizedRequest
@@ -19,6 +18,11 @@ class CompanyRequest extends SanitizedRequest
         return true;
     }
 
+    private function cast($number)
+    {
+        return (int)$number;
+    }
+
     public function rules()
     {
         switch($this->method())
@@ -31,10 +35,10 @@ class CompanyRequest extends SanitizedRequest
                 $rules['start_act']    = 'required';
                 $rules['address']      = 'required';
                 $rules['commune_id']   = 'required|integer';
-                $rules['num']          = 'required|integer|digits_between:1,8';
+                $rules['num']          = 'required|regex:/[0-9 -()+]+$/|digits_between:1,8';
                 $rules['lot']          = 'max:20';
                 $rules['ofi']          = 'max:5';
-                $rules['floor']        = 'integer|digits_between:1,3';
+                $rules['floor']        = 'regex:/[0-9 -()+]+$/|digits_between:1,3';
                 $rules['muni_license'] = 'required|max:50';
                 $rules['email']        = 'required|email|unique:companies,email|max:100';
                 $rules['phone1']       = 'required|max:20';
@@ -59,10 +63,10 @@ class CompanyRequest extends SanitizedRequest
 
                     $rules['address_suc' . $i]      = 'required';
                     $rules['commune_suc_id' . $i]   = 'required|integer';
-                    $rules['num_suc' . $i]          = 'required|integer|digits_between:1,8';
+                    $rules['num_suc' . $i]          = 'required|regex:/[0-9 -()+]+$/|digits_between:1,8';
                     $rules['lot_suc' . $i]          = 'max:20';
                     $rules['ofi_suc' . $i]          = 'max:5';
-                    $rules['floor_suc' . $i]        = 'integer|digits_between:1,3';
+                    $rules['floor_suc' . $i]        = 'regex:/[0-9 -()+]+$/|digits_between:1,3';
                     $rules['muni_license_suc' . $i] = 'required|max:50';
                     $rules['email_suc' . $i]        = 'required|email|unique:subsidiaries,email|max:100';
                     $rules['phone1_suc-' . $i]      = 'required|max:20';
@@ -81,7 +85,7 @@ class CompanyRequest extends SanitizedRequest
                 $rules['start_act']    = 'required';
                 $rules['address']      = 'required';
                 $rules['commune_id']   = 'required|integer';
-                $rules['num']          = 'required|integer|digits_between:1,8';
+                $rules['num']          = 'required|regex:/[0-9 -()+]+$/|digits_between:1,8';
                 $rules['lot']          = 'max:20';
                 $rules['ofi']          = 'max:5';
                 $rules['floor']        = 'integer|digits_between:1,3';
@@ -107,12 +111,13 @@ class CompanyRequest extends SanitizedRequest
 
                 for ($i = 0; $i < Request::get('count_subsidiary'); $i++) {
 
+                    $this->cast(Request::get('num_suc' . $i));
                     $rules['address_suc' . $i]      = 'required';
                     $rules['commune_suc_id' . $i]   = 'required|integer';
-                    $rules['num_suc' . $i]          = 'required|integer|digits_between:1,8';
+                    $rules['num_suc' . $i]          = 'required|regex:/[0-9 -()+]+$/|digits_between:1,8';
                     $rules['lot_suc' . $i]          = 'max:20';
                     $rules['ofi_suc' . $i]          = 'max:5';
-                    $rules['floor_suc' . $i]        = 'integer|digits_between:1,3';
+                    $rules['floor_suc' . $i]        = 'regex:/[0-9 -()+]+$/|digits_between:1,3';
                     $rules['muni_license_suc' . $i] = 'required|max:50';
                     $rules['email_suc' . $i]        = 'required|max:100|email|unique:subsidiaries,email,' . Request::get('id_suc' . $i);
                     $rules['phone1_suc-' . $i]      = 'required|max:20';

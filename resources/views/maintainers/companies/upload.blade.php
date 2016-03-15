@@ -95,9 +95,8 @@
                 ],
 
                 initialPreviewConfig: [
-
-                        @foreach($imagesRut as $image)
-                    { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
+                    @foreach($imagesRut as $image)
+                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
                     @endforeach
                 ],
 
@@ -138,7 +137,6 @@
                 ],
 
                 initialPreviewConfig: [
-
                     @foreach($imagesLicense as $image)
                         { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
                     @endforeach

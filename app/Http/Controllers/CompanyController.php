@@ -102,7 +102,10 @@ class CompanyController extends Controller
         $communes       = Province::find($province->id)->communes->lists('name', 'id');
         $nationalities  = Nationality::lists('name', 'id');
 
-        /* load provinces and commune to subsidiaries */
+        /*
+         *  load provinces and commune to subsidiaries
+         * */
+
         if(count($company->subsidiaries) >0) {
             $subsidiary = $company->subsidiaries;
             for($i = 0; $i < count($company->subsidiaries); $i++) {
@@ -123,13 +126,19 @@ class CompanyController extends Controller
         $company->fill($request->all());
         $company->save();
 
-        /*** Delete Legal Representatives before save or update */
+        /**
+         * Delete Legal Representatives before save or update
+         */
+
         if($request->get('id_deletes_legal') != '')
             $this->deleteLegalRepresentative($request->get('id_deletes_legal'));
 
         for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {
 
-            /** New legal representative */
+            /**
+             * New legal representative
+             */
+
             if ($request->get('id' . $i) == '0') {
                 $legal = new LegalRepresentative();
                 $legal->company()->associate($company);
@@ -151,13 +160,19 @@ class CompanyController extends Controller
         }
 
 
-        /*** Delete Subsidiaries before save or update */
+        /**
+         * Delete Subsidiaries before save or update
+         */
+
         if($request->get('id_deletes_subsidiary') != '')
             $this->deleteSubsidiary($request->get('id_deletes_subsidiary'));
 
         for($i = 0; $i < $request->get('count_subsidiary'); $i++) {
 
-            /** New Subsidiary */
+            /**
+             * New Subsidiary
+             */
+
             if ($request->get('id_suc' . $i) == '0') {
                 $subsidiary = new Subsidiary();
                 $subsidiary->company()->associate($company);
@@ -229,13 +244,13 @@ class CompanyController extends Controller
 
     public function addFiles(Request $request)
     {
-        $id                     = $request->get('id');
-        $type                   = $request->get('type');
-        $path                   = public_path() . '/storage/companies/' . $id . '/' . $type . '/';
-        $company                = Company::findOrFail($id);
-        $file                   = $request->file('file_data');
-        $extension              = $file->getClientOriginalExtension();
-        $filename               = Str::random(15) . '.' . $extension;
+        $id             = $request->get('id');
+        $type           = $request->get('type');
+        $path           = public_path() . '/storage/companies/' . $id . '/' . $type . '/';
+        $company        = Company::findOrFail($id);
+        $file = $request->file('file_data');
+        $extension      = $file->getClientOriginalExtension();
+        $filename       = Str::random(15) . '.' . $extension;
 
         if ($type == 'rut')
             $imgCompany = new ImageRutCompany();
@@ -253,6 +268,7 @@ class CompanyController extends Controller
         if (!$imgCompany->save())
             return response()->json(['success' => false], 400);
 
+        $this->checkActivateCompany($company);
         return response()->json(['success' => true], 200);
 
     }
@@ -275,7 +291,21 @@ class CompanyController extends Controller
             return response()->json(['success' => true], 200);
         }
 
+        $this->checkActivateCompany($company);
         return response()->json(['success' => false], 400);
+    }
+
+    public function checkActivateCompany($company)
+    {
+        $img_rut    = count($company->imageRutCompanies);
+        $img_legal  = count($company->imageLicenseCompanies);
+
+        if ($img_rut > 0 && $img_legal > 0)
+            $company->status = true;
+        else
+            $company->status = false;
+
+        $company->save();
     }
 
 }

@@ -66,7 +66,7 @@
 
                 $('.data_mask').inputmask({
                     placeholder: 'dd-mm-yyyy',
-                    alias: "dd-mm-yyyy",
+                    alias: 'dd-mm-yyyy',
                     "clearIncomplete": true,
                     yearrange: { minyear: 1900, maxyear: (new Date()).getFullYear() }
                 });

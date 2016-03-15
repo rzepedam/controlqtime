@@ -19,7 +19,7 @@ class CreateManpowersTable extends Migration
             $table->string('first_name', 30);
             $table->string('second_name', 30);
             $table->string('rut', 15);
-            $table->integer('birthday')->unsigned();
+            $table->bigInteger('birthday');
             $table->integer('nationality_id')->unsigned();
             $table->integer('gender_id')->unsigned();
             $table->string('address');
