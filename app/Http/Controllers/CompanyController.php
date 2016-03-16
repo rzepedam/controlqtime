@@ -91,7 +91,6 @@ class CompanyController extends Controller
         return response()->json([$response], 200);
     }
 
-
     public function edit($id)
     {
         $company        = Company::findOrFail($id);
@@ -126,18 +125,10 @@ class CompanyController extends Controller
         $company->fill($request->all());
         $company->save();
 
-        /**
-         * Delete Legal Representatives before save or update
-         */
-
         if($request->get('id_deletes_legal') != '')
             $this->deleteLegalRepresentative($request->get('id_deletes_legal'));
 
         for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {
-
-            /**
-             * New legal representative
-             */
 
             if ($request->get('id' . $i) == '0') {
                 $legal = new LegalRepresentative();
@@ -159,19 +150,10 @@ class CompanyController extends Controller
             $legal->save();
         }
 
-
-        /**
-         * Delete Subsidiaries before save or update
-         */
-
         if($request->get('id_deletes_subsidiary') != '')
             $this->deleteSubsidiary($request->get('id_deletes_subsidiary'));
 
         for($i = 0; $i < $request->get('count_subsidiary'); $i++) {
-
-            /**
-             * New Subsidiary
-             */
 
             if ($request->get('id_suc' . $i) == '0') {
                 $subsidiary = new Subsidiary();
