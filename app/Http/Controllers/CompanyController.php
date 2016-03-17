@@ -22,7 +22,10 @@ use App\Commune;
 
 class CompanyController extends Controller
 {
-
+    /**
+     * @param Request string $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
 	public function index(Request $request)
     {
         $companies = Company::firmName($request->get('table_search'))->orderBy('firm_name')->paginate(20);
@@ -30,6 +33,9 @@ class CompanyController extends Controller
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $nationalities  = Nationality::lists('name', 'id');
@@ -42,6 +48,10 @@ class CompanyController extends Controller
     }
 
 
+    /**
+     * @param CompanyRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(CompanyRequest $request)
     {
         $company = Company::create($request->all());
@@ -91,6 +101,11 @@ class CompanyController extends Controller
         return response()->json([$response], 200);
     }
 
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $company        = Company::findOrFail($id);
@@ -101,10 +116,7 @@ class CompanyController extends Controller
         $communes       = Province::find($province->id)->communes->lists('name', 'id');
         $nationalities  = Nationality::lists('name', 'id');
 
-        /*
-         *  load provinces and commune to subsidiaries
-         * */
-
+        /* load provinces and commune to subsidiaries */
         if(count($company->subsidiaries) >0) {
             $subsidiary = $company->subsidiaries;
             for($i = 0; $i < count($company->subsidiaries); $i++) {
@@ -119,21 +131,29 @@ class CompanyController extends Controller
     }
 
 
+    /**
+     * @param CompanyRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(CompanyRequest $request, $id)
     {
         $company = Company::findOrFail($id);
         $company->fill($request->all());
         $company->save();
 
+        /* delete legal representive */
         if($request->get('id_deletes_legal') != '')
             $this->deleteLegalRepresentative($request->get('id_deletes_legal'));
 
         for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {
 
+            /* new legal */
             if ($request->get('id' . $i) == '0') {
                 $legal = new LegalRepresentative();
                 $legal->company()->associate($company);
             }else {
+                /* update legal */
                 $legal = LegalRepresentative::find($request->get('id' . $i));
             }
 
@@ -150,15 +170,18 @@ class CompanyController extends Controller
             $legal->save();
         }
 
+        /* delete subsidiaries */
         if($request->get('id_deletes_subsidiary') != '')
             $this->deleteSubsidiary($request->get('id_deletes_subsidiary'));
 
         for($i = 0; $i < $request->get('count_subsidiary'); $i++) {
 
+            /* new subsidiary */
             if ($request->get('id_suc' . $i) == '0') {
                 $subsidiary = new Subsidiary();
                 $subsidiary->company()->associate($company);
             }else {
+                /* update subsidiary */
                 $subsidiary = Subsidiary::find($request->get('id_suc' . $i));
             }
 
@@ -177,7 +200,6 @@ class CompanyController extends Controller
 
         $message = $company->firm_name . ' fue actualizado satisfactoriamente';
         Session::flash('success', $message);
-
         $response = array(
             'status'    => 'success',
             'url'       => '/maintainers/companies'
@@ -186,12 +208,22 @@ class CompanyController extends Controller
         return response()->json([$response], 200);
     }
 
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
 	public function show($id)
 	{
 		$company = Company::find($id);
 		return view('maintainers.companies.show', compact('company'));
 	}
 
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         $company = Company::findOrFail($id);
