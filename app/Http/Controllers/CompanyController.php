@@ -186,6 +186,11 @@ class CompanyController extends Controller
         return response()->json([$response], 200);
     }
 
+	public function show($id)
+	{
+		$company = Company::find($id);
+		return view('maintainers.companies.show', compact('company'));
+	}
 
     public function destroy($id)
     {
@@ -226,6 +231,7 @@ class CompanyController extends Controller
 
     public function addFiles(Request $request)
     {
+        dd($request->all());
         $id             = $request->get('id');
         $type           = $request->get('type');
         $path           = public_path() . '/storage/companies/' . $id . '/' . $type . '/';

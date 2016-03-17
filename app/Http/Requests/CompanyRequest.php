@@ -88,7 +88,7 @@ class CompanyRequest extends SanitizedRequest
                 $rules['num']          = 'required|regex:/[0-9 -()+]+$/|digits_between:1,8';
                 $rules['lot']          = 'max:20';
                 $rules['ofi']          = 'max:5';
-                $rules['floor']        = 'integer|digits_between:1,3';
+                $rules['floor']        = 'regex:/[0-9 -()+]+$/|digits_between:1,3';
                 $rules['muni_license'] = 'required|max:50';
                 $rules['email']        = 'required|max:100|email|unique:companies,email,' . $this->route->getParameter('companies');
                 $rules['phone1']       = 'required|max:20';

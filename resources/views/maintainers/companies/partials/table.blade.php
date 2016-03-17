@@ -17,7 +17,7 @@
                     <td>{{ $company->firm_name }}</td>
                     <td>{{ $company->email }}</td>
                     @if (!$company->status)
-                        <td class="text-center"><a href="{{ url('maintainers/companies/attachFiles/' . $company->id) }}" class="label label-danger upload-files">Activación pendiente</a></td>
+                        <td class="text-center"><a href="{{ url('maintainers/companies/attachFiles/' . $company->id) }}" class="badge bg-red">Activación pendiente</a></td>
                     @else
                         <td></td>
                     @endif

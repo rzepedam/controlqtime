@@ -57,7 +57,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        {!! Form::text("birthday" . $i, $legal_representative->birthday, ["class" => "form-control data_mask"])  !!}
+                        {!! Form::text("birthday" . $i, $legal_representative->birthday->format('d-m-Y'), ["class" => "form-control data_mask"])  !!}
                     </div>
                 </div>
             </div>
