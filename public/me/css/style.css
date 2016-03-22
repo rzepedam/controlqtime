@@ -115,3 +115,17 @@ a.black:active {
     color: black;
 }
 
+.circle	{
+    display: block;
+    margin: 0 auto;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    background-color: #00C0EF;
+    color: white;
+    text-align: center;
+    font-size: 1.4em;
+}
+
