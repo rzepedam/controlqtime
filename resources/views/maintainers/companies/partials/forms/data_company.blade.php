@@ -24,7 +24,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{ Form::text('start_act', null, ['class' => 'form-control data_mask']) }}
+                    {{ Form::text('start_act', (end((explode('/', URL::current()))) == 'create') ? null : $company->start_act->format('d-m-Y'), ['class' => 'form-control data_mask']) }}
                 </div>
             </div>
         </div>

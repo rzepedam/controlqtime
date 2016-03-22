@@ -8,39 +8,36 @@ use Illuminate\Database\Eloquent\Model;
 class LegalRepresentative extends Model
 {
 
-	/*
-     * Properties
-     */
-
 	protected $fillable = [
 		'company_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'rut', 'birthday', 'nationality_id', 'email', 'phone1', 'phone2'
 	];
 
-
-	/*
-     * Relationships
-     */
+	protected $dates = [
+		'birthday'
+	];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
 	public function company() {
 		return $this->belongsTo('App\Company');
 	}
 
 
-	/*
-     * Set methods (Mutators)
-     */
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function nationality() {
+		return  $this->belongsTo('App\Nationality');
+	}
 
 
     /**
      * @param string $value
      */
 	public function setMaleSurnameAttribute($value) {
-		$this->attributes['male_surname'] = ucfirst($value);
+		$this->attributes['male_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
 	}
 
 
@@ -48,7 +45,7 @@ class LegalRepresentative extends Model
      * @param string $value
      */
 	public function setFemaleSurnameAttribute($value) {
-		$this->attributes['female_surname'] = ucfirst($value);
+		$this->attributes['female_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
 	}
 
 
@@ -56,7 +53,7 @@ class LegalRepresentative extends Model
      * @param string $value
      */
 	public function setFirstNameAttribute($value) {
-		$this->attributes['first_name'] = ucfirst($value);
+		$this->attributes['first_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
 	}
 
 
@@ -64,7 +61,7 @@ class LegalRepresentative extends Model
      * @param string $value
      */
 	public function setSecondNameAttribute($value) {
-		$this->attributes['second_name'] = ucfirst($value);
+		$this->attributes['second_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
 	}
 
 
@@ -73,5 +70,21 @@ class LegalRepresentative extends Model
      */
 	public function setEmailAttribute($value) {
 		$this->attributes['email'] = strtolower($value);
+	}
+
+
+	/**
+	 * @param string $value
+	 */
+	public function setBirthdayAttribute($value) {
+		$this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getFullNameAttribute() {
+		return $this->first_name . " " . $this->second_name . " " . $this->male_surname . " " . $this->female_surname;
 	}
 }

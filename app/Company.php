@@ -2,20 +2,20 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
 
-    /*
-     * Properties
-     */
-
     protected $fillable = [
         'id', 'rut', 'firm_name', 'gyre', 'start_act', 'address', 'commune_id', 'num', 'lot', 'ofi', 'floor', 'muni_license', 'email', 'phone1', 'phone2'
     ];
 
-    public $timestamps   = false;
+    protected $dates = [
+        'start_act'
+    ];
+
 
     public function scopeFirmName($query, $name)
     {
@@ -27,46 +27,73 @@ class Company extends Model
     }
 
 
-    /*
-     * Relationships
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-
     public function legalRepresentatives() {
         return $this->hasMany('App\LegalRepresentative');
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function subsidiaries() {
         return $this->hasMany('App\Subsidiary');
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function imageRutCompanies() {
         return $this->hasMany('App\ImageRutCompany');
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function imageLicenseCompanies() {
         return $this->hasMany('App\ImageLicenseCompany');
     }
 
 
-    /*
-     * Set methods (Mutators)
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function commune() {
+        return $this->belongsTo('App\Commune');
+    }
 
 
+    /**
+     * @param string $value
+     */
     public function setEmailAttribute($value) {
         $this->attributes['email'] = strtolower($value);
     }
 
 
-    /*
-     * Get methods (Accesors)
+    /**
+     * @param string $value
      */
+    public function setStartActAttribute($value) {
+        $this->attributes['start_act'] = Carbon::createFromFormat('d-m-Y', $value);
+    }
 
 
+    /**
+     * @return int
+     */
     public function getNumSubsidiaryAttribute() {
         return count($this->subsidiaries);
     }
 
+
+    /**
+     * @return int
+     */
     public function getNumRepresentativeAttribute() {
         return count($this->legalRepresentatives);
     }
