@@ -35,7 +35,9 @@ class CompanyController extends Controller
 
 
     /**
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      */
     public function create()
     {
@@ -222,7 +224,6 @@ class CompanyController extends Controller
 	public function show($id)
 	{
 		$company = Company::find($id);
-        //dd($company);
 		return view('maintainers.companies.show', compact('company'));
 	}
 
