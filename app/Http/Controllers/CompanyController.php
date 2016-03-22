@@ -24,6 +24,7 @@ class CompanyController extends Controller
 {
     /**
      * @param Request string $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function index(Request $request)
@@ -50,6 +51,7 @@ class CompanyController extends Controller
 
     /**
      * @param CompanyRequest $request
+     * 
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(CompanyRequest $request)
@@ -104,6 +106,7 @@ class CompanyController extends Controller
 
     /**
      * @param $id
+     * 
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
@@ -133,7 +136,9 @@ class CompanyController extends Controller
 
     /**
      * @param CompanyRequest $request
+     *
      * @param $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(CompanyRequest $request, $id)
@@ -211,17 +216,20 @@ class CompanyController extends Controller
 
     /**
      * @param $id
+     * 
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function show($id)
 	{
 		$company = Company::find($id);
+        //dd($company);
 		return view('maintainers.companies.show', compact('company'));
 	}
 
 
     /**
      * @param $id
+     * 
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
