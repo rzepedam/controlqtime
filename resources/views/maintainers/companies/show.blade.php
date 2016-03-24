@@ -38,16 +38,16 @@
                             <td class="text-center"><i class="fa fa-map-marker"></i> {{ $company->address . " " . $company->num . ". " . $company->commune->name . ", " . $company->commune->province->name . ". " . $company->commune->province->region->name }}</td>
                         </tr>
                         <tr>
+                            <td><b>Inicio Actividad</b></td>
+                            <td class="text-center text-capitalize"><i class="fa fa-calendar"></i> {{ Date::parse($company->start_act)->format('l j F Y') }}</td>
+                        </tr>
+                        <tr>
                             <td class="col-md-2"><b>Rut</b></td>
                             <td class="text-center">{{ $company->rut }}</td>
                         </tr>
                         <tr>
                             <td><b>Giro</b></td>
                             <td class="text-center">{{ $company->gyre }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Inicio Actividad</b></td>
-                            <td class="text-center">{{ $company->start_act }}</td>
                         </tr>
                         @if($company->lot)
                             <tr>
@@ -90,23 +90,7 @@
                         <tbody>
                             <tr>
                                 <td><b>Nombre</b></td>
-                                <td class="text-center"> {{ $legal->full_name }}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-md-2"><b>Rut</b></td>
-                                <td class="text-center">{{ $company->rut }}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Fecha Nacimiento</b></td>
-                                <td class="text-center">{{ $legal->birthday }}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Edad</b></td>
-                                <td class="text-center">{{ $legal->age . " años" }}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Nacionalidad</b></td>
-                                <td class="text-center">{{ $legal->nationality->name }}</td>
+                                <td class="text-center"><i class="fa fa-user"></i> {{ $legal->full_name }}</td>
                             </tr>
                             <tr>
                                 <td><b>Email</b></td>
@@ -116,6 +100,22 @@
                                 <td><b>Teléfono 1</b></td>
                                 <td class="text-center"><i class="fa fa-phone"></i> {{ $legal->phone1 }}</td>
                             </tr>
+                            <tr>
+                                <td><b>Fecha Nacimiento</b></td>
+                                <td class="text-center text-capitalize"><i class="fa fa-calendar"></i> {{ Date::parse($legal->birthday)->format('l j F Y') }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-2"><b>Rut</b></td>
+                                <td class="text-center">{{ $legal->rut }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Edad</b></td>
+                                <td class="text-center">{{ $legal->birthday->age . " años" }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Nacionalidad</b></td>
+                                <td class="text-center">{{ $legal->nationality->name }}</td>
+                            </tr>
                             @if($legal->phone2)
                                 <tr>
                                     <td><b>Teléfono 2</b></td>
@@ -124,19 +124,29 @@
                             @endif
                         </tbody>
                     </table>
-                    <hr />
+                    @if ($i > 1)
+                        <hr />
+                    @endif
                     <?php $i++; ?>
                 @endforeach
                 <br />
             </div>
 
             <div class="tab-pane" id="tab_3">
-                @if($company->num_subsidiary > 0)
+                @if($company->subsidiaries)
                     <?php $i = 1 ?>
                     @foreach($company->subsidiaries as $subsidiary)
                         <h3 class="text-yellow">Sucursal #{{ $i }}</h3>
                         <table class="table table-bordered table-striped dataTable" role="grid">
                             <tbody>
+                                <tr>
+                                    <td><b>Email</b></td>
+                                    <td class="text-center"><i class="fa fa-envelope"></i> {{ Html::mailto($subsidiary->email) }}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Teléfono 1</b></td>
+                                    <td class="text-center"><i class="fa fa-phone"></i> {{ $subsidiary->phone1 }}</td>
+                                </tr>
                                 <tr>
                                     <td><b>Dirección</b></td>
                                     <td class="text-center"><i class="fa fa-map-marker"></i> {{ $subsidiary->address . " " . $subsidiary->num . ". " . $subsidiary->commune->name . ", " . $subsidiary->commune->province->name . ". " . $subsidiary->commune->province->region->name }}</td>
@@ -163,14 +173,6 @@
                                     <td><b>Patente Municipal</b></td>
                                     <td class="text-center">{{ $subsidiary->muni_license }}</td>
                                 </tr>
-                                <tr>
-                                    <td><b>Email</b></td>
-                                    <td class="text-center">{{ $subsidiary->email }}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Teléfono 1</b></td>
-                                    <td class="text-center">{{ $subsidiary->phone1 }}</td>
-                                </tr>
                                 @if($subsidiary->phone2)
                                     <tr>
                                         <td><b>Teléfono 2</b></td>
@@ -179,11 +181,19 @@
                                 @endif
                             </tbody>
                         </table>
-                        <hr />
+                        @if ($i > 1)
+                            <hr />
+                        @endif
                         <?php $i++; ?>
                     @endforeach
                 @else
 
+                    <br /><br /><br /><br />
+                    <div class="text-center"><i class="fa fa-cubes fa-3x"></i></div>
+                    <br/>
+                    <h2 class="text-center text-yellow">No existen Sucursales Asociadas</h2>
+                    <br /><br /><br />
+                    <hr />
 
                 @endif
             </div>

@@ -27,9 +27,13 @@
 
 				<!-- load blank fields in create company case -->
 				@if (end((explode('/', URL::current()))) == 'create')
+
 					@include('maintainers.companies.partials.forms.data_legal_representative')
+
 				@else
+
 					@include('maintainers.companies.partials.forms.edit_data_legal_representative')
+
 				@endif
 
 			</div>
@@ -53,20 +57,24 @@
 		<div class="box-body">
 
 			<div id="content_subsidiaries">
+
 				@if (end((explode('/', URL::current()))) == 'create')
 
 					<h2 class="text-center text-yellow">No existen Sucursales Asociadas <br />
 						<small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
 					<br />
 					<hr />
-				@elseif($company->num_subsidiary == 0)
+
+				@elseif($company->subsidiaries)
+
+					@include('maintainers.companies.partials.forms.edit_subsidiaries')
+
+				@else
+
 					<h2 class="text-center text-yellow">No existen Sucursales Asociadas <br />
 						<small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
 					<br />
 					<hr />
-				@else
-
-					@include('maintainers.companies.partials.forms.edit_subsidiaries')
 
 				@endif
 

@@ -33,7 +33,7 @@ class CompanyController extends Controller
         return view('maintainers.companies.index', compact('companies'));
     }
 
-
+  
     /**
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -113,7 +113,7 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company        = Company::findOrFail($id);
+        $company        = Company::with(['legalRepresentatives', 'subsidiaries'])->findOrFail($id);
         $regions        = Region::lists('name', 'id');
         $region         = Commune::find($company->commune_id)->province->region;
         $provinces      = Region::find($region->id)->provinces->lists('name', 'id');
@@ -223,7 +223,7 @@ class CompanyController extends Controller
      */
 	public function show($id)
 	{
-		$company = Company::find($id);
+		$company = Company::with(['legalRepresentatives', 'subsidiaries'])->find($id);
 		return view('maintainers.companies.show', compact('company'));
 	}
 

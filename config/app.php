@@ -160,6 +160,7 @@ return [
          * Propias
          */
         Collective\Html\HtmlServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
 
     ],
 
@@ -212,7 +213,7 @@ return [
          */
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
-
+        'Date'      => Jenssegers\Date\Date::class,
     ],
 
 ];
