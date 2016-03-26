@@ -24,22 +24,22 @@
 
 Route::group(['middleware' => ['web']], function () {
 
+    /*
+     * Home
+     */
+
     Route::get('/', function () {
         return view('layout.index');
     });
 
-    /***************************************
-     *********** Humans-Resources **********
-     ***************************************/
+
+    /*
+     *  Humans-Resources
+     */
+
     Route::group(['prefix' => 'human-resources'], function(){
 
-        Route::get('/', function(){
-            return view('human-resources.index');
-        });
-
         Route::resource('manpowers', 'ManpowerController');
-
-        //Routes for Form Wizard
         Route::group(['prefix' => 'manpowers'], function(){
             Route::post('step1', ['as' => 'human-resources.manpowers.step1', 'uses' => 'ManpowerController@step1']);
             Route::post('step2', ['as' => 'human-resources.manpowers.step2', 'uses' => 'ManpowerController@step2']);
@@ -48,25 +48,20 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('deleteImg', ['as' => 'human-resources.manpowers.deleteImg', 'uses' => 'StorageController@deleteImg']);
             Route::post('loadImagesDropzone', ['as' => 'human-resources.manpowers.loadImagesDropzone', 'uses' => 'StorageController@loadImagesDropzone']);
         });
+
     });
 
 
-    /**********************************
-     *********** Maintainers **********
-     **********************************/
-    Route::group(['prefix' => 'maintainers'], function() {
+    /*
+     * Maintainers
+     */
 
-        Route::get('/', function(){
-            return view('maintainers.index');
-        });
+    Route::group(['prefix' => 'maintainers'], function() {
 
         Route::resource('areas', 'AreaController');
         Route::resource('certifications', 'CertificationController');
         Route::resource('cities', 'CityController');
         Route::resource('companies', 'CompanyController');
-            Route::get('companies/attachFiles/{id}', ['as' => 'maintainers.companies.attachFiles', 'uses' => 'CompanyController@getUpload']);
-            Route::post('companies/attachFiles', ['as' => 'maintainers.companies.attachFiles', 'uses' => 'CompanyController@addFiles']);
-            Route::post('companies/deleteFiles', ['as' => 'maintainers.companies.deleteFiles', 'uses' => 'CompanyController@deleteFiles']);
         Route::resource('countries', 'CountryController');
         Route::resource('degrees', 'DegreeController');
         Route::resource('disabilities', 'DisabilityController');
@@ -85,9 +80,19 @@ Route::group(['middleware' => ['web']], function () {
     });
 
 
-    /**********************************
-     ********** Ajax Functions ********
-     **********************************/
+    /*
+     * Others
+     */
+
+    Route::get('attachFiles/{id}', ['as' => 'attachFiles', 'uses' => 'UploadController@getUpload']);
+    Route::post('attachFiles', ['as' => 'attachFiles_added', 'uses' => 'UploadController@addFiles']);
+    Route::post('deleteFiles', ['as' => 'deleteFiles', 'uses' => 'UploadController@deleteFiles']);
+
+
+    /*
+     * Ajax Functions
+     */
+
     Route::post('loadProvinces/', 'AjaxLoadController@loadProvinces');
     Route::post('loadCommunes', 'AjaxLoadController@loadCommunes');
     Route::post('verificaEmail/', 'AjaxLoadController@verificaEmail');

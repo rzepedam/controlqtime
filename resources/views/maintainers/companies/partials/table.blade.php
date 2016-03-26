@@ -24,7 +24,7 @@
                     <td class="text-center">
                         <a href="{{ route('maintainers.companies.show', $company) }}" class="btn bg-navy btn-flat mitooltip" title="Ver Detalles"><i class="fa fa-search"></i></a>
                         <a href="{{ route('maintainers.companies.edit', $company) }}" class="btn btn-success btn-flat mitooltip" title="Editar Registro"><i class="fa fa-pencil"></i></a>
-                        <a href="{{ url('maintainers/companies/attachFiles/' . $company->id) }}" class="btn bg-purple btn-flat mitooltip" title="Adjuntar Imágenes"><i class="fa fa-file-text-o"></i>
+                        <a href="{{ url('attachFiles', $company->id) }}" class="btn bg-purple btn-flat mitooltip" title="Adjuntar Imágenes"><i class="fa fa-file-text-o"></i>
                         </a>
                     </td>
                 </tr>

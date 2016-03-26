@@ -96,7 +96,7 @@
 
                 initialPreviewConfig: [
                     @foreach($imagesRut as $image)
-                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
+                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('deleteFiles')  }}", key: {{ $image->id }} },
                     @endforeach
                 ],
 
@@ -116,7 +116,7 @@
                 uploadIcon: "<i class='fa fa-cloud-upload'></i>",
                 uploadLabel: "",
                 uploadTitle: "",
-                uploadUrl: '{{ url("maintainers/companies/attachFiles") }}'
+                uploadUrl: '{{ route("attachFiles_added") }}'
             });
 
             $("#license").fileinput({
@@ -138,7 +138,7 @@
 
                 initialPreviewConfig: [
                     @foreach($imagesLicense as $image)
-                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles')  }}", key: {{ $image->id }} },
+                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('deleteFiles')  }}", key: {{ $image->id }} },
                     @endforeach
                 ],
 
@@ -158,7 +158,7 @@
                 uploadIcon: "<i class='fa fa-cloud-upload'></i>",
                 uploadLabel: "",
                 uploadTitle: "",
-                uploadUrl: '{{ url("maintainers/companies/attachFiles") }}'
+                uploadUrl: '{{ route("attachFiles_added") }}'
             });
 
         });
