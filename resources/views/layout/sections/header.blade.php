@@ -1,167 +1,210 @@
-<header class="main-header">
-
-    <!-- Logo -->
-    <a href="{{ url('/') }}" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>C</b>QT</span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>C</b>ontrol<b>QT</b>ime</span>
-    </a>
-
-    <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
-        <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-        </a>
-        <!-- Navbar Right Menu -->
-        <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-                <!-- Messages: style can be found in dropdown.less-->
-                <li class="dropdown messages-menu">
-                    <!-- Menu toggle button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success">4</span>
+<nav class="site-navbar navbar navbar-inverse navbar-fixed-top navbar-mega" role="navigation">
+    <div class="navbar-container container-fluid">
+        <div class="navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+            <ul class="nav navbar-toolbar">
+                <li id="toggleMenubar">
+                    <a data-toggle="menubar" href="#" role="button">
+                        <i class="icon hamburger hamburger-arrow-left">
+                            <span class="sr-only">Toggle menubar</span>
+                            <span class="hamburger-bar"></span>
+                        </i>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">You have 4 messages</li>
-                        <li>
-                            <!-- inner menu: contains the messages -->
-                            <ul class="menu">
-                                <li><!-- start message -->
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <!-- User Image -->
-                                            <img src="{{ asset('bower_components/AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-                                        </div>
-                                        <!-- Message title and timestamp -->
-                                        <h4>
-                                            Support Team
-                                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                        </h4>
-                                        <!-- The message -->
-                                        <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                </li>
-                                <!-- end message -->
-                            </ul>
-                            <!-- /.menu -->
-                        </li>
-                        <li class="footer"><a href="#">See All Messages</a></li>
-                    </ul>
                 </li>
-                <!-- /.messages-menu -->
-
-                <!-- Notifications Menu -->
-                <li class="dropdown notifications-menu">
-                    <!-- Menu toggle button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
+                <li>
+                    <a class="icon md-search" data-toggle="collapse" href="#site-navbar-search" role="button">
+                        <span class="sr-only">Toggle Search</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">You have 10 notifications</li>
-                        <li>
-                            <!-- Inner Menu: contains the notifications -->
-                            <ul class="menu">
-                                <li><!-- start notification -->
-                                    <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                    </a>
-                                </li>
-                                <!-- end notification -->
-                            </ul>
-                        </li>
-                        <li class="footer"><a href="#">View all</a></li>
-                    </ul>
                 </li>
-                <!-- Tasks Menu -->
-                <li class="dropdown tasks-menu">
-                    <!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-flag-o"></i>
-                        <span class="label label-danger">9</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">You have 9 tasks</li>
-                        <li>
-                            <!-- Inner menu: contains the tasks -->
-                            <ul class="menu">
-                                <li><!-- Task item -->
-                                    <a href="#">
-                                        <!-- Task title and progress text -->
-                                        <h3>
-                                            Design some buttons
-                                            <small class="pull-right">20%</small>
-                                        </h3>
-                                        <!-- The progress bar -->
-                                        <div class="progress xs">
-                                            <!-- Change the css width attribute to simulate progress -->
-                                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">20% Complete</span>
+            </ul>
+            <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+                <li class="dropdown">
+                    <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false" data-animation="scale-up" role="button"><i class="icon md-notifications" aria-hidden="true"></i><span class="badge badge-danger up">5</span></a>
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+                        <li class="dropdown-menu-header" role="presentation">
+                            <h5>NOTIFICATIONS</h5>
+                            <span class="label label-round label-danger">New 5</span>
+                        </li>
+                        <li class="list-group" role="presentation">
+                            <div data-role="container">
+                                <div data-role="content">
+                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                        <div class="media">
+                                            <div class="media-left padding-right-10">
+                                                <i class="icon md-receipt bg-red-600 white icon-circle" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">A new order has been placed</h6>
+                                                <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">5 hours ago</time>
                                             </div>
                                         </div>
                                     </a>
-                                </li>
-                                <!-- end task item -->
-                            </ul>
+                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                        <div class="media">
+                                            <div class="media-left padding-right-10">
+                                                <i class="icon md-account bg-green-600 white icon-circle" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Completed the task</h6>
+                                                <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">2 days ago</time>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                        <div class="media">
+                                            <div class="media-left padding-right-10">
+                                                <i class="icon md-settings bg-red-600 white icon-circle" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Settings updated</h6>
+                                                <time class="media-meta" datetime="2015-06-11T14:05:00+08:00">2 days ago</time>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                        <div class="media">
+                                            <div class="media-left padding-right-10">
+                                                <i class="icon md-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Event started</h6>
+                                                <time class="media-meta" datetime="2015-06-10T13:50:18+08:00">3 days ago</time>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                        <div class="media">
+                                            <div class="media-left padding-right-10">
+                                                <i class="icon md-comment bg-orange-600 white icon-circle" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Message received</h6>
+                                                <time class="media-meta" datetime="2015-06-10T12:34:48+08:00">3 days ago</time>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                         </li>
-                        <li class="footer">
-                            <a href="#">View all tasks</a>
+                        <li class="dropdown-menu-footer" role="presentation">
+                            <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
+                                <i class="icon md-settings" aria-hidden="true"></i>
+                            </a>
+                            <a href="javascript:void(0)" role="menuitem">
+                                All notifications
+                            </a>
                         </li>
                     </ul>
                 </li>
-                <!-- User Account Menu -->
-                <li class="dropdown user user-menu">
-                    <!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <!-- The user image in the navbar-->
-                        <img src="{{ asset('bower_components/AdminLTE/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">Alexander Pierce</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <!-- The user image in the menu -->
-                        <li class="user-header">
-                            <img src="{{ asset('bower_components/AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-
-                            <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
-                            </p>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" href="javascript:void(0)" title="Messages" aria-expanded="false"
+                    data-animation="scale-up" role="button"><i class="icon md-email" aria-hidden="true"></i><span class="badge badge-info up">3</span></a>
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+                        <li class="dropdown-menu-header" role="presentation">
+                            <h5>MESSAGES</h5>
+                            <span class="label label-round label-info">New 3</span>
                         </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
+                        <li class="list-group" role="presentation">
+                            <div data-role="container">
+                                <div data-role="content">
+                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                        <div class="media">
+                                            <div class="media-left padding-right-10">
+                                                <span class="avatar avatar-sm avatar-online">
+                                                    <img src="{{ asset('remark/global/portraits/2.jpg') }}" alt="..." />
+                                                    <i></i>
+                                                </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Mary Adams</h6>
+                                                <div class="media-meta">
+                                                    <time datetime="2015-06-17T20:22:05+08:00">30 minutes ago</time>
+                                                </div>
+                                                <div class="media-detail">Anyways, i would like just do it</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                        <div class="media">
+                                            <div class="media-left padding-right-10">
+                                                <span class="avatar avatar-sm avatar-off">
+                                                    <img src="{{ asset('remark/global/portraits/3.jpg') }}" alt="..." />
+                                                    <i></i>
+                                                </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Caleb Richards</h6>
+                                                <div class="media-meta">
+                                                    <time datetime="2015-06-17T12:30:30+08:00">12 hours ago</time>
+                                                </div>
+                                                <div class="media-detail">I checheck the document. But there seems</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                        <div class="media">
+                                            <div class="media-left padding-right-10">
+                                                <span class="avatar avatar-sm avatar-busy">
+                                                    <img src="{{ asset('remark/global/portraits/4.jpg') }}" alt="..." />
+                                                    <i></i>
+                                                </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">June Lane</h6>
+                                                <div class="media-meta">
+                                                    <time datetime="2015-06-16T18:38:40+08:00">2 days ago</time>
+                                                </div>
+                                                <div class="media-detail">Lorem ipsum Id consectetur et minim</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                        <div class="media">
+                                            <div class="media-left padding-right-10">
+                                                <span class="avatar avatar-sm avatar-away">
+                                                    <img src="{{ asset('remark/global/portraits/5.jpg') }}" alt="..." />
+                                                    <i></i>
+                                                </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Edward Fletcher</h6>
+                                                <div class="media-meta">
+                                                    <time datetime="2015-06-15T20:34:48+08:00">3 days ago</time>
+                                                </div>
+                                                <div class="media-detail">Dolor et irure cupidatat commodo nostrud nostrud.</div>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
-                            <!-- /.row -->
                         </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                            </div>
+                        <li class="dropdown-menu-footer" role="presentation">
+                            <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
+                                <i class="icon md-settings" aria-hidden="true"></i>
+                            </a>
+                            <a href="javascript:void(0)" role="menuitem">
+                                See all messages
+                            </a>
                         </li>
                     </ul>
-                </li>
-                <!-- Control Sidebar Toggle Button -->
-                <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>
             </ul>
+            <div class="navbar-brand navbar-brand-center">
+                <a href="index.html">
+                    <img class="navbar-brand-logo" src="{{ asset('remark/center/assets/images/logo.png') }}" title="Remark">
+                </a>
+            </div>
         </div>
-    </nav>
-</header>
+        <div class="collapse navbar-search-overlap" id="site-navbar-search">
+            <form role="search">
+                <div class="form-group">
+                    <div class="input-search">
+                        <i class="input-search-icon md-search" aria-hidden="true"></i>
+                        <input type="text" class="form-control" name="site-search" placeholder="Search...">
+                        <button type="button" class="input-search-close icon md-close" data-target="#site-navbar-search"
+                        data-toggle="collapse" aria-label="Close"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>

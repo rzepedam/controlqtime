@@ -1,144 +1,107 @@
 <!DOCTYPE html>
-
-<html>
+<html class="no-js css-menubar" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="bootstrap admin template">
+    <meta name="author" content="">
     <title>ControlQTime</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="shortcut icon" href="{{ asset('me/img/favicon.ico') }}" type="image/x-icon" />
-    <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/dist/css/AdminLTE.css') }}">
-    <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/dist/css/skins/skin-blue.min.css') }}">
-    @yield('css')
-    {{ Html::style('me/css/style.css') }}
+    <link rel="apple-touch-icon" href="{{ asset('remark/center/assets/images/apple-touch-icon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('remark/center/assets/images/favicon.ico') }}">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('remark/global/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/css/bootstrap-extend.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/center/assets/css/site.min.css') }}">
+    <!-- Plugins -->
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/animsition/animsition.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/asscrollable/asScrollable.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/switchery/switchery.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/intro-js/introjs.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/slidepanel/slidePanel.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/flag-icon-css/flag-icon.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/waves/waves.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/chartist-js/chartist.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/jvectormap/jquery-jvectormap.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/center/assets/examples/css/dashboard/v1.css') }}">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{{ asset('remark/global/fonts/material-design/material-design.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/global/fonts/brand-icons/brand-icons.min.css') }}">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <!--[if lt IE 9]>
+    <script src="../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <script src="../../global/vendor/media-match/media.match.min.js"></script>
+    <script src="../../global/vendor/respond/respond.min.js"></script>
+    <![endif]-->
+    <!-- Scripts -->
+    <script src="{{ asset('remark/global/vendor/modernizr/modernizr.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/breakpoints/breakpoints.js') }}"></script>
+    <script>
+        Breakpoints();
+    </script>
 </head>
+<body class="dashboard">
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-<body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
+    <!-- Header -->
+    @include('layout.sections.header')
 
-        <!-- Main Header -->
-        @include('layout.sections.header')
+    <!-- Sidebar -->
+    @include('layout.sections.sidebar')
 
-        <!-- Left side column. contains the logo and sidebar -->
-        @include('layout.sections.sidebar')
+    <!-- Content -->
+    <div class="page animsition">
+        <div class="page-content padding-30 container-fluid">
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    @yield('title_header')
-                </h1>
-                <ol class="breadcrumb">
-                    @yield('breadcumb')
-                </ol>
-                <!-- Solamente en vistas index para insertar buscador -->
-                @yield('form_search')
-            </section>
+            @yield('content')
 
-            <!-- Main content -->
-            <section class="content">
-
-                @include('layout.messages.errors')
-                @include('layout.messages.success')
-
-                @yield('content')
-
-            </section>
-            <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-
-        <!-- Main Footer -->
-        {{--@include('layout.sections.footer')--}}
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Create the tabs -->
-            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-                <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <!-- Home tab content -->
-                <div class="tab-pane active" id="control-sidebar-home-tab">
-                    <h3 class="control-sidebar-heading">Recent Activity</h3>
-                    <ul class="control-sidebar-menu">
-                        <li>
-                            <a href="javascript::;">
-                                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-                                <div class="menu-info">
-                                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                                    <p>Will be 23 on April 24th</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.control-sidebar-menu -->
-
-                    <h3 class="control-sidebar-heading">Tasks Progress</h3>
-                    <ul class="control-sidebar-menu">
-                        <li>
-                            <a href="javascript::;">
-                                <h4 class="control-sidebar-subheading">
-                                    Custom Template Design
-                                    <span class="label label-danger pull-right">70%</span>
-                                </h4>
-
-                                <div class="progress progress-xxs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.control-sidebar-menu -->
-
-                </div>
-                <!-- /.tab-pane -->
-                <!-- Stats tab content -->
-                <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-                <!-- /.tab-pane -->
-                <!-- Settings tab content -->
-                <div class="tab-pane" id="control-sidebar-settings-tab">
-                    <form method="post">
-                        <h3 class="control-sidebar-heading">General Settings</h3>
-
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">
-                                Report panel usage
-                                <input type="checkbox" class="pull-right" checked>
-                            </label>
-
-                            <p>
-                                Some information about this general settings option
-                            </p>
-                        </div>
-                        <!-- /.form-group -->
-                    </form>
-                </div>
-                <!-- /.tab-pane -->
-            </div>
-        </aside>
-        <!-- /.control-sidebar -->
-
-        <!-- Add the sidebar's background. This div must be placed
-             immediately after the control sidebar -->
-        <div class="control-sidebar-bg"></div>
     </div>
 
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <script src="{{ asset('bower_components/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
-    <script src="{{ asset('bower_components/AdminLTE/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bower_components/AdminLTE/dist/js/app.min.js') }}"></script>
+    <!-- Footer -->
+    @include('layout.sections.footer')
 
-    @yield('scripts')
-
+    <!-- Core  -->
+    <script src="{{ asset('remark/global/vendor/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/bootstrap/bootstrap.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/animsition/animsition.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/asscroll/jquery-asScroll.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/mousewheel/jquery.mousewheel.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/asscrollable/jquery.asScrollable.all.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/ashoverscroll/jquery-asHoverScroll.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/waves/waves.js') }}"></script>
+    <!-- Plugins -->
+    <script src="{{ asset('remark/global/vendor/switchery/switchery.min.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/intro-js/intro.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/screenfull/screenfull.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/slidepanel/jquery-slidePanel.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/chartist-js/chartist.min.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip') }}.min.js"></script>
+    <script src="{{ asset('remark/global/vendor/jvectormap/jquery-jvectormap.min.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/jvectormap/maps/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/matchheight/jquery.matchHeight-min.js') }}"></script>
+    <script src="{{ asset('remark/global/vendor/peity/jquery.peity.min.js') }}"></script>
+    <!-- Scripts -->
+    <script src="{{ asset('remark/global/js/core.js') }}"></script>
+    <script src="{{ asset('remark/center/assets/js/site.js') }}"></script>
+    <script src="{{ asset('remark/center/assets/js/sections/menu.js') }}"></script>
+    <script src="{{ asset('remark/center/assets/js/sections/menubar.js') }}"></script>
+    <script src="{{ asset('remark/center/assets/js/sections/sidebar.js') }}"></script>
+    <script src="{{ asset('remark/global/js/configs/config-colors.js') }}"></script>
+    <script src="{{ asset('remark/center/assets/js/configs/config-tour.js') }}"></script>
+    <script src="{{ asset('remark/global/js/components/asscrollable.js') }}"></script>
+    <script src="{{ asset('remark/global/js/components/animsition.js') }}"></script>
+    <script src="{{ asset('remark/global/js/components/slidepanel.js') }}"></script>
+    <script src="{{ asset('remark/global/js/components/switchery.js') }}"></script>
+    <script src="{{ asset('remark/global/js/components/tabs.js') }}"></script>
+    <script src="{{ asset('remark/global/js/components/matchheight.js') }}"></script>
+    <script src="{{ asset('remark/global/js/components/jvectormap.js') }}"></script>
+    <script src="{{ asset('remark/global/js/components/peity.js') }}"></script>
+    <script src="{{ asset('remark/center/assets/examples/js/dashboard/v1.js') }}"></script>
 </body>
 </html>
