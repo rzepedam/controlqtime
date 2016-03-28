@@ -7,12 +7,17 @@
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
-            <li><a href="{{ url('human-resources') }}"><i class="fa fa-users"></i> <span>RRHH</span></a></li>
+            <li class="treeview">
+                <a href="javascript:void(0)"><i class="fa fa-users"></i> <span>Recursos Humanos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('human-resources.manpowers.index') }}"><i class="fa fa-user"></i> Trabajadores</a></li>
+                </ul>
+            </li>
             <li><a href="#"><i class="fa fa-life-ring"></i> <span>Seguridad</span></a></li>
             <li><a href="#"><i class="fa fa-rss"></i> <span>Operaciones</span></a></li>
             <li><a href="#"><i class="fa fa-gavel"></i> <span>Contratos</span></a></li>
             <li class="treeview">
-                <a href="{{ url('maintainers.index') }}"><i class="fa fa-cogs"></i> <span>Mantenedores</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="javascript:void(0)"><i class="fa fa-cogs"></i> <span>Mantenedores</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('maintainers.areas.index') }}"><i class="fa fa-sitemap"></i> Áreas</a></li>
                     <li><a href="#"><i class="fa fa-archive"></i> Bodegas</a></li>

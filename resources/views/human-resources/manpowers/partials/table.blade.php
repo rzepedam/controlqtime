@@ -1,5 +1,6 @@
-
-        <table class="table table-responsive table-bordered table-hover">
+<div class="box box-primary">
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -22,3 +23,5 @@
             @endforeach
             </tbody>
         </table>
+    </div>
+</div>
