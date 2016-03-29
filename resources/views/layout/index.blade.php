@@ -20,8 +20,8 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/font-awesome.min.css') }}">
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
     @yield('css')
 
@@ -54,27 +54,27 @@
 
     <!-- Content -->
     <div class="page animsition">
-        <div class="page-content padding-30 container-fluid">
-            <div class="page-header">
-                <h1 class="page-title">
+        <div class="page-header">
+            <h1 class="page-title">
 
-                    @yield('title_header')
+                @yield('title_header')
 
-                </h1>
-                <ol class="breadcrumb">
+            </h1>
+            <div class="page-header-actions">
+                <ol class="breadcrumb breadcrumb-arrow">
 
                     @yield('breadcumb')
 
                 </ol>
             </div>
-            <div class="page-content">
+        </div>
+        <div class="page-content">
 
-                @include('layout.messages.errors')
-                @include('layout.messages.success')
+            @include('layout.messages.errors')
+            @include('layout.messages.success')
 
-                @yield('content')
+            @yield('content')
 
-            </div>
         </div>
     </div>
 

@@ -1,9 +1,16 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-wizard.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/formValidation.css') }}">
+
+@stop
+
 @section('title_header') Crear Nuevo Trabajador @stop
 
 @section('breadcumb')
-    <li><a href="{{ url('human-resources') }}"><i class="fa fa-users"></i> RR.HH</a></li>
+    <li><a href="javascript:void(0)"><i class="fa fa-users"></i> RR.HH</a></li>
     <li><a href="{{ route('human-resources.manpowers.index') }}"><i class="fa fa-user"></i> Trabajadores</a></li>
     <li class="active">Nuevo</li>
 @stop
@@ -12,42 +19,87 @@
 
     <span class="col-md-12 alert alert-danger hide" id="js"></span>
 
-    <div id="rootwizard">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <ul>
-                        <li class="text-center"><a href="#tab1" data-toggle="tab"><span class="circle"><strong>1</strong></span> <strong>Información Personal</strong></a></li>
-                        <li><a href="#tab2" data-toggle="tab"><span class="circle"><strong>2</strong></span> <strong>Declaración de Salud</strong></a></li>
-                        <li><a href="#tab3" data-toggle="tab"><span class="circle"><strong>3</strong></span> <strong>Competencias Laborales</strong></a></li>
-                    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Panel Wizard Form -->
+            <div class="panel" id="exampleWizardForm">
+                <div class="panel-body">
+                    <!-- Steps -->
+                    <div class="steps steps-sm row" data-plugin="matchHeight" data-by-row="true" role="tablist">
+                        <div class="step col-md-4 current" data-target="#exampleAccount" role="tab">
+                            <span class="step-number">1</span>
+                            <div class="step-desc">
+                                <span class="step-title">Datos</span>
+                                <p>Personales</p>
+                            </div>
+                        </div>
+                        <div class="step col-md-4" data-target="#exampleBilling" role="tab">
+                            <span class="step-number">2</span>
+                            <div class="step-desc">
+                                <span class="step-title">Compencias</span>
+                                <p>Laborales</p>
+                            </div>
+                        </div>
+                        <div class="step col-md-4" data-target="#exampleGetting" role="tab">
+                            <span class="step-number">3</span>
+                            <div class="step-desc">
+                                <span class="step-title">Información</span>
+                                <p>de Salud</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Steps -->
+                    <!-- Wizard Content -->
+                    <div class="wizard-content">
+                        <div class="wizard-pane active" id="exampleAccount" role="tabpanel">
+                            <div class="panel-group" id="exampleAccordionDefault" aria-multiselectable="true" role="tablist">
+                                <div class="alert alert-primary alert-alt alert-dismissible" role="alert">
+                                    <i class="fa fa-street-view"></i> <strong>Información Personal</strong>
+                                </div>
+                                {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
+
+                                    @include('human-resources.manpowers.partials.step1.personal_data')
+
+                                {{ Form::close() }}
+                                <br />
+                                <div class="alert alert-success alert-alt alert-dismissible" role="alert">
+                                    <i class="fa fa-picture-o"></i> <strong>Imagen de Perfil</strong>
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <div class="alert alert-warning alert-alt alert-dismissible" role="alert">
+                                    <i class="fa fa-male"></i><i class="fa fa-female"></i> <strong>Parentescos Familiares</strong>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="wizard-pane" id="exampleBilling" role="tabpanel">
+                            <form id="exampleBillingForm">
+                                <div class="form-group form-material">
+                                    <label class="control-label" for="inputCardNumber">Card Number</label>
+                                    <input type="text" class="form-control" id="inputCardNumber" name="number" placeholder="Card number">
+                                </div>
+                                <div class="form-group form-material">
+                                    <label class="control-label" for="inputCVV">CVV</label>
+                                    <input type="text" class="form-control" id="inputCVV" name="cvv" placeholder="CVV">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="wizard-pane" id="exampleGetting" role="tabpanel">
+                            <div class="text-center margin-vertical-20">
+                                <i class="icon md-check font-size-40" aria-hidden="true"></i>
+                                <h4>We got your order. Your product will be shipping soon.</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Wizard Content -->
                 </div>
             </div>
-        </div>
-        <div id="bar" class="progress progress-danger progress-striped active">
-            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-        </div>
-        <div class="tab-content">
-            <div class="tab-pane" id="tab1">
-                {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
-                    @include('human-resources.manpowers.partials.step1.personal_information')
-                {{ Form::close() }}
-            </div>
-            <div class="tab-pane" id="tab2">
-                {{ Form::open(["route" => "human-resources.manpowers.step2", "method" => "POST", "files" => true, "id" => "step2"]) }}
-                    @include('human-resources.manpowers.partials.step2.health')
-                {{ Form::close() }}
-            </div>
-            <div class="tab-pane" id="tab3">
-                {{ Form::open(["route" => "human-resources.manpowers.store", "method" => "POST", "files" => true, "id" => "step3"]) }}
-                    @include('human-resources.manpowers.partials.step3.job_skills')
-                {{ Form::close() }}
-            </div>
-
-            <ul class="pager wizard">
-                <li class="previous"><a href="#">Anterior</a></li>
-                <li class="next"><a href="#">Siguiente</a></li>
-            </ul>
+            <!-- End Panel Wizard One Form -->
         </div>
     </div>
 
@@ -58,7 +110,13 @@
     {{ Html::script('me/js/verificaUltimosNumeros.js') }}
     {{ Html::script('assets/js/config.js') }}
     {{ Html::script('assets/js/jquery.inputmask.js') }}
-    {{ Html::script('assets/js/jquery.bootstrap.wizard.js') }}
+    {{ Html::script('assets/js/formValidation.js') }}
+    {{ Html::script('assets/js/form-validation/bootstrap.js') }}
+    {{ Html::script('assets/js/jquery.matchHeight-min.js') }}
+    {{ Html::script('assets/js/jquery-wizard.js') }}
+    {{ Html::script('assets/js/components/jquery-wizard.js') }}
+    {{ Html::script('assets/js/components/matchheight.js') }}
+
 
     <script type="text/javascript">
 
@@ -85,19 +143,37 @@
              ********************* Initialize components ***********************
              ******************************************************************/
 
+            var defaults = $.components.getDefaults("wizard");
 
-            $('#rootwizard').bootstrapWizard({
-                onTabShow: function(tab, navigation, index) {
-                    var $total = navigation.find('li').length;
-                    var $current = index+1;
-                    var $percent = ($current/$total) * 100;
-                    $('#rootwizard .progress-bar').css({width:$percent+'%'});
-                }
+            var options = $.extend(true, {}, defaults, {
+                buttonsAppendTo: '.panel-body'
             });
 
+            var wizard = $("#exampleWizardForm").wizard(options).data('wizard');
+
+            wizard.get("#exampleAccount").setValidator(function() {
+                var fv = $("#step1").data('formValidation');
+                fv.validate();
+
+                if (!fv.isValid()) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            wizard.get("#exampleBilling").setValidator(function() {
+                var fv = $("#exampleBillingForm").data('formValidation');
+                fv.validate();
+
+                if (!fv.isValid()) {
+                    return false;
+                }
+
+                return true;
+            });
 
             $('.mitooltip').tooltip();
-
 
 
 
@@ -860,423 +936,179 @@
              *****************************************************************/
 
 
-            function validateStep1()
-            {
-                /* male_surname */
-                if ($('#male_surname').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#male_surname').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#male_surname').focus();
+            $('#step1').formValidation({
+                framework: 'bootstrap',
+                fields: {
+                    male_surname: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> es obligatorio.'
+                            },
+                            stringLength: {
+                                max: 30,
+                                message: '<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> no debe ser mayor que 30 caracteres.'
+                            },
+                        }
+                    },
+                    female_surname: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> es obligatorio.'
+                            },
+                            stringLength: {
+                                max: 30,
+                                message: '<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> no debe ser mayor que 30 caracteres.'
+                            },
+                        }
+                    },
+                    first_name: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> es obligatorio.'
+                            },
+                            stringLength: {
+                                max: 30,
+                                message: '<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> no debe ser mayor que 30 caracteres.'
+                            },
+                        }
+                    },
+                    second_name: {
+                        validators: {
+                            stringLength: {
+                                max: 30,
+                                message: '<i class="fa fa-times"></i> El campo <strong>Segundo Nombre</strong> no debe ser mayor que 30 caracteres.'
+                            },
+                        }
+                    },
+                    rut: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Rut</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    birthday: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Fecha de Nacimiento</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    country_id: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Nacionalidad</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    gender_id: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Sexo</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    address: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Dirección</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    commune_id: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Comuna</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Email</strong> es obligatorio.'
+                            },
+                            stringLength: {
+                                max: 100,
+                                message: '<i class="fa fa-times"></i> El campo <strong>Email</strong> no debe ser mayor que 100 caracteres.'
+                            },
+                        }
+                    },
+                    phone1: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> es obligatorio.'
+                            },
+                            stringLength: {
+                                max: 20,
+                                message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> no debe ser mayor que 20 caracteres.'
+                            },
+                        }
+                    },
+                    phone2: {
+                        validators: {
+                            stringLength: {
+                                max: 20,
+                                message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 2</strong> no debe ser mayor que 20 caracteres.'
+                            },
+                        }
+                    },
+                    forecast_id: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Previsión</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    mutuality_id: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Mutualidad</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    pension_id: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>AFP</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    company_id: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Empresa</strong> es obligatorio.'
+                            },
+                        }
+                    },
+                    rating_id: {
+                        validators: {
+                            notEmpty: {
+                                message: '<i class="fa fa-times"></i> El campo <strong>Cargo</strong> es obligatorio.'
+                            },
+                        }
+                    },
                 }
+            });
 
-                if ($('#male_surname').val().length > 30) {
-                    $('#js').removeClass('hide');
-                    $('#male_surname').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> no debe ser mayor que 30 caracteres.');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#male_surname').focus();
-                }
-
-                /* female_surname */
-                if ($('#female_surname').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#female_surname').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#female_surname').focus();
-                }
-
-
-                if ($('#female_surname').val().length > 30) {
-                    $('#js').removeClass('hide');
-                    $('#female_surname').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> no debe ser mayor que 30 caracteres.');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#female_surname').focus();
-                }
-
-                /* first_name */
-                if ($('#first_name').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#first_name').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#first_name').focus();
-                }
-
-
-                if ($('#first_name').val().length > 30) {
-                    $('#js').removeClass('hide');
-                    $('#first_name').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> no debe ser mayor que 30 caracteres.');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#first_name').focus();
-                }
-
-                /* second_name */
-                if ($('#second_name').val().length > 30) {
-                    $('#js').removeClass('hide');
-                    $('#second_name').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Segundo Nombre</strong> no debe ser mayor que 30 caracteres.');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#second_name').focus();
-                }
-
-                /* rut */
-                if ($('#rut').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#rut').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#rut').focus();
-                }
-
-                /* birthday */
-                if ($('#birthday').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#birthday').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Fecha de Nacimiento</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#birthday').focus();
-                }
-
-                /* forecast */
-                if ($('#forecast_id').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#forecast_id').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Previsión</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#forecast_id').focus();
-                }
-
-                /* country */
-                if ($('#country_id').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#country_id').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nacionalidad</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#country_id').focus();
-                }
-
-                /* gender */
-                if ($('#gender_id').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#gender_id').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Sexo</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#gender_id').focus();
-                }
-
-                /* rating */
-                if ($('#rating_id').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#rating_id').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Cargo</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#rating_id').focus();
-                }
-
-                /* company */
-                if ($('#company_id').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#company_id').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Empresa</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#company_id').focus();
-                }
-
-                /* commune */
-                if ($('#commune_id').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#commune_id').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Comuna</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#commune_id').focus();
-                }
-
-                /* address */
-                if ($('#address').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#address').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Dirección</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#address').focus();
-                }
-
-                /* phone1 */
-                if ($('#phone1').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#phone1').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#phone1').focus();
-                }
-
-                if ($('#phone1').val().length > 20) {
-                    $('#js').removeClass('hide');
-                    $('#phone1').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> no debe ser mayor que 20 caracteres.');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#phone1').focus();
-                }
-
-                /* phone2 */
-                if ($('#phone2').val().length > 20) {
-                    $('#js').removeClass('hide');
-                    $('#phone2').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Teléfono 2</strong> no debe ser mayor que 20 caracteres.');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#phone2').focus();
-                }
-
-                /* email */
-                if ($('#email').val() == '') {
-                    $('#js').removeClass('hide');
-                    $('#email').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email</strong> es obligatorio').removeClass('hide');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#email').focus();
-                }
-
-                if ($('#email').val().length > 100) {
-                    $('#js').removeClass('hide');
-                    $('#email').focus();
-                    $('#js').html('<i class="fa fa-times"></i> El campo <strong>Email</strong> no debe ser mayor que 100 caracteres.');
-                    return false;
-                } else {
-                    $('#js').addClass('hide');
-                    $('#email').focus();
-                }
-
-                for(var i = 0; i < count_family_relationships; i++) {
-
-                    if ($('select#family_relationship' + i).val() == null) {
-                        $('#js').removeClass('hide');
-                        $('select#family_relationship' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Parentesco Familiar ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    }else {
-                        $('#js').addClass('hide');
-                        $('select#family_relationship' + i).focus();
+            $("#exampleBillingForm").formValidation({
+                framework: 'bootstrap',
+                    fields: {
+                        number: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The credit card number is required'
+                                }
+                            }
+                        },
+                        cvv: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The CVV number is required'
+                                }
+                            }
+                        }
                     }
-                }
-            }
-
-            function validateStep2()
-            {
-                //disabilities
-                for(var i = 0; i < count_disabilities; i++) {
-
-                    //disability
-                    if ($('select#disability' + i).val() == null) {
-                        $('#js').removeClass('hide');
-                        $('select#disability' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Discapacidad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    }else {
-                        $('#js').addClass('hide');
-                        $('select#disability' + i).focus();
-                    }
-
-                    //detail_disability
-                    if ($('#detail_disability' + i).val() == '') {
-                        $('#js').removeClass('hide');
-                        $('#detail_disability' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Detalle Discapacidad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    }else {
-                        $('#js').addClass('hide');
-                        $('#detail_disability' + i).focus();
-                    }
-                }
-
-                //diseases
-                for(var i = 0; i < count_diseases; i++) {
-
-                    //disease
-                    if ($('select#disease' + i).val() == null) {
-                        $('#js').removeClass('hide');
-                        $('select#disease' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Enfermedad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    }else {
-                        $('#js').addClass('hide');
-                        $('select#disease' + i).focus();
-                    }
-
-                    //detalle disease
-                    if ($('#detail_disease' + i).val() == '') {
-                        $('#js').removeClass('hide');
-                        $('#detail_disease' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Detalle Enfermedad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    }else {
-                        $('#js').addClass('hide');
-                        $('#detail_disease' + i).focus();
-                    }
-                }
-
-                //family_responsabilities
-                for (var i = 0; i < count_family_responsabilities; i++) {
-
-                    //full_name
-                    if ($('#name_responsability' + i).val() == '') {
-                        $('#js').removeClass('hide');
-                        $('#name_responsability' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Nombre Completo ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    }else {
-                        $('#js').addClass('hide');
-                        $('#name_responsability' + i).focus();
-                    }
-
-                    //rut
-                    if ($('#rut' + i).val() == '') {
-                        $('#js').removeClass('hide');
-                        $('#rut' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Rut ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    }else {
-                        $('#js').addClass('hide');
-                        $('#rut' + i).focus();
-                    }
-
-                    //kin_id
-                    if ($('select#kin_id' + i).val() == null) {
-                        $('#js').removeClass('hide');
-                        $('select#kin_id' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Parentesco ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    }else {
-                        $('#js').addClass('hide');
-                        $('select#kin_id' + i).focus();
-                    }
-                }
-            }
-
-            function validateStep3()
-            {
-                //certifications
-                for(var i = 0; i < count_certifications; i++) {
-
-                    //certification
-                    if ($('select#certification' + i).val() == null) {
-                        $('#js').removeClass('hide');
-                        $('select#certification' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Certificación ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    } else {
-                        $('#js').addClass('hide');
-                        $('select#certification' + i).focus();
-                    }
-
-                    //institution certification
-                    if ($('#content_certifications select#institution_id' + i).val() == null) {
-                        $('#js').removeClass('hide');
-                        $('#content_certifications select#institution_id' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Institución ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    } else {
-                        $('#js').addClass('hide');
-                        $('#content_certifications select#institution_id' + i).focus();
-                    }
-                }
-
-                //licenses
-                for(var i = 0; i < count_licenses; i++) {
-
-                    //type licence
-                    if ($('select#license' + i).val() == null) {
-                        $('#js').removeClass('hide');
-                        $('select#license' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Tipo Licencia ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    } else {
-                        $('#js').addClass('hide');
-                        $('select#license' + i).focus();
-                    }
-
-                    //expired
-                    if ($('#expired' + i).val() == '') {
-                        $('#js').removeClass('hide');
-                        $('#expired' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Fecha de Vencimiento ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    }else {
-                        $('#js').addClass('hide');
-                        $('#expired' + i).focus();
-                    }
-                }
-
-                //specialities
-                for(var i = 0; i < count_specialities; i++) {
-
-                    //speciality
-                    if ($('select#speciality' + i).val() == null) {
-                        $('#js').removeClass('hide');
-                        $('select#speciality' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Especialidad ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    } else {
-                        $('#js').addClass('hide');
-                        $('select#speciality' + i).focus();
-                    }
-
-                    //institution specialities
-                    if ($('#content_specialities select#institution_id' + i).val() == null) {
-                        $('#js').removeClass('hide');
-                        $('#content_specialities select#institution_id' + i).focus();
-                        $('#js').html('<i class="fa fa-times"></i> El campo <strong>Institución ' + (i + 1) + '</strong> es obligatorio').removeClass('hide');
-                        return false;
-                    } else {
-                        $('#js').addClass('hide');
-                        $('#content_specialities select#institution_id' + i).focus();
-                    }
-                }
-            }
-
+            });
 
 
             /*****************************************************************
