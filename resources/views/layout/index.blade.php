@@ -15,17 +15,18 @@
     <!-- Plugins -->
     <link rel="stylesheet" href="{{ asset('assets/css/animsition.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/asScrollable.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/switchery.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/introjs.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/slidePanel.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/flag-icon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/waves.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/v1.min.css') }}">
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/brand-icons/brand-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/font-awesome.min.css') }}">
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    @yield('css')
+
+    {{ Html::style('me/css/style.css') }}
+
     <!--[if lt IE 9]>
     <script src="{{ asset('assets/js/html5shiv.min.js') }}"></script>
     <![endif]-->
@@ -54,9 +55,26 @@
     <!-- Content -->
     <div class="page animsition">
         <div class="page-content padding-30 container-fluid">
+            <div class="page-header">
+                <h1 class="page-title">
 
-            @yield('content')
+                    @yield('title_header')
 
+                </h1>
+                <ol class="breadcrumb">
+
+                    @yield('breadcumb')
+
+                </ol>
+            </div>
+            <div class="page-content">
+
+                @include('layout.messages.errors')
+                @include('layout.messages.success')
+
+                @yield('content')
+
+            </div>
         </div>
     </div>
 
@@ -73,10 +91,7 @@
     <script src="{{ asset('assets/js/jquery-asHoverScroll.js') }}"></script>
     <script src="{{ asset('assets/js/waves.js') }}"></script>
     <!-- Plugins -->
-    <script src="{{ asset('assets/js/switchery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/intro.js') }}"></script>
-    <script src="{{ asset('assets/js/screenfull.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-slidePanel.js') }}"></script>
+
     <!-- Scripts -->
     <script src="{{ asset('assets/js/core.js') }}"></script>
     <script src="{{ asset('assets/js/site.js') }}"></script>
@@ -85,9 +100,10 @@
     <script src="{{ asset('assets/js/sidebar.js') }}"></script>
     <script src="{{ asset('assets/js/components/asscrollable.js') }}"></script>
     <script src="{{ asset('assets/js/components/animsition.js') }}"></script>
-    <script src="{{ asset('assets/js/components/slidepanel.js') }}"></script>
-    <script src="{{ asset('assets/js/components/switchery.js') }}"></script>
     <script src="{{ asset('assets/js/components/tabs.js') }}"></script>
     <script src="{{ asset('assets/js/v1.min.js') }}"></script>
+
+    @yield('scripts')
+
 </body>
 </html>
