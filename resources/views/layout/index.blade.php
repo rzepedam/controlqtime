@@ -7,38 +7,35 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
     <title>ControlQTime</title>
-    <link rel="apple-touch-icon" href="{{ asset('remark/center/assets/images/apple-touch-icon.png') }}">
-    <link rel="shortcut icon" href="{{ asset('remark/center/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('me/img/favicon.ico') }}">
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ asset('remark/global/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/css/bootstrap-extend.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/center/assets/css/site.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-extend.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
     <!-- Plugins -->
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/animsition/animsition.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/asscrollable/asScrollable.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/switchery/switchery.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/intro-js/introjs.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/slidepanel/slidePanel.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/flag-icon-css/flag-icon.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/waves/waves.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/chartist-js/chartist.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/jvectormap/jquery-jvectormap.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/center/assets/examples/css/dashboard/v1.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animsition.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/asScrollable.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/switchery.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/introjs.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/slidePanel.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/flag-icon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/waves.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/v1.min.css') }}">
     <!-- Fonts -->
-    <link rel="stylesheet" href="{{ asset('remark/global/fonts/material-design/material-design.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('remark/global/fonts/brand-icons/brand-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/brand-icons/brand-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/font-awesome.min.css') }}">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
     <!--[if lt IE 9]>
-    <script src="../../global/vendor/html5shiv/html5shiv.min.js"></script>
+    <script src="{{ asset('assets/js/html5shiv.min.js') }}"></script>
     <![endif]-->
     <!--[if lt IE 10]>
-    <script src="../../global/vendor/media-match/media.match.min.js"></script>
-    <script src="../../global/vendor/respond/respond.min.js"></script>
+    <script src="{{ asset('assets/js/media.match.min.js') }}"></script>
+    <script src="{{ asset('assets/js/respond.min.js') }}"></script>
     <![endif]-->
     <!-- Scripts -->
-    <script src="{{ asset('remark/global/vendor/modernizr/modernizr.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/breakpoints/breakpoints.js') }}"></script>
+    <script src="{{ asset('assets/js/modernizr.js') }}"></script>
+    <script src="{{ asset('assets/js/breakpoints.js') }}"></script>
     <script>
         Breakpoints();
     </script>
@@ -67,41 +64,30 @@
     @include('layout.sections.footer')
 
     <!-- Core  -->
-    <script src="{{ asset('remark/global/vendor/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/bootstrap/bootstrap.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/animsition/animsition.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/asscroll/jquery-asScroll.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/mousewheel/jquery.mousewheel.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/asscrollable/jquery.asScrollable.all.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/ashoverscroll/jquery-asHoverScroll.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/waves/waves.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/js/animsition.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-asScroll.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.mousewheel.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.asScrollable.all.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-asHoverScroll.js') }}"></script>
+    <script src="{{ asset('assets/js/waves.js') }}"></script>
     <!-- Plugins -->
-    <script src="{{ asset('remark/global/vendor/switchery/switchery.min.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/intro-js/intro.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/screenfull/screenfull.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/slidepanel/jquery-slidePanel.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/chartist-js/chartist.min.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip') }}.min.js"></script>
-    <script src="{{ asset('remark/global/vendor/jvectormap/jquery-jvectormap.min.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/jvectormap/maps/jquery-jvectormap-world-mill-en.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/matchheight/jquery.matchHeight-min.js') }}"></script>
-    <script src="{{ asset('remark/global/vendor/peity/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('assets/js/switchery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/intro.js') }}"></script>
+    <script src="{{ asset('assets/js/screenfull.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-slidePanel.js') }}"></script>
     <!-- Scripts -->
-    <script src="{{ asset('remark/global/js/core.js') }}"></script>
-    <script src="{{ asset('remark/center/assets/js/site.js') }}"></script>
-    <script src="{{ asset('remark/center/assets/js/sections/menu.js') }}"></script>
-    <script src="{{ asset('remark/center/assets/js/sections/menubar.js') }}"></script>
-    <script src="{{ asset('remark/center/assets/js/sections/sidebar.js') }}"></script>
-    <script src="{{ asset('remark/global/js/configs/config-colors.js') }}"></script>
-    <script src="{{ asset('remark/center/assets/js/configs/config-tour.js') }}"></script>
-    <script src="{{ asset('remark/global/js/components/asscrollable.js') }}"></script>
-    <script src="{{ asset('remark/global/js/components/animsition.js') }}"></script>
-    <script src="{{ asset('remark/global/js/components/slidepanel.js') }}"></script>
-    <script src="{{ asset('remark/global/js/components/switchery.js') }}"></script>
-    <script src="{{ asset('remark/global/js/components/tabs.js') }}"></script>
-    <script src="{{ asset('remark/global/js/components/matchheight.js') }}"></script>
-    <script src="{{ asset('remark/global/js/components/jvectormap.js') }}"></script>
-    <script src="{{ asset('remark/global/js/components/peity.js') }}"></script>
-    <script src="{{ asset('remark/center/assets/examples/js/dashboard/v1.js') }}"></script>
+    <script src="{{ asset('assets/js/core.js') }}"></script>
+    <script src="{{ asset('assets/js/site.js') }}"></script>
+    <script src="{{ asset('assets/js/menu.js') }}"></script>
+    <script src="{{ asset('assets/js/menubar.js') }}"></script>
+    <script src="{{ asset('assets/js/sidebar.js') }}"></script>
+    <script src="{{ asset('assets/js/components/asscrollable.js') }}"></script>
+    <script src="{{ asset('assets/js/components/animsition.js') }}"></script>
+    <script src="{{ asset('assets/js/components/slidepanel.js') }}"></script>
+    <script src="{{ asset('assets/js/components/switchery.js') }}"></script>
+    <script src="{{ asset('assets/js/components/tabs.js') }}"></script>
+    <script src="{{ asset('assets/js/v1.min.js') }}"></script>
 </body>
 </html>

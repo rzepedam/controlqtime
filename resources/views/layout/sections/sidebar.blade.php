@@ -1,11 +1,11 @@
 <div class="site-menubar site-menubar-dark site-menubar-dark">
     <div class="site-menubar-header">
         <div class="cover overlay">
-            <img class="cover-image" src="{{ asset('remark/center/assets/examples/images/dashboard-header.jpg') }}" alt="...">
+            <img class="cover-image" src="{{ asset('assets/images/dashboard-header.jpg') }}" alt="...">
             <div class="overlay-panel vertical-align overlay-background">
                 <div class="vertical-align-middle">
                     <a class="avatar avatar-lg" href="javascript:void(0)">
-                        <img src="{{ asset('remark/global/portraits/1.jpg') }}" alt="">
+                        <img src="{{ asset('assets/images/1.jpg') }}" alt="">
                     </a>
                     <div class="site-menubar-info">
                         <h5 class="site-menubar-user">Machi</h5>

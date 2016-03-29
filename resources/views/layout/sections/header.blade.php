@@ -1,4 +1,4 @@
-<nav class="site-navbar navbar navbar-inverse navbar-fixed-top navbar-mega" role="navigation">
+<nav class="site-navbar navbar navbar-inverse navbar-fixed-top navbar-mega bg-blue-600" role="navigation">
     <div class="navbar-container container-fluid">
         <div class="navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
             <ul class="nav navbar-toolbar">
@@ -110,7 +110,7 @@
                                         <div class="media">
                                             <div class="media-left padding-right-10">
                                                 <span class="avatar avatar-sm avatar-online">
-                                                    <img src="{{ asset('remark/global/portraits/2.jpg') }}" alt="..." />
+                                                    <img src="{{ asset('assets/images/2.jpg') }}" alt="..." />
                                                     <i></i>
                                                 </span>
                                             </div>
@@ -127,7 +127,7 @@
                                         <div class="media">
                                             <div class="media-left padding-right-10">
                                                 <span class="avatar avatar-sm avatar-off">
-                                                    <img src="{{ asset('remark/global/portraits/3.jpg') }}" alt="..." />
+                                                    <img src="{{ asset('assets/images/3.jpg') }}" alt="..." />
                                                     <i></i>
                                                 </span>
                                             </div>
@@ -144,7 +144,7 @@
                                         <div class="media">
                                             <div class="media-left padding-right-10">
                                                 <span class="avatar avatar-sm avatar-busy">
-                                                    <img src="{{ asset('remark/global/portraits/4.jpg') }}" alt="..." />
+                                                    <img src="{{ asset('assets/images/4.jpg') }}" alt="..." />
                                                     <i></i>
                                                 </span>
                                             </div>
@@ -161,7 +161,7 @@
                                         <div class="media">
                                             <div class="media-left padding-right-10">
                                                 <span class="avatar avatar-sm avatar-away">
-                                                    <img src="{{ asset('remark/global/portraits/5.jpg') }}" alt="..." />
+                                                    <img src="{{ asset('assets/images/5.jpg') }}" alt="..." />
                                                     <i></i>
                                                 </span>
                                             </div>
@@ -190,7 +190,7 @@
             </ul>
             <div class="navbar-brand navbar-brand-center">
                 <a href="index.html">
-                    <img class="navbar-brand-logo" src="{{ asset('remark/center/assets/images/logo.png') }}" title="Remark">
+                    <img class="navbar-brand-logo" src="{{ asset('me/img/logo.png') }}" title="Remark">
                 </a>
             </div>
         </div>
