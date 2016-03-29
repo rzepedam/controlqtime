@@ -28,9 +28,7 @@ Route::group(['middleware' => ['web']], function () {
      * Home
      */
 
-    Route::get('/', function () {
-        return view('layout.index');
-    });
+    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 
     /*
