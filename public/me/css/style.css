@@ -18,13 +18,13 @@ textarea {
     font-size: 1.8em;
 }
 
-.title-elements-panel2 {
+/*.title-elements-panel2 {
     font-size: 1.4em;
-}
+}*/
 
 .delete-elements {
     color: red;
-    font-size: 1.8em;
+    font-size: 1.4em;
     cursor: pointer;
 }
 
@@ -32,24 +32,27 @@ textarea {
     color: red;
 }
 
-.delete-elements-panel2 {
+/*.delete-elements-panel2 {
     color: red;
     font-size: 1.4em;
     cursor: pointer;
-}
+}*/
 
 .delete-elements-panel2:hover {
     color: red;
 }
 
 .add_family_relationship {
-    font-size: 1.1em;
+    font-size: 0.9em;
+    padding: 5px;
+    vertical-align: middle;
+    display: block;
+    cursor: pointer;
 }
 
 .add_family_relationship:hover {
-    text-decoration: none;
-    display: block;
     color: black;
+    background: #FFE0B2;
 }
 
 a.black {

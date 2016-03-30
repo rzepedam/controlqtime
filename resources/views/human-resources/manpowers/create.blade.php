@@ -4,6 +4,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/jquery-wizard.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/formValidation.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/ribbon.css') }}">
 
 @stop
 
@@ -22,39 +23,39 @@
     <div class="row">
         <div class="col-md-12">
             <!-- Panel Wizard Form -->
-            <div class="panel" id="exampleWizardForm">
-                <div class="panel-body">
-                    <!-- Steps -->
-                    <div class="steps steps-sm row" data-plugin="matchHeight" data-by-row="true" role="tablist">
-                        <div class="step col-md-4 current" data-target="#exampleAccount" role="tab">
-                            <span class="step-number">1</span>
-                            <div class="step-desc">
-                                <span class="step-title">Datos</span>
-                                <p>Personales</p>
-                            </div>
-                        </div>
-                        <div class="step col-md-4" data-target="#exampleBilling" role="tab">
-                            <span class="step-number">2</span>
-                            <div class="step-desc">
-                                <span class="step-title">Compencias</span>
-                                <p>Laborales</p>
-                            </div>
-                        </div>
-                        <div class="step col-md-4" data-target="#exampleGetting" role="tab">
-                            <span class="step-number">3</span>
-                            <div class="step-desc">
-                                <span class="step-title">Información</span>
-                                <p>de Salud</p>
-                            </div>
+            <div id="exampleWizardForm">
+                <!-- Steps -->
+                <div class="steps steps-sm row" data-plugin="matchHeight" data-by-row="true" role="tablist">
+                    <div class="step col-md-4 current" data-target="#exampleAccount" role="tab">
+                        <span class="step-number">1</span>
+                        <div class="step-desc">
+                            <span class="step-title">Datos</span>
+                            <p>Personales</p>
                         </div>
                     </div>
-                    <!-- End Steps -->
-                    <!-- Wizard Content -->
-                    <div class="wizard-content">
-                        <div class="wizard-pane active" id="exampleAccount" role="tabpanel">
-                            <div class="panel-group" id="exampleAccordionDefault" aria-multiselectable="true" role="tablist">
-                                <div class="alert alert-primary alert-alt alert-dismissible" role="alert">
-                                    <i class="fa fa-street-view"></i> <strong>Información Personal</strong>
+                    <div class="step col-md-4" data-target="#exampleBilling" role="tab">
+                        <span class="step-number">2</span>
+                        <div class="step-desc">
+                            <span class="step-title">Compencias</span>
+                            <p>Laborales</p>
+                        </div>
+                    </div>
+                    <div class="step col-md-4" data-target="#exampleGetting" role="tab">
+                        <span class="step-number">3</span>
+                        <div class="step-desc">
+                            <span class="step-title">Información</span>
+                            <p>de Salud</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Steps -->
+                <!-- Wizard Content -->
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="wizard-content">
+                            <div class="wizard-pane active" id="exampleAccount" role="tabpanel">
+                                <div class="alert alert-success alert-alt alert-dismissible" role="alert">
+                                    <span class="text-success"><i class="fa fa-street-view"></i> <strong>Información Personal</strong></span>
                                 </div>
                                 {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
 
@@ -62,8 +63,8 @@
 
                                 {{ Form::close() }}
                                 <br />
-                                <div class="alert alert-success alert-alt alert-dismissible" role="alert">
-                                    <i class="fa fa-picture-o"></i> <strong>Imagen de Perfil</strong>
+                                <div class="alert alert-info alert-alt alert-dismissible" role="alert">
+                                    <span class="text-info"><i class="fa fa-picture-o"></i> <strong>Imagen de Perfil</strong></span>
                                 </div>
                                 <br />
                                 <br />
@@ -72,31 +73,45 @@
                                 <br />
                                 <br />
                                 <div class="alert alert-warning alert-alt alert-dismissible" role="alert">
-                                    <i class="fa fa-male"></i><i class="fa fa-female"></i> <strong>Parentescos Familiares</strong>
+                                    <span class="text-warning"><i class="fa fa-male"></i><i class="fa fa-female"></i> <strong>Parentescos Familiares</strong></span>
+                                    <button type="button" class="btn btn-warning btn-squared btn-sm waves-effect waves-light" onclick="$(this).addElementFamilyRelationship(this)"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</button>
+                                </div>
+                                <div id="content_family_relationships">
+                                    {{ Form::open(["route" => "human-resources.manpowers.store", "method" => "POST", "files" => true, "id" => "step3"]) }}
+
+                                        <br />
+                                        <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3>
+                                        <br />
+                                        <br />
+                                        <hr />
+
+                                    {{ Form::close() }}
                                 </div>
                                 <br />
+                                <br />
+
+                            </div>
+                            <div class="wizard-pane" id="exampleBilling" role="tabpanel">
+                                <form id="exampleBillingForm">
+                                    <div class="form-group form-material">
+                                        <label class="control-label" for="inputCardNumber">Card Number</label>
+                                        <input type="text" class="form-control" id="inputCardNumber" name="number" placeholder="Card number">
+                                    </div>
+                                    <div class="form-group form-material">
+                                        <label class="control-label" for="inputCVV">CVV</label>
+                                        <input type="text" class="form-control" id="inputCVV" name="cvv" placeholder="CVV">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="wizard-pane" id="exampleGetting" role="tabpanel">
+                                <div class="text-center margin-vertical-20">
+                                    <i class="icon md-check font-size-40" aria-hidden="true"></i>
+                                    <h4>We got your order. Your product will be shipping soon.</h4>
+                                </div>
                             </div>
                         </div>
-                        <div class="wizard-pane" id="exampleBilling" role="tabpanel">
-                            <form id="exampleBillingForm">
-                                <div class="form-group form-material">
-                                    <label class="control-label" for="inputCardNumber">Card Number</label>
-                                    <input type="text" class="form-control" id="inputCardNumber" name="number" placeholder="Card number">
-                                </div>
-                                <div class="form-group form-material">
-                                    <label class="control-label" for="inputCVV">CVV</label>
-                                    <input type="text" class="form-control" id="inputCVV" name="cvv" placeholder="CVV">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="wizard-pane" id="exampleGetting" role="tabpanel">
-                            <div class="text-center margin-vertical-20">
-                                <i class="icon md-check font-size-40" aria-hidden="true"></i>
-                                <h4>We got your order. Your product will be shipping soon.</h4>
-                            </div>
-                        </div>
+                        <!-- End Wizard Content -->
                     </div>
-                    <!-- End Wizard Content -->
                 </div>
             </div>
             <!-- End Panel Wizard One Form -->
@@ -151,7 +166,7 @@
 
             var wizard = $("#exampleWizardForm").wizard(options).data('wizard');
 
-            wizard.get("#exampleAccount").setValidator(function() {
+            /*wizard.get("#exampleAccount").setValidator(function() {
                 var fv = $("#step1").data('formValidation');
                 fv.validate();
 
@@ -171,7 +186,7 @@
                 }
 
                 return true;
-            });
+            });*/
 
             $('.mitooltip').tooltip();
 
@@ -195,11 +210,11 @@
                         for (var i = 0; i < span.length; i++) {
 
                             item = verificaUltimosNumeros(span[i].id);
-
+                            $('span#family_relationship' + item).attr('id', 'family_relationship' + i);
                             $('span#num_family_relationship' + item).text('Parentesco Familiar #' + (i + 1));
                             $('span#num_family_relationship' + item).attr('id', 'num_family_relationship' + i);
-                            $('span#family_relationship' + item).attr('id', 'family_relationship' + i);
-                            $('label[for="family_relationship' + item + '"]').attr('for', "family_relationship" + i);
+
+                            /*$('label[for="family_relationship' + item + '"]').attr('for', "family_relationship" + i);
                             $('select#family_relationship' + item).each(function (j) {
                                 $(this).attr('id', 'family_relationship' + i);
                                 $(this).attr('name', 'family_relationship' + i);
@@ -209,12 +224,12 @@
                             $('select#manpower' + item).each(function (j) {
                                 $(this).attr('id', 'manpower' + i);
                                 $(this).attr('name', 'manpower' + i);
-                            });
+                            });*/
                         }
 
                         count_family_relationships--;
                         if (count_family_relationships == 0) {
-                            var html = '<h2 class="text-center text-light-blue">No existen Parentescos Familiares Asociados <br /><small class="text-muted">(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h2><br /><hr />'
+                            var html = '<br /><h2 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small class="text-muted">(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h2><br /><br /><hr />'
                             $('#content_family_relationships').html(html);
                         }
 
@@ -513,7 +528,7 @@
 
             $.fn.addElementFamilyRelationship = function () {
 
-                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="title-elements text-light-blue">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship', $kins, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower', $manpowers, null, ['class'=> 'form-control'])}}</div></div></div><hr/></span>';
+                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="title-elements text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship[]', $kins, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower[]', $manpowers, null, ['class'=> 'form-control', 'required'])}}</div></div></div><hr/></span>';
 
                 if (count_family_relationships == 0)
                     $('#content_family_relationships').html($family_relationship);
@@ -525,7 +540,7 @@
                 $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationships);
                 $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
 
-                $('label[for="family_relationship"]').attr('for', 'family_relationship' + count_family_relationships);
+                /*$('label[for="family_relationship"]').attr('for', 'family_relationship' + count_family_relationships);
                 $('select#family_relationship').each(function (i) {
                     $(this).attr('id', 'family_relationship' + count_family_relationships);
                     $(this).attr('name', 'family_relationship' + count_family_relationships);
@@ -535,7 +550,7 @@
                 $('select#manpower').each(function (i) {
                     $(this).attr('id', 'manpower' + count_family_relationships);
                     $(this).attr('name', 'manpower' + count_family_relationships);
-                });
+                });*/
 
                 count_family_relationships++;
                 $('.mitooltip').tooltip();
@@ -936,7 +951,7 @@
              *****************************************************************/
 
 
-            $('#step1').formValidation({
+            /*$('#step1').formValidation({
                 framework: 'bootstrap',
                 fields: {
                     male_surname: {
@@ -1108,7 +1123,7 @@
                             }
                         }
                     }
-            });
+            });*/
 
 
             /*****************************************************************

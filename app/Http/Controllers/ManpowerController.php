@@ -59,6 +59,8 @@ class ManpowerController extends Controller
 
     public function step1(Request $request)
     {
+        dd('...');
+
         $rules = [
             'email'             => 'required|email|unique:manpowers|max:100',
             'phone2'            => 'max:20',
