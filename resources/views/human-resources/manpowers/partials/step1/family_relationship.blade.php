@@ -10,7 +10,7 @@
 	<div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                {{Form::label('relationship_id', 'Relación')}}
+                {{Form::label('relationship_id', 'Parentesco Familiar')}}
                 {{Form::select('relationship_id[]', $relationships, Session::get('relationship_id')[$i], ['class'=> 'form-control', 'required'])}}
             </div>
         </div>

@@ -105,6 +105,7 @@ class ManpowerController extends Controller
      */
     public function step2(Request $request)
     {
+        dd($request->all());
         for ($i = 0; $i < $request->get('count_disabilities'); $i++ ) {
             Session::put('disability' . $i, $request->get('disability' . $i));
             Session::put('treatment_disability' . $i, $request->get('treatment_disability' . $i));

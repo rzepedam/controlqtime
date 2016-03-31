@@ -30,7 +30,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            {{ Form::text('birthday', Session::get('birthday'), ['class' => 'form-control', 'data-inputmask' => 'alias": "dd/mm/yyyy', 'data-mask' => '', 'required']) }}
+            {{ Form::text('birthday', Session::get('birthday'), ['class' => 'form-control data_mask', 'required']) }}
         </div>
     </div>
     <div class="col-md-3 form-group">

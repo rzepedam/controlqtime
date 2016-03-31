@@ -54,13 +54,14 @@
                     <div class="panel-body">
                         <div class="wizard-content">
                             <div class="wizard-pane active" id="exampleAccount" role="tabpanel">
-                                <div class="alert alert-success alert-alt alert-dismissible" role="alert">
-                                    <span><i class="fa fa-street-view"></i> <strong>Información Personal</strong></span>
-                                </div>
 
                                 {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
 
-                                    @include('human-resources.manpowers.partials.step1.personal_data')
+                                    <div class="alert alert-success alert-alt alert-dismissible" role="alert">
+                                        <span><i class="fa fa-street-view"></i> <strong>Información Personal</strong></span>
+                                    </div>
+
+                                        @include('human-resources.manpowers.partials.step1.personal_data')
 
                                     <br />
                                     <div class="alert alert-info alert-alt alert-dismissible" role="alert">
@@ -73,7 +74,7 @@
                                     <br />
                                     <br />
                                     <div class="alert alert-warning alert-alt alert-dismissible contiene-titulo-label-seccion" role="alert">
-                                        <span><i class="fa fa-male"></i><i class="fa fa-female"></i> <strong>Parentescos Familiares</strong></span>
+                                        <span><i class="icon md-male-female"></i> <strong>Parentescos Familiares</strong></span>
                                         <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementFamilyRelationship(this)"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
                                     </div>
                                     <div id="content_family_relationships">
@@ -88,26 +89,68 @@
                                             <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3>
                                             <br />
                                             <br />
-                                            <hr />
                                         @endif
                                     </div>
-                                    <br />
                                     <br />
 
                                 {{ Form::close() }}
 
                             </div>
                             <div class="wizard-pane" id="exampleBilling" role="tabpanel">
-                                <form id="exampleBillingForm">
-                                    <div class="form-group form-material">
-                                        <label class="control-label" for="inputCardNumber">Card Number</label>
-                                        <input type="text" class="form-control" id="inputCardNumber" name="number" placeholder="Card number">
+                                {{ Form::open(["route" => "human-resources.manpowers.step2", "method" => "POST", "id" => "step2"]) }}
+
+                                    <div class="alert alert-info alert-alt alert-dismissible" role="alert">
+                                        <span><i class="icon md-library"></i> <strong>Estudios Académicos</strong></span>
+                                        <span class="label label-outline label-info add_study waves-effect waves-block" onclick="$(this).addElementStudy(this)"><i class="fa fa-plus"></i> Agregar Estudio Académico</span>
                                     </div>
-                                    <div class="form-group form-material">
-                                        <label class="control-label" for="inputCVV">CVV</label>
-                                        <input type="text" class="form-control" id="inputCVV" name="cvv" placeholder="CVV">
+                                    <div id="content_studies">
+                                        <br />
+                                        <h3 class="text-center text-info">No existen Estudios Académicos Asociados <br /><small>(Pulse "Agregar Estudio Académico" para comenzar su adición)</small></h3>
+                                        <br />
+                                        <br />
                                     </div>
-                                </form>
+                                    <br />
+                                    <br />
+                                    <div class="alert alert-danger alert-alt alert-dismissible" role="alert">
+                                        <span><i class="icon md-badge-check"></i> <strong>Certificaciones</strong></span>
+                                        <span class="label label-outline label-danger add_certification waves-effect waves-block" onclick="$(this).addElementCertification(this)"><i class="fa fa-plus"></i> Agregar Certificación</span>
+                                    </div>
+                                    <div id="content_certifications">
+                                        <br />
+                                        <h3 class="text-center text-danger">No existen Certificaciones Asociadas <br /><small>(Pulse "Agregar Certificación" para comenzar su adición)</small></h3>
+                                        <br />
+                                        <br />
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="alert alert-warning alert-alt alert-dismissible" role="alert">
+                                        <span><i class="fa fa-wrench"></i> <strong>Especialidades</strong></span>
+                                        <!-- Utilizo misma clase de FamilyRelationship para reutilizarla -->
+                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementSpeciality(this)"><i class="fa fa-plus"></i> Agregar Especialidad</span>
+                                    </div>
+                                    <div id="content_specialities">
+                                        <br />
+                                        <h3 class="text-center text-warning">No existen Especialidades Asociadas <br /><small>(Pulse "Agregar Especialidad" para comenzar su adición)</small></h3>
+                                        <br />
+                                        <br />
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="alert alert-success alert-alt alert-dismissible" role="alert">
+                                        <span><i class="icon md-account-calendar"></i> <strong>Licencias Profesionales</strong></span>
+                                        <span class="label label-outline label-success add_license waves-effect waves-block" onclick="$(this).addElementLicense(this)"><i class="fa fa-plus"></i> Agregar Licencia Profesional</span>
+                                    </div>
+                                    <div id="content_licenses">
+                                        <br />
+                                        <h3 class="text-center text-success">No existen Licencias Profesionales Asociadas <br /><small>(Pulse "Agregar Licencia Profesional" para comenzar su adición)</small></h3>
+                                        <br />
+                                        <br />
+                                    </div>
+                                    <br />
+                                    <br />
+
+                                {{ Form::close() }}
+
                             </div>
                             <div class="wizard-pane" id="exampleGetting" role="tabpanel">
                                 <div class="text-center margin-vertical-20">
@@ -130,6 +173,8 @@
 
     {{ Html::script('me/js/verificaUltimosNumeros.js') }}
     {{ Html::script('assets/js/config.js') }}
+    {{ Html::script('assets/js/inputmask.js') }}
+    {{ Html::script('assets/js/inputmask.date.extensions.js') }}
     {{ Html::script('assets/js/jquery.inputmask.js') }}
     {{ Html::script('assets/js/formValidation.js') }}
     {{ Html::script('assets/js/form-validation/bootstrap.js') }}
@@ -194,8 +239,21 @@
                 return true;
             });*/
 
-            $('.mitooltip').tooltip();
+            initializeComponents();
 
+
+            function initializeComponents() {
+
+                $('.mitooltip').tooltip();
+
+                $('.data_mask').inputmask({
+                    placeholder: 'dd-mm-yyyy',
+                    alias: "dd-mm-yyyy",
+                    "clearIncomplete": true,
+                    yearrange: {minyear: 1900, maxyear: (new Date()).getFullYear()}
+                });
+
+            }
 
 
             /******************************************************************
@@ -225,7 +283,7 @@
 
                         count_family_relationships--;
                         if (count_family_relationships == 0) {
-                            var html = '<br /><h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3><br /><br /><hr />'
+                            var html = '<br /><h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3><br /><br />'
                             $('#content_family_relationships').html(html);
                         }
 
@@ -237,38 +295,79 @@
 
                             item = verificaUltimosNumeros(span[i].id);
 
-                            $('span#study' + item).attr('id', 'study' + i);
-                            $('span#num_study' + item).text('Estudio #' + (i + 1));
+                            $('span#num_study' + item).text('Estudio Académico #' + (i + 1));
                             $('span#num_study' + item).attr('id', 'num_study' + i);
+                            $('span#study' + item).attr('id', 'study' + i);
 
-                            $('label[for="degree' + item + '"]').attr('for', "degree" + i);
-                            $('select#degree' + item).each(function (j) {
-                                $(this).attr('id', 'degree' + i);
-                                $(this).attr('name', 'degree' + i);
-                            });
-
-                            $('label[for="name_study' + item + '"]').attr('for', 'name_study' + i);
-                            $('input#name_study' + item).attr('name', 'name_study' + i);
-                            $('input#name_study' + item).attr('id', 'name_study' + i);
-
-                            $('label[for="institution_id' + item + '"]').attr('for', "institution_id" + i);
-                            $('#content_studies select#institution_id' + item).each(function (j) {
-                                $(this).attr('id', 'institution_id' + i);
-                                $(this).attr('name', 'institution_id' + i);
-                            });
-
-                            $('label[for="date' + item + '"]').attr('for', 'date' + i);
-                            $('input#date' + item).attr('name', 'date' + i);
-                            $('input#date' + item).attr('id', 'date' + i);
                         }
 
                         count_studies--;
                         if (count_studies == 0) {
-                            var html = '<h2 class="text-center text-green">No existen Estudios Asociados <br /><small class="text-muted">(Pulse "Agregar Estudio" para comenzar su adición)</small></h2><br /><hr />'
+                            var html = '<br/> <h3 class="text-center text-info">No existen Estudios Académicos Asociados <br/><small>(Pulse "Agregar Estudio Académico" para comenzar su adición)</small></h3> <br/> <br/>'
                             $('#content_studies').html(html);
                         }
 
                         break;
+
+                    case 'certification':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_certification' + item).text('Certificación #' + (i + 1));
+                            $('span#num_certification' + item).attr('id', 'num_certification' + i);
+                            $('span#certification' + item).attr('id', 'certification' + i);
+
+                        }
+
+                        count_certifications--;
+                        if (count_certifications == 0) {
+                            var html = '<br/> <h3 class="text-center text-danger">No existen Certificaciones Asociadas <br/><small>(Pulse "Agregar Certificación" para comenzar su adición)</small></h3> <br/> <br/>';
+                            $('#content_certifications').html(html);
+                        }
+
+                        break;
+
+                    case 'speciality':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_speciality' + item).text('Especialidad #' + (i + 1));
+                            $('span#num_speciality' + item).attr('id', 'num_speciality' + i);
+                            $('span#speciality' + item).attr('id', 'speciality' + i);
+
+                        }
+
+                        count_specialities--;
+                        if (count_specialities == 0) {
+                            var html = '<br/> <h3 class="text-center text-warning">No existen Especialidades Asociadas <br/><small>(Pulse "Agregar Especialidad" para comenzar su adición)</small></h3> <br/> <br/>';
+                            $('#content_specialities').html(html);
+                        }
+
+                        break;
+
+                    case 'license':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_license' + item).text('Licencia #' + (i + 1));
+                            $('span#num_license' + item).attr('id', 'num_license' + i);
+                            $('span#license' + item).attr('id', 'license' + i);
+
+                        }
+
+                        count_licenses--;
+                        if (count_licenses == 0) {
+                            var html = '<br/> <h3 class="text-center text-success">No existen Licencias Profesionales Asociadas <br/><small>(Pulse "Agregar Licencia Profesional" para comenzar su adición)</small></h3> <br/> <br/>';
+                            $('#content_licenses').html(html);
+                        }
+
+                        break
 
                     case 'disability':
 
@@ -408,109 +507,6 @@
 
                         break;
 
-                    case 'certification':
-
-                        for (var i = 0; i < span.length; i++) {
-
-                            item = verificaUltimosNumeros(span[i].id);
-
-                            $('span#num_certification' + item).text('Certificación #' + (i + 1));
-                            $('span#num_certification' + item).attr('id', 'num_certification' + i);
-                            $('span#certification' + item).attr('id', 'certification' + i);
-
-                            $('label[for="certification' + item + '"]').attr('for', "certification" + i);
-                            $('#content_certifications select#certification' + item).each(function (j) {
-                                $(this).attr('id', 'certification' + i);
-                                $(this).attr('name', 'certification' + i);
-                            });
-
-                            $('label[for="institution_id' + item + '"]').attr('for', "institution_id" + i);
-                            $('#content_certifications select#institution_id' + item).each(function (j) {
-                                $(this).attr('id', 'institution_id' + i);
-                                $(this).attr('name', 'institution_id' + i);
-                            });
-
-                            $('label[for="expired_certification' + item + '"]').attr('for', 'expired_certification' + i);
-                            $('input#expired_certification' + item).attr('name', 'expired_certification' + i);
-                            $('input#expired_certification' + item).attr('id', 'expired_certification' + i);
-
-                            $('div#img_certification' + item).attr('id', 'img_certification' + i);
-                        }
-
-                        count_certifications--;
-                        if (count_certifications == 0) {
-                            var html = '<h2 class="text-center text-red">No existen Certificaciones Asociadas <br /><small class="text-muted">(Pulse "Agregar Certificación" para comenzar su adición)</small></h2><br /><hr />';
-                            $('#content_certifications').html(html);
-                        }
-
-                        break;
-
-                    case 'license':
-
-                        for (var i = 0; i < span.length; i++) {
-
-                            item = verificaUltimosNumeros(span[i].id);
-
-                            $('span#num_license' + item).text('Licencia #' + (i + 1));
-                            $('span#num_license' + item).attr('id', 'num_license' + i);
-                            $('span#license' + item).attr('id', 'license' + i);
-
-                            $('label[for="expired' + item + '"]').attr('for', 'expired' + i);
-                            $('input#expired' + item).attr('name', 'expired' + i);
-                            $('input#expired' + item).attr('id', 'expired' + i);
-
-                            $('label[for="detail_license' + item + '"]').attr('for', 'detail_license' + i);
-                            $('textarea#detail_license' + item).attr('name', 'detail_license' + i);
-                            $('textarea#detail_license' + item).attr('id', 'detail_license' + i);
-
-                            $('div#img_license' + item).attr('id', 'img_license' + i);
-                        }
-
-                        count_licenses--;
-                        if (count_licenses == 0) {
-                            var html = '<h2 class="text-center text-yellow">No existen Licencias Asociadas <br /><small class="text-muted">(Pulse "Agregar Licencia" para comenzar su adición)</small></h2><br /><hr />';
-                            $('#content_licenses').html(html);
-                        }
-
-                        break
-
-                    case 'speciality':
-
-                        for (var i = 0; i < span.length; i++) {
-
-                            item = verificaUltimosNumeros(span[i].id);
-
-                            $('span#num_speciality' + item).text('Especialidad #' + (i + 1));
-                            $('span#num_speciality' + item).attr('id', 'num_speciality' + i);
-                            $('span#speciality' + item).attr('id', 'speciality' + i);
-
-                            $('label[for="speciality' + item + '"]').attr('for', "speciality" + i);
-                            $('#content_specialities select#speciality' + item).each(function (j) {
-                                $(this).attr('id', 'speciality' + i);
-                                $(this).attr('name', 'speciality' + i);
-                            });
-
-                            $('label[for="expired_speciality' + item + '"]').attr('for', 'expired_speciality' + i);
-                            $('input#expired_speciality' + item).attr('name', 'expired_speciality' + i);
-                            $('input#expired_speciality' + item).attr('id', 'expired_speciality' + i);
-
-                            $('label[for="institution_id' + item + '"]').attr('for', "institution_id" + i);
-                            $('#content_specialities select#institution_id' + item).each(function (j) {
-                                $(this).attr('id', 'institution_id' + i);
-                                $(this).attr('name', 'institution_id' + i);
-                            });
-
-                            $('div#img_speciality' + item).attr('id', 'img_speciality' + i);
-                        }
-
-                        count_specialities--;
-                        if (count_specialities == 0) {
-                            var html = '<h2 class="text-center text-green">No existen Especialidades Asociadas <br /><small class="text-muted">(Pulse "Agregar Especialidad" para comenzar su adición)</small></h2><br /><hr />';
-                            $('#content_specialities').html(html);
-                        }
-
-                        break
-
                 }
 
             });
@@ -524,7 +520,7 @@
 
             $.fn.addElementFamilyRelationship = function () {
 
-                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="text-warning titulo-seccion">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Parentesco"><i class="fa fa-trash"></i></a></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('relationship_id', 'Relación')}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label('manpower_id', 'Nombre')}}{{Form::select('manpower_id[]', $manpowers, null, ['class'=> 'form-control', 'required'])}}</div></div></div><hr/></span>';
+                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="text-warning titulo-seccion">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Parentesco"><i class="fa fa-trash"></i></a></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('relationship_id', 'Parentesco Familiar')}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label('manpower_id', 'Nombre')}}{{Form::select('manpower_id[]', $manpowers, null, ['class'=> 'form-control', 'required'])}}</div></div></div><hr/></span>';
 
                 if (count_family_relationships == 0)
                     $('#content_family_relationships').html($family_relationship);
@@ -536,7 +532,7 @@
                 $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
 
                 count_family_relationships++;
-                $('.mitooltip').tooltip();
+                initializeComponents();
             }
 
 
@@ -548,7 +544,7 @@
 
             $.fn.addElementStudy = function () {
 
-                $study = '<span id="study"><div class="row"><div class="col-md-12"><span id="num_study" class="title-elements text-green">Estudio #' + (count_studies + 1) + '</span><a id="study" class="delete-elements pull-right mitooltip" title="Eliminar Estudio"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-3"><div class="form-group">{{Form::label("degree", "Grado Académico")}}{{Form::select("degree", $degrees, null, ["class"=> "form-control"])}}</div></div><div class="col-md-4"><div class="form-group">{{Form::label("name_study", "Nombre Estudio")}}{{Form::text("name_study", null, ["class"=> "form-control"])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label("institution_id", "Institución")}}{{Form::select("institution_id", $institutions, null, ["class"=> "form-control"])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label("date", "Fecha Obtención")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text("date", null, ["class"=> "form-control required", "data-inputmask"=> 'alias": "dd/mm/yyyy', "data-mask"=> ""])}}</div></div></div></div><hr/></span>';
+                $study = '<span id="study"><div class="row"><div class="col-md-12"><span id="num_study" class="text-info titulo-seccion">Estudio Académico #' + (count_studies + 1) + '</span><a id="study" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Estudio"><i class="fa fa-trash"></i></a></div></div><div class="row"><div class="col-md-3"><div class="form-group">{{Form::label('degree', 'Grado Académico')}}{{Form::select('degree[]', $degrees, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-4"><div class="form-group">{{Form::label('name_study', 'Nombre Estudio')}}{{Form::text('name_study[]', null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('date', 'Fecha Obtención')}}<div class="input-group"> <div class="input-group-addon"><i class="fa fa-calendar"></i> </div>{{Form::text('date[]', null, ['class'=> 'form-control', "data-inputmask"=> 'alias": "dd/mm/yyyy', "data-mask"=> "", 'required'])}}</div></div></div></div><hr/></span>';
 
                 if (count_studies == 0)
                     $('#content_studies').html($study);
@@ -559,28 +555,81 @@
                 $('span#study').attr('id', 'study' + count_studies);
                 $('span#num_study').attr('id', 'num_study' + count_studies);
 
-                $('label[for="degree"]').attr('for', 'degree' + count_studies);
-                $('select#degree').each(function (i) {
-                    $(this).attr('id', 'degree' + count_studies);
-                    $(this).attr('name', 'degree' + count_studies);
-                });
-
-                $('label[for="name_study"]').attr('for', 'name_study' + count_studies);
-                $('input#name_study').attr('name', 'name_study' + count_studies);
-                $('input#name_study').attr('id', 'name_study' + count_studies);
-
-                $('label[for="institution_id"]').attr('for', 'institution_id' + count_studies);
-                $('#content_studies select#institution_id').each(function (i) {
-                    $(this).attr('id', 'institution_id' + count_studies);
-                    $(this).attr('name', 'institution_id' + count_studies);
-                });
-
-                $('label[for="date"]').attr('for', 'date' + count_studies);
-                $('input#date').attr('name', 'date' + count_studies);
-                $('input#date').attr('id', 'date' + count_studies);
-
                 count_studies++;
-                $('.mitooltip').tooltip();
+                initializeComponents();
+            }
+
+
+
+
+            /*****************************************************************
+             ********************* Add Certifications zone *******************
+             *****************************************************************/
+
+
+            $.fn.addElementCertification = function() {
+
+                $certification = '<span id="certification"><div class="row"><div class="col-md-12"><span id="num_certification" class="text-danger titulo-seccion">Certificación #' + (count_certifications + 1) + '</span><a id="certification" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('certification', 'Certificación')}}{{Form::select('certification[]', $certifications, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired_certification', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_certification[]', null, ['class'=> 'form-control', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> '', 'required'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><hr/></span>';
+
+                if (count_certifications == 0)
+                    $('#content_certifications').html($certification);
+                else
+                    $('#content_certifications').append($certification);
+
+
+                $('span#certification').attr('id', 'certification' + count_certifications);
+                $('span#num_certification').attr('id', 'num_certification' + count_certifications);
+
+                count_certifications++;
+                initializeComponents();
+            }
+
+
+
+            /*****************************************************************
+             ********************** Add Specialities zone ********************
+             *****************************************************************/
+
+
+            $.fn.addElementSpeciality = function() {
+
+                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><span id="num_speciality" class="text-warning titulo-seccion">Especialidad #' + (count_specialities + 1) + '</span><a id="speciality" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('speciality', 'Especialidad')}}{{Form::select('speciality[]', $specialities, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired_speciality', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i></div>{{Form::text('expired_speciality[]', null, ['class'=> 'form-control', 'data-inputmask'=> 'alias": "dd-mm-yyyy', 'data-mask'=> '', 'required'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><hr/></span>';
+
+                if (count_specialities == 0)
+                    $('#content_specialities').html($speciality);
+                else
+                    $('#content_specialities').append($speciality);
+
+
+                $('span#speciality').attr('id', 'speciality' + count_specialities);
+                $('span#num_speciality').attr('id', 'num_speciality' + count_specialities);
+
+                count_specialities++;
+                initializeComponents();
+            }
+
+
+
+            /*****************************************************************
+             ************************ Add Licenses zone **********************
+             *****************************************************************/
+
+
+            $.fn.addElementLicense = function() {
+
+                $license = '<span id="license"><div class="row"><div class="col-md-12"><span id="num_license" class="text-success titulo-seccion">Licencia Profesional #' + (count_licenses + 1) + '</span><a id="license" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div><div class="row"><div class="col-md-4"><div class="form-group">{{Form::label('license', 'Tipo Licencia')}}{{Form::select('license[]', $licenses, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"><i class="fa fa-calendar"></i> </div>{{Form::text('expired[]', null, ['class'=> 'form-control', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> '', 'required'])}}</div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license[]', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><hr/></span>';
+
+                if (count_licenses == 0)
+                    $('#content_licenses').html($license);
+                else
+                    $('#content_licenses').append($license);
+
+
+                $('span#license').attr('id', 'license' + count_licenses);
+                $('span#num_license').attr('id', 'num_license' + count_licenses);
+
+                count_licenses++;
+                initializeComponents();
             }
 
 
@@ -736,126 +785,6 @@
                 $('.mitooltip').tooltip();
             }
 
-
-
-            /*****************************************************************
-             ********************* Add Certifications zone *******************
-             *****************************************************************/
-
-
-            $.fn.addElementCertification = function() {
-
-                $certification = '<span id="exam"><div class="row"><div class="col-md-12"><span id="num_exam" class="title-elements text-muted">Examen Preocupacional #' + (count_exams + 1) + '</span><a id="exam" class="delete-elements pull-right mitooltip" title="Eliminar Examen Preocupacional"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-4"><div class="form-group">{{Form::label('exam', 'Nombre Examen')}}{{Form::select('exam', $exams, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired_exam', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_exam', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div></div></div><hr/></span>';
-
-                if (count_certifications == 0)
-                    $('#content_certifications').html($certification);
-                else
-                    $('#content_certifications').append($certification);
-
-
-                $('span#certification').attr('id', 'certification' + count_certifications);
-                $('span#num_certification').attr('id', 'num_certification' + count_certifications);
-
-                $('label[for="certification"]').attr('for', 'certification' + count_certifications);
-                $('select#certification').each(function(i) {
-                    $(this).attr('id', 'certification' + count_certifications);
-                    $(this).attr('name', 'certification' + count_certifications);
-                });
-
-                $('label[for="expired_certification"]').attr('for', 'expired_certification' + count_certifications);
-                $('input#expired_certification').attr('name', 'expired_certification' + count_certifications);
-                $('input#expired_certification').attr('id', 'expired_certification' + count_certifications);
-
-                $('label[for="institution_id"]').attr('for', 'institution_id' + count_certifications);
-                $('#content_certifications select#institution_id').each(function(i) {
-                    $(this).attr('id', 'institution_id' + count_certifications);
-                    $(this).attr('name', 'institution_id' + count_certifications);
-                });
-
-
-                count_certifications++;
-                $('.mitooltip').tooltip();
-            }
-
-
-
-            /*****************************************************************
-             ************************ Add Licenses zone **********************
-             *****************************************************************/
-
-
-            $.fn.addElementLicense = function() {
-
-                $license = '<span id="license"><div class="row"><div class="col-md-12"><span id="num_license" class="title-elements text-yellow">Licencia #' + (count_licenses + 1) + '</span><a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-4"><div class="form-group">{{Form::label('license', 'Tipo Licencia')}}{{Form::select('license', $licenses, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div></div></div><br/><div class="row"><div class="col-md-12"><div class="form-group">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><hr/></span>';
-
-                if (count_licenses == 0)
-                    $('#content_licenses').html($license);
-                else
-                    $('#content_licenses').append($license);
-
-
-                $('span#license').attr('id', 'license' + count_licenses);
-                $('span#num_license').attr('id', 'num_license' + count_licenses);
-
-                $('label[for="license"]').attr('for', 'license' + count_licenses);
-                $('select#license').each(function(i) {
-                    $(this).attr('id', 'license' + count_licenses);
-                    $(this).attr('name', 'license' + count_licenses);
-                });
-
-                $('label[for="expired"]').attr('for', 'expired' + count_licenses);
-                $('input#expired').attr('name', 'expired' + count_licenses);
-                $('input#expired').attr('id', 'expired' + count_licenses);
-
-                $('label[for="detail_license"]').attr('for', 'detail_license' + count_licenses);
-                $('textarea#detail_license').attr('name', 'detail_license' + count_licenses);
-                $('textarea#detail_license').attr('id', 'detail_license' + count_licenses);
-
-
-                count_licenses++;
-                $('.mitooltip').tooltip();
-            }
-
-
-
-            /*****************************************************************
-             ********************** Add Specialities zone ********************
-             *****************************************************************/
-
-
-            $.fn.addElementSpeciality = function() {
-
-                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><span id="num_speciality" class="title-elements text-green">Especialidad #' + (count_specialities + 1) + '</span><a id="speciality" class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('speciality', 'Especialidad')}}{{Form::select('speciality', $specialities, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired_speciality', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i></div>{{Form::text('expired_speciality', null, ['class'=> 'form-control required', 'data-inputmask'=> 'alias": "dd/mm/yyyy', 'data-mask'=> ''])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_id', 'Institución')}}{{Form::select('institution_id', $institutions, null, ['class'=> 'form-control'])}}</div></div></div><hr/></span>';
-
-                if (count_specialities == 0)
-                    $('#content_specialities').html($speciality);
-                else
-                    $('#content_specialities').append($speciality);
-
-
-                $('span#speciality').attr('id', 'speciality' + count_specialities);
-                $('span#num_speciality').attr('id', 'num_speciality' + count_specialities);
-
-                $('label[for="speciality"]').attr('for', 'speciality' + count_specialities);
-                $('#content_specialities select#speciality').each(function(i) {
-                    $(this).attr('id', 'speciality' + count_specialities);
-                    $(this).attr('name', 'speciality' + count_specialities);
-                });
-
-                $('label[for="expired_speciality"]').attr('for', 'expired_speciality' + count_specialities);
-                $('input#expired_speciality').attr('name', 'expired_speciality' + count_specialities);
-                $('input#expired_speciality').attr('id', 'expired_speciality' + count_specialities);
-
-                $('label[for="institution_id"]').attr('for', 'institution_id' + count_specialities);
-                $('#content_specialities select#institution_id').each(function(i) {
-                    $(this).attr('id', 'institution_id' + count_specialities);
-                    $(this).attr('name', 'institution_id' + count_specialities);
-                });
-
-
-                count_specialities++;
-                $('.mitooltip').tooltip();
-            }
 
 
 
@@ -1094,7 +1023,7 @@
                         type: 'POST',
                         url: '{{ route("human-resources.manpowers.step1") }}',
                         data: $('#step1').serialize(),
-                        async: false,
+                        //async: false,
                         dataType: 'json',
                         success: function(result) {
 

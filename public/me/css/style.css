@@ -41,7 +41,7 @@ textarea {
     cursor: pointer;
 }
 
-.delete-elements:hover {
+.icono-eliminar-elementos:hover {
     color: red;
 }
 
@@ -68,4 +68,67 @@ textarea {
 .add_family_relationship:hover {
     color: white;
     background: #FF9800;
+}
+
+.add_study{
+    float: right;
+    padding: 7px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: -20px;
+}
+
+@media screen and (max-width: 400px) {
+    .add_study {
+        float: none;
+        width: auto;
+        margin-top: 5px;
+    }
+}
+
+.add_study:hover {
+    color: white;
+    background: #00bcd4;
+}
+
+.add_certification{
+    float: right;
+    padding: 7px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: -20px;
+}
+
+@media screen and (max-width: 400px) {
+    .add_certification {
+        float: none;
+        width: auto;
+        margin-top: 5px;
+    }
+}
+
+.add_certification:hover {
+    color: white;
+    background: #F44336;
+}
+
+.add_license{
+    float: right;
+    padding: 7px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: -20px;
+}
+
+@media screen and (max-width: 400px) {
+    .add_license {
+        float: none;
+        width: auto;
+        margin-top: 5px;
+    }
+}
+
+.add_license:hover {
+    color: white;
+    background: #4CAF50;
 }

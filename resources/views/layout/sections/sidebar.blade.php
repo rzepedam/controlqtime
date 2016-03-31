@@ -39,7 +39,7 @@
                         <ul class="site-menu-sub">
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('human-resources.manpowers.index')}}">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-user" aria-hidden="true"></i> Trabajadores</span>
+                                    <span class="site-menu-title"><i class="icon md-accounts-alt site-menu-icon" aria-hidden="true"></i> Trabajadores</span>
                                 </a>
                             </li>
                         </ul>
