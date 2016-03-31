@@ -26,7 +26,7 @@
 @section('content')
 
     @if($kins->count())
-        @include('maintainers.kins.partials.table')
+        @include('maintainers.relationships.partials.table')
     @else
         <h3 class="text-center">No se han encontrado Parentescos Familiares</h3>
     @endif

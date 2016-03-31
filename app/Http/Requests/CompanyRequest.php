@@ -18,11 +18,6 @@ class CompanyRequest extends SanitizedRequest
         return true;
     }
 
-    private function cast($number)
-    {
-        return (int)$number;
-    }
-
     public function rules()
     {
         switch($this->method())

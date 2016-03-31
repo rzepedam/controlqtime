@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Kin extends Model
+class Relationship extends Model
 {
     protected $fillable = [
         'name'

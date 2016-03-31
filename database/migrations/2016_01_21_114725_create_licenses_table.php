@@ -11,8 +11,8 @@ class CreateLicensesTable extends Migration
         Schema::create('licenses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
-            $table->integer('expiration')->unsigned();
-            $table->string('detail');
+            $table->date('expiration');
+            $table->string('detail')->default(null);
         });
     }
 

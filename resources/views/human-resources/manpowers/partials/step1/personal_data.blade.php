@@ -104,7 +104,7 @@
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('company_id', 'Empresa') }}
-        {{ Form::select('company_id', ['Empresa1', 'Empresa2'], Session::get('company_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('company_id', $companies, Session::get('company_id'), ['class' => 'form-control', 'required']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('rating_id', 'Cargo') }}

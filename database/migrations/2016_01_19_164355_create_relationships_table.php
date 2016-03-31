@@ -3,12 +3,12 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKinsTable extends Migration
+class CreateRelationshipsTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('kins', function (Blueprint $table) {
+        Schema::create('relationships', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 30);
         });
@@ -17,6 +17,6 @@ class CreateKinsTable extends Migration
 
     public function down()
     {
-        Schema::drop('kins');
+        Schema::drop('relationships');
     }
 }

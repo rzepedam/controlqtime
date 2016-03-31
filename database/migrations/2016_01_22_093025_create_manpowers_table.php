@@ -11,16 +11,14 @@ class CreateManpowersTable extends Migration
         Schema::create('manpowers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('photo');
-            $table->string('track');
             $table->string('cod_ref');
-            $table->string('qr');
             $table->string('male_surname', 30);
             $table->string('female_surname', 30);
             $table->string('first_name', 30);
             $table->string('second_name', 30);
             $table->string('full_name', 120);
             $table->string('rut', 15);
-            $table->bigInteger('birthday');
+            $table->date('birthday');
             $table->integer('nationality_id')->unsigned();
             $table->integer('gender_id')->unsigned();
             $table->string('address');
@@ -31,17 +29,19 @@ class CreateManpowersTable extends Migration
             $table->integer('forecast_id')->unsigned();
             $table->integer('mutuality_id')->unsigned();
             $table->integer('pension_id')->unsigned();
+            $table->integer('company_id')->unsigned();
             $table->integer('rating_id')->unsigned();
-
-            /*
-            *   Agregar foránea empresa
-            */
 
             $table->timestamps();
 
             $table->foreign('nationality_id')
                 ->references('id')
                 ->on('nationalities')
+                ->onUpdate('cascade');
+
+            $table->foreign('commune_id')
+                ->references('id')
+                ->on('communes')
                 ->onUpdate('cascade');
 
             $table->foreign('gender_id')
@@ -64,15 +64,17 @@ class CreateManpowersTable extends Migration
                 ->on('pensions')
                 ->onUpdate('cascade');
 
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->foreign('rating_id')
                 ->references('id')
                 ->on('ratings')
                 ->onUpdate('cascade');
 
-            $table->foreign('commune_id')
-                ->references('id')
-                ->on('communes')
-                ->onUpdate('cascade');
         });
     }
 

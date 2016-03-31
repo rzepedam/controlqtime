@@ -28,9 +28,7 @@ class Company extends Model
 
 
     /**
-     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     *
      */
     public function legalRepresentatives() {
         return $this->hasMany('App\LegalRepresentative');
@@ -38,9 +36,7 @@ class Company extends Model
 
 
     /**
-     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     *
      */
     public function subsidiaries() {
         return $this->hasMany('App\Subsidiary');
@@ -48,9 +44,7 @@ class Company extends Model
 
 
     /**
-     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     *
      */
     public function imageRutCompanies() {
         return $this->hasMany('App\ImageRutCompany');
@@ -58,9 +52,7 @@ class Company extends Model
 
 
     /**
-     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     *
      */
     public function imageLicenseCompanies() {
         return $this->hasMany('App\ImageLicenseCompany');
@@ -68,9 +60,14 @@ class Company extends Model
 
 
     /**
-     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function manpowers() {
+        return $this->hasMany('App\Manpower');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     *
      */
     public function commune() {
         return $this->belongsTo('App\Commune');
@@ -78,9 +75,7 @@ class Company extends Model
 
 
     /**
-     *
      * @param string $value
-     *
      */
     public function setEmailAttribute($value) {
         $this->attributes['email'] = strtolower($value);
@@ -88,9 +83,7 @@ class Company extends Model
 
 
     /**
-     *
      * @param string $value
-     *
      */
     public function setStartActAttribute($value) {
         $this->attributes['start_act'] = Carbon::createFromFormat('d-m-Y', $value);
@@ -98,9 +91,7 @@ class Company extends Model
 
 
     /**
-     *
      * @return int
-     *
      */
     public function getNumSubsidiaryAttribute() {
         return count($this->subsidiaries);
@@ -108,9 +99,7 @@ class Company extends Model
 
 
     /**
-     *
      * @return int
-     * 
      */
     public function getNumRepresentativeAttribute() {
         return count($this->legalRepresentatives);

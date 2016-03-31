@@ -6,75 +6,13 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', sans-serif;
 }
 
-textarea {
-    resize: none;
-}
-
-.font-up{
-    font-size: 1.1em;
-}
-
-.title-elements {
-    font-size: 1.8em;
-}
-
-/*.title-elements-panel2 {
-    font-size: 1.4em;
-}*/
-
-.delete-elements {
-    color: red;
-    font-size: 1.4em;
-    cursor: pointer;
-}
-
-.delete-elements:hover {
-    color: red;
-}
-
-/*.delete-elements-panel2 {
-    color: red;
-    font-size: 1.4em;
-    cursor: pointer;
-}*/
-
-.delete-elements-panel2:hover {
-    color: red;
-}
-
-.add_family_relationship {
-    font-size: 0.9em;
-    padding: 5px;
-    vertical-align: middle;
-    display: block;
-    cursor: pointer;
-}
-
-.add_family_relationship:hover {
-    color: black;
-    background: #FFE0B2;
-}
-
-a.black {
-    color: black;
-}
-
-a.black:hover {
-    color: black;
-}
-
-a.black:visited {
-    color: black;
-}
-
-a.black:active {
-    color: black;
-}
-
 .breadcrumb > li > a {
     text-decoration: none;
 }
 
+/**
+* Bradcumb responsive
+**/
 @media screen and (max-width: 767px) {
     .page-header-actions {
         position:relative;
@@ -87,4 +25,47 @@ a.black:active {
         transform: none;
         margin: auto;
     }
+}
+
+textarea {
+    resize: none;
+}
+
+.titulo-seccion {
+    font-size: 1.2em;
+}
+
+.icono-eliminar-elementos {
+    color: red;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.delete-elements:hover {
+    color: red;
+}
+
+.contiene-titulo-label-seccion{
+    overflow: hidden;
+}
+
+.add_family_relationship{
+    float: right;
+    padding: 7px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: -20px;
+}
+
+@media screen and (max-width: 400px) {
+    .add_family_relationship {
+        float: none;
+        width: auto;
+        margin-top: 5px;
+    }
+}
+
+.add_family_relationship:hover {
+    color: white;
+    background: #FF9800;
 }

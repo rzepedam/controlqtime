@@ -59,17 +59,17 @@ class CompanyController extends Controller
 
         for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {
 
-            $legal = new LegalRepresentative();
-            $legal->male_surname = $request->get('male_surname' . $i);
+            $legal                 = new LegalRepresentative();
+            $legal->male_surname   = $request->get('male_surname' . $i);
             $legal->female_surname = $request->get('female_surname' . $i);
-            $legal->first_name = $request->get('first_name' . $i);
-            $legal->second_name = $request->get('second_name' . $i);
-            $legal->rut = $request->get('rut' . $i);
-            $legal->birthday = $request->get('birthday' . $i);
+            $legal->first_name     = $request->get('first_name' . $i);
+            $legal->second_name    = $request->get('second_name' . $i);
+            $legal->rut            = $request->get('rut' . $i);
+            $legal->birthday       = $request->get('birthday' . $i);
             $legal->nationality_id = $request->get('nationality_id' . $i);
-            $legal->email = $request->get('email' . $i);
-            $legal->phone1 = $request->get('phone1-' . $i);
-            $legal->phone2 = $request->get('phone2-' . $i);
+            $legal->email          = $request->get('email' . $i);
+            $legal->phone1         = $request->get('phone1-' . $i);
+            $legal->phone2         = $request->get('phone2-' . $i);
 
             $legal->company()->associate($company);
             $legal->save();
@@ -77,17 +77,17 @@ class CompanyController extends Controller
 
         for ($i = 0; $i < $request->get('count_subsidiary'); $i++) {
 
-            $subsidiary = new Subsidiary();
-            $subsidiary->address = $request->get('address_suc' . $i);
-            $subsidiary->commune_id = $request->get('commune_suc_id' . $i);
-            $subsidiary->num = $request->get('num_suc' . $i);
-            $subsidiary->lot = $request->get('lot_suc' . $i);
-            $subsidiary->ofi = $request->get('ofi_suc' . $i);
-            $subsidiary->floor = $request->get('floor_suc' . $i);
+            $subsidiary               = new Subsidiary();
+            $subsidiary->address      = $request->get('address_suc' . $i);
+            $subsidiary->commune_id   = $request->get('commune_suc_id' . $i);
+            $subsidiary->num          = $request->get('num_suc' . $i);
+            $subsidiary->lot          = $request->get('lot_suc' . $i);
+            $subsidiary->ofi          = $request->get('ofi_suc' . $i);
+            $subsidiary->floor        = $request->get('floor_suc' . $i);
             $subsidiary->muni_license = $request->get('muni_license_suc' . $i);
-            $subsidiary->email = $request->get('email_suc' . $i);
-            $subsidiary->phone1 = $request->get('phone1_suc-' . $i);
-            $subsidiary->phone2 = $request->get('phone2_suc-' . $i);
+            $subsidiary->email        = $request->get('email_suc' . $i);
+            $subsidiary->phone1       = $request->get('phone1_suc-' . $i);
+            $subsidiary->phone2       = $request->get('phone2_suc-' . $i);
 
             $subsidiary->company()->associate($company);
             $subsidiary->save();
@@ -256,7 +256,7 @@ class CompanyController extends Controller
     /**
      *
      * @param string $ids
-     * 
+     *
      */
     public function deleteSubsidiary($ids)
     {

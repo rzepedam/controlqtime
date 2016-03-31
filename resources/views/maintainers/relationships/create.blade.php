@@ -13,7 +13,7 @@
     <div class="box box-primary">
         {!! Form::open(array('route' => 'maintainers.kins.store', 'method' => 'POST')) !!}
         <div class="box-body">
-            @include('maintainers.kins.partials.fields')
+            @include('maintainers.relationships.partials.fields')
         </div>
         <div class="box-footer">
             <a href="{{ route('maintainers.kins.index') }}">Volver</a>

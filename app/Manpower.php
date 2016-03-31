@@ -14,4 +14,12 @@ class Manpower extends Model
             $query->where("full_name", "LIKE", "%$not_space_name%");
         }
     }
+
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function company() {
+        return $this->belongsTo('App\Company');
+    }
 }

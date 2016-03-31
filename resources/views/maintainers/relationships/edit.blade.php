@@ -13,7 +13,7 @@
     <div class="box box-success">
         {!! Form::model($kin, array('route' => ['maintainers.kins.update', $kin], 'method' => 'PUT' )) !!}
         <div class="box-body">
-            @include('maintainers.kins.partials.fields')
+            @include('maintainers.relationships.partials.fields')
         </div>
         <div class="box-footer">
             <a href="{{ route('maintainers.kins.index') }}">Volver</a>
@@ -22,7 +22,7 @@
         {!! Form::close() !!}
     </div>
     <br><br><br>
-    @include('maintainers.kins.partials.delete')
+    @include('maintainers.relationships.partials.delete')
 @stop
 
 @section('scripts')

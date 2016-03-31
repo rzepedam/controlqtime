@@ -36,7 +36,7 @@
                     <div class="step col-md-4" data-target="#exampleBilling" role="tab">
                         <span class="step-number">2</span>
                         <div class="step-desc">
-                            <span class="step-title">Compencias</span>
+                            <span class="step-title">Competencias</span>
                             <p>Laborales</p>
                         </div>
                     </div>
@@ -55,40 +55,46 @@
                         <div class="wizard-content">
                             <div class="wizard-pane active" id="exampleAccount" role="tabpanel">
                                 <div class="alert alert-success alert-alt alert-dismissible" role="alert">
-                                    <span class="text-success"><i class="fa fa-street-view"></i> <strong>Información Personal</strong></span>
+                                    <span><i class="fa fa-street-view"></i> <strong>Información Personal</strong></span>
                                 </div>
+
                                 {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
 
                                     @include('human-resources.manpowers.partials.step1.personal_data')
 
+                                    <br />
+                                    <div class="alert alert-info alert-alt alert-dismissible" role="alert">
+                                        <span><i class="fa fa-picture-o"></i> <strong>Imagen de Perfil</strong></span>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <div class="alert alert-warning alert-alt alert-dismissible contiene-titulo-label-seccion" role="alert">
+                                        <span><i class="fa fa-male"></i><i class="fa fa-female"></i> <strong>Parentescos Familiares</strong></span>
+                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementFamilyRelationship(this)"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
+                                    </div>
+                                    <div id="content_family_relationships">
+                                        @if (Session::get('relationship_id') != null)
+                                            @for($i = 0; $i < count(Session::get('relationship_id')); $i++)
+
+                                                @include('human-resources.manpowers.partials.step1.family_relationship')
+
+                                            @endfor
+                                        @else
+                                            <br />
+                                            <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3>
+                                            <br />
+                                            <br />
+                                            <hr />
+                                        @endif
+                                    </div>
+                                    <br />
+                                    <br />
+
                                 {{ Form::close() }}
-                                <br />
-                                <div class="alert alert-info alert-alt alert-dismissible" role="alert">
-                                    <span class="text-info"><i class="fa fa-picture-o"></i> <strong>Imagen de Perfil</strong></span>
-                                </div>
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <div class="alert alert-warning alert-alt alert-dismissible" role="alert">
-                                    <span class="text-warning"><i class="fa fa-male"></i><i class="fa fa-female"></i> <strong>Parentescos Familiares</strong></span>
-                                    <button type="button" class="btn btn-warning btn-squared btn-sm waves-effect waves-light" onclick="$(this).addElementFamilyRelationship(this)"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</button>
-                                </div>
-                                <div id="content_family_relationships">
-                                    {{ Form::open(["route" => "human-resources.manpowers.store", "method" => "POST", "files" => true, "id" => "step3"]) }}
-
-                                        <br />
-                                        <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3>
-                                        <br />
-                                        <br />
-                                        <hr />
-
-                                    {{ Form::close() }}
-                                </div>
-                                <br />
-                                <br />
 
                             </div>
                             <div class="wizard-pane" id="exampleBilling" role="tabpanel">
@@ -142,7 +148,7 @@
              *************************** Variables ****************************
              ******************************************************************/
 
-            var count_family_relationships = {{ Session::get('count_family_relationships') ? Session::get('count_family_relationships') : 0  }};
+            var count_family_relationships = {{ count(Session::get('relationship_id')) ? count(Session::get('relationship_id')) : 0  }};
             var count_studies = 0;
             var count_disabilities = {{ Session::get('count_disabilities') ? Session::get('count_disabilities') : 0  }};
             var count_diseases = {{ Session::get('count_diseases') ? Session::get('count_diseases') : 0  }};
@@ -166,7 +172,7 @@
 
             var wizard = $("#exampleWizardForm").wizard(options).data('wizard');
 
-            /*wizard.get("#exampleAccount").setValidator(function() {
+            wizard.get("#exampleAccount").setValidator(function() {
                 var fv = $("#step1").data('formValidation');
                 fv.validate();
 
@@ -177,7 +183,7 @@
                 return true;
             });
 
-            wizard.get("#exampleBilling").setValidator(function() {
+            /*wizard.get("#exampleBilling").setValidator(function() {
                 var fv = $("#exampleBillingForm").data('formValidation');
                 fv.validate();
 
@@ -197,7 +203,7 @@
              ******************************************************************/
 
 
-            $(document).on('click', '.delete-elements', function () {
+            $(document).on('click', '.icono-eliminar-elementos', function () {
 
                 var element = $(this).attr('id');
                 var padre = $(this).parent().parent().parent().parent();
@@ -210,26 +216,16 @@
                         for (var i = 0; i < span.length; i++) {
 
                             item = verificaUltimosNumeros(span[i].id);
-                            $('span#family_relationship' + item).attr('id', 'family_relationship' + i);
+
                             $('span#num_family_relationship' + item).text('Parentesco Familiar #' + (i + 1));
                             $('span#num_family_relationship' + item).attr('id', 'num_family_relationship' + i);
+                            $('span#family_relationship' + item).attr('id', 'family_relationship' + i);
 
-                            /*$('label[for="family_relationship' + item + '"]').attr('for', "family_relationship" + i);
-                            $('select#family_relationship' + item).each(function (j) {
-                                $(this).attr('id', 'family_relationship' + i);
-                                $(this).attr('name', 'family_relationship' + i);
-                            });
-
-                            $('label[for="manpower' + item + '"]').attr('for', 'manpower' + i);
-                            $('select#manpower' + item).each(function (j) {
-                                $(this).attr('id', 'manpower' + i);
-                                $(this).attr('name', 'manpower' + i);
-                            });*/
                         }
 
                         count_family_relationships--;
                         if (count_family_relationships == 0) {
-                            var html = '<br /><h2 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small class="text-muted">(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h2><br /><br /><hr />'
+                            var html = '<br /><h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3><br /><br /><hr />'
                             $('#content_family_relationships').html(html);
                         }
 
@@ -528,7 +524,7 @@
 
             $.fn.addElementFamilyRelationship = function () {
 
-                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="title-elements text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('family_relationship', 'Parentesco Familiar')}}{{Form::select('family_relationship[]', $kins, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label('manpower', 'Nombre')}}{{Form::select('manpower[]', $manpowers, null, ['class'=> 'form-control', 'required'])}}</div></div></div><hr/></span>';
+                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><span id="num_family_relationship" class="text-warning titulo-seccion">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Parentesco"><i class="fa fa-trash"></i></a></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('relationship_id', 'Relación')}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label('manpower_id', 'Nombre')}}{{Form::select('manpower_id[]', $manpowers, null, ['class'=> 'form-control', 'required'])}}</div></div></div><hr/></span>';
 
                 if (count_family_relationships == 0)
                     $('#content_family_relationships').html($family_relationship);
@@ -536,21 +532,8 @@
                     $('#content_family_relationships').append($family_relationship);
 
 
-                //Refresh N° element family_relationships
                 $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationships);
                 $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
-
-                /*$('label[for="family_relationship"]').attr('for', 'family_relationship' + count_family_relationships);
-                $('select#family_relationship').each(function (i) {
-                    $(this).attr('id', 'family_relationship' + count_family_relationships);
-                    $(this).attr('name', 'family_relationship' + count_family_relationships);
-                });
-
-                $('label[for="manpower"]').attr('for', 'manpower' + count_family_relationships);
-                $('select#manpower').each(function (i) {
-                    $(this).attr('id', 'manpower' + count_family_relationships);
-                    $(this).attr('name', 'manpower' + count_family_relationships);
-                });*/
 
                 count_family_relationships++;
                 $('.mitooltip').tooltip();
@@ -690,7 +673,7 @@
 
             $.fn.addElementFamilyResponsability = function() {
 
-                $family_responsability = '<span id="family_responsability"><div class="row"><div class="col-md-12"><span id="num_family_responsability" class="title-elements text-yellow">Carga Familiar #' + (count_family_responsabilities + 1) + '</span><a id="family_responsability" class="delete-elements pull-right mitooltip" title="Eliminar Carga Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('name_responsability', 'Nombre Completo')}}{{Form::text('name_responsability', null, ['class'=> 'form-control'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('rut', 'Rut')}}{{Form::text('rut', null, ['class'=> 'form-control'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('kin_id', 'Parentesco')}}{{Form::select('kin_id', $kins, null, ['class'=> 'form-control'])}}</div></div></div><hr/></span>';
+                $family_responsability = '<span id="family_responsability"><div class="row"><div class="col-md-12"><span id="num_family_responsability" class="title-elements text-yellow">Carga Familiar #' + (count_family_responsabilities + 1) + '</span><a id="family_responsability" class="delete-elements pull-right mitooltip" title="Eliminar Carga Familiar"><i class="fa fa-trash"></i></a></div></div><br/><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('name_responsability', 'Nombre Completo')}}{{Form::text('name_responsability', null, ['class'=> 'form-control'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('rut', 'Rut')}}{{Form::text('rut', null, ['class'=> 'form-control'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('relationship_id', 'Relación')}}{{Form::select('relationship_id', $relationships, null, ['class'=> 'form-control'])}}</div></div></div><hr/></span>';
 
                 if (count_family_responsabilities == 0)
                     $('#content_family_responsabilities').html($family_responsability);
@@ -951,161 +934,188 @@
              *****************************************************************/
 
 
-            /*$('#step1').formValidation({
-                framework: 'bootstrap',
-                fields: {
-                    male_surname: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> es obligatorio.'
-                            },
-                            stringLength: {
-                                max: 30,
-                                message: '<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> no debe ser mayor que 30 caracteres.'
-                            },
-                        }
-                    },
-                    female_surname: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> es obligatorio.'
-                            },
-                            stringLength: {
-                                max: 30,
-                                message: '<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> no debe ser mayor que 30 caracteres.'
-                            },
-                        }
-                    },
-                    first_name: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> es obligatorio.'
-                            },
-                            stringLength: {
-                                max: 30,
-                                message: '<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> no debe ser mayor que 30 caracteres.'
-                            },
-                        }
-                    },
-                    second_name: {
-                        validators: {
-                            stringLength: {
-                                max: 30,
-                                message: '<i class="fa fa-times"></i> El campo <strong>Segundo Nombre</strong> no debe ser mayor que 30 caracteres.'
-                            },
-                        }
-                    },
-                    rut: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Rut</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    birthday: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Fecha de Nacimiento</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    country_id: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Nacionalidad</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    gender_id: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Sexo</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    address: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Dirección</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    commune_id: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Comuna</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    email: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Email</strong> es obligatorio.'
-                            },
-                            stringLength: {
-                                max: 100,
-                                message: '<i class="fa fa-times"></i> El campo <strong>Email</strong> no debe ser mayor que 100 caracteres.'
-                            },
-                        }
-                    },
-                    phone1: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> es obligatorio.'
-                            },
-                            stringLength: {
-                                max: 20,
-                                message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> no debe ser mayor que 20 caracteres.'
-                            },
-                        }
-                    },
-                    phone2: {
-                        validators: {
-                            stringLength: {
-                                max: 20,
-                                message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 2</strong> no debe ser mayor que 20 caracteres.'
-                            },
-                        }
-                    },
-                    forecast_id: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Previsión</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    mutuality_id: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Mutualidad</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    pension_id: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>AFP</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    company_id: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Empresa</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                    rating_id: {
-                        validators: {
-                            notEmpty: {
-                                message: '<i class="fa fa-times"></i> El campo <strong>Cargo</strong> es obligatorio.'
-                            },
-                        }
-                    },
-                }
-            });
+            $('#step1')
+                .formValidation({
+                    framework: 'bootstrap',
+                    fields: {
+                        /*male_surname: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> es obligatorio.'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> no debe ser mayor que 30 caracteres.'
+                                },
+                            }
+                        },
+                        female_surname: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> es obligatorio.'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> no debe ser mayor que 30 caracteres.'
+                                },
+                            }
+                        },
+                        first_name: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> es obligatorio.'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> no debe ser mayor que 30 caracteres.'
+                                },
+                            }
+                        },
+                        second_name: {
+                            validators: {
+                                stringLength: {
+                                    max: 30,
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Segundo Nombre</strong> no debe ser mayor que 30 caracteres.'
+                                },
+                            }
+                        },
+                        rut: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Rut</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        birthday: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Fecha de Nacimiento</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        country_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Nacionalidad</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        gender_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Sexo</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        address: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Dirección</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        commune_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Comuna</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Email</strong> es obligatorio.'
+                                },
+                                stringLength: {
+                                    max: 100,
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Email</strong> no debe ser mayor que 100 caracteres.'
+                                },
+                            }
+                        },
+                        phone1: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> es obligatorio.'
+                                },
+                                stringLength: {
+                                    max: 20,
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> no debe ser mayor que 20 caracteres.'
+                                },
+                            }
+                        },
+                        phone2: {
+                            validators: {
+                                stringLength: {
+                                    max: 20,
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 2</strong> no debe ser mayor que 20 caracteres.'
+                                },
+                            }
+                        },
+                        forecast_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Previsión</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        mutuality_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Mutualidad</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        pension_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>AFP</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        company_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Empresa</strong> es obligatorio.'
+                                },
+                            }
+                        },
+                        rating_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: '<i class="fa fa-times"></i> El campo <strong>Cargo</strong> es obligatorio.'
+                                },
+                            }
+                        },*/
+                    }
+                })
 
-            $("#exampleBillingForm").formValidation({
+                .on('success.form.fv', function(event) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route("human-resources.manpowers.step1") }}',
+                        data: $('#step1').serialize(),
+                        async: false,
+                        dataType: 'json',
+                        success: function(result) {
+
+                        },
+
+                        beforeSend: function() {
+
+                        },
+
+                        error: function (data) {
+                            var errors = $.parseJSON(data.responseText);
+                            $.each(errors.errors, function (index, value) {
+                                $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
+                                $('#' + index).focus();
+                            });
+                        }
+
+                    });
+                });
+
+            /*$("#exampleBillingForm").formValidation({
                 framework: 'bootstrap',
                     fields: {
                         number: {

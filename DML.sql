@@ -188,10 +188,10 @@ INSERT INTO specialities(name) VALUES ('Muebles y terminaciones de la madera');
 INSERT INTO specialities(name) VALUES ('Vestuario y confección textil');
 
 /* licenses | Licencias */
-INSERT INTO licenses(name) VALUES ('Licencia A-1');
-INSERT INTO licenses(name) VALUES ('Licencia A-2');
-INSERT INTO licenses(name) VALUES ('Licencia B');
-INSERT INTO licenses(name) VALUES ('Licencia D');
+INSERT INTO licenses(name) VALUES ('Licencia A-1', '2016-03-31');
+INSERT INTO licenses(name) VALUES ('Licencia A-2', '2016-03-31');
+INSERT INTO licenses(name) VALUES ('Licencia B', '2016-03-31');
+INSERT INTO licenses(name) VALUES ('Licencia D', '2016-03-31');
 
 
 /* professions | Profesiones */
@@ -202,12 +202,12 @@ INSERT INTO professions(name) VALUES ('Servicio Social');
 INSERT INTO professions(name) VALUES ('Teatro');
 
 
-/* kins | Parentesco Familiar */
-INSERT INTO kins(name) VALUES ('Padre');
-INSERT INTO kins(name) VALUES ('Madre');
-INSERT INTO kins(name) VALUES ('Hijo');
-INSERT INTO kins(name) VALUES ('Tía');
-INSERT INTO kins(name) VALUES ('Primo');
+/* relationships | Tipo Parentesco Familiar */
+INSERT INTO relationships(name) VALUES ('Padre');
+INSERT INTO relationships(name) VALUES ('Madre');
+INSERT INTO relationships(name) VALUES ('Hijo');
+INSERT INTO relationships(name) VALUES ('Tía');
+INSERT INTO relationships(name) VALUES ('Primo');
 
 
 /* type-institutions | Tipos de Institución */

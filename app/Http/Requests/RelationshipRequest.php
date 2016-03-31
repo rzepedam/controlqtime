@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class KinRequest extends SanitizedRequest
+class RelationshipRequest extends SanitizedRequest
 {
 
     public function __construct(Route $route)
