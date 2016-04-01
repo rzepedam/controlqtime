@@ -39,7 +39,7 @@
                         <ul class="site-menu-sub">
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('human-resources.manpowers.index')}}">
-                                    <span class="site-menu-title"><i class="icon md-accounts-alt site-menu-icon" aria-hidden="true"></i> Trabajadores</span>
+                                    <span class="site-menu-title"><i class="icon md-accounts-alt site-menu-icon" aria-hidden="true" style="font-size: 18px;"></i> Trabajadores</span>
                                 </a>
                             </li>
                         </ul>
@@ -129,8 +129,8 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.licenses.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-star" aria-hidden="true"></i> Lic. Profesionales</span>
+                                <a class="animsition-link" href="{{ route('maintainers.professional_licenses.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon md-account-calendar" aria-hidden="true" style="font-size: 18px;"></i> Lic. Profesionales</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
@@ -149,7 +149,7 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.kins.index') }}">
+                                <a class="animsition-link" href="{{ route('maintainers.relationships.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-child" aria-hidden="true"></i> Parentescos Fam.</span>
                                 </a>
                             </li>

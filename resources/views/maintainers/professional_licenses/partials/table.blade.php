@@ -9,7 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($licenses as $license)
+            @foreach($professional_licenses as $license)
                 <tr data-id="{{ $license->id }}">
                     <td>{{ $license->id }}</td>
                     <td>{{ $license->name }}</td>

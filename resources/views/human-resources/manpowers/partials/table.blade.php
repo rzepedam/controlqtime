@@ -17,8 +17,8 @@
                             <td>{{ $manpower->full_name }}</td>
                             <td>{{ $manpower->email }}</td>
                             <td class="text-center">
-                                <a href="{{ route('human-resources.manpowers.show', $manpower) }}" class="btn btn-squared btn-info waves-effect waves-light"><i class="fa fa-search"></i></a>
-                                <a href="{{ route('human-resources.manpowers.edit', $manpower) }}" class="btn btn-squared btn-success waves-effect waves-light"><i class="fa fa-pencil"></i></a>
+                                <a href="{{ route('human-resources.manpowers.show', $manpower) }}" class="btn btn-squared btn-info waves-effect waves-light mitooltip" title="Ver"><i class="fa fa-search"></i></a>
+                                <a href="{{ route('human-resources.manpowers.edit', $manpower) }}" class="btn btn-squared btn-success waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
                     @endforeach

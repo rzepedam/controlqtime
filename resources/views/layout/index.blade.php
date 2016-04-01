@@ -79,7 +79,7 @@
     </div>
 
     <!-- Footer -->
-    @include('layout.sections.footer')
+    {{-- @include('layout.sections.footer') --}}
 
     <!-- Core  -->
     <script src="{{ asset('assets/js/jquery.js') }}"></script>

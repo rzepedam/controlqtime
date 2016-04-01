@@ -5,7 +5,10 @@ namespace App\Http\Requests;
 use App\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class LicenseRequest extends SanitizedRequest
+/**
+ * @property Route route
+ */
+class ProfessionalLicenseRequest extends SanitizedRequest
 {
 
     public function __construct(Route $route)
@@ -25,7 +28,7 @@ class LicenseRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:50|unique:licenses',
+                    'name'  => 'required|max:50|unique:professional_licenses',
                 ];
             }
 
@@ -33,7 +36,7 @@ class LicenseRequest extends SanitizedRequest
             {
                 return [
 
-                    'name'  => 'required|max:50|unique:licenses,name,' . $this->route->getParameter('licenses')
+                    'name'  => 'required|max:50|unique:professional_licenses,name,' . $this->route->getParameter('professional_licenses')
                 ];
             }
         }

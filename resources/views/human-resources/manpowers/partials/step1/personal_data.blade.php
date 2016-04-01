@@ -34,8 +34,8 @@
         </div>
     </div>
     <div class="col-md-3 form-group">
-        {{ Form::label('country_id', 'Nacionalidad') }}
-        {{ Form::select('country_id', $countries, Session::get('country_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::label('nationality_id', 'Nacionalidad') }}
+        {{ Form::select('nationality_id', $countries, Session::get('nationality_id'), ['class' => 'form-control', 'required']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('gender_id', 'Sexo') }}

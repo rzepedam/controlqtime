@@ -41,10 +41,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'manpowers'], function(){
             Route::post('step1', ['as' => 'human-resources.manpowers.step1', 'uses' => 'ManpowerController@step1']);
             Route::post('step2', ['as' => 'human-resources.manpowers.step2', 'uses' => 'ManpowerController@step2']);
-            Route::post('step3', ['as' => 'human-resources.manpowers.step3', 'uses' => 'ManpowerController@step3']);
-            Route::post('storage', ['as' => 'human-resources.manpowers.storage', 'uses' => 'StorageController@saveTempImg']);
-            Route::post('deleteImg', ['as' => 'human-resources.manpowers.deleteImg', 'uses' => 'StorageController@deleteImg']);
-            Route::post('loadImagesDropzone', ['as' => 'human-resources.manpowers.loadImagesDropzone', 'uses' => 'StorageController@loadImagesDropzone']);
         });
 
     });
@@ -67,14 +63,15 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('exams', 'ExamController');
         Route::resource('forecasts', 'ForecastController');
         Route::resource('institutions', 'InstitutionController');
-        Route::resource('kins', 'KinController');
-        Route::resource('licenses', 'LicenseController');
+        Route::resource('relationships', 'RelationshipController');
+        Route::resource('professional_licenses', 'ProfessionalLicenseController');
         Route::resource('mutualities', 'MutualityController');
         Route::resource('pensions', 'PensionController');
         Route::resource('professions', 'ProfessionController');
         Route::resource('ratings', 'RatingController');
         Route::resource('specialities', 'SpecialityController');
         Route::resource('type-institutions', 'TypeInstitutionController');
+        
     });
 
 

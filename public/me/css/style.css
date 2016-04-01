@@ -10,6 +10,11 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
 }
 
+td > a {
+    text-decoration: none!important;;
+}
+
+
 /**
 * Bradcumb responsive
 **/
@@ -132,3 +137,4 @@ textarea {
     color: white;
     background: #4CAF50;
 }
+

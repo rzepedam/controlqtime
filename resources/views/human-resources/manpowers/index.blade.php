@@ -13,11 +13,36 @@
 @section('content')
 
     @if($manpowers->count())
+
         @include('human-resources.manpowers.partials.table')
+
     @else
+
         <h3 class="text-center">No se han encontrado Trabajadores</h3>
+
     @endif
 
     {{ $manpowers->links() }}
+
+@stop
+
+@section('scripts')
+
+    <script>
+
+        $(document).ready(function(){
+
+
+            /**************************************************
+             ************** Initialize components **************
+             **************************************************/
+
+            $('.mitooltip').tooltip();
+
+
+
+        });
+
+    </script>
 
 @stop

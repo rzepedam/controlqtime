@@ -13,16 +13,16 @@
     <div class="box box-success">
         {!! Form::model($license, array('route' => ['maintainers.licenses.update', $license], 'method' => 'PUT' )) !!}
         <div class="box-body">
-            @include('maintainers.licenses.partials.fields')
+            @include('maintainers.professional_licenses.partials.fields')
         </div>
         <div class="box-footer">
-            <a href="{{ route('maintainers.licenses.index') }}">Volver</a>
+            <a href="{{ route('maintainers.professional_licenses.index') }}">Volver</a>
             <button type="submit" class="btn btn-success btn-flat btn-lg pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
         </div>
         {!! Form::close() !!}
     </div>
     <br><br><br>
-    @include('maintainers.licenses.partials.delete')
+    @include('maintainers.professional_licenses.partials.delete')
 @stop
 
 @section('scripts')

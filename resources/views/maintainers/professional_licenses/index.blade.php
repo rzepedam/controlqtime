@@ -2,7 +2,7 @@
 
 @section('title_header') Listado de Licencias Profesionales
     <br>
-    <a href="{{ route('maintainers.licenses.create') }}" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Crear Nueva Licencia</a>
+    <a href="{{ route('maintainers.professional_license.create') }}" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Crear Nueva Licencia</a>
 @stop
 
 @section('breadcumb')
@@ -12,7 +12,7 @@
 
 @section('form_search')
     <div class="box-tools breadcrumb2">
-        {!! Form::open(['route' => 'maintainers.licenses.index', 'method' => 'GET']) !!}
+        {!! Form::open(['route' => 'maintainers.professional_license.index', 'method' => 'GET']) !!}
         <div class="input-group input-group-sm" style="width: 250px;">
             {{ Form::text('table_search', null, ['class' => 'form-control pull-right', 'placeholder' => 'Buscar...', 'autofocus']) }}
             <div class="input-group-btn">
@@ -25,12 +25,16 @@
 
 @section('content')
 
-    @if($licenses->count())
-        @include('maintainers.licenses.partials.table')
+    @if($professional_license->count())
+
+        @include('maintainers.professional_licenses.partials.table')
+
     @else
+
         <h3 class="text-center">No se han encontrado Licencias Profesionales</h3>
+
     @endif
 
-    {{ $licenses->links() }}
+    {{ $professional_licenses->links() }}
 
 @stop

@@ -187,11 +187,11 @@ INSERT INTO specialities(name) VALUES ('Mecánica automotriz');
 INSERT INTO specialities(name) VALUES ('Muebles y terminaciones de la madera');
 INSERT INTO specialities(name) VALUES ('Vestuario y confección textil');
 
-/* licenses | Licencias */
-INSERT INTO licenses(name) VALUES ('Licencia A-1', '2016-03-31');
-INSERT INTO licenses(name) VALUES ('Licencia A-2', '2016-03-31');
-INSERT INTO licenses(name) VALUES ('Licencia B', '2016-03-31');
-INSERT INTO licenses(name) VALUES ('Licencia D', '2016-03-31');
+/* professional_licenses | Licencias Profesionales */
+INSERT INTO professional_licenses(name) VALUES ('Licencia A-1');
+INSERT INTO professional_licenses(name) VALUES ('Licencia A-2');
+INSERT INTO professional_licenses(name) VALUES ('Licencia B');
+INSERT INTO professional_licenses(name) VALUES ('Licencia D');
 
 
 /* professions | Profesiones */

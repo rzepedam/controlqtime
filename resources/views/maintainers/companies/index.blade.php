@@ -2,7 +2,7 @@
 
 @section('title_header') Listado de Empresas
     <br>
-    <a href="{{ route('maintainers.companies.create') }}" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Crear Nueva Empresa</a>
+    <a href="{{ route('maintainers.companies.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Empresa</a>
 @stop
 
 @section('breadcumb')
@@ -26,9 +26,13 @@
 @section('content')
 
     @if($companies->count())
+
         @include('maintainers.companies.partials.table')
+
     @else
+
         <h3 class="text-center">No se han encontrado Empresas</h3>
+
     @endif
 
     {{ $companies->links() }}

@@ -31,7 +31,7 @@ class ManpowerRequest extends SanitizedRequest
                     'second_name'       => 'max:30',
                     'rut'               => 'required|max:15',
                     'birthday'          => 'required',
-                    'country_id'        => 'required|regex:/[0-9 -()+]+$/',
+                    'nationality_id'    => 'required|regex:/[0-9 -()+]+$/',
                     'gender_id'         => 'required|regex:/[0-9 -()+]+$/',
                     'address'           => 'required',
                     'commune_id'        => 'required|regex:/[0-9 -()+]+$/',

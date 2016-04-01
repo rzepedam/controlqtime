@@ -18,7 +18,7 @@ use App\Disability;
 use App\Disease;
 use App\Certification;
 use App\Institution;
-use App\License;
+use App\ProfessionalLicense;
 use App\Speciality;
 use App\Mutuality;
 use App\Pension;
@@ -57,13 +57,13 @@ class ManpowerController extends Controller
         $relationships = Relationship::lists('name', 'id');
         $certifications = Certification::lists('name', 'id');
         $institutions = Institution::lists('name', 'id');
-        $licenses = License::lists('name', 'id');
+        $professional_licenses = ProfessionalLicense::lists('name', 'id');
         $specialities = Speciality::lists('name', 'id');
         $manpowers = Manpower::lists('full_name', 'id');
         $exams = Exam::lists('name', 'id');
         $degrees = Degree::lists('name', 'id');
 
-        return view('human-resources.manpowers.create', compact('genders', 'ratings', 'communes', 'countries', 'forecasts', 'companies', 'disabilities', 'diseases', 'relationships', 'certifications', 'institutions', 'licenses', 'specialities', 'manpowers', 'mutualities', 'pensions', 'exams', 'degrees'));
+        return view('human-resources.manpowers.create', compact('genders', 'ratings', 'communes', 'countries', 'forecasts', 'companies', 'disabilities', 'diseases', 'relationships', 'certifications', 'institutions', 'professional_licenses', 'specialities', 'manpowers', 'mutualities', 'pensions', 'exams', 'degrees'));
     }
 
 
@@ -73,10 +73,12 @@ class ManpowerController extends Controller
      */
     public function step1(ManpowerRequest $request)
     {
+        Session::put('step1', $request->all());
         Session::put('male_surname', $request->get('male_surname'));
         Session::put('female_surname', $request->get('female_surname'));
         Session::put('first_name', $request->get('first_name'));
         Session::put('second_name', $request->get('second_name'));
+        Session::put('full_name', Session::put('first_name', $request->get('first_name')) + $request->get('first_name') + $request->get('male_surname') + $request->get('female_surname'));
         Session::put('rut', $request->get('rut'));
         Session::put('birthday', $request->get('birthday'));
         Session::put('nationality_id', $request->get('nationality_id'));
@@ -105,26 +107,19 @@ class ManpowerController extends Controller
      */
     public function step2(Request $request)
     {
-        dd($request->all());
-        for ($i = 0; $i < $request->get('count_disabilities'); $i++ ) {
-            Session::put('disability' . $i, $request->get('disability' . $i));
-            Session::put('treatment_disability' . $i, $request->get('treatment_disability' . $i));
-            Session::put('detail_disability' . $i, $request->get('detail_disability' . $i));
-        }
-
-        Session::put('count_diseases', $request->get('count_diseases'));
-        for ($i = 0; $i < $request->get('count_diseases'); $i++) {
-            Session::put('disease' . $i, $request->get('disease' . $i));
-            Session::put('treatment_disease' . $i, $request->get('treatment_disease' . $i));
-            Session::put('detail_disease' . $i, $request->get('detail_disease' . $i));
-        }
-
-        Session::put('count_family_responsabilities', $request->get('count_family_responsabilities'));
-        for ($i = 0; $i < $request->get('count_family_responsabilities'); $i++) {
-            Session::put('name_responsability' . $i, $request->get('name_responsability' . $i));
-            Session::put('rut' . $i, $request->get('rut' . $i));
-            Session::put('kin_id' . $i, $request->get('kin_id' . $i));
-        }
+        Session::put('degree_id', $request->get('degree_id'));
+        Session::put('name_study', $request->get('name_study'));
+        Session::put('institution_study_id', $request->get('institution_study_id'));
+        Session::put('date', $request->get('date'));
+        Session::put('certification_id', $request->get('certification_id'));
+        Session::put('expired_certification', $request->get('expired_certification'));
+        Session::put('institution_certification_id', $request->get('institution_certification_id'));
+        Session::put('speciality_id', $request->get('speciality_id'));
+        Session::put('expired_speciality', $request->get('expired_speciality'));
+        Session::put('institution_speciality_id', $request->get('institution_speciality_id'));
+        Session::put('professional_license_id', $request->get('professional_license_id'));
+        Session::put('expired_license', $request->get('expired_license'));
+        Session::put('detail_license', $request->get('detail_license'));
 
         return response()->json(['status' => 'success'], 200);
     }
@@ -135,6 +130,7 @@ class ManpowerController extends Controller
      */
     public function store(Request $request)
     {
+        $manpower = Manpower::create(Session::get('step1'));
 
     }
 
