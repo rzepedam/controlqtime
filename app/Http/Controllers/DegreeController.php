@@ -26,7 +26,7 @@ class DegreeController extends Controller
     public function store(DegreeRequest $request)
     {
         Degree::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.degrees.index');
     }
 
@@ -39,7 +39,7 @@ class DegreeController extends Controller
     public function update(DegreeRequest $request, $id)
     {
         $degree = Degree::findOrFail($id);
-        $message = $degree->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $degree->name . ' fue actualizado satisfactoriamente.';
         $degree->fill($request->all());
         $degree->save();
         Session::flash('success', $message);
@@ -50,7 +50,7 @@ class DegreeController extends Controller
     {
         $degree = Degree::findOrFail($id);
         $degree->delete();
-        Session::flash('success', $degree->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $degree->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.degrees.index');
     }
 }

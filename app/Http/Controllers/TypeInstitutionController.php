@@ -24,7 +24,7 @@ class TypeInstitutionController extends Controller
     public function store(TypeInstitutionRequest $request)
     {
         TypeInstitution::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.type-institutions.index');
     }
 
@@ -37,7 +37,7 @@ class TypeInstitutionController extends Controller
     public function update($id, TypeInstitutionRequest $request)
     {
         $type_institution = TypeInstitution::findOrFail($id);
-        $message = $type_institution->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $type_institution->name . ' fue actualizado satisfactoriamente.';
         $type_institution->fill($request->all());
         $type_institution->save();
         Session::flash('success', $message);
@@ -48,7 +48,7 @@ class TypeInstitutionController extends Controller
     {
         $type_institution = TypeInstitution::findOrFail($id);
         $type_institution->delete();
-        Session::flash('success', $type_institution->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $type_institution->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.type-institutions.index');
     }
 }

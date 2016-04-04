@@ -26,7 +26,7 @@ class MutualityController extends Controller
     public function store(MutualityRequest $request)
     {
     	Mutuality::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.mutualities.index');
     }
 
@@ -39,7 +39,7 @@ class MutualityController extends Controller
     public function update(MutualityRequest $request, $id)
     {
         $mutuality = Mutuality::findOrFail($id);
-        $message = $mutuality->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $mutuality->name . ' fue actualizado satisfactoriamente.';
         $mutuality->fill($request->all());
         $mutuality->save();
         Session::flash('success', $message);
@@ -50,7 +50,7 @@ class MutualityController extends Controller
     {
         $mutuality = Mutuality::findOrFail($id);
         $mutuality->delete();
-        Session::flash('success', $mutuality->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $mutuality->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.mutualities.index');
     }
 }

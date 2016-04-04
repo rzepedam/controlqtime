@@ -26,7 +26,7 @@ class SpecialityController extends Controller
     public function store(SpecialityRequest $request)
     {
         Speciality::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.specialities.index');
     }
 
@@ -39,7 +39,7 @@ class SpecialityController extends Controller
     public function update(SpecialityRequest $request, $id)
     {
         $speciality = Speciality::findOrFail($id);
-        $message = $speciality->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $speciality->name . ' fue actualizado satisfactoriamente.';
         $speciality->fill($request->all());
         $speciality->save();
         Session::flash('success', $message);
@@ -50,7 +50,7 @@ class SpecialityController extends Controller
     {
         $speciality = Speciality::findOrFail($id);
         $speciality->delete();
-        Session::flash('success', $speciality->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $speciality->name . ' fue eliminado de nuestros registros.');
         return redirect()->route('maintainers.specialities.index');
     }
 }

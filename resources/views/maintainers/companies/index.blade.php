@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    {{ Html::style('assets/css/toastr.css') }}
+
+@stop
+
 @section('title_header') Listado de Empresas
     <br>
     <a href="{{ route('maintainers.companies.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Empresa</a>
@@ -40,6 +46,9 @@
 @stop
 
 @section('scripts')
+
+    {{ Html::script('assets/js/toastr.js') }}
+    {{ Html::script('assets/js/components/toastr.js') }}
 
     <script>
 

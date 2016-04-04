@@ -14,7 +14,6 @@ class ProfessionalLicenseController extends Controller
 {
     public function index(Request $request)
     {
-        dd('...');
         $professional_licenses = ProfessionalLicense::name($request->get('table_search'))->orderBy('name')->paginate(20);
         return view('maintainers.professional_licenses.index', compact('professional_licenses'));
     }
@@ -27,7 +26,7 @@ class ProfessionalLicenseController extends Controller
     public function store(ProfessionalLicenseRequest $request)
     {
         ProfessionalLicense::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.professional_licenses.index');
     }
 
@@ -40,7 +39,7 @@ class ProfessionalLicenseController extends Controller
     public function update(ProfessionalLicenseRequest $request, $id)
     {
         $professional_license = ProfessionalLicense::findOrFail($id);
-        $message = $professional_license->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $professional_license->name . ' fue actualizado satisfactoriamente.';
         $professional_license->fill($request->all());
         $professional_license->save();
         Session::flash('success', $message);
@@ -51,7 +50,7 @@ class ProfessionalLicenseController extends Controller
     {
         $professional_license = ProfessionalLicense::findOrFail($id);
         $professional_license->delete();
-        Session::flash('success', $professional_license->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $professional_license->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.professional_licenses.index');
     }
 }

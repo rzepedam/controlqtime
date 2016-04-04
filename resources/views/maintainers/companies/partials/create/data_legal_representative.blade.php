@@ -1,10 +1,11 @@
 <span id="legal_representative0">
 	<div class="row">
 		<div class="col-md-12">
-			<span id="num_legal_representative0" class="title-elements-panel2 text-green">Representante Legal #1</span>
+			<div class="alert alert-alt alert-success alert-dismissible" role="alert">
+				<span id="num_legal_representative0" class="text-success">Representante Legal #1</span>
+			</div>
 		</div>
 	</div>
-	<br />
 	<div class="row">
 		<div class="col-md-3">
 			<div class="form-group">
@@ -91,5 +92,4 @@
 	        </div>
 		</div>
 	</div>
-	<hr />
 </span>

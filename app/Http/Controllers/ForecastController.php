@@ -26,7 +26,7 @@ class ForecastController extends Controller
     public function store(ForecastRequest $request)
     {
         Forecast::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.forecasts.index');
     }
 
@@ -39,7 +39,7 @@ class ForecastController extends Controller
     public function update(ForecastRequest $request, $id)
     {
         $forecast = Forecast::findOrFail($id);
-        $message = $forecast->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $forecast->name . ' fue actualizado satisfactoriamente.';
         $forecast->fill($request->all());
         $forecast->save();
         Session::flash('success', $message);
@@ -50,7 +50,7 @@ class ForecastController extends Controller
     {
         $forecast = Forecast::findOrFail($id);
         $forecast->delete();
-        Session::flash('success', $forecast->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $forecast->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.forecasts.index');
     }
 

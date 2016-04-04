@@ -28,7 +28,7 @@ class CityController extends Controller
     public function store(CityRequest $request)
     {
         City::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.cities.index');
     }
 
@@ -42,7 +42,7 @@ class CityController extends Controller
     public function update(CityRequest $request, $id)
     {
         $city    = City::findOrFail($id);
-        $message = $city->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $city->name . ' fue actualizado satisfactoriamente.';
         $city->fill($request->all());
         $city->save();
         Session::flash('success', $message);
@@ -53,7 +53,7 @@ class CityController extends Controller
     {
         $city = City::findOrFail($id);
         $city->delete();
-        Session::flash('success', $city->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $city->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.cities.index');
     }
 }

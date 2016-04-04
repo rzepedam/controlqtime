@@ -3,11 +3,12 @@
     <span id="subsidiary{{ $i }}">
         <div class="row">
             <div class="col-md-12">
-                <span id="num_subsidiary{{ $i }}" class="title-elements-panel2 text-yellow">Sucursal #{{ $i + 1 }}</span>
-                <a id="subsidiary" class="delete-elements-panel2 pull-right mitooltip" title="Eliminar Sucursal"><i class="fa fa-trash"></i></a>
+                <div class="alert alert-alt alert-warning alert-dismissible" role="alert">
+                    <span id="num_subsidiary{{ $i }}" class="text-warning">Sucursal #{{ $i + 1 }}</span>
+                    <a id="subsidiary" class="delete-elements pull-right mitooltip" title="Eliminar Sucursal"><i class="fa fa-trash"></i></a>
+                </div>
             </div>
         </div>
-        <br/>
         <div class="row">
             <div class="col-md-1 hide">
                 <div class="form-group">

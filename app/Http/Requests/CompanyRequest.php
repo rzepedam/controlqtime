@@ -106,7 +106,6 @@ class CompanyRequest extends SanitizedRequest
 
                 for ($i = 0; $i < Request::get('count_subsidiary'); $i++) {
 
-                    $this->cast(Request::get('num_suc' . $i));
                     $rules['address_suc' . $i]      = 'required';
                     $rules['commune_suc_id' . $i]   = 'required|integer';
                     $rules['num_suc' . $i]          = 'required|regex:/[0-9 -()+]+$/|digits_between:1,8';

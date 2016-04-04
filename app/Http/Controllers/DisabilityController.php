@@ -25,7 +25,7 @@ class DisabilityController extends Controller
     public function store(DisabilityRequest $request)
     {
         Disability::create($request->all());
-        Session::flash('message', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('message', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.disabilities.index');
     }
 
@@ -44,7 +44,7 @@ class DisabilityController extends Controller
     public function update(DisabilityRequest $request, $id)
     {
         $disability = Disability::findOrFail($id);
-        $message = $disability->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $disability->name . ' fue actualizado satisfactoriamente.';
         $disability->fill($request->all());
         $disability->save();
         Session::flash('success', $message);
@@ -55,7 +55,7 @@ class DisabilityController extends Controller
     {
         $disability = Disability::findOrFail($id);
         $disability->delete();
-        Session::flash('success', $disability->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $disability->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.disabilities.index');
     }
 }

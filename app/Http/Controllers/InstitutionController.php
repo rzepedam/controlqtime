@@ -27,7 +27,7 @@ class InstitutionController extends Controller
     public function store(InstitutionRequest $request)
     {
         Institution::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.institutions.index');
     }
 
@@ -41,7 +41,7 @@ class InstitutionController extends Controller
     public function update(InstitutionRequest $request, $id)
     {
         $institution = Institution::findOrFail($id);
-        $message = $institution->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $institution->name . ' fue actualizado satisfactoriamente.';
         $institution->fill($request->all());
         $institution->save();
         Session::flash('success', $message);
@@ -52,7 +52,7 @@ class InstitutionController extends Controller
     {
         $institution = Institution::findOrFail($id);
         $institution->delete();
-        Session::flash('success', $institution->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $institution->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.institutions.index');
     }
 }

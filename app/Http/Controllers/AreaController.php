@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Session;
 
 use App\Area;
 use App\Http\Requests\AreaRequest;
-use App\Terminal;
 
 class AreaController extends Controller
 {
@@ -21,28 +20,26 @@ class AreaController extends Controller
 
     public function create()
     {
-    	$terminals = Terminal::lists('name', 'id');
-        return view('maintainers.areas.create', compact('terminals'));
+        return view('maintainers.areas.create');
     }
 
     public function store(AreaRequest $request)
     {
         Area::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.areas.index');
     }
 
     public function edit($id)
     {
         $area      = Area::findOrFail($id);
-        $terminals = Terminal::lists('name', 'id');
-        return view('maintainers.areas.edit', compact('area', 'terminals'));
+        return view('maintainers.areas.edit');
     }
 
     public function update(AreaRequest $request, $id)
     {
         $area = Area::findOrFail($id);
-        $message = $area->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $area->name . ' fue actualizado satisfactoriamente.';
         $area->fill($request->all());
         $area->save();
         Session::flash('success', $message);
@@ -53,7 +50,7 @@ class AreaController extends Controller
     {
         $area = Area::findOrFail($id);
         $area->delete();
-        Session::flash('success', $area->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $area->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.areas.index');
     }
 }

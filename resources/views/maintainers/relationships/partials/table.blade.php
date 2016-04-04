@@ -1,24 +1,26 @@
-<div class="box box-primary">
-    <div class="box-body table-responsive no-padding">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach($kins as $kin)
-                <tr data-id="{{ $kin->id }}">
-                    <td>{{ $kin->id }}</td>
-                    <td>{{ $kin->name }}</td>
-                    <td class="text-center">
-                        <a href="{{ route('maintainers.kins.edit', $kin) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i> Editar</a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+<div class="panel">
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">ID</th>
+                        <th class="col-md-9">Nombre</th>
+                        <th class="text-center col-md-2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($relationships as $relationship)
+                    <tr data-id="{{ $relationship->id }}">
+                        <td>{{ $relationship->id }}</td>
+                        <td>{{ $relationship->name }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('maintainers.relationships.edit', $relationship) }}" class="btn btn-squared btn-success waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> </a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

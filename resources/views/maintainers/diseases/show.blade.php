@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') <br> @stop
+@section('title_header') Detalle Registro : <span class="text-primary">{{ $disease->name }}</span> @stop
 
 @section('breadcumb')
     <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -10,11 +10,16 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-default">
-                @include('maintainers.diseases.partials.detail')
-            </div><!-- /.box -->
+    <div class="panel panel-bordered">
+        <div class="panel-body">
+
+            {{ $disease->description }}
+
+        </div>
+        <div class="panel-footer">
+
+            <a href="{{ route('maintainers.disabilities.index') }}">Volver</a>
+
         </div>
     </div>
 

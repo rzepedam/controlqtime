@@ -1,7 +1,31 @@
 @if (Session::has('success'))
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <i class="icon fa fa-check"></i> {!! session('success') !!}
-    </div>
+
+    <script>
+        $(document).ready(function() {
+
+            toastr.success(
+                    '{!! Session::get('success') !!}',
+                    '',
+                    {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": true,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "showDuration": "400",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+            );
+
+        });
+    </script>
+
 @endif
 

@@ -26,7 +26,7 @@ class ExamController extends Controller
     public function store(ExamRequest $request)
     {
         Exam::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.exams.index');
     }
 
@@ -39,7 +39,7 @@ class ExamController extends Controller
     public function update(ExamRequest $request, $id)
     {
         $exam = Exam::findOrFail($id);
-        $message = $exam->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $exam->name . ' fue actualizado satisfactoriamente.';
         $exam->fill($request->all());
         $exam->save();
         Session::flash('success', $message);
@@ -50,7 +50,7 @@ class ExamController extends Controller
     {
         $exam = Exam::findOrFail($id);
         $exam->delete();
-        Session::flash('success', $exam->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $exam->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.exams.index');
     }
 }

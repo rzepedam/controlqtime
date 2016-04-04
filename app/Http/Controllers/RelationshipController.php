@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\RelationshipRequest;
 use App\Relationship;
 
-class KinController extends Controller
+class RelationshipController extends Controller
 {
     /**
      * @param Request $request
@@ -38,7 +38,7 @@ class KinController extends Controller
     public function store(RelationshipRequest $request)
     {
         Relationship::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.relationships.index');
     }
 
@@ -62,14 +62,14 @@ class KinController extends Controller
     public function update(RelationshipRequest $request, $id)
     {
         $relationship = Relationship::findOrFail($id);
-        $message = $relationship->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $relationship->name . ' fue actualizado satisfactoriamente.';
         $relationship->fill($request->all());
         $relationship->save();
         Session::flash('success', $message);
         return redirect()->route('maintainers.relationships.index');
     }
 
-    
+
     /**
      * @param $id
      * @return mixed
@@ -78,7 +78,7 @@ class KinController extends Controller
     {
         $relationship = Relationship::findOrFail($id);
         $relationship->delete();
-        Session::flash('success', $relationship->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $relationship->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.relationships.index');
     }
 }

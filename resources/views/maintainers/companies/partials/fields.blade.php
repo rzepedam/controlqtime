@@ -1,100 +1,87 @@
-
-<div class="panel box box-primary">
-	<div class="box-header with-border">
-		<h4 class="box-title">
-		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed black">Datos Empresa <small>(Información Casa Matriz)</small></a>
-		</h4>
+<div class="panel panel-bordered">
+	<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-building-o text-primary"></i> Datos Empresa <small>(Información Casa Matriz)</small></h3>
 	</div>
-	<div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
-		<div class="box-body">
+	<div class="panel-body">
 
-			@include('maintainers.companies.partials.forms.data_company')
+		@include('maintainers.companies.partials.create.data_company')
 
-		</div>
 	</div>
 </div>
 
-<div class="panel box box-success">
-	<div class="box-header with-border">
-		<h4 class="box-title">
-		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" class="collapsed black">Datos Representante Legal</a>
-		</h4>
+<div class="panel panel-bordered">
+	<div class="panel-heading">
+		<div class="panel-actions">
+			<span class="label label-outline label-success add_license waves-effect waves-block" onclick="$(this).addLegalRepresentative(this)"><i class="fa fa-plus"></i> Agregar Representante Legal</span>
+		</div>
+		<h3 class="panel-title"><i class="fa fa-gavel text-success"></i> Datos Representante Legal</h3>
 	</div>
-	<div id="collapseTwo" class="panel-collapse collapse in" aria-expanded="false">
-		<div class="box-body">
 
-			<div id="content_legal_representatives">
+	<div class="panel-body">
+		<div id="content_legal_representatives">
 
-				<!-- load blank fields in create company case -->
-				@if (end((explode('/', URL::current()))) == 'create')
+			<!-- load blank fields in create company case -->
+			@if (end((explode('/', URL::current()))) == 'create')
 
-					@include('maintainers.companies.partials.forms.data_legal_representative')
+				@include('maintainers.companies.partials.create.data_legal_representative')
 
-				@else
+			@elseif($company->num_representative)
 
-					@include('maintainers.companies.partials.forms.edit_data_legal_representative')
+				@include('maintainers.companies.partials.edit.edit_data_legal_representative')
 
-				@endif
+			@else
 
-			</div>
-			<div class="row">
-				<div class="col-md-12 pull-right">
-				    <a id="add_legal_representative" href="javascript: void(0)" onclick="$(this).addLegalRepresentative(this)" class="text-green add_legal_representative pull-right"><i class="fa fa-plus"></i> Agregar Representante Legal</a>
-				</div>
-			</div>
+				@include('maintainers.companies.partials.create.data_legal_representative')
+
+			@endif
 
 		</div>
 	</div>
+
 </div>
 
-<div class="panel box box-warning">
-	<div class="box-header with-border">
-		<h4 class="box-title">
-		  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" class="collapsed black">Datos Sucursales</a>
-		</h4>
+<div class="panel panel-bordered">
+	<div class="panel-heading">
+		<div class="panel-actions">
+			<span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addSubsidiary(this)"><i class="fa fa-plus"></i> Agregar Sucursal</span>
+		</div>
+		<h3 class="panel-title"><i class="fa fa-cubes text-warning"></i> Datos Sucursales</h3>
 	</div>
-	<div id="collapseThree" class="panel-collapse collapse in" aria-expanded="false">
-		<div class="box-body">
+	<div class="panel-body">
+		<div id="content_subsidiaries">
 
-			<div id="content_subsidiaries">
+			@if (end((explode('/', URL::current()))) == 'create')
 
-				@if (end((explode('/', URL::current()))) == 'create')
+				<h2 class="text-center text-warning">No existen Sucursales Asociadas <br />
+					<small>(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
+				<br />
+				<br />
 
-					<h2 class="text-center text-yellow">No existen Sucursales Asociadas <br />
-						<small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
-					<br />
-					<hr />
+			@elseif($company->num_subsidiary)
 
-				@elseif($company->subsidiaries)
+				@include('maintainers.companies.partials.forms.edit_subsidiaries')
 
-					@include('maintainers.companies.partials.forms.edit_subsidiaries')
+			@else
 
-				@else
+				<h2 class="text-center text-warning">No existen Sucursales Asociadas <br />
+					<small>(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
+				<br />
+				<br />
 
-					<h2 class="text-center text-yellow">No existen Sucursales Asociadas <br />
-						<small class="text-muted">(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
-					<br />
-					<hr />
-
-				@endif
-
-			</div>
-			<div class="row">
-				<div class="col-md-12 pull-right">
-				    <a id="add_subsidiary" href="javascript: void(0)" onclick="$(this).addSubsidiary(this)" class="text-yellow add_subsidiary pull-right"><i class="fa fa-plus"></i> Agregar Sucursal</a>
-				</div>
-			</div>
+			@endif
 
 		</div>
 	</div>
+
 </div>
 <br />
 <div class="row">
 	<div class="col-md-6">
 		<a href="{{ route('maintainers.companies.index') }}">Volver</a>
-        <span class="ajax pull-right text-green"></span>
+		<!-- Gif Ajax hide -->
+        <span class="ajax pull-right text-success"></span>
 	</div>
 	<div class="col-md-6 pull-right">
-		<button id="btn-submit" type="submit" class="btn btn-primary btn-flat btn-lg pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+		<button id="btn-submit" type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
 	</div>
 </div>

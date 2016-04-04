@@ -17,39 +17,35 @@
 @section('content')
 
     <br />
-    <br />
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <div class="box box-solid box-primary">
-                <div class="box-header">
-                    <h3 class="box-title"><strong>#</strong> Rut Empresa</h3>
-                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <strong>#</strong> Rut Empresa
+                    </h3>
                 </div>
-                <div class="box-body">
-                    <br />
+                <div class="panel-body">
 
+                    <br />
                     <input id="rut" type="file" class="file-loading" multiple>
 
                 </div>
             </div>
         </div>
-        <div class="col-md-1"></div>
     </div>
     <br />
-    <br />
-
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <div class="box box-solid box-warning">
-                <div class="box-header">
-                    <h3 class="box-title"><strong>#</strong> Patente Municipal</h3>
-                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <strong>#</strong> Patente Municipal
+                    </h3>
                 </div>
-                <div class="box-body">
-                    <br />
+                <div class="panel-body">
 
+                    <br />
                     <input id="license" type="file" class="file-loading" multiple>
 
                 </div>
@@ -58,11 +54,11 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+        <div class="col-md-10 col-md-offset-1">
             <a href="{{ route('maintainers.companies.index') }}">Volver</a>
         </div>
     </div>
+    <br />
     <br />
 
 @stop

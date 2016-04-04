@@ -71,7 +71,6 @@
         <div class="page-content">
 
             @include('layout.messages.errors')
-            @include('layout.messages.success')
 
             @yield('content')
 
@@ -104,6 +103,8 @@
     <script src="{{ asset('assets/js/v1.min.js') }}"></script>
 
     @yield('scripts')
+
+    @include('layout.messages.success')
 
 </body>
 </html>

@@ -3,23 +3,31 @@
 @section('title_header') Crear Nuevo País @stop
 
 @section('breadcumb')
-    <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.countries.index') }}"><i class="fa fa-flag"></i> Países</a></li>
     <li class="active">Nuevo</li>
 @stop
 
 @section('content')
 
-    <div class="box box-primary">
-        {!! Form::open(array('route' => 'maintainers.countries.store', 'method' => 'POST')) !!}
-            <div class="box-body">
-                @include('maintainers.countries.partials.fields')
+<div class="panel">
+    {{ Form::open(array('route' => 'maintainers.countries.store', 'method' => 'POST')) }}
+
+        <div class="panel-body">
+
+            @include('maintainers.countries.partials.fields')
+
+        </div>
+        <br />
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ route('maintainers.countries.index') }}">Volver</a><button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                </div>
             </div>
-            <div class="box-footer">
-                <a href="{{ route('maintainers.countries.index') }}">Volver</a>
-                <button type="submit" class="btn btn-primary btn-flat btn-lg pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
-            </div>
-        {!! Form::close() !!}
-    </div>
+        </div>
+
+    {{ Form::close() }}
+</div>
 
 @stop

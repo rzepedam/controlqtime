@@ -1,8 +1,14 @@
 @extends('layout.index')
 
+@section('css')
+
+    {{ Html::style('assets/css/toastr.css') }}
+
+@stop
+
 @section('title_header') Listado de Licencias Profesionales
     <br>
-    <a href="{{ route('maintainers.professional_license.create') }}" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Crear Nueva Licencia</a>
+    <a href="{{ route('maintainers.professional_licenses.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Licencia Profesional</a>
 @stop
 
 @section('breadcumb')
@@ -12,7 +18,7 @@
 
 @section('form_search')
     <div class="box-tools breadcrumb2">
-        {!! Form::open(['route' => 'maintainers.professional_license.index', 'method' => 'GET']) !!}
+        {!! Form::open(['route' => 'maintainers.professional_licenses.index', 'method' => 'GET']) !!}
         <div class="input-group input-group-sm" style="width: 250px;">
             {{ Form::text('table_search', null, ['class' => 'form-control pull-right', 'placeholder' => 'Buscar...', 'autofocus']) }}
             <div class="input-group-btn">
@@ -25,7 +31,7 @@
 
 @section('content')
 
-    @if($professional_license->count())
+    @if($professional_licenses->count())
 
         @include('maintainers.professional_licenses.partials.table')
 
@@ -36,5 +42,29 @@
     @endif
 
     {{ $professional_licenses->links() }}
+
+@stop
+
+@section('scripts')
+
+    {{ Html::script('assets/js/toastr.js') }}
+    {{ Html::script('assets/js/components/toastr.js') }}
+
+    <script>
+
+        $(document).ready(function(){
+
+
+            /**************************************************
+             ************** Initialize components **************
+             **************************************************/
+
+            $('.mitooltip').tooltip();
+
+
+
+        });
+
+    </script>
 
 @stop

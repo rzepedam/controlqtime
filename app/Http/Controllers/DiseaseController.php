@@ -24,7 +24,7 @@ class DiseaseController extends Controller
     public function store(DiseaseRequest $request)
     {
         Disease::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.diseases.index');
     }
 
@@ -43,7 +43,7 @@ class DiseaseController extends Controller
     public function update(DiseaseRequest $request, $id)
     {
         $disease = Disease::findOrFail($id);
-        $message = $disease->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $disease->name . ' fue actualizado satisfactoriamente.';
         $disease->fill($request->all());
         $disease->save();
         Session::flash('success', $message);
@@ -54,7 +54,7 @@ class DiseaseController extends Controller
     {
         $disease = Disease::findOrFail($id);
         $disease->delete();
-        Session::flash('success', $disease->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $disease->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.diseases.index');
     }
 }

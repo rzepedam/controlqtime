@@ -32,14 +32,14 @@
                     <!-- Recursos Humanos -->
                     <li class="site-menu-item has-sub">
                         <a href="javascript:void(0)">
-                            <i class="site-menu-icon fa fa-users" aria-hidden="true"></i>
+                            <i class="site-menu-icon fa fa-street-view" aria-hidden="true"></i>
                             <span class="site-menu-title">Recursos Humanos</span>
                             <span class="site-menu-arrow"></span>
                         </a>
                         <ul class="site-menu-sub">
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('human-resources.manpowers.index')}}">
-                                    <span class="site-menu-title"><i class="icon md-accounts-alt site-menu-icon" aria-hidden="true" style="font-size: 18px;"></i> Trabajadores</span>
+                                    <span class="site-menu-title"><i class="icon fa fa-users site-menu-icon"></i> Trabajadores</span>
                                 </a>
                             </li>
                         </ul>
@@ -69,13 +69,13 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.cities.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-flag-o" aria-hidden="true"></i> Ciudades</span>
+                                <a class="animsition-link" href="{{ route('maintainers.certifications.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon md-badge-check" aria-hidden="true" ></i>Certificaciones</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.certifications.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-certificate" aria-hidden="true"></i> Certificaciones</span>
+                                <a class="animsition-link" href="{{ route('maintainers.cities.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-flag-o" aria-hidden="true"></i> Ciudades</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
@@ -130,7 +130,7 @@
                             </li>
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.professional_licenses.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon md-account-calendar" aria-hidden="true" style="font-size: 18px;"></i> Lic. Profesionales</span>
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-bookmark"></i> Lic. Profesionales</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">

@@ -1,6 +1,8 @@
-{!! Form::open(['route' => ['maintainers.kins.destroy', $kin], 'method' => 'DELETE', 'id' => 'form-delete']) !!}
-    <button class="btn btn-danger btn-block btn-flat btn-delete" data-id="{{ $kin->id }}" data-toggle="modal" data-target="#mi_delete"><i class="fa fa-trash-o fa-lg"></i> Eliminar Registro</button>
-{!! Form::close() !!}
+{{ Form::open(['route' => ['maintainers.relationships.destroy', $relationship], 'method' => 'DELETE', 'id' => 'form-delete']) }}
+
+    <button class="btn btn-block btn-squared btn-danger waves-effect waves-light btn-delete" data-id="{{ $relationship->id }}" data-toggle="modal" data-target="#mi_delete"><i class="fa fa-trash-o fa-lg"></i> Eliminar Registro</button>
+
+{{ Form::close() }}
 
 @include('layout.modal.delete')
 

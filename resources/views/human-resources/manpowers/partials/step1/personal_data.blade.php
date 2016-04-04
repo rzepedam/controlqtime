@@ -21,7 +21,7 @@
 <!-- second row -->
 <div class="row">
     <div class="col-md-3 form-group">
-        {{ Form::label('rut', 'Rut') }} <i class="fa fa-info-circle text-primary"></i>
+        {{ Form::label('rut', 'Rut') }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
         {{ Form::text('rut', Session::get('rut'), ['class' => 'form-control', 'required']) }}
     </div>
     <div class="col-md-3 form-group">

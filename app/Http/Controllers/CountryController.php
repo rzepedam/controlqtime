@@ -25,7 +25,7 @@ class CountryController extends Controller
     public function store(CountryRequest $request)
     {
         Country::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.countries.index');
     }
 
@@ -38,7 +38,7 @@ class CountryController extends Controller
     public function update(CountryRequest $request, $id)
     {
         $country = Country::findOrFail($id);
-        $message = $country->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $country->name . ' fue actualizado satisfactoriamente.';
         $country->fill($request->all());
         $country->save();
         Session::flash('success', $message);
@@ -49,7 +49,7 @@ class CountryController extends Controller
     {
         $country = Country::findOrFail($id);
         $country->delete();
-        Session::flash('success', $country->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $country->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.countries.index');
     }
 }

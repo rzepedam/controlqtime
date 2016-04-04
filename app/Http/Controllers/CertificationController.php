@@ -25,7 +25,7 @@ class CertificationController extends Controller
     public function store(CertificationRequest $request)
     {
         Certification::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.certifications.index');
     }
 
@@ -38,7 +38,7 @@ class CertificationController extends Controller
     public function update(CertificationRequest $request, $id)
     {
         $certification = Certification::findOrFail($id);
-        $message = $certification->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $certification->name . ' fue actualizado satisfactoriamente.';
         $certification->fill($request->all());
         $certification->save();
         Session::flash('success', $message);
@@ -49,7 +49,7 @@ class CertificationController extends Controller
     {
         $certification = Certification::findOrFail($id);
         $certification->delete();
-        Session::flash('success', $certification->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $certification->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.certifications.index');
     }
 }

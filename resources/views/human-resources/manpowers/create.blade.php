@@ -2,17 +2,18 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-wizard.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/formValidation.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/ribbon.css') }}">
+    {{ Html::style('assets/css/jquery-wizard.css') }}
+    {{ Html::style('assets/css/formValidation.css') }}
+    {{ Html::style('assets/css/ribbon.css') }}
+    {{ Html::style('assets/css/webui-popover.css') }}
 
 @stop
 
 @section('title_header') Crear Nuevo Trabajador @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-users"></i> RR.HH</a></li>
-    <li><a href="{{ route('human-resources.manpowers.index') }}"><i class="fa fa-user"></i> Trabajadores</a></li>
+    <li><a href="javascript:void(0)"><i class="fa fa-street-view"></i> RR.HH</a></li>
+    <li><a href="{{ route('human-resources.manpowers.index') }}"><i class="fa fa-users"></i> Trabajadores</a></li>
     <li class="active">Nuevo</li>
 @stop
 
@@ -29,8 +30,8 @@
                     <div class="step col-md-4 current" data-target="#datos_personales" role="tab">
                         <span class="step-number">1</span>
                         <div class="step-desc">
-                            <span class="step-title">Datos</span>
-                            <p>Personales</p>
+                            <span class="step-title">Información</span>
+                            <p>Personal</p>
                         </div>
                     </div>
                     <div class="step col-md-4" data-target="#competencias_laborales" role="tab">
@@ -50,203 +51,217 @@
                 </div>
                 <!-- End Steps -->
                 <!-- Wizard Content -->
-                <div class="panel">
-                    <div class="panel-body">
-                        <div class="wizard-content">
-                            <div class="wizard-pane active" id="datos_personales" role="tabpanel">
+                <div class="wizard-content">
+                    <div class="wizard-pane active" id="datos_personales" role="tabpanel">
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-check-square-o text-primary"></i> Datos Personales</h3>
+                            </div>
+                            <div class="panel-body">
 
                                 {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
 
-                                    <div class="alert alert-success alert-alt alert-dismissible" role="alert">
-                                        <span><i class="fa fa-street-view"></i> <strong>Información Personal</strong></span>
-                                    </div>
-
                                         @include('human-resources.manpowers.partials.step1.personal_data')
 
-                                    <br />
-                                    <div class="alert alert-info alert-alt alert-dismissible" role="alert">
-                                        <span><i class="fa fa-picture-o"></i> <strong>Imagen de Perfil</strong></span>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <div class="alert alert-warning alert-alt alert-dismissible contiene-titulo-label-seccion" role="alert">
-                                        <span><i class="icon md-male-female" style="font-size: 16px;"></i> <strong>Parentescos Familiares</strong></span>
-                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementFamilyRelationship(this)"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
-                                    </div>
-                                    <div id="content_family_relationships">
-                                        @if (Session::get('relationship_id') != null)
-                                            @for($i = 0; $i < count(Session::get('relationship_id')); $i++)
+                            </div>
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-picture-o text-info"></i> Imagen de Perfil</h3>
+                            </div>
+                            <div class="panel-body">
 
-                                                @include('human-resources.manpowers.partials.step1.family_relationship')
-
-                                            @endfor
-                                        @else
-                                            <br />
-                                            <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3>
-                                            <br />
-                                            <br />
-                                        @endif
-                                    </div>
-                                    <br />
-
-                                {{ Form::close() }}
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
 
                             </div>
-                            <div class="wizard-pane" id="competencias_laborales" role="tabpanel">
-                                {{ Form::open(["route" => "human-resources.manpowers.step2", "method" => "POST", "id" => "step2"]) }}
-
-                                    <div class="alert alert-info alert-alt alert-dismissible" role="alert">
-                                        <span><i class="icon md-library" style="font-size: 16px;"></i> <strong>Estudios Académicos</strong></span>
-                                        <span class="label label-outline label-info add_study waves-effect waves-block" onclick="$(this).addElementStudy(this)"><i class="fa fa-plus"></i> Agregar Estudio Académico</span>
-                                    </div>
-                                    <div id="content_studies">
-                                        @if (Session::get('degree_id') != null)
-                                            @for($i = 0; $i < count(Session::get('degree_id')); $i++)
-
-                                                @include('human-resources.manpowers.partials.step2.study')
-
-                                            @endfor
-                                        @else
-                                            <br />
-                                            <h3 class="text-center text-info">No existen Estudios Académicos Asociados <br /><small>(Pulse "Agregar Estudio Académico" para comenzar su adición)</small></h3>
-                                            <br />
-                                            <br />
-                                        @endif
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div class="alert alert-danger alert-alt alert-dismissible" role="alert">
-                                        <span><i class="icon md-badge-check" style="font-size: 16px;"></i> <strong>Certificaciones</strong></span>
-                                        <span class="label label-outline label-danger add_certification waves-effect waves-block" onclick="$(this).addElementCertification(this)"><i class="fa fa-plus"></i> Agregar Certificación</span>
-                                    </div>
-                                    <div id="content_certifications">
-                                        @if (Session::get('certification_id') != null)
-                                            @for($i = 0; $i < count(Session::get('certification_id')); $i++)
-
-                                                @include('human-resources.manpowers.partials.step2.certification')
-
-                                            @endfor
-                                        @else
-                                            <br />
-                                            <h3 class="text-center text-danger">No existen Certificaciones Asociadas <br /><small>(Pulse "Agregar Certificación" para comenzar su adición)</small></h3>
-                                            <br />
-                                            <br />
-                                        @endif
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div class="alert alert-warning alert-alt alert-dismissible" role="alert">
-                                        <span><i class="fa fa-wrench"></i> <strong>Especialidades</strong></span>
-                                        <!-- Utilizo misma clase de FamilyRelationship para reutilizar atributos -->
-                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementSpeciality(this)"><i class="fa fa-plus"></i> Agregar Especialidad</span>
-                                    </div>
-                                    <div id="content_specialities">
-                                        @if (Session::get('speciality_id') != null)
-                                            @for($i = 0; $i < count(Session::get('speciality_id')); $i++)
-
-                                                @include('human-resources.manpowers.partials.step2.speciality')
-
-                                            @endfor
-                                        @else
-                                            <br />
-                                            <h3 class="text-center text-warning">No existen Especialidades Asociadas <br /><small>(Pulse "Agregar Especialidad" para comenzar su adición)</small></h3>
-                                            <br />
-                                            <br />
-                                        @endif
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div class="alert alert-success alert-alt alert-dismissible" role="alert">
-                                        <span><i class="icon md-account-calendar" style="font-size: 16px;"></i> <strong>Licencias Profesionales</strong></span>
-                                        <span class="label label-outline label-success add_license waves-effect waves-block" onclick="$(this).addElementProfessionalLicense(this)"><i class="fa fa-plus"></i> Agregar Licencia Profesional</span>
-                                    </div>
-                                    <div id="content_licenses">
-                                        @if (Session::get('professional_license_id') != null)
-                                            @for($i = 0; $i < count(Session::get('professional_license_id')); $i++)
-
-                                                @include('human-resources.manpowers.partials.step2.professional_license')
-
-                                            @endfor
-                                        @else
-                                            <br />
-                                            <h3 class="text-center text-success">No existen Licencias Profesionales Asociadas <br /><small>(Pulse "Agregar Licencia Profesional" para comenzar su adición)</small></h3>
-                                            <br />
-                                            <br />
-                                        @endif
-                                    </div>
-                                    <br />
-
-                                {{ Form::close() }}
-
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementFamilyRelationship(this)"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
+                                </div>
+                                <h3 class="panel-title"><i class="fa fa-child text-warning"></i> Parentescos Familiares</h3>
                             </div>
-                            <div class="wizard-pane" id="info_salud" role="tabpanel">
-                                {{ Form::open(["route" => "human-resources.manpowers.store", "method" => "POST", "id" => "step3"]) }}
+                            <div class="panel-body">
+                                <div id="content_family_relationships">
 
-                                    <div class="alert alert-warning alert-alt alert-dismissible" role="alert">
-                                        <span><i class="fa fa-wheelchair"></i> <strong>Discapacidades</strong></span>
-                                        <!-- Utilizo misma clase de FamilyRelationship para reutilizar atributos -->
-                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementDisability(this)"><i class="fa fa-plus"></i> Agregar Discapacidad</span>
-                                    </div>
-                                    <div id="content_disabilities">
+                                    @if (Session::get('relationship_id') != null)
+                                        @for($i = 0; $i < count(Session::get('relationship_id')); $i++)
+
+                                            @include('human-resources.manpowers.partials.step1.family_relationship')
+
+                                        @endfor
+                                    @else
                                         <br />
-                                        <h3 class="text-center text-warning">No existen Discapacidades Asociadas <br /><small>(Pulse "Agregar Discapacidad" para comenzar su adición)</small></h3>
-                                        <br />
-                                        <br />
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div class="alert alert-success alert-alt alert-dismissible" role="alert">
-                                        <span><i class="fa fa-bed"></i> <strong>Enfermedades</strong></span>
-                                        <!-- Utilizo misma clase de LicenciasProfesionales para reutilizar atributos -->
-                                        <span class="label label-outline label-success add_license waves-effect waves-block" onclick="$(this).addElementDisease(this)"><i class="fa fa-plus"></i> Agregar Enfermedad</span>
-                                    </div>
-                                    <div id="content_diseases">
-                                        <br />
-                                        <h3 class="text-center text-success">No existen Enfermedades Asociadas <br /><small>(Pulse "Agregar Enfermedad" para comenzar su adición)</small></h3>
+                                        <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3>
                                         <br />
                                         <br />
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div class="alert alert-info alert-alt alert-dismissible" role="alert">
-                                        <span><i class="fa fa-stethoscope"></i> <strong>Exámenes Preocupacionales</strong></span>
-                                        <!-- Utilizo misma clase de EstudiosAcadémicos para reutilizar atributos -->
-                                        <span class="label label-outline label-info add_study waves-effect waves-block" onclick="$(this).addElementExam(this)"><i class="fa fa-plus"></i> Agregar Examen Preocupacional</span>
-                                    </div>
-                                    <div id="content_exams">
-                                        <br />
-                                        <h3 class="text-center text-info">No existen Exámenes Preocupacionales Asociados <br /><small>(Pulse "Agregar Examen Preocupacional" para comenzar su adición)</small></h3>
-                                        <br />
-                                        <br />
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div class="alert alert-danger alert-alt alert-dismissible" role="alert">
-                                        <span><i class="fa fa-child"></i> <strong>Cargas Familiares</strong></span>
-                                        <!-- Utilizo misma clase de Certificaciones para reutilizar atributos -->
-                                        <span class="label label-outline label-danger add_certification waves-effect waves-block" onclick="$(this).addElementFamilyResponsability(this)"><i class="fa fa-plus"></i> Agregar Carga Familiar</span>
-                                    </div>
-                                    <div id="content_family_responsabilities">
-                                        <br />
-                                        <h3 class="text-center text-danger">No existen Cargas Familiares Asociadas <br /><small>(Pulse "Agregar Carga Familiar" para comenzar su adición)</small></h3>
-                                        <br />
-                                        <br />
-                                    </div>
-                                    <br />
+                                    @endif
+
+                                </div>
+                                <br />
 
                                 {{ Form::close() }}
 
                             </div>
                         </div>
-                        <!-- End Wizard Content -->
+                        <div class="panel content-step">
+
+                        </div>
                     </div>
                 </div>
+                <div class="wizard-pane" id="competencias_laborales" role="tabpanel">
+                    {{ Form::open(["route" => "human-resources.manpowers.step2", "method" => "POST", "id" => "step2"]) }}
+
+                        <div class="alert alert-info alert-alt alert-dismissible" role="alert">
+                            <span><i class="icon md-library" style="font-size: 16px;"></i> <strong>Estudios Académicos</strong></span>
+                            <span class="label label-outline label-info add_study waves-effect waves-block" onclick="$(this).addElementStudy(this)"><i class="fa fa-plus"></i> Agregar Estudio Académico</span>
+                        </div>
+                        <div id="content_studies">
+                            @if (Session::get('degree_id') != null)
+                                @for($i = 0; $i < count(Session::get('degree_id')); $i++)
+
+                                    @include('human-resources.manpowers.partials.step2.study')
+
+                                @endfor
+                            @else
+                                <br />
+                                <h3 class="text-center text-info">No existen Estudios Académicos Asociados <br /><small>(Pulse "Agregar Estudio Académico" para comenzar su adición)</small></h3>
+                                <br />
+                                <br />
+                            @endif
+                        </div>
+                        <br />
+                        <br />
+                        <div class="alert alert-danger alert-alt alert-dismissible" role="alert">
+                            <span><i class="icon md-badge-check" style="font-size: 16px;"></i> <strong>Certificaciones</strong></span>
+                            <span class="label label-outline label-danger add_certification waves-effect waves-block" onclick="$(this).addElementCertification(this)"><i class="fa fa-plus"></i> Agregar Certificación</span>
+                        </div>
+                        <div id="content_certifications">
+                            @if (Session::get('certification_id') != null)
+                                @for($i = 0; $i < count(Session::get('certification_id')); $i++)
+
+                                    @include('human-resources.manpowers.partials.step2.certification')
+
+                                @endfor
+                            @else
+                                <br />
+                                <h3 class="text-center text-danger">No existen Certificaciones Asociadas <br /><small>(Pulse "Agregar Certificación" para comenzar su adición)</small></h3>
+                                <br />
+                                <br />
+                            @endif
+                        </div>
+                        <br />
+                        <br />
+                        <div class="alert alert-warning alert-alt alert-dismissible" role="alert">
+                            <span><i class="fa fa-wrench"></i> <strong>Especialidades</strong></span>
+                            <!-- Utilizo misma clase de FamilyRelationship para reutilizar atributos -->
+                            <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementSpeciality(this)"><i class="fa fa-plus"></i> Agregar Especialidad</span>
+                        </div>
+                        <div id="content_specialities">
+                            @if (Session::get('speciality_id') != null)
+                                @for($i = 0; $i < count(Session::get('speciality_id')); $i++)
+
+                                    @include('human-resources.manpowers.partials.step2.speciality')
+
+                                @endfor
+                            @else
+                                <br />
+                                <h3 class="text-center text-warning">No existen Especialidades Asociadas <br /><small>(Pulse "Agregar Especialidad" para comenzar su adición)</small></h3>
+                                <br />
+                                <br />
+                            @endif
+                        </div>
+                        <br />
+                        <br />
+                        <div class="alert alert-success alert-alt alert-dismissible" role="alert">
+                            <span><i class="icon md-account-calendar" style="font-size: 16px;"></i> <strong>Licencias Profesionales</strong></span>
+                            <span class="label label-outline label-success add_license waves-effect waves-block" onclick="$(this).addElementProfessionalLicense(this)"><i class="fa fa-plus"></i> Agregar Licencia Profesional</span>
+                        </div>
+                        <div id="content_licenses">
+                            @if (Session::get('professional_license_id') != null)
+                                @for($i = 0; $i < count(Session::get('professional_license_id')); $i++)
+
+                                    @include('human-resources.manpowers.partials.step2.professional_license')
+
+                                @endfor
+                            @else
+                                <br />
+                                <h3 class="text-center text-success">No existen Licencias Profesionales Asociadas <br /><small>(Pulse "Agregar Licencia Profesional" para comenzar su adición)</small></h3>
+                                <br />
+                                <br />
+                            @endif
+                        </div>
+                        <br />
+
+                    {{ Form::close() }}
+
+                </div>
+                <div class="wizard-pane" id="info_salud" role="tabpanel">
+                    {{ Form::open(["route" => "human-resources.manpowers.store", "method" => "POST", "id" => "step3"]) }}
+
+                        <div class="alert alert-warning alert-alt alert-dismissible" role="alert">
+                            <span><i class="fa fa-wheelchair"></i> <strong>Discapacidades</strong></span>
+                            <!-- Utilizo misma clase de FamilyRelationship para reutilizar atributos -->
+                            <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementDisability(this)"><i class="fa fa-plus"></i> Agregar Discapacidad</span>
+                        </div>
+                        <div id="content_disabilities">
+                            <br />
+                            <h3 class="text-center text-warning">No existen Discapacidades Asociadas <br /><small>(Pulse "Agregar Discapacidad" para comenzar su adición)</small></h3>
+                            <br />
+                            <br />
+                        </div>
+                        <br />
+                        <br />
+                        <div class="alert alert-success alert-alt alert-dismissible" role="alert">
+                            <span><i class="fa fa-bed"></i> <strong>Enfermedades</strong></span>
+                            <!-- Utilizo misma clase de LicenciasProfesionales para reutilizar atributos -->
+                            <span class="label label-outline label-success add_license waves-effect waves-block" onclick="$(this).addElementDisease(this)"><i class="fa fa-plus"></i> Agregar Enfermedad</span>
+                        </div>
+                        <div id="content_diseases">
+                            <br />
+                            <h3 class="text-center text-success">No existen Enfermedades Asociadas <br /><small>(Pulse "Agregar Enfermedad" para comenzar su adición)</small></h3>
+                            <br />
+                            <br />
+                        </div>
+                        <br />
+                        <br />
+                        <div class="alert alert-info alert-alt alert-dismissible" role="alert">
+                            <span><i class="fa fa-stethoscope"></i> <strong>Exámenes Preocupacionales</strong></span>
+                            <!-- Utilizo misma clase de EstudiosAcadémicos para reutilizar atributos -->
+                            <span class="label label-outline label-info add_study waves-effect waves-block" onclick="$(this).addElementExam(this)"><i class="fa fa-plus"></i> Agregar Examen Preocupacional</span>
+                        </div>
+                        <div id="content_exams">
+                            <br />
+                            <h3 class="text-center text-info">No existen Exámenes Preocupacionales Asociados <br /><small>(Pulse "Agregar Examen Preocupacional" para comenzar su adición)</small></h3>
+                            <br />
+                            <br />
+                        </div>
+                        <br />
+                        <br />
+                        <div class="alert alert-danger alert-alt alert-dismissible" role="alert">
+                            <span><i class="fa fa-child"></i> <strong>Cargas Familiares</strong></span>
+                            <!-- Utilizo misma clase de Certificaciones para reutilizar atributos -->
+                            <span class="label label-outline label-danger add_certification waves-effect waves-block" onclick="$(this).addElementFamilyResponsability(this)"><i class="fa fa-plus"></i> Agregar Carga Familiar</span>
+                        </div>
+                        <div id="content_family_responsabilities">
+                            <br />
+                            <h3 class="text-center text-danger">No existen Cargas Familiares Asociadas <br /><small>(Pulse "Agregar Carga Familiar" para comenzar su adición)</small></h3>
+                            <br />
+                            <br />
+                        </div>
+                        <br />
+
+                    {{ Form::close() }}
+
+                </div>
             </div>
-            <!-- End Panel Wizard One Form -->
+            <!-- End Wizard Content -->
         </div>
     </div>
 
@@ -263,8 +278,10 @@
     {{ Html::script('assets/js/form-validation/bootstrap.js') }}
     {{ Html::script('assets/js/jquery.matchHeight-min.js') }}
     {{ Html::script('assets/js/jquery-wizard.js') }}
+    {{ Html::script('assets/js/jquery.webui-popover.js') }}
     {{ Html::script('assets/js/components/jquery-wizard.js') }}
     {{ Html::script('assets/js/components/matchheight.js') }}
+    {{ Html::script('assets/js/components/webui-popover.js') }}
 
 
     <script type="text/javascript">
@@ -294,7 +311,7 @@
             var defaults = $.components.getDefaults("wizard");
 
             var options = $.extend(true, {}, defaults, {
-                buttonsAppendTo: '.panel-body'
+                buttonsAppendTo: '.content-step'
             });
 
             var wizard = $("#form_new_manpower").wizard(options).data('wizard');

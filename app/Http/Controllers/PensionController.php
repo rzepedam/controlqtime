@@ -26,7 +26,7 @@ class PensionController extends Controller
     public function store(PensionRequest $request)
     {
         Pension::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.pensions.index');
     }
 
@@ -39,7 +39,7 @@ class PensionController extends Controller
     public function update(PensionRequest $request, $id)
     {
         $pension = Pension::findOrFail($id);
-        $message = $pension->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $pension->name . ' fue actualizado satisfactoriamente.';
         $pension->fill($request->all());
         $pension->save();
         Session::flash('success', $message);
@@ -50,7 +50,7 @@ class PensionController extends Controller
     {
         $pension = Pension::findOrFail($id);
         $pension->delete();
-        Session::flash('success', $pension->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $pension->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.pensions.index');
     }
 }

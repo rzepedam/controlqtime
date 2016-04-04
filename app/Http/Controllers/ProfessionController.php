@@ -26,7 +26,7 @@ class ProfessionController extends Controller
     public function store(ProfessionRequest $request)
     {
         Profession::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.professions.index');
     }
 
@@ -39,7 +39,7 @@ class ProfessionController extends Controller
     public function update(ProfessionRequest $request, $id)
     {
         $profession = Profession::findOrFail($id);
-        $message = $profession->name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $profession->name . ' fue actualizado satisfactoriamente.';
         $profession->fill($request->all());
         $profession->save();
         Session::flash('success', $message);
@@ -50,7 +50,7 @@ class ProfessionController extends Controller
     {
         $profession = Profession::findOrFail($id);
         $profession->delete();
-        Session::flash('success', $profession->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $profession->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.professions.index');
     }
 }

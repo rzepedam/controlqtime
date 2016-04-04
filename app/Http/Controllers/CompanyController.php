@@ -93,7 +93,7 @@ class CompanyController extends Controller
             $subsidiary->save();
         }
 
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         $response = array(
             'status' => 'success',
             'url' => '/maintainers/companies'
@@ -202,7 +202,7 @@ class CompanyController extends Controller
             $subsidiary->save();
         }
 
-        $message = $company->firm_name . ' fue actualizado satisfactoriamente';
+        $message = 'El registro ' . $company->firm_name . ' fue actualizado satisfactoriamente.';
         Session::flash('success', $message);
         $response = array(
             'status' => 'success',
@@ -234,7 +234,7 @@ class CompanyController extends Controller
     {
         $company = Company::findOrFail($id);
         $company->delete();
-        Session::flash('success', $company->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $company->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.companies.index');
     }
 

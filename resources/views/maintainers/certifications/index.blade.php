@@ -1,8 +1,14 @@
 @extends('layout.index')
 
+@section('css')
+
+    {{ Html::style('assets/css/toastr.css') }}
+
+@stop
+
 @section('title_header') Listado de Certificaciones
     <br>
-    <a href="{{ route('maintainers.certifications.create') }}" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Crear Nueva Certificación</a>
+    <a href="{{ route('maintainers.certifications.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Certificación</a>
 @stop
 
 @section('breadcumb')
@@ -32,5 +38,29 @@
     @endif
 
     {{ $certifications->links() }}
+
+@stop
+
+@section('scripts')
+
+    {{ Html::script('assets/js/toastr.js') }}
+    {{ Html::script('assets/js/components/toastr.js') }}
+
+    <script>
+
+        $(document).ready(function(){
+
+
+            /**************************************************
+             ************** Initialize components **************
+             **************************************************/
+
+            $('.mitooltip').tooltip();
+
+
+
+        });
+
+    </script>
 
 @stop

@@ -25,7 +25,8 @@ class RatingController extends Controller
     public function store(RatingRequest $request)
     {
         Rating::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente');
+
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.ratings.index');
     }
 
@@ -38,7 +39,7 @@ class RatingController extends Controller
     public function update(RatingRequest $request, $id)
     {
         $rating = Rating::findOrFail($id);
-        $message = $rating->name . ' fue actualizado satisfactoriamente';
+        $message =  'El registro ' . $rating->name . ' ha sido actualizado satisfactoriamente.';
         $rating->fill($request->all());
         $rating->save();
         Session::flash('success', $message);
@@ -49,7 +50,7 @@ class RatingController extends Controller
     {
         $rating = Rating::findOrFail($id);
         $rating->delete();
-        Session::flash('success', $rating->name . ' fue eliminado de nuestros registros');
+        Session::flash('success', 'El registro ' . $rating->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.ratings.index');
     }
 }
