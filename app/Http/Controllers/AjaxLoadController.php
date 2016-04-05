@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Manpower;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -25,7 +26,7 @@ class AjaxLoadController extends Controller
     }
 
     public function verificaEmail(Request $request) {
-
+		
 		switch($request->get('element'))
 		{
 			case 'Company':
@@ -39,6 +40,9 @@ class AjaxLoadController extends Controller
 			case 'Subsidiary':
 				$first = Subsidiary::where('email', $request->get('email'))->first();
 			break;
+
+			case 'Manpower':
+				$first = Manpower::where('email', $request->get('email'))->first();
 		}
 
 		if ($first)

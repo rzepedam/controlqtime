@@ -1,10 +1,12 @@
 <span id="family_relationship{{ $i }}">
 	<div class="row">
         <div class="col-md-12">
-			<span id="num_family_relationship{{ $i }}" class="text-warning titulo-seccion">
-				Parentesco Familiar #{{ $i + 1 }}
-			</span>
-            <a id="family_relationship" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Parentesco"><i class="fa fa-trash"></i></a>
+            <div class="alert alert-alt alert-warning alert-dismissible" role="alert">
+			    <span id="num_family_relationship{{ $i }}" class="text-warning">
+				    Parentesco Familiar #{{ $i + 1 }}
+			    </span>
+                <a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco"><i class="fa fa-trash"></i></a>
+            </div>
         </div>
     </div>
 	<div class="row">
@@ -21,7 +23,8 @@
             </div>
         </div>
     </div>
-	<hr/>
+	<br />
 </span>
+
 
 

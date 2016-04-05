@@ -6,24 +6,30 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', sans-serif;
 }
 
-.breadcrumb > li > a {
-    text-decoration: none;
+textarea {
+    resize: none;
 }
 
 a {
     text-decoration: none!important;;
 }
 
-.delete-elements {
-    color: red!important;
-    font-size: 1.4em;
-    margin-top: -4px;
-    margin-right: -15px;
-    cursor: pointer;
-}
-
-.delete-elements:hover {
-    color: red;
+/*
+* Fixed buttons in heading Panels
+*/
+@media (max-width: 550px) {
+    .panel-actions {
+        position: relative;
+        top: auto;
+        display: block;
+        right: auto;
+        z-index: 1;
+        padding: 0 30px 20px;
+        -webkit-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        transform: none;
+    }
 }
 
 /**
@@ -43,21 +49,19 @@ a {
     }
 }
 
-textarea {
-    resize: none;
+.breadcrumb > li > a {
+    text-decoration: none;
 }
 
-.titulo-seccion {
-    font-size: 1.2em;
-}
-
-.icono-eliminar-elementos {
-    color: red;
+.delete-elements {
+    color: red!important;
     font-size: 1.4em;
+    margin-top: -4px;
+    margin-right: -15px;
     cursor: pointer;
 }
 
-.icono-eliminar-elementos:hover {
+.delete-elements:hover {
     color: red;
 }
 
@@ -76,19 +80,8 @@ textarea {
 }
 
 .add_study{
-    float: right;
     padding: 7px;
-    vertical-align: middle;
     cursor: pointer;
-    margin-right: -20px;
-}
-
-@media screen and (max-width: 400px) {
-    .add_study {
-        float: none;
-        width: auto;
-        margin-top: 5px;
-    }
 }
 
 .add_study:hover {
@@ -97,19 +90,8 @@ textarea {
 }
 
 .add_certification{
-    float: right;
     padding: 7px;
-    vertical-align: middle;
     cursor: pointer;
-    margin-right: -20px;
-}
-
-@media screen and (max-width: 400px) {
-    .add_certification {
-        float: none;
-        width: auto;
-        margin-top: 5px;
-    }
 }
 
 .add_certification:hover {
@@ -134,19 +116,4 @@ textarea {
     background-color: transparent;
     border: none;
     box-shadow: none;
-}
-
-@media (max-width: 767px) {
-    .panel-actions {
-        position: relative;
-        top: auto;
-        display: block;
-        right: auto;
-        z-index: 1;
-        padding: 0 30px 20px;
-        -webkit-transform: none;
-        -ms-transform: none;
-        -o-transform: none;
-        transform: none;
-    }
 }

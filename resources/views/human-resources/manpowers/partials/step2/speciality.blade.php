@@ -1,10 +1,12 @@
 <span id="speciality{{ $i }}">
     <div class="row">
         <div class="col-md-12">
-            <span id="num_speciality{{ $i }}" class="text-warning titulo-seccion">
-                Especialidad #{{ $i + 1 }}
-            </span>
-            <a id="speciality" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a>
+            <div class="alert alert-alt alert-warning alert-dismissible" role="alert">
+                <span id="num_speciality{{ $i }}" class="text-warning">
+                    Especialidad #{{ $i + 1 }}
+                </span>
+                <a id="speciality" class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -32,5 +34,5 @@
             </div>
         </div>
     </div>
-    <hr/>
+    <br/>
 </span>

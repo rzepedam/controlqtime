@@ -7,24 +7,10 @@
 
 	}
 
-
-	function checkElementEmail(input) {
-
-		if (input.length == 5)
-			return "Company";
-
-		if(input.length == 6)
-			return "Representative";
-
-		if(input.length == 10)
-			return "Subsidiary";
-	}
-
-
 	$.fn.checkEmail = function() {
 
 		var element = $('#' + $(this).attr('id'));
-		var input   = checkElementEmail($(this).attr('id'));
+		var input   = $(this).attr('id');
 
 		if ($(this).val() == '')
 			return false;
@@ -32,7 +18,7 @@
 		if (!validaEmail(element.val())) {
 			element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
 			toastr.warning(
-				'Porfavor, verifique que el email está ingresado correctamente',
+				'Verifique que el email está ingresado correctamente',
 				'Email Incorrecto',
 				{
 					"preventDuplicates": true,
@@ -62,7 +48,7 @@
 					element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
 					element.closest('.form-group').find('i.fa-spinner').remove();
 					toastr.warning(
-						'El Email ingresado se encuentra registrado. Porfavor, intente nuevamente.',
+						'El Email ya se encuentra registrado en nuestra Base de Datos',
 						'Email Registrado',
 						{
 							"preventDuplicates": true,

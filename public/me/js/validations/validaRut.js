@@ -15,7 +15,7 @@ $(document).on('blur', '.check_rut', function(input) {
             element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
 
             toastr.warning(
-                'Porfavor, verifique que el rut ha sido ingresado correctamente',
+                'Verifique que el rut ha sido ingresado correctamente',
                 'Rut Incorrecto',
                 {
                     "preventDuplicates": true,

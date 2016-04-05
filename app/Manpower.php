@@ -80,7 +80,7 @@ class Manpower extends Model
     /**
      * @return string
      */
-    public function getFullNameAttribute() {
+    /*public function getFullNameAttribute() {
         return $this->first_name . " " . $this->second_name . " " . $this->male_surname . " " . $this->female_surname;
-    }
+    }*/
 }

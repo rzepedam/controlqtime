@@ -1,10 +1,12 @@
 <span id="license{{ $i }}">
     <div class="row">
         <div class="col-md-12">
-            <span id="num_license{{ $i }}" class="text-success titulo-seccion">
-                Licencia Profesional #{{ $i + 1 }}
-            </span>
-            <a id="license" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a>
+            <div class="alert alert-alt alert-success alert-dismissible" role="alert">
+                <span id="num_license{{ $i }}" class="text-success">
+                    Licencia Profesional #{{ $i + 1 }}
+                </span>
+                <a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -34,5 +36,5 @@
             </div>
         </div>
     </div>
-    <hr/>
+    <br/>
 </span>

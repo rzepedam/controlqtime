@@ -86,12 +86,13 @@ class ManpowerController extends Controller
         Session::put('female_surname', $request->get('female_surname'));
         Session::put('first_name', $request->get('first_name'));
         Session::put('second_name', $request->get('second_name'));
-        Session::put('full_name', Session::put('first_name', $request->get('first_name')) + $request->get('first_name') + $request->get('male_surname') + $request->get('female_surname'));
         Session::put('rut', $request->get('rut'));
         Session::put('birthday', $request->get('birthday'));
         Session::put('nationality_id', $request->get('nationality_id'));
         Session::put('gender_id', $request->get('gender_id'));
         Session::put('address', $request->get('address'));
+        Session::put('region_id', $request->get('region_id'));
+        Session::put('province_id', $request->get('province_id'));
         Session::put('commune_id', $request->get('commune_id'));
         Session::put('email', $request->get('email'));
         Session::put('phone1', $request->get('phone1'));
@@ -115,6 +116,7 @@ class ManpowerController extends Controller
      */
     public function step2(Request $request)
     {
+        Session::put('step2', $request->all());
         Session::put('degree_id', $request->get('degree_id'));
         Session::put('name_study', $request->get('name_study'));
         Session::put('institution_study_id', $request->get('institution_study_id'));
@@ -138,6 +140,7 @@ class ManpowerController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $manpower = Manpower::create(Session::get('step1'));
 
     }

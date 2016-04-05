@@ -1,10 +1,12 @@
 <span id="certification{{ $i }}">
     <div class="row">
         <div class="col-md-12">
-            <span id="num_certification{{ $i }}" class="text-danger titulo-seccion">
-                Certificación #{{ $i + 1}}
-            </span>
-            <a id="certification" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a>
+            <div class="alert alert-alt alert-danger alert-dismissible" role="alert">
+                <span id="num_certification{{ $i }}" class="text-danger">
+                    Certificación #{{ $i + 1}}
+                </span>
+                <a id="certification" class="delete-elements pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -32,5 +34,5 @@
             </div>
         </div>
     </div>
-    <hr/>
+    <br/>
 </span>

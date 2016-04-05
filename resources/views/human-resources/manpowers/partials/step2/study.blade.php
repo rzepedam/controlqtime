@@ -1,10 +1,12 @@
 <span id="study{{ $i }}">
     <div class="row">
         <div class="col-md-12">
-            <span id="num_study{{ $i }}" class="text-info titulo-seccion">
-                Estudio Académico #{{ $i + 1 }}
-            </span>
-            <a id="study" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Estudio"><i class="fa fa-trash"></i></a>
+            <div class="alert alert-alt alert-info alert-dismissible" role="alert">
+                <span id="num_study{{ $i }}" class="text-info titulo-seccion">
+                    Estudio Académico #{{ $i + 1 }}
+                </span>
+                <a id="study" class="delete-elements pull-right mitooltip" title="Eliminar Estudio"><i class="fa fa-trash"></i></a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -38,5 +40,5 @@
             </div>
         </div>
     </div>
-    <hr/>
+    <br/>
 </span>

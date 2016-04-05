@@ -20,9 +20,11 @@
 
 <!-- second row -->
 <div class="row">
-    <div class="col-md-3 form-group">
-        {{ Form::label('rut', 'Rut') }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
-        {{ Form::text('rut', Session::get('rut'), ['class' => 'form-control', 'required']) }}
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('rut', 'Rut') }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
+            {{ Form::text('rut', Session::get('rut'), ['class' => 'form-control check_rut', 'required']) }}
+        </div>
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('birthday', 'Fecha de Nacimiento') }}
@@ -72,7 +74,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-envelope"></i>
             </div>
-            {{ Form::email('email', Session::get('email'), ['class' => 'form-control', 'required']) }}
+            {{ Form::text('email', Session::get('email'), ['id' => 'Manpower', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)', 'required']) }}
         </div>
     </div>
     <div class="col-md-3 form-group">
