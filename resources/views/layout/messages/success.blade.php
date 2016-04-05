@@ -4,24 +4,12 @@
         $(document).ready(function() {
 
             toastr.success(
-                    '{!! Session::get('success') !!}',
-                    '',
-                    {
-                        "closeButton": true,
-                        "debug": false,
-                        "newestOnTop": true,
-                        "progressBar": true,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "showDuration": "400",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    }
+                '{!! Session::get('success') !!}',
+                '',
+                {
+                    "closeButton": true,
+                    "progressBar": true,
+                }
             );
 
         });

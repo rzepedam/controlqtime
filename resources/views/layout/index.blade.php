@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>ControlQTime</title>
     <link rel="shortcut icon" href="{{ asset('me/img/favicon.ico') }}">
     <!-- Stylesheets -->
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/asScrollable.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/waves.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/v1.min.css') }}">
+    {{ Html::style('assets/css/toastr.css') }}
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/font-awesome.min.css') }}">
@@ -97,10 +99,12 @@
     <script src="{{ asset('assets/js/menu.js') }}"></script>
     <script src="{{ asset('assets/js/menubar.js') }}"></script>
     <script src="{{ asset('assets/js/sidebar.js') }}"></script>
+    <script src="{{ asset('assets/js/v1.min.js') }}"></script>
+    {{ Html::script('assets/js/toastr.js') }}
     <script src="{{ asset('assets/js/components/asscrollable.js') }}"></script>
     <script src="{{ asset('assets/js/components/animsition.js') }}"></script>
     <script src="{{ asset('assets/js/components/tabs.js') }}"></script>
-    <script src="{{ asset('assets/js/v1.min.js') }}"></script>
+    {{ Html::script('assets/js/components/toastr.js') }}
 
     @yield('scripts')
 

@@ -61,7 +61,7 @@
 
                                 {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
 
-                                        @include('human-resources.manpowers.partials.step1.personal_data')
+                                    @include('human-resources.manpowers.partials.step1.personal_data')
 
                             </div>
                         </div>
@@ -82,10 +82,10 @@
                         </div>
                         <div class="panel panel-bordered">
                             <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-child text-warning"></i> Parentescos Familiares</h3>
                                 <div class="panel-actions">
                                     <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementFamilyRelationship(this)"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
                                 </div>
-                                <h3 class="panel-title"><i class="fa fa-child text-warning"></i> Parentescos Familiares</h3>
                             </div>
                             <div class="panel-body">
                                 <div id="content_family_relationships">
@@ -269,8 +269,9 @@
 
 @section('scripts')
 
-    {{ Html::script('me/js/verificaUltimosNumeros.js') }}
     {{ Html::script('assets/js/config.js') }}
+    {{ Html::script('me/js/verificaUltimosNumeros.js') }}
+    {{ Html::script('me/js/changeMethods/changeRegionProvince.js') }}
     {{ Html::script('assets/js/inputmask.js') }}
     {{ Html::script('assets/js/inputmask.date.extensions.js') }}
     {{ Html::script('assets/js/jquery.inputmask.js') }}

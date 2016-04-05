@@ -45,15 +45,28 @@
 
 <!-- third row -->
 <div class="row">
-    <div class="col-md-5 form-group">
+    <div class="col-md-6 form-group">
         {{ Form::label('address', 'Dirección') }}
         {{ Form::text('address', Session::get('address'), ['class' => 'form-control', 'required']) }}
     </div>
     <div class="col-md-3 form-group">
+        {{ Form::label('region_id', 'Región') }}
+        {{ Form::select('region_id', $regions, Session::get('region_id'), ['class' => 'form-control', 'required']) }}
+    </div>
+    <div class="col-md-3 form-group">
+        {{ Form::label('province_id', 'Provincia') }}
+        {{ Form::select('province_id', $provinces, Session::get('province_id'), ['class' => 'form-control', 'required']) }}
+    </div>
+</div>
+
+
+<!-- Four row -->
+<div class="row">
+    <div class="col-md-3 form-group">
         {{ Form::label('commune_id', 'Comuna') }}
         {{ Form::select('commune_id', $communes, Session::get('commune_id'), ['class' => 'form-control', 'required']) }}
     </div>
-    <div class="col-md-4 form-group">
+    <div class="col-md-6 form-group">
         {{ Form::label('email', 'Email') }}
         <div class="input-group">
             <div class="input-group-addon">
@@ -62,10 +75,6 @@
             {{ Form::email('email', Session::get('email'), ['class' => 'form-control', 'required']) }}
         </div>
     </div>
-</div>
-
-<!-- four row -->
-<div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('phone1', 'Teléfono 1') }}
         <div class="input-group">
@@ -75,6 +84,11 @@
             {{ Form::text('phone1', Session::get('phone1'), ['class' => 'form-control', 'required']) }}
         </div>
     </div>
+</div>
+
+
+<!-- Five row -->
+<div class="row">
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('phone2', 'Teléfono 2') }}
@@ -94,14 +108,14 @@
         {{ Form::label('mutuality_id', 'Mutualidad') }}
         {{ Form::select('mutuality_id', $mutualities, Session::get('mutuality_id'), ['class' => 'form-control', 'required']) }}
     </div>
-</div>
-
-<!-- five row -->
-<div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('pension_id', 'AFP') }}
         {{ Form::select('pension_id', $pensions, Session::get('pension_id'), ['class' => 'form-control', 'required']) }}
     </div>
+</div>
+
+<!-- five row -->
+<div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('company_id', 'Empresa') }}
         {{ Form::select('company_id', $companies, Session::get('company_id'), ['class' => 'form-control', 'required']) }}

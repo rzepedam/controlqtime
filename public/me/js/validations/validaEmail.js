@@ -31,8 +31,14 @@
 
 		if (!validaEmail(element.val())) {
 			element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
-			element.closest('.form-group').find('i.fa-check').remove();
-			element.closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+			toastr.warning(
+				'Porfavor, verifique que el email está ingresado correctamente',
+				'Email Incorrecto',
+				{
+					"preventDuplicates": true,
+					"progressBar": true,
+				}
+			);
 		}else {
 
 			$.ajax ({
@@ -43,8 +49,6 @@
 
 				beforeSend: function() {
 					element.closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
-					element.closest('.form-group').find('i.fa-times').remove();
-					element.closest('.form-group').find('i.fa-check').remove();
 					element.closest('.form-group').append('<i class="fa fa-spinner fa-pulse fa-lg form-control-feedback"></i>');
 				},
 
@@ -52,15 +56,19 @@
 				{
 					element.closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
 					element.closest('.form-group').find('i.fa-spinner').remove();
-					element.closest('.form-group').find('i.fa-times').remove();
-					element.closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
 				},
 
 				error: function(data){
 					element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
 					element.closest('.form-group').find('i.fa-spinner').remove();
-					element.closest('.form-group').find('i.fa-check').remove();
-					element.closest('.form-group').append('<i class="fa fa-times fa-lg form-control-feedback"></i>');
+					toastr.warning(
+						'El Email ingresado se encuentra registrado. Porfavor, intente nuevamente.',
+						'Email Registrado',
+						{
+							"preventDuplicates": true,
+							"progressBar": true,
+						}
+					);
 				}
 			});
 		}

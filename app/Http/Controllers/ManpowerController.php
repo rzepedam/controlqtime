@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Province;
+use App\Region;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -46,6 +48,8 @@ class ManpowerController extends Controller
     {
         $countries = Country::lists('name', 'id');
         $genders = Gender::lists('name', 'id');
+        $regions = Region::lists('name', 'id');
+        $provinces = Province::lists('name', 'id');
         $communes = Commune::lists('name', 'id');
         $forecasts = Forecast::lists('name', 'id');
         $mutualities = Mutuality::lists('name', 'id');
@@ -63,7 +67,11 @@ class ManpowerController extends Controller
         $exams = Exam::lists('name', 'id');
         $degrees = Degree::lists('name', 'id');
 
-        return view('human-resources.manpowers.create', compact('genders', 'ratings', 'communes', 'countries', 'forecasts', 'companies', 'disabilities', 'diseases', 'relationships', 'certifications', 'institutions', 'professional_licenses', 'specialities', 'manpowers', 'mutualities', 'pensions', 'exams', 'degrees'));
+        return view('human-resources.manpowers.create', compact(
+            'countries', 'genders', 'regions', 'provinces', 'communes', 'forecasts', 'mutualities',
+            'pensions', 'companies', 'ratings', 'disabilities', 'diseases', 'relationships', 'certifications',
+            'institutions', 'professional_licenses', 'specialities', 'manpowers', 'exams', 'degrees')
+        );
     }
 
 

@@ -1,6 +1,7 @@
 
 
     $('#region_id').change(function(){
+        
         $.post('/loadProvinces',
             { id: $('#region_id').val() },
             function(data) {

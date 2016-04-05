@@ -88,9 +88,9 @@ Route::group(['middleware' => ['web']], function () {
      * Ajax Functions
      */
 
-    Route::post('loadProvinces/', 'AjaxLoadController@loadProvinces');
+    Route::post('loadProvinces', 'AjaxLoadController@loadProvinces');
     Route::post('loadCommunes', 'AjaxLoadController@loadCommunes');
-    Route::post('verificaEmail/', 'AjaxLoadController@verificaEmail');
+    Route::post('verificaEmail', 'AjaxLoadController@verificaEmail');
 
 });
 
