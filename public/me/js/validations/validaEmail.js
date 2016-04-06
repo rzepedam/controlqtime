@@ -17,7 +17,7 @@
 
 		if (!validaEmail(element.val())) {
 			element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
-			toastr.warning(
+			toastr.error(
 				'Verifique que el email está ingresado correctamente',
 				'Email Incorrecto',
 				{
@@ -47,7 +47,7 @@
 				error: function(data){
 					element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
 					element.closest('.form-group').find('i.fa-spinner').remove();
-					toastr.warning(
+					toastr.error(
 						'El Email ya se encuentra registrado en nuestra Base de Datos',
 						'Email Registrado',
 						{

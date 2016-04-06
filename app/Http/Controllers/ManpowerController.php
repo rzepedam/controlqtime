@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Province;
 use App\Region;
+use App\Study;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -140,8 +141,21 @@ class ManpowerController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $manpower = Manpower::create(Session::get('step1'));
+        $manpower->relationships()->attach(Session::get('relationship_id'));
+
+        for ($i = 0; $i < count(Session::get('degree_id')); $i++) {
+
+            $study = new Study([
+                'degree_id'             => Session::get('degree_id')[$i],
+                'name_study'            => Session::get('name_study')[$i],
+                'institution_study_id'  => Session::get('institution_study_id')[$i],
+                'date'                  => Session::get('date')[$i]
+
+            ]);
+
+            $manpower->studies()->save($study);
+        }
 
     }
 

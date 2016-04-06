@@ -30,6 +30,22 @@ class Manpower extends Model
 
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function studies() {
+        return $this->hasMany('App\Study');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function relationships() {
+        return $this->belongsToMany('App\Relationship')->withTimestamps();
+    }
+
+
+    /**
      * @param string $value
      */
     public function setMaleSurnameAttribute($value) {
@@ -76,11 +92,4 @@ class Manpower extends Model
         $this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
-
-    /**
-     * @return string
-     */
-    /*public function getFullNameAttribute() {
-        return $this->first_name . " " . $this->second_name . " " . $this->male_surname . " " . $this->female_surname;
-    }*/
 }

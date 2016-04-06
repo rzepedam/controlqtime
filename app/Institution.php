@@ -12,10 +12,6 @@ class Institution extends Model
 
     public $timestamps = false;
 
-    public function typeInstitution() {
-        return $this->belongsTo('App\TypeInstitution');
-    }
-
     public function scopeName($query, $name)
     {
         $not_space_name = trim($name);
@@ -24,4 +20,13 @@ class Institution extends Model
             $query->where("name", "LIKE", "%$not_space_name%");
         }
     }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function typeInstitution() {
+        return $this->belongsTo('App\TypeInstitution');
+    }
+    
 }

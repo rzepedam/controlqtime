@@ -1049,10 +1049,12 @@
 
                 .on('success.form.fv', function(event) {
 
+                    var full_name = $('#first_name').val() + " " + $('#second_name').val() + " " + $('#male_surname').val() + " " + $('#female_surname').val();
+
                     $.ajax({
                         type: 'POST',
                         url: '{{ route("human-resources.manpowers.step1") }}',
-                        data: $('#step1').serialize(),
+                        data: $('#step1').serialize() + "&full_name=" + full_name,
                         //async: false,
                         dataType: 'json',
                         success: function(result) {

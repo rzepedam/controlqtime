@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManpowerRelationshipsTable extends Migration
+class CreateManpowerRelationshipTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,11 @@ class CreateManpowerRelationshipsTable extends Migration
      */
     public function up()
     {
-        Schema::create('manpower_relationships', function (Blueprint $table) {
+        Schema::create('manpower_relationship', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('manpower_id')->unsigned();
             $table->integer('relationship_id')->unsigned();
+            $table->timestamps();
 
             $table->foreign('manpower_id')
                 ->references('id')
@@ -38,6 +39,6 @@ class CreateManpowerRelationshipsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('manpower_relationships');
+        Schema::drop('manpower_relationship');
     }
 }

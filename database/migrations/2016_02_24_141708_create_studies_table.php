@@ -10,17 +10,24 @@ class CreateStudiesTable extends Migration
     {
         Schema::create('studies', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('manpower_id')->unsigned();
             $table->integer('degree_id')->unsigned();
-            $table->string('name', 100);
-            $table->integer('institution_id')->unsigned();
+            $table->string('name_study', 100);
+            $table->integer('institution_study_id')->unsigned();
             $table->integer('date');
+
+            $table->foreign('manpower_id')
+                ->references('id')
+                ->on('manpowers')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->foreign('degree_id')
             ->references('id')
-            ->on('studies')
+            ->on('degrees')
             ->onUpdate('cascade');
 
-            $table->foreign('institution_id')
+            $table->foreign('institution_study_id')
             ->references('id')
             ->on('institutions')
             ->onUpdate('cascade');
