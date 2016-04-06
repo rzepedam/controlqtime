@@ -3,21 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Speciality extends Model
 {
     protected $fillable = [
-        'name'
+        'type_speciality_id', 'expired_speciality', 'institution_speciality_id'
     ];
 
-    public $timestamps = false;
 
-    public function scopeName($query, $name)
-    {
-        $not_space_name = trim($name);
-
-        if(!empty($not_space_name)) {
-            $query->where("name", "LIKE", "%$not_space_name%");
-        }
+    public function setExpiredSpecialityAttribute($value) {
+        $this->attributes['expired_speciality'] = Carbon::createFromFormat('d-m-Y', $value);
     }
+
 }

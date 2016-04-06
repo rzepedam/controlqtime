@@ -2,22 +2,23 @@
 
 namespace App;
 
+use Carbon\Carbon;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Certification extends Model
 {
     protected $fillable = [
-        'name'
+        'type_certification_id', 'expired_certification', 'institution_certification_id'        
     ];
 
-    public $timestamps = false;
 
-    public function scopeName($query, $name)
-    {
-        $not_space_name = trim($name);
 
-        if(!empty($not_space_name)) {
-            $query->where("name", "LIKE", "%$not_space_name%");
-        }
+    /**
+     * @param $value
+     */
+    public function setExpiredCertificationAttribute($value) {
+        $this->attributes['expired_certification'] = Carbon::createFromFormat('d-m-Y', $value);
     }
+    
 }

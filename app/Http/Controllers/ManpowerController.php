@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\ProfessionalLicense;
 use App\Province;
 use App\Region;
+use App\Speciality;
 use App\Study;
+use App\TypeCertification;
+use App\TypeProfessionalLicense;
+use App\TypeSpeciality;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -21,8 +26,6 @@ use App\Disability;
 use App\Disease;
 use App\Certification;
 use App\Institution;
-use App\ProfessionalLicense;
-use App\Speciality;
 use App\Mutuality;
 use App\Pension;
 use App\Exam;
@@ -60,18 +63,19 @@ class ManpowerController extends Controller
         $disabilities = Disability::lists('name', 'id');
         $diseases = Disease::lists('name', 'id');
         $relationships = Relationship::lists('name', 'id');
-        $certifications = Certification::lists('name', 'id');
+        $type_certifications = TypeCertification::lists('name', 'id');
         $institutions = Institution::lists('name', 'id');
-        $professional_licenses = ProfessionalLicense::lists('name', 'id');
-        $specialities = Speciality::lists('name', 'id');
+        $type_professional_licenses = TypeProfessionalLicense::lists('name', 'id');
+        $type_specialities = TypeSpeciality::lists('name', 'id');
         $manpowers = Manpower::lists('full_name', 'id');
         $exams = Exam::lists('name', 'id');
         $degrees = Degree::lists('name', 'id');
 
         return view('human-resources.manpowers.create', compact(
             'countries', 'genders', 'regions', 'provinces', 'communes', 'forecasts', 'mutualities',
-            'pensions', 'companies', 'ratings', 'disabilities', 'diseases', 'relationships', 'certifications',
-            'institutions', 'professional_licenses', 'specialities', 'manpowers', 'exams', 'degrees')
+            'pensions', 'companies', 'ratings', 'disabilities', 'diseases', 'relationships',
+            'type_certifications', 'institutions', 'type_professional_licenses', 'type_specialities',
+            'manpowers', 'exams', 'degrees')
         );
     }
 
@@ -122,13 +126,13 @@ class ManpowerController extends Controller
         Session::put('name_study', $request->get('name_study'));
         Session::put('institution_study_id', $request->get('institution_study_id'));
         Session::put('date', $request->get('date'));
-        Session::put('certification_id', $request->get('certification_id'));
+        Session::put('type_certification_id', $request->get('type_certification_id'));
         Session::put('expired_certification', $request->get('expired_certification'));
         Session::put('institution_certification_id', $request->get('institution_certification_id'));
-        Session::put('speciality_id', $request->get('speciality_id'));
+        Session::put('type_speciality_id', $request->get('type_speciality_id'));
         Session::put('expired_speciality', $request->get('expired_speciality'));
         Session::put('institution_speciality_id', $request->get('institution_speciality_id'));
-        Session::put('professional_license_id', $request->get('professional_license_id'));
+        Session::put('type_professional_license_id', $request->get('type_professional_license_id'));
         Session::put('expired_license', $request->get('expired_license'));
         Session::put('detail_license', $request->get('detail_license'));
 
@@ -141,8 +145,17 @@ class ManpowerController extends Controller
      */
     public function store(Request $request)
     {
+
+        /*
+         * Step 1
+         */
+        
         $manpower = Manpower::create(Session::get('step1'));
         $manpower->relationships()->attach(Session::get('relationship_id'));
+
+        /*
+         * Step 2
+         */
 
         for ($i = 0; $i < count(Session::get('degree_id')); $i++) {
 
@@ -155,6 +168,42 @@ class ManpowerController extends Controller
             ]);
 
             $manpower->studies()->save($study);
+        }
+
+        for($i = 0; $i < count(Session::get('type_certification_id')); $i++) {
+
+            $certification = new Certification([
+                'type_certification_id'         => Session::get('type_certification_id')[$i],
+                'expired_certification'         => Session::get('expired_certification')[$i],
+                'institution_certification_id'  => Session::get('institution_certification_id')[$i],
+            ]);
+            
+            $manpower->certifications()->save($certification);
+
+        }
+
+        for ($i = 0; $i < count(Session::get('type_speciality_id')); $i++) {
+
+            $speciality = new Speciality([
+                'type_speciality_id'            => Session::get('type_speciality_id')[$i],
+                'expired_speciality'            => Session::get('expired_speciality')[$i],
+                'institution_speciality_id'     => Session::get('institution_speciality_id')[$i]
+            ]);
+
+            $manpower->specialities()->save($speciality);
+
+        }
+
+        for ($i = 0; $i < count(Session::get('type_professional_license_id')); $i ++) {
+
+            $professional_license = new ProfessionalLicense([
+                'type_professional_license_id'  => Session::get('type_professional_license_id')[$i],
+                'expired_license'               => Session::get('expired_license')[$i],
+                'detail_license'                => Session::get('detail_license')[$i]
+            ]);
+
+            $manpower->professionalLicenses()->save($professional_license);
+
         }
 
     }

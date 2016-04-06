@@ -3,21 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class ProfessionalLicense extends Model
 {
     protected $fillable = [
-        'name'
+        'type_professional_license_id', 'expired_license', 'detail_license'
     ];
+    
 
-    public $timestamps = false;
-
-    public function scopeName($query, $name)
-    {
-        $not_space_name = trim($name);
-
-        if(!empty($not_space_name)) {
-            $query->where("name", "LIKE", "%$not_space_name%");
-        }
+    /**
+     * @param $value
+     */
+    public function setExpiredLicenseAttribute($value) {
+        $this->attributes['expired_license'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 }

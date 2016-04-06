@@ -38,6 +38,26 @@ class Manpower extends Model
 
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function certifications() {
+        return $this->hasMany('App\Certification');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function specialities() {
+        return $this->hasMany('App\Speciality');
+    }
+
+
+    public function professionalLicenses(){
+        return $this->hasMany('App\ProfessionalLicense');
+    }
+    
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function relationships() {

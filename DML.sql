@@ -129,11 +129,11 @@ INSERT INTO ratings(name) VALUES ('Contador');
 INSERT INTO ratings(name) VALUES ('Secretario');
 
 
-/* certifications | Certificaciones */
-INSERT INTO certifications(name) VALUES ('Certificación Java');
-INSERT INTO certifications(name) VALUES ('Certificación RIGGR');
-INSERT INTO certifications(name) VALUES ('Certificación Conducción a la Defensiva');
-INSERT INTO certifications(name) VALUES ('Certificación Cero Daño');
+/* type_certifications | Tipos de Certificaciones */
+INSERT INTO type_certifications(name) VALUES ('Certificación Java');
+INSERT INTO type_certifications(name) VALUES ('Certificación RIGGR');
+INSERT INTO type_certifications(name) VALUES ('Certificación Conducción a la Defensiva');
+INSERT INTO type_certifications(name) VALUES ('Certificación Cero Daño');
 
 
 /* mutualities | mutualidades */
@@ -181,17 +181,17 @@ INSERT INTO diseases(name, description) VALUES ('Estrés', 'Lorem ipsum dolor si
 INSERT INTO diseases(name, description) VALUES ('El Síndrome de la Fatiga Crónica', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu.');
 INSERT INTO diseases(name, description) VALUES ('Síndorme de Tunel Carpiano', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu.');
 
-/* specialities | Especialidades */
-INSERT INTO specialities(name) VALUES ('Administración');
-INSERT INTO specialities(name) VALUES ('Mecánica automotriz');
-INSERT INTO specialities(name) VALUES ('Muebles y terminaciones de la madera');
-INSERT INTO specialities(name) VALUES ('Vestuario y confección textil');
+/* type_specialities | Tipos de Especialidades */
+INSERT INTO type_specialities(name) VALUES ('Administración');
+INSERT INTO type_specialities(name) VALUES ('Mecánica automotriz');
+INSERT INTO type_specialities(name) VALUES ('Muebles y terminaciones de la madera');
+INSERT INTO type_specialities(name) VALUES ('Vestuario y confección textil');
 
-/* professional_licenses | Licencias Profesionales */
-INSERT INTO professional_licenses(name) VALUES ('Licencia A-1');
-INSERT INTO professional_licenses(name) VALUES ('Licencia A-2');
-INSERT INTO professional_licenses(name) VALUES ('Licencia B');
-INSERT INTO professional_licenses(name) VALUES ('Licencia D');
+/* type_professional_licenses | Tipos de Licencias Profesionales */
+INSERT INTO type_professional_licenses(name) VALUES ('Licencia A-1');
+INSERT INTO type_professional_licenses(name) VALUES ('Licencia A-2');
+INSERT INTO type_professional_licenses(name) VALUES ('Licencia B');
+INSERT INTO type_professional_licenses(name) VALUES ('Licencia D');
 
 
 /* professions | Profesiones */

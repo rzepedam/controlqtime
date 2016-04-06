@@ -12,8 +12,8 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                {{ Form::label('professional_license_id', 'Tipo Licencia') }}
-                {{ Form::select('professional_license_id[]', $professional_licenses, Session::get('professional_license_id')[$i], ['class'=> 'form-control', 'required']) }}
+                {{ Form::label('type_professional_license_id', 'Tipo Licencia') }}
+                {{ Form::select('type_professional_license_id[]', $type_professional_licenses, Session::get('type_professional_license_id')[$i], ['class'=> 'form-control', 'required']) }}
             </div>
         </div>
         <div class="col-md-3">

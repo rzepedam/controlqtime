@@ -3,12 +3,12 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpecialitiesTable extends Migration
+class CreateTypeSpecialitiesTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('specialities', function (Blueprint $table) {
+        Schema::create('type_specialities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
         });
@@ -17,6 +17,6 @@ class CreateSpecialitiesTable extends Migration
 
     public function down()
     {
-        Schema::drop('specialities');
+        Schema::drop('type_specialities');
     }
 }

@@ -3,12 +3,12 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfessionalLicensesTable extends Migration
+class CreateTypeProfessionalLicensesTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('professional_licenses', function (Blueprint $table) {
+        Schema::create('type_professional_licenses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
         }); 
@@ -17,6 +17,6 @@ class CreateProfessionalLicensesTable extends Migration
 
     public function down()
     {
-        Schema::drop('professional_licenses');
+        Schema::drop('type_professional_licenses');
     }
 }

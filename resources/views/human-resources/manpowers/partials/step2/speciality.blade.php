@@ -13,7 +13,7 @@
         <div class="col-md-5">
             <div class="form-group">
                 {{ Form::label('speciality_id', 'Especialidad') }}
-                {{ Form::select('speciality_id[]', $specialities, Session::get('speciality_id')[$i], ['class'=> 'form-control', 'required']) }}
+                {{ Form::select('type_speciality_id[]', $type_specialities, Session::get('type_speciality_id')[$i], ['class'=> 'form-control', 'required']) }}
             </div>
         </div>
         <div class="col-md-3">

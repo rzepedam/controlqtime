@@ -12,8 +12,8 @@
     <div class="row">
         <div class="col-md-5">
             <div class="form-group">
-                {{ Form::label('certification_id', 'Certificación') }}
-                {{ Form::select('certification_id[]', $certifications, Session::get('certification_id')[$i], ['class'=> 'form-control', 'required']) }}
+                {{ Form::label('type_certification_id', 'Certificación') }}
+                {{ Form::select('type_certification_id[]', $type_certifications, Session::get('type_certification_id')[$i], ['class'=> 'form-control', 'required']) }}
             </div>
         </div>
         <div class="col-md-3">

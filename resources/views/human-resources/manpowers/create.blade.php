@@ -151,8 +151,8 @@
                                 <div class="panel-body">
                                     <div id="content_certifications">
 
-                                        @if (Session::get('certification_id') != null)
-                                            @for($i = 0; $i < count(Session::get('certification_id')); $i++)
+                                        @if (Session::get('type_certification_id') != null)
+                                            @for($i = 0; $i < count(Session::get('type_certification_id')); $i++)
 
                                                 @include('human-resources.manpowers.partials.step2.certification')
 
@@ -179,8 +179,8 @@
                                 <div class="panel-body">
                                     <div id="content_specialities">
 
-                                        @if (Session::get('speciality_id') != null)
-                                            @for($i = 0; $i < count(Session::get('speciality_id')); $i++)
+                                        @if (Session::get('type_speciality_id') != null)
+                                            @for($i = 0; $i < count(Session::get('type_speciality_id')); $i++)
 
                                                 @include('human-resources.manpowers.partials.step2.speciality')
 
@@ -207,8 +207,8 @@
                                 <div class="panel-body">
                                     <div id="content_licenses">
 
-                                        @if (Session::get('professional_license_id') != null)
-                                            @for($i = 0; $i < count(Session::get('professional_license_id')); $i++)
+                                        @if (Session::get('type_professional_license_id') != null)
+                                            @for($i = 0; $i < count(Session::get('type_professional_license_id')); $i++)
 
                                                 @include('human-resources.manpowers.partials.step2.professional_license')
 
@@ -357,9 +357,9 @@
 
             var count_family_relationships = {{ count(Session::get('relationship_id')) ? count(Session::get('relationship_id')) : 0  }};
             var count_studies = {{ count(Session::get('degree_id')) ? count(Session::get('degree_id')) : 0  }};
-            var count_certifications = {{ count(Session::get('certification_id')) ? count(Session::get('certification_id')) : 0  }};
-            var count_specialities = {{ count(Session::get('speciality_id')) ? count(Session::get('speciality_id')) : 0  }};
-            var count_licenses = {{ count(Session::get('professional_license_id')) ? count(Session::get('professional_license_id')) : 0  }};
+            var count_certifications = {{ count(Session::get('type_certification_id')) ? count(Session::get('type_certification_id')) : 0  }};
+            var count_specialities = {{ count(Session::get('type_speciality_id')) ? count(Session::get('type_speciality_id')) : 0  }};
+            var count_licenses = {{ count(Session::get('type_professional_license_id')) ? count(Session::get('type_professional_license_id')) : 0  }};
             var count_disabilities = {{ Session::get('count_disabilities') ? Session::get('count_disabilities') : 0  }};
             var count_diseases = {{ Session::get('count_diseases') ? Session::get('count_diseases') : 0  }};
             var count_exams = 0;
@@ -692,7 +692,7 @@
 
             $.fn.addElementCertification = function() {
 
-                $certification = '<span id="certification"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-danger alert-dismissible" role="alert"><span id="num_certification" class="text-danger">Certificación #' + (count_certifications + 1) + '</span><a id="certification" class="delete-elements pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('certification_id', 'Certificación')}}{{Form::select('certification_id[]', $certifications, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired_certification', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_certification[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_certification_id', 'Institución')}}{{Form::select('institution_certification_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br /></span>';
+                $certification = '<span id="certification"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-danger alert-dismissible" role="alert"><span id="num_certification" class="text-danger">Certificación #' + (count_certifications + 1) + '</span><a id="certification" class="delete-elements pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-5"><div class="form-group">{{Form::label('type_certification_id', 'Certificación')}}{{Form::select('type_certification_id[]', $type_certifications, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('expired_certification', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_certification[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_certification_id', 'Institución')}}{{Form::select('institution_certification_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br /></span>';
 
                 if (count_certifications == 0)
                     $('#content_certifications').html($certification);
@@ -716,7 +716,7 @@
 
             $.fn.addElementSpeciality = function() {
 
-                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-warning alert-dismissible" role="alert"><span id="num_speciality" class="text-warning">Especialidad #' + (count_specialities + 1) + '</span><a id="speciality" class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('speciality_id', 'Especialidad')}}{{Form::select('speciality_id[]', $specialities, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired_speciality', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i></div>{{Form::text('expired_speciality[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_speciality_id', 'Institución')}}{{Form::select('institution_speciality_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br /></span>';
+                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-warning alert-dismissible" role="alert"><span id="num_speciality" class="text-warning">Especialidad #' + (count_specialities + 1) + '</span><a id="speciality" class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('type_speciality_id', 'Especialidad')}}{{Form::select('type_speciality_id[]', $type_specialities, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired_speciality', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i></div>{{Form::text('expired_speciality[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_speciality_id', 'Institución')}}{{Form::select('institution_speciality_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br /></span>';
 
                 if (count_specialities == 0)
                     $('#content_specialities').html($speciality);
@@ -740,7 +740,7 @@
 
             $.fn.addElementProfessionalLicense = function() {
 
-                $license = '<span id="license"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-success alert-dismissible" role="alert"><span id="num_license" class="text-success">Licencia Profesional #' + (count_licenses + 1) + '</span><a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-4"><div class="form-group">{{Form::label('professional_license_id', 'Tipo Licencia')}}{{Form::select('professional_license_id[]', $professional_licenses, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('expired_license', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"><i class="fa fa-calendar"></i> </div>{{Form::text('expired_license[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license[]', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><br /></span>';
+                $license = '<span id="license"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-success alert-dismissible" role="alert"><span id="num_license" class="text-success">Licencia Profesional #' + (count_licenses + 1) + '</span><a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-4"><div class="form-group">{{Form::label('type_professional_license_id', 'Tipo Licencia')}}{{Form::select('type_professional_license_id[]', $type_professional_licenses, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('expired_license', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"><i class="fa fa-calendar"></i> </div>{{Form::text('expired_license[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license[]', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><br /></span>';
 
                 if (count_licenses == 0)
                     $('#content_licenses').html($license);
