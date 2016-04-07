@@ -3,21 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Exam extends Model
 {
     protected $fillable = [
-        'name'
+        'type_exam_id', 'expired_exam', 'detail_exam'
     ];
-
-    public $timestamps = false;
-
-    public function scopeName($query, $name)
-    {
-        $not_space_name = trim($name);
-
-        if(!empty(trim($not_space_name))) {
-            $query->where("name", "LIKE", "%$not_space_name%");
-        }
+    
+    
+    public function setExpiredExamAttribute($value) {
+        $this->attributes['expired_exam'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 }

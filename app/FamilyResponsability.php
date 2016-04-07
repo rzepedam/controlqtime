@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Disease extends Model
+class FamilyResponsability extends Model
 {
     protected $fillable = [
-        'type_disease_id', 'treatment_disease', 'detail_disease'
+        'name_responsability', 'rut', 'relationship_id'
     ];
 }

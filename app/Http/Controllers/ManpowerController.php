@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Disability;
+use App\Disease;
+use App\Exam;
+use App\FamilyResponsability;
 use App\ProfessionalLicense;
 use App\Province;
 use App\Region;
@@ -22,13 +26,13 @@ use App\Rating;
 use App\Commune;
 use App\Country;
 use App\Forecast;
-use App\Disability;
-use App\Disease;
+use App\TypeDisability;
+use App\TypeDisease;
 use App\Certification;
 use App\Institution;
 use App\Mutuality;
 use App\Pension;
-use App\Exam;
+use App\TypeExam;
 use App\Degree;
 use App\Http\Requests\ManpowerRequest;
 
@@ -60,22 +64,22 @@ class ManpowerController extends Controller
         $pensions = Pension::lists('name', 'id');
         $companies = Company::where('status', true)->lists('firm_name', 'id');
         $ratings = Rating::lists('name', 'id');
-        $disabilities = Disability::lists('name', 'id');
-        $diseases = Disease::lists('name', 'id');
+        $type_disabilities = TypeDisability::lists('name', 'id');
+        $type_diseases = TypeDisease::lists('name', 'id');
         $relationships = Relationship::lists('name', 'id');
         $type_certifications = TypeCertification::lists('name', 'id');
         $institutions = Institution::lists('name', 'id');
         $type_professional_licenses = TypeProfessionalLicense::lists('name', 'id');
         $type_specialities = TypeSpeciality::lists('name', 'id');
         $manpowers = Manpower::lists('full_name', 'id');
-        $exams = Exam::lists('name', 'id');
+        $type_exams = TypeExam::lists('name', 'id');
         $degrees = Degree::lists('name', 'id');
 
         return view('human-resources.manpowers.create', compact(
             'countries', 'genders', 'regions', 'provinces', 'communes', 'forecasts', 'mutualities',
-            'pensions', 'companies', 'ratings', 'disabilities', 'diseases', 'relationships',
-            'type_certifications', 'institutions', 'type_professional_licenses', 'type_specialities',
-            'manpowers', 'exams', 'degrees')
+            'pensions', 'companies', 'ratings', 'relationships', 'manpowers', 'degrees', 'institutions',
+            'type_certifications', 'type_specialities', 'type_professional_licenses',
+            'type_disabilities', 'type_diseases', 'type_exams')
         );
     }
 
@@ -145,7 +149,6 @@ class ManpowerController extends Controller
      */
     public function store(Request $request)
     {
-
         /*
          * Step 1
          */
@@ -206,11 +209,74 @@ class ManpowerController extends Controller
 
         }
 
+        /*
+         * Step 3
+         */
+
+        for ($i = 0; $i < count($request->get('type_disability_id')); $i++) {
+
+            $disability = new Disability([
+                'type_disability_id'        => $request->get('type_disability_id')[$i],
+                'treatment_disability'      => $request->get('treatment_disability' . $i),
+                'detail_disability'         => $request->get('detail_disability')[$i]
+            ]);
+
+            $manpower->disabilities()->save($disability);
+
+        }
+
+        for ($i = 0; $i < count($request->get('type_disease_id')); $i++) {
+
+            $disease = new Disease([
+                'type_disease_id'   => $request->get('type_disease_id')[$i],
+                'treatment_disease' => $request->get('treatment_disease' . $i),
+                'detail_disease'    => $request->get('detail_disease')[$i]
+            ]);
+
+            $manpower->diseases()->save($disease);
+
+        }
+
+        for ($i = 0; $i < count($request->get('type_exam_id')); $i++) {
+
+            $exam = new Exam([
+                'type_exam_id'  => $request->get('type_exam_id')[$i],
+                'expired_exam'  => $request->get('expired_exam')[$i],
+                'detail_exam'   => $request->get('detail_exam')[$i]
+            ]);
+
+            $manpower->exams()->save($exam);
+
+        }
+
+        for ($i = 0; $i < count($request->get('name_responsability')); $i++) {
+
+            $family_responsability = new FamilyResponsability([
+                'name_responsability'   => $request->get('name_responsability')[$i],
+                'rut'                   => $request->get('rut')[$i],
+                'relationship_id'       => $request->get('relationship_id')[$i]
+            ]);
+            
+            $manpower->familyResponsabilities()->save($family_responsability);
+            
+        }
+
+        $response = array(
+            'status' => 'success',
+            'url' => '/human-resources/manpowers'
+        );
+
+        return response()->json([$response], 200);
+        
     }
 
     public function show($id)
     {
-        $manpower = Manpower::findOrFail($id);
+        $manpower = Manpower::with([
+            'company', 'nationality', 'gender', 'relationships', 'studies', 'certifications', 'specialities',
+            'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities'
+        ])->findOrFail($id);
+        
         return view('human-resources.manpowers.show', compact('manpower'));
     }
 }

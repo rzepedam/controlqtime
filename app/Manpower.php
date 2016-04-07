@@ -30,6 +30,70 @@ class Manpower extends Model
 
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function nationality() {
+        return $this->belongsTo('App\Country');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function gender() {
+        return $this->belongsTo('App\Gender');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function commune() {
+        return $this->belongsTo('App\Commune');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function forecast() {
+        return $this->belongsTo('App\Forecast');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function mutuality() {
+        return $this->belongsTo('App\Mutuality');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pension() {
+        return $this->belongsTo('App\Pension');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function rating() {
+        return $this->belongsTo('App\Rating');
+    }
+
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function relationships() {
+        return $this->belongsToMany('App\Relationship')->withTimestamps();
+    }
+
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function studies() {
@@ -53,15 +117,43 @@ class Manpower extends Model
     }
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function professionalLicenses(){
         return $this->hasMany('App\ProfessionalLicense');
     }
-    
+
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function relationships() {
-        return $this->belongsToMany('App\Relationship')->withTimestamps();
+    public function disabilities() {
+        return $this->hasMany('App\Disability');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function diseases() {
+        return $this->hasMany('App\Disease');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function exams() {
+        return $this->hasMany('App\Exam');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function familyResponsabilities() {
+        return $this->hasMany('App\FamilyResponsability');
     }
 
 

@@ -27,7 +27,7 @@ $factory->define(App\Company::class, function (Faker\Generator $faker) {
         'email'         => $faker->email,
         'phone1'        => '22895060',
         'phone2'        => '23108920',
-        'status'        => false
+        'status'        => true
     ];
 
 });

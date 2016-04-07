@@ -10,8 +10,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                {{ Form::label("disability_id", "Discapacidad") }}
-                {{ Form::select("disability_id[]", $disabilities, null, ["class"=> "form-control", "required"]) }}
+                {{ Form::label("type_disability_id", "Discapacidad") }}
+                {{ Form::select("type_disability_id[]", $type_disabilities, null, ["class"=> "form-control", "required"]) }}
             </div>
         </div>
         <div class="col-md-6 text-center">

@@ -360,10 +360,10 @@
             var count_certifications = {{ count(Session::get('type_certification_id')) ? count(Session::get('type_certification_id')) : 0  }};
             var count_specialities = {{ count(Session::get('type_speciality_id')) ? count(Session::get('type_speciality_id')) : 0  }};
             var count_licenses = {{ count(Session::get('type_professional_license_id')) ? count(Session::get('type_professional_license_id')) : 0  }};
-            var count_disabilities = {{ Session::get('count_disabilities') ? Session::get('count_disabilities') : 0  }};
-            var count_diseases = {{ Session::get('count_diseases') ? Session::get('count_diseases') : 0  }};
+            var count_disabilities = 0;
+            var count_diseases = 0;
             var count_exams = 0;
-            var count_family_responsabilities = {{ Session::get('count_family_responsabilities') ? Session::get('count_family_responsabilities') : 0  }};
+            var count_family_responsabilities = 0;
 
 
             /******************************************************************
@@ -782,7 +782,7 @@
 
             $.fn.addElementDisability = function() {
 
-                $disability = '<span id="disability"> <div class="row"> <div class="col-md-12"><div class="alert alert-alt alert-warning alert-dismissible" role="alert"><span id="num_disability" class="text-warning"> Discapacidad #' + (count_disabilities + 1) + '</span> <a id="disability" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label("disability_id", "Discapacidad")}}{{Form::select("disability_id[]", $disabilities, null, ["class"=> "form-control", "required"])}}</div></div><div class="col-md-6 text-center"> <div class="form-group">{{Form::label("treatment_disability", "Está en tratamiento?")}}<ul class="list-unstyled list-inline"> <li> <div class="radio-custom radio-primary">{{Form::radio("treatment_disability", "si", true)}}{{Form::label("treatment_disability", "Si")}}</div></li><li> <div class="radio-custom radio-primary">{{Form::radio("treatment_disability", "no", false)}}{{Form::label("treatment_disability", "No")}}</div></li></ul> </div></div></div><div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label("detail_disability[]", "Detalle")}}{{Form::textarea("detail_disability[]", null, ["class"=> "form-control", "rows"=> "3"])}}</div></div></div><br/></span>';
+                $disability = '<span id="disability"> <div class="row"> <div class="col-md-12"><div class="alert alert-alt alert-warning alert-dismissible" role="alert"><span id="num_disability" class="text-warning"> Discapacidad #' + (count_disabilities + 1) + '</span> <a id="disability" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label("type_disability_id", "Discapacidad")}}{{Form::select("type_disability_id[]", $type_disabilities, null, ["class"=> "form-control", "required"])}}</div></div><div class="col-md-6 text-center"> <div class="form-group">{{Form::label("treatment_disability", "Está en tratamiento?")}}<ul class="list-unstyled list-inline"> <li> <div class="radio-custom radio-primary">{{Form::radio("treatment_disability", 1, false)}}{{Form::label("treatment_disability", "Si")}}</div></li><li> <div class="radio-custom radio-primary">{{Form::radio("treatment_disability", 0, true)}}{{Form::label("treatment_disability", "No")}}</div></li></ul> </div></div></div><div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label("detail_disability[]", "Detalle")}}{{Form::textarea("detail_disability[]", null, ["class"=> "form-control", "rows"=> "3"])}}</div></div></div><br/></span>';
 
                 if (count_disabilities == 0)
                     $('#content_disabilities').html($disability);
@@ -817,13 +817,18 @@
 
             $.fn.addElementDisease = function() {
 
-                $disease = '<span id="disease"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"><span id="num_disease" class="text-success"> Enfermedad #' + (count_diseases + 1) + ' </span> <a id="disease" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label("disease_id", "Nombre")}}{{Form::select("disease_id[]", $diseases, null, ["class"=> "form-control", "required"])}}</div></div><div class="col-md-6 text-center"> <div class="form-group">{{Form::label("treatment_disease", "Está en tratamiento?")}}<ul class="list-unstyled list-inline"> <li> <div class="radio-custom radio-primary">{{Form::radio("treatment_disease", "si", true)}}{{Form::label("treatment_disease", "Si")}}</div></li><li> <div class="radio-custom radio-primary">{{Form::radio("treatment_disease", "no", false)}}{{Form::label("treatment_disease", "No")}}</div></li></ul> </div></div></div><br/> <div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label("detail_disease", "Detalle")}}{{Form::textarea("detail_disease[]", null, ["class"=> "form-control", "rows"=> "3"])}}</div></div></div><br /></span>';
+                $disease = '<span id="disease"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"><span id="num_disease" class="text-success"> Enfermedad #' + (count_diseases + 1) + ' </span> <a id="disease" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label("type_disease_id", "Nombre")}}{{Form::select("type_disease_id[]", $type_diseases, null, ["class"=> "form-control", "required"])}}</div></div><div class="col-md-6 text-center"> <div class="form-group">{{Form::label("treatment_disease", "Está en tratamiento?")}}<ul class="list-unstyled list-inline"> <li> <div class="radio-custom radio-primary">{{Form::radio("treatment_disease", 1, false)}}{{Form::label("treatment_disease", "Si")}}</div></li><li> <div class="radio-custom radio-primary">{{Form::radio("treatment_disease", 0, true)}}{{Form::label("treatment_disease", "No")}}</div></li></ul> </div></div></div> <div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label("detail_disease", "Detalle")}}{{Form::textarea("detail_disease[]", null, ["class"=> "form-control", "rows"=> "3"])}}</div></div></div><br /></span>';
 
                 if (count_diseases == 0)
                     $('#content_diseases').html($disease);
                 else
                     $('#content_diseases').append($disease);
 
+                /*
+                 * Enumeramos radio, ya que al haber más de una enfermedad,
+                 *
+                 * no es posible capturar el valor de cada uno en backend
+                 */
 
                 $('#content_diseases span#disease').attr('id', 'disease' + count_diseases);
                 $('span#num_disease').attr('id', 'num_disease' + count_diseases);
@@ -846,7 +851,7 @@
 
             $.fn.addElementExam = function() {
 
-                $exam = '<span id="exam"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"><span id="num_exam" class="text-info"> Examen Preocupacional #' + (count_exams + 1) + ' </span> <a id="exam" class="delete-elements pull-right mitooltip" title="Eliminar Examen"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-5"> <div class="form-group">{{Form::label('exam_id', 'Examen')}}{{Form::select('exam_id[]', $exams, null, ['class'=> 'form-control', "required"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('expired_exam', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_exam[]', null, ['class'=> 'form-control data_mask', "required"])}}</div></div></div></div><br/></span>';
+                $exam = '<span id="exam"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"><span id="num_exam" class="text-info"> Examen Preocupacional #' + (count_exams + 1) + ' </span> <a id="exam" class="delete-elements pull-right mitooltip" title="Eliminar Examen"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-5"> <div class="form-group">{{Form::label('type_exam_id', 'Examen')}}{{Form::select('type_exam_id[]', $type_exams, null, ['class'=> 'form-control', "required"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('expired_exam', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_exam[]', null, ['class'=> 'form-control data_mask', "required"])}}</div></div></div></div><div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label("detail_exam", "Detalle")}}{{Form::textarea("detail_exam[]", null, ["class"=> "form-control", "rows"=> "3"])}}</div></div></div><br/></span>';
 
                 if (count_exams == 0)
                     $('#content_exams').html($exam);
@@ -1163,8 +1168,9 @@
                         data: $('#step3').serialize(),
                         //async: false,
                         dataType: 'json',
-                        success: function(result) {
-
+                        success: function(data) {
+                            console.log(data);
+                            window.location.href = data[0].url;
                         },
 
                         beforeSend: function() {

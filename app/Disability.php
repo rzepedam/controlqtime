@@ -7,17 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Disability extends Model
 {
     protected $fillable = [
-        'name', 'description'
+        'type_disability_id', 'treatment_disability', 'detail_disability'
     ];
-
-    public $timestamps = false;
-
-    public function scopeName($query, $name)
-    {
-        $not_space_name = trim($name);
-
-        if(!empty($not_space_name)) {
-            $query->where("name", "LIKE", "%$not_space_name%");
-        }
-    }
 }
