@@ -150,7 +150,7 @@
                             </li>
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.relationships.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-child" aria-hidden="true"></i> Parentescos Fam.</span>
+                                    <span class="site-menu-title"><i class="site-menu-icon md-male-female font-size-18" aria-hidden="true"></i> Parentescos Fam.</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">

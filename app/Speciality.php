@@ -12,6 +12,29 @@ class Speciality extends Model
     ];
 
 
+    protected $dates = [
+        'expired_speciality'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function typeSpeciality() {
+        return $this->belongsTo('App\TypeSpeciality');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function institution() {
+        return $this->belongsTo('App\Institution', 'institution_speciality_id');
+    }
+    
+
+    /**
+     * @param $value
+     */
     public function setExpiredSpecialityAttribute($value) {
         $this->attributes['expired_speciality'] = Carbon::createFromFormat('d-m-Y', $value);
     }

@@ -88,15 +88,15 @@ class Manpower extends Model
         return $this->belongsTo('App\Rating');
     }
 
-    
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function relationships() {
-        return $this->belongsToMany('App\Relationship')->withTimestamps();
+    public function familyRelationships() {
+        return $this->hasMany('App\FamilyRelationship');
     }
-
-
+    
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -207,5 +207,4 @@ class Manpower extends Model
     public function setBirthdayAttribute($value) {
         $this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
     }
-
 }

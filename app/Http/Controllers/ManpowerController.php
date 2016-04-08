@@ -6,6 +6,7 @@ use App\Company;
 use App\Disability;
 use App\Disease;
 use App\Exam;
+use App\FamilyRelationship;
 use App\FamilyResponsability;
 use App\ProfessionalLicense;
 use App\Province;
@@ -156,7 +157,17 @@ class ManpowerController extends Controller
          */
         
         $manpower = Manpower::create(Session::get('step1'));
-        $manpower->relationships()->attach(Session::get('relationship_id'));
+
+        for ($i = 0; $i < count(Session::get('relationship_id')); $i++) {
+
+            $family_relationship = new FamilyRelationship([
+                'relationship_id'   => Session::get('relationship_id')[$i],
+                'manpower_id'       => Session::get('manpower_id')[$i]
+            ]);
+
+            $manpower->familyRelationships()->save($family_relationship);
+
+        }
 
         /*
          * Step 2
@@ -275,7 +286,7 @@ class ManpowerController extends Controller
     public function show($id)
     {
         $manpower = Manpower::with([
-            'company', 'nationality', 'gender', 'relationships', 'studies', 'certifications', 'specialities',
+            'company', 'nationality', 'gender', 'familyRelationships', 'studies', 'certifications', 'specialities',
             'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities'
         ])->findOrFail($id);
         

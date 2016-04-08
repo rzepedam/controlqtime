@@ -11,6 +11,8 @@
 |
 */
 
+use Carbon\Carbon;
+
 $factory->define(App\Company::class, function (Faker\Generator $faker) {
 
     return [

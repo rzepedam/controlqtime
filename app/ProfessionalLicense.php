@@ -11,6 +11,13 @@ class ProfessionalLicense extends Model
         'type_professional_license_id', 'expired_license', 'detail_license'
     ];
     
+    protected $dates = [
+        'expired_license'
+    ];
+    
+    public function typeProfessionalLicense() {
+        return $this->belongsTo('App\TypeProfessionalLicense');
+    }
 
     /**
      * @param $value

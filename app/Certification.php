@@ -12,6 +12,24 @@ class Certification extends Model
         'type_certification_id', 'expired_certification', 'institution_certification_id'        
     ];
 
+    protected $dates = [
+        'expired_certification'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function typeCertification() {
+        return $this->belongsTo('App\TypeCertification');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function institution() {
+        return $this->belongsTo('App\Institution', 'institution_certification_id');
+    }
 
 
     /**

@@ -81,7 +81,7 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-child text-warning"></i> Parentescos Familiares</h3>
+                                    <h3 class="panel-title"><i class="icon md-male-female text-warning font-size-18"></i> Parentescos Familiares</h3>
                                     <div class="panel-actions">
                                         <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementFamilyRelationship(this)"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
                                     </div>
@@ -116,7 +116,7 @@
                         {{ Form::open(["route" => "human-resources.manpowers.step2", "method" => "POST", "id" => "step2"]) }}
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon md-library text-info" style="font-size: 16px;"></i> Estudios Académicos</h3>
+                                    <h3 class="panel-title"><i class="icon md-library text-info font-size-18"></i> Estudios Académicos</h3>
                                     <div class="panel-actions">
                                         <span class="label label-outline label-info add_study waves-effect waves-block" onclick="$(this).addElementStudy(this)"><i class="fa fa-plus"></i> Agregar Estudio Académico</span>
                                     </div>
@@ -143,7 +143,7 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon md-badge-check text-danger" style="font-size: 16px;"></i> Certificaciones</h3>
+                                    <h3 class="panel-title"><i class="icon md-badge-check text-danger font-size-18"></i> Certificaciones</h3>
                                     <div class="panel-actions">
                                         <span class="label label-outline label-danger add_certification waves-effect waves-block" onclick="$(this).addElementCertification(this)"><i class="fa fa-plus"></i> Agregar Certificación</span>
                                     </div>

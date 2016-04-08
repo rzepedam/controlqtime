@@ -11,8 +11,16 @@ class Exam extends Model
         'type_exam_id', 'expired_exam', 'detail_exam'
     ];
     
+    protected $dates = [
+        'expired_exam'
+    ];
+    
+    public function typeExam() {
+        return $this->belongsTo('App\TypeExam');
+    }
     
     public function setExpiredExamAttribute($value) {
         $this->attributes['expired_exam'] = Carbon::createFromFormat('d-m-Y', $value);
     }
+    
 }

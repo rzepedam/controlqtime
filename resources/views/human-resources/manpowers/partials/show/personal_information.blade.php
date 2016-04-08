@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel">
-            <div class="ribbon ribbon-bookmark ribbon-reverse ribbon-primary">
+            <div class="ribbon ribbon-bookmark ribbon-reverse ribbon-info">
                 <span class="ribbon-inner"><i class="fa fa-gift"></i> {{ "Miembro hace " . \Carbon\Carbon::now()->diffInYears($manpower->created_at) . " años" }}</span>
             </div>
-            <div class="ribbon">
+            <div class="ribbon ribbon-bookmark ribbon-info">
                 <span class="ribbon-inner">COD REF : 234568765434567</span>
             </div>
             <div class="panel-body">
@@ -98,23 +98,29 @@
                         <div class="col-md-offset-1 col-md-10">
                             <?php $i = 1; ?>
                             <table class="table table-striped table-bordered">
-                                <tr class="text-center warning">
-                                    <td class="col-md-12" colspan="3"><i class="fa fa-child"></i> Parentescos Familiares</td>
-                                </tr>
-                                <tr class="active">
-                                    <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
-                                    <th class="col-md-3 text-center">Relación</th>
-                                    <th class="col-md-8 text-center">Trabajador</th>
-                                </tr>
+                                <tbody>
 
-                                @foreach($manpower->relationships as $item)
-
-                                    <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $item->name }}</td>
+                                    <tr class="text-center warning">
+                                        <td class="col-md-12" colspan="3"><i class="md-male-female font-size-18"></i> Parentescos Familiares</td>
                                     </tr>
-                                    <?php $i++; ?>
-                                @endforeach
+                                    <tr class="active">
+                                        <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
+                                        <th class="col-md-3 text-center">Relación</th>
+                                        <th class="col-md-8 text-center">Trabajador</th>
+                                    </tr>
+
+                                    @foreach($manpower->familyRelationships as $family_relationship)
+
+                                        <tr>
+                                            <td class="text-center">{{ $i }}</td>
+                                            <td class="text-center">{{ $family_relationship->relationship->name }}</td>
+                                            <td class="text-center">{{ $family_relationship->manpower->full_name }}</td>
+                                        </tr>
+                                        <?php $i++; ?>
+                                    @endforeach
+
+
+                                </tbody>
                             </table>
 
                         </div>
