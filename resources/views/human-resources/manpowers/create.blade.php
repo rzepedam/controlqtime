@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="panel-body">
 
-                                    @include('human-resources.manpowers.partials.step1.personal_data')
+                                    @include('human-resources.manpowers.partials.create.step1.personal_data')
 
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                         @if (Session::get('relationship_id') != null)
                                             @for($i = 0; $i < count(Session::get('relationship_id')); $i++)
 
-                                                @include('human-resources.manpowers.partials.step1.family_relationship')
+                                                @include('human-resources.manpowers.partials.create.step1.family_relationship')
 
                                             @endfor
                                         @else
@@ -127,7 +127,7 @@
                                             @if (Session::get('degree_id') != null)
                                                 @for($i = 0; $i < count(Session::get('degree_id')); $i++)
 
-                                                    @include('human-resources.manpowers.partials.step2.study')
+                                                    @include('human-resources.manpowers.partials.create.step2.study')
 
                                                 @endfor
                                             @else
@@ -154,7 +154,7 @@
                                         @if (Session::get('type_certification_id') != null)
                                             @for($i = 0; $i < count(Session::get('type_certification_id')); $i++)
 
-                                                @include('human-resources.manpowers.partials.step2.certification')
+                                                @include('human-resources.manpowers.partials.create.step2.certification')
 
                                             @endfor
                                         @else
@@ -182,7 +182,7 @@
                                         @if (Session::get('type_speciality_id') != null)
                                             @for($i = 0; $i < count(Session::get('type_speciality_id')); $i++)
 
-                                                @include('human-resources.manpowers.partials.step2.speciality')
+                                                @include('human-resources.manpowers.partials.create.step2.speciality')
 
                                             @endfor
                                         @else
@@ -210,7 +210,7 @@
                                         @if (Session::get('type_professional_license_id') != null)
                                             @for($i = 0; $i < count(Session::get('type_professional_license_id')); $i++)
 
-                                                @include('human-resources.manpowers.partials.step2.professional_license')
+                                                @include('human-resources.manpowers.partials.create.step2.professional_license')
 
                                             @endfor
                                         @else
@@ -319,6 +319,11 @@
                 </div>
                 <!-- End Wizard Content -->
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ route('human-resources.manpowers.index') }}">Volver</a>
         </div>
     </div>
 
@@ -1169,7 +1174,6 @@
                         //async: false,
                         dataType: 'json',
                         success: function(data) {
-                            console.log(data);
                             window.location.href = data[0].url;
                         },
 

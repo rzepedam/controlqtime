@@ -20,4 +20,10 @@ class Relationship extends Model
             $query->where("name", "LIKE", "%$not_space_name%");
         }
     }
+
+
+    public function manpowers() {
+        return $this->belongsToMany('App\Manpower');
+    }
+
 }

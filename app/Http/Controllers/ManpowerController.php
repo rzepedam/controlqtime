@@ -44,7 +44,7 @@ class ManpowerController extends Controller
      */
     public function index(Request $request)
     {
-        $manpowers = Manpower::name($request->get('table_search'))->orderBy('full_name')->paginate(25);
+        $manpowers = Manpower::name($request->get('table_search'))->orderBy('id', 'DESC')->paginate(25);
         return view('human-resources.manpowers.index', compact('manpowers'));
     }
 
@@ -57,8 +57,10 @@ class ManpowerController extends Controller
         $countries = Country::lists('name', 'id');
         $genders = Gender::lists('name', 'id');
         $regions = Region::lists('name', 'id');
-        $provinces = Province::lists('name', 'id');
-        $communes = Commune::lists('name', 'id');
+        $firstRegion = Region::first();
+        $provinces = Region::find($firstRegion->id)->provinces->lists('name', 'id');
+        $firstProvince = Province::first();
+        $communes = Province::find($firstProvince->id)->communes->lists('name', 'id');
         $forecasts = Forecast::lists('name', 'id');
         $mutualities = Mutuality::lists('name', 'id');
         $pensions = Pension::lists('name', 'id');

@@ -4,7 +4,7 @@
 
 @section('breadcumb')
     <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.ratings.index') }}"><i class="fa fa-male"></i> Cargos</a></li>
+    <li><a href="{{ route('maintainers.ratings.index') }}"><i class="md-seat font-size-18"></i> Cargos</a></li>
     <li class="active">Editar</li>
 @stop
 
