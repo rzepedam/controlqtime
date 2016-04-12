@@ -66,48 +66,5 @@ class AjaxLoadController extends Controller
 
 		return response()->json(['success' => true], 200);
     }
-
-
-    public function destroySessionData() {
-        
-        Session::forget('step1');
-        Session::forget('male_surname');
-        Session::forget('female_surname');
-        Session::forget('first_name');
-        Session::forget('second_name');
-        Session::forget('rut');
-        Session::forget('birthday');
-        Session::forget('nationality_id');
-        Session::forget('gender_id');
-        Session::forget('address');
-        Session::forget('region_id');
-        Session::forget('province_id');
-        Session::forget('commune_id');
-        Session::forget('email');
-        Session::forget('phone1');
-        Session::forget('phone2');
-        Session::forget('forecast_id');
-        Session::forget('mutuality_id');
-        Session::forget('pension_id');
-        Session::forget('company_id');
-        Session::forget('rating_id');
-        Session::forget('relationship_id');
-        Session::forget('manpower_id');
-        Session::forget('step2');
-        Session::forget('degree_id');
-        Session::forget('name_study');
-        Session::forget('institution_study_id');
-        Session::forget('date');
-        Session::forget('type_certification_id');
-        Session::forget('expired_certification');
-        Session::forget('institution_certification_id');
-        Session::forget('type_speciality_id');
-        Session::forget('expired_speciality');
-        Session::forget('institution_speciality_id');
-        Session::forget('type_professional_license_id');
-        Session::forget('expired_license');
-        Session::forget('detail_license');
-
-        return response()->json(['success' => true], 200);
-    }
+    
 }

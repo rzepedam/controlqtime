@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FamilyRelationship extends Model
 {
     protected $fillable = [
-        'relationship_id', 'manpower_id'
+        'relationship_id', 'manpower_family_id'
     ];
 
 
@@ -25,4 +25,13 @@ class FamilyRelationship extends Model
     public function manpower() {
         return $this->belongsTo('App\Manpower');
     }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function manpowerFamily() {
+        return $this->belongsTo('App\Manpower', 'manpower_family_id');
+    }
+    
 }

@@ -31,11 +31,11 @@
         <div class="col-md-2">
             <div class="form-group">
                 {{ Form::label('date', 'Fecha Obtención') }}
-                <div class="input-group">
+                <div class="input-group date beforeCurrentDate">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{ Form::text('date[]', Session::get('date')[$i], ['class'=> 'form-control data_mask', 'required']) }}
+                    {{ Form::text('date[]', Session::get('date')[$i], ['class'=> 'form-control', 'required', 'readonly']) }}
                 </div>
             </div>
         </div>

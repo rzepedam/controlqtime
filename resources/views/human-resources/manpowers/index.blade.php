@@ -85,7 +85,7 @@
                         */
 
                         $.ajax({
-                                url: "/destroySessionData",
+                                url: "{{ route('destroyManpowerData') }}",
                                 type: "GET"
 
                             }).done(function() {

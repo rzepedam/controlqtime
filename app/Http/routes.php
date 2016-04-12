@@ -41,6 +41,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'manpowers'], function(){
             Route::post('step1', ['as' => 'human-resources.manpowers.step1', 'uses' => 'ManpowerController@step1']);
             Route::post('step2', ['as' => 'human-resources.manpowers.step2', 'uses' => 'ManpowerController@step2']);
+            Route::get('/session/destroyManpowerData', ['as' => 'destroyManpowerData', 'uses' => 'ManpowerController@destroyManpowerData']);
         });
 
     });
@@ -53,25 +54,24 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'maintainers'], function() {
 
         Route::resource('areas', 'AreaController');
-        Route::resource('certifications', 'CertificationController');
         Route::resource('cities', 'CityController');
         Route::resource('companies', 'CompanyController');
         Route::resource('countries', 'CountryController');
         Route::resource('degrees', 'DegreeController');
-        Route::resource('disabilities', 'DisabilityController');
-        Route::resource('diseases', 'DiseaseController');
-        Route::resource('exams', 'ExamController');
         Route::resource('forecasts', 'ForecastController');
         Route::resource('institutions', 'InstitutionController');
-        Route::resource('relationships', 'RelationshipController');
-        Route::resource('professional_licenses', 'ProfessionalLicenseController');
         Route::resource('mutualities', 'MutualityController');
         Route::resource('pensions', 'PensionController');
         Route::resource('professions', 'ProfessionController');
         Route::resource('ratings', 'RatingController');
-        Route::resource('specialities', 'SpecialityController');
+        Route::resource('relationships', 'RelationshipController');
+        Route::resource('type-certifications', 'TypeCertificationController');
+        Route::resource('type-disabilities', 'TypeDisabilityController');
+        Route::resource('type-diseases', 'TypeDiseaseController');
+        Route::resource('type-exams', 'TypeExamController');
         Route::resource('type-institutions', 'TypeInstitutionController');
-        
+        Route::resource('type-professional-licenses', 'TypeProfessionalLicenseController');
+        Route::resource('type-specialities', 'TypeSpecialityController');
     });
 
 
@@ -91,6 +91,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('loadProvinces', 'AjaxLoadController@loadProvinces');
     Route::post('loadCommunes', 'AjaxLoadController@loadCommunes');
     Route::post('verificaEmail', 'AjaxLoadController@verificaEmail');
-    Route::get('destroySessionData', 'AjaxLoadController@destroySessionData');
+
 });
 

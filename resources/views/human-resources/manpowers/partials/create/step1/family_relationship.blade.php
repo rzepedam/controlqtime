@@ -12,14 +12,14 @@
 	<div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                {{Form::label('relationship_id', 'Parentesco Familiar')}}
-                {{Form::select('relationship_id[]', $relationships, Session::get('relationship_id')[$i], ['class'=> 'form-control', 'required'])}}
+                {{ Form::label('relationship_id', 'Parentesco Familiar') }}
+                {{ Form::select('relationship_id[]', $relationships, Session::get('relationship_id')[$i], ['class'=> 'form-control']) }}
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {{Form::label('manpower_id', 'Nombre')}}
-                {{Form::select('manpower_id[]', $manpowers, Session::get('manpower_id')[$i], ['class'=> 'form-control', 'required'])}}
+                {{ Form::label('manpower_family_id', 'Nombre')}}
+                {{ Form::select('manpower_family_id[]', $manpowers, Session::get('manpower_family_id')[$i], ['class'=> 'form-control']) }}
             </div>
         </div>
     </div>

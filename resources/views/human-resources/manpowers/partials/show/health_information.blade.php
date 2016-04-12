@@ -128,7 +128,7 @@
                                     <tr>
                                         <td class="text-center">{{ $i }}</td>
                                         <td class="text-center">{{ $family_responsability->name_responsability }}</td>
-                                        <td class="text-center">{{ $family_responsability->rut }}</td>
+                                        <td class="text-center">{{ $family_responsability->rut_responsability }}</td>
                                         <td class="text-center">{{ $family_responsability->relationship->name }}</td>
                                     </tr>
                                     <?php $i++; ?>

@@ -2,15 +2,15 @@
 <div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('male_surname', 'Apellido Paterno') }}
-        {{ Form::text('male_surname', Session::get('male_surname'), ['class' => 'form-control', 'required', 'autofocus']) }}
+        {{ Form::text('male_surname', Session::get('male_surname'), ['class' => 'form-control', 'autofocus']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('female_surname', 'Apellido Materno') }}
-        {{ Form::text('female_surname', Session::get('female_surname'), ['class' => 'form-control', 'required']) }}
+        {{ Form::text('female_surname', Session::get('female_surname'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('first_name', 'Primer Nombre') }}
-        {{ Form::text('first_name', Session::get('first_name'), ['class' => 'form-control', 'required']) }}
+        {{ Form::text('first_name', Session::get('first_name'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('second_name', 'Segundo Nombre') }}
@@ -23,25 +23,25 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('rut', 'Rut') }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
-            {{ Form::text('rut', Session::get('rut'), ['class' => 'form-control check_rut', 'required']) }}
+            {{ Form::text('rut', Session::get('rut'), ['class' => 'form-control check_rut']) }}
         </div>
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('birthday', 'Fecha de Nacimiento') }}
-        <div class="input-group">
+        <div class="input-group date beforeCurrentDate">
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            {{ Form::text('birthday', Session::get('birthday'), ['class' => 'form-control data_mask', 'required']) }}
+            {{ Form::text('birthday', Session::get('birthday'), ['class' => 'form-control', 'readonly']) }}
         </div>
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('nationality_id', 'Nacionalidad') }}
-        {{ Form::select('nationality_id', $countries, Session::get('nationality_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('nationality_id', $countries, Session::get('nationality_id'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('gender_id', 'Sexo') }}
-        {{ Form::select('gender_id', $genders, Session::get('gender_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('gender_id', $genders, Session::get('gender_id'), ['class' => 'form-control']) }}
     </div>
 </div>
 
@@ -49,15 +49,15 @@
 <div class="row">
     <div class="col-md-6 form-group">
         {{ Form::label('address', 'Dirección') }}
-        {{ Form::text('address', Session::get('address'), ['class' => 'form-control', 'required']) }}
+        {{ Form::text('address', Session::get('address'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('region_id', 'Región') }}
-        {{ Form::select('region_id', $regions, Session::get('region_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('region_id', $regions, Session::get('region_id'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('province_id', 'Provincia') }}
-        {{ Form::select('province_id', $provinces, Session::get('province_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('province_id', $provinces, Session::get('province_id'), ['class' => 'form-control']) }}
     </div>
 </div>
 
@@ -66,7 +66,7 @@
 <div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('commune_id', 'Comuna') }}
-        {{ Form::select('commune_id', $communes, Session::get('commune_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('commune_id', $communes, Session::get('commune_id'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-6 form-group">
         {{ Form::label('email', 'Email') }}
@@ -74,7 +74,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-envelope"></i>
             </div>
-            {{ Form::text('email', Session::get('email'), ['id' => 'Manpower', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)', 'required']) }}
+            {{ Form::text('email', Session::get('email'), ['id' => 'Manpower', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
         </div>
     </div>
     <div class="col-md-3 form-group">
@@ -83,7 +83,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-phone"></i>
             </div>
-            {{ Form::text('phone1', Session::get('phone1'), ['class' => 'form-control', 'required']) }}
+            {{ Form::text('phone1', Session::get('phone1'), ['class' => 'form-control']) }}
         </div>
     </div>
 </div>
@@ -104,15 +104,15 @@
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('forecast_id', 'Previsión') }}
-        {{ Form::select('forecast_id', $forecasts, Session::get('forecast_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('forecast_id', $forecasts, Session::get('forecast_id'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('mutuality_id', 'Mutualidad') }}
-        {{ Form::select('mutuality_id', $mutualities, Session::get('mutuality_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('mutuality_id', $mutualities, Session::get('mutuality_id'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('pension_id', 'AFP') }}
-        {{ Form::select('pension_id', $pensions, Session::get('pension_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('pension_id', $pensions, Session::get('pension_id'), ['class' => 'form-control']) }}
     </div>
 </div>
 
@@ -120,11 +120,11 @@
 <div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('company_id', 'Empresa') }}
-        {{ Form::select('company_id', $companies, Session::get('company_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('company_id', $companies, Session::get('company_id'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('rating_id', 'Cargo') }}
-        {{ Form::select('rating_id', $ratings, Session::get('rating_id'), ['class' => 'form-control', 'required']) }}
+        {{ Form::select('rating_id', $ratings, Session::get('rating_id'), ['class' => 'form-control']) }}
     </div>
 </div>
 

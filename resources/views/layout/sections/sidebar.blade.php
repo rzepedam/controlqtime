@@ -65,12 +65,12 @@
                             </li>
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.ratings.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon md-seat font-size-18" aria-hidden="true"></i> Cargos</span>
+                                    <span class="site-menu-title"><i class="site-menu-icon md-seat font-size-18" aria-hidden="true"></i>Cargos</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.certifications.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon md-badge-check" aria-hidden="true" ></i>Certificaciones</span>
+                                <a class="animsition-link" href="{{ route('maintainers.type-certifications.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon md-badge-check" aria-hidden="true" ></i> Certificaciones</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
@@ -79,7 +79,7 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.disabilities.index') }}">
+                                <a class="animsition-link" href="{{ route('maintainers.type-disabilities.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-wheelchair" aria-hidden="true"></i> Discapacidades</span>
                                 </a>
                             </li>
@@ -94,7 +94,7 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.diseases.index') }}">
+                                <a class="animsition-link" href="{{ route('maintainers.type-diseases.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-bed" aria-hidden="true"></i> Enfermedades</span>
                                 </a>
                             </li>
@@ -104,12 +104,12 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.specialities.index') }}">
+                                <a class="animsition-link" href="{{ route('maintainers.type-specialities.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-wrench" aria-hidden="true"></i> Especialidades</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.exams.index') }}">
+                                <a class="animsition-link" href="{{ route('maintainers.type-exams.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-stethoscope" aria-hidden="true"></i> Ex. Preocupacionales</span>
                                 </a>
                             </li>
@@ -129,7 +129,7 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.professional_licenses.index') }}">
+                                <a class="animsition-link" href="{{ route('maintainers.type-professional-licenses.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-bookmark"></i> Lic. Profesionales</span>
                                 </a>
                             </li>
@@ -150,7 +150,7 @@
                             </li>
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.relationships.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon md-male-female font-size-18" aria-hidden="true"></i> Parentescos Fam.</span>
+                                    <span class="site-menu-title"><i class="site-menu-icon md-male-female font-size-18" aria-hidden="true"></i>Relaciones Fam.</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">

@@ -3,7 +3,7 @@
 @section('title_header') Detalle Empresa : <span class="text-primary">{{ $company->firm_name }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
     <li class="active">Ver</li>
 @stop

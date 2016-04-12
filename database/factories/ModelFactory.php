@@ -17,9 +17,10 @@ $factory->define(App\Company::class, function (Faker\Generator $faker) {
 
     return [
         'rut'           => $faker->numberBetween($min = 10000000, $max = 20000000),
-        'firm_name'     => 'Stop Frenos Ltda.',
-        'gyre'          => 'Comercializadora de respuestos y artículo para vehículos',
-        'address'       => 'Santa Clara',
+        'firm_name'     => $faker->company . " " . $faker->companySuffix,
+        'gyre'          => $faker->sentence,
+        'start_act'     => '08-03-1999',
+        'address'       => $faker->address,
         'commune_id'    => 102,
         'num'           => '1379',
         'lot'           => '10',
@@ -27,8 +28,8 @@ $factory->define(App\Company::class, function (Faker\Generator $faker) {
         'floor'         => '2',
         'muni_license'  => 'KNJBHGFCGVHBCFGV2019-K',
         'email'         => $faker->email,
-        'phone1'        => '22895060',
-        'phone2'        => '23108920',
+        'phone1'        => $faker->phoneNumber,
+        'phone2'        => $faker->phoneNumber,
         'status'        => true
     ];
 
@@ -49,6 +50,7 @@ $factory->define(App\Manpower::class, function (Faker\Generator $faker) {
         'second_name'       => $secondName,
         'full_name'         => "$firstName $secondName $maleSurname $femaleSurname",
         'rut'               => $faker->numberBetween($min = 10000000, $max = 20000000),
+        'birthday'          => '09-10-2000',
         'nationality_id'    => rand(1,9),
         'gender_id'         => rand(1,2),
         'address'           => $faker->address,

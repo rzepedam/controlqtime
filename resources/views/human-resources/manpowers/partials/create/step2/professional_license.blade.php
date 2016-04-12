@@ -19,11 +19,11 @@
         <div class="col-md-3">
             <div class="form-group">
                 {{ Form::label('expired_license', 'Fecha de Vencimiento') }}
-                <div class="input-group">
+                <div class="input-group date afterCurrentDate">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{ Form::text('expired_license[]', Session::get('expired_license')[$i], ['class'=> 'form-control data_mask', 'required']) }}
+                    {{ Form::text('expired_license[]', Session::get('expired_license')[$i], ['class'=> 'form-control', 'required', 'readonly']) }}
                 </div>
             </div>
         </div>

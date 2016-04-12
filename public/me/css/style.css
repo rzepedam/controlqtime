@@ -11,11 +11,15 @@ textarea {
 }
 
 a {
-    text-decoration: none!important;;
+    text-decoration: none!important;
 }
 
 table td {
     vertical-align: middle !important;
+}
+
+img {
+    max-width: 100%;
 }
 
 /*

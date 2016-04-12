@@ -6,14 +6,14 @@
 
 @stop
 
-@section('title_header') Listado de Patentescos Familiares
+@section('title_header') Listado de Relaciones Familiares
     <br>
-    <a href="{{ route('maintainers.relationships.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Parentesco Familiar</a>
+    <a href="{{ route('maintainers.relationships.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Relación Familiar</a>
 @stop
 
 @section('breadcumb')
-    <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li class="active">Parentescos Familiares</li>
+    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li class="active">Relaciones Familiares</li>
 @stop
 
 @section('form_search')
@@ -34,7 +34,7 @@
     @if($relationships->count())
         @include('maintainers.relationships.partials.table')
     @else
-        <h3 class="text-center">No se han encontrado Parentescos Familiares</h3>
+        <h3 class="text-center">No se han encontrado Relaciones Familiares</h3>
     @endif
 
     {{ $relationships->links() }}

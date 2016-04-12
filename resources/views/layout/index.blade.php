@@ -104,7 +104,6 @@
     <script src="{{ asset('assets/js/components/asscrollable.js') }}"></script>
     <script src="{{ asset('assets/js/components/animsition.js') }}"></script>
     <script src="{{ asset('assets/js/components/tabs.js') }}"></script>
-    {{ Html::script('assets/js/components/toastr.js') }}
 
     @yield('scripts')
 

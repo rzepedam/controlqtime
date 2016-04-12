@@ -2617,7 +2617,7 @@
     };
 
     $.fn.fileinput.defaults = {
-        language: 'en',
+        language: 'es',
         showCaption: true,
         showPreview: true,
         showRemove: false,
@@ -2660,7 +2660,7 @@
         browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>&nbsp;',
         browseClass: 'btn btn-primary',
         removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
-        removeClass: 'btn btn-default',
+        removeClass: 'btn btn-danger',
         cancelIcon: '<i class="glyphicon glyphicon-ban-circle"></i>',
         cancelClass: 'btn btn-default',
         uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',

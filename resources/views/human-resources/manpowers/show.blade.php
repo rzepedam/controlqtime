@@ -1,8 +1,8 @@
 @extends('layout.index')
 
 @section('breadcumb')
-    <li><a href="{{ url('human-resources') }}"><i class="fa fa-users"></i> RR.HH</a></li>
-    <li><a href="{{ route('human-resources.manpowers.index') }}"><i class="fa fa-user"></i> Trabajadores</a></li>
+    <li><a href="javascript:void(0)"><i class="fa fa-street-view"></i> RR.HH</a></li>
+    <li><a href="{{ route('human-resources.manpowers.index') }}"><i class="fa fa-users"></i> Trabajadores</a></li>
     <li class="active">Ver</li>
 @stop
 

@@ -3,7 +3,7 @@
 @section('title_header') Crear Nuevo Tipo de Institución @stop
 
 @section('breadcumb')
-    <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-institutions.index') }}"><i class="fa fa-university"></i> Tipos de Institución</a></li>
     <li class="active">Nuevo</li>
 @stop

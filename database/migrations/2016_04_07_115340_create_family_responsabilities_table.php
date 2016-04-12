@@ -16,7 +16,7 @@ class CreateFamilyResponsabilitiesTable extends Migration
             $table->increments('id');
             $table->integer('manpower_id')->unsigned();
             $table->string('name_responsability', 120);
-            $table->string('rut', 15);
+            $table->string('rut_responsability', 15);
             $table->integer('relationship_id')->unsigned();
             $table->timestamps();
 

@@ -6,6 +6,9 @@
     {{ Html::style('assets/css/formValidation.css') }}
     {{ Html::style('assets/css/ribbon.css') }}
     {{ Html::style('assets/css/webui-popover.css') }}
+    {{ Html::style('assets/css/bootstrap-datepicker.css') }}
+    {{ Html::style('assets/css/cropper.css') }}
+    {{ Html::style('assets/css/image-cropping.css') }}
 
 @stop
 
@@ -24,7 +27,7 @@
     <div class="row">
         <div class="col-md-12">
             <!-- Panel Wizard Form -->
-            <div id="form_new_manpower">
+            <div id="form_new_manpower" class="wizard">
                 <!-- Steps -->
                 <div class="steps steps-sm row" data-plugin="matchHeight" data-by-row="true" role="tablist">
                     <div class="step col-md-4 current" data-target="#datos_personales" role="tab">
@@ -53,7 +56,9 @@
                 <!-- Wizard Content -->
                 <div class="wizard-content">
                     <div class="wizard-pane active" id="datos_personales" role="tabpanel">
+
                         {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
+
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="icon fa fa-check-square-o text-primary"></i> Datos Personales</h3>
@@ -70,8 +75,18 @@
                                 </div>
                                 <div class="panel-body">
 
-                                    <br />
-                                    <br />
+                                    <div class="row">
+                                        <div id="perfilImgCropper" class="col-md-9 cropper text-center">
+
+                                            <img src="{{ asset('assets/images/img-test1.jpg') }}" alt="">
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="cropper-preview clearfix" id="simpleCropperPreview">
+                                                <div class="img-preview preview-lg img-rounded img-bordered img-bordered-primary"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <br />
                                     <br />
                                     <br />
@@ -110,7 +125,9 @@
                             <div class="panel content-step">
 
                             </div>
+
                         {{ Form::close() }}
+
                     </div>
                     <div class="wizard-pane" id="competencias_laborales" role="tabpanel">
                         {{ Form::open(["route" => "human-resources.manpowers.step2", "method" => "POST", "id" => "step2"]) }}
@@ -337,18 +354,19 @@
     {{ Html::script('assets/js/jquery.Rut.js') }}
     {{ Html::script('me/js/validations/validaRut.js') }}
     {{ Html::script('me/js/validations/validaEmail.js') }}
-    {{ Html::script('assets/js/inputmask.js') }}
-    {{ Html::script('assets/js/inputmask.date.extensions.js') }}
-    {{ Html::script('assets/js/jquery.inputmask.js') }}
     {{ Html::script('assets/js/formValidation.js') }}
     {{ Html::script('assets/js/form-validation/bootstrap.js') }}
     {{ Html::script('assets/js/formValidation_es.js') }}
     {{ Html::script('assets/js/jquery.matchHeight-min.js') }}
     {{ Html::script('assets/js/jquery-wizard.js') }}
+    {{ Html::script('assets/js/bootstrap-datepicker.js') }}
+    {{ Html::script('assets/js/bootstrap-datepicker.es.min.js') }}
     {{ Html::script('assets/js/jquery.webui-popover.js') }}
+    {{ Html::script('assets/js/cropper.min.js') }}
     {{ Html::script('assets/js/components/jquery-wizard.js') }}
     {{ Html::script('assets/js/components/matchheight.js') }}
     {{ Html::script('assets/js/components/webui-popover.js') }}
+    {{ Html::script('assets/js/components/bootstrap-datepicker.js') }}
 
 
     <script type="text/javascript">
@@ -374,6 +392,7 @@
             /******************************************************************
              ********************* Initialize components ***********************
              ******************************************************************/
+
 
             var defaults = $.components.getDefaults("wizard");
 
@@ -416,21 +435,61 @@
                 return true;
             });
 
-            initializeComponents();
+            $('.mitooltip').tooltip();
 
+            $('.beforeCurrentDate').datepicker({
+                format: 'dd-mm-yyyy',
+                todayHighlight: true,
+                language: 'es',
+                autoclose: true,
+                endDate: new Date(),
+                todayBtn: true,
+            });
 
-            function initializeComponents() {
+            $('.afterCurrentDate').datepicker({
+                format: 'dd-mm-yyyy',
+                todayHighlight: true,
+                language: 'es',
+                autoclose: true,
+                startDate: new Date(),
+                todayBtn: true,
+            });
+
+            function initializeComponentsWithDateBeforeCurrentDate() {
 
                 $('.mitooltip').tooltip();
 
-                $('.data_mask').inputmask({
-                    placeholder: 'dd-mm-yyyy',
-                    alias: "dd-mm-yyyy",
-                    "clearIncomplete": true,
-                    yearrange: {minyear: 1900, maxyear: (new Date()).getFullYear()}
+                $('.input-group.date').datepicker({
+                    format: 'dd-mm-yyyy',
+                    todayHighlight: true,
+                    language: 'es',
+                    autoclose: true,
+                    endDate: new Date(),
+                    todayBtn: true,
                 });
-
             }
+
+            function initializeComponentsWithDateAfterCurrentDate() {
+
+                $('.mitooltip').tooltip();
+
+                $('.input-group.date').datepicker({
+                    format: 'dd-mm-yyyy',
+                    todayHighlight: true,
+                    language: 'es',
+                    autoclose: true,
+                    startDate: new Date(),
+                    todayBtn: true,
+                });
+            }
+
+
+            $("#perfilImgCropper img").cropper({
+                preview: "#simpleCropperPreview >.img-preview",
+                //aspectRatio: 16 / 9,
+                //background: false,
+                responsive: true
+            });
 
 
             /******************************************************************
@@ -649,7 +708,7 @@
 
             $.fn.addElementFamilyRelationship = function () {
 
-                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-warning alert-dismissible" role="alert"><span id="num_family_relationship" class="text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('relationship_id', 'Parentesco Familiar')}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label('manpower_id', 'Nombre')}}{{Form::select('manpower_id[]', $manpowers, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br/></span>';
+                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-warning alert-dismissible" role="alert"><span id="num_family_relationship" class="text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('relationship_id', 'Parentesco Familiar')}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label('manpower_family_id', 'Nombre')}}{{Form::select('manpower_family_id[]', $manpowers, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br/></span>';
 
                 if (count_family_relationships == 0)
                     $('#content_family_relationships').html($family_relationship);
@@ -661,7 +720,7 @@
                 $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
 
                 count_family_relationships++;
-                initializeComponents();
+                $('.mitooltip').tooltip();
             }
 
 
@@ -673,7 +732,7 @@
 
             $.fn.addElementStudy = function () {
 
-                $study = '<span id="study"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-info alert-dismissible" role="alert"><span id="num_study" class="text-info">Estudio Académico #' + (count_studies + 1) + '</span><a id="study" class="delete-elements pull-right mitooltip" title="Eliminar Estudio"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-3"><div class="form-group">{{Form::label('degree_id', 'Grado Académico')}}{{Form::select('degree_id[]', $degrees, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-4"><div class="form-group">{{Form::label('name_study', 'Nombre')}}{{Form::text('name_study[]', null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('institution_study_id', 'Institución')}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('date', 'Fecha Obtención')}}<div class="input-group"> <div class="input-group-addon"><i class="fa fa-calendar"></i> </div>{{Form::text('date[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div></div><br /></span>';
+                $study = '<span id="study"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-info alert-dismissible" role="alert"><span id="num_study" class="text-info">Estudio Académico #' + (count_studies + 1) + '</span><a id="study" class="delete-elements pull-right mitooltip" title="Eliminar Estudio"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-3"><div class="form-group">{{Form::label('degree_id', 'Grado Académico')}}{{Form::select('degree_id[]', $degrees, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-4"><div class="form-group">{{Form::label('name_study', 'Nombre')}}{{Form::text('name_study[]', null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('institution_study_id', 'Institución')}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('date', 'Fecha Obtención')}}<div class="input-group date"> <div class="input-group-addon"><i class="fa fa-calendar"></i> </div>{{Form::text('date[]', null, ['class'=> 'form-control', 'required', 'readonly'])}}</div></div></div></div><br /></span>';
 
                 if (count_studies == 0)
                     $('#content_studies').html($study);
@@ -685,7 +744,7 @@
                 $('span#num_study').attr('id', 'num_study' + count_studies);
 
                 count_studies++;
-                initializeComponents();
+                initializeComponentsWithDateBeforeCurrentDate();
             }
 
 
@@ -697,7 +756,7 @@
 
             $.fn.addElementCertification = function() {
 
-                $certification = '<span id="certification"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-danger alert-dismissible" role="alert"><span id="num_certification" class="text-danger">Certificación #' + (count_certifications + 1) + '</span><a id="certification" class="delete-elements pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-5"><div class="form-group">{{Form::label('type_certification_id', 'Certificación')}}{{Form::select('type_certification_id[]', $type_certifications, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('expired_certification', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_certification[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_certification_id', 'Institución')}}{{Form::select('institution_certification_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br /></span>';
+                $certification = '<span id="certification"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-danger alert-dismissible" role="alert"><span id="num_certification" class="text-danger">Certificación #' + (count_certifications + 1) + '</span><a id="certification" class="delete-elements pull-right mitooltip" title="Eliminar Certificación"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-5"><div class="form-group">{{Form::label('type_certification_id', 'Certificación')}}{{Form::select('type_certification_id[]', $type_certifications, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('expired_certification', 'Fecha de Vencimiento')}}<div class="input-group date"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_certification[]', null, ['class'=> 'form-control', 'required', 'readonly'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_certification_id', 'Institución')}}{{Form::select('institution_certification_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br /></span>';
 
                 if (count_certifications == 0)
                     $('#content_certifications').html($certification);
@@ -709,7 +768,7 @@
                 $('span#num_certification').attr('id', 'num_certification' + count_certifications);
 
                 count_certifications++;
-                initializeComponents();
+                initializeComponentsWithDateAfterCurrentDate();
             }
 
 
@@ -721,7 +780,7 @@
 
             $.fn.addElementSpeciality = function() {
 
-                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-warning alert-dismissible" role="alert"><span id="num_speciality" class="text-warning">Especialidad #' + (count_specialities + 1) + '</span><a id="speciality" class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('type_speciality_id', 'Especialidad')}}{{Form::select('type_speciality_id[]', $type_specialities, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-2"><div class="form-group">{{Form::label('expired_speciality', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i></div>{{Form::text('expired_speciality[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_speciality_id', 'Institución')}}{{Form::select('institution_speciality_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br /></span>';
+                $speciality = '<span id="speciality"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-warning alert-dismissible" role="alert"><span id="num_speciality" class="text-warning">Especialidad #' + (count_specialities + 1) + '</span><a id="speciality" class="delete-elements pull-right mitooltip" title="Eliminar Especialidad"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-5"><div class="form-group">{{Form::label('type_speciality_id', 'Especialidad')}}{{Form::select('type_speciality_id[]', $type_specialities, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('expired_speciality', 'Fecha de Vencimiento')}}<div class="input-group date"> <div class="input-group-addon"> <i class="fa fa-calendar"></i></div>{{Form::text('expired_speciality[]', null, ['class'=> 'form-control', 'required', 'readonly'])}}</div></div></div><div class="col-md-4"><div class="form-group">{{Form::label('institution_speciality_id', 'Institución')}}{{Form::select('institution_speciality_id[]', $institutions, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br /></span>';
 
                 if (count_specialities == 0)
                     $('#content_specialities').html($speciality);
@@ -733,7 +792,7 @@
                 $('span#num_speciality').attr('id', 'num_speciality' + count_specialities);
 
                 count_specialities++;
-                initializeComponents();
+                initializeComponentsWithDateAfterCurrentDate();
             }
 
 
@@ -745,7 +804,7 @@
 
             $.fn.addElementProfessionalLicense = function() {
 
-                $license = '<span id="license"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-success alert-dismissible" role="alert"><span id="num_license" class="text-success">Licencia Profesional #' + (count_licenses + 1) + '</span><a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-4"><div class="form-group">{{Form::label('type_professional_license_id', 'Tipo Licencia')}}{{Form::select('type_professional_license_id[]', $type_professional_licenses, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('expired_license', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"><i class="fa fa-calendar"></i> </div>{{Form::text('expired_license[]', null, ['class'=> 'form-control data_mask', 'required'])}}</div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license[]', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><br /></span>';
+                $license = '<span id="license"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-success alert-dismissible" role="alert"><span id="num_license" class="text-success">Licencia Profesional #' + (count_licenses + 1) + '</span><a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-4"><div class="form-group">{{Form::label('type_professional_license_id', 'Tipo Licencia')}}{{Form::select('type_professional_license_id[]', $type_professional_licenses, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"><div class="form-group">{{Form::label('expired_license', 'Fecha de Vencimiento')}}<div class="input-group date"> <div class="input-group-addon"><i class="fa fa-calendar"></i> </div>{{Form::text('expired_license[]', null, ['class'=> 'form-control', 'required', 'readonly'])}}</div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group">{{Form::label('detail_license', 'Detalle')}}{{Form::textarea('detail_license[]', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><br /></span>';
 
                 if (count_licenses == 0)
                     $('#content_licenses').html($license);
@@ -758,24 +817,8 @@
 
                 count_licenses++;
 
-                /*
-                * Validamos manualmente porque la fecha de vencimiento
-                * de la licencia debe ser superior al día actual
-                */
+                initializeComponentsWithDateAfterCurrentDate();
 
-                initializeComponents();
-
-                /*$('.mitooltip').tooltip();
-
-                var d = new Date();
-                var now = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
-
-                $('.data_mask').inputmask({
-                    placeholder: 'dd-mm-yyyy',
-                    alias: "dd-mm-yyyy",
-                    "clearIncomplete": true,
-                    yearrange: {minyear: (new Date()).getFullYear() }
-                });*/
             }
 
 
@@ -809,7 +852,7 @@
                 $('span#num_disability').attr('id', 'num_disability' + count_disabilities);
 
                 count_disabilities++;
-                initializeComponents();
+                $('.mitooltip').tooltip();
 
             };
 
@@ -844,7 +887,7 @@
                 });
 
                 count_diseases++;
-                initializeComponents();
+                $('.mitooltip').tooltip();
             }
 
 
@@ -856,7 +899,7 @@
 
             $.fn.addElementExam = function() {
 
-                $exam = '<span id="exam"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"><span id="num_exam" class="text-info"> Examen Preocupacional #' + (count_exams + 1) + ' </span> <a id="exam" class="delete-elements pull-right mitooltip" title="Eliminar Examen"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-5"> <div class="form-group">{{Form::label('type_exam_id', 'Examen')}}{{Form::select('type_exam_id[]', $type_exams, null, ['class'=> 'form-control', "required"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('expired_exam', 'Fecha de Vencimiento')}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_exam[]', null, ['class'=> 'form-control data_mask', "required"])}}</div></div></div></div><div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label("detail_exam", "Detalle")}}{{Form::textarea("detail_exam[]", null, ["class"=> "form-control", "rows"=> "3"])}}</div></div></div><br/></span>';
+                $exam = '<span id="exam"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"><span id="num_exam" class="text-info"> Examen Preocupacional #' + (count_exams + 1) + ' </span> <a id="exam" class="delete-elements pull-right mitooltip" title="Eliminar Examen"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-5"> <div class="form-group">{{Form::label('type_exam_id', 'Examen')}}{{Form::select('type_exam_id[]', $type_exams, null, ['class'=> 'form-control', "required"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('expired_exam', 'Fecha de Vencimiento')}}<div class="input-group date"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_exam[]', null, ['class'=> 'form-control', 'required', 'readonly'])}}</div></div></div></div><div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label("detail_exam", "Detalle")}}{{Form::textarea("detail_exam[]", null, ["class"=> "form-control", "rows"=> "3"])}}</div></div></div><br/></span>';
 
                 if (count_exams == 0)
                     $('#content_exams').html($exam);
@@ -868,7 +911,7 @@
                 $('span#num_exam').attr('id', 'num_exam' + count_exams);
 
                 count_exams++;
-                initializeComponents();
+                initializeComponentsWithDateAfterCurrentDate();
             }
 
 
@@ -880,7 +923,7 @@
 
             $.fn.addElementFamilyResponsability = function() {
 
-                $family_responsability = '<span id="family_responsability"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-danger alert-dismissible" role="alert"><span id="num_family_responsability" class="text-danger"> Carga Familiar #' + (count_family_responsabilities + 1) + ' </span> <a id="family_responsability" class="delete-elements pull-right mitooltip" title="Eliminar Carga Familiar"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label('name_responsability', 'Nombre Completo')}}{{Form::text('name_responsability[]', null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('rut', 'Rut')}}{{Form::text('rut[]', null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('relationship_id', 'Relación')}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control'])}}</div></div></div><br/></span>';
+                $family_responsability = '<span id="family_responsability"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-danger alert-dismissible" role="alert"><span id="num_family_responsability" class="text-danger"> Carga Familiar #' + (count_family_responsabilities + 1) + ' </span> <a id="family_responsability" class="delete-elements pull-right mitooltip" title="Eliminar Carga Familiar"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label('name_responsability', 'Nombre Completo')}}{{Form::text('name_responsability[]', null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('rut_responsability', 'Rut')}}{{Form::text('rut_responsability[]', null, ['class'=> 'form-control check_rut', 'required'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('relationship_id', 'Relación')}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control'])}}</div></div></div><br/></span>';
 
                 if (count_family_responsabilities == 0)
                     $('#content_family_responsabilities').html($family_responsability);
@@ -892,7 +935,9 @@
                 $('#content_family_responsabilities span#num_family_responsability').attr('id', 'num_family_responsability' + count_family_responsabilities);
 
                 count_family_responsabilities++;
-                initializeComponents();
+
+                $('.mitooltip').tooltip();
+
             }
 
 
@@ -906,185 +951,228 @@
                 .formValidation({
                     framework: 'bootstrap',
                     fields: {
-                        /*male_surname: {
+                        male_surname: {
                             validators: {
                                 notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> es obligatorio.'
+                                    message: 'El campo Apellido Materno es obligatorio.'
                                 },
                                 stringLength: {
                                     max: 30,
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Apellido Paterno</strong> no debe ser mayor que 30 caracteres.'
+                                    message: 'El campo Apellido Materno no debe ser mayor que 30 caracteres.'
                                 },
+                                blank:{}
                             }
                         },
                         female_surname: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> es obligatorio.'
+                                /*notEmpty: {
+                                    message: 'El campo Apellido Materno es obligatorio.'
                                 },
                                 stringLength: {
                                     max: 30,
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Apellido Materno</strong> no debe ser mayor que 30 caracteres.'
-                                },
+                                    message: 'El campo Apellido Materno no debe ser mayor que 30 caracteres.'
+                                },*/
+                                blank:{}
                             }
                         },
                         first_name: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> es obligatorio.'
+                                /*notEmpty: {
+                                    message: 'El campo Primer Nombre es obligatorio.'
                                 },
                                 stringLength: {
                                     max: 30,
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Primer Nombre</strong> no debe ser mayor que 30 caracteres.'
-                                },
+                                    message: 'El campo Primer Nombre no debe ser mayor que 30 caracteres.'
+                                },*/
+                                blank:{}
                             }
                         },
                         second_name: {
                             validators: {
-                                stringLength: {
+                                /*stringLength: {
                                     max: 30,
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Segundo Nombre</strong> no debe ser mayor que 30 caracteres.'
-                                },
+                                    message: 'El campo Segundo Nombre no debe ser mayor que 30 caracteres.'
+                                },*/
+                                blank:{}
                             }
                         },
                         rut: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Rut</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Rut es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         birthday: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Fecha de Nacimiento</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Fecha de Nacimiento es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         country_id: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Nacionalidad</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Nacionalidad es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         gender_id: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Sexo</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Sexo es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         address: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Dirección</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Dirección es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         commune_id: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Comuna</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Comuna es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         email: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Email</strong> es obligatorio.'
+                                /*notEmpty: {
+                                    message: 'El campo Email es obligatorio.'
                                 },
                                 stringLength: {
                                     max: 100,
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Email</strong> no debe ser mayor que 100 caracteres.'
-                                },
+                                    message: 'El campo Email no debe ser mayor que 100 caracteres.'
+                                },*/
+                                blank:{}
                             }
                         },
                         phone1: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> es obligatorio.'
+                                /*notEmpty: {
+                                    message: 'El campo Teléfono 1 es obligatorio.'
                                 },
                                 stringLength: {
                                     max: 20,
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 1</strong> no debe ser mayor que 20 caracteres.'
-                                },
+                                    message: 'El campo Teléfono 1 no debe ser mayor que 20 caracteres.'
+                                },*/
+                                blank:{}
                             }
                         },
                         phone2: {
                             validators: {
-                                stringLength: {
+                                /*stringLength: {
                                     max: 20,
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Teléfono 2</strong> no debe ser mayor que 20 caracteres.'
-                                },
+                                    message: 'El campo Teléfono 2 no debe ser mayor que 20 caracteres.'
+                                },*/
+                                blank:{}
                             }
                         },
                         forecast_id: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Previsión</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Previsión es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         mutuality_id: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Mutualidad</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Mutualidad es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         pension_id: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>AFP</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo AFP es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         company_id: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Empresa</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Empresa es obligatorio.'
+                                },*/
+                                blank:{}
                             }
                         },
                         rating_id: {
                             validators: {
-                                notEmpty: {
-                                    message: '<i class="fa fa-times"></i> El campo <strong>Cargo</strong> es obligatorio.'
-                                },
+                                /*notEmpty: {
+                                    message: 'El campo Cargo es obligatorio.'
+                                },*/
+                                blank:{}
                             }
-                        },*/
+                        },
+                        'relationship_id[]': {
+                            validators: {
+                                blank:{}
+                            }
+                        },
+                        'manpower_family_id[]': {
+                            validators: {
+                                blank:{}
+                            }
+                        }
                     }
                 })
 
                 .on('success.form.fv', function(event) {
 
+                    event.preventDefault();
+
                     var full_name = $('#first_name').val() + " " + $('#second_name').val() + " " + $('#male_surname').val() + " " + $('#female_surname').val();
+
+                    var $form = $(event.target),
+                        fv =$form.data('formValidation');
 
                     $.ajax({
                         type: 'POST',
                         url: '{{ route("human-resources.manpowers.step1") }}',
                         data: $('#step1').serialize() + "&full_name=" + full_name,
-                        //async: false,
+                        async: false,
                         dataType: 'json',
-                        success: function(result) {
-
+                        success: function(response) {
+                            if (response.result === 'error') {
+                                $.each(response.fields, function (index, value) {
+                                    fv
+                                        .updateMessage(index, 'blank', value)
+                                        .updateStatus(index, 'INVALID', 'blank');
+                                    return false;
+                                });
+                            }
                         },
 
                         beforeSend: function() {
 
                         },
 
-                        error: function (data) {
-                            var errors = $.parseJSON(data.responseText);
+                        error: function (response) {
+                            alert('error');
+
+                            /*var errors = $.parseJSON(data.responseText);
                             $.each(errors.errors, function (index, value) {
                                 $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
                                 $('#' + index).focus();
-                            });
+                            });*/
                         }
 
                     });
                 });
+
 
             $("#step2")
                 .formValidation({

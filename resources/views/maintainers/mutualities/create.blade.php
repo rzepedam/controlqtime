@@ -3,7 +3,7 @@
 @section('title_header') Crear Nueva Mutualidad @stop
 
 @section('breadcumb')
-    <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.mutualities.index') }}"><i class="fa fa-ambulance"></i> Mutualidades</a></li>
     <li class="active">Nuevo</li>
 @stop
@@ -22,7 +22,8 @@
         <div class="panel-footer">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('maintainers.mutualities.index') }}">Volver</a><button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                    <a href="{{ route('maintainers.mutualities.index') }}">Volver</a>
+                    <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
                 </div>
             </div>
         </div>

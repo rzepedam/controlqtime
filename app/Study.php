@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Study extends Model
@@ -16,6 +17,7 @@ class Study extends Model
         'date'
     ];
 
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -29,6 +31,14 @@ class Study extends Model
      */
     public function institution() {
         return $this->belongsTo('App\Institution', 'institution_study_id');
+    }
+
+
+    /**
+     * @param $value
+     */
+    public function setDateAttribute($value) {
+        $this->attributes['date'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
 }

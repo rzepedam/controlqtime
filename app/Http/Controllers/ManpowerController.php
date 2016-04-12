@@ -16,6 +16,7 @@ use App\Study;
 use App\TypeCertification;
 use App\TypeProfessionalLicense;
 use App\TypeSpeciality;
+use Validator;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -24,7 +25,6 @@ use App\Relationship;
 use App\Manpower;
 use App\Gender;
 use App\Rating;
-use App\Commune;
 use App\Country;
 use App\Forecast;
 use App\TypeDisability;
@@ -35,7 +35,6 @@ use App\Mutuality;
 use App\Pension;
 use App\TypeExam;
 use App\Degree;
-use App\Http\Requests\ManpowerRequest;
 
 class ManpowerController extends Controller
 {
@@ -88,11 +87,43 @@ class ManpowerController extends Controller
 
 
     /**
-     * @param ManpowerRequest $request
+     * @param Request $request
      * @return mixed
      */
-    public function step1(ManpowerRequest $request)
+    public function step1(Request $request)
     {
+        $rules = [
+            'male_surname'          => 'required|max:30',
+            'female_surname'        => 'required|max:30',
+            'first_name'            => 'required|max:30',
+            'second_name'           => 'max:30',
+            'rut'                   => 'required|max:15',
+            'birthday'              => 'required',
+            'nationality_id'        => 'required|regex:/[0-9 -()+]+$/',
+            'gender_id'             => 'required|regex:/[0-9 -()+]+$/',
+            'address'               => 'required',
+            'commune_id'            => 'required|regex:/[0-9 -()+]+$/',
+            'email'                 => 'required|email|max:100|unique:manpowers',
+            'phone1'                => 'required|max:20',
+            'phone2'                => 'max:20',
+            'forecast_id'           => 'required|regex:/[0-9 -()+]+$/',
+            'mutuality_id'          => 'required|regex:/[0-9 -()+]+$/',
+            'pension_id'            => 'required|regex:/[0-9 -()+]+$/',
+            'company_id'            => 'required|regex:/[0-9 -()+]+$/',
+            'rating_id'             => 'required|regex:/[0-9 -()+]+$/',
+            'relationship_id'       => 'required|regex:/[0-9 -()+]+$/',
+            'manpower_family_id'    => 'required|regex:/[0-9 -()+]+$/'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                "result" => "error",
+                "fields" => $validator->errors()->messages()
+            ]);
+        }
+
         Session::put('step1', $request->all());
         Session::put('male_surname', $request->get('male_surname'));
         Session::put('female_surname', $request->get('female_surname'));
@@ -115,9 +146,11 @@ class ManpowerController extends Controller
         Session::put('company_id', $request->get('company_id'));
         Session::put('rating_id', $request->get('rating_id'));
         Session::put('relationship_id', $request->get('relationship_id'));
-        Session::put('manpower_id', $request->get('manpower_id'));
+        Session::put('manpower_family_id', $request->get('manpower_family_id'));
 
-        return response()->json(['status' => 'success'], 200);
+        return response()->json([
+            'status' => 'OK'
+        ]);
 
     }
 
@@ -155,14 +188,14 @@ class ManpowerController extends Controller
         /*
          * Step 1
          */
-        
+
         $manpower = Manpower::create(Session::get('step1'));
 
         for ($i = 0; $i < count(Session::get('relationship_id')); $i++) {
 
             $family_relationship = new FamilyRelationship([
-                'relationship_id'   => Session::get('relationship_id')[$i],
-                'manpower_id'       => Session::get('manpower_id')[$i]
+                'relationship_id'       => Session::get('relationship_id')[$i],
+                'manpower_family_id'    => Session::get('manpower_family_id')[$i]
             ]);
 
             $manpower->familyRelationships()->save($family_relationship);
@@ -182,7 +215,7 @@ class ManpowerController extends Controller
                 'date'                  => Session::get('date')[$i]
 
             ]);
-
+            
             $manpower->studies()->save($study);
         }
 
@@ -193,7 +226,7 @@ class ManpowerController extends Controller
                 'expired_certification'         => Session::get('expired_certification')[$i],
                 'institution_certification_id'  => Session::get('institution_certification_id')[$i],
             ]);
-            
+
             $manpower->certifications()->save($certification);
 
         }
@@ -266,12 +299,12 @@ class ManpowerController extends Controller
 
             $family_responsability = new FamilyResponsability([
                 'name_responsability'   => $request->get('name_responsability')[$i],
-                'rut'                   => $request->get('rut')[$i],
+                'rut_responsability'    => $request->get('rut_responsability')[$i],
                 'relationship_id'       => $request->get('relationship_id')[$i]
             ]);
-            
+
             $manpower->familyResponsabilities()->save($family_responsability);
-            
+
         }
 
         $response = array(
@@ -279,17 +312,120 @@ class ManpowerController extends Controller
             'url' => '/human-resources/manpowers'
         );
 
+        $this->destroyManpowerData();
         return response()->json([$response], 200);
-        
+
     }
 
-    public function show($id)
+
+    /**
+     * @param $id
+     */
+    public function edit($id)
     {
         $manpower = Manpower::with([
             'company', 'nationality', 'gender', 'familyRelationships', 'studies', 'certifications', 'specialities',
             'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities'
         ])->findOrFail($id);
         
+        $countries = Country::lists('name', 'id');
+        $genders = Gender::lists('name', 'id');
+        $regions = Region::lists('name', 'id');
+        $regionSelected = $manpower->commune->province->region;
+        $provinces = Region::find($regionSelected->id)->provinces->lists('name', 'id');
+        $provinceSelected = $manpower->commune->province;
+        $communes = Province::find($provinceSelected->id)->communes->lists('name', 'id');
+        $forecasts = Forecast::lists('name', 'id');
+        $mutualities = Mutuality::lists('name', 'id');
+        $pensions = Pension::lists('name', 'id');
+        $companies = Company::lists('firm_name', 'id');
+        $ratings = Rating::lists('name', 'id');
+        $relationships = Relationship::lists('name', 'id');
+        $manpowers = Manpower::lists('full_name', 'id');
+        $degrees = Degree::lists('name', 'id');
+        $institutions = Institution::lists('name', 'id');
+        $type_certifications = TypeCertification::lists('name', 'id');
+        $type_specialities = TypeSpeciality::lists('name', 'id');
+        $type_professional_licenses = TypeProfessionalLicense::lists('name', 'id');
+        $type_disabilities = TypeDisability::lists('name', 'id');
+        $type_diseases = TypeDisease::lists('name', 'id');
+        $type_exams = TypeExam::lists('name', 'id');
+
+        return view('human-resources.manpowers.edit', compact(
+            'manpower', 'countries', 'genders', 'regions', 'regionSelected', 'provinces', 'provinceSelected',
+            'communes', 'forecasts', 'mutualities', 'pensions', 'companies', 'ratings', 'relationships', 'manpowers',
+            'degrees', 'institutions', 'type_certifications', 'type_specialities', 'type_professional_licenses',
+            'type_disabilities', 'type_diseases', 'type_exams'
+        ));
+
+    }
+
+    
+    public function update() 
+    {
+        dd($request->all());
+    }
+
+    
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function show($id)
+    {
+        $manpower = Manpower::with([
+            'company', 'nationality', 'gender', 'familyRelationships', 'studies', 'certifications', 'specialities',
+            'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities'
+        ])->findOrFail($id);
+
         return view('human-resources.manpowers.show', compact('manpower'));
+        
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function destroyManpowerData() {
+        
+        Session::forget('step1');
+        Session::forget('male_surname');
+        Session::forget('female_surname');
+        Session::forget('first_name');
+        Session::forget('second_name');
+        Session::forget('rut');
+        Session::forget('birthday');
+        Session::forget('nationality_id');
+        Session::forget('gender_id');
+        Session::forget('address');
+        Session::forget('region_id');
+        Session::forget('province_id');
+        Session::forget('commune_id');
+        Session::forget('email');
+        Session::forget('phone1');
+        Session::forget('phone2');
+        Session::forget('forecast_id');
+        Session::forget('mutuality_id');
+        Session::forget('pension_id');
+        Session::forget('company_id');
+        Session::forget('rating_id');
+        Session::forget('relationship_id');
+        Session::forget('manpower_family_id');
+        Session::forget('step2');
+        Session::forget('degree_id');
+        Session::forget('name_study');
+        Session::forget('institution_study_id');
+        Session::forget('date');
+        Session::forget('type_certification_id');
+        Session::forget('expired_certification');
+        Session::forget('institution_certification_id');
+        Session::forget('type_speciality_id');
+        Session::forget('expired_speciality');
+        Session::forget('institution_speciality_id');
+        Session::forget('type_professional_license_id');
+        Session::forget('expired_license');
+        Session::forget('detail_license');
+
+        return response()->json(['success' => true], 200);
     }
 }

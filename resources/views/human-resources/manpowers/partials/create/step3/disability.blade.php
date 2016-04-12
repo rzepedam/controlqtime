@@ -1,10 +1,12 @@
 <span id="disability">
     <div class="row">
         <div class="col-md-12">
-            <span id="num_disability" class="text-warning titulo-seccion">
-                Discapacidad #{{ $i + 1 }}
-            </span>
-            <a id="disability" class="icono-eliminar-elementos pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a>
+            <div class="alert alert-alt alert-warning alert-dismissible" role="alert">
+                <span id="num_disability" class="text-warning titulo-seccion">
+                    Discapacidad #{{ $i + 1 }}
+                </span>
+                <a id="disability" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a>
+            </div>
         </div>
     </div>
     <div class="row">

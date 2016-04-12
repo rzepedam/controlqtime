@@ -3,7 +3,7 @@
 @section('title_header') Crear Nueva Profesión @stop
 
 @section('breadcumb')
-    <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.professions.index') }}"><i class="fa fa-briefcase"></i> Profesiones</a></li>
     <li class="active">Nuevo</li>
 @stop

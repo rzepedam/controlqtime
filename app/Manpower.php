@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Manpower extends Model
 {
     protected $fillable = [
-        'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday', 'nationality_id', 'gender_id', 'address', 'commune_id', 'email', 'phone1', 'phone2', 'forecast_id', 'mutuality_id', 'pension_id', 'company_id', 'rating_id'
+        'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday', 'nationality_id', 'gender_id', 'address',
+        'commune_id', 'email', 'phone1', 'phone2', 'forecast_id', 'mutuality_id', 'pension_id', 'company_id', 'rating_id'
     ];
 
     protected $dates = [
@@ -207,4 +208,5 @@ class Manpower extends Model
     public function setBirthdayAttribute($value) {
         $this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
     }
+    
 }

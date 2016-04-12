@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    {{ Html::style('assets/css/sweet-alert.css') }}
+
+@stop
+
 @section('title_header') Editar Registro @stop
 
 @section('breadcumb')
@@ -37,5 +43,8 @@
 @stop
 
 @section('scripts')
+
+    {{ Html::script('assets/js/sweet-alert.js') }}
     {{ Html::script('me/js/delete.js') }}
+
 @stop

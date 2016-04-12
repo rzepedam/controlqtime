@@ -4,7 +4,7 @@
 
 @section('breadcumb')
     <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.relationships.index') }}"><i class="fa fa-child"></i> Parentescos Familiares</a></li>
+    <li><a href="{{ route('maintainers.relationships.index') }}"><i class="md-male-female font-size-16"></i> Relaciones Familiares</a></li>
     <li class="active">Editar</li>
 @stop
 

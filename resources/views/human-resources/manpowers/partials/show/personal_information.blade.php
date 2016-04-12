@@ -2,7 +2,18 @@
     <div class="col-md-12">
         <div class="panel">
             <div class="ribbon ribbon-bookmark ribbon-reverse ribbon-info">
-                <span class="ribbon-inner"><i class="fa fa-gift"></i> {{ "Miembro hace " . \Carbon\Carbon::now()->diffInYears($manpower->created_at) . " años" }}</span>
+                <?php $yearInCompany = \Carbon\Carbon::now()->diffInYears($manpower->created_at); ?>
+                <?php $monthsInCompany = \Carbon\Carbon::now()->diffInMonths($manpower->created_at); ?>
+                <?php $daysInCompany = \Carbon\Carbon::now()->diffInDays($manpower->created_at); ?>
+
+                @if ($yearInCompany == 0 && $monthsInCompany == 0)
+                    <span class="ribbon-inner"><i class="fa fa-gift"></i> {{ "Miembro hace " . $daysInCompany . " día(s)" }}</span>
+                @elseif ($yearInCompany == 0 && $monthsInCompany > 0)
+                    <span class="ribbon-inner"><i class="fa fa-gift"></i> {{ "Miembro hace " . $monthsInCompany . " mes(es)" }}</span>
+                @else
+                    <span class="ribbon-inner"><i class="fa fa-gift"></i> {{ "Miembro hace " . $yearInCompany . " año(s)" }}</span>
+                @endif
+
             </div>
             <div class="ribbon ribbon-bookmark ribbon-info">
                 <span class="ribbon-inner">COD REF : 234568765434567</span>
@@ -114,7 +125,7 @@
                                         <tr>
                                             <td class="text-center">{{ $i }}</td>
                                             <td class="text-center">{{ $family_relationship->relationship->name }}</td>
-                                            <td class="text-center">{{ $family_relationship->manpower->full_name }}</td>
+                                            <td class="text-center">{{ $family_relationship->manpowerFamily->full_name }}</td>
                                         </tr>
                                         <?php $i++; ?>
                                     @endforeach

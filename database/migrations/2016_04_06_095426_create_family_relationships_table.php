@@ -16,6 +16,7 @@ class CreateFamilyRelationshipsTable extends Migration
             $table->increments('id');
             $table->integer('manpower_id')->unsigned();
             $table->integer('relationship_id')->unsigned();
+            $table->integer('manpower_family_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('manpower_id')
@@ -27,6 +28,11 @@ class CreateFamilyRelationshipsTable extends Migration
             $table->foreign('relationship_id')
                 ->references('id')
                 ->on('relationships')
+                ->onUpdate('cascade');
+            
+            $table->foreign('manpower_family_id')
+                ->references('id')
+                ->on('manpowers')
                 ->onUpdate('cascade');
             
         });

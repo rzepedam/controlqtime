@@ -26,14 +26,14 @@ class RelationshipRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:30|unique:kins',
+                    'name'  => 'required|max:30|unique:relationships',
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'      => 'required|max:30|unique:kins,name,' . $this->route->getParameter('kins')
+                    'name'      => 'required|max:30|unique:relationships,name,' . $this->route->getParameter('relationships')
                 ];
             }
         }

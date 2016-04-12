@@ -51,8 +51,11 @@ class UploadController extends Controller
                 ], 400);
         }else {
             $imgCompany = new ImageLicenseCompany();
-            if (ImageLicenseCompany::where('orig_name', $file->getClientOriginalName()))
-                return response()->json(['success' => false], 400);
+            if (ImageLicenseCompany::where('orig_name', $file->getClientOriginalName())->first())
+                return response()->json([
+                    'success' => false,
+                    'error'     => 'El archivo ya existe. Por favor, intente nuevamente.',
+                ], 400);
         }
 
         $imgCompany->name       = $filename;
@@ -80,22 +83,22 @@ class UploadController extends Controller
      */
     public function deleteFiles(Request $request) {
 
-        $company    = $request->get('company');
+        $company    = Company::with(['imageRutCompanies', 'imageLicenseCompanies'])->findOrFail($request->get('company'));
         $type       = $request->get('type');
         $id         = $request->get('key');
 
         if ($type == 'rut')
-            $image  = ImageRutCompany::find($id);
+            $image  = ImageRutCompany::findOrFail($id);
         else
-            $image  = ImageLicenseCompany::find($id);
+            $image  = ImageLicenseCompany::findOrFail($id);
 
         if ($image->delete()) {
             $path = public_path() . '/storage/companies/' . $company . '/' . $type . '/' . $image->name;
             File::delete($path);
+            $this->checkActivateCompany($company);
             return response()->json(['success' => true], 200);
         }
 
-        $this->checkActivateCompany($company);
         return response()->json(['success' => false], 400);
     }
 

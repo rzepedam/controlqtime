@@ -9,7 +9,7 @@
 @stop
 
 @section('breadcumb')
-    <li><a href="#"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
     <li class="active">Subir Archivos</li>
 @stop
@@ -102,7 +102,7 @@
                 removeClass: "btn btn-danger",
                 removeLabel: "",
                 removeTitle: "",
-                removeIcon: "<i class='glyphicon glyphicon-trash'></i> ",
+                removeIcon: "<i class='fa fa-trash'></i>",
                 uploadAsync: true,
                 uploadClass: "btn btn-info",
                 uploadExtraData:  {

@@ -16,8 +16,8 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {{ Form::label('rut', 'Rut') }}
-                {{ Form::text('rut[]', null, ['class'=> 'form-control', 'required']) }}
+                {{ Form::label('rut_responsability', 'Rut') }}
+                {{ Form::text('rut_responsability[]', null, ['class'=> 'form-control check_rut', 'required']) }}
             </div>
         </div>
         <div class="col-md-3">
