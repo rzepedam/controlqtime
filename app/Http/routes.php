@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     /*
-     *  Humans-Resources
+     * Humans-Resources
      */
 
     Route::group(['prefix' => 'human-resources'], function(){
@@ -76,7 +76,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     /*
-     * Others
+     * Upload Files
      */
 
     Route::get('attachFiles/{id}', ['as' => 'attachFiles', 'uses' => 'UploadController@getUpload']);
@@ -85,12 +85,18 @@ Route::group(['middleware' => ['web']], function () {
 
 
     /*
-     * Ajax Functions
+     * Ajax Controller
      */
 
     Route::post('loadProvinces', 'AjaxLoadController@loadProvinces');
     Route::post('loadCommunes', 'AjaxLoadController@loadCommunes');
     Route::post('verificaEmail', 'AjaxLoadController@verificaEmail');
+
+    /*
+     * Session Controller
+     */
+
+    Route::post('deleteElementSession', 'SessionController@destroy');
 
 });
 

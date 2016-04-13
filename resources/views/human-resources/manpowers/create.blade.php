@@ -98,14 +98,14 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="icon md-male-female text-warning font-size-18"></i> Parentescos Familiares</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block" onclick="$(this).addElementFamilyRelationship(this)"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
+                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
                                     <div id="content_family_relationships">
 
-                                        @if (Session::get('relationship_id') != null)
-                                            @for($i = 0; $i < count(Session::get('relationship_id')); $i++)
+                                        @if (Session::get('count_family_relationships') > 0)
+                                            @for($i = 0; $i < Session::get('count_family_relationships'); $i++)
 
                                                 @include('human-resources.manpowers.partials.create.step1.family_relationship')
 
@@ -130,7 +130,9 @@
 
                     </div>
                     <div class="wizard-pane" id="competencias_laborales" role="tabpanel">
+
                         {{ Form::open(["route" => "human-resources.manpowers.step2", "method" => "POST", "id" => "step2"]) }}
+
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="icon md-library text-info font-size-18"></i> Estudios Académicos</h3>
@@ -244,11 +246,15 @@
                             <div class="panel content-step">
 
                             </div>
+
                         {{ Form::close() }}
+
                     </div>
                     <div class="wizard-pane" id="info_salud" role="tabpanel">
+
                         {{ Form::open(["route" => "human-resources.manpowers.store", "method" => "POST", "id" => "step3"]) }}
-                            <div class="panel panel-bordered">
+
+                        <div class="panel panel-bordered">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="icon fa fa-wheelchair text-warning"></i> Discapacidades</h3>
                                     <div class="panel-actions">
@@ -331,7 +337,9 @@
                             <div class="panel content-step">
 
                             </div>
+
                         {{ Form::close() }}
+
                     </div>
                 </div>
                 <!-- End Wizard Content -->
@@ -378,7 +386,7 @@
              *************************** Variables ****************************
              ******************************************************************/
 
-            var count_family_relationships = {{ count(Session::get('relationship_id')) ? count(Session::get('relationship_id')) : 0  }};
+            var count_family_relationships = {{ Session::get('count_family_relationships') ? Session::get('count_family_relationships') : 0  }};
             var count_studies = {{ count(Session::get('degree_id')) ? count(Session::get('degree_id')) : 0  }};
             var count_certifications = {{ count(Session::get('type_certification_id')) ? count(Session::get('type_certification_id')) : 0  }};
             var count_specialities = {{ count(Session::get('type_speciality_id')) ? count(Session::get('type_speciality_id')) : 0  }};
@@ -514,6 +522,26 @@
                             $('span#num_family_relationship' + item).text('Parentesco Familiar #' + (i + 1));
                             $('span#num_family_relationship' + item).attr('id', 'num_family_relationship' + i);
                             $('span#family_relationship' + item).attr('id', 'family_relationship' + i);
+
+                            /*
+                             * Relationship
+                             */
+
+                            $('label[for="relationship_id' + item + '"]').attr('for', "relationship_id" + i);
+                            $('select#relationship_id' + item).each(function (j) {
+                                $(this).attr('id', 'relationship_id' + i);
+                                $(this).attr('name', 'relationship_id' + i);
+                            });
+
+                            /*
+                             * Nombre Familiar
+                             */
+
+                            $('label[for="manpower_family_id' + item + '"]').attr('for', 'manpower_family_id' + i);
+                            $('select#manpower_family_id' + item).each(function (j) {
+                                $(this).attr('id', 'manpower_family_id' + i);
+                                $(this).attr('name', 'manpower_family_id' + i);
+                            });
 
                         }
 
@@ -698,30 +726,6 @@
                 }
 
             });
-
-
-
-            /*****************************************************************
-             **************** Add Family Relationship zone ***************
-             *****************************************************************/
-
-
-            $.fn.addElementFamilyRelationship = function () {
-
-                $family_relationship = '<span id="family_relationship"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-warning alert-dismissible" role="alert"><span id="num_family_relationship" class="text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span><a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-6"><div class="form-group">{{Form::label('relationship_id', 'Parentesco Familiar')}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control', 'required'])}}</div></div><div class="col-md-6"><div class="form-group">{{Form::label('manpower_family_id', 'Nombre')}}{{Form::select('manpower_family_id[]', $manpowers, null, ['class'=> 'form-control', 'required'])}}</div></div></div><br/></span>';
-
-                if (count_family_relationships == 0)
-                    $('#content_family_relationships').html($family_relationship);
-                else
-                    $('#content_family_relationships').append($family_relationship);
-
-
-                $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationships);
-                $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
-
-                count_family_relationships++;
-                $('.mitooltip').tooltip();
-            }
 
 
 
@@ -943,23 +947,22 @@
 
 
             /*****************************************************************
-             ************************** Validations **************************
+             ************************** Validation ***************************
              *****************************************************************/
 
 
             $('#step1')
                 .formValidation({
-                    framework: 'bootstrap',
                     fields: {
                         male_surname: {
                             validators: {
-                                notEmpty: {
+                                /*notEmpty: {
                                     message: 'El campo Apellido Materno es obligatorio.'
                                 },
                                 stringLength: {
                                     max: 30,
                                     message: 'El campo Apellido Materno no debe ser mayor que 30 caracteres.'
-                                },
+                                },*/
                                 blank:{}
                             }
                         },
@@ -1005,6 +1008,7 @@
                             }
                         },
                         birthday: {
+
                             validators: {
                                 /*notEmpty: {
                                     message: 'El campo Fecha de Nacimiento es obligatorio.'
@@ -1117,17 +1121,70 @@
                                 blank:{}
                             }
                         },
-                        'relationship_id[]': {
-                            validators: {
-                                blank:{}
-                            }
-                        },
-                        'manpower_family_id[]': {
-                            validators: {
-                                blank:{}
-                            }
-                        }
                     }
+                })
+
+                .on('click', '.add_family_relationship', function() {
+
+                    $family_relationship = '<span id="family_relationship"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-warning alert-dismissible" role="alert"> <span id="num_family_relationship" class="text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span> <a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label('relationship_id', 'Relación', ['class'=> 'control-label'])}}{{Form::select('relationship_id', $relationships, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label('manpower_family_id', 'Nombre Familiar', ['class'=> 'control-label'])}}{{Form::select('manpower_family_id', $manpowers, null, ['class'=> 'form-control'])}}</div></div></div><br/></span>';
+
+                    if (count_family_relationships == 0)
+                        $('#content_family_relationships').html($family_relationship);
+                    else
+                        $('#content_family_relationships').append($family_relationship);
+
+                    /*
+                     * Div Contenedor, Nº elemento
+                     */
+
+                    $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationships);
+                    $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
+
+                    /*
+                     * Relación
+                     */
+
+                    $('label[for="relationship_id"]').attr('for', 'relationship_id' + count_family_relationships);
+                    $('select#relationship_id').each(function (i) {
+                        $(this).attr('id', 'relationship_id' + count_family_relationships);
+                        $(this).attr('name', 'relationship_id' + count_family_relationships);
+                    });
+
+                    /*
+                     * Nombre Familiar
+                     */
+
+                    $('label[for="manpower_family_id"]').attr('for', 'manpower_family_id' + count_family_relationships);
+                    $('select#manpower_family_id').each(function (i) {
+                        $(this).attr('id', 'manpower_family_id' + count_family_relationships);
+                        $(this).attr('name', 'manpower_family_id' + count_family_relationships);
+                    });
+
+                    /*
+                     * Validación
+                     */
+
+                    $('#step1')
+                        .formValidation('addField', 'relationship_id' + count_family_relationships, {
+                            validators: {
+                                /*notEmpty: {
+                                    message: 'El campo Relación es obligatorio.'
+                                }*/
+                                blank: {}
+                            }
+                        })
+                        .formValidation('addField', 'manpower_family_id' + count_family_relationships, {
+                            validators: {
+                                /*notEmpty: {
+                                    message: 'El campo Nombre Familiar es obligatorio.'
+                                }*/
+                                blank: {}
+                            }
+                        });
+
+
+                    count_family_relationships++;
+                    $('.mitooltip').tooltip();
                 })
 
                 .on('success.form.fv', function(event) {
@@ -1142,7 +1199,7 @@
                     $.ajax({
                         type: 'POST',
                         url: '{{ route("human-resources.manpowers.step1") }}',
-                        data: $('#step1').serialize() + "&full_name=" + full_name,
+                        data: $('#step1').serialize() + "&full_name=" + full_name + "&count_family_relationships=" + count_family_relationships,
                         async: false,
                         dataType: 'json',
                         success: function(response) {
@@ -1151,7 +1208,6 @@
                                     fv
                                         .updateMessage(index, 'blank', value)
                                         .updateStatus(index, 'INVALID', 'blank');
-                                    return false;
                                 });
                             }
                         },
@@ -1162,12 +1218,6 @@
 
                         error: function (response) {
                             alert('error');
-
-                            /*var errors = $.parseJSON(data.responseText);
-                            $.each(errors.errors, function (index, value) {
-                                $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
-                                $('#' + index).focus();
-                            });*/
                         }
 
                     });
@@ -1219,7 +1269,7 @@
                         type: 'POST',
                         url: '{{ route("human-resources.manpowers.step2") }}',
                         data: $('#step2').serialize(),
-                        //async: false,
+                        async: false,
                         dataType: 'json',
                         success: function(result) {
 

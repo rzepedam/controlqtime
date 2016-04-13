@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Step1Request;
 use App\Company;
 use App\Disability;
 use App\Disease;
@@ -87,43 +88,11 @@ class ManpowerController extends Controller
 
 
     /**
-     * @param Request $request
+     * @param Step1Request $request
      * @return mixed
      */
-    public function step1(Request $request)
+    public function step1(Step1Request $request)
     {
-        $rules = [
-            'male_surname'          => 'required|max:30',
-            'female_surname'        => 'required|max:30',
-            'first_name'            => 'required|max:30',
-            'second_name'           => 'max:30',
-            'rut'                   => 'required|max:15',
-            'birthday'              => 'required',
-            'nationality_id'        => 'required|regex:/[0-9 -()+]+$/',
-            'gender_id'             => 'required|regex:/[0-9 -()+]+$/',
-            'address'               => 'required',
-            'commune_id'            => 'required|regex:/[0-9 -()+]+$/',
-            'email'                 => 'required|email|max:100|unique:manpowers',
-            'phone1'                => 'required|max:20',
-            'phone2'                => 'max:20',
-            'forecast_id'           => 'required|regex:/[0-9 -()+]+$/',
-            'mutuality_id'          => 'required|regex:/[0-9 -()+]+$/',
-            'pension_id'            => 'required|regex:/[0-9 -()+]+$/',
-            'company_id'            => 'required|regex:/[0-9 -()+]+$/',
-            'rating_id'             => 'required|regex:/[0-9 -()+]+$/',
-            'relationship_id'       => 'required|regex:/[0-9 -()+]+$/',
-            'manpower_family_id'    => 'required|regex:/[0-9 -()+]+$/'
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return response()->json([
-                "result" => "error",
-                "fields" => $validator->errors()->messages()
-            ]);
-        }
-
         Session::put('step1', $request->all());
         Session::put('male_surname', $request->get('male_surname'));
         Session::put('female_surname', $request->get('female_surname'));
@@ -145,8 +114,12 @@ class ManpowerController extends Controller
         Session::put('pension_id', $request->get('pension_id'));
         Session::put('company_id', $request->get('company_id'));
         Session::put('rating_id', $request->get('rating_id'));
-        Session::put('relationship_id', $request->get('relationship_id'));
-        Session::put('manpower_family_id', $request->get('manpower_family_id'));
+        Session::put('count_family_relationships', $request->get('count_family_relationships'));
+
+        for($i = 0; $i < $request->get('count_family_relationships'); $i++) {
+            Session::put('relationship_id' . $i, $request->get('relationship_id' . $i));
+            Session::put('manpower_family_id' . $i, $request->get('manpower_family_id' . $i));
+        }
 
         return response()->json([
             'status' => 'OK'
@@ -428,4 +401,5 @@ class ManpowerController extends Controller
 
         return response()->json(['success' => true], 200);
     }
+    
 }
