@@ -29,7 +29,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 {{ Form::label('date_obtention' . $i, 'Fecha Obtención', ['class' => 'control-label']) }}
-                <div class="input-group date">
+                <div class="input-group date beforeCurrentDate">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>

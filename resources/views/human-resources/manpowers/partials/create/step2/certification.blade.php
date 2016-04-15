@@ -19,7 +19,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 {{ Form::label('expired_certification' . $i, 'Fecha Expiración', ['class' => 'control-label']) }}
-                <div class="input-group date">
+                <div class="input-group date afterCurrentDate">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>

@@ -78,10 +78,12 @@
                                         <td class="col-md-3">Teléfono 1</td>
                                         <td class="text-center"><i class="fa fa-phone"></i> {{ $manpower->phone1 }}</td>
                                     </tr>
+                                    @if ($manpower->phone2)
                                     <tr>
                                         <td class="col-md-3">Teléfono 2</td>
                                         <td class="text-center">{{ $manpower->phone2 }}</td>
                                     </tr>
+                                    @endif
                                     <tr>
                                         <td class="col-md-3">Previsión</td>
                                         <td class="text-center">{{ $manpower->forecast->name }}</td>
