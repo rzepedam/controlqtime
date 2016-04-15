@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-    {{ Html::style('assets/css/toastr.css') }}
-
-@stop
-
 @section('title_header') Listado de Países
     <br>
     <a href="{{ route('maintainers.countries.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo País</a>
@@ -42,9 +36,6 @@
 @stop
 
 @section('scripts')
-
-    {{ Html::script('assets/js/toastr.js') }}
-    {{ Html::script('assets/js/components/toastr.js') }}
 
     <script>
 

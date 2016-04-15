@@ -72,6 +72,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('type-institutions', 'TypeInstitutionController');
         Route::resource('type-professional-licenses', 'TypeProfessionalLicenseController');
         Route::resource('type-specialities', 'TypeSpecialityController');
+        Route::resource('type-vehicles', 'TypeVehicleController');
+        Route::resource('vehicles', 'VehicleController');
     });
 
 

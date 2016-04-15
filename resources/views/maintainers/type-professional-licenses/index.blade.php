@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-    {{ Html::style('assets/css/toastr.css') }}
-
-@stop
-
 @section('title_header') Listado de Licencias Profesionales
     <br>
     <a href="{{ route('maintainers.type-professional-licenses.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Licencia Profesional</a>
@@ -46,9 +40,6 @@
 @stop
 
 @section('scripts')
-
-    {{ Html::script('assets/js/toastr.js') }}
-    {{ Html::script('assets/js/components/toastr.js') }}
 
     <script>
 

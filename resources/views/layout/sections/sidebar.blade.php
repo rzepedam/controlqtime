@@ -183,6 +183,16 @@
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-university" aria-hidden="true"></i> Tipos de Instituciones</span>
                                 </a>
                             </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('maintainers.type-vehicles.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-subway" aria-hidden="true"></i> Tipos de Vehículos</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('maintainers.type-vehicles.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-bus" aria-hidden="true"></i> Vehículos</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
