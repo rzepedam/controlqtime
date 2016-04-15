@@ -107,19 +107,71 @@ img {
     background: #F44336;
 }
 
-.add_license{
+.add_speciality {
     padding: 7px;
     cursor: pointer;
 }
 
-.add_license:hover {
+.add_speciality:hover {
+    color: white;
+    background: #FF9800;
+}
+
+.add_professional_license{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_professional_license:hover {
     color: white;
     background: #4CAF50;
 }
 
-/**
+.add_disabilities{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_disabilities:hover {
+    color: white;
+    background: #FF9800;
+}
+
+.add_diseases{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_diseases:hover {
+    color: white;
+    background: #4CAF50;
+}
+
+.add_exams{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_exams:hover {
+    color: white;
+    background: #00bcd4;
+}
+
+.add_family_responsability{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_family_responsability:hover {
+    color: white;
+    background: #F44336;
+}
+
+
+/*
 * Hide panel buttons step wizard
-**/
+*/
+
 .content-step {
     background-color: transparent;
     border: none;

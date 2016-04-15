@@ -36,7 +36,7 @@
                                             <td class="text-center">{{ $study->degree->name }}</td>
                                             <td class="text-center">{{ $study->name_study }}</td>
                                             <td class="text-center">{{ $study->institution->name }}</td>
-                                            <td class="text-center">{{ $study->date->format('d-m-Y') }}</td>
+                                            <td class="text-center">{{ $study->date_obtention->format('d-m-Y') }}</td>
 
                                         </tr>
                                         <?php $i++; ?>

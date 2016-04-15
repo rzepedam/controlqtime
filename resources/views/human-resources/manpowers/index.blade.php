@@ -2,7 +2,6 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/toastr.css') }}
     {{ Html::style('assets/css/sweet-alert.css') }}
 
 @stop
@@ -39,9 +38,8 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/toastr.js') }}
+
     {{ Html::script('assets/js/sweet-alert.js') }}
-    {{ Html::script('assets/js/components/toastr.js') }}
 
     <script>
 

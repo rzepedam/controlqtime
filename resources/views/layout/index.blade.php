@@ -91,6 +91,7 @@
     <script src="{{ asset('assets/js/jquery.asScrollable.all.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-asHoverScroll.js') }}"></script>
     <script src="{{ asset('assets/js/waves.js') }}"></script>
+    {{ Html::script('assets/js/toastr.js') }}
     <!-- Plugins -->
 
     <!-- Scripts -->

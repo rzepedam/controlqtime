@@ -9,6 +9,8 @@ use App\Disease;
 use App\Exam;
 use App\FamilyRelationship;
 use App\FamilyResponsability;
+use App\Http\Requests\Step2Request;
+use App\Http\Requests\Step3Request;
 use App\ProfessionalLicense;
 use App\Province;
 use App\Region;
@@ -129,34 +131,56 @@ class ManpowerController extends Controller
 
 
     /**
-     * @param Request $request
+     * @param Step2Request $request
      * @return mixed
      */
-    public function step2(Request $request)
+    public function step2(Step2Request $request)
     {
         Session::put('step2', $request->all());
-        Session::put('degree_id', $request->get('degree_id'));
-        Session::put('name_study', $request->get('name_study'));
-        Session::put('institution_study_id', $request->get('institution_study_id'));
-        Session::put('date', $request->get('date'));
-        Session::put('type_certification_id', $request->get('type_certification_id'));
-        Session::put('expired_certification', $request->get('expired_certification'));
-        Session::put('institution_certification_id', $request->get('institution_certification_id'));
-        Session::put('type_speciality_id', $request->get('type_speciality_id'));
-        Session::put('expired_speciality', $request->get('expired_speciality'));
-        Session::put('institution_speciality_id', $request->get('institution_speciality_id'));
-        Session::put('type_professional_license_id', $request->get('type_professional_license_id'));
-        Session::put('expired_license', $request->get('expired_license'));
-        Session::put('detail_license', $request->get('detail_license'));
+        Session::put('count_studies', $request->get('count_studies'));
 
-        return response()->json(['status' => 'success'], 200);
+        for ($i = 0; $i < Session::get('count_studies'); $i++) {
+            Session::put('degree_id' . $i, $request->get('degree_id' . $i));
+            Session::put('name_study' . $i, $request->get('name_study' . $i));
+            Session::put('institution_study_id' . $i, $request->get('institution_study_id' . $i));
+            Session::put('date_obtention' . $i, $request->get('date_obtention' . $i));
+        }
+
+        Session::put('count_certifications', $request->get('count_certifications'));
+
+        for ($i = 0; $i < $request->get('count_certifications'); $i++) {
+            Session::put('type_certification_id' . $i, $request->get('type_certification_id' . $i));
+            Session::put('expired_certification' . $i, $request->get('expired_certification' . $i));
+            Session::put('institution_certification_id' . $i, $request->get('institution_certification_id' . $i));
+        }
+
+        Session::put('count_specialities', $request->get('count_specialities'));
+
+        for ($i = 0; $i < $request->get('count_specialities'); $i++) {
+            Session::put('type_speciality_id' . $i, $request->get('type_speciality_id' . $i));
+            Session::put('expired_speciality' . $i, $request->get('expired_speciality' . $i));
+            Session::put('institution_speciality_id' . $i, $request->get('institution_speciality_id' . $i));
+        }
+
+        Session::put('count_professional_licenses', $request->get('count_professional_licenses'));
+
+        for($i = 0; $i < $request->get('count_professional_licenses'); $i++) {
+            Session::put('type_professional_license_id' . $i, $request->get('type_professional_license_id' . $i));
+            Session::put('expired_license' . $i, $request->get('expired_license' . $i));
+            Session::put('detail_license' . $i, $request->get('detail_license' . $i));
+        }
+
+        return response()->json([
+            'status' => 'OK'
+        ]);
     }
 
 
     /**
-     * @param Request $request
+     * @param Step3Request $request
+     * @return mixed
      */
-    public function store(Request $request)
+    public function store(Step3Request $request)
     {
         /*
          * Step 1
@@ -164,11 +188,11 @@ class ManpowerController extends Controller
 
         $manpower = Manpower::create(Session::get('step1'));
 
-        for ($i = 0; $i < count(Session::get('relationship_id')); $i++) {
+        for ($i = 0; $i < Session::get('count_family_relationships'); $i++) {
 
             $family_relationship = new FamilyRelationship([
-                'relationship_id'       => Session::get('relationship_id')[$i],
-                'manpower_family_id'    => Session::get('manpower_family_id')[$i]
+                'relationship_id'       => Session::get('relationship_id' . $i),
+                'manpower_family_id'    => Session::get('manpower_family_id' . $i)
             ]);
 
             $manpower->familyRelationships()->save($family_relationship);
@@ -179,49 +203,49 @@ class ManpowerController extends Controller
          * Step 2
          */
 
-        for ($i = 0; $i < count(Session::get('degree_id')); $i++) {
+        for ($i = 0; $i < Session::get('count_studies'); $i++) {
 
             $study = new Study([
-                'degree_id'             => Session::get('degree_id')[$i],
-                'name_study'            => Session::get('name_study')[$i],
-                'institution_study_id'  => Session::get('institution_study_id')[$i],
-                'date'                  => Session::get('date')[$i]
+                'degree_id'             => Session::get('degree_id' . $i),
+                'name_study'            => Session::get('name_study' . $i),
+                'institution_study_id'  => Session::get('institution_study_id' . $i),
+                'date'                  => Session::get('date' . $i)
 
             ]);
             
             $manpower->studies()->save($study);
         }
 
-        for($i = 0; $i < count(Session::get('type_certification_id')); $i++) {
+        for($i = 0; $i < Session::get('count_certifications'); $i++) {
 
             $certification = new Certification([
-                'type_certification_id'         => Session::get('type_certification_id')[$i],
-                'expired_certification'         => Session::get('expired_certification')[$i],
-                'institution_certification_id'  => Session::get('institution_certification_id')[$i],
+                'type_certification_id'         => Session::get('type_certification_id' . $i),
+                'expired_certification'         => Session::get('expired_certification' . $i),
+                'institution_certification_id'  => Session::get('institution_certification_id' . $i),
             ]);
 
             $manpower->certifications()->save($certification);
 
         }
 
-        for ($i = 0; $i < count(Session::get('type_speciality_id')); $i++) {
+        for ($i = 0; $i < Session::get('count_specialities'); $i++) {
 
             $speciality = new Speciality([
-                'type_speciality_id'            => Session::get('type_speciality_id')[$i],
-                'expired_speciality'            => Session::get('expired_speciality')[$i],
-                'institution_speciality_id'     => Session::get('institution_speciality_id')[$i]
+                'type_speciality_id'            => Session::get('type_speciality_id' . $i),
+                'expired_speciality'            => Session::get('expired_speciality' . $i),
+                'institution_speciality_id'     => Session::get('institution_speciality_id' . $i)
             ]);
 
             $manpower->specialities()->save($speciality);
 
         }
 
-        for ($i = 0; $i < count(Session::get('type_professional_license_id')); $i ++) {
+        for ($i = 0; $i < Session::get('count_professional_licenses'); $i ++) {
 
             $professional_license = new ProfessionalLicense([
-                'type_professional_license_id'  => Session::get('type_professional_license_id')[$i],
-                'expired_license'               => Session::get('expired_license')[$i],
-                'detail_license'                => Session::get('detail_license')[$i]
+                'type_professional_license_id'  => Session::get('type_professional_license_id' . $i),
+                'expired_license'               => Session::get('expired_license' . $i),
+                'detail_license'                => Session::get('detail_license' . $i)
             ]);
 
             $manpower->professionalLicenses()->save($professional_license);
@@ -232,48 +256,48 @@ class ManpowerController extends Controller
          * Step 3
          */
 
-        for ($i = 0; $i < count($request->get('type_disability_id')); $i++) {
+        for ($i = 0; $i < $request->get('count_disabilities'); $i++) {
 
             $disability = new Disability([
-                'type_disability_id'        => $request->get('type_disability_id')[$i],
+                'type_disability_id'        => $request->get('type_disability_id' . $i),
                 'treatment_disability'      => $request->get('treatment_disability' . $i),
-                'detail_disability'         => $request->get('detail_disability')[$i]
+                'detail_disability'         => $request->get('detail_disability' . $i)
             ]);
 
             $manpower->disabilities()->save($disability);
 
         }
 
-        for ($i = 0; $i < count($request->get('type_disease_id')); $i++) {
+        for ($i = 0; $i < $request->get('count_diseases'); $i++) {
 
             $disease = new Disease([
-                'type_disease_id'   => $request->get('type_disease_id')[$i],
+                'type_disease_id'   => $request->get('type_disease_id' . $i),
                 'treatment_disease' => $request->get('treatment_disease' . $i),
-                'detail_disease'    => $request->get('detail_disease')[$i]
+                'detail_disease'    => $request->get('detail_disease' . $i)
             ]);
 
             $manpower->diseases()->save($disease);
 
         }
 
-        for ($i = 0; $i < count($request->get('type_exam_id')); $i++) {
+        for ($i = 0; $i < $request->get('count_exams'); $i++) {
 
             $exam = new Exam([
-                'type_exam_id'  => $request->get('type_exam_id')[$i],
-                'expired_exam'  => $request->get('expired_exam')[$i],
-                'detail_exam'   => $request->get('detail_exam')[$i]
+                'type_exam_id'  => $request->get('type_exam_id' . $i),
+                'expired_exam'  => $request->get('expired_exam' . $i),
+                'detail_exam'   => $request->get('detail_exam' . $i)
             ]);
 
             $manpower->exams()->save($exam);
 
         }
 
-        for ($i = 0; $i < count($request->get('name_responsability')); $i++) {
+        for ($i = 0; $i < $request->get('count_family_responsabilities'); $i++) {
 
             $family_responsability = new FamilyResponsability([
-                'name_responsability'   => $request->get('name_responsability')[$i],
-                'rut_responsability'    => $request->get('rut_responsability')[$i],
-                'relationship_id'       => $request->get('relationship_id')[$i]
+                'name_responsability'   => $request->get('name_responsability' . $i),
+                'rut_responsability'    => $request->get('rut_responsability' . $i),
+                'relationship_id'       => $request->get('relationship_id' . $i)
             ]);
 
             $manpower->familyResponsabilities()->save($family_responsability);
@@ -382,24 +406,48 @@ class ManpowerController extends Controller
         Session::forget('pension_id');
         Session::forget('company_id');
         Session::forget('rating_id');
-        Session::forget('relationship_id');
-        Session::forget('manpower_family_id');
-        Session::forget('step2');
-        Session::forget('degree_id');
-        Session::forget('name_study');
-        Session::forget('institution_study_id');
-        Session::forget('date');
-        Session::forget('type_certification_id');
-        Session::forget('expired_certification');
-        Session::forget('institution_certification_id');
-        Session::forget('type_speciality_id');
-        Session::forget('expired_speciality');
-        Session::forget('institution_speciality_id');
-        Session::forget('type_professional_license_id');
-        Session::forget('expired_license');
-        Session::forget('detail_license');
 
-        return response()->json(['success' => true], 200);
+        for ($i = 0; $i < Session::get('count_family_relationships'); $i++) {
+            Session::forget('relationship_id' . $i);
+            Session::forget('manpower_family_id' . $i);
+        }
+
+        Session::forget('count_family_relationships');
+        Session::forget('step2');
+
+        for ($i = 0; $i < Session::get('count_studies'); $i++) {
+            Session::forget('degree_id' . $i);
+            Session::forget('name_study' . $i);
+            Session::forget('institution_study_id' . $i);
+            Session::forget('date_obtention' . $i);
+        }
+
+        for ($i = 0; $i < Session::get('count_certifications'); $i++) {
+            Session::forget('type_certification_id' . $i);
+            Session::forget('expired_certification' . $i);
+            Session::forget('institution_certification_id' . $i);
+        }
+
+        for ($i = 0; $i < Session::get('count_specialities'); $i++) {
+            Session::forget('type_speciality_id' . $i);
+            Session::forget('expired_speciality' . $i);
+            Session::forget('institution_speciality_id' . $i);
+        }
+
+        for ($i = 0; $i < Session::get('count_professional_licenses'); $i++) {
+            Session::forget('type_professional_license_id' . $i);
+            Session::forget('expired_license' . $i);
+            Session::forget('detail_license' . $i);
+        }
+
+        Session::forget('count_studies');
+        Session::forget('count_certifications');
+        Session::forget('count_specialities');
+        Session::forget('count_professional_licenses');
+        
+        return response()->json([
+            'success' => true
+        ], 200);
     }
     
 }

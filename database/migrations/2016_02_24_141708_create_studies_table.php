@@ -14,7 +14,7 @@ class CreateStudiesTable extends Migration
             $table->integer('degree_id')->unsigned();
             $table->string('name_study', 100);
             $table->integer('institution_study_id')->unsigned();
-            $table->date('date');
+            $table->date('date_obtention');
 
             $table->foreign('manpower_id')
                 ->references('id')

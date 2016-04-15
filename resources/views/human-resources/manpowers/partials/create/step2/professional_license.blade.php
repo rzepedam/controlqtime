@@ -1,5 +1,5 @@
 <span id="license{{ $i }}">
-    <div class="row">
+	<div class="row">
         <div class="col-md-12">
             <div class="alert alert-alt alert-success alert-dismissible" role="alert">
                 <span id="num_license{{ $i }}" class="text-success">
@@ -9,32 +9,32 @@
             </div>
         </div>
     </div>
-    <div class="row">
+	<div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                {{ Form::label('type_professional_license_id', 'Tipo Licencia') }}
-                {{ Form::select('type_professional_license_id[]', $type_professional_licenses, Session::get('type_professional_license_id')[$i], ['class'=> 'form-control', 'required']) }}
+                {{ Form::label('type_professional_license_id' . $i, 'Tipo Licencia', ['class' => 'control-label']) }}
+                {{ Form::select('type_professional_license_id' . $i, $type_professional_licenses, Session::get('type_professional_license_id' . $i), ['class'=> 'form-control']) }}
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {{ Form::label('expired_license', 'Fecha de Vencimiento') }}
-                <div class="input-group date afterCurrentDate">
+                {{ Form::label('expired_license' . $i, 'Fecha Expiración', ['class' => 'control-label']) }}
+                <div class="input-group date">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{ Form::text('expired_license[]', Session::get('expired_license')[$i], ['class'=> 'form-control', 'required', 'readonly']) }}
+                    {{ Form::text('expired_license' . $i, Session::get('expired_license' . $i), ['class'=> 'form-control']) }}
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+	<div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                {{ Form::label('detail_license', 'Detalle') }}
-                {{ Form::textarea('detail_license[]', Session::get('detail_license')[$i], ['class'=> 'form-control', 'rows'=> 3]) }}
+                {{ Form::label('detail_license' . $i, 'Detalle', ['class' => 'control-label']) }}
+                {{ Form::textarea('detail_license' . $i, Session::get('detail_license' . $i), ['class'=> 'form-control', 'rows'=> 3]) }}
             </div>
         </div>
     </div>
-    <br/>
+	<br />
 </span>

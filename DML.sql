@@ -141,6 +141,7 @@ INSERT INTO mutualities(name) VALUES ('Instituto de Seguridad del Trabajo');
 INSERT INTO mutualities(name) VALUES ('Asociación Chilena de Seguridad (ACHS)');
 INSERT INTO mutualities(name) VALUES ('Mutual de Seguridad');
 INSERT INTO mutualities(name) VALUES ('Instituto de Seguridad Laboral');
+INSERT INTO mutualities(name) VALUES ('Sin Mutualidad');
 
 
 /* pensions | AFP  */
@@ -161,6 +162,9 @@ INSERT INTO type_exams(name) VALUES ('Declaración de salud');
 
 
 /* degrees | grados académicos */
+INSERT INTO degrees(name) VALUES ('Técnico Nivel Medio');
+INSERT INTO degrees(name) VALUES ('Técnico Nivel Profesional');
+INSERT INTO degrees(name) VALUES ('Licenciado');
 INSERT INTO degrees(name) VALUES ('Licenciado');
 INSERT INTO degrees(name) VALUES ('Título Profesional');
 INSERT INTO degrees(name) VALUES ('Magister');

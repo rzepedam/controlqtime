@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use App\Http\Requests\Forms\SanitizedRequest;
 
-class Step1Request extends Request
+class Step1Request extends SanitizedRequest
 {
 
     public function authorize()
@@ -28,7 +28,7 @@ class Step1Request extends Request
                 $rules['first_name']        = 'required|max:30';
                 $rules['second_name']       = 'max:30';
                 $rules['rut']               = 'required|max:15';
-                $rules['birthday']          = 'required';
+                $rules['birthday']          = 'required|date';
                 $rules['nationality_id']    = 'required|regex:/[0-9 -()+]+$/';
                 $rules['gender_id']         = 'required|regex:/[0-9 -()+]+$/';
                 $rules['address']           = 'required';
@@ -46,7 +46,7 @@ class Step1Request extends Request
                     $rules['relationship_id' . $i]       = 'required|regex:/[0-9 -()+]+$/';
                     $rules['manpower_family_id' . $i]    = 'required|regex:/[0-9 -()+]+$/';
                 }
-
+                
                 return $rules;
 
             }

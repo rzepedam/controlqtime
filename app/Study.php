@@ -10,11 +10,11 @@ class Study extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'degree_id', 'name_study', 'institution_study_id', 'date'
+        'degree_id', 'name_study', 'institution_study_id', 'date_obtention'
     ];
 
     protected $dates = [
-        'date'
+        'date_obtention'
     ];
 
 
@@ -38,7 +38,7 @@ class Study extends Model
      * @param $value
      */
     public function setDateAttribute($value) {
-        $this->attributes['date'] = Carbon::createFromFormat('d-m-Y', $value);
+        $this->attributes['date_obtention'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
 }
