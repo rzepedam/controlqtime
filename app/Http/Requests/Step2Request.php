@@ -44,7 +44,9 @@ class Step2Request extends SanitizedRequest
                 
                 for ($i = 0; $i < Request::get('count_professional_licenses'); $i++) {
                     $rules['type_professional_license_id' . $i] = 'required|regex:/[0-9 -()+]+$/';
+                    $rules['emission_license' . $i]             = 'required|date';
                     $rules['expired_license' . $i]              = 'required|date';
+                    $rules['is_donor' . $i]                     = 'required';
                 }
 
                 /*

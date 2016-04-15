@@ -107,13 +107,15 @@
                                 <tbody>
                                 <?php $i = 1; ?>
                                 <tr class="text-center success">
-                                    <td class="col-md-12" colspan="4"><i class="fa fa-bookmark"></i> Licencias Profesionales</td>
+                                    <td class="col-md-12" colspan="6    "><i class="fa fa-bookmark"></i> Licencias Profesionales</td>
                                 </tr>
                                 <tr class="active">
                                     <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
-                                    <th class="col-md-4 text-center">Licencia Profesional</th>
+                                    <th class="col-md-3 text-center">Licencia Profesional</th>
+                                    <th class="col-md-2 text-center">Emisión</th>
                                     <th class="col-md-2 text-center">Expiración</th>
-                                    <th class="col-md-5 text-center">Observación</th>
+                                    <th class="col-md-1 text-center">Donante</th>
+                                    <th class="col-md-3 text-center">Observación</th>
                                 </tr>
 
                                 @foreach($manpower->professionalLicenses as $license)
@@ -121,7 +123,13 @@
                                     <tr>
                                         <td class="text-center">{{ $i }}</td>
                                         <td class="text-center">{{ $license->typeProfessionalLicense->name }}</td>
+                                        <td class="text-center">{{ $license->emission_license->format('d-m-Y') }}</td>
                                         <td class="text-center">{{ $license->expired_license->format('d-m-Y') }}</td>
+                                        @if($license->is_donor == true)
+                                            <td class="text-center text-success"><i class="fa fa-check-circle font-size-18"></i></td>
+                                        @else
+                                            <td class="text-center text-danger"><i class="fa fa-times-circle font-size-18"></i></td>
+                                        @endif
                                         <td class="text-center">{{ $license->detail_license }}</td>
                                     </tr>
                                     <?php $i++; ?>

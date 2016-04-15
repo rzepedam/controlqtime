@@ -166,7 +166,9 @@ class ManpowerController extends Controller
 
         for($i = 0; $i < $request->get('count_professional_licenses'); $i++) {
             Session::put('type_professional_license_id' . $i, $request->get('type_professional_license_id' . $i));
+            Session::put('emission_license' . $i, $request->get('emission_license' . $i));
             Session::put('expired_license' . $i, $request->get('expired_license' . $i));
+            Session::put('is_donor' . $i, $request->get('is_donor' . $i));
             Session::put('detail_license' . $i, $request->get('detail_license' . $i));
         }
 
@@ -244,7 +246,9 @@ class ManpowerController extends Controller
 
             $professional_license = new ProfessionalLicense([
                 'type_professional_license_id'  => Session::get('type_professional_license_id' . $i),
+                'emission_license'              => Session::get('emission_license' . $i),
                 'expired_license'               => Session::get('expired_license' . $i),
+                'is_donor'                      => Session::get('is_donor' . $i),
                 'detail_license'                => Session::get('detail_license' . $i)
             ]);
 
@@ -436,7 +440,9 @@ class ManpowerController extends Controller
 
         for ($i = 0; $i < Session::get('count_professional_licenses'); $i++) {
             Session::forget('type_professional_license_id' . $i);
+            Session::forget('emission_license' . $i);
             Session::forget('expired_license' . $i);
+            Session::forget('is_donor' . $i);
             Session::forget('detail_license' . $i);
         }
 

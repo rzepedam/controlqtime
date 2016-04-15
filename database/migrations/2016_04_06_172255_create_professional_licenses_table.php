@@ -16,7 +16,9 @@ class CreateProfessionalLicensesTable extends Migration
             $table->increments('id');
             $table->integer('manpower_id')->unsigned();
             $table->integer('type_professional_license_id')->unsigned();
+            $table->date('emission_license');
             $table->date('expired_license');
+            $table->boolean('is_donor')->default(false);
             $table->string('detail_license');
             $table->timestamps();
 

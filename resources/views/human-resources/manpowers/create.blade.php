@@ -705,7 +705,7 @@
 
                             item = verificaUltimosNumeros(span[i].id);
 
-                            $('span#num_license' + item).text('Licencia #' + (i + 1));
+                            $('span#num_license' + item).text('Licencia Profesional #' + (i + 1));
                             $('span#num_license' + item).attr('id', 'num_license' + i);
                             $('span#license' + item).attr('id', 'license' + i);
 
@@ -720,12 +720,29 @@
                             });
 
                             /*
+                             * Fecha Emisión
+                             */
+
+                            $('label[for="emission_license' + item + '"]').attr('for', 'emission_license' + i);
+                            $('input#emission_license' + item).attr('name', 'emission_license' + i);
+                            $('input#emission_license' + item).attr('id', 'emission_license' + i);
+
+                            /*
                              * Fecha Expiración
                              */
 
                             $('label[for="expired_license' + item + '"]').attr('for', 'expired_license' + i);
                             $('input#expired_license' + item).attr('name', 'expired_license' + i);
                             $('input#expired_license' + item).attr('id', 'expired_license' + i);
+
+                            /*
+                             * Es donante?
+                             */
+
+                            $('input:radio[name="is_donor' + item + '"]').each(function (j) {
+                                $(this).attr('name', 'is_donor' + i);
+                                $(this).attr('id', 'is_donor' + i);
+                            });
 
                             /*
                              * Detalle Licencia
@@ -1482,7 +1499,7 @@
 
                 .on('click', '.add_professional_license', function() {
 
-                    $license = '<span id="license"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-success alert-dismissible" role="alert"><span id="num_license" class="text-success">Licencia Profesional #' + (count_professional_licenses + 1) + '</span><a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div></div><div class="row"> <div class="col-md-4"> <div class="form-group">{{Form::label('type_professional_license_id', 'Tipo Licencia', ['class'=> 'control-label'])}}{{Form::select('type_professional_license_id', $type_professional_licenses, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('expired_license', 'Fecha Expiración', ['class'=> 'control-label'])}}<div class="input-group date"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_license', null, ['class'=> 'form-control'])}}</div></div></div></div><div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label('detail_license', 'Detalle', ['class'=> 'control-label'])}}{{Form::textarea('detail_license', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><br/></span>';
+                    $license = '<span id="license"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-success alert-dismissible" role="alert"><span id="num_license" class="text-success">Licencia Profesional #' + (count_professional_licenses + 1) + '</span><a id="license" class="delete-elements pull-right mitooltip" title="Eliminar Licencia"><i class="fa fa-trash"></i></a></div></div></div><div class="row"> <div class="col-md-3"> <div class="form-group">{{Form::label('type_professional_license_id', 'Tipo Licencia', ['class'=> 'control-label'])}}{{Form::select('type_professional_license_id', $type_professional_licenses, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('emission_license', 'Fecha Emisión', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('emission_license', null, ['class'=> 'form-control'])}}</div></div></div><div class="col-md-3"> <div class="form-group">{{Form::label('expired_license', 'Fecha Expiración', ['class'=> 'control-label'])}}<div class="input-group date afterCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_license', null, ['class'=> 'form-control'])}}</div></div></div><div class="col-md-3"> <div class="form-group">{{Form::label("is_donor", "Es donante?")}}<ul class="list-unstyled list-inline"> <li> <div class="radio-custom radio-primary">{{Form::radio("is_donor", 1, false)}}{{Form::label("is_donor", "Si", ['class'=> 'control-label'])}}</div></li><li> <div class="radio-custom radio-primary">{{Form::radio("is_donor", 0, true)}}{{Form::label("is_donor", "No", ['class'=> 'control-label'])}}</div></li></ul> </div></div></div><div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label('detail_license', 'Restricciones', ['class'=> 'control-label'])}}{{Form::textarea('detail_license', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><br/></span>';
 
                     if (count_professional_licenses == 0)
                         $('#content_licenses').html($license);
@@ -1507,12 +1524,29 @@
                     });
 
                     /*
+                     * Fecha Emisión
+                     */
+
+                    $('label[for="emission_license"]').attr('for', 'emission_license' + count_professional_licenses);
+                    $('input#emission_license').attr('name', 'emission_license' + count_professional_licenses);
+                    $('input#emission_license').attr('id', 'emission_license' + count_professional_licenses);
+
+                    /*
                      * Fecha Expiración
                      */
 
                     $('label[for="expired_license"]').attr('for', 'expired_license' + count_professional_licenses);
                     $('input#expired_license').attr('name', 'expired_license' + count_professional_licenses);
                     $('input#expired_license').attr('id', 'expired_license' + count_professional_licenses);
+
+                    /*
+                     * Es donante ?
+                     */
+
+                    $('input:radio[name=is_donor]').each(function(i){
+                        $(this).attr('name', 'is_donor' + count_professional_licenses);
+                        $(this).attr('id', 'is_donor' + count_professional_licenses);
+                    });
 
                     /*
                      * Detalle Licencia
@@ -1529,24 +1563,47 @@
                     $('#step2')
                         .formValidation('addField', 'type_professional_license_id' + count_professional_licenses, {
                             validators: {
-                                notEmpty: {
+                                /*notEmpty: {
                                     message: 'El campo Tipo Licencia es obligatorio.'
-                                },
+                                },*/
                                 blank: {}
                             }
                         })
                         .formValidation('addField', 'expired_license' + count_professional_licenses, {
                             validators: {
-                                notEmpty: {
+                                /*notEmpty: {
                                     message: 'El campo Fecha Expiración es obligatorio.'
-                                },
+                                },*/
                                 blank: {}
                             }
                         })
 
 
                     count_professional_licenses++;
-                    initializeComponentsWithDateAfterCurrentDate();
+
+                    /*
+                     * Inicializamos componente de fecha manualmente, ya que
+                     *
+                     * una debe ir antes de hoy y la otra después de hoy
+                     */
+
+                    $('.beforeCurrentDate').datepicker({
+                        format: 'dd-mm-yyyy',
+                        todayHighlight: true,
+                        language: 'es',
+                        autoclose: true,
+                        endDate: new Date(),
+                        todayBtn: true,
+                    });
+
+                    $('.afterCurrentDate').datepicker({
+                        format: 'dd-mm-yyyy',
+                        todayHighlight: true,
+                        language: 'es',
+                        autoclose: true,
+                        startDate: new Date(),
+                        todayBtn: true,
+                    });
 
                 })
 
@@ -1584,6 +1641,7 @@
 
                     });
                 });
+
 
             $("#step3")
                 .formValidation({
