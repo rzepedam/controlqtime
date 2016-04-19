@@ -74,7 +74,7 @@ return [
     ],
     'string'               => 'El campo <strong>:attribute</strong> debe ser una cadena de caracteres.',
     'timezone'             => 'El <strong>:attribute</strong> debe ser una zona válida.',
-    'unique'               => 'El <strong>:attribute</strong> ya ha sido registrado.',
+    'unique'               => 'El campo <strong>:attribute</strong> ya ha sido registrado.',
     'url'                  => 'El formato <strong>:attribute</strong> es inválido.',
 
     /*
@@ -106,6 +106,17 @@ return [
     */
 
     'attributes' => [
+
+        /*
+         * Vehículos
+         */
+
+        'patent'                                => 'Patente',
+        'code'                                  => 'Cód. Interno',
+        'type_vehicle_id'                       => 'Tipo de Vehículo',
+        'model_vehicle_id'                      => 'Modelo',
+        'terminal_id'                           => 'Terminal',
+        'year'                                  => 'Año',
 
         /*
          * Parentescos Familiares

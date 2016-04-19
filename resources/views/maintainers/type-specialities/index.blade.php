@@ -26,9 +26,13 @@
 @section('content')
 
     @if($type_specialities->count())
+
         @include('maintainers.type-specialities.partials.table')
+
     @else
+
         <h3 class="text-center">No se han encontrado Especialidades</h3>
+
     @endif
 
     {{ $type_specialities->links() }}

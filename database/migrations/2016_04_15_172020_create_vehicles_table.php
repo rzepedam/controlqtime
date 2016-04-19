@@ -11,14 +11,34 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('type_vehicle_id')->unsigned();
-            $table->integer('trademark_id')->unsigned();
-            $table->integer('model_id')->unsigned();
+            $table->integer('model_vehicle_id')->unsigned();
             $table->integer('terminal_id')->unsigned();
-            $table->string('patent');
-            $table->string('year');
+            $table->integer('operator_id')->unsigned()->default(1);
+            $table->string('patent', 15)->unique();
+            $table->string('year', 4);
             $table->string('code');
-
             $table->timestamps();
+
+            $table->foreign('type_vehicle_id')
+                ->references('id')
+                ->on('type_vehicles')
+                ->onUpdate('cascade');
+
+            $table->foreign('model_vehicle_id')
+                ->references('id')
+                ->on('model_vehicles')
+                ->onUpdate('cascade');
+
+            $table->foreign('terminal_id')
+                ->references('id')
+                ->on('terminals')
+                ->onUpdate('cascade');
+
+            $table->foreign('operator_id')
+                ->references('id')
+                ->on('operators')
+                ->onUpdate('cascade');
+
         });
     }
 

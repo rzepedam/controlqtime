@@ -134,6 +134,16 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('maintainers.trademarks.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-trademark" aria-hidden="true"></i> Marca Vehículos</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('maintainers.model-vehicles.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-car" aria-hidden="true"></i> Modelo Vehículos</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
                                 <a class="animsition-link" href="javascript:void(0)">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-money" aria-hidden="true"></i> Monedas</span>
                                 </a>
@@ -174,7 +184,7 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="javascript:void(0)">
+                                <a class="animsition-link" href="{{ route('maintainers.terminals.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-road" aria-hidden="true"></i> Terminales</span>
                                 </a>
                             </li>
@@ -189,7 +199,7 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.type-vehicles.index') }}">
+                                <a class="animsition-link" href="{{ route('maintainers.vehicles.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-bus" aria-hidden="true"></i> Vehículos</span>
                                 </a>
                             </li>

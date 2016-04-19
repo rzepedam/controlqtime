@@ -12,7 +12,7 @@
 
 @section('form_search')
     <div class="box-tools breadcrumb2">
-        {{ Form::open(['route' => 'maintainers.type-specialities.index', 'method' => 'GET']) }}
+        {{ Form::open(['route' => 'maintainers.type-vehicles.index', 'method' => 'GET']) }}
 
             <div class="input-group input-group-sm" style="width: 250px;">
                 {{ Form::text('table_search', null, ['class' => 'form-control pull-right', 'placeholder' => 'Buscar...', 'autofocus']) }}
@@ -27,7 +27,17 @@
 
 @section('content')
 
+    @if($type_vehicles->count())
 
+        @include('maintainers.type-vehicles.partials.table')
+
+    @else
+
+        <h3 class="text-center">No se han encontrado Tipos de Vehículos</h3>
+
+    @endif
+
+    {{ $type_vehicles->links() }}
 
 @stop
 
@@ -43,7 +53,6 @@
              **************************************************/
 
             $('.mitooltip').tooltip();
-
 
 
         });

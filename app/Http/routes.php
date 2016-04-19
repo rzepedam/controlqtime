@@ -60,11 +60,14 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('degrees', 'DegreeController');
         Route::resource('forecasts', 'ForecastController');
         Route::resource('institutions', 'InstitutionController');
+        Route::resource('model-vehicles', 'ModelVehicleController');
         Route::resource('mutualities', 'MutualityController');
         Route::resource('pensions', 'PensionController');
         Route::resource('professions', 'ProfessionController');
         Route::resource('ratings', 'RatingController');
         Route::resource('relationships', 'RelationshipController');
+        Route::resource('terminals', 'TerminalController');
+        Route::resource('trademarks', 'TrademarkController');
         Route::resource('type-certifications', 'TypeCertificationController');
         Route::resource('type-disabilities', 'TypeDisabilityController');
         Route::resource('type-diseases', 'TypeDiseaseController');
@@ -93,6 +96,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('loadProvinces', 'AjaxLoadController@loadProvinces');
     Route::post('loadCommunes', 'AjaxLoadController@loadCommunes');
     Route::post('verificaEmail', 'AjaxLoadController@verificaEmail');
+    Route::post('loadModelVehicles', 'AjaxLoadController@loadModelVehicles');
 
     /*
      * Session Controller

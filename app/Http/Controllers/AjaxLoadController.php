@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Manpower;
+use App\Trademark;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -66,5 +67,14 @@ class AjaxLoadController extends Controller
 
 		return response()->json(['success' => true], 200);
     }
-    
+
+
+    /**
+     * @param Request $request
+     */
+    public function loadModelVehicles(Request $request)
+	{
+		$model_vehicles = Trademark::find($request->get('id'))->modelVehicles;
+		return $model_vehicles->lists('name', 'id');
+	}
 }

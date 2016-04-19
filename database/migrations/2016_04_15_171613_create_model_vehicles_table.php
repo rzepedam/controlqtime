@@ -5,24 +5,17 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateModelVehiclesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('model_vehicles', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('trademark_id')->unsigned();
+            $table->string('name', 75);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::drop('model_vehicles');

@@ -53,4 +53,5 @@ class DegreeController extends Controller
         Session::flash('success', 'El registro ' . $degree->name . ' fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.degrees.index');
     }
+    
 }

@@ -1,3 +1,13 @@
+/*
+ * Insertamos Operador, dependiendo de donde se ejecute el Software (Subus, Alsacia, etc.),
+ *
+ * este Operador cambiará en el Insert
+ */
+
+/* operators | Operadores */
+INSERT INTO operators(name) VALUES('Subus');
+
+
 /* genders | Género */
 INSERT INTO genders(name) VALUES ('Masculino');
 INSERT INTO genders(name) VALUES ('Femenino');
@@ -815,3 +825,28 @@ INSERT INTO communes(name, province_id) VALUES('Primavera',52);
 INSERT INTO communes(name, province_id) VALUES('Timaukel',52);
 INSERT INTO communes(name, province_id) VALUES('Natales',53);
 INSERT INTO communes(name, province_id) VALUES('Torres del Paine',53);
+
+
+/* type_vehicles | Tipos de Vehículos */
+INSERT INTO type_vehicles(name) VALUES('Bus');
+INSERT INTO type_vehicles(name) VALUES('Moto');
+INSERT INTO type_vehicles(name) VALUES('Auto');
+
+/* trademarks | Marcas */
+INSERT INTO trademarks(name) VALUES('Mercedes Benz');
+INSERT INTO trademarks(name) VALUES('Volvo');
+INSERT INTO trademarks(name) VALUES('Scannia');
+INSERT INTO trademarks(name) VALUES('Honda');
+
+/* model_vehicle | Modelos de Vehículos */
+INSERT INTO model_vehicles(trademark_id, name) VALUES(1, 'Caio Foz');
+INSERT INTO model_vehicles(trademark_id, name) VALUES(1, 'Caio Mondego H');
+INSERT INTO model_vehicles(trademark_id, name) VALUES(1, 'Metalpar Tronador');
+INSERT INTO model_vehicles(trademark_id, name) VALUES(2, 'Marcopolo Viale BRS');
+INSERT INTO model_vehicles(trademark_id, name) VALUES(2, 'Caio Mondego');
+INSERT INTO model_vehicles(trademark_id, name) VALUES(3, 'Marcopolo Gran Viale LE');
+
+/* terminals | Terminales */
+INSERT INTO terminals(name) VALUES('Terminal Norte');
+INSERT INTO terminals(name) VALUES('Terminal Oriente');
+INSERT INTO terminals(name) VALUES('Terminal Sur');

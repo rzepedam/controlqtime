@@ -116,26 +116,39 @@
                                     <tr class="text-center warning">
                                         <td class="col-md-12" colspan="3"><i class="md-male-female font-size-18"></i> Parentescos Familiares</td>
                                     </tr>
-                                    <tr class="active">
-                                        <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
-                                        <th class="col-md-3 text-center">Relación</th>
-                                        <th class="col-md-8 text-center">Trabajador</th>
-                                    </tr>
 
-                                    @foreach($manpower->familyRelationships as $family_relationship)
-
-                                        <tr>
-                                            <td class="text-center">{{ $i }}</td>
-                                            <td class="text-center">{{ $family_relationship->relationship->name }}</td>
-                                            <td class="text-center">{{ $family_relationship->manpowerFamily->full_name }}</td>
+                                    @if (count($manpower->familyRelationships) > 0)
+                                        <tr class="active">
+                                            <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
+                                            <th class="col-md-3 text-center">Relación</th>
+                                            <th class="col-md-8 text-center">Trabajador</th>
                                         </tr>
-                                        <?php $i++; ?>
-                                    @endforeach
 
+                                        @foreach($manpower->familyRelationships as $family_relationship)
+
+                                            <tr>
+                                                <td class="text-center">{{ $i }}</td>
+                                                <td class="text-center">{{ $family_relationship->relationship->name }}</td>
+                                                <td class="text-center">{{ $family_relationship->manpowerFamily->full_name }}</td>
+                                            </tr>
+                                            <?php $i++; ?>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td style="border-bottom: hidden; background-color: #FAFAFA"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" class="text-center font-size-18">
+                                                No existen Parentescos Familiares Asociados
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-top: hidden; background-color: #FAFAFA"></td>
+                                        </tr>
+                                    @endif
 
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
