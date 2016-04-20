@@ -48,6 +48,17 @@ Route::group(['middleware' => ['web']], function () {
 
 
     /*
+     * Operaciones
+     */
+
+    Route::group(['prefix' => 'operations'], function() {
+
+        Route::resource('route-sheets', 'RouteSheetController');
+        Route::resource('rounds', 'RoundController');
+
+    });
+
+    /*
      * Maintainers
      */
 
@@ -66,6 +77,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('professions', 'ProfessionController');
         Route::resource('ratings', 'RatingController');
         Route::resource('relationships', 'RelationshipController');
+        Route::resource('routes', 'RouteController');
         Route::resource('terminals', 'TerminalController');
         Route::resource('trademarks', 'TrademarkController');
         Route::resource('type-certifications', 'TypeCertificationController');

@@ -22,6 +22,7 @@
                             <td class="text-center">
                                 <a href="{{ route('maintainers.vehicles.show', $vehicle) }}" class="btn btn-squared btn-info waves-effect waves-light mitooltip" title="Ver"><i class="fa fa-search"></i> </a>
                                 <a href="{{ route('maintainers.vehicles.edit', $vehicle) }}" class="btn btn-squared btn-success waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> </a>
+                                <a href="javascript:void(0)" class="btn btn-squared btn-primary waves-effect waves-light mitooltip" title="Adjuntar Imágenes"><i class="fa fa-cloud-upload"></i></a>
                             </td>
                         </tr>
 

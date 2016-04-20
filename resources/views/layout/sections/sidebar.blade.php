@@ -27,7 +27,7 @@
                             <span class="site-menu-title">Inicio</span>
                         </a>
                     </li>
-
+                    <!----- ------------- ------>
 
                     <!-- Recursos Humanos -->
                     <li class="site-menu-item has-sub">
@@ -40,6 +40,23 @@
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('human-resources.manpowers.index')}}">
                                     <span class="site-menu-title"><i class="icon fa fa-users site-menu-icon"></i> Trabajadores</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!----- ------------- ------>
+
+                    <!-- Operaciones -->
+                    <li class="site-menu-item has-sub">
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon fa fa-map-pin" aria-hidden="true"></i>
+                            <span class="site-menu-title">Operaciones</span>
+                            <span class="site-menu-arrow"></span>
+                        </a>
+                        <ul class="site-menu-sub">
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('operations.route-sheets.index') }}">
+                                    <span class="site-menu-title"><i class="icon fa fa-thumb-tack site-menu-icon" aria-hidden="true"></i> Planilla de Ruta</span>
                                 </a>
                             </li>
                         </ul>
@@ -159,11 +176,6 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.relationships.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon md-male-female font-size-18" aria-hidden="true"></i>Relaciones Fam.</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.forecasts.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-heart" aria-hidden="true"></i> Previsiones</span>
                                 </a>
@@ -176,6 +188,16 @@
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.professions.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-briefcase" aria-hidden="true"></i> Profesiones</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('maintainers.routes.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-map" aria-hidden="true"></i> Recorridos</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('maintainers.relationships.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon md-male-female font-size-18" aria-hidden="true"></i>Relaciones Fam.</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
@@ -205,6 +227,8 @@
                             </li>
                         </ul>
                     </li>
+                    <!----- ------------- ------>
+
                 </ul>
             </div>
         </div>
