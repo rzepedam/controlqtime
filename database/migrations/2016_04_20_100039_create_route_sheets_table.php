@@ -13,7 +13,7 @@ class CreateRouteSheetsTable extends Migration
             $table->string('num_sheet', 20);
             $table->integer('manpower_id')->unsigned();
             $table->string('turn', 2);
-            $table->enum('state', ['open', 'closed'])->default('open');
+            $table->enum('status', ['open', 'closed'])->default('open');
             $table->timestamps();
 
             $table->foreign('manpower_id')

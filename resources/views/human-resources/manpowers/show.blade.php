@@ -1,5 +1,7 @@
 @extends('layout.index')
 
+@section('title_header') Información de Trabajador @stop
+
 @section('breadcumb')
     <li><a href="javascript:void(0)"><i class="fa fa-street-view"></i> RR.HH</a></li>
     <li><a href="{{ route('human-resources.manpowers.index') }}"><i class="fa fa-users"></i> Trabajadores</a></li>

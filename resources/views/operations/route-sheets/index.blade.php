@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    {{ Html::style('assets/css/sweetalert.css') }}
+
+@stop
+
 @section('title_header') Listado de Planillas de Ruta
     <br />
     <a href="{{ route('operations.route-sheets.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Planilla de Ruta</a>
@@ -43,11 +49,14 @@
 
 @section('scripts')
 
+    {{ Html::script('assets/js/config.js') }}
+    {{ Html::script('assets/js/sweetalert.min.js') }}
+
     <script>
 
         $(document).ready(function(){
 
-            var id = 0;
+            var id      = 0;
 
             /**************************************************
              ************** Initialize components **************
@@ -65,28 +74,68 @@
 
                 e.preventDefault();
 
+                var round   = $('#route_id option:selected').text();
+                var vehicle = $('#vehicle_id option:selected').text();
+
                 $.ajax({
                     type: 'POST',
                     url: '{{ route("operations.rounds.store") }}',
                     data: $('#form-assign-route').serialize() + "&route_sheet_id=" + id,
+                    dataType: 'json',
+                }).done(function(response) {
+                    swal({
+                        title: "Operación Exitosa",
+                        text: "El recorrido " + round + " y el bus con patente " + vehicle + " fueron asociados satisfactoriamente",
+                        type: "success",
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Listo',
+                        closeOnConfirm: true
+                    }, function() {
+                        window.location.href = response[0].url;
+                    });
+                });
+            });
+
+            $('.btnConfirmFinishedRoute').click(function(){
+
+                id = $(this).data('id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/loadRouteAndVehicleSelectedInRound',
+                    data: "id=" + id,
                     async: false,
                     dataType: 'json',
                     success: function(response) {
-                        /*
-                         * Redirección a Home
-                         */
-
-                        window.location.href = response[0].url;
+                        $('#route_select_id').val(response.route.id);
+                        $('#vehicle_select_id').val(response.vehicle.id);
                     },
 
                     error: function (data) {
                         alert('error');
                     }
+                });
+            });
 
+            $('#btnFinishedRoute').click(function(e){
+
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/operations/route-sheets/' + id ,
+                    async: false,
+                    dataType: 'json',
+                    success: function(response) {
+
+                    },
+
+                    error: function (data) {
+                        alert('error');
+                    }
                 });
 
             });
-
 
         });
 

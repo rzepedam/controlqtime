@@ -31,6 +31,7 @@ class CreateManpowersTable extends Migration
             $table->integer('pension_id')->unsigned();
             $table->integer('company_id')->unsigned();
             $table->integer('rating_id')->unsigned();
+            $table->enum('status', ['available', 'unavailable'])->default('available');
 
             $table->timestamps();
 

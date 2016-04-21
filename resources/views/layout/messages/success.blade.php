@@ -3,7 +3,7 @@
     <script>
         $(document).ready(function() {
 
-            toastr.success(
+            toastr.info(
                 '{!! Session::get('success') !!}',
                 '',
                 {

@@ -14,7 +14,7 @@ class RoundController extends Controller
     public function store(RoundRequest $request)
     {
         Round::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        Session::flash('success', 'El Recorrido ' . $request->round . ' fue asociado satisfactoriamente al bus con Patente ' . $request->vehicle . '.');
 
         $response = array(
             'url' => '/operations/route-sheets'
@@ -24,5 +24,10 @@ class RoundController extends Controller
             $response
         ], 200);
 
+    }
+    
+    public function update(Request $request)
+    {
+        dd($request->all());
     }
 }

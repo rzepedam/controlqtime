@@ -1,8 +1,8 @@
-@extends('layout.index')
+ç@extends('layout.index')
 
 @section('css')
 
-    {{ Html::style('assets/css/sweet-alert.css') }}
+    {{ Html::style('assets/css/sweetalert.css') }}
 
 @stop
 
@@ -44,7 +44,7 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/sweet-alert.js') }}
+    {{ Html::script('assets/js/sweetalert.min.js') }}
     {{ Html::script('me/js/delete.js') }}
 
 @stop

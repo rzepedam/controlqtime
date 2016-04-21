@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Manpower;
+use App\Round;
 use App\Trademark;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -27,7 +28,6 @@ class AjaxLoadController extends Controller
 		return $provinces->lists('name', 'id');
     }
 
-
     /**
      * @param Request $request
      * @return mixed
@@ -36,7 +36,6 @@ class AjaxLoadController extends Controller
     	$communes = Province::find($request->get('id'))->communes;
 		return $communes->lists('name', 'id');
     }
-
 
 	/**
 	 * @param Request $request
@@ -68,7 +67,6 @@ class AjaxLoadController extends Controller
 		return response()->json(['success' => true], 200);
     }
 
-
     /**
      * @param Request $request
      */
@@ -76,5 +74,12 @@ class AjaxLoadController extends Controller
 	{
 		$model_vehicles = Trademark::find($request->get('id'))->modelVehicles;
 		return $model_vehicles->lists('name', 'id');
+	}
+
+
+    public function loadRouteAndVehicleSelectedInRound(Request $request)
+	{
+		$round = Round::with(['route', 'vehicle'])->find($request->get('id'));
+        return $round;
 	}
 }

@@ -17,7 +17,7 @@ class RouteSheetController extends Controller
 {
     public function index(Request $request)
     {
-        $route_sheets = RouteSheet::orderBy('id', 'DESC')->paginate(20);
+        $route_sheets = RouteSheet::with(['rounds'])->orderBy('id', 'DESC')->paginate(20);
         $routes = Route::lists('name', 'id');
         $vehicles = DB::table('type_vehicles')
             ->where('type_vehicles.name', 'Bus')
@@ -29,16 +29,36 @@ class RouteSheetController extends Controller
         ));
     }
 
+
     public function create()
     {
         $manpowers = Manpower::lists('full_name', 'id');
         return view('operations.route-sheets.create', compact('manpowers'));
     }
 
+
     public function store(RouteSheetRequest $request)
     {
         RouteSheet::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
-        return redirect()->route('operations.route-sheets.index');
+
+        $response = array(
+            'status' => 'success',
+            'url' => '/operations/route-sheets'
+        );
+
+        return response()->json([
+            $response
+        ], 200);
+    }
+
+    public function show($id)
+    {
+        $route_sheet = RouteSheet::with(['rounds'])->find($id);
+        return view('operations.route-sheets.show', compact('route_sheet'));
+    }
+
+    public function update(RouteSheetRequest $request, $id)
+    {
+        dd($request->all());
     }
 }
