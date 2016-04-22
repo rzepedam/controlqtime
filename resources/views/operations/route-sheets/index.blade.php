@@ -169,7 +169,7 @@
                         }).done(function(response) {
                             swal({
                                 title: "Operación Exitosa",
-                                text: "La Planilla de Ruta ha sido finalizada satisfactoriamente",
+                                text: "Planilla de Ruta Nº <span style='color:#3F51B5'>" + numRouteSheet + "</span> ha sido finalizada satisfactoriamente",
                                 type: "success",
                                 confirmButtonColor: '#3F51B5',
                                 confirmButtonText: 'Listo',
