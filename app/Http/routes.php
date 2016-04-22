@@ -54,7 +54,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'operations'], function() {
 
         Route::resource('route-sheets', 'RouteSheetController');
-        Route::post('route-sheets', ['as' => 'operations.route-sheets.changeStateRoundSheet', 'uses' => 'RouteSheetController@changeStateRoundSheet']);
+        Route::post('route-sheets/changeStateRoundSheet', ['as' => 'operations.route-sheets.changeStateRoundSheet', 'uses' => 'RouteSheetController@changeStateRoundSheet']);
         Route::resource('rounds', 'RoundController');
 
     });

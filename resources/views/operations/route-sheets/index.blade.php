@@ -172,6 +172,7 @@
                                 text: "Planilla de Ruta Nº <span style='color:#3F51B5'>" + numRouteSheet + "</span> ha sido finalizada satisfactoriamente",
                                 type: "success",
                                 confirmButtonColor: '#3F51B5',
+                                html: true,
                                 confirmButtonText: 'Listo',
                                 closeOnConfirm: true
                             }, function() {
