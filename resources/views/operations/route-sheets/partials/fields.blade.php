@@ -12,3 +12,10 @@
         {{ Form::text('turn', null, ['class' => 'form-control text-center']) }}
     </div>
 </div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        {{ Form::label('obs', 'Observaciones') }}
+        {{ Form::textarea('obs', null, ['class' => 'form-control', 'rows' => '3']) }}
+    </div>
+</div>

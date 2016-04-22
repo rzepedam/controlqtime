@@ -14,7 +14,6 @@ class RoundController extends Controller
     public function store(RoundRequest $request)
     {
         Round::create($request->all());
-        Session::flash('success', 'El Recorrido ' . $request->round . ' fue asociado satisfactoriamente al bus con Patente ' . $request->vehicle . '.');
 
         $response = array(
             'url' => '/operations/route-sheets'
@@ -26,8 +25,33 @@ class RoundController extends Controller
 
     }
     
-    public function update(Request $request)
+    public function update($id)
     {
-        dd($request->all());
+        $round = Round::findOrFail($id);
+        $round->status = 'closed';
+        $round->save();
+
+        $response = array(
+            'url' => '/operations/route-sheets'
+        );
+
+        return response()->json([
+            $response
+        ], 200);
+
+    }
+    
+    public function destroy($id)
+    {
+        $round = Round::findOrFail($id);
+        $round->delete();
+
+        $response = array(
+            'success' => true
+        );
+
+        return response()->json([
+            $response
+        ], 200);
     }
 }

@@ -8,6 +8,6 @@ class ManpowerTableSeeder extends Seeder
 
     public function run()
     {
-        factory(App\Manpower::class, 50)->create();
+        factory(App\Manpower::class, 3)->create();
     }
 }

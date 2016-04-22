@@ -11,6 +11,7 @@
 @section('content')
 
 <div class="panel">
+
     {{ Form::open(array('route' => 'maintainers.degrees.store', 'method' => 'POST')) }}
 
         <div class="panel-body">

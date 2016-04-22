@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RouteSheet extends Model
 {
     protected $fillable = [
-        'num_sheet', 'manpower_id', 'turn'
+        'num_sheet', 'manpower_id', 'turn', 'obs'
     ];
 
     /*
@@ -38,7 +38,7 @@ class RouteSheet extends Model
      * @return mixed
      */
     public function getNumRoundsAttribute() {
-        return count($this->rounds);
+        return count($this->rounds->where('status', 'open'));
     }
     
     /**

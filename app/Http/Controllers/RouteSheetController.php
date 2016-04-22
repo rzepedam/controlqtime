@@ -40,15 +40,8 @@ class RouteSheetController extends Controller
     public function store(RouteSheetRequest $request)
     {
         RouteSheet::create($request->all());
-
-        $response = array(
-            'status' => 'success',
-            'url' => '/operations/route-sheets'
-        );
-
-        return response()->json([
-            $response
-        ], 200);
+        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        return redirect()->route('operations.route-sheets.index');
     }
 
     public function show($id)
@@ -57,8 +50,34 @@ class RouteSheetController extends Controller
         return view('operations.route-sheets.show', compact('route_sheet'));
     }
 
-    public function update(RouteSheetRequest $request, $id)
+    public function edit($id)
     {
-        dd($request->all());
+        $route_sheet = RouteSheet::with(['rounds'])->findOrFail($id);
+        $manpowers = Manpower::lists('full_name', 'id');
+        return view('operations.route-sheets.edit', compact('route_sheet', 'manpowers'));
     }
+
+    public function destroy($id)
+    {
+        $route_sheet = RouteSheet::findOrFail($id);
+        $route_sheet->delete();
+        Session::flash('success', 'El registro ' . $route_sheet->name . ' fue eliminado satisfactoriamente.');
+        return redirect()->route('operations.route-sheets.index');
+    }
+    
+    public function changeStateRoundSheet(Request $request)
+    {
+        $route_sheet = RouteSheet::find($request->get('id'));
+        $route_sheet->status = 'closed';
+        $route_sheet->save();
+
+        $response = array(
+            'url' => '/operations/route-sheets'
+        );
+
+        return response()->json([
+            $response
+        ], 200);
+    }
+    
 }

@@ -58,10 +58,6 @@
 
             var id      = 0;
 
-            /**************************************************
-             ************** Initialize components **************
-             **************************************************/
-
             $('.mitooltip').tooltip();
 
             $("#btnAssignRoute").click(function(){
@@ -104,34 +100,84 @@
                     type: 'POST',
                     url: '/loadRouteAndVehicleSelectedInRound',
                     data: "id=" + id,
-                    async: false,
                     dataType: 'json',
                     success: function(response) {
-                        $('#route_select_id').val(response.route.id);
-                        $('#vehicle_select_id').val(response.vehicle.id);
+                        swal({
+                            title: "Desea finalizar el recorrido <br /><span style='color:#16a085'>" + response.route.name + "</span> asociado al bus <span style='color:#16a085'>" + response.vehicle.patent + "</span>",
+                            text: "Recuerde que una vez finalizado, podrá ver el detalle en la actual Planilla de Ruta.",
+                            type: "warning",
+                            showCancelButton: true,
+                            html: true,
+                            confirmButtonColor: '#DD6B55',
+                            confirmButtonText: 'Finalizar',
+                            cancelButtonText: 'Cancelar',
+                            closeOnConfirm: false,
+                        }, function() {
+                            $.ajax({
+                                type: "PUT",
+                                url: $('#form-round-update').attr('action'),
+                                dataType: 'json',
+                            }).done(function(response) {
+                                swal({
+                                    title: "Operación Exitosa",
+                                    text: "El recorrido ha sido finalizado satisfactoriamente",
+                                    type: "success",
+                                    confirmButtonColor: '#DD6B55',
+                                    confirmButtonText: 'Listo',
+                                    closeOnConfirm: true
+                                }, function() {
+                                    window.location.href = response[0].url;
+                                });
+                            });
+                        });
                     },
 
-                    error: function (data) {
+                    error: function () {
                         alert('error');
                     }
                 });
             });
 
-            $('#btnFinishedRoute').click(function(e){
+            $('.btnFinishedRouteSheet').click(function(){
 
-                e.preventDefault();
+                id = $(this).data('id');
+                var numRouteSheet = $(this).parents('tr').find('.numRouteSheet').html();
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/operations/route-sheets/' + id ,
-                    async: false,
-                    dataType: 'json',
-                    success: function(response) {
-
-                    },
-
-                    error: function (data) {
-                        alert('error');
+                swal({
+                    title: "Autorización",
+                    text: "Debe ingresar su código de autorización para finalizar la Planilla de Ruta Nº <span style='color:#3F51B5'>" + numRouteSheet + "</span>",
+                    type: "input",
+                    inputType: "password",
+                    html: true,
+                    inputPlaceholder: "Introduzca su código aquí",
+                    showCancelButton: true,
+                    showLoaderOnConfirm: true,
+                    confirmButtonText: 'Finalizar',
+                    confirmButtonColor: '#3F51B5',
+                    cancelButtonText: 'Cancelar',
+                    closeOnConfirm: false
+                }, function(typedPassword) {
+                    if (typedPassword === "") {
+                        swal.showInputError("Es necesario el código para continuar");
+                        return false;
+                    }else {
+                        $.ajax({
+                            type: 'POST',
+                            url: '{{ route('operations.route-sheets.changeStateRoundSheet') }}',
+                            data: "id=" + id + "&code=" + typedPassword,
+                            dataType: 'json'
+                        }).done(function(response) {
+                            swal({
+                                title: "Operación Exitosa",
+                                text: "La Planilla de Ruta ha sido finalizada satisfactoriamente",
+                                type: "success",
+                                confirmButtonColor: '#3F51B5',
+                                confirmButtonText: 'Listo',
+                                closeOnConfirm: true
+                            }, function() {
+                                window.location.href = response[0].url;
+                            });
+                        });
                     }
                 });
 

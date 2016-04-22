@@ -19,7 +19,8 @@ class CreateRoundsTable extends Migration
             $table->foreign('route_sheet_id')
                 ->references('id')
                 ->on('route_sheets')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->foreign('route_id')
                 ->references('id')

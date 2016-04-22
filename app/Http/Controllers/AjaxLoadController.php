@@ -69,7 +69,10 @@ class AjaxLoadController extends Controller
 
     /**
      * @param Request $request
-     */
+	 *
+	 * Carga modelo de vehículos en base a la selección
+	 * de la marca que se realiza. Asociado a evento onChange
+	 */
     public function loadModelVehicles(Request $request)
 	{
 		$model_vehicles = Trademark::find($request->get('id'))->modelVehicles;
@@ -77,6 +80,13 @@ class AjaxLoadController extends Controller
 	}
 
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     *
+     * Busca recorrido y bus asociado a la vuelta actual
+     *
+     */
     public function loadRouteAndVehicleSelectedInRound(Request $request)
 	{
 		$round = Round::with(['route', 'vehicle'])->find($request->get('id'));

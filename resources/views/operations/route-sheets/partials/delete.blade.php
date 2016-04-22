@@ -1,6 +1,6 @@
-{{ Form::open(['route' => ['maintainers.degrees.destroy', $degree], 'method' => 'DELETE', 'id' => 'form-delete']) }}
+{{ Form::open(['route' => ['operations.route-sheets.destroy', $route_sheet], 'method' => 'DELETE', 'id' => 'form-delete']) }}
 
-    <button class="btn btn-block btn-squared btn-danger waves-effect waves-light btn-delete" data-id="{{ $degree->id }}" data-toggle="modal" data-target="#mi_delete"><i class="fa fa-trash-o fa-lg"></i> Eliminar Registro</button>
+    <button class="btn btn-block btn-squared btn-danger waves-effect waves-light btn-delete" data-id="{{ $route_sheet->id }}" data-toggle="modal" data-target="#mi_delete"><i class="fa fa-trash-o fa-lg"></i> Eliminar Registro</button>
 
 {{ Form::close() }}
 

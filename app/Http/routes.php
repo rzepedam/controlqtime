@@ -54,6 +54,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'operations'], function() {
 
         Route::resource('route-sheets', 'RouteSheetController');
+        Route::post('route-sheets', ['as' => 'operations.route-sheets.changeStateRoundSheet', 'uses' => 'RouteSheetController@changeStateRoundSheet']);
         Route::resource('rounds', 'RoundController');
 
     });
@@ -110,12 +111,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('verificaEmail', 'AjaxLoadController@verificaEmail');
     Route::post('loadModelVehicles', 'AjaxLoadController@loadModelVehicles');
     Route::post('loadRouteAndVehicleSelectedInRound', 'AjaxLoadController@loadRouteAndVehicleSelectedInRound');
-
-    /*
-     * Session Controller
-     */
-
-    Route::post('deleteElementSession', 'SessionController@destroy');
 
 });
 
