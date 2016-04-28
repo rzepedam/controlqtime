@@ -1,26 +1,28 @@
-<div class="box box-primary">
-    <div class="box-body table-responsive no-padding">
-        <table class="table table-hover">
-            <thead>
+<div class="panel">
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-condensed">
+                <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Terminal</th>
-                    <th class="text-center">Acciones</th>
+                    <th class="col-md-1">ID</th>
+                    <th class="col-md-4">Nombre</th>
+                    <th class="col-md-5">Terminal</th>
+                    <th class="col-md-2 text-center">Acciones</th>
                 </tr>
-            </thead>
-            <tbody>
-            @foreach($areas as $area)
-                <tr data-id="{{ $area->id }}">
-                    <td>{{ $area->id }}</td>
-                    <td>{{ $area->name }}</td>
-                    <td>{{ $area->terminal->name }}</td>
-                    <td class="text-center">
-                        <a href="{{ route('maintainers.areas.edit', $area) }}" class="btn btn-success btn-flat"><i class="fa fa-pencil"></i> Editar</a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach($areas as $area)
+                    <tr data-id="{{ $area->id }}">
+                        <td>{{ $area->id }}</td>
+                        <td>{{ $area->name }}</td>
+                        <td>{{ $area->terminal->name }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('maintainers.areas.edit', $area) }}" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> Editar</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

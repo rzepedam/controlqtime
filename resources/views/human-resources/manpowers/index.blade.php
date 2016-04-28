@@ -40,11 +40,11 @@
 
 
     {{ Html::script('assets/js/sweetalert.min.js') }}
+    {{ Html::script('assets/js/config.js') }}
 
     <script>
 
         $(document).ready(function(){
-
 
             /**************************************************
              ************** Initialize components **************
@@ -52,6 +52,9 @@
 
             $('.mitooltip').tooltip();
 
+            /*
+             * Delete Data in Session Storage
+             */
 
             $('#modalSessionConfirmation').on("click", function(event) {
 
@@ -99,6 +102,88 @@
                 });
             });
 
+            /*
+             * Start Daily Assistance
+             */
+
+            $('.btnStartDailyAssistance').click(function(){
+
+                var id = $(this).data('id');
+
+                swal({
+                    title: "Confirma Iniciar la Jornada Laboral del Trabajador con ID: <span style='color:#3F51B5'>" + id + "</span>",
+                    text: "Al iniciar, el Trabajador comenzará inmediatamente su jornada laboral.",
+                    type: "info",
+                    showCancelButton: true,
+                    showLoaderOnConfirm: true,
+                    closeOnConfirm: false,
+                    confirmButtonText: 'Confirmar',
+                    cancelButtonText: 'Cancelar',
+                    html: true,
+                },
+                function(isConfirm){
+                    if(isConfirm) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '{{ route('human-resources.manpowers.startDailyAssistance') }}',
+                            data: "manpower_id=" + id,
+                            dataType: 'json',
+                            success: function (response) {
+                                swal({
+                                    title: "<span style='color:#A5DC86'>" + response[0].name + "</span> <br />inició su jornada laboral satisfactoriamente",
+                                    text: "Puede continuar con el ingreso de un nuevo Trabajador",
+                                    type: "success",
+                                    html: true,
+                                }, function(isConfirm) {
+                                    window.location.href = response[0].url;
+                                });
+                            },
+                        });
+                    }
+                });
+
+            });
+
+            /*
+             * Stop Daily Assistance
+             */
+
+            $('.btnUpdateDailyAssistance').click(function(){
+
+                var id = $(this).data('id');
+
+                swal({
+                    title: "Desea finalizar la Jornada Laboral del Trabajador con ID: <span style='color:#3F51B5'>" + id + "</span>",
+                    text: "",
+                    type: "warning",
+                    showCancelButton: true,
+                    html: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Finalizar',
+                    cancelButtonText: 'Cancelar',
+                    closeOnConfirm: false,
+                }, function(isConfirm) {
+                    if(isConfirm) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('human-resources.manpowers.updateDailyAssistance') }}",
+                            data: $('#form-assistance-update').serialize(),
+                            dataType: 'json',
+                            success: function (response) {
+                                alert('...');
+                                /*swal({
+                                    title: "<span style='color:#A5DC86'>" + response[0].name + "</span> <br />inició su jornada laboral satisfactoriamente",
+                                    text: "Puede continuar con el ingreso de un nuevo Trabajador",
+                                    type: "success",
+                                    html: true,
+                                }, function(isConfirm) {
+                                    window.location.href = response[0].url;
+                                });*/
+                            },
+                        });
+                    }
+                })
+            });
         });
 
     </script>

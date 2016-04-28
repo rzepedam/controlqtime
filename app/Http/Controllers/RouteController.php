@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RouteRequest;
 use App\Route;
+use App\Terminal;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,7 +20,8 @@ class RouteController extends Controller
 
     public function create()
     {
-        return view('maintainers.routes.create');
+        $terminals = Terminal::lists('name', 'id');
+        return view('maintainers.routes.create', compact('terminals'));
     }
 
     public function store(RouteRequest $request)
@@ -31,8 +33,9 @@ class RouteController extends Controller
 
     public function edit($id)
     {
+        $terminals = Terminal::lists('name', 'id');
         $route = Route::findOrFail($id);
-        return view('maintainers.routes.edit', compact('route'));
+        return view('maintainers.routes.edit', compact('route', 'terminals'));
     }
 
     public function update(RouteRequest $request, $id)

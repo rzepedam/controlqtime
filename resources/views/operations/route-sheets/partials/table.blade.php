@@ -34,6 +34,7 @@
                         @endif
 
                         <td class="text-center">
+
                             <a href="{{ route('operations.route-sheets.show', $route_sheet) }}" class="btn btn-squared btn-info waves-effect waves-light mitooltip" title="Ver"><i class="fa fa-search"></i> </a>
                             <a href="{{ route('operations.route-sheets.edit', $route_sheet) }}" class="btn btn-squared btn-success waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> </a>
                             @if ($route_sheet->num_rounds > 0)
@@ -46,6 +47,7 @@
                                 <a id="btnAssignRoute" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" data-target="#assignRouteModal" data-id="{{ $route_sheet->id }}" data-toggle="modal" title="Asignar Recorrido"><i class="fa fa-map-signs" aria-hidden="true"></i> </a>
                             @endif
                             <a class="btn btn-squared btn-primary waves-effect waves-light mitooltip btnFinishedRouteSheet" data-id="{{ $route_sheet->id }}" title="Finalizar Planilla de Ruta"><i class="fa fa-check-square-o" aria-hidden="true"></i> </a>
+
                         </td>
                     </tr>
                 @endforeach

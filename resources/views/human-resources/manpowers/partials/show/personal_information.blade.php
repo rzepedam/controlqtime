@@ -16,7 +16,7 @@
 
             </div>
             <div class="ribbon ribbon-bookmark ribbon-info">
-                <span class="ribbon-inner">COD REF : 234568765434567</span>
+                <span class="ribbon-inner">Cód. Interno : {{ $manpower->code_internal }}</span>
             </div>
             <div class="panel-body">
                 <br />
@@ -30,7 +30,7 @@
                                         <td><i class="fa fa-street-view"></i> {{ $manpower->full_name }}</td>
                                     </tr>
                                     <tr class="text-center">
-                                        <td><i class="fa fa-building-o"></i> {{ $manpower->company->firm_name }}</td>
+                                        <td><i class="fa fa-building-o"></i><a href="{{ route('maintainers.companies.show', $manpower->company->id) }}" style="color: #757575"> {{ $manpower->company->firm_name }}</a></td>
                                     </tr>
                                     <tr class="text-center">
                                         <td><i class="fa fa-envelope"></i> {{ Html::mailto($manpower->email, null, ['class' => 'text-muted']) }}</td>
@@ -50,6 +50,14 @@
                         <div class="col-md-offset-1 col-md-10">
                             <table class="table table-striped table-bordered">
                                 <tbody>
+                                    <tr>
+                                        <td class="col-md-3">Terminal</td>
+                                        <td class="text-center"><i class="fa fa-road"></i> {{ $manpower->area->terminal->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3">Área</td>
+                                        <td class="text-center"><i class="fa fa-sitemap"></i> {{ $manpower->area->name }}</td>
+                                    </tr>
                                     <tr>
                                         <td class="col-md-3">Rut</td>
                                         <td class="text-center"> {{ $manpower->rut }}</td>

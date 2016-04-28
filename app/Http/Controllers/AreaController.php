@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Terminal;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -14,13 +15,14 @@ class AreaController extends Controller
 {
 	public function index(Request $request)
     {
-        $areas = Area::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $areas = Area::name($request->get('table_search'))->orderBy('id', 'DESC')->paginate(20);
         return view('maintainers.areas.index', compact('areas'));
     }
 
     public function create()
     {
-        return view('maintainers.areas.create');
+        $terminals = Terminal::lists('name', 'id');
+        return view('maintainers.areas.create', compact('terminals'));
     }
 
     public function store(AreaRequest $request)
@@ -32,8 +34,9 @@ class AreaController extends Controller
 
     public function edit($id)
     {
-        $area      = Area::findOrFail($id);
-        return view('maintainers.areas.edit');
+        $area       = Area::findOrFail($id);
+        $terminals  = Terminal::lists('name', 'id');
+        return view('maintainers.areas.edit', compact('area', 'terminals'));
     }
 
     public function update(AreaRequest $request, $id)

@@ -39,11 +39,19 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::resource('manpowers', 'ManpowerController');
         Route::group(['prefix' => 'manpowers'], function(){
+            
+            /* Manpowers create */
             Route::post('step1', ['as' => 'human-resources.manpowers.step1', 'uses' => 'ManpowerController@step1']);
             Route::post('step2', ['as' => 'human-resources.manpowers.step2', 'uses' => 'ManpowerController@step2']);
             Route::get('/session/destroyManpowerData', ['as' => 'destroyManpowerData', 'uses' => 'ManpowerController@destroyManpowerData']);
-        });
 
+            /* Manpowers update */
+            Route::put('updateStep1/{id}', ['as' => 'human-resources.manpowers.updateStep1', 'uses' => 'ManpowerController@updateStep1']);
+
+            /* Daily Assistance */
+            Route::post('startDailyAssistance', ['as' => 'human-resources.manpowers.startDailyAssistance', 'uses' => 'DailyAssistanceController@startAssistance']);
+            Route::post('updateDailyAssistance', ['as' => 'human-resources.manpowers.updateDailyAssistance', 'uses' => 'DailyAssistanceController@updateAssistance']);
+        });
     });
 
 

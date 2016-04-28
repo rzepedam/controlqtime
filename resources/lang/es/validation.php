@@ -107,6 +107,8 @@ return [
 
     'attributes' => [
 
+        'code_internal'                         => 'Código Interno',
+
         /*
          * Vehículos
          */
@@ -117,6 +119,7 @@ return [
         'model_vehicle_id'                      => 'Modelo',
         'terminal_id'                           => 'Terminal',
         'year'                                  => 'Año',
+
 
         /*
          * Parentescos Familiares
@@ -301,6 +304,8 @@ return [
 
         'address'                               => 'Dirección',
         'birthday'                              => 'Fecha de Nac.',
+        'region_id'                             => 'Región',
+        'province_id'                           => 'Provincia',
         'commune_id'                            => 'Comuna',
         'company_id'                            => 'Empresa',
         'email'                                 => 'Email',

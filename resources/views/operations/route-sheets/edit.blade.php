@@ -136,6 +136,9 @@
 
     @include('operations.route-sheets.partials.delete')
 
+    <br />
+    <br />
+
 @stop
 
 @section('scripts')
@@ -151,9 +154,9 @@
 
             $('.btnEliminarRound').click(function(){
 
-                var id = $(this).data('id');
-                var row =  $(this).parents('tr');
-                var num = $(this).parents('tr').find('.number').html();
+                var id  = $(this).data('id');
+                var row = $(this).parents('tr');
+                var num = $(this).parents('tr').find('.number').html();9
 
                 swal({
                     title: "Desea eliminar el recorrido <span style='color:#F8BB86'>#" + num + "</span>",
@@ -171,13 +174,10 @@
                         url: $('#form-delete' + id).attr('action'),
                         dataType: 'json',
                     }).done(function(response) {
-                        if(response[0].success)
-                        {
-                            swal.close();
-                            setTimeout (function () {
-                                row.fadeOut(800);
-                            });
-                        }
+                            if(response[0].success) {
+                                swal.close();
+                                row.fadeOut('800');
+                            }
 
                     });
                 });

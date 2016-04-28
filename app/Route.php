@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Route extends Model
 {
     protected $fillable = [
-        'name'
+        'name', 'terminal_id'
     ];
 
     public function scopeName($query, $name)
@@ -18,6 +18,19 @@ class Route extends Model
             $query->where("name", "LIKE", "%$not_space_name%");
         }
     }
+
+
+    /*
+     * Relationships
+     */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function terminal() {
+        return $this->belongsTo('App\Terminal');
+    }
+
 
     /*
      * Mutators

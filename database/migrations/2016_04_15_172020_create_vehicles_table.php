@@ -13,7 +13,7 @@ class CreateVehiclesTable extends Migration
             $table->integer('type_vehicle_id')->unsigned();
             $table->integer('model_vehicle_id')->unsigned();
             $table->integer('terminal_id')->unsigned();
-            $table->integer('operator_id')->unsigned()->default(1);
+            $table->integer('company_id')->unsigned();
             $table->string('patent', 15)->unique();
             $table->string('year', 4);
             $table->string('code');
@@ -35,9 +35,9 @@ class CreateVehiclesTable extends Migration
                 ->on('terminals')
                 ->onUpdate('cascade');
 
-            $table->foreign('operator_id')
+            $table->foreign('company_id')
                 ->references('id')
-                ->on('operators')
+                ->on('companies')
                 ->onUpdate('cascade');
 
         });

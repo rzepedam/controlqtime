@@ -1,3 +1,4 @@
+
 @extends('layout.index')
 
 @section('title_header') Editar Registro @stop
@@ -72,7 +73,10 @@
                 });
             }
 
-            /** added class success ans icon check to rut ans email */
+            /*
+             * added class success ans icon check to rut ans email
+             */
+
             $('#rut').closest('.form-group').addClass('has-success has-feedback');
             $('#rut').closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
             $('#email').closest('.form-group').addClass('has-success has-feedback');

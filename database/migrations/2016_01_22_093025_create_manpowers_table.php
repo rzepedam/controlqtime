@@ -11,7 +11,6 @@ class CreateManpowersTable extends Migration
         Schema::create('manpowers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('photo');
-            $table->string('cod_ref');
             $table->string('male_surname', 30);
             $table->string('female_surname', 30);
             $table->string('first_name', 30);
@@ -31,6 +30,8 @@ class CreateManpowersTable extends Migration
             $table->integer('pension_id')->unsigned();
             $table->integer('company_id')->unsigned();
             $table->integer('rating_id')->unsigned();
+            $table->integer('area_id')->unsigned();
+            $table->string('code_internal');
             $table->enum('status', ['available', 'unavailable'])->default('available');
 
             $table->timestamps();
@@ -75,6 +76,11 @@ class CreateManpowersTable extends Migration
                 ->references('id')
                 ->on('ratings')
                 ->onUpdate('cascade');
+
+            $table->foreign('area_id')
+                ->references('id')
+                ->on('areas')
+                ->onupdate('cascade');
 
         });
     }

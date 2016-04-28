@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Area;
 use App\Http\Requests\Step1Request;
 use App\Company;
 use App\Disability;
@@ -19,7 +20,6 @@ use App\Study;
 use App\TypeCertification;
 use App\TypeProfessionalLicense;
 use App\TypeSpeciality;
-use Validator;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -43,11 +43,12 @@ class ManpowerController extends Controller
 {
     /**
      * @param Request $request
+     *
      * @return mixed
      */
     public function index(Request $request)
     {
-        $manpowers = Manpower::name($request->get('table_search'))->orderBy('id', 'DESC')->paginate(25);
+        $manpowers = Manpower::with(['dailyAssistances'])->orderBy('id', 'DESC')->paginate(25);
         return view('human-resources.manpowers.index', compact('manpowers'));
     }
 
@@ -79,18 +80,20 @@ class ManpowerController extends Controller
         $manpowers = Manpower::lists('full_name', 'id');
         $type_exams = TypeExam::lists('name', 'id');
         $degrees = Degree::lists('name', 'id');
+        $areas = Area::lists('name', 'id');
 
         return view('human-resources.manpowers.create', compact(
             'countries', 'genders', 'regions', 'provinces', 'communes', 'forecasts', 'mutualities',
             'pensions', 'companies', 'ratings', 'relationships', 'manpowers', 'degrees', 'institutions',
             'type_certifications', 'type_specialities', 'type_professional_licenses',
-            'type_disabilities', 'type_diseases', 'type_exams')
-        );
+            'type_disabilities', 'type_diseases', 'type_exams', 'areas'
+        ));
     }
 
 
     /**
      * @param Step1Request $request
+     *
      * @return mixed
      */
     public function step1(Step1Request $request)
@@ -116,6 +119,8 @@ class ManpowerController extends Controller
         Session::put('pension_id', $request->get('pension_id'));
         Session::put('company_id', $request->get('company_id'));
         Session::put('rating_id', $request->get('rating_id'));
+        Session::put('area_id', $request->get('area_id'));
+        Session::put('code_internal', $request->get('code_internal'));
         Session::put('count_family_relationships', $request->get('count_family_relationships'));
 
         for($i = 0; $i < $request->get('count_family_relationships'); $i++) {
@@ -132,6 +137,7 @@ class ManpowerController extends Controller
 
     /**
      * @param Step2Request $request
+     *
      * @return mixed
      */
     public function step2(Step2Request $request)
@@ -180,6 +186,7 @@ class ManpowerController extends Controller
 
     /**
      * @param Step3Request $request
+     *
      * @return mixed
      */
     public function store(Step3Request $request)
@@ -326,57 +333,62 @@ class ManpowerController extends Controller
     {
         $manpower = Manpower::with([
             'company', 'nationality', 'gender', 'familyRelationships', 'studies', 'certifications', 'specialities',
-            'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities'
+            'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities', 'area'
         ])->findOrFail($id);
         
-        $countries = Country::lists('name', 'id');
-        $genders = Gender::lists('name', 'id');
-        $regions = Region::lists('name', 'id');
-        $regionSelected = $manpower->commune->province->region;
-        $provinces = Region::find($regionSelected->id)->provinces->lists('name', 'id');
-        $provinceSelected = $manpower->commune->province;
-        $communes = Province::find($provinceSelected->id)->communes->lists('name', 'id');
-        $forecasts = Forecast::lists('name', 'id');
-        $mutualities = Mutuality::lists('name', 'id');
-        $pensions = Pension::lists('name', 'id');
-        $companies = Company::lists('firm_name', 'id');
-        $ratings = Rating::lists('name', 'id');
-        $relationships = Relationship::lists('name', 'id');
-        $manpowers = Manpower::lists('full_name', 'id');
-        $degrees = Degree::lists('name', 'id');
-        $institutions = Institution::lists('name', 'id');
-        $type_certifications = TypeCertification::lists('name', 'id');
-        $type_specialities = TypeSpeciality::lists('name', 'id');
+        $countries                  = Country::lists('name', 'id');
+        $genders                    = Gender::lists('name', 'id');
+        $regions                    = Region::lists('name', 'id');
+        $regionSelected             = $manpower->commune->province->region;
+        $provinces                  = Region::find($regionSelected->id)->provinces->lists('name', 'id');
+        $provinceSelected           = $manpower->commune->province;
+        $communes                   = Province::find($provinceSelected->id)->communes->lists('name', 'id');
+        $forecasts                  = Forecast::lists('name', 'id');
+        $mutualities                = Mutuality::lists('name', 'id');
+        $pensions                   = Pension::lists('name', 'id');
+        $companies                  = Company::lists('firm_name', 'id');
+        $ratings                    = Rating::lists('name', 'id');
+        $relationships              = Relationship::lists('name', 'id');
+        $manpowers                  = Manpower::lists('full_name', 'id');
+        $degrees                    = Degree::lists('name', 'id');
+        $institutions               = Institution::lists('name', 'id');
+        $type_certifications        = TypeCertification::lists('name', 'id');
+        $type_specialities          = TypeSpeciality::lists('name', 'id');
         $type_professional_licenses = TypeProfessionalLicense::lists('name', 'id');
-        $type_disabilities = TypeDisability::lists('name', 'id');
-        $type_diseases = TypeDisease::lists('name', 'id');
-        $type_exams = TypeExam::lists('name', 'id');
+        $type_disabilities          = TypeDisability::lists('name', 'id');
+        $type_diseases              = TypeDisease::lists('name', 'id');
+        $type_exams                 = TypeExam::lists('name', 'id');
+        $areas                      = Area::lists('name', 'id');
 
         return view('human-resources.manpowers.edit', compact(
             'manpower', 'countries', 'genders', 'regions', 'regionSelected', 'provinces', 'provinceSelected',
             'communes', 'forecasts', 'mutualities', 'pensions', 'companies', 'ratings', 'relationships', 'manpowers',
             'degrees', 'institutions', 'type_certifications', 'type_specialities', 'type_professional_licenses',
-            'type_disabilities', 'type_diseases', 'type_exams'
+            'type_disabilities', 'type_diseases', 'type_exams', 'areas'
         ));
 
     }
 
-    
-    public function update() 
+
+
+    public function updateStep1(Step1Request $request, $id)
     {
         dd($request->all());
+        $manpower = Manpower::find($id);
+        $manpower->fill($request->all());
+        $manpower->save();
     }
-
     
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function show($id)
     {
         $manpower = Manpower::with([
             'company', 'nationality', 'gender', 'familyRelationships', 'studies', 'certifications', 'specialities',
-            'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities'
+            'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities', 'area'
         ])->findOrFail($id);
 
         return view('human-resources.manpowers.show', compact('manpower'));
@@ -410,6 +422,8 @@ class ManpowerController extends Controller
         Session::forget('pension_id');
         Session::forget('company_id');
         Session::forget('rating_id');
+        Session::forget('area_id');
+        Session::forget('code_internal');
 
         for ($i = 0; $i < Session::get('count_family_relationships'); $i++) {
             Session::forget('relationship_id' . $i);

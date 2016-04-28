@@ -358,7 +358,6 @@
     {{ Html::script('me/js/validations/validaEmail.js') }}
     {{ Html::script('assets/js/formValidation.js') }}
     {{ Html::script('assets/js/form-validation/bootstrap.js') }}
-    {{ Html::script('assets/js/formValidation_es.js') }}
     {{ Html::script('assets/js/jquery.matchHeight-min.js') }}
     {{ Html::script('assets/js/jquery-wizard.js') }}
     {{ Html::script('assets/js/bootstrap-datepicker.js') }}
@@ -501,10 +500,10 @@
 
             $(document).on('click', '.delete-elements', function () {
 
-                var element = $(this).attr('id');
-                var padre = $(this).parent().parent().parent().parent().parent();
+                var element     = $(this).attr('id');
+                var padre       = $(this).parent().parent().parent().parent().parent();
                 $(this).parent().parent().parent().parent().remove();
-                var span = padre.children("span");
+                var span        = padre.children("span");
 
                 switch (element) {
                     case 'family_relationship':
@@ -955,6 +954,18 @@
              ************************** Validation ***************************
              *****************************************************************/
 
+            $('#datePicker')
+                .datepicker({
+                    format: 'dd-mm-yyyy'
+                })
+                .on('changeDate', function(e) {
+                    // Set the value for the date input
+                    $("#selectedDate").val($("#datePicker").datepicker('getFormattedDate'));
+
+                    // Revalidate the date field
+                    $('#step1').formValidation('revalidateField', 'selectedDate');
+                });
+
 
             $('#step1')
                 .formValidation({
@@ -1017,15 +1028,30 @@
                             }
                         },
                         birthday: {
-
                             validators: {
+                                date: {
+                                    format: 'DD-MM-YYYY',
+                                    message: 'The date is not a valid'
+                                },
                                 notEmpty: {
                                     message: 'El campo Fecha de Nacimiento es obligatorio.'
                                 },
                                 blank:{}
                             }
                         },
-                        country_id: {
+                        selectedDate: {
+                            excluded: false,
+                            validators: {
+                                notEmpty: {
+                                    message: 'The date is required 2'
+                                },
+                                date: {
+                                    format: 'DD-MM-YYYY',
+                                    message: 'The date is not a valid 2'
+                                }
+                            }
+                        },
+                        nationality_id: {
                             validators: {
                                 notEmpty: {
                                     message: 'El campo Nacionalidad es obligatorio.'
@@ -1047,6 +1073,22 @@
                                     message: 'El campo Dirección es obligatorio.'
                                 },
                                 blank:{}
+                            }
+                        },
+                        region_id: {
+                            validators: {
+                                /*notEmpty: {
+                                 message: 'El campo Región es obligatorio.'
+                                 },*/
+                                blank: {}
+                            }
+                        },
+                        province_id: {
+                            validators: {
+                                /*notEmpty: {
+                                 message: 'El campo Provincia es obligatorio.'
+                                 },*/
+                                blank: {}
                             }
                         },
                         commune_id: {
@@ -1130,6 +1172,22 @@
                                 blank:{}
                             }
                         },
+                        area_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'El campo Área es obligatorio.'
+                                },
+                                blank:{}
+                            }
+                        },
+                        code_internal: {
+                            validators: {
+                                /*notEmpty: {
+                                 message: 'El campo Código Interno es obligatorio.'
+                                 },*/
+                                blank: {}
+                            }
+                        }
                     }
                 })
 

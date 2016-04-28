@@ -140,8 +140,8 @@
 
             $('.btnFinishedRouteSheet').click(function(){
 
-                id = $(this).data('id');
-                var numRouteSheet = $(this).parents('tr').find('.numRouteSheet').html();
+                id                  = $(this).data('id');
+                var numRouteSheet   = $(this).parents('tr').find('.numRouteSheet').html();
 
                 swal({
                     title: "Autorización",
@@ -157,29 +157,33 @@
                     cancelButtonText: 'Cancelar',
                     closeOnConfirm: false
                 }, function(typedPassword) {
+
+                    if (typedPassword === false) return false;
+
                     if (typedPassword === "") {
                         swal.showInputError("Es necesario el código para continuar");
                         return false;
-                    }else {
-                        $.ajax({
-                            type: 'POST',
-                            url: '{{ route('operations.route-sheets.changeStateRoundSheet') }}',
-                            data: "id=" + id + "&code=" + typedPassword,
-                            dataType: 'json'
-                        }).done(function(response) {
-                            swal({
-                                title: "Operación Exitosa",
-                                text: "Planilla de Ruta Nº <span style='color:#3F51B5'>" + numRouteSheet + "</span> ha sido finalizada satisfactoriamente",
-                                type: "success",
-                                confirmButtonColor: '#3F51B5',
-                                html: true,
-                                confirmButtonText: 'Listo',
-                                closeOnConfirm: true
-                            }, function() {
-                                window.location.href = response[0].url;
-                            });
-                        });
                     }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('operations.route-sheets.changeStateRoundSheet') }}',
+                        data: "id=" + id + "&code=" + typedPassword,
+                        dataType: 'json'
+                    }).done(function(response) {
+                        swal({
+                            title: "Operación Exitosa",
+                            text: "Planilla de Ruta Nº <span style='color:#3F51B5'>" + numRouteSheet + "</span> ha sido finalizada satisfactoriamente",
+                            type: "success",
+                            confirmButtonColor: '#3F51B5',
+                            html: true,
+                            confirmButtonText: 'Listo',
+                            closeOnConfirm: true
+                        }, function() {
+                            window.location.href = response[0].url;
+                        });
+                    });
+
                 });
 
             });

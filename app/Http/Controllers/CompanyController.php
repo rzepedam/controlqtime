@@ -146,18 +146,28 @@ class CompanyController extends Controller
         $company->fill($request->all());
         $company->save();
 
-        /* delete legal representive */
+        /*
+         * Delete legal representive
+         */
+
         if ($request->get('id_deletes_legal') != '')
             $this->deleteLegalRepresentative($request->get('id_deletes_legal'));
 
         for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {
 
-            /* new legal */
+            /*
+             * New Legal Representative ID = 0
+             */
+
             if ($request->get('id' . $i) == '0') {
                 $legal = new LegalRepresentative();
                 $legal->company()->associate($company);
             } else {
-                /* update legal */
+
+                /*
+                 * Update legal Representative ID <> 0
+                 */
+
                 $legal = LegalRepresentative::find($request->get('id' . $i));
             }
 
@@ -174,18 +184,28 @@ class CompanyController extends Controller
             $legal->save();
         }
 
-        /* delete subsidiaries */
+        /*
+         * Delete subsidiaries
+         */
+
         if ($request->get('id_deletes_subsidiary') != '')
             $this->deleteSubsidiary($request->get('id_deletes_subsidiary'));
 
         for ($i = 0; $i < $request->get('count_subsidiary'); $i++) {
 
-            /* new subsidiary */
+            /*
+             * New subsidiary
+             */
+
             if ($request->get('id_suc' . $i) == '0') {
                 $subsidiary = new Subsidiary();
                 $subsidiary->company()->associate($company);
             } else {
-                /* update subsidiary */
+
+                /*
+                 * Update Subsidiary
+                 */
+                
                 $subsidiary = Subsidiary::find($request->get('id_suc' . $i));
             }
 

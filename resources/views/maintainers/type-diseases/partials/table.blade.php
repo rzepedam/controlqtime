@@ -16,7 +16,7 @@
                         <td>{{ $type_disease->name }}</td>
                         <td class="text-center">
                             <a href="{{ route('maintainers.type-diseases.show', $type_disease) }}" class="btn btn-squared btn-info waves-effect waves-light mitooltip" title="Ver"><i class="fa fa-search"></i></a>
-                            <a href="{{ route('maintainers.type-diseases.edit', $type_disease) }}" class="btn btn-squared btn-success waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i></a>
+                            <a href="{{ route('maintainers.type-diseases.edit', $type_disease) }}" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i></a>
                         </td>
                     </tr>
                 @endforeach

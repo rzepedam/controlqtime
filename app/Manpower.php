@@ -5,11 +5,13 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Manpower extends Model
 {
     protected $fillable = [
-        'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday', 'nationality_id', 'gender_id', 'address',
-        'commune_id', 'email', 'phone1', 'phone2', 'forecast_id', 'mutuality_id', 'pension_id', 'company_id', 'rating_id'
+        'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday', 'nationality_id',
+        'gender_id', 'address', 'commune_id', 'email', 'phone1', 'phone2', 'forecast_id', 'mutuality_id', 'pension_id',
+        'company_id', 'rating_id', 'area_id', 'code_internal', 'status'
     ];
 
     protected $dates = [
@@ -25,6 +27,9 @@ class Manpower extends Model
         }
     }
 
+    /*
+     * Relationships
+     */
     
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -87,6 +92,14 @@ class Manpower extends Model
      */
     public function rating() {
         return $this->belongsTo('App\Rating');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function area() {
+        return $this->belongsTo('App\Area');
     }
 
 
@@ -163,6 +176,17 @@ class Manpower extends Model
 
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dailyAssistances() {
+        return $this->hasMany('App\DailyAssistance');
+    }
+
+    /*
+     * Mutators
+     */
+    
+    /**
      * @param string $value
      */
     public function setMaleSurnameAttribute($value) {
@@ -207,6 +231,17 @@ class Manpower extends Model
      */
     public function setBirthdayAttribute($value) {
         $this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
+    }
+
+    /*
+     * Accesors
+     */
+
+    /**
+     * @return mixed
+     */
+    public function getNumFamilyRelationshipAttribute() {
+        return count($this->familyRelationships);
     }
     
 }

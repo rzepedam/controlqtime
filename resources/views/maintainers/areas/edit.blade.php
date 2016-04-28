@@ -10,21 +10,38 @@
 
 @section('content')
 
-    <div class="box box-success">
-        {!! Form::model($area, array('route' => ['maintainers.areas.update', $area], 'method' => 'PUT' )) !!}
-        <div class="box-body">
-            @include('maintainers.areas.partials.fields')
-        </div>
-        <div class="box-footer">
-            <a href="{{ route('maintainers.areas.index') }}">Volver</a>
-            <button type="submit" class="btn btn-success btn-flat btn-lg pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
-        </div>
-        {!! Form::close() !!}
+    <div class="panel">
+
+        {{ Form::model($area, array('route' => ['maintainers.areas.update', $area], 'method' => 'PUT' )) }}
+
+            <div class="panel-body">
+
+                @include('maintainers.areas.partials.fields')
+
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{ route('maintainers.areas.index') }}">Volver</a>
+                        <button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+                    </div>
+                </div>
+            </div>
+
+
+        {{ Form::close() }}
+
     </div>
-    <br><br><br>
+    <br />
+    <br />
+    <br />
+
     @include('maintainers.areas.partials.delete')
+
 @stop
 
 @section('scripts')
+
     {{ Html::script('me/js/delete.js') }}
+
 @stop

@@ -1,12 +1,3 @@
-/*
- * Insertamos Operador, dependiendo de donde se ejecute el Software (Subus, Alsacia, etc.),
- *
- * este Operador cambiará en el Insert
- */
-
-/* operators | Operadores */
-INSERT INTO operators(name) VALUES('Subus');
-
 
 /* genders | Género */
 INSERT INTO genders(name) VALUES ('Masculino');
@@ -850,3 +841,8 @@ INSERT INTO model_vehicles(trademark_id, name) VALUES(3, 'Marcopolo Gran Viale L
 INSERT INTO terminals(name) VALUES('Terminal Norte');
 INSERT INTO terminals(name) VALUES('Terminal Oriente');
 INSERT INTO terminals(name) VALUES('Terminal Sur');
+
+/* areas | Áreas */
+INSERT INTO areas(terminal_id, name) VALUES(1, 'COF');
+INSERT INTO areas(terminal_id, name) VALUES(1, 'Mantención');
+INSERT INTO areas(terminal_id, name) VALUES(1, 'Gerencia');

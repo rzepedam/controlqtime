@@ -5,7 +5,8 @@
                 <thead>
                     <tr>
                         <th class="col-md-1">ID</th>
-                        <th class="col-md-9">Nombre</th>
+                        <th class="col-md-4">Nombre</th>
+                        <th class="col-md-5">Terminal</th>
                         <th class="text-center col-md-2">Acciones</th>
                     </tr>
                 </thead>
@@ -14,8 +15,9 @@
                     <tr data-id="{{ $route->id }}">
                         <td>{{ $route->id }}</td>
                         <td>{{ $route->name }}</td>
+                        <td>{{ $route->terminal->name }}</td>
                         <td class="text-center">
-                            <a href="{{ route('maintainers.routes.edit', $route) }}" class="btn btn-squared btn-success waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> </a>
+                            <a href="{{ route('maintainers.routes.edit', $route) }}" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> </a>
                         </td>
                     </tr>
                 @endforeach
