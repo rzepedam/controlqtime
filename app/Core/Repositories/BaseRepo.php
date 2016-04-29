@@ -2,30 +2,32 @@
 
 namespace Controlqtime\Core\Repositories;
 
-abstract class BaseRepo
+use Controlqtime\Core\Contracts\BaseRepoInterface;
+
+abstract class BaseRepo implements BaseRepoInterface
 {
-    /**
-     * Return all with name used in Search bar
-     * 
-     * @param $request
-     * 
-     * @return mixed
-     */
-    public function all($request)
+    public function all()
     {
-        return $this->model->name($request->get('table_search'))->orderBy('name')->paginate(20);
+        return $this->model->orderBy('name')->paginate(20);
     }
-
-
-    /**
-     * Return element with specific id
-     * 
-     * @param $id
-     * 
-     * @return mixed
-     */
-    public function findOrFail($id)
+    
+    public function find($id)
     {
         return $this->model->findOrFail($id);
+    }
+
+    public function create(array $request)
+    {
+        return $this->model->create($request);
+    }
+
+    public function update(array $request, $id)
+    {
+        return $this->model->findOrFail($id)->fill($request)->save();
+    }
+
+    public function delete($id)
+    {
+        $this->model->destroy($id);
     }
 }

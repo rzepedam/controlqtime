@@ -76,11 +76,6 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="javascript:void(0)">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-archive" aria-hidden="true"></i> Bodegas</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.ratings.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon md-seat font-size-18" aria-hidden="true"></i>Cargos</span>
                                 </a>

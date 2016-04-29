@@ -2,25 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 use Controlqtime\Http\Requests\ProfessionRequest;
-use Controlqtime\Core\Contracts\ProfessionRepoInterface;
-
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 
 class ProfessionController extends Controller
 {
     protected $profession;
     
-    public function __construct(ProfessionRepoInterface $profession)
+    public function __construct(BaseRepoInterface $profession)
     {
         $this->profession = $profession;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $professions = $this->profession->all($request);
+        $professions = $this->profession->all();
         return view('maintainers.professions.index', compact('professions'));
     }
 
@@ -31,32 +29,28 @@ class ProfessionController extends Controller
 
     public function store(ProfessionRequest $request)
     {
-        Profession::create($request->all());
+        $this->profession->create($request->all());
         Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.professions.index');
     }
 
     public function edit($id)
     {
-        $profession = $this->profession->findOrFail($id);
+        $profession = $this->profession->find($id);
         return view('maintainers.professions.edit', compact('profession'));
     }
 
     public function update(ProfessionRequest $request, $id)
     {
-        $profession = Profession::findOrFail($id);
-        $message = 'El registro ' . $profession->name . ' fue actualizado satisfactoriamente.';
-        $profession->fill($request->all());
-        $profession->save();
-        Session::flash('success', $message);
+        $this->profession->update($request->all(), $id);
+        Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
         return redirect()->route('maintainers.professions.index');
     }
 
     public function destroy($id)
     {
-        $profession = Profession::findOrFail($id);
-        $profession->delete();
-        Session::flash('success', 'El registro ' . $profession->name . ' fue eliminado satisfactoriamente.');
+        $this->profession->delete($id);
+        Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.professions.index');
     }
 }

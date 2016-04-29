@@ -2,18 +2,22 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Controlqtime\Http\Requests;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Illuminate\Support\Facades\Session;
-use Controlqtime\Rating;
 use Controlqtime\Http\Requests\RatingRequest;
 
 class RatingController extends Controller
 {
-    public function index(Request $request)
+    protected $rating;
+
+    public function __construct(BaseRepoInterface $rating)
     {
-        $ratings = Rating::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->rating = $rating;
+    }
+
+    public function index()
+    {
+        $ratings = $this->rating->all();
         return view('maintainers.ratings.index', compact('ratings'));
     }
 
@@ -24,33 +28,28 @@ class RatingController extends Controller
 
     public function store(RatingRequest $request)
     {
-        Rating::create($request->all());
-
+        $this->rating->create($request->all());
         Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.ratings.index');
     }
 
     public function edit($id)
     {
-        $rating = Rating::findOrFail($id);
+        $rating = $this->rating->find($id);
         return view('maintainers.ratings.edit', compact('rating'));
     }
 
     public function update(RatingRequest $request, $id)
     {
-        $rating = Rating::findOrFail($id);
-        $message =  'El registro ' . $rating->name . ' ha sido actualizado satisfactoriamente.';
-        $rating->fill($request->all());
-        $rating->save();
-        Session::flash('success', $message);
+        $this->rating->update($request->all(), $id);
+        Session::flash('success', 'El registro ha sido actualizado satisfactoriamente.');
         return redirect()->route('maintainers.ratings.index');
     }
 
     public function destroy($id)
     {
-        $rating = Rating::findOrFail($id);
-        $rating->delete();
-        Session::flash('success', 'El registro ' . $rating->name . ' fue eliminado satisfactoriamente.');
+        $this->rating->delete($id);
+        Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.ratings.index');
     }
 }

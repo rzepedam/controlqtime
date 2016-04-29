@@ -3,9 +3,8 @@
 namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Entities\Profession;
-use Controlqtime\Core\Contracts\ProfessionRepoInterface;
 
-class ProfessionRepo extends BaseRepo implements ProfessionRepoInterface
+class ProfessionRepo extends BaseRepo
 {
     protected $model;
 

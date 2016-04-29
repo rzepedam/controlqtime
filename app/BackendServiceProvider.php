@@ -14,9 +14,19 @@ class BackendServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        /*
+         * Maintainers
+         */
+
         $this->app->bind(
-            'Controlqtime\Core\Contracts\ProfessionRepoInterface',
+            'Controlqtime\Core\Contracts\BaseRepoInterface',
             'Controlqtime\Core\Repositories\ProfessionRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\BaseRepoInterface',
+            'Controlqtime\Core\Repositories\RatingRepo'
         );
     }
 }
