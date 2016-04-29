@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Controlqtime\Http\Requests;
 
-use App\Http\Requests\Request;
+use Controlqtime\Http\Requests\Request;
 use Illuminate\Routing\Route;
 
 /**

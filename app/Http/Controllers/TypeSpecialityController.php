@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use App\TypeSpeciality;
-use App\Http\Requests\TypeSpecialityRequest;
+use Controlqtime\TypeSpeciality;
+use Controlqtime\Http\Requests\TypeSpecialityRequest;
 
 
 class TypeSpecialityController extends Controller

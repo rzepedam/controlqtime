@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\Http\Requests\RoundRequest;
-use App\Round;
+use Controlqtime\Http\Requests\RoundRequest;
+use Controlqtime\Round;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
 class RoundController extends Controller

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +11,6 @@ class ImageLicenseCompany extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function company() {
-        return $this->belongsTo('App\Company');
+        return $this->belongsTo('Controlqtime\Company');
     }
 }

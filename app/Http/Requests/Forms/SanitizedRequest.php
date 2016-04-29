@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Forms;
+namespace Controlqtime\Http\Requests\Forms;
 
-use App\Http\Requests\Request;
+use Controlqtime\Http\Requests\Request;
 
 abstract class SanitizedRequest extends Request{
 

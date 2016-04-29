@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\Http\Requests\TrademarkRequest;
-use App\Trademark;
+use Controlqtime\Http\Requests\TrademarkRequest;
+use Controlqtime\Trademark;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
 class TrademarkController extends Controller

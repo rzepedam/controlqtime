@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\DailyAssistance;
-use App\Manpower;
+use Controlqtime\DailyAssistance;
+use Controlqtime\Manpower;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 
 class DailyAssistanceController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,7 +25,7 @@ class Vehicle extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function modelVehicle() {
-        return $this->belongsTo('App\ModelVehicle');
+        return $this->belongsTo('Controlqtime\ModelVehicle');
     }
 
 
@@ -33,7 +33,7 @@ class Vehicle extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function typeVehicle() {
-        return $this->belongsTo('App\TypeVehicle');
+        return $this->belongsTo('Controlqtime\TypeVehicle');
     }
 
 
@@ -41,7 +41,7 @@ class Vehicle extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function terminal() {
-        return $this->belongsTo('App\Terminal');
+        return $this->belongsTo('Controlqtime\Terminal');
     }
 
     /*

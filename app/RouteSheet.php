@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +19,7 @@ class RouteSheet extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function manpower() {
-        return $this->belongsTo('App\Manpower');
+        return $this->belongsTo('Controlqtime\Manpower');
     }
 
 
@@ -27,7 +27,7 @@ class RouteSheet extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function rounds() {
-        return $this->hasMany('App\Round');
+        return $this->hasMany('Controlqtime\Round');
     }
     
     /*

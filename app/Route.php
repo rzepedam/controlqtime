@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,7 +28,7 @@ class Route extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function terminal() {
-        return $this->belongsTo('App\Terminal');
+        return $this->belongsTo('Controlqtime\Terminal');
     }
 
 

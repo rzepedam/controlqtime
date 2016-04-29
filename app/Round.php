@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,7 +20,7 @@ class Round extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function route() {
-        return $this->belongsTo('App\Route');
+        return $this->belongsTo('Controlqtime\Route');
     }
 
 
@@ -28,7 +28,7 @@ class Round extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function vehicle() {
-        return $this->belongsTo('App\Vehicle');
+        return $this->belongsTo('Controlqtime\Vehicle');
     }
 
 }

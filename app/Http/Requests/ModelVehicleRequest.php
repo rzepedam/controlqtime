@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Controlqtime\Http\Requests;
 
-use App\Http\Requests\Forms\SanitizedRequest;
-use App\Http\Requests\Request;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
+use Controlqtime\Http\Requests\Request;
 
 class ModelVehicleRequest extends SanitizedRequest
 {

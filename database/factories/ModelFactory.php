@@ -13,7 +13,7 @@
 
 use Carbon\Carbon;
 
-$factory->define(App\Company::class, function (Faker\Generator $faker) {
+$factory->define(Controlqtime\Company::class, function (Faker\Generator $faker) {
 
     return [
         'rut'           => $faker->numberBetween($min = 10000000, $max = 20000000),
@@ -36,7 +36,7 @@ $factory->define(App\Company::class, function (Faker\Generator $faker) {
 });
 
 
-$factory->define(App\Manpower::class, function (Faker\Generator $faker) {
+$factory->define(Controlqtime\Manpower::class, function (Faker\Generator $faker) {
 
     $maleSurname   = $faker->lastName;
     $femaleSurname = $faker->lastName;

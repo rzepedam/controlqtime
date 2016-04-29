@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Forecast;
-use App\Http\Requests\ForecastRequest;
+use Controlqtime\Http\Requests;
+use Controlqtime\Http\Controllers\Controller;
+use Controlqtime\Forecast;
+use Controlqtime\Http\Requests\ForecastRequest;
 use Illuminate\Support\Facades\Session;
 
 class ForecastController extends Controller

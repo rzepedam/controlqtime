@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Controlqtime\Http\Requests;
+use Controlqtime\Http\Controllers\Controller;
 
-use App\City;
-use App\Country;
-use App\Http\Requests\CityRequest;
+use Controlqtime\City;
+use Controlqtime\Country;
+use Controlqtime\Http\Requests\CityRequest;
 use Illuminate\Support\Facades\Session;
 
 class CityController extends Controller

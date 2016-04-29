@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -30,7 +30,7 @@ class Company extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function legalRepresentatives() {
-        return $this->hasMany('App\LegalRepresentative');
+        return $this->hasMany('Controlqtime\LegalRepresentative');
     }
 
 
@@ -38,7 +38,7 @@ class Company extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function subsidiaries() {
-        return $this->hasMany('App\Subsidiary');
+        return $this->hasMany('Controlqtime\Subsidiary');
     }
 
 
@@ -46,7 +46,7 @@ class Company extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function imageRutCompanies() {
-        return $this->hasMany('App\ImageRutCompany');
+        return $this->hasMany('Controlqtime\ImageRutCompany');
     }
 
 
@@ -54,7 +54,7 @@ class Company extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function imageLicenseCompanies() {
-        return $this->hasMany('App\ImageLicenseCompany');
+        return $this->hasMany('Controlqtime\ImageLicenseCompany');
     }
 
 
@@ -62,14 +62,14 @@ class Company extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function manpowers() {
-        return $this->hasMany('App\Manpower');
+        return $this->hasMany('Controlqtime\Manpower');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function commune() {
-        return $this->belongsTo('App\Commune');
+        return $this->belongsTo('Controlqtime\Commune');
     }
 
 

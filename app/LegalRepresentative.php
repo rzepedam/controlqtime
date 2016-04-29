@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +21,7 @@ class LegalRepresentative extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
 	public function company() {
-		return $this->belongsTo('App\Company');
+		return $this->belongsTo('Controlqtime\Company');
 	}
 
 
@@ -29,7 +29,7 @@ class LegalRepresentative extends Model
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function nationality() {
-		return  $this->belongsTo('App\Nationality');
+		return  $this->belongsTo('Controlqtime\Nationality');
 	}
 
 

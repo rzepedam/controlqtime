@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,7 +25,7 @@ class ModelVehicle extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function trademark() {
-        return $this->belongsTo('App\Trademark');
+        return $this->belongsTo('Controlqtime\Trademark');
     }
 
     /*

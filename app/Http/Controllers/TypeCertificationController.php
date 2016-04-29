@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\TypeCertification;
+use Controlqtime\TypeCertification;
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
-use App\Http\Requests\TypeCertificationRequest;
+use Controlqtime\Http\Requests\TypeCertificationRequest;
 
 class TypeCertificationController extends Controller
 {

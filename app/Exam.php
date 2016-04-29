@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -16,7 +16,7 @@ class Exam extends Model
     ];
     
     public function typeExam() {
-        return $this->belongsTo('App\TypeExam');
+        return $this->belongsTo('Controlqtime\TypeExam');
     }
     
     public function setExpiredExamAttribute($value) {

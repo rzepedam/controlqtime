@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -16,7 +16,7 @@ class ProfessionalLicense extends Model
     ];
     
     public function typeProfessionalLicense() {
-        return $this->belongsTo('App\TypeProfessionalLicense');
+        return $this->belongsTo('Controlqtime\TypeProfessionalLicense');
     }
 
     /**

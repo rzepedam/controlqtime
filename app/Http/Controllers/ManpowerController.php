@@ -1,43 +1,43 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\Area;
-use App\Http\Requests\Step1Request;
-use App\Company;
-use App\Disability;
-use App\Disease;
-use App\Exam;
-use App\FamilyRelationship;
-use App\FamilyResponsability;
-use App\Http\Requests\Step2Request;
-use App\Http\Requests\Step3Request;
-use App\ProfessionalLicense;
-use App\Province;
-use App\Region;
-use App\Speciality;
-use App\Study;
-use App\TypeCertification;
-use App\TypeProfessionalLicense;
-use App\TypeSpeciality;
+use Controlqtime\Area;
+use Controlqtime\Http\Requests\Step1Request;
+use Controlqtime\Company;
+use Controlqtime\Disability;
+use Controlqtime\Disease;
+use Controlqtime\Exam;
+use Controlqtime\FamilyRelationship;
+use Controlqtime\FamilyResponsability;
+use Controlqtime\Http\Requests\Step2Request;
+use Controlqtime\Http\Requests\Step3Request;
+use Controlqtime\ProfessionalLicense;
+use Controlqtime\Province;
+use Controlqtime\Region;
+use Controlqtime\Speciality;
+use Controlqtime\Study;
+use Controlqtime\TypeCertification;
+use Controlqtime\TypeProfessionalLicense;
+use Controlqtime\TypeSpeciality;
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
-use App\Relationship;
-use App\Manpower;
-use App\Gender;
-use App\Rating;
-use App\Country;
-use App\Forecast;
-use App\TypeDisability;
-use App\TypeDisease;
-use App\Certification;
-use App\Institution;
-use App\Mutuality;
-use App\Pension;
-use App\TypeExam;
-use App\Degree;
+use Controlqtime\Relationship;
+use Controlqtime\Manpower;
+use Controlqtime\Gender;
+use Controlqtime\Rating;
+use Controlqtime\Country;
+use Controlqtime\Forecast;
+use Controlqtime\TypeDisability;
+use Controlqtime\TypeDisease;
+use Controlqtime\Certification;
+use Controlqtime\Institution;
+use Controlqtime\Mutuality;
+use Controlqtime\Pension;
+use Controlqtime\TypeExam;
+use Controlqtime\Degree;
 
 class ManpowerController extends Controller
 {

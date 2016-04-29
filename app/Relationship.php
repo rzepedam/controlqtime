@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +23,7 @@ class Relationship extends Model
 
 
     public function manpowers() {
-        return $this->belongsToMany('App\Manpower');
+        return $this->belongsToMany('Controlqtime\Manpower');
     }
 
 }

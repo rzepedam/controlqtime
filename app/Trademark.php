@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,6 +34,6 @@ class Trademark extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function modelVehicles() {
-        return $this->hasMany('App\ModelVehicle');
+        return $this->hasMany('Controlqtime\ModelVehicle');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -20,7 +20,7 @@ class Speciality extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function typeSpeciality() {
-        return $this->belongsTo('App\TypeSpeciality');
+        return $this->belongsTo('Controlqtime\TypeSpeciality');
     }
 
 
@@ -28,7 +28,7 @@ class Speciality extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function institution() {
-        return $this->belongsTo('App\Institution', 'institution_speciality_id');
+        return $this->belongsTo('Controlqtime\Institution', 'institution_speciality_id');
     }
     
 

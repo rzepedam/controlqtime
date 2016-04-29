@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +35,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function company() {
-        return $this->belongsTo('App\Company');
+        return $this->belongsTo('Controlqtime\Company');
     }
 
 
@@ -43,7 +43,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function nationality() {
-        return $this->belongsTo('App\Country');
+        return $this->belongsTo('Controlqtime\Country');
     }
 
 
@@ -51,7 +51,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function gender() {
-        return $this->belongsTo('App\Gender');
+        return $this->belongsTo('Controlqtime\Gender');
     }
 
 
@@ -59,7 +59,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function commune() {
-        return $this->belongsTo('App\Commune');
+        return $this->belongsTo('Controlqtime\Commune');
     }
 
 
@@ -67,7 +67,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function forecast() {
-        return $this->belongsTo('App\Forecast');
+        return $this->belongsTo('Controlqtime\Forecast');
     }
 
 
@@ -75,7 +75,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function mutuality() {
-        return $this->belongsTo('App\Mutuality');
+        return $this->belongsTo('Controlqtime\Mutuality');
     }
 
 
@@ -83,7 +83,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function pension() {
-        return $this->belongsTo('App\Pension');
+        return $this->belongsTo('Controlqtime\Pension');
     }
 
 
@@ -91,7 +91,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function rating() {
-        return $this->belongsTo('App\Rating');
+        return $this->belongsTo('Controlqtime\Rating');
     }
 
 
@@ -99,7 +99,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function area() {
-        return $this->belongsTo('App\Area');
+        return $this->belongsTo('Controlqtime\Area');
     }
 
 
@@ -107,7 +107,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function familyRelationships() {
-        return $this->hasMany('App\FamilyRelationship');
+        return $this->hasMany('Controlqtime\FamilyRelationship');
     }
     
     
@@ -115,7 +115,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function studies() {
-        return $this->hasMany('App\Study');
+        return $this->hasMany('Controlqtime\Study');
     }
 
 
@@ -123,7 +123,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function certifications() {
-        return $this->hasMany('App\Certification');
+        return $this->hasMany('Controlqtime\Certification');
     }
 
 
@@ -131,7 +131,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function specialities() {
-        return $this->hasMany('App\Speciality');
+        return $this->hasMany('Controlqtime\Speciality');
     }
 
 
@@ -139,7 +139,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function professionalLicenses(){
-        return $this->hasMany('App\ProfessionalLicense');
+        return $this->hasMany('Controlqtime\ProfessionalLicense');
     }
 
 
@@ -147,7 +147,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function disabilities() {
-        return $this->hasMany('App\Disability');
+        return $this->hasMany('Controlqtime\Disability');
     }
 
 
@@ -155,7 +155,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function diseases() {
-        return $this->hasMany('App\Disease');
+        return $this->hasMany('Controlqtime\Disease');
     }
 
 
@@ -163,7 +163,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function exams() {
-        return $this->hasMany('App\Exam');
+        return $this->hasMany('Controlqtime\Exam');
     }
 
 
@@ -171,7 +171,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function familyResponsabilities() {
-        return $this->hasMany('App\FamilyResponsability');
+        return $this->hasMany('Controlqtime\FamilyResponsability');
     }
 
 
@@ -179,7 +179,7 @@ class Manpower extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function dailyAssistances() {
-        return $this->hasMany('App\DailyAssistance');
+        return $this->hasMany('Controlqtime\DailyAssistance');
     }
 
     /*

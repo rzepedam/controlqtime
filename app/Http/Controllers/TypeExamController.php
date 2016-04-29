@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
-use App\TypeExam;
-use App\Http\Requests\TypeExamRequest;
+use Controlqtime\TypeExam;
+use Controlqtime\Http\Requests\TypeExamRequest;
 
 class TypeExamController extends Controller
 {

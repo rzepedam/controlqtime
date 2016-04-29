@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Institution;
-use App\TypeInstitution;
-use App\Http\Requests\InstitutionRequest;
+use Controlqtime\Http\Requests;
+use Controlqtime\Http\Controllers\Controller;
+use Controlqtime\Institution;
+use Controlqtime\TypeInstitution;
+use Controlqtime\Http\Requests\InstitutionRequest;
 use Illuminate\Support\Facades\Session;
 
 class InstitutionController extends Controller

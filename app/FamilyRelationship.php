@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +15,7 @@ class FamilyRelationship extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function relationship() {
-        return $this->belongsTo('App\Relationship');
+        return $this->belongsTo('Controlqtime\Relationship');
     }
 
 
@@ -23,7 +23,7 @@ class FamilyRelationship extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function manpower() {
-        return $this->belongsTo('App\Manpower');
+        return $this->belongsTo('Controlqtime\Manpower');
     }
 
 
@@ -31,7 +31,7 @@ class FamilyRelationship extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function manpowerFamily() {
-        return $this->belongsTo('App\Manpower', 'manpower_family_id');
+        return $this->belongsTo('Controlqtime\Manpower', 'manpower_family_id');
     }
     
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +13,6 @@ class FamilyResponsability extends Model
 
 
     public function relationship() {
-        return $this->belongsTo('App\Relationship');
+        return $this->belongsTo('Controlqtime\Relationship');
     }
 }

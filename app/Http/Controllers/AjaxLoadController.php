@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\Manpower;
-use App\Round;
-use App\Trademark;
+use Controlqtime\Manpower;
+use Controlqtime\Round;
+use Controlqtime\Trademark;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Controlqtime\Http\Requests;
+use Controlqtime\Http\Controllers\Controller;
 
-use App\Region;
-use App\Province;
-use App\Company;
-use App\LegalRepresentative;
-use App\Subsidiary;
+use Controlqtime\Region;
+use Controlqtime\Province;
+use Controlqtime\Company;
+use Controlqtime\LegalRepresentative;
+use Controlqtime\Subsidiary;
 use Illuminate\Support\Facades\Session;
 
 class AjaxLoadController extends Controller

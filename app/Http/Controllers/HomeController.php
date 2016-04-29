@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 
 class HomeController extends Controller
 {

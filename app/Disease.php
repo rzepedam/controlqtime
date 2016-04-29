@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +15,6 @@ class Disease extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function typeDisease() {
-        return $this->belongsTo('App\TypeDisease');
+        return $this->belongsTo('Controlqtime\TypeDisease');
     }
 }

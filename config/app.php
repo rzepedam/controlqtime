@@ -151,18 +151,19 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Controlqtime\Providers\AppServiceProvider::class,
+        Controlqtime\Providers\AuthServiceProvider::class,
+        Controlqtime\Providers\EventServiceProvider::class,
+        Controlqtime\Providers\RouteServiceProvider::class,
 
         /*
-         * Propias
+         * Controlqtime Providers
          */
+
         Collective\Html\HtmlServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        Controlqtime\BackendServiceProvider::class,
     ],
 
     /*

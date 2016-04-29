@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-use App\Company;
-use App\ImageRutCompany;
-use App\ImageLicenseCompany;
+use Controlqtime\Company;
+use Controlqtime\ImageRutCompany;
+use Controlqtime\ImageLicenseCompany;
 
 class UploadController extends Controller
 {

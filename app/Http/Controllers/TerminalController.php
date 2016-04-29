@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\Http\Requests\TerminalRequest;
-use App\Terminal;
+use Controlqtime\Http\Requests\TerminalRequest;
+use Controlqtime\Terminal;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
 class TerminalController extends Controller

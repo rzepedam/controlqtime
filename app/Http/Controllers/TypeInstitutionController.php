@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use App\TypeInstitution;
-use App\Http\Requests\TypeInstitutionRequest;
+use Controlqtime\TypeInstitution;
+use Controlqtime\Http\Requests\TypeInstitutionRequest;
 
 class TypeInstitutionController extends Controller
 {

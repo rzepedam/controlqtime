@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\Http\Requests\VehicleRequest;
-use App\ModelVehicle;
-use App\Terminal;
-use App\Trademark;
-use App\TypeVehicle;
-use App\Vehicle;
+use Controlqtime\Http\Requests\VehicleRequest;
+use Controlqtime\ModelVehicle;
+use Controlqtime\Terminal;
+use Controlqtime\Trademark;
+use Controlqtime\TypeVehicle;
+use Controlqtime\Vehicle;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
 class VehicleController extends Controller

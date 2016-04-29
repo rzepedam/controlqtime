@@ -1,16 +1,16 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Province extends Model
 {
     public function communes() {
-    	return $this->hasMany('App\Commune');
+    	return $this->hasMany('Controlqtime\Commune');
     }
 
     public function region() {
-        return $this->belongsTo('App\Region');
+        return $this->belongsTo('Controlqtime\Region');
     }
 }

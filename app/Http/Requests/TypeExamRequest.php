@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use App\Http\Requests\Forms\SanitizedRequest;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class TypeExamRequest extends SanitizedRequest
 {

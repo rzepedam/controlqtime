@@ -1,20 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use Illuminate\Routing\Route;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use App\Profession;
-use App\Http\Requests\ProfessionRequest;
+use Controlqtime\Http\Requests\ProfessionRequest;
+use Controlqtime\Core\Contracts\ProfessionRepoInterface;
 
 
 class ProfessionController extends Controller
 {
+    protected $profession;
+    
+    public function __construct(ProfessionRepoInterface $profession)
+    {
+        $this->profession = $profession;
+    }
+
     public function index(Request $request)
     {
-        $professions = Profession::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $professions = $this->profession->all($request);
         return view('maintainers.professions.index', compact('professions'));
     }
 
@@ -32,7 +38,7 @@ class ProfessionController extends Controller
 
     public function edit($id)
     {
-        $profession = Profession::findOrFail($id);
+        $profession = $this->profession->findOrFail($id);
         return view('maintainers.professions.edit', compact('profession'));
     }
 

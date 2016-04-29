@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace Controlqtime\Jobs;
 
 use Illuminate\Bus\Queueable;
 

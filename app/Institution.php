@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +26,7 @@ class Institution extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function typeInstitution() {
-        return $this->belongsTo('App\TypeInstitution');
+        return $this->belongsTo('Controlqtime\TypeInstitution');
     }
     
 }

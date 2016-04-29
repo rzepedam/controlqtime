@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Controlqtime\Http\Requests;
+use Controlqtime\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
-use App\Pension;
-use App\Http\Requests\PensionRequest;
+use Controlqtime\Pension;
+use Controlqtime\Http\Requests\PensionRequest;
 
 class PensionController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,14 +10,14 @@ class Subsidiary extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function company() {
-        return $this->belongsTo('App\Company');
+        return $this->belongsTo('Controlqtime\Company');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function commune() {
-        return $this->belongsTo('App\Commune');
+        return $this->belongsTo('Controlqtime\Commune');
     }
 
     /*

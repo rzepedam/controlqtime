@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
 
-use App\Http\Requests\CompanyRequest;
-use App\Company;
-use App\Nationality;
-use App\Region;
-use App\Province;
-use App\LegalRepresentative;
-use App\Subsidiary;
-use App\Commune;
+use Controlqtime\Http\Requests\CompanyRequest;
+use Controlqtime\Company;
+use Controlqtime\Nationality;
+use Controlqtime\Region;
+use Controlqtime\Province;
+use Controlqtime\LegalRepresentative;
+use Controlqtime\Subsidiary;
+use Controlqtime\Commune;
 
 
 class CompanyController extends Controller

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\Http\Requests\RouteRequest;
-use App\Route;
-use App\Terminal;
+use Controlqtime\Http\Requests\RouteRequest;
+use Controlqtime\Route;
+use Controlqtime\Terminal;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
 class RouteController extends Controller

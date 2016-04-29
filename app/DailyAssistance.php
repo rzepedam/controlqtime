@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +18,6 @@ class DailyAssistance extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function manpower() {
-        return $this->belongsTo('App\Manpower');
+        return $this->belongsTo('Controlqtime\Manpower');
     }
 }

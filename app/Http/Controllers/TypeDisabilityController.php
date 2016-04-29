@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\TypeDisability;
+use Controlqtime\TypeDisability;
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\TypeDisabilityRequest;
+use Controlqtime\Http\Requests\TypeDisabilityRequest;
 
 
 class TypeDisabilityController extends Controller

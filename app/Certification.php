@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Carbon\Carbon;
 
@@ -20,7 +20,7 @@ class Certification extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function typeCertification() {
-        return $this->belongsTo('App\TypeCertification');
+        return $this->belongsTo('Controlqtime\TypeCertification');
     }
 
 
@@ -28,7 +28,7 @@ class Certification extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function institution() {
-        return $this->belongsTo('App\Institution', 'institution_certification_id');
+        return $this->belongsTo('Controlqtime\Institution', 'institution_certification_id');
     }
 
 

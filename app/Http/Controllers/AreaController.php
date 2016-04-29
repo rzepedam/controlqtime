@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\Terminal;
+use Controlqtime\Terminal;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Controlqtime\Http\Requests;
+use Controlqtime\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
-use App\Area;
-use App\Http\Requests\AreaRequest;
+use Controlqtime\Area;
+use Controlqtime\Http\Requests\AreaRequest;
 
 class AreaController extends Controller
 {

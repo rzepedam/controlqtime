@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Controlqtime\Http\Requests;
+use Controlqtime\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
-use App\Mutuality;
-use App\Http\Requests\MutualityRequest;
+use Controlqtime\Mutuality;
+use Controlqtime\Http\Requests\MutualityRequest;
 
 class MutualityController extends Controller
 {

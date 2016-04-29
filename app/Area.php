@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Controlqtime;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +26,7 @@ class Area extends Model
     }
 
     public function companies() {
-        return $this->belongsToMany('App\Company');
+        return $this->belongsToMany('Controlqtime\Company');
     }
 
 }

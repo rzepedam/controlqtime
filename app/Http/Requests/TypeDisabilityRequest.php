@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Controlqtime\Http\Requests;
 
-use App\Http\Requests\Forms\SanitizedRequest;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
 class TypeDisabilityRequest extends SanitizedRequest

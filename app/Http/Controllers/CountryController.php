@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\CountryRequest;
+use Controlqtime\Http\Requests\CountryRequest;
 
-use App\Country;
+use Controlqtime\Country;
 
 class CountryController extends Controller
 {

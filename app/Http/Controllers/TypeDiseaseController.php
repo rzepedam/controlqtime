@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use App\TypeDisease;
-use App\Http\Requests\TypeDiseaseRequest;
+use Controlqtime\TypeDisease;
+use Controlqtime\Http\Requests\TypeDiseaseRequest;
 
 class TypeDiseaseController extends Controller
 {

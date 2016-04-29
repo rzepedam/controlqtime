@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Controlqtime\Http\Controllers;
 
-use App\Http\Requests\RouteSheetRequest;
-use App\Manpower;
-use App\Route;
-use App\RouteSheet;
-use App\Vehicle;
+use Controlqtime\Http\Requests\RouteSheetRequest;
+use Controlqtime\Manpower;
+use Controlqtime\Route;
+use Controlqtime\RouteSheet;
+use Controlqtime\Vehicle;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
