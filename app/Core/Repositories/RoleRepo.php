@@ -2,13 +2,13 @@
 
 namespace Controlqtime\Core\Repositories;
 
-use Controlqtime\Core\Entities\Rating;
+use Controlqtime\Core\Entities\Role;
 
-class RatingRepo extends BaseRepo
+class RoleRepo extends BaseRepo
 {
     protected $model;
 
-    public function __construct(Rating $model)
+    public function __construct(Role $model)
     {
         $this->model = $model;
     }

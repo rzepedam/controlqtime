@@ -124,10 +124,10 @@ INSERT INTO forecasts(name) VALUES ('Vida Tres S.A');
 
 
 /* ratings | Cargos */
-INSERT INTO ratings(name) VALUES ('Administrador');
-INSERT INTO ratings(name) VALUES ('Gerente General');
-INSERT INTO ratings(name) VALUES ('Contador');
-INSERT INTO ratings(name) VALUES ('Secretario');
+INSERT INTO roles(name) VALUES ('Administrador');
+INSERT INTO roles(name) VALUES ('Gerente General');
+INSERT INTO roles(name) VALUES ('Contador');
+INSERT INTO roles(name) VALUES ('Secretario');
 
 
 /* type_certifications | Tipos de Certificaciones */

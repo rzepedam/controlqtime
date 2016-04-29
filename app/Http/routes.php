@@ -84,7 +84,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('mutualities', 'MutualityController');
         Route::resource('pensions', 'PensionController');
         Route::resource('professions', 'ProfessionController');
-        Route::resource('ratings', 'RatingController');
+        Route::resource('roles', 'RoleController');
         Route::resource('relationships', 'RelationshipController');
         Route::resource('routes', 'RouteController');
         Route::resource('terminals', 'TerminalController');

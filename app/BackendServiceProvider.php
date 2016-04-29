@@ -26,7 +26,7 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\BaseRepoInterface',
-            'Controlqtime\Core\Repositories\RatingRepo'
+            'Controlqtime\Core\Repositories\RoleRepo'
         );
     }
 }

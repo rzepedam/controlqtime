@@ -29,7 +29,7 @@ class CreateManpowersTable extends Migration
             $table->integer('mutuality_id')->unsigned();
             $table->integer('pension_id')->unsigned();
             $table->integer('company_id')->unsigned();
-            $table->integer('rating_id')->unsigned();
+            $table->integer('role_id')->unsigned();
             $table->integer('area_id')->unsigned();
             $table->string('code_internal');
             $table->enum('status', ['available', 'unavailable'])->default('available');
@@ -72,9 +72,9 @@ class CreateManpowersTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreign('rating_id')
+            $table->foreign('role_id')
                 ->references('id')
-                ->on('ratings')
+                ->on('roles')
                 ->onUpdate('cascade');
 
             $table->foreign('area_id')

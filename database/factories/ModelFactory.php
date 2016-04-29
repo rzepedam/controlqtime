@@ -61,7 +61,8 @@ $factory->define(Controlqtime\Manpower::class, function (Faker\Generator $faker)
         'forecast_id'       => rand(1,4),
         'mutuality_id'      => rand(1,4),
         'pension_id'        => rand(1,6),
-        'rating_id'         => rand(1,4),
-        'company_id'        => rand(1,2)
+        'role_id'           => rand(1,4),
+        'company_id'        => rand(1,2),
+        'area_id'           => rand(1,3),
     ];
 });

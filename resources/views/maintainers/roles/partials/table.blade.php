@@ -10,12 +10,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($ratings as $rating)
-                    <tr data-id="{{ $rating->id }}">
-                        <td>{{ $rating->id }}</td>
-                        <td>{{ $rating->name }}</td>
+                @foreach($roles as $role)
+                    <tr data-id="{{ $role->id }}">
+                        <td>{{ $role->id }}</td>
+                        <td>{{ $role->name }}</td>
                         <td class="text-center">
-                            <a href="{{ route('maintainers.ratings.edit', $rating) }}" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> </a>
+                            <a href="{{ route('maintainers.roles.edit', $role) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i> </a>
                         </td>
                     </tr>
                 @endforeach

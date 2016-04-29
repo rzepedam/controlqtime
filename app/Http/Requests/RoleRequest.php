@@ -5,22 +5,19 @@ namespace Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class RatingRequest extends SanitizedRequest
+class RoleRequest extends SanitizedRequest
 {
-    /**
-     * RatingRequest constructor.
-     */
+    private $route;
+
     public function __construct(Route $route)
     {
         $this->route = $route;
     }
 
-
     public function authorize()
     {
         return true;
     }
-
 
     public function rules()
     {
@@ -29,14 +26,14 @@ class RatingRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:50|unique:ratings',
+                    'name'  => 'required|max:50|unique:roles',
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:50|unique:ratings,name,' . $this->route->getParameter('ratings')
+                    'name'  => 'required|max:50|unique:roles,name,' . $this->route->getParameter('roles')
                 ];
             }
         }

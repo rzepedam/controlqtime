@@ -76,7 +76,7 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.ratings.index') }}">
+                                <a class="animsition-link" href="{{ route('maintainers.roles.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon md-seat font-size-18" aria-hidden="true"></i>Cargos</span>
                                 </a>
                             </li>
