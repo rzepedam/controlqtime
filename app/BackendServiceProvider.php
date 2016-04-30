@@ -28,5 +28,16 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Contracts\BaseRepoInterface',
             'Controlqtime\Core\Repositories\RoleRepo'
         );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\BaseRepoInterface',
+            'Controlqtime\Core\Repositories\TypeCertificationRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\BaseRepoInterface',
+            'Controlqtime\Core\Repositories\TypeDisabilityRepo'
+        );
+
     }
 }

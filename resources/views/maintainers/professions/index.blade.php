@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('title_header') Listado de Profesiones
-    <br>
+    <br />
     <a href="{{ route('maintainers.professions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Profesión</a>
 @stop
 
@@ -12,33 +12,16 @@
 
 @section('content')
 
-    @if($professions->count())
+    @if(count($professions) > 0)
+
         @include('maintainers.professions.partials.table')
+
     @else
+
         <h3 class="text-center">No se han encontrado Profesiones</h3>
+
     @endif
 
     {{ $professions->links() }}
-
-@stop
-
-@section('scripts')
-
-    <script>
-
-        $(document).ready(function(){
-
-
-            /**************************************************
-             ************** Initialize components **************
-             **************************************************/
-
-            $('.mitooltip').tooltip();
-
-
-
-        });
-
-    </script>
 
 @stop

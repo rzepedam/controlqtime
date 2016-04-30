@@ -11,7 +11,8 @@
 @section('content')
 
 <div class="panel">
-    {{ Form::model($type_certification, array('route' => ['maintainers.type-certifications.update', $type_certification], 'method' => 'PUT' )) }}
+
+    {{ Form::model($type_certification, array('route' => array('maintainers.type-certifications.update', $type_certification), 'method' => 'PUT' )) }}
 
         <div class="panel-body">
 
@@ -29,6 +30,7 @@
         </div>
 
     {{ Form::close() }}
+
 </div>
 <br />
 <br />
@@ -39,5 +41,7 @@
 @stop
 
 @section('scripts')
+
     {{ Html::script('me/js/delete.js') }}
+
 @stop

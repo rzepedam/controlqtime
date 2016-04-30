@@ -7,6 +7,7 @@ use Illuminate\Routing\Route;
 
 class TypeDisabilityRequest extends SanitizedRequest
 {
+    private $route;
 
     public function __construct(Route $route)
     {

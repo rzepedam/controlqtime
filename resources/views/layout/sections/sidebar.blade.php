@@ -96,11 +96,6 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="javascript:void(0)">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-files-o" aria-hidden="true"></i> Documentos</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.companies.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-building-o" aria-hidden="true"></i> Empresas</span>
                                 </a>
@@ -108,11 +103,6 @@
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.type-diseases.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-bed" aria-hidden="true"></i> Enfermedades</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
-                                <a class="animsition-link" href="javadcript:void(0)">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-shield" aria-hidden="true"></i> EPP's</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
@@ -156,11 +146,6 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="javascript:void(0)">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-money" aria-hidden="true"></i> Monedas</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.mutualities.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-ambulance" aria-hidden="true"></i> Mutualidades</span>
                                 </a>
@@ -176,11 +161,6 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="javascript:void(0)">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-cubes" aria-hidden="true"></i> Productos</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.professions.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-briefcase" aria-hidden="true"></i> Profesiones</span>
                                 </a>
@@ -193,11 +173,6 @@
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.relationships.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon md-male-female font-size-18" aria-hidden="true"></i>Relaciones Fam.</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
-                                <a class="animsition-link" href="javascript:void(0)">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-steam" aria-hidden="true"></i> Talleres</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">

@@ -2,19 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\TypeDisability;
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 use Controlqtime\Http\Requests\TypeDisabilityRequest;
 
-
 class TypeDisabilityController extends Controller
 {
-    public function index(Request $request)
-    {
+    private $type_disability;
 
-        $type_disabilities = TypeDisability::name($request->get('table_search'))->orderBy('name')->paginate(20);
+    public function __construct(BaseRepoInterface $type_disability)
+    {
+        $this->type_disability = $type_disability;
+    }
+
+    public function index()
+    {
+        $type_disabilities = $this->type_disability->all();
         return view('maintainers.type-disabilities.index', compact('type_disabilities'));
     }
 
@@ -25,38 +29,28 @@ class TypeDisabilityController extends Controller
 
     public function store(TypeDisabilityRequest $request)
     {
-        TypeDisability::create($request->all());
+        $this->type_disability->create($request->all());
         Session::flash('message', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.type-disabilities.index');
     }
 
-    public function show($id)
-    {
-        $type_disability = TypeDisability::findOrFail($id);
-        return view('maintainers.type-disabilities.show', compact('type_disability'));
-    }
-
     public function edit($id)
     {
-        $type_disability = TypeDisability::findOrFail($id);
+        $type_disability = $this->type_disability->find($id);
         return view('maintainers.type-disabilities.edit', compact('type_disability'));
     }
 
     public function update(TypeDisabilityRequest $request, $id)
     {
-        $type_disability = TypeDisability::findOrFail($id);
-        $message = 'El registro ' . $type_disability->name . ' fue actualizado satisfactoriamente.';
-        $type_disability->fill($request->all());
-        $type_disability->save();
-        Session::flash('success', $message);
+        $this->type_disability->update($request->all(), $id);
+        Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
         return redirect()->route('maintainers.type-disabilities.index');
     }
 
     public function destroy($id)
     {
-        $type_disability = TypeDisability::findOrFail($id);
-        $type_disability->delete();
-        Session::flash('success', 'El registro ' . $type_disability->name . ' fue eliminado satisfactoriamente.');
+        $this->type_disability->delete($id);
+        Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.type-disabilities.index');
     }
 }

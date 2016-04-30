@@ -12,7 +12,7 @@
 
 <div class="panel">
 
-    {{ Form::model($type_disability, array('route' => ['maintainers.type-disabilities.update', $type_disability], 'method' => 'PUT' )) }}
+    {{ Form::model($type_disability, array('route' => array('maintainers.type-disabilities.update', $type_disability), 'method' => 'PUT' )) }}
 
         <div class="panel-body">
 
@@ -41,5 +41,7 @@
 @stop
 
 @section('scripts')
+
     {{ Html::script('me/js/delete.js') }}
+
 @stop
