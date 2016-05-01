@@ -79,5 +79,10 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\MutualityRepo'
         );
 
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\BaseRepoInterface',
+            'Controlqtime\Core\Repositories\CountryRepo'
+        );
+
     }
 }

@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCountriesTable extends Migration
 {
-
     public function up()
     {
         Schema::create('countries', function (Blueprint $table) {

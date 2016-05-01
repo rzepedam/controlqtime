@@ -2,18 +2,22 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 use Controlqtime\Http\Requests\CountryRequest;
-
-use Controlqtime\Country;
 
 class CountryController extends Controller
 {
-    public function index(Request $request)
+    protected $country;
+
+    public function __construct(BaseRepoInterface $country)
     {
-        $countries = Country::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->country = $country;
+    }
+
+    public function index()
+    {
+        $countries = $this->country->all();
         return view('maintainers.countries.index', compact('countries'));
     }
 
@@ -24,32 +28,25 @@ class CountryController extends Controller
 
     public function store(CountryRequest $request)
     {
-        Country::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->country->create($request->all());
         return redirect()->route('maintainers.countries.index');
     }
 
     public function edit($id)
     {
-        $country = Country::findOrFail($id);
+        $country = $this->country->find($id);
         return view('maintainers.countries.edit', compact('country'));
     }
 
     public function update(CountryRequest $request, $id)
     {
-        $country = Country::findOrFail($id);
-        $message = 'El registro ' . $country->name . ' fue actualizado satisfactoriamente.';
-        $country->fill($request->all());
-        $country->save();
-        Session::flash('success', $message);
+        $this->country->update($request->all(), $id);
         return redirect()->route('maintainers.countries.index');
     }
 
     public function destroy($id)
     {
-        $country = Country::findOrFail($id);
-        $country->delete();
-        Session::flash('success', 'El registro ' . $country->name . ' fue eliminado satisfactoriamente.');
+        $this->country->delete($id);
         return redirect()->route('maintainers.countries.index');
     }
 }
