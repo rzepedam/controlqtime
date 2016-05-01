@@ -8,7 +8,7 @@ abstract class BaseRepo implements BaseRepoInterface
 {
     public function all()
     {
-        return $this->model->orderBy('name')->paginate(20);
+        return $this->model->orderBy('id', 'DESC')->paginate();
     }
     
     public function find($id)

@@ -23,7 +23,7 @@
             "database"
         ],
         "psr-4": {
-            "Controlqtime\\": "app/Core/Entities"
+            "Controlqtime\\": "app"
         }
     },
     "autoload-dev": {

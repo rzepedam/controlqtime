@@ -39,5 +39,10 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\TypeDisabilityRepo'
         );
 
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\BaseRepoInterface',
+            'Controlqtime\Core\Repositories\TypeDiseaseRepo'
+        );
+
     }
 }

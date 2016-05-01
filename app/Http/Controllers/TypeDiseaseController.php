@@ -2,17 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use Controlqtime\TypeDisease;
 use Controlqtime\Http\Requests\TypeDiseaseRequest;
 
 class TypeDiseaseController extends Controller
 {
-    public function index(Request $request)
+    private $type_disease;
+
+    public function __construct(BaseRepoInterface $type_disease)
     {
-        $type_diseases = TypeDisease::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->type_disease = $type_disease;
+    }
+
+    public function index()
+    {
+        $type_diseases = $this->type_disease->all();
         return view('maintainers.type-diseases.index', compact('type_diseases'));
     }
 
@@ -23,38 +29,34 @@ class TypeDiseaseController extends Controller
 
     public function store(TypeDiseaseRequest $request)
     {
-        TypeDisease::create($request->all());
+        $this->type_disease->create($request->all());
         Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.type-diseases.index');
     }
 
     public function show($id)
     {
-        $type_disease = TypeDisease::findOrFail($id);
+        $type_disease = $this->type_disease->find($id);
         return view('maintainers.type-diseases.show', compact('type_disease'));
     }
 
     public function edit($id)
     {
-        $type_disease = TypeDisease::findOrFail($id);
+        $type_disease = $this->type_disease->find($id);
         return view('maintainers.type-diseases.edit', compact('type_disease'));
     }
 
     public function update(TypeDiseaseRequest $request, $id)
     {
-        $type_disease = TypeDisease::findOrFail($id);
-        $message = 'El registro ' . $type_disease->name . ' fue actualizado satisfactoriamente.';
-        $type_disease->fill($request->all());
-        $type_disease->save();
-        Session::flash('success', $message);
+        $this->type_disease->update($request->all(), $id);
+        Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
         return redirect()->route('maintainers.type-diseases.index');
     }
 
     public function destroy($id)
     {
-        $type_disease = TypeDisease::findOrFail($id);
-        $type_disease->delete();
-        Session::flash('success', 'El registro ' . $type_disease->name . ' fue eliminado satisfactoriamente.');
+        $this->type_disease->delete($id);
+        Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.type-diseases.index');
     }
 }

@@ -1,16 +1,15 @@
 <?php
 
-namespace Controlqtime;
+namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Disease extends Model
+class Disease extends Eloquent
 {
     protected $fillable = [
         'type_disease_id', 'treatment_disease', 'detail_disease'
     ];
-
-
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
