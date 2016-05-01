@@ -2,18 +2,22 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
-
-use Controlqtime\TypeExam;
 use Controlqtime\Http\Requests\TypeExamRequest;
 
 class TypeExamController extends Controller
 {
-	public function index(Request $request)
+    protected $type_exam;
+
+    public function __construct(BaseRepoInterface $type_exam)
     {
-        $type_exams = TypeExam::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->type_exam = $type_exam;
+    }
+
+	public function index()
+    {
+        $type_exams = $this->type_exam->all();
         return view('maintainers.type-exams.index', compact('type_exams'));
     }
 
@@ -24,32 +28,25 @@ class TypeExamController extends Controller
 
     public function store(TypeExamRequest $request)
     {
-        TypeExam::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->type_exam->create($request->all());
         return redirect()->route('maintainers.type-exams.index');
     }
 
     public function edit($id)
     {
-        $type_exam = TypeExam::findOrFail($id);
+        $type_exam = $this->type_exam->find($id);
         return view('maintainers.type-exams.edit', compact('type_exam'));
     }
 
     public function update(TypeExamRequest $request, $id)
     {
-        $type_exam = TypeExam::findOrFail($id);
-        $message = 'El registro ' . $type_exam->name . ' fue actualizado satisfactoriamente.';
-        $type_exam->fill($request->all());
-        $type_exam->save();
-        Session::flash('success', $message);
+        $this->type_exam->update($request->all(), $id);
         return redirect()->route('maintainers.type-exams.index');
     }
 
     public function destroy($id)
     {
-        $type_exam = TypeExam::findOrFail($id);
-        $type_exam->delete();
-        Session::flash('success', 'El registro ' . $type_exam->name . ' fue eliminado satisfactoriamente.');
+        $this->type_exam->delete($id);
         return redirect()->route('maintainers.type-exams.index');
     }
 }

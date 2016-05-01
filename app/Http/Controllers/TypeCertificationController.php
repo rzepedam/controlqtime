@@ -4,7 +4,6 @@ namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 use Controlqtime\Http\Requests\TypeCertificationRequest;
 
 class TypeCertificationController extends Controller
@@ -30,7 +29,6 @@ class TypeCertificationController extends Controller
     public function store(TypeCertificationRequest $request)
     {
         $this->type_certification->create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.type-certifications.index');
     }
 
@@ -43,14 +41,12 @@ class TypeCertificationController extends Controller
     public function update(TypeCertificationRequest $request, $id)
     {
         $this->type_certification->update($request->all(), $id);
-        Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
         return redirect()->route('maintainers.type-certifications.index');
     }
 
     public function destroy($id)
     {
         $this->type_certification->delete($id);
-        Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.type-certifications.index');
     }
 }

@@ -4,7 +4,6 @@ namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 use Controlqtime\Http\Requests\TypeDiseaseRequest;
 
 class TypeDiseaseController extends Controller
@@ -30,7 +29,6 @@ class TypeDiseaseController extends Controller
     public function store(TypeDiseaseRequest $request)
     {
         $this->type_disease->create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.type-diseases.index');
     }
 
@@ -49,14 +47,12 @@ class TypeDiseaseController extends Controller
     public function update(TypeDiseaseRequest $request, $id)
     {
         $this->type_disease->update($request->all(), $id);
-        Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
         return redirect()->route('maintainers.type-diseases.index');
     }
 
     public function destroy($id)
     {
         $this->type_disease->delete($id);
-        Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.type-diseases.index');
     }
 }

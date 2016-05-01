@@ -4,7 +4,6 @@ namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 use Controlqtime\Http\Requests\TypeDisabilityRequest;
 
 class TypeDisabilityController extends Controller
@@ -30,7 +29,6 @@ class TypeDisabilityController extends Controller
     public function store(TypeDisabilityRequest $request)
     {
         $this->type_disability->create($request->all());
-        Session::flash('message', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.type-disabilities.index');
     }
 
@@ -43,14 +41,12 @@ class TypeDisabilityController extends Controller
     public function update(TypeDisabilityRequest $request, $id)
     {
         $this->type_disability->update($request->all(), $id);
-        Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
         return redirect()->route('maintainers.type-disabilities.index');
     }
 
     public function destroy($id)
     {
         $this->type_disability->delete($id);
-        Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.type-disabilities.index');
     }
 }

@@ -2,19 +2,22 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Controlqtime\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-
-use Controlqtime\Pension;
 use Controlqtime\Http\Requests\PensionRequest;
 
 class PensionController extends Controller
 {
-    public function index(Request $request)
+    protected $pension;
+
+    public function __construct(BaseRepoInterface $pension)
     {
-        $pensions = Pension::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->pension = $pension;
+    }
+
+    public function index()
+    {
+        $pensions = $this->pension->all();
         return view('maintainers.pensions.index', compact('pensions'));
     }
 
@@ -25,32 +28,25 @@ class PensionController extends Controller
 
     public function store(PensionRequest $request)
     {
-        Pension::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->pension->create($request->all());
         return redirect()->route('maintainers.pensions.index');
     }
 
     public function edit($id)
     {
-        $pension = Pension::findOrFail($id);
+        $pension = $this->pension->find($id);
         return view('maintainers.pensions.edit', compact('pension'));
     }
 
     public function update(PensionRequest $request, $id)
     {
-        $pension = Pension::findOrFail($id);
-        $message = 'El registro ' . $pension->name . ' fue actualizado satisfactoriamente.';
-        $pension->fill($request->all());
-        $pension->save();
-        Session::flash('success', $message);
+        $this->pension->update($request->all(), $id);
         return redirect()->route('maintainers.pensions.index');
     }
 
     public function destroy($id)
     {
-        $pension = Pension::findOrFail($id);
-        $pension->delete();
-        Session::flash('success', 'El registro ' . $pension->name . ' fue eliminado satisfactoriamente.');
+        $this->pension->delete($id);
         return redirect()->route('maintainers.pensions.index');
     }
 }

@@ -3,7 +3,6 @@
 namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 use Controlqtime\Http\Requests\ProfessionRequest;
 use Controlqtime\Core\Contracts\BaseRepoInterface;
 
@@ -30,7 +29,6 @@ class ProfessionController extends Controller
     public function store(ProfessionRequest $request)
     {
         $this->profession->create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.professions.index');
     }
 
@@ -43,14 +41,12 @@ class ProfessionController extends Controller
     public function update(ProfessionRequest $request, $id)
     {
         $this->profession->update($request->all(), $id);
-        Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
         return redirect()->route('maintainers.professions.index');
     }
 
     public function destroy($id)
     {
         $this->profession->delete($id);
-        Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
         return redirect()->route('maintainers.professions.index');
     }
 }

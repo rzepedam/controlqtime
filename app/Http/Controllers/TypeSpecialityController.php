@@ -3,9 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\BaseRepoInterface;
-use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 use Controlqtime\Http\Requests\TypeSpecialityRequest;
 
 
@@ -32,7 +30,6 @@ class TypeSpecialityController extends Controller
     public function store(TypeSpecialityRequest $request)
     {
         $this->type_speciality->create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.type-specialities.index');
     }
 
@@ -45,14 +42,12 @@ class TypeSpecialityController extends Controller
     public function update(TypeSpecialityRequest $request, $id)
     {
         $this->type_speciality->update($request->all(), $id);
-        Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
         return redirect()->route('maintainers.type-specialities.index');
     }
 
     public function destroy($id)
     {
         $this->type_speciality->delete($id);
-        Session::flash('success', 'El registro fue eliminado de nuestros registros.');
         return redirect()->route('maintainers.type-specialities.index');
     }
 }
