@@ -2,19 +2,21 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Controlqtime\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-
-use Controlqtime\Mutuality;
 use Controlqtime\Http\Requests\MutualityRequest;
 
 class MutualityController extends Controller
 {
-    public function index(Request $request)
+    protected $mutuality;
+
+    public function __construct(BaseRepoInterface $mutuality)
     {
-    	$mutualities = Mutuality::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->mutuality = $mutuality;
+    }
+    public function index()
+    {
+    	$mutualities = $this->mutuality->all();
     	return view('maintainers.mutualities.index', compact('mutualities'));
     }
 
@@ -25,32 +27,25 @@ class MutualityController extends Controller
 
     public function store(MutualityRequest $request)
     {
-    	Mutuality::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+    	$this->mutuality->create($request->all());
         return redirect()->route('maintainers.mutualities.index');
     }
 
     public function edit($id)
     {
-        $mutuality = Mutuality::findOrFail($id);
+        $mutuality = $this->mutuality->find($id);
         return view('maintainers.mutualities.edit', compact('mutuality'));
     }
 
     public function update(MutualityRequest $request, $id)
     {
-        $mutuality = Mutuality::findOrFail($id);
-        $message = 'El registro ' . $mutuality->name . ' fue actualizado satisfactoriamente.';
-        $mutuality->fill($request->all());
-        $mutuality->save();
-        Session::flash('success', $message);
+        $this->mutuality->update($request->all(), $id);
         return redirect()->route('maintainers.mutualities.index');
     }
 
     public function destroy($id)
     {
-        $mutuality = Mutuality::findOrFail($id);
-        $mutuality->delete();
-        Session::flash('success', 'El registro ' . $mutuality->name . ' fue eliminado satisfactoriamente.');
+        $this->mutuality->delete($id);
         return redirect()->route('maintainers.mutualities.index');
     }
 }
