@@ -89,5 +89,10 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\ForecastRepo'
         );
 
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\BaseRepoInterface',
+            'Controlqtime\Core\Repositories\RelationshipRepo'
+        );
+
     }
 }

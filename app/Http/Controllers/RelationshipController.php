@@ -2,83 +2,51 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
-
 use Controlqtime\Http\Requests\RelationshipRequest;
-use Controlqtime\Relationship;
 
 class RelationshipController extends Controller
 {
-    /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function index(Request $request)
+    private $relationship;
+
+    public function __construct(BaseRepoInterface $relationship)
     {
-        $relationships = Relationship::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->relationship = $relationship;
+    }
+
+    public function index()
+    {
+        $relationships = $this->relationship->all();
         return view('maintainers.relationships.index', compact('relationships'));
     }
 
-
-    /**
-     * @return mixed
-     */
     public function create()
     {
         return view('maintainers.relationships.create');
     }
 
-
-    /**
-     * @param RelationshipRequest $request
-     * @return mixed
-     */
     public function store(RelationshipRequest $request)
     {
-        Relationship::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->relationship->create($request->all());
         return redirect()->route('maintainers.relationships.index');
     }
 
-
-    /**
-     * @param $id
-     * @return mixed
-     */
     public function edit($id)
     {
-        $relationship = Relationship::findOrFail($id);
+        $relationship = $this->relationship->find($id);
         return view('maintainers.relationships.edit', compact('relationship'));
     }
 
-
-    /**
-     * @param RelationshipRequest $request
-     * @param $id
-     * @return mixed
-     */
     public function update(RelationshipRequest $request, $id)
     {
-        $relationship = Relationship::findOrFail($id);
-        $message = 'El registro ' . $relationship->name . ' fue actualizado satisfactoriamente.';
-        $relationship->fill($request->all());
-        $relationship->save();
-        Session::flash('success', $message);
+        $this->relationship->update($request->all(), $id);
         return redirect()->route('maintainers.relationships.index');
     }
 
-
-    /**
-     * @param $id
-     * @return mixed
-     */
     public function destroy($id)
     {
-        $relationship = Relationship::findOrFail($id);
-        $relationship->delete();
-        Session::flash('success', 'El registro ' . $relationship->name . ' fue eliminado satisfactoriamente.');
+        $this->relationship->delete($id);
         return redirect()->route('maintainers.relationships.index');
     }
 }

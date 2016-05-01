@@ -11,6 +11,7 @@
 @section('content')
 
 <div class="panel">
+
     {{ Form::open(array('route' => 'maintainers.relationships.store', 'method' => 'POST')) }}
 
         <div class="panel-body">
@@ -29,6 +30,7 @@
         </div>
 
     {{ Form::close() }}
+
 </div>
 
 @stop
