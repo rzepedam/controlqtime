@@ -104,5 +104,10 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\TypeInstitutionRepo'
         );
 
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\BaseRepoInterface',
+            'Controlqtime\Core\Repositories\TypeVehicleRepo'
+        );
+
     }
 }

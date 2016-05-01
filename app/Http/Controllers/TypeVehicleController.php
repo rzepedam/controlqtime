@@ -2,18 +2,22 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests\TypeVehicleRequest;
-use Controlqtime\TypeVehicle;
-use Illuminate\Http\Request;
-
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 
 class TypeVehicleController extends Controller
 {
-    public function index(Request $request)
+    protected $type_vehicle;
+
+    public function __construct(BaseRepoInterface $type_vehicle)
     {
-        $type_vehicles = TypeVehicle::name($request->get('table_search'))->orderBy('id', 'DESC')->paginate(20);
+        $this->type_vehicle = $type_vehicle;
+    }
+
+    public function index()
+    {
+        $type_vehicles = $this->type_vehicle->all();
         return view('maintainers.type-vehicles.index', compact('type_vehicles'));
     }
     
@@ -22,35 +26,27 @@ class TypeVehicleController extends Controller
         return view('maintainers.type-vehicles.create');
     }
 
-
     public function store(TypeVehicleRequest $request)
     {
-        TypeVehicle::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->type_vehicle->create($request->all());
         return redirect()->route('maintainers.type-vehicles.index');
     }
 
     public function edit($id)
     {
-        $type_vehicle = TypeVehicle::findOrFail($id);
+        $type_vehicle = $this->type_vehicle->find($id);
         return view('maintainers.type-vehicles.edit', compact('type_vehicle'));
     }
 
     public function update(TypeVehicleRequest $request, $id)
     {
-        $type_vehicle = TypeVehicle::findOrFail($id);
-        $message = 'El registro ' . $type_vehicle->name . ' fue actualizado satisfactoriamente.';
-        $type_vehicle->fill($request->all());
-        $type_vehicle->save();
-        Session::flash('success', $message);
+        $this->type_vehicle->update($request->all(), $id);
         return redirect()->route('maintainers.type-vehicles.index');
     }
 
     public function destroy($id)
     {
-        $type_vehicle = TypeVehicle::findOrFail($id);
-        $type_vehicle->delete();
-        Session::flash('success', 'El registro ' . $type_vehicle->name . ' fue eliminado satisfactoriamente.');
+        $this->type_vehicle->delete($id);
         return redirect()->route('maintainers.type-vehicles.index');
     }
 
