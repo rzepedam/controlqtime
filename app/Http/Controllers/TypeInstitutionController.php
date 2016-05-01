@@ -2,17 +2,22 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
-use Controlqtime\TypeInstitution;
 use Controlqtime\Http\Requests\TypeInstitutionRequest;
 
 class TypeInstitutionController extends Controller
 {
-    public function index(Request $request)
+    protected $type_institution;
+
+    public function __construct(BaseRepoInterface $type_institution)
     {
-        $type_institutions = TypeInstitution::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->type_institution = $type_institution;
+    }
+
+    public function index()
+    {
+        $type_institutions = $this->type_institution->all();
         return view('maintainers.type-institutions.index', compact('type_institutions'));
     }
 
@@ -23,32 +28,25 @@ class TypeInstitutionController extends Controller
 
     public function store(TypeInstitutionRequest $request)
     {
-        TypeInstitution::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->type_institution->create($request->all());
         return redirect()->route('maintainers.type-institutions.index');
     }
 
     public function edit($id)
     {
-        $type_institution = TypeInstitution::findOrFail($id);
+        $type_institution = $this->type_institution->find($id);
         return view('maintainers.type-institutions.edit', compact('type_institution'));
     }
 
     public function update($id, TypeInstitutionRequest $request)
     {
-        $type_institution = TypeInstitution::findOrFail($id);
-        $message = 'El registro ' . $type_institution->name . ' fue actualizado satisfactoriamente.';
-        $type_institution->fill($request->all());
-        $type_institution->save();
-        Session::flash('success', $message);
+        $this->type_institution->update($request->all(), $id);
         return redirect()->route('maintainers.type-institutions.index');
     }
 
     public function destroy($id)
     {
-        $type_institution = TypeInstitution::findOrFail($id);
-        $type_institution->delete();
-        Session::flash('success', 'El registro ' . $type_institution->name . ' fue eliminado satisfactoriamente.');
+        $this->type_institution->delete($id);
         return redirect()->route('maintainers.type-institutions.index');
     }
 }
