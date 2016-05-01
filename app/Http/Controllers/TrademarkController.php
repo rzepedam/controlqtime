@@ -2,18 +2,21 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests\TrademarkRequest;
-use Controlqtime\Trademark;
-use Illuminate\Http\Request;
-
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 
 class TrademarkController extends Controller
 {
-    public function index(Request $request)
+    private $trademark;
+
+    public function __construct(BaseRepoInterface $trademark)
     {
-        $trademarks = Trademark::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->trademark = $trademark;
+    }
+    public function index()
+    {
+        $trademarks = $this->trademark->all();
         return view('maintainers.trademarks.index', compact('trademarks'));
     }
 
@@ -24,32 +27,25 @@ class TrademarkController extends Controller
 
     public function store(TrademarkRequest $request)
     {
-        Trademark::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->trademark->create($request->all());
         return redirect()->route('maintainers.trademarks.index');
     }
 
     public function edit($id)
     {
-        $trademark = Trademark::findOrFail($id);
+        $trademark = $this->trademark->find($id);
         return view('maintainers.trademarks.edit', compact('trademark'));
     }
 
     public function update(TrademarkRequest $request, $id)
     {
-        $trademark = Trademark::findOrFail($id);
-        $message = 'El registro ' . $trademark->name . ' fue actualizado satisfactoriamente.';
-        $trademark->fill($request->all());
-        $trademark->save();
-        Session::flash('success', $message);
+        $this->trademark->update($request->all(), $id);
         return redirect()->route('maintainers.trademarks.index');
     }
 
     public function destroy($id)
     {
-        $trademark = Trademark::findOrFail($id);
-        $trademark->delete();
-        Session::flash('success', 'El registro ' . $trademark->name . ' fue eliminado satisfactoriamente.');
+        $this->trademark->delete($id);
         return redirect()->route('maintainers.trademarks.index');
     }
 }

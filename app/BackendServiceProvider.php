@@ -69,5 +69,10 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\TypeProfessionalLicenseRepo'
         );
 
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\BaseRepoInterface',
+            'Controlqtime\Core\Repositories\TrademarkRepo'
+        );
+
     }
 }

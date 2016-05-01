@@ -15,7 +15,7 @@
                         <td>{{ $trademark->id }}</td>
                         <td>{{ $trademark->name }}</td>
                         <td class="text-center">
-                            <a href="{{ route('maintainers.trademarks.edit', $trademark) }}" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> </a>
+                            <a href="{{ route('maintainers.trademarks.edit', $trademark) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i> </a>
                         </td>
                     </tr>
                 @endforeach
