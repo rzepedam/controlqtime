@@ -11,23 +11,26 @@
 @section('content')
 
     <div class="panel">
+
         {{ Form::open(array('route' => 'maintainers.terminals.store', 'method' => 'POST')) }}
 
-        <div class="panel-body">
+            <div class="panel-body">
 
-            @include('maintainers.terminals.partials.fields')
+                @include('maintainers.terminals.partials.fields')
 
-        </div>
-        <br />
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="{{ route('maintainers.terminals.index') }}">Volver</a><button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+            </div>
+            <br />
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{ route('maintainers.terminals.index') }}">Volver</a>
+                        <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
         {{ Form::close() }}
+
     </div>
 
 @stop

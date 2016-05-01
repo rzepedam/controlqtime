@@ -2,18 +2,21 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests\TerminalRequest;
-use Controlqtime\Terminal;
-use Illuminate\Http\Request;
-
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 
 class TerminalController extends Controller
 {
-    public function index(Request $request)
+    protected $terminal;
+
+    public function __construct(BaseRepoInterface $terminal)
     {
-        $terminals = Terminal::name($request->get('table_search'))->orderBy('id', 'name')->paginate(20);
+        $this->terminal = $terminal;
+    }
+    public function index()
+    {
+        $terminals = $this->terminal->all();
         return view('maintainers.terminals.index', compact('terminals'));
     }
 
@@ -24,32 +27,25 @@ class TerminalController extends Controller
 
     public function store(TerminalRequest $request)
     {
-        Terminal::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->terminal->create($request->all());
         return redirect()->route('maintainers.terminals.index');
     }
 
     public function edit($id)
     {
-        $terminal = Terminal::findOrFail($id);
+        $terminal = $this->terminal->find($id);
         return view('maintainers.terminals.edit', compact('terminal'));
     }
 
     public function update(TerminalRequest $request, $id)
     {
-        $terminal = Terminal::findOrFail($id);
-        $message = 'El registro ' . $terminal->name . ' fue actualizado satisfactoriamente.';
-        $terminal->fill($request->all());
-        $terminal->save();
-        Session::flash('success', $message);
+        $this->terminal->update($request->all(), $id);
         return redirect()->route('maintainers.terminals.index');
     }
 
     public function destroy($id)
     {
-        $terminal = Terminal::findOrFail($id);
-        $terminal->delete();
-        Session::flash('success', 'El registro ' . $terminal->name . ' fue eliminado satisfactoriamente.');
+        $this->terminal->delete($id);
         return redirect()->route('maintainers.terminals.index');
     }
 }
