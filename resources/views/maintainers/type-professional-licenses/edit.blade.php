@@ -12,7 +12,7 @@
 
 <div class="panel">
 
-    {{ Form::model($type_professional_license, array('route' => ['maintainers.type-professional-licenses.update', $type_professional_license], 'method' => 'PUT' )) }}
+    {{ Form::model($type_professional_license, array('route' => array('maintainers.type-professional-licenses.update', $type_professional_license), 'method' => 'PUT' )) }}
 
         <div class="panel-body">
 
@@ -41,5 +41,7 @@
 @stop
 
 @section('scripts')
+
     {{ Html::script('me/js/delete.js') }}
+
 @stop

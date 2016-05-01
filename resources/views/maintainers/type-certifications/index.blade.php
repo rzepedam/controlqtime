@@ -12,7 +12,7 @@
 
 @section('content')
 
-    @if (count($type_certifications) > 0)
+    @if ($type_certifications->count())
 
         @include('maintainers.type-certifications.partials.table')
 

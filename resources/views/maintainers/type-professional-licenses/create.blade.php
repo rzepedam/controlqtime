@@ -23,7 +23,8 @@
         <div class="panel-footer">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('maintainers.type-professional-licenses.index') }}">Volver</a><button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                    <a href="{{ route('maintainers.type-professional-licenses.index') }}">Volver</a>
+                    <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
                 </div>
             </div>
         </div>

@@ -2,19 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
-use Controlqtime\TypeProfessionalLicense;
 use Controlqtime\Http\Requests\TypeProfessionalLicenseRequest;
 
 
 class TypeProfessionalLicenseController extends Controller
 {
-    public function index(Request $request)
+    protected $type_professional_license;
+
+    public function __construct(BaseRepoInterface $type_professional_license)
     {
-        $type_professional_licenses = TypeProfessionalLicense::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->type_professional_license = $type_professional_license;
+    }
+
+    public function index()
+    {
+        $type_professional_licenses = $this->type_professional_license->all();
         return view('maintainers.type-professional-licenses.index', compact('type_professional_licenses'));
     }
 
@@ -25,32 +29,25 @@ class TypeProfessionalLicenseController extends Controller
 
     public function store(TypeProfessionalLicenseRequest $request)
     {
-        TypeProfessionalLicense::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->type_professional_license->create($request->all());
         return redirect()->route('maintainers.type-professional-licenses.index');
     }
 
     public function edit($id)
     {
-        $type_professional_license = TypeProfessionalLicense::findOrFail($id);
+        $type_professional_license = $this->type_professional_license->find($id);
         return view('maintainers.type-professional-licenses.edit', compact('type_professional_license'));
     }
 
     public function update(TypeProfessionalLicenseRequest $request, $id)
     {
-        $type_professional_license = TypeProfessionalLicense::findOrFail($id);
-        $message = 'El registro ' . $type_professional_license->name . ' fue actualizado satisfactoriamente.';
-        $type_professional_license->fill($request->all());
-        $type_professional_license->save();
-        Session::flash('success', $message);
+        $this->type_professional_license->update($request->all(), $id);
         return redirect()->route('maintainers.type-professional-licenses.index');
     }
 
     public function destroy($id)
     {
-        $type_professional_license = TypeProfessionalLicense::findOrFail($id);
-        $type_professional_license->delete();
-        Session::flash('success', 'El registro ' . $type_professional_license->name . ' fue eliminado satisfactoriamente.');
+        $this->type_professional_license->delete($id);
         return redirect()->route('maintainers.type-professional-licenses.index');
     }
 }

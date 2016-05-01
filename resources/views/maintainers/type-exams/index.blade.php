@@ -12,7 +12,7 @@
 
 @section('content')
 
-    @if(count($type_exams) > 0)
+    @if ($type_exams->count())
 
         @include('maintainers.type-exams.partials.table')
 

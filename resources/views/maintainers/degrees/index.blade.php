@@ -12,7 +12,7 @@
 
 @section('content')
 
-    @if(count($degrees) > 0)
+    @if ($degrees->count())
 
         @include('maintainers.degrees.partials.table')
 

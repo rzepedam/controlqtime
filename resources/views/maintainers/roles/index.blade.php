@@ -14,7 +14,7 @@
 
 @section('content')
 
-    @if (count($roles) > 0)
+    @if ($roles->count())
 
         @include('maintainers.roles.partials.table')
 

@@ -12,7 +12,7 @@
 
 @section('content')
 
-    @if(count($type_specialities) > 0)
+    @if ($type_specialities->count())
 
         @include('maintainers.type-specialities.partials.table')
 

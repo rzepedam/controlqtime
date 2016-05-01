@@ -12,7 +12,7 @@
 
 @section('content')
 
-    @if(count($professions) > 0)
+    @if ($professions->count())
 
         @include('maintainers.professions.partials.table')
 
