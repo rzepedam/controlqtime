@@ -2,19 +2,22 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Controlqtime\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-
-use Controlqtime\Degree;
 use Controlqtime\Http\Requests\DegreeRequest;
 
 class DegreeController extends Controller
 {
-	public function index(Request $request)
+    protected $degree;
+
+    public function __construct(BaseRepoInterface $degree)
     {
-        $degrees = Degree::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->degree = $degree;
+    }
+
+	public function index()
+    {
+        $degrees = $this->degree->all();
         return view('maintainers.degrees.index', compact('degrees'));
     }
 
@@ -25,32 +28,25 @@ class DegreeController extends Controller
 
     public function store(DegreeRequest $request)
     {
-        Degree::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->degree->create($request->all());
         return redirect()->route('maintainers.degrees.index');
     }
 
     public function edit($id)
     {
-        $degree = Degree::findOrFail($id);
+        $degree = $this->degree->find($id);
         return view('maintainers.degrees.edit', compact('degree'));
     }
 
     public function update(DegreeRequest $request, $id)
     {
-        $degree = Degree::findOrFail($id);
-        $message = 'El registro ' . $degree->name . ' fue actualizado satisfactoriamente.';
-        $degree->fill($request->all());
-        $degree->save();
-        Session::flash('success', $message);
+        $this->degree->update($request->all(), $id);
         return redirect()->route('maintainers.degrees.index');
     }
 
     public function destroy($id)
     {
-        $degree = Degree::findOrFail($id);
-        $degree->delete();
-        Session::flash('success', 'El registro ' . $degree->name . ' fue eliminado satisfactoriamente.');
+        $this->degree->delete($id);
         return redirect()->route('maintainers.degrees.index');
     }
     

@@ -11,7 +11,8 @@
 @section('content')
 
 <div class="panel">
-    {{ Form::model($degree, array('route' => ['maintainers.degrees.update', $degree], 'method' => 'PUT' )) }}
+
+    {{ Form::model($degree, array('route' => array('maintainers.degrees.update', $degree), 'method' => 'PUT' )) }}
 
         <div class="panel-body">
 
@@ -29,6 +30,7 @@
         </div>
 
     {{ Form::close() }}
+
 </div>
 <br />
 <br />
