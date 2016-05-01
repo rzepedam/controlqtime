@@ -2,19 +2,22 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
-use Controlqtime\Http\Controllers\Controller;
-use Controlqtime\Forecast;
 use Controlqtime\Http\Requests\ForecastRequest;
-use Illuminate\Support\Facades\Session;
 
 class ForecastController extends Controller
 {
-    public function index(Request $request)
+    protected $forecast;
+
+    public function __construct(BaseRepoInterface $forecast)
     {
-        $forecasts = Forecast::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->forecast = $forecast;
+    }
+
+    public function index()
+    {
+        $forecasts = $this->forecast->all();
         return view('maintainers.forecasts.index', compact('forecasts'));
     }
 
@@ -25,32 +28,25 @@ class ForecastController extends Controller
 
     public function store(ForecastRequest $request)
     {
-        Forecast::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->forecast->create($request->all());
         return redirect()->route('maintainers.forecasts.index');
     }
 
     public function edit($id)
     {
-        $forecast = Forecast::findOrFail($id);
+        $forecast = $this->forecast->find($id);
         return view('maintainers.forecasts.edit', compact('forecast'));
     }
 
     public function update(ForecastRequest $request, $id)
     {
-        $forecast = Forecast::findOrFail($id);
-        $message = 'El registro ' . $forecast->name . ' fue actualizado satisfactoriamente.';
-        $forecast->fill($request->all());
-        $forecast->save();
-        Session::flash('success', $message);
+        $this->forecast->update($request->all(), $id);
         return redirect()->route('maintainers.forecasts.index');
     }
 
     public function destroy($id)
     {
-        $forecast = Forecast::findOrFail($id);
-        $forecast->delete();
-        Session::flash('success', 'El registro ' . $forecast->name . ' fue eliminado satisfactoriamente.');
+        $this->forecast->delete($id);
         return redirect()->route('maintainers.forecasts.index');
     }
 
