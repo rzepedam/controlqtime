@@ -2,18 +2,25 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use Controlqtime\TypeSpeciality;
 use Controlqtime\Http\Requests\TypeSpecialityRequest;
 
 
 class TypeSpecialityController extends Controller
 {
-    public function index(Request $request)
+    protected $type_speciality;
+
+    public function __construct(BaseRepoInterface $type_speciality)
     {
-        $type_specialities = TypeSpeciality::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->type_speciality = $type_speciality;
+    }
+
+    public function index()
+    {
+        $type_specialities = $this->type_speciality->all();
         return view('maintainers.type-specialities.index', compact('type_specialities'));
     }
 
@@ -24,32 +31,28 @@ class TypeSpecialityController extends Controller
 
     public function store(TypeSpecialityRequest $request)
     {
-        TypeSpeciality::create($request->all());
+        $this->type_speciality->create($request->all());
         Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
         return redirect()->route('maintainers.type-specialities.index');
     }
 
     public function edit($id)
     {
-        $type_speciality = TypeSpeciality::findOrFail($id);
+        $type_speciality = $this->type_speciality->find($id);
         return view('maintainers.type-specialities.edit', compact('type_speciality'));
     }
 
     public function update(TypeSpecialityRequest $request, $id)
     {
-        $type_speciality = TypeSpeciality::findOrFail($id);
-        $message = 'El registro ' . $type_speciality->name . ' fue actualizado satisfactoriamente.';
-        $type_speciality->fill($request->all());
-        $type_speciality->save();
-        Session::flash('success', $message);
+        $this->type_speciality->update($request->all(), $id);
+        Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
         return redirect()->route('maintainers.type-specialities.index');
     }
 
     public function destroy($id)
     {
-        $type_speciality = TypeSpeciality::findOrFail($id);
-        $type_speciality->delete();
-        Session::flash('success', 'El registro ' . $type_speciality->name . ' fue eliminado de nuestros registros.');
+        $this->type_speciality->delete($id);
+        Session::flash('success', 'El registro fue eliminado de nuestros registros.');
         return redirect()->route('maintainers.type-specialities.index');
     }
 }
