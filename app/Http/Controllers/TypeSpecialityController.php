@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\TypeSpecialityRequest;
 
@@ -11,7 +11,7 @@ class TypeSpecialityController extends Controller
 {
     protected $type_speciality;
 
-    public function __construct(BaseRepoInterface $type_speciality)
+    public function __construct(TypeSpecialityRepoInterface $type_speciality)
     {
         $this->type_speciality = $type_speciality;
     }

@@ -2,9 +2,11 @@
 
 interface BaseRepoInterface {
 
-    public function all();
+    public function make(array $with = array());
 
-    public function find($id);
+    public function all(array $with = array());
+
+    public function find($id, array $with = array());
 
     public function create(array $request);
 

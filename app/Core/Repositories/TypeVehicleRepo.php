@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
 use Controlqtime\Core\Entities\TypeVehicle;
 
-class TypeVehicleRepo extends BaseRepo
+class TypeVehicleRepo extends BaseRepo implements TypeVehicleRepoInterface
 {
     protected $model;
 

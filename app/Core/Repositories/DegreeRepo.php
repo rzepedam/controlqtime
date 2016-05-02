@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\DegreeRepoInterface;
 use Controlqtime\Core\Entities\Degree;
 
-class DegreeRepo extends BaseRepo
+class DegreeRepo extends BaseRepo implements DegreeRepoInterface
 {
     protected $model;
 

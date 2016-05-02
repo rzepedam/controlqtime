@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\PensionRepoInterface;
 use Controlqtime\Core\Entities\Pension;
 
-class PensionRepo extends BaseRepo
+class PensionRepo extends BaseRepo implements PensionRepoInterface
 {
     protected $model;
 

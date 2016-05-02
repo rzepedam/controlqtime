@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\TypeDisabilityRepoInterface;
 use Controlqtime\Core\Entities\TypeDisability;
 
-class TypeDisabilityRepo extends BaseRepo
+class TypeDisabilityRepo extends BaseRepo implements TypeDisabilityRepoInterface
 {
     protected $model;
 

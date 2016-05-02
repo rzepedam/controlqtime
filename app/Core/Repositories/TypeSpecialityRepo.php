@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
 use Controlqtime\Core\Entities\TypeSpeciality;
 
-class TypeSpecialityRepo extends BaseRepo
+class TypeSpecialityRepo extends BaseRepo implements TypeSpecialityRepoInterface
 {
     protected $model;
 

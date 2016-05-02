@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 use Controlqtime\Http\Requests\TrademarkRequest;
 use Controlqtime\Http\Requests;
 
@@ -10,7 +10,7 @@ class TrademarkController extends Controller
 {
     private $trademark;
 
-    public function __construct(BaseRepoInterface $trademark)
+    public function __construct(TrademarkRepoInterface $trademark)
     {
         $this->trademark = $trademark;
     }

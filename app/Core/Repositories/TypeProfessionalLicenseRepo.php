@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 
-class TypeProfessionalLicenseRepo extends BaseRepo
+class TypeProfessionalLicenseRepo extends BaseRepo implements TypeProfessionalLicenseRepoInterface
 {
     protected $model;
 

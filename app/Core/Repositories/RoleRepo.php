@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\RoleRepoInterface;
 use Controlqtime\Core\Entities\Role;
 
-class RoleRepo extends BaseRepo
+class RoleRepo extends BaseRepo implements RoleRepoInterface
 {
     protected $model;
 

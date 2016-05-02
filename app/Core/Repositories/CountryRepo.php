@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\CountryRepoInterface;
 use Controlqtime\Core\Entities\Country;
 
-class CountryRepo extends BaseRepo
+class CountryRepo extends BaseRepo implements CountryRepoInterface
 {
     protected $model;
 

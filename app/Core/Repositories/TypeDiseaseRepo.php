@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\TypeDiseaseRepoInterface;
 use Controlqtime\Core\Entities\TypeDisease;
 
-class TypeDiseaseRepo extends BaseRepo
+class TypeDiseaseRepo extends BaseRepo implements TypeDiseaseRepoInterface
 {
     protected $model;
 

@@ -2,58 +2,56 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Terminal;
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\AreaRepoInterface;
+use Controlqtime\Core\Contracts\TerminalRepoInterface;
 use Controlqtime\Http\Requests;
-use Controlqtime\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-
-use Controlqtime\Area;
 use Controlqtime\Http\Requests\AreaRequest;
 
 class AreaController extends Controller
 {
-	public function index(Request $request)
+    protected $area;
+    protected $terminal;
+
+    public function __construct(AreaRepoInterface $area, TerminalRepoInterface $terminal)
     {
-        $areas = Area::name($request->get('table_search'))->orderBy('id', 'DESC')->paginate(20);
+        $this->area = $area;
+        $this->terminal = $terminal;
+    }
+
+	public function index()
+    {
+        $areas = $this->area->all(['terminal']);
         return view('maintainers.areas.index', compact('areas'));
     }
 
     public function create()
     {
-        $terminals = Terminal::lists('name', 'id');
+        $terminals = $this->terminal->lists('name', 'id');
         return view('maintainers.areas.create', compact('terminals'));
     }
 
     public function store(AreaRequest $request)
     {
-        Area::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->area->create($request->all());
         return redirect()->route('maintainers.areas.index');
     }
 
     public function edit($id)
     {
-        $area       = Area::findOrFail($id);
-        $terminals  = Terminal::lists('name', 'id');
+        $area       = $this->area->find($id);
+        $terminals  = $this->terminal->lists('name', 'id');
         return view('maintainers.areas.edit', compact('area', 'terminals'));
     }
 
     public function update(AreaRequest $request, $id)
     {
-        $area = Area::findOrFail($id);
-        $message = 'El registro ' . $area->name . ' fue actualizado satisfactoriamente.';
-        $area->fill($request->all());
-        $area->save();
-        Session::flash('success', $message);
+        $this->area->update($request->all(), $id);
         return redirect()->route('maintainers.areas.index');
     }
 
     public function destroy($id)
     {
-        $area = Area::findOrFail($id);
-        $area->delete();
-        Session::flash('success', 'El registro ' . $area->name . ' fue eliminado satisfactoriamente.');
+        $this->area->delete($id);
         return redirect()->route('maintainers.areas.index');
     }
 }

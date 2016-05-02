@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\TypeProfessionalLicenseRequest;
 
@@ -11,7 +11,7 @@ class TypeProfessionalLicenseController extends Controller
 {
     protected $type_professional_license;
 
-    public function __construct(BaseRepoInterface $type_professional_license)
+    public function __construct(TypeProfessionalLicenseRepoInterface $type_professional_license)
     {
         $this->type_professional_license = $type_professional_license;
     }

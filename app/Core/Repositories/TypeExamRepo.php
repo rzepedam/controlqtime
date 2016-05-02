@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\TypeExamRepoInterface;
 use Controlqtime\Core\Entities\TypeExam;
 
-class TypeExamRepo extends BaseRepo
+class TypeExamRepo extends BaseRepo implements TypeExamRepoInterface
 {
     protected $model;
 

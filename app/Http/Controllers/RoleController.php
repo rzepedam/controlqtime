@@ -2,14 +2,14 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\RoleRepoInterface;
 use Controlqtime\Http\Requests\RoleRequest;
 
 class RoleController extends Controller
 {
     protected $role;
 
-    public function __construct(BaseRepoInterface $role)
+    public function __construct(RoleRepoInterface $role)
     {
         $this->role = $role;
     }

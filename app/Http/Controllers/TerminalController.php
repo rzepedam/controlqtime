@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TerminalRepoInterface;
 use Controlqtime\Http\Requests\TerminalRequest;
 use Controlqtime\Http\Requests;
 
@@ -10,7 +10,7 @@ class TerminalController extends Controller
 {
     protected $terminal;
 
-    public function __construct(BaseRepoInterface $terminal)
+    public function __construct(TerminalRepoInterface $terminal)
     {
         $this->terminal = $terminal;
     }

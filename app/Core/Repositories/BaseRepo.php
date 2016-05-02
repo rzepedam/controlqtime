@@ -7,14 +7,21 @@ use Illuminate\Support\Facades\Session;
 
 abstract class BaseRepo implements BaseRepoInterface
 {
-    public function all()
+    public function make(array $with = array())
     {
-        return $this->model->orderBy('id', 'DESC')->paginate();
+        return $this->model->with($with);
     }
     
-    public function find($id)
+    public function all(array $with = array())
     {
-        return $this->model->findOrFail($id);
+        $query = $this->make($with);
+        return $query->orderBy('id', 'DESC')->paginate();
+    }
+    
+    public function find($id, array $with = array())
+    {
+        $query = $this->make($with);
+        return $query->findOrFail($id);
     }
 
     public function create(array $request)

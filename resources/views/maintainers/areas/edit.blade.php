@@ -12,13 +12,14 @@
 
     <div class="panel">
 
-        {{ Form::model($area, array('route' => ['maintainers.areas.update', $area], 'method' => 'PUT' )) }}
+        {{ Form::model($area, array('route' => array('maintainers.areas.update', $area), 'method' => 'PUT' )) }}
 
             <div class="panel-body">
 
                 @include('maintainers.areas.partials.fields')
 
             </div>
+            <br />
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">

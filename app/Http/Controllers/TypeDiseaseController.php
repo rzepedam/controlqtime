@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TypeDiseaseRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\TypeDiseaseRequest;
 
@@ -10,7 +10,7 @@ class TypeDiseaseController extends Controller
 {
     private $type_disease;
 
-    public function __construct(BaseRepoInterface $type_disease)
+    public function __construct(TypeDiseaseRepoInterface $type_disease)
     {
         $this->type_disease = $type_disease;
     }

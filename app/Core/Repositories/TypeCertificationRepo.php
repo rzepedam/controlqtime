@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\TypeCertificationRepoInterface;
 use Controlqtime\Core\Entities\TypeCertification;
 
-class TypeCertificationRepo extends BaseRepo
+class TypeCertificationRepo extends BaseRepo implements TypeCertificationRepoInterface
 {
     protected $model;
 

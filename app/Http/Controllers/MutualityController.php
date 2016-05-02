@@ -2,18 +2,19 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Http\Requests;
+use Controlqtime\Core\Contracts\MutualityRepoInterface;
 use Controlqtime\Http\Requests\MutualityRequest;
 
 class MutualityController extends Controller
 {
     protected $mutuality;
 
-    public function __construct(BaseRepoInterface $mutuality)
+    public function __construct(MutualityRepoInterface $mutuality)
     {
         $this->mutuality = $mutuality;
     }
+
     public function index()
     {
     	$mutualities = $this->mutuality->all();

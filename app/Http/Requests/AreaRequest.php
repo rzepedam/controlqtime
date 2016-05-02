@@ -25,14 +25,14 @@ class AreaRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:50|unique:areas'
+                    //'name'  => 'required|max:50|unique:areas'
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:50|unique:areas,name,' . $this->route->getParameter('areas')
+                    //'name'  => 'required|max:50|unique:areas,name,' . $this->route->getParameter('areas')
                 ];
             }
         }

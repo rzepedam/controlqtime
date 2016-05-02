@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TypeInstitutionRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\TypeInstitutionRequest;
 
@@ -10,7 +10,7 @@ class TypeInstitutionController extends Controller
 {
     protected $type_institution;
 
-    public function __construct(BaseRepoInterface $type_institution)
+    public function __construct(TypeInstitutionRepoInterface $type_institution)
     {
         $this->type_institution = $type_institution;
     }

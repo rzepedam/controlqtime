@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\RelationshipRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\RelationshipRequest;
 
@@ -10,7 +10,7 @@ class RelationshipController extends Controller
 {
     private $relationship;
 
-    public function __construct(BaseRepoInterface $relationship)
+    public function __construct(RelationshipRepoInterface $relationship)
     {
         $this->relationship = $relationship;
     }

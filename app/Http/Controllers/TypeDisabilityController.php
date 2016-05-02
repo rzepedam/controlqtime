@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TypeDisabilityRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\TypeDisabilityRequest;
 
@@ -10,7 +10,7 @@ class TypeDisabilityController extends Controller
 {
     private $type_disability;
 
-    public function __construct(BaseRepoInterface $type_disability)
+    public function __construct(TypeDisabilityRepoInterface $type_disability)
     {
         $this->type_disability = $type_disability;
     }

@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\ForecastRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\ForecastRequest;
 
@@ -10,7 +10,7 @@ class ForecastController extends Controller
 {
     protected $forecast;
 
-    public function __construct(BaseRepoInterface $forecast)
+    public function __construct(ForecastRepoInterface $forecast)
     {
         $this->forecast = $forecast;
     }

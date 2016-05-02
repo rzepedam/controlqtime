@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\RelationshipRepoInterface;
 use Controlqtime\Core\Entities\Relationship;
 
-class RelationshipRepo extends BaseRepo
+class RelationshipRepo extends BaseRepo implements RelationshipRepoInterface
 {
     protected $model;
 

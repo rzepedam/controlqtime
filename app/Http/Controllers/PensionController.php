@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\PensionRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\PensionRequest;
 
@@ -10,7 +10,7 @@ class PensionController extends Controller
 {
     protected $pension;
 
-    public function __construct(BaseRepoInterface $pension)
+    public function __construct(PensionRepoInterface $pension)
     {
         $this->pension = $pension;
     }

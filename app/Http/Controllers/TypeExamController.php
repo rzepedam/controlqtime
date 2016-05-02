@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TypeExamRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\TypeExamRequest;
 
@@ -10,7 +10,7 @@ class TypeExamController extends Controller
 {
     protected $type_exam;
 
-    public function __construct(BaseRepoInterface $type_exam)
+    public function __construct(TypeExamRepoInterface $type_exam)
     {
         $this->type_exam = $type_exam;
     }

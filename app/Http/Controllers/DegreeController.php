@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\DegreeRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\DegreeRequest;
 
@@ -10,7 +10,7 @@ class DegreeController extends Controller
 {
     protected $degree;
 
-    public function __construct(BaseRepoInterface $degree)
+    public function __construct(DegreeRepoInterface $degree)
     {
         $this->degree = $degree;
     }

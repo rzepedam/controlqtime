@@ -163,7 +163,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Controlqtime\BackendServiceProvider::class,
+        Controlqtime\Core\Providers\BackendServiceProvider::class,
     ],
 
     /*

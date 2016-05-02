@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\ForecastRepoInterface;
 use Controlqtime\Core\Entities\Forecast;
 
-class ForecastRepo extends BaseRepo
+class ForecastRepo extends BaseRepo implements ForecastRepoInterface
 {
     protected $model;
 

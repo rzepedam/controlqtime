@@ -2,15 +2,15 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\ProfessionRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\ProfessionRequest;
-use Controlqtime\Core\Contracts\BaseRepoInterface;
 
 class ProfessionController extends Controller
 {
     protected $profession;
     
-    public function __construct(BaseRepoInterface $profession)
+    public function __construct(ProfessionRepoInterface $profession)
     {
         $this->profession = $profession;
     }

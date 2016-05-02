@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Core\Repositories;
 
+use Controlqtime\Core\Contracts\TerminalRepoInterface;
 use Controlqtime\Core\Entities\Terminal;
 
-class TerminalRepo extends BaseRepo
+class TerminalRepo extends BaseRepoWithLists implements TerminalRepoInterface
 {
     protected $model;
 
@@ -12,4 +13,5 @@ class TerminalRepo extends BaseRepo
     {
         $this->model = $model;
     }
+    
 }

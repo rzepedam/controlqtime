@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TypeCertificationRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\TypeCertificationRequest;
 
@@ -10,7 +10,7 @@ class TypeCertificationController extends Controller
 {
     private $type_certification;
 
-    public function __construct(BaseRepoInterface $type_certification)
+    public function __construct(TypeCertificationRepoInterface $type_certification)
     {
         $this->type_certification = $type_certification;
     }

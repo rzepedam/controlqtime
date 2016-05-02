@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
 use Controlqtime\Http\Requests\TypeVehicleRequest;
 use Controlqtime\Http\Requests;
 
@@ -10,7 +11,7 @@ class TypeVehicleController extends Controller
 {
     protected $type_vehicle;
 
-    public function __construct(BaseRepoInterface $type_vehicle)
+    public function __construct(TypeVehicleRepoInterface $type_vehicle)
     {
         $this->type_vehicle = $type_vehicle;
     }

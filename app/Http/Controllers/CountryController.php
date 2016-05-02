@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\CountryRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\CountryRequest;
 
@@ -10,7 +10,7 @@ class CountryController extends Controller
 {
     protected $country;
 
-    public function __construct(BaseRepoInterface $country)
+    public function __construct(CountryRepoInterface $country)
     {
         $this->country = $country;
     }
