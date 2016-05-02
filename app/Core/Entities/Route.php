@@ -1,24 +1,14 @@
 <?php
 
-namespace Controlqtime;
+namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Route extends Model
+class Route extends Eloquent
 {
     protected $fillable = [
         'name', 'terminal_id'
     ];
-
-    public function scopeName($query, $name)
-    {
-        $not_space_name = trim($name);
-
-        if(!empty(trim($not_space_name))) {
-            $query->where("name", "LIKE", "%$not_space_name%");
-        }
-    }
-
 
     /*
      * Relationships
@@ -28,14 +18,12 @@ class Route extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function terminal() {
-        return $this->belongsTo('Controlqtime\Terminal');
+        return $this->belongsTo(Terminal::class);
     }
-
 
     /*
      * Mutators
      */
-
 
     /**
      * @param $value

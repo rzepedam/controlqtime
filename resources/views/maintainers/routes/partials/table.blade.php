@@ -17,7 +17,7 @@
                         <td>{{ $route->name }}</td>
                         <td>{{ $route->terminal->name }}</td>
                         <td class="text-center">
-                            <a href="{{ route('maintainers.routes.edit', $route) }}" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> </a>
+                            <a href="{{ route('maintainers.routes.edit', $route) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i> </a>
                         </td>
                     </tr>
                 @endforeach

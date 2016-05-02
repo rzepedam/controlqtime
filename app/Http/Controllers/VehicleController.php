@@ -3,13 +3,12 @@
 namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Http\Requests\VehicleRequest;
-use Controlqtime\ModelVehicle;
-use Controlqtime\Terminal;
-use Controlqtime\Trademark;
-use Controlqtime\TypeVehicle;
+use Controlqtime\Core\Entities\ModelVehicle;
+use Controlqtime\Core\Entities\Terminal;
+use Controlqtime\Core\Entities\Trademark;
+use Controlqtime\Core\Entities\TypeVehicle;
 use Controlqtime\Vehicle;
 use Illuminate\Http\Request;
-
 use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
 

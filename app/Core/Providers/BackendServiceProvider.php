@@ -80,6 +80,11 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\RouteRepoInterface',
+            'Controlqtime\Core\Repositories\RouteRepo'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\TerminalRepoInterface',
             'Controlqtime\Core\Repositories\TerminalRepo'
         );

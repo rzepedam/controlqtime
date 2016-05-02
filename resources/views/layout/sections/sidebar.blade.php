@@ -20,16 +20,15 @@
             <div>
                 <ul class="site-menu">
 
-                    <!-- Home -->
+                    {{-- Home --}}
                     <li class="site-menu-item active">
                         <a class="animsition-link" href="{{ route('home') }}">
                             <i class="site-menu-icon fa fa-home" aria-hidden="true"></i>
                             <span class="site-menu-title">Inicio</span>
                         </a>
                     </li>
-                    <!----- ------------- ------>
 
-                    <!-- Recursos Humanos -->
+                    {{-- Recursos Humanos --}}
                     <li class="site-menu-item has-sub">
                         <a href="javascript:void(0)">
                             <i class="site-menu-icon fa fa-street-view" aria-hidden="true"></i>
@@ -44,9 +43,8 @@
                             </li>
                         </ul>
                     </li>
-                    <!----- ------------- ------>
 
-                    <!-- Operaciones -->
+                    {{-- Operaciones --}}
                     <li class="site-menu-item has-sub">
                         <a href="javascript:void(0)">
                             <i class="site-menu-icon fa fa-map-pin" aria-hidden="true"></i>
@@ -62,7 +60,7 @@
                         </ul>
                     </li>
 
-                    <!-- Mantenedores -->
+                    {{-- Mantenedores --}}
                     <li class="site-menu-item has-sub">
                         <a href="javascript:void(0)">
                             <i class="site-menu-icon fa fa-cogs" aria-hidden="true"></i>
@@ -197,7 +195,6 @@
                             </li>
                         </ul>
                     </li>
-                    <!----- ------------- ------>
 
                 </ul>
             </div>

@@ -2,7 +2,6 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
 use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
 use Controlqtime\Http\Requests\TypeVehicleRequest;
 use Controlqtime\Http\Requests;

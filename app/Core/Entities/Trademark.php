@@ -20,6 +20,6 @@ class Trademark extends Eloquent
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function modelVehicles() {
-        return $this->hasMany('Controlqtime\ModelVehicle');
+        return $this->hasMany(ModelVehicle::class);
     }
 }

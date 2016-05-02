@@ -2,6 +2,9 @@
 
 namespace Controlqtime;
 
+use Controlqtime\Core\Entities\ModelVehicle;
+use Controlqtime\Core\Entities\Terminal;
+use Controlqtime\Core\Entities\TypeVehicle;
 use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
@@ -25,7 +28,7 @@ class Vehicle extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function modelVehicle() {
-        return $this->belongsTo('Controlqtime\ModelVehicle');
+        return $this->belongsTo(ModelVehicle::class);
     }
 
 
@@ -33,7 +36,7 @@ class Vehicle extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function typeVehicle() {
-        return $this->belongsTo('Controlqtime\TypeVehicle');
+        return $this->belongsTo(TypeVehicle::class);
     }
 
 
@@ -41,7 +44,7 @@ class Vehicle extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function terminal() {
-        return $this->belongsTo('Controlqtime\Terminal');
+        return $this->belongsTo(Terminal::class);
     }
 
     /*
