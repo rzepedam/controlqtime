@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Core\Contracts;
 
-interface TrademarkRepoInterface extends BaseRepoInterface
+interface TrademarkRepoInterface extends BaseRepoWithListsInterface
 {
 
 }

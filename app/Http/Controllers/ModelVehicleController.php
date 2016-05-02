@@ -2,19 +2,26 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Http\Requests\ModelVehicleRequest;
-use Controlqtime\ModelVehicle;
-use Controlqtime\Trademark;
-use Illuminate\Http\Request;
-
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
+use Controlqtime\Core\Contracts\ModelVehicleRepoInterface;
+use Controlqtime\Http\Requests\ModelVehicleRequest;
+use Controlqtime\Core\Contracts\TrademarkRepoInterface;
+use Controlqtime\Core\Entities\Trademark;
 
 class ModelVehicleController extends Controller
 {
-    public function index(Request $request)
+    protected $trademark;
+    protected $model_vehicle;
+
+    public function __construct(ModelVehicleRepoInterface $model_vehicle, TrademarkRepoInterface $trademark)
     {
-        $model_vehicles = ModelVehicle::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->model_vehicle = $model_vehicle;
+        $this->trademark = $trademark;
+    }
+
+    public function index()
+    {
+        $model_vehicles = $this->model_vehicle->all(['trademark']);
         return view('maintainers.model-vehicles.index', compact('model_vehicles'));
     }
 
@@ -26,15 +33,14 @@ class ModelVehicleController extends Controller
 
     public function store(ModelVehicleRequest $request)
     {
-        ModelVehicle::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->model_vehicle->create($request->all());
         return redirect()->route('maintainers.model-vehicles.index');
     }
 
     public function edit($id)
     {
-        $model_vehicle = ModelVehicle::findOrFail($id);
-        $trademarks = Trademark::lists('name', 'id');
+        $model_vehicle = $this->model_vehicle->find($id);
+        $trademarks = $this->trademark->lists('name', 'id');
         return view('maintainers.model-vehicles.edit', compact(
             'model_vehicle', 'trademarks'
         ));
@@ -42,19 +48,13 @@ class ModelVehicleController extends Controller
 
     public function update(ModelVehicleRequest $request, $id)
     {
-        $model_vehicle = ModelVehicle::findOrFail($id);
-        $message = 'El registro ' . $model_vehicle->name . ' fue actualizado satisfactoriamente.';
-        $model_vehicle->fill($request->all());
-        $model_vehicle->save();
-        Session::flash('success', $message);
+        $this->model_vehicle->update($request->all(), $id);
         return redirect()->route('maintainers.model-vehicles.index');
     }
 
     public function destroy($id)
     {
-        $model_vehicle = ModelVehicle::findOrFail($id);
-        $model_vehicle->delete();
-        Session::flash('success', 'El registro ' . $model_vehicle->name . ' fue eliminado satisfactoriamente.');
+        $this->model_vehicle->delete($id);
         return redirect()->route('maintainers.model-vehicles.index');
     }
     

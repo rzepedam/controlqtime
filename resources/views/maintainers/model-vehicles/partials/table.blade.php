@@ -18,7 +18,7 @@
                             <td>{{ $model_vehicle->name }}</td>
                             <td>{{ $model_vehicle->trademark->name }}</td>
                             <td class="text-center">
-                                <a href="{{ route('maintainers.model-vehicles.edit', $model_vehicle) }}" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i> </a>
+                                <a href="{{ route('maintainers.model-vehicles.edit', $model_vehicle) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i> </a>
                             </td>
                         </tr>
 
