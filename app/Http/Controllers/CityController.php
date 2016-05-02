@@ -2,58 +2,60 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\CityRepoInterface;
+use Controlqtime\Core\Contracts\CountryRepoInterface;
+use Controlqtime\Core\Entities\City;
+use Controlqtime\Core\Entities\Country;
 use Controlqtime\Http\Requests;
-use Controlqtime\Http\Controllers\Controller;
-
-use Controlqtime\City;
-use Controlqtime\Country;
 use Controlqtime\Http\Requests\CityRequest;
 use Illuminate\Support\Facades\Session;
 
 class CityController extends Controller
 {
-    public function index(Request $request)
+    protected $city;
+
+    protected $country;
+
+    public function __construct(CityRepoInterface $city, CountryRepoInterface $country)
     {
-        $cities = City::name($request->get('table_search'))->orderBy('name')->paginate(20);
+        $this->city = $city;
+        $this->country = $country;
+    }
+    
+    public function index()
+    {
+        $cities = $this->city->all(['country']);
         return view('maintainers.cities.index', compact('cities'));
     }
 
     public function create()
     {
-        $countries = Country::lists('name', 'id');
+        $countries = $this->country->lists('name', 'id');
         return view('maintainers.cities.create', compact('countries'));
     }
 
     public function store(CityRequest $request)
     {
-        City::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->city->create($request->all());
         return redirect()->route('maintainers.cities.index');
     }
 
     public function edit($id)
     {
-        $city      = City::findOrFail($id);
-        $countries = Country::lists('name', 'id');
+        $city      = $this->city->find($id);
+        $countries = $this->country->lists('name', 'id');
         return view('maintainers.cities.edit', compact('city', 'countries'));
     }
 
     public function update(CityRequest $request, $id)
     {
-        $city    = City::findOrFail($id);
-        $message = 'El registro ' . $city->name . ' fue actualizado satisfactoriamente.';
-        $city->fill($request->all());
-        $city->save();
-        Session::flash('success', $message);
+        $this->city->update($request->all(), $id);
         return redirect()->route('maintainers.cities.index');
     }
 
     public function destroy($id)
     {
-        $city = City::findOrFail($id);
-        $city->delete();
-        Session::flash('success', 'El registro ' . $city->name . ' fue eliminado satisfactoriamente.');
+        $this->city->delete($id);
         return redirect()->route('maintainers.cities.index');
     }
 }

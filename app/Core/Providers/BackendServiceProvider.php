@@ -23,6 +23,11 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Contracts\AreaRepoInterface',
             'Controlqtime\Core\Repositories\AreaRepo'
         );
+        
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\CityRepoInterface',
+            'Controlqtime\Core\Repositories\CityRepo'
+        );
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\CountryRepoInterface',
