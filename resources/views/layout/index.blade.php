@@ -72,8 +72,6 @@
         </div>
         <div class="page-content">
 
-            @include('layout.messages.errors')
-
             @yield('content')
 
         </div>

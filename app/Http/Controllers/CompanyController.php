@@ -2,123 +2,92 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
-
-
 use Controlqtime\Http\Requests\CompanyRequest;
-use Controlqtime\Company;
-use Controlqtime\Nationality;
-use Controlqtime\Region;
-use Controlqtime\Province;
-use Controlqtime\LegalRepresentative;
-use Controlqtime\Subsidiary;
-use Controlqtime\Commune;
-
+use Controlqtime\Core\Contracts\CommuneRepoInterface;
+use Controlqtime\Core\Contracts\CompanyRepoInterface;
+use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
+use Controlqtime\Core\Contracts\NationalityRepoInterface;
+use Controlqtime\Core\Contracts\ProvinceRepoInterface;
+use Controlqtime\Core\Contracts\RegionRepoInterface;
+use Controlqtime\Core\Contracts\SubsidiaryRepoInterface;
 
 class CompanyController extends Controller
 {
-    /**
-     * @param Request string $request
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index(Request $request)
+    protected $commune;
+    protected $company;
+    protected $legal_representative;
+    protected $nationality;
+    protected $province;
+    protected $region;
+    protected $subsidiary;
+
+    public function __construct(CompanyRepoInterface $company, NationalityRepoInterface $nationality, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, LegalRepresentativeRepoInterface $legal_representative, SubsidiaryRepoInterface $subsidiary)
     {
-        $companies = Company::firmName($request->get('table_search'))->orderBy('firm_name')->paginate(20);
+        $this->commune              = $commune;
+        $this->company              = $company;
+        $this->legal_representative = $legal_representative;
+        $this->nationality          = $nationality;
+        $this->province             = $province;
+        $this->region               = $region;
+        $this->subsidiary           = $subsidiary;
+    }
+
+    public function index()
+    {
+        $companies = $this->company->all();
         return view('maintainers.companies.index', compact('companies'));
     }
 
-
-    /**
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     *
-     */
     public function create()
     {
-        $nationalities = Nationality::lists('name', 'id');
-        $regions = Region::lists('name', 'id');
-        $region = Region::first();
-        $provinces = Region::find($region->id)->provinces->lists('name', 'id');
-        $province = Province::first();
-        $communes = Province::find($province->id)->communes->lists('name', 'id');
-        return view('maintainers.companies.create', compact('nationalities', 'regions', 'region', 'provinces', 'province', 'communes'));
+        $nationalities  = $this->nationality->lists('name', 'id');
+        $regions        = $this->region->lists('name', 'id');
+        $provinces      = $this->province->lists('name', 'id');
+        $communes       = $this->commune->lists('name', 'id');
+
+        return view('maintainers.companies.create', compact(
+            'nationalities', 'regions', 'provinces', 'communes'
+        ));
     }
 
-
-    /**
-     * @param CompanyRequest $request
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function store(CompanyRequest $request)
     {
-        $company = Company::create($request->all());
+        $company = $this->company->create($request->all());
+        $this->legal_representative->createWithSave($request->all(), $company);
+        $this->subsidiary->createWithSave($request->all(), $company);
 
-        for ($i = 0; $i < $request->get('count_legal_representative'); $i++) {
-
-            $legal                 = new LegalRepresentative();
-            $legal->male_surname   = $request->get('male_surname' . $i);
-            $legal->female_surname = $request->get('female_surname' . $i);
-            $legal->first_name     = $request->get('first_name' . $i);
-            $legal->second_name    = $request->get('second_name' . $i);
-            $legal->rut            = $request->get('rut' . $i);
-            $legal->birthday       = $request->get('birthday' . $i);
-            $legal->nationality_id = $request->get('nationality_id' . $i);
-            $legal->email          = $request->get('email' . $i);
-            $legal->phone1         = $request->get('phone1-' . $i);
-            $legal->phone2         = $request->get('phone2-' . $i);
-
-            $legal->company()->associate($company);
-            $legal->save();
+        if ($request->ajax()) {
+            return response()->json(array(
+                'success'   => true,
+                'url'       => '/maintainers/companies'
+            ));
         }
 
-        for ($i = 0; $i < $request->get('count_subsidiary'); $i++) {
+        return redirect()->back();
 
-            $subsidiary               = new Subsidiary();
-            $subsidiary->address      = $request->get('address_suc' . $i);
-            $subsidiary->commune_id   = $request->get('commune_suc_id' . $i);
-            $subsidiary->num          = $request->get('num_suc' . $i);
-            $subsidiary->lot          = $request->get('lot_suc' . $i);
-            $subsidiary->ofi          = $request->get('ofi_suc' . $i);
-            $subsidiary->floor        = $request->get('floor_suc' . $i);
-            $subsidiary->muni_license = $request->get('muni_license_suc' . $i);
-            $subsidiary->email        = $request->get('email_suc' . $i);
-            $subsidiary->phone1       = $request->get('phone1_suc-' . $i);
-            $subsidiary->phone2       = $request->get('phone2_suc-' . $i);
-
-            $subsidiary->company()->associate($company);
-            $subsidiary->save();
-        }
-
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
-        $response = array(
-            'status' => 'success',
-            'url' => '/maintainers/companies'
-        );
-
-        return response()->json([$response], 200);
     }
-
-
-    /**
-     * @param $id
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+    
     public function edit($id)
     {
-        $company = Company::with(['legalRepresentatives', 'subsidiaries'])->findOrFail($id);
-        $regions = Region::lists('name', 'id');
-        $region = Commune::find($company->commune_id)->province->region;
-        $provinces = Region::find($region->id)->provinces->lists('name', 'id');
-        $province = Commune::find($company->commune_id)->province;
-        $communes = Province::find($province->id)->communes->lists('name', 'id');
-        $nationalities = Nationality::lists('name', 'id');
+        $company        = $this->company->find($id, ['subsidiaries.commune.province.region']);
+        $regions        = $this->region->lists('name', 'id');
+        $provinces      = $this->province->lists('name', 'id');
+        $communes       = $this->commune->lists('name', 'id');
+        $nationalities  = $this->nationality->lists('name', 'id');
 
-        /* load provinces and commune to subsidiaries */
+        return view('maintainers.companies.edit', compact(
+            'company', 'regions', 'provinces', 'communes', 'nationalities'
+        ));
+
+        /*$company        = Company::with(['legalRepresentatives', 'subsidiaries'])->findOrFail($id);
+        $regions        = Region::lists('name', 'id');
+        $region         = Commune::find($company->commune_id)->province->region;
+        $provinces      = Region::find($region->id)->provinces->lists('name', 'id');
+        $province       = Commune::find($company->commune_id)->province;
+        $communes       = Province::find($province->id)->communes->lists('name', 'id');
+        $nationalities  = Nationality::lists('name', 'id');
+
         if (count($company->subsidiaries) > 0) {
             $subsidiary = $company->subsidiaries;
             for ($i = 0; $i < count($company->subsidiaries); $i++) {
@@ -129,7 +98,10 @@ class CompanyController extends Controller
             }
         }
 
-        return view('maintainers.companies.edit', compact('company', 'regions', 'region', 'provinces', 'province', 'communes', 'nationalities', 'region_sub', 'provinces_sub', 'province_sub', 'communes_sub'));
+        return view('maintainers.companies.edit', compact(
+            'company', 'regions', 'region', 'provinces', 'province', 'communes',
+            'nationalities', 'region_sub', 'provinces_sub', 'province_sub', 'communes_sub'
+        ));*/
     }
 
 

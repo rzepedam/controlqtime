@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Core\Contracts;
 
-interface TypeInstitutionRepoInterface extends BaseRepoWithListsInterface
+interface TypeInstitutionRepoInterface extends BaseRepoInterface, BaseRepoListsInterface
 {
 
 }

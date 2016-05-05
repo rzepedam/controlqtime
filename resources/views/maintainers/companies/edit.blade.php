@@ -1,5 +1,10 @@
-
 @extends('layout.index')
+
+@section('css')
+
+    {{ Html::style('assets/css/bootstrap-datepicker.css') }}
+
+@stop
 
 @section('title_header') Editar Registro @stop
 
@@ -11,94 +16,105 @@
 
 @section('content')
 
-    <div class="clearfix">
-        <span class="col-md-12 col-xs-12 alert alert-danger hide" id="js"></span>
-    </div>
+    @include('layout.messages.errors')
 
-    {{ Form::model($company, array('route' => ['maintainers.companies.update', $company], 'method' => 'PUT', 'id' => 'form-company')) }}
+    {{ Form::model($company, array('route' => array('maintainers.companies.update', $company), 'method' => 'PUT', 'id' => 'form-company')) }}
 
-        @include('maintainers.companies.partials.fields')
+        <div class="panel panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-building-o text-primary"></i> Datos Empresa <small>(Información Casa Matriz)</small></h3>
+            </div>
+            <div class="panel-body">
 
-        {{ Form::hidden('count_legal_representative', $company->num_representative, ['id' => 'count_legal_representative']) }}
-        {{ Form::hidden('count_subsidiary', $company->num_subsidiary, ['id' => 'count_subsidiary']) }}
+                @include('maintainers.companies.partials.edit.data_company')
+
+            </div>
+        </div>
+
+        <div class="panel panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <span class="label label-outline label-success add_license waves-effect waves-block" onclick="$(this).addLegalRepresentative(this)"><i class="fa fa-plus"></i> Agregar Representante Legal</span>
+                </div>
+                <h3 class="panel-title"><i class="fa fa-gavel text-success"></i> Datos Representante Legal</h3>
+            </div>
+
+            <div class="panel-body">
+                <div id="content_legal_representatives">
+
+                    @include('maintainers.companies.partials.edit.data_legal_representative')
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <span class="label label-outline label-warning add_subsidiary waves-effect waves-block" onclick="$(this).addSubsidiary(this)"><i class="fa fa-plus"></i> Agregar Sucursal</span>
+                </div>
+                <h3 class="panel-title"><i class="fa fa-cubes text-warning"></i> Datos Sucursales</h3>
+            </div>
+            <div class="panel-body">
+                <div id="content_subsidiaries">
+
+                    @include('maintainers.companies.partials.edit.data_subsidiaries')
+
+                </div>
+            </div>
+        </div>
 
     {{ Form::close() }}
+
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{ route('maintainers.companies.index') }}">Volver</a>
+        </div>
+        <div class="col-md-6 pull-right">
+            <button id="btnUpdateCompany" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+        </div>
+    </div>
 
 @stop
 
 @section('scripts')
 
+    {{ Html::script('assets/js/config.js') }}
     {{ Html::script('me/js/verificaUltimosNumeros.js') }}
     {{ Html::script('assets/js/jquery.Rut.js') }}
     {{ Html::script('me/js/validations/validaRut.js') }}
-    {{ Html::script('assets/js/config.js') }}
+    {{ Html::script('me/js/validations/validaEmail.js') }}
     {{ Html::script('me/js/changeMethods/changeRegionProvince.js') }}
-    {{ Html::script('assets/js/inputmask.js') }}
-    {{ Html::script('assets/js/inputmask.date.extensions.js') }}
-    {{ Html::script('assets/js/jquery.inputmask.js') }}
+    {{ Html::script('assets/js/bootstrap-datepicker.js') }}
+    {{ Html::script('assets/js/bootstrap-datepicker.es.min.js') }}
     {{ Html::script('me/js/delete.js') }}
 
     <script type="text/javascript">
 
         $(document).ready(function(){
 
-
-            /**************************************************
-             ******************** Variables *******************
-             **************************************************/
-
-
             var count_legal_representative  = {{ $company->num_representative + 1 }};
             var count_subsidiary            = {{ $company->num_subsidiary }};
             var id_deletes_legal            = [];
             var id_deletes_subsidiary       = [];
 
+            function initializeComponents() {
+                $('.input-group.date').datepicker({
+                    format: 'dd-mm-yyyy',
+                    todayHighlight: true,
+                    language: 'es',
+                    autoclose: true,
+                    endDate: new Date(),
+                    todayBtn: true,
+                });
 
-            /**************************************************
-             ************** Initialize components **************
-             **************************************************/
-
+                $('.tooltip-primary').tooltip();
+                $('.tooltip-danger').tooltip()
+            }
 
             initializeComponents();
-
-            function initializeComponents() {
-
-                $('.mitooltip').tooltip();
-
-                $('.data_mask').inputmask({
-                    placeholder: 'dd-mm-yyyy',
-                    alias: 'dd-mm-yyyy',
-                    "clearIncomplete": true,
-                    yearrange: { minyear: 1900, maxyear: (new Date()).getFullYear() }
-                });
-            }
-
-            /*
-             * added class success ans icon check to rut ans email
-             */
-
-            $('#rut').closest('.form-group').addClass('has-success has-feedback');
-            $('#rut').closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
-            $('#email').closest('.form-group').addClass('has-success has-feedback');
-            $('#email').closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
-
-            for(var i = 0; i < count_legal_representative; i++) {
-                $('#rut' + i).closest('.form-group').addClass('has-success has-feedback');
-                $('#rut' + i).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
-                $('#email' + i).closest('.form-group').addClass('has-success has-feedback');
-                $('#email' + i).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
-            }
-
-            for(var i = 0; i < count_subsidiary; i++) {
-                $('#email_suc' + i).closest('.form-group').addClass('has-success has-feedback');
-                $('#email_suc' + i).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
-            }
-
-
-            /**************************************************
-             ************** $(document) Methods ****************
-             **************************************************/
-
 
             $(document).on('click', '.delete-elements', function() {
 
@@ -419,9 +435,9 @@
 
 
 
-            /**************************************************
+           /* /!**************************************************
              ******************* Validations *******************
-             **************************************************/
+             **************************************************!/
 
 
             function validaEmail(email) {
@@ -1302,14 +1318,14 @@
                     }
                 }
             }
-
+*/
 
             /**************************************************
              ******************* Form submit ******************
              **************************************************/
 
 
-            $('#form-company').submit(function(e) {
+            /*$('#form-company').submit(function(e) {
 
                 e.preventDefault();
 
@@ -1317,7 +1333,7 @@
 
                     $.ajax({
                         type: 'PUT',
-                        url: '/maintainers/companies/{{ $company->id }}',
+                        url: '/maintainers/companies/{{-- $company->id --}}',
                         data: $('#form-company').serialize() + "&id_deletes_legal=" + id_deletes_legal + "&id_deletes_subsidiary=" + id_deletes_subsidiary,
                         dataType: "json",
 
@@ -1345,7 +1361,7 @@
                         }
                     });
                 }
-            });
+            });*/
 
 
         });

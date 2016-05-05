@@ -167,6 +167,25 @@ img {
     background: #F44336;
 }
 
+.add_license{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_license:hover {
+    color: white;
+    background: #4CAF50;
+}
+
+.add_subsidiary{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_subsidiary:hover {
+    color: white;
+    background: #FF9800;
+}
 
 /*
 * Hide panel buttons step wizard

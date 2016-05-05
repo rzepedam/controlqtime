@@ -12,16 +12,16 @@ class CreateSubsidiariesTable extends Migration
 
             $table->increments('id');
             $table->integer('company_id')->unsigned();
-            $table->string('address');
+            $table->string('address_suc');
             $table->integer('commune_id')->unsigned();
-            $table->string('num', 8);
-            $table->string('lot', 20);
-            $table->string('ofi', 5);
-            $table->string('floor', 3);
-            $table->string('muni_license', 50);
-            $table->string('email', 100)->unique();
-            $table->string('phone1', 20);
-            $table->string('phone2', 20);
+            $table->string('num_suc', 8);
+            $table->string('lot_suc', 20);
+            $table->string('ofi_suc', 5);
+            $table->string('floor_suc', 3);
+            $table->string('muni_license_suc', 50);
+            $table->string('phone1_suc', 20);
+            $table->string('phone2_suc', 20);
+            $table->string('email_suc', 100)->unique();
             $table->timestamps();
 
             $table->foreign('company_id')

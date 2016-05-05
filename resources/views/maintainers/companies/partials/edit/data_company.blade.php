@@ -26,7 +26,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
-                {{ Form::text('start_act', null, ['class' => 'form-control', 'readonly']) }}
+                {{ Form::text('start_act', $company->start_act->format('d-m-Y'), ['class' => 'form-control', 'readonly']) }}
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
     <div class="col-md-3">
         <div class="form-group">
                 {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-                {{ Form::select('region_id', $regions, null, ['class' => 'form-control']) }}
+                {{ Form::select('region_id', $regions, $company->commune->province->region->id, ['class' => 'form-control']) }}
         </div>
     </div>
 </div>
@@ -47,7 +47,7 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('province_id', 'Provincia', ['class' => 'control-label'])}}
-            {{ Form::select('province_id', $provinces, null, ['class' => 'form-control']) }}
+            {{ Form::select('province_id', $provinces, $company->commune->province->id, ['class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-3">

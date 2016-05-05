@@ -1,14 +1,10 @@
-/**
- * Created by Raul on 11-03-2016.
- */
-
-$(document).on('blur', '.check_rut', function(input) {
-
-    var element = $('#' + $(this).attr('id'));
+$(document).on('blur', '.check_rut', function() {
+    
+    var element = $(this);
     
     element.Rut({
         on_success: function(){
-            element.closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+            element.closest('.form-group').removeClass('has-error has-feedback');
         },
 
         on_error: function(){

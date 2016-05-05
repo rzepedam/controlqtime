@@ -1,5 +1,6 @@
 <?php
 
+use Controlqtime\Core\Entities\Company;
 use Illuminate\Database\Seeder;
 
 class CompanyTableSeeder extends Seeder
@@ -11,6 +12,6 @@ class CompanyTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Controlqtime\Company::class, 2)->create();
+        factory(Company::class, 2)->create();
     }
 }

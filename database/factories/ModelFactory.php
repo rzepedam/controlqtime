@@ -11,10 +11,10 @@
 |
 */
 
-use Carbon\Carbon;
+use Controlqtime\Core\Entities\Company;
 
-$factory->define(Controlqtime\Company::class, function (Faker\Generator $faker) {
-
+$factory->define(Company::class, function (Faker\Generator $faker) {
+    
     return [
         'rut'           => $faker->numberBetween($min = 10000000, $max = 20000000),
         'firm_name'     => $faker->company . " " . $faker->companySuffix,
@@ -27,10 +27,10 @@ $factory->define(Controlqtime\Company::class, function (Faker\Generator $faker) 
         'ofi'           => '1',
         'floor'         => '2',
         'muni_license'  => 'KNJBHGFCGVHBCFGV2019-K',
-        'email'         => $faker->email,
+        'email_legal'   => $faker->email,
         'phone1'        => $faker->phoneNumber,
         'phone2'        => $faker->phoneNumber,
-        'status'        => true
+        'status'        => 'available'
     ];
 
 });

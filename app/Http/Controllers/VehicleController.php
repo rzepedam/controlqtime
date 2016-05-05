@@ -2,31 +2,46 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\ModelVehicleRepoInterface;
+use Controlqtime\Core\Contracts\TerminalRepoInterface;
+use Controlqtime\Core\Contracts\TrademarkRepoInterface;
+use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
+use Controlqtime\Core\Contracts\VehicleRepoInterface;
+use Controlqtime\Core\Entities\Company;
 use Controlqtime\Http\Requests\VehicleRequest;
-use Controlqtime\Core\Entities\ModelVehicle;
-use Controlqtime\Core\Entities\Terminal;
-use Controlqtime\Core\Entities\Trademark;
-use Controlqtime\Core\Entities\TypeVehicle;
-use Controlqtime\Vehicle;
-use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
-use Illuminate\Support\Facades\Session;
 
 class VehicleController extends Controller
 {
-    public function index(Request $request)
+    protected $company;
+    protected $model_vehicle;
+    protected $terminal;
+    protected $type_vehicle;
+    protected $vehicle;
+    protected $trademark;
+
+    public function __construct(VehicleRepoInterface $vehicle, TypeVehicleRepoInterface $type_vehicle, TrademarkRepoInterface $trademark, ModelVehicleRepoInterface $model_vehicle, TerminalRepoInterface $terminal, Company $company)
     {
-        $vehicles = Vehicle::patent($request->get('table_search'))->orderBy('id', 'DESC')->paginate(20);
+        $this->company          = $company;
+        $this->model_vehicle    = $model_vehicle;
+        $this->terminal         = $terminal;
+        $this->trademark        = $trademark;
+        $this->type_vehicle     = $type_vehicle;
+        $this->vehicle          = $vehicle;
+    }
+
+    public function index()
+    {
+        $vehicles = $this->vehicle->all(['typeVehicle', 'modelVehicle', 'terminal']);
         return view('maintainers.vehicles.index', compact('vehicles'));
     }
 
     public function create()
     {
-        $type_vehicles = TypeVehicle::lists('name', 'id');
-        $trademarks = Trademark::lists('name', 'id');
-        $firstTrademark = Trademark::first();
-        $model_vehicles = Trademark::find($firstTrademark->id)->modelVehicles->lists('name', 'id');
-        $terminals = Terminal::lists('name', 'id');
+        $model_vehicles     = $this->model_vehicle->lists('name', 'id');
+        $terminals          = $this->terminal->lists('name', 'id');
+        $trademarks         = $this->trademark->lists('name', 'id');
+        $type_vehicles      = $this->type_vehicle->lists('name', 'id');
 
         return view('maintainers.vehicles.create', compact(
             'type_vehicles', 'trademarks', 'model_vehicles', 'terminals'
@@ -35,8 +50,7 @@ class VehicleController extends Controller
 
     public function store(VehicleRequest $request)
     {
-        Vehicle::create($request->all());
-        Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
+        $this->vehicle->create($request->all());
         return redirect()->route('maintainers.vehicles.index');
     }
 

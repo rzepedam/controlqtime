@@ -17,15 +17,15 @@
                         <td>{{ $company->id }}</td>
                         <td>{{ $company->firm_name }}</td>
                         <td>{{ $company->email }}</td>
-                        @if (!$company->status)
+                        @if ($company->status == 'available')
                             <td class="text-center"><a href="{{ route('attachFiles', $company->id) }}" class="label label-round label-danger">Activar</a></td>
                         @else
                             <td></td>
                         @endif
                         <td class="text-center">
-                            <a href="{{ route('maintainers.companies.show', $company) }}" class="btn btn-squared btn-info waves-effect waves-light mitooltip" title="Ver"><i class="fa fa-search"></i></a>
-                            <a href="{{ route('maintainers.companies.edit', $company) }}" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i></a>
-                            <a href="{{ route('attachFiles', $company->id) }}" class="btn btn-squared btn-primary waves-effect waves-light mitooltip" title="Adjuntar Imágenes"><i class="fa fa-cloud-upload"></i></a>
+                            <a href="{{ route('maintainers.companies.show', $company) }}" class="btn btn-squared btn-info waves-effect waves-light tooltip-info" data-toggle="tooltip" data-original-title="Ver"><i class="fa fa-search"></i></a>
+                            <a href="{{ route('maintainers.companies.edit', $company) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i></a>
+                            <a href="{{ route('attachFiles', $company->id) }}" class="btn btn-squared btn-primary waves-effect waves-light tooltip-primary" data-toggle="tooltip" data-original-title="Adjuntar Archivos"><i class="fa fa-cloud-upload"></i></a>
                         </td>
                     </tr>
                 @endforeach

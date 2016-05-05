@@ -26,8 +26,9 @@ abstract class BaseRepo implements BaseRepoInterface
 
     public function create(array $request)
     {
+        $query = $this->model->create($request);
         Session::flash('success', 'El registro fue almacenado satisfactoriamente.');
-        return $this->model->create($request);
+        return $query;
     }
 
     public function update(array $request, $id)

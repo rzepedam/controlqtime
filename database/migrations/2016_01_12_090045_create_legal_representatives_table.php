@@ -16,12 +16,12 @@ class CreateLegalRepresentativesTable extends Migration
             $table->string('female_surname', 30);
             $table->string('first_name', 30);
             $table->string('second_name', 30);
-            $table->string('rut', 15);
+            $table->string('rut_legal', 15);
             $table->date('birthday');
             $table->integer('nationality_id')->unsigned();
-            $table->string('email', 100)->unique();
-            $table->string('phone1', 20);
-            $table->string('phone2', 20);
+            $table->string('email_legal', 100)->unique();
+            $table->string('phone1_legal', 20);
+            $table->string('phone2_legal', 20);
             $table->timestamps();
 
             $table->foreign('nationality_id')

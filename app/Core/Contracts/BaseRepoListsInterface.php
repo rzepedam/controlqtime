@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Core\Contracts;
 
-interface BaseRepoWithListsInterface extends BaseRepoInterface
+interface BaseRepoListsInterface
 {
     public function lists($column, $id);
 }
