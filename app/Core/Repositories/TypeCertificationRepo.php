@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\TypeCertificationRepoInterface;
 use Controlqtime\Core\Entities\TypeCertification;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 
 class TypeCertificationRepo extends BaseRepo implements TypeCertificationRepoInterface
 {

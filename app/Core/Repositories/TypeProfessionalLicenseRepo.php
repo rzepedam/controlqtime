@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 
 class TypeProfessionalLicenseRepo extends BaseRepo implements TypeProfessionalLicenseRepoInterface
 {

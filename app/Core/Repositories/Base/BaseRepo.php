@@ -1,27 +1,27 @@
 <?php 
 
-namespace Controlqtime\Core\Repositories;
+namespace Controlqtime\Core\Repositories\Base;
 
-use Controlqtime\Core\Contracts\BaseRepoInterface;
+use Controlqtime\Core\Contracts\Base\BaseRepoInterface;
 use Illuminate\Support\Facades\Session;
 
 abstract class BaseRepo implements BaseRepoInterface
 {
-    public function make(array $with = array())
+    /*public function make(array $with = array())
     {
         return $this->model->with($with);
-    }
+    }*/
     
     public function all(array $with = array())
     {
-        $query = $this->make($with);
-        return $query->orderBy('id', 'DESC')->paginate();
+        //$query = $this->make($with);
+        return $this->model->with($with)->orderBy('id', 'DESC')->paginate();
     }
     
     public function find($id, array $with = array())
     {
-        $query = $this->make($with);
-        return $query->findOrFail($id);
+        //$query = $this->make($with);
+        return $this->model->with($with)->findOrFail($id);
     }
 
     public function create(array $request)
@@ -39,7 +39,8 @@ abstract class BaseRepo implements BaseRepoInterface
 
     public function delete($id)
     {
+        $query = $this->model->destroy($id);
         Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
-        return $this->model->destroy($id);
+        return $query;
     }
 }

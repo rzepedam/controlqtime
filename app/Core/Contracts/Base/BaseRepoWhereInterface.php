@@ -1,6 +1,6 @@
 <?php
 
-namespace Controlqtime\Core\Contracts;
+namespace Controlqtime\Core\Contracts\Base;
 
 interface BaseRepoWhereInterface
 {

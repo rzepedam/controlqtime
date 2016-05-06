@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
 use Controlqtime\Core\Entities\TypeVehicle;
+use Controlqtime\Core\Repositories\Base\BaseRepoWithLists;
 
 class TypeVehicleRepo extends BaseRepoWithLists implements TypeVehicleRepoInterface
 {

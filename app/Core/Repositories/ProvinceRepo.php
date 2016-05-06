@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Entities\Province;
+use Controlqtime\Core\Repositories\Base\BaseListsRepo;
 
 class ProvinceRepo extends BaseListsRepo implements ProvinceRepoInterface
 {

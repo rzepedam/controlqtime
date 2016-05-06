@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Entities\Company;
+use Controlqtime\Core\Repositories\Base\BaseWhereAndListsRepo;
 
 class CompanyRepo extends BaseWhereAndListsRepo implements CompanyRepoInterface
 {

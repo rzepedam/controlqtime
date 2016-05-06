@@ -21,10 +21,10 @@ class CreateCompaniesTable extends Migration
             $table->string('ofi', 5);
             $table->string('floor', 3);
             $table->string('muni_license', 50);
-            $table->string('email_legal', 100)->unique();
             $table->string('phone1', 20);
             $table->string('phone2', 20);
-            $table->enum('status', ['available', 'unavailable'])->default('available');
+            $table->string('email', 100)->unique();
+            $table->enum('status', ['available', 'unavailable'])->default('unavailable');
             $table->timestamps();
 
             $table->foreign('commune_id')

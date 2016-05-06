@@ -19,9 +19,9 @@ class CreateLegalRepresentativesTable extends Migration
             $table->string('rut_legal', 15);
             $table->date('birthday');
             $table->integer('nationality_id')->unsigned();
-            $table->string('email_legal', 100)->unique();
             $table->string('phone1_legal', 20);
             $table->string('phone2_legal', 20);
+            $table->string('email_legal', 100)->unique();
             $table->timestamps();
 
             $table->foreign('nationality_id')
@@ -32,7 +32,8 @@ class CreateLegalRepresentativesTable extends Migration
             $table->foreign('company_id')
                 ->references('id')
                 ->on('companies')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

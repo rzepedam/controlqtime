@@ -12,8 +12,8 @@
         <div class="row">
             <div class="col-md-1 hide">
                 <div class="form-group">
-                    {{ Form::label("id_suc[]", "ID", ["class" => "control-label"]) }}
-                    {{ Form::text("id_suc[]", $subsidiary->id, ["class" => "form-control"]) }}
+                    {{ Form::label("id_suc" . $i, "ID", ["class" => "control-label"]) }}
+                    {{ Form::text("id_suc[]", $subsidiary->id, ["id" => "id_suc" . $i, "class" => "form-control"]) }}
                 </div>
             </div>
             <div class="col-md-6">
@@ -103,7 +103,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-envelope"></i>
                         </div>
-                        {{ Form::text("email_suc[]", $subsidiary->email_suc, ["id" => "Subsidiary", "class" => "form-control", "onBlur"=> "$(this).checkEmail(this)"]) }}
+                        {{ Form::text("email_suc[]", $subsidiary->email_suc, ["id" => "Subsidiary", "class" => "form-control"]) }}
                     </div>
                 </div>
             </div>

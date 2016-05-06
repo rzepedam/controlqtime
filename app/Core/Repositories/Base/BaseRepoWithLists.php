@@ -1,6 +1,6 @@
 <?php
 
-namespace Controlqtime\Core\Repositories;
+namespace Controlqtime\Core\Repositories\Base;
 
 class BaseRepoWithLists extends BaseRepo
 {

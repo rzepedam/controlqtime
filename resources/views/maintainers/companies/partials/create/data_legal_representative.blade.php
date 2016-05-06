@@ -7,6 +7,12 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-md-1 hide">
+			<div class="form-group">
+				{{ Form::label("id_legal0", "ID", ["class" => "control-label"]) }}
+				{{ Form::text("id_legal[]", 0, ["id" => "id_legal0", "class" => "form-control"]) }}
+			</div>
+		</div>
 		<div class="col-md-3">
 			<div class="form-group">
 				{{ Form::label('male_surname[]', 'Apellido Paterno', ['class' => 'control-label']) }}

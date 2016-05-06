@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\TypeDiseaseRepoInterface;
 use Controlqtime\Core\Entities\TypeDisease;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 
 class TypeDiseaseRepo extends BaseRepo implements TypeDiseaseRepoInterface
 {

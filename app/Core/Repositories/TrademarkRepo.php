@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 use Controlqtime\Core\Entities\Trademark;
+use Controlqtime\Core\Repositories\Base\BaseRepoWithLists;
 
 class TrademarkRepo extends BaseRepoWithLists implements TrademarkRepoInterface
 {

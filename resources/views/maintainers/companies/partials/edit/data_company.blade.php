@@ -117,7 +117,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-envelope"></i>
                     </div>
-                    {{ Form::text('email', null, ['id' => 'Company', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+                    {{ Form::text('email', null, ['id' => 'Company', 'class' => 'form-control']) }}
                 </div>
             </div>
     </div>

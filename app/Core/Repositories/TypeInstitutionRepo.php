@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\TypeInstitutionRepoInterface;
 use Controlqtime\Core\Entities\TypeInstitution;
+use Controlqtime\Core\Repositories\Base\BaseRepoWithLists;
 
 class TypeInstitutionRepo extends BaseRepoWithLists implements TypeInstitutionRepoInterface
 {

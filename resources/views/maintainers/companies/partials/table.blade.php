@@ -17,7 +17,7 @@
                         <td>{{ $company->id }}</td>
                         <td>{{ $company->firm_name }}</td>
                         <td>{{ $company->email }}</td>
-                        @if ($company->status == 'available')
+                        @if ($company->status == 'unavailable')
                             <td class="text-center"><a href="{{ route('attachFiles', $company->id) }}" class="label label-round label-danger">Activar</a></td>
                         @else
                             <td></td>

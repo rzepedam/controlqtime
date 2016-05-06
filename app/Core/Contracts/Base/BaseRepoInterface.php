@@ -1,8 +1,10 @@
-<?php namespace Controlqtime\Core\Contracts;
+<?php
+
+namespace Controlqtime\Core\Contracts\Base;
 
 interface BaseRepoInterface {
 
-    public function make(array $with = array());
+    //public function make(array $with = array());
 
     public function all(array $with = array());
 

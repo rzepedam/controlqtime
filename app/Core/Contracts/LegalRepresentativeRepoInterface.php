@@ -2,7 +2,11 @@
 
 namespace Controlqtime\Core\Contracts;
 
-interface LegalRepresentativeRepoInterface extends BaseRepoInterface, BaseRepoWhereInterface
+use Controlqtime\Core\Contracts\Base\BaseRepoArrayInterface;
+use Controlqtime\Core\Contracts\Base\BaseRepoInterface;
+use Controlqtime\Core\Contracts\Base\BaseRepoWhereInterface;
+
+interface LegalRepresentativeRepoInterface extends BaseRepoInterface, BaseRepoWhereInterface, BaseRepoArrayInterface
 {
-    public function createWithSave(array $request, $company);
+    
 }

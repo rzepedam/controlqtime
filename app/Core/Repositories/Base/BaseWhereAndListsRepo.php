@@ -1,8 +1,8 @@
 <?php
 
-namespace Controlqtime\Core\Repositories;
+namespace Controlqtime\Core\Repositories\Base;
 
-use Controlqtime\Core\Contracts\BaseRepoWhereInterface;
+use Controlqtime\Core\Contracts\Base\BaseRepoWhereInterface;
 
 class BaseWhereAndListsRepo extends BaseRepoWithLists implements BaseRepoWhereInterface
 {

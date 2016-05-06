@@ -77,8 +77,8 @@ class CompanyRequest extends SanitizedRequest
 
             case 'PUT':
             {
-                $rules['rut']          = 'required|max:15|unique:companies,rut,' . $this->route->getParameter('companies');
-                /*$rules['firm_name']    = 'required';
+                /*$rules['rut']          = 'required|max:15|unique:companies,rut,' . $this->route->getParameter('companies');
+                $rules['firm_name']    = 'required';
                 $rules['gyre']         = 'required';
                 $rules['start_act']    = 'required';
                 $rules['address']      = 'required';
@@ -89,10 +89,10 @@ class CompanyRequest extends SanitizedRequest
                 $rules['floor']        = 'regex:/[0-9 -()+]+$/|digits_between:1,3';
                 $rules['muni_license'] = 'required|max:50';
                 $rules['email']        = 'required|max:100|email|unique:companies,email,' . $this->route->getParameter('companies');
-                $rules['phone1']       = 'required|max:20';
+                $rules['phone1']       = 'required|max:20';*/
                 $rules['phone2']       = 'max:20';
 
-                for ($i = 0; $i < Request::get('count_legal_representative'); $i++) {
+                /*for ($i = 0; $i < Request::get('count_legal_representative'); $i++) {
 
                     $rules['male_surname' . $i]   = 'required|max:30';
                     $rules['female_surname' . $i] = 'required|max:30';
