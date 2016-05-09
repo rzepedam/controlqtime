@@ -49,6 +49,16 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\ImagePatentCompanyRepoInterface',
+            'Controlqtime\Core\Repositories\ImagePatentCompanyRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageRolCompanyRepoInterface',
+            'Controlqtime\Core\Repositories\ImageRolCompanyRepo'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\InstitutionRepoInterface',
             'Controlqtime\Core\Repositories\InstitutionRepo'
         );

@@ -3,16 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImageLicenseCompaniesTable extends Migration
+class CreateImagePatentCompaniesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('image_license_companies', function (Blueprint $table) {
+        Schema::create('image_patent_companies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id')->unsigned();
             $table->string('name');
@@ -27,13 +22,8 @@ class CreateImageLicenseCompaniesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::drop('image_license_companies');
+        Schema::drop('image_patent_companies');
     }
 }

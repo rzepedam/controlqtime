@@ -6,5 +6,5 @@ use Controlqtime\Core\Contracts\Base\BaseRepoListsInterface;
 
 interface ProvinceRepoInterface extends BaseRepoListsInterface
 {
-    public function find($id);
+    public function findCommunes($id);
 }

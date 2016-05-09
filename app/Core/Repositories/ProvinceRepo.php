@@ -15,7 +15,7 @@ class ProvinceRepo extends BaseListsRepo implements ProvinceRepoInterface
         $this->model = $model;
     }
 
-    public function find($id) {
+    public function findCommunes($id) {
         return $this->model->findOrFail($id)->communes->lists('name', 'id');
     }
 }

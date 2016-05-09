@@ -7,7 +7,7 @@ use Controlqtime\Core\Entities\Subsidiary;
 $factory->define(Company::class, function (Faker\Generator $faker) {
     
     return [
-        'rut'           => $faker->numberBetween($min = 10000000, $max = 20000000),
+        'rut'           => rand(100, 110) . "." . rand(100, 999) . "." . rand(100, 999) . "-" . rand(1,9),
         'firm_name'     => $faker->company . " " . $faker->companySuffix,
         'gyre'          => $faker->sentence,
         'start_act'     => $faker->date($format = 'd-m-Y', $max = 'now'),
@@ -34,7 +34,7 @@ $factory->define(LegalRepresentative::class, function (Faker\Generator $faker) {
         'female_surname'    => $faker->lastName,
         'first_name'        => $faker->firstName,
         'second_name'       => $faker->firstName,
-        'rut_legal'         => $faker->numberBetween($min = 10000000, $max = 20000000),
+        'rut_legal'         => rand(3, 24) . "." . rand(100, 999) . "." . rand(100, 999) . "-" . rand(1,9),
         'birthday'          => $faker->date($format = 'd-m-Y', $max = 'now'),
         'nationality_id'    => rand(1, 9),
         'phone1_legal'      => $faker->phoneNumber,
@@ -75,7 +75,7 @@ $factory->define(Controlqtime\Manpower::class, function (Faker\Generator $faker)
         'first_name'        => $firstName,
         'second_name'       => $secondName,
         'full_name'         => "$firstName $secondName $maleSurname $femaleSurname",
-        'rut'               => $faker->numberBetween($min = 10000000, $max = 20000000),
+        'rut'               => rand(3, 24) . "." . rand(100, 999) . "." . rand(100, 999) . "-" . rand(1,9),
         'birthday'          => $faker->date($format = 'd-m-Y', $max = 'now'),
         'nationality_id'    => rand(1, 9),
         'gender_id'         => rand(1, 2),
@@ -89,6 +89,6 @@ $factory->define(Controlqtime\Manpower::class, function (Faker\Generator $faker)
         'pension_id'        => rand(1, 6),
         'role_id'           => rand(1, 4),
         'company_id'        => rand(1, 25),
-        'area_id'           => rand(1, 49),
+        'area_id'           => rand(1, 3),
     ];
 });

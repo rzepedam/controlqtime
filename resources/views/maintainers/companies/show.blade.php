@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Detalle Empresa : <span class="text-primary">{{ $company->firm_name }}</span> @stop
+@section('title_header') Detalle Empresa : <span class="text-primary">{{ $company->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>

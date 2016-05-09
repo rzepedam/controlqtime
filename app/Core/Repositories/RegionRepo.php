@@ -5,7 +5,6 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Repositories\Base\BaseListsRepo;
-use Illuminate\Database\DatabaseManager as DB;
 
 class RegionRepo extends BaseListsRepo implements RegionRepoInterface
 {
@@ -16,7 +15,7 @@ class RegionRepo extends BaseListsRepo implements RegionRepoInterface
         $this->model = $model;
     }
 
-    public function find($id) {
+    public function findProvinces($id) {
         return $this->model->findOrFail($id)->provinces->lists('name', 'id');
     }
 

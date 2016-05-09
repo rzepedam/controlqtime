@@ -3,16 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImageRutCompaniesTable extends Migration
+class CreateImageRolCompaniesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('image_rut_companies', function (Blueprint $table) {
+        Schema::create('image_rol_companies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id')->unsigned();
             $table->string('name');
@@ -27,14 +22,9 @@ class CreateImageRutCompaniesTable extends Migration
 
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
-        Schema::drop('image_rut_companies');
+        Schema::drop('image_rol_companies');
     }
 }

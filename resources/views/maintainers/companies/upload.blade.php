@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Seleccione imágenes a adjuntar @stop
+@section('title_header') Adjuntar imágenes a Empresa: <span class="text-primary">{{ $id }}</span> @stop
 
 @section('css')
 
@@ -22,13 +22,13 @@
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <strong>#</strong> Rut Empresa
+                        <strong>#</strong> Rol Empresa
                     </h3>
                 </div>
                 <div class="panel-body">
 
                     <br />
-                    <input id="rut" type="file" class="file-loading" multiple>
+                    <input id="rol" type="file" class="file-loading" multiple>
 
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <div class="panel-body">
 
                     <br />
-                    <input id="license" type="file" class="file-loading" multiple>
+                    <input id="patent" type="file" class="file-loading" multiple>
 
                 </div>
             </div>
@@ -58,103 +58,52 @@
             <a href="{{ route('maintainers.companies.index') }}">Volver</a>
         </div>
     </div>
-    <br />
-    <br />
 
 @stop
 
 @section('scripts')
 
     {{ Html::script('assets/js/fileinput.js') }}
-    {{ Html::script('assets/js/fileinput_locale_es.js') }}
     {{ Html::script('assets/js/config.js') }}
 
     <script>
 
-        $(document).ready(function(){
+        $(document).ready(function() {
 
-            $("#rut").fileinput({
-
-                allowedFileExtensions: ["jpg", "png", "jpeg"],
-                browseClass: "btn btn-primary mitooltip",
-                browseLabel: "Seleccione..",
-                browseIcon: "<i class='fa fa-folder-open'></i>",
-                deleteExtraData: {
-                    company: {{ $id }},
-                    type: 'rut'
-                },
-
+            $("#rol").fileinput({
                 initialPreview: [
-                    @foreach($imagesRut as $image)
-                            "<img style='height:160px' src='{{ asset("/storage/companies/" . $id . "/rut/" . $image->name) }}' />",
+                    @foreach($company->imageRolCompanies as $image_rut)
+                            "<img style='height:160px' src='{{ asset("/storage/company/" . $id . "/rol/" . $image_rut->name) }}' />",
                     @endforeach
                 ],
-
                 initialPreviewConfig: [
-                    @foreach($imagesRut as $image)
-                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('deleteFiles')  }}", key: {{ $image->id }} },
+                    @foreach($company->imageRolCompanies as $image_rut)
+                        { caption: "{{ $image_rut->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles') }}", key: "{{ $image_rut->id }}", extra: { img_name: "{{ $image_rut->name }}", id: "{{ $id }}", type: "rol" } },
                     @endforeach
                 ],
-
-                language: "es",
-                minFileCount: 1,
-                overwriteInitial: false,
-                removeClass: "btn btn-danger",
-                removeLabel: "",
-                removeTitle: "",
-                removeIcon: "<i class='fa fa-trash'></i>",
-                uploadAsync: true,
-                uploadClass: "btn btn-info",
+                uploadUrl: "{{ route('maintainers.companies.addImages') }}",
                 uploadExtraData:  {
-                    id: {{ $id }},
-                    type: 'rut'
-                },
-                uploadIcon: "<i class='fa fa-cloud-upload'></i>",
-                uploadLabel: "",
-                uploadTitle: "",
-                uploadUrl: '{{ route("attachFiles_added") }}'
+                    id: "{{ $id }}",
+                    type: "rol"
+                }
             });
 
-            $("#license").fileinput({
-
-                allowedFileExtensions: ["jpg", "png", "gif"],
-                browseClass: "btn btn-primary mitooltip",
-                browseLabel: "Seleccione..",
-                browseIcon: "<i class='fa fa-folder-open'></i>",
-                deleteExtraData: {
-                    company: {{ $id }},
-                    type: 'license'
-                },
-
+            $("#patent").fileinput({
                 initialPreview: [
-                    @foreach($imagesLicense as $image)
-                            "<img style='height:160px' src='{{ asset("/storage/companies/" . $id . "/license/" . $image->name) }}' />",
+                    @foreach($company->imagePatentCompanies as $image_patent)
+                            "<img style='height:160px' src='{{ asset("/storage/company/" . $id . "/patent/" . $image_patent->name) }}' />",
                     @endforeach
                 ],
-
                 initialPreviewConfig: [
-                    @foreach($imagesLicense as $image)
-                        { caption: "{{ $image->orig_name }}", width: "120px", url: "{{ route('deleteFiles')  }}", key: {{ $image->id }} },
+                    @foreach($company->imagePatentCompanies as $image_patent)
+                        { caption: "{{ $image_patent->orig_name }}", width: "120px", url: "{{ route('maintainers.companies.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { img_name: "{{ $image_patent->name }}", id: "{{ $id }}", type: "patent" } },
                     @endforeach
                 ],
-
-                language: "es",
-                minFileCount: 1,
-                overwriteInitial: false,
-                removeClass: "btn btn-danger",
-                removeLabel: "",
-                removeTitle: "",
-                removeIcon: "<i class='glyphicon glyphicon-trash'></i> ",
-                uploadAsync: true,
-                uploadClass: "btn btn-info",
+                uploadUrl: "{{ route('maintainers.companies.addImages') }}",
                 uploadExtraData:  {
-                    id: {{ $id }},
-                    type: 'license'
-                },
-                uploadIcon: "<i class='fa fa-cloud-upload'></i>",
-                uploadLabel: "",
-                uploadTitle: "",
-                uploadUrl: '{{ route("attachFiles_added") }}'
+                    id: "{{ $id }}",
+                    type: "patent"
+                }
             });
 
         });

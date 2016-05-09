@@ -31,15 +31,15 @@ class AjaxLoadController extends Controller
     }
 
     public function loadProvinces(Request $request) {
-		return $this->region->find($request->get('id'));
+		return $this->region->findProvinces($request->get('id'));
     }
 
     public function loadCommunes(Request $request) {
-		return $this->province->find($request->get('id'));
+		return $this->province->findCommunes($request->get('id'));
     }
 
 	public function verificaEmail(Request $request) {
-		
+
 		switch($request->get('element'))
 		{
 			case 'Company':

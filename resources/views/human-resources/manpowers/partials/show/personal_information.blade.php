@@ -36,7 +36,7 @@
                                         <td><i class="fa fa-envelope"></i> {{ Html::mailto($manpower->email, null, ['class' => 'text-muted']) }}</td>
                                     </tr>
                                     <tr class="text-center">
-                                        <td><i class="md-seat font-size-18"></i> {{ $manpower->rating->name   }}</td>
+                                        <td><i class="md-seat font-size-18"></i> {{ $manpower->role->name   }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -52,11 +52,11 @@
                                 <tbody>
                                     <tr>
                                         <td class="col-md-3">Terminal</td>
-                                        <td class="text-center"><i class="fa fa-road"></i> {{ $manpower->area->terminal->name }}</td>
+                                        <td class="text-center"><i class="fa fa-road" aria-hidden="true"></i> {{ $manpower->area->terminal->name }}</td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Área</td>
-                                        <td class="text-center"><i class="fa fa-sitemap"></i> {{ $manpower->area->name }}</td>
+                                        <td class="text-center"><i class="fa fa-sitemap" aria-hidden="true"></i> {{ $manpower->area->name }}</td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Rut</td>
@@ -68,7 +68,7 @@
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Fecha de Nacimiento</td>
-                                        <td class="text-center text-capitalize"><i class="fa fa-calendar"></i> {{ Date::parse($manpower->birthday)->format('l j F Y') }}</td>
+                                        <td class="text-center text-capitalize"><i class="fa fa-calendar" aria-hidden="true"></i> {{ Date::parse($manpower->birthday)->format('l j F Y') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Nacionalidad</td>
@@ -80,16 +80,16 @@
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Domicilio</td>
-                                        <td class="text-center"><i class="fa fa-map-marker"></i> {{ $manpower->address . ", " . $manpower->commune->name . ". " . $manpower->commune->province->name . ". " . $manpower->commune->province->region->name }}</td>
+                                        <td class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $manpower->address . ", " . $manpower->commune->name . ". " . $manpower->commune->province->name . ". " . $manpower->commune->province->region->name }}</td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Teléfono 1</td>
-                                        <td class="text-center"><i class="fa fa-phone"></i> {{ $manpower->phone1 }}</td>
+                                        <td class="text-center"><i class="fa fa-phone" aria-hidden="true"></i> {{ $manpower->phone1 }}</td>
                                     </tr>
                                     @if ($manpower->phone2)
                                     <tr>
                                         <td class="col-md-3">Teléfono 2</td>
-                                        <td class="text-center">{{ $manpower->phone2 }}</td>
+                                        <td class="text-center"><i class="fa fa-fax" aria-hidden="true"></i> {{ $manpower->phone2 }}</td>
                                     </tr>
                                     @endif
                                     <tr>

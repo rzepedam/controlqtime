@@ -7,6 +7,6 @@ class SubsidiaryTableSeeder extends Seeder
 {
     public function run()
     {
-        factory(Subsidiary::class, 50)->create();
+        factory(Subsidiary::class, 600)->create();
     }
 }

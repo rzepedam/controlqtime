@@ -2,9 +2,25 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Area;
+use Controlqtime\Core\Entities\Area;
+use Controlqtime\Core\Entities\Country;
+use Controlqtime\Core\Entities\Degree;
+use Controlqtime\Core\Entities\Forecast;
+use Controlqtime\Core\Entities\Institution;
+use Controlqtime\Core\Entities\Mutuality;
+use Controlqtime\Core\Entities\Pension;
+use Controlqtime\Core\Entities\Province;
+use Controlqtime\Core\Entities\Region;
+use Controlqtime\Core\Entities\Relationship;
+use Controlqtime\Core\Entities\Role;
+use Controlqtime\Core\Entities\TypeCertification;
+use Controlqtime\Core\Entities\TypeDisability;
+use Controlqtime\Core\Entities\TypeDisease;
+use Controlqtime\Core\Entities\TypeExam;
+use Controlqtime\Core\Entities\TypeProfessionalLicense;
+use Controlqtime\Core\Entities\TypeSpeciality;
 use Controlqtime\Http\Requests\Step1Request;
-use Controlqtime\Company;
+use Controlqtime\Core\Entities\Company;
 use Controlqtime\Disability;
 use Controlqtime\Disease;
 use Controlqtime\Exam;
@@ -13,39 +29,17 @@ use Controlqtime\FamilyResponsability;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
 use Controlqtime\ProfessionalLicense;
-use Controlqtime\Province;
-use Controlqtime\Region;
 use Controlqtime\Speciality;
 use Controlqtime\Study;
-use Controlqtime\TypeCertification;
-use Controlqtime\TypeProfessionalLicense;
-use Controlqtime\TypeSpeciality;
 use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-
-use Controlqtime\Relationship;
 use Controlqtime\Manpower;
 use Controlqtime\Gender;
-use Controlqtime\Rating;
-use Controlqtime\Country;
-use Controlqtime\Forecast;
-use Controlqtime\TypeDisability;
-use Controlqtime\TypeDisease;
 use Controlqtime\Certification;
-use Controlqtime\Institution;
-use Controlqtime\Mutuality;
-use Controlqtime\Pension;
-use Controlqtime\TypeExam;
-use Controlqtime\Degree;
 
 class ManpowerController extends Controller
 {
-    /**
-     * @param Request $request
-     *
-     * @return mixed
-     */
     public function index(Request $request)
     {
         $manpowers = Manpower::with(['dailyAssistances'])->orderBy('id', 'DESC')->paginate(25);
@@ -68,8 +62,8 @@ class ManpowerController extends Controller
         $forecasts = Forecast::lists('name', 'id');
         $mutualities = Mutuality::lists('name', 'id');
         $pensions = Pension::lists('name', 'id');
-        $companies = Company::where('status', true)->lists('firm_name', 'id');
-        $ratings = Rating::lists('name', 'id');
+        $companies = Company::where('status', 'available')->lists('firm_name', 'id');
+        $ratings = Role::lists('name', 'id');
         $type_disabilities = TypeDisability::lists('name', 'id');
         $type_diseases = TypeDisease::lists('name', 'id');
         $relationships = Relationship::lists('name', 'id');
@@ -390,7 +384,7 @@ class ManpowerController extends Controller
             'company', 'nationality', 'gender', 'familyRelationships', 'studies', 'certifications', 'specialities',
             'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities', 'area'
         ])->findOrFail($id);
-
+        
         return view('human-resources.manpowers.show', compact('manpower'));
         
     }

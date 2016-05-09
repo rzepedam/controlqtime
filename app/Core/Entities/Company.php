@@ -28,12 +28,12 @@ class Company extends Eloquent
         return $this->hasMany(Subsidiary::class);
     }
 
-    public function imageRutCompanies() {
-        return $this->hasMany('Controlqtime\ImageRutCompany');
+    public function imageRolCompanies() {
+        return $this->hasMany(ImageRolCompany::class);
     }
 
-    public function imageLicenseCompanies() {
-        return $this->hasMany('Controlqtime\ImageLicenseCompany');
+    public function imagePatentCompanies() {
+        return $this->hasMany(ImagePatentCompany::class);
     }
 
     public function manpowers() {

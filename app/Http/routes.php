@@ -76,6 +76,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('areas', 'AreaController');
         Route::resource('cities', 'CityController');
         Route::resource('companies', 'CompanyController');
+        Route::group(['prefix' => 'companies'], function() {
+            Route::get('attachFiles/{id}', ['as' => 'maintainers.companies.attachFiles', 'uses' => 'CompanyController@getImages']);
+            Route::post('attachFiles', ['as' => 'maintainers.companies.addImages', 'uses' => 'CompanyController@addImages']);
+            Route::post('deleteFiles', ['as' => 'maintainers.companies.deleteFiles', 'uses' => 'CompanyController@deleteFiles']);
+        });
         Route::resource('countries', 'CountryController');
         Route::resource('degrees', 'DegreeController');
         Route::resource('forecasts', 'ForecastController');
@@ -99,16 +104,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('type-vehicles', 'TypeVehicleController');
         Route::resource('vehicles', 'VehicleController');
     });
-
-
-    /*
-     * Upload Files
-     */
-
-    Route::get('attachFiles/{id}', ['as' => 'attachFiles', 'uses' => 'UploadController@getUpload']);
-    Route::post('attachFiles', ['as' => 'attachFiles_added', 'uses' => 'UploadController@addFiles']);
-    Route::post('deleteFiles', ['as' => 'deleteFiles', 'uses' => 'UploadController@deleteFiles']);
-
 
     /*
      * Ajax Controller

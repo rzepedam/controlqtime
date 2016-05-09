@@ -1,6 +1,6 @@
 /*!
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version 4.3.1
+ * @version 4.3.2
  *
  * File input styled for Bootstrap 3.0 that utilizes HTML5 File Input's advanced features including the FileReader API.
  *
@@ -142,7 +142,7 @@
                 data.config[index] = config;
                 data.tags[index] = tags;
             } else {
-                index = content.length;
+                index = content.length - 1;
                 data.content = content;
                 data.config = config;
                 data.tags = tags;
@@ -204,10 +204,12 @@
             if (chk === 1) {
                 previewCache.data[id].content = [];
                 previewCache.data[id].config = [];
+                previewCache.data[id].tags = [];
                 return;
             }
             previewCache.data[id].content[index] = null;
             previewCache.data[id].config[index] = null;
+            previewCache.data[id].tags[index] = null;
         },
         out: function (id) {
             var html = '', data = previewCache.data[id], caption, len = previewCache.count(id, true);
@@ -278,20 +280,20 @@
         '   <span class="{previewFileIconClass}">{previewFileIcon}</span>\n' +
         '</div>';
     defaultFileActionSettings = {
-        removeIcon: '<i class="glyphicon glyphicon-trash text-danger"></i>',
+        removeIcon: '<i class="fa fa-trash text-danger" aria-hidden="true"></i>',
         removeClass: 'btn btn-xs btn-default',
-        removeTitle: 'Remove file',
-        uploadIcon: '<i class="glyphicon glyphicon-upload text-info"></i>',
+        removeTitle: 'Eliminar archivo',
+        uploadIcon: '<i class="fa fa-arrow-circle-o-up text-info" aria-hidden="true"></i>',
         uploadClass: 'btn btn-xs btn-default',
-        uploadTitle: 'Upload file',
-        indicatorNew: '<i class="glyphicon glyphicon-hand-down text-warning"></i>',
-        indicatorSuccess: '<i class="glyphicon glyphicon-ok-sign text-success"></i>',
-        indicatorError: '<i class="glyphicon glyphicon-exclamation-sign text-danger"></i>',
-        indicatorLoading: '<i class="glyphicon glyphicon-hand-up text-muted"></i>',
-        indicatorNewTitle: 'Not uploaded yet',
-        indicatorSuccessTitle: 'Uploaded',
-        indicatorErrorTitle: 'Upload Error',
-        indicatorLoadingTitle: 'Uploading ...'
+        uploadTitle: 'Subir archivo',
+        indicatorNew: '<i class="fa fa-hand-o-down text-warning" aria-hidden="true"></i>',
+        indicatorSuccess: '<i class="fa fa-check-circle text-success" aria-hidden="true"></i>',
+        indicatorError: '<i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>',
+        indicatorLoading: '<i class="fa fa-hand-o-up text-muted" aria-hidden="true"></i>',
+        indicatorNewTitle: 'No subido todavía',
+        indicatorSuccessTitle: 'Subido',
+        indicatorErrorTitle: 'Subir Error',
+        indicatorLoadingTitle: 'Subiendo ...'
     };
     tMain1 = '{preview}\n' +
         '<div class="kv-upload-progress hide"></div>\n' +
@@ -356,7 +358,8 @@
         '</div>';
     tActionDelete = '<button type="button" class="kv-file-remove {removeClass}" ' +
         'title="{removeTitle}" {dataUrl}{dataKey}>{removeIcon}</button>\n';
-    tActionUpload = '';
+    tActionUpload = '<button type="button" class="kv-file-upload {uploadClass}" title="{uploadTitle}">' +
+        '   {uploadIcon}\n</button>\n';
     tZoom = '<button type="button" class="btn btn-default btn-xs btn-block" title="{zoomTitle}: {caption}" onclick="{dialog}">\n' +
         '   {zoomInd}\n' +
         '</button>\n';
@@ -559,6 +562,9 @@
                         break;
                 }
             });
+            if (isEmpty(self.allowedPreviewTypes)) {
+                self.allowedPreviewTypes = defaultPreviewTypes;
+            }
             self.fileInputCleared = false;
             self.fileBatchCompleted = true;
             if (!self.isPreviewable) {
@@ -2617,10 +2623,10 @@
     };
 
     $.fn.fileinput.defaults = {
-        language: 'es',
+        language: 'en',
         showCaption: true,
         showPreview: true,
-        showRemove: false,
+        showRemove: true,
         showUpload: true,
         showCancel: true,
         showClose: true,
@@ -2640,31 +2646,31 @@
         removeFromPreviewOnError: false,
         deleteUrl: '',
         deleteExtraData: {},
-        overwriteInitial: true,
+        overwriteInitial: false,
         layoutTemplates: defaultLayoutTemplates,
         previewTemplates: defaultPreviewTemplates,
-        allowedPreviewTypes: defaultPreviewTypes,
+        allowedPreviewTypes: null,
         allowedPreviewMimeTypes: null,
         allowedFileTypes: null,
-        allowedFileExtensions: null,
+        allowedFileExtensions: ["jpg", "png", "jpeg"],
         defaultPreviewContent: null,
         customLayoutTags: {},
         customPreviewTags: {},
         previewSettings: defaultPreviewSettings,
         fileTypeSettings: defaultFileTypeSettings,
-        previewFileIcon: '<i class="glyphicon glyphicon-file"></i>',
+        previewFileIcon: '<i class="fa fa-file" aria-hidden="true"></i>',
         previewFileIconClass: 'file-icon-4x',
         previewFileIconSettings: {},
         previewFileExtSettings: {},
         buttonLabelClass: 'hidden-xs',
-        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>&nbsp;',
+        browseIcon: '<i class="fa fa-folder-open" aria-hidden="true"></i>&nbsp;',
         browseClass: 'btn btn-primary',
-        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+        removeIcon: '<i class="fa fa-minus-circle" aria-hidden="true"></i>',
         removeClass: 'btn btn-danger',
-        cancelIcon: '<i class="glyphicon glyphicon-ban-circle"></i>',
+        cancelIcon: '<i class="fa fa-ban" aria-hidden="true"></i>',
         cancelClass: 'btn btn-default',
-        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
-        uploadClass: 'btn btn-default',
+        uploadIcon: '<i class="fa fa-cloud-upload" aria-hidden="true"></i>',
+        uploadClass: 'btn btn-info',
         uploadUrl: null,
         uploadAsync: true,
         uploadExtraData: {},
@@ -2677,18 +2683,18 @@
         resizeQuality: 0.92,
         resizeDefaultImageType: 'image/jpeg',
         maxFileSize: 0,
-        minFileCount: 0,
+        minFileCount: 1,
         maxFileCount: 0,
         validateInitialCount: false,
         msgValidationErrorClass: 'text-danger',
-        msgValidationErrorIcon: '<i class="glyphicon glyphicon-exclamation-sign"></i> ',
+        msgValidationErrorIcon: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
         msgErrorClass: 'file-error-message',
         progressThumbClass: "progress-bar progress-bar-success progress-bar-striped active",
         progressClass: "progress-bar progress-bar-success progress-bar-striped active",
         progressCompleteClass: "progress-bar progress-bar-success",
         progressErrorClass: "progress-bar progress-bar-danger",
         previewFileType: 'image',
-        zoomIndicator: '<i class="glyphicon glyphicon-zoom-in"></i>',
+        zoomIndicator: '<i class="fa fa-search-plus" aria-hidden="true"></i>',
         elCaptionContainer: null,
         elCaptionText: null,
         elPreviewContainer: null,
@@ -2708,42 +2714,42 @@
     };
 
     $.fn.fileinputLocales.en = {
-        fileSingle: 'file',
-        filePlural: 'files',
-        browseLabel: 'Browse &hellip;',
-        removeLabel: 'Remove',
-        removeTitle: 'Clear selected files',
-        cancelLabel: 'Cancel',
-        cancelTitle: 'Abort ongoing upload',
-        uploadLabel: 'Upload',
-        uploadTitle: 'Upload selected files',
+        fileSingle: 'archivo',
+        filePlural: 'archivos',
+        browseLabel: 'Examinar...',
+        removeLabel: 'Quitar',
+        removeTitle: 'Quitar archivos seleccionados',
+        cancelLabel: 'Cancelar',
+        cancelTitle: 'Abortar la subida en curso',
+        uploadLabel: 'Subir',
+        uploadTitle: 'Subir archivos seleccionados',
         msgNo: 'No',
-        msgCancelled: 'Cancelled',
-        msgZoomTitle: 'View details',
-        msgZoomModalHeading: 'Detailed Preview',
-        msgSizeTooLarge: 'File "{name}" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB</b>.',
-        msgFilesTooLess: 'You must select at least <b>{n}</b> {files} to upload.',
-        msgFilesTooMany: 'Number of files selected for upload <b>({n})</b> exceeds maximum allowed limit of <b>{m}</b>.',
-        msgFileNotFound: 'File "{name}" not found!',
-        msgFileSecured: 'Security restrictions prevent reading the file "{name}".',
-        msgFileNotReadable: 'File "{name}" is not readable.',
-        msgFilePreviewAborted: 'File preview aborted for "{name}".',
-        msgFilePreviewError: 'An error occurred while reading the file "{name}".',
-        msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.',
-        msgInvalidFileExtension: 'Invalid extension for file "{name}". Only "{extensions}" files are supported.',
-        msgUploadAborted: 'The file upload was aborted',
-        msgValidationError: 'Validation Error',
-        msgLoading: 'Loading file {index} of {files} &hellip;',
-        msgProgress: 'Loading file {index} of {files} - {name} - {percent}% completed.',
-        msgSelected: '{n} {files} selected',
-        msgFoldersNotAllowed: 'Drag & drop files only! {n} folder(s) dropped were skipped.',
-        msgImageWidthSmall: 'Width of image file "{name}" must be at least {size} px.',
-        msgImageHeightSmall: 'Height of image file "{name}" must be at least {size} px.',
-        msgImageWidthLarge: 'Width of image file "{name}" cannot exceed {size} px.',
-        msgImageHeightLarge: 'Height of image file "{name}" cannot exceed {size} px.',
-        msgImageResizeError: 'Could not get the image dimensions to resize.',
-        msgImageResizeException: 'Error while resizing the image.<pre>{errors}</pre>',
-        dropZoneTitle: 'Drag & drop files here &hellip;'
+        msgCancelled: 'Cancelado',
+        msgZoomTitle: 'Ver detalles',
+        msgZoomModalHeading: 'Vista previa detallada',
+        msgSizeTooLarge: 'Archivo "{name}" (<b>{size} KB</b>) excede el tamaño máximo permitido de <b>{maxSize} KB</b>.',
+        msgFilesTooLess: 'Debe seleccionar al menos <b>{n}</b> {files} a cargar.',
+        msgFilesTooMany: 'El número de archivos seleccionados a cargar <b>({n})</b> excede el límite máximo permitido de <b>{m}</b>.',
+        msgFileNotFound: 'Archivo "{name}" no encontrado.',
+        msgFileSecured: 'No es posible acceder al archivo "{name}" porque estará siendo usado por otra aplicación o no tengamos permisos de lectura.',
+        msgFileNotReadable: 'No es posible acceder al archivo "{name}".',
+        msgFilePreviewAborted: 'Previsualización del archivo "{name}" cancelada.',
+        msgFilePreviewError: 'Ocurrió un error mientras se leía el archivo "{name}".',
+        msgInvalidFileType: 'Tipo de archivo no válido para "{name}". Sólo archivos "{types}" son permitidos.',
+        msgInvalidFileExtension: 'Extensión de archivo no válido para "{name}". Sólo archivos "{extensions}" son permitidos.',
+        msgUploadAborted: 'La carga de archivos se ha cancelado',
+        msgValidationError: 'Error de validacion',
+        msgLoading: 'Subiendo archivo {index} de {files} &hellip;',
+        msgProgress: 'Subiendo archivo {index} de {files} - {name} - {percent}% completado.',
+        msgSelected: '{n} {files} seleccionado(s)',
+        msgFoldersNotAllowed: 'Arrastre y suelte únicamente archivos. Omitida(s) {n} carpeta(s).',
+        msgImageWidthSmall: 'El ancho de la imagen "{name}" debe ser al menos {size} px.',
+        msgImageHeightSmall: 'La altura de la imagen "{name}" debe ser al menos {size} px.',
+        msgImageWidthLarge: 'El ancho de la imagen "{name}" no puede exceder de {size} px.',
+        msgImageHeightLarge: 'La altura de la imagen "{name}" no puede exceder de {size} px.',
+        msgImageResizeError: 'No se pudo obtener las dimensiones de imagen para cambiar el tamaño.',
+        msgImageResizeException: 'Error al cambiar el tamaño de la imagen.<pre>{errors}</pre>',
+        dropZoneTitle: 'Arrastre y suelte aquí los archivos &hellip;',
     };
 
     $.fn.fileinput.Constructor = FileInput;

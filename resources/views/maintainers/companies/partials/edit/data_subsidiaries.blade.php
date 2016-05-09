@@ -28,6 +28,7 @@
                     {{ Form::select("region_suc_id[]", $regions, $subsidiary->commune->province->region->id, ["class"=> "form-control", "onChange"=> "$(this).changeRegion()", "id"=> "region_suc_id" . $i]) }}
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div class="form-group">
                     {{ Form::label("province_suc_id" . $i, "Provincia", ["class" => "control-label"]) }}
