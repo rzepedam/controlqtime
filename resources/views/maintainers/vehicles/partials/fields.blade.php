@@ -14,9 +14,13 @@
 </div>
 <br />
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-3">
         {{ Form::label('terminal_id', 'Terminal', ['class' => 'control-label']) }}
         {{ Form::select('terminal_id', $terminals, null, ['class' => 'form-control']) }}
+    </div>
+    <div class="col-md-3">
+        {{ Form::label('company_id', 'Empresa', ['class' => 'control-label']) }}
+        {{ Form::select('company_id', $companies, null, ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3">
         {{ Form::label('patent', 'Patente', ['class' => 'control-label']) }}

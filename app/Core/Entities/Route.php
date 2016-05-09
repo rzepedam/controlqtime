@@ -14,9 +14,6 @@ class Route extends Eloquent
      * Relationships
      */
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function terminal() {
         return $this->belongsTo(Terminal::class);
     }
@@ -25,9 +22,6 @@ class Route extends Eloquent
      * Mutators
      */
 
-    /**
-     * @param $value
-     */
     public function setNameAttribute($value) {
         $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }

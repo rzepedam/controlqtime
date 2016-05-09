@@ -11,6 +11,13 @@ class Country extends Eloquent
     ];
 
     public $timestamps = false;
-    //public $incrementing = false;
-    
+
+    /*
+     * Mutators
+     */
+
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
 }

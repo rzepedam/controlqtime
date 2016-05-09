@@ -48,6 +48,14 @@ class Company extends Eloquent
      * Mutators
      */
 
+    public function setFirmNameAttribute($value) {
+        $this->attributes['firm_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
+    public function setGyreAttribute($value) {
+        $this->attributes['gyre'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
     public function setEmailAttribute($value) {
         $this->attributes['email'] = strtolower($value);
     }

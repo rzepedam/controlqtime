@@ -16,11 +16,16 @@ class Institution extends Eloquent
      * Relationships
      */
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function typeInstitution() {
         return $this->belongsTo(TypeInstitution::class);
     }
-    
+
+    /*
+     * Mutators
+     */
+
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
 }

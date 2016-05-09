@@ -40,11 +40,4 @@
     {{ Html::script('me/js/changeMethods/changeTrademarkModel.js') }}
     {{ Html::script('assets/js/config.js') }}
 
-    <script type="text/javascript">
-
-
-
-    </script>
-
-
 @stop

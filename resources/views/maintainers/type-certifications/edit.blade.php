@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Editar Registro @stop
+@section('title_header') Editar Certificación: <span class="text-primary">{{ $type_certification->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>

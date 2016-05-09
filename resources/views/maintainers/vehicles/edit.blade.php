@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Editar Registro @stop
+@section('title_header') Editar Vehículo: <span class="text-primary">{{ $vehicle->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -11,23 +11,25 @@
 @section('content')
 
     <div class="panel">
-        {{ Form::model($vehicle, array('route' => ['maintainers.vehicles.update', $vehicle], 'method' => 'PUT' )) }}
 
-        <div class="panel-body">
+        {{ Form::model($vehicle, array('route' => array('maintainers.vehicles.update', $vehicle), 'method' => 'PUT' )) }}
 
-            @include('maintainers.vehicles.partials.fields')
+            <div class="panel-body">
 
-        </div>
-        <br />
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="{{ route('maintainers.vehicles.index') }}">Volver</a><button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+                @include('maintainers.vehicles.partials.fields')
+
+            </div>
+            <br />
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{ route('maintainers.vehicles.index') }}">Volver</a><button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
         {{ Form::close() }}
+
     </div>
     <br />
     <br />

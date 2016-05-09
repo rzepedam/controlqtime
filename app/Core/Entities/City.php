@@ -15,11 +15,16 @@ class City extends Eloquent
     /*
      * Relationships
      */
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+    
     public function country() {
         return $this->belongsTo(Country::class);
+    }
+    
+    /*
+     * Mutators
+     */
+    
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 }

@@ -16,11 +16,16 @@ class Relationship extends Eloquent
      * Relationships
      */
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function manpowers() {
         return $this->belongsToMany('Controlqtime\Manpower');
+    }
+
+    /*
+     * Mutators
+     */
+
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
 }

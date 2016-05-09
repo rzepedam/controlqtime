@@ -16,27 +16,24 @@ class Certification extends Model
         'expired_certification'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    /*
+     * Relationships
      */
+
     public function typeCertification() {
         return $this->belongsTo('Controlqtime\TypeCertification');
     }
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function institution() {
         return $this->belongsTo('Controlqtime\Institution', 'institution_certification_id');
     }
 
-
-    /**
-     * @param $value
+    /*
+     * Mutators
      */
+
     public function setExpiredCertificationAttribute($value) {
         $this->attributes['expired_certification'] = Carbon::createFromFormat('d-m-Y', $value);
     }
-    
+
 }

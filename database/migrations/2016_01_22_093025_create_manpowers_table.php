@@ -32,7 +32,8 @@ class CreateManpowersTable extends Migration
             $table->integer('role_id')->unsigned();
             $table->integer('area_id')->unsigned();
             $table->string('code_internal');
-            $table->enum('status', ['available', 'unavailable'])->default('available');
+            $table->enum('state', ['available', 'unavailable'])->default('unavailable');
+            $table->enum('condition', ['able', 'unable'])->default('unable');
 
             $table->timestamps();
 

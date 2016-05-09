@@ -9,10 +9,7 @@ class Region extends Eloquent
     /*
      * Relationships
      */
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    
     public function provinces() {
     	return $this->hasMany(Province::class);
     }

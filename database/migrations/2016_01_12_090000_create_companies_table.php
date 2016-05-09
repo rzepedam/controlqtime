@@ -24,7 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('phone1', 20);
             $table->string('phone2', 20);
             $table->string('email', 100)->unique();
-            $table->enum('status', ['available', 'unavailable'])->default('unavailable');
+            $table->enum('state', ['available', 'unavailable'])->default('unavailable');
             $table->timestamps();
 
             $table->foreign('commune_id')

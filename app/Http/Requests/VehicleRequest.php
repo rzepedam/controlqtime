@@ -33,6 +33,7 @@ class VehicleRequest extends SanitizedRequest
                     'type_vehicle_id'   => 'required|regex:/[0-9 -()+]+$/',
                     'model_vehicle_id'  => 'required|regex:/[0-9 -()+]+$/',
                     'terminal_id'       => 'required|regex:/[0-9 -()+]+$/',
+                    'company_id'        => 'required|regex:/[0-9 -()+]+$/',
                     'patent'            => 'required|max:15|unique:vehicles',
                     'year'              => 'required|max:4',
                     'code'              => 'required'
@@ -45,6 +46,7 @@ class VehicleRequest extends SanitizedRequest
                     'type_vehicle_id'   => 'required|regex:/[0-9 -()+]+$/',
                     'model_vehicle_id'  => 'required|regex:/[0-9 -()+]+$/',
                     'terminal_id'       => 'required|regex:/[0-9 -()+]+$/',
+                    'company_id'        => 'required|regex:/[0-9 -()+]+$/',
                     'patent'            => 'required|max:15|unique:vehicles,patent,' . $this->route->getParameter('vehicles'),
                     'year'              => 'required|max:4',
                     'code'              => 'required'

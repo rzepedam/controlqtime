@@ -11,5 +11,13 @@ class TypeSpeciality extends Eloquent
     ];
 
     public $timestamps = false;
-    
+
+    /*
+     * Mutators
+     */
+
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
 }

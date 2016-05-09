@@ -2,14 +2,14 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Http\Requests;
+use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ModelVehicleRepoInterface;
 use Controlqtime\Core\Contracts\TerminalRepoInterface;
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
 use Controlqtime\Core\Contracts\VehicleRepoInterface;
-use Controlqtime\Core\Entities\Company;
 use Controlqtime\Http\Requests\VehicleRequest;
-use Controlqtime\Http\Requests;
 
 class VehicleController extends Controller
 {
@@ -20,7 +20,7 @@ class VehicleController extends Controller
     protected $vehicle;
     protected $trademark;
 
-    public function __construct(VehicleRepoInterface $vehicle, TypeVehicleRepoInterface $type_vehicle, TrademarkRepoInterface $trademark, ModelVehicleRepoInterface $model_vehicle, TerminalRepoInterface $terminal, Company $company)
+    public function __construct(VehicleRepoInterface $vehicle, TypeVehicleRepoInterface $type_vehicle, TrademarkRepoInterface $trademark, ModelVehicleRepoInterface $model_vehicle, TerminalRepoInterface $terminal, CompanyRepoInterface $company)
     {
         $this->company          = $company;
         $this->model_vehicle    = $model_vehicle;
@@ -42,9 +42,10 @@ class VehicleController extends Controller
         $terminals          = $this->terminal->lists('name', 'id');
         $trademarks         = $this->trademark->lists('name', 'id');
         $type_vehicles      = $this->type_vehicle->lists('name', 'id');
+        $companies          = $this->company->whereLists('state', 'available', 'firm_name');
 
         return view('maintainers.vehicles.create', compact(
-            'type_vehicles', 'trademarks', 'model_vehicles', 'terminals'
+            'type_vehicles', 'trademarks', 'model_vehicles', 'terminals', 'companies'
         ));
     }
 
@@ -56,15 +57,15 @@ class VehicleController extends Controller
 
     public function edit($id)
     {
-        $vehicle = Vehicle::findOrFail($id);
-        $type_vehicles = TypeVehicle::lists('name', 'id');
-        $tempTrade = ModelVehicle::where('id', $vehicle->model_vehicle_id)->first();
-        $trademarks = Trademark::lists('name', 'id');
-        $model_vehicles = Trademark::find($tempTrade->trademark_id)->modelVehicles->lists('name', 'id');
-        $terminals = Terminal::lists('name', 'id');
+        $vehicle        = $this->vehicle->find($id);
+        $type_vehicles  = $this->type_vehicle->all();
+        $trademarks     = $this->trademark->all();
+        $model_vehicles = $this->model_vehicle->all();
+        $terminals      = $this->terminal->all();
+        $companies      = $this->company->all();
 
         return view('maintainers.vehicles.edit', compact(
-            'vehicle', 'type_vehicles', 'trademarks', 'model_vehicles', 'terminals'
+            'vehicle', 'type_vehicles', 'trademarks', 'model_vehicles', 'terminals', 'companies'
         ));
     }
 
@@ -75,12 +76,13 @@ class VehicleController extends Controller
         $vehicle->fill($request->all());
         $vehicle->save();
         Session::flash('success', $message);
+
         return redirect()->route('maintainers.vehicles.index');
     }
 
     public function show($id)
     {
-        $vehicle = Vehicle::find($id);
+        $vehicle = $this->vehicle->find($id);
         return view('maintainers.vehicles.show', compact('vehicle'));
     }
 

@@ -62,7 +62,7 @@ class ManpowerController extends Controller
         $forecasts = Forecast::lists('name', 'id');
         $mutualities = Mutuality::lists('name', 'id');
         $pensions = Pension::lists('name', 'id');
-        $companies = Company::where('status', 'available')->lists('firm_name', 'id');
+        $companies = Company::where('state', 'available')->lists('firm_name', 'id');
         $ratings = Role::lists('name', 'id');
         $type_disabilities = TypeDisability::lists('name', 'id');
         $type_diseases = TypeDisease::lists('name', 'id');

@@ -146,7 +146,7 @@ class CompanyController extends Controller
         }
 
         if ($save) {
-            $this->company->checkStatus($request->get('id'));
+            $this->company->checkState($request->get('id'));
             return response()->json(['success' => true]);
         }
 
@@ -169,7 +169,7 @@ class CompanyController extends Controller
         }
 
         if ($destroy) {
-            $this->company->checkStatus($request->get('id'));
+            $this->company->checkState($request->get('id'));
             return response()->json(['success' => true]);
         }
 

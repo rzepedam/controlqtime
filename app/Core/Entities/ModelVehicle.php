@@ -12,9 +12,10 @@ class ModelVehicle extends Eloquent
 
     public $timestamps = false;
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    /*
+     * Relationships
      */
+
     public function trademark() {
         return $this->belongsTo(Trademark::class);
     }
@@ -23,9 +24,6 @@ class ModelVehicle extends Eloquent
      * Mutators
      */
     
-    /**
-     * @param string $value
-     */
     public function setNameAttribute($value) {
         $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }

@@ -9,4 +9,8 @@ class BaseWhereAndListsRepo extends BaseRepoWithLists implements BaseRepoWhereIn
     public function whereFirst($attribute, $value, $columns = array('*')) {
         return $this->model->where($attribute, '=', $value)->first($columns);
     }
+
+    public function whereLists($attribute, $value, $column) {
+        return $this->model->where($attribute, '=', $value)->lists($column, 'id');
+    }
 }

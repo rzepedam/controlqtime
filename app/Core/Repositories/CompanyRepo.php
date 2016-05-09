@@ -15,17 +15,17 @@ class CompanyRepo extends BaseWhereAndListsRepo implements CompanyRepoInterface
         $this->model = $model;
     }
 
-    public function checkStatus($id)
+    public function checkState($id)
     {
         $company        = parent::find($id, ['imageRolCompanies', 'imagePatentCompanies']);
         $image_rol      = $company->imageRolCompanies->count();
         $image_patent   = $company->imagePatentCompanies->count();
 
         if ($image_rol > 0 && $image_patent > 0) {
-            $company->status = 'available';
+            $company->state = 'available';
             $company->save();
         }else {
-            $company->status = 'unavailable';
+            $company->state = 'unavailable';
             $company->save();
         }
     }

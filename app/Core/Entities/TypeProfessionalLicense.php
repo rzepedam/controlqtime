@@ -11,5 +11,13 @@ class TypeProfessionalLicense extends Eloquent
     ];
 
     public $timestamps = false;
-    
+
+    /*
+     * Mutators
+     */
+
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = ucfirst($value);
+    }
+
 }

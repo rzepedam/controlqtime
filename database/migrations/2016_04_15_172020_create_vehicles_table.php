@@ -17,7 +17,8 @@ class CreateVehiclesTable extends Migration
             $table->string('patent', 15)->unique();
             $table->string('year', 4);
             $table->string('code');
-            $table->enum('status', ['available', 'unavailable'])->default('available');
+            $table->enum('state', ['available', 'unavailable'])->default('unavailable');
+            $table->enum('condition', ['able', 'unable'])->default('unable');
             $table->timestamps();
 
             $table->foreign('type_vehicle_id')

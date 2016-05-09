@@ -66,8 +66,7 @@ class AjaxLoadController extends Controller
 
     public function loadModelVehicles(Request $request)
 	{
-		$model_vehicles = Trademark::find($request->get('id'))->modelVehicles;
-		return $model_vehicles->lists('name', 'id');
+		return $this->trademark->findModelVehicles($request->get('id'));
 	}
 
     public function loadRouteAndVehicleSelectedInRound(Request $request)
