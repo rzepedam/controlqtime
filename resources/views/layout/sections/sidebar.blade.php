@@ -28,6 +28,22 @@
                         </a>
                     </li>
 
+                    {{-- Administración --}}
+                    <li class="site-menu-item has-sub">
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon fa fa-th-large" aria-hidden="true"></i>
+                            <span class="site-menu-title">Administración</span>
+                            <span class="site-menu-arrow"></span>
+                        </a>
+                        <ul class="site-menu-sub">
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('administration.companies.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-building-o" aria-hidden="true"></i> Empresas</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     {{-- Recursos Humanos --}}
                     <li class="site-menu-item has-sub">
                         <a href="javascript:void(0)">
@@ -37,7 +53,7 @@
                         </a>
                         <ul class="site-menu-sub">
                             <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('human-resources.manpowers.index')}}">
+                                <a class="animsition-link" href="{{ route('human-resources.employees.index')}}">
                                     <span class="site-menu-title"><i class="icon fa fa-users site-menu-icon" aria-hidden="true"></i> Trabajadores</span>
                                 </a>
                             </li>
@@ -55,6 +71,11 @@
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('operations.route-sheets.index') }}">
                                     <span class="site-menu-title"><i class="icon fa fa-thumb-tack site-menu-icon" aria-hidden="true"></i> Planilla de Ruta</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('operations.vehicles.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-bus" aria-hidden="true"></i> Vehículos</span>
                                 </a>
                             </li>
                         </ul>
@@ -96,11 +117,6 @@
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.type-disabilities.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-wheelchair" aria-hidden="true"></i> Discapacidades</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.companies.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-building-o" aria-hidden="true"></i> Empresas</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
@@ -191,11 +207,6 @@
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.type-vehicles.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-subway" aria-hidden="true"></i> Tipos de Vehículos</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
-                                <a class="animsition-link" href="{{ route('maintainers.vehicles.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-bus" aria-hidden="true"></i> Vehículos</span>
                                 </a>
                             </li>
                         </ul>

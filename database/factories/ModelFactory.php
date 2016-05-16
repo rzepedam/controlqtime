@@ -42,7 +42,7 @@ $factory->define(LegalRepresentative::class, function (Faker\Generator $faker) {
 
 });
 
-$factory->define(Controlqtime\Manpower::class, function (Faker\Generator $faker) {
+$factory->define(Controlqtime\Employee::class, function (Faker\Generator $faker) {
 
     $maleSurname   = $faker->lastName;
     $femaleSurname = $faker->lastName;

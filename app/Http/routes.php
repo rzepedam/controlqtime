@@ -10,25 +10,40 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
     /*
+     * Administration
+     */
+
+    Route::group(['prefix' => 'administration'], function(){
+
+        Route::resource('companies', 'CompanyController');
+        Route::group(['prefix' => 'companies'], function() {
+            Route::get('attachFiles/{id}', ['as' => 'administration.companies.attachFiles', 'uses' => 'CompanyController@getImages']);
+            Route::post('attachFiles', ['as' => 'administration.companies.addImages', 'uses' => 'CompanyController@addImages']);
+            Route::post('deleteFiles', ['as' => 'administration.companies.deleteFiles', 'uses' => 'CompanyController@deleteFiles']);
+        });
+
+    });
+
+    /*
      * Humans-Resources
      */
 
     Route::group(['prefix' => 'human-resources'], function(){
 
-        Route::resource('manpowers', 'ManpowerController');
-        Route::group(['prefix' => 'manpowers'], function(){
+        Route::resource('employees', 'EmployeeController');
+        Route::group(['prefix' => 'employees'], function(){
             
-            /* Manpowers create */
-            Route::post('step1', ['as' => 'human-resources.manpowers.step1', 'uses' => 'ManpowerController@step1']);
-            Route::post('step2', ['as' => 'human-resources.manpowers.step2', 'uses' => 'ManpowerController@step2']);
-            Route::get('/session/destroyManpowerData', ['as' => 'destroyManpowerData', 'uses' => 'ManpowerController@destroyManpowerData']);
+            /* Employees create */
+            Route::post('step1', ['as' => 'human-resources.employees.step1', 'uses' => 'EmployeeController@step1']);
+            Route::post('step2', ['as' => 'human-resources.employees.step2', 'uses' => 'EmployeeController@step2']);
+            Route::get('/session/destroyManpowerData', ['as' => 'destroyManpowerData', 'uses' => 'EmployeeController@destroyManpowerData']);
 
-            /* Manpowers update */
-            Route::put('updateStep1/{id}', ['as' => 'human-resources.manpowers.updateStep1', 'uses' => 'ManpowerController@updateStep1']);
+            /* Employees update */
+            Route::put('updateStep1/{id}', ['as' => 'human-resources.employees.updateStep1', 'uses' => 'EmployeeController@updateStep1']);
 
             /* Daily Assistance */
-            Route::post('startDailyAssistance', ['as' => 'human-resources.manpowers.startDailyAssistance', 'uses' => 'DailyAssistanceController@startAssistance']);
-            Route::post('updateDailyAssistance', ['as' => 'human-resources.manpowers.updateDailyAssistance', 'uses' => 'DailyAssistanceController@updateAssistance']);
+            Route::post('startDailyAssistance', ['as' => 'human-resources.employees.startDailyAssistance', 'uses' => 'DailyAssistanceController@startAssistance']);
+            Route::post('updateDailyAssistance', ['as' => 'human-resources.employees.updateDailyAssistance', 'uses' => 'DailyAssistanceController@updateAssistance']);
         });
     });
 
@@ -41,7 +56,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('route-sheets', 'RouteSheetController');
         Route::post('route-sheets/changeStateRoundSheet', ['as' => 'operations.route-sheets.changeStateRoundSheet', 'uses' => 'RouteSheetController@changeStateRoundSheet']);
         Route::resource('rounds', 'RoundController');
-
+        Route::resource('vehicles', 'VehicleController');
+        Route::group(['prefix' => 'vehicles'], function() {
+            Route::get('attachFiles/{id}', ['as' => 'operations.vehicles.attachFiles', 'uses' => 'VehicleController@getImages']);
+            Route::post('attachFiles', ['as' => 'operations.vehicles.addImages', 'uses' => 'VehicleController@addImages']);
+            Route::post('deleteFiles', ['as' => 'operations.vehicles.deleteFiles', 'uses' => 'VehicleController@deleteFiles']);
+        });
     });
 
     /*
@@ -52,12 +72,6 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::resource('areas', 'AreaController');
         Route::resource('cities', 'CityController');
-        Route::resource('companies', 'CompanyController');
-        Route::group(['prefix' => 'companies'], function() {
-            Route::get('attachFiles/{id}', ['as' => 'maintainers.companies.attachFiles', 'uses' => 'CompanyController@getImages']);
-            Route::post('attachFiles', ['as' => 'maintainers.companies.addImages', 'uses' => 'CompanyController@addImages']);
-            Route::post('deleteFiles', ['as' => 'maintainers.companies.deleteFiles', 'uses' => 'CompanyController@deleteFiles']);
-        });
         Route::resource('countries', 'CountryController');
         Route::resource('degrees', 'DegreeController');
         Route::resource('forecasts', 'ForecastController');
@@ -80,12 +94,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('type-professional-licenses', 'TypeProfessionalLicenseController');
         Route::resource('type-specialities', 'TypeSpecialityController');
         Route::resource('type-vehicles', 'TypeVehicleController');
-        Route::resource('vehicles', 'VehicleController');
-        Route::group(['prefix' => 'vehicles'], function() {
-            Route::get('attachFiles/{id}', ['as' => 'maintainers.vehicles.attachFiles', 'uses' => 'VehicleController@getImages']);
-            Route::post('attachFiles', ['as' => 'maintainers.vehicles.addImages', 'uses' => 'VehicleController@addImages']);
-            Route::post('deleteFiles', ['as' => 'maintainers.vehicles.deleteFiles', 'uses' => 'VehicleController@deleteFiles']);
-        });
     });
 
     /*

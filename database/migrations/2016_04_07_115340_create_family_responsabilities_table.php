@@ -5,24 +5,19 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFamilyResponsabilitiesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('family_responsabilities', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('manpower_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
             $table->string('name_responsability', 120);
             $table->string('rut_responsability', 15);
             $table->integer('relationship_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('manpower_id')
+            $table->foreign('employee_id')
                 ->references('id')
-                ->on('manpowers')
+                ->on('employees')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -33,12 +28,7 @@ class CreateFamilyResponsabilitiesTable extends Migration
 
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::drop('family_responsabilities');

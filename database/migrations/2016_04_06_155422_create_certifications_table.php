@@ -14,15 +14,15 @@ class CreateCertificationsTable extends Migration
     {
         Schema::create('certifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('manpower_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
             $table->integer('type_certification_id')->unsigned();
             $table->date('expired_certification');
             $table->integer('institution_certification_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('manpower_id')
+            $table->foreign('employee_id')
                 ->references('id')
-                ->on('manpowers')
+                ->on('employees')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

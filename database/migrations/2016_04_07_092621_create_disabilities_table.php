@@ -14,15 +14,15 @@ class CreateDisabilitiesTable extends Migration
     {
         Schema::create('disabilities', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('manpower_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
             $table->integer('type_disability_id')->unsigned();
             $table->boolean('treatment_disability')->default(false);
             $table->text('detail_disability');
             $table->timestamps();
             
-            $table->foreign('manpower_id')
+            $table->foreign('employee_id')
                 ->references('id')
-                ->on('manpowers')
+                ->on('employees')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             

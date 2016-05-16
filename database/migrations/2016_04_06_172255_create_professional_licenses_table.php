@@ -14,7 +14,7 @@ class CreateProfessionalLicensesTable extends Migration
     {
         Schema::create('professional_licenses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('manpower_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
             $table->integer('type_professional_license_id')->unsigned();
             $table->date('emission_license');
             $table->date('expired_license');
@@ -22,9 +22,9 @@ class CreateProfessionalLicensesTable extends Migration
             $table->string('detail_license');
             $table->timestamps();
 
-            $table->foreign('manpower_id')
+            $table->foreign('employee_id')
                 ->references('id')
-                ->on('manpowers')
+                ->on('employees')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

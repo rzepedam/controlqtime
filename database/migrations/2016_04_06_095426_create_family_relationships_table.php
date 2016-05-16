@@ -14,14 +14,14 @@ class CreateFamilyRelationshipsTable extends Migration
     {
         Schema::create('family_relationships', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('manpower_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
             $table->integer('relationship_id')->unsigned();
-            $table->integer('manpower_family_id')->unsigned();
+            $table->integer('employee_family_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('manpower_id')
+            $table->foreign('employee_id')
                 ->references('id')
-                ->on('manpowers')
+                ->on('employees')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -30,9 +30,9 @@ class CreateFamilyRelationshipsTable extends Migration
                 ->on('relationships')
                 ->onUpdate('cascade');
             
-            $table->foreign('manpower_family_id')
+            $table->foreign('employee_family_id')
                 ->references('id')
-                ->on('manpowers')
+                ->on('employees')
                 ->onUpdate('cascade');
             
         });

@@ -5,20 +5,19 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateStudiesTable extends Migration
 {
-
     public function up()
     {
         Schema::create('studies', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('manpower_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
             $table->integer('degree_id')->unsigned();
             $table->string('name_study', 100);
             $table->integer('institution_study_id')->unsigned();
             $table->date('date_obtention');
 
-            $table->foreign('manpower_id')
+            $table->foreign('employee_id')
                 ->references('id')
-                ->on('manpowers')
+                ->on('employees')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

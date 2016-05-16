@@ -22,16 +22,16 @@ class FamilyRelationship extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function manpower() {
-        return $this->belongsTo('Controlqtime\Manpower');
+    public function employee() {
+        return $this->belongsTo('Controlqtime\Employee');
     }
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function manpowerFamily() {
-        return $this->belongsTo('Controlqtime\Manpower', 'manpower_family_id');
+    public function employeeFamily() {
+        return $this->belongsTo('Controlqtime\Employee', 'employee_family_id');
     }
     
 }

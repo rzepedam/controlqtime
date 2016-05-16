@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTypeVehiclesTable extends Migration
 {
-
     public function up()
     {
         Schema::create('type_vehicles', function (Blueprint $table) {
@@ -14,7 +13,6 @@ class CreateTypeVehiclesTable extends Migration
         });
     }
 
-    
     public function down()
     {
         Schema::drop('type_vehicles');

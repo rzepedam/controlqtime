@@ -41,7 +41,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = $this->company->all();
-        return view('maintainers.companies.index', compact('companies'));
+        return view('administration.companies.index', compact('companies'));
     }
 
     public function create()
@@ -51,7 +51,7 @@ class CompanyController extends Controller
         $provinces      = $this->province->lists('name', 'id');
         $communes       = $this->commune->lists('name', 'id');
 
-        return view('maintainers.companies.create', compact(
+        return view('administration.companies.create', compact(
             'nationalities', 'regions', 'provinces', 'communes'
         ));
     }
@@ -64,11 +64,11 @@ class CompanyController extends Controller
         if ($request->ajax()) {
             return response()->json(array(
                 'success'   => true,
-                'url'       => '/maintainers/companies'
+                'url'       => '/administration/companies'
             ));
         }
 
-        return redirect()->route('maintainers.companies.index');
+        return redirect()->route('administration.companies.index');
 
     }
     
@@ -80,7 +80,7 @@ class CompanyController extends Controller
         $communes       = $this->province->findCommunes($company->commune->province->id);
         $nationalities  = $this->nationality->lists('name', 'id');
 
-        return view('maintainers.companies.edit', compact(
+        return view('administration.companies.edit', compact(
             'company', 'regions', 'provinces', 'communes', 'nationalities'
         ));
     }
@@ -95,29 +95,29 @@ class CompanyController extends Controller
         if ($request->ajax()) {
             return response()->json(array(
                 'success'   => true,
-                'url'       => '/maintainers/companies'
+                'url'       => '/administration/companies'
             ));
         }
 
-        return redirect()->route('maintainers.companies.index');
+        return redirect()->route('administration.companies.index');
     }
 
     public function show($id)
     {
         $company = $this->company->find($id, ['commune.province.region', 'legalRepresentatives.nationality']);
-        return view('maintainers.companies.show', compact('company'));
+        return view('administration.companies.show', compact('company'));
     }
 
     public function destroy($id)
     {
         $this->company->delete($id);
-        return redirect()->route('maintainers.companies.index');
+        return redirect()->route('administration.companies.index');
     }
     
     public function getImages($id)
     {
         $company = $this->company->find($id, ['imageRolCompanies', 'imagePatentCompanies']);
-        return view('maintainers.companies.upload', compact('id', 'company'));
+        return view('administration.companies.upload', compact('id', 'company'));
     }
     
     public function addImages(Request $request)

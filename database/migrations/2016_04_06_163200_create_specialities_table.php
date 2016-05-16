@@ -14,15 +14,15 @@ class CreateSpecialitiesTable extends Migration
     {
         Schema::create('specialities', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('manpower_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
             $table->integer('type_speciality_id')->unsigned();
             $table->date('expired_speciality');
             $table->integer('institution_speciality_id')->unsigned();
             $table->timestamps();
             
-            $table->foreign('manpower_id')
+            $table->foreign('employee_id')
                 ->references('id')
-                ->on('manpowers')
+                ->on('employees')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             

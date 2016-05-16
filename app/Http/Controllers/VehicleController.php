@@ -47,7 +47,7 @@ class VehicleController extends Controller {
 	{
 		$vehicles = $this->vehicle->all(['typeVehicle', 'modelVehicle']);
 
-		return view('maintainers.vehicles.index', compact('vehicles'));
+		return view('operations.vehicles.index', compact('vehicles'));
 	}
 
 	public function create()
@@ -58,7 +58,7 @@ class VehicleController extends Controller {
 		$type_vehicles  = $this->type_vehicle->lists('name', 'id');
 		$companies      = $this->company->whereLists('state', 'available', 'firm_name');
 
-		return view('maintainers.vehicles.create', compact(
+		return view('operations.vehicles.create', compact(
 			'trademarks', 'model_vehicles', 'type_vehicles', 'fuels', 'companies'
 		));
 	}
@@ -67,7 +67,7 @@ class VehicleController extends Controller {
 	{
 		$this->vehicle->create($request->all());
 
-		return redirect()->route('maintainers.vehicles.index');
+		return redirect()->route('operations.vehicles.index');
 	}
 
 	public function edit($id)
@@ -79,7 +79,7 @@ class VehicleController extends Controller {
 		$companies      = $this->company->whereLists('state', 'available', 'firm_name');
 		$fuels          = $this->fuel->lists('name', 'id');
 
-		return view('maintainers.vehicles.edit', compact(
+		return view('operations.vehicles.edit', compact(
 			'vehicle', 'type_vehicles', 'trademarks', 'model_vehicles', 'companies', 'fuels'
 		));
 	}
@@ -88,28 +88,28 @@ class VehicleController extends Controller {
 	{
 		$this->vehicle->update($request->all(), $id);
 
-		return redirect()->route('maintainers.vehicles.index');
+		return redirect()->route('operations.vehicles.index');
 	}
 
 	public function show($id)
 	{
 		$vehicle = $this->vehicle->find($id);
 
-		return view('maintainers.vehicles.show', compact('vehicle'));
+		return view('operations.vehicles.show', compact('vehicle'));
 	}
 
 	public function destroy($id)
 	{
 		$this->vehicle->delete($id);
 
-		return redirect()->route('maintainers.vehicles.index');
+		return redirect()->route('operations.vehicles.index');
 	}
 
 	public function getImages($id)
 	{
 		$vehicle = $this->vehicle->find($id);
 
-		return view('maintainers.vehicles.upload', compact('id', 'vehicle'));
+		return view('operations.vehicles.upload', compact('id', 'vehicle'));
 	}
 
 	public function addImages(Request $request)

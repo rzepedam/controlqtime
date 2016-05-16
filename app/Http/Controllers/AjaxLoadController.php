@@ -47,8 +47,8 @@ class AjaxLoadController extends Controller
                 $email = $this->legal_representative->whereFirst('email_legal', $request->get('email'), ['email_legal']);
 			break;
 
-			case 'Manpower':
-                $email = Manpower::where('email', $request->get('email'))->first();
+			case 'Employee':
+                $email = Employee::where('email', $request->get('email'))->first();
 		}
 
 		if ($email)

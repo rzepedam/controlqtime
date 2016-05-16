@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RouteSheet extends Model
 {
     protected $fillable = [
-        'num_sheet', 'manpower_id', 'turn', 'obs'
+        'num_sheet', 'employee_id', 'turn', 'obs'
     ];
 
     /*
@@ -18,8 +18,8 @@ class RouteSheet extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function manpower() {
-        return $this->belongsTo('Controlqtime\Manpower');
+    public function employee() {
+        return $this->belongsTo('Controlqtime\Employee');
     }
 
 

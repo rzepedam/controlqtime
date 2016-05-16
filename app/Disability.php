@@ -11,9 +11,7 @@ class Disability extends Model
     ];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+    
     public function typeDisability() {
         return $this->belongsTo('Controlqtime\TypeDisability');
     }
