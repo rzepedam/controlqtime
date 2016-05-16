@@ -6,5 +6,5 @@ interface BaseRepoArrayInterface
 {
     public function createOrUpdateWithArray(array $request, $company);
     
-    public function destroyWithArray($id);
+    public function destroyArrayId($id);
 }

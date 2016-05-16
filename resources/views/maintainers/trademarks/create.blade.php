@@ -10,6 +10,8 @@
 
 @section('content')
 
+    @include('layout.messages.errors')
+
     <div class="panel">
 
         {{ Form::open(array('route' => 'maintainers.trademarks.store', 'method' => 'POST')) }}

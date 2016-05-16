@@ -10,33 +10,36 @@
 
 @section('content')
 
-<div class="panel">
+    @include('layout.messages.errors')
 
-    {{ Form::model($type_certification, array('route' => array('maintainers.type-certifications.update', $type_certification), 'method' => 'PUT' )) }}
+    <div class="panel">
 
-        <div class="panel-body">
+        {{ Form::model($type_certification, array('route' => array('maintainers.type-certifications.update', $type_certification), 'method' => 'PUT' )) }}
 
-            @include('maintainers.type-certifications.partials.fields')
+            <div class="panel-body">
 
-        </div>
-        <br />
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="{{ route('maintainers.type-certifications.index') }}">Volver</a>
-                    <button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+                @include('maintainers.type-certifications.partials.fields')
+
+            </div>
+            <br />
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{ route('maintainers.type-certifications.index') }}">Volver</a>
+                        <button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    {{ Form::close() }}
+        {{ Form::close() }}
 
-</div>
-<br />
-<br />
-<br />
+    </div>
+    <br />
+    <br />
+    <br />
 
     @include('maintainers.type-certifications.partials.delete')
+    <br />
 
 @stop
 

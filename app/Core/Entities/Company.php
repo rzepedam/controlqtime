@@ -24,10 +24,6 @@ class Company extends Eloquent
         return $this->hasMany(LegalRepresentative::class);
     }
 
-    public function subsidiaries() {
-        return $this->hasMany(Subsidiary::class);
-    }
-
     public function imageRolCompanies() {
         return $this->hasMany(ImageRolCompany::class);
     }
@@ -67,10 +63,6 @@ class Company extends Eloquent
     /*
      * Accesors
      */
-
-    public function getNumSubsidiaryAttribute() {
-        return count($this->subsidiaries);
-    }
 
     public function getNumRepresentativeAttribute() {
         return count($this->legalRepresentatives);

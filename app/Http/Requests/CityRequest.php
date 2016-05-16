@@ -7,6 +7,8 @@ use Illuminate\Routing\Route;
 
 class CityRequest extends SanitizedRequest
 {
+    protected $route;
+
     public function __construct(Route $route)
     {
         $this->route = $route;
@@ -16,7 +18,6 @@ class CityRequest extends SanitizedRequest
     {
         return true;
     }
-
 
     public function rules()
     {

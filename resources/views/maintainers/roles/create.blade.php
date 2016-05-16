@@ -4,11 +4,13 @@
 
 @section('breadcumb')
     <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.roles.index') }}"><i class="md-seat font-size-18"></i> Cargos</a></li>
+    <li><a href="{{ route('maintainers.roles.index') }}"><i class="md-seat"></i> Cargos</a></li>
     <li class="active">Nuevo</li>
 @stop
 
 @section('content')
+
+    @include('layout.messages.errors')
 
     <div class="panel">
 

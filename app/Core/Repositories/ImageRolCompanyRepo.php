@@ -15,9 +15,4 @@ class ImageRolCompanyRepo extends BaseUploadRepo implements ImageRolCompanyRepoI
         $this->model = $model;
     }
     
-    public function delete($id)
-    {
-        $this->model->destroy($id);
-    }
-    
 }

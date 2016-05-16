@@ -22,7 +22,7 @@
 
 @section('content')
 
-    <span class="col-md-12 alert alert-danger hide" id="js"></span>
+    @include('layout.messages.errors')
 
     <div class="row">
         <div class="col-md-12">
@@ -57,7 +57,7 @@
                 <div class="wizard-content">
                     <div class="wizard-pane active" id="datos_personales" role="tabpanel">
 
-                        {{ Form::open(["route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1"]) }}
+                        {{ Form::open(array("route" => "human-resources.manpowers.step1", "method" => "POST", "files" => true, "id" => "step1")) }}
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">

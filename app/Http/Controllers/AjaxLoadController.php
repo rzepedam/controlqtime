@@ -8,7 +8,6 @@ use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
-use Controlqtime\Core\Contracts\SubsidiaryRepoInterface;
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 
 class AjaxLoadController extends Controller
@@ -17,16 +16,14 @@ class AjaxLoadController extends Controller
     protected $legal_representative;
     protected $province;
     protected $region;
-    protected $subsidiary;
     protected $trademark;
 
-    public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, LegalRepresentativeRepoInterface $legal_representative, SubsidiaryRepoInterface $subsidiary, TrademarkRepoInterface $trademark)
+    public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, LegalRepresentativeRepoInterface $legal_representative, TrademarkRepoInterface $trademark)
     {
         $this->company              = $company;
         $this->legal_representative = $legal_representative;
         $this->province             = $province;
         $this->region               = $region;
-        $this->subsidiary           = $subsidiary;
         $this->trademark            = $trademark;
     }
 
@@ -48,10 +45,6 @@ class AjaxLoadController extends Controller
 
 			case 'Representative':
                 $email = $this->legal_representative->whereFirst('email_legal', $request->get('email'), ['email_legal']);
-			break;
-
-			case 'Subsidiary':
-                $email = $this->subsidiary->whereFirst('email_suc', $request->get('email'), ['email_suc']);
 			break;
 
 			case 'Manpower':

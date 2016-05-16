@@ -1,10 +1,8 @@
 <?php
 
-namespace Controlqtime\Core\Repositories\Base;
+namespace Controlqtime\Core\Traits;
 
-use Controlqtime\Core\Contracts\Base\BaseRepoWhereInterface;
-
-class BaseWhereAndListsRepo extends BaseRepoWithLists implements BaseRepoWhereInterface
+trait WhereMethods
 {
     public function whereFirst($attribute, $value, $columns = array('*')) {
         return $this->model->where($attribute, '=', $value)->first($columns);

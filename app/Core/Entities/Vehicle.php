@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Vehicle extends Eloquent
 {
     protected $fillable = [
-        'type_vehicle_id', 'model_vehicle_id', 'terminal_id', 'company_id', 'patent',
-        'year', 'code', 'status'
+        'model_vehicle_id', 'type_vehicle_id', 'company_id', 'year', 'color', 'patent',
+        'fuel_id', 'num_motor', 'num_chasis', 'km', 'engine_cubic', 'weight', 'code', 'obs',
     ];
 
     /*
@@ -23,12 +23,29 @@ class Vehicle extends Eloquent
         return $this->belongsTo(ModelVehicle::class);
     }
 
-    public function terminal() {
-        return $this->belongsTo(Terminal::class);
-    }
-
     public function company() {
         return $this->belongsTo(Company::class);
+    }
+
+    public function fuel()
+    {
+        return $this->belongsTo(Fuel::class);
+    }
+
+    public function imagePadrones() {
+        return $this->hasMany(ImagePadronVehicle::class);
+    }
+
+    public function imageObligatoryInsurances() {
+        return $this->hasMany(ImageObligatoryInsuranceVehicle::class);
+    }
+
+    public function imagePatents() {
+        return $this->hasMany(ImagePatentVehicle::class);
+    }
+    
+    public function imageCirculationPermits() {
+        return $this->hasMany(ImageCirculationPermitVehicle::class);
     }
     
     /*

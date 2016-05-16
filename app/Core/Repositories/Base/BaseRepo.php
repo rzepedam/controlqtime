@@ -7,20 +7,13 @@ use Illuminate\Support\Facades\Session;
 
 abstract class BaseRepo implements BaseRepoInterface
 {
-    /*public function make(array $with = array())
-    {
-        return $this->model->with($with);
-    }*/
-    
     public function all(array $with = array())
     {
-        //$query = $this->make($with);
         return $this->model->with($with)->orderBy('id', 'DESC')->paginate();
     }
     
     public function find($id, array $with = array())
     {
-        //$query = $this->make($with);
         return $this->model->with($with)->findOrFail($id);
     }
 
@@ -33,8 +26,9 @@ abstract class BaseRepo implements BaseRepoInterface
 
     public function update(array $request, $id)
     {
+        $query = $this->model->findOrFail($id)->fill($request)->save();
         Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
-        return $this->model->findOrFail($id)->fill($request)->save();
+        return $query;
     }
 
     public function delete($id)

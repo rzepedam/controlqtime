@@ -8,7 +8,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CompanyTableSeeder::class);
         $this->call(LegalRepresentativeTableSeeder::class);
-        $this->call(SubsidiaryTableSeeder::class);
         $this->call(ManpowerTableSeeder::class);
     }
 }

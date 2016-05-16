@@ -1,8 +1,8 @@
 <?php
 
-namespace Controlqtime\Core\Repositories\Base;
+namespace Controlqtime\Core\Traits;
 
-class BaseRepoWithLists extends BaseRepo
+trait Lists
 {
     public function lists($column, $id)
     {

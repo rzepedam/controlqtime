@@ -22,7 +22,6 @@ class VehicleRequest extends SanitizedRequest
         return true;
     }
 
-    
     public function rules()
     {
         switch($this->method())
@@ -30,12 +29,18 @@ class VehicleRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'type_vehicle_id'   => 'required|regex:/[0-9 -()+]+$/',
                     'model_vehicle_id'  => 'required|regex:/[0-9 -()+]+$/',
-                    'terminal_id'       => 'required|regex:/[0-9 -()+]+$/',
+                    'type_vehicle_id'   => 'required|regex:/[0-9 -()+]+$/',
                     'company_id'        => 'required|regex:/[0-9 -()+]+$/',
-                    'patent'            => 'required|max:15|unique:vehicles',
                     'year'              => 'required|max:4',
+                    'color'             => 'required|max:30',
+                    'patent'            => 'required|max:15|unique:vehicles',
+                    'fuel_id'           => 'required|regex:/[0-9 -()+]+$/',
+                    'num_motor'         => 'required|max:12',
+                    'num_chasis'        => 'required|max:17',
+                    'km'                => 'required|max:7|regex:/[0-9 -()+]+$/',
+                    'engine_cubic'      => 'required|max:4|regex:/[0-9 -()+]+$/',
+                    'weight'            => 'required|regex:/[0-9 -()+]+$/',
                     'code'              => 'required'
                 ];
             }
@@ -43,12 +48,18 @@ class VehicleRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'type_vehicle_id'   => 'required|regex:/[0-9 -()+]+$/',
                     'model_vehicle_id'  => 'required|regex:/[0-9 -()+]+$/',
-                    'terminal_id'       => 'required|regex:/[0-9 -()+]+$/',
+                    'type_vehicle_id'   => 'required|regex:/[0-9 -()+]+$/',
                     'company_id'        => 'required|regex:/[0-9 -()+]+$/',
-                    'patent'            => 'required|max:15|unique:vehicles,patent,' . $this->route->getParameter('vehicles'),
                     'year'              => 'required|max:4',
+                    'color'             => 'required|max:30',
+                    'patent'            => 'required|max:15|unique:vehicles,patent,' . $this->route->getParameter('vehicles'),
+                    'fuel_id'           => 'required|regex:/[0-9 -()+]+$/',
+                    'num_motor'         => 'required|max:12',
+                    'num_chasis'        => 'required|max:17',
+                    'km'                => 'required|max:7|regex:/[0-9 -()+]+$/',
+                    'engine_cubic'      => 'required|max:4|regex:/[0-9 -()+]+$/',
+                    'weight'            => 'required|regex:/[0-9 -()+]+$/',
                     'code'              => 'required'
                 ];
             }

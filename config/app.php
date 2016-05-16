@@ -164,7 +164,6 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Controlqtime\Providers\BackendServiceProvider::class,
-        Controlqtime\Providers\ViewServiceProvider::class,
     ],
 
     /*

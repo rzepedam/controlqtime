@@ -5,21 +5,19 @@ namespace Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-/**
- * @property Route route
- */
 class DegreeRequest extends SanitizedRequest
 {
+    private $route;
+
     public function __construct(Route $route)
     {
-        $this->route = $route;
+        $this->route = $route;  
     }
 
     public function authorize()
     {
         return true;
     }
-
 
     public function rules()
     {

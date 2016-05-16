@@ -1,35 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
-
 Route::group(['middleware' => ['web']], function () {
 
     /*
      * Home
      */
 
+    Route::auth();
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-
 
     /*
      * Humans-Resources
@@ -54,9 +32,8 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
 
-
     /*
-     * Operaciones
+     * Operations
      */
 
     Route::group(['prefix' => 'operations'], function() {
@@ -84,6 +61,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('countries', 'CountryController');
         Route::resource('degrees', 'DegreeController');
         Route::resource('forecasts', 'ForecastController');
+        Route::resource('fuels', 'FuelController');
         Route::resource('institutions', 'InstitutionController');
         Route::resource('model-vehicles', 'ModelVehicleController');
         Route::resource('mutualities', 'MutualityController');
@@ -103,6 +81,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('type-specialities', 'TypeSpecialityController');
         Route::resource('type-vehicles', 'TypeVehicleController');
         Route::resource('vehicles', 'VehicleController');
+        Route::group(['prefix' => 'vehicles'], function() {
+            Route::get('attachFiles/{id}', ['as' => 'maintainers.vehicles.attachFiles', 'uses' => 'VehicleController@getImages']);
+            Route::post('attachFiles', ['as' => 'maintainers.vehicles.addImages', 'uses' => 'VehicleController@addImages']);
+            Route::post('deleteFiles', ['as' => 'maintainers.vehicles.deleteFiles', 'uses' => 'VehicleController@deleteFiles']);
+        });
     });
 
     /*
@@ -116,4 +99,3 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('loadRouteAndVehicleSelectedInRound', 'AjaxLoadController@loadRouteAndVehicleSelectedInRound');
 
 });
-

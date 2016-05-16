@@ -36,10 +36,6 @@
                                             <td class="text-center"><i class="fa fa-building"></i> <a href="{{ route('maintainers.companies.show', $vehicle->company->id) }}" style="color: #757575"> {{ $vehicle->company->firm_name }}</a></td>
                                         </tr>
                                         <tr>
-                                            <td class="col-md-3">Terminal</td>
-                                            <td class="text-center"><i class="fa fa-road"></i> {{ $vehicle->terminal->name }}</td>
-                                        </tr>
-                                        <tr>
                                             <td class="col-md-3">Tipo Vehículo</td>
                                             <td class="text-center"><i class="fa fa-bus"></i> {{ $vehicle->typeVehicle->name }}</td>
                                         </tr>
@@ -56,9 +52,43 @@
                                             <td class="text-center">{{ $vehicle->year }}</td>
                                         </tr>
                                         <tr>
+                                            <td class="col-md-3">Color</td>
+                                            <td class="text-center">{{ $vehicle->color }}</td>
+                                        </tr>
+                                        <tr>
                                             <td class="col-md-3">Patente</td>
                                             <td class="text-center">{{ $vehicle->patent }}</td>
                                         </tr>
+                                        <tr>
+                                            <td class="col-md-3">Combustible</td>
+                                            <td class="text-center"><i class="md-gas-station font-size-16" aria-hidden="true" ></i> {{ $vehicle->fuel->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3">Nº Chasis</td>
+                                            <td class="text-center">{{ $vehicle->num_chasis }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3">Nº Motor</td>
+                                            <td class="text-center">{{ $vehicle->num_motor }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3">Kilometraje</td>
+                                            <td class="text-center">{{ $vehicle->km }} km</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3">Cilindraje Motor</td>
+                                            <td class="text-center">{{ $vehicle->engine_cubic }} cc</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3">Peso</td>
+                                            <td class="text-center">{{ $vehicle->weight }} kg</td>
+                                        </tr>
+                                        @if ($vehicle->obs)
+                                            <tr>
+                                                <td class="col-md-3">Observación</td>
+                                                <td class="text-center">{{ $vehicle->obs }}</td>
+                                            </tr>
+                                        @endif
                                         <tr>
                                             <td class="col-md-3">Ingresado</td>
                                             <td class="text-center text-capitalize">{{ Date::parse($vehicle->created_at)->format('l j F Y H:i:s') }}</td>

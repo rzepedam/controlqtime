@@ -49,33 +49,6 @@
 
         </div>
 
-        <div class="panel panel-bordered">
-            <div class="panel-heading">
-                <div class="panel-actions">
-                    <span class="label label-outline label-warning add_subsidiary waves-effect waves-block" onclick="$(this).addSubsidiary(this)"><i class="fa fa-plus"></i> Agregar Sucursal</span>
-                </div>
-                <h3 class="panel-title"><i class="fa fa-cubes text-warning"></i> Datos Sucursales</h3>
-            </div>
-            <div class="panel-body">
-                <div id="content_subsidiaries">
-
-                    @if ($company->num_subsidiary > 0)
-
-                        @include('maintainers.companies.partials.edit.data_subsidiaries')
-
-                    @else
-
-                        <h2 class="text-center text-warning">No existen Sucursales Asociadas <br />
-                            <small>(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2>
-                        <br />
-                        <br />
-
-                    @endif
-
-                </div>
-            </div>
-        </div>
-
     {{ Form::close() }}
 
     <br />
@@ -93,7 +66,6 @@
     <br />
 
     @include('maintainers.companies.partials.delete')
-
     <br />
 
 @stop
@@ -114,10 +86,7 @@
         $(document).ready(function(){
 
             var count_legal_representative  = {{ ($company->num_representative > 0) ? $company->num_representative : 1 }};
-            var count_subsidiary            = {{ $company->num_subsidiary }};
             var id_deletes_legal            = [];
-            var id_deletes_subsidiary       = [];
-
 
             function initializaComponents() {
                 $('.input-group.date').datepicker({
@@ -146,9 +115,6 @@
                 if (element == 'legal_representative') {
                     if ($('#id_legal' + num_element).val() != 0)
                         id_deletes_legal.push($('#id_legal' + num_element).val());
-                }else {
-                    if ($('#id_suc' + num_element).val() != 0)
-                        id_deletes_subsidiary.push($('#id_suc' + num_element).val());
                 }
 
                 $(this).parent().parent().parent().parent().remove();
@@ -173,46 +139,7 @@
 
                         count_legal_representative--;
 
-                        break;
-
-                    case 'subsidiary':
-
-                        for (var i = 0; i < span.length; i++) {
-
-                            item = verificaUltimosNumeros(span[i].id);
-
-                            $('span#subsidiary' + item).attr('id', 'subsidiary' + i);
-                            $('span#num_subsidiary' + item).text('Sucursal #' + (i + 1));
-                            $('span#num_subsidiary' + item).attr('id', 'num_subsidiary' + i);
-
-                            $('label[for="id_suc' + item + '"]').attr('for', 'id_suc' + i);
-                            $('#id_suc' + item).attr('id', 'id_suc' + i);
-
-                            $('label[for="region_suc_id' + item + '"]').attr('for', 'region_suc_id' + i);
-                            $('#region_suc_id' + item).each(function(i){
-                                $(this).attr('id', 'region_suc_id' + i);
-                            });
-
-                            $('label[for="province_suc_id' + item + '"]').attr('for', 'province_suc_id' + i);
-                            $('#province_suc_id' + item).each(function(i){
-                                $(this).attr('id', 'province_suc_id' + i);
-                            });
-
-                            $('label[for="commune_suc_id' + item + '"]').attr('for', 'commune_suc_id' + i);
-                            $('#commune_suc_id' + item).each(function(i){
-                                $(this).attr('id', 'commune_suc_id' + i);
-                            });
-
-                        }
-
-                        count_subsidiary--;
-                        if (count_subsidiary == 0) {
-                            var html = '<h2 class="text-center text-warning">No existen Sucursales Asociadas <br /><small>(Pulse "Agregar Sucursal" para comenzar su adición)</small></h2><br /><br />'
-                            $('#content_subsidiaries').html(html);
-                        }
-
-                        break;
-
+                    break;
                 }
             });
 
@@ -234,41 +161,6 @@
             };
 
 
-            $.fn.addSubsidiary = function() {
-
-                var new_subsidiary = '<span id="subsidiary"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-warning alert-dismissible" role="alert"> <span id="num_subsidiary" class="text-warning">Sucursal #' + (count_subsidiary + 1) + '</span><a id="subsidiary" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Representante Legal" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_suc", "ID", ["class"=> "control-label"])}}{{Form::text("id_suc[]", 0, ["id"=> "id_suc", "class"=> "form-control"])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label("address_suc[]", "Dirección")}}{{Form::text("address_suc[]", null, ["class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label("region_suc_id", "Región")}}{{Form::select("region_suc_id[]", $regions, null, ["id"=> "region_suc_id", "class"=> "form-control", "onChange"=> "$(this).changeRegion()"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label("province_suc_id", "Provincia")}}{{Form::select("province_suc_id[]", $provinces, null, ["id"=> "province_suc_id", "class"=> "form-control", "onChange"=> "$(this).changeProvince()"])}}</div></div></div><div class="row"> <div class="col-md-3"> <div class="form-group">{{Form::label("commune_suc_id", "Comuna")}}{{Form::select("commune_suc_id[]", $communes, null, ["id"=> "commune_suc_id", "class"=> "form-control"])}}</div></div><div class="col-md-1"> <div class="form-group">{{Form::label("num_suc[]", "N°")}}{{Form::text("num_suc[]", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"> <div class="form-group">{{Form::label("lot_suc[]", "Lote")}}{{Form::text("lot_suc[]", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"> <div class="form-group">{{Form::label("ofi_suc[]", "Oficina")}}{{Form::text("ofi_suc[]", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-1"> <div class="form-group">{{Form::label("floor_suc[]", "Piso")}}{{Form::text("floor_suc[]", null, ["class"=> "form-control text-center"])}}</div></div><div class="col-md-2"> <div class="form-group">{{Form::label("muni_license_suc[]", "Patente Municipal")}}{{Form::text("muni_license_suc[]", null, ["class"=> "form-control text-center"])}}</div></div></div><div class="row"> <div class="col-md-2"> <div class="form-group">{{Form::label("phone1_suc[]", "Teléfono 1")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1_suc[]", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-2"> <div class="form-group">{{Form::label("phone2_suc[]", "Teléfono 2")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2_suc[]", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-6"> <div class="form-group">{{Form::label("email_suc[]", "Email")}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{Form::text("email_suc[]", null, [ "id"=> "Subsidiary", "class"=> "form-control"])}}</div></div></div></div><hr/></span>';
-
-                if (count_subsidiary == 0)
-                    $('#content_subsidiaries').html(new_subsidiary);
-                else
-                    $('#content_subsidiaries').append(new_subsidiary);
-
-                $('span#subsidiary').attr('id', 'subsidiary' + count_subsidiary);
-                $('span#num_subsidiary').attr('id', 'num_subsidiary' + count_subsidiary);
-
-                $('label[for="id_suc"]').attr('for', 'id_suc' + count_subsidiary);
-                $('#id_suc').attr('id', 'id_suc' + count_subsidiary);
-
-                $('label[for="region_suc_id"]').attr('for', 'region_suc_id' + count_subsidiary);
-                $('#region_suc_id').each(function(){
-                    $(this).attr('id', 'region_suc_id' + count_subsidiary);
-                });
-
-                $('label[for="province_suc_id"]').attr('for', 'province_suc_id' + count_subsidiary);
-                $('#province_suc_id').each(function(){
-                    $(this).attr('id', 'province_suc_id' + count_subsidiary);
-                });
-
-                $('label[for="commune_suc_id"]').attr('for', 'commune_suc_id' + count_subsidiary);
-                $('#commune_suc_id').each(function(){
-                    $(this).attr('id', 'commune_suc_id' + count_subsidiary);
-                });
-
-                count_subsidiary++;
-                initializaComponents();
-            }
-
-
             $('#btnUpdateCompany').click(function(e) {
 
                 e.preventDefault();
@@ -278,7 +170,7 @@
                 var button          = $(this);
 
                 button.html('<i class="fa fa-spin fa-refresh fa-fw" aria-hidden="true"></i>').css({ width: '138px' });
-                $.post(action, formCompany.serialize() + "&id_deletes_legal=" + id_deletes_legal + "&id_deletes_subsidiary=" + id_deletes_subsidiary + "&count_legal_representative=" + count_legal_representative + "&count_subsidiary=" + count_subsidiary, function(response) {
+                $.post(action, formCompany.serialize() + "&id_deletes_legal=" + id_deletes_legal + "&count_legal_representative=" + count_legal_representative, function(response) {
                     if (response.success) {
                         window.location.href = response.url;
                     }

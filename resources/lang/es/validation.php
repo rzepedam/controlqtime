@@ -2,17 +2,6 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines contain the default error messages used by
-    | the validator class. Some of these rules have multiple versions such
-    | such as the size rules. Feel free to tweak each of these messages.
-    |
-    */
-
     'accepted'             => '<strong>:attribute</strong> debe ser aceptado.',
     'active_url'           => '<strong>:attribute</strong> no es una URL válida.',
     'after'                => '<strong>:attribute</strong> debe ser una fecha posterior a :date.',
@@ -113,12 +102,18 @@ return [
          * Vehículos
          */
 
-        'patent'                                => 'Patente',
-        'code'                                  => 'Cód. Interno',
-        'type_vehicle_id'                       => 'Tipo de Vehículo',
         'model_vehicle_id'                      => 'Modelo',
-        'terminal_id'                           => 'Terminal',
+        'type_vehicle_id'                       => 'Tipo de Vehículo',
         'year'                                  => 'Año',
+        'color'                                 => 'Color',
+        'patent'                                => 'Patente',
+        'fuel_id'                               => 'Combustible',
+        'num_chasis'                            => 'Nº Chasis',
+        'num_motor'                             => 'Nº Motor',
+        'km'                                    => 'Kilometraje',
+        'engine_cubic'                          => 'Cilindraje Motor',
+        'weight'                                => 'Peso',
+        'code'                                  => 'Cód. Interno',
 
 
         /*

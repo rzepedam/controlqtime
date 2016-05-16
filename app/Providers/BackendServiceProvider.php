@@ -49,8 +49,33 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\FuelRepoInterface',
+            'Controlqtime\Core\Repositories\FuelRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageCirculationPermitVehicleRepoInterface',
+            'Controlqtime\Core\Repositories\ImageCirculationPermitVehicleRepo'
+        );
+        
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageObligatoryInsuranceVehicleRepoInterface',
+            'Controlqtime\Core\Repositories\ImageObligatoryInsuranceVehicleRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImagePadronVehicleRepoInterface',
+            'Controlqtime\Core\Repositories\ImagePadronVehicleRepo'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\ImagePatentCompanyRepoInterface',
             'Controlqtime\Core\Repositories\ImagePatentCompanyRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImagePatentVehicleRepoInterface',
+            'Controlqtime\Core\Repositories\ImagePatentVehicleRepo'
         );
 
         $this->app->bind(

@@ -4,10 +4,14 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
-use Controlqtime\Core\Repositories\Base\BaseWhereAndListsRepo;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\Lists;
+use Controlqtime\Core\Traits\WhereMethods;
 
-class CompanyRepo extends BaseWhereAndListsRepo implements CompanyRepoInterface
+class CompanyRepo extends BaseRepo implements CompanyRepoInterface
 {
+    use Lists, WhereMethods;
+    
     protected $model;
 
     public function __construct(Company $model)

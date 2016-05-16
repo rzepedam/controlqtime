@@ -10,28 +10,30 @@
 
 @section('content')
 
-<div class="panel">
+    @include('layout.messages.errors')
 
-    {{ Form::open(array('route' => 'maintainers.mutualities.store', 'method' => 'POST')) }}
+    <div class="panel">
 
-        <div class="panel-body">
+        {{ Form::open(array('route' => 'maintainers.mutualities.store', 'method' => 'POST')) }}
 
-            @include('maintainers.mutualities.partials.fields')
+            <div class="panel-body">
 
-        </div>
-        <br />
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="{{ route('maintainers.mutualities.index') }}">Volver</a>
-                    <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                @include('maintainers.mutualities.partials.fields')
+
+            </div>
+            <br />
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{ route('maintainers.mutualities.index') }}">Volver</a>
+                        <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    {{ Form::close() }}
+        {{ Form::close() }}
 
-</div>
+    </div>
 
 @stop
 

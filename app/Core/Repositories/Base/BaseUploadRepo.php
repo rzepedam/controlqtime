@@ -28,7 +28,6 @@ class BaseUploadRepo implements BaseRepoUploadInterface
     {
         $path = $this->getPath($repo, $id, $type);
         $name = $this->randName($file->getClientOriginalExtension());
-
         $this->model->name          = $name;
         $this->model->mime          = $file->getClientOriginalExtension();
         $this->model->orig_name     = $file->getClientOriginalName();
@@ -37,6 +36,10 @@ class BaseUploadRepo implements BaseRepoUploadInterface
         {
             case 'company':
                 $this->model->company_id    = $id;
+                break;
+
+            case 'vehicle':
+                $this->model->vehicle_id    = $id;
                 break;
         }
 
@@ -55,4 +58,10 @@ class BaseUploadRepo implements BaseRepoUploadInterface
             return true;
         }
     }
+
+    public function delete($id)
+    {
+        $this->model->destroy($id);
+    }
+    
 }

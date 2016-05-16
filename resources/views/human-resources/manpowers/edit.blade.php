@@ -22,7 +22,7 @@
 
 @section('content')
 
-    <span class="col-md-12 alert alert-danger hide" id="js"></span>
+    @include('layout.messages.errors')
 
     <div class="row">
         <div class="col-md-12">

@@ -4,11 +4,12 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
 use Controlqtime\Core\Entities\Commune;
-use Controlqtime\Core\Repositories\Base\BaseListsRepo;
+use Controlqtime\Core\Traits\Lists;
 
-
-class CommuneRepo extends BaseListsRepo implements CommuneRepoInterface
+class CommuneRepo implements CommuneRepoInterface
 {
+    use Lists;
+
     protected $model;
 
     public function __construct(Commune $model)

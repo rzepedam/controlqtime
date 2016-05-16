@@ -13,4 +13,6 @@ interface BaseRepoUploadInterface
     public function addImages($repo, $file, $id, $type);
 
     public function destroyImage($repo, $id, $type, $name);
+
+    public function delete($id);
 }

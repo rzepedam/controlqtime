@@ -2,7 +2,6 @@
 
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\LegalRepresentative;
-use Controlqtime\Core\Entities\Subsidiary;
 
 $factory->define(Company::class, function (Faker\Generator $faker) {
     
@@ -41,24 +40,6 @@ $factory->define(LegalRepresentative::class, function (Faker\Generator $faker) {
         'email_legal'       => $faker->email,
     ];
 
-});
-
-$factory->define(Subsidiary::class, function (Faker\Generator $faker) {
-    
-    return [
-        'company_id'        => rand(1, 25),
-        'address_suc'       => $faker->address,
-        'commune_suc_id'    => rand(1, 53),
-        'num_suc'           => rand(100, 999),
-        'lot_suc'           => rand(1, 99),
-        'ofi_suc'           => rand(1, 50),
-        'floor_suc'         => rand(1,30),
-        'muni_license_suc'  => strtoupper($faker->word),
-        'phone1_suc'        => $faker->phoneNumber,
-        'phone2_suc'        => $faker->phoneNumber,
-        'email_suc'         => $faker->email,
-    ];
-    
 });
 
 $factory->define(Controlqtime\Manpower::class, function (Faker\Generator $faker) {

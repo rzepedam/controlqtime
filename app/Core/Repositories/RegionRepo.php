@@ -4,10 +4,12 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Entities\Region;
-use Controlqtime\Core\Repositories\Base\BaseListsRepo;
+use Controlqtime\Core\Traits\Lists;
 
-class RegionRepo extends BaseListsRepo implements RegionRepoInterface
+class RegionRepo implements RegionRepoInterface
 {
+    use Lists;
+
     protected $model;
 
     public function __construct(Region $model)

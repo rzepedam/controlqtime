@@ -846,3 +846,9 @@ INSERT INTO terminals(name) VALUES('Terminal Sur');
 INSERT INTO areas(terminal_id, name) VALUES(1, 'COF');
 INSERT INTO areas(terminal_id, name) VALUES(1, 'Mantención');
 INSERT INTO areas(terminal_id, name) VALUES(1, 'Gerencia');
+
+/* fuels | Combustibles */
+INSERT INTO fuels(name) VALUES('Diesel');
+INSERT INTO fuels(name) VALUES('93');
+INSERT INTO fuels(name) VALUES('95');
+INSERT INTO fuels(name) VALUES('97');

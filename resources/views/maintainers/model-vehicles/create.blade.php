@@ -10,6 +10,8 @@
 
 @section('content')
 
+    @include('layout.messages.errors')
+
     <div class="panel">
 
         {{ Form::open(array('route' => 'maintainers.model-vehicles.store', 'method' => 'POST')) }}

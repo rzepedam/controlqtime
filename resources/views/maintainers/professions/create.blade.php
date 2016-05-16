@@ -10,27 +10,29 @@
 
 @section('content')
 
-<div class="panel">
+    @include('layout.messages.errors')
 
-    {{ Form::open(array('route' => 'maintainers.professions.store', 'method' => 'POST')) }}
+    <div class="panel">
 
-        <div class="panel-body">
+        {{ Form::open(array('route' => 'maintainers.professions.store', 'method' => 'POST')) }}
 
-            @include('maintainers.professions.partials.fields')
+            <div class="panel-body">
 
-        </div>
-        <br />
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="{{ route('maintainers.professions.index') }}">Volver</a>
-                    <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                @include('maintainers.professions.partials.fields')
+
+            </div>
+            <br />
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{ route('maintainers.professions.index') }}">Volver</a>
+                        <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    {{ Form::close() }}
+        {{ Form::close() }}
 
-</div>
+    </div>
 
 @stop

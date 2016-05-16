@@ -10,6 +10,8 @@
 
 @section('content')
 
+    @include('layout.messages.errors')
+
     <div class="panel">
 
         {{ Form::model($vehicle, array('route' => array('maintainers.vehicles.update', $vehicle), 'method' => 'PUT' )) }}
@@ -36,6 +38,7 @@
     <br />
 
     @include('maintainers.vehicles.partials.delete')
+    <br />
 
 @stop
 

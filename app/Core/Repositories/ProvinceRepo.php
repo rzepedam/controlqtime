@@ -4,10 +4,12 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Entities\Province;
-use Controlqtime\Core\Repositories\Base\BaseListsRepo;
+use Controlqtime\Core\Traits\Lists;
 
-class ProvinceRepo extends BaseListsRepo implements ProvinceRepoInterface
+class ProvinceRepo implements ProvinceRepoInterface
 {
+    use Lists;
+
     protected $model;
 
     public function __construct(Province $model)

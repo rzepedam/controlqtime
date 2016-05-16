@@ -14,9 +14,5 @@ class ImagePatentCompanyRepo extends BaseUploadRepo implements ImagePatentCompan
     {
         $this->model = $model;
     }
-
-    public function delete($id)
-    {
-        $this->model->destroy($id);
-    }
+    
 }

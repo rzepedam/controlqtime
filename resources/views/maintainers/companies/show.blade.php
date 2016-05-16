@@ -14,7 +14,6 @@
     <ul class="nav nav-tabs" data-plugin="nav-tabs" role="tablist">
         <li class="active" role="presentation"><a data-toggle="tab" href="#tab_1" aria-controls="tab_1" role="tab"><i class="fa fa-building"></i> Datos Empresa</a></li>
         <li role="presentation"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-gavel"></i> Representante Legal</a></li>
-        <li role="presentation"><a data-toggle="tab" href="#tab_3" aria-controls="tab_3" role="tab"><i class="fa fa-cubes"></i> Sucursales</a></li>
     </ul>
     <div class="tab-content padding-top-20">
         <div class="tab-pane active" id="tab_1" role="tabpanel">
@@ -25,11 +24,6 @@
         <div class="tab-pane" id="tab_2" role="tabpanel">
 
             @include('maintainers.companies.partials.show.legal_representative')
-
-        </div>
-        <div class="tab-pane" id="tab_3" role="tabpanel">
-
-            @include('maintainers.companies.partials.show.subsidiary')
 
         </div>
     </div>

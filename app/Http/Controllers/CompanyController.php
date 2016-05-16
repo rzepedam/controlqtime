@@ -2,18 +2,18 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\ImagePatentCompanyRepoInterface;
-use Controlqtime\Core\Contracts\ImageRolCompanyRepoInterface;
-use Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\CompanyRequest;
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
+use Controlqtime\Core\Contracts\ImagePatentCompanyRepoInterface;
+use Controlqtime\Core\Contracts\ImageRolCompanyRepoInterface;
 use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
 use Controlqtime\Core\Contracts\NationalityRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
-use Controlqtime\Core\Contracts\SubsidiaryRepoInterface;
+use Controlqtime\Http\Requests;
 use Illuminate\Http\Request;
+use Controlqtime\Core\Contracts\SubsidiaryRepoInterface;
 
 class CompanyController extends Controller
 {
@@ -25,9 +25,8 @@ class CompanyController extends Controller
     protected $nationality;
     protected $province;
     protected $region;
-    protected $subsidiary;
 
-    public function __construct(CompanyRepoInterface $company, NationalityRepoInterface $nationality, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, LegalRepresentativeRepoInterface $legal_representative, SubsidiaryRepoInterface $subsidiary, ImageRolCompanyRepoInterface $image_rol, ImagePatentCompanyRepoInterface $image_patent)
+    public function __construct(CompanyRepoInterface $company, NationalityRepoInterface $nationality, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, LegalRepresentativeRepoInterface $legal_representative, ImageRolCompanyRepoInterface $image_rol, ImagePatentCompanyRepoInterface $image_patent)
     {
         $this->commune              = $commune;
         $this->company              = $company;
@@ -37,7 +36,6 @@ class CompanyController extends Controller
         $this->nationality          = $nationality;
         $this->province             = $province;
         $this->region               = $region;
-        $this->subsidiary           = $subsidiary;
     }
 
     public function index()
@@ -62,7 +60,6 @@ class CompanyController extends Controller
     {
         $company = $this->company->create($request->all());
         $this->legal_representative->createOrUpdateWithArray($request->all(), $company);
-        $this->subsidiary->createOrUpdateWithArray($request->all(), $company);
 
         if ($request->ajax()) {
             return response()->json(array(
@@ -77,21 +74,14 @@ class CompanyController extends Controller
     
     public function edit($id)
     {
-        $company        = $this->company->find($id, ['subsidiaries.commune.province.region', 'legalRepresentatives']);
+        $company        = $this->company->find($id, ['legalRepresentatives']);
         $regions        = $this->region->lists('name', 'id');
         $provinces      = $this->region->findProvinces($company->commune->province->region->id);
         $communes       = $this->province->findCommunes($company->commune->province->id);
         $nationalities  = $this->nationality->lists('name', 'id');
-        
-        /*$i = 0;
-        foreach ($company->subsidiaries as $subsidiary) {
-            $prov_sel[$i]       = $this->region->findProvinces($subsidiary->commune->province->region->id);
-            $i++;
-        }*/
 
         return view('maintainers.companies.edit', compact(
-            'company', 'regions', 'provinces', 'communes', 'nationalities',
-            'prov_sel'
+            'company', 'regions', 'provinces', 'communes', 'nationalities'
         ));
     }
 
@@ -99,10 +89,8 @@ class CompanyController extends Controller
     {
         $company = $this->company->find($id);
         $this->company->update($request->all(), $id);
-        $this->legal_representative->destroyWithArray($request->get('id_deletes_legal'));
-        $this->subsidiary->destroyWithArray($request->get('id_deletes_subsidiary'));
+        $this->legal_representative->destroyArrayId($request->get('id_deletes_legal'));
         $this->legal_representative->createOrUpdateWithArray($request->all(), $company);
-        $this->subsidiary->createOrUpdateWithArray($request->all(), $company);
 
         if ($request->ajax()) {
             return response()->json(array(
@@ -116,7 +104,7 @@ class CompanyController extends Controller
 
     public function show($id)
     {
-        $company = $this->company->find($id, ['commune.province.region', 'legalRepresentatives.nationality', 'subsidiaries.commune.province.region']);
+        $company = $this->company->find($id, ['commune.province.region', 'legalRepresentatives.nationality']);
         return view('maintainers.companies.show', compact('company'));
     }
 

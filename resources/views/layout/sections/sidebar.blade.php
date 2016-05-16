@@ -75,17 +75,22 @@
                             </li>
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.roles.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon md-seat font-size-18" aria-hidden="true"></i>Cargos</span>
+                                    <span class="site-menu-title"><i class="site-menu-icon md-seat font-size-16" aria-hidden="true"></i>Cargos</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.type-certifications.index') }}">
-                                    <span class="site-menu-title"><i class="site-menu-icon md-badge-check" aria-hidden="true" ></i> Certificaciones</span>
+                                    <span class="site-menu-title"><i class="site-menu-icon md-badge-check font-size-16" aria-hidden="true" ></i> Certificaciones</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.cities.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-flag-o" aria-hidden="true"></i> Ciudades</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('maintainers.fuels.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon md-gas-station font-size-16" aria-hidden="true" ></i> Combustibles</span>
                                 </a>
                             </li>
                             <li class="site-menu-item">

@@ -21,14 +21,14 @@
                             <td class="text-center">{{ $vehicle->typeVehicle->name }}</td>
                             <td class="text-center">{{ $vehicle->modelVehicle->name }}</td>
                             @if ($vehicle->state == 'unavailable')
-                                <td class="text-center"><a href="javascript:void(0)" class="label label-round label-danger">Activar</a></td>
+                                <td class="text-center"><a href="{{ route('maintainers.vehicles.attachFiles', $vehicle) }}" class="label label-round label-danger">Activar</a></td>
                             @else
                                 <td></td>
                             @endif
                             <td class="text-center">
                                 <a href="{{ route('maintainers.vehicles.show', $vehicle) }}" class="btn btn-squared btn-info waves-effect waves-light tooltip-info" data-toggle="tooltip" data-original-title="Ver"><i class="fa fa-search"></i> </a>
                                 <a href="{{ route('maintainers.vehicles.edit', $vehicle) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i> </a>
-                                <a href="javascript:void(0)" class="btn btn-squared btn-primary waves-effect waves-light tooltip-primary" data-toggle="tooltip" data-original-title="Adjuntar Archivos"><i class="fa fa-cloud-upload"></i></a>
+                                <a href="{{ route('maintainers.vehicles.attachFiles', $vehicle) }}" class="btn btn-squared btn-primary waves-effect waves-light tooltip-primary" data-toggle="tooltip" data-original-title="Adjuntar Archivos"><i class="fa fa-cloud-upload"></i></a>
                             </td>
                         </tr>
 

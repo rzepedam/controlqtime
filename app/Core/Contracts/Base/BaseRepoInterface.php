@@ -4,8 +4,6 @@ namespace Controlqtime\Core\Contracts\Base;
 
 interface BaseRepoInterface {
 
-    //public function make(array $with = array());
-
     public function all(array $with = array());
 
     public function find($id, array $with = array());
