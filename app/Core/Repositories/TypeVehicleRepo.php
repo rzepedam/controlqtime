@@ -5,11 +5,11 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
 use Controlqtime\Core\Entities\TypeVehicle;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
-use Controlqtime\Core\Traits\Lists;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class TypeVehicleRepo extends BaseRepo implements TypeVehicleRepoInterface
 {
-    use Lists;
+    use ListsTrait;
     
     protected $model;
 

@@ -4,11 +4,11 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Entities\Region;
-use Controlqtime\Core\Traits\Lists;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class RegionRepo implements RegionRepoInterface
 {
-    use Lists;
+    use ListsTrait;
 
     protected $model;
 

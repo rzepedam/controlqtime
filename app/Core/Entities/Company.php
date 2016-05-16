@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Company extends Eloquent
 {
     protected $fillable = [
-        'id', 'rut', 'firm_name', 'gyre', 'start_act', 'address', 'commune_id', 'num',
+        'type_company_id', 'rut', 'firm_name', 'gyre', 'start_act', 'address', 'commune_id', 'num',
         'lot', 'ofi', 'floor', 'muni_license', 'email', 'phone1', 'phone2', 'status'
     ];
 
@@ -34,6 +34,10 @@ class Company extends Eloquent
 
     public function manpowers() {
         return $this->hasMany('Controlqtime\Manpower');
+    }
+
+    public function typeCompany() {
+        return $this->belongsTo(TypeCompany::class);
     }
 
     public function commune() {

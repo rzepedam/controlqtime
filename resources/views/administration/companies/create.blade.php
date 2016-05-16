@@ -114,7 +114,7 @@
 
                         for (var i = 1; i < span.length; i++) {
 
-                            item = verificaUltimosNumeros(span[i].id);
+                            var item = verificaUltimosNumeros(span[i].id);
 
                             $('span#legal_representative' + item).attr('id', 'legal_representative' + i);
                             $('span#num_legal_representative' + item).text('Representante Legal #' + (i + 1));

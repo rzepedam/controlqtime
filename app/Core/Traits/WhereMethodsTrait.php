@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Core\Traits;
 
-trait WhereMethods
+trait WhereMethodsTrait
 {
     public function whereFirst($attribute, $value, $columns = array('*')) {
         return $this->model->where($attribute, '=', $value)->first($columns);

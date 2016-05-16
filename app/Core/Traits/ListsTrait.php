@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Core\Traits;
 
-trait Lists
+trait ListsTrait
 {
     public function lists($column, $id)
     {

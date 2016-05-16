@@ -1,17 +1,22 @@
 <div class="row">
+    {{-- Tipo Empresa Form Select --}}
+    <div class="form-group col-md-2">
+        {{ Form::label('type_company_id', 'Tipo Empresa', ['class' => 'control-label']) }}
+        {{ Form::select('type_company_id', $type_companies, null, ['class' => 'form-control']) }}
+    </div>
     <div class="col-md-2">
         <div class="form-group">
             {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle text-primary tooltip-primary" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
             {{ Form::text('rut', null, ['class' => 'form-control check_rut']) }}
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="form-group">
             {{ Form::label('firm_name', 'Razón Social', ['class' => 'control-label']) }}
             {{ Form::text('firm_name', null, ['class' => 'form-control']) }}
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="form-group">
             {{ Form::label('gyre', 'Giro', ['class' => 'control-label']) }}
             {{ Form::text('gyre', null, ['class' => 'form-control']) }}

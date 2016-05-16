@@ -200,6 +200,11 @@
                                 </a>
                             </li>
                             <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('maintainers.type-companies.index') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon md-city-alt font-size-18" aria-hidden="true"></i> Tipos de Empresas</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
                                 <a class="animsition-link" href="{{ route('maintainers.type-institutions.index') }}">
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-university" aria-hidden="true"></i> Tipos de Instituciones</span>
                                 </a>

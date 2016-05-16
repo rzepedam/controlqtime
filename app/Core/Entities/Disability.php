@@ -1,10 +1,10 @@
 <?php
 
-namespace Controlqtime;
+namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Disability extends Model
+class Disability extends Eloquent
 {
     protected $fillable = [
         'type_disability_id', 'treatment_disability', 'detail_disability'

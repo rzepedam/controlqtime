@@ -24,15 +24,10 @@ class CreateEmployeesTable extends Migration
             $table->string('email', 100)->unique();
             $table->string('phone1', 20);
             $table->string('phone2', 20);
-            $table->integer('forecast_id')->unsigned();
-            $table->integer('mutuality_id')->unsigned();
-            $table->integer('pension_id')->unsigned();
             $table->integer('company_id')->unsigned();
-            $table->integer('role_id')->unsigned();
-            $table->integer('area_id')->unsigned();
-            $table->string('code_internal');
-            $table->enum('state', ['available', 'unavailable'])->default('unavailable');
-            $table->enum('condition', ['able', 'unable'])->default('unable');
+            $table->string('code');
+            $table->enum('state', ['enable', 'disable'])->default('disable');
+            $table->enum('condition', ['available', 'unavailable'])->default('available');
 
             $table->timestamps();
 
@@ -41,29 +36,14 @@ class CreateEmployeesTable extends Migration
                 ->on('nationalities')
                 ->onUpdate('cascade');
 
-            $table->foreign('commune_id')
-                ->references('id')
-                ->on('communes')
-                ->onUpdate('cascade');
-
             $table->foreign('gender_id')
                 ->references('id')
                 ->on('genders')
                 ->onUpdate('cascade');
 
-            $table->foreign('forecast_id')
+            $table->foreign('commune_id')
                 ->references('id')
-                ->on('forecasts')
-                ->onUpdate('cascade');
-
-            $table->foreign('mutuality_id')
-                ->references('id')
-                ->on('mutualities')
-                ->onUpdate('cascade');
-
-            $table->foreign('pension_id')
-                ->references('id')
-                ->on('pensions')
+                ->on('communes')
                 ->onUpdate('cascade');
 
             $table->foreign('company_id')
@@ -71,16 +51,6 @@ class CreateEmployeesTable extends Migration
                 ->on('companies')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
-            $table->foreign('role_id')
-                ->references('id')
-                ->on('roles')
-                ->onUpdate('cascade');
-
-            $table->foreign('area_id')
-                ->references('id')
-                ->on('areas')
-                ->onupdate('cascade');
 
         });
     }

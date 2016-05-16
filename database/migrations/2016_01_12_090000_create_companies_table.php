@@ -10,6 +10,7 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('type_company_id')->unsigned();
             $table->string('rut', 15);
             $table->string('firm_name');
             $table->string('gyre');
@@ -26,6 +27,11 @@ class CreateCompaniesTable extends Migration
             $table->string('email', 100)->unique();
             $table->enum('state', ['available', 'unavailable'])->default('unavailable');
             $table->timestamps();
+
+            $table->foreign('type_company_id')
+                ->references('id')
+                ->on('type_companies')
+                ->onUpdate('cascade');
 
             $table->foreign('commune_id')
                 ->references('id')

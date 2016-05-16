@@ -4,11 +4,11 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\NationalityRepoInterface;
 use Controlqtime\Core\Entities\Nationality;
-use Controlqtime\Core\Traits\Lists;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class NationalityRepo implements NationalityRepoInterface
 {
-    use Lists;
+    use ListsTrait;
 
     protected $model;
 

@@ -33,7 +33,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="col-md-3">Empresa</td>
-                                            <td class="text-center"><i class="fa fa-building"></i> <a href="{{ route('maintainers.companies.show', $vehicle->company->id) }}" style="color: #757575"> {{ $vehicle->company->firm_name }}</a></td>
+                                            <td class="text-center"><i class="fa fa-building"></i> <a href="{{ route('administration.companies.show', $vehicle->company->id) }}" style="color: #757575"> {{ $vehicle->company->firm_name }}</a></td>
                                         </tr>
                                         <tr>
                                             <td class="col-md-3">Tipo Vehículo</td>
@@ -92,6 +92,10 @@
                                         <tr>
                                             <td class="col-md-3">Ingresado</td>
                                             <td class="text-center text-capitalize">{{ Date::parse($vehicle->created_at)->format('l j F Y H:i:s') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3">Actualizado</td>
+                                            <td class="text-center text-capitalize">{{ Date::parse($vehicle->updated_at)->format('l j F Y H:i:s') }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

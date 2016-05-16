@@ -1,11 +1,11 @@
 <?php
 
-namespace Controlqtime;
+namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 use Carbon\Carbon;
 
-class ProfessionalLicense extends Model
+class ProfessionalLicense extends Eloquent
 {
     protected $fillable = [
         'type_professional_license_id', 'expired_license', 'emission_license', 'is_donor', 'detail_license'

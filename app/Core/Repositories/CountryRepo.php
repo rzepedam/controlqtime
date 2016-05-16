@@ -5,11 +5,11 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\CountryRepoInterface;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
-use Controlqtime\Core\Traits\Lists;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class CountryRepo extends BaseRepo implements CountryRepoInterface
 {
-    use Lists;
+    use ListsTrait;
 
     protected $model;
 

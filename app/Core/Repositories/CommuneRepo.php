@@ -4,11 +4,11 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
 use Controlqtime\Core\Entities\Commune;
-use Controlqtime\Core\Traits\Lists;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class CommuneRepo implements CommuneRepoInterface
 {
-    use Lists;
+    use ListsTrait;
 
     protected $model;
 

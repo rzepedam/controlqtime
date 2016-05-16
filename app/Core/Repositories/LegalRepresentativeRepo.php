@@ -6,11 +6,11 @@ use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\OperationEntityArray;
-use Controlqtime\Core\Traits\WhereMethods;
+use Controlqtime\Core\Traits\WhereMethodsTrait;
 
 class LegalRepresentativeRepo extends BaseRepo implements LegalRepresentativeRepoInterface
 {
-    use WhereMethods, OperationEntityArray;
+    use WhereMethodsTrait, OperationEntityArray;
 
     protected $model;
 

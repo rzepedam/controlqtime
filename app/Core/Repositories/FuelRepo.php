@@ -5,11 +5,11 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\FuelRepoInterface;
 use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
-use Controlqtime\Core\Traits\Lists;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class FuelRepo extends BaseRepo implements FuelRepoInterface
 {
-    use Lists;
+    use ListsTrait;
     
     protected $model;
 

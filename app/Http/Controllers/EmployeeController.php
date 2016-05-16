@@ -2,6 +2,21 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\CommuneRepoInterface;
+use Controlqtime\Core\Contracts\CompanyRepoInterface;
+use Controlqtime\Core\Contracts\CountryRepoInterface;
+use Controlqtime\Core\Contracts\DegreeRepoInterface;
+use Controlqtime\Core\Contracts\EmployeeRepoInterface;
+use Controlqtime\Core\Contracts\GenderRepoInterface;
+use Controlqtime\Core\Contracts\InstitutionRepoInterface;
+use Controlqtime\Core\Contracts\ProvinceRepoInterface;
+use Controlqtime\Core\Contracts\RelationshipRepoInterface;
+use Controlqtime\Core\Contracts\TypeCertificationRepoInterface;
+use Controlqtime\Core\Contracts\TypeDisabilityRepoInterface;
+use Controlqtime\Core\Contracts\TypeDiseaseRepoInterface;
+use Controlqtime\Core\Contracts\TypeExamRepoInterface;
+use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
+use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Core\Entities\Degree;
@@ -12,44 +27,92 @@ use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Entities\Relationship;
-use Controlqtime\Core\Entities\Role;
 use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\TypeDisability;
 use Controlqtime\Core\Entities\TypeDisease;
 use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Controlqtime\Core\Entities\TypeSpeciality;
+use Controlqtime\Core\Repositories\RegionRepo;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Core\Entities\Company;
-use Controlqtime\Disability;
-use Controlqtime\Disease;
-use Controlqtime\Exam;
-use Controlqtime\FamilyRelationship;
-use Controlqtime\FamilyResponsability;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
-use Controlqtime\ProfessionalLicense;
-use Controlqtime\Speciality;
-use Controlqtime\Study;
-use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
 use Illuminate\Support\Facades\Session;
-use Controlqtime\Employee;
-use Controlqtime\Gender;
-use Controlqtime\Certification;
 
 class EmployeeController extends Controller {
 
-	public function index(Request $request)
+	protected $commune;
+	protected $country;
+	protected $degree;
+	protected $employee;
+	protected $gender;
+	protected $institution;
+	protected $province;
+	protected $region;
+	protected $company;
+	protected $relationship;
+	protected $type_certification;
+	protected $type_disability;
+	protected $type_disease;
+	protected $type_exam;
+	protected $type_professional_license;
+	protected $type_speciality;
+
+	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepo $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, CompanyRepoInterface $company, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam)
 	{
-		$employees = Employee::with(['dailyAssistances'])->orderBy('id', 'DESC')->paginate(25);
+		$this->commune                   = $commune;
+		$this->company                   = $company;
+		$this->country                   = $country;
+		$this->degree                    = $degree;
+		$this->employee                  = $employee;
+		$this->gender                    = $gender;
+		$this->institution               = $institution;
+		$this->province                  = $province;
+		$this->region                    = $region;
+		$this->relationship              = $relationship;
+		$this->type_certification        = $type_certification;
+		$this->type_disability           = $type_disability;
+		$this->type_disease              = $type_disease;
+		$this->type_exam                 = $type_exam;
+		$this->type_professional_license = $type_professional_license;
+		$this->type_speciality           = $type_speciality;
+	}
+
+	public function index()
+	{
+		$employees = $this->employee->all();
 
 		return view('human-resources.employees.index', compact('employees'));
 	}
 
 	public function create()
 	{
-		$countries                  = Country::lists('name', 'id');
+		$communes                   = $this->commune->lists('name', 'id');
+		$companies                  = $this->company->whereLists('state', 'enable', 'firm_name');
+		$countries                  = $this->country->lists('name', 'id');
+		$degrees                    = $this->degree->lists('name', 'id');
+		$employees                  = $this->employee->lists('full_name', 'id');
+		$genders                    = $this->gender->lists('name', 'id');
+		$institutions               = $this->institution->lists('name', 'id');
+		$provinces                  = $this->province->lists('name', 'id');
+		$regions                    = $this->region->lists('name', 'id');
+		$relationships              = $this->relationship->lists('name', 'id');
+		$type_certifications        = $this->type_certification->lists('name', 'id');
+		$type_diseases              = $this->type_disease->lists('name', 'id');
+		$type_specialities          = $this->type_speciality->lists('name', 'id');
+		$type_professional_licenses = $this->type_professional_license->lists('name', 'id');
+		$type_disabilities          = $this->type_disability->lists('name', 'id');
+		$type_exams                 = $this->type_exam->lists('name', 'id');
+
+		return view('human-resources.employees.create', compact(
+			'employees', 'countries', 'genders', 'regions', 'provinces', 'communes', 'companies',
+			'relationships', 'degrees', 'institutions', 'type_certifications', 'type_specialities',
+			'type_professional_licenses', 'type_disabilities', 'type_diseases', 'type_exams'
+		));
+		
+		/*$countries                  = Country::lists('name', 'id');
 		$genders                    = Gender::lists('name', 'id');
 		$regions                    = Region::lists('name', 'id');
 		$firstRegion                = Region::first();
@@ -78,7 +141,7 @@ class EmployeeController extends Controller {
 			'pensions', 'companies', 'ratings', 'relationships', 'employees', 'degrees', 'institutions',
 			'type_certifications', 'type_specialities', 'type_professional_licenses',
 			'type_disabilities', 'type_diseases', 'type_exams', 'areas'
-		));
+		));*/
 	}
 
 	public function step1(Step1Request $request)

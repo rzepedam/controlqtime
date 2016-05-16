@@ -4,11 +4,11 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Entities\Province;
-use Controlqtime\Core\Traits\Lists;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class ProvinceRepo implements ProvinceRepoInterface
 {
-    use Lists;
+    use ListsTrait;
 
     protected $model;
 

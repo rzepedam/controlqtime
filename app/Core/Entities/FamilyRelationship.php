@@ -1,10 +1,10 @@
 <?php
 
-namespace Controlqtime;
+namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class FamilyRelationship extends Model
+class FamilyRelationship extends Eloquent
 {
     protected $fillable = [
         'relationship_id', 'manpower_family_id'

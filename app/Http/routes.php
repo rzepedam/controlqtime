@@ -87,6 +87,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('terminals', 'TerminalController');
         Route::resource('trademarks', 'TrademarkController');
         Route::resource('type-certifications', 'TypeCertificationController');
+        Route::resource('type-companies', 'TypeCompanyController');
         Route::resource('type-disabilities', 'TypeDisabilityController');
         Route::resource('type-diseases', 'TypeDiseaseController');
         Route::resource('type-exams', 'TypeExamController');

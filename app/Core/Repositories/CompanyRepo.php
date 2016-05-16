@@ -5,12 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
-use Controlqtime\Core\Traits\Lists;
-use Controlqtime\Core\Traits\WhereMethods;
+use Controlqtime\Core\Traits\ListsTrait;
+use Controlqtime\Core\Traits\WhereMethodsTrait;
 
 class CompanyRepo extends BaseRepo implements CompanyRepoInterface
 {
-    use Lists, WhereMethods;
+    use ListsTrait, WhereMethodsTrait;
     
     protected $model;
 

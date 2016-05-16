@@ -1,11 +1,11 @@
 <?php
 
-namespace Controlqtime;
+namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Study extends Model
+class Study extends Eloquent
 {
     public $timestamps = false;
 

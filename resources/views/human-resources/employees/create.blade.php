@@ -386,12 +386,6 @@
             var count_exams = 0;
             var count_family_responsabilities = 0;
 
-
-            /******************************************************************
-             ********************* Initialize components ***********************
-             ******************************************************************/
-
-
             var defaults = $.components.getDefaults("wizard");
 
             var options = $.extend(true, {}, defaults, {
@@ -400,62 +394,25 @@
 
             var wizard = $("#form_new_manpower").wizard(options).data('wizard');
 
-            /*wizard.get("#datos_personales").setValidator(function() {
-                var fv = $("#step1").data('formValidation');
-                fv.validate();
+            initializaComponents();
 
-                if (!fv.isValid()) {
-                    return false;
-                }
+            function initializaComponents() {
 
-                return true;
-            });*/
+                $('.beforeCurrentDate').datepicker({
+                    format: 'dd-mm-yyyy',
+                    todayHighlight: true,
+                    language: 'es',
+                    autoclose: true,
+                    endDate: new Date(),
+                    todayBtn: true,
+                });
 
-            /*wizard.get("#competencias_laborales").setValidator(function() {
-                var fv = $("#step2").data('formValidation');
-                fv.validate();
+                $('.tooltip-primary').tooltip();
+                $('.tooltip-danger').tooltip();
 
-                if (!fv.isValid()) {
-                    return false;
-                }
+            }
 
-                return true;
-            });*/
-
-            /*wizard.get("#info_salud").setValidator(function() {
-                var fv = $("#step3").data('formValidation');
-                fv.validate();
-
-                if (!fv.isValid()) {
-                    return false;
-                }
-
-                return true;
-            });*/
-
-            $('.mitooltip').tooltip();
-
-            $('.beforeCurrentDate').datepicker({
-                format: 'dd-mm-yyyy',
-                todayHighlight: true,
-                language: 'es',
-                autoclose: true,
-                endDate: new Date(),
-                todayBtn: true,
-            });
-
-            $('.afterCurrentDate').datepicker({
-                format: 'dd-mm-yyyy',
-                todayHighlight: true,
-                language: 'es',
-                autoclose: true,
-                startDate: new Date(),
-                todayBtn: true,
-            });
-
-            function initializeComponentsWithDateBeforeCurrentDate() {
-
-                $('.mitooltip').tooltip();
+            function initializaComponentsWithDateBeforeCurrentDate() {
 
                 $('.input-group.date').datepicker({
                     format: 'dd-mm-yyyy',
@@ -465,11 +422,12 @@
                     endDate: new Date(),
                     todayBtn: true,
                 });
+
+                $('.tooltip-primary').tooltip();
+                $('.tooltip-danger').tooltip();
             }
 
-            function initializeComponentsWithDateAfterCurrentDate() {
-
-                $('.mitooltip').tooltip();
+            function initializaComponentsWithDateAfterCurrentDate() {
 
                 $('.input-group.date').datepicker({
                     format: 'dd-mm-yyyy',
@@ -479,6 +437,9 @@
                     startDate: new Date(),
                     todayBtn: true,
                 });
+
+                $('.tooltip-primary').tooltip();
+                $('.tooltip-danger').tooltip();
             }
 
 
@@ -489,6 +450,88 @@
                 responsive: true
             });
 
+            $('.add_family_relationship').click(function() {
+
+                var family_relationship = '<span id="family_relationship"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-warning alert-dismissible" role="alert"> <span id="num_family_relationship" class="text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span> <a id="family_relationship" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Parentesco Familiar" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_family_relationship", "ID", ["class"=> "control-label"])}}{{Form::text("id_family_relationship[]", 0, ["id"=> "id_family_relationship", "class"=> "form-control"])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label('relationship_id[]', 'Relación', ['class'=> 'control-label'])}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label('employee_family_id[]', 'Nombre Familiar', ['class'=> 'control-label'])}}{{Form::select('employee_family_id[]', $employees, null, ['class'=> 'form-control'])}}</div></div></div><br/></span>';
+
+                if (count_family_relationships == 0)
+                    $('#content_family_relationships').html(family_relationship);
+                else
+                    $('#content_family_relationships').append(family_relationship);
+
+                $('span#family_relationship').attr('id', 'family_relationship' + count_family_relationships);
+                $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
+
+                $('label[for="id_family_relationship"]').attr('for', 'id_family_relationship' + count_family_relationships);
+                $('#id_family_relationship').attr('id', 'id_family_relationship' + count_family_relationships);
+
+                count_family_relationships++;
+                initializaComponents();
+
+            });
+
+            /*on('click', '.add_family_relationship', function () {
+
+                $family_relationship = '<span id="family_relationship"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-warning alert-dismissible" role="alert"> <span id="num_family_relationship" class="text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span> <a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label('relationship_id', 'Relación', ['class'=> 'control-label'])}}{{Form::select('relationship_id', $relationships, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label('manpower_family_id', 'Nombre Familiar', ['class'=> 'control-label'])}}{{Form::select('manpower_family_id', $employees, null, ['class'=> 'form-control'])}}</div></div></div><br/></span>';
+
+                if (count_family_relationships == 0)
+                    $('#content_family_relationships').html($family_relationship);
+                else
+                    $('#content_family_relationships').append($family_relationship);
+
+                /*
+                 * Div Contenedor, Nº elemento
+                 */
+
+                //$('span#family_relationship').attr('id', 'family_relationship' + count_family_relationships);
+                //$('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
+
+                /*
+                 * Relación
+                 */
+
+                /*$('label[for="relationship_id"]').attr('for', 'relationship_id' + count_family_relationships);
+                $('select#relationship_id').each(function (i) {
+                    $(this).attr('id', 'relationship_id' + count_family_relationships);
+                    $(this).attr('name', 'relationship_id' + count_family_relationships);
+                });*/
+
+                /*
+                 * Nombre Familiar
+                 */
+
+                /*$('label[for="manpower_family_id"]').attr('for', 'manpower_family_id' + count_family_relationships);
+                $('select#manpower_family_id').each(function (i) {
+                    $(this).attr('id', 'manpower_family_id' + count_family_relationships);
+                    $(this).attr('name', 'manpower_family_id' + count_family_relationships);
+                });
+            });*/
+
+
+            $(document).on('click', '[data-wizard]', function(e) {
+
+                alert('...');
+
+            });
+            /*$.post(action, formCompany.serialize() + "&id_deletes_legal=" + id_deletes_legal + "&count_legal_representative=" + count_legal_representative, function(response) {
+
+
+            });
+            $.ajax({
+                type: 'POST',
+                url: '{{-- route("human-resources.employees.step1") --}}',
+                data: $('#step1').serialize() + "&full_name=" + full_name + "&count_family_relationships=" + count_family_relationships,
+                async: false,
+                dataType: 'json',
+                success: function(response) {
+                    alert('Todo bien!');
+                },
+
+                error: function (response) {
+                    alert('error');
+                }
+
+            });*/
 
             /******************************************************************
              ************************ Delete elements *************************
@@ -507,31 +550,12 @@
 
                         for (var i = 0; i < span.length; i++) {
 
-                            item = verificaUltimosNumeros(span[i].id);
+                            var item = verificaUltimosNumeros(span[i].id);
 
                             $('span#num_family_relationship' + item).text('Parentesco Familiar #' + (i + 1));
                             $('span#num_family_relationship' + item).attr('id', 'num_family_relationship' + i);
                             $('span#family_relationship' + item).attr('id', 'family_relationship' + i);
 
-                            /*
-                             * Relationship
-                             */
-
-                            $('label[for="relationship_id' + item + '"]').attr('for', "relationship_id" + i);
-                            $('select#relationship_id' + item).each(function (j) {
-                                $(this).attr('id', 'relationship_id' + i);
-                                $(this).attr('name', 'relationship_id' + i);
-                            });
-
-                            /*
-                             * Nombre Familiar
-                             */
-
-                            $('label[for="manpower_family_id' + item + '"]').attr('for', 'manpower_family_id' + i);
-                            $('select#manpower_family_id' + item).each(function (j) {
-                                $(this).attr('id', 'manpower_family_id' + i);
-                                $(this).attr('name', 'manpower_family_id' + i);
-                            });
 
                         }
 
@@ -955,7 +979,7 @@
                 .datepicker({
                     format: 'dd-mm-yyyy'
                 })
-                .on('changeDate', function(e) {
+                .on('changeDate', function() {
                     // Set the value for the date input
                     $("#selectedDate").val($("#datePicker").datepicker('getFormattedDate'));
 
@@ -964,265 +988,6 @@
                 });
 
 
-            /*$('#step1')
-                .formValidation({
-                    fields: {
-                        male_surname: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Apellido Materno es obligatorio.'
-                                },
-                                stringLength: {
-                                    max: 30,
-                                    message: 'El campo Apellido Materno no debe ser mayor que 30 caracteres.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        female_surname: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Apellido Materno es obligatorio.'
-                                },
-                                stringLength: {
-                                    max: 30,
-                                    message: 'El campo Apellido Materno no debe ser mayor que 30 caracteres.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        first_name: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Primer Nombre es obligatorio.'
-                                },
-                                stringLength: {
-                                    max: 30,
-                                    message: 'El campo Primer Nombre no debe ser mayor que 30 caracteres.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        second_name: {
-                            validators: {
-                                stringLength: {
-                                    max: 30,
-                                    message: 'El campo Segundo Nombre no debe ser mayor que 30 caracteres.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        rut: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Rut es obligatorio.'
-                                },
-                                stringLength: {
-                                    max: 15,
-                                    message: 'El campo Rut no debe ser mayor que 15 caracteres.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        birthday: {
-                            validators: {
-                                date: {
-                                    format: 'DD-MM-YYYY',
-                                    message: 'The date is not a valid'
-                                },
-                                notEmpty: {
-                                    message: 'El campo Fecha de Nacimiento es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        selectedDate: {
-                            excluded: false,
-                            validators: {
-                                notEmpty: {
-                                    message: 'The date is required 2'
-                                },
-                                date: {
-                                    format: 'DD-MM-YYYY',
-                                    message: 'The date is not a valid 2'
-                                }
-                            }
-                        },
-                        nationality_id: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Nacionalidad es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        gender_id: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Sexo es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        address: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Dirección es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        region_id: {
-                            validators: {
-                                /*notEmpty: {
-                                 message: 'El campo Región es obligatorio.'
-                                 },
-                                blank: {}
-                            }
-                        },
-                        province_id: {
-                            validators: {
-                                /*notEmpty: {
-                                 message: 'El campo Provincia es obligatorio.'
-                                 },
-                                blank: {}
-                            }
-                        },
-                        commune_id: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Comuna es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        email: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Email es obligatorio.'
-                                },
-                                stringLength: {
-                                    max: 100,
-                                    message: 'El campo Email no debe ser mayor que 100 caracteres.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        phone1: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Teléfono 1 es obligatorio.'
-                                },
-                                stringLength: {
-                                    max: 20,
-                                    message: 'El campo Teléfono 1 no debe ser mayor que 20 caracteres.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        phone2: {
-                            validators: {
-                                stringLength: {
-                                    max: 20,
-                                    message: 'El campo Teléfono 2 no debe ser mayor que 20 caracteres.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        forecast_id: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Previsión es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        mutuality_id: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Mutualidad es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        pension_id: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo AFP es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        company_id: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Empresa es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        rating_id: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Cargo es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        area_id: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El campo Área es obligatorio.'
-                                },
-                                blank:{}
-                            }
-                        },
-                        code_internal: {
-                            validators: {
-                                /*notEmpty: {
-                                 message: 'El campo Código Interno es obligatorio.'
-                                 },
-                                blank: {}
-                            }
-                        }
-                    }
-                })
-
-                .on('click', '.add_family_relationship', function() {
-
-                    $family_relationship = '<span id="family_relationship"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-warning alert-dismissible" role="alert"> <span id="num_family_relationship" class="text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span> <a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco Familiar"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label('relationship_id', 'Relación', ['class'=> 'control-label'])}}{{Form::select('relationship_id', $relationships, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label('manpower_family_id', 'Nombre Familiar', ['class'=> 'control-label'])}}{{Form::select('manpower_family_id', $employees, null, ['class'=> 'form-control'])}}</div></div></div><br/></span>';
-
-                    if (count_family_relationships == 0)
-                        $('#content_family_relationships').html($family_relationship);
-                    else
-                        $('#content_family_relationships').append($family_relationship);
-
-                    /*
-                     * Div Contenedor, Nº elemento
-                     */
-
-                    /*$('span#family_relationship').attr('id', 'family_relationship' + count_family_relationships);
-                    $('span#num_family_relationship').attr('id', 'num_family_relationship' + count_family_relationships);
-
-                    /*
-                     * Relación
-                     */
-
-                    /*$('label[for="relationship_id"]').attr('for', 'relationship_id' + count_family_relationships);
-                    $('select#relationship_id').each(function (i) {
-                        $(this).attr('id', 'relationship_id' + count_family_relationships);
-                        $(this).attr('name', 'relationship_id' + count_family_relationships);
-                    });
-
-                    /*
-                     * Nombre Familiar
-                     */
-
-                    /*$('label[for="manpower_family_id"]').attr('for', 'manpower_family_id' + count_family_relationships);
-                    $('select#manpower_family_id').each(function (i) {
-                        $(this).attr('id', 'manpower_family_id' + count_family_relationships);
-                        $(this).attr('name', 'manpower_family_id' + count_family_relationships);
-                    });
 
                     /*
                      * Validación
@@ -1260,31 +1025,7 @@
                     var $form = $(event.target),
                         fv =$form.data('formValidation');
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '{{-- route("human-resources.employees.step1") --}}',
-                        data: $('#step1').serialize() + "&full_name=" + full_name + "&count_family_relationships=" + count_family_relationships,
-                        async: false,
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.result === 'error') {
-                                $.each(response.fields, function (index, value) {
-                                    fv
-                                        .updateMessage(index, 'blank', value)
-                                        .updateStatus(index, 'INVALID', 'blank');
-                                });
-                            }
-                        },
 
-                        beforeSend: function() {
-
-                        },
-
-                        error: function (response) {
-                            alert('error');
-                        }
-
-                    });
                 });*/
 
 

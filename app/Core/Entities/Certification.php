@@ -1,12 +1,12 @@
 <?php
 
-namespace Controlqtime;
+namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Certification extends Model
+class Certification extends Eloquent
 {
     protected $fillable = [
         'type_certification_id', 'expired_certification', 'institution_certification_id'        

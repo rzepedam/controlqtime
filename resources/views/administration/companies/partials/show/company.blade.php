@@ -6,6 +6,10 @@
                     <table class="table table-striped table-bordered">
                         <tbody>
                             <tr>
+                                <td>Tipo Empresa</td>
+                                <td class="text-center">{{ $company->typeCompany->name }}</td>
+                            </tr>
+                            <tr>
                                 <td>Razón Social</td>
                                 <td class="text-center"><i class="fa fa-building-o"></i> {{ $company->firm_name }}</td>
                             </tr>

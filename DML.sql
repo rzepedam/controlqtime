@@ -852,3 +852,10 @@ INSERT INTO fuels(name) VALUES('Diesel');
 INSERT INTO fuels(name) VALUES('93');
 INSERT INTO fuels(name) VALUES('95');
 INSERT INTO fuels(name) VALUES('97');
+
+
+/* type_companies | Tipos de Empresa */
+INSERT INTO type_companies(name) VALUES('Operador');
+INSERT INTO type_companies(name) VALUES('Contratista');
+INSERT INTO type_companies(name) VALUES('Proveedor');
+INSERT INTO type_companies(name) VALUES('Visitas');

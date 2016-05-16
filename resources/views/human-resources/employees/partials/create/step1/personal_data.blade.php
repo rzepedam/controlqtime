@@ -89,7 +89,6 @@
     </div>
 </div>
 
-
 {{-- Five row --}}
 <div class="row">
     <div class="col-md-3">
@@ -104,35 +103,11 @@
         </div>
     </div>
     <div class="col-md-3 form-group">
-        {{ Form::label('forecast_id', 'Previsión', ['class' => 'control-label']) }}
-        {{ Form::select('forecast_id', $forecasts, Session::get('forecast_id'), ['class' => 'form-control']) }}
-    </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('mutuality_id', 'Mutualidad', ['class' => 'control-label']) }}
-        {{ Form::select('mutuality_id', $mutualities, Session::get('mutuality_id'), ['class' => 'form-control']) }}
-    </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('pension_id', 'AFP', ['class' => 'control-label']) }}
-        {{ Form::select('pension_id', $pensions, Session::get('pension_id'), ['class' => 'form-control']) }}
-    </div>
-</div>
-
-{{-- five row --}}
-<div class="row">
-    <div class="col-md-3 form-group">
         {{ Form::label('company_id', 'Empresa', ['class' => 'control-label']) }}
         {{ Form::select('company_id', $companies, Session::get('company_id'), ['class' => 'form-control']) }}
     </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('rating_id', 'Cargo', ['class' => 'control-label']) }}
-        {{ Form::select('rating_id', $ratings, Session::get('rating_id'), ['class' => 'form-control']) }}
-    </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('area_id', 'Área', ['class' => 'control-label']) }}
-        {{ Form::select('area_id', $areas, null, ['class' => 'form-control']) }}
-    </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('code_internal', 'Código Interno', ['class' => 'control-label']) }}
-        {{ Form::text('code_internal', null, ['class' => 'form-control']) }}
+    <div class="col-md-6 form-group">
+        {{ Form::label('code', 'Cód. Interno', ['class' => 'control-label']) }}
+        {{ Form::text('code', null, ['class' => 'form-control']) }}
     </div>
 </div>
