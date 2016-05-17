@@ -25,9 +25,11 @@
 
     <div class="row">
         <div class="col-md-12">
-            <!-- Panel Wizard Form -->
+
+            {{-- Panel Wizard Form --}}
             <div id="form_new_manpower" class="wizard">
-                <!-- Steps -->
+
+                {{-- Steps --}}
                 <div class="steps steps-sm row" data-plugin="matchHeight" data-by-row="true" role="tablist">
                     <div class="step col-md-4 current" data-target="#datos_personales" role="tab">
                         <span class="step-number">1</span>
@@ -51,8 +53,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- End Steps -->
-                <!-- Wizard Content -->
+                {{-- End Steps --}}
+
+                {{-- Wizard Content --}}
                 <div class="wizard-content">
                     <div class="wizard-pane active" id="datos_personales" role="tabpanel">
 
@@ -335,7 +338,8 @@
 
                     </div>
                 </div>
-                <!-- End Wizard Content -->
+                {{-- End Wizard Content --}}
+
             </div>
         </div>
     </div>
@@ -386,32 +390,38 @@
             var count_exams = 0;
             var count_family_responsabilities = 0;
 
-            var defaults = $.components.getDefaults("wizard");
+            /*var defaults = $.components.getDefaults("wizard");
 
             var options = $.extend(true, {}, defaults, {
                 buttonsAppendTo: '.content-step'
             });
 
+            var wizard = $("#form_new_manpower").wizard(options).data('wizard');*/
+
+            var defaults = $.components.getDefaults("wizard");
+
+            var options = $.extend(true, {}, defaults, {
+                templates: {
+                    buttons: function() {
+                        var options = this.options;
+                        var html = '<div class="btn-group btn-group-sm btn-group-flat">' +
+                                '<a class="btn btn-default" href="#' + this.id + '" data-wizard="back" role="button">' + options.buttonLabels.back + '</a>' +
+                                '<a class="btn btn-success pull-right" href="#' + this.id + '" data-wizard="finish" role="button">' + options.buttonLabels.finish + '</a>' +
+                                '<a class="btn btn-default pull-right step1" href="#' + this.id + '" data-wizard="next" role="button">' + options.buttonLabels.next + '</a>' +
+                                '</div>';
+                        return html;
+                    }
+                },
+                buttonLabels: {
+                    next: 'Hola',
+                    back: 'Mundo',
+                    finish: '<i class="icon md-check" aria-hidden="true"></i>'
+                },
+
+                buttonsAppendTo: '.content-step'
+            });
+
             var wizard = $("#form_new_manpower").wizard(options).data('wizard');
-
-            initializaComponents();
-
-            function initializaComponents() {
-
-                $('.beforeCurrentDate').datepicker({
-                    format: 'dd-mm-yyyy',
-                    todayHighlight: true,
-                    language: 'es',
-                    autoclose: true,
-                    endDate: new Date(),
-                    todayBtn: true,
-                });
-
-                $('.tooltip-primary').tooltip();
-                $('.tooltip-danger').tooltip();
-
-            }
-
             function initializaComponentsWithDateBeforeCurrentDate() {
 
                 $('.input-group.date').datepicker({
@@ -450,6 +460,10 @@
                 responsive: true
             });
 
+            /*
+             * Add Family Relationships
+             */
+
             $('.add_family_relationship').click(function() {
 
                 var family_relationship = '<span id="family_relationship"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-warning alert-dismissible" role="alert"> <span id="num_family_relationship" class="text-warning">Parentesco Familiar #' + (count_family_relationships + 1) + '</span> <a id="family_relationship" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Parentesco Familiar" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_family_relationship", "ID", ["class"=> "control-label"])}}{{Form::text("id_family_relationship[]", 0, ["id"=> "id_family_relationship", "class"=> "form-control"])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label('relationship_id[]', 'Relación', ['class'=> 'control-label'])}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label('employee_family_id[]', 'Nombre Familiar', ['class'=> 'control-label'])}}{{Form::select('employee_family_id[]', $employees, null, ['class'=> 'form-control'])}}</div></div></div><br/></span>';
@@ -466,7 +480,7 @@
                 $('#id_family_relationship').attr('id', 'id_family_relationship' + count_family_relationships);
 
                 count_family_relationships++;
-                initializaComponents();
+                $('.tooltip-danger').tooltip();
 
             });
 
@@ -508,8 +522,9 @@
             });*/
 
 
-            $(document).on('click', '[data-wizard]', function(e) {
+            $('.step1').click(function() {
 
+                e.preventDefault();
                 alert('...');
 
             });
