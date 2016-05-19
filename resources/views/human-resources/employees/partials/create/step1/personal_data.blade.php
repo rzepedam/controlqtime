@@ -32,8 +32,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            {{ Form::text('birthday', Session::get('birthday'), ['class' => 'form-control']) }}
-            {{ Form::hidden('selectedDate') }}
+            {{ Form::text('birthday', Session::get('birthday'), ['class' => 'form-control', "readonly"]) }}
         </div>
     </div>
     <div class="col-md-3 form-group">
@@ -108,6 +107,6 @@
     </div>
     <div class="col-md-6 form-group">
         {{ Form::label('code', 'Cód. Interno', ['class' => 'control-label']) }}
-        {{ Form::text('code', null, ['class' => 'form-control']) }}
+        {{ Form::text('code', Session::get('code'), ['class' => 'form-control']) }}
     </div>
 </div>

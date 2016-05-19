@@ -166,7 +166,6 @@ INSERT INTO type_exams(name) VALUES ('Declaración de salud');
 INSERT INTO degrees(name) VALUES ('Técnico Nivel Medio');
 INSERT INTO degrees(name) VALUES ('Técnico Nivel Profesional');
 INSERT INTO degrees(name) VALUES ('Licenciado');
-INSERT INTO degrees(name) VALUES ('Licenciado');
 INSERT INTO degrees(name) VALUES ('Título Profesional');
 INSERT INTO degrees(name) VALUES ('Magister');
 INSERT INTO degrees(name) VALUES ('Doctorado');

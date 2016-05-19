@@ -5,17 +5,13 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSpecialitiesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('specialities', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
             $table->integer('type_speciality_id')->unsigned();
+            $table->date('emission_speciality');
             $table->date('expired_speciality');
             $table->integer('institution_speciality_id')->unsigned();
             $table->timestamps();
@@ -37,12 +33,7 @@ class CreateSpecialitiesTable extends Migration
                 ->onUpdate('cascade');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::drop('specialities');

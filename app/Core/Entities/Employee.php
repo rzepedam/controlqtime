@@ -5,7 +5,6 @@ namespace Controlqtime\Core\Entities;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-
 class Employee extends Eloquent
 {
     protected $fillable = [
@@ -67,11 +66,11 @@ class Employee extends Eloquent
     }
 
     public function exams() {
-        return $this->hasMany('Controlqtime\Exam');
+        return $this->hasMany(Exam::class);
     }
 
     public function familyResponsabilities() {
-        return $this->hasMany('Controlqtime\FamilyResponsability');
+        return $this->hasMany(FamilyResponsability::class);
     }
 
     /*public function dailyAssistances() {

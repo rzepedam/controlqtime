@@ -15,6 +15,10 @@ class FamilyResponsability extends Eloquent
      */
 
     public function relationship() {
-        return $this->belongsTo('Controlqtime\Relationship');
+        return $this->belongsTo(Relationship::class);
+    }
+    
+    public function employee() {
+        return $this->belongsTo(Employee::class);
     }
 }

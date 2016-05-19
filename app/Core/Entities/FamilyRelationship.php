@@ -7,31 +7,23 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class FamilyRelationship extends Eloquent
 {
     protected $fillable = [
-        'relationship_id', 'manpower_family_id'
+        'relationship_id', 'employee_family_id'
     ];
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    /*
+     * Relationships
      */
+
     public function relationship() {
-        return $this->belongsTo('Controlqtime\Relationship');
+        return $this->belongsTo(Relationship::class);
     }
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function employee() {
-        return $this->belongsTo('Controlqtime\Employee');
+        return $this->belongsTo(Employee::class);
     }
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function employeeFamily() {
-        return $this->belongsTo('Controlqtime\Employee', 'employee_family_id');
+        return $this->belongsTo(Employee::class, 'employee_family_id');
     }
     
 }

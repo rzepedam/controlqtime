@@ -16,6 +16,7 @@ class CreateCertificationsTable extends Migration
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
             $table->integer('type_certification_id')->unsigned();
+            $table->date('emission_certification');
             $table->date('expired_certification');
             $table->integer('institution_certification_id')->unsigned();
             $table->timestamps();

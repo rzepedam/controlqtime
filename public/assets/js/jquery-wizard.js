@@ -1,6 +1,4 @@
-/*! jQuery wizard - v0.3.1 - 2015-05-07
- * https://github.com/amazingSurge/jquery-wizard
- * Copyright (c) 2015 amazingSurge; Licensed GPL */
+
 (function($, document, window, undefined) {
     "use strict";
 
@@ -95,20 +93,20 @@
         setTimeout(callback, duration);
     }
     Wizard.defaults = {
-        step: '.wizard-steps > li',
+        step: '.wizard-steps > div',
 
         getPane: function(index, step) {
             return this.$element.find('.wizard-content').children().eq(index);
         },
 
-        buttonsAppendTo: 'this',
+        buttonsAppendTo: '.content-step',
         templates: {
             buttons: function() {
                 var options = this.options;
                 return '<div class="wizard-buttons">' +
-                    '<a class="wizard-back" href="#' + this.id + '" data-wizard="back" role="button">' + options.buttonLabels.back + '</a>' +
-                    '<a class="wizard-next" href="#' + this.id + '" data-wizard="next" role="button">' + options.buttonLabels.next + '</a>' +
-                    '<a class="wizard-finish" href="#' + this.id + '" data-wizard="finish" role="button">' + options.buttonLabels.finish + '</a>' +
+                    '<a class="btn btn-default" href="#' + this.id + '" data-wizard="back" role="button">' + options.buttonLabels.back + '</a>' +
+                    '<a class="btn btn-primary pull-right" href="#' + this.id + '" data-wizard="next" role="button">' + options.buttonLabels.next + '</a>' +
+                    '<a class="btn btn-success pull-right" href="#' + this.id + '" data-wizard="finish" role="button">' + options.buttonLabels.finish + '</a>' +
                     '</div>';
             }
         },
@@ -788,7 +786,9 @@
     });
 
     $(document).on('click', '[data-wizard]', function(e) {
-        alert('click');
+        
+        e.preventDefault();
+
         var href;
         var $this = $(this);
         var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, ''));

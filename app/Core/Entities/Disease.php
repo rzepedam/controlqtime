@@ -9,11 +9,12 @@ class Disease extends Eloquent
     protected $fillable = [
         'type_disease_id', 'treatment_disease', 'detail_disease'
     ];
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+
+    /*
+     * Relationships
      */
+
     public function typeDisease() {
-        return $this->belongsTo('Controlqtime\TypeDisease');
+        return $this->belongsTo(TypeDisease::class);
     }
 }

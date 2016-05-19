@@ -2,40 +2,32 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\CertificationRepoInterface;
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\CountryRepoInterface;
 use Controlqtime\Core\Contracts\DegreeRepoInterface;
+use Controlqtime\Core\Contracts\DisabilityRepoInterface;
+use Controlqtime\Core\Contracts\DiseaseRepoInterface;
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ExamRepoInterface;
+use Controlqtime\Core\Contracts\FamilyRelationshipRepoInterface;
+use Controlqtime\Core\Contracts\FamilyResponsabilityRepoInterface;
 use Controlqtime\Core\Contracts\GenderRepoInterface;
 use Controlqtime\Core\Contracts\InstitutionRepoInterface;
+use Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
+use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Contracts\RelationshipRepoInterface;
+use Controlqtime\Core\Contracts\SpecialityRepoInterface;
+use Controlqtime\Core\Contracts\StudyRepoInterface;
 use Controlqtime\Core\Contracts\TypeCertificationRepoInterface;
 use Controlqtime\Core\Contracts\TypeDisabilityRepoInterface;
 use Controlqtime\Core\Contracts\TypeDiseaseRepoInterface;
 use Controlqtime\Core\Contracts\TypeExamRepoInterface;
 use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
-use Controlqtime\Core\Entities\Area;
-use Controlqtime\Core\Entities\Country;
-use Controlqtime\Core\Entities\Degree;
-use Controlqtime\Core\Entities\Forecast;
-use Controlqtime\Core\Entities\Institution;
-use Controlqtime\Core\Entities\Mutuality;
-use Controlqtime\Core\Entities\Pension;
-use Controlqtime\Core\Entities\Province;
-use Controlqtime\Core\Entities\Region;
-use Controlqtime\Core\Entities\Relationship;
-use Controlqtime\Core\Entities\TypeCertification;
-use Controlqtime\Core\Entities\TypeDisability;
-use Controlqtime\Core\Entities\TypeDisease;
-use Controlqtime\Core\Entities\TypeExam;
-use Controlqtime\Core\Entities\TypeProfessionalLicense;
-use Controlqtime\Core\Entities\TypeSpeciality;
-use Controlqtime\Core\Repositories\RegionRepo;
 use Controlqtime\Http\Requests\Step1Request;
-use Controlqtime\Core\Entities\Company;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
 use Controlqtime\Http\Requests;
@@ -43,16 +35,25 @@ use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller {
 
+	protected $certification;
 	protected $commune;
+	protected $company;
 	protected $country;
 	protected $degree;
+	protected $disability;
+	protected $disease;
 	protected $employee;
+	protected $exam;
+	protected $family_relationship;
+	protected $family_responsability;
 	protected $gender;
 	protected $institution;
+	protected $professionalLicense;
 	protected $province;
 	protected $region;
-	protected $company;
 	protected $relationship;
+	protected $speciality;
+	protected $study;
 	protected $type_certification;
 	protected $type_disability;
 	protected $type_disease;
@@ -60,18 +61,27 @@ class EmployeeController extends Controller {
 	protected $type_professional_license;
 	protected $type_speciality;
 
-	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepo $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, CompanyRepoInterface $company, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam)
+	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, CompanyRepoInterface $company, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam, FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense, DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam, FamilyResponsabilityRepoInterface $family_responsability)
 	{
+		$this->certification             = $certification;
 		$this->commune                   = $commune;
 		$this->company                   = $company;
 		$this->country                   = $country;
 		$this->degree                    = $degree;
+		$this->disability                = $disability;
+		$this->disease                   = $disease;
 		$this->employee                  = $employee;
+		$this->exam                      = $exam;
+		$this->family_relationship       = $family_relationship;
+		$this->family_responsability     = $family_responsability;
 		$this->gender                    = $gender;
 		$this->institution               = $institution;
+		$this->professionalLicense       = $professionalLicense;
 		$this->province                  = $province;
 		$this->region                    = $region;
 		$this->relationship              = $relationship;
+		$this->speciality                = $speciality;
+		$this->study                     = $study;
 		$this->type_certification        = $type_certification;
 		$this->type_disability           = $type_disability;
 		$this->type_disease              = $type_disease;
@@ -111,7 +121,7 @@ class EmployeeController extends Controller {
 			'relationships', 'degrees', 'institutions', 'type_certifications', 'type_specialities',
 			'type_professional_licenses', 'type_disabilities', 'type_diseases', 'type_exams'
 		));
-		
+
 		/*$countries                  = Country::lists('name', 'id');
 		$genders                    = Gender::lists('name', 'id');
 		$regions                    = Region::lists('name', 'id');
@@ -162,23 +172,15 @@ class EmployeeController extends Controller {
 		Session::put('email', $request->get('email'));
 		Session::put('phone1', $request->get('phone1'));
 		Session::put('phone2', $request->get('phone2'));
-		Session::put('forecast_id', $request->get('forecast_id'));
-		Session::put('mutuality_id', $request->get('mutuality_id'));
-		Session::put('pension_id', $request->get('pension_id'));
 		Session::put('company_id', $request->get('company_id'));
-		Session::put('rating_id', $request->get('rating_id'));
-		Session::put('area_id', $request->get('area_id'));
-		Session::put('code_internal', $request->get('code_internal'));
+		Session::put('code', $request->get('code'));
 		Session::put('count_family_relationships', $request->get('count_family_relationships'));
-
-		for ($i = 0; $i < $request->get('count_family_relationships'); $i ++)
-		{
-			Session::put('relationship_id' . $i, $request->get('relationship_id' . $i));
-			Session::put('manpower_family_id' . $i, $request->get('manpower_family_id' . $i));
-		}
+		Session::put('id_family_relationship', $request->get('id_family_relationship'));
+		Session::put('relationship_id', $request->get('relationship_id'));
+		Session::put('employee_family_id', $request->get('employee_family_id'));
 
 		return response()->json([
-			'status' => 'OK'
+			'status' => true
 		]);
 
 	}
@@ -187,74 +189,63 @@ class EmployeeController extends Controller {
 	{
 		Session::put('step2', $request->all());
 		Session::put('count_studies', $request->get('count_studies'));
-
-		for ($i = 0; $i < Session::get('count_studies'); $i ++)
-		{
-			Session::put('degree_id' . $i, $request->get('degree_id' . $i));
-			Session::put('name_study' . $i, $request->get('name_study' . $i));
-			Session::put('institution_study_id' . $i, $request->get('institution_study_id' . $i));
-			Session::put('date_obtention' . $i, $request->get('date_obtention' . $i));
-		}
-
+		Session::put('id_study', $request->get('id_study'));
+		Session::put('degree_id', $request->get('degree_id'));
+		Session::put('name_study', $request->get('name_study'));
+		Session::put('institution_study_id', $request->get('institution_study_id'));
+		Session::put('date_obtention', $request->get('date_obtention'));
 		Session::put('count_certifications', $request->get('count_certifications'));
-
-		for ($i = 0; $i < $request->get('count_certifications'); $i ++)
-		{
-			Session::put('type_certification_id' . $i, $request->get('type_certification_id' . $i));
-			Session::put('expired_certification' . $i, $request->get('expired_certification' . $i));
-			Session::put('institution_certification_id' . $i, $request->get('institution_certification_id' . $i));
-		}
-
+		Session::put('id_certification', $request->get('id_certification'));
+		Session::put('type_certification_id', $request->get('type_certification_id'));
+		Session::put('institution_certification_id', $request->get('institution_certification_id'));
+		Session::put('emission_certification', $request->get('emission_certification'));
+		Session::put('expired_certification', $request->get('expired_certification'));
 		Session::put('count_specialities', $request->get('count_specialities'));
-
-		for ($i = 0; $i < $request->get('count_specialities'); $i ++)
-		{
-			Session::put('type_speciality_id' . $i, $request->get('type_speciality_id' . $i));
-			Session::put('expired_speciality' . $i, $request->get('expired_speciality' . $i));
-			Session::put('institution_speciality_id' . $i, $request->get('institution_speciality_id' . $i));
-		}
-
+		Session::put('id_speciality', $request->get('id_speciality'));
+		Session::put('type_speciality_id', $request->get('type_speciality_id'));
+		Session::put('institution_speciality_id', $request->get('institution_speciality_id'));
+		Session::put('emission_speciality', $request->get('emission_speciality'));
+		Session::put('expired_speciality', $request->get('expired_speciality'));
 		Session::put('count_professional_licenses', $request->get('count_professional_licenses'));
-
+		Session::put('type_professional_license_id', $request->get('type_professional_license_id'));
+		Session::put('emission_license', $request->get('emission_license'));
+		Session::put('expired_license', $request->get('expired_license'));
 		for ($i = 0; $i < $request->get('count_professional_licenses'); $i ++)
 		{
-			Session::put('type_professional_license_id' . $i, $request->get('type_professional_license_id' . $i));
-			Session::put('emission_license' . $i, $request->get('emission_license' . $i));
-			Session::put('expired_license' . $i, $request->get('expired_license' . $i));
 			Session::put('is_donor' . $i, $request->get('is_donor' . $i));
-			Session::put('detail_license' . $i, $request->get('detail_license' . $i));
 		}
+		Session::put('detail_license', $request->get('detail_license'));
 
 		return response()->json([
-			'status' => 'OK'
+			'status' => true
 		]);
 	}
 
 	public function store(Step3Request $request)
 	{
-		/*
-		 * Step 1
-		 */
+		$employee = $this->employee->create(Session::get('step1'));
+		$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
+		$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
+		$this->certification->createOrUpdateWithArray(Session::get('step2'), $employee);
+		$this->speciality->createOrUpdateWithArray(Session::get('step2'), $employee);
+		$this->professionalLicense->createOrUpdateWithArray(Session::get('step2'), $employee);
+		$this->disability->createOrUpdateWithArray($request->all(), $employee);
+		$this->disease->createOrUpdateWithArray($request->all(), $employee);
+		$this->exam->createOrUpdateWithArray($request->all(), $employee);
+		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 
-		$employee = Employee::create(Session::get('step1'));
+		//$this->destroyEmployeeData();
 
-		for ($i = 0; $i < Session::get('count_family_relationships'); $i ++)
-		{
-
-			$family_relationship = new FamilyRelationship([
-				'relationship_id'    => Session::get('relationship_id' . $i),
-				'manpower_family_id' => Session::get('manpower_family_id' . $i)
-			]);
-
-			$employee->familyRelationships()->save($family_relationship);
-
-		}
+		return response()->json([
+			'status' => true,
+			'url'    => '/human-resources/employees'
+		], 200);
 
 		/*
 		 * Step 2
 		 */
 
-		for ($i = 0; $i < Session::get('count_studies'); $i ++)
+		/*for ($i = 0; $i < Session::get('count_studies'); $i ++)
 		{
 
 			$study = new Study([
@@ -307,13 +298,13 @@ class EmployeeController extends Controller {
 
 			$employee->professionalLicenses()->save($professional_license);
 
-		}
+		}*/
 
 		/*
 		 * Step 3
 		 */
 
-		for ($i = 0; $i < $request->get('count_disabilities'); $i ++)
+		/*for ($i = 0; $i < $request->get('count_disabilities'); $i ++)
 		{
 
 			$disability = new Disability([
@@ -370,9 +361,9 @@ class EmployeeController extends Controller {
 			'url'    => '/human-resources/employee'
 		);
 
-		$this->destroyEmployeeData();
+		$this->destroyEmployeeData();*/
 
-		return response()->json([$response], 200);
+		//return response()->json([$response], 200);
 
 	}
 
@@ -398,37 +389,22 @@ class EmployeeController extends Controller {
 		Session::forget('email');
 		Session::forget('phone1');
 		Session::forget('phone2');
-		Session::forget('forecast_id');
-		Session::forget('mutuality_id');
-		Session::forget('pension_id');
 		Session::forget('company_id');
-		Session::forget('rating_id');
-		Session::forget('area_id');
-		Session::forget('code_internal');
-
-		for ($i = 0; $i < Session::get('count_family_relationships'); $i ++)
-		{
-			Session::forget('relationship_id' . $i);
-			Session::forget('manpower_family_id' . $i);
-		}
-
+		Session::forget('code');
 		Session::forget('count_family_relationships');
+		Session::forget('relationship_id');
+		Session::forget('employee_family_id');
 		Session::forget('step2');
+		Session::forget('count_studies');
+		Session::forget('degree_id');
+		Session::forget('name_study');
+		Session::forget('institution_study_id');
+		Session::forget('date_obtention');
+		Session::forget('count_certifications');
+		Session::forget('type_certification_id');
+		Session::forget('institution_certification_id');
+		Session::forget('expired_certification');
 
-		for ($i = 0; $i < Session::get('count_studies'); $i ++)
-		{
-			Session::forget('degree_id' . $i);
-			Session::forget('name_study' . $i);
-			Session::forget('institution_study_id' . $i);
-			Session::forget('date_obtention' . $i);
-		}
-
-		for ($i = 0; $i < Session::get('count_certifications'); $i ++)
-		{
-			Session::forget('type_certification_id' . $i);
-			Session::forget('expired_certification' . $i);
-			Session::forget('institution_certification_id' . $i);
-		}
 
 		for ($i = 0; $i < Session::get('count_specialities'); $i ++)
 		{
@@ -446,8 +422,6 @@ class EmployeeController extends Controller {
 			Session::forget('detail_license' . $i);
 		}
 
-		Session::forget('count_studies');
-		Session::forget('count_certifications');
 		Session::forget('count_specialities');
 		Session::forget('count_professional_licenses');
 

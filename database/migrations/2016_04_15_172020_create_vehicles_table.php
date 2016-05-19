@@ -23,8 +23,8 @@ class CreateVehiclesTable extends Migration
             $table->string('weight', 6);
             $table->string('code');
             $table->text('obs');
-            $table->enum('state', ['available', 'unavailable'])->default('unavailable');
-            $table->enum('condition', ['able', 'unable'])->default('unable');
+            $table->enum('state', ['enable', 'disable'])->default('disable');
+            $table->enum('condition', ['available', 'unavailable'])->default('available');
             $table->timestamps();
 
             $table->foreign('model_vehicle_id')

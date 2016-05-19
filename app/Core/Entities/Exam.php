@@ -8,17 +8,29 @@ use Carbon\Carbon;
 class Exam extends Eloquent
 {
     protected $fillable = [
-        'type_exam_id', 'expired_exam', 'detail_exam'
+        'type_exam_id', 'emission_exam', 'expired_exam', 'detail_exam'
     ];
     
     protected $dates = [
-        'expired_exam'
+        'emission_exam', 'expired_exam'
     ];
-    
+
+    /*
+     * Relationships
+     */
+
     public function typeExam() {
-        return $this->belongsTo('Controlqtime\TypeExam');
+        return $this->belongsTo(TypeExam::class);
     }
-    
+
+    /*
+     * Mutators
+     */
+
+    public function setEmissionExamAttribute($value) {
+        $this->attributes['emission_exam'] = Carbon::createFromFormat('d-m-Y', $value);
+    }
+
     public function setExpiredExamAttribute($value) {
         $this->attributes['expired_exam'] = Carbon::createFromFormat('d-m-Y', $value);
     }

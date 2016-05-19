@@ -8,33 +8,34 @@ use Carbon\Carbon;
 class Speciality extends Eloquent
 {
     protected $fillable = [
-        'type_speciality_id', 'expired_speciality', 'institution_speciality_id'
+        'type_speciality_id', 'institution_speciality_id', 'emission_speciality', 'expired_speciality'
     ];
 
 
     protected $dates = [
-        'expired_speciality'
+        'emission_speciality', 'expired_speciality'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    /*
+     * Relationships
      */
+    
     public function typeSpeciality() {
-        return $this->belongsTo('Controlqtime\TypeSpeciality');
+        return $this->belongsTo(TypeSpeciality::class);
     }
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function institution() {
-        return $this->belongsTo('Controlqtime\Institution', 'institution_speciality_id');
+        return $this->belongsTo(Institution::class, 'institution_speciality_id');
     }
     
-
-    /**
-     * @param $value
+    /*
+     * Mutators
      */
+
+    public function setEmissionSpecialityAttribute($value) {
+        $this->attributes['emission_speciality'] = Carbon::createFromFormat('d-m-Y', $value);
+    }
+
     public function setExpiredSpecialityAttribute($value) {
         $this->attributes['expired_speciality'] = Carbon::createFromFormat('d-m-Y', $value);
     }

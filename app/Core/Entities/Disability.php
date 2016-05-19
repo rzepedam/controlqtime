@@ -10,10 +10,12 @@ class Disability extends Eloquent
         'type_disability_id', 'treatment_disability', 'detail_disability'
     ];
 
-
+    /*
+     * Relationships
+     */
     
     public function typeDisability() {
-        return $this->belongsTo('Controlqtime\TypeDisability');
+        return $this->belongsTo(TypeDisability::class);
     }
 
 }

@@ -1614,7 +1614,7 @@
 	$.fn.datepicker = datepickerPlugin;
 
 	var defaults = $.fn.datepicker.defaults = {
-		autoclose: false,
+		autoclose: true,
 		beforeShowDay: $.noop,
 		beforeShowMonth: $.noop,
 		beforeShowYear: $.noop,
@@ -1637,8 +1637,8 @@
 		rtl: false,
 		startDate: -Infinity,
 		startView: 0,
-		todayBtn: false,
-		todayHighlight: false,
+		todayBtn: true,
+		todayHighlight: true,
 		weekStart: 0,
 		disableTouchKeyboard: false,
 		enableOnReadonly: true,

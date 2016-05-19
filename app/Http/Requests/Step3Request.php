@@ -3,80 +3,77 @@
 namespace Controlqtime\Http\Requests;
 
 use Controlqtime\Http\Requests\Forms\SanitizedRequest;
-use Controlqtime\Http\Requests\Request;
 
-class Step3Request extends SanitizedRequest
-{
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+class Step3Request extends SanitizedRequest {
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        switch($this->method()) {
+	public function authorize()
+	{
+		return true;
+	}
 
-            case 'POST': {
+	public function rules()
+	{
+		switch ($this->method())
+		{
+			case 'POST':
+			{
+				$index = 0;
 
-                for ($i = 0; $i < Request::get('count_disabilities'); $i++) {
-                    $rules['type_disability_id' . $i] = 'required|regex:/[0-9 -()+]+$/';
-                    $rules['treatment_disability' . $i] = 'required';
-                }
+				if ( Request::get('count_disabilities') > 0 )
+				{
+					foreach (range(0, Request::get('count_disabilities') - 1) as $index)
+					{
+						$rules[ 'id_disability.' . $index ]       = 'required|in:0';
+						$rules[ 'type_disability_id.' . $index ]  = 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'treatment_disability' . $index ] = 'required|regex:/[0-9 -()+]+$/|in:0,1';
+					}
+				}
 
-                for ($i = 0; $i < Request::get('count_diseases'); $i++) {
-                    $rules['type_disease_id' . $i] = 'required|regex:/[0-9 -()+]+$/';
-                    $rules['treatment_disease' . $i] = 'required';
-                }
+				if ( Request::get('count_diseases') > 0 )
+				{
+					foreach (range(0, Request::get('count_diseases') - 1) as $index)
+					{
+						$rules[ 'id_disease.' . $index ]       = 'required|in:0';
+						$rules[ 'type_disease_id.' . $index ]  = 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'treatment_disease' . $index ] = 'required|regex:/[0-9 -()+]+$/|in:0,1';
+					}
+				}
 
-                for ($i = 0; $i < Request::get('count_exams'); $i++) {
-                    $rules['type_exam_id' . $i] = 'required|regex:/[0-9 -()+]+$/';
-                    $rules['expired_exam' . $i] = 'required|date';
-                }
+				if ( Request::get('count_exams') > 0 )
+				{
+					foreach (range(0, Request::get('count_exams') - 1) as $index)
+					{
+						$rules[ 'id_exam.' . $index ]       = 'required|in:0';
+						$rules[ 'type_exam_id.' . $index ]  = 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'emission_exam.' . $index ] = 'required|date';
+						$rules[ 'expired_exam.' . $index ]  = 'required|date';
+					}
+				}
 
-                for ($i = 0; $i < Request::get('count_family_responsabilities'); $i++) {
-                    $rules['name_responsability' . $i] = 'required|max:120';
-                    $rules['rut_responsability' . $i] = 'required|max:15';
-                    $rules['relationship_id' . $i] = 'required|regex:/[0-9 -()+]+$/';
-                }
+				if ( Request::get('count_family_responsabilities') > 0 )
+				{
+					foreach (range(0, Request::get('count_family_responsabilities') - 1) as $index)
+					{
+						$rules[ 'id_family_responsability.' . $index ] = 'required|in:0';
+						$rules[ 'name_responsability.' . $index ]      = 'required|max:120';
+						$rules[ 'rut_responsability.' . $index ]       = 'required|max:15';
+						$rules[ 'relationship_id.' . $index ]          = 'required|regex:/[0-9 -()+]+$/';
+					}
+				}
 
-                /*
-                 * Definimos $rules en caso de no entrar en
-                 *
-                 * alguna de las validaciones anteriores
-                 */
+				/*
+				 * Inicializamos rules en caso de no entrar en un if
+				 */
 
-                if ($i == 0)
-                    $rules = [
-                        'success' => 'OK'
-                    ];
+				if ( $index == 0 )
+					$rules = [
+						'success' => 'OK'
+					];
 
-                return $rules;
+				return $rules;
 
-            }
-        }
-    }
+			}
+		}
+	}
 
-    /**
-     * @param array $errors
-     * @return mixed
-     */
-    public function response(array $errors)
-    {
-        if ($this->ajax() || $this->wantsJson()) {
-            return response()->json([
-                "result" => "error",
-                "fields" => $errors
-            ]);
-        }
-    }
 }

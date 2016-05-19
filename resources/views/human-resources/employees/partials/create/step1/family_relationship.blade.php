@@ -5,21 +5,27 @@
 			    <span id="num_family_relationship{{ $i }}" class="text-warning">
 				    Parentesco Familiar #{{ $i + 1 }}
 			    </span>
-                <a id="family_relationship" class="delete-elements pull-right mitooltip" title="Eliminar Parentesco"><i class="fa fa-trash"></i></a>
+                <a id="family_relationship" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Parentesco Familiar" data-html="true"><i class="fa fa-trash"></i></a>
             </div>
         </div>
     </div>
 	<div class="row">
-        <div class="col-md-6">
+        <div class="col-md-1 hide">
             <div class="form-group">
-                {{ Form::label('relationship_id' . $i, 'Relación', ['class' => 'control-label']) }}
-                {{ Form::select('relationship_id' . $i, $relationships, Session::get('relationship_id' . $i), ['class'=> 'form-control']) }}
+                {{ Form::label("id_family_relationship", "ID", ["class" => "control-label"]) }}
+                {{ Form::text("id_family_relationship[]", Session::get('id_family_relationship')[$i], ["id" => "id_family_relationship", "class" => "form-control"]) }}
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {{ Form::label('manpower_family_id' . $i, 'Nombre Familiar', ['class' => 'control-label'])}}
-                {{ Form::select('manpower_family_id' . $i, $manpowers, Session::get('manpower_family_id' . $i), ['class'=> 'form-control']) }}
+                {{ Form::label('relationship_id', 'Relación', ['class' => 'control-label']) }}
+                {{ Form::select('relationship_id[]', $relationships, Session::get('relationship_id')[$i], ['class'=> 'form-control']) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ Form::label('employee_family_id', 'Nombre Familiar', ['class' => 'control-label'])}}
+                {{ Form::select('employee_family_id[]', $employees, Session::get('employee_family_id')[$i], ['class'=> 'form-control']) }}
             </div>
         </div>
     </div>

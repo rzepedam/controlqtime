@@ -24,12 +24,12 @@ class VehicleRepo extends BaseRepo implements VehicleRepoInterface
         $image_cir_permit   = $vehicle->imageCirculationPermits->count();
 
         if ($image_padron > 0 && $image_obl_ins > 0 && $image_patent > 0 && $image_cir_permit > 0) {
-            $vehicle->state     = 'available';
-            $vehicle->condition = 'able';
+            $vehicle->state     = 'enable';
+            $vehicle->condition = 'available';
             $vehicle->save();
         }else {
-            $vehicle->state     = 'unavailable';
-            $vehicle->condition = 'unable';
+            $vehicle->state     = 'disable';
+            $vehicle->condition = 'unavailable';
             $vehicle->save();
         }
     }

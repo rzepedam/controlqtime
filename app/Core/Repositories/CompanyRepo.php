@@ -26,10 +26,10 @@ class CompanyRepo extends BaseRepo implements CompanyRepoInterface
         $image_patent   = $company->imagePatentCompanies->count();
 
         if ($image_rol > 0 && $image_patent > 0) {
-            $company->state = 'available';
+            $company->state = 'enable';
             $company->save();
         }else {
-            $company->state = 'unavailable';
+            $company->state = 'disable';
             $company->save();
         }
     }

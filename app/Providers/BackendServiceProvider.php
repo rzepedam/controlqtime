@@ -17,10 +17,15 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Contracts\AreaRepoInterface',
             'Controlqtime\Core\Repositories\AreaRepo'
         );
-        
+
         $this->app->bind(
             'Controlqtime\Core\Contracts\CityRepoInterface',
             'Controlqtime\Core\Repositories\CityRepo'
+        );
+        
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\CertificationRepoInterface',
+            'Controlqtime\Core\Repositories\CertificationRepo'
         );
 
         $this->app->bind(
@@ -44,8 +49,33 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\DisabilityRepoInterface',
+            'Controlqtime\Core\Repositories\DisabilityRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\DiseaseRepoInterface',
+            'Controlqtime\Core\Repositories\DiseaseRepo'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\EmployeeRepoInterface',
             'Controlqtime\Core\Repositories\EmployeeRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ExamRepoInterface',
+            'Controlqtime\Core\Repositories\ExamRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\FamilyRelationshipRepoInterface',
+            'Controlqtime\Core\Repositories\FamilyRelationshipRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\FamilyResponsabilityRepoInterface',
+            'Controlqtime\Core\Repositories\FamilyResponsabilityRepo'
         );
 
         $this->app->bind(
@@ -124,6 +154,11 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface',
+            'Controlqtime\Core\Repositories\ProfessionalLicenseRepo'
+        );  
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\ProfessionRepoInterface',
             'Controlqtime\Core\Repositories\ProfessionRepo'
         );
@@ -151,6 +186,16 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->bind(
             'Controlqtime\Core\Contracts\RouteRepoInterface',
             'Controlqtime\Core\Repositories\RouteRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\SpecialityRepoInterface',
+            'Controlqtime\Core\Repositories\SpecialityRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\StudyRepoInterface',
+            'Controlqtime\Core\Repositories\StudyRepo'
         );
 
         $this->app->bind(

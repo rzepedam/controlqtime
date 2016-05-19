@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
@@ -10,61 +11,67 @@ use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 
-class AjaxLoadController extends Controller
-{
-    protected $company;
-    protected $legal_representative;
-    protected $province;
-    protected $region;
-    protected $trademark;
+class AjaxLoadController extends Controller {
 
-    public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, LegalRepresentativeRepoInterface $legal_representative, TrademarkRepoInterface $trademark)
-    {
-        $this->company              = $company;
-        $this->legal_representative = $legal_representative;
-        $this->province             = $province;
-        $this->region               = $region;
-        $this->trademark            = $trademark;
-    }
+	protected $company;
+	protected $employee;
+	protected $legal_representative;
+	protected $province;
+	protected $region;
+	protected $trademark;
 
-    public function loadProvinces(Request $request) {
+	public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, LegalRepresentativeRepoInterface $legal_representative, TrademarkRepoInterface $trademark, EmployeeRepoInterface $employee)
+	{
+		$this->company              = $company;
+		$this->employee             = $employee;
+		$this->legal_representative = $legal_representative;
+		$this->province             = $province;
+		$this->region               = $region;
+		$this->trademark            = $trademark;
+	}
+
+	public function loadProvinces(Request $request)
+	{
 		return $this->region->findProvinces($request->get('id'));
-    }
+	}
 
-    public function loadCommunes(Request $request) {
+	public function loadCommunes(Request $request)
+	{
 		return $this->province->findCommunes($request->get('id'));
-    }
+	}
 
-	public function verificaEmail(Request $request) {
+	public function verificaEmail(Request $request)
+	{
 
-		switch($request->get('element'))
+		switch ($request->get('element'))
 		{
 			case 'Company':
 				$email = $this->company->whereFirst('email', $request->get('email'), ['email']);
-			break;
+				break;
 
 			case 'Representative':
-                $email = $this->legal_representative->whereFirst('email_legal', $request->get('email'), ['email_legal']);
-			break;
+				$email = $this->legal_representative->whereFirst('email_legal', $request->get('email'), ['email_legal']);
+				break;
 
 			case 'Employee':
-                $email = Employee::where('email', $request->get('email'))->first();
+				$email = $this->employee->whereFirst('email', $request->get('email', ['email']));
 		}
 
-		if ($email)
-            return response()->json(['success' => false], 400);
+		if ( $email )
+			return response()->json(['success' => false], 400);
 
 		return response()->json(['success' => true], 200);
-    }
+	}
 
-    public function loadModelVehicles(Request $request)
+	public function loadModelVehicles(Request $request)
 	{
 		return $this->trademark->findModelVehicles($request->get('id'));
 	}
 
-    public function loadRouteAndVehicleSelectedInRound(Request $request)
+	public function loadRouteAndVehicleSelectedInRound(Request $request)
 	{
 		$round = Round::with(['route', 'vehicle'])->find($request->get('id'));
-        return $round;
+
+		return $round;
 	}
 }

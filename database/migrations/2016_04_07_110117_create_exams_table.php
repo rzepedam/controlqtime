@@ -16,6 +16,7 @@ class CreateExamsTable extends Migration
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
             $table->integer('type_exam_id')->unsigned();
+            $table->date('emission_exam');
             $table->date('expired_exam');
             $table->text('detail_exam');
             $table->timestamps();
