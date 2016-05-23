@@ -35,10 +35,11 @@ Route::group(['middleware' => ['web']], function () {
             /* Employees create */
             Route::post('step1', ['as' => 'human-resources.employees.step1', 'uses' => 'EmployeeController@step1']);
             Route::post('step2', ['as' => 'human-resources.employees.step2', 'uses' => 'EmployeeController@step2']);
-            Route::get('/session/destroyManpowerData', ['as' => 'destroyManpowerData', 'uses' => 'EmployeeController@destroyManpowerData']);
+            Route::get('/session/destroyManpowerData', ['as' => 'destroyEmployeeData', 'uses' => 'EmployeeController@destroyEmployeeData']);
 
             /* Employees update */
             Route::put('updateStep1/{id}', ['as' => 'human-resources.employees.updateStep1', 'uses' => 'EmployeeController@updateStep1']);
+            Route::put('updateStep2/{id}', ['as' => 'human-resources.employees.updateStep2', 'uses' => 'EmployeeController@updateStep2']);
 
             /* Daily Assistance */
             Route::post('startDailyAssistance', ['as' => 'human-resources.employees.startDailyAssistance', 'uses' => 'DailyAssistanceController@startAssistance']);

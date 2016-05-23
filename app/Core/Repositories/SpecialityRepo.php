@@ -37,7 +37,7 @@ class SpecialityRepo implements SpecialityRepoInterface {
 
 			} else
 			{
-				$this->model                            = parent::find($id);
+				$this->model                            = $this->model->find($id);
 				$this->model->type_speciality_id        = $request['type_speciality_id'][ $i ];
 				$this->model->institution_speciality_id = $request['institution_speciality_id'][ $i ];
 				$this->model->emission_speciality       = $request['emission_speciality'][ $i ];

@@ -36,7 +36,7 @@ class DiseaseRepo implements DiseaseRepoInterface {
 
 			} else
 			{
-				$this->model                    = parent::find($id);
+				$this->model                    = $this->model->find($id);
 				$this->model->type_disease_id   = $request['type_disease_id'][ $i ];
 				$this->model->treatment_disease = $request[ 'treatment_disease' . $i ];
 				$this->model->detail_disease    = $request['detail_disease'][ $i ];

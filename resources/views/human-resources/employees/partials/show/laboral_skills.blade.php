@@ -1,12 +1,9 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel">
-            <div class="ribbon ribbon-bookmark ribbon-reverse ribbon-info">
-                <span class="ribbon-inner"><i class="fa fa-gift"></i> {{ "Miembro hace " . \Carbon\Carbon::now()->diffInYears($manpower->created_at) . " años" }}</span>
-            </div>
-            <div class="ribbon ribbon-bookmark ribbon-info">
-                <span class="ribbon-inner">COD REF : 234568765434567</span>
-            </div>
+
+            @include('human-resources.employees.partials.show.partials.ribbon-bookmark')
+
             <div class="panel-body">
                 <br />
                 <br />
@@ -22,7 +19,7 @@
                                         <td class="col-md-12" colspan="5"><i class="icon md-library font-size-18"></i> Estudios Académicos</td>
                                     </tr>
 
-                                    @if (count($manpower->studies) > 0)
+                                    @if (count($employee->studies) > 0)
                                         <tr class="active">
                                             <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                                             <th class="col-md-2 text-center">Grado Académico</th>
@@ -31,7 +28,7 @@
                                             <th class="col-md-2 text-center">Fecha Obtención</th>
                                         </tr>
 
-                                        @foreach($manpower->studies as $study)
+                                        @foreach($employee->studies as $study)
 
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
@@ -66,22 +63,24 @@
                                 <tbody>
                                     <?php $i = 1; ?>
                                     <tr class="text-center danger">
-                                        <td class="col-md-12" colspan="4"><i class="icon md-badge-check font-size-18"></i> Certificaciones</td>
+                                        <td class="col-md-12" colspan="5"><i class="icon md-badge-check font-size-18"></i> Certificaciones</td>
                                     </tr>
 
-                                    @if (count($manpower->certifications) > 0)
+                                    @if (count($employee->certifications) > 0)
                                         <tr class="active">
                                             <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                                             <th class="col-md-4 text-center">Certificación</th>
+                                            <th class="col-md-2 text-center">Emisión</th>
                                             <th class="col-md-2 text-center">Expiración</th>
-                                            <th class="col-md-5 text-center">Institución</th>
+                                            <th class="col-md-3 text-center">Institución</th>
                                         </tr>
 
-                                        @foreach($manpower->certifications as $certification)
+                                        @foreach($employee->certifications as $certification)
 
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
                                                 <td class="text-center">{{ $certification->typeCertification->name }}</td>
+                                                <td class="text-center">{{ $certification->emission_certification->format('d-m-Y') }}</td>
                                                 <td class="text-center">{{ $certification->expired_certification->format('d-m-Y') }}</td>
                                                 <td class="text-center">{{ $certification->institution->name }}</td>
 
@@ -110,22 +109,24 @@
                                 <tbody>
                                     <?php $i = 1; ?>
                                     <tr class="text-center warning">
-                                        <td class="col-md-12" colspan="4"><i class="fa fa-wrench"></i> Especialidades</td>
+                                        <td class="col-md-12" colspan="5"><i class="fa fa-wrench"></i> Especialidades</td>
                                     </tr>
 
-                                    @if (count($manpower->specialities) > 0)
+                                    @if (count($employee->specialities) > 0)
                                         <tr class="active">
                                             <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                                             <th class="col-md-4 text-center">Especialidad</th>
+                                            <th class="col-md-2 text-center">Emisión</th>
                                             <th class="col-md-2 text-center">Expiración</th>
-                                            <th class="col-md-5 text-center">Institución</th>
+                                            <th class="col-md-3 text-center">Institución</th>
                                         </tr>
 
-                                        @foreach($manpower->specialities as $speciality)
+                                        @foreach($employee->specialities as $speciality)
 
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
                                                 <td class="text-center">{{ $speciality->typeSpeciality->name }}</td>
+                                                <td class="text-center">{{ $speciality->emission_speciality->format('d-m-Y') }}</td>
                                                 <td class="text-center">{{ $speciality->expired_speciality->format('d-m-Y') }}</td>
                                                 <td class="text-center">{{ $speciality->institution->name }}</td>
                                             </tr>
@@ -156,7 +157,7 @@
                                         <td class="col-md-12" colspan="6"><i class="fa fa-bookmark"></i> Licencias Profesionales</td>
                                     </tr>
 
-                                    @if (count($manpower->professionalLicenses) > 0)
+                                    @if (count($employee->professionalLicenses) > 0)
                                         <tr class="active">
                                             <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                                             <th class="col-md-3 text-center">Licencia Profesional</th>
@@ -166,7 +167,7 @@
                                             <th class="col-md-3 text-center">Observación</th>
                                         </tr>
 
-                                        @foreach($manpower->professionalLicenses as $license)
+                                        @foreach($employee->professionalLicenses as $license)
 
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
@@ -207,7 +208,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

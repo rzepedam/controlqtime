@@ -1,10 +1,10 @@
 @extends('layout.index')
 
-@section('title_header') Información de Trabajador @stop
+@section('title_header') Detalle Trabajador : <span class="text-primary">{{ $employee->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="javascript:void(0)"><i class="fa fa-street-view"></i> RR.HH</a></li>
-    <li><a href="{{ route('human-resources.manpowers.index') }}"><i class="fa fa-users"></i> Trabajadores</a></li>
+    <li><a href="{{ route('human-resources.employees.index') }}"><i class="fa fa-street-view"></i> Trabajadores</a></li>
     <li class="active">Ver</li>
 @stop
 
@@ -19,27 +19,25 @@
     <div class="tab-content padding-top-20">
         <div class="tab-pane active" id="tab_1" role="tabpanel">
 
-            @include('human-resources.manpowers.partials.show.personal_information')
+            @include('human-resources.employees.partials.show.personal_information')
 
         </div>
         <div class="tab-pane" id="tab_2" role="tabpanel">
 
-            @include('human-resources.manpowers.partials.show.laboral_skills')
+            @include('human-resources.employees.partials.show.laboral_skills')
 
         </div>
         <div class="tab-pane" id="tab_3" role="tabpanel">
 
-            @include('human-resources.manpowers.partials.show.health_information')
+            @include('human-resources.employees.partials.show.health_information')
 
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <a href="{{ route('human-resources.manpowers.index') }}">Volver</a>
+        <a href="{{ route('human-resources.employees.index') }}">Volver</a>
     </div>
 </div>
-
-
 
 @stop

@@ -25,8 +25,8 @@
                             @endif
 
                             <td class="text-center">
-                                <a href="{{ route('human-resources.employees.show', $employee) }}" class="btn btn-squared btn-info waves-effect waves-light mitooltip" title="Ver"><i class="fa fa-search"></i></a>
-                                <a href="{{ route('human-resources.employees.edit', $employee) }}" class="btn btn-squared btn-warning waves-effect waves-light mitooltip" title="Editar"><i class="fa fa-pencil"></i></a>
+                                <a href="{{ route('human-resources.employees.show', $employee) }}" class="btn btn-squared btn-info waves-effect waves-light tooltip-info" data-toggle="tooltip" data-original-title="Ver"><i class="fa fa-search"></i></a>
+                                <a href="{{ route('human-resources.employees.edit', $employee) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i></a>
                                 @if ($employee->state == 'enable')
                                     <a class="btn btn-squared btn-success waves-effect waves-light mitooltip btnStartDailyAssistance" data-id="{{ $employee->id }}" title="Iniciar Asistencia Diaria"><i class="fa fa-clock-o" aria-hidden="true"></i></a>
                                 @else

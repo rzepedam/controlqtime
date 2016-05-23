@@ -11,9 +11,9 @@ class CreateSpecialitiesTable extends Migration
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
             $table->integer('type_speciality_id')->unsigned();
+            $table->integer('institution_speciality_id')->unsigned();
             $table->date('emission_speciality');
             $table->date('expired_speciality');
-            $table->integer('institution_speciality_id')->unsigned();
             $table->timestamps();
             
             $table->foreign('employee_id')

@@ -35,9 +35,9 @@ class FamilyRelationshipRepo implements FamilyRelationshipRepoInterface {
 
 			} else
 			{
-				$this->model                     = parent::find($id);
-				$this->model->relationship_id    = $request['relationship_id'][ $i ];
-				$this->model->employee_family_id = $request['employee_family_id'][ $i ];
+				$this->model						= $this->model->find($id);
+				$this->model->relationship_id    	= $request['relationship_id'][ $i ];
+				$this->model->employee_family_id 	= $request['employee_family_id'][ $i ];
 
 				$this->model->save();
 			}

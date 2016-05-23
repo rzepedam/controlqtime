@@ -1,5 +1,4 @@
-
-<!-- first row -->
+{{-- first row --}}
 <div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('male_surname', 'Apellido Paterno', ['class' => 'control-label']) }}
@@ -19,22 +18,21 @@
     </div>
 </div>
 
-
-<!-- second row -->
+{{-- second row --}}
 <div class="row">
     <div class="col-md-3">
         <div class="form-group">
-            {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle mitooltip text-primary" title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
+            {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
             {{ Form::text('rut', null, ['class' => 'form-control check_rut']) }}
         </div>
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('birthday', 'Fecha de Nacimiento', ['class' => 'control-label']) }}
-        <div class="input-group date beforeCurrentDate">
+        <div class="input-group date beforeCurrentDate" id="datePicker">
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            {{ Form::text('birthday', $manpower->birthday->format('d-m-Y'), ['class' => 'form-control']) }}
+            {{ Form::text('birthday', $employee->birthday->format('d-m-Y'), ['class' => 'form-control', "readonly"]) }}
         </div>
     </div>
     <div class="col-md-3 form-group">
@@ -47,8 +45,7 @@
     </div>
 </div>
 
-
-<!-- third row -->
+{{-- third row --}}
 <div class="row">
     <div class="col-md-6 form-group">
         {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
@@ -56,16 +53,16 @@
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-        {{ Form::select('region_id', $regions, $regionSelected->id, ['class' => 'form-control']) }}
+        {{ Form::select('region_id', $regions, $employee->commune->province->region->id, ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('province_id', 'Provincia', ['class' => 'control-label']) }}
-        {{ Form::select('province_id', $provinces, $provinceSelected->id, ['class' => 'form-control']) }}
+        {{ Form::select('province_id', $provinces, $employee->commune->province->id, ['class' => 'form-control']) }}
     </div>
 </div>
 
 
-<!-- Four row -->
+{{-- Four row --}}
 <div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
@@ -77,7 +74,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-envelope"></i>
             </div>
-            {{ Form::text('email', null, ['id' => 'Manpower', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+            {{ Form::text('email', null, ['id' => 'Employee', 'class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-3 form-group">
@@ -91,8 +88,7 @@
     </div>
 </div>
 
-
-<!-- Five row -->
+{{-- Five row --}}
 <div class="row">
     <div class="col-md-3">
         <div class="form-group">
@@ -106,36 +102,11 @@
         </div>
     </div>
     <div class="col-md-3 form-group">
-        {{ Form::label('forecast_id', 'Previsión', ['class' => 'control-label']) }}
-        {{ Form::select('forecast_id', $forecasts, null, ['class' => 'form-control']) }}
-    </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('mutuality_id', 'Mutualidad', ['class' => 'control-label']) }}
-        {{ Form::select('mutuality_id', $mutualities, null, ['class' => 'form-control']) }}
-    </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('pension_id', 'AFP', ['class' => 'control-label']) }}
-        {{ Form::select('pension_id', $pensions, null, ['class' => 'form-control']) }}
-    </div>
-</div>
-
-
-<!-- Six row -->
-<div class="row">
-    <div class="col-md-3 form-group">
         {{ Form::label('company_id', 'Empresa', ['class' => 'control-label']) }}
         {{ Form::select('company_id', $companies, null, ['class' => 'form-control']) }}
     </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('rating_id', 'Cargo', ['class' => 'control-label']) }}
-        {{ Form::select('rating_id', $ratings, null, ['class' => 'form-control']) }}
-    </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('area_id', 'Área', ['class' => 'control-label']) }}
-        {{ Form::select('area_id', $areas, null, ['class' => 'form-control']) }}
-    </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('code_internal', 'Código Interno', ['class' => 'control-label']) }}
-        {{ Form::text('code_internal', null, ['class' => 'form-control']) }}
+    <div class="col-md-6 form-group">
+        {{ Form::label('code', 'Cód. Interno', ['class' => 'control-label']) }}
+        {{ Form::text('code', null, ['class' => 'form-control']) }}
     </div>
 </div>

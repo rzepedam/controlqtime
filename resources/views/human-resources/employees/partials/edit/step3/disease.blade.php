@@ -1,22 +1,28 @@
 <?php $i = 0; ?>
-@foreach($manpower->diseases as $disease)
+@foreach($employee->diseases as $disease)
 
     <span id="disease{{ $i }}">
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-alt alert-success alert-dismissible" role="alert">
-                    <span id="num_disease{{ $i }}" class="text-success titulo-seccion">
+                    <span id="num_disease{{ $i }}" class="text-success">
                         Enfermedad #{{ $i + 1 }}
                     </span>
-                    <a id="disease" class="delete-elements pull-right mitooltip" title="Eliminar Discapacidad"><i class="fa fa-trash"></i></a>
+                    <a id="disease" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Enfermedad" data-html="true"><i class="fa fa-trash"></i></a>
                 </div>
             </div>
         </div>
         <div class="row">
+            <div class="col-md-1 hide">
+                <div class="form-group">
+                    {{ Form::label("id_disease", "ID", ["class" => "control-label"]) }}
+                    {{ Form::text("id_disease[]", $disease->id, ["id" => "id_disease" . $i, "class" => "form-control"]) }}
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    {{ Form::label("disease_id", "Nombre") }}
-                    {{ Form::select("disease_id[]", $type_diseases, $disease->type_disease_id, ["class"=> "form-control", "required"]) }}
+                    {{ Form::label("type_disease_id", "Nombre") }}
+                    {{ Form::select("type_disease_id[]", $type_diseases, $disease->typeDisease->id, ["class"=> "form-control"]) }}
                 </div>
             </div>
             <div class="col-md-6 text-center">
@@ -25,14 +31,14 @@
                     <ul class="list-unstyled list-inline">
                         <li>
                             <div class="radio-custom radio-primary">
-                                {{ Form::radio("treatment_disease" . $i, 1, ($disease->treatment_disease) ? true : false) }}
-                                {{ Form::label("treatment_disease" . $i, "Si") }}
+                                {{ Form::radio("treatment_disease" . $i, 1, ($disease->treatment_disease == 1) ? true : false) }}
+                                {{ Form::label("treatment_disease" . $i, "Si", ['class' => 'control-label']) }}
                             </div>
                         </li>
                         <li>
                             <div class="radio-custom radio-primary">
-                                {{ Form::radio("treatment_disease" . $i, 0, ($disease->treatment_disease) ? false : true) }}
-                                {{ Form::label("treatment_disease" . $i, "No") }}
+                                {{ Form::radio("treatment_disease" . $i, 0, ($disease->treatment_disease == 0) ? true : false) }}
+                                {{ Form::label("treatment_disease" . $i, "No", ['class' => 'control-label']) }}
                             </div>
                         </li>
                     </ul>

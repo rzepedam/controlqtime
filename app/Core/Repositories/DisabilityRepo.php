@@ -36,7 +36,7 @@ class DisabilityRepo implements DisabilityRepoInterface {
 
 			} else
 			{
-				$this->model                       = parent::find($id);
+				$this->model                       = $this->model->find($id);
 				$this->model->type_disability_id   = $request['type_disability_id'][ $i ];
 				$this->model->treatment_disability = $request[ 'treatment_disability' . $i ];
 				$this->model->detail_disability    = $request['detail_disability'][ $i ];

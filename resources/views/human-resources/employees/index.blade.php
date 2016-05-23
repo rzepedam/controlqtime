@@ -7,8 +7,8 @@
 @stop
 
 @section('title_header') Listado de Trabajadores
-    <br>
-    @if (\Session::get('step1'))
+    <br />
+    @if (Session::get('step1'))
         <a href="{{ route('human-resources.employees.create') }}" class="btn btn-primary waves-effect waves-light" id="modalSessionConfirmation"><i class="fa fa-plus"></i> Crear Nuevo Trabajador</a>
     @else
         <a href="{{ route('human-resources.employees.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Trabajador</a>
@@ -38,19 +38,12 @@
 
 @section('scripts')
 
-
     {{ Html::script('assets/js/sweetalert.min.js') }}
     {{ Html::script('assets/js/config.js') }}
 
     <script>
 
         $(document).ready(function(){
-
-            /**************************************************
-             ************** Initialize components **************
-             **************************************************/
-
-            $('.mitooltip').tooltip();
 
             /*
              * Delete Data in Session Storage
@@ -67,6 +60,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#DD6B55',
                     confirmButtonText: 'Confirmar',
+                    cancelButtonText: 'Cancelar',
                     closeOnConfirm: false,
                 },
                 function(isConfirm) {
@@ -86,7 +80,7 @@
                         */
 
                         $.ajax({
-                                url: "{{ route('destroyManpowerData') }}",
+                                url: "{{ route('destroyEmployeeData') }}",
                                 type: "GET"
 
                             }).done(function() {

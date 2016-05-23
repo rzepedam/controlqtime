@@ -80,63 +80,33 @@ class Employee extends Eloquent
     /*
      * Mutators
      */
-    
-    /**
-     * @param string $value
-     */
+
     public function setMaleSurnameAttribute($value) {
         $this->attributes['male_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-
-    /**
-     * @param string $value
-     */
     public function setFemaleSurnameAttribute($value) {
         $this->attributes['female_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-
-    /**
-     * @param string $value
-     */
     public function setFirstNameAttribute($value) {
         $this->attributes['first_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-
-    /**
-     * @param string $value
-     */
     public function setSecondNameAttribute($value) {
         $this->attributes['second_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
+    
+    public function setAddressAttribute($value) {
+        $this->attributes['address'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
 
-
-    /**
-     * @param string $value
-     */
     public function setEmailAttribute($value) {
         $this->attributes['email'] = strtolower($value);
     }
-    
-    
-    /**
-     * @param $value
-     */
+
     public function setBirthdayAttribute($value) {
         $this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
-    /*
-     * Accesors
-     */
-
-    /**
-     * @return mixed
-     */
-    public function getNumFamilyRelationshipAttribute() {
-        return count($this->familyRelationships);
-    }
-    
 }

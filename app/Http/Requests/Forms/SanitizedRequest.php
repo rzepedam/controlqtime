@@ -15,7 +15,6 @@ abstract class SanitizedRequest extends Request {
 
 	protected function sanitize(Array $inputs)
 	{
-
 		if ( $this->clean )
 			return $inputs;
 

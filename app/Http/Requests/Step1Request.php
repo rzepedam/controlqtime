@@ -59,10 +59,8 @@ class Step1Request extends SanitizedRequest {
 
 			}
 
-
 			case 'PUT':
 			{
-
 				$rules = [
 					'male_surname'   => 'required|max:30',
 					'female_surname' => 'required|max:30',
@@ -76,17 +74,20 @@ class Step1Request extends SanitizedRequest {
 					'region_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'province_id'    => 'required|regex:/[0-9 -()+]+$/',
 					'commune_id'     => 'required|regex:/[0-9 -()+]+$/',
-					'email'          => 'required|email|max:100|unique:manpowers,email,' . $this->id,
+					'email'          => 'required|email|max:100|unique:employees,email,' . $this->id,
 					'phone1'         => 'required|max:20',
 					'phone2'         => 'max:20',
 					'company_id'     => 'required|regex:/[0-9 -()+]+$/',
 					'code'           => 'required'
 				];
 
-				for ($i = 0; $i < Request::get('count_family_relationships'); $i ++)
+				if (Request::get('count_family_relationships') > 0)
 				{
-					$rules[ 'relationship_id' . $i ]    = 'required|regex:/[0-9 -()+]+$/';
-					$rules[ 'employee_family_id' . $i ] = 'required|regex:/[0-9 -()+]+$/';
+					foreach (range(0, Request::get('count_family_relationships') - 1) as $index)
+					{
+						$rules[ 'relationship_id.' . $index ]    = 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'employee_family_id.' . $index ] = 'required|regex:/[0-9 -()+]+$/';
+					}
 				}
 
 				return $rules;

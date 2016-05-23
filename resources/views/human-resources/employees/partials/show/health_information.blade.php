@@ -1,12 +1,9 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel">
-            <div class="ribbon ribbon-bookmark ribbon-reverse ribbon-info">
-                <span class="ribbon-inner"><i class="fa fa-gift"></i> {{ "Miembro hace " . \Carbon\Carbon::now()->diffInYears($manpower->created_at) . " años" }}</span>
-            </div>
-            <div class="ribbon ribbon-bookmark ribbon-info">
-                <span class="ribbon-inner">COD REF : 234568765434567</span>
-            </div>
+
+            @include('human-resources.employees.partials.show.partials.ribbon-bookmark')
+
             <div class="panel-body">
                 <br />
                 <br />
@@ -21,7 +18,7 @@
                                         <td class="col-md-12" colspan="4"><i class="fa fa-wheelchair"></i> Discapacidades</td>
                                     </tr>
 
-                                    @if (count($manpower->disabilities) > 0)
+                                    @if (count($employee->disabilities) > 0)
                                         <tr class="active">
                                             <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                                             <th class="col-md-3 text-center">Discapacidad</th>
@@ -29,7 +26,7 @@
                                             <th class="col-md-7 text-center">Observación</th>
                                         </tr>
 
-                                        @foreach($manpower->disabilities as $disability)
+                                        @foreach($employee->disabilities as $disability)
 
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
@@ -74,7 +71,7 @@
                                         <td class="col-md-12" colspan="4"><i class="fa fa-bed"></i> Enfermedades</td>
                                     </tr>
 
-                                    @if (count($manpower->diseases) > 0)
+                                    @if (count($employee->diseases) > 0)
                                         <tr class="active">
                                             <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                                             <th class="col-md-3 text-center">Enfermedad</th>
@@ -82,7 +79,7 @@
                                             <th class="col-md-7 text-center">Observación</th>
                                         </tr>
 
-                                        @foreach($manpower->diseases as $disease)
+                                        @foreach($employee->diseases as $disease)
 
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
@@ -128,7 +125,7 @@
                                         <td class="col-md-12" colspan="4"><i class="fa fa-stethoscope"></i> Exámenes Preocupacionales</td>
                                     </tr>
 
-                                    @if (count($manpower->exams) > 0)
+                                    @if (count($employee->exams) > 0)
                                         <tr class="active">
                                             <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                                             <th class="col-md-3 text-center">Examen Preocupacional</th>
@@ -136,7 +133,7 @@
                                             <th class="col-md-6 text-center">Observación</th>
                                         </tr>
 
-                                        @foreach($manpower->exams as $exam)
+                                        @foreach($employee->exams as $exam)
 
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
@@ -178,7 +175,7 @@
                                         <td class="col-md-12" colspan="4"><i class="fa fa-child"></i> Cargas Familiares</td>
                                     </tr>
 
-                                    @if (count($manpower->familyResponsabilities) > 0)
+                                    @if (count($employee->familyResponsabilities) > 0)
                                         <tr class="active">
                                             <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                                             <th class="col-md-6 text-center">Nombre</th>
@@ -186,7 +183,7 @@
                                             <th class="col-md-3 text-center">Relación</th>
                                         </tr>
 
-                                        @foreach($manpower->familyResponsabilities as $family_responsability)
+                                        @foreach($employee->familyResponsabilities as $family_responsability)
 
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>

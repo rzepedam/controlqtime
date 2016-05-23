@@ -37,7 +37,7 @@ class StudyRepo implements StudyRepoInterface {
 
 			} else
 			{
-				$this->model                       = parent::find($id);
+				$this->model                       = $this->model->find($id);
 				$this->model->degree_id            = $request['degree_id'][ $i ];
 				$this->model->name_study           = $request['name_study'][ $i ];
 				$this->model->institution_study_id = $request['institution_study_id'][ $i ];

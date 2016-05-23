@@ -35,7 +35,7 @@ class FamilyResponsabilityRepo implements FamilyResponsabilityRepoInterface {
 
 			} else
 			{
-				$this->model                      = parent::find($id);
+				$this->model                      = $this->model->find($id);
 				$this->model->name_responsability = $request['name_responsability'][ $i ];
 				$this->model->rut_responsability  = $request['rut_responsability'][ $i ];
 				$this->model->relationship_id     = $request['relationship_id'][ $i ];

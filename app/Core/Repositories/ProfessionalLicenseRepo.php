@@ -38,7 +38,7 @@ class ProfessionalLicenseRepo implements ProfessionalLicenseRepoInterface {
 
 			} else
 			{
-				$this->model                               = parent::find($id);
+				$this->model                               = $this->model->find($id);
 				$this->model->type_professional_license_id = $request['type_professional_license_id'][ $i ];
 				$this->model->emission_license             = $request['emission_license'][ $i ];
 				$this->model->is_donor                     = $request['is_donor' . $i];

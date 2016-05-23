@@ -36,7 +36,7 @@ class ExamRepo implements ExamRepoInterface {
 
 			} else
 			{
-				$this->model                = parent::find($id);
+				$this->model                = $this->model->find($id);
 				$this->model->type_exam_id  = $request['type_exam_id'][ $i ];
 				$this->model->emission_exam = $request['emission_exam'][ $i ];
 				$this->model->expired_exam  = $request['expired_exam'][ $i ];

@@ -37,7 +37,7 @@ class CertificationRepo implements CertificationRepoInterface {
 
 			} else
 			{
-				$this->model                               = parent::find($id);
+				$this->model                               = $this->model->find($id);
 				$this->model->type_certification_id        = $request['type_certification_id'][ $i ];
 				$this->model->institution_certification_id = $request['institution_certification_id'][ $i ];
 				$this->model->emission_certification       = $request['emission_certification'][ $i ];
