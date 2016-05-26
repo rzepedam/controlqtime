@@ -1,18 +1,12 @@
 /*!
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version 4.3.2
- *
- * File input styled for Bootstrap 3.0 that utilizes HTML5 File Input's advanced features including the FileReader API.
- *
- * The plugin drastically enhances the HTML file input to preview multiple files on the client before upload. In
- * addition it provides the ability to preview content of images, text, videos, audio, html, flash and other objects.
- * It also offers the ability to upload and delete files using AJAX, and add files in batches (i.e. preview, append,
- * or remove before upload).
+ * bootstrap-fileinput v4.3.2
+ * http://plugins.krajee.com/file-input
  *
  * Author: Kartik Visweswaran
- * Copyright: 2015, Kartik Visweswaran, Krajee.com
- * For more JQuery plugins visit http://plugins.krajee.com
- * For more Yii related demos visit http://demos.krajee.com
+ * Copyright: 2014 - 2016, Kartik Visweswaran, Krajee.com
+ *
+ * Licensed under the BSD 3-Clause
+ * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
  */
 (function (factory) {
     "use strict";
@@ -33,15 +27,29 @@
     "use strict";
 
     $.fn.fileinputLocales = {};
+    $.fn.fileinputThemes = {};
 
-    var NAMESPACE, objUrl, compare, isIE, isEdge, handler, previewCache, getNum, hasFileAPISupport, hasDragDropSupport,
-        hasFileUploadSupport, addCss, STYLE_SETTING, OBJECT_PARAMS, DEFAULT_PREVIEW, defaultFileActionSettings, tMain1,
-        tMain2, tPreview, tIcon, tClose, tCaption, tBtnDefault, tBtnLink, tBtnBrowse, tModal, tProgress, tFooter,
-        tActions, tActionDelete, tActionUpload, tZoom, tGeneric, tHtml, tImage, tText, tVideo, tAudio, tFlash, tObject,
-        tOther, defaultLayoutTemplates, defaultPreviewTemplates, defaultPreviewTypes, defaultPreviewSettings, FileInput,
-        defaultFileTypeSettings, isEmpty, isArray, isSet, getElement, uniqId, htmlEncode, replaceTags, cleanMemory;
+    var NAMESPACE, MODAL_ID, STYLE_SETTING, OBJECT_PARAMS, DEFAULT_PREVIEW, objUrl, compare, isIE, isEdge, handler,
+        previewCache, getNum, hasFileAPISupport, hasDragDropSupport, hasFileUploadSupport, addCss, tMain1, tMain2,
+        tPreview, tFileIcon, tClose, tCaption, tBtnDefault, tBtnLink, tBtnBrowse, tModalMain, tModal, tProgress, tSize,
+        tFooter, tActions, tActionDelete, tActionUpload, tActionZoom, tActionDrag, tTagBef, tTagBef1, tTagBef2, tTagAft,
+        tGeneric, tHtml, tImage, tText, tVideo, tAudio, tFlash, tObject, tPdf, tOther, defaultFileActionSettings,
+        defaultLayoutTemplates, defaultPreviewTemplates, defaultPreviewZoomSettings, defaultPreviewTypes, getElement,
+        defaultPreviewSettings, defaultFileTypeSettings, isEmpty, isArray, ifSet, uniqId, htmlEncode, replaceTags,
+        cleanMemory, findFileName, checkFullScreen, toggleFullScreen, moveArray, FileInput;
 
     NAMESPACE = '.fileinput';
+    MODAL_ID = 'kvFileinputModal';
+    STYLE_SETTING = 'style="width:{width};height:{height};"';
+    OBJECT_PARAMS = '<param name="controller" value="true" />\n' +
+        '<param name="allowFullScreen" value="true" />\n' +
+        '<param name="allowScriptAccess" value="always" />\n' +
+        '<param name="autoPlay" value="false" />\n' +
+        '<param name="autoStart" value="false" />\n' +
+        '<param name="quality" value="high" />\n';
+    DEFAULT_PREVIEW = '<div class="file-preview-other">\n' +
+        '<span class="{previewFileIconClass}">{previewFileIcon}</span>\n' +
+        '</div>';
     //noinspection JSUnresolvedVariable
     objUrl = window.URL || window.webkitURL;
     compare = function (input, str, exact) {
@@ -81,7 +89,18 @@
                 config: obj.initialPreviewConfig,
                 tags: obj.initialPreviewThumbTags,
                 delimiter: obj.initialPreviewDelimiter,
+                previewFileType: obj.initialPreviewFileType,
+                previewAsData: obj.initialPreviewAsData,
                 template: obj.previewGenericTemplate,
+                showZoom: obj.fileActionSettings.showZoom,
+                showDrag: obj.fileActionSettings.showDrag,
+                getSize: function(size) {
+                    return obj._getSize(size);
+                },
+                parseTemplate: function (cat, data, fname, ftype, pId, ftr, ind, size) {
+                    var fc = ' file-preview-initial';
+                    return obj._generatePreviewTemplate(cat, data, fname, ftype, pId, false, null, fc, ftr, ind);
+                },
                 msg: function (n) {
                     return obj._getMsgSelected(n);
                 },
@@ -89,8 +108,8 @@
                 footer: obj._getLayoutTemplate('footer').replace(/\{progress}/g, obj._renderThumbProgress()),
                 isDelete: obj.initialPreviewShowDelete,
                 caption: obj.initialCaption,
-                actions: function (showUpload, showDelete, disabled, url, key) {
-                    return obj._renderFileActions(showUpload, showDelete, disabled, url, key);
+                actions: function (showUpload, showDelete, showZoom, showDrag, disabled, url, key) {
+                    return obj._renderFileActions(showUpload, showDelete, showZoom, showDrag, disabled, url, key, true);
                 }
             };
         },
@@ -104,23 +123,32 @@
                 (all ? previewCache.data[id].content.length : previewCache.fetch(id).length) : 0;
         },
         get: function (id, i, isDisabled) {
-            var ind = 'init_' + i, data = previewCache.data[id], config = data.config[i],
-                previewId = data.initId + '-' + ind, out, $tmp, frameClass = ' file-preview-initial';
-            /** @namespace config.frameClass */
-            /** @namespace config.frameAttr */
+            var ind = 'init_' + i, data = previewCache.data[id], config = data.config[i], content = data.content[i],
+                previewId = data.initId + '-' + ind, out, $tmp, frameClass = ' file-preview-initial', cat, cap, ftr,
+                ftype, asData = ifSet('previewAsData', config, data.previewAsData);
             isDisabled = isDisabled === undefined ? true : isDisabled;
-            if (data.content[i] === null) {
+            /** @namespace config.frameAttr */
+            /** @namespace config.frameClass */
+            /** @namespace config.filetype */
+            if (!content) {
                 return '';
             }
-            if (!isEmpty(config) && !isEmpty(config.frameClass)) {
+            if (config && config.frameClass) {
                 frameClass += ' ' + config.frameClass;
             }
-            out = data.template
-                .replace(/\{previewId}/g, previewId)
-                .replace(/\{frameClass}/g, frameClass)
-                .replace(/\{fileindex}/g, ind)
-                .replace(/\{content}/g, data.content[i])
-                .replace(/\{footer}/g, previewCache.footer(id, i, isDisabled));
+            if (asData) {
+                cat = data.previewAsData ? ifSet('type', config, data.previewFileType || 'generic') : 'generic';
+                cap = ifSet('caption', config);
+                ftr = previewCache.footer(id, i, isDisabled, (config && config.size || null));
+                ftype = ifSet('filetype', config, cat);
+                out = data.parseTemplate(cat, content, cap, ftype, previewId, ftr, ind, null);
+            } else {
+                out = data.template
+                    .replace(/\{previewId}/g, previewId).replace(/\{frameClass}/g, frameClass)
+                    .replace(/\{fileindex}/g, ind).replace(/\{content}/g, data.content[i])
+                    .replace(/\{template}/g, ifSet('type', config, data.previewFileType))
+                    .replace(/\{footer}/g, previewCache.footer(id, i, isDisabled, (config && config.size || null)));
+            }
             if (data.tags.length && data.tags[i]) {
                 out = replaceTags(out, data.tags[i]);
             }
@@ -220,26 +248,22 @@
                 html += previewCache.get(id, i);
             }
             caption = data.msg(previewCache.count(id));
-            return {content: html, caption: caption};
+            return {content: '<div class="file-initial-thumbs">' + html + '</div>', caption: caption};
         },
-        footer: function (id, i, isDisabled) {
+        footer: function (id, i, isDisabled, size) {
             var data = previewCache.data[id];
             isDisabled = isDisabled === undefined ? true : isDisabled;
             if (data.config.length === 0 || isEmpty(data.config[i])) {
                 return '';
             }
-            var config = data.config[i],
-                caption = isSet('caption', config) ? config.caption : '',
-                width = isSet('width', config) ? config.width : 'auto',
-                url = isSet('url', config) ? config.url : false,
-                key = isSet('key', config) ? config.key : null,
-                disabled = (url === false) && isDisabled,
-                actions = data.isDelete ? data.actions(false, true, disabled, url, key) : '',
+            var config = data.config[i], caption = ifSet('caption', config), width = ifSet('width', config, 'auto'),
+                url = ifSet('url', config, false), key = ifSet('key', config, null),
+                showDel = ifSet('showDelete', config, true), showZoom = ifSet('showZoom', config, data.showZoom),
+                showDrag = ifSet('showDrag', config, data.showDrag), disabled = (url === false) && isDisabled,
+                actions = data.isDelete ? data.actions(false, showDel, showZoom, showDrag, disabled, url, key) : '',
                 footer = data.footer.replace(/\{actions}/g, actions);
-            return footer.replace(/\{caption}/g, caption)
-                .replace(/\{width}/g, width)
-                .replace(/\{indicator}/g, '')
-                .replace(/\{indicatorTitle}/g, '');
+            return footer.replace(/\{caption}/g, caption).replace(/\{size}/g, data.getSize(size))
+                .replace(/\{width}/g, width).replace(/\{indicator}/g, '').replace(/\{indicatorTitle}/g, '');
         }
     };
     getNum = function (num, def) {
@@ -269,31 +293,32 @@
     addCss = function ($el, css) {
         $el.removeClass(css).addClass(css);
     };
-    STYLE_SETTING = 'style="width:{width};height:{height};"';
-    OBJECT_PARAMS = '      <param name="controller" value="true" />\n' +
-        '      <param name="allowFullScreen" value="true" />\n' +
-        '      <param name="allowScriptAccess" value="always" />\n' +
-        '      <param name="autoPlay" value="false" />\n' +
-        '      <param name="autoStart" value="false" />\n' +
-        '      <param name="quality" value="high" />\n';
-    DEFAULT_PREVIEW = '<div class="file-preview-other">\n' +
-        '   <span class="{previewFileIconClass}">{previewFileIcon}</span>\n' +
-        '</div>';
     defaultFileActionSettings = {
-        removeIcon: '<i class="fa fa-trash text-danger" aria-hidden="true"></i>',
+        showRemove: true,
+        showUpload: true,
+        showZoom: false,
+        showDrag: false,
+        removeIcon: '<i class="fa fa-trash text-danger"></i>',
         removeClass: 'btn btn-xs btn-default',
-        removeTitle: 'Eliminar archivo',
-        uploadIcon: '<i class="fa fa-arrow-circle-o-up text-info" aria-hidden="true"></i>',
+        removeTitle: 'Remove file',
+        uploadIcon: '<i class="fa fa-arrow-circle-o-up text-info"></i>',
         uploadClass: 'btn btn-xs btn-default',
-        uploadTitle: 'Subir archivo',
-        indicatorNew: '<i class="fa fa-hand-o-down text-warning" aria-hidden="true"></i>',
-        indicatorSuccess: '<i class="fa fa-check-circle text-success" aria-hidden="true"></i>',
-        indicatorError: '<i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>',
-        indicatorLoading: '<i class="fa fa-hand-o-up text-muted" aria-hidden="true"></i>',
-        indicatorNewTitle: 'No subido todavía',
-        indicatorSuccessTitle: 'Subido',
-        indicatorErrorTitle: 'Subir Error',
-        indicatorLoadingTitle: 'Subiendo ...'
+        uploadTitle: 'Upload file',
+        zoomIcon: '<i class="fa fa-search-plus"></i>',
+        zoomClass: 'btn btn-xs btn-default',
+        zoomTitle: 'View Details',
+        dragIcon: '<i class="fa fa-bars" aria-hidden="true"></i>',
+        dragClass: 'text-info',
+        dragTitle: 'Move / Rearrange',
+        dragSettings: {},
+        indicatorNew: '<i class="fa fa-hand-o-down text-warning"></i>',
+        indicatorSuccess: '<i class="fa fa-check-circle text-success"></i>',
+        indicatorError: '<i class="fa fa-exclamation-circle text-danger"></i>',
+        indicatorLoading: '<i class="fa fa-hand-o-up text-muted"></i>',
+        indicatorNewTitle: 'Not uploaded yet',
+        indicatorSuccessTitle: 'Uploaded',
+        indicatorErrorTitle: 'Upload Error',
+        indicatorLoadingTitle: 'Uploading ...'
     };
     tMain1 = '{preview}\n' +
         '<div class="kv-upload-progress hide"></div>\n' +
@@ -317,148 +342,130 @@
         '    <div class="kv-fileinput-error"></div>\n' +
         '    </div>\n' +
         '</div>';
-    tClose = '';
-    tIcon = '<span class="glyphicon glyphicon-file kv-caption-icon"></span>';
+    tClose = '<div class="close fileinput-remove">&times;</div>\n';
+    tFileIcon = '<i class="fa fa-file kv-caption-icon"></i>';
     tCaption = '<div tabindex="500" class="form-control file-caption {class}">\n' +
         '   <div class="file-caption-name"></div>\n' +
         '</div>\n';
     //noinspection HtmlUnknownAttribute
-    tBtnDefault = '<button type="{type}" tabindex="500" title="{title}" class="{css}" {status}>{icon}{label}</button>';
-    tBtnLink = '<a href="{href}" tabindex="500" title="{title}" class="{css}" {status}>{icon}{label}</a>';
-    tBtnBrowse = '<div tabindex="500" class="{css}" {status}>{icon}{label}</div>';
-    tModal = '<div id="{id}" class="file-preview-detail-modal modal fade" tabindex="-1">\n' +
-        '  <div class="modal-dialog modal-lg">\n' +
-        '    <div class="modal-content">\n' +
-        '      <div class="modal-header">\n' +
-        '        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n' +
-        '        <h3 class="modal-title">{heading} <small>{title}</small></h3>\n' +
-        '      </div>\n' +
-        '      <div class="modal-body">\n' +
-        '           <pre>{body}</pre>\n' +
-        '      </div>\n' +
+    tBtnDefault = '<button type="{type}" tabindex="500" title="{title}" class="{css}" {status}>{icon} {label}</button>';
+    tBtnLink = '<a href="{href}" tabindex="500" title="{title}" class="{css}" {status}>{icon} {label}</a>';
+    tBtnBrowse = '<div tabindex="500" class="{css}" {status}>{icon} {label}</div>';
+    tModalMain = '<div id="' + MODAL_ID + '" class="file-zoom-dialog modal fade" tabindex="-1" aria-labelledby="' +
+        MODAL_ID + 'Label"></div>';
+    tModal = '<div class="modal-dialog modal-lg" role="document">\n' +
+        '  <div class="modal-content">\n' +
+        '    <div class="modal-header">\n' +
+        '      <div class="kv-zoom-actions pull-right">{toggleheader}{fullscreen}{borderless}{close}</div>\n' +
+        '      <h3 class="modal-title">{heading} <small><span class="kv-zoom-title"></span></small></h3>\n' +
+        '    </div>\n' +
+        '    <div class="modal-body">\n' +
+        '      <div class="floating-buttons"></div>\n' +
+        '      <div class="kv-zoom-body file-zoom-content"></div>\n' + '{prev} {next}\n' +
         '    </div>\n' +
         '  </div>\n' +
-        '</div>';
+        '</div>\n';
     tProgress = '<div class="progress">\n' +
         '    <div class="{class}" role="progressbar"' +
         ' aria-valuenow="{percent}" aria-valuemin="0" aria-valuemax="100" style="width:{percent}%;">\n' +
         '        {percent}%\n' +
         '     </div>\n' +
         '</div>';
+    tSize = ' <br><samp>({sizeText})</samp>';
     tFooter = '<div class="file-thumbnail-footer">\n' +
-        '    <div class="file-footer-caption" title="{caption}">{caption}</div>\n' +
+        '    <div class="file-footer-caption" title="{caption}">{caption}{size}</div>\n' +
         '    {progress} {actions}\n' +
         '</div>';
     tActions = '<div class="file-actions">\n' +
         '    <div class="file-footer-buttons">\n' +
-        '        {upload}{delete}{other}' +
+        '        {upload} {delete} {zoom} {other}' +
         '    </div>\n' +
+        '    {drag}\n' +
         '    <div class="file-upload-indicator" title="{indicatorTitle}">{indicator}</div>\n' +
         '    <div class="clearfix"></div>\n' +
         '</div>';
     tActionDelete = '<button type="button" class="kv-file-remove {removeClass}" ' +
         'title="{removeTitle}" {dataUrl}{dataKey}>{removeIcon}</button>\n';
     tActionUpload = '<button type="button" class="kv-file-upload {uploadClass}" title="{uploadTitle}">' +
-        '   {uploadIcon}\n</button>\n';
-    tZoom = '<button type="button" class="btn btn-default btn-xs btn-block" title="{zoomTitle}: {caption}" onclick="{dialog}">\n' +
-        '   {zoomInd}\n' +
-        '</button>\n';
-    tGeneric = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}">\n' +
-        '   {content}\n' +
-        '   {footer}\n' +
-        '</div>\n';
-    tHtml = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}">\n' +
-        '    <object class="file-object" data="{data}" type="{type}" width="{width}" height="{height}">\n' +
-        '       ' + DEFAULT_PREVIEW + '\n' +
-        '    </object>\n' +
-        '   {footer}\n' +
-        '</div>';
-    tImage = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}">\n' +
-        '   <img src="{data}" class="file-preview-image" title="{caption}" alt="{caption}" ' + STYLE_SETTING + '>\n' +
-        '   {footer}\n' +
-        '</div>\n';
-    tText = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}">\n' +
-        '   <pre class="file-preview-text" title="{caption}" ' + STYLE_SETTING + '>{data}</pre>\n' +
-        '   {zoom}\n' +
-        '   {footer}\n' +
-        '</div>';
-    tVideo = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
-        ' title="{caption}" ' + STYLE_SETTING + '>\n' +
-        '   <video width="{width}" height="{height}" controls>\n' +
-        '       <source src="{data}" type="{type}">\n' +
-        '       ' + DEFAULT_PREVIEW + '\n' +
-        '   </video>\n' +
-        '   {footer}\n' +
-        '</div>\n';
-    tAudio = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
-        ' title="{caption}" ' + STYLE_SETTING + '>\n' +
-        '   <audio controls>\n' +
-        '       <source src="' + '{data}' + '" type="{type}">\n' +
-        '       ' + DEFAULT_PREVIEW + '\n' +
-        '   </audio>\n' +
-        '   {footer}\n' +
-        '</div>';
-    tFlash = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
-        ' title="{caption}" ' + STYLE_SETTING + '>\n' +
-        '   <object class="file-object" type="application/x-shockwave-flash" width="{width}" height="{height}" data="{data}">\n' +
-        OBJECT_PARAMS + '       ' + DEFAULT_PREVIEW + '\n' +
-        '   </object>\n' +
-        '   {footer}\n' +
-        '</div>\n';
-    tObject = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
-        ' title="{caption}" ' + STYLE_SETTING + '>\n' +
-        '   <object class="file-object" data="{data}" type="{type}" width="{width}" height="{height}">\n' +
-        '       <param name="movie" value="{caption}" />\n' +
-        OBJECT_PARAMS + '         ' + DEFAULT_PREVIEW + '\n' +
-        '   </object>\n' +
-        '   {footer}\n' +
-        '</div>';
-    tOther = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
-        ' title="{caption}" ' + STYLE_SETTING + '>\n' +
-        '   <div class="file-preview-other-frame">\n' +
-        '   ' + DEFAULT_PREVIEW + '\n' +
-        '   </div>\n' +
-        '   <div class="file-preview-other-footer">{footer}</div>\n' +
-        '</div>';
+        '{uploadIcon}</button>';
+    tActionZoom = '<button type="button" class="kv-file-zoom {zoomClass}" title="{zoomTitle}">{zoomIcon}</button>';
+    tActionDrag = '<span class="file-drag-handle {dragClass}" title="{dragTitle}">{dragIcon}</span>';
+    tTagBef = '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
+        ' data-template="{template}"';
+    tTagBef1 = tTagBef + '><div class="kv-file-content">\n';
+    tTagBef2 = tTagBef + ' title="{caption}" ' + STYLE_SETTING + '><div class="kv-file-content">\n';
+    tTagAft = '</div>{footer}\n</div>\n';
+    tGeneric = '{content}\n';
+    tHtml = '<div class="kv-preview-data file-preview-html" title="{caption}" ' + STYLE_SETTING + '>{data}</div>\n';
+    tImage = '<img src="{data}" class="kv-preview-data file-preview-image" title="{caption}" alt="{caption}" ' +
+        STYLE_SETTING + '>\n';
+    tText = '<textarea class="kv-preview-data file-preview-text" title="{caption}" readonly ' + STYLE_SETTING +
+        '>{data}</textarea>\n';
+    tVideo = '<video class="kv-preview-data" width="{width}" height="{height}" controls>\n' +
+        '<source src="{data}" type="{type}">\n' + DEFAULT_PREVIEW + '\n</video>\n';
+    tAudio = '<audio class="kv-preview-data" controls>\n<source src="' + '{data}' + '" type="{type}">\n' +
+        DEFAULT_PREVIEW + '\n</audio>\n';
+    tFlash = '<object class="kv-preview-data file-object" type="application/x-shockwave-flash" ' +
+        'width="{width}" height="{height}" data="{data}">\n' + OBJECT_PARAMS + ' ' + DEFAULT_PREVIEW + '\n</object>\n';
+    tObject = '<object class="kv-preview-data file-object" data="{data}" type="{type}" width="{width}" height="{height}">\n' +
+        '<param name="movie" value="{caption}" />\n' + OBJECT_PARAMS + ' ' + DEFAULT_PREVIEW + '\n</object>\n';
+    tPdf = '<embed class="kv-preview-data" src="{data}" width="{width}" height="{height}" type="application/pdf">\n';
+    tOther = '<div class="kv-preview-data file-preview-other-frame">\n' + DEFAULT_PREVIEW + '\n</div>\n';
     defaultLayoutTemplates = {
         main1: tMain1,
         main2: tMain2,
         preview: tPreview,
         close: tClose,
-        zoom: tZoom,
-        icon: tIcon,
+        fileIcon: tFileIcon,
         caption: tCaption,
+        modalMain: tModalMain,
         modal: tModal,
         progress: tProgress,
+        size: tSize,
         footer: tFooter,
         actions: tActions,
         actionDelete: tActionDelete,
         actionUpload: tActionUpload,
+        actionZoom: tActionZoom,
+        actionDrag: tActionDrag,
         btnDefault: tBtnDefault,
         btnLink: tBtnLink,
         btnBrowse: tBtnBrowse
     };
     defaultPreviewTemplates = {
-        generic: tGeneric,
-        html: tHtml,
-        image: tImage,
-        text: tText,
-        video: tVideo,
-        audio: tAudio,
-        flash: tFlash,
-        object: tObject,
-        other: tOther
+        generic: tTagBef1 + tGeneric + tTagAft,
+        html: tTagBef1 + tHtml + tTagAft,
+        image: tTagBef1 + tImage + tTagAft,
+        text: tTagBef1 + tText + tTagAft,
+        video: tTagBef2 + tVideo + tTagAft,
+        audio: tTagBef2 + tAudio + tTagAft,
+        flash: tTagBef2 + tFlash + tTagAft,
+        object: tTagBef2 + tObject + tTagAft,
+        pdf: tTagBef2 + tPdf + tTagAft,
+        other: tTagBef2 + tOther + tTagAft
     };
     defaultPreviewTypes = ['image', 'html', 'text', 'video', 'audio', 'flash', 'object'];
     defaultPreviewSettings = {
         image: {width: "auto", height: "160px"},
         html: {width: "213px", height: "160px"},
-        text: {width: "160px", height: "136px"},
+        text: {width: "213px", height: "160px"},
         video: {width: "213px", height: "160px"},
         audio: {width: "213px", height: "80px"},
         flash: {width: "213px", height: "160px"},
         object: {width: "160px", height: "160px"},
+        pdf: {width: "160px", height: "160px"},
         other: {width: "160px", height: "160px"}
+    };
+    defaultPreviewZoomSettings = {
+        image: {width: "auto", height: "100%"},
+        html: {width: "100%", height: "100%", 'min-height': "480px"},
+        text: {width: "100%", height: "100%", 'min-height': "480px"},
+        video: {width: "auto", height: "100%", 'max-width': "100%"},
+        audio: {width: "100%", height: "30px"},
+        flash: {width: "auto", height: "480px"},
+        object: {width: "auto", height: "480px"},
+        pdf: {width: "100%", height: "100%", 'min-height': "480px"},
+        other: {width: "auto", height: "100%", 'min-height': "480px"}
     };
     defaultFileTypeSettings = {
         image: function (vType, vName) {
@@ -482,8 +489,11 @@
         flash: function (vType, vName) {
             return compare(vType, 'application/x-shockwave-flash', true) || compare(vName, /\.(swf)$/i);
         },
-        object: function (vType, vName) {
+        pdf: function (vType, vName) {
             return compare(vType, 'application/pdf', true) || compare(vName, /\.(pdf)$/i);
+        },
+        object: function () {
+            return true;
         },
         other: function () {
             return true;
@@ -495,8 +505,9 @@
     isArray = function (a) {
         return Array.isArray(a) || Object.prototype.toString.call(a) === '[object Array]';
     };
-    isSet = function (needle, haystack) {
-        return (typeof haystack === 'object' && needle in haystack);
+    ifSet = function (needle, haystack, def) {
+        def = def || '';
+        return (typeof haystack === 'object' && needle in haystack) ? haystack[needle] : def;
     };
     getElement = function (options, param, value) {
         return (isEmpty(options) || isEmpty(options[param])) ? value : $(options[param]);
@@ -529,6 +540,60 @@
         /** @namespace objUrl.revokeObjectURL */
         objUrl.revokeObjectURL(data);
     };
+    findFileName = function (filePath) {
+        var sepIndex = filePath.lastIndexOf('/');
+        if (sepIndex === -1) {
+            sepIndex = filePath.lastIndexOf('\\');
+        }
+        return filePath.split(filePath.substring(sepIndex, sepIndex + 1)).pop();
+    };
+    checkFullScreen = function () {
+        //noinspection JSUnresolvedVariable
+        return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement ||
+            document.msFullscreenElement;
+    };
+    toggleFullScreen = function (maximize) {
+        if (maximize && !checkFullScreen()) {
+            /** @namespace document.documentElement.requestFullscreen */
+            /** @namespace document.documentElement.msRequestFullscreen */
+            /** @namespace document.documentElement.mozRequestFullScreen */
+            /** @namespace document.documentElement.webkitRequestFullscreen */
+            /** @namespace Element.ALLOW_KEYBOARD_INPUT */
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) {
+                document.documentElement.msRequestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+        } else {
+            /** @namespace document.exitFullscreen */
+            /** @namespace document.msExitFullscreen */
+            /** @namespace document.mozCancelFullScreen */
+            /** @namespace document.webkitExitFullscreen */
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+    };
+    moveArray = function (arr, oldIndex, newIndex) {
+        if (newIndex >= arr.length) {
+            var k = newIndex - arr.length;
+            while ((k--) + 1) {
+                arr.push(undefined);
+            }
+        }
+        arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+        return arr;
+    };
     FileInput = function (element, options) {
         var self = this;
         self.$element = $(element);
@@ -545,7 +610,6 @@
             self.$element.removeClass('file-loading');
         }
     };
-
     FileInput.prototype = {
         constructor: FileInput,
         _init: function (options) {
@@ -626,13 +690,14 @@
             self.id = self.$element.attr('id');
             previewCache.init(self);
             self._initPreview(true);
-            self._initPreviewDeletes();
+            self._initPreviewActions();
             self.options = options;
             self._setFileDropZoneTitle();
             self.$element.removeClass('file-loading');
             if (self.$element.attr('disabled')) {
                 self.disable();
             }
+            self._initZoom();
         },
         _validate: function () {
             var self = this, $exception;
@@ -768,7 +833,7 @@
             var self = this, isValid, vType, cat, i;
             for (i = 0; i < defaultPreviewTypes.length; i += 1) {
                 cat = defaultPreviewTypes[i];
-                isValid = isSet(cat, self.fileTypeSettings) ? self.fileTypeSettings[cat] : defaultFileTypeSettings[cat];
+                isValid = ifSet(cat, self.fileTypeSettings, defaultFileTypeSettings[cat]);
                 vType = isValid(file.type, file.name) ? cat : '';
                 if (!isEmpty(vType)) {
                     return vType;
@@ -787,6 +852,7 @@
                     $.each(self.previewFileExtSettings, function (key, func) {
                         if (self.previewFileIconSettings[key] && func(ext)) {
                             icn = self.previewFileIconSettings[key];
+                            return;
                         }
                     });
                 }
@@ -833,6 +899,33 @@
             }
             return true;
         },
+        _listenFullScreen: function (isFullScreen) {
+            var self = this, $modal = self.$modal, $btnFull, $btnBord;
+            if (!$modal || !$modal.length) {
+                return;
+            }
+            $btnFull = $modal && $modal.find('.btn-fullscreen');
+            $btnBord = $modal && $modal.find('.btn-borderless');
+            if (!$btnFull.length || !$btnBord.length) {
+                return;
+            }
+            $btnFull.removeClass('active').attr('aria-pressed', 'false');
+            $btnBord.removeClass('active').attr('aria-pressed', 'false');
+            if (isFullScreen) {
+                $btnFull.addClass('active').attr('aria-pressed', 'true');
+            } else {
+                $btnBord.addClass('active').attr('aria-pressed', 'true');
+            }
+            if ($modal.hasClass('file-zoom-fullscreen')) {
+                self._maximizeZoomDialog();
+            } else {
+                if (isFullScreen) {
+                    self._maximizeZoomDialog();
+                } else {
+                    $btnBord.removeClass('active').attr('aria-pressed', 'false');
+                }
+            }
+        },
         _listen: function () {
             var self = this, $el = self.$element, $form = $el.closest('form'), $cont = self.$container;
             handler($el, 'change', $.proxy(self._change, self));
@@ -845,6 +938,14 @@
                 handler($form, 'submit', $.proxy(self._submitForm, self));
             }
             handler(self.$container.find('.fileinput-upload'), 'click', $.proxy(self._uploadClick, self));
+            handler($(window), 'resize', function () {
+                self._listenFullScreen(screen.width === window.innerWidth && screen.height === window.innerHeight);
+            });
+            handler($(document), 'webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange',
+                function () {
+                    self._listenFullScreen(checkFullScreen());
+                });
+
         },
         _initDragDrop: function () {
             var self = this, $zone = self.$dropZone;
@@ -926,6 +1027,34 @@
             }
             self._validateDefaultPreview();
         },
+        _initSortable: function () {
+            var self = this, $preview = self.$preview, $el, settings;
+            if (!window.Sortable) {
+                return;
+            }
+            $el = $preview.find('.file-initial-thumbs');
+            settings = {
+                handle: '.drag-handle-init',
+                dataIdAttr: 'data-preview-id',
+                onSort: function (e) {
+                    var oldIndex = e.oldIndex, newIndex = e.newIndex;
+                    self.initialPreview = moveArray(self.initialPreview, oldIndex, newIndex);
+                    self.initialPreviewConfig = moveArray(self.initialPreviewConfig, oldIndex, newIndex);
+                    previewCache.init(self);
+                    self._raise('filesorted', {
+                        previewId: $(e.item).attr('id'),
+                        'oldIndex': oldIndex,
+                        'newIndex': newIndex,
+                        stack: self.initialPreviewConfig
+                    });
+                }
+            };
+            if ($el.data('sortable')) {
+                $el.sortable('destroy');
+            }
+            $.extend(true, settings, self.fileActionSettings.dragSettings);
+            $el.sortable(settings);
+        },
         _initPreview: function (isInit) {
             var self = this, cap = self.initialCaption || '', out;
             if (!previewCache.count(self.id)) {
@@ -941,11 +1070,261 @@
             cap = isInit && self.initialCaption ? self.initialCaption : out.caption;
             self.$preview.html(out.content);
             self._setCaption(cap);
+            self._initSortable();
             if (!isEmpty(out.content)) {
                 self.$container.removeClass('file-input-new');
             }
         },
-        _initPreviewDeletes: function () {
+        _getZoomButton: function (type) {
+            var self = this, label = self.previewZoomButtonIcons[type], css = self.previewZoomButtonClasses[type],
+                title = ' title="' + (self.previewZoomButtonTitles[type] || '') + '" ',
+                params = title + (type === 'close' ? ' data-dismiss="modal" aria-hidden="true"' : '');
+            if (type === 'fullscreen' || type === 'borderless' || type === 'toggleheader') {
+                params += ' data-toggle="button" aria-pressed="false" autocomplete="off"';
+            }
+            return '<button type="button" class="' + css + ' btn-' + type + '"' + params + '>' + label + '</button>';
+        },
+        _getModalContent: function () {
+            var self = this;
+            return self._getLayoutTemplate('modal')
+                .replace(/\{heading}/g, self.msgZoomModalHeading)
+                .replace(/\{prev}/g, self._getZoomButton('prev'))
+                .replace(/\{next}/g, self._getZoomButton('next'))
+                .replace(/\{toggleheader}/g, self._getZoomButton('toggleheader'))
+                .replace(/\{fullscreen}/g, self._getZoomButton('fullscreen'))
+                .replace(/\{borderless}/g, self._getZoomButton('borderless'))
+                .replace(/\{close}/g, self._getZoomButton('close'));
+        },
+        _listenModalEvent: function (event) {
+            var self = this, $modal = self.$modal, getParams = function (e) {
+                return {
+                    sourceEvent: e,
+                    previewId: $modal.data('previewId'),
+                    modal: $modal
+                };
+            };
+            $modal.on(event + '.bs.modal', function (e) {
+                var $btnFull = $modal.find('.btn-fullscreen'), $btnBord = $modal.find('.btn-borderless');
+                self._raise('filezoom' + event, getParams(e));
+                if (event === 'shown') {
+                    $btnBord.removeClass('active').attr('aria-pressed', 'false');
+                    $btnFull.removeClass('active').attr('aria-pressed', 'false');
+                    if ($modal.hasClass('file-zoom-fullscreen')) {
+                        self._maximizeZoomDialog();
+                        if (checkFullScreen()) {
+                            $btnFull.addClass('active').attr('aria-pressed', 'true');
+                        } else {
+                            $btnBord.addClass('active').attr('aria-pressed', 'true');
+                        }
+                    }
+                }
+            });
+        },
+        _initZoom: function () {
+            var self = this, $dialog, modalMain = self._getLayoutTemplate('modalMain'), modalId = '#' + MODAL_ID;
+            self.$modal = $(modalId);
+            if (!self.$modal || !self.$modal.length) {
+                $dialog = $(document.createElement('div')).html(modalMain).insertAfter(self.$container);
+                self.$modal = $('#' + MODAL_ID).insertBefore($dialog);
+                $dialog.remove();
+            }
+            self.$modal.html(self._getModalContent());
+            self._listenModalEvent('show');
+            self._listenModalEvent('shown');
+            self._listenModalEvent('hide');
+            self._listenModalEvent('hidden');
+            self._listenModalEvent('loaded');
+        },
+        _initZoomButtons: function () {
+            var self = this, previewId = self.$modal.data('previewId') || '', $first, $last,
+                frames = self.$preview.find('.file-preview-frame').toArray(), len = frames.length,
+                $prev = self.$modal.find('.btn-prev'), $next = self.$modal.find('.btn-next');
+
+            if (!len) {
+                return;
+            }
+            $first = $(frames[0]);
+            $last = $(frames[len - 1]);
+            $prev.removeAttr('disabled');
+            $next.removeAttr('disabled');
+            if ($first.length && $first.attr('id') === previewId) {
+                $prev.attr('disabled', true);
+            }
+            if ($last.length && $last.attr('id') === previewId) {
+                $next.attr('disabled', true);
+            }
+        },
+        _maximizeZoomDialog: function () {
+            var self = this, $modal = self.$modal, $head = $modal.find('.modal-header:visible'),
+                $foot = $modal.find('.modal-footer:visible'), $body = $modal.find('.modal-body'),
+                h = $(window).height(), diff = 0;
+            $modal.addClass('file-zoom-fullscreen');
+            if ($head && $head.length) {
+                h -= $head.outerHeight(true);
+            }
+            if ($foot && $foot.length) {
+                h -= $foot.outerHeight(true);
+            }
+            if ($body && $body.length) {
+                diff = $body.outerHeight(true) - $body.height();
+                h -= diff;
+            }
+            $modal.find('.kv-zoom-body').height(h);
+        },
+        _resizeZoomDialog: function (fullScreen) {
+            var self = this, $modal = self.$modal, $btnFull = $modal.find('.btn-fullscreen'),
+                $btnBord = $modal.find('.btn-borderless');
+            if ($modal.hasClass('file-zoom-fullscreen')) {
+                toggleFullScreen(false);
+                if (!fullScreen) {
+                    if (!$btnFull.hasClass('active')) {
+                        $modal.removeClass('file-zoom-fullscreen');
+                        self.$modal.find('.kv-zoom-body').css('height', self.zoomModalHeight);
+                    } else {
+                        $btnFull.removeClass('active').attr('aria-pressed', 'false');
+                    }
+                } else {
+                    if (!$btnFull.hasClass('active')) {
+                        $modal.removeClass('file-zoom-fullscreen');
+                        self._resizeZoomDialog(true);
+                        if ($btnBord.hasClass('active')) {
+                            $btnBord.removeClass('active').attr('aria-pressed', 'false');
+                        }
+                    }
+                }
+            } else {
+                if (!fullScreen) {
+                    self._maximizeZoomDialog();
+                    return;
+                }
+                toggleFullScreen(true);
+            }
+            $modal.focus();
+        },
+        _setZoomContent: function ($preview, animate) {
+            var self = this, $content, tmplt, body, title, $body, $dataEl, config, previewId = $preview.attr('id'),
+                $modal = self.$modal, $prev = $modal.find('.btn-prev'), $next = $modal.find('.btn-next'), $tmp,
+                $btnFull = $modal.find('.btn-fullscreen'), $btnBord = $modal.find('.btn-borderless'),
+                $btnTogh = $modal.find('.btn-toggleheader');
+            tmplt = $preview.data('template') || 'generic';
+            $content = $preview.find('.kv-file-content');
+            body = $content.length ? $content.html() : '';
+            title = $preview.find('.file-footer-caption').text() || '';
+            $modal.find('.kv-zoom-title').html(title);
+            $body = $modal.find('.kv-zoom-body');
+            if (animate) {
+                $tmp = $body.clone().insertAfter($body);
+                $body.html(body).hide();
+                $tmp.fadeOut('fast', function () {
+                    $body.fadeIn('fast');
+                    $tmp.remove();
+                });
+            } else {
+                $body.html(body);
+            }
+            config = self.previewZoomSettings[tmplt];
+            if (config) {
+                $dataEl = $body.find('.kv-preview-data');
+                addCss($dataEl, 'file-zoom-detail');
+                $.each(config, function (key, value) {
+                    $dataEl.css(key, value);
+                    if (($dataEl.attr('width') && key === 'width') || ($dataEl.attr('height') && key === 'height')) {
+                        $dataEl.removeAttr(key);
+                    }
+                });
+            }
+            $modal.data('previewId', previewId);
+            handler($prev, 'click', function () {
+                self._zoomSlideShow('prev', previewId);
+            });
+            handler($next, 'click', function () {
+                self._zoomSlideShow('next', previewId);
+            });
+            handler($btnFull, 'click', function () {
+                self._resizeZoomDialog(true);
+            });
+            handler($btnBord, 'click', function () {
+                self._resizeZoomDialog(false);
+            });
+            handler($btnTogh, 'click', function () {
+                var $header = $modal.find('.modal-header'), $floatBar = $modal.find('.modal-body .floating-buttons'),
+                    ht, $actions = $header.find('.kv-zoom-actions'), resize = function (height) {
+                        var $body = self.$modal.find('.kv-zoom-body'), h = self.zoomModalHeight;
+                        if ($modal.hasClass('file-zoom-fullscreen')) {
+                            h = $body.outerHeight(true);
+                            if (!height) {
+                                h = h - $header.outerHeight(true);
+                            }
+                        }
+                        $body.css('height', height ? h + height : h);
+                    };
+                if ($header.is(':visible')) {
+                    ht = $header.outerHeight(true);
+                    $header.slideUp('slow', function () {
+                        $actions.find('.btn').appendTo($floatBar);
+                        resize(ht);
+                    });
+                } else {
+                    $floatBar.find('.btn').appendTo($actions);
+                    $header.slideDown('slow', function () {
+                        resize();
+                    });
+                }
+                $modal.focus();
+            });
+            handler($modal, 'keydown', function (e) {
+                var key = e.which || e.keyCode;
+                if (key === 37 && !$prev.attr('disabled')) {
+                    self._zoomSlideShow('prev', previewId);
+                }
+                if (key === 39 && !$next.attr('disabled')) {
+                    self._zoomSlideShow('next', previewId);
+                }
+            });
+        },
+        _zoomPreview: function ($btn) {
+            var self = this, $preview;
+            if (!$btn.length) {
+                throw 'Cannot zoom to detailed preview!';
+            }
+            self.$modal.html(self._getModalContent());
+            $preview = $btn.closest('.file-preview-frame');
+            self._setZoomContent($preview);
+            self.$modal.modal('show');
+            self._initZoomButtons();
+        },
+        _zoomSlideShow: function (dir, previewId) {
+            var self = this, $btn = self.$modal.find('.kv-zoom-actions .btn-' + dir), $targFrame, i,
+                frames = self.$preview.find('.file-preview-frame').toArray(), len = frames.length, out;
+            if ($btn.attr('disabled')) {
+                return;
+            }
+            for (i = 0; i < len; i++) {
+                if ($(frames[i]).attr('id') === previewId) {
+                    out = dir === 'prev' ? i - 1 : i + 1;
+                    break;
+                }
+            }
+            if (out < 0 || out >= len || !frames[out]) {
+                return;
+            }
+            $targFrame = $(frames[out]);
+            if ($targFrame.length) {
+                self._setZoomContent($targFrame, true);
+            }
+            self._initZoomButtons();
+            self._raise('filezoom' + dir, {'previewId': previewId, modal: self.$modal});
+        },
+        _initZoomButton: function () {
+            var self = this;
+            self.$preview.find('.kv-file-zoom').each(function () {
+                var $el = $(this);
+                handler($el, 'click', function () {
+                    self._zoomPreview($el);
+                });
+            });
+        },
+        _initPreviewActions: function () {
             var self = this, deleteExtraData = self.deleteExtraData || {},
                 resetProgress = function () {
                     var hasFiles = self.isUploadable ? previewCache.count(self.id) : self.$element.get(0).files.length;
@@ -954,7 +1333,7 @@
                         self.initialCaption = '';
                     }
                 };
-
+            self._initZoomButton();
             self.$preview.find('.kv-file-remove').each(function () {
                 var $el = $(this), vUrl = $el.data('url') || self.deleteUrl, vKey = $el.data('key');
                 if (isEmpty(vUrl) || vKey === undefined) {
@@ -1101,6 +1480,10 @@
                 self._clearPreview();
                 self._initCaption();
             }
+            if (self.showPreview) {
+                self._initZoom();
+                self._initSortable();
+            }
         },
         _clearDefaultPreview: function () {
             var self = this;
@@ -1125,14 +1508,14 @@
                 out = previewCache.out(self.id);
                 self.$preview.html(out.content);
                 self._setCaption(out.caption);
-                self._initPreviewDeletes();
+                self._initPreviewActions();
             } else {
                 self._clearPreview();
             }
         },
         _getLayoutTemplate: function (t) {
             var self = this,
-                template = isSet(t, self.layoutTemplates) ? self.layoutTemplates[t] : defaultLayoutTemplates[t];
+                template = ifSet(t, self.layoutTemplates, defaultLayoutTemplates[t]);
             if (isEmpty(self.customLayoutTags)) {
                 return template;
             }
@@ -1140,7 +1523,7 @@
         },
         _getPreviewTemplate: function (t) {
             var self = this,
-                template = isSet(t, self.previewTemplates) ? self.previewTemplates[t] : defaultPreviewTemplates[t];
+                template = ifSet(t, self.previewTemplates, defaultPreviewTemplates[t]);
             if (isEmpty(self.customPreviewTags)) {
                 return template;
             }
@@ -1228,7 +1611,13 @@
                 config = out.initialPreviewConfig || [];
                 tags = out.initialPreviewThumbTags || [];
                 append = out.append === undefined || out.append ? true : false;
+                if (content.length > 0 && !isArray(content)) {
+                    content = content.split(self.initialPreviewDelimiter);
+                }
                 self.overwriteInitial = false;
+                self.initialPreview.concat(content);
+                self.initialPreviewThumbTags.concat(tags);
+                self.initialPreviewConfig.concat(config);
                 if ($thumb !== undefined) {
                     if (!allFiles) {
                         index = previewCache.add(self.id, content, config[0], tags[0], append);
@@ -1236,7 +1625,7 @@
                         $newThumb = $(data).hide();
                         $thumb.after($newThumb).fadeOut('slow', function () {
                             $newThumb.fadeIn('slow').css('display:inline-block');
-                            self._initPreviewDeletes();
+                            self._initPreviewActions();
                             self._clearFileInput();
                             $thumb.remove();
                         });
@@ -1250,7 +1639,7 @@
                 } else {
                     previewCache.set(self.id, content, config, tags, append);
                     self._initPreview();
-                    self._initPreviewDeletes();
+                    self._initPreviewActions();
                 }
             }
         },
@@ -1321,21 +1710,16 @@
                 }
             };
             chkComplete = function () {
+                var u = self.uploadCache;
                 if (!self.fileBatchCompleted) {
                     return;
                 }
                 setTimeout(function () {
                     if (self.showPreview) {
-                        previewCache.set(
-                            self.id,
-                            self.uploadCache.content,
-                            self.uploadCache.config,
-                            self.uploadCache.tags,
-                            self.uploadCache.append
-                        );
+                        previewCache.set(self.id, u.content, u.config, u.tags, u.append);
                         if (self.hasInitData) {
                             self._initPreview();
-                            self._initPreviewDeletes();
+                            self._initPreviewActions();
                         }
                     }
                     self.unlock();
@@ -1583,6 +1967,7 @@
             if (!self.showPreview) {
                 return;
             }
+            self._initZoomButton();
             self.$preview.find('.kv-file-remove').each(function () {
                 var $el = $(this), $frame = $el.closest('.file-preview-frame'), hasError,
                     id = $frame.attr('id'), ind = $frame.attr('data-fileindex'), n, cap, status;
@@ -1639,33 +2024,55 @@
         _showFileIcon: function () {
             this.$captionContainer.find('.kv-caption-icon').show();
         },
+        _getSize: function (bytes) {
+            var size = parseFloat(bytes);
+            if (bytes === null || isNaN(size)) {
+                return '';
+            }
+            var self = this, i, tmplt = self._getLayoutTemplate('size'), func = self.fileSizeGetter, sizes, out;
+            if (typeof func === 'function') {
+                out = func(bytes);
+            } else {
+                i = Math.floor(Math.log(size) / Math.log(1024));
+                sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+                    out = (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + sizes[i];
+            }
+            return tmplt.replace('{sizeText}', out);
+        },
+        _generatePreviewTemplate: function (cat, data, fname, ftype, previewId, isError, size, frameClass, foot, ind) {
+            var self = this, tmplt = self._getPreviewTemplate(cat), content, sText, css = frameClass || '',
+                config = ifSet(cat, self.previewSettings, defaultPreviewSettings[cat]), caption = self.slug(fname),
+                footer = foot || self._renderFileFooter(caption, size, config.width, isError);
+            ind = ind || previewId.slice(previewId.lastIndexOf('-') + 1);
+            tmplt = self._parseFilePreviewIcon(tmplt, fname);
+            if (cat === 'text' || cat === 'html') {
+                sText = cat === 'text' ? htmlEncode(data) : data;
+                content = tmplt.replace(/\{previewId}/g, previewId).replace(/\{caption}/g, caption)
+                    .replace(/\{width}/g, config.width).replace(/\{height}/g, config.height)
+                    .replace(/\{frameClass}/g, css).replace(/\{cat}/g, ftype)
+                    .replace(/\{footer}/g, footer).replace(/\{fileindex}/g, ind)
+                    .replace(/\{data}/g, sText).replace(/\{template}/g, cat);
+            } else {
+                content = tmplt.replace(/\{previewId}/g, previewId).replace(/\{caption}/g, caption)
+                    .replace(/\{frameClass}/g, css).replace(/\{type}/g, ftype).replace(/\{fileindex}/g, ind)
+                    .replace(/\{width}/g, config.width).replace(/\{height}/g, config.height)
+                    .replace(/\{footer}/g, footer).replace(/\{data}/g, data).replace(/\{template}/g, cat);
+            }
+            return content;
+        },
         _previewDefault: function (file, previewId, isDisabled) {
-            if (!this.showPreview) {
+            var self = this, $preview = self.$preview, $previewLive = $preview.find('.file-live-thumbs');
+            if (!self.showPreview) {
                 return;
             }
-            var self = this, frameClass = '', fname = file ? file.name : '',
-                /** @namespace objUrl.createObjectURL */
-                data = objUrl.createObjectURL(file), ind = previewId.slice(previewId.lastIndexOf('-') + 1),
-                config = self.previewSettings.other || defaultPreviewSettings.other,
-                footer = self._renderFileFooter(file.name, config.width),
-                previewOtherTemplate = self._parseFilePreviewIcon(self._getPreviewTemplate('other'), fname);
-            if (isDisabled === true) {
-                if (!self.isUploadable) {
-                    footer += '<div class="file-other-error" title="' + self.fileActionSettings.indicatorErrorTitle +
-                        '">' + self.fileActionSettings.indicatorError + '</div>';
-                }
-            }
+            var fname = file ? file.name : '', ftype = file ? file.type : '', content,
+                isError = isDisabled === true && !self.isUploadable, data = objUrl.createObjectURL(file);
             self._clearDefaultPreview();
-            self.$preview.append("\n" + previewOtherTemplate
-                    .replace(/\{previewId}/g, previewId)
-                    .replace(/\{frameClass}/g, frameClass)
-                    .replace(/\{fileindex}/g, ind)
-                    .replace(/\{caption}/g, self.slug(file.name))
-                    .replace(/\{width}/g, config.width)
-                    .replace(/\{height}/g, config.height)
-                    .replace(/\{type}/g, file.type)
-                    .replace(/\{data}/g, data)
-                    .replace(/\{footer}/g, footer));
+            content = self._generatePreviewTemplate('other', data, fname, ftype, previewId, isError, file.size);
+            if (!$previewLive.length) {
+                $previewLive = $(document.createElement('div')).addClass('file-live-thumbs').appendTo($preview);
+            }
+            $previewLive.append("\n" + content);
             if (isDisabled === true && self.isUploadable) {
                 self._setThumbStatus($('#' + previewId), 'Error');
             }
@@ -1675,40 +2082,26 @@
                 return;
             }
             var self = this, cat = self._parseFileType(file), fname = file ? file.name : '', caption = self.slug(fname),
-                content, strText, types = self.allowedPreviewTypes, mimes = self.allowedPreviewMimeTypes,
-                tmplt = self._getPreviewTemplate(cat), chkTypes = types && types.indexOf(cat) >= 0, id,
-                config = isSet(cat, self.previewSettings) ? self.previewSettings[cat] : defaultPreviewSettings[cat],
-                chkMimes = mimes && mimes.indexOf(file.type) !== -1,
-                footer = self._renderFileFooter(caption, config.width), modal = '',
-                ind = previewId.slice(previewId.lastIndexOf('-') + 1);
+                types = self.allowedPreviewTypes, mimes = self.allowedPreviewMimeTypes, $preview = self.$preview,
+                chkTypes = types && types.indexOf(cat) >= 0, $previewLive = $preview.find('.file-live-thumbs'),
+                iData = (cat === 'text' || cat === 'html' || cat === 'image') ? theFile.target.result : data, content,
+                chkMimes = mimes && mimes.indexOf(file.type) !== -1;
+            if (!$previewLive.length) {
+                $previewLive = $(document.createElement('div')).addClass('file-live-thumbs').appendTo($preview);
+            }
+            /** @namespace window.DOMPurify */
+            if (cat === 'html' && self.purifyHtml && window.DOMPurify) {
+                iData = window.DOMPurify.sanitize(iData);
+            }
             if (chkTypes || chkMimes) {
-                tmplt = self._parseFilePreviewIcon(tmplt, fname.split('.').pop());
-                if (cat === 'text') {
-                    strText = htmlEncode(theFile.target.result);
-                    id = 'text-' + uniqId();
-                    content = tmplt.replace(/\{zoom}/g, self._getLayoutTemplate('zoom'));
-                    modal = self._getLayoutTemplate('modal').replace('{id}', id)
-                        .replace(/\{title}/g, caption)
-                        .replace(/\{body}/g, strText).replace(/\{heading}/g, self.msgZoomModalHeading);
-                    content = content.replace(/\{previewId}/g, previewId).replace(/\{caption}/g, caption)
-                            .replace(/\{width}/g, config.width).replace(/\{height}/g, config.height)
-                            .replace(/\{frameClass}/g, '').replace(/\{zoomInd}/g, self.zoomIndicator)
-                            .replace(/\{footer}/g, footer).replace(/\{fileindex}/g, ind)
-                            .replace(/\{type}/g, file.type).replace(/\{zoomTitle}/g, self.msgZoomTitle)
-                            .replace(/\{dialog}/g, "$('#" + id + "').modal('show')")
-                            .replace(/\{data}/g, strText) + modal;
-                } else {
-                    content = tmplt.replace(/\{previewId}/g, previewId).replace(/\{caption}/g, caption)
-                        .replace(/\{frameClass}/g, '').replace(/\{type}/g, file.type).replace(/\{fileindex}/g, ind)
-                        .replace(/\{width}/g, config.width).replace(/\{height}/g, config.height)
-                        .replace(/\{footer}/g, footer).replace(/\{data}/g, data);
-                }
+                content = self._generatePreviewTemplate(cat, iData, fname, file.type, previewId, false, file.size);
                 self._clearDefaultPreview();
-                self.$preview.append("\n" + content);
+                $previewLive.append("\n" + content);
                 self._validateImage(i, previewId, caption, file.type);
             } else {
                 self._previewDefault(file, previewId);
             }
+            self._initSortable();
         },
         _slugDefault: function (text) {
             return isEmpty(text) ? '' : String(text).replace(/[\-\[\]\/\{}:;#%=\(\)\*\+\?\\\^\$\|<>&"']/g, '_');
@@ -1719,6 +2112,8 @@
                 $container = self.$previewContainer, $status = self.$previewStatus, msgLoading = self.msgLoading,
                 msgProgress = self.msgProgress, previewInitId = self.previewInitId, numFiles = files.length,
                 settings = self.fileTypeSettings, ctr = self.filestack.length, readFile,
+                maxPreviewSize = self.maxFilePreviewSize && parseFloat(self.maxFilePreviewSize),
+                canPreview = $preview.length && (!maxPreviewSize || isNaN(maxPreviewSize)),
                 throwError = function (msg, file, previewId, index) {
                     var p1 = $.extend(true, {}, self._getOutData({}, {}, files), {id: previewId, index: index}),
                         p2 = {id: previewId, index: index, file: file, files: files};
@@ -1726,7 +2121,9 @@
                     if (self.isUploadable) {
                         self.addToStack(undefined);
                     }
-                    setTimeout(readFile(index + 1), 100);
+                    setTimeout(function () {
+                        readFile(index + 1);
+                    }, 100);
                     self._initFileActions();
                     if (self.removeFromPreviewOnError) {
                         $('#' + previewId).remove();
@@ -1743,7 +2140,6 @@
                     self.totalImagesCount++;
                 }
             });
-
             readFile = function (i) {
                 if (isEmpty($el.attr('multiple'))) {
                     numFiles = 1;
@@ -1758,7 +2154,7 @@
                     $status.html('');
                     return;
                 }
-                var node = ctr + i, previewId = previewInitId + "-" + node, isText, file = files[i],
+                var node = ctr + i, previewId = previewInitId + "-" + node, isText, isImage, file = files[i],
                     caption = self.slug(file.name), fileSize = (file.size || 0) / 1000, checkFile, fileExtExpr = '',
                     previewData = objUrl.createObjectURL(file), fileCount = 0, j, msg, typ, chk,
                     fileTypes = self.allowedFileTypes, strTypes = isEmpty(fileTypes) ? '' : fileTypes.join(', '),
@@ -1799,11 +2195,21 @@
                 }
                 if (!self.showPreview) {
                     self.addToStack(file);
-                    setTimeout(readFile(i + 1), 100);
+                    setTimeout(function () {
+                        readFile(i + 1);
+                    }, 100);
                     self._raise('fileloaded', [file, previewId, i, reader]);
                     return;
                 }
-                if ($preview.length > 0 && FileReader !== undefined) {
+                if (!canPreview && fileSize > maxPreviewSize) {
+                    $container.addClass('file-thumb-loading');
+                    self._previewDefault(file, previewId);
+                    self._initFileActions();
+                    self._updateFileDetails(numFiles);
+                    readFile(i + 1);
+                    return;
+                }
+                if ($preview.length && FileReader !== undefined) {
                     $status.html(msgLoading.replace('{index}', i + 1).replace('{files}', numFiles));
                     $container.addClass('file-thumb-loading');
                     reader.onerror = function (evt) {
@@ -1814,8 +2220,7 @@
                         self._initFileActions();
                     };
                     reader.onloadend = function () {
-                        msg = msgProgress
-                            .replace('{index}', i + 1).replace('{files}', numFiles)
+                        msg = msgProgress.replace('{index}', i + 1).replace('{files}', numFiles)
                             .replace('{percent}', 50).replace('{name}', caption);
                         setTimeout(function () {
                             $status.html(msg);
@@ -1834,11 +2239,17 @@
                             }, 100);
                         }
                     };
-                    isText = isSet('text', settings) ? settings.text : defaultFileTypeSettings.text;
+                    isText = ifSet('text', settings, defaultFileTypeSettings.text);
+                    isImage = ifSet('image', settings, defaultFileTypeSettings.image);
+
                     if (isText(file.type, caption)) {
                         reader.readAsText(file, self.textEncoding);
                     } else {
-                        reader.readAsArrayBuffer(file);
+                        if (isImage(file.type, caption)) {
+                            reader.readAsDataURL(file);
+                        } else {
+                            reader.readAsArrayBuffer(file);
+                        }
                     }
                 } else {
                     self._previewDefault(file, previewId);
@@ -1856,7 +2267,8 @@
         },
         _updateFileDetails: function (numFiles) {
             var self = this, $el = self.$element, fileStack = self.getFileStack(),
-                name = ($el[0].files[0] && $el[0].files[0].name) || (fileStack.length && fileStack[0].name) || '',
+                name = (isIE(9) && findFileName($el.val())) ||
+                    ($el[0].files[0] && $el[0].files[0].name) || (fileStack.length && fileStack[0].name) || '',
                 label = self.slug(name), n = self.isUploadable ? fileStack.length : numFiles,
                 nFiles = previewCache.count(self.id) + n, log = n > 1 ? self._getMsgSelected(nFiles) : label;
             if (self.isError) {
@@ -1872,7 +2284,7 @@
                 self._raise('fileselect', [numFiles, label]);
             }
             if (previewCache.count(self.id)) {
-                self._initPreviewDeletes();
+                self._initPreviewActions();
             }
         },
         _setThumbStatus: function ($thumb, status) {
@@ -1887,6 +2299,10 @@
             $thumb.removeClass('file-preview-success file-preview-error file-preview-loading');
             if (status === 'Error') {
                 $thumb.find('.kv-file-upload').attr('disabled', true);
+            }
+            if (status === 'Success') {
+                $thumb.find('.file-drag-handle').remove();
+                $indicator.css('margin-left', 0);
             }
             $indicator.html(config[icon]);
             $indicator.attr('title', config[msg]);
@@ -2103,19 +2519,21 @@
                     return;
                 }
                 title = $('<div>' + content + '</div>').text();
-                out = self._getLayoutTemplate('icon') + title;
+                out = self._getLayoutTemplate('fileIcon') + title;
             }
             self.$caption.html(out);
             self.$caption.attr('title', title);
             self.$captionContainer.find('.file-caption-ellipsis').attr('title', title);
         },
         _createContainer: function () {
-            var self = this,
-                $container = $(document.createElement("div"))
-                    .attr({"class": 'file-input file-input-new'})
-                    .html(self._renderMain());
+            var self = this, $container = $(document.createElement("div"))
+                .attr({"class": 'file-input file-input-new'})
+                .html(self._renderMain());
             self.$element.before($container);
             self._initBrowse($container);
+            if (self.theme) {
+                $container.addClass('theme-' + self.theme);
+            }
             return $container;
         },
         _refreshContainer: function () {
@@ -2177,66 +2595,75 @@
             if (!isEmpty(label)) {
                 label = ' <span class="' + self.buttonLabelClass + '">' + label + '</span>';
             }
-            return tmplt.replace('{type}', btnType)
-                .replace('{css}', css)
-                .replace('{title}', title)
-                .replace('{status}', status)
-                .replace('{icon}', icon)
-                .replace('{label}', label);
+            return tmplt.replace('{type}', btnType).replace('{css}', css).replace('{title}', title)
+                .replace('{status}', status).replace('{icon}', icon).replace('{label}', label);
         },
         _renderThumbProgress: function () {
             return '<div class="file-thumb-progress hide">' + this.progressTemplate.replace(/\{percent}/g,
                     '0') + '</div>';
         },
-        _renderFileFooter: function (caption, width) {
-            var self = this, config = self.fileActionSettings, footer, out, template = self._getLayoutTemplate(
-                'footer');
+        _renderFileFooter: function (caption, size, width, isError) {
+            var self = this, config = self.fileActionSettings, footer, rem = config.showRemove, drg = config.showDrag,
+                upl = config.showUpload, zoom = config.showZoom, out, template = self._getLayoutTemplate('footer'),
+                indicator = isError ? config.indicatorError : config.indicatorNew,
+                title = isError ? config.indicatorErrorTitle : config.indicatorNewTitle;
+            size = self._getSize(size);
             if (self.isUploadable) {
-                footer = template.replace(/\{actions}/g, self._renderFileActions(true, true, false, false, false));
-                out = footer.replace(/\{caption}/g, caption)
-                    .replace(/\{width}/g, width)
-                    .replace(/\{progress}/g, self._renderThumbProgress())
-                    .replace(/\{indicator}/g, config.indicatorNew)
-                    .replace(/\{indicatorTitle}/g, config.indicatorNewTitle);
+                out = template.replace(/\{actions}/g, self._renderFileActions(rem, upl, zoom, drg, false, false, false))
+                    .replace(/\{caption}/g, caption).replace(/\{size}/g, size).replace(/\{width}/g, width)
+                    .replace(/\{progress}/g, self._renderThumbProgress()).replace(/\{indicator}/g, indicator)
+                    .replace(/\{indicatorTitle}/g, title);
             } else {
-                out = template.replace(/\{actions}/g, '')
-                    .replace(/\{caption}/g, caption)
-                    .replace(/\{progress}/g, '')
-                    .replace(/\{width}/g, width)
-                    .replace(/\{indicator}/g, '')
-                    .replace(/\{indicatorTitle}/g, '');
+                out = template.replace(/\{actions}/g,
+                    self._renderFileActions(false, false, zoom, drg, false, false, false))
+                    .replace(/\{caption}/g, caption).replace(/\{size}/g, size).replace(/\{width}/g, width)
+                    .replace(/\{progress}/g, '').replace(/\{indicator}/g, indicator)
+                    .replace(/\{indicatorTitle}/g, title);
             }
             out = replaceTags(out, self.previewThumbTags);
             return out;
         },
-        _renderFileActions: function (showUpload, showDelete, disabled, url, key) {
-            if (!showUpload && !showDelete) {
+        _renderFileActions: function (showUpload, showDelete, showZoom, showDrag, disabled, url, key, isInit) {
+            if (!showUpload && !showDelete && !showZoom && !showDrag) {
                 return '';
             }
             var self = this,
                 vUrl = url === false ? '' : ' data-url="' + url + '"',
                 vKey = key === false ? '' : ' data-key="' + key + '"',
-                btnDelete = self._getLayoutTemplate('actionDelete'),
-                btnUpload = '',
-                template = self._getLayoutTemplate('actions'),
+                btnDelete = '', btnUpload = '', btnZoom = '', btnDrag = '', css,
+                template = self._getLayoutTemplate('actions'), config = self.fileActionSettings,
                 otherButtons = self.otherActionButtons.replace(/\{dataKey}/g, vKey),
-                config = self.fileActionSettings,
                 removeClass = disabled ? config.removeClass + ' disabled' : config.removeClass;
-            btnDelete = btnDelete
-                .replace(/\{removeClass}/g, removeClass)
-                .replace(/\{removeIcon}/g, config.removeIcon)
-                .replace(/\{removeTitle}/g, config.removeTitle)
-                .replace(/\{dataUrl}/g, vUrl)
-                .replace(/\{dataKey}/g, vKey);
+            if (showDelete) {
+                btnDelete = self._getLayoutTemplate('actionDelete')
+                    .replace(/\{removeClass}/g, removeClass)
+                    .replace(/\{removeIcon}/g, config.removeIcon)
+                    .replace(/\{removeTitle}/g, config.removeTitle)
+                    .replace(/\{dataUrl}/g, vUrl)
+                    .replace(/\{dataKey}/g, vKey);
+            }
             if (showUpload) {
                 btnUpload = self._getLayoutTemplate('actionUpload')
                     .replace(/\{uploadClass}/g, config.uploadClass)
                     .replace(/\{uploadIcon}/g, config.uploadIcon)
                     .replace(/\{uploadTitle}/g, config.uploadTitle);
             }
-            return template
-                .replace(/\{delete}/g, btnDelete)
+            if (showZoom) {
+                btnZoom = self._getLayoutTemplate('actionZoom')
+                    .replace(/\{zoomClass}/g, config.zoomClass)
+                    .replace(/\{zoomIcon}/g, config.zoomIcon)
+                    .replace(/\{zoomTitle}/g, config.zoomTitle);
+            }
+            if (showDrag && isInit) {
+                css = 'drag-handle-init ' + config.dragClass;
+                btnDrag = self._getLayoutTemplate('actionDrag').replace(/\{dragClass}/g, css)
+                    .replace(/\{dragTitle}/g, config.dragTitle)
+                    .replace(/\{dragIcon}/g, config.dragIcon);
+            }
+            return template.replace(/\{delete}/g, btnDelete)
                 .replace(/\{upload}/g, btnUpload)
+                .replace(/\{zoom}/g, btnZoom)
+                .replace(/\{drag}/g, btnDrag)
                 .replace(/\{other}/g, otherButtons);
         },
         _browse: function (e) {
@@ -2462,7 +2889,7 @@
             if (self._hasInitialPreview()) {
                 self._showFileIcon();
                 self._resetPreview();
-                self._initPreviewDeletes();
+                self._initPreviewActions();
                 self.$container.removeClass('file-input-new');
             } else {
                 self._getThumbs().each(function () {
@@ -2597,13 +3024,17 @@
         args.shift();
         this.each(function () {
             var self = $(this), data = self.data('fileinput'), options = typeof option === 'object' && option,
-                lang = options.language || self.data('language') || 'en', loc = {}, opts;
-
+                theme = options.theme || self.data('theme'), l = {}, t = {},
+                lang = options.language || self.data('language') || 'en', opts;
             if (!data) {
-                if (lang !== 'en' && !isEmpty($.fn.fileinputLocales[lang])) {
-                    loc = $.fn.fileinputLocales[lang];
+                if (theme) {
+                    t = $.fn.fileinputThemes[theme] || {};
                 }
-                opts = $.extend(true, {}, $.fn.fileinput.defaults, $.fn.fileinputLocales.en, loc, options, self.data());
+                if (lang !== 'en' && !isEmpty($.fn.fileinputLocales[lang])) {
+                    l = $.fn.fileinputLocales[lang] || {};
+                }
+                opts = $.extend(true, {}, $.fn.fileinput.defaults, t, $.fn.fileinputLocales.en, l, options,
+                    self.data());
                 data = new FileInput(this, opts);
                 self.data('fileinput', data);
             }
@@ -2623,22 +3054,26 @@
     };
 
     $.fn.fileinput.defaults = {
-        language: 'en',
+        language: 'es',
         showCaption: true,
         showPreview: true,
         showRemove: true,
         showUpload: true,
         showCancel: true,
-        showClose: true,
+        showClose: false,
         showUploadedThumbs: true,
         autoReplace: false,
-        mainClass: '',
         previewClass: '',
         captionClass: '',
+        mainClass: '',
         mainTemplate: null,
+        purifyHtml: true,
+        fileSizeGetter: null,
         initialCaption: '',
         initialPreview: [],
         initialPreviewDelimiter: '*$$*',
+        initialPreviewAsData: false,
+        initialPreviewFileType: 'image',
         initialPreviewConfig: [],
         initialPreviewThumbTags: [],
         previewThumbTags: {},
@@ -2646,34 +3081,52 @@
         removeFromPreviewOnError: false,
         deleteUrl: '',
         deleteExtraData: {},
-        overwriteInitial: false,
+        overwriteInitial: true,
         layoutTemplates: defaultLayoutTemplates,
         previewTemplates: defaultPreviewTemplates,
+        previewZoomSettings: defaultPreviewZoomSettings,
+        previewZoomButtonIcons: {
+            prev: '<i class="fa fa-caret-left"></i>',
+            next: '<i class="fa fa-caret-right"></i>',
+            toggleheader: '<i class="fa fa-arrows-v"></i>',
+            fullscreen: '<i class="fa fa-arrows-alt"></i>',
+            borderless: '<i class="fa fa-expand"></i>',
+            close: '<i class="fa fa-times"></i>'
+        },
+        previewZoomButtonClasses: {
+            prev: 'btn btn-navigate',
+            next: 'btn btn-navigate',
+            toggleheader: 'btn btn-default btn-header-toggle',
+            fullscreen: 'btn btn-default',
+            borderless: 'btn btn-default',
+            close: 'btn btn-default'
+        },
         allowedPreviewTypes: null,
         allowedPreviewMimeTypes: null,
         allowedFileTypes: null,
-        allowedFileExtensions: ["jpg", "png", "jpeg"],
+        allowedFileExtensions: ["jpg", "jpeg", "png"],
         defaultPreviewContent: null,
         customLayoutTags: {},
         customPreviewTags: {},
         previewSettings: defaultPreviewSettings,
         fileTypeSettings: defaultFileTypeSettings,
-        previewFileIcon: '<i class="fa fa-file" aria-hidden="true"></i>',
-        previewFileIconClass: 'file-icon-4x',
+        previewFileIcon: '<i class="fa fa-file"></i>',
+        previewFileIconClass: 'file-other-icon',
         previewFileIconSettings: {},
         previewFileExtSettings: {},
         buttonLabelClass: 'hidden-xs',
-        browseIcon: '<i class="fa fa-folder-open" aria-hidden="true"></i>&nbsp;',
+        browseIcon: '<i class="fa fa-folder-open"></i>&nbsp;',
         browseClass: 'btn btn-primary',
-        removeIcon: '<i class="fa fa-minus-circle" aria-hidden="true"></i>',
+        removeIcon: '<i class="fa fa-trash"></i>',
         removeClass: 'btn btn-danger',
-        cancelIcon: '<i class="fa fa-ban" aria-hidden="true"></i>',
+        cancelIcon: '<i class="fa fa-ban"></i>',
         cancelClass: 'btn btn-default',
-        uploadIcon: '<i class="fa fa-cloud-upload" aria-hidden="true"></i>',
+        uploadIcon: '<i class="fa fa-arrow-circle-o-up"></i>',
         uploadClass: 'btn btn-info',
         uploadUrl: null,
         uploadAsync: true,
         uploadExtraData: {},
+        zoomModalHeight: 480,
         minImageWidth: null,
         minImageHeight: null,
         maxImageWidth: null,
@@ -2683,18 +3136,18 @@
         resizeQuality: 0.92,
         resizeDefaultImageType: 'image/jpeg',
         maxFileSize: 0,
+        maxFilePreviewSize: 25600, // 25 MB
         minFileCount: 1,
         maxFileCount: 0,
         validateInitialCount: false,
         msgValidationErrorClass: 'text-danger',
-        msgValidationErrorIcon: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+        msgValidationErrorIcon: '<i class="fa fa-exclamation-circle"></i> ',
         msgErrorClass: 'file-error-message',
         progressThumbClass: "progress-bar progress-bar-success progress-bar-striped active",
         progressClass: "progress-bar progress-bar-success progress-bar-striped active",
         progressCompleteClass: "progress-bar progress-bar-success",
         progressErrorClass: "progress-bar progress-bar-danger",
         previewFileType: 'image',
-        zoomIndicator: '<i class="fa fa-search-plus" aria-hidden="true"></i>',
         elCaptionContainer: null,
         elCaptionText: null,
         elPreviewContainer: null,
@@ -2725,8 +3178,7 @@
         uploadTitle: 'Subir archivos seleccionados',
         msgNo: 'No',
         msgCancelled: 'Cancelado',
-        msgZoomTitle: 'Ver detalles',
-        msgZoomModalHeading: 'Vista previa detallada',
+        msgZoomModalHeading: 'Detailed Preview',
         msgSizeTooLarge: 'Archivo "{name}" (<b>{size} KB</b>) excede el tamaño máximo permitido de <b>{maxSize} KB</b>.',
         msgFilesTooLess: 'Debe seleccionar al menos <b>{n}</b> {files} a cargar.',
         msgFilesTooMany: 'El número de archivos seleccionados a cargar <b>({n})</b> excede el límite máximo permitido de <b>{m}</b>.',
@@ -2750,6 +3202,14 @@
         msgImageResizeError: 'No se pudo obtener las dimensiones de imagen para cambiar el tamaño.',
         msgImageResizeException: 'Error al cambiar el tamaño de la imagen.<pre>{errors}</pre>',
         dropZoneTitle: 'Arrastre y suelte aquí los archivos &hellip;',
+        previewZoomButtonTitles: {
+            prev: 'Ver archivo anterior',
+            next: 'Ver archivo siguiente',
+            toggleheader: 'Toggle header',
+            fullscreen: 'Pantalla Completa',
+            borderless: 'Expandir',
+            close: 'Cerrar'
+        }
     };
 
     $.fn.fileinput.Constructor = FileInput;

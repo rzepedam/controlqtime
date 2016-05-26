@@ -10,9 +10,9 @@ class CreateImagePatentVehiclesTable extends Migration
         Schema::create('image_patent_vehicles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('vehicle_id')->unsigned();
-            $table->string('name');
-            $table->string('mime', 20);
+            $table->string('path');
             $table->string('orig_name');
+            $table->string('size', 7);
             $table->timestamps();
 
             $table->foreign('vehicle_id')

@@ -38,7 +38,7 @@ class CompanyRequest extends SanitizedRequest
                 $rules['ofi']           = 'max:5';
                 $rules['floor']         = 'regex:/[0-9 -()+]+$/|digits_between:1,3';
                 $rules['muni_license']  = 'required|max:50';
-                $rules['email']         = 'required|email|unique:companies,email|max:100';
+                $rules['email_company'] = 'required|email|unique:companies,email|max:100';
                 $rules['phone1']        = 'required|max:20';*/
                 $rules['phone2']        = 'max:20';
 
@@ -73,7 +73,7 @@ class CompanyRequest extends SanitizedRequest
                 $rules['ofi']          = 'max:5';
                 $rules['floor']        = 'regex:/[0-9 -()+]+$/|digits_between:1,3';
                 $rules['muni_license'] = 'required|max:50';
-                $rules['email']        = 'required|max:100|email|unique:companies,email,' . $this->route->getParameter('companies');
+                $rules['email_company']= 'required|max:100|email|unique:companies,email,' . $this->route->getParameter('companies');
                 $rules['phone1']       = 'required|max:20';*/
                 $rules['phone2']       = 'max:20';
 

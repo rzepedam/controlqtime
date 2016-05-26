@@ -9,7 +9,7 @@ class Company extends Eloquent
 {
     protected $fillable = [
         'type_company_id', 'rut', 'firm_name', 'gyre', 'start_act', 'address', 'commune_id', 'num',
-        'lot', 'ofi', 'floor', 'muni_license', 'email', 'phone1', 'phone2', 'status'
+        'lot', 'bod', 'ofi', 'floor', 'muni_license', 'email_company', 'phone1', 'phone2', 'status'
     ];
 
     protected $dates = [
@@ -56,8 +56,8 @@ class Company extends Eloquent
         $this->attributes['gyre'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-    public function setEmailAttribute($value) {
-        $this->attributes['email'] = strtolower($value);
+    public function setEmailCompanyAttribute($value) {
+        $this->attributes['email_company'] = strtolower($value);
     }
 
     public function setStartActAttribute($value) {

@@ -20,7 +20,7 @@
                             <td class="text-center">{{ $vehicle->patent }}</td>
                             <td class="text-center">{{ $vehicle->typeVehicle->name }}</td>
                             <td class="text-center">{{ $vehicle->modelVehicle->name }}</td>
-                            @if ($vehicle->state == 'unavailable')
+                            @if ($vehicle->state == 'disable')
                                 <td class="text-center"><a href="{{ route('operations.vehicles.attachFiles', $vehicle) }}" class="label label-round label-danger">Activar</a></td>
                             @else
                                 <td></td>

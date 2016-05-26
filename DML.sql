@@ -816,11 +816,18 @@ INSERT INTO communes(name, province_id) VALUES('Timaukel',52);
 INSERT INTO communes(name, province_id) VALUES('Natales',53);
 INSERT INTO communes(name, province_id) VALUES('Torres del Paine',53);
 
+/* weights | Unidad de medida para Peso */
+INSERT INTO weights(name, acr) VALUES('Kilógramo', 'kg');
+INSERT INTO weights(name, acr) VALUES('Tonelada', 'ton');
+
+/* engine_cubics | Unidad de medida para Cilindraje Motor */
+INSERT INTO engine_cubics(name, acr) VALUES('Centímetros cúbicos', 'cc');
+INSERT INTO engine_cubics(name, acr) VALUES('Caballos de fuerza', 'hp');
 
 /* type_vehicles | Tipos de Vehículos */
-INSERT INTO type_vehicles(name) VALUES('Bus');
-INSERT INTO type_vehicles(name) VALUES('Moto');
-INSERT INTO type_vehicles(name) VALUES('Auto');
+INSERT INTO type_vehicles(name, engine_cubic_id, weight_id) VALUES('Bus', 2, 2);
+INSERT INTO type_vehicles(name, engine_cubic_id, weight_id) VALUES('Moto', 1, 1);
+INSERT INTO type_vehicles(name, engine_cubic_id, weight_id) VALUES('Auto', 1, 1);
 
 /* trademarks | Marcas */
 INSERT INTO trademarks(name) VALUES('Mercedes Benz');
@@ -858,3 +865,7 @@ INSERT INTO type_companies(name) VALUES('Operador');
 INSERT INTO type_companies(name) VALUES('Contratista');
 INSERT INTO type_companies(name) VALUES('Proveedor');
 INSERT INTO type_companies(name) VALUES('Visitas');
+
+/* state_vehicles | Estado de vehículo */
+INSERT INTO state_vehicles(name) VALUES('Nuevo');
+INSERT INTO state_vehicles(name) VALUES('Usado');

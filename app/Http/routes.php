@@ -95,6 +95,13 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('type-professional-licenses', 'TypeProfessionalLicenseController');
         Route::resource('type-specialities', 'TypeSpecialityController');
         Route::resource('type-vehicles', 'TypeVehicleController');
+        Route::get('measuring-units', ['as' => 'maintainers.measuring-units', function(){
+            return view('maintainers.measuring-units.index');
+        }]);
+        Route::group(['prefix' => 'measuring-units'], function() {
+            Route::resource('weights', 'WeightController');
+            Route::resource('engine-cubics', 'EngineCubicController');
+        });
     });
 
     /*

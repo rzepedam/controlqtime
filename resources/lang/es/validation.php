@@ -362,6 +362,12 @@ return [
         'weight'                                => 'Peso',
         'code'                                  => 'Cód. Interno',
 
+        /*
+         * Peso
+         */
+
+        'acr'                                   => 'Acrónimo',
+
     ],
 
 ];

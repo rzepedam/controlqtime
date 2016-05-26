@@ -7,6 +7,7 @@ use Controlqtime\Core\Contracts\ImageCirculationPermitVehicleRepoInterface;
 use Controlqtime\Core\Contracts\ImageObligatoryInsuranceVehicleRepoInterface;
 use Controlqtime\Core\Contracts\ImagePadronVehicleRepoInterface;
 use Controlqtime\Core\Contracts\ImagePatentVehicleRepoInterface;
+use Controlqtime\Core\Contracts\StateVehicleRepoInterface;
 use Controlqtime\Http\Requests;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ModelVehicleRepoInterface;
@@ -27,9 +28,10 @@ class VehicleController extends Controller {
 	protected $model_vehicle;
 	protected $trademark;
 	protected $type_vehicle;
+	protected $state_vehicle;
 	protected $vehicle;
 
-	public function __construct(VehicleRepoInterface $vehicle, TypeVehicleRepoInterface $type_vehicle, TrademarkRepoInterface $trademark, ModelVehicleRepoInterface $model_vehicle, CompanyRepoInterface $company, FuelRepoInterface $fuel, ImagePadronVehicleRepoInterface $image_padron, ImageObligatoryInsuranceVehicleRepoInterface $image_obl_ins, ImagePatentVehicleRepoInterface $image_patent, ImageCirculationPermitVehicleRepoInterface $image_cir_permit)
+	public function __construct(VehicleRepoInterface $vehicle, TypeVehicleRepoInterface $type_vehicle, TrademarkRepoInterface $trademark, ModelVehicleRepoInterface $model_vehicle, CompanyRepoInterface $company, FuelRepoInterface $fuel, ImagePadronVehicleRepoInterface $image_padron, ImageObligatoryInsuranceVehicleRepoInterface $image_obl_ins, ImagePatentVehicleRepoInterface $image_patent, ImageCirculationPermitVehicleRepoInterface $image_cir_permit, StateVehicleRepoInterface $state_vehicle)
 	{
 		$this->company          = $company;
 		$this->fuel             = $fuel;
@@ -40,6 +42,7 @@ class VehicleController extends Controller {
 		$this->model_vehicle    = $model_vehicle;
 		$this->trademark        = $trademark;
 		$this->type_vehicle     = $type_vehicle;
+		$this->state_vehicle 	= $state_vehicle;
 		$this->vehicle          = $vehicle;
 	}
 
@@ -56,10 +59,12 @@ class VehicleController extends Controller {
 		$model_vehicles = $this->model_vehicle->lists('name', 'id');
 		$trademarks     = $this->trademark->lists('name', 'id');
 		$type_vehicles  = $this->type_vehicle->lists('name', 'id');
-		$companies      = $this->company->whereLists('state', 'available', 'firm_name');
+		$companies      = $this->company->whereLists('state', 'enable', 'firm_name');
+		$state_vehicles	= $this->state_vehicle->lists('name', 'id');
 
 		return view('operations.vehicles.create', compact(
-			'trademarks', 'model_vehicles', 'type_vehicles', 'fuels', 'companies'
+			'trademarks', 'model_vehicles', 'type_vehicles', 'fuels', 'companies',
+			'state_vehicles'
 		));
 	}
 
@@ -76,11 +81,13 @@ class VehicleController extends Controller {
 		$trademarks     = $this->trademark->lists('name', 'id');
 		$model_vehicles = $this->trademark->findModelVehicles($vehicle->modelVehicle->trademark->id);
 		$type_vehicles  = $this->type_vehicle->lists('name', 'id');
-		$companies      = $this->company->whereLists('state', 'available', 'firm_name');
+		$companies      = $this->company->whereLists('state', 'enable', 'firm_name');
 		$fuels          = $this->fuel->lists('name', 'id');
+		$state_vehicles	= $this->state_vehicle->lists('name', 'id');
 
 		return view('operations.vehicles.edit', compact(
-			'vehicle', 'type_vehicles', 'trademarks', 'model_vehicles', 'companies', 'fuels'
+			'vehicle', 'type_vehicles', 'trademarks', 'model_vehicles', 'companies', 'fuels',
+			'state_vehicles'
 		));
 	}
 
@@ -148,22 +155,22 @@ class VehicleController extends Controller {
 		switch ($request->get('type'))
 		{
 			case 'padron':
-				$destroy = $this->image_padron->destroyImage('vehicle', $request->get('id'), $request->get('type'), $request->get('img_name'));
+				$destroy = $this->image_padron->destroyImage($request->get('path'));
 				$this->image_padron->delete($request->get('key'));
 				break;
 
 			case 'obligatory_insurance':
-				$destroy = $this->image_obl_ins->destroyImage('vehicle', $request->get('id'), $request->get('type'), $request->get('img_name'));
+				$destroy = $this->image_obl_ins->destroyImage($request->get('path'));
 				$this->image_obl_ins->delete($request->get('key'));
 				break;
 
 			case 'patent':
-				$destroy = $this->image_patent->destroyImage('vehicle', $request->get('id'), $request->get('type'), $request->get('img_name'));
+				$destroy = $this->image_patent->destroyImage($request->get('path'));
 				$this->image_patent->delete($request->get('key'));
 				break;
 
 			case 'circulation_permit':
-				$destroy = $this->image_cir_permit->destroyImage('vehicle', $request->get('id'), $request->get('type'), $request->get('img_name'));
+				$destroy = $this->image_cir_permit->destroyImage($request->get('path'));
 				$this->image_cir_permit->delete($request->get('key'));
 				break;
 		}

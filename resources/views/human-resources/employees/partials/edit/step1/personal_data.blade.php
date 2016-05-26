@@ -69,12 +69,12 @@
         {{ Form::select('commune_id', $communes, null, ['class' => 'form-control']) }}
     </div>
     <div class="col-md-6 form-group">
-        {{ Form::label('email', 'Email', ['class' => 'control-label']) }}
+        {{ Form::label('email_employee', 'Email', ['class' => 'control-label']) }}
         <div class="input-group">
             <div class="input-group-addon">
                 <i class="fa fa-envelope"></i>
             </div>
-            {{ Form::text('email', null, ['id' => 'Employee', 'class' => 'form-control']) }}
+            {{ Form::text('email_employee', null, ['id' => 'Employee', 'class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-3 form-group">

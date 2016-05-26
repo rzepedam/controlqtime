@@ -23,7 +23,7 @@
                             </tr>
                             <tr>
                                 <td>Email</td>
-                                <td class="text-center"><i class="fa fa-envelope"></i> {{ Html::mailto($company->email, null, ['class' => 'text-muted']) }}</td>
+                                <td class="text-center"><i class="fa fa-envelope"></i> {{ Html::mailto($company->email_company, null, ['class' => 'text-muted']) }}</td>
                             </tr>
                             <tr>
                                 <td>Teléfono 1</td>
@@ -47,6 +47,12 @@
                                 <tr>
                                     <td>Lote</td>
                                     <td class="text-center">{{ $company->lot }}</td>
+                                </tr>
+                            @endif
+                            @if($company->bod)
+                                <tr>
+                                    <td>Bodega</td>
+                                    <td class="text-center">{{ $company->bod }}</td>
                                 </tr>
                             @endif
                             @if($company->floor)

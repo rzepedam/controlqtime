@@ -14,7 +14,9 @@ class Study extends Eloquent
     protected $dates = [
         'date_obtention'
     ];
+
     public $timestamps = false;
+
     /*
      * Relationships
      */

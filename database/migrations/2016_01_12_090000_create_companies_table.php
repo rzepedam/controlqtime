@@ -19,12 +19,13 @@ class CreateCompaniesTable extends Migration
             $table->integer('commune_id')->unsigned();
             $table->string('num', 8);
             $table->string('lot', 20);
+            $table->string('bod', 5);
             $table->string('ofi', 5);
             $table->string('floor', 3);
             $table->string('muni_license', 50);
             $table->string('phone1', 20);
             $table->string('phone2', 20);
-            $table->string('email', 100)->unique();
+            $table->string('email_company', 60)->unique();
             $table->enum('state', ['enable', 'disable'])->default('disable');
             $table->timestamps();
 

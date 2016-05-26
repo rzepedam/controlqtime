@@ -1633,7 +1633,7 @@
 		maxViewMode: 2,
 		multidate: false,
 		multidateSeparator: ',',
-		orientation: "auto",
+		orientation: "bottom",
 		rtl: false,
 		startDate: -Infinity,
 		startView: 0,

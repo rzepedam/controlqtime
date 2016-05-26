@@ -22,7 +22,7 @@ $factory->define(Company::class, function (Faker\Generator $faker)
         'muni_license'  	=> strtoupper($faker->word),
         'phone1'        	=> $faker->phoneNumber,
         'phone2'        	=> $faker->phoneNumber,
-        'email'         	=> $faker->email,
+        'email_company'     => $faker->email,
     ];
 
 });
@@ -66,10 +66,10 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'gender_id'      	=> rand(1, 2),
 		'address'        	=> $faker->address,
 		'commune_id'     	=> rand(1, 53),
-		'email'          	=> $faker->unique()->email,
+		'email_employee'   	=> $faker->unique()->email,
 		'phone1'         	=> $faker->phoneNumber,
 		'phone2'         	=> $faker->phoneNumber,
-		'company_id'     	=> rand(1, 24),
+		'company_id'     	=> rand(1, 25),
 		'code'				=> $faker->postcode,
 	];
 });

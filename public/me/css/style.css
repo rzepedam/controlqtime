@@ -77,6 +77,16 @@ img {
     overflow: hidden;
 }
 
+.add_info_contact{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_info_contact:hover{
+    color: white;
+    background: #4CAF50;
+}
+
 .add_family_relationship{
     padding: 7px;
     cursor: pointer;
@@ -195,4 +205,8 @@ img {
     background-color: transparent;
     border: none;
     box-shadow: none;
+}
+
+.pointer {
+    cursor: pointer;
 }

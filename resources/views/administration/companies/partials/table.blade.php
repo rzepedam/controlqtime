@@ -16,8 +16,8 @@
                     <tr data-id="{{ $company->id }}">
                         <td>{{ $company->id }}</td>
                         <td>{{ $company->firm_name }}</td>
-                        <td>{{ $company->email }}</td>
-                        @if ($company->state == 'unavailable')
+                        <td>{{ $company->email_company }}</td>
+                        @if ($company->state == 'disable')
                             <td class="text-center"><a href="{{ route('administration.companies.attachFiles', $company->id) }}" class="label label-round label-danger">Activar</a></td>
                         @else
                             <td></td>

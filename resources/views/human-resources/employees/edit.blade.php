@@ -101,6 +101,38 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-pencil-square-o text-success" aria-hidden="true"></i> Información de Contacto</h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-success add_info_contact waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Contacto</span>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="content_info_contact">
+
+                                        @if (count($employee->infoContacts) > 0)
+
+                                            @include('human-resources.employees.partials.edit.step1.info_contact')
+
+                                        @else
+
+                                            <br/>
+                                            <h3 class="text-center text-success">No existe Información de Contacto Asociada
+                                                <br/>
+                                                <small>(Pulse "Agregar Contacto" para comenzar su adición)
+                                                </small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
+
+                                        @endif
+
+                                    </div>
+                                    <br/>
+
+                                </div>
+                            </div>
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
                                     <h3 class="panel-title"><i class="icon md-male-female text-warning font-size-18"></i> Parentescos Familiares</h3>
                                     <div class="panel-actions">
                                         <span class="label label-outline label-warning add_family_relationship waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
@@ -399,6 +431,13 @@
         </div>
     </div>
 
+    <br />
+    <br />
+    <br />
+
+    @include('human-resources.employees.partials.delete')
+    <br />
+
 @stop
 
 @section('scripts')
@@ -411,6 +450,7 @@
     {{ Html::script('me/js/validations/employees/step1.js') }}
     {{ Html::script('me/js/validations/employees/step2.js') }}
     {{ Html::script('me/js/validations/employees/step3.js') }}
+    {{ Html::script('me/js/delete.js') }}
     {{ Html::script('assets/js/jquery.Rut.js') }}
     {{ Html::script('assets/js/jquery.matchHeight-min.js') }}
     {{ Html::script('assets/js/jquery-wizard.js') }}
@@ -424,6 +464,7 @@
 
         $(document).ready(function() {
 
+            var count_contacts                  = {{ (count($employee->infoContacts) > 0) ? count($employee->infoContacts) : 0 }};
             var count_family_relationships      = {{ (count($employee->familyRelationships) > 0) ? count($employee->familyRelationships) : 0 }};
             var count_studies                   = {{ (count($employee->studies) > 0) ? count($employee->studies) : 0 }};
             var count_certifications            = {{ (count($employee->certifications) > 0) ? count($employee->certifications) : 0 }};
@@ -434,6 +475,7 @@
             var count_exams                     = {{ (count($employee->exams) > 0) ? count($employee->exams) : 0 }};
             var count_family_responsabilities   = {{ (count($employee->familyResponsabilities) > 0) ? count($employee->familyResponsabilities) : 0 }};
 
+            var id_delete_contact               = [];
             var id_delete_family_relationship   = [];
             var id_delete_study                 = [];
             var id_delete_certification         = [];
@@ -504,7 +546,7 @@
                     $.ajax({
                         type: 'POST',
                         url: url,
-                        data: $('#step1').serialize() + "&full_name=" + full_name + "&count_family_relationships=" + count_family_relationships + "&id_delete_family_relationship=" + id_delete_family_relationship,
+                        data: $('#step1').serialize() + "&full_name=" + full_name + "&count_contacts=" + count_contacts + "&count_family_relationships=" + count_family_relationships + "&id_delete_contact=" + id_delete_contact + "&id_delete_family_relationship=" + id_delete_family_relationship,
                         async: false,
                         dataType: "json",
                         success: function (response) {
@@ -594,6 +636,28 @@
                         }
                     });
                 }
+
+            });
+
+            /**
+             *  Add Contact
+             */
+
+            $('.add_info_contact').click(function() {
+
+                var contact = '<span id="contact"><div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"> <span id="num_contact" class="text-success"> Contacto #' + (count_contacts + 1) + ' </span> <a id="contact" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Contacto" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_contact", "ID", ["class"=> "control-label"])}}{{Form::text("id_contact[]", 0, ["id"=> "id_contact", "class"=> "form-control"])}}</div></div><div class="col-md-6 form-group">{{Form::label('name_contact', 'Nombre', ['class'=> 'control-label'])}}{{Form::text('name_contact[]', null, ['class'=> 'form-control'])}}</div><div class="col-md-6 form-group">{{Form::label('email_contact', 'Email', ['class'=> 'control-label'])}}{{Form::text('email_contact[]', null, ['id' => 'EmailContactEmployee', 'class'=> 'form-control'])}}</div></div><div class="row"> <div class="col-md-9 form-group">{{Form::label('address_contact', 'Dirección', ['class'=> 'control-label'])}}{{Form::text('address_contact[]', null, ['class'=> 'form-control'])}}</div><div class="col-md-3 form-group">{{Form::label('tel_contact', 'Teléfono', ['class'=> 'control-label'])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text('tel_contact[]', null, ['class'=> 'form-control'])}}</div></div></div><br /></span>';
+
+                if (count_contacts == 0)
+                    $('#content_info_contact').html(contact);
+                else
+                    $('#content_info_contact').append(contact);
+
+                $('span#contact').attr('id', 'contact' + count_contacts);
+                $('span#num_contact').attr('id', 'num_contact' + count_contacts);
+                $('#id_contact').attr('id', 'id_contact' + count_contacts);
+
+                $('.tooltip-danger').tooltip();
+                count_contacts++;
 
             });
 
@@ -843,6 +907,13 @@
                  */
 
                 switch (element) {
+
+                    case 'contact':
+                        if ($('#id_contact' + num_element).val() != 0)
+                            id_delete_contact.push($('#id_contact' + num_element).val());
+
+                        break;
+
                     case 'family_relationship':
                         if ($('#id_family_relationship' + num_element).val() != 0)
                             id_delete_family_relationship.push($('#id_family_relationship' + num_element).val());
@@ -903,6 +974,28 @@
                 var span = padre.children("span");
 
                 switch (element) {
+                    case 'contact':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            var item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_contact' + item).text('Contacto #' + (i + 1));
+                            $('span#num_contact' + item).attr('id', 'num_contact' + i);
+                            $('span#contact' + item).attr('id', 'contact' + i);
+
+                            $('#id_contact' + item).attr('id', 'id_contact' + i);
+
+                        }
+
+                        count_contacts--;
+                        if (count_contacts == 0) {
+                            var html = '<br /><h3 class="text-center text-success">No existe Información de Contacto Asociada <br /><small>(Pulse "Agregar Contacto" para comenzar su adición)</small></h3><br /><br />'
+                            $('#content_info_contact').html(html);
+                        }
+
+                        break;
+
                     case 'family_relationship':
 
                         for (var i = 0; i < span.length; i++) {
@@ -1130,6 +1223,7 @@
 
                 }
             });
+
         });
 
     </script>

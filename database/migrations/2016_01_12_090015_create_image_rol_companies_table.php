@@ -10,9 +10,9 @@ class CreateImageRolCompaniesTable extends Migration
         Schema::create('image_rol_companies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id')->unsigned();
-            $table->string('name');
-            $table->string('mime', 20);
+            $table->string('path');
             $table->string('orig_name');
+            $table->string('size', 7);
             $table->timestamps();
 
             $table->foreign('company_id')

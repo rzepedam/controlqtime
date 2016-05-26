@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class ImageRolCompany extends Eloquent
 {
     protected $fillable = [
-        'name', 'mime', 'orig_name'
+        'path', 'orig_name', 'size'
     ];
 
     /*

@@ -23,7 +23,7 @@ class Step3Request extends SanitizedRequest {
 				{
 					foreach (range(0, Request::get('count_disabilities') - 1) as $index)
 					{
-						$rules[ 'id_disability.' . $index ]       = 'required|in:0';
+						$rules[ 'id_disability.' . $index ]       = 'required|regex:/[0-9 -()+]+$/';
 						$rules[ 'type_disability_id.' . $index ]  = 'required|regex:/[0-9 -()+]+$/';
 						$rules[ 'treatment_disability' . $index ] = 'required|regex:/[0-9 -()+]+$/|in:0,1';
 					}

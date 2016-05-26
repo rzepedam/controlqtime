@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
+use Controlqtime\Core\Contracts\InfoContactRepoInterface;
 use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
@@ -15,15 +16,17 @@ class AjaxLoadController extends Controller {
 
 	protected $company;
 	protected $employee;
+	protected $info_contact;
 	protected $legal_representative;
 	protected $province;
 	protected $region;
 	protected $trademark;
 
-	public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, LegalRepresentativeRepoInterface $legal_representative, TrademarkRepoInterface $trademark, EmployeeRepoInterface $employee)
+	public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, LegalRepresentativeRepoInterface $legal_representative, TrademarkRepoInterface $trademark, EmployeeRepoInterface $employee, InfoContactRepoInterface $info_contact)
 	{
 		$this->company              = $company;
 		$this->employee             = $employee;
+		$this->info_contact 		= $info_contact;
 		$this->legal_representative = $legal_representative;
 		$this->province             = $province;
 		$this->region               = $region;
@@ -42,11 +45,10 @@ class AjaxLoadController extends Controller {
 
 	public function verificaEmail(Request $request)
 	{
-
 		switch ($request->get('element'))
 		{
 			case 'Company':
-				$email = $this->company->whereFirst('email', $request->get('email'), ['email']);
+				$email = $this->company->whereFirst('email_company', $request->get('email'), ['email_company']);
 				break;
 
 			case 'Representative':
@@ -54,7 +56,12 @@ class AjaxLoadController extends Controller {
 				break;
 
 			case 'Employee':
-				$email = $this->employee->whereFirst('email', $request->get('email', ['email']));
+				$email = $this->employee->whereFirst('email_employee', $request->get('email', ['email_employee']));
+				break;
+				
+			case 'EmailContactEmployee';
+				$email = $this->info_contact->whereFirst('email_contact', $request->get('email', ['email_contact']));
+				break;
 		}
 
 		if ( $email )

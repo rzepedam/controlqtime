@@ -25,3 +25,5 @@
     {{ $companies->links() }}
 
 @stop
+
+

@@ -69,12 +69,12 @@
         {{ Form::select('commune_id', $communes, Session::get('commune_id'), ['class' => 'form-control']) }}
     </div>
     <div class="col-md-6 form-group">
-        {{ Form::label('email', 'Email', ['class' => 'control-label']) }}
+        {{ Form::label('email_employee', 'Email', ['class' => 'control-label']) }}
         <div class="input-group">
             <div class="input-group-addon">
                 <i class="fa fa-envelope"></i>
             </div>
-            {{ Form::text('email', Session::get('email'), ['id' => 'Employee', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+            {{ Form::text('email_employee', Session::get('email_employee'), ['id' => 'Employee', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
         </div>
     </div>
     <div class="col-md-3 form-group">

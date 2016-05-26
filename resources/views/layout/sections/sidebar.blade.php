@@ -214,6 +214,11 @@
                                     <span class="site-menu-title"><i class="site-menu-icon fa fa-subway" aria-hidden="true"></i> Tipos de Vehículos</span>
                                 </a>
                             </li>
+                            <li class="site-menu-item">
+                                <a class="animsition-link" href="{{ route('maintainers.measuring-units') }}">
+                                    <span class="site-menu-title"><i class="site-menu-icon fa fa-sort-amount-asc" aria-hidden="true"></i> Unid. de Medida</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 

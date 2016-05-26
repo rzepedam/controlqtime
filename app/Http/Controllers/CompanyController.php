@@ -159,12 +159,12 @@ class CompanyController extends Controller {
 		switch ($request->get('type'))
 		{
 			case 'rol':
-				$destroy = $this->image_rol->destroyImage('company', $request->get('id'), $request->get('type'), $request->get('img_name'));
+				$destroy = $this->image_rol->destroyImage($request->get('path'));
 				$this->image_rol->delete($request->get('key'));
 				break;
 
 			case 'patent':
-				$destroy = $this->image_patent->destroyImage('company', $request->get('id'), $request->get('type'), $request->get('img_name'));
+				$destroy = $this->image_patent->destroyImage($request->get('path'));
 				$this->image_patent->delete($request->get('key'));
 				break;
 		}

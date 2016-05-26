@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    {{ Html::style('assets/css/magnific-popup.min.css') }}
+
+@stop
+
 @section('title_header') Detalle Empresa : <span class="text-primary">{{ $company->id }}</span> @stop
 
 @section('breadcumb')
@@ -12,8 +18,9 @@
 
 <div class="nav-tabs-horizontal">
     <ul class="nav nav-tabs" data-plugin="nav-tabs" role="tablist">
-        <li class="active" role="presentation"><a data-toggle="tab" href="#tab_1" aria-controls="tab_1" role="tab"><i class="fa fa-building"></i> Datos Empresa</a></li>
-        <li role="presentation"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-gavel"></i> Representante Legal</a></li>
+        <li class="active" role="presentation"><a data-toggle="tab" href="#tab_1" aria-controls="tab_1" role="tab"><i class="fa fa-building" aria-hidden="true"></i> Datos Empresa</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-gavel" aria-hidden="true"></i> Representante Legal</a></li>
+        <li role="files_attach"><a data-toggle="tab" href="#tab_3" aria-controls="tab_3" role="tab"><i class="fa fa-file-text-o" aria-hidden="true"></i> Documentos Adjuntos</a></li>
     </ul>
     <div class="tab-content padding-top-20">
         <div class="tab-pane active" id="tab_1" role="tabpanel">
@@ -26,6 +33,11 @@
             @include('administration.companies.partials.show.legal_representative')
 
         </div>
+        <div class="tab-pane" id="tab_3" role="tabpanel">
+
+            @include('administration.companies.partials.show.files_attach')
+
+        </div>
     </div>
 </div>
 <div class="row">
@@ -33,5 +45,12 @@
         <a href="{{ route('administration.companies.index') }}">Volver</a>
     </div>
 </div>
+
+@stop
+
+@section('scripts')
+
+    {{ Html::script('assets/js/jquery.magnific-popup.js') }}
+    {{ Html::script('me/js/common/showMagnificImage.js') }}
 
 @stop

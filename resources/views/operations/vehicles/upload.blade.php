@@ -109,12 +109,12 @@
             $("#padron").fileinput({
                 initialPreview: [
                     @foreach($vehicle->imagePadrones as $image_padron)
-                        "<img style='height:160px' src='{{ asset("/storage/vehicle/" . $id . "/padron/" . $image_padron->name) }}' />",
+                        "<img style='height:160px' src='{{ $image_padron->path }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
                     @foreach($vehicle->imagePadrones as $image_padron)
-                        { caption: "{{ $image_padron->orig_name }}", width: "120px", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_padron->id }}", extra: { img_name: "{{ $image_padron->name }}", id: "{{ $id }}", type: "padron" } },
+                        { caption: "{{ $image_padron->orig_name }}", size: "{{ $image_padron->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_padron->id }}", extra: { path: "{{ $image_padron->path }}", id: "{{ $id }}", type: "padron" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('operations.vehicles.addImages') }}",
@@ -127,12 +127,12 @@
             $("#obligatory_insurance").fileinput({
                 initialPreview: [
                     @foreach($vehicle->imageObligatoryInsurances as $image_obl_ins)
-                        "<img style='height:160px' src='{{ asset("/storage/vehicle/" . $id . "/obligatory_insurance/" . $image_obl_ins->name) }}' />",
+                        "<img style='height:160px' src='{{ $image_obl_ins->path }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
                     @foreach($vehicle->imageObligatoryInsurances as $image_obl_ins)
-                        { caption: "{{ $image_obl_ins->orig_name }}", width: "120px", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_obl_ins->id }}", extra: { img_name: "{{ $image_obl_ins->name }}", id: "{{ $id }}", type: "obligatory_insurance" } },
+                        { caption: "{{ $image_obl_ins->orig_name }}", size: "{{ $image_obl_ins->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_obl_ins->id }}", extra: { path: "{{ $image_obl_ins->path }}", id: "{{ $id }}", type: "obligatory_insurance" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('operations.vehicles.addImages') }}",
@@ -145,12 +145,12 @@
             $("#patent").fileinput({
                 initialPreview: [
                     @foreach($vehicle->imagePatents as $image_patent)
-                        "<img style='height:160px' src='{{ asset("/storage/vehicle/" . $id . "/patent/" . $image_patent->name) }}' />",
+                        "<img style='height:160px' src='{{ $image_patent->path }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
                     @foreach($vehicle->imagePatents as $image_patent)
-                        { caption: "{{ $image_patent->orig_name }}", width: "120px", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { img_name: "{{ $image_patent->name }}", id: "{{ $id }}", type: "patent" } },
+                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_patent->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "patent" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('operations.vehicles.addImages') }}",
@@ -163,12 +163,12 @@
             $("#circulation_permit").fileinput({
                 initialPreview: [
                     @foreach($vehicle->imageCirculationPermits as $image_cir_permit)
-                        "<img style='height:160px' src='{{ asset("/storage/vehicle/" . $id . "/circulation_permit/" . $image_cir_permit->name) }}' />",
+                        "<img style='height:160px' src='{{ $image_cir_permit->path }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
                     @foreach($vehicle->imageCirculationPermits as $image_cir_permit)
-                        { caption: "{{ $image_cir_permit->orig_name }}", width: "120px", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_cir_permit->id }}", extra: { img_name: "{{ $image_cir_permit->name }}", id: "{{ $id }}", type: "circulation_permit" } },
+                        { caption: "{{ $image_cir_permit->orig_name }}", size: "{{ $image_cir_permit->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_cir_permit->id }}", extra: { path: "{{ $image_cir_permit->path }}", id: "{{ $id }}", type: "circulation_permit" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('operations.vehicles.addImages') }}",

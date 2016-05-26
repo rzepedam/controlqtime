@@ -11,7 +11,6 @@
 
 		var element = $(this);
 		var input   = $(this).attr('id');
-
 		if ($(this).val() == '')
 			return false;
 

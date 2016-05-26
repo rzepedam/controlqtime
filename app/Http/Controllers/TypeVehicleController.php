@@ -2,52 +2,70 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\EngineCubicRepoInterface;
 use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
+use Controlqtime\Core\Contracts\WeightRepoInterface;
 use Controlqtime\Http\Requests\TypeVehicleRequest;
 use Controlqtime\Http\Requests;
 
-class TypeVehicleController extends Controller
-{
-    protected $type_vehicle;
+class TypeVehicleController extends Controller {
 
-    public function __construct(TypeVehicleRepoInterface $type_vehicle)
-    {
-        $this->type_vehicle = $type_vehicle;
-    }
+	protected $engine_cubic;
+	protected $type_vehicle;
+	protected $weight;
 
-    public function index()
-    {
-        $type_vehicles = $this->type_vehicle->all();
-        return view('maintainers.type-vehicles.index', compact('type_vehicles'));
-    }
-    
-    public function create()
-    {
-        return view('maintainers.type-vehicles.create');
-    }
+	public function __construct(TypeVehicleRepoInterface $type_vehicle, WeightRepoInterface $weight, EngineCubicRepoInterface $engine_cubic)
+	{
+		$this->engine_cubic = $engine_cubic;
+		$this->type_vehicle = $type_vehicle;
+		$this->weight       = $weight;
+	}
 
-    public function store(TypeVehicleRequest $request)
-    {
-        $this->type_vehicle->create($request->all());
-        return redirect()->route('maintainers.type-vehicles.index');
-    }
+	public function index()
+	{
+		$type_vehicles = $this->type_vehicle->all(['engineCubic', 'weight']);
 
-    public function edit($id)
-    {
-        $type_vehicle = $this->type_vehicle->find($id);
-        return view('maintainers.type-vehicles.edit', compact('type_vehicle'));
-    }
+		return view('maintainers.type-vehicles.index', compact('type_vehicles'));
+	}
 
-    public function update(TypeVehicleRequest $request, $id)
-    {
-        $this->type_vehicle->update($request->all(), $id);
-        return redirect()->route('maintainers.type-vehicles.index');
-    }
+	public function create()
+	{
+		$engine_cubics = $this->engine_cubic->lists('acr', 'id');
+		$weights       = $this->weight->lists('acr', 'id');
 
-    public function destroy($id)
-    {
-        $this->type_vehicle->delete($id);
-        return redirect()->route('maintainers.type-vehicles.index');
-    }
+		return view('maintainers.type-vehicles.create', compact('engine_cubics', 'weights'));
+	}
+
+	public function store(TypeVehicleRequest $request)
+	{
+		$this->type_vehicle->create($request->all());
+
+		return redirect()->route('maintainers.type-vehicles.index');
+	}
+
+	public function edit($id)
+	{
+		$engine_cubics = $this->engine_cubic->lists('acr', 'id');
+		$type_vehicle  = $this->type_vehicle->find($id);
+		$weights       = $this->weight->lists('acr', 'id');
+
+		return view('maintainers.type-vehicles.edit', compact(
+			'engine_cubics', 'type_vehicle', 'weights'
+		));
+	}
+
+	public function update(TypeVehicleRequest $request, $id)
+	{
+		$this->type_vehicle->update($request->all(), $id);
+
+		return redirect()->route('maintainers.type-vehicles.index');
+	}
+
+	public function destroy($id)
+	{
+		$this->type_vehicle->delete($id);
+
+		return redirect()->route('maintainers.type-vehicles.index');
+	}
 
 }

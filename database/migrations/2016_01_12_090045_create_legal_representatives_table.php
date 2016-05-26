@@ -21,7 +21,7 @@ class CreateLegalRepresentativesTable extends Migration
             $table->integer('nationality_id')->unsigned();
             $table->string('phone1_legal', 20);
             $table->string('phone2_legal', 20);
-            $table->string('email_legal', 100)->unique();
+            $table->string('email_legal', 60)->unique();
             $table->timestamps();
 
             $table->foreign('nationality_id')

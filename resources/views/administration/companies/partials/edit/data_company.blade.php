@@ -75,6 +75,12 @@
     </div>
     <div class="col-md-1">
         <div class="form-group">
+            {{ Form::label('bod', 'Bodega', ['class' => 'control-label']) }}
+            {{ Form::text('bod', null, ['class' => 'form-control text-center']) }}
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="form-group">
             {{ Form::label('ofi', 'Oficina', ['class' => 'control-label']) }}
             {{ Form::text('ofi', null, ['class' => 'form-control text-center']) }}
         </div>
@@ -85,14 +91,14 @@
             {{ Form::text('floor', null, ['class' => 'form-control text-center']) }}
         </div>
     </div>
+</div>
+<div class="row">
     <div class="col-md-2">
         <div class="form-group">
             {{ Form::label('muni_license', 'Patente Municipal', ['class' => 'control-label']) }}
             {{ Form::text('muni_license', null, ['class' => 'form-control text-center']) }}
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-md-2">
         <div class="form-group">
             {{ Form::label('phone1', 'Teléfono 1', ['class' => 'control-label']) }}
@@ -117,12 +123,12 @@
     </div>
     <div class="col-md-6">
             <div class="form-group">
-                {{ Form::label('email', 'Email', ['class' => 'control-label']) }}
+                {{ Form::label('email_company', 'Email', ['class' => 'control-label']) }}
                 <div class="input-group">
                     <div class="input-group-addon">
                         <i class="fa fa-envelope"></i>
                     </div>
-                    {{ Form::text('email', null, ['id' => 'Company', 'class' => 'form-control']) }}
+                    {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control']) }}
                 </div>
             </div>
     </div>

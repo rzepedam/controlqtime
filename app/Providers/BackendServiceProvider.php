@@ -64,6 +64,11 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\EngineCubicRepoInterface',
+            'Controlqtime\Core\Repositories\EngineCubicRepo'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\ExamRepoInterface',
             'Controlqtime\Core\Repositories\ExamRepo'
         );
@@ -91,6 +96,11 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->bind(
             'Controlqtime\Core\Contracts\GenderRepoInterface',
             'Controlqtime\Core\Repositories\GenderRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\InfoContactRepoInterface',
+            'Controlqtime\Core\Repositories\InfoContactRepo'
         );
 
         $this->app->bind(
@@ -194,6 +204,11 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\StateVehicleRepoInterface',
+            'Controlqtime\Core\Repositories\StateVehicleRepo'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\StudyRepoInterface',
             'Controlqtime\Core\Repositories\StudyRepo'
         );
@@ -261,6 +276,11 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->bind(
             'Controlqtime\Core\Contracts\VehicleRepoInterface',
             'Controlqtime\Core\Repositories\VehicleRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\WeightRepoInterface',
+            'Controlqtime\Core\Repositories\WeightRepo'
         );
     }
 }

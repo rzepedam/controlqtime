@@ -5,7 +5,9 @@
                 <thead>
                 <tr>
                     <th class="col-md-1">ID</th>
-                    <th class="col-md-9">Nombre</th>
+                    <th class="col-md-7">Nombre</th>
+                    <th class="text-center col-md-1">Peso</th>
+                    <th class="text-center col-md-2">Cilindraje Motor</th>
                     <th class="text-center col-md-2">Acciones</th>
                 </tr>
                 </thead>
@@ -15,7 +17,8 @@
                         <tr data-id="{{ $type_vehicle->id }}">
                             <td>{{ $type_vehicle->id }}</td>
                             <td>{{ $type_vehicle->name }}</td>
-
+                            <td class="text-center">{{ $type_vehicle->weight->acr }}</td>
+                            <td class="text-center">{{ $type_vehicle->engineCubic->acr }}</td>
                             <td class="text-center">
                                 <a href="{{ route('maintainers.type-vehicles.edit', $type_vehicle) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i> </a>
                             </td>

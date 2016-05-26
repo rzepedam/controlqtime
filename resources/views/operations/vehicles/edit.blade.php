@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    {{ Html::style('assets/css/bootstrap-datepicker.css') }}
+
+@stop
+
 @section('title_header') Editar Vehículo: <span class="text-primary">{{ $vehicle->id }}</span> @stop
 
 @section('breadcumb')
@@ -44,8 +50,11 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/config.js') }}
-    {{ Html::script('me/js/delete.js') }}
     {{ Html::script('me/js/changeMethods/changeTrademarkModel.js') }}
+    {{ Html::script('assets/js/config.js') }}
+    {{ Html::script('assets/js/bootstrap-datepicker.js') }}
+    {{ Html::script('assets/js/bootstrap-datepicker.es.min.js') }}
+    {{ Html::script('me/js/delete.js') }}
+    {{ Html::script('me/js/base/operations/vehicles/base.js') }}
 
 @stop

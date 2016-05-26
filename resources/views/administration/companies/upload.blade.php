@@ -73,14 +73,15 @@
             $("#rol").fileinput({
                 initialPreview: [
                     @foreach($company->imageRolCompanies as $image_rut)
-                            "<img style='height:160px' src='{{ asset("/storage/company/" . $id . "/rol/" . $image_rut->name) }}' />",
+                        "<img style='height:160px' src='{{ $image_rut->path }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
                     @foreach($company->imageRolCompanies as $image_rut)
-                        { caption: "{{ $image_rut->orig_name }}", width: "120px", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_rut->id }}", extra: { img_name: "{{ $image_rut->name }}", id: "{{ $id }}", type: "rol" } },
+                        { caption: "{{ $image_rut->orig_name }}", size: "{{ $image_rut->size }}", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_rut->id }}", extra: { path: "{{ $image_rut->path }}", id: "{{ $id }}", type: "rol" } },
                     @endforeach
                 ],
+                overwriteInitial: false,
                 uploadUrl: "{{ route('administration.companies.addImages') }}",
                 uploadExtraData:  {
                     id: "{{ $id }}",
@@ -91,14 +92,15 @@
             $("#patent").fileinput({
                 initialPreview: [
                     @foreach($company->imagePatentCompanies as $image_patent)
-                            "<img style='height:160px' src='{{ asset("/storage/company/" . $id . "/patent/" . $image_patent->name) }}' />",
+                        "<img style='height:160px' src='{{ $image_patent->path }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
                     @foreach($company->imagePatentCompanies as $image_patent)
-                        { caption: "{{ $image_patent->orig_name }}", width: "120px", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { img_name: "{{ $image_patent->name }}", id: "{{ $id }}", type: "patent" } },
+                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_rut->size }}", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "patent" } },
                     @endforeach
                 ],
+                overwriteInitial: false,
                 uploadUrl: "{{ route('administration.companies.addImages') }}",
                 uploadExtraData:  {
                     id: "{{ $id }}",

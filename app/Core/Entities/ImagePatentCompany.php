@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class ImagePatentCompany extends Eloquent
 {
     protected $fillable = [
-        'name', 'mime', 'orig_name'
+        'path', 'orig_name', 'size'
     ];
 
     /*

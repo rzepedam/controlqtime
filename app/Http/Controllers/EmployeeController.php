@@ -14,6 +14,7 @@ use Controlqtime\Core\Contracts\ExamRepoInterface;
 use Controlqtime\Core\Contracts\FamilyRelationshipRepoInterface;
 use Controlqtime\Core\Contracts\FamilyResponsabilityRepoInterface;
 use Controlqtime\Core\Contracts\GenderRepoInterface;
+use Controlqtime\Core\Contracts\InfoContactRepoInterface;
 use Controlqtime\Core\Contracts\InstitutionRepoInterface;
 use Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
@@ -47,6 +48,7 @@ class EmployeeController extends Controller {
 	protected $family_relationship;
 	protected $family_responsability;
 	protected $gender;
+	protected $info_contact;
 	protected $institution;
 	protected $professionalLicense;
 	protected $province;
@@ -61,33 +63,34 @@ class EmployeeController extends Controller {
 	protected $type_professional_license;
 	protected $type_speciality;
 
-	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, CompanyRepoInterface $company, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam, FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense, DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam, FamilyResponsabilityRepoInterface $family_responsability)
+	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, CompanyRepoInterface $company, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam, FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense, DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam, FamilyResponsabilityRepoInterface $family_responsability, InfoContactRepoInterface $info_contact)
 	{
-		$this->certification             = $certification;
-		$this->commune                   = $commune;
-		$this->company                   = $company;
-		$this->country                   = $country;
-		$this->degree                    = $degree;
-		$this->disability                = $disability;
-		$this->disease                   = $disease;
-		$this->employee                  = $employee;
-		$this->exam                      = $exam;
-		$this->family_relationship       = $family_relationship;
-		$this->family_responsability     = $family_responsability;
-		$this->gender                    = $gender;
-		$this->institution               = $institution;
-		$this->professionalLicense       = $professionalLicense;
-		$this->province                  = $province;
-		$this->region                    = $region;
-		$this->relationship              = $relationship;
-		$this->speciality                = $speciality;
-		$this->study                     = $study;
-		$this->type_certification        = $type_certification;
-		$this->type_disability           = $type_disability;
-		$this->type_disease              = $type_disease;
-		$this->type_exam                 = $type_exam;
-		$this->type_professional_license = $type_professional_license;
-		$this->type_speciality           = $type_speciality;
+		$this->certification             	= $certification;
+		$this->commune                   	= $commune;
+		$this->company                   	= $company;
+		$this->country                   	= $country;
+		$this->degree                    	= $degree;
+		$this->disability                	= $disability;
+		$this->disease                   	= $disease;
+		$this->employee                  	= $employee;
+		$this->exam                      	= $exam;
+		$this->family_relationship       	= $family_relationship;
+		$this->family_responsability     	= $family_responsability;
+		$this->gender                    	= $gender;
+		$this->info_contact 				= $info_contact;
+		$this->institution               	= $institution;
+		$this->professionalLicense       	= $professionalLicense;
+		$this->province                  	= $province;
+		$this->region                    	= $region;
+		$this->relationship              	= $relationship;
+		$this->speciality                	= $speciality;
+		$this->study                     	= $study;
+		$this->type_certification        	= $type_certification;
+		$this->type_disability           	= $type_disability;
+		$this->type_disease              	= $type_disease;
+		$this->type_exam                 	= $type_exam;
+		$this->type_professional_license 	= $type_professional_license;
+		$this->type_speciality           	= $type_speciality;
 	}
 
 	public function index()
@@ -139,12 +142,18 @@ class EmployeeController extends Controller {
 		Session::put('region_id', $request->get('region_id'));
 		Session::put('province_id', $request->get('province_id'));
 		Session::put('commune_id', $request->get('commune_id'));
-		Session::put('email', $request->get('email'));
+		Session::put('email_employee', $request->get('email_employee'));
 		Session::put('phone1', $request->get('phone1'));
 		Session::put('phone2', $request->get('phone2'));
 		Session::put('company_id', $request->get('company_id'));
 		Session::put('code', $request->get('code'));
 		Session::put('count_family_relationships', $request->get('count_family_relationships'));
+		Session::put('count_contacts', $request->get('count_contacts'));
+		Session::put('id_contact', $request->get('id_contact'));
+		Session::put('name_contact', $request->get('name_contact'));
+		Session::put('email_contact', $request->get('email_contact'));
+		Session::put('address_contact', $request->get('address_contact'));
+		Session::put('tel_contact', $request->get('tel_contact'));
 		Session::put('id_family_relationship', $request->get('id_family_relationship'));
 		Session::put('relationship_id', $request->get('relationship_id'));
 		Session::put('employee_family_id', $request->get('employee_family_id'));
@@ -195,6 +204,7 @@ class EmployeeController extends Controller {
 	public function store(Step3Request $request)
 	{
 		$employee = $this->employee->create(Session::get('step1'));
+		$this->info_contact->createOrUpdateWithArray(Session::get('step1'), $employee);
 		$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
 		$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
 		$this->certification->createOrUpdateWithArray(Session::get('step2'), $employee);
@@ -246,6 +256,8 @@ class EmployeeController extends Controller {
 	{
 		$employee = $this->employee->find($id);
 		$this->employee->update($request->all(), $id);
+		$this->info_contact->destroyArrayId($request->get('id_delete_contact'));
+		$this->info_contact->createOrUpdateWithArray($request->all(), $employee);
 		$this->family_relationship->destroyArrayId($request->get('id_delete_family_relationship'));
 		$this->family_relationship->createOrUpdateWithArray($request->all(), $employee);
 
@@ -292,7 +304,8 @@ class EmployeeController extends Controller {
 	public function show($id)
 	{
 		$employee = $this->employee->find($id, array(
-			'familyRelationships', 'studies', 'certifications', 'specialities', 'professionalLicenses'
+			'infoContacts', 'familyRelationships', 'studies', 'certifications', 'specialities',
+			'professionalLicenses'
 		));
 
 		return view('human-resources.employees.show', compact('employee'));
@@ -301,7 +314,9 @@ class EmployeeController extends Controller {
 
 	public function destroy($id)
 	{
+		$this->employee->delete($id);
 
+		return redirect()->route('human-resources.employees.index');
 	}
 
 	public function destroyEmployeeData()
@@ -319,11 +334,17 @@ class EmployeeController extends Controller {
 		Session::forget('region_id');
 		Session::forget('province_id');
 		Session::forget('commune_id');
-		Session::forget('email');
+		Session::forget('email_employee');
 		Session::forget('phone1');
 		Session::forget('phone2');
 		Session::forget('company_id');
 		Session::forget('code');
+		Session::forget('count_contacts');
+		Session::forget('id_contact');
+		Session::forget('name_contact');
+		Session::forget('email_contact');
+		Session::forget('address_contact');
+		Session::forget('tel_contact');
 		Session::forget('count_family_relationships');
 		Session::forget('id_family_relationship');
 		Session::forget('relationship_id');

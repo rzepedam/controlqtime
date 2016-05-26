@@ -9,8 +9,8 @@ class Employee extends Eloquent
 {
     protected $fillable = [
         'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
-        'nationality_id', 'gender_id', 'address', 'commune_id', 'email', 'phone1', 'phone2', 'company_id',
-        'code', 'state'
+        'nationality_id', 'gender_id', 'address', 'commune_id', 'email_employee', 'phone1', 'phone2',
+        'company_id', 'code', 'state'
     ];
 
     protected $dates = [
@@ -35,6 +35,10 @@ class Employee extends Eloquent
     
     public function commune() {
         return $this->belongsTo(Commune::class);
+    }
+
+    public function infoContacts() {
+        return $this->hasMany(InfoContact::class);
     }
     
     public function familyRelationships() {
@@ -101,8 +105,8 @@ class Employee extends Eloquent
         $this->attributes['address'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-    public function setEmailAttribute($value) {
-        $this->attributes['email'] = strtolower($value);
+    public function setEmailEmployeeAttribute($value) {
+        $this->attributes['email_employee'] = strtolower($value);
     }
 
     public function setBirthdayAttribute($value) {

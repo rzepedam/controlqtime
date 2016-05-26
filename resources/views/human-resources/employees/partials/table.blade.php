@@ -16,7 +16,7 @@
                         <tr data-id="{{ $employee->id }}">
                             <td>{{ $employee->id }}</td>
                             <td>{{ $employee->full_name }}</td>
-                            <td>{{ $employee->email }}</td>
+                            <td>{{ $employee->email_employee }}</td>
 
                             @if ($employee->state == 'disable')
                                 <td class="text-center">

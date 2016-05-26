@@ -6,62 +6,59 @@ use Controlqtime\Core\Contracts\Base\BaseRepoUploadInterface;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class BaseUploadRepo implements BaseRepoUploadInterface
-{
-    public function getPath($repo, $id, $type)
-    {
-        return $path = public_path() . "/storage/" . $repo . "/" . $id . "/" . $type . "/";
-    }
+class BaseUploadRepo implements BaseRepoUploadInterface {
 
-    public function randName($ext)
-    {
-        return Str::random(20) . '.' . $ext;
-    }
+	public function addImages($repo, $file, $id, $type)
+	{
+		$path                   = $this->getPath($repo, $id, $type);
+		$name                   = time() . $file->getClientOriginalName();
+		$this->model->path      = $path . $name;
+		$this->model->orig_name = $file->getClientOriginalName();
+		$this->model->size		= $file->getSize();
 
-    public function moveImage($path, $file, $name)
-    {
-        File::makeDirectory($path, $mode = 0777, true, true);
-        $file->move($path, $name);
-    }
+		switch ($repo)
+		{
+			case 'company':
+				$this->model->company_id = $id;
+				break;
 
-    public function addImages($repo, $file, $id, $type)
-    {
-        $path = $this->getPath($repo, $id, $type);
-        $name = $this->randName($file->getClientOriginalExtension());
-        $this->model->name          = $name;
-        $this->model->mime          = $file->getClientOriginalExtension();
-        $this->model->orig_name     = $file->getClientOriginalName();
+			case 'vehicle':
+				$this->model->vehicle_id = $id;
+				break;
+		}
 
-        switch ($repo)
-        {
-            case 'company':
-                $this->model->company_id    = $id;
-                break;
+		if ( $this->model->save() )
+		{
+			$this->moveImage(public_path() . $path, $file, $name);
 
-            case 'vehicle':
-                $this->model->vehicle_id    = $id;
-                break;
-        }
+			return true;
+		}
+	}
 
-        if ($this->model->save()) {
-            $this->moveImage($path, $file, $name);
-            return true;
-        }
-    }
-    
-    public function destroyImage($repo, $id, $type, $name)
-    {
-        $path   = $this->getPath($repo, $id, $type) . $name;
+	public function getPath($repo, $id, $type)
+	{
+		return $path = "/storage/" . $repo . "/" . $id . "/" . $type . "/";
+	}
 
-        if (is_file($path)) {
-            unlink($path);
-            return true;
-        }
-    }
+	public function moveImage($path, $file, $name)
+	{
+		File::makeDirectory($path, $mode = 0777, true, true);
+		$file->move($path, $name);
+	}
 
-    public function delete($id)
-    {
-        $this->model->destroy($id);
-    }
-    
+	public function destroyImage($path)
+	{
+		if ( is_file(public_path() . $path) )
+		{
+			unlink(public_path() . $path);
+
+			return true;
+		}
+	}
+
+	public function delete($id)
+	{
+		$this->model->destroy($id);
+	}
+
 }

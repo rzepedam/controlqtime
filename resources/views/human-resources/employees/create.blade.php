@@ -69,8 +69,7 @@
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-check-square-o text-primary"></i> Datos
-                                        Personales</h3>
+                                    <h3 class="panel-title"><i class="icon fa fa-check-square-o text-primary"></i> Datos Personales</h3>
                                 </div>
                                 <div class="panel-body">
 
@@ -80,8 +79,7 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-picture-o text-info"></i> Imagen de Perfil
-                                    </h3>
+                                    <h3 class="panel-title"><i class="icon fa fa-picture-o text-info"></i> Imagen de Perfil</h3>
                                 </div>
                                 <div class="panel-body">
 
@@ -106,11 +104,41 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon md-male-female text-warning font-size-18"></i>
-                                        Parentescos Familiares</h3>
+                                    <h3 class="panel-title"><i class="fa fa-pencil-square-o text-success" aria-hidden="true"></i> Información de Contacto</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
+                                        <span class="label label-outline label-success add_info_contact waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Contacto</span>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="content_info_contact">
+
+                                        @if (Session::get('count_contacts') > 0)
+                                            @for($i = 0; $i < Session::get('count_contacts'); $i++)
+
+                                                @include('human-resources.employees.partials.create.step1.info_contact')
+
+                                            @endfor
+                                        @else
+                                            <br/>
+                                            <h3 class="text-center text-success">No existe Información de Contacto Asociada
+                                                <br/>
+                                                <small>(Pulse "Agregar Contacto" para comenzar su adición)
+                                                </small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
+                                        @endif
+
+                                    </div>
+                                    <br/>
+
+                                </div>
+                            </div>
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon md-male-female text-warning font-size-18"></i> Parentescos Familiares</h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -151,11 +179,9 @@
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon md-library text-info font-size-18"></i> Estudios
-                                        Académicos</h3>
+                                    <h3 class="panel-title"><i class="icon md-library text-info font-size-18"></i> Estudios Académicos</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-info add_study waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Estudio Académico</span>
+                                        <span class="label label-outline label-info add_study waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Estudio Académico</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -182,11 +208,9 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon md-badge-check text-danger font-size-18"></i>
-                                        Certificaciones</h3>
+                                    <h3 class="panel-title"><i class="icon md-badge-check text-danger font-size-18"></i> Certificaciones</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-danger add_certification waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Certificación</span>
+                                        <span class="label label-outline label-danger add_certification waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Certificación</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -213,11 +237,9 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-wrench text-warning"></i> Especialidades
-                                    </h3>
+                                    <h3 class="panel-title"><i class="icon fa fa-wrench text-warning"></i> Especialidades</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-warning add_speciality waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Especialidad</span>
+                                        <span class="label label-outline label-warning add_speciality waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Especialidad</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -244,12 +266,9 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-bookmark text-success"
-                                                               style="font-size: 16px;"></i></i> Licencias Profesionales
-                                    </h3>
+                                    <h3 class="panel-title"><i class="icon fa fa-bookmark text-success" style="font-size: 16px;"></i></i> Licencias Profesionales</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-success add_professional_license waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Licencia Profesional</span>
+                                        <span class="label label-outline label-success add_professional_license waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Licencia Profesional</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -289,11 +308,9 @@
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-wheelchair text-warning"></i>
-                                        Discapacidades</h3>
+                                    <h3 class="panel-title"><i class="icon fa fa-wheelchair text-warning"></i> Discapacidades</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-warning add_disabilities waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Discapacidad</span>
+                                        <span class="label label-outline label-warning add_disabilities waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Discapacidad</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -314,8 +331,7 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="icon fa fa-bed text-success"></i> Enfermedades</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-success add_diseases waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Enfermedad</span>
+                                        <span class="label label-outline label-success add_diseases waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Enfermedad</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -334,11 +350,9 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-stethoscope text-info"></i> Exámenes
-                                        Preocupacionales</h3>
+                                    <h3 class="panel-title"><i class="icon fa fa-stethoscope text-info"></i> Exámenes Preocupacionales</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-info add_exams waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Examen Preocupacional</span>
+                                        <span class="label label-outline label-info add_exams waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Examen Preocupacional</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -358,11 +372,9 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-child text-danger"></i> Cargas Familiares
-                                    </h3>
+                                    <h3 class="panel-title"><i class="icon fa fa-child text-danger"></i> Cargas Familiares</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-danger add_family_responsability waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Carga Familiar</span>
+                                        <span class="label label-outline label-danger add_family_responsability waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Carga Familiar</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -424,11 +436,12 @@
 
         $(document).ready(function () {
 
-            var count_family_relationships      = {{ Session::get('count_family_relationships') ? Session::get('count_family_relationships') : 0  }};
-            var count_studies                   = {{ Session::get('count_studies') ? Session::get('count_studies') : 0  }};
-            var count_certifications            = {{ Session::get('count_certifications') ? Session::get('count_certifications') : 0  }};
-            var count_specialities              = {{ Session::get('count_specialities') ? Session::get('count_specialities') : 0  }};
-            var count_professional_licenses     = {{ Session::get('count_professional_licenses') ? Session::get('count_professional_licenses') : 0  }};
+            var count_contacts                   = {{ Session::get('count_contacts') ? Session::get('count_contacts') : 0 }}
+            var count_family_relationships      = {{ Session::get('count_family_relationships') ? Session::get('count_family_relationships') : 0 }};
+            var count_studies                   = {{ Session::get('count_studies') ? Session::get('count_studies') : 0 }};
+            var count_certifications            = {{ Session::get('count_certifications') ? Session::get('count_certifications') : 0 }};
+            var count_specialities              = {{ Session::get('count_specialities') ? Session::get('count_specialities') : 0 }};
+            var count_professional_licenses     = {{ Session::get('count_professional_licenses') ? Session::get('count_professional_licenses') : 0 }};
             var count_disabilities              = 0;
             var count_diseases                  = 0;
             var count_exams                     = 0;
@@ -493,7 +506,7 @@
                     $.ajax({
                         type: 'POST',
                         url: '{{ route("human-resources.employees.step1") }}',
-                        data: $('#step1').serialize() + "&full_name=" + full_name + "&count_family_relationships=" + count_family_relationships,
+                        data: $('#step1').serialize() + "&full_name=" + full_name + "&count_family_relationships=" + count_family_relationships + "&count_contacts=" + count_contacts,
                         async: false,
                         dataType: "json",
                         success: function (response) {
@@ -582,6 +595,27 @@
                         }
                     });
                 }
+
+            });
+
+            /**
+             *  Add Contact
+             */
+
+            $('.add_info_contact').click(function() {
+
+                var contact = '<span id="contact"><div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"> <span id="num_contact" class="text-success"> Contacto #' + (count_contacts + 1) + ' </span> <a id="contact" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Contacto" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_contact", "ID", ["class"=> "control-label"])}}{{Form::text("id_contact[]", 0, ["id"=> "id_contact", "class"=> "form-control"])}}</div></div><div class="col-md-6 form-group">{{Form::label('name_contact', 'Nombre', ['class'=> 'control-label'])}}{{Form::text('name_contact[]', null, ['class'=> 'form-control'])}}</div><div class="col-md-6 form-group">{{Form::label('email_contact', 'Email', ['class'=> 'control-label'])}}{{Form::text('email_contact[]', null, ['id' => 'EmailContactEmployee', 'class'=> 'form-control', 'onBlur' => '$(this).checkEmail(this)'])}}</div></div><div class="row"> <div class="col-md-9 form-group">{{Form::label('address_contact', 'Dirección', ['class'=> 'control-label'])}}{{Form::text('address_contact[]', null, ['class'=> 'form-control'])}}</div><div class="col-md-3 form-group">{{Form::label('tel_contact', 'Teléfono', ['class'=> 'control-label'])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text('tel_contact[]', null, ['class'=> 'form-control'])}}</div></div></div><br /></span>';
+
+                if (count_contacts == 0)
+                    $('#content_info_contact').html(contact);
+                else
+                    $('#content_info_contact').append(contact);
+
+                $('span#contact').attr('id', 'contact' + count_contacts);
+                $('span#num_contact').attr('id', 'num_contact' + count_contacts);
+
+                $('.tooltip-danger').tooltip();
+                count_contacts++;
 
             });
 
@@ -815,6 +849,27 @@
                 var span    = padre.children("span");
 
                 switch (element) {
+                    case 'contact':
+
+                        for (var i = 0; i < span.length; i++) {
+
+                            var item = verificaUltimosNumeros(span[i].id);
+
+                            $('span#num_contact' + item).text('Contacto #' + (i + 1));
+                            $('span#num_contact' + item).attr('id', 'num_contact' + i);
+                            $('span#contact' + item).attr('id', 'contact' + i);
+
+                        }
+
+                        count_contacts--;
+                        if (count_contacts == 0) {
+                            var html = '<br /><h3 class="text-center text-success">No existe Información de Contacto Asociada <br /><small>(Pulse "Agregar Contacto" para comenzar su adición)</small></h3><br /><br />'
+                            $('#content_info_contact').html(html);
+                        }
+
+
+                        break;
+
                     case 'family_relationship':
 
                         for (var i = 0; i < span.length; i++) {
