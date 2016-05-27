@@ -5,7 +5,7 @@
 @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li class="active">Unidades de Medida</li>
 @stop
 
@@ -31,6 +31,13 @@
                     <span class="counter-number">Cilindraje Motor</span>
                 </div>
             </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ route('maintainers') }}">Volver</a>
         </div>
     </div>
 

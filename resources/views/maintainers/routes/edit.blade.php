@@ -3,7 +3,7 @@
 @section('title_header') Editar Recorrido: <span class="text-primary">{{ $route->id }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.routes.index') }}"><i class="fa fa-map"></i> Recorridos</a></li>
     <li class="active">Editar</li>
 @stop

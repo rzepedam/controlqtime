@@ -139,6 +139,11 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\LaborUnionRepoInterface',
+            'Controlqtime\Core\Repositories\LaborUnionRepo'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface',
             'Controlqtime\Core\Repositories\LegalRepresentativeRepo'
         );

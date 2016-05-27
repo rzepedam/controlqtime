@@ -3,7 +3,7 @@
 @section('title_header') Crear Nuevo Examen Preocupacional @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-exams.index') }}"><i class="fa fa-stethoscope"></i> Exámenes Preocupacionales</a></li>
     <li class="active">Nuevo</li>
 @stop

@@ -3,8 +3,8 @@
 @section('title_header') Editar Marca: <span class="text-primary">{{ $trademark->id }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.trademarks.index') }}"><i class="fa fa-trademark"></i> Marcas</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers.trademarks.index') }}"><i class="fa fa-trademark"></i> Marca Vehículos</a></li>
     <li class="active">Editar</li>
 @stop
 

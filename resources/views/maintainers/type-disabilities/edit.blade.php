@@ -3,7 +3,7 @@
 @section('title_header') Editar Discapacidad: <span class="text-primary">{{ $type_disability->id }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-disabilities.index') }}"><i class="fa fa-wheelchair"></i> Discapacidades</a></li>
     <li class="active">Editar</li>
 @stop

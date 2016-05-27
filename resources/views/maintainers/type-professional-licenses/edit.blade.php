@@ -3,7 +3,7 @@
 @section('title_header') Editar Licencia Profesional: <span class="text-primary">{{ $type_professional_license->id }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-professional-licenses.index') }}"><i class="fa fa-bookmark"></i> Licencias Profesionales</a></li>
     <li class="active">Editar</li>
 @stop

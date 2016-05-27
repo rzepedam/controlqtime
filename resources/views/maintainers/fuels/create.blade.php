@@ -3,7 +3,7 @@
 @section('title_header') Crear Nuevo Combustible @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.fuels.index') }}"><i class="md-gas-station"></i> Combustibles</a></li>
     <li class="active">Nuevo</li>
 @stop

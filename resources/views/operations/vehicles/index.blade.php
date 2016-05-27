@@ -6,7 +6,7 @@
 @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('operations') }}"><i class="fa fa-map-pin"></i> Operaciones</a></li>
     <li class="active">Vehículos</li>
 @stop
 
@@ -22,6 +22,11 @@
 
     @endif
 
-    {{ $vehicles->links() }}
+    <div class="row">
+        <div class="col-md-12">
+            <a class="pull-left margin-top-30" href="{{ route('operations') }}">Volver</a>
+            <span class="pull-right">{{ $vehicles->links() }}</span>
+        </div>
+    </div>
 
 @stop

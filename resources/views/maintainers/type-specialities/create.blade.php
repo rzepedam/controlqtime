@@ -3,7 +3,7 @@
 @section('title_header') Crear Nueva Especialidad @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-specialities.index') }}"><i class="fa fa-wrench"></i> Especialidades</a></li>
     <li class="active">Nuevo</li>
 @stop

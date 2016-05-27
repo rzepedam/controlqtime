@@ -3,7 +3,7 @@
 @section('title_header') Crear Nueva Enfermedad @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-diseases.index') }}"><i class="fa fa-bed"></i> Enfermedades</a></li>
     <li class="active">Nuevo</li>
 @stop

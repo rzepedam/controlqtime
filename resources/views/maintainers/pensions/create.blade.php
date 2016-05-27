@@ -3,7 +3,7 @@
 @section('title_header') Crear Nuevo Fondo de Pensión @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.pensions.index') }}"><i class="fa fa-tags"></i> Fondos de Pensiones</a></li>
     <li class="active">Nuevo</li>
 @stop

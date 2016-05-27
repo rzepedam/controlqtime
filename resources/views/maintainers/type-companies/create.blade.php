@@ -3,7 +3,7 @@
 @section('title_header') Crear Nuevo Tipo de Empresa @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-companies.index') }}"><i class="md-city-alt"></i> Tipo de Empresas</a></li>
     <li class="active">Nuevo</li>
 @stop

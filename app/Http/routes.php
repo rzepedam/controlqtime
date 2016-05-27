@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => ['web']], function () {
 
     /*
@@ -12,6 +14,9 @@ Route::group(['middleware' => ['web']], function () {
      * Administration
      */
 
+    Route::get('administration', ['as' => 'administration', function(){
+        return view('administration.index');
+    }]);
     Route::group(['prefix' => 'administration'], function(){
 
         Route::resource('companies', 'CompanyController');
@@ -27,6 +32,9 @@ Route::group(['middleware' => ['web']], function () {
      * Humans-Resources
      */
 
+    Route::get('human-resources', ['as' => 'human-resources', function(){
+        return view('human-resources.index');
+    }]);
     Route::group(['prefix' => 'human-resources'], function(){
 
         Route::resource('employees', 'EmployeeController');
@@ -51,8 +59,11 @@ Route::group(['middleware' => ['web']], function () {
      * Operations
      */
 
+    Route::get('operations', ['as' => 'operations', function(){
+        return view('operations.index');
+    }]);
     Route::group(['prefix' => 'operations'], function() {
-
+        
         Route::resource('route-sheets', 'RouteSheetController');
         Route::post('route-sheets/changeStateRoundSheet', ['as' => 'operations.route-sheets.changeStateRoundSheet', 'uses' => 'RouteSheetController@changeStateRoundSheet']);
         Route::resource('rounds', 'RoundController');
@@ -68,6 +79,9 @@ Route::group(['middleware' => ['web']], function () {
      * Maintainers
      */
 
+    Route::get('maintainers', ['as' => 'maintainers', function(){
+        return view('maintainers.index');
+    }]);
     Route::group(['prefix' => 'maintainers'], function() {
 
         Route::resource('areas', 'AreaController');
@@ -84,6 +98,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('roles', 'RoleController');
         Route::resource('relationships', 'RelationshipController');
         Route::resource('routes', 'RouteController');
+        Route::resource('labor-unions', 'LaborUnionController');
         Route::resource('terminals', 'TerminalController');
         Route::resource('trademarks', 'TrademarkController');
         Route::resource('type-certifications', 'TypeCertificationController');

@@ -3,8 +3,8 @@
 @section('title_header') Editar Modelo de Vehículo: <span class="text-primary">{{ $model_vehicle->id }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.model-vehicles.index') }}"><i class="fa fa-car"></i> Modelo de Vehículos</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers.model-vehicles.index') }}"><i class="fa fa-car"></i> Modelo Vehículos</a></li>
     <li class="active">Editar</li>
 @stop
 

@@ -9,7 +9,7 @@
 @section('title_header') Editar Empresa: <span class="text-primary">{{ $company->id }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-th-large"></i> Administración</a></li>
+    <li><a href="{{ route('administration') }}"><i class="fa fa-th-large"></i> Administración</a></li>
     <li><a href="{{ route('administration.companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
     <li class="active">Editar</li>
 @stop

@@ -27,72 +27,49 @@ class CompanyRequest extends SanitizedRequest
         {
             case 'POST':
             {
-                /*$rules['rut']           = 'required|unique:companies,rut|max:15';
-                $rules['firm_name']     = 'required';
-                $rules['gyre']          = 'required';
-                $rules['start_act']     = 'required';
-                $rules['address']       = 'required';
-                $rules['commune_id']    = 'required|integer';
-                $rules['num']           = 'required|regex:/[0-9 -()+]+$/|digits_between:1,8';
-                $rules['lot']           = 'max:20';
-                $rules['ofi']           = 'max:5';
-                $rules['floor']         = 'regex:/[0-9 -()+]+$/|digits_between:1,3';
-                $rules['muni_license']  = 'required|max:50';
-                $rules['email_company'] = 'required|email|unique:companies,email|max:100';
-                $rules['phone1']        = 'required|max:20';*/
-                $rules['phone2']        = 'max:20';
+                $rules = [ 
+                    'rut'           => 'required|unique:companies,rut|max:15',
+                    'firm_name'     => 'required',
+                    'gyre'          => 'required',
+                    'start_act'     => 'required|date',
+                    'address'       => 'required',
+                    'commune_id'    => 'required|integer',
+                    'num'           => 'required|regex:/[0-9 -()+]+$/|digits_between:1,8',
+                    'lot'           => 'max:20',
+                    'bod'           => 'max:5',
+                    'ofi'           => 'max:5',
+                    'floor'         => 'regex:/[0-9 -()+]+$/|digits_between:1,3',
+                    'muni_license'  => 'required|max:50',
+                    'phone1'        => 'required|max:20',
+                    'phone2'        => 'max:20',
+                    'email_company' => 'required|email|unique:companies,email|max:60',
+                ];
 
-                /*for ($i = 0; $i < $this->request->get('count_legal_representative'); $i++) {
-
-                    $rules['male_surname.' . $i]    = 'required|max:30';
-                    $rules['female_surname'][$i]    = 'required|max:30';
-                    $rules['first_name'][$i]        = 'required|max:30';
-                    $rules['second_name'][$i]       = 'max:30';
-                    $rules['rut_legal'][$i]         = 'required|max:15';
-                    $rules['birthday'][$i]          = 'required';
-                    $rules['nationality_id'][$i]    = 'required|integer';
-                    $rules['email_legal'][$i]       = 'required|email|unique:legal_representatives,email|max:100';
-                    $rules['phone1_legal'][$i]      = 'required|max:20';
-                    $rules['phone2_legal'][$i]      = 'max:20';
-
-                }*/
+                if (Request::get('count_legal_representative') > 0)
+                {
+                    foreach (range(0, Request::get('count_legal_representative') - 1) as $index)
+                    {
+                        $rules[ 'male_surname.' . $index ]   	= 'required|max:30';
+                        $rules[ 'female_surname.' . $index ]    = 'required|max:30';
+                        $rules[ 'first_name.' . $index ] 		= 'required|max:30';
+                        $rules[ 'second_name.' . $index ] 		= 'max:30';
+                        $rules[ 'rut_legal.' . $index ] 		= 'required|max:15|unique:legal_representatives,rut';
+                        $rules[ 'birthday.' . $index ] 	    	= 'required|date';
+                        $rules[ 'nationality_id.' . $index ] 	= 'required|regex:/[0-9 -()+]+$/';
+                        $rules[ 'email_legal.' . $index ] 		= 'required|max:60|email|unique:legal_representatives,email,' . Request::get('id' . $i);
+                        $rules[ 'phone1_legal.' . $index ] 		= 'required|max:20';
+                        $rules[ 'phone2_legal.' . $index ] 		= 'max:20';
+                    }
+                }
 
                 return $rules;
             }
 
             case 'PUT':
             {
-                /*$rules['rut']          = 'required|max:15|unique:companies,rut,' . $this->route->getParameter('companies');
-                $rules['firm_name']    = 'required';
-                $rules['gyre']         = 'required';
-                $rules['start_act']    = 'required';
-                $rules['address']      = 'required';
-                $rules['commune_id']   = 'required|integer';
-                $rules['num']          = 'required|regex:/[0-9 -()+]+$/|digits_between:1,8';
-                $rules['lot']          = 'max:20';
-                $rules['ofi']          = 'max:5';
-                $rules['floor']        = 'regex:/[0-9 -()+]+$/|digits_between:1,3';
-                $rules['muni_license'] = 'required|max:50';
-                $rules['email_company']= 'required|max:100|email|unique:companies,email,' . $this->route->getParameter('companies');
-                $rules['phone1']       = 'required|max:20';*/
-                $rules['phone2']       = 'max:20';
+                /*
 
-                /*for ($i = 0; $i < Request::get('count_legal_representative'); $i++) {
-
-                    $rules['male_surname' . $i]   = 'required|max:30';
-                    $rules['female_surname' . $i] = 'required|max:30';
-                    $rules['first_name' . $i]     = 'required|max:30';
-                    $rules['second_name' . $i]    = 'max:30';
-                    $rules['rut' . $i]            = 'required|max:15';
-                    $rules['birthday' . $i]       = 'required';
-                    $rules['nationality_id' . $i] = 'required|integer';
-                    $rules['email' . $i]          = 'required|max:100|email|unique:legal_representatives,email,' . Request::get('id' . $i);
-                    $rules['phone1-' . $i]        = 'required|max:20';
-                    $rules['phone2-' . $i]        = 'max:20';
-
-                }*/
-
-                return $rules;
+                return $rules;*/
             }
         }
     }

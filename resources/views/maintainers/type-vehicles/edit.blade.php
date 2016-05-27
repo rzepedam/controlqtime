@@ -3,7 +3,7 @@
 @section('title_header') Editar Tipo de Vehículo: <span class="text-primary">{{ $type_vehicle->id }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-vehicles.index') }}"><i class="fa fa-subway"></i> Tipos de Vehículos</a></li>
     <li class="active">Editar</li>
 @stop

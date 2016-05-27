@@ -3,7 +3,7 @@
 @section('title_header') Editar Unidad de Medida: <span class="text-primary">{{ $weight->id }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.measuring-units') }}"><i class="fa fa-sort-amount-asc"></i> Unidades de Medida</a></li>
     <li><a href="{{ route('maintainers.measuring-units.weights.index') }}"><i class="fa fa-balance-scale"></i> Peso</a></li>
     <li class="active">Editar</li>

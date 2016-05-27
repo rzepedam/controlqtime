@@ -14,8 +14,8 @@
 @section('title_header') Crear Nuevo Trabajador @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-street-view"></i> RR.HH</a></li>
-    <li><a href="{{ route('human-resources.employees.index') }}"><i class="fa fa-users"></i> Trabajadores</a></li>
+    <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
+    <li><a href="{{ route('human-resources.employees.index') }}"><i class="md-accounts font-size-16"></i> Trabajadores</a></li>
     <li class="active">Nuevo</li>
 @stop
 

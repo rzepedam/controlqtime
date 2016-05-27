@@ -9,8 +9,8 @@
 @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('operations.vehicles.index') }}"><i class="fa fa-building-o"></i> Vehículos</a></li>
+    <li><a href="{{ route('operations') }}"><i class="fa fa-map-pin"></i> Operaciones</a></li>
+    <li><a href="{{ route('operations.vehicles.index') }}"><i class="fa fa-bus"></i> Vehículos</a></li>
     <li class="active">Subir Archivos</li>
 @stop
 

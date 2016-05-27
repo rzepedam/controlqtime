@@ -3,7 +3,7 @@
 @section('title_header') Crear Nuevo Relación Familiar @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.relationships.index') }}"><i class="md-male-female font-size-16"></i> Relaciones Familiares</a></li>
     <li class="active">Nuevo</li>
 @stop

@@ -16,7 +16,7 @@
 @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-street-view"></i> RR.HH</a></li>
+    <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
     <li class="active">Trabajadores</li>
 @stop
 
@@ -32,7 +32,12 @@
 
     @endif
 
-    {{ $employees->links() }}
+    <div class="row">
+        <div class="col-md-12">
+            <a class="pull-left margin-top-30" href="{{ route('human-resources') }}">Volver</a>
+            <span class="pull-right">{{ $employees->links() }}</span>
+        </div>
+    </div>
 
 @stop
 

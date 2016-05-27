@@ -17,4 +17,20 @@ class InfoContact extends Eloquent
 	public function employee() {
 		return $this->belongsTo(Employee::class);
 	}
+
+	/*
+	 * Mutators
+	 */
+
+	public function setNameContactAttribute($value) {
+		$this->attributes['name_contact'] = ucfirst(mb_strtolower($value, 'utf-8'));
+	}
+
+	public function setEmailContactAttribute($value) {
+		$this->attributes['email_contact'] = strtolower($value);
+	}
+
+	public function setAddressContactAttribute($value) {
+		$this->attributes['address_contact'] = ucfirst(mb_strtolower($value, 'utf-8'));
+	}
 }

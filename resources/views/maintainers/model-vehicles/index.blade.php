@@ -6,8 +6,8 @@
 @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li class="active">Modelo de Vehículos</li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li class="active">Modelo Vehículos</li>
 @stop
 
 @section('content')
@@ -22,6 +22,11 @@
 
     @endif
 
-    {{ $model_vehicles->links() }}
+    <div class="row">
+        <div class="col-md-12">
+            <a class="pull-left margin-top-30" href="{{ route('maintainers') }}">Volver</a>
+            <span class="pull-right">{{ $model_vehicles->links() }}</span>
+        </div>
+    </div>
 
 @stop

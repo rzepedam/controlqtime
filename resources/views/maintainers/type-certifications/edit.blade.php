@@ -3,7 +3,7 @@
 @section('title_header') Editar Certificación: <span class="text-primary">{{ $type_certification->id }}</span> @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-certifications.index') }}"><i class="md-badge-check"></i> Certificaciones</a></li>
     <li class="active">Editar</li>
 @stop

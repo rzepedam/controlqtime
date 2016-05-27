@@ -3,7 +3,7 @@
 @section('title_header') Crear Nuevo Tipo Vehículo @stop
 
 @section('breadcumb')
-    <li><a href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
+    <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.type-vehicles.index') }}"><i class="fa fa-subway"></i> Tipos de Vehículos</a></li>
     <li class="active">Nuevo</li>
 @stop
