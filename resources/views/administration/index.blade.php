@@ -2,10 +2,6 @@
 
 @section('title_header') Administración @stop
 
-@section('breadcumb')
-    <li><a class="active" href="javascript:void(0)"><i class="fa fa-th-large"></i> Administración</a></li>
-@stop
-
 @section('content')
 
     <div class="row">

@@ -869,3 +869,8 @@ INSERT INTO type_companies(name) VALUES('Visitas');
 /* state_vehicles | Estado de vehículo */
 INSERT INTO state_vehicles(name) VALUES('Nuevo');
 INSERT INTO state_vehicles(name) VALUES('Usado');
+
+/* type_representatives | Tipo de Representante */
+INSERT INTO type_representatives(name) VALUES('Administrador de Contrato');
+INSERT INTO type_representatives(name) VALUES('Representante Legal');
+

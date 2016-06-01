@@ -16,7 +16,12 @@
 
 @section('content')
 
-    @include('layout.messages.errors')
+    {{-- Show Errors Validations --}}
+    <div class="clearfix">
+        <div class="col-md-12 col-xs-12 alert alert-danger alert-dismissible hide" role="alert" id="js">
+        </div>
+    </div>
+    {{-- End Show Errors --}}
 
     {{ Form::model($company, array('route' => array('administration.companies.update', $company), 'method' => 'PUT', 'id' => 'form-company')) }}
 
@@ -34,15 +39,15 @@
         <div class="panel panel-bordered">
             <div class="panel-heading">
                 <div class="panel-actions">
-                    <span class="label label-outline label-success add_license waves-effect waves-block" onclick="$(this).addLegalRepresentative(this)"><i class="fa fa-plus"></i> Agregar Representante Legal</span>
+                    <span class="label label-outline label-success add_representative waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Representante Empresa</span>
                 </div>
-                <h3 class="panel-title"><i class="fa fa-gavel text-success"></i> Datos Representante Legal</h3>
+                <h3 class="panel-title"><i class="fa fa-users text-success"></i> Datos Representantes Empresa</h3>
             </div>
 
             <div class="panel-body">
-                <div id="content_legal_representatives">
+                <div id="content_representative_companies">
 
-                    @include('administration.companies.partials.edit.data_legal_representative')
+                    @include('administration.companies.partials.edit.data_representative_companies')
 
                 </div>
             </div>
@@ -85,26 +90,19 @@
 
         $(document).ready(function(){
 
-            var count_legal_representative  = {{ ($company->num_representative > 0) ? $company->num_representative : 1 }};
-            var id_deletes_legal            = [];
+            var count_representative_company    = {{ count($company->representativeCompanies) > 0 ? count($company->representativeCompanies) : 1 }};
+            var id_delete_representatives       = [];
 
             function initializaComponents() {
                 $('.input-group.date').datepicker({
-                    format: 'dd-mm-yyyy',
-                    todayHighlight: true,
-                    language: 'es',
-                    autoclose: true,
                     endDate: new Date(),
-                    todayBtn: true,
                 });
 
                 $('.tooltip-primary').tooltip();
                 $('.tooltip-danger').tooltip();
             }
 
-
             initializaComponents();
-
 
             $(document).on('click', '.delete-elements', function() {
 
@@ -112,54 +110,53 @@
                 var padre       = $(this).parent().parent().parent().parent().parent();
                 var num_element = verificaUltimosNumeros($(this).parent().parent().parent().parent().attr('id'));
 
-                if (element == 'legal_representative') {
-                    if ($('#id_legal' + num_element).val() != 0)
-                        id_deletes_legal.push($('#id_legal' + num_element).val());
+                if (element == 'representative_company') {
+                    if ($('#id_representative' + num_element).val() != 0)
+                        id_delete_representatives.push($('#id_representative' + num_element).val());
                 }
 
                 $(this).parent().parent().parent().parent().remove();
-                var span        = padre.children("span");
+                var span  = padre.children("span");
 
                 switch (element)
                 {
-                    case 'legal_representative':
+                    case 'representative_company':
 
                         for (var i = 1; i < span.length; i++) {
 
-                            item = verificaUltimosNumeros(span[i].id);
+                            var item = verificaUltimosNumeros(span[i].id);
 
-                            $('span#legal_representative' + item).attr('id', 'legal_representative' + i);
-                            $('span#num_legal_representative' + item).text('Representante Legal #' + (i + 1));
-                            $('span#num_legal_representative' + item).attr('id', 'num_legal_representative' + i);
+                            $('span#representative_company' + item).attr('id', 'representative_company' + i);
+                            $('span#num_representative_company' + item).text('Representante Empresa #' + (i + 1));
+                            $('span#num_representative_company' + item).attr('id', 'num_representative_company' + i);
 
-                            $('label[for="id_legal' + item + '"]').attr('for', 'id_legal' + i);
-                            $('#id_legal' + item).attr('id', 'id_legal' + i);
+                            $('label[for="id_representative' + item + '"]').attr('for', 'id_representative' + i);
+                            $('#id_representative' + item).attr('id', 'id_representative' + i);
 
                         }
 
-                        count_legal_representative--;
+                        count_representative_company--;
 
                     break;
                 }
             });
 
+            $('.add_representative').click(function() {
 
-            $.fn.addLegalRepresentative = function() {
+                var new_representative = '<span id="representative_company"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"> <span id="num_representative_company" class="text-success">Representante Empresa #' + (count_representative_company + 1) + '</span><a id="representative_company" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Representante Empresa" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 form-group hide">{{Form::label("id_representative", "ID", ["class"=> "control-label"])}}{{Form::text("id_representative[]", 0, ["id_representative", "class"=> "form-control"])}}</div><div class="col-md-3 form-group">{{Form::label("type_representative_id", "Tipo Representante", ["class"=> "control-label"])}}{{Form::select("type_representative_id[]", $type_representatives, null, ["class"=> "form-control"])}}</div><div class="col-md-3 form-group">{{Form::label("male_surname", "Apellido Paterno", ["class"=> "control-label"])}}{{Form::text("male_surname[]", null, ["class"=> "form-control"])}}</div><div class="col-md-3 form-group">{{Form::label("female_surname", "Apellido Materno", ["class"=> "control-label"])}}{{Form::text("female_surname[]", null, ["class"=> "form-control"])}}</div><div class="col-md-3 form-group">{{Form::label("first_name", "Primer Nombre", ["class"=> "control-label"])}}{{Form::text("first_name[]", null, ["class"=> "form-control"])}}</div></div><div class="row"> <div class="col-md-3 form-group">{{Form::label("second_name", "Segundo Nombre", ["class"=> "control-label"])}}{{Form::text("second_name[]", null, ["class"=> "form-control"])}}</div><div class="col-md-2 form-group">{{Form::label("rut_representative", "Rut", ["class"=> "control-label"])}} <i class="fa fa-info-circle text-primary tooltip-primary" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos uión. <p class=\'text-center\'>Ej: 19317518k</p>" data-html="true"></i>{{Form::text("rut_representative[]", null, ["class"=> "form-control check_rut"])}}</div><div class="col-md-2 form-group">{{Form::label("birthday", "Fecha de Nac.", ["class"=> "control-label"])}}<div class="input-group date"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text("birthday[]", null, ["class"=> "form-control", "readonly"])}}</div></div><div class="col-md-3 form-group">{{Form::label("nationality_id", "Nacionalidad", ["class"=> "control-label"])}}{{Form::select("nationality_id[]", $nationalities, null, ["class"=> "form-control"])}}</div><div class="col-md-2 form-group">{{Form::label("phone1_representative", "Teléfono 1", ["class"=> "control-label"])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1_representative[]", null, ["class"=> "form-control"])}}</div></div></div><div class="row"> <div class="col-md-2 form-group">{{Form::label("phone2_representative", "Teléfono 2", ["class"=> "control-label"])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2_representative[]", null, ["class"=> "form-control"])}}</div></div><div class="col-md-6 form-group">{{Form::label("email_representative", "Email", ["class"=> "control-label"])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{Form::text("email_representative[]", null, ["id"=> "Representative", "class"=> "form-control"])}}</div></div></div><br/></span>';
 
-                var new_legal = '<span id="legal_representative"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"> <span id="num_legal_representative" class="text-success">Representante Legal #' + (count_legal_representative + 1) + '</span><a id="legal_representative" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Representante Legal" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_legal", "ID", ["class"=> "control-label"])}}{{Form::text("id_legal[]", 0, ["id"=> "id_legal", "class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label("male_surname[]", "Apellido Paterno", ["class"=> "control-label"])}}{{Form::text("male_surname[]", null, ["class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label("female_surname[]", "Apellido Materno", ["class"=> "control-label"])}}{{Form::text("female_surname[]", null, ["class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label("first_name[]", "Primer Nombre", ["class"=> "control-label"])}}{{Form::text("first_name[]", null, ["class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label("second_name[]", "Segundo Nombre", ["class"=> "control-label"])}}{{Form::text("second_name[]", null, ["class"=> "form-control"])}}</div></div></div><div class="row"> <div class="col-md-2"> <div class="form-group">{{Form::label("rut_legal[]", "Rut", ["class"=> "control-label"])}} <i class="fa fa-info-circle text-primary tooltip-primary" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class=\'text-center\'>Ej: 19317518k</p>" data-html="true"></i>{{Form::text("rut_legal[]", null, ["class"=> "form-control check_rut"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label("birthday[]", "Fecha de Nac.", ["class"=> "control-label"])}}<div class="input-group date"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text("birthday[]", null, ["class"=> "form-control", "readonly"])}}</div></div></div><div class="col-md-3"> <div class="form-group">{{Form::label("nationality_id[]", "Nacionalidad", ["class"=> "control-label"])}}{{Form::select("nationality_id[]", $nationalities, null, ["class"=> "form-control"])}}</div></div><div class="col-md-2"> <div class="form-group">{{Form::label("phone1_legal[]", "Teléfono 1", ["class"=> "control-label"])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text("phone1_legal[]", null, ["class"=> "form-control"])}}</div></div></div><div class="col-md-2"> <div class="form-group">{{Form::label("phone2_legal[]", "Teléfono 2", ["class"=> "control-label"])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-fax"></i> </div>{{Form::text("phone2_legal[]", null, ["class"=> "form-control"])}}</div></div></div></div><div class="row"> <div class="col-md-6"> <div class="form-group">{{Form::label("email_legal[]", "Email", ["class"=> "control-label"])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-envelope"></i> </div>{{Form::text("email_legal[]", null, ["id"=> "Representative", "class"=> "form-control"])}}</div></div></div></div><hr/></span>';
+                $('#content_representative_companies').append(new_representative);
 
-                $('#content_legal_representatives').append(new_legal);
+                $('span#representative_company').attr('id', 'representative_company' + count_representative_company);
+                $('span#num_representative_company').attr('id', 'num_representative_company' + count_representative_company);
 
-                $('span#legal_representative').attr('id', 'legal_representative' + count_legal_representative);
-                $('span#num_legal_representative').attr('id', 'num_legal_representative' + count_legal_representative);
+                $('label[for="id_representative"]').attr('for', 'id_representative' + count_representative_company);
+                $('#id_representative').attr('id', 'id_representative' + count_representative_company);
 
-                $('label[for="id_legal"]').attr('for', 'id_legal' + count_legal_representative);
-                $('#id_legal').attr('id', 'id_legal' + count_legal_representative);
-
-                count_legal_representative++;
+                count_representative_company++;
                 initializaComponents();
-            };
 
+            });
 
             $('#btnUpdateCompany').click(function(e) {
 
@@ -169,13 +166,20 @@
                 var action          = formCompany.attr('action');
                 var button          = $(this);
 
-                button.html('<i class="fa fa-spin fa-refresh fa-fw" aria-hidden="true"></i>').css({ width: '138px' });
-                $.post(action, formCompany.serialize() + "&id_deletes_legal=" + id_deletes_legal + "&count_legal_representative=" + count_legal_representative, function(response) {
+                button.html('<i class="fa fa-refresh fa-spin fa-fw"></i>').css({ width: '122px' });
+                $.post(action, formCompany.serialize() + "&id_delete_representatives=" + id_delete_representatives + "&count_representative_company=" + count_representative_company, function(response) {
                     if (response.success) {
                         window.location.href = response.url;
                     }
+                }).fail(function(response) {
+                    button.html('<i class="fa fa-refresh"> Actualizar</i>').css({ width: '122px' });
+                    var errors = $.parseJSON(response.responseText);
+                    $.each(errors, function (index, value) {
+                        $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
+                        $('#' + index).focus();
+                        return false;
+                    });
                 });
-
             })
 
         });

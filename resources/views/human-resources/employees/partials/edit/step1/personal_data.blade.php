@@ -51,19 +51,33 @@
         {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
         {{ Form::text('address', null, ['class' => 'form-control']) }}
     </div>
+    {{-- Depto Form Input --}}
+    <div class="col-md-1 form-group">
+        {{ Form::label('depto', 'Depto', ['class' => 'control-label']) }}
+        {{ Form::text('depto', null, ['class' => 'form-control text-center']) }}
+    </div>
+    {{-- Block Form Input --}}
+    <div class="col-md-1 form-group">
+        {{ Form::label('block', 'Block', ['class' => 'control-label']) }}
+        {{ Form::text('block', null, ['class' => 'form-control text-center']) }}
+    </div>
+    {{-- Num_home Form Input --}}
+    <div class="col-md-1 form-group">
+        {{ Form::label('num_home', 'Nº Casa', ['class' => 'control-label']) }}
+        {{ Form::text('num_home', null, ['class' => 'form-control text-center']) }}
+    </div>
     <div class="col-md-3 form-group">
         {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
         {{ Form::select('region_id', $regions, $employee->commune->province->region->id, ['class' => 'form-control']) }}
     </div>
+</div>
+
+{{-- Four row --}}
+<div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('province_id', 'Provincia', ['class' => 'control-label']) }}
         {{ Form::select('province_id', $provinces, $employee->commune->province->id, ['class' => 'form-control']) }}
     </div>
-</div>
-
-
-{{-- Four row --}}
-<div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
         {{ Form::select('commune_id', $communes, null, ['class' => 'form-control']) }}
@@ -77,6 +91,10 @@
             {{ Form::text('email_employee', null, ['id' => 'Employee', 'class' => 'form-control']) }}
         </div>
     </div>
+</div>
+
+{{-- Five row --}}
+<div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('phone1', 'Teléfono 1', ['class' => 'control-label']) }}
         <div class="input-group">
@@ -86,10 +104,6 @@
             {{ Form::text('phone1', null, ['class' => 'form-control']) }}
         </div>
     </div>
-</div>
-
-{{-- Five row --}}
-<div class="row">
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('phone2', 'Teléfono 2', ['class' => 'control-label']) }}
@@ -105,7 +119,7 @@
         {{ Form::label('company_id', 'Empresa', ['class' => 'control-label']) }}
         {{ Form::select('company_id', $companies, null, ['class' => 'form-control']) }}
     </div>
-    <div class="col-md-6 form-group">
+    <div class="col-md-3 form-group">
         {{ Form::label('code', 'Cód. Interno', ['class' => 'control-label']) }}
         {{ Form::text('code', null, ['class' => 'form-control']) }}
     </div>

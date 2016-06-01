@@ -21,7 +21,7 @@ class Step2Request extends SanitizedRequest {
 				{
 					foreach (range(0, Request::get('count_studies') - 1) as $index)
 					{
-						$rules[ 'id_study.' . $index ]       		= 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'id_study.' . $index ]       		= 'required|in:0';
 						$rules[ 'degree_id.' . $index ]            	= 'required|regex:/[0-9 -()+]+$/';
 						$rules[ 'name_study.' . $index ]           	= 'required|max:100';
 						$rules[ 'institution_study_id.' . $index ] 	= 'required|regex:/[0-9 -()+]+$/';
@@ -33,7 +33,7 @@ class Step2Request extends SanitizedRequest {
 				{
 					foreach (range(0, Request::get('count_certifications') - 1) as $index)
 					{
-						$rules[ 'id_certification.' . $index ]       		= 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'id_certification.' . $index ]       		= 'required|in:0';
 						$rules[ 'type_certification_id.' . $index ]        	= 'required|regex:/[0-9 -()+]+$/';
 						$rules[ 'institution_certification_id.' . $index ] 	= 'required|regex:/[0-9 -()+]+$/';
 						$rules[ 'emission_certification.' . $index ]        = 'required|date';
@@ -45,7 +45,7 @@ class Step2Request extends SanitizedRequest {
 				{
 					foreach (range(0, Request::get('count_specialities') - 1) as $index)
 					{
-						$rules[ 'id_speciality.' . $index ]       			= 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'id_speciality.' . $index ]       			= 'required|in:0';
 						$rules[ 'type_speciality_id.' . $index ]        	= 'required|regex:/[0-9 -()+]+$/';
 						$rules[ 'institution_speciality_id.' . $index ] 	= 'required|regex:/[0-9 -()+]+$/';
 						$rules[ 'emission_speciality.' . $index ]        	= 'required|date';
@@ -57,13 +57,24 @@ class Step2Request extends SanitizedRequest {
 				{
 					foreach (range(0, Request::get('count_professional_licenses') - 1) as $index)
 					{
-						$rules[ 'id_professional_license.' . $index ]      = 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'id_professional_license.' . $index ]      = 'required|in:0';
 						$rules[ 'type_professional_license_id.' . $index ] = 'required|regex:/[0-9 -()+]+$/';
 						$rules[ 'emission_license.' . $index ]             = 'required|date';
 						$rules[ 'expired_license.' . $index ]              = 'required|date';
-						$rules[ 'is_donor' . $index ]                      = 'required';
+						$rules[ 'is_donor' . $index ]                      = 'required|in:0,1';
 					}
 				}
+
+				/*
+				 * Inicializamos rules en caso de no entrar en un if
+			 	 */
+
+				if ( Request::get('count_studies') + Request::get('count_certifications') + Request::get('count_specialities') + Request::get('count_professional_licenses') == 0 )
+					$rules = [
+						'success' => 'OK'
+					];
+
+				return $rules;
 
 			}
 
@@ -116,18 +127,19 @@ class Step2Request extends SanitizedRequest {
 						$rules[ 'is_donor' . $index ]                      = 'required|in:0,1';
 					}
 				}
+
+				/*
+				 * Inicializamos rules en caso de no entrar en un if
+			 	 */
+
+				if ( Request::get('count_studies') + Request::get('count_certifications') + Request::get('count_specialities') + Request::get('count_professional_licenses') == 0 )
+					$rules = [
+						'success' => 'OK'
+					];
+
+				return $rules;
+
 			}
-
-			/*
-			 * Inicializamos rules en caso de no entrar en un if
-			 */
-
-			if ( Request::get('count_studies') + Request::get('count_certifications') + Request::get('count_specialities') + Request::get('count_professional_licenses') == 0 )
-				$rules = [
-					'success' => 'OK'
-				];
-
-			return $rules;
 
 		}
 	}
@@ -136,11 +148,17 @@ class Step2Request extends SanitizedRequest {
 	{
 		return [
 
+			//Studies
 			'id_study.0.required'						=> 'El campo ID Estudio Académico 1 es obligatorio.',
 			'id_study.1.required'						=> 'El campo ID Estudio Académico 2 es obligatorio.',
 			'id_study.2.required'						=> 'El campo ID Estudio Académico 3 es obligatorio.',
 			'id_study.3.required'						=> 'El campo ID Estudio Académico 4 es obligatorio.',
 			'id_study.4.required'						=> 'El campo ID Estudio Académico 5 es obligatorio.',
+			'id_study.0.in'								=> 'El campo ID Estudio Académico 1 es inválido.',
+			'id_study.1.in'								=> 'El campo ID Estudio Académico 2 es inválido.',
+			'id_study.2.in'								=> 'El campo ID Estudio Académico 3 es inválido.',
+			'id_study.3.in'								=> 'El campo ID Estudio Académico 4 es inválido.',
+			'id_study.4.in'								=> 'El campo ID Estudio Académico 5 es inválido.',
 			'id_study.0.regex'							=> 'El formato de ID Estudio Académico 1 es inválido.',
 			'id_study.1.regex'							=> 'El formato de ID Estudio Académico 2 es inválido.',
 			'id_study.2.regex'							=> 'El formato de ID Estudio Académico 3 es inválido.',
@@ -187,11 +205,17 @@ class Step2Request extends SanitizedRequest {
 			'date_obtention.3.date'						=> 'El campo Fecha Obtención 4 no es una fecha válida.',
 			'date_obtention.4.date'						=> 'El campo Fecha Obtención 5 no es una fecha válida.',
 
+			//Certifications
 			'id_certification.0.required'				=> 'El campo ID Certificación 1 es obligatorio.',
 			'id_certification.1.required'				=> 'El campo ID Certificación 2 es obligatorio.',
 			'id_certification.2.required'				=> 'El campo ID Certificación 3 es obligatorio.',
 			'id_certification.3.required'				=> 'El campo ID Certificación 4 es obligatorio.',
 			'id_certification.4.required'				=> 'El campo ID Certificación 5 es obligatorio.',
+			'id_certification.0.in'						=> 'El campo ID Certificación 1 es inválido.',
+			'id_certification.1.in'						=> 'El campo ID Certificación 2 es inválido.',
+			'id_certification.2.in'						=> 'El campo ID Certificación 3 es inválido.',
+			'id_certification.3.in'						=> 'El campo ID Certificación 4 es inválido.',
+			'id_certification.4.in'						=> 'El campo ID Certificación 5 es inválido.',
 			'id_certification.0.regex'					=> 'El formato de ID Certificación 1 es inválido.',
 			'id_certification.1.regex'					=> 'El formato de ID Certificación 2 es inválido.',
 			'id_certification.2.regex'					=> 'El formato de ID Certificación 3 es inválido.',
@@ -238,11 +262,17 @@ class Step2Request extends SanitizedRequest {
 			'expired_certification.3.date'				=> 'El campo Fecha Expiración Certificación 4 no es una fecha válida.',
 			'expired_certification.4.date'				=> 'El campo Fecha Expiración Certificación 5 no es una fecha válida.',
 
+			//Specialities
 			'id_speciality.0.required'				=> 'El campo ID Especialidad 1 es obligatorio.',
 			'id_speciality.1.required'				=> 'El campo ID Especialidad 2 es obligatorio.',
 			'id_speciality.2.required'				=> 'El campo ID Especialidad 3 es obligatorio.',
 			'id_speciality.3.required'				=> 'El campo ID Especialidad 4 es obligatorio.',
 			'id_speciality.4.required'				=> 'El campo ID Especialidad 5 es obligatorio.',
+			'id_speciality.0.in'					=> 'El campo ID Especialidad 1 es inválido.',
+			'id_speciality.1.in'					=> 'El campo ID Especialidad 2 es inválido.',
+			'id_speciality.2.in'					=> 'El campo ID Especialidad 3 es inválido.',
+			'id_speciality.3.in'					=> 'El campo ID Especialidad 4 es inválido.',
+			'id_speciality.4.in'					=> 'El campo ID Especialidad 5 es inválido.',
 			'id_speciality.0.regex'					=> 'El formato de ID Especialidad 1 es inválido.',
 			'id_speciality.1.regex'					=> 'El formato de ID Especialidad 2 es inválido.',
 			'id_speciality.2.regex'					=> 'El formato de ID Especialidad 3 es inválido.',
@@ -289,11 +319,17 @@ class Step2Request extends SanitizedRequest {
 			'expired_speciality.3.date'				=> 'El campo Fecha Expiración Especialidad 4 no es una fecha válida.',
 			'expired_speciality.4.date'				=> 'El campo Fecha Expiración Especialidad 5 no es una fecha válida.',
 
+			//Professional Licenses
 			'id_professional_license.0.required'				=> 'El campo ID Licencia Profesional 1 es obligatorio.',
 			'id_professional_license.1.required'				=> 'El campo ID Licencia Profesional 2 es obligatorio.',
 			'id_professional_license.2.required'				=> 'El campo ID Licencia Profesional 3 es obligatorio.',
 			'id_professional_license.3.required'				=> 'El campo ID Licencia Profesional 4 es obligatorio.',
 			'id_professional_license.4.required'				=> 'El campo ID Licencia Profesional 5 es obligatorio.',
+			'id_professional_license.0.in'						=> 'El campo ID Licencia Profesional 1 es inválido.',
+			'id_professional_license.1.in'						=> 'El campo ID Licencia Profesional 2 es inválido.',
+			'id_professional_license.2.in'						=> 'El campo ID Licencia Profesional 3 es inválido.',
+			'id_professional_license.3.in'						=> 'El campo ID Licencia Profesional 4 es inválido.',
+			'id_professional_license.4.in'						=> 'El campo ID Licencia Profesional 5 es inválido.',
 			'id_professional_license.0.regex'					=> 'El formato de ID Licencia Profesional 1 es inválido.',
 			'id_professional_license.1.regex'					=> 'El formato de ID Licencia Profesional 2 es inválido.',
 			'id_professional_license.2.regex'					=> 'El formato de ID Licencia Profesional 3 es inválido.',
@@ -334,3 +370,4 @@ class Step2Request extends SanitizedRequest {
 	}
 
 }
+

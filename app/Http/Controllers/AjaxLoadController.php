@@ -2,12 +2,12 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\InfoContactRepoInterface;
+use Controlqtime\Core\Contracts\RepresentativeCompanyRepoInterface;
 use Illuminate\Http\Request;
 use Controlqtime\Http\Requests;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
-use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
@@ -16,18 +16,18 @@ class AjaxLoadController extends Controller {
 
 	protected $company;
 	protected $employee;
-	protected $info_contact;
-	protected $legal_representative;
+	protected $contact_employee;
+	protected $representative_company;
 	protected $province;
 	protected $region;
 	protected $trademark;
 
-	public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, LegalRepresentativeRepoInterface $legal_representative, TrademarkRepoInterface $trademark, EmployeeRepoInterface $employee, InfoContactRepoInterface $info_contact)
+	public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, RepresentativeCompanyRepoInterface $representative_company, TrademarkRepoInterface $trademark, EmployeeRepoInterface $employee, ContactEmployeeRepoInterface $contact_employee)
 	{
 		$this->company              = $company;
 		$this->employee             = $employee;
-		$this->info_contact 		= $info_contact;
-		$this->legal_representative = $legal_representative;
+		$this->contact_employee 	= $contact_employee;
+		$this->representative_company = $representative_company;
 		$this->province             = $province;
 		$this->region               = $region;
 		$this->trademark            = $trademark;
@@ -52,7 +52,7 @@ class AjaxLoadController extends Controller {
 				break;
 
 			case 'Representative':
-				$email = $this->legal_representative->whereFirst('email_legal', $request->get('email'), ['email_legal']);
+				$email = $this->representative_company->whereFirst('email_representative', $request->get('email'), ['email_representative']);
 				break;
 
 			case 'Employee':
@@ -60,7 +60,7 @@ class AjaxLoadController extends Controller {
 				break;
 				
 			case 'EmailContactEmployee';
-				$email = $this->info_contact->whereFirst('email_contact', $request->get('email', ['email_contact']));
+				$email = $this->contact_employee->whereFirst('email_contact', $request->get('email', ['email_contact']));
 				break;
 		}
 

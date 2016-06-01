@@ -17,7 +17,6 @@ class CreateCompaniesTable extends Migration
             $table->date('start_act');
             $table->string('address');
             $table->integer('commune_id')->unsigned();
-            $table->string('num', 8);
             $table->string('lot', 20);
             $table->string('bod', 5);
             $table->string('ofi', 5);

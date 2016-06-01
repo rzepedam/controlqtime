@@ -3,13 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInfoContactsTable extends Migration
+class CreateContactEmployeesTable extends Migration
 {
     public function up()
     {
-        Schema::create('info_contacts', function (Blueprint $table) {
+        Schema::create('contact_employees', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
+            $table->integer('contact_relationship_id')->unsigned();
             $table->string('name_contact', 120);
             $table->string('email_contact', 60)->unique();
             $table->string('address_contact');
@@ -22,11 +23,16 @@ class CreateInfoContactsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
+            $table->foreign('contact_relationship_id')
+                ->references('id')
+                ->on('relationships')
+                ->onUpdate('cascade');
+
         });
     }
 
     public function down()
     {
-        Schema::drop('info_contacts');
+        Schema::drop('contact_employees');
     }
 }

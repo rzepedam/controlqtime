@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Listado de Relaciones Familiares
+@section('title_header') Listado de Relación-Parentesco
     <br />
     <a href="{{ route('maintainers.relationships.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Relación Familiar</a>
 @stop

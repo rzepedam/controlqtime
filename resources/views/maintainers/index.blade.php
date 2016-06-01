@@ -4,10 +4,6 @@
 
 @stop
 
-@section('breadcumb')
-    <li><a class="active" href="javascript:void(0)"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-@stop
-
 @section('content')
 
     <div class="row">
@@ -221,7 +217,27 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-terminals" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-relationships" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align height-150 margin-bottom-5 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="icon md-male-female" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Relaciones</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div id="redirect-type-representatives" class="counter counter-lg counter-inverse bg-orange-200 vertical-align height-150 margin-bottom-5 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="icon md-assignment-account" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Representante de Empresas</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div id="redirect-terminals" class="counter counter-lg counter-inverse bg-blue-grey-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-road" aria-hidden="true"></i>
@@ -231,7 +247,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-type-companies" class="counter counter-lg counter-inverse bg-orange-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-type-companies" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="icon md-city-alt" aria-hidden="true"></i>
@@ -240,8 +256,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-type-institutions" class="counter counter-lg counter-inverse bg-blue-grey-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-type-institutions" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-university" aria-hidden="true"></i>
@@ -251,7 +270,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-type-vehicles" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 pointer">
+            <div id="redirect-type-vehicles" class="counter counter-lg counter-inverse bg-green-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-subway" aria-hidden="true"></i>
@@ -260,11 +279,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-measuring-units" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-measuring-units" class="counter counter-lg counter-inverse bg-amber-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>

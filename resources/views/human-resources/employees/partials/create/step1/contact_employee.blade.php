@@ -16,11 +16,15 @@
                 {{ Form::text("id_contact[]", Session::get('id_contact')[$i], ["id" => "id_contact", "class" => "form-control"]) }}
             </div>
         </div>
-        <div class="col-md-6 form-group">
+        <div class="col-md-3 form-group">
+            {{ Form::label("contact_relationship_id", "Relación", ["class"=> "control-label"]) }}
+            {{ Form::select("contact_relationship_id[]", $relationships, Session::get('contact_relationship_id')[$i], ["class"=> "form-control"]) }}
+        </div>
+        <div class="col-md-5 form-group">
             {{ Form::label('name_contact', 'Nombre', ['class' => 'control-label']) }}
             {{ Form::text('name_contact[]', Session::get('name_contact')[$i], ['class' => 'form-control']) }}
         </div>
-        <div class="col-md-6 form-group">
+        <div class="col-md-4 form-group">
             {{ Form::label('email_contact', 'Email', ['class' => 'control-label']) }}
             {{ Form::text('email_contact[]', Session::get('email_contact')[$i], ['id' => 'EmailContactEmployee', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
         </div>

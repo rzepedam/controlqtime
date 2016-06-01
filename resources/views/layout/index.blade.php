@@ -12,6 +12,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-extend.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
     <!-- Plugins -->
     <link rel="stylesheet" href="{{ asset('assets/css/animsition.css') }}">
@@ -21,14 +22,12 @@
     {{ Html::style('assets/css/toastr.css') }}
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/font-awesome.min.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
     @yield('css')
 
     {{ Html::style('me/css/style.css') }}
-
     <!--[if lt IE 9]>
     <script src="{{ asset('assets/js/html5shiv.min.js') }}"></script>
     <![endif]-->

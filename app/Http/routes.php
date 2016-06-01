@@ -108,6 +108,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('type-exams', 'TypeExamController');
         Route::resource('type-institutions', 'TypeInstitutionController');
         Route::resource('type-professional-licenses', 'TypeProfessionalLicenseController');
+        Route::resource('type-represents', 'TypeRepresentController');
         Route::resource('type-specialities', 'TypeSpecialityController');
         Route::resource('type-vehicles', 'TypeVehicleController');
         Route::get('measuring-units', ['as' => 'maintainers.measuring-units', function(){

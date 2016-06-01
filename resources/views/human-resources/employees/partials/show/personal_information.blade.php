@@ -68,10 +68,28 @@
                                     <td class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $employee->address . ", " . $employee->commune->name . ". " . $employee->commune->province->name . ". " . $employee->commune->province->region->name }}
                                     </td>
                                 </tr>
-                                @if ($employee->phone2)
+                                @if ($employee->depto)
                                     <tr>
-                                        <td class="col-md-3">Teléfono 2</td>
-                                        <td class="text-center"><i class="fa fa-fax" aria-hidden="true"></i> {{ $employee->phone2 }}</td>
+                                        <td class="col-md-3">Depto</td>
+                                        <td class="text-center"> {{ $employee->depto }}</td>
+                                    </tr>
+                                @endif
+                                @if ($employee->depto)
+                                    <tr>
+                                        <td class="col-md-3">Block</td>
+                                        <td class="text-center"> {{ $employee->block }}</td>
+                                    </tr>
+                                @endif
+                                @if ($employee->block)
+                                    <tr>
+                                        <td class="col-md-3">Casa</td>
+                                        <td class="text-center"> {{ $employee->block }}</td>
+                                    </tr>
+                                @endif
+                                @if ($employee->num_hom)
+                                    <tr>
+                                        <td class="col-md-3">Casa</td>
+                                        <td class="text-center"> {{ $employee->num_hom }}</td>
                                     </tr>
                                 @endif
                                 <tr>
@@ -95,25 +113,27 @@
                         <table class="table table-striped table-bordered">
                             <tbody>
                             <tr class="text-center success">
-                                <td class="col-md-12" colspan="5"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <td class="col-md-12" colspan="6"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Información de Contacto
                                 </td>
                             </tr>
-                            @if (count($employee->infoContacts) > 0)
+                            @if (count($employee->contactEmployees) > 0)
                                 <tr class="active">
                                     <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
+                                    <th class="col-md-1 text-center">Parentesco</th>
                                     <th class="col-md-3 text-center">Nombre</th>
                                     <th class="col-md-3 text-center">Email</th>
-                                    <th class="col-md-5 text-center">Dirección</th>
+                                    <th class="col-md-4 text-center">Dirección</th>
                                     <th class="col-md-1 text-center">Teléfono</th>
                                 </tr>
-                                @foreach($employee->infoContacts as $info_contact)
+                                @foreach($employee->contactEmployees as $contact_employee)
                                     <tr>
                                         <td class="text-center">{{ $i }}</td>
-                                        <td class="text-center">{{ $info_contact->name_contact }}</td>
-                                        <td class="text-center">{{ Html::mailto($info_contact->email_contact, null, ['class' => 'text-muted']) }}</td>
-                                        <td class="text-center">{{ $info_contact->address_contact }}</td>
-                                        <td class="text-center">{{ $info_contact->tel_contact }}</td>
+                                        <td class="text-center">{{ $contact_employee->relationship->name }}</td>
+                                        <td class="text-center">{{ $contact_employee->name_contact }}</td>
+                                        <td class="text-center">{{ Html::mailto($contact_employee->email_contact, null, ['class' => 'text-muted']) }}</td>
+                                        <td class="text-center">{{ $contact_employee->address_contact }}</td>
+                                        <td class="text-center">{{ $contact_employee->tel_contact }}</td>
                                     </tr>
                                     <?php $i ++; ?>
                                 @endforeach
@@ -122,7 +142,7 @@
                                     <td style="border-bottom: hidden; background-color: #FAFAFA"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" class="text-center font-size-18">
+                                    <td colspan="6" class="text-center font-size-18">
                                         No existe Información de Contacto Asociada
                                     </td>
                                 </tr>

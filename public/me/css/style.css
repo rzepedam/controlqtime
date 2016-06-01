@@ -77,12 +77,12 @@ img {
     overflow: hidden;
 }
 
-.add_info_contact{
+.add_contact_employee{
     padding: 7px;
     cursor: pointer;
 }
 
-.add_info_contact:hover{
+.add_contact_employee:hover{
     color: white;
     background: #4CAF50;
 }
@@ -187,14 +187,14 @@ img {
     background: #4CAF50;
 }
 
-.add_subsidiary{
+.add_representative{
     padding: 7px;
     cursor: pointer;
 }
 
-.add_subsidiary:hover {
+.add_representative:hover {
     color: white;
-    background: #FF9800;
+    background: #4CAF50;
 }
 
 /*
@@ -209,4 +209,9 @@ img {
 
 .pointer {
     cursor: pointer;
+}
+
+.fix .fa-spinner {
+    -webkit-transform-origin: 50% calc(50% - .5px);
+    transform-origin: 50% calc(50% - .5px);
 }

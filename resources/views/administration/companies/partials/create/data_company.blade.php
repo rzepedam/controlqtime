@@ -1,12 +1,11 @@
 <div class="row">
-    {{-- Tipo Empresa Form Select --}}
     <div class="form-group col-md-2">
         {{ Form::label('type_company_id', 'Tipo Empresa', ['class' => 'control-label']) }}
         {{ Form::select('type_company_id', $type_companies, null, ['class' => 'form-control']) }}
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle text-primary tooltip-primary" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
+            {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle text-primary tooltip-primary" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class=\'text-center\'>Ej: 19317518k</p>" data-html="true"></i>
             {{ Form::text('rut', null, ['class' => 'form-control check_rut']) }}
         </div>
     </div>
@@ -24,7 +23,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="form-group">
             {{ Form::label('start_act', 'Inicio Act.', ['class' => 'control-label']) }}
             <div class="input-group date">
@@ -39,32 +38,6 @@
         <div class="form-group">
             {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }} <small class="text-muted"> (Casa Matriz)</small>
             {{ Form::text('address', null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group">
-                {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-                {{ Form::select('region_id', $regions, null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-3">
-        <div class="form-group">
-            {{ Form::label('province_id', 'Provincia', ['class' => 'control-label'])}}
-            {{ Form::select('province_id', $provinces, null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group">
-            {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
-            {{ Form::select('commune_id', $communes, null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-    <div class="col-md-1">
-        <div class="form-group">
-            {{ Form::label('num', 'N°', ['class' => 'control-label']) }}
-            {{ Form::text('num', null, ['class' => 'form-control text-center']) }}
         </div>
     </div>
     <div class="col-md-1">
@@ -93,12 +66,32 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
+            {{ Form::select('region_id', $regions, null, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('province_id', 'Provincia', ['class' => 'control-label'])}}
+            {{ Form::select('province_id', $provinces, null, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
+            {{ Form::select('commune_id', $communes, null, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('muni_license', 'Patente Municipal', ['class' => 'control-label']) }}
             {{ Form::text('muni_license', null, ['class' => 'form-control text-center']) }}
         </div>
     </div>
+</div>
+<div class="row">
     <div class="col-md-2">
         <div class="form-group">
             {{ Form::label('phone1', 'Teléfono 1', ['class' => 'control-label']) }}
@@ -122,14 +115,20 @@
         </div>
     </div>
     <div class="col-md-6">
-            <div class="form-group">
-                {{ Form::label('email_company', 'Email', ['class' => 'control-label']) }}
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-envelope"></i>
-                    </div>
-                    {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+        <div class="form-group">
+            {{ Form::label('email_company', 'Email', ['class' => 'control-label']) }}
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
                 </div>
+                {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
             </div>
+        </div>
+    </div>
+</div>
+<div id="Company" class="row hide">
+    <br />
+    <div class="col-md-12 text-center">
+        @include('layout.ajax.show_spin_icon')
     </div>
 </div>

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Company extends Eloquent
 {
     protected $fillable = [
-        'type_company_id', 'rut', 'firm_name', 'gyre', 'start_act', 'address', 'commune_id', 'num',
-        'lot', 'bod', 'ofi', 'floor', 'muni_license', 'email_company', 'phone1', 'phone2', 'status'
+        'type_company_id', 'rut', 'firm_name', 'gyre', 'start_act', 'address', 'commune_id', 'lot',
+        'bod', 'ofi', 'floor', 'muni_license', 'email_company', 'phone1', 'phone2', 'status'
     ];
 
     protected $dates = [
@@ -20,8 +20,8 @@ class Company extends Eloquent
      * Relationships
      */
 
-    public function legalRepresentatives() {
-        return $this->hasMany(LegalRepresentative::class);
+    public function representativeCompanies() {
+        return $this->hasMany(RepresentativeCompany::class);
     }
 
     public function imageRolCompanies() {
@@ -30,10 +30,6 @@ class Company extends Eloquent
 
     public function imagePatentCompanies() {
         return $this->hasMany(ImagePatentCompany::class);
-    }
-
-    public function manpowers() {
-        return $this->hasMany('Controlqtime\Manpower');
     }
 
     public function typeCompany() {
@@ -63,12 +59,5 @@ class Company extends Eloquent
     public function setStartActAttribute($value) {
         $this->attributes['start_act'] = Carbon::createFromFormat('d-m-Y', $value);
     }
-
-    /*
-     * Accesors
-     */
-
-    public function getNumRepresentativeAttribute() {
-        return count($this->legalRepresentatives);
-    }
+    
 }

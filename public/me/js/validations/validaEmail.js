@@ -11,8 +11,11 @@
 
 		var element = $(this);
 		var input   = $(this).attr('id');
-		if ($(this).val() == '')
+
+		if ($(this).val() == '') {
+			element.closest('.form-group').removeClass('has-error has-feedback');
 			return false;
+		}
 
 		if (!validaEmail(element.val())) {
 			element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
@@ -21,44 +24,36 @@
 				'Email Incorrecto',
 				{
 					"closeButton": true,
-					"debug": false,
-					"newestOnTop": false,
-					"progressBar": true,
-					"positionClass": "toast-top-right",
 					"preventDuplicates": true,
-					"onclick": null,
-					"showDuration": "300",
-					"hideDuration": "1000",
-					"timeOut": "5000",
-					"extendedTimeOut": "1000",
-					"showEasing": "swing",
-					"hideEasing": "linear",
-					"showMethod": "fadeIn",
-					"hideMethod": "fadeOut"
+					"progressBar": true,
 				}
 			);
 		}else {
-
+			$('div#' + input).removeClass('hide');
 			$.ajax ({
 				type: 'POST',
 				url: '/verificaEmail',
 				data: { email: element.val(), element: input },
 				dataType: "json",
 
-				/*beforeSend: function() {
-					element.closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
-					element.closest('.form-group').append('<i class="fa fa-spinner fa-pulse fa-lg form-control-feedback"></i>');
-				},*/
-
 				success: function()
 				{
+					$('div#' + input).addClass('hide');
 					element.closest('.form-group').removeClass('has-error has-feedback');
-					//element.closest('.form-group').find('i.fa-spinner').remove();
+					toastr.success(
+						'El Email se encuentra disponible en nuestra Base de Datos',
+						'Email Válido',
+						{
+							"closeButton": true,
+							"preventDuplicates": true,
+							"progressBar": true,
+						}
+					);
 				},
 
 				error: function(){
+					$('div#' + input).addClass('hide');
 					element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
-					//element.closest('.form-group').find('i.fa-spinner').remove();
 					toastr.error(
 						'El Email ya se encuentra registrado en nuestra Base de Datos',
 						'Email Registrado',

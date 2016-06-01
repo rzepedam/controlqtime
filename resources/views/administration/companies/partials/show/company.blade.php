@@ -19,7 +19,7 @@
                             </tr>
                             <tr>
                                 <td>Dirección</td>
-                                <td class="text-center"><i class="fa fa-map-marker"></i> {{ $company->address . " " . $company->num . ". " . $company->commune->name . ", " . $company->commune->province->name . ". " . $company->commune->province->region->name }}</td>
+                                <td class="text-center"><i class="fa fa-map-marker"></i> {{ $company->address . ". " . $company->commune->name . ", " . $company->commune->province->name . ". " . $company->commune->province->region->name }}</td>
                             </tr>
                             <tr>
                                 <td>Email</td>

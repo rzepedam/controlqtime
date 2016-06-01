@@ -1,5 +1,4 @@
 <div class="row">
-    {{-- Tipo Empresa Form Select --}}
     <div class="form-group col-md-2">
         {{ Form::label('type_company_id', 'Tipo Empresa', ['class' => 'control-label']) }}
         {{ Form::select('type_company_id', $type_companies, null, ['class' => 'form-control']) }}
@@ -24,7 +23,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="form-group">
             {{ Form::label('start_act', 'Inicio Act.', ['class' => 'control-label']) }}
             <div class="input-group date">
@@ -39,32 +38,6 @@
         <div class="form-group">
             {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }} <small class="text-muted"> (Casa Matriz)</small>
             {{ Form::text('address', null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group">
-                {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-                {{ Form::select('region_id', $regions, $company->commune->province->region->id, ['class' => 'form-control']) }}
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-3">
-        <div class="form-group">
-            {{ Form::label('province_id', 'Provincia', ['class' => 'control-label'])}}
-            {{ Form::select('province_id', $provinces, $company->commune->province->id, ['class' => 'form-control']) }}
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group">
-            {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
-            {{ Form::select('commune_id', $communes, null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-    <div class="col-md-1">
-        <div class="form-group">
-            {{ Form::label('num', 'N°', ['class' => 'control-label']) }}
-            {{ Form::text('num', null, ['class' => 'form-control text-center']) }}
         </div>
     </div>
     <div class="col-md-1">
@@ -93,12 +66,32 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
+            {{ Form::select('region_id', $regions, $company->commune->province->region->id, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('province_id', 'Provincia', ['class' => 'control-label'])}}
+            {{ Form::select('province_id', $provinces, $company->commune->province->id, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
+            {{ Form::select('commune_id', $communes, null, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('muni_license', 'Patente Municipal', ['class' => 'control-label']) }}
             {{ Form::text('muni_license', null, ['class' => 'form-control text-center']) }}
         </div>
     </div>
+</div>
+<div class="row">
     <div class="col-md-2">
         <div class="form-group">
             {{ Form::label('phone1', 'Teléfono 1', ['class' => 'control-label']) }}

@@ -9,8 +9,8 @@ class Employee extends Eloquent
 {
     protected $fillable = [
         'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
-        'nationality_id', 'gender_id', 'address', 'commune_id', 'email_employee', 'phone1', 'phone2',
-        'company_id', 'code', 'state'
+        'nationality_id', 'gender_id', 'address', 'depto', 'block', 'num_home', 'commune_id', 'email_employee',
+        'phone1', 'phone2', 'company_id', 'code', 'state'
     ];
 
     protected $dates = [
@@ -37,8 +37,8 @@ class Employee extends Eloquent
         return $this->belongsTo(Commune::class);
     }
 
-    public function infoContacts() {
-        return $this->hasMany(InfoContact::class);
+    public function contactEmployees() {
+        return $this->hasMany(ContactEmployee::class);
     }
     
     public function familyRelationships() {

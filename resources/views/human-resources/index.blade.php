@@ -2,10 +2,6 @@
 
 @section('title_header') Recursos Humanos @stop
 
-@section('breadcumb')
-    <li><a class="active" href="javascript:void(0)"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
-@stop
-
 @section('content')
 
     <div class="row">

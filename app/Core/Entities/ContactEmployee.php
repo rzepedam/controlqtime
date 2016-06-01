@@ -4,10 +4,10 @@ namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class InfoContact extends Eloquent
+class ContactEmployee extends Eloquent
 {
     protected $fillable = [
-		'name_contact', 'email_contact', 'address_contact', 'tel_contact'
+		'contact_relationship_id', 'name_contact', 'email_contact', 'address_contact', 'tel_contact'
 	];
 
 	/*
@@ -16,6 +16,10 @@ class InfoContact extends Eloquent
 
 	public function employee() {
 		return $this->belongsTo(Employee::class);
+	}
+
+	public function relationship() {
+		return $this->belongsTo(Relationship::class, 'contact_relationship_id');
 	}
 
 	/*

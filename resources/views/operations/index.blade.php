@@ -4,10 +4,6 @@
 
 @stop
 
-@section('breadcumb')
-    <li><a class="active" href="javascript:void(0)"><i class="fa fa-map-pin"></i> Operaciones</a></li>
-@stop
-
 @section('content')
 
     <div class="row">

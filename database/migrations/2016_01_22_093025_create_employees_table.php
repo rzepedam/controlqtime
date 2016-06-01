@@ -20,6 +20,9 @@ class CreateEmployeesTable extends Migration
             $table->integer('nationality_id')->unsigned();
             $table->integer('gender_id')->unsigned();
             $table->string('address');
+            $table->string('depto', 5);
+            $table->string('block', 4);
+            $table->string('num_home', 5);
             $table->integer('commune_id')->unsigned();
             $table->string('email_employee', 60)->unique();
             $table->string('phone1', 20);

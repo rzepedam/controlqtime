@@ -2,17 +2,6 @@
     <div class="site-menubar-header">
         <div class="cover overlay">
             <img class="cover-image" src="{{ asset('assets/images/dashboard-header.jpg') }}" alt="...">
-            <div class="overlay-panel vertical-align overlay-background">
-                <div class="vertical-align-middle">
-                    <a class="avatar avatar-lg" href="javascript:void(0)">
-                        <img src="{{ asset('assets/images/1.jpg') }}" alt="">
-                    </a>
-                    <div class="site-menubar-info">
-                        <h5 class="site-menubar-user">Machi</h5>
-                        <p class="site-menubar-email">machidesign@gmail.com</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="site-menubar-body">

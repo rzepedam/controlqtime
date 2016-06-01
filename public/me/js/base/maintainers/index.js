@@ -84,6 +84,10 @@ $(document).ready(function(){
         window.location.href = "/maintainers/relationships";
     });
 
+    $('#redirect-type-representatives').click(function() {
+        window.location.href = "/maintainers/type-representatives";
+    });
+
     $('#redirect-labor-unions').click(function() {
         window.location.href = "/maintainers/labor-unions";
     });

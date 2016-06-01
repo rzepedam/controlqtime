@@ -5,11 +5,11 @@ namespace Controlqtime\Core\Entities;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class LegalRepresentative extends Eloquent
+class RepresentativeCompany extends Eloquent
 {
 	protected $fillable = [
-		'male_surname', 'female_surname', 'first_name', 'second_name', 'rut_legal',
-		'birthday', 'nationality_id', 'email_legal', 'phone1_legal', 'phone2_legal'
+		'type_representative_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'rut_representative',
+		'birthday', 'nationality_id', 'email_representative', 'phone1_representative', 'phone2_representative'
 	];
 
 	protected $dates = [
@@ -26,6 +26,10 @@ class LegalRepresentative extends Eloquent
 
 	public function nationality() {
 		return  $this->belongsTo(Nationality::class);
+	}
+
+	public function typeRepresentative() {
+		return $this->belongsTo(TypeRepresentative::class);
 	}
 
     /*
@@ -49,7 +53,7 @@ class LegalRepresentative extends Eloquent
 	}
 
 	public function setEmailAttribute($value) {
-		$this->attributes['email'] = strtolower($value);
+		$this->attributes['email_representative'] = strtolower($value);
 	}
 
 	public function setBirthdayAttribute($value) {

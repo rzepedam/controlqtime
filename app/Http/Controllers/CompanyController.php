@@ -3,12 +3,13 @@
 namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\TypeCompanyRepoInterface;
+use Controlqtime\Core\Contracts\TypeRepresentativeRepoInterface;
 use Controlqtime\Http\Requests\CompanyRequest;
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ImagePatentCompanyRepoInterface;
 use Controlqtime\Core\Contracts\ImageRolCompanyRepoInterface;
-use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
+use Controlqtime\Core\Contracts\RepresentativeCompanyRepoInterface;
 use Controlqtime\Core\Contracts\NationalityRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
@@ -22,23 +23,25 @@ class CompanyController extends Controller {
 	protected $company;
 	protected $image_patent;
 	protected $image_rol;
-	protected $legal_representative;
+	protected $representative_company;
 	protected $nationality;
 	protected $province;
 	protected $region;
 	protected $type_company;
+	protected $type_representative;
 
-	public function __construct(TypeCompanyRepoInterface $type_company, CompanyRepoInterface $company, NationalityRepoInterface $nationality, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, LegalRepresentativeRepoInterface $legal_representative, ImageRolCompanyRepoInterface $image_rol, ImagePatentCompanyRepoInterface $image_patent)
+	public function __construct(TypeCompanyRepoInterface $type_company, CompanyRepoInterface $company, NationalityRepoInterface $nationality, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, RepresentativeCompanyRepoInterface $representative_company, ImageRolCompanyRepoInterface $image_rol, ImagePatentCompanyRepoInterface $image_patent, TypeRepresentativeRepoInterface $type_representative)
 	{
-		$this->commune              = $commune;
-		$this->company              = $company;
-		$this->image_patent         = $image_patent;
-		$this->image_rol            = $image_rol;
-		$this->legal_representative = $legal_representative;
-		$this->nationality          = $nationality;
-		$this->province             = $province;
-		$this->region               = $region;
-		$this->type_company         = $type_company;
+		$this->commune                = $commune;
+		$this->company                = $company;
+		$this->image_patent           = $image_patent;
+		$this->image_rol              = $image_rol;
+		$this->representative_company = $representative_company;
+		$this->nationality            = $nationality;
+		$this->province               = $province;
+		$this->region                 = $region;
+		$this->type_company           = $type_company;
+		$this->type_representative    = $type_representative;
 	}
 
 	public function index()
@@ -50,45 +53,44 @@ class CompanyController extends Controller {
 
 	public function create()
 	{
-		$nationalities  = $this->nationality->lists('name', 'id');
-		$regions        = $this->region->lists('name', 'id');
-		$provinces      = $this->province->lists('name', 'id');
-		$communes       = $this->commune->lists('name', 'id');
-		$type_companies = $this->type_company->lists('name', 'id');
+		$nationalities        = $this->nationality->lists('name', 'id');
+		$regions              = $this->region->lists('name', 'id');
+		$provinces            = $this->province->lists('name', 'id');
+		$communes             = $this->commune->lists('name', 'id');
+		$type_companies       = $this->type_company->lists('name', 'id');
+		$type_representatives = $this->type_representative->lists('name', 'id');
 
 		return view('administration.companies.create', compact(
-			'nationalities', 'regions', 'provinces', 'communes', 'type_companies'
+			'nationalities', 'regions', 'provinces', 'communes', 'type_companies',
+			'type_representatives'
 		));
 	}
 
 	public function store(CompanyRequest $request)
 	{
 		$company = $this->company->create($request->all());
-		$this->legal_representative->createOrUpdateWithArray($request->all(), $company);
+		$this->representative_company->createOrUpdateWithArray($request->all(), $company);
 
-		if ( $request->ajax() )
-		{
-			return response()->json(array(
-				'success' => true,
-				'url'     => '/administration/companies'
-			));
-		}
-
-		return redirect()->route('administration.companies.index');
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/administration/companies'
+		));
 
 	}
 
 	public function edit($id)
 	{
-		$company       = $this->company->find($id, ['legalRepresentatives']);
-		$regions       = $this->region->lists('name', 'id');
-		$provinces     = $this->region->findProvinces($company->commune->province->region->id);
-		$communes      = $this->province->findCommunes($company->commune->province->id);
-		$nationalities = $this->nationality->lists('name', 'id');
-		$type_companies = $this->type_company->lists('name', 'id');
+		$company              = $this->company->find($id, ['representativeCompanies']);
+		$regions              = $this->region->lists('name', 'id');
+		$provinces            = $this->region->findProvinces($company->commune->province->region->id);
+		$communes             = $this->province->findCommunes($company->commune->province->id);
+		$nationalities        = $this->nationality->lists('name', 'id');
+		$type_companies       = $this->type_company->lists('name', 'id');
+		$type_representatives = $this->type_representative->lists('name', 'id');
 
 		return view('administration.companies.edit', compact(
-			'company', 'regions', 'provinces', 'communes', 'nationalities', 'type_companies'
+			'representativeCompanies.typeRepresentative', 'company', 'regions', 'provinces', 'communes', 'nationalities', 'type_companies',
+			'type_representatives'
 		));
 	}
 
@@ -96,23 +98,19 @@ class CompanyController extends Controller {
 	{
 		$company = $this->company->find($id);
 		$this->company->update($request->all(), $id);
-		$this->legal_representative->destroyArrayId($request->get('id_deletes_legal'));
-		$this->legal_representative->createOrUpdateWithArray($request->all(), $company);
+		$this->representative_company->destroyArrayId($request->get('id_delete_representatives'));
+		$this->representative_company->createOrUpdateWithArray($request->all(), $company);
 
-		if ( $request->ajax() )
-		{
-			return response()->json(array(
-				'success' => true,
-				'url'     => '/administration/companies'
-			));
-		}
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/administration/companies'
+		));
 
-		return redirect()->route('administration.companies.index');
 	}
 
 	public function show($id)
 	{
-		$company = $this->company->find($id, ['commune.province.region', 'legalRepresentatives.nationality', 'typeCompany']);
+		$company = $this->company->find($id, ['commune.province.region', 'representativeCompanies.nationality', 'typeCompany']);
 
 		return view('administration.companies.show', compact('company'));
 	}

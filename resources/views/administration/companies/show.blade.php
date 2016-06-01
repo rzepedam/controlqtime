@@ -19,7 +19,7 @@
 <div class="nav-tabs-horizontal">
     <ul class="nav nav-tabs" data-plugin="nav-tabs" role="tablist">
         <li class="active" role="presentation"><a data-toggle="tab" href="#tab_1" aria-controls="tab_1" role="tab"><i class="fa fa-building" aria-hidden="true"></i> Datos Empresa</a></li>
-        <li role="presentation"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-gavel" aria-hidden="true"></i> Representante Legal</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-users" aria-hidden="true"></i> Representantes Empresa</a></li>
         <li role="files_attach"><a data-toggle="tab" href="#tab_3" aria-controls="tab_3" role="tab"><i class="fa fa-file-text-o" aria-hidden="true"></i> Documentos Adjuntos</a></li>
     </ul>
     <div class="tab-content padding-top-20">
@@ -30,7 +30,7 @@
         </div>
         <div class="tab-pane" id="tab_2" role="tabpanel">
 
-            @include('administration.companies.partials.show.legal_representative')
+            @include('administration.companies.partials.show.representative_company')
 
         </div>
         <div class="tab-pane" id="tab_3" role="tabpanel">

@@ -27,68 +27,78 @@ class Step1Request extends SanitizedRequest {
 			case 'POST':
 			{
 				$rules = [
-					'male_surname'   => 'required|max:30',
-					'female_surname' => 'required|max:30',
-					'first_name'     => 'required|max:30',
-					'second_name'    => 'max:30',
-					'rut'            => 'required|max:15',
-					'birthday'       => 'required|date',
-					'nationality_id' => 'required|regex:/[0-9 -()+]+$/',
-					'gender_id'      => 'required|regex:/[0-9 -()+]+$/',
-					'address'        => 'required',
-					'region_id'      => 'required|regex:/[0-9 -()+]+$/',
-					'province_id'    => 'required|regex:/[0-9 -()+]+$/',
-					'commune_id'     => 'required|regex:/[0-9 -()+]+$/',
-					'email_employee' => 'required|email|max:100|unique:employees,email_employee',
-					'phone1'         => 'required|max:20',
-					'phone2'         => 'max:20',
-					'company_id'     => 'required|regex:/[0-9 -()+]+$/',
-					'code'           => 'required'
+					'male_surname'   	=> 'required|max:30',
+					'female_surname' 	=> 'required|max:30',
+					'first_name'     	=> 'required|max:30',
+					'second_name'    	=> 'max:30',
+					'rut'            	=> 'required|max:15',
+					'birthday'       	=> 'required|date',
+					'nationality_id' 	=> 'required|regex:/[0-9 -()+]+$/',
+					'gender_id'      	=> 'required|regex:/[0-9 -()+]+$/',
+					'address'        	=> 'required',
+					'depto'				=> 'max:5',
+					'block'				=> 'max:4',
+					'num_home'			=> 'max:5',
+					'region_id'      	=> 'required|regex:/[0-9 -()+]+$/',
+					'province_id'    	=> 'required|regex:/[0-9 -()+]+$/',
+					'commune_id'     	=> 'required|regex:/[0-9 -()+]+$/',
+					'email_employee' 	=> 'required|email|max:100|unique:employees,email_employee',
+					'phone1'         	=> 'required|max:20',
+					'phone2'         	=> 'max:20',
+					'company_id'     	=> 'required|regex:/[0-9 -()+]+$/',
+					'code'           	=> 'required'
 				];
-
-				if (Request::get('count_family_relationships') > 0)
-				{
-					foreach (range(0, Request::get('count_family_relationships') - 1) as $index)
-					{
-						$rules[ 'id_family_relationship.' . $index ]   	= 'required|regex:/[0-9 -()+]+$/';
-						$rules[ 'relationship_id.' . $index ]    		= 'required|regex:/[0-9 -()+]+$/';
-						$rules[ 'employee_family_id.' . $index ] 		= 'required|regex:/[0-9 -()+]+$/';
-					}
-				}
 
 				if (Request::get('count_contacts') > 0)
 				{
 					foreach (range(0, Request::get('count_contacts') - 1) as $index)
 					{
-						$rules[ 'id_contact.' . $index ]    		= 'required|regex:/[0-9 -()+]+$/';
-						$rules[ 'name_contact.' . $index ]    		= 'required|max:120';
-						$rules[ 'email_contact.' . $index ]    		= 'required|email|max:60|unique:info_contacts,email_contact';
-						$rules[ 'address_contact.' . $index ]    	= 'required';
-						$rules[ 'tel_contact.' . $index ]    		= 'required|max:20';
+						$rules[ 'id_contact.' . $index ]    			= 'required|in:0';
+						$rules[ 'contact_relationship_id.' . $index ]   = 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'name_contact.' . $index ]    			= 'required|max:120';
+						$rules[ 'email_contact.' . $index ]    			= 'email|max:60|unique:contact_employees,email_contact';
+						$rules[ 'address_contact.' . $index ]    		= 'required';
+						$rules[ 'tel_contact.' . $index ]    			= 'required|max:20';
 					}
 				}
+
+				if (Request::get('count_family_relationships') > 0)
+				{
+					foreach (range(0, Request::get('count_family_relationships') - 1) as $index)
+					{
+						$rules[ 'id_family_relationship.' . $index ]   	= 'required|in:0';
+						$rules[ 'relationship_id.' . $index ]    		= 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'employee_family_id.' . $index ] 		= 'required|regex:/[0-9 -()+]+$/';
+					}
+				}
+
+				return $rules;
+
 			}
 
 			case 'PUT':
 			{
 				$rules = [
-					'male_surname'   => 'required|max:30',
-					'female_surname' => 'required|max:30',
-					'first_name'     => 'required|max:30',
-					'second_name'    => 'max:30',
-					'rut'            => 'required|max:15',
-					'birthday'       => 'required|date',
-					'nationality_id' => 'required|regex:/[0-9 -()+]+$/',
-					'gender_id'      => 'required|regex:/[0-9 -()+]+$/',
-					'address'        => 'required',
-					'region_id'      => 'required|regex:/[0-9 -()+]+$/',
-					'province_id'    => 'required|regex:/[0-9 -()+]+$/',
-					'commune_id'     => 'required|regex:/[0-9 -()+]+$/',
-					'email_employee' => 'required|email|max:100|unique:employees,email_employee,' . $this->id,
-					'phone1'         => 'required|max:20',
-					'phone2'         => 'max:20',
-					'company_id'     => 'required|regex:/[0-9 -()+]+$/',
-					'code'           => 'required'
+					'male_surname'   	=> 'required|max:30',
+					'female_surname' 	=> 'required|max:30',
+					'first_name'     	=> 'required|max:30',
+					'second_name'    	=> 'max:30',
+					'rut'            	=> 'required|max:15',
+					'birthday'       	=> 'required|date',
+					'nationality_id' 	=> 'required|regex:/[0-9 -()+]+$/',
+					'gender_id'      	=> 'required|regex:/[0-9 -()+]+$/',
+					'address'        	=> 'required',
+					'depto'				=> 'max:5',
+					'block'				=> 'max:4',
+					'num_home'			=> 'max:5',
+					'region_id'      	=> 'required|regex:/[0-9 -()+]+$/',
+					'province_id'    	=> 'required|regex:/[0-9 -()+]+$/',
+					'commune_id'     	=> 'required|regex:/[0-9 -()+]+$/',
+					'email_employee' 	=>	'required|email|max:100|unique:employees,email_employee,' . $this->id,
+					'phone1'         	=> 'required|max:20',
+					'phone2'         	=> 'max:20',
+					'company_id'     	=> 'required|regex:/[0-9 -()+]+$/',
+					'code'           	=> 'required'
 				];
 
 				if (Request::get('count_family_relationships') > 0)
@@ -105,22 +115,23 @@ class Step1Request extends SanitizedRequest {
 				{
 					foreach (range(0, Request::get('count_contacts') - 1) as $index)
 					{
-						$rules[ 'id_contact.' . $index ]    		= 'required|regex:/[0-9 -()+]+$/';
-						$rules[ 'name_contact.' . $index ]    		= 'required|max:120';
+						$rules[ 'id_contact.' . $index ]    			= 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'contact_relationship_id.' . $index ]   = 'required|regex:/[0-9 -()+]+$/';
+						$rules[ 'name_contact.' . $index ]    			= 'required|max:120';
 
 						if (Request::get('id_contact')[$index] == 0)
-							$rules[ 'email_contact.' . $index ]    		= 'required|email|max:60|unique:info_contacts,email_contact';
+							$rules[ 'email_contact.' . $index ]    		= 'required|email|max:60|unique:contact_employees,email_contact';
 						else
-							$rules[ 'email_contact.' . $index ]    		= 'required|email|max:60|unique:info_contacts,email_contact,' . Request::get('id_contact')[$index];
+							$rules[ 'email_contact.' . $index ]    		= 'required|email|max:60|unique:contact_employees,email_contact,' . Request::get('id_contact')[$index];
 
-						$rules[ 'address_contact.' . $index ]    	= 'required';
-						$rules[ 'tel_contact.' . $index ]    		= 'required|max:20';
+						$rules[ 'address_contact.' . $index ]    		= 'required';
+						$rules[ 'tel_contact.' . $index ]    			= 'required|max:20';
 					}
 				}
+
+				return $rules;
+
 			}
-
-			return $rules;
-
 		}
 	}
 
@@ -128,42 +139,17 @@ class Step1Request extends SanitizedRequest {
 	{
 		return [
 
-			'id_family_relationship.0.required'	=> 'El campo ID Parentesco Familiar 1 es obligatorio.',
-			'id_family_relationship.1.required'	=> 'El campo ID Parentesco Familiar 2 es obligatorio.',
-			'id_family_relationship.2.required'	=> 'El campo ID Parentesco Familiar 3 es obligatorio.',
-			'id_family_relationship.3.required'	=> 'El campo ID Parentesco Familiar 4 es obligatorio.',
-			'id_family_relationship.4.required'	=> 'El campo ID Parentesco Familiar 5 es obligatorio.',
-			'id_family_relationship.0.regex' 	=> 'El formato de ID Parentesco Familiar 1 es inválido.',
-			'id_family_relationship.1.regex' 	=> 'El formato de ID Parentesco Familiar 2 es inválido.',
-			'id_family_relationship.2.regex' 	=> 'El formato de ID Parentesco Familiar 3 es inválido.',
-			'id_family_relationship.3.regex' 	=> 'El formato de ID Parentesco Familiar 4 es inválido.',
-			'id_family_relationship.4.regex' 	=> 'El formato de ID Parentesco Familiar 5 es inválido.',
-			'relationship_id.0.required' 		=> 'El campo Relación 1 es obligatorio.',
-			'relationship_id.1.required' 		=> 'El campo Relación 2 es obligatorio.',
-			'relationship_id.2.required' 		=> 'El campo Relación 3 es obligatorio.',
-			'relationship_id.3.required' 		=> 'El campo Relación 4 es obligatorio.',
-			'relationship_id.4.required' 		=> 'El campo Relación 5 es obligatorio.',
-			'relationship_id.0.regex' 			=> 'El formato de Relación 1 es inválido.',
-			'relationship_id.1.regex' 			=> 'El formato de Relación 2 es inválido.',
-			'relationship_id.2.regex' 			=> 'El formato de Relación 3 es inválido.',
-			'relationship_id.3.regex' 			=> 'El formato de Relación 4 es inválido.',
-			'relationship_id.4.regex' 			=> 'El formato de Relación 5 es inválido.',
-			'employee_family_id.0.required' 	=> 'El campo Nombre Familiar 1 es obligatorio.',
-			'employee_family_id.1.required' 	=> 'El campo Nombre Familiar 2 es obligatorio.',
-			'employee_family_id.2.required' 	=> 'El campo Nombre Familiar 3 es obligatorio.',
-			'employee_family_id.3.required' 	=> 'El campo Nombre Familiar 4 es obligatorio.',
-			'employee_family_id.4.required' 	=> 'El campo Nombre Familiar 5 es obligatorio.',
-			'employee_family_id.0.regex' 		=> 'El formato de Nombre Familiar 1 es inválido.',
-			'employee_family_id.1.regex' 		=> 'El formato de Nombre Familiar 2 es inválido.',
-			'employee_family_id.2.regex' 		=> 'El formato de Nombre Familiar 3 es inválido.',
-			'employee_family_id.3.regex' 		=> 'El formato de Nombre Familiar 4 es inválido.',
-			'employee_family_id.4.regex' 		=> 'El formato de Nombre Familiar 5 es inválido.',
-
+			//Contact employee
 			'id_contact.0.required'				=> 'El campo ID Contacto 1 es obligatorio.',
 			'id_contact.1.required'				=> 'El campo ID Contacto 2 es obligatorio.',
 			'id_contact.2.required'				=> 'El campo ID Contacto 3 es obligatorio.',
 			'id_contact.3.required'				=> 'El campo ID Contacto 4 es obligatorio.',
 			'id_contact.4.required'				=> 'El campo ID Contacto 5 es obligatorio.',
+			'id_contact.0.in'					=> 'El campo ID Contacto 1 es inválido.',
+			'id_contact.1.in'					=> 'El campo ID Contacto 2 es inválido.',
+			'id_contact.2.in'					=> 'El campo ID Contacto 3 es inválido.',
+			'id_contact.3.in'					=> 'El campo ID Contacto 4 es inválido.',
+			'id_contact.4.in'					=> 'El campo ID Contacto 5 es inválido.',
 			'id_contact.0.regex' 				=> 'El formato de ID Contacto 1 es inválido.',
 			'id_contact.1.regex' 				=> 'El formato de ID Contacto 2 es inválido.',
 			'id_contact.2.regex' 				=> 'El formato de ID Contacto 3 es inválido.',
@@ -179,11 +165,6 @@ class Step1Request extends SanitizedRequest {
 			'name_contact.2.max'				=> 'El campo Nombre Contacto 3 no debe ser mayor que 120 caracteres.',
 			'name_contact.3.max'				=> 'El campo Nombre Contacto 4 no debe ser mayor que 120 caracteres.',
 			'name_contact.4.max'				=> 'El campo Nombre Contacto 5 no debe ser mayor que 120 caracteres.',
-			'email_contact.0.required'			=> 'El campo Email Contacto 1 es obligatorio.',
-			'email_contact.1.required'			=> 'El campo Email Contacto 2 es obligatorio.',
-			'email_contact.2.required'			=> 'El campo Email Contacto 3 es obligatorio.',
-			'email_contact.3.required'			=> 'El campo Email Contacto 4 es obligatorio.',
-			'email_contact.4.required'			=> 'El campo Email Contacto 5 es obligatorio.',
 			'email_contact.0.email'				=> 'El Email Contacto 1 no es un correo válido',
 			'email_contact.1.email'				=> 'El Email Contacto 2 no es un correo válido',
 			'email_contact.2.email'				=> 'El Email Contacto 3 no es un correo válido',
@@ -214,6 +195,44 @@ class Step1Request extends SanitizedRequest {
 			'tel_contact.2.max'					=> 'El campo Teléfono Contacto 3 no debe ser mayor que 20 caracteres.',
 			'tel_contact.3.max'					=> 'El campo Teléfono Contacto 4 no debe ser mayor que 20 caracteres.',
 			'tel_contact.4.max'					=> 'El campo Teléfono Contacto 5 no debe ser mayor que 20 caracteres.',
+
+			//Family relationship
+			'id_family_relationship.0.required'	=> 'El campo ID Parentesco Familiar 1 es obligatorio.',
+			'id_family_relationship.1.required'	=> 'El campo ID Parentesco Familiar 2 es obligatorio.',
+			'id_family_relationship.2.required'	=> 'El campo ID Parentesco Familiar 3 es obligatorio.',
+			'id_family_relationship.3.required'	=> 'El campo ID Parentesco Familiar 4 es obligatorio.',
+			'id_family_relationship.4.required'	=> 'El campo ID Parentesco Familiar 5 es obligatorio.',
+			'id_family_relationship.0.in'		=> 'El campo ID Parentesco Familiar 1 es inválido.',
+			'id_family_relationship.1.in'		=> 'El campo ID Parentesco Familiar 2 es inválido.',
+			'id_family_relationship.2.in'		=> 'El campo ID Parentesco Familiar 3 es inválido.',
+			'id_family_relationship.3.in'		=> 'El campo ID Parentesco Familiar 4 es inválido.',
+			'id_family_relationship.4.in'		=> 'El campo ID Parentesco Familiar 5 es inválido.',
+			'id_family_relationship.0.regex' 	=> 'El formato de ID Parentesco Familiar 1 es inválido.',
+			'id_family_relationship.1.regex' 	=> 'El formato de ID Parentesco Familiar 2 es inválido.',
+			'id_family_relationship.2.regex' 	=> 'El formato de ID Parentesco Familiar 3 es inválido.',
+			'id_family_relationship.3.regex' 	=> 'El formato de ID Parentesco Familiar 4 es inválido.',
+			'id_family_relationship.4.regex' 	=> 'El formato de ID Parentesco Familiar 5 es inválido.',
+			'relationship_id.0.required' 		=> 'El campo Relación 1 es obligatorio.',
+			'relationship_id.1.required' 		=> 'El campo Relación 2 es obligatorio.',
+			'relationship_id.2.required' 		=> 'El campo Relación 3 es obligatorio.',
+			'relationship_id.3.required' 		=> 'El campo Relación 4 es obligatorio.',
+			'relationship_id.4.required' 		=> 'El campo Relación 5 es obligatorio.',
+			'relationship_id.0.regex' 			=> 'El formato de Relación 1 es inválido.',
+			'relationship_id.1.regex' 			=> 'El formato de Relación 2 es inválido.',
+			'relationship_id.2.regex' 			=> 'El formato de Relación 3 es inválido.',
+			'relationship_id.3.regex' 			=> 'El formato de Relación 4 es inválido.',
+			'relationship_id.4.regex' 			=> 'El formato de Relación 5 es inválido.',
+			'employee_family_id.0.required' 	=> 'El campo Nombre Familiar 1 es obligatorio.',
+			'employee_family_id.1.required' 	=> 'El campo Nombre Familiar 2 es obligatorio.',
+			'employee_family_id.2.required' 	=> 'El campo Nombre Familiar 3 es obligatorio.',
+			'employee_family_id.3.required' 	=> 'El campo Nombre Familiar 4 es obligatorio.',
+			'employee_family_id.4.required' 	=> 'El campo Nombre Familiar 5 es obligatorio.',
+			'employee_family_id.0.regex' 		=> 'El formato de Nombre Familiar 1 es inválido.',
+			'employee_family_id.1.regex' 		=> 'El formato de Nombre Familiar 2 es inválido.',
+			'employee_family_id.2.regex' 		=> 'El formato de Nombre Familiar 3 es inválido.',
+			'employee_family_id.3.regex' 		=> 'El formato de Nombre Familiar 4 es inválido.',
+			'employee_family_id.4.regex' 		=> 'El formato de Nombre Familiar 5 es inválido.',
+
 		];
 	}
 

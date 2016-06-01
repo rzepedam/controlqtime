@@ -1,10 +1,10 @@
 @extends('layout.index')
 
-@section('title_header') Editar Relación Familiar: <span class="text-primary">{{ $relationship->id }}</span> @stop
+@section('title_header') Editar Relación: <span class="text-primary">{{ $relationship->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.relationships.index') }}"><i class="md-male-female font-size-16"></i> Relaciones Familiares</a></li>
+    <li><a href="{{ route('maintainers.relationships.index') }}"><i class="md-male-female font-size-16"></i> Relación-Parentesco</a></li>
     <li class="active">Editar</li>
 @stop
 
