@@ -4,9 +4,10 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\DiseaseRepoInterface;
 use Controlqtime\Core\Entities\Disease;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
-class DiseaseRepo implements DiseaseRepoInterface {
+class DiseaseRepo extends BaseRepo implements DiseaseRepoInterface {
 
 	use OperationEntityArray;
 

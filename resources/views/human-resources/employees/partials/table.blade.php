@@ -6,9 +6,9 @@
                     <tr>
                         <th class="col-md-1">ID</th>
                         <th class="col-md-3">Nombre</th>
-                        <th class="col-md-4">Email</th>
-                        <th class="col-md-1 text-center">Estado</th>
-                        <th class="col-md-3 text-center">Acciones</th>
+                        <th class="col-md-3">Email</th>
+                        <th class="col-md-1 text-center">Documentación</th>
+                        <th class="col-md-4 text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,7 +20,11 @@
 
                             @if ($employee->state == 'disable')
                                 <td class="text-center">
-                                    <span class="label label-round label-danger">Activar</span>
+                                    <a href="{{ route('human-resources.employees.attachFiles', $employee) }}" class="text-danger"><i class="fa fa-times-circle font-size-18"></i></a>
+                                </td>
+                            @else
+                                <td class="text-center text-success">
+                                    <i class="fa fa-check-circle font-size-18"></i>
                                 </td>
                             @endif
 

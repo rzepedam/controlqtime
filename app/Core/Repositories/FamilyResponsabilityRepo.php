@@ -4,9 +4,10 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\FamilyResponsabilityRepoInterface;
 use Controlqtime\Core\Entities\FamilyResponsability;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
-class FamilyResponsabilityRepo implements FamilyResponsabilityRepoInterface {
+class FamilyResponsabilityRepo extends BaseRepo implements FamilyResponsabilityRepoInterface {
 
 	use OperationEntityArray;
 

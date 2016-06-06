@@ -4,9 +4,10 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\CertificationRepoInterface;
 use Controlqtime\Core\Entities\Certification;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
-class CertificationRepo implements CertificationRepoInterface {
+class CertificationRepo extends BaseRepo implements CertificationRepoInterface {
 
 	use OperationEntityArray;
 

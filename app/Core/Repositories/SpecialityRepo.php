@@ -4,9 +4,10 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\SpecialityRepoInterface;
 use Controlqtime\Core\Entities\Speciality;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
-class SpecialityRepo implements SpecialityRepoInterface {
+class SpecialityRepo extends BaseRepo implements SpecialityRepoInterface {
 
 	use OperationEntityArray;
 

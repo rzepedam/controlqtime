@@ -7,6 +7,7 @@ Route::group(['middleware' => ['web']], function () {
     /*
      * Home
      */
+    
     //Route::auth();
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 

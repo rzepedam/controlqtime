@@ -4,9 +4,10 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\ExamRepoInterface;
 use Controlqtime\Core\Entities\Exam;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
-class ExamRepo implements ExamRepoInterface {
+class ExamRepo extends BaseRepo implements ExamRepoInterface {
 
 	use OperationEntityArray;
 

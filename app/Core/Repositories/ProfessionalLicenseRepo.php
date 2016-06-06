@@ -4,9 +4,10 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Entities\ProfessionalLicense;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
-class ProfessionalLicenseRepo implements ProfessionalLicenseRepoInterface {
+class ProfessionalLicenseRepo extends BaseRepo implements ProfessionalLicenseRepoInterface {
 
 	use OperationEntityArray;
 

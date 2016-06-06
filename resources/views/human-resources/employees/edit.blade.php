@@ -582,7 +582,7 @@
                     $.ajax({
                         type: 'POST',
                         url: url,
-                        data: $('#step2').serialize() + "&count_studies=" + count_studies + "&count_certifications=" + count_certifications + "&count_specialities=" + count_specialities + "&count_professional_licenses=" + count_professional_licenses + "&count_disabilities=" + count_disabilities + "&id_delete_study=" + id_delete_study + "&id_delete_certification=" + id_delete_certification + "&id_delete_speciality=" + id_delete_speciality + "&id_delete_professional_license=" + id_delete_professional_license,
+                        data: $('#step2').serialize() + "&count_studies=" + count_studies + "&count_certifications=" + count_certifications + "&count_specialities=" + count_specialities + "&count_professional_licenses=" + count_professional_licenses + "&id_delete_study=" + id_delete_study + "&id_delete_certification=" + id_delete_certification + "&id_delete_speciality=" + id_delete_speciality + "&id_delete_professional_license=" + id_delete_professional_license,
                         async: false,
                         dataType: "json",
                         success: function (response) {
@@ -618,7 +618,7 @@
                     $.ajax({
                         type: 'POST',
                         url: url,
-                        data: $('#step3').serialize() + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_exams=" + count_exams + "&count_family_responsabilities=" + count_family_responsabilities + "&id_delete_disability=" + id_delete_disability + "&id_delete_disease=" + id_delete_disease + "&id_delete_exam=" + id_delete_exam + "&id_delete_family_responsability=" + id_delete_family_responsability,
+                        data: $('#step3').serialize() + "&count_certifications=" + count_certifications + "&count_specialities=" + count_specialities + "&count_professional_licenses=" + count_professional_licenses + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_exams=" + count_exams + "&count_family_responsabilities=" + count_family_responsabilities + "&id_delete_disability=" + id_delete_disability + "&id_delete_disease=" + id_delete_disease + "&id_delete_exam=" + id_delete_exam + "&id_delete_family_responsability=" + id_delete_family_responsability,
                         async: false,
                         dataType: "json",
                         success: function (response) {
