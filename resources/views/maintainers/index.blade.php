@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-roles" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-positions" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="icon md-seat" aria-hidden="true"></i>

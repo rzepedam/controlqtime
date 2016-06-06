@@ -19,6 +19,10 @@ class Exam extends Eloquent
      * Relationships
      */
 
+    public function imageExamEmployees() {
+        return $this->hasMany(ImageExamEmployee::class);
+    }
+
     public function typeExam() {
         return $this->belongsTo(TypeExam::class);
     }

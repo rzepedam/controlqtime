@@ -14,6 +14,10 @@ class Disease extends Eloquent
      * Relationships
      */
 
+    public function imageDiseaseEmployees() {
+        return $this->hasMany(ImageDiseaseEmployee::class);
+    }
+
     public function typeDisease() {
         return $this->belongsTo(TypeDisease::class);
     }

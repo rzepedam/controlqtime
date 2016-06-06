@@ -8,9 +8,9 @@ use Illuminate\Support\Str;
 
 class BaseUploadRepo implements BaseRepoUploadInterface {
 
-	public function addImages($repo, $file, $id, $type)
+	public function addImages($repo, $file, $id, $type, $subRepoId = null)
 	{
-		$path                   = $this->getPath($repo, $id, $type);
+		$path                   = $this->getPath($repo, $id, $type, $subRepoId);
 		$name                   = time() . $file->getClientOriginalName();
 		$this->model->path      = $path . $name;
 		$this->model->orig_name = $file->getClientOriginalName();
@@ -25,6 +25,30 @@ class BaseUploadRepo implements BaseRepoUploadInterface {
 			case 'vehicle':
 				$this->model->vehicle_id = $id;
 				break;
+
+			case 'employee':
+				if($type == 'certification')
+					$this->model->certification_id = $subRepoId;
+
+				if($type == 'speciality')
+					$this->model->speciality_id = $subRepoId;
+
+				if($type == 'professional_license')
+					$this->model->professional_license_id = $subRepoId;
+
+				if($type == 'disability')
+					$this->model->disability_id = $subRepoId;
+
+				if($type == 'disease')
+					$this->model->disease_id = $subRepoId;
+
+				if($type == 'exam')
+					$this->model->exam_id = $subRepoId;
+
+				if($type == 'family_responsability')
+					$this->model->family_responsability_id = $subRepoId;
+
+				break;
 		}
 
 		if ( $this->model->save() )
@@ -35,14 +59,15 @@ class BaseUploadRepo implements BaseRepoUploadInterface {
 		}
 	}
 
-	public function getPath($repo, $id, $type)
+	public function getPath($repo, $id, $type, $subRepoId)
 	{
-		return $path = "/storage/" . $repo . "/" . $id . "/" . $type . "/";
+		$path = "/storage/" . $repo . "/" . $id . "/" . $type . "/" . $subRepoId . "/";
+		return $path;
 	}
 
 	public function moveImage($path, $file, $name)
 	{
-		File::makeDirectory($path, $mode = 0777, true, true);
+		File::makeDirectory($path, $mode = 0775, true, true);
 		$file->move($path, $name);
 	}
 

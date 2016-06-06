@@ -35,6 +35,8 @@ class ProfessionalLicenseRepo implements ProfessionalLicenseRepoInterface {
 				]);
 
 				$entity->professionalLicenses()->save($this->model);
+				$entity->state = 'disable';
+				$entity->save();
 
 			} else
 			{

@@ -34,6 +34,8 @@ class CertificationRepo implements CertificationRepoInterface {
 				]);
 
 				$entity->certifications()->save($this->model);
+				$entity->state = 'disable';
+				$entity->save();
 
 			} else
 			{

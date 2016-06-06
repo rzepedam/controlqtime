@@ -104,8 +104,28 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageCertificationEmployeeRepoInterface',
+            'Controlqtime\Core\Repositories\ImageCertificationEmployeeRepo'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\ImageCirculationPermitVehicleRepoInterface',
             'Controlqtime\Core\Repositories\ImageCirculationPermitVehicleRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageDisabilityEmployeeRepoInterface',
+            'Controlqtime\Core\Repositories\ImageDisabilityEmployeeRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageDiseaseEmployeeRepoInterface',
+            'Controlqtime\Core\Repositories\ImageDiseaseEmployeeRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageExamEmployeeRepoInterface',
+            'Controlqtime\Core\Repositories\ImageExamEmployeeRepo'
         );
         
         $this->app->bind(
@@ -129,8 +149,23 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageProfessionalLicenseEmployeeRepoInterface',
+            'Controlqtime\Core\Repositories\ImageProfessionalLicenseEmployeeRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageFamilyResponsabilityEmployeeRepoInterface',
+            'Controlqtime\Core\Repositories\ImageFamilyResponsabilityEmployeeRepo'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\ImageRolCompanyRepoInterface',
             'Controlqtime\Core\Repositories\ImageRolCompanyRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageSpecialityEmployeeRepoInterface',
+            'Controlqtime\Core\Repositories\ImageSpecialityEmployeeRepo'
         );
 
         $this->app->bind(
@@ -194,8 +229,8 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'Controlqtime\Core\Contracts\RoleRepoInterface',
-            'Controlqtime\Core\Repositories\RoleRepo'
+            'Controlqtime\Core\Contracts\PositionRepoInterface',
+            'Controlqtime\Core\Repositories\PositionRepo'
         );
 
         $this->app->bind(

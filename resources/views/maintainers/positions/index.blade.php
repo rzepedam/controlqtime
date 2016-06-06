@@ -2,7 +2,7 @@
 
 @section('title_header') Listado de Cargos
     <br />
-    <a href="{{ route('maintainers.roles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Cargo</a>
+    <a href="{{ route('maintainers.positions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Cargo</a>
 @stop
 
 @section('breadcumb')
@@ -14,9 +14,9 @@
 
 @section('content')
 
-    @if ($roles->count())
+    @if ($positions->count())
 
-        @include('maintainers.roles.partials.table')
+        @include('maintainers.positions.partials.table')
 
     @else
 
@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-md-12">
             <a class="pull-left margin-top-30" href="{{ route('maintainers') }}">Volver</a>
-            <span class="pull-right">{{ $roles->links() }}</span>
+            <span class="pull-right">{{ $positions->links() }}</span>
         </div>
     </div>
 

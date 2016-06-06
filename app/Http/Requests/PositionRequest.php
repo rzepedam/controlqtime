@@ -5,7 +5,7 @@ namespace Controlqtime\Http\Requests;
 use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class RoleRequest extends SanitizedRequest
+class PositionRequest extends SanitizedRequest
 {
     private $route;
 
@@ -26,14 +26,14 @@ class RoleRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:50|unique:roles',
+                    'name'  => 'required|max:50|unique:positions',
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:50|unique:roles,name,' . $this->route->getParameter('roles')
+                    'name'  => 'required|max:50|unique:positions,name,' . $this->route->getParameter('positions')
                 ];
             }
         }

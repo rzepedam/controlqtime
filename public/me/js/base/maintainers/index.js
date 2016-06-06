@@ -4,8 +4,8 @@ $(document).ready(function(){
         window.location.href = "/maintainers/areas";
     });
 
-    $('#redirect-roles').click(function() {
-        window.location.href = "/maintainers/roles";
+    $('#redirect-positions').click(function() {
+        window.location.href = "/maintainers/positions";
     });
 
     $('#redirect-type-certifications').click(function() {

@@ -28,6 +28,10 @@ class Certification extends Eloquent
         return $this->belongsTo(Institution::class, 'institution_certification_id');
     }
 
+    public function imageCertificationEmployees() {
+        return $this->hasMany(ImageCertificationEmployee::class);
+    }
+
     /*
      * Mutators
      */

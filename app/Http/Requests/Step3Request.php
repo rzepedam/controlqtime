@@ -115,7 +115,7 @@ class Step3Request extends SanitizedRequest {
 						if (Request::get('id_family_responsability')[$index] == 0)
 							$rules[ 'rut_responsability.' . $index ]       = 'required|max:15|unique:family_responsabilities,rut_responsability';
 						else
-							$rules[ 'rut_responsability.' . $index ]       = 'required|max:15|unique:family_responsabilities,rut_responsability,' . Request::get('rut_responsability')[$index];
+							$rules[ 'rut_responsability.' . $index ]       = 'required|max:15|unique:family_responsabilities,rut_responsability,' . Request::get('id_family_responsability')[$index];
 
 						$rules[ 'relationship_id.' . $index ]          = 'required|regex:/[0-9 -()+]+$/';
 					}

@@ -13,7 +13,11 @@ class Disability extends Eloquent
     /*
      * Relationships
      */
-    
+
+    public function imageDisabilityEmployees () {
+        return $this->hasMany(ImageDisabilityEmployee::class);
+    }
+
     public function typeDisability() {
         return $this->belongsTo(TypeDisability::class);
     }

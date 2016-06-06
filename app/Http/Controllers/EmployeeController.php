@@ -15,6 +15,13 @@ use Controlqtime\Core\Contracts\FamilyRelationshipRepoInterface;
 use Controlqtime\Core\Contracts\FamilyResponsabilityRepoInterface;
 use Controlqtime\Core\Contracts\GenderRepoInterface;
 use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ImageCertificationEmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ImageDisabilityEmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ImageDiseaseEmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ImageExamEmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ImageFamilyResponsabilityEmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ImageProfessionalLicenseEmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ImageSpecialityEmployeeRepoInterface;
 use Controlqtime\Core\Contracts\InstitutionRepoInterface;
 use Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
@@ -32,6 +39,7 @@ use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
 use Controlqtime\Http\Requests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller {
@@ -49,6 +57,13 @@ class EmployeeController extends Controller {
 	protected $family_relationship;
 	protected $family_responsability;
 	protected $gender;
+	protected $image_certification;
+	protected $image_disability;
+	protected $image_disease;
+	protected $image_exam;
+	protected $image_family_responsability;
+	protected $image_professional_license;
+	protected $image_speciality;
 	protected $institution;
 	protected $professionalLicense;
 	protected $province;
@@ -63,34 +78,41 @@ class EmployeeController extends Controller {
 	protected $type_professional_license;
 	protected $type_speciality;
 
-	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, CompanyRepoInterface $company, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam, FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense, DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam, FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee)
+	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, CompanyRepoInterface $company, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam, FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense, DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam, FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee, ImageCertificationEmployeeRepoInterface $image_certification, ImageSpecialityEmployeeRepoInterface $image_speciality, ImageProfessionalLicenseEmployeeRepoInterface $image_professional_license, ImageDisabilityEmployeeRepoInterface $image_disability, ImageDiseaseEmployeeRepoInterface $image_disease, ImageExamEmployeeRepoInterface $image_exam, ImageFamilyResponsabilityEmployeeRepoInterface $image_family_responsability)
 	{
-		$this->certification             	= $certification;
-		$this->commune                   	= $commune;
-		$this->company                   	= $company;
-		$this->contact_employee 			= $contact_employee;
-		$this->country                   	= $country;
-		$this->degree                    	= $degree;
-		$this->disability                	= $disability;
-		$this->disease                   	= $disease;
-		$this->employee                  	= $employee;
-		$this->exam                      	= $exam;
-		$this->family_relationship       	= $family_relationship;
-		$this->family_responsability     	= $family_responsability;
-		$this->gender                    	= $gender;
-		$this->institution               	= $institution;
-		$this->professionalLicense       	= $professionalLicense;
-		$this->province                  	= $province;
-		$this->region                    	= $region;
-		$this->relationship              	= $relationship;
-		$this->speciality                	= $speciality;
-		$this->study                     	= $study;
-		$this->type_certification        	= $type_certification;
-		$this->type_disability           	= $type_disability;
-		$this->type_disease              	= $type_disease;
-		$this->type_exam                 	= $type_exam;
-		$this->type_professional_license 	= $type_professional_license;
-		$this->type_speciality           	= $type_speciality;
+		$this->certification               = $certification;
+		$this->commune                     = $commune;
+		$this->company                     = $company;
+		$this->contact_employee            = $contact_employee;
+		$this->country                     = $country;
+		$this->degree                      = $degree;
+		$this->disability                  = $disability;
+		$this->disease                     = $disease;
+		$this->employee                    = $employee;
+		$this->exam                        = $exam;
+		$this->family_relationship         = $family_relationship;
+		$this->family_responsability       = $family_responsability;
+		$this->gender                      = $gender;
+		$this->image_certification         = $image_certification;
+		$this->image_disability            = $image_disability;
+		$this->image_disease               = $image_disease;
+		$this->image_exam                  = $image_exam;
+		$this->image_family_responsability = $image_family_responsability;
+		$this->image_professional_license  = $image_professional_license;
+		$this->image_speciality            = $image_speciality;
+		$this->institution                 = $institution;
+		$this->professionalLicense         = $professionalLicense;
+		$this->province                    = $province;
+		$this->region                      = $region;
+		$this->relationship                = $relationship;
+		$this->speciality                  = $speciality;
+		$this->study                       = $study;
+		$this->type_certification          = $type_certification;
+		$this->type_disability             = $type_disability;
+		$this->type_disease                = $type_disease;
+		$this->type_exam                   = $type_exam;
+		$this->type_professional_license   = $type_professional_license;
+		$this->type_speciality             = $type_speciality;
 	}
 
 	public function index()
@@ -219,6 +241,8 @@ class EmployeeController extends Controller {
 		$this->exam->createOrUpdateWithArray($request->all(), $employee);
 		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 
+		$this->checkStateStoreEmployee($employee);
+
 		$this->destroyEmployeeData();
 
 		return response()->json([
@@ -228,14 +252,28 @@ class EmployeeController extends Controller {
 
 	}
 
+	public function checkStateStoreEmployee($employee)
+	{
+		if ( Session::get('count_certifications') + Session::get('count_specialities') +
+			Session::get('count_specialities') + Session::get('count_professional_licenses') +
+			Session::get('count_disabilities') + Session::get('count_diseases') + Session::get('count_exams') +
+			Session::get('count_family_responsabilities') == 0 ) {
+
+			$employee->state = 'enable';
+			$employee->save();
+		}
+
+		return true;
+	}
+
 	public function edit($id)
 	{
-		$employee 					= $this->employee->find($id);
+		$employee                   = $this->employee->find($id);
 		$communes                   = $this->commune->lists('name', 'id');
 		$companies                  = $this->company->whereLists('state', 'enable', 'firm_name');
 		$countries                  = $this->country->lists('name', 'id');
 		$degrees                    = $this->degree->lists('name', 'id');
-		$employees					= $this->employee->lists('full_name', 'id');
+		$employees                  = $this->employee->lists('full_name', 'id');
 		$genders                    = $this->gender->lists('name', 'id');
 		$institutions               = $this->institution->lists('name', 'id');
 		$provinces                  = $this->province->lists('name', 'id');
@@ -308,8 +346,8 @@ class EmployeeController extends Controller {
 	public function show($id)
 	{
 		$employee = $this->employee->find($id, array(
-			'commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship', 'studies.degree.institution', 'certifications', 'specialities',
-			'professionalLicenses'
+			'commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
+			'studies.degree.institution', 'certifications', 'specialities', 'professionalLicenses'
 		));
 
 		return view('human-resources.employees.show', compact('employee'));
@@ -321,6 +359,112 @@ class EmployeeController extends Controller {
 		$this->employee->delete($id);
 
 		return redirect()->route('human-resources.employees.index');
+	}
+
+	public function getImages($id)
+	{
+		$employee = $this->employee->find($id, [
+			'certifications.imageCertificationEmployees', 'specialities.imageSpecialityEmployees',
+			'professionalLicenses.imageProfessionalLicenseEmployees', 'disabilities.imageDisabilityEmployees',
+			'diseases.imageDiseaseEmployees', 'exams.imageExamEmployees',
+			'familyResponsabilities.imageFamilyResponsabilityEmployees'
+		]);
+
+		return view('human-resources.employees.upload', compact('id', 'employee'));
+	}
+
+	public function addImages(Request $request)
+	{
+		switch ($request->get('type'))
+		{
+			case 'certification':
+				$save = $this->image_certification->addImages('employee', $request->file('file_data'), $request->get('id'), $request->get('type'), $request->get('subRepoId'));
+				break;
+
+			case 'speciality':
+				$save = $this->image_speciality->addImages('employee', $request->file('file_data'), $request->get('id'), $request->get('type'), $request->get('subRepoId'));
+				break;
+
+			case 'professional_license':
+				$save = $this->image_professional_license->addImages('employee', $request->file('file_data'), $request->get('id'), $request->get('type'), $request->get('subRepoId'));
+				break;
+
+			case 'disability':
+				$save = $this->image_disability->addImages('employee', $request->file('file_data'), $request->get('id'), $request->get('type'), $request->get('subRepoId'));
+				break;
+
+			case 'disease':
+				$save = $this->image_disease->addImages('employee', $request->file('file_data'), $request->get('id'), $request->get('type'), $request->get('subRepoId'));
+				break;
+
+			case 'exam':
+				$save = $this->image_exam->addImages('employee', $request->file('file_data'), $request->get('id'), $request->get('type'), $request->get('subRepoId'));
+				break;
+
+			case 'family_responsability':
+				$save = $this->image_family_responsability->addImages('employee', $request->file('file_data'), $request->get('id'), $request->get('type'), $request->get('subRepoId'));
+				break;
+		}
+
+		if ( $save )
+		{
+			$this->employee->checkState($request->get('id'));
+
+			return response()->json(['success' => true]);
+		}
+
+		return response()->json(['success' => false]);
+	}
+
+	public function deleteFiles(Request $request)
+	{
+		switch ($request->get('type'))
+		{
+			case 'certification':
+				$destroy = $this->image_certification->destroyImage($request->get('path'));
+				$this->image_certification->delete($request->get('key'));
+				break;
+
+			case 'speciality':
+				$destroy = $this->image_speciality->destroyImage($request->get('path'));
+				$this->image_speciality->delete($request->get('key'));
+				break;
+
+			case 'professional_license':
+				$destroy = $this->image_professional_license->destroyImage($request->get('path'));
+				$this->image_professional_license->delete($request->get('key'));
+				break;
+
+			case 'disability':
+				$destroy = $this->image_disability->destroyImage($request->get('path'));
+				$this->image_disability->delete($request->get('key'));
+				break;
+
+			case 'disease':
+				$destroy = $this->image_disease->destroyImage($request->get('path'));
+				$this->image_disease->delete($request->get('key'));
+				break;
+
+			case 'exam':
+				$destroy = $this->image_exam->destroyImage($request->get('path'));
+				$this->image_exam->delete($request->get('key'));
+				break;
+
+			case 'family_responsability':
+				$destroy = $this->image_family_responsability->destroyImage($request->get('path'));
+				$this->image_family_responsability->delete($request->get('key'));
+				break;
+
+		}
+
+		if ( $destroy )
+		{
+			$this->employee->checkState($request->get('id'));
+
+			return response()->json(['success' => true]);
+		}
+
+		return response()->json(['success' => false]);
 	}
 
 	public function destroyEmployeeData()

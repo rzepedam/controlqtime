@@ -24,13 +24,9 @@ class Employee extends Eloquent
     public function company() {
         return $this->belongsTo(Company::class);
     }
-    
-    public function nationality() {
-        return $this->belongsTo(Nationality::class);
-    }
 
-    public function gender() {
-        return $this->belongsTo(Gender::class);
+    public function certifications() {
+        return $this->hasMany(Certification::class);
     }
     
     public function commune() {
@@ -40,31 +36,11 @@ class Employee extends Eloquent
     public function contactEmployees() {
         return $this->hasMany(ContactEmployee::class);
     }
-    
-    public function familyRelationships() {
-        return $this->hasMany(FamilyRelationship::class);
-    }
-    
-    public function studies() {
-        return $this->hasMany(Study::class);
-    }
-    
-    public function certifications() {
-        return $this->hasMany(Certification::class);
-    }
-    
-    public function specialities() {
-        return $this->hasMany(Speciality::class);
-    }
-    
-    public function professionalLicenses(){
-        return $this->hasMany(ProfessionalLicense::class);
-    }
-    
+
     public function disabilities() {
         return $this->hasMany(Disability::class);
     }
-    
+
     public function diseases() {
         return $this->hasMany(Disease::class);
     }
@@ -72,9 +48,61 @@ class Employee extends Eloquent
     public function exams() {
         return $this->hasMany(Exam::class);
     }
+    
+    public function familyRelationships() {
+        return $this->hasMany(FamilyRelationship::class);
+    }
 
     public function familyResponsabilities() {
         return $this->hasMany(FamilyResponsability::class);
+    }
+
+    public function gender() {
+        return $this->belongsTo(Gender::class);
+    }
+
+    public function imageCertificationEmployees() {
+        return $this->hasManyThrough(ImageCertificationEmployee::class, Certification::class);
+    }
+
+    public function imageDisabilityEmployees() {
+        return $this->hasManyThrough(ImageDisabilityEmployee::class, Disability::class);
+    }
+
+    public function imageDiseaseEmployees() {
+        return $this->hasManyThrough(ImageDiseaseEmployee::class, Disease::class);
+    }
+
+    public function imageExamEmployees() {
+        return $this->hasManyThrough(ImageExamEmployee::class, Exam::class);
+    }
+
+    public function imageFamilyResponsabilityEmployees() {
+        return $this->hasManyThrough(ImageFamilyResponsabilityEmployee::class, FamilyResponsability::class);
+    }
+
+    public function imageProfessionalLicenses() {
+        return $this->hasManyThrough(ImageProfessionalLicenseEmployee::class, ProfessionalLicense::class);
+    }
+
+    public function imageSpecialityEmployees() {
+        return $this->hasManyThrough(ImageSpecialityEmployee::class, Speciality::class);
+    }
+
+    public function nationality() {
+        return $this->belongsTo(Nationality::class);
+    }
+
+    public function professionalLicenses(){
+        return $this->hasMany(ProfessionalLicense::class);
+    }
+    
+    public function specialities() {
+        return $this->hasMany(Speciality::class);
+    }
+
+    public function studies() {
+        return $this->hasMany(Study::class);
     }
 
     /*public function dailyAssistances() {
@@ -113,4 +141,37 @@ class Employee extends Eloquent
         $this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
+
+    /*
+     * Accesors
+     */
+
+    public function getNumCertificationsAttribute() {
+        return count($this->certifications);
+    }
+
+    public function getNumDisabilitiesAttribute() {
+        return count($this->disabilities);
+    }
+
+    public function getNumDiseasesAttribute() {
+        return count($this->diseases);
+    }
+
+    public function getNumExamsAttribute() {
+        return count($this->exams);
+    }
+
+    public function getNumFamilyResponsabilitiesAttribute() {
+        return count($this->familyResponsabilities);
+    }
+
+    public function getNumProfessionalLicensesAttribute() {
+        return count($this->professionalLicenses);
+    }
+
+    public function getNumSpecialitiesAttribute() {
+        return count($this->specialities);
+    }
+    
 }

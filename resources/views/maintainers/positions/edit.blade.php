@@ -1,10 +1,10 @@
 @extends('layout.index')
 
-@section('title_header') Editar Cargo: <span class="text-primary">{{ $role->id }}</span> @stop
+@section('title_header') Editar Cargo: <span class="text-primary">{{ $position->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.roles.index') }}"><i class="md-seat font-size-18"></i> Cargos</a></li>
+    <li><a href="{{ route('maintainers.positions.index') }}"><i class="md-seat font-size-18"></i> Cargos</a></li>
     <li class="active">Editar</li>
 @stop
 
@@ -14,18 +14,18 @@
 
     <div class="panel">
 
-        {{ Form::model($role, array('route' => ['maintainers.roles.update', $role], 'method' => 'PUT' )) }}
+        {{ Form::model($position, array('route' => ['maintainers.positions.update', $position], 'method' => 'PUT' )) }}
 
             <div class="panel-body">
 
-                @include('maintainers.roles.partials.fields')
+                @include('maintainers.positions.partials.fields')
 
             </div>
             <br />
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('maintainers.roles.index') }}">Volver</a>
+                        <a href="{{ route('maintainers.positions.index') }}">Volver</a>
                         <button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
     <br />
     <br />
 
-    @include('maintainers.roles.partials.delete')
+    @include('maintainers.positions.partials.delete')
     <br />
 
 @stop

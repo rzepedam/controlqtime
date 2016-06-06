@@ -9,51 +9,34 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>ControlQTime</title>
     <link rel="shortcut icon" href="{{ asset('me/img/favicon.ico') }}">
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-extend.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
-    <!-- Plugins -->
     <link rel="stylesheet" href="{{ asset('assets/css/animsition.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/asScrollable.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/waves.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/v1.min.css') }}">
     {{ Html::style('assets/css/toastr.css') }}
-    <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
     @yield('css')
 
     {{ Html::style('me/css/style.css') }}
-    <!--[if lt IE 9]>
-    <script src="{{ asset('assets/js/html5shiv.min.js') }}"></script>
-    <![endif]-->
-    <!--[if lt IE 10]>
-    <script src="{{ asset('assets/js/media.match.min.js') }}"></script>
-    <script src="{{ asset('assets/js/respond.min.js') }}"></script>
-    <![endif]-->
-    <!-- Scripts -->
-    <script src="{{ asset('assets/js/modernizr.js') }}"></script>
     <script src="{{ asset('assets/js/breakpoints.js') }}"></script>
     <script>
         Breakpoints();
     </script>
 </head>
 <body class="dashboard">
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
-    <!-- Header -->
+    {{-- Header --}}
     @include('layout.sections.header')
 
-    <!-- Sidebar -->
+    {{-- Sidebar --}}
     @include('layout.sections.sidebar')
 
-    <!-- Content -->
+    {{-- Content --}}
     <div class="page animsition">
         <div class="page-header">
             <h1 class="page-title">
@@ -76,10 +59,9 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    {{-- Footer --}}
     {{-- @include('layout.sections.footer') --}}
 
-    <!-- Core  -->
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets/js/animsition.js') }}"></script>
@@ -89,9 +71,6 @@
     <script src="{{ asset('assets/js/jquery-asHoverScroll.js') }}"></script>
     <script src="{{ asset('assets/js/waves.js') }}"></script>
     {{ Html::script('assets/js/toastr.js') }}
-    <!-- Plugins -->
-
-    <!-- Scripts -->
     <script src="{{ asset('assets/js/core.js') }}"></script>
     <script src="{{ asset('assets/js/site.js') }}"></script>
     <script src="{{ asset('assets/js/menu.js') }}"></script>

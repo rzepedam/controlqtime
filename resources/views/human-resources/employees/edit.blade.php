@@ -364,7 +364,7 @@
                                 <div class="panel-body">
                                     <div id="content_exams">
 
-                                        @if (count($employee->diseases) > 0)
+                                        @if (count($employee->exams) > 0)
 
                                             @include('human-resources.employees.partials.edit.step3.exams')
 

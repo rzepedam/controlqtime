@@ -34,6 +34,8 @@ class SpecialityRepo implements SpecialityRepoInterface {
 				]);
 
 				$entity->certifications()->save($this->model);
+				$entity->state = 'disable';
+				$entity->save();
 
 			} else
 			{

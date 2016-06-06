@@ -13,12 +13,16 @@ class FamilyResponsability extends Eloquent
     /*
      * Relationships
      */
-
-    public function relationship() {
-        return $this->belongsTo(Relationship::class);
+    
+    public function imageFamilyResponsabilityEmployees() {
+        return $this->hasMany(ImageFamilyResponsabilityEmployee::class);
     }
     
     public function employee() {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function relationship() {
+        return $this->belongsTo(Relationship::class);
     }
 }

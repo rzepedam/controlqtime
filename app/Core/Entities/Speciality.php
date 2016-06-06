@@ -28,6 +28,10 @@ class Speciality extends Eloquent
         return $this->belongsTo(Institution::class, 'institution_speciality_id');
     }
     
+    public function imageSpecialityEmployees () {
+        return $this->hasMany(ImageSpecialityEmployee::class);
+    }
+    
     /*
      * Mutators
      */

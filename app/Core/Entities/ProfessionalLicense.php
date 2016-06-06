@@ -23,6 +23,10 @@ class ProfessionalLicense extends Eloquent
         return $this->belongsTo(TypeProfessionalLicense::class);
     }
 
+    public function imageProfessionalLicenseEmployees () {
+        return $this->hasMany(ImageProfessionalLicenseEmployee::class);
+    }
+
     /*
      * Mutators
      */

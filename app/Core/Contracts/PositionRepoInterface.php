@@ -4,7 +4,7 @@ namespace Controlqtime\Core\Contracts;
 
 use Controlqtime\Core\Contracts\Base\BaseRepoInterface;
 
-interface RoleRepoInterface extends BaseRepoInterface
+interface PositionRepoInterface extends BaseRepoInterface
 {
 
 }

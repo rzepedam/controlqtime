@@ -123,11 +123,11 @@ INSERT INTO forecasts(name) VALUES ('San Lorenzo Ltda.');
 INSERT INTO forecasts(name) VALUES ('Vida Tres S.A');
 
 
-/* ratings | Cargos */
-INSERT INTO roles(name) VALUES ('Administrador');
-INSERT INTO roles(name) VALUES ('Gerente General');
-INSERT INTO roles(name) VALUES ('Contador');
-INSERT INTO roles(name) VALUES ('Secretario');
+/* positions | Cargos */
+INSERT INTO positions(name) VALUES ('Administrador');
+INSERT INTO positions(name) VALUES ('Gerente General');
+INSERT INTO positions(name) VALUES ('Contador');
+INSERT INTO positions(name) VALUES ('Secretario');
 
 
 /* type_certifications | Tipos de Certificaciones */

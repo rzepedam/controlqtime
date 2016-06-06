@@ -18,14 +18,14 @@ Route::group(['middleware' => ['web']], function () {
         return view('administration.index');
     }]);
     Route::group(['prefix' => 'administration'], function(){
-
         Route::resource('companies', 'CompanyController');
         Route::group(['prefix' => 'companies'], function() {
+
+            /* Upload images companies */
             Route::get('attachFiles/{id}', ['as' => 'administration.companies.attachFiles', 'uses' => 'CompanyController@getImages']);
             Route::post('attachFiles', ['as' => 'administration.companies.addImages', 'uses' => 'CompanyController@addImages']);
             Route::post('deleteFiles', ['as' => 'administration.companies.deleteFiles', 'uses' => 'CompanyController@deleteFiles']);
         });
-
     });
 
     /*
@@ -36,9 +36,13 @@ Route::group(['middleware' => ['web']], function () {
         return view('human-resources.index');
     }]);
     Route::group(['prefix' => 'human-resources'], function(){
-
         Route::resource('employees', 'EmployeeController');
         Route::group(['prefix' => 'employees'], function(){
+
+            /* Upload images employees */
+            Route::get('attachFiles/{id}', ['as' => 'human-resources.employees.attachFiles', 'uses' => 'EmployeeController@getImages']);
+            Route::post('attachFiles', ['as' => 'human-resources.employees.addImages', 'uses' => 'EmployeeController@addImages']);
+            Route::post('deleteFiles', ['as' => 'human-resources.employees.deleteFiles', 'uses' => 'EmployeeController@deleteFiles']);
             
             /* Employees create */
             Route::post('step1', ['as' => 'human-resources.employees.step1', 'uses' => 'EmployeeController@step1']);
@@ -63,7 +67,6 @@ Route::group(['middleware' => ['web']], function () {
         return view('operations.index');
     }]);
     Route::group(['prefix' => 'operations'], function() {
-        
         Route::resource('route-sheets', 'RouteSheetController');
         Route::post('route-sheets/changeStateRoundSheet', ['as' => 'operations.route-sheets.changeStateRoundSheet', 'uses' => 'RouteSheetController@changeStateRoundSheet']);
         Route::resource('rounds', 'RoundController');
@@ -94,8 +97,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('model-vehicles', 'ModelVehicleController');
         Route::resource('mutualities', 'MutualityController');
         Route::resource('pensions', 'PensionController');
+        Route::resource('positions', 'PositionController');
         Route::resource('professions', 'ProfessionController');
-        Route::resource('roles', 'RoleController');
         Route::resource('relationships', 'RelationshipController');
         Route::resource('routes', 'RouteController');
         Route::resource('labor-unions', 'LaborUnionController');

@@ -4,7 +4,7 @@ namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Role extends Eloquent
+class Position extends Eloquent
 {
     protected $fillable = [
         'name'
