@@ -5,11 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\CertificationRepoInterface;
 use Controlqtime\Core\Entities\Certification;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\DestroyImageFile;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
 class CertificationRepo extends BaseRepo implements CertificationRepoInterface {
 
-	use OperationEntityArray;
+	use OperationEntityArray, DestroyImageFile;
 
 	protected $model;
 
@@ -50,5 +51,5 @@ class CertificationRepo extends BaseRepo implements CertificationRepoInterface {
 			}
 		}
 	}
-
+	
 }

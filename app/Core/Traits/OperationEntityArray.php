@@ -8,5 +8,7 @@ trait OperationEntityArray
     {
         $id_delete = explode(",", $id);
         $this->model->whereIn('id', $id_delete)->delete();
+
     }
+    
 }

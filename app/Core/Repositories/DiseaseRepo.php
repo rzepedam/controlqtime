@@ -5,11 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\DiseaseRepoInterface;
 use Controlqtime\Core\Entities\Disease;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\DestroyImageFile;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
 class DiseaseRepo extends BaseRepo implements DiseaseRepoInterface {
 
-	use OperationEntityArray;
+	use OperationEntityArray, DestroyImageFile;
 
 	protected $model;
 

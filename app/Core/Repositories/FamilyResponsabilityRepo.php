@@ -5,11 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\FamilyResponsabilityRepoInterface;
 use Controlqtime\Core\Entities\FamilyResponsability;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\DestroyImageFile;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
 class FamilyResponsabilityRepo extends BaseRepo implements FamilyResponsabilityRepoInterface {
 
-	use OperationEntityArray;
+	use OperationEntityArray, DestroyImageFile;
 
 	protected $model;
 
@@ -34,8 +35,7 @@ class FamilyResponsabilityRepo extends BaseRepo implements FamilyResponsabilityR
 
 				$entity->familyResponsabilities()->save($this->model);
 
-			} else
-			{
+			}else {
 				$this->model                      = $this->model->find($id);
 				$this->model->name_responsability = $request['name_responsability'][ $i ];
 				$this->model->rut_responsability  = $request['rut_responsability'][ $i ];

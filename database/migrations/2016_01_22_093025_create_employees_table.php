@@ -30,7 +30,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('company_id')->unsigned();
             $table->string('code');
             $table->enum('state', ['enable', 'disable'])->default('disable');
-            $table->enum('condition', ['available', 'unavailable'])->default('available');
+            $table->enum('condition', ['available', 'unavailable'])->default('unavailable');
 
             $table->timestamps();
 

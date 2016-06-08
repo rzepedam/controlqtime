@@ -26,7 +26,7 @@
                     @endforeach
                 @else
                     <br/>
-                    <h3 class="text-center text-warning">No existen Imágenes de Rol asociadas a la Empresa actual
+                    <h3 class="text-center text-success">No existen Imágenes de Rol asociadas a la Empresa actual
                         <br/>
                         <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('administration.companies.attachFiles', $company->id) }}">Aquí</a>)
                         </small>

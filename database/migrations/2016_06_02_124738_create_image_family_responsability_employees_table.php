@@ -15,7 +15,7 @@ class CreateImageFamilyResponsabilityEmployeesTable extends Migration
             $table->string('size', 7);
             $table->timestamps();
 
-            $table->foreign('family_responsability_id', 'image_license_employee_professional_license_foreign')
+            $table->foreign('family_responsability_id', 'image_family_resp_employee_family_resp_foreign')
                 ->references('id')
                 ->on('family_responsabilities')
                 ->onUpdate('cascade')

@@ -8,7 +8,7 @@
                     <span id="num_family_responsability{{ $i }}" class="text-danger">
                         Carga Familiar #{{ $i + 1 }}
                     </span>
-                    <a id="family_responsability" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Examen Preocupacional" data-html="true"><i class="fa fa-trash"></i></a>
+                    <a id="family_responsability" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Carga Familiar" data-html="true"><i class="fa fa-trash"></i></a>
                 </div>
             </div>
         </div>

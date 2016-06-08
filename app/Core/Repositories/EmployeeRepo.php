@@ -70,14 +70,16 @@ class EmployeeRepo extends BaseRepo implements EmployeeRepoInterface {
 				return $this->saveStateDisableEmployee($employee);
 		}
 
-		$employee->state = 'enable';
+		$employee->state     = 'enable';
+		$employee->condition = 'available';
 		$employee->save();
 
 	}
 
 	public function saveStateDisableEmployee($employee)
 	{
-		$employee->state = 'disable';
+		$employee->state     = 'disable';
+		$employee->condition = 'unavailable';
 		$employee->save();
 
 		return true;

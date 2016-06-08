@@ -117,9 +117,7 @@ class EmployeeController extends Controller {
 
 	public function index()
 	{
-		$employees = $this->employee->all();
-
-		return view('human-resources.employees.index', compact('employees'));
+		return view('human-resources.employees.index');
 	}
 
 	public function create()
@@ -257,12 +255,87 @@ class EmployeeController extends Controller {
 		if ( Session::get('count_certifications') + Session::get('count_specialities') +
 			Session::get('count_specialities') + Session::get('count_professional_licenses') +
 			Session::get('count_disabilities') + Session::get('count_diseases') + Session::get('count_exams') +
-			Session::get('count_family_responsabilities') == 0 ) {
-
+			Session::get('count_family_responsabilities') == 0
+		)
 			$this->enableStateEmployee($employee);
-		}
 
 		return true;
+	}
+
+	public function enableStateEmployee($employee)
+	{
+		$employee->state     = 'enable';
+		$employee->condition = 'available';
+		$employee->save();
+	}
+
+	public function destroyEmployeeData()
+	{
+		Session::forget('step1');
+		Session::forget('male_surname');
+		Session::forget('female_surname');
+		Session::forget('first_name');
+		Session::forget('second_name');
+		Session::forget('rut');
+		Session::forget('birthday');
+		Session::forget('nationality_id');
+		Session::forget('gender_id');
+		Session::forget('address');
+		Session::forget('depto');
+		Session::forget('block');
+		Session::forget('num_home');
+		Session::forget('region_id');
+		Session::forget('province_id');
+		Session::forget('commune_id');
+		Session::forget('email_employee');
+		Session::forget('phone1');
+		Session::forget('phone2');
+		Session::forget('company_id');
+		Session::forget('code');
+		Session::forget('count_contacts');
+		Session::forget('id_contact');
+		Session::forget('contact_relationship_id');
+		Session::forget('name_contact');
+		Session::forget('email_contact');
+		Session::forget('address_contact');
+		Session::forget('tel_contact');
+		Session::forget('count_family_relationships');
+		Session::forget('id_family_relationship');
+		Session::forget('relationship_id');
+		Session::forget('employee_family_id');
+		Session::forget('step2');
+		Session::forget('count_studies');
+		Session::forget('id_study');
+		Session::forget('degree_id');
+		Session::forget('name_study');
+		Session::forget('institution_study_id');
+		Session::forget('date_obtention');
+		Session::forget('count_certifications');
+		Session::forget('id_certification');
+		Session::forget('type_certification_id');
+		Session::forget('institution_certification_id');
+		Session::forget('emission_certification');
+		Session::forget('expired_certification');
+		Session::forget('count_specialities');
+		Session::forget('id_speciality');
+		Session::forget('type_speciality_id');
+		Session::forget('institution_speciality_id');
+		Session::forget('emission_speciality');
+		Session::forget('expired_speciality');
+		Session::forget('count_professional_licenses');
+		Session::forget('id_professional_license');
+		Session::forget('type_professional_license_id');
+		Session::forget('emission_license');
+		Session::forget('expired_license');
+		Session::forget('detail_license');
+		for ($i = 0; $i < Session::get('count_professional_licenses'); $i ++)
+		{
+			Session::forget('is_donor');
+		}
+
+		return response()->json([
+			'success' => true
+		]);
 	}
 
 	public function edit($id)
@@ -313,10 +386,13 @@ class EmployeeController extends Controller {
 		$this->checkStateUpdateStep2Employee($request, $employee);
 		$this->study->destroyArrayId($request->get('id_delete_study'));
 		$this->study->createOrUpdateWithArray($request->all(), $employee);
+		$this->certification->destroyImages($request->get('id_delete_certification'), 'certification');
 		$this->certification->destroyArrayId($request->get('id_delete_certification'));
 		$this->certification->createOrUpdateWithArray($request->all(), $employee);
+		$this->speciality->destroyImages($request->get('id_delete_speciality'), 'speciality');
 		$this->speciality->destroyArrayId($request->get('id_delete_speciality'));
 		$this->speciality->createOrUpdateWithArray($request->all(), $employee);
+		$this->professionalLicense->destroyImages($request->get('id_delete_professional_license'), 'professional_license');
 		$this->professionalLicense->destroyArrayId($request->get('id_delete_professional_license'));
 		$this->professionalLicense->createOrUpdateWithArray($request->all(), $employee);
 
@@ -328,12 +404,12 @@ class EmployeeController extends Controller {
 	public function checkStateUpdateStep2Employee($request, $employee)
 	{
 		// Nueva certificación deshabilita Employee
-		if ($employee->num_certifications < $request->get('count_certifications'))
+		if ( $employee->num_certifications < $request->get('count_certifications') )
 			$this->disableStateEmployee($employee);
 
-		for ($i = 0; $i < count($request->get('id_certification')); $i++)
+		for ($i = 0; $i < count($request->get('id_certification')); $i ++)
 		{
-			if ($request->get('id_certification')[$i] != 0)
+			if ( $request->get('id_certification')[ $i ] != 0 )
 			{
 				$num_images = $this->certification->find($request->get('id_certification')[ $i ])->imageCertificationEmployees->count();
 				if ( $num_images == 0 )
@@ -346,12 +422,12 @@ class EmployeeController extends Controller {
 			}
 		}
 
-		if ($employee->num_specialities < $request->get('count_specialities'))
+		if ( $employee->num_specialities < $request->get('count_specialities') )
 			$this->disableStateEmployee($employee);
 
-		for ($i = 0; $i < count($request->get('id_speciality')); $i++)
+		for ($i = 0; $i < count($request->get('id_speciality')); $i ++)
 		{
-			if ($request->get('id_speciality')[$i] != 0)
+			if ( $request->get('id_speciality')[ $i ] != 0 )
 			{
 				$num_images = $this->speciality->find($request->get('id_speciality')[ $i ])->imageSpecialityEmployees->count();
 				if ( $num_images == 0 )
@@ -364,12 +440,12 @@ class EmployeeController extends Controller {
 			}
 		}
 
-		if ($employee->num_professional_licenses < $request->get('count_professional_licenses'))
+		if ( $employee->num_professional_licenses < $request->get('count_professional_licenses') )
 			$this->disableStateEmployee($employee);
 
-		for ($i = 0; $i < count($request->get('id_professional_license')); $i++)
+		for ($i = 0; $i < count($request->get('id_professional_license')); $i ++)
 		{
-			if ($request->get('id_professional_license')[$i] != 0)
+			if ( $request->get('id_professional_license')[ $i ] != 0 )
 			{
 				$num_images = count($this->professionalLicense->find($request->get('id_professional_license')[ $i ])->imageProfessionalLicenses);
 				if ( $num_images == 0 )
@@ -385,14 +461,10 @@ class EmployeeController extends Controller {
 		return true;
 	}
 
-	public function enableStateEmployee($employee)
+	public function disableStateEmployee($employee)
 	{
-		$employee->state = 'enable';
-		$employee->save();
-	}
-
-	public function disableStateEmployee($employee) {
-		$employee->state = 'disable';
+		$employee->state     = 'disable';
+		$employee->condition = 'unavailable';
 		$employee->save();
 	}
 
@@ -400,12 +472,16 @@ class EmployeeController extends Controller {
 	{
 		$employee = $this->employee->find($id);
 		$this->checkStateUpdateEmployee($request, $employee);
+		$this->disability->destroyImages($request->get('id_delete_disability'), 'disability');
 		$this->disability->destroyArrayId($request->get('id_delete_disability'));
 		$this->disability->createOrUpdateWithArray($request->all(), $employee);
+		$this->disease->destroyImages($request->get('id_delete_disease'), 'disease');
 		$this->disease->destroyArrayId($request->get('id_delete_disease'));
 		$this->disease->createOrUpdateWithArray($request->all(), $employee);
+		$this->exam->destroyImages($request->get('id_delete_exam'), 'exam');
 		$this->exam->destroyArrayId($request->get('id_delete_exam'));
 		$this->exam->createOrUpdateWithArray($request->all(), $employee);
+		$this->family_responsability->destroyImages($request->get('id_delete_family_responsability'), 'family_responsability');
 		$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'));
 		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 
@@ -417,12 +493,12 @@ class EmployeeController extends Controller {
 
 	public function checkStateUpdateEmployee($request, $employee)
 	{
-		if ($employee->num_disabilities < $request->get('count_disabilities'))
+		if ( $employee->num_disabilities < $request->get('count_disabilities') )
 			$this->disableStateEmployee($employee);
 
-		for ($i = 0; $i < count($request->get('id_disability')); $i++)
+		for ($i = 0; $i < count($request->get('id_disability')); $i ++)
 		{
-			if ($request->get('id_disability')[$i] != 0)
+			if ( $request->get('id_disability')[ $i ] != 0 )
 			{
 				$num_images = $this->disability->find($request->get('id_disability')[ $i ])->imageDisabilityEmployees->count();
 				if ( $num_images == 0 )
@@ -435,12 +511,12 @@ class EmployeeController extends Controller {
 			}
 		}
 
-		if ($employee->num_diseases < $request->get('count_diseases'))
+		if ( $employee->num_diseases < $request->get('count_diseases') )
 			$this->disableStateEmployee($employee);
 
-		for ($i = 0; $i < count($request->get('id_disease')); $i++)
+		for ($i = 0; $i < count($request->get('id_disease')); $i ++)
 		{
-			if ($request->get('id_disease')[$i] != 0)
+			if ( $request->get('id_disease')[ $i ] != 0 )
 			{
 				$num_images = $this->disease->find($request->get('id_disease')[ $i ])->imageDiseaseEmployees->count();
 				if ( $num_images == 0 )
@@ -453,12 +529,12 @@ class EmployeeController extends Controller {
 			}
 		}
 
-		if ($employee->num_exams < $request->get('count_exams'))
+		if ( $employee->num_exams < $request->get('count_exams') )
 			$this->disableStateEmployee($employee);
 
-		for ($i = 0; $i < count($request->get('id_exam')); $i++)
+		for ($i = 0; $i < count($request->get('id_exam')); $i ++)
 		{
-			if ($request->get('id_exam')[$i] != 0)
+			if ( $request->get('id_exam')[ $i ] != 0 )
 			{
 				$num_images = $this->exam->find($request->get('id_exam')[ $i ])->imageExamEmployees->count();
 				if ( $num_images == 0 )
@@ -471,12 +547,12 @@ class EmployeeController extends Controller {
 			}
 		}
 
-		if ($employee->num_family_responsabilities < $request->get('count_family_responsabilities'))
+		if ( $employee->num_family_responsabilities < $request->get('count_family_responsabilities') )
 			$this->disableStateEmployee($employee);
 
-		for ($i = 0; $i < count($request->get('id_family_responsability')); $i++)
+		for ($i = 0; $i < count($request->get('id_family_responsability')); $i ++)
 		{
-			if ($request->get('id_family_responsability')[$i] != 0)
+			if ( $request->get('id_family_responsability')[ $i ] != 0 )
 			{
 				$num_images = $this->family_responsability->find($request->get('id_family_responsability')[ $i ])->imageFamilyResponsabilityEmployees->count();
 				if ( $num_images == 0 )
@@ -489,7 +565,7 @@ class EmployeeController extends Controller {
 			}
 		}
 
-		if ($request->get('count_certifications') + $request->get('count_specialities') + $request->get('count_professional_licenses') + $request->get('count_disabilities') + $request->get('count_diseases') + $request->get('count_exams') + $request->get('count_family_responsabilities') == 0)
+		if ( $request->get('count_certifications') + $request->get('count_specialities') + $request->get('count_professional_licenses') + $request->get('count_disabilities') + $request->get('count_diseases') + $request->get('count_exams') + $request->get('count_family_responsabilities') == 0 )
 			$this->enableStateEmployee($employee);
 
 		return true;
@@ -617,75 +693,6 @@ class EmployeeController extends Controller {
 		}
 
 		return response()->json(['success' => false]);
-	}
-
-	public function destroyEmployeeData()
-	{
-		Session::forget('step1');
-		Session::forget('male_surname');
-		Session::forget('female_surname');
-		Session::forget('first_name');
-		Session::forget('second_name');
-		Session::forget('rut');
-		Session::forget('birthday');
-		Session::forget('nationality_id');
-		Session::forget('gender_id');
-		Session::forget('address');
-		Session::forget('depto');
-		Session::forget('block');
-		Session::forget('num_home');
-		Session::forget('region_id');
-		Session::forget('province_id');
-		Session::forget('commune_id');
-		Session::forget('email_employee');
-		Session::forget('phone1');
-		Session::forget('phone2');
-		Session::forget('company_id');
-		Session::forget('code');
-		Session::forget('count_contacts');
-		Session::forget('id_contact');
-		Session::forget('contact_relationship_id');
-		Session::forget('name_contact');
-		Session::forget('email_contact');
-		Session::forget('address_contact');
-		Session::forget('tel_contact');
-		Session::forget('count_family_relationships');
-		Session::forget('id_family_relationship');
-		Session::forget('relationship_id');
-		Session::forget('employee_family_id');
-		Session::forget('step2');
-		Session::forget('count_studies');
-		Session::forget('id_study');
-		Session::forget('degree_id');
-		Session::forget('name_study');
-		Session::forget('institution_study_id');
-		Session::forget('date_obtention');
-		Session::forget('count_certifications');
-		Session::forget('id_certification');
-		Session::forget('type_certification_id');
-		Session::forget('institution_certification_id');
-		Session::forget('emission_certification');
-		Session::forget('expired_certification');
-		Session::forget('count_specialities');
-		Session::forget('id_speciality');
-		Session::forget('type_speciality_id');
-		Session::forget('institution_speciality_id');
-		Session::forget('emission_speciality');
-		Session::forget('expired_speciality');
-		Session::forget('count_professional_licenses');
-		Session::forget('id_professional_license');
-		Session::forget('type_professional_license_id');
-		Session::forget('emission_license');
-		Session::forget('expired_license');
-		Session::forget('detail_license');
-		for ($i = 0; $i < Session::get('count_professional_licenses'); $i ++)
-		{
-			Session::forget('is_donor');
-		}
-
-		return response()->json([
-			'success' => true
-		]);
 	}
 
 }

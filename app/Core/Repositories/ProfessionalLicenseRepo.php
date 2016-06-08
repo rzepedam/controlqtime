@@ -5,11 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Entities\ProfessionalLicense;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\DestroyImageFile;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
 class ProfessionalLicenseRepo extends BaseRepo implements ProfessionalLicenseRepoInterface {
 
-	use OperationEntityArray;
+	use OperationEntityArray, DestroyImageFile;
 
 	protected $model;
 
@@ -51,4 +52,5 @@ class ProfessionalLicenseRepo extends BaseRepo implements ProfessionalLicenseRep
 			}
 		}
 	}
+
 }

@@ -5,11 +5,13 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\SpecialityRepoInterface;
 use Controlqtime\Core\Entities\Speciality;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\DestroyImageFile;
 use Controlqtime\Core\Traits\OperationEntityArray;
+use Controlqtime\Core\Traits\WhereMethodsTrait;
 
 class SpecialityRepo extends BaseRepo implements SpecialityRepoInterface {
 
-	use OperationEntityArray;
+	use OperationEntityArray, WhereMethodsTrait, DestroyImageFile;
 
 	protected $model;
 
@@ -40,7 +42,7 @@ class SpecialityRepo extends BaseRepo implements SpecialityRepoInterface {
 
 			} else
 			{
-				$this->model                            = $this->model->find($id);
+				$this->model                            = $this->model->findOrFail($id);
 				$this->model->type_speciality_id        = $request['type_speciality_id'][ $i ];
 				$this->model->institution_speciality_id = $request['institution_speciality_id'][ $i ];
 				$this->model->emission_speciality       = $request['emission_speciality'][ $i ];
@@ -50,4 +52,5 @@ class SpecialityRepo extends BaseRepo implements SpecialityRepoInterface {
 			}
 		}
 	}
+	
 }

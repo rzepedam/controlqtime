@@ -150,6 +150,10 @@ class Employee extends Eloquent
         return count($this->certifications);
     }
 
+    public function getNumContactEmployeesAttribute() {
+        return count($this->contactEmployees);
+    }
+
     public function getNumDisabilitiesAttribute() {
         return count($this->disabilities);
     }
@@ -162,6 +166,10 @@ class Employee extends Eloquent
         return count($this->exams);
     }
 
+    public function getNumFamilyRelationshipsAttribute() {
+        return count($this->familyRelationships);
+    }
+
     public function getNumFamilyResponsabilitiesAttribute() {
         return count($this->familyResponsabilities);
     }
@@ -172,6 +180,10 @@ class Employee extends Eloquent
 
     public function getNumSpecialitiesAttribute() {
         return count($this->specialities);
+    }
+
+    public function getNumStudiesAttribute() {
+        return count($this->studies);
     }
     
 }

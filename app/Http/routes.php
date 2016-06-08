@@ -36,11 +36,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('human-resources', ['as' => 'human-resources', function(){
         return view('human-resources.index');
     }]);
+
     Route::group(['prefix' => 'human-resources'], function(){
         Route::resource('employees', 'EmployeeController');
+        Route::get('api', function(){
+            return Datatables::of(\Controlqtime\Core\Entities\Employee::all())->make(true);
+        });
         Route::group(['prefix' => 'employees'], function(){
 
-            /* Upload images employees */
+            /* Upload images employees */   
             Route::get('attachFiles/{id}', ['as' => 'human-resources.employees.attachFiles', 'uses' => 'EmployeeController@getImages']);
             Route::post('attachFiles', ['as' => 'human-resources.employees.addImages', 'uses' => 'EmployeeController@addImages']);
             Route::post('deleteFiles', ['as' => 'human-resources.employees.deleteFiles', 'uses' => 'EmployeeController@deleteFiles']);
@@ -112,7 +116,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('type-exams', 'TypeExamController');
         Route::resource('type-institutions', 'TypeInstitutionController');
         Route::resource('type-professional-licenses', 'TypeProfessionalLicenseController');
-        Route::resource('type-represents', 'TypeRepresentController');
+        // Route::resource('type-represents', 'TypeRepresentController');
         Route::resource('type-specialities', 'TypeSpecialityController');
         Route::resource('type-vehicles', 'TypeVehicleController');
         Route::get('measuring-units', ['as' => 'maintainers.measuring-units', function(){

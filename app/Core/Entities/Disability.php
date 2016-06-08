@@ -14,7 +14,7 @@ class Disability extends Eloquent
      * Relationships
      */
 
-    public function imageDisabilityEmployees () {
+    public function imageDisabilityEmployees() {
         return $this->hasMany(ImageDisabilityEmployee::class);
     }
 

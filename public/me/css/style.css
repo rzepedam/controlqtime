@@ -210,8 +210,3 @@ img {
 .pointer {
     cursor: pointer;
 }
-
-.fix .fa-spinner {
-    -webkit-transform-origin: 50% calc(50% - .5px);
-    transform-origin: 50% calc(50% - .5px);
-}

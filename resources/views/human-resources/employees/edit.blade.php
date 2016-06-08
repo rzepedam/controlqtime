@@ -459,21 +459,22 @@
     {{ Html::script('assets/js/jquery.webui-popover.js') }}
     {{ Html::script('assets/js/cropper.min.js') }}
     {{ Html::script('assets/js/components/matchheight.js') }}
+    {{ Html::script('me/js/common/scrollTop.js') }}
 
     <script type="text/javascript">
 
         $(document).ready(function() {
 
-            var count_contacts                  = {{ (count($employee->contactEmployees) > 0) ? count($employee->contactEmployees) : 0 }};
-            var count_family_relationships      = {{ (count($employee->familyRelationships) > 0) ? count($employee->familyRelationships) : 0 }};
-            var count_studies                   = {{ (count($employee->studies) > 0) ? count($employee->studies) : 0 }};
-            var count_certifications            = {{ (count($employee->certifications) > 0) ? count($employee->certifications) : 0 }};
-            var count_specialities              = {{ (count($employee->specialities) > 0) ? count($employee->specialities) : 0 }};
-            var count_professional_licenses     = {{ (count($employee->professionalLicenses) > 0) ? count($employee->professionalLicenses) : 0 }};
-            var count_disabilities              = {{ (count($employee->disabilities) > 0) ? count($employee->disabilities) : 0 }};
-            var count_diseases                  = {{ (count($employee->diseases) > 0) ? count($employee->diseases) : 0 }};
-            var count_exams                     = {{ (count($employee->exams) > 0) ? count($employee->exams) : 0 }};
-            var count_family_responsabilities   = {{ (count($employee->familyResponsabilities) > 0) ? count($employee->familyResponsabilities) : 0 }};
+            var count_contacts                  = {{ ($employee->num_contact_employees > 0) ? ($employee->num_contact_employees) : 0 }};
+            var count_family_relationships      = {{ ($employee->num_family_relationships > 0) ? ($employee->num_family_relationships) : 0 }};
+            var count_studies                   = {{ ($employee->num_studies > 0) ? ($employee->num_studies) : 0 }};
+            var count_certifications            = {{ ($employee->num_certifications > 0) ? ($employee->num_certifications) : 0 }};
+            var count_specialities              = {{ ($employee->num_specialities > 0) ? ($employee->num_specialities) : 0 }};
+            var count_professional_licenses     = {{ ($employee->num_professional_licenses > 0) ? ($employee->num_professional_licenses) : 0 }};
+            var count_disabilities              = {{ ($employee->num_disabilities > 0) ? ($employee->num_disabilities) : 0 }};
+            var count_diseases                  = {{ ($employee->num_diseases > 0) ? ($employee->num_diseases) : 0 }};
+            var count_exams                     = {{ ($employee->num_exams > 0) ? ($employee->num_exams) : 0 }};
+            var count_family_responsabilities   = {{ ($employee->num_family_responsabilities > 0) ? ($employee->num_family_responsabilities) : 0 }};
 
             var id_delete_contact               = [];
             var id_delete_family_relationship   = [];
@@ -552,6 +553,7 @@
                         success: function (response) {
                             if (response.status) {
                                 status = true;
+                                scrollTop();
                             }
                         },
                         error: function (response) {
@@ -561,6 +563,8 @@
                                 $('#' + index).focus();
                                 return false;
                             });
+
+                            scrollTop();
                         }
                     });
 
@@ -588,6 +592,7 @@
                         success: function (response) {
                             if (response.status) {
                                 status = true;
+                                scrollTop();
                             }
                         },
                         error: function (response) {
@@ -597,6 +602,9 @@
                                 $('#' + index).focus();
                                 return false;
                             });
+
+                            scrollTop();
+
                         }
                     });
 
@@ -633,6 +641,9 @@
                                 $('#' + index).focus();
                                 return false;
                             });
+
+                            scrollTop();
+
                         }
                     });
                 }
@@ -758,7 +769,7 @@
 
             $('.add_professional_license').click(function () {
 
-                var professional_license = '<span id="license"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"> <span id="num_license" class="text-success">Licencia Profesional #' + (count_professional_licenses + 1) + '</span> <a id="license" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Licencia Profesional" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_professional_license", "ID", ["class"=> "control-label"])}}{{Form::text("id_professional_license[]", 0, ["id"=> "id_professional_license", "class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('type_professional_license_id', 'Tipo Licencia', ['class'=> 'control-label'])}}{{Form::select('type_professional_license_id[]', $type_professional_licenses, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('emission_license', 'Fecha Emisión', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('emission_license[]', null, ['class'=> 'form-control', 'readonly'])}}</div></div></div><div class="col-md-3"> <div class="form-group">{{Form::label('expired_license', 'Fecha Expiración', ['class'=> 'control-label'])}}<div class="input-group date afterCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_license[]', null, ['class'=> 'form-control', 'readonly'])}}</div></div></div><div class="col-md-offset-1 col-md-2"> <div class="form-group">{{Form::label("is_donor", "Es donante?")}}<ul class="list-unstyled list-inline"> <li> <div class="radio-custom radio-primary">{{Form::radio("is_donor", 1, false)}}{{Form::label("is_donor", "Si", ['class'=> 'control-label'])}}</div></li><li> <div class="radio-custom radio-primary">{{Form::radio("is_donor", 0, true)}}{{Form::label("is_donor", "No", ['class'=> 'control-label'])}}</div></li></ul> </div></div></div><div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label('detail_license', 'Restricciones', ['class'=> 'control-label'])}}{{Form::textarea('detail_license[]', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><br/></span>';
+                var professional_license = '<span id="license"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"> <span id="num_license" class="text-success">Licencia Profesional #' + (count_professional_licenses + 1) + '</span> <a id="license" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Licencia Profesional" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_professional_license", "ID", ["class"=> "control-label"])}}{{Form::text("id_professional_license[]", 0, ["id"=> "id_professional_license", "class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('type_professional_license_id', 'Tipo Licencia', ['class'=> 'control-label'])}}{{Form::select('type_professional_license_id[]', $type_professional_licenses, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-2"> <div class="form-group">{{Form::label('emission_license', 'Fecha Emisión', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('emission_license[]', null, ['class'=> 'form-control', 'readonly'])}}</div></div></div><div class="col-md-2"> <div class="form-group">{{Form::label('expired_license', 'Fecha Expiración', ['class'=> 'control-label'])}}<div class="input-group date afterCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('expired_license[]', null, ['class'=> 'form-control', 'readonly'])}}</div></div></div><div class="col-md-offset-2 col-md-2"> <div class="form-group">{{Form::label("is_donor", "Es donante?")}}<ul class="list-unstyled list-inline"> <li> <div class="radio-custom radio-primary">{{Form::radio("is_donor", 1, false)}}{{Form::label("is_donor", "Si", ['class'=> 'control-label'])}}</div></li><li> <div class="radio-custom radio-primary">{{Form::radio("is_donor", 0, true)}}{{Form::label("is_donor", "No", ['class'=> 'control-label'])}}</div></li></ul> </div></div></div><div class="row"> <div class="col-md-12"> <div class="form-group">{{Form::label('detail_license', 'Restricciones', ['class'=> 'control-label'])}}{{Form::textarea('detail_license[]', null, ['class'=> 'form-control', 'rows'=> 3])}}</div></div></div><br/></span>';
 
                 if (count_professional_licenses == 0)
                     $('#content_licenses').html(professional_license);
@@ -881,8 +892,8 @@
                 else
                     $('#content_family_responsabilities').append(family_responsability);
 
-                $('#family_responsability').attr('id', 'family_responsability' + count_family_responsabilities);
-                $('#num_family_responsability').attr('id', 'num_family_responsability' + count_family_responsabilities);
+                $('span#family_responsability').attr('id', 'family_responsability' + count_family_responsabilities);
+                $('span#num_family_responsability').attr('id', 'num_family_responsability' + count_family_responsabilities);
                 $('#id_family_responsability').attr('id', 'id_family_responsability' + count_family_responsabilities);
 
                 $('.tooltip-primary').tooltip();

@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    {{ Html::style('assets/css/magnific-popup.min.css') }}
+
+@stop
+
 @section('title_header') Detalle Trabajador : <span class="text-primary">{{ $employee->id }}</span> @stop
 
 @section('breadcumb')
@@ -15,6 +21,7 @@
         <li class="active" role="presentation"><a data-toggle="tab" href="#tab_1" aria-controls="tab_1" role="tab"><i class="fa fa-pencil"></i> Información Personal</a></li>
         <li role="presentation"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-star"></i> Competencias Laborales</a></li>
         <li role="presentation"><a data-toggle="tab" href="#tab_3" aria-controls="tab_3" role="tab"><i class="fa fa-heartbeat"></i> Información de Salud</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#tab_4" aria-controls="tab_4" role="tab"><i class="fa fa-file-text-o"></i> Documentos Adjuntos</a></li>
     </ul>
     <div class="tab-content padding-top-20">
         <div class="tab-pane active" id="tab_1" role="tabpanel">
@@ -32,6 +39,11 @@
             @include('human-resources.employees.partials.show.health_information')
 
         </div>
+        <div class="tab-pane" id="tab_4" role="tabpanel">
+
+            @include('human-resources.employees.partials.show.files_attach')
+
+        </div>
     </div>
 </div>
 <div class="row">
@@ -39,5 +51,12 @@
         <a href="{{ route('human-resources.employees.index') }}">Volver</a>
     </div>
 </div>
+
+@stop
+
+@section('scripts')
+
+    {{ Html::script('assets/js/jquery.magnific-popup.js') }}
+    {{ Html::script('me/js/common/showMagnificImage.js') }}
 
 @stop

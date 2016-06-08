@@ -3,6 +3,7 @@
 @section('css')
 
     {{ Html::style('assets/css/sweetalert.css') }}
+    {{ Html::style('assets/css/jquery.dataTables.min.css') }}
 
 @stop
 
@@ -22,20 +23,20 @@
 
 @section('content')
 
-    @if($employees->count())
+    {{--@if($employees->count())--}}
 
         @include('human-resources.employees.partials.table')
 
-    @else
+    {{--@else
 
         <h3 class="text-center">No se han encontrado Trabajadores</h3>
 
-    @endif
+    @endif--}}
 
     <div class="row">
         <div class="col-md-12">
             <a class="pull-left margin-top-30" href="{{ route('human-resources') }}">Volver</a>
-            <span class="pull-right">{{ $employees->links() }}</span>
+            <span class="pull-right">{{-- $employees->links() --}}</span>
         </div>
     </div>
 
@@ -45,10 +46,29 @@
 
     {{ Html::script('assets/js/sweetalert.min.js') }}
     {{ Html::script('assets/js/config.js') }}
+    {{ Html::script('assets/js/jquery.dataTables.min.js') }}
 
     <script>
 
         $(document).ready(function(){
+
+            /*
+             *  Configure datatables
+             */
+
+            $('#users').DataTable({
+                processing: true,
+                serverSide: true,
+                "pagingType": "numbers",
+                ajax: "/human-resources/api",
+                columns:[
+                    {data: 'id'},
+                    {data: 'full_name'},
+                    {data: 'email_employee'}
+                ]
+            });
+
+            // ajax: "/human-resources/api",
 
             /*
              * Delete Data in Session Storage

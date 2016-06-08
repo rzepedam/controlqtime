@@ -5,11 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\DisabilityRepoInterface;
 use Controlqtime\Core\Entities\Disability;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\DestroyImageFile;
 use Controlqtime\Core\Traits\OperationEntityArray;
 
 class DisabilityRepo extends BaseRepo implements DisabilityRepoInterface {
 
-	use OperationEntityArray;
+	use OperationEntityArray, DestroyImageFile;
 
 	protected $model;
 
@@ -35,8 +36,7 @@ class DisabilityRepo extends BaseRepo implements DisabilityRepoInterface {
 
 				$entity->studies()->save($this->model);
 
-			} else
-			{
+			}else {
 				$this->model                       = $this->model->find($id);
 				$this->model->type_disability_id   = $request['type_disability_id'][ $i ];
 				$this->model->treatment_disability = $request[ 'treatment_disability' . $i ];

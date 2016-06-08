@@ -22,7 +22,7 @@
                 {{ Form::select('type_professional_license_id[]', $type_professional_licenses, Session::get('type_professional_license_id')[$i], ['class'=> 'form-control']) }}
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="form-group">
                 {{ Form::label('emission_license', 'Fecha Emisión', ['class' => 'control-label']) }}
                 <div class="input-group date beforeCurrentDate">
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="form-group">
                 {{ Form::label('expired_license', 'Fecha Expiración', ['class' => 'control-label']) }}
                 <div class="input-group date afterCurrentDate">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-offset-1 col-md-2">
+        <div class="col-md-offset-2 col-md-2">
             <div class="form-group">
                 {{ Form::label("is_donor" . $i, "Es donante?") }}
                 <ul class="list-unstyled list-inline">
