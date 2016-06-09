@@ -39,9 +39,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['prefix' => 'human-resources'], function(){
         Route::resource('employees', 'EmployeeController');
-        Route::get('api', function(){
-            return Datatables::of(\Controlqtime\Core\Entities\Employee::all())->make(true);
-        });
         Route::group(['prefix' => 'employees'], function(){
 
             /* Upload images employees */   

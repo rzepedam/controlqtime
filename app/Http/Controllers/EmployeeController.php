@@ -117,7 +117,8 @@ class EmployeeController extends Controller {
 
 	public function index()
 	{
-		return view('human-resources.employees.index');
+		$employees = $this->employee->all();
+		return view('human-resources.employees.index', compact('employees'));
 	}
 
 	public function create()
