@@ -1,6 +1,9 @@
 <div class="panel">
     <div class="panel-body">
         <div class="row">
+            <div class="col-md-6 pull-left margin-bottom-5">
+                <div class="pagination-detail"><span class="pagination-info">Mostrando <span class="page-list "><span class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><span class="page-size">25</span> <span class="fa fa-caret-down"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:void(0)" class="num_paginate">25</a></li><li><a href="javascript:void(0)" class="num_paginate">50</a></li><li><a href="javascript:void(0)" class="num_paginate">100</a></li></ul></span> elementos</span></span> </div>
+            </div>
             <div class="col-xs-12 col-sm-6 col-md-4 pull-right">
                 <div class="input-group">
                     {{ Form::text('search', null, ['class' => 'form-control', 'placeholder' => 'Buscar...', 'autofocus']) }}
@@ -56,7 +59,9 @@
             </table>
         </div>
         <br />
-        <div class="pull-left margin-top-25 pagination-detail"><span class="pagination-info">Mostrando <span class="page-list "><span class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><span class="page-size">25</span> <span class="fa fa-caret-down"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:void(0)" class="num_paginate">25</a></li><li><a href="javascript:void(0)" class="num_paginate">50</a></li><li><a href="javascript:void(0)" class="num_paginate">100</a></li></ul></span> elementos</span></span> </div>
+        <span class="pull-left margin-top-30">
+            Hay un total de <span class="text-primary">{{ $employees->total() }}</span> registros
+        </span>
         <span class="pull-right">{{ $employees->links() }}</span>
     </div>
 
