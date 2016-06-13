@@ -68,5 +68,6 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'phone2'         => $faker->phoneNumber,
 		'company_id'     => rand(1, 25),
 		'code'           => $faker->postcode,
+		'state'			 => 'enable'
 	];
 });

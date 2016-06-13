@@ -9,7 +9,7 @@ abstract class BaseRepo implements BaseRepoInterface
 {
     public function all(array $with = array())
     {
-        return $this->model->with($with)->orderBy('id', 'DESC')->paginate(50);
+        return $this->model->with($with)->get()->toJson();
     }
     
     public function find($id, array $with = array())
@@ -37,4 +37,5 @@ abstract class BaseRepo implements BaseRepoInterface
         Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
         return $query;
     }
+    
 }

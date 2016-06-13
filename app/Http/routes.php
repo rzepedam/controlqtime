@@ -36,7 +36,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('human-resources', ['as' => 'human-resources', function(){
         return view('human-resources.index');
     }]);
-
+    Route::get('getEmployees', ['as' => 'human-resources.employees.getEmployees', 'uses' => 'EmployeeController@getEmployees']);
     Route::group(['prefix' => 'human-resources'], function(){
         Route::resource('employees', 'EmployeeController');
         Route::group(['prefix' => 'employees'], function(){

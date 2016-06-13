@@ -3,6 +3,7 @@
 @section('css')
 
     {{ Html::style('assets/css/sweetalert.css') }}
+    {{ Html::style('assets/css/bootstrap-table.css') }}
 
 @stop
 
@@ -22,15 +23,15 @@
 
 @section('content')
 
-    @if($employees->count())
+    {{--@if($employees->count())--}}
 
         @include('human-resources.employees.partials.table')
 
-    @else
+    {{--@else
 
         <h3 class="text-center">No se han encontrado Trabajadores</h3>
 
-    @endif
+    @endif--}}
 
     <div class="row">
         <div class="col-md-12">
@@ -44,14 +45,62 @@
 
     {{ Html::script('assets/js/sweetalert.min.js') }}
     {{ Html::script('assets/js/config.js') }}
+    {{ Html::script('assets/js/bootstrap-table.js') }}
+    {{ Html::script('assets/js/bootstrap-table-es-ES.js') }}
 
     <script>
 
         $(document).ready(function () {
 
-            $('.num_paginate').click(function(){
+            $('#employee_table').bootstrapTable({
+                url: "{{ route('human-resources.employees.getEmployees') }}",
+                search: true,
+                sortName: 'id',
+                sortOrder: 'desc',
+                striped: true,
+                pagination: true,
+                iconsPrefix: 'fa',
+                icons: {
+                    paginationSwitchDown: 'fa-caret-square-o-down',
+                    paginationSwitchUp: 'fa-caret-square-o-up',
+                    refresh: 'fa-refresh',
+                    toggle: 'fa-list-alt',
+                    columns: 'fa-th',
+                    detailOpen: 'fa-plus',
+                    detailClose: 'fa-minus'
+                },
+                pageList: [25, 50, 100],
+                pageSize: 25,
+                columns: [
+                    {}, {}, {},
+                    {
+                        formatter : function(value,row,index) {
+                            return row.company.firm_name;
+                        }
+                    },
+                    {
+                        formatter : function(value,row,index) {
+                            if (row.state == 'enable') {
+                                var $state_enable = '<a class="btn btn-squared btn-success waves-effect waves-light btnStartDailyAssistance tooltip-success" data-toggle="tooltip" data-original-title="Iniciar Asistencia Diaria" data-id="' + row.id + '"><i class="fa fa-clock-o" aria-hidden="true"></i></a>';
+                            }else {
+                                var $state_enable = '<a class="btn btn-squared btn-success waves-effect waves-light disabled btnStartDailyAssistance tooltip-success" data-toggle="tooltip" data-original-title="Iniciar Asistencia Diaria" data-id="' + row.id +'"><i class="fa fa-clock-o" aria-hidden="true"></i></a>';
+                            }
 
+                            return  '<a href="/human-resources/employees/' + row.id + '" class="btn btn-squared btn-info waves-effect waves-light tooltip-info" data-toggle="tooltip" data-original-title="Ver"><i class="fa fa-search"></i></a> ' +
+                                    '<a href="/human-resources/employees/' + row.id +'/edit" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i></a> ' +
+                                    '<a href="/human-resources/employees/attachFiles/' + row.id + '" class="btn btn-squared btn-primary waves-effect waves-light tooltip-primary" data-toggle="tooltip" data-original-title="Adjuntar Archivos"><i class="fa fa-cloud-upload"></i></a> ' +
+                                    $state_enable;
+                        }
+                    }
+                ],
 
+                onAll: function (name, args) {
+                    $('[data-toggle="tooltip"]').tooltip();
+                },
+
+                onLoadSuccess: function () {
+                    $('#myToolbar').append($('.page-list'));
+                },
             });
 
             /*
