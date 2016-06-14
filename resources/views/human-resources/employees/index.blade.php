@@ -20,18 +20,9 @@
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
     <li class="active">Trabajadores</li>
 @stop
-
 @section('content')
 
-    {{--@if($employees->count())--}}
-
-        @include('human-resources.employees.partials.table')
-
-    {{--@else
-
-        <h3 class="text-center">No se han encontrado Trabajadores</h3>
-
-    @endif--}}
+    @include('human-resources.employees.partials.table')
 
     <div class="row">
         <div class="col-md-12">
@@ -46,6 +37,10 @@
     {{ Html::script('assets/js/sweetalert.min.js') }}
     {{ Html::script('assets/js/config.js') }}
     {{ Html::script('assets/js/bootstrap-table.js') }}
+    {{ Html::script('assets/js/bootstrap-table-mobile.js') }}
+    {{ Html::script('assets/js/bootstrap-table-export.js') }}
+    {{ Html::script('assets/js/tableExport.js') }}
+    {{ Html::script('assets/js/jquery.base64.js') }}
     {{ Html::script('assets/js/bootstrap-table-es-ES.js') }}
 
     <script>
@@ -99,7 +94,12 @@
                 },
 
                 onLoadSuccess: function () {
-                    $('#myToolbar').append($('.page-list'));
+                    $('#myToolbar').html($('.page-list'));
+                },
+
+                onPageChange: function () {
+                    $('#myToolbar').html('');
+                    $('#myToolbar').html($('.page-list'));
                 },
             });
 

@@ -10,7 +10,7 @@
             return 'Por favor espere...';
         },
         formatRecordsPerPage: function (pageNumber) {
-            return '<span class="font-size-14">Mostrando ' + pageNumber + ' registros <span class="hidden-xs hidden-sm">por página</span></span>';
+            return '<span class="font-size-14">Mostrando ' + pageNumber + ' <span class="hidden-xs hidden-sm">registros por página</span></span>';
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
             // return 'Mostrando desde ' + pageFrom + ' hasta ' + pageTo + ' - En total ' + totalRows + ' resultados';
