@@ -1,7 +1,7 @@
 <div class="panel">
     <div class="panel-body">
         <div id="myToolbar" class="pull-left margin-bottom-10 padding-left-0 col-xs-9 col-sm-8 col-md-6"></div>
-        <table class="table-hover table-condensed" id="employee_table" data-sort-name="name" data-sort-order="desc" data-mobile-responsive="true" data-show-export="true">
+        <table class="table-hover table-condensed" id="employee_table" data-sort-name="name" data-sort-order="desc" data-mobile-responsive="true">
             <thead>
                 <tr>
                     <th data-field="id" data-sortable="true">ID</th>

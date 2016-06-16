@@ -38,9 +38,6 @@
     {{ Html::script('assets/js/config.js') }}
     {{ Html::script('assets/js/bootstrap-table.js') }}
     {{ Html::script('assets/js/bootstrap-table-mobile.js') }}
-    {{ Html::script('assets/js/bootstrap-table-export.js') }}
-    {{ Html::script('assets/js/tableExport.js') }}
-    {{ Html::script('assets/js/jquery.base64.js') }}
     {{ Html::script('assets/js/bootstrap-table-es-ES.js') }}
 
     <script>

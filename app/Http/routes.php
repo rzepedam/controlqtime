@@ -135,4 +135,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('loadModelVehicles', 'AjaxLoadController@loadModelVehicles');
     Route::post('loadRouteAndVehicleSelectedInRound', 'AjaxLoadController@loadRouteAndVehicleSelectedInRound');
 
+    /*
+     *  Download files
+     */
+
+    Route::post('download/pdf', ['as' => 'download.pdf', 'uses' => 'DownloadController@getPdf']);
+
 });

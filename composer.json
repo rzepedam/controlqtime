@@ -10,7 +10,8 @@
         "laravelcollective/html": "~5.0",
         "jenssegers/date": "^3.2",
         "barryvdh/laravel-debugbar": "^2.2",
-        "yajra/laravel-datatables-oracle": "^6.11"
+        "yajra/laravel-datatables-oracle": "^6.11",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
