@@ -164,6 +164,7 @@ return [
 		Jenssegers\Date\DateServiceProvider::class,
 		Barryvdh\Debugbar\ServiceProvider::class,
 		Controlqtime\Providers\BackendServiceProvider::class,
+		Barryvdh\Snappy\ServiceProvider::class,
 	],
 
 	/*
@@ -214,10 +215,12 @@ return [
 		 * Propias
 		 */
 
-		'Date'       => Jenssegers\Date\Date::class,
-		'Debugbar'   => Barryvdh\Debugbar\Facade::class,
-		'Form'       => Collective\Html\FormFacade::class,
-		'Html'       => Collective\Html\HtmlFacade::class,
+		'Date'     => Jenssegers\Date\Date::class,
+		'Debugbar' => Barryvdh\Debugbar\Facade::class,
+		'Form'     => Collective\Html\FormFacade::class,
+		'Html'     => Collective\Html\HtmlFacade::class,
+		'PDF'      => Barryvdh\Snappy\Facades\SnappyPdf::class,
+		'Image'    => Barryvdh\Snappy\Facades\SnappyImage::class,
 	],
 
 ];
