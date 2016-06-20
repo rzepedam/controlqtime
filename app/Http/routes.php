@@ -139,6 +139,6 @@ Route::group(['middleware' => ['web']], function () {
      *  Download files
      */
 
-    Route::post('download/pdf', ['as' => 'download.pdf', 'uses' => 'DownloadController@getPdf']);
+    Route::get('download/pdf', ['as' => 'download.pdf', 'uses' => 'DownloadController@getPdf']);
 
 });
