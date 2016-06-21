@@ -165,6 +165,7 @@ return [
 		Barryvdh\Debugbar\ServiceProvider::class,
 		Controlqtime\Providers\BackendServiceProvider::class,
 		Barryvdh\Snappy\ServiceProvider::class,
+		Maatwebsite\Excel\ExcelServiceProvider::class,
 	],
 
 	/*
@@ -221,6 +222,7 @@ return [
 		'Html'     => Collective\Html\HtmlFacade::class,
 		'PDF'      => Barryvdh\Snappy\Facades\SnappyPdf::class,
 		'Image'    => Barryvdh\Snappy\Facades\SnappyImage::class,
+		'Excel'    => Maatwebsite\Excel\Facades\Excel::class,
 	],
 
 ];

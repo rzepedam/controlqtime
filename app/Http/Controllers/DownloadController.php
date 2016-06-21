@@ -4,10 +4,12 @@ namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Controlqtime\Http\Requests;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DownloadController extends Controller {
 
 	protected $employee;
+	protected $excel;
 
 	public function __construct(EmployeeRepoInterface $employee)
 	{
@@ -28,5 +30,37 @@ class DownloadController extends Controller {
 						->setOption('footer-html', $footer);
 
 		return $pdf->inline();
+	}
+
+	public function getExcel()
+	{
+		Excel::create('excel', function($excel) {
+			$excel->sheet('Listado de Empleados', function($sheet){
+
+				$employees = $this->employee->all(['company']);
+
+				$sheet->setBorder('A1:D1', 'thin', 'medium');
+				$sheet->setHeight(array(
+					'1'	=> '25'
+				));
+
+				for($i = 1; $i <= count($employees) + 1; $i++)
+				{
+					$sheet->cells('A' . $i . ':D' . $i, function ($cells)
+					{
+						$cells->setFontFamily('Open Sans');
+						$cells->setBorder('thin', 'thin');
+					});
+
+					$sheet->cells('A1:D1', function ($cells)
+					{
+						$cells->setBackground('#3498db');
+						$cells->setValignment('center');
+					});
+				}
+
+				$sheet->loadView('human-resources.employees.partials.pdf.index', compact('employees'));
+			});
+		})->download('xls');
 	}
 }
