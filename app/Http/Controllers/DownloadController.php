@@ -3,7 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Http\Requests;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DownloadController extends Controller {
@@ -14,6 +14,11 @@ class DownloadController extends Controller {
 	public function __construct(EmployeeRepoInterface $employee)
 	{
 		$this->employee = $employee;
+	}
+
+	public function getFile(Request $request)
+	{
+		return response()->download(public_path() . $request->get('file'));
 	}
 
 	public function getPdf()
@@ -34,17 +39,19 @@ class DownloadController extends Controller {
 
 	public function getExcel()
 	{
-		Excel::create('excel', function($excel) {
-			$excel->sheet('Listado de Empleados', function($sheet){
+		Excel::create('excel', function ($excel)
+		{
+			$excel->sheet('Listado de Empleados', function ($sheet)
+			{
 
 				$employees = $this->employee->all(['company']);
 
 				$sheet->setBorder('A1:D1', 'thin', 'medium');
 				$sheet->setHeight(array(
-					'1'	=> '25'
+					'1' => '25'
 				));
 
-				for($i = 1; $i <= count($employees) + 1; $i++)
+				for ($i = 1; $i <= count($employees) + 1; $i ++)
 				{
 					$sheet->cells('A' . $i . ':D' . $i, function ($cells)
 					{

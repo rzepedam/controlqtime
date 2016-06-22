@@ -10,7 +10,7 @@
                             </div>
                         </div>
                     </div>
-                    @if(count($employee->imageCertificationEmployees) > 0)
+                    @if($employee->imageCertificationEmployees->count() > 0)
                         @foreach($employee->imageCertificationEmployees as $image_certification)
 
                             <div class="col-md-4">
@@ -18,6 +18,9 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_certification->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_certification->path }}"></a>
+                                            {{ Form::close() }}
                                             <a class="icon md-search" href="{{ $image_certification->path }}"></a>
                                         </figcaption>
                                     </figure>
@@ -54,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    @if(count($employee->imageSpecialityEmployees) > 0)
+                    @if($employee->imageSpecialityEmployees->count() > 0)
                         @foreach($employee->imageSpecialityEmployees as $image_speciality)
 
                             <div class="col-md-4">
@@ -62,6 +65,9 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_speciality->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_speciality->path }}"></a>
+                                            {{ Form::close() }}
                                             <a class="icon md-search" href="{{ $image_speciality->path }}"></a>
                                         </figcaption>
                                     </figure>
@@ -93,11 +99,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="alert alert-alt alert-success alert-dismissible" role="alert">
-                                <i class="fa fa-picture-o text-success"></i> Imágenes Licencia Profesional
+                                <i class="fa fa-picture-o text-success"></i                                                                                                                                                                                                                             > Imágenes Licencia Profesional
                             </div>
                         </div>
                     </div>
-                    @if (count($employee->imageProfessionalLicenses) > 0)
+                    @if ($employee->imageProfessionalLicenses->count() > 0)
                         @foreach($employee->imageProfessionalLicenses as $image_professional_license)
 
                             <div class="col-md-4">
@@ -105,6 +111,9 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_professional_license->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_professional_license->path }}"></a>
+                                            {{ Form::close() }}
                                             <a class="icon md-search" href="{{ $image_professional_license->path }}"></a>
                                         </figcaption>
                                     </figure>
@@ -140,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (count($employee->imageDisabilityEmployees) > 0)
+                    @if ($employee->imageDisabilityEmployees->count() > 0)
                         @foreach($employee->imageDisabilityEmployees as $image_disability)
 
                             <div class="col-md-4">
@@ -148,6 +157,9 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_disability->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_disability->path }}"></a>
+                                            {{ Form::close() }}
                                             <a class="icon md-search" href="{{ $image_disability->path }}"></a>
                                         </figcaption>
                                     </figure>
@@ -183,7 +195,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (count($employee->imageDiseaseEmployees) > 0)
+                    @if ($employee->imageDiseaseEmployees->count() > 0)
                         @foreach($employee->imageDiseaseEmployees as $image_disease)
 
                             <div class="col-md-4">
@@ -191,6 +203,9 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_disease->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_disease->path }}"></a>
+                                            {{ Form::close() }}
                                             <a class="icon md-search" href="{{ $image_disease->path }}"></a>
                                         </figcaption>
                                     </figure>
@@ -226,7 +241,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (count($employee->imageExamEmployees) > 0)
+                    @if ($employee->imageExamEmployees->count() > 0)
                         @foreach($employee->imageExamEmployees as $image_exam)
 
                             <div class="col-md-4">
@@ -234,6 +249,9 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_exam->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_exam->path }}"></a>
+                                            {{ Form::close() }}
                                             <a class="icon md-search" href="{{ $image_exam->path }}"></a>
                                         </figcaption>
                                     </figure>
@@ -269,7 +287,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (count($employee->imageFamilyResponsabilityEmployees) > 0)
+                    @if ($employee->imageFamilyResponsabilityEmployees->count() > 0)
                         @foreach($employee->imageFamilyResponsabilityEmployees as $image_family_responsability)
 
                             <div class="col-md-4">
@@ -277,6 +295,9 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_family_responsability->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_family_responsability->path }}"></a>
+                                            {{ Form::close() }}
                                             <a class="icon md-search" href="{{ $image_family_responsability->path }}"></a>
                                         </figcaption>
                                     </figure>

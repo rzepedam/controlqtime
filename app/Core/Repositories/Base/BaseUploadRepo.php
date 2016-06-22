@@ -11,9 +11,9 @@ class BaseUploadRepo implements BaseRepoUploadInterface {
 	public function addImages($repo, $file, $id, $type, $subRepoId = null)
 	{
 		$path                   = $this->getPath($repo, $id, $type, $subRepoId);
-		$name                   = time() . $file->getClientOriginalName();
+		$name                   = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
 		$this->model->path      = $path . $name;
-		$this->model->orig_name = $file->getClientOriginalName();
+		$this->model->orig_name = $name;
 		$this->model->size		= $file->getSize();
 
 		switch ($repo)
