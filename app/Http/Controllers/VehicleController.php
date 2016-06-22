@@ -48,9 +48,12 @@ class VehicleController extends Controller {
 
 	public function index()
 	{
-		$vehicles = $this->vehicle->all(['typeVehicle', 'modelVehicle']);
-
 		return view('operations.vehicles.index', compact('vehicles'));
+	}
+
+	public function getVehicles() {
+		$vehicles = $this->vehicle->all(['typeVehicle', 'modelVehicle']);
+		return $vehicles;
 	}
 
 	public function create()

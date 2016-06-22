@@ -247,9 +247,9 @@
         locale: undefined,
         height: undefined,
         undefinedText: '-',
-        sortName: undefined,
-        sortOrder: 'asc',
-        striped: false,
+        sortName: 'id',
+        sortOrder: 'desc',
+        striped: true,
         columns: [[]],
         data: [],
         dataField: 'rows',
@@ -267,19 +267,19 @@
         responseHandler: function (res) {
             return res;
         },
-        pagination: false,
+        pagination: true,
         onlyInfoPagination: false,
         sidePagination: 'client', // client or server
         totalRows: 0, // server side need to set
         pageNumber: 1,
-        pageSize: 10,
-        pageList: [10, 25, 50, 100],
+        pageSize: 25,
+        pageList: [25, 50, 100],
         paginationHAlign: 'right', //right, left
         paginationVAlign: 'bottom', //bottom, top, both
         paginationDetailHAlign: 'left', //right, left
         paginationPreText: '&lsaquo;',
         paginationNextText: '&rsaquo;',
-        search: false,
+        search: true,
         searchOnEnterKey: false,
         strictSearch: false,
         searchAlign: 'right',
@@ -313,15 +313,15 @@
         searchTimeOut: 500,
         searchText: '',
         iconSize: undefined,
-        iconsPrefix: 'glyphicon', // glyphicon of fa (font awesome)
+        iconsPrefix: 'fa', // glyphicon of fa (font awesome)
         icons: {
-            paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
-            paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
-            refresh: 'glyphicon-refresh icon-refresh',
-            toggle: 'glyphicon-list-alt icon-list-alt',
-            columns: 'glyphicon-th icon-th',
-            detailOpen: 'glyphicon-plus icon-plus',
-            detailClose: 'glyphicon-minus icon-minus'
+            paginationSwitchDown: 'fa-caret-square-o-down',
+            paginationSwitchUp: 'fa-caret-square-o-up',
+            refresh: 'fa-refresh',
+            toggle: 'fa-list-alt',
+            columns: 'fa-th',
+            detailOpen: 'fa-plus',
+            detailClose: 'fa-minus'
         },
 
         rowStyle: function (row, index) {
@@ -333,7 +333,7 @@
         },
 
         onAll: function (name, args) {
-            return false;
+            $('[data-toggle="tooltip"]').tooltip();
         },
         onClickCell: function (field, value, row, $element) {
             return false;
@@ -369,7 +369,7 @@
             return false;
         },
         onLoadSuccess: function (data) {
-            return false;
+            $('#myToolbar').html($('.page-list'));
         },
         onLoadError: function (status) {
             return false;
@@ -378,7 +378,8 @@
             return false;
         },
         onPageChange: function (number, size) {
-            return false;
+            $('#myToolbar').html('');
+            $('#myToolbar').html($('.page-list'));
         },
         onSearch: function (text) {
             return false;

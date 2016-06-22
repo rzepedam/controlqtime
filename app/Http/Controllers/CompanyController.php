@@ -46,9 +46,12 @@ class CompanyController extends Controller {
 
 	public function index()
 	{
-		$companies = $this->company->all();
+		return view('administration.companies.index');
+	}
 
-		return view('administration.companies.index', compact('companies'));
+	public function getCompanies() {
+		$companies = $this->company->all();
+		return $companies;
 	}
 
 	public function create()

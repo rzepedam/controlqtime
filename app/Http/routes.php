@@ -18,8 +18,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('administration', ['as' => 'administration', function(){
         return view('administration.index');
     }]);
+
     Route::group(['prefix' => 'administration'], function(){
         Route::resource('companies', 'CompanyController');
+
+        /* Companies format to bootstrap-table */
+        Route::get('getCompanies', ['as' => 'administration.getCompanies', 'uses' => 'CompanyController@getCompanies']);
+
         Route::group(['prefix' => 'companies'], function() {
 
             /* Upload images companies */
@@ -36,9 +41,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('human-resources', ['as' => 'human-resources', function(){
         return view('human-resources.index');
     }]);
-    Route::get('getEmployees', ['as' => 'human-resources.employees.getEmployees', 'uses' => 'EmployeeController@getEmployees']);
+
     Route::group(['prefix' => 'human-resources'], function(){
         Route::resource('employees', 'EmployeeController');
+        
+        /* Employees format to bootstrap-table */
+        Route::get('getEmployees', ['as' => 'human-resources.getEmployees', 'uses' => 'EmployeeController@getEmployees']);
+        
         Route::group(['prefix' => 'employees'], function(){
 
             /* Upload images employees */   
@@ -73,6 +82,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('route-sheets/changeStateRoundSheet', ['as' => 'operations.route-sheets.changeStateRoundSheet', 'uses' => 'RouteSheetController@changeStateRoundSheet']);
         Route::resource('rounds', 'RoundController');
         Route::resource('vehicles', 'VehicleController');
+
+        /* Vehicles format to bootstrap-table */
+        Route::get('getVehicles', ['as' => 'operations.getVehicles', 'uses' => 'VehicleController@getVehicles']);
+
         Route::group(['prefix' => 'vehicles'], function() {
             Route::get('attachFiles/{id}', ['as' => 'operations.vehicles.attachFiles', 'uses' => 'VehicleController@getImages']);
             Route::post('attachFiles', ['as' => 'operations.vehicles.addImages', 'uses' => 'VehicleController@addImages']);
@@ -87,6 +100,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('maintainers', ['as' => 'maintainers', function(){
         return view('maintainers.index');
     }]);
+
     Route::group(['prefix' => 'maintainers'], function() {
 
         Route::resource('areas', 'AreaController');

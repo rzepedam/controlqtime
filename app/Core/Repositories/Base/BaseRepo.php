@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Session;
 
 abstract class BaseRepo implements BaseRepoInterface
 {
-    public function allJson(array $with = array())
-    {
-        return $this->model->with($with)->get()->toJson();
-    }
-
     public function all(array $with = array())
     {
         return $this->model->with($with)->get();
