@@ -20,8 +20,12 @@ class InstitutionController extends Controller
 
     public function index()
     {
+        return view('maintainers.institutions.index');
+    }
+
+    public function getInstitutions() {
         $institutions = $this->institution->all(['typeInstitution']);
-        return view('maintainers.institutions.index', compact('institutions'));
+        return $institutions;
     }
 
     public function create()

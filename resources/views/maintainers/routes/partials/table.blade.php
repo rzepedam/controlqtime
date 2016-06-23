@@ -1,28 +1,15 @@
 <div class="panel">
     <div class="panel-body">
-        <div class="table-responsive">
-            <table class="table table-striped table-condensed">
-                <thead>
-                    <tr>
-                        <th class="col-md-1">ID</th>
-                        <th class="col-md-4">Nombre</th>
-                        <th class="col-md-5">Terminal</th>
-                        <th class="text-center col-md-2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach($routes as $route)
-                    <tr data-id="{{ $route->id }}">
-                        <td>{{ $route->id }}</td>
-                        <td>{{ $route->name }}</td>
-                        <td>{{ $route->terminal->name }}</td>
-                        <td class="text-center">
-                            <a href="{{ route('maintainers.routes.edit', $route) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i> </a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
+        <div id="myToolbar" class="pull-left margin-bottom-10 padding-left-0 col-xs-9 col-sm-8 col-md-6"></div>
+        <table class="table-hover table-condensed" id="route_table" data-mobile-responsive="true">
+            <thead>
+                <tr>
+                    <th data-field="id" data-sortable="true">ID</th>
+                    <th data-field="name" data-sortable="true">Nombre</th>
+                    <th data-field="terminal_id" data-sortable="true">Terminal</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>

@@ -17,8 +17,12 @@ class DegreeController extends Controller
 
 	public function index()
     {
+        return view('maintainers.degrees.index');
+    }
+
+    public function getDegrees() {
         $degrees = $this->degree->all();
-        return view('maintainers.degrees.index', compact('degrees'));
+        return $degrees;
     }
 
     public function create()

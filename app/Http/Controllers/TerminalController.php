@@ -16,8 +16,13 @@ class TerminalController extends Controller
     }
     public function index()
     {
+        return view('maintainers.terminals.index');
+    }
+
+    public function getTerminals()
+    {
         $terminals = $this->terminal->all();
-        return view('maintainers.terminals.index', compact('terminals'));
+        return $terminals;
     }
 
     public function create()

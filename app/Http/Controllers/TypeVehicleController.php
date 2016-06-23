@@ -23,9 +23,13 @@ class TypeVehicleController extends Controller {
 
 	public function index()
 	{
-		$type_vehicles = $this->type_vehicle->all(['engineCubic', 'weight']);
+		return view('maintainers.type-vehicles.index');
+	}
 
-		return view('maintainers.type-vehicles.index', compact('type_vehicles'));
+	public function getTypeVehicles()
+	{
+		$type_vehicles = $this->type_vehicle->all(['engineCubic', 'weight']);
+		return $type_vehicles;
 	}
 
 	public function create()

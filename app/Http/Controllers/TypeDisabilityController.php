@@ -17,8 +17,12 @@ class TypeDisabilityController extends Controller
 
     public function index()
     {
+        return view('maintainers.type-disabilities.index');
+    }
+
+    public function getTypeDisabilities() {
         $type_disabilities = $this->type_disability->all();
-        return view('maintainers.type-disabilities.index', compact('type_disabilities'));
+        return $type_disabilities;
     }
 
     public function create()

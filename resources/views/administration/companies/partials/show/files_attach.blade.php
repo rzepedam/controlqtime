@@ -17,6 +17,9 @@
                                 <figure class="widget-header overlay-hover overlay">
                                     <img class="overlay-figure overlay-scale" src="{{ $image_rol->path }}">
                                     <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                        {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_rol->path }}"></a>
+                                        {{ Form::close() }}
                                         <a class="icon md-search" href="{{ $image_rol->path }}"></a>
                                     </figcaption>
                                 </figure>
@@ -56,6 +59,9 @@
                                 <figure class="widget-header overlay-hover overlay">
                                     <img class="overlay-figure overlay-scale" src="{{ $image_patent->path }}">
                                     <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                        {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_patent->path }}"></a>
+                                        {{ Form::close() }}
                                         <a class="icon md-search" href="{{ $image_patent->path }}"></a>
                                     </figcaption>
                                 </figure>

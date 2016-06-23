@@ -1,32 +1,16 @@
 <div class="panel">
     <div class="panel-body">
-        <div class="table-responsive">
-            <table class="table table-striped table-condensed">
-                <thead>
+        <div id="myToolbar" class="pull-left margin-bottom-10 padding-left-0 col-xs-9 col-sm-8 col-md-6"></div>
+        <table class="table-hover table-condensed" id="type_vehicle_table" data-mobile-responsive="true">
+            <thead>
                 <tr>
-                    <th class="col-md-1">ID</th>
-                    <th class="col-md-7">Nombre</th>
-                    <th class="text-center col-md-1">Peso</th>
-                    <th class="text-center col-md-2">Cilindraje Motor</th>
+                    <th data-field="id" data-sortable="true">ID</th>
+                    <th data-field="name" data-sortable="true">Nombre</th>
+                    <th data-field="weight_id" data-sortable="true" class="text-center">Peso</th>
+                    <th data-field="engine_cubic_id" data-sortable="true" class="text-center">Cilindraje Motor</th>
                     <th class="text-center col-md-2">Acciones</th>
                 </tr>
-                </thead>
-                <tbody>
-                    @foreach($type_vehicles as $type_vehicle)
-
-                        <tr data-id="{{ $type_vehicle->id }}">
-                            <td>{{ $type_vehicle->id }}</td>
-                            <td>{{ $type_vehicle->name }}</td>
-                            <td class="text-center">{{ $type_vehicle->weight->acr }}</td>
-                            <td class="text-center">{{ $type_vehicle->engineCubic->acr }}</td>
-                            <td class="text-center">
-                                <a href="{{ route('maintainers.type-vehicles.edit', $type_vehicle) }}" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i> </a>
-                            </td>
-                        </tr>
-
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+            </thead>
+        </table>
     </div>
 </div>

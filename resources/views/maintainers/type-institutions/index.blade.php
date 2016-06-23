@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    {{ Html::style('assets/css/bootstrap-table.css') }}
+
+@stop
+
 @section('title_header') Listado de Tipos de Institución
     <br />
     <a href="{{ route('maintainers.type-institutions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Tipo de Institución</a>
@@ -12,21 +18,21 @@
 
 @section('content')
 
-    @if ($type_institutions->count())
-
-        @include('maintainers.type-institutions.partials.table')
-
-    @else
-
-        <h3 class="text-center">No se han encontrado Tipos de Institución</h3>
-
-    @endif
+    @include('maintainers.type-institutions.partials.table')
 
     <div class="row">
         <div class="col-md-12">
-            <a class="pull-left margin-top-30" href="{{ route('maintainers') }}">Volver</a>
-            <span class="pull-right">{{ $type_institutions->links() }}</span>
+            <a href="{{ route('maintainers') }}">Volver</a>
         </div>
     </div>
+
+@stop
+
+@section('scripts')
+
+    {{ Html::script('assets/js/bootstrap-table.js') }}
+    {{ Html::script('assets/js/bootstrap-table-mobile.js') }}
+    {{ Html::script('assets/js/bootstrap-table-es-ES.js') }}
+    {{ Html::script('me/js/base/maintainers/type-institutions/config_bootstrap_table.js') }}
 
 @stop

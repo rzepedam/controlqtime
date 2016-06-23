@@ -17,8 +17,12 @@ class TypeCertificationController extends Controller
 
     public function index()
     {
+        return view('maintainers.type-certifications.index');
+    }
+
+    public function getTypeCertifications() {
         $type_certifications = $this->type_certification->all();
-        return view('maintainers.type-certifications.index', compact('type_certifications'));
+        return $type_certifications;
     }
 
     public function create()

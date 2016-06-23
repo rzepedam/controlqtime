@@ -17,8 +17,12 @@ class FuelController extends Controller
     
     public function index()
     {
+        return view('maintainers.fuels.index');
+    }
+
+    public function getFuels() {
         $fuels = $this->fuel->all();
-        return view('maintainers.fuels.index', compact('fuels'));
+        return $fuels;
     }
 
     public function create()

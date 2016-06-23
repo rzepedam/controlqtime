@@ -19,8 +19,13 @@ class EngineCubicController extends Controller
 
 	public function index()
 	{
+		return view('maintainers.measuring-units.engine-cubics.index');
+	}
+
+	public function getEngineCubics()
+	{
 		$engine_cubics = $this->engine_cubic->all();
-		return view('maintainers.measuring-units.engine-cubics.index', compact('engine_cubics'));
+		return $engine_cubics;
 	}
 
 	public function create()

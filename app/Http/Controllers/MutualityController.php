@@ -17,8 +17,13 @@ class MutualityController extends Controller
 
     public function index()
     {
-    	$mutualities = $this->mutuality->all();
-    	return view('maintainers.mutualities.index', compact('mutualities'));
+    	return view('maintainers.mutualities.index');
+    }
+    
+    public function getMutualities()
+    {
+        $mutualities = $this->mutuality->all();
+        return $mutualities;
     }
 
     public function create()

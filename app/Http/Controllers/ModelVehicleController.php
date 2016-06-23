@@ -21,8 +21,12 @@ class ModelVehicleController extends Controller
 
     public function index()
     {
+        return view('maintainers.model-vehicles.index');
+    }
+
+    public function getModelVehicles() {
         $model_vehicles = $this->model_vehicle->all(['trademark']);
-        return view('maintainers.model-vehicles.index', compact('model_vehicles'));
+        return $model_vehicles;
     }
 
     public function create()

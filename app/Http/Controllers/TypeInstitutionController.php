@@ -17,8 +17,13 @@ class TypeInstitutionController extends Controller
 
     public function index()
     {
+        return view('maintainers.type-institutions.index');
+    }
+
+    public function getTypeInstitutions()
+    {
         $type_institutions = $this->type_institution->all();
-        return view('maintainers.type-institutions.index', compact('type_institutions'));
+        return $type_institutions;
     }
 
     public function create()

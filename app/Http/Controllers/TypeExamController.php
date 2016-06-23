@@ -17,8 +17,12 @@ class TypeExamController extends Controller
 
 	public function index()
     {
+        return view('maintainers.type-exams.index');
+    }
+
+    public function getTypeExams() {
         $type_exams = $this->type_exam->all();
-        return view('maintainers.type-exams.index', compact('type_exams'));
+        return $type_exams;
     }
 
     public function create()

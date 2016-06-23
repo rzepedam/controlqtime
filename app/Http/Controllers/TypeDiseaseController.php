@@ -17,8 +17,12 @@ class TypeDiseaseController extends Controller
 
     public function index()
     {
+        return view('maintainers.type-diseases.index');
+    }
+
+    public function getTypeDiseases() {
         $type_diseases = $this->type_disease->all();
-        return view('maintainers.type-diseases.index', compact('type_diseases'));
+        return $type_diseases;
     }
 
     public function create()

@@ -24,8 +24,12 @@ class CityController extends Controller
     
     public function index()
     {
+        return view('maintainers.cities.index');
+    }
+
+    public function getCities() {
         $cities = $this->city->all(['country']);
-        return view('maintainers.cities.index', compact('cities'));
+        return $cities;
     }
 
     public function create()

@@ -17,8 +17,13 @@ class CountryController extends Controller
 
     public function index()
     {
+        return view('maintainers.countries.index');
+    }
+
+    public function getCountries()
+    {
         $countries = $this->country->all();
-        return view('maintainers.countries.index', compact('countries'));
+        return $countries;
     }
 
     public function create()

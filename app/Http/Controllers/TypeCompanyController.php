@@ -19,9 +19,14 @@ class TypeCompanyController extends Controller
     
     public function index()
     {
-        $type_companies = $this->type_company->all(); 
-    	return view('maintainers.type-companies.index', compact('type_companies'));
+    	return view('maintainers.type-companies.index');
     }
+
+	public function getTypeCompanies()
+	{
+		$type_companies = $this->type_company->all();
+		return $type_companies;
+	}
 
     public function create()
     {

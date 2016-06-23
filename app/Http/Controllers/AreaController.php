@@ -20,8 +20,12 @@ class AreaController extends Controller
 
 	public function index()
     {
+        return view('maintainers.areas.index');
+    }
+
+    public function getAreas() {
         $areas = $this->area->all(['terminal']);
-        return view('maintainers.areas.index', compact('areas'));
+        return $areas;
     }
 
     public function create()

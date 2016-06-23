@@ -46,5 +46,6 @@
 
     {{ Html::script('assets/js/jquery.magnific-popup.js') }}
     {{ Html::script('me/js/common/showMagnificImage.js') }}
+    {{ Html::script('me/js/common/download.js') }}
 
 @stop

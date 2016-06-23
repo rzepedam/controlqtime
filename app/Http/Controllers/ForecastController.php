@@ -17,8 +17,12 @@ class ForecastController extends Controller
 
     public function index()
     {
+        return view('maintainers.forecasts.index');
+    }
+
+    public function getForecasts() {
         $forecasts = $this->forecast->all();
-        return view('maintainers.forecasts.index', compact('forecasts'));
+        return $forecasts;
     }
 
     public function create()

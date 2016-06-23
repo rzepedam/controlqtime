@@ -18,8 +18,13 @@ class TypeRepresentativeController extends Controller
 
     public function index()
     {
+        return view('maintainers.type-representatives.index');
+    }
+
+    public function getTypeRepresentatives()
+    {
         $type_representatives = $this->type_representative->all();
-        return view('maintainers.type-representatives.index', compact('type_representatives'));
+        return $type_representatives;
     }
 
     public function create()
@@ -27,7 +32,7 @@ class TypeRepresentativeController extends Controller
         return view('maintainers.type-representatives.create');
     }
 
-    public function store(TypeRepresentRequest $request)
+    public function store(TypeRepresentativeRequest $request)
     {
         $this->type_representative->create($request->all());
         return redirect()->route('maintainers.type-representatives.index');

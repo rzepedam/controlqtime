@@ -17,8 +17,13 @@ class ProfessionController extends Controller
 
     public function index()
     {
+        return view('maintainers.professions.index');
+    }
+
+    public function getProfessions()
+    {
         $professions = $this->profession->all();
-        return view('maintainers.professions.index', compact('professions'));
+        return $professions;
     }
 
     public function create()

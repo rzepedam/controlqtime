@@ -20,8 +20,13 @@ class RouteController extends Controller
 
     public function index()
     {
+        return view('maintainers.routes.index');
+    }
+
+    public function getRoutes()
+    {
         $routes = $this->route->all(['terminal']);
-        return view('maintainers.routes.index', compact('routes'));
+        return $routes;
     }
 
     public function create()

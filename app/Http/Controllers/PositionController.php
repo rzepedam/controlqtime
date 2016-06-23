@@ -16,8 +16,12 @@ class PositionController extends Controller
 
     public function index()
     {
+        return view('maintainers.positions.index');
+    }
+
+    public function getPositions() {
         $positions = $this->position->all();
-        return view('maintainers.positions.index', compact('positions'));
+        return $positions;
     }
 
     public function create()

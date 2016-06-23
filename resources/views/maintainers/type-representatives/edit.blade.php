@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Editar Representante: <span class="text-primary">{{ $type_represent->id }}</span> @stop
+@section('title_header') Editar Representante: <span class="text-primary">{{ $type_representative->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -14,7 +14,7 @@
 
     <div class="panel">
 
-        {{ Form::model($type_represent, array('route' => array('maintainers.type-representatives.update', $type_represent), 'method' => 'PUT' )) }}
+        {{ Form::model($type_representative, array('route' => array('maintainers.type-representatives.update', $type_representative), 'method' => 'PUT' )) }}
 
             <div class="panel-body">
 

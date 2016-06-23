@@ -18,8 +18,13 @@ class TypeProfessionalLicenseController extends Controller
 
     public function index()
     {
+        return view('maintainers.type-professional-licenses.index');
+    }
+
+    public function getTypeProfessionalLicenses()
+    {
         $type_professional_licenses = $this->type_professional_license->all();
-        return view('maintainers.type-professional-licenses.index', compact('type_professional_licenses'));
+        return $type_professional_licenses;
     }
 
     public function create()

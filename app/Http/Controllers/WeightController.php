@@ -18,8 +18,13 @@ class WeightController extends Controller
 
     public function index()
 	{
+		return view('maintainers.measuring-units.weights.index');
+	}
+
+	public function getWeights()
+	{
 		$weights = $this->weight->all();
-		return view('maintainers.measuring-units.weights.index', compact('weights'));
+		return $weights;
 	}
 
 	public function create()

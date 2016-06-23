@@ -16,8 +16,12 @@ class TrademarkController extends Controller
     }
     public function index()
     {
+        return view('maintainers.trademarks.index');
+    }
+    
+    public function getTrademarks() {
         $trademarks = $this->trademark->all();
-        return view('maintainers.trademarks.index', compact('trademarks'));
+        return $trademarks;
     }
 
     public function create()

@@ -17,8 +17,12 @@ class PensionController extends Controller
 
     public function index()
     {
+        return view('maintainers.pensions.index');
+    }
+    
+    public function getPensions() {
         $pensions = $this->pension->all();
-        return view('maintainers.pensions.index', compact('pensions'));
+        return $pensions;
     }
 
     public function create()

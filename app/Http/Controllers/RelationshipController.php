@@ -17,8 +17,13 @@ class RelationshipController extends Controller
 
     public function index()
     {
+        return view('maintainers.relationships.index');
+    }
+
+    public function getRelationships()
+    {
         $relationships = $this->relationship->all();
-        return view('maintainers.relationships.index', compact('relationships'));
+        return $relationships;
     }
 
     public function create()

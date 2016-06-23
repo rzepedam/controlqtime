@@ -18,8 +18,12 @@ class TypeSpecialityController extends Controller
 
     public function index()
     {
+        return view('maintainers.type-specialities.index');
+    }
+
+    public function getTypeSpecialities() {
         $type_specialities = $this->type_speciality->all();
-        return view('maintainers.type-specialities.index', compact('type_specialities'));
+        return $type_specialities;
     }
 
     public function create()
