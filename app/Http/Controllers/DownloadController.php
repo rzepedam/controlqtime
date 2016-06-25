@@ -4,6 +4,7 @@ namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Illuminate\Http\Request;
+
 use Maatwebsite\Excel\Facades\Excel;
 
 class DownloadController extends Controller {
@@ -24,15 +25,7 @@ class DownloadController extends Controller {
 	public function getPdf()
 	{
 		$employees = $this->employee->all(['company']);
-		$header    = view('human-resources.employees.partials.pdf.header');
-		$footer    = view('human-resources.employees.partials.pdf.footer');
-		$pdf       = \PDF::loadView('human-resources.employees.partials.pdf.index', compact('employees'))
-						->setOption('page-size', 'letter')
-						->setOption('margin-top', '25mm')
-						->setOption('margin-bottom', '14mm')
-						->setOption('header-spacing', '4')
-						->setOption('header-html', $header)
-						->setOption('footer-html', $footer);
+		$pdf       = \PDF::loadView('human-resources.employees.partials.pdf.index', compact('employees'));
 
 		return $pdf->inline();
 	}
