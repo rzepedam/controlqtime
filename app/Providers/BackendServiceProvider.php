@@ -104,6 +104,11 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'Controlqtime\Core\Contracts\ImageFactoryInterface',
+            'Controlqtime\Core\Factory\ImageFactory'
+        );
+
+        $this->app->bind(
             'Controlqtime\Core\Contracts\ImageCertificationEmployeeRepoInterface',
             'Controlqtime\Core\Repositories\ImageCertificationEmployeeRepo'
         );

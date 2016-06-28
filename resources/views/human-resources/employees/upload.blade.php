@@ -82,15 +82,15 @@
                     ],
                     initialPreviewConfig: [
                         @foreach($certification->imageCertificationEmployees as $image_certification)
-                            { caption: "{{ $image_certification->orig_name }}", size: "{{ $image_certification->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_certification->id }}", extra: { path: "{{ $image_certification->path }}", id: "{{ $id }}", type: "certification" } },
+                            { caption: "{{ $image_certification->orig_name }}", size: "{{ $image_certification->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_certification->id }}", extra: { path: "{{ $image_certification->path }}", id: "{{ $id }}", type: "CertificationEmployee" } },
                         @endforeach
                     ],
                     overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
-                        id: "{{ $id }}",
-                        subRepoId: "{{ $certification->id }}",
-                        type: "certification"
+                        employee_id: "{{ $id }}",
+                        repo_id: "{{ $certification->id }}",
+                        type: "CertificationEmployee"
                     }
                 });
                 <?php $i++; ?>
@@ -110,15 +110,15 @@
                     ],
                     initialPreviewConfig: [
                         @foreach($speciality->imageSpecialityEmployees as $image_speciality)
-                            { caption: "{{ $image_speciality->orig_name }}", size: "{{ $image_speciality->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_speciality->id }}", extra: { path: "{{ $image_speciality->path }}", id: "{{ $id }}", type: "speciality" } },
+                            { caption: "{{ $image_speciality->orig_name }}", size: "{{ $image_speciality->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_speciality->id }}", extra: { path: "{{ $image_speciality->path }}", id: "{{ $id }}", type: "SpecialityEmployee" } },
                         @endforeach
                     ],
                     overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
-                        id: "{{ $id }}",
-                        subRepoId: "{{ $speciality->id }}",
-                        type: "speciality"
+                        employee_id: "{{ $id }}",
+                        repo_id: "{{ $speciality->id }}",
+                        type: "SpecialityEmployee"
                     }
                 });
             <?php $i++; ?>
@@ -138,15 +138,15 @@
                     ],
                     initialPreviewConfig: [
                         @foreach($professional_license->imageProfessionalLicenseEmployees as $image_professional_license)
-                            { caption: "{{ $image_professional_license->orig_name }}", size: "{{ $image_professional_license->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_professional_license->id }}", extra: { path: "{{ $image_professional_license->path }}", id: "{{ $id }}", type: "professional_license" } },
+                            { caption: "{{ $image_professional_license->orig_name }}", size: "{{ $image_professional_license->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_professional_license->id }}", extra: { path: "{{ $image_professional_license->path }}", id: "{{ $id }}", type: "ProfessionalLicenseEmployee" } },
                         @endforeach
                     ],
                     overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
-                        id: "{{ $id }}",
-                        subRepoId: "{{ $professional_license->id }}",
-                        type: "professional_license"
+                        employee_id: "{{ $id }}",
+                        repo_id: "{{ $professional_license->id }}",
+                        type: "ProfessionalLicenseEmployee"
                     }
                 });
                 <?php $i++; ?>
@@ -166,15 +166,15 @@
                     ],
                     initialPreviewConfig: [
                         @foreach($disability->imageDisabilityEmployees as $image_disability)
-                            { caption: "{{ $image_disability->orig_name }}", size: "{{ $image_disability->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_disability->id }}", extra: { path: "{{ $image_disability->path }}", id: "{{ $id }}", type: "disability" } },
+                            { caption: "{{ $image_disability->orig_name }}", size: "{{ $image_disability->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_disability->id }}", extra: { path: "{{ $image_disability->path }}", id: "{{ $id }}", type: "DisabilityEmployee" } },
                         @endforeach
                     ],
                     overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
-                        id: "{{ $id }}",
-                        subRepoId: "{{ $disability->id }}",
-                        type: "disability"
+                        employee_id: "{{ $id }}",
+                        repo_id: "{{ $disability->id }}",
+                        type: "DisabilityEmployee"
                     }
                 });
                 <?php $i++; ?>
@@ -194,15 +194,15 @@
                     ],
                     initialPreviewConfig: [
                         @foreach($disease->imageDiseaseEmployees as $image_disease)
-                            { caption: "{{ $image_disease->orig_name }}", size: "{{ $image_disease->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_disease->id }}", extra: { path: "{{ $image_disease->path }}", id: "{{ $id }}", type: "disease" } },
+                            { caption: "{{ $image_disease->orig_name }}", size: "{{ $image_disease->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_disease->id }}", extra: { path: "{{ $image_disease->path }}", id: "{{ $id }}", type: "DiseaseEmployee" } },
                         @endforeach
                     ],
                     overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
-                        id: "{{ $id }}",
-                        subRepoId: "{{ $disease->id }}",
-                        type: "disease"
+                        employee_id: "{{ $id }}",
+                        repo_id: "{{ $disease->id }}",
+                        type: "DiseaseEmployee"
                     }
                 });
                 <?php $i++; ?>
@@ -222,15 +222,15 @@
                     ],
                     initialPreviewConfig: [
                         @foreach($exam->imageExamEmployees as $image_exam)
-                            { caption: "{{ $image_exam->orig_name }}", size: "{{ $image_exam->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_exam->id }}", extra: { path: "{{ $image_exam->path }}", id: "{{ $id }}", type: "exam" } },
+                            { caption: "{{ $image_exam->orig_name }}", size: "{{ $image_exam->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_exam->id }}", extra: { path: "{{ $image_exam->path }}", id: "{{ $id }}", type: "ExamEmployee" } },
                         @endforeach
                     ],
                     overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
-                        id: "{{ $id }}",
-                        subRepoId: "{{ $exam->id }}",
-                        type: "exam"
+                        employee_id: "{{ $id }}",
+                        repo_id: "{{ $exam->id }}",
+                        type: "ExamEmployee"
                     }
                 });
                 <?php $i++; ?>
@@ -250,15 +250,15 @@
                     ],
                     initialPreviewConfig: [
                         @foreach($family_responsability->imageFamilyResponsabilityEmployees as $image_family_responsability)
-                            { caption: "{{ $image_family_responsability->orig_name }}", size: "{{ $image_family_responsability->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_family_responsability->id }}", extra: { path: "{{ $image_family_responsability->path }}", id: "{{ $id }}", type: "family_responsability" } },
+                            { caption: "{{ $image_family_responsability->orig_name }}", size: "{{ $image_family_responsability->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_family_responsability->id }}", extra: { path: "{{ $image_family_responsability->path }}", id: "{{ $id }}", type: "FamilyResponsabilityEmployee" } },
                         @endforeach
                     ],
                     overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
-                        id: "{{ $id }}",
-                        subRepoId: "{{ $family_responsability->id }}",
-                        type: "family_responsability"
+                        employee_id: "{{ $id }}",
+                        repo_id: "{{ $family_responsability->id }}",
+                        type: "FamilyResponsabilityEmployee"
                     }
                 });
                 <?php $i++; ?>
