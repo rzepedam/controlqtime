@@ -26,7 +26,7 @@ class ImageSpecialityEmployee extends Image {
 		$this->entity->size          = $this->file->getSize();
 		$this->entity->speciality_id = $this->repoId;
 
-		if ( $this->entity->save() )
+		if ( ! $this->entity->save() )
 		{
 			throw new Exception('This element not save in DB');
 		}

@@ -616,6 +616,7 @@ class EmployeeController extends Controller {
 
 		if ( $save )
 		{
+			dd('...');
 			$this->employee->checkState($request->get('id'));
 
 			return response()->json(['success' => true]);
