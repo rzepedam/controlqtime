@@ -78,14 +78,13 @@
                 ],
                 initialPreviewConfig: [
                     @foreach($company->imageRolCompanies as $image_rut)
-                        { caption: "{{ $image_rut->orig_name }}", size: "{{ $image_rut->size }}", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_rut->id }}", extra: { path: "{{ $image_rut->path }}", id: "{{ $id }}", type: "rol" } },
+                        { caption: "{{ $image_rut->orig_name }}", size: "{{ $image_rut->size }}", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_rut->id }}", extra: { path: "{{ $image_rut->path }}", id: "{{ $id }}", type: "RolCompany" } },
                     @endforeach
                 ],
-                overwriteInitial: false,
                 uploadUrl: "{{ route('administration.companies.addImages') }}",
                 uploadExtraData:  {
-                    id: "{{ $id }}",
-                    type: "rol"
+                    company_id: "{{ $id }}",
+                    type: "RolCompany"
                 }
             });
 
@@ -97,14 +96,13 @@
                 ],
                 initialPreviewConfig: [
                     @foreach($company->imagePatentCompanies as $image_patent)
-                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_rut->size }}", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "patent" } },
+                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_patent->size }}", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "PatentCompany" } },
                     @endforeach
                 ],
-                overwriteInitial: false,
                 uploadUrl: "{{ route('administration.companies.addImages') }}",
                 uploadExtraData:  {
-                    id: "{{ $id }}",
-                    type: "patent"
+                    company_id: "{{ $id }}",
+                    type: "PatentCompany"
                 }
             });
 

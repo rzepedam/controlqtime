@@ -32,6 +32,7 @@ class ImageExamEmployee extends Image {
 		}
 
 		$this->moveImage();
+		return true;
 	}
 
 }

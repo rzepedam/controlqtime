@@ -32,6 +32,7 @@ class ImageProfessionalLicenseEmployee extends Image {
 		}
 
 		$this->moveImage();
+		return true;
 	}
 
 }

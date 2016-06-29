@@ -2,40 +2,36 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\ImageFactoryInterface;
 use Controlqtime\Core\Contracts\TypeCompanyRepoInterface;
 use Controlqtime\Core\Contracts\TypeRepresentativeRepoInterface;
 use Controlqtime\Http\Requests\CompanyRequest;
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
-use Controlqtime\Core\Contracts\ImagePatentCompanyRepoInterface;
-use Controlqtime\Core\Contracts\ImageRolCompanyRepoInterface;
 use Controlqtime\Core\Contracts\RepresentativeCompanyRepoInterface;
 use Controlqtime\Core\Contracts\NationalityRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Http\Requests;
 use Illuminate\Http\Request;
-use Controlqtime\Core\Contracts\SubsidiaryRepoInterface;
 
 class CompanyController extends Controller {
 
 	protected $commune;
 	protected $company;
-	protected $image_patent;
-	protected $image_rol;
-	protected $representative_company;
+	protected $image;
 	protected $nationality;
 	protected $province;
 	protected $region;
+	protected $representative_company;
 	protected $type_company;
 	protected $type_representative;
 
-	public function __construct(TypeCompanyRepoInterface $type_company, CompanyRepoInterface $company, NationalityRepoInterface $nationality, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, RepresentativeCompanyRepoInterface $representative_company, ImageRolCompanyRepoInterface $image_rol, ImagePatentCompanyRepoInterface $image_patent, TypeRepresentativeRepoInterface $type_representative)
+	public function __construct(TypeCompanyRepoInterface $type_company, CompanyRepoInterface $company, NationalityRepoInterface $nationality, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, RepresentativeCompanyRepoInterface $representative_company, TypeRepresentativeRepoInterface $type_representative, ImageFactoryInterface $image)
 	{
 		$this->commune                = $commune;
 		$this->company                = $company;
-		$this->image_patent           = $image_patent;
-		$this->image_rol              = $image_rol;
+		$this->image                  = $image;
 		$this->representative_company = $representative_company;
 		$this->nationality            = $nationality;
 		$this->province               = $province;
@@ -49,8 +45,10 @@ class CompanyController extends Controller {
 		return view('administration.companies.index');
 	}
 
-	public function getCompanies() {
+	public function getCompanies()
+	{
 		$companies = $this->company->all();
+
 		return $companies;
 	}
 
@@ -128,26 +126,17 @@ class CompanyController extends Controller {
 	public function getImages($id)
 	{
 		$company = $this->company->find($id, ['imageRolCompanies', 'imagePatentCompanies']);
-
+		
 		return view('administration.companies.upload', compact('id', 'company'));
 	}
 
 	public function addImages(Request $request)
 	{
-		switch ($request->get('type'))
-		{
-			case 'rol':
-				$save = $this->image_rol->addImages('company', $request->file('file_data'), $request->get('id'), $request->get('type'));
-				break;
-
-			case 'patent':
-				$save = $this->image_patent->addImages('company', $request->file('file_data'), $request->get('id'), $request->get('type'));
-				break;
-		}
+		$save = $this->image->build($request->get('type'), null, $request->get('company_id'), $request->file('file_data'), null)->addImages();
 
 		if ( $save )
 		{
-			$this->company->checkState($request->get('id'));
+			$this->company->checkState($request->get('company_id'));
 
 			return response()->json(['success' => true]);
 		}
@@ -157,18 +146,7 @@ class CompanyController extends Controller {
 
 	public function deleteFiles(Request $request)
 	{
-		switch ($request->get('type'))
-		{
-			case 'rol':
-				$destroy = $this->image_rol->destroyImage($request->get('path'));
-				$this->image_rol->delete($request->get('key'));
-				break;
-
-			case 'patent':
-				$destroy = $this->image_patent->destroyImage($request->get('path'));
-				$this->image_patent->delete($request->get('key'));
-				break;
-		}
+		$destroy = $this->image->build($request->get('type'), null, $request->get('key'), null, $request->get('path'))->destroyImage();
 
 		if ( $destroy )
 		{

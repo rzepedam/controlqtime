@@ -32,6 +32,7 @@ class ImageDisabilityEmployee extends Image {
 		}
 
 		$this->moveImage();
+		return true;
 	}
 
 }

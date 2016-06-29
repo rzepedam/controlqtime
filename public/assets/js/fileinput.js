@@ -3081,7 +3081,7 @@
         removeFromPreviewOnError: false,
         deleteUrl: '',
         deleteExtraData: {},
-        overwriteInitial: true,
+        overwriteInitial: false,
         layoutTemplates: defaultLayoutTemplates,
         previewTemplates: defaultPreviewTemplates,
         previewZoomSettings: defaultPreviewZoomSettings,

@@ -114,13 +114,13 @@
                 ],
                 initialPreviewConfig: [
                     @foreach($vehicle->imagePadrones as $image_padron)
-                        { caption: "{{ $image_padron->orig_name }}", size: "{{ $image_padron->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_padron->id }}", extra: { path: "{{ $image_padron->path }}", id: "{{ $id }}", type: "padron" } },
+                        { caption: "{{ $image_padron->orig_name }}", size: "{{ $image_padron->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_padron->id }}", extra: { path: "{{ $image_padron->path }}", id: "{{ $id }}", type: "PadronVehicle" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('operations.vehicles.addImages') }}",
                 uploadExtraData:  {
-                    id: "{{ $id }}",
-                    type: "padron"
+                    vehicle_id: "{{ $id }}",
+                    type: "PadronVehicle"
                 }
             });
 
@@ -132,13 +132,13 @@
                 ],
                 initialPreviewConfig: [
                     @foreach($vehicle->imageObligatoryInsurances as $image_obl_ins)
-                        { caption: "{{ $image_obl_ins->orig_name }}", size: "{{ $image_obl_ins->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_obl_ins->id }}", extra: { path: "{{ $image_obl_ins->path }}", id: "{{ $id }}", type: "obligatory_insurance" } },
+                        { caption: "{{ $image_obl_ins->orig_name }}", size: "{{ $image_obl_ins->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_obl_ins->id }}", extra: { path: "{{ $image_obl_ins->path }}", id: "{{ $id }}", type: "ObligatoryInsuranceVehicle" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('operations.vehicles.addImages') }}",
                 uploadExtraData:  {
-                    id: "{{ $id }}",
-                    type: "obligatory_insurance"
+                    vehicle_id: "{{ $id }}",
+                    type: "ObligatoryInsuranceVehicle"
                 }
             });
 
@@ -150,13 +150,13 @@
                 ],
                 initialPreviewConfig: [
                     @foreach($vehicle->imagePatents as $image_patent)
-                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_patent->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "patent" } },
+                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_patent->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "PatentVehicle" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('operations.vehicles.addImages') }}",
                 uploadExtraData:  {
-                    id: "{{ $id }}",
-                    type: "patent"
+                    vehicle_id: "{{ $id }}",
+                    type: "PatentVehicle"
                 }
             });
 
@@ -168,13 +168,13 @@
                 ],
                 initialPreviewConfig: [
                     @foreach($vehicle->imageCirculationPermits as $image_cir_permit)
-                        { caption: "{{ $image_cir_permit->orig_name }}", size: "{{ $image_cir_permit->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_cir_permit->id }}", extra: { path: "{{ $image_cir_permit->path }}", id: "{{ $id }}", type: "circulation_permit" } },
+                        { caption: "{{ $image_cir_permit->orig_name }}", size: "{{ $image_cir_permit->size }}", url: "{{ route('operations.vehicles.deleteFiles') }}", key: "{{ $image_cir_permit->id }}", extra: { path: "{{ $image_cir_permit->path }}", id: "{{ $id }}", type: "CirculationPermitVehicle" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('operations.vehicles.addImages') }}",
                 uploadExtraData:  {
-                    id: "{{ $id }}",
-                    type: "circulation_permit"
+                    vehicle_id: "{{ $id }}",
+                    type: "CirculationPermitVehicle"
                 }
             });
 

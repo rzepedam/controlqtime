@@ -85,7 +85,6 @@
                             { caption: "{{ $image_certification->orig_name }}", size: "{{ $image_certification->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_certification->id }}", extra: { path: "{{ $image_certification->path }}", id: "{{ $id }}", type: "CertificationEmployee" } },
                         @endforeach
                     ],
-                    overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
                         employee_id: "{{ $id }}",
@@ -113,7 +112,6 @@
                             { caption: "{{ $image_speciality->orig_name }}", size: "{{ $image_speciality->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_speciality->id }}", extra: { path: "{{ $image_speciality->path }}", id: "{{ $id }}", type: "SpecialityEmployee" } },
                         @endforeach
                     ],
-                    overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
                         employee_id: "{{ $id }}",
@@ -141,7 +139,6 @@
                             { caption: "{{ $image_professional_license->orig_name }}", size: "{{ $image_professional_license->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_professional_license->id }}", extra: { path: "{{ $image_professional_license->path }}", id: "{{ $id }}", type: "ProfessionalLicenseEmployee" } },
                         @endforeach
                     ],
-                    overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
                         employee_id: "{{ $id }}",
@@ -169,7 +166,6 @@
                             { caption: "{{ $image_disability->orig_name }}", size: "{{ $image_disability->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_disability->id }}", extra: { path: "{{ $image_disability->path }}", id: "{{ $id }}", type: "DisabilityEmployee" } },
                         @endforeach
                     ],
-                    overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
                         employee_id: "{{ $id }}",
@@ -197,7 +193,6 @@
                             { caption: "{{ $image_disease->orig_name }}", size: "{{ $image_disease->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_disease->id }}", extra: { path: "{{ $image_disease->path }}", id: "{{ $id }}", type: "DiseaseEmployee" } },
                         @endforeach
                     ],
-                    overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
                         employee_id: "{{ $id }}",
@@ -225,7 +220,6 @@
                             { caption: "{{ $image_exam->orig_name }}", size: "{{ $image_exam->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_exam->id }}", extra: { path: "{{ $image_exam->path }}", id: "{{ $id }}", type: "ExamEmployee" } },
                         @endforeach
                     ],
-                    overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
                         employee_id: "{{ $id }}",
@@ -253,7 +247,6 @@
                             { caption: "{{ $image_family_responsability->orig_name }}", size: "{{ $image_family_responsability->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_family_responsability->id }}", extra: { path: "{{ $image_family_responsability->path }}", id: "{{ $id }}", type: "FamilyResponsabilityEmployee" } },
                         @endforeach
                     ],
-                    overwriteInitial: false,
                     uploadUrl: "{{ route('human-resources.employees.addImages') }}",
                     uploadExtraData:  {
                         employee_id: "{{ $id }}",
@@ -263,7 +256,6 @@
                 });
                 <?php $i++; ?>
             @endforeach
-
 
         });
 

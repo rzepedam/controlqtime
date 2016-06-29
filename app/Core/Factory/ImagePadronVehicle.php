@@ -4,13 +4,13 @@ namespace Controlqtime\Core\Factory;
 
 use Exception;
 
-class ImageFamilyResponsabilityEmployee extends Image {
+class ImagePadronVehicle extends Image {
 
 	public function __construct($id, $repoId, $type, $file, $class, $pathImgDelete)
 	{
 		$this->id            = $id;
 		$this->repoId        = $repoId;
-		$this->repo          = 'employee';
+		$this->repo          = 'vehicle';
 		$this->type          = $type;
 		$this->file          = $file;
 		$this->model         = $this->dirEntity . $class;
@@ -20,11 +20,11 @@ class ImageFamilyResponsabilityEmployee extends Image {
 
 	public function addImages()
 	{
-		$this->name                             = $this->getName();
-		$this->entity->path                     = $this->getPath() . $this->name;
-		$this->entity->orig_name                = $this->name;
-		$this->entity->size                     = $this->file->getSize();
-		$this->entity->family_responsability_id = $this->repoId;
+		$this->name               = $this->getName();
+		$this->entity->path       = $this->getPath() . $this->name;
+		$this->entity->orig_name  = $this->name;
+		$this->entity->size       = $this->file->getSize();
+		$this->entity->vehicle_id = $this->repoId;
 
 		if ( ! $this->entity->save() )
 		{
@@ -32,6 +32,7 @@ class ImageFamilyResponsabilityEmployee extends Image {
 		}
 
 		$this->moveImage();
+
 		return true;
 	}
 
