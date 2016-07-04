@@ -317,7 +317,7 @@ class EmployeeController extends Controller {
 		Session::forget('emission_license');
 		Session::forget('expired_license');
 		Session::forget('detail_license');
-		
+
 		for ($i = 0; $i < Session::get('count_professional_licenses'); $i ++)
 		{
 			Session::forget('is_donor');
@@ -597,7 +597,10 @@ class EmployeeController extends Controller {
 
 		if ( $save )
 		{
-			$this->employee->checkState($request->get('employee_id'));
+			if ( $this->employee->checkState($request->get('employee_id')) )
+			{
+				dd('...');
+			}
 
 			return response()->json(['success' => true]);
 		}

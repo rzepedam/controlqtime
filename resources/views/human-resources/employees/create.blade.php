@@ -6,8 +6,6 @@
     {{ Html::style('assets/css/ribbon.css') }}
     {{ Html::style('assets/css/webui-popover.css') }}
     {{ Html::style('assets/css/bootstrap-datepicker.css') }}
-    {{ Html::style('assets/css/cropper.css') }}
-    {{ Html::style('assets/css/image-cropping.css') }}
 
 @stop
 
@@ -28,8 +26,7 @@
             <div id="form_new_employee" class="wizard">
 
                 {{-- Steps --}}
-                <div class="steps wizard-steps steps-sm row" data-plugin="matchHeight" data-by-row="true"
-                     role="tablist">
+                <div class="steps wizard-steps steps-sm row" data-plugin="matchHeight" data-by-row="true" role="tablist">
                     <div class="step col-md-4 current" data-target="#datos_personales" role="tab">
                         <span class="step-number">1</span>
                         <div class="step-desc">
@@ -74,31 +71,6 @@
                                 <div class="panel-body">
 
                                     @include('human-resources.employees.partials.create.step1.personal_data')
-
-                                </div>
-                            </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-picture-o text-info"></i> Imagen de Perfil</h3>
-                                </div>
-                                <div class="panel-body">
-
-                                    <div class="row">
-                                        <div id="perfilImgCropper" class="col-md-9 cropper text-center">
-
-                                            <img id="perfil-img" src="{{ asset('assets/images/img-test1.jpg') }}" alt="">
-
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="cropper-preview clearfix" id="simpleCropperPreview">
-                                                <div class="img-preview preview-lg img-rounded img-bordered img-bordered-primary"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                    <br/>
 
                                 </div>
                             </div>
@@ -435,7 +407,6 @@
     {{ Html::script('assets/js/bootstrap-datepicker.js') }}
     {{ Html::script('assets/js/bootstrap-datepicker.es.min.js') }}
     {{ Html::script('assets/js/jquery.webui-popover.js') }}
-    {{ Html::script('assets/js/cropper.min.js') }}
     {{ Html::script('assets/js/components/matchheight.js') }}
     {{ Html::script('me/js/common/scrollTop.js') }}
 
@@ -458,21 +429,10 @@
             var count_family_responsabilities   = 0;
 
             /**
-             *  Constructor Wizard and Image Crop
+             *  Constructor Wizard
              */
 
             var wizard = $('#form_new_employee').wizard({}).data('wizard');
-
-            $("#perfilImgCropper img").cropper({
-                preview: "#simpleCropperPreview >.img-preview",
-                responsive: true,
-                crop: function(e) {
-                    /*console.log(e.x);
-                    console.log(e.y);
-                    console.log(e.width);
-                    console.log(e.height);*/
-                }
-            });
 
             /**
              *  Initializa date type (before and after today)
@@ -1095,11 +1055,8 @@
                         }
 
                         break;
-
                 }
-
             });
-
         });
 
     </script>

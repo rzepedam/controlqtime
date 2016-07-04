@@ -6,8 +6,6 @@
     {{ Html::style('assets/css/ribbon.css') }}
     {{ Html::style('assets/css/webui-popover.css') }}
     {{ Html::style('assets/css/bootstrap-datepicker.css') }}
-    {{ Html::style('assets/css/cropper.css') }}
-    {{ Html::style('assets/css/image-cropping.css') }}
 
 @stop
 
@@ -74,28 +72,6 @@
                                 <div class="panel-body">
 
                                     @include('human-resources.employees.partials.edit.step1.personal_data')
-
-                                </div>
-                            </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-picture-o text-info"></i> Imagen de Perfil</h3>
-                                </div>
-                                <div class="panel-body">
-
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-
-                                            <img src="{{ asset('assets/images/5.jpg') }}" />
-
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="cropper-preview clearfix" id="simpleCropperPreview">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
 
                                 </div>
                             </div>
@@ -457,7 +433,6 @@
     {{ Html::script('assets/js/bootstrap-datepicker.js') }}
     {{ Html::script('assets/js/bootstrap-datepicker.es.min.js') }}
     {{ Html::script('assets/js/jquery.webui-popover.js') }}
-    {{ Html::script('assets/js/cropper.min.js') }}
     {{ Html::script('assets/js/components/matchheight.js') }}
     {{ Html::script('me/js/common/scrollTop.js') }}
 
@@ -488,21 +463,10 @@
             var id_delete_family_responsability = [];
 
             /**
-             *  Constructor Wizard and Image Crop
+             *  Constructor Wizard
              */
 
             var wizard = $('#form_edit_employee').wizard({}).data('wizard');
-
-            $("#perfilImgCropper img").cropper({
-                preview: "#simpleCropperPreview >.img-preview",
-                responsive: true,
-                crop: function (e) {
-                    console.log(e.x);
-                    console.log(e.y);
-                    console.log(e.width);
-                    console.log(e.height);
-                }
-            });
 
             /**
              *  Initializa date type (before and after today)

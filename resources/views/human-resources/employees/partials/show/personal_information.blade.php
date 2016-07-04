@@ -32,8 +32,7 @@
                             </table>
                         </div>
                         <div class="col-md-2" style="margin-top: 3px;">
-                            <img src="{{ asset('assets/images/5.jpg') }}" alt="{{ $employee->full_name }}" width="152"
-                                 height="152" class="img-bordered img-bordered-primary">
+                            <img src="https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/06/29/163531241838.jpg" alt="{{ $employee->full_name }}" width="152" height="152" class="img-bordered img-bordered-primary">
                         </div>
                     </div>
                 </div>
