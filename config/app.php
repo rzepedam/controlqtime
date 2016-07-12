@@ -166,6 +166,7 @@ return [
 		Controlqtime\Providers\BackendServiceProvider::class,
 		Barryvdh\Snappy\ServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
+		Dingo\Api\Provider\LaravelServiceProvider::class
 	],
 
 	/*

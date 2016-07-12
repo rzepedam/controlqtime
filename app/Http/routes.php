@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version('v1', function ($api) {
+    $api->group(['namespace' => 'Controlqtime\Core\Api\Http\Controllers'], function($api) {
+        $api->resource('access-control', 'AccessControlController');
+    });
+});
+
 Route::group(['middleware' => ['web']], function () {
 
     require __DIR__ . '/Routes/home/admin.php';
