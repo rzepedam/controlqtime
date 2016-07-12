@@ -2,16 +2,21 @@
 
 namespace Controlqtime\Core\Api\Http\Controllers;
 
+use Controlqtime\Core\Api\Entities\AccessControl;
+use Controlqtime\Core\Api\Transformers\AccessControlTransformer;
 use Controlqtime\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Dingo\Api\Routing\Helpers;
 
 use Controlqtime\Http\Requests;
 
 class AccessControlController extends Controller
 {
+    use Helpers;
+
     public function index()
     {
-        dd('...');
+        return $this->response->paginator(AccessControl::paginate(10), new AccessControlTransformer());
     }
 
 
