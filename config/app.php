@@ -224,6 +224,7 @@ return [
 		'PDF'      => Barryvdh\Snappy\Facades\SnappyPdf::class,
 		'Image'    => Barryvdh\Snappy\Facades\SnappyImage::class,
 		'Excel'    => Maatwebsite\Excel\Facades\Excel::class,
+		'Uuid' 	   => Webpatser\Uuid\Uuid::class,
 	],
 
 ];

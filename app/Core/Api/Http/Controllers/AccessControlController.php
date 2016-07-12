@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 
 use Controlqtime\Http\Requests;
+use Webpatser\Uuid\Uuid;
 
 class AccessControlController extends Controller
 {
@@ -19,21 +20,12 @@ class AccessControlController extends Controller
         return $this->response->paginator(AccessControl::paginate(10), new AccessControlTransformer());
     }
 
-
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['uuid'] = Uuid::generate(4)->string;
+        $accessControl = AccessControl::create($data);
+        return $this->response->item($accessControl, new AccessControlTransformer());
     }
 
     /**
