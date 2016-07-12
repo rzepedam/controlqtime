@@ -372,7 +372,11 @@
                             <div class="panel content-step">
 
                             </div>
-
+                            <div class="row hide show-icon">
+                                <div class="col-md-12 text-center">
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></i><span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
                         {{ Form::close() }}
 
                     </div>
@@ -413,9 +417,6 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-
-            var heightStep2 = $('#competencias_laborales').height();
-            var heightStep3 = $('#info_salud').height();
 
             var count_contacts                  = {{ Session::get('count_contacts') ? Session::get('count_contacts') : 0 }}
             var count_family_relationships      = {{ Session::get('count_family_relationships') ? Session::get('count_family_relationships') : 0 }};
@@ -494,7 +495,6 @@
                             });
 
                             scrollTop();
-
                         }
                     });
 
@@ -570,7 +570,6 @@
                             });
 
                             scrollTop();
-
                         }
                     });
                 }

@@ -7,16 +7,19 @@ use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\ListsTrait;
 use Controlqtime\Core\Traits\WhereMethodsTrait;
+use Controlqtime\Core\WebServices\Biometry\Biometry;
 
 class EmployeeRepo extends BaseRepo implements EmployeeRepoInterface {
 
 	use ListsTrait, WhereMethodsTrait;
 
 	protected $model;
+	protected $biometry;
 
 	public function __construct(Employee $model)
 	{
-		$this->model = $model;
+		$this->model    = $model;
+		$this->biometry = new Biometry();
 	}
 
 	public function checkState($id)
@@ -70,17 +73,32 @@ class EmployeeRepo extends BaseRepo implements EmployeeRepoInterface {
 				return $this->saveStateDisableEmployee($employee);
 		}
 
-		$employee->state     = 'enable';
-		$employee->condition = 'available';
-
-		return $employee->save();
+		return $this->saveStateEnableEmployee($employee);
 	}
 
 	public function saveStateDisableEmployee($employee)
 	{
+		if ($employee->state != 'disable')
+		{
+			$this->biometry->delete($employee);
+		}
+
 		$employee->state     = 'disable';
 		$employee->condition = 'unavailable';
 
+		return $employee->save();
+	}
+
+	public function saveStateEnableEmployee($employee)
+	{
+		if ($employee->state != 'enable')
+		{
+			$this->biometry->create($employee);
+		}
+
+		$employee->state     = 'enable';
+		$employee->condition = 'available';
+		
 		return $employee->save();
 	}
 
