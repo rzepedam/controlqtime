@@ -6,7 +6,10 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
     $api->group(['namespace' => 'Controlqtime\Core\Api\Http\Controllers'], function($api) {
-        $api->resource('access-control', 'AccessControlController');
+        $api->post('/auth/authorize-client', 'OAuthController@authorizeClient');
+        $api->group(['middleware' => 'api.auth'], function($api){
+            $api->resource('access-control', 'AccessControlController');
+        });
     });
 });
 

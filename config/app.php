@@ -155,6 +155,7 @@ return [
 		Controlqtime\Providers\AuthServiceProvider::class,
 		Controlqtime\Providers\EventServiceProvider::class,
 		Controlqtime\Providers\RouteServiceProvider::class,
+		Controlqtime\Core\Api\Providers\OAuthServiceProvider::class,
 
 		/*
 		 * Controlqtime Providers
@@ -166,7 +167,9 @@ return [
 		Controlqtime\Providers\BackendServiceProvider::class,
 		Barryvdh\Snappy\ServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
-		Dingo\Api\Provider\LaravelServiceProvider::class
+		Dingo\Api\Provider\LaravelServiceProvider::class,
+		LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
+		LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
 	],
 
 	/*
@@ -217,14 +220,15 @@ return [
 		 * Propias
 		 */
 
-		'Date'     => Jenssegers\Date\Date::class,
-		'Debugbar' => Barryvdh\Debugbar\Facade::class,
-		'Form'     => Collective\Html\FormFacade::class,
-		'Html'     => Collective\Html\HtmlFacade::class,
-		'PDF'      => Barryvdh\Snappy\Facades\SnappyPdf::class,
-		'Image'    => Barryvdh\Snappy\Facades\SnappyImage::class,
-		'Excel'    => Maatwebsite\Excel\Facades\Excel::class,
-		'Uuid' 	   => Webpatser\Uuid\Uuid::class,
+		'Date'     		=> Jenssegers\Date\Date::class,
+		'Debugbar' 		=> Barryvdh\Debugbar\Facade::class,
+		'Form'     		=> Collective\Html\FormFacade::class,
+		'Html'     		=> Collective\Html\HtmlFacade::class,
+		'PDF'      		=> Barryvdh\Snappy\Facades\SnappyPdf::class,
+		'Image'    		=> Barryvdh\Snappy\Facades\SnappyImage::class,
+		'Excel'    		=> Maatwebsite\Excel\Facades\Excel::class,
+		'Uuid' 	   		=> Webpatser\Uuid\Uuid::class,
+		'Authorizer' 	=> LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
 	],
 
 ];
