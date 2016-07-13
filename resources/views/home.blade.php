@@ -19,6 +19,6 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        Test x 2
+        {{ phpinfo() }}
     </div>
 </div>
