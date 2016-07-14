@@ -138,9 +138,9 @@
         enableWhenVisited: false,
 
         buttonLabels: {
-            next: 'Siguiente <i class="fa fa-arrow-circle-right"></i>',
+            next: 'Siguiente <span class="replace-next"><i class="fa fa-arrow-circle-right"></i></span>',
             back: '<i class="fa fa-arrow-circle-left"></i> Anterior',
-            finish: '<i class="fa fa-floppy-o"></i> Guardar'
+            finish: '<span class="replace-icon"><i class="fa fa-floppy-o"></i> Guardar</span>'
         },
 
         loading: {

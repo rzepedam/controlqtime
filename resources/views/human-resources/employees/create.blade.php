@@ -550,11 +550,14 @@
 
                 if (validateStep3()) {
 
+                    $('.finish').addClass('btn-warning');
+                    $('.replace-icon').html('<i class="fa fa-spinner fa-spin fa-fw"></i> Guardando...');
+
                     $.ajax({
                         type: 'POST',
                         url: '{{ route("human-resources.employees.store") }}',
                         data: $('#step3').serialize() + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_exams=" + count_exams + "&count_family_responsabilities=" + count_family_responsabilities,
-                        async: false,
+                        async: true,
                         dataType: "json",
                         success: function (response) {
                             if (response.status) {
@@ -562,6 +565,8 @@
                             }
                         },
                         error: function (response) {
+                            $('.finish').removeClass('btn-warning').addClass('btn-success');
+                            $('.replace-icon').html('<i class="fa fa-floppy-o"></i> Guardar');
                             var errors = $.parseJSON(response.responseText);
                             $.each(errors, function (index, value) {
                                 $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
