@@ -14,6 +14,6 @@ class HomeController extends Controller
     
     public function index()
     {
-        return view('maintenance');
+        return view('errors.503');
     }
 }
