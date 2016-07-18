@@ -26,9 +26,9 @@
     <![endif]-->
     <div class="page animsition vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
         <div class="page-content vertical-align-middle">
-            <i class="icon md-settings icon-spin fa-5x page-maintenance-icon" aria-hidden="true"></i>
+            <i class="icon md-settings icon-spin fa-5x page-maintenance-icon text-primary" aria-hidden="true"></i>
             <h2>En Mantenimiento</h2>
-            <p>PORFAVOR, ESTAMOS TRABAJANDO PARA BRINDARTE UN MEJOR SERVICIO</p>
+            <p>ESTAMOS TRABAJANDO PARA BRINDARTE UN MEJOR SERVICIO</p>
             <footer class="page-copyright">
                 <p>WEBSITE BY @ControlQTime</p>
                 <p>© 2016. Todos los derechos reservados.</p>

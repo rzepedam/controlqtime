@@ -384,10 +384,6 @@ class EmployeeController extends Controller {
 		// Nueva certificación deshabilita Employee
 		if ( $employee->num_certifications < $request->get('count_certifications') )
 		{
-			// echo ($employee->num_certifications) . '<br>';
-			// echo ($request->get('count_certifications')) . '<br>';
-			// dd('...');
-
 			$this->employee->saveStateDisableEmployee($employee);
 		}
 
