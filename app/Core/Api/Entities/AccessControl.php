@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class AccessControl extends Eloquent
 {
     protected $fillable = array(
-		'uuid', 'rut', 'num_device', 'status'
+		'uuid', 'rut', 'num_device', 'status', 'created_at'
 	);
 }
