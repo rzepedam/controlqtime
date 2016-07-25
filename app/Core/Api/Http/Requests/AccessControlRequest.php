@@ -16,7 +16,8 @@ class AccessControlRequest extends Request
         return [
             'rut' 			=> 'required|max:15|unique:access_controls',
 			'num_device'	=> 'required',
-			'status' 		=> 'required'
+			'status' 		=> 'required',
+			'created_at'	=> 'required'
         ];
     }
 }
