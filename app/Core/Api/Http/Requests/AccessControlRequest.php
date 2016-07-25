@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Core\Api\Http\Requests;
 
-use Controlqtime\Http\Requests\Request;
+use Dingo\Api\Http\FormRequest as Request;
 
 class AccessControlRequest extends Request
 {
