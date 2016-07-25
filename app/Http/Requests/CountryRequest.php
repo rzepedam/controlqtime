@@ -7,6 +7,8 @@ use Illuminate\Routing\Route;
 
 class CountryRequest extends SanitizedRequest
 {
+	protected $route;
+
     public function __construct(Route $route)
     {
         $this->route = $route;
