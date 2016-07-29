@@ -138,7 +138,7 @@
         enableWhenVisited: false,
 
         buttonLabels: {
-            next: 'Siguiente <span class="replace-next"><i class="fa fa-arrow-circle-right"></i></span>',
+            next: '<span class="replace-next">Siguiente <i class="fa fa-arrow-circle-right"></i></span>',
             back: '<i class="fa fa-arrow-circle-left"></i> Anterior',
             finish: '<span class="replace-icon"><i class="fa fa-floppy-o"></i> Guardar</span>'
         },
@@ -732,6 +732,7 @@
         },
 
         next: function() {
+            $('.replace-next').html('Enviando...');
             if (this._current < this.lastIndex()) {
                 var from = this._current,
                     to = this._current + 1;

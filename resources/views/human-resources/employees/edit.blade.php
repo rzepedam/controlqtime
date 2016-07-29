@@ -26,8 +26,7 @@
             <div id="form_edit_employee" class="wizard">
 
                 {{-- Steps --}}
-                <div class="steps wizard-steps steps-sm row" data-plugin="matchHeight" data-by-row="true"
-                     role="tablist">
+                <div class="steps wizard-steps steps-sm row" data-plugin="matchHeight" data-by-row="true" role="tablist">
                     <div class="step col-md-4 current" data-target="#datos_personales" role="tab">
                         <span class="step-number">1</span>
                         <div class="step-desc">
@@ -63,7 +62,7 @@
                 <div class="wizard-content">
                     <div class="wizard-pane active" id="datos_personales" role="tabpanel">
 
-                        {{ Form::model($employee, array("route" => array("human-resources.employees.updateStep1", $employee->id), "method" => "PUT", "files" => true, "id" => "step1")) }}
+                        {{ Form::model($employee, array("route" => array("human-resources.employees.updateSessionStep1", $employee), "method" => "PUT", "files" => true, "id" => "step1")) }}
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
@@ -145,7 +144,7 @@
                     </div>
                     <div class="wizard-pane" id="competencias_laborales" role="tabpanel">
 
-                        {{ Form::model($employee, array("route" => array("human-resources.employees.updateStep2", $employee->id), "method" => "PUT", "id" => "step2")) }}
+                        {{ Form::model($employee, array("route" => array("human-resources.employees.updateSessionStep2", $employee), "method" => "PUT", "id" => "step2")) }}
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
@@ -507,9 +506,9 @@
                     var full_name   = capitalize($('#first_name').val()) + " " + capitalize($('#second_name').val()) + " " + capitalize($('#male_surname').val()) + " " + capitalize($('#female_surname').val());
                     var status      = false;
                     var url         = $('#step1').attr('action');
-
+                    alert('setValidator');
                     $.ajax({
-                        type: 'POST',
+                        type: 'PUT',
                         url: url,
                         data: $('#step1').serialize() + "&full_name=" + full_name + "&count_contacts=" + count_contacts + "&count_family_relationships=" + count_family_relationships + "&id_delete_contact=" + id_delete_contact + "&id_delete_family_relationship=" + id_delete_family_relationship,
                         async: false,
@@ -533,6 +532,7 @@
                     });
 
                     return status;
+
                 }
             });
 
@@ -540,7 +540,7 @@
              *  Validation and submit Step2
              */
 
-            wizard.get('#competencias_laborales').setValidator(function () {
+            /*wizard.get('#competencias_laborales').setValidator(function () {
 
                 if (validateStep2()) {
 
@@ -548,7 +548,7 @@
                     var url    = $('#step2').attr('action');
 
                     $.ajax({
-                        type: 'POST',
+                        type: 'PUT',
                         url: url,
                         data: $('#step2').serialize() + "&count_studies=" + count_studies + "&count_certifications=" + count_certifications + "&count_specialities=" + count_specialities + "&count_professional_licenses=" + count_professional_licenses + "&id_delete_study=" + id_delete_study + "&id_delete_certification=" + id_delete_certification + "&id_delete_speciality=" + id_delete_speciality + "&id_delete_professional_license=" + id_delete_professional_license,
                         async: false,
@@ -575,13 +575,13 @@
                     return status;
                 }
 
-            });
+            });*/
 
             /**
              *  Validation and submit Step3
              */
 
-            wizard.get('#info_salud').setValidator(function () {
+            /*wizard.get('#info_salud').setValidator(function () {
 
                 if (validateStep3()) {
 
@@ -612,7 +612,7 @@
                     });
                 }
 
-            });
+            });*/
 
             /**
              *  Add Contact

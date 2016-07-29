@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/waves.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/v1.min.css') }}">
     {{ Html::style('assets/css/toastr.css') }}
+    {{ Html::style('assets/css/custom-color-toastr.css') }}
     <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
 
     @yield('css')

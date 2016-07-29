@@ -136,6 +136,167 @@ class EmployeeController extends Controller {
 
 	}
 
+	public function store(Step3Request $request)
+	{
+		$employee = $this->employee->create(Session::get('step1'));
+		$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
+		$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
+		$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
+		$this->certification->createOrUpdateWithArray(Session::get('step2'), $employee);
+		$this->speciality->createOrUpdateWithArray(Session::get('step2'), $employee);
+		$this->professionalLicense->createOrUpdateWithArray(Session::get('step2'), $employee);
+		$this->disability->createOrUpdateWithArray($request->all(), $employee);
+		$this->disease->createOrUpdateWithArray($request->all(), $employee);
+		$this->exam->createOrUpdateWithArray($request->all(), $employee);
+		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
+
+		$this->checkStateStoreEmployee($employee, $request);
+
+		$this->destroyEmployeeData();
+
+		return response()->json([
+			'status' => true,
+			'url'    => '/human-resources/employees'
+		]);
+	}
+
+	public function checkStateStoreEmployee($employee, $request)
+	{
+		if ( Session::get('count_certifications') + Session::get('count_specialities') + Session::get('count_professional_licenses') + $request->get('count_disabilities') + $request->get('count_diseases') + $request->get('count_exams') + $request->get('count_family_responsabilities') == 0 )
+		{
+			$this->employee->saveStateEnableEmployee($employee);
+		}
+	}
+
+	public function edit($id)
+	{
+		$employee                   = $this->employee->find($id);
+		$communes                   = $this->commune->lists('name', 'id');
+		$companies                  = $this->company->whereLists('state', 'enable', 'firm_name');
+		$countries                  = $this->country->lists('name', 'id');
+		$degrees                    = $this->degree->lists('name', 'id');
+		$employees                  = $this->employee->lists('full_name', 'id');
+		$genders                    = $this->gender->lists('name', 'id');
+		$institutions               = $this->institution->lists('name', 'id');
+		$provinces                  = $this->province->lists('name', 'id');
+		$regions                    = $this->region->lists('name', 'id');
+		$relationships              = $this->relationship->lists('name', 'id');
+		$type_certifications        = $this->type_certification->lists('name', 'id');
+		$type_disabilities          = $this->type_disability->lists('name', 'id');
+		$type_diseases              = $this->type_disease->lists('name', 'id');
+		$type_exams                 = $this->type_exam->lists('name', 'id');
+		$type_professional_licenses = $this->type_professional_license->lists('name', 'id');
+		$type_specialities          = $this->type_speciality->lists('name', 'id');
+
+		return view('human-resources.employees.edit', compact(
+			'employee', 'communes', 'companies', 'countries', 'degrees', 'employees', 'genders', 'institutions',
+			'provinces', 'regions', 'relationships', 'type_certifications', 'type_disabilities', 'type_diseases',
+			'type_exams', 'type_professional_licenses', 'type_specialities'
+		));
+
+	}
+
+	public function update(Step3Request $request, $id)
+	{
+		$employee = $this->employee->find($id);
+
+		// Update Step1 data
+		$this->employee->update($request->session()->get('step1_update'), $id);
+		$this->contact_employee->destroyArrayId($request->session()->get('id_delete_contact_update'));
+		$this->contact_employee->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
+		$this->family_relationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'));
+		$this->family_relationship->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
+
+		// Update Step2 data
+		$this->study->destroyArrayId($request->session()->get('id_delete_study_update'));
+		$this->study->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
+		$this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'certification');
+		$this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'));
+		$this->certification->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
+		$this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'speciality');
+		$this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'));
+		$this->speciality->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
+		$this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'professional_license');
+		$this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'));
+		$this->professionalLicense->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
+
+		// Update Step3 data
+		$this->disability->destroyImages($request->get('id_delete_disability'), 'disability');
+		$this->disability->destroyArrayId($request->get('id_delete_disability'));
+		$this->disability->createOrUpdateWithArray($request->all(), $employee);
+		$this->disease->destroyImages($request->get('id_delete_disease'), 'disease');
+		$this->disease->destroyArrayId($request->get('id_delete_disease'));
+		$this->disease->createOrUpdateWithArray($request->all(), $employee);
+		$this->exam->destroyImages($request->get('id_delete_exam'), 'exam');
+		$this->exam->destroyArrayId($request->get('id_delete_exam'));
+		$this->exam->createOrUpdateWithArray($request->all(), $employee);
+		$this->family_responsability->destroyImages($request->get('id_delete_family_responsability'), 'family_responsability');
+		$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'));
+		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
+
+		return response()->json([
+			'status' => true,
+			'url'    => '/human-resources/employees'
+		]);
+	}
+
+	public function show($id)
+	{
+		$employee = $this->employee->find($id, array(
+			'commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
+			'studies.degree.institution', 'certifications', 'specialities', 'professionalLicenses'
+		));
+
+		return view('human-resources.employees.show', compact('employee'));
+	}
+
+	public function destroy($id)
+	{
+		$this->employee->delete($id);
+
+		return redirect()->route('human-resources.employees.index');
+	}
+
+	public function getImages($id)
+	{
+		$employee = $this->employee->find($id, array(
+			'certifications.imageCertificationEmployees', 'specialities.imageSpecialityEmployees',
+			'professionalLicenses.imageProfessionalLicenseEmployees', 'disabilities.imageDisabilityEmployees',
+			'diseases.imageDiseaseEmployees', 'exams.imageExamEmployees',
+			'familyResponsabilities.imageFamilyResponsabilityEmployees'
+		));
+
+		return view('human-resources.employees.upload', compact('id', 'employee'));
+	}
+
+	public function addImages(Request $request)
+	{
+		$save = $this->image->build($request->get('type'), $request->get('employee_id'), $request->get('repo_id'), $request->file('file_data'))->addImages();
+
+		if ( $save )
+		{
+			$this->employee->checkState($request->get('employee_id'));
+
+			return response()->json(['success' => true]);
+		}
+
+		return response()->json(['success' => false]);
+	}
+
+	public function deleteFiles(Request $request)
+	{
+		$destroy = $this->image->build($request->get('type'), null, $request->get('key'), null, $request->get('path'))->destroyImage();
+
+		if ( $destroy )
+		{
+			$this->employee->checkState($request->get('id'));
+
+			return response()->json(['success' => true]);
+		}
+
+		return response()->json(['success' => false]);
+	}
+
 	public function step1(Step1Request $request)
 	{
 		Session::put('step1', $request->all());
@@ -174,7 +335,6 @@ class EmployeeController extends Controller {
 		return response()->json([
 			'status' => true
 		]);
-
 	}
 
 	public function step2(Step2Request $request)
@@ -214,39 +374,7 @@ class EmployeeController extends Controller {
 		]);
 	}
 
-	public function store(Step3Request $request)
-	{
-		$employee = $this->employee->create(Session::get('step1'));
-		$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
-		$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
-		$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
-		$this->certification->createOrUpdateWithArray(Session::get('step2'), $employee);
-		$this->speciality->createOrUpdateWithArray(Session::get('step2'), $employee);
-		$this->professionalLicense->createOrUpdateWithArray(Session::get('step2'), $employee);
-		$this->disability->createOrUpdateWithArray($request->all(), $employee);
-		$this->disease->createOrUpdateWithArray($request->all(), $employee);
-		$this->exam->createOrUpdateWithArray($request->all(), $employee);
-		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
-
-		$this->checkStateStoreEmployee($employee, $request);
-
-		$this->destroyEmployeeData();
-
-		return response()->json([
-			'status' => true,
-			'url'    => '/human-resources/employees'
-		]);
-	}
-
-	public function checkStateStoreEmployee($employee, $request)
-	{
-		if ( Session::get('count_certifications') + Session::get('count_specialities') + Session::get('count_professional_licenses') + $request->get('count_disabilities') + $request->get('count_diseases') + $request->get('count_exams') + $request->get('count_family_responsabilities') == 0 )
-		{
-			$this->employee->saveStateEnableEmployee($employee);
-		}
-	}
-
-	public function destroyEmployeeData()
+	public function destroySessionStoreEmployee()
 	{
 		Session::forget('step1');
 		Session::forget('male_surname');
@@ -316,303 +444,40 @@ class EmployeeController extends Controller {
 		]);
 	}
 
-	public function edit($id)
+	public function updateSessionStep1(Step1Request $request)
 	{
-		$employee                   = $this->employee->find($id);
-		$communes                   = $this->commune->lists('name', 'id');
-		$companies                  = $this->company->whereLists('state', 'enable', 'firm_name');
-		$countries                  = $this->country->lists('name', 'id');
-		$degrees                    = $this->degree->lists('name', 'id');
-		$employees                  = $this->employee->lists('full_name', 'id');
-		$genders                    = $this->gender->lists('name', 'id');
-		$institutions               = $this->institution->lists('name', 'id');
-		$provinces                  = $this->province->lists('name', 'id');
-		$regions                    = $this->region->lists('name', 'id');
-		$relationships              = $this->relationship->lists('name', 'id');
-		$type_certifications        = $this->type_certification->lists('name', 'id');
-		$type_disabilities          = $this->type_disability->lists('name', 'id');
-		$type_diseases              = $this->type_disease->lists('name', 'id');
-		$type_exams                 = $this->type_exam->lists('name', 'id');
-		$type_professional_licenses = $this->type_professional_license->lists('name', 'id');
-		$type_specialities          = $this->type_speciality->lists('name', 'id');
-
-		return view('human-resources.employees.edit', compact(
-			'employee', 'communes', 'companies', 'countries', 'degrees', 'employees', 'genders', 'institutions',
-			'provinces', 'regions', 'relationships', 'type_certifications', 'type_disabilities', 'type_diseases',
-			'type_exams', 'type_professional_licenses', 'type_specialities'
-		));
-
-	}
-
-	public function updateStep1(Step1Request $request, $id)
-	{
-		$employee = $this->employee->find($id);
-		$this->employee->update($request->all(), $id);
-		$this->contact_employee->destroyArrayId($request->get('id_delete_contact'));
-		$this->contact_employee->createOrUpdateWithArray($request->all(), $employee);
-		$this->family_relationship->destroyArrayId($request->get('id_delete_family_relationship'));
-		$this->family_relationship->createOrUpdateWithArray($request->all(), $employee);
+		$request->session()->put('step1_update', $request->all());
+		$request->session()->put('id_delete_contact_update', $request->get('id_delete_contact'));
+		$request->session()->put('id_delete_family_relationship_update', $request->get('id_delete_family_relationship'));
 
 		return response()->json([
 			'status' => true
 		]);
 	}
 
-	public function updateStep2(Step2Request $request, $id)
+	public function updateSessionStep2(Step2Request $request)
 	{
-		$employee = $this->employee->find($id);
-		$this->checkStateUpdateStep2Employee($request, $employee);
-		$this->study->destroyArrayId($request->get('id_delete_study'));
-		$this->study->createOrUpdateWithArray($request->all(), $employee);
-		$this->certification->destroyImages($request->get('id_delete_certification'), 'certification');
-		$this->certification->destroyArrayId($request->get('id_delete_certification'));
-		$this->certification->createOrUpdateWithArray($request->all(), $employee);
-		$this->speciality->destroyImages($request->get('id_delete_speciality'), 'speciality');
-		$this->speciality->destroyArrayId($request->get('id_delete_speciality'));
-		$this->speciality->createOrUpdateWithArray($request->all(), $employee);
-		$this->professionalLicense->destroyImages($request->get('id_delete_professional_license'), 'professional_license');
-		$this->professionalLicense->destroyArrayId($request->get('id_delete_professional_license'));
-		$this->professionalLicense->createOrUpdateWithArray($request->all(), $employee);
+		$request->session()->put('step2_update', $request->all());
+		$request->session()->put('id_delete_study_update', $request->get('id_delete_study'));
+		$request->session()->put('id_delete_certification_update', $request->get('id_delete_certification'));
+		$request->session()->put('id_delete_speciality_update', $request->get('id_delete_speciality'));
+		$request->session()->put('id_delete_professional_license_update', $request->get('id_delete_professional_license'));
 
 		return response()->json([
 			'status' => true
 		]);
 	}
 
-	public function checkStateUpdateStep2Employee($request, $employee)
+	public function destroySessionUpdateEmployee(Request $request)
 	{
-		// Nueva certificación deshabilita Employee
-		if ( $employee->num_certifications < $request->get('count_certifications') )
-		{
-			$this->employee->saveStateDisableEmployee($employee);
-		}
-
-		for ($i = 0; $i < count($request->get('id_certification')); $i ++)
-		{
-			if ( $request->get('id_certification')[ $i ] != 0 )
-			{
-				$num_images = $this->certification->find($request->get('id_certification')[ $i ])->imageCertificationEmployees->count();
-				if ( $num_images == 0 )
-				{
-					$this->employee->saveStateDisableEmployee($employee);
-					break;
-				}
-
-				$this->employee->saveStateEnableEmployee($employee);
-			}
-		}
-
-		if ( $employee->num_specialities < $request->get('count_specialities') )
-		{
-			$this->employee->saveStateDisableEmployee($employee);
-		}
-
-		for ($i = 0; $i < count($request->get('id_speciality')); $i ++)
-		{
-			if ( $request->get('id_speciality')[ $i ] != 0 )
-			{
-				$num_images = $this->speciality->find($request->get('id_speciality')[ $i ])->imageSpecialityEmployees->count();
-				if ( $num_images == 0 )
-				{
-					$this->employee->saveStateDisableEmployee($employee);
-					break;
-				}
-
-				$this->employee->saveStateEnableEmployee($employee);
-			}
-		}
-
-		if ( $employee->num_professional_licenses < $request->get('count_professional_licenses') )
-		{
-			$this->employee->saveStateDisableEmployee($employee);
-		}
-
-		for ($i = 0; $i < count($request->get('id_professional_license')); $i ++)
-		{
-			if ( $request->get('id_professional_license')[ $i ] != 0 )
-			{
-				$num_images = count($this->professionalLicense->find($request->get('id_professional_license')[ $i ])->imageProfessionalLicenses);
-				if ( $num_images == 0 )
-				{
-					$this->employee->saveStateDisableEmployee($employee);
-					break;
-				}
-
-				$this->employee->saveStateEnableEmployee($employee);
-			}
-		}
-
-		return true;
-	}
-
-	public function update(Step3Request $request, $id)
-	{
-		$employee = $this->employee->find($id);
-		$this->checkStateUpdateStep3Employee($request, $employee);
-		$this->disability->destroyImages($request->get('id_delete_disability'), 'disability');
-		$this->disability->destroyArrayId($request->get('id_delete_disability'));
-		$this->disability->createOrUpdateWithArray($request->all(), $employee);
-		$this->disease->destroyImages($request->get('id_delete_disease'), 'disease');
-		$this->disease->destroyArrayId($request->get('id_delete_disease'));
-		$this->disease->createOrUpdateWithArray($request->all(), $employee);
-		$this->exam->destroyImages($request->get('id_delete_exam'), 'exam');
-		$this->exam->destroyArrayId($request->get('id_delete_exam'));
-		$this->exam->createOrUpdateWithArray($request->all(), $employee);
-		$this->family_responsability->destroyImages($request->get('id_delete_family_responsability'), 'family_responsability');
-		$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'));
-		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
-
-		return response()->json([
-			'status' => true,
-			'url'    => '/human-resources/employees'
-		]);
-	}
-
-	public function checkStateUpdateStep3Employee($request, $employee)
-	{
-		if ( $employee->num_disabilities < $request->get('count_disabilities') )
-		{
-			$this->employee->saveStateDisableEmployee($employee);
-		}
-
-		for ($i = 0; $i < count($request->get('id_disability')); $i ++)
-		{
-			if ( $request->get('id_disability')[ $i ] != 0 )
-			{
-				$num_images = $this->disability->find($request->get('id_disability')[ $i ])->imageDisabilityEmployees->count();
-				if ( $num_images == 0 )
-				{
-					$this->employee->saveStateDisableEmployee($employee);
-					break;
-				}
-
-				$this->employee->saveStateEnableEmployee($employee);
-			}
-		}
-
-		if ( $employee->num_diseases < $request->get('count_diseases') )
-		{
-			$this->employee->saveStateDisableEmployee($employee);
-		}
-
-		for ($i = 0; $i < count($request->get('id_disease')); $i ++)
-		{
-			if ( $request->get('id_disease')[ $i ] != 0 )
-			{
-				$num_images = $this->disease->find($request->get('id_disease')[ $i ])->imageDiseaseEmployees->count();
-				if ( $num_images == 0 )
-				{
-					$this->employee->saveStateDisableEmployee($employee);
-					break;
-				}
-
-				$this->employee->saveStateEnableEmployee($employee);
-			}
-		}
-
-		if ( $employee->num_exams < $request->get('count_exams') )
-		{
-			$this->employee->saveStateDisableEmployee($employee);
-		}
-
-		for ($i = 0; $i < count($request->get('id_exam')); $i ++)
-		{
-			if ( $request->get('id_exam')[ $i ] != 0 )
-			{
-				$num_images = $this->exam->find($request->get('id_exam')[ $i ])->imageExamEmployees->count();
-				if ( $num_images == 0 )
-				{
-					$this->employee->saveStateDisableEmployee($employee);
-					break;
-				}
-
-				$this->employee->saveStateEnableEmployee($employee);
-			}
-		}
-
-		if ( $employee->num_family_responsabilities < $request->get('count_family_responsabilities') )
-		{
-			$this->employee->saveStateDisableEmployee($employee);
-		}
-		
-		for ($i = 0; $i < count($request->get('id_family_responsability')); $i ++)
-		{
-			if ( $request->get('id_family_responsability')[ $i ] != 0 )
-			{
-				$num_images = $this->family_responsability->find($request->get('id_family_responsability')[ $i ])->imageFamilyResponsabilityEmployees->count();
-				if ( $num_images == 0 )
-				{
-					$this->employee->saveStateDisableEmployee($employee);
-					break;
-				}
-
-				$this->employee->saveStateEnableEmployee($employee);
-			}
-		}
-
-		if ( $request->get('count_certifications') + $request->get('count_specialities') + $request->get('count_professional_licenses') + $request->get('count_disabilities') + $request->get('count_diseases') + $request->get('count_exams') + $request->get('count_family_responsabilities') == 0 )
-		{
-			$this->employee->saveStateEnableEmployee($employee);
-		}
-
-		return true;
-	}
-
-	public function show($id)
-	{
-		$employee = $this->employee->find($id, array(
-			'commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
-			'studies.degree.institution', 'certifications', 'specialities', 'professionalLicenses'
-		));
-
-		return view('human-resources.employees.show', compact('employee'));
-	}
-
-	public function destroy($id)
-	{
-		$this->employee->delete($id);
-
-		return redirect()->route('human-resources.employees.index');
-	}
-
-	public function getImages($id)
-	{
-		$employee = $this->employee->find($id, array(
-			'certifications.imageCertificationEmployees', 'specialities.imageSpecialityEmployees',
-			'professionalLicenses.imageProfessionalLicenseEmployees', 'disabilities.imageDisabilityEmployees',
-			'diseases.imageDiseaseEmployees', 'exams.imageExamEmployees',
-			'familyResponsabilities.imageFamilyResponsabilityEmployees'
-		));
-
-		return view('human-resources.employees.upload', compact('id', 'employee'));
-	}
-
-	public function addImages(Request $request)
-	{
-		$save = $this->image->build($request->get('type'), $request->get('employee_id'), $request->get('repo_id'), $request->file('file_data'))->addImages();
-
-		if ( $save )
-		{
-			$this->employee->checkState($request->get('employee_id'));
-
-			return response()->json(['success' => true]);
-		}
-
-		return response()->json(['success' => false]);
-	}
-
-	public function deleteFiles(Request $request)
-	{
-		$destroy = $this->image->build($request->get('type'), null, $request->get('key'), null, $request->get('path'))->destroyImage();
-
-		if ( $destroy )
-		{
-			$this->employee->checkState($request->get('id'));
-
-			return response()->json(['success' => true]);
-		}
-
-		return response()->json(['success' => false]);
+		$request->session()->forget('step1_update');
+		$request->session()->forget('id_delete_contact_update');
+		$request->session()->forget('id_delete_family_relationship_update');
+		$request->session()->forget('step2_update');
+		$request->session()->forget('id_delete_study_update');
+		$request->session()->forget('id_delete_certification_update');
+		$request->session()->forget('id_delete_speciality_update');
+		$request->session()->forget('id_delete_professional_license_update');
 	}
 
 }
