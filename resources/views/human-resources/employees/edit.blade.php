@@ -506,7 +506,7 @@
                     var full_name   = capitalize($('#first_name').val()) + " " + capitalize($('#second_name').val()) + " " + capitalize($('#male_surname').val()) + " " + capitalize($('#female_surname').val());
                     var status      = false;
                     var url         = $('#step1').attr('action');
-                    alert('setValidator');
+
                     $.ajax({
                         type: 'PUT',
                         url: url,
@@ -540,7 +540,7 @@
              *  Validation and submit Step2
              */
 
-            /*wizard.get('#competencias_laborales').setValidator(function () {
+            wizard.get('#competencias_laborales').setValidator(function () {
 
                 if (validateStep2()) {
 
@@ -575,13 +575,13 @@
                     return status;
                 }
 
-            });*/
+            });
 
             /**
              *  Validation and submit Step3
              */
 
-            /*wizard.get('#info_salud').setValidator(function () {
+            wizard.get('#info_salud').setValidator(function () {
 
                 if (validateStep3()) {
 
@@ -612,7 +612,7 @@
                     });
                 }
 
-            });*/
+            });
 
             /**
              *  Add Contact

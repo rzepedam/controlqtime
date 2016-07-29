@@ -152,7 +152,7 @@ class EmployeeController extends Controller {
 
 		$this->checkStateStoreEmployee($employee, $request);
 
-		$this->destroyEmployeeData();
+		$this->destroySessionStoreEmployee();
 
 		return response()->json([
 			'status' => true,
@@ -164,8 +164,10 @@ class EmployeeController extends Controller {
 	{
 		if ( Session::get('count_certifications') + Session::get('count_specialities') + Session::get('count_professional_licenses') + $request->get('count_disabilities') + $request->get('count_diseases') + $request->get('count_exams') + $request->get('count_family_responsabilities') == 0 )
 		{
-			$this->employee->saveStateEnableEmployee($employee);
+			return $this->employee->saveStateEnableEmployee($employee);
 		}
+
+		return $this->employee->saveStateDisableEmployee($employee);
 	}
 
 	public function edit($id)
@@ -234,6 +236,8 @@ class EmployeeController extends Controller {
 		$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'));
 		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 
+		$this->checkStateStoreEmployee($employee, $request);
+
 		return response()->json([
 			'status' => true,
 			'url'    => '/human-resources/employees'
@@ -244,7 +248,7 @@ class EmployeeController extends Controller {
 	{
 		$employee = $this->employee->find($id, array(
 			'commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
-			'studies.degree.institution', 'certifications', 'specialities', 'professionalLicenses'
+			'studies.degree', 'studies.institution', 'certifications', 'specialities', 'professionalLicenses'
 		));
 
 		return view('human-resources.employees.show', compact('employee'));

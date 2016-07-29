@@ -732,7 +732,6 @@
         },
 
         next: function() {
-            $('.replace-next').html('Enviando...');
             if (this._current < this.lastIndex()) {
                 var from = this._current,
                     to = this._current + 1;
