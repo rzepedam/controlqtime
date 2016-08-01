@@ -14,10 +14,10 @@ class AccessControlRequest extends Request
     public function rules()
     {
         return [
-            'rut' 			=> 'required|max:15',
+			'rut' 			=> 'required|max:15|unique_with:access_controls,created_at',
             'num_device'	=> 'required',
-	          'status' 		=> 'required',
-	          'created_at'	=> 'required|date'
+	        'status' 		=> 'required',
+			'created_at'	=> 'required|date'
         ];
     }
 }

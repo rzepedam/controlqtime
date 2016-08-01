@@ -433,7 +433,11 @@
              *  Constructor Wizard
              */
 
-            var wizard = $('#form_new_employee').wizard({}).data('wizard');
+            var wizard = $('#form_new_employee').wizard({
+                onAfterShow: function(){
+                    $('.replace-next').html('<span class="replace-next">Siguiente <i class="fa fa-arrow-circle-right"></i></span>');
+                }
+            }).data('wizard');
 
             /**
              *  Initializa date type (before and after today)

@@ -18,7 +18,8 @@
         "guzzlehttp/guzzle": "~6.0",
         "dingo/api": "1.0.*@dev",
         "webpatser/laravel-uuid": "2.*",
-        "lucadegasperi/oauth2-server-laravel": "5.1.*"
+        "lucadegasperi/oauth2-server-laravel": "5.1.*",
+        "felixkiss/uniquewith-validator": "2.*"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
