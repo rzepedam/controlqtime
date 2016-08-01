@@ -1,4 +1,4 @@
-ç<?php
+<?php
 
 use Controlqtime\Core\Api\Entities\AccessControl;
 use Controlqtime\Core\Entities\Company;
