@@ -13,7 +13,7 @@ class CreateAccessControlsTable extends Migration
             $table->string('rut', 15);
             $table->string('num_device');
             $table->boolean('status')->default(0);
-            $table->timestamps();
+			$table->timestamp('created_at');
         });
     }
 
