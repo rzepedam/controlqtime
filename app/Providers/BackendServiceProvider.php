@@ -8,6 +8,11 @@ class BackendServiceProvider extends ServiceProvider
 {
     public function register()
     {
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\AccessControlRepoInterface',
+			'Controlqtime\Core\Repositories\AccessControlRepo'
+		);
+
         $this->app->bind(
             'Controlqtime\Core\Contracts\AreaRepoInterface',
             'Controlqtime\Core\Repositories\AreaRepo'

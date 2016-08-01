@@ -28,8 +28,10 @@ Route::group(['prefix' => 'human-resources'], function(){
 		Route::put('updateSessionStep2/{id}', ['as' => 'human-resources.employees.updateSessionStep2', 'uses' => 'EmployeeController@updateSessionStep2']);
 		Route::get('/session/destroySessionUpdateEmployee', ['as' => 'destroySessionUpdateEmployee', 'uses' => 'EmployeeController@destroySessionUpdateEmployee']);
 
-		/* Daily Assistance */
-		Route::post('startDailyAssistance', ['as' => 'human-resources.employees.startDailyAssistance', 'uses' => 'DailyAssistanceController@startAssistance']);
-		Route::post('updateDailyAssistance', ['as' => 'human-resources.employees.updateDailyAssistance', 'uses' => 'DailyAssistanceController@updateAssistance']);
 	});
+
+	// Access Controls
+	Route::get('getAccessControls', ['as' => 'human-resources.getAccessControls', 'uses' => 'AccessControlController@getAccessControls']);
+	Route::resource('access-controls', 'AccessControlController');
+
 });

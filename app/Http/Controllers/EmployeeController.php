@@ -102,6 +102,7 @@ class EmployeeController extends Controller {
 		return view('human-resources.employees.index');
 	}
 
+	// Load data table employee to bootstrap-table
 	public function getEmployees()
 	{
 		$employees = $this->employee->all(['company']);
