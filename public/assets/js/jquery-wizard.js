@@ -22,6 +22,7 @@
             };
 
         function test(property, prefixed) {
+
             var result = false,
                 upper = property.charAt(0).toUpperCase() + property.slice(1);
 
@@ -562,7 +563,7 @@
             this.$buttons = this.$buttons.appendTo($to);
         },
 
-        updateButtons: function() {
+        updateButtons: function(element) {
             var classes = this.options.classes.button;
             var $back = this.$buttons.find('[data-wizard="back"]');
             var $next = this.$buttons.find('[data-wizard="next"]');
@@ -587,7 +588,6 @@
             var self = this;
 
             $.each(this.steps, function(i, step) {
-
                 if (i > self._current) {
                     step.leave('error');
                     step.leave('active');
@@ -786,7 +786,7 @@
     });
 
     $(document).on('click', '[data-wizard]', function(e) {
-        
+
         e.preventDefault();
 
         var href;

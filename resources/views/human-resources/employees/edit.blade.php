@@ -465,7 +465,11 @@
              *  Constructor Wizard
              */
 
-            var wizard = $('#form_edit_employee').wizard({}).data('wizard');
+            var wizard = $('#form_edit_employee').wizard({
+                onFinish: function(){
+                    alert('onFinish');
+                }
+            }).data('wizard');
 
             /**
              *  Initializa date type (before and after today)
@@ -500,7 +504,7 @@
              */
 
             wizard.get('#datos_personales').setValidator(function () {
-
+                alert('datos_personales');
                 if (validateStep1()) {
 
                     var full_name   = capitalize($('#first_name').val()) + " " + capitalize($('#second_name').val()) + " " + capitalize($('#male_surname').val()) + " " + capitalize($('#female_surname').val());

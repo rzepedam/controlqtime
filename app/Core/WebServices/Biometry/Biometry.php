@@ -29,7 +29,6 @@ class Biometry implements BiometryInterface{
 				'last_name'  => $employee->male_surname
 			]
 		])->getBody();
-
 	}
 	
 	public function delete($employee)
