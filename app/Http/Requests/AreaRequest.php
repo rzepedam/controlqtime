@@ -7,32 +7,48 @@ use Illuminate\Routing\Route;
 
 class AreaRequest extends SanitizedRequest
 {
-    public function __construct(Route $route)
+	/**
+	 * @var Route
+	 */
+	protected $route;
+
+	/**
+	 * AreaRequest constructor.
+	 * @param Route $route
+	 */
+	public function __construct(Route $route)
     {
         $this->route = $route;
     }
 
-
-    public function authorize()
+	/**
+	 * @return bool
+	 */
+	public function authorize()
     {
         return true;
     }
 
-    public function rules()
+	/**
+	 * @return array
+	 */
+	public function rules()
     {
         switch($this->method())
         {
             case 'POST':
             {
                 return [
-                    //'name'  => 'required|max:50|unique:areas'
+					'name'  		=> 'required|max:50|unique_with:areas,terminal_id',
+					'terminal_id' 	=> 'required|regex:/[0-9 -()+]+$/'
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    //'name'  => 'required|max:50|unique:areas,name,' . $this->route->getParameter('areas')
+					'name'  		=> 'required|max:50|unique_with:areas,terminal_id,' . $this->route->getParameter('areas'),
+					'terminal_id' 	=> 'required|regex:/[0-9 -()+]+$/'
                 ];
             }
         }

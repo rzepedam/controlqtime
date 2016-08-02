@@ -7,35 +7,48 @@ use Illuminate\Routing\Route;
 
 class EngineCubicRequest extends SanitizedRequest
 {
-    private $route;
+	/**
+	 * @var Route
+	 */
+	protected $route;
 
-    public function __construct(Route $route)
+	/**
+	 * EngineCubicRequest constructor.
+	 * @param Route $route
+	 */
+	public function __construct(Route $route)
     {
         $this->route = $route;
     }
 
-    public function authorize()
+	/**
+	 * @return bool
+	 */
+	public function authorize()
     {
         return true;
     }
 
-    public function rules()
+	/**
+	 * @return array
+	 */
+	public function rules()
     {
         switch($this->method())
         {
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:30|unique:engine_cubics',
-                    'acr'   => 'required|max:5|unique:engine_cubics'
+                    'name'  => 'required|max:30|unique_with:engine_cubics,acr',
+                    'acr'   => 'required|max:5'
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:30|unique:engine_cubics,name,' . $this->route->getParameter('engine_cubics'),
-                    'acr'   => 'required|max:5|unique:engine_cubics,acr,' . $this->route->getParameter('engine_cubics')
+                    'name'  => 'required|max:30|unique_with:engine_cubics,acr,' . $this->route->getParameter('engine_cubics'),
+                    'acr'   => 'required|max:5'
                 ];
             }
         }

@@ -15,6 +15,8 @@ $api->version('v1', function ($api) {
 
 Route::group(['middleware' => ['web']], function () {
 
+	Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
     require __DIR__ . '/Routes/home/admin.php';
 
     require __DIR__ . '/Routes/administration/admin.php';

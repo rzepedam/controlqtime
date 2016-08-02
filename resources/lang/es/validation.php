@@ -137,6 +137,7 @@ return [
          */
         'model_vehicle_id'                      => 'Modelo',
         'type_vehicle_id'                       => 'Tipo de Vehículo',
+		'trademark_id'							=> 'Marca',
         'year'                                  => 'Año',
         'color'                                 => 'Color',
         'patent'                                => 'Patente',
@@ -151,8 +152,10 @@ return [
          * Others
          */
         'acr'                                   => 'Acrónimo',
-        'name'                                  => 'Nombre'
-
+        'name'                                  => 'Nombre',
+		'terminal_id'							=> 'Terminal',
+		'country_id'							=> 'País',
+		'type_institution_id'					=> 'Tipo de Institución',
     ],
 
 ];

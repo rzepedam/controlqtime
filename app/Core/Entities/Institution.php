@@ -25,7 +25,7 @@ class Institution extends Eloquent
      */
 
     public function setNameAttribute($value) {
-        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+        $this->attributes['name'] = ucfirst($value, 'utf-8');
     }
 
 }

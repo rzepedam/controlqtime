@@ -26,18 +26,16 @@ class InstitutionRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    //'name'                  => 'required|max:75|unique:institutions',
-                    'name'                  => 'required|max:75',
-                    'type_institution_id'   => 'required'
+                    'name'                  => 'required|max:75|unique_with:institutions,type_institution_id',
+                    'type_institution_id'   => 'required|regex:/[0-9 -()+]+$/'
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    //'name'                  => 'required|max:75|unique:institutions,name,' . $this->route->getParameter('institutions'),
-                    'name'                  => 'required|max:75',
-                    'type_institution_id'   => 'required'
+                    'name'                  => 'required|max:75|unique_with:institutions,type_institution_id,' . $this->route->getParameter('institutions'),
+                    'type_institution_id'   => 'required|regex:/[0-9 -()+]+$/'
                 ];
             }
         }
