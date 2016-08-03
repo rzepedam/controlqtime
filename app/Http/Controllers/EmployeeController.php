@@ -312,7 +312,7 @@ class EmployeeController extends Controller
 			$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'));
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 
-			$this->employee->checkStateUpdate($id);
+			$this->employee->checkStateUpdateEmployee($id);
 			/*DB::commit();
 
 		} catch ( Exception $e )
