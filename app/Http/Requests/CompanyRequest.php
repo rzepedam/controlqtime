@@ -29,7 +29,7 @@ class CompanyRequest extends SanitizedRequest {
 			{
 				$rules = [
 					'type_company_id' => 'required|regex:/[0-9 -()+]+$/',
-					'rut'             => 'required|unique:companies,rut|max:15',
+					'rut'             => 'required|unique:companies,rut|max:10',
 					'firm_name'       => 'required',
 					'gyre'            => 'required',
 					'start_act'       => 'required|date',
@@ -70,7 +70,7 @@ class CompanyRequest extends SanitizedRequest {
 			{
 				$rules = [
 					'type_company_id' => 'required|regex:/[0-9 -()+]+$/',
-					'rut'             => 'required|max:15|unique:companies,rut,' . $this->route->getParameter('companies'),
+					'rut'             => 'required|max:10|unique:companies,rut,' . $this->route->getParameter('companies'),
 					'firm_name'       => 'required',
 					'gyre'            => 'required',
 					'start_act'       => 'required|date',

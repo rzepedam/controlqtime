@@ -156,6 +156,12 @@ return [
 		'terminal_id'							=> 'Terminal',
 		'country_id'							=> 'País',
 		'type_institution_id'					=> 'Tipo de Institución',
+
+		/*
+		 * Api
+		 */
+
+		'created_at'							=> 'Fecha Creación',
     ],
 
 ];

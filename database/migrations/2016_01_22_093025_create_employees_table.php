@@ -15,7 +15,7 @@ class CreateEmployeesTable extends Migration
             $table->string('first_name', 30);
             $table->string('second_name', 30);
             $table->string('full_name', 120);
-            $table->string('rut', 15);
+            $table->string('rut', 10);
             $table->date('birthday');
             $table->integer('nationality_id')->unsigned();
             $table->integer('gender_id')->unsigned();

@@ -9,7 +9,7 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 {
 	return [
 		'type_company_id' => rand(1, 2),
-		'rut'             => rand(100, 110) . "." . rand(100, 999) . "." . rand(100, 999) . "-" . rand(1, 9),
+		'rut'             => rand(100, 110) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'firm_name'       => $faker->company . " " . $faker->companySuffix,
 		'gyre'            => $faker->sentence,
 		'start_act'       => $faker->date($format = 'd-m-Y', $max = 'now'),
@@ -35,7 +35,7 @@ $factory->define(RepresentativeCompany::class, function (Faker\Generator $faker)
 		'female_surname'         => $faker->lastName,
 		'first_name'             => $faker->firstName,
 		'second_name'            => $faker->firstName,
-		'rut_representative'     => rand(3, 24) . "." . rand(100, 999) . "." . rand(100, 999) . "-" . rand(1, 9),
+		'rut_representative'     => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'birthday'               => $faker->date($format = 'd-m-Y', $max = 'now'),
 		'nationality_id'         => rand(1, 9),
 		'phone1_representative'  => $faker->phoneNumber,
@@ -58,7 +58,7 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'first_name'     => $firstName,
 		'second_name'    => $secondName,
 		'full_name'      => "$firstName $secondName $maleSurname $femaleSurname",
-		'rut'            => rand(3, 24) . "." . rand(100, 999) . "." . rand(100, 999) . "-" . rand(1, 9),
+		'rut'            => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'birthday'       => $faker->date($format = 'd-m-Y', $max = 'now'),
 		'nationality_id' => rand(1, 9),
 		'gender_id'      => rand(1, 2),
@@ -77,7 +77,7 @@ $factory->define(AccessControl::class, function (Faker\Generator $faker)
 {
 	return array(
 		'uuid'			=> $faker->uuid,
-		'rut'			=> rand(3, 24) . "." . rand(100, 999) . "." . rand(100, 999) . "-" . rand(1, 9),
+		'rut'			=> rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'num_device'	=> $faker->macAddress,
 		'status'		=> $faker->boolean
 	);

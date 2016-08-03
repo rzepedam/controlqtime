@@ -10,7 +10,7 @@ class CreateAccessControlsTable extends Migration
         Schema::create('access_controls', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uuid');
-            $table->string('rut', 15);
+            $table->string('rut', 10);
             $table->string('num_device');
             $table->boolean('status')->default(0);
 			$table->timestamp('created_at');

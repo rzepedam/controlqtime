@@ -16,7 +16,7 @@ class CreateRepresentativeCompaniesTable extends Migration
             $table->string('female_surname', 30);
             $table->string('first_name', 30);
             $table->string('second_name', 30);
-            $table->string('rut_representative', 15);
+            $table->string('rut_representative', 10);
             $table->date('birthday');
             $table->integer('nationality_id')->unsigned();
             $table->string('phone1_representative', 20);
