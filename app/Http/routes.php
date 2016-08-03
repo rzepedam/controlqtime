@@ -9,6 +9,7 @@ $api->version('v1', function ($api) {
         $api->post('/auth/authorize-client', 'OAuthController@authorizeClient');
         $api->group(['middleware' => 'api.auth'], function($api){
             $api->resource('access-control', 'AccessControlController');
+			$api->put('updateEmployeeImage', 'EmployeeController@update');
         });
     });
 });

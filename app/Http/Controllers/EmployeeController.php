@@ -32,11 +32,12 @@ use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
-use Controlqtime\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class EmployeeController extends Controller {
+class EmployeeController extends Controller
+{
 
 	protected $certification;
 	protected $commune;
@@ -68,33 +69,33 @@ class EmployeeController extends Controller {
 
 	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, CompanyRepoInterface $company, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam, FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense, DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam, FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee, ImageFactoryInterface $image)
 	{
-		$this->certification             = $certification;
-		$this->commune                   = $commune;
-		$this->company                   = $company;
-		$this->contact_employee          = $contact_employee;
-		$this->country                   = $country;
-		$this->degree                    = $degree;
-		$this->disability                = $disability;
-		$this->disease                   = $disease;
-		$this->employee                  = $employee;
-		$this->exam                      = $exam;
-		$this->family_relationship       = $family_relationship;
-		$this->family_responsability     = $family_responsability;
-		$this->gender                    = $gender;
-		$this->image                     = $image;
-		$this->institution               = $institution;
-		$this->professionalLicense       = $professionalLicense;
-		$this->province                  = $province;
-		$this->region                    = $region;
-		$this->relationship              = $relationship;
-		$this->speciality                = $speciality;
-		$this->study                     = $study;
-		$this->type_certification        = $type_certification;
-		$this->type_disability           = $type_disability;
-		$this->type_disease              = $type_disease;
-		$this->type_exam                 = $type_exam;
+		$this->certification = $certification;
+		$this->commune = $commune;
+		$this->company = $company;
+		$this->contact_employee = $contact_employee;
+		$this->country = $country;
+		$this->degree = $degree;
+		$this->disability = $disability;
+		$this->disease = $disease;
+		$this->employee = $employee;
+		$this->exam = $exam;
+		$this->family_relationship = $family_relationship;
+		$this->family_responsability = $family_responsability;
+		$this->gender = $gender;
+		$this->image = $image;
+		$this->institution = $institution;
+		$this->professionalLicense = $professionalLicense;
+		$this->province = $province;
+		$this->region = $region;
+		$this->relationship = $relationship;
+		$this->speciality = $speciality;
+		$this->study = $study;
+		$this->type_certification = $type_certification;
+		$this->type_disability = $type_disability;
+		$this->type_disease = $type_disease;
+		$this->type_exam = $type_exam;
 		$this->type_professional_license = $type_professional_license;
-		$this->type_speciality           = $type_speciality;
+		$this->type_speciality = $type_speciality;
 	}
 
 	public function index()
@@ -112,22 +113,22 @@ class EmployeeController extends Controller {
 
 	public function create()
 	{
-		$communes                   = $this->commune->lists('name', 'id');
-		$companies                  = $this->company->whereLists('state', 'enable', 'firm_name');
-		$countries                  = $this->country->lists('name', 'id');
-		$degrees                    = $this->degree->lists('name', 'id');
-		$employees                  = $this->employee->lists('full_name', 'id');
-		$genders                    = $this->gender->lists('name', 'id');
-		$institutions               = $this->institution->lists('name', 'id');
-		$provinces                  = $this->province->lists('name', 'id');
-		$regions                    = $this->region->lists('name', 'id');
-		$relationships              = $this->relationship->lists('name', 'id');
-		$type_certifications        = $this->type_certification->lists('name', 'id');
-		$type_disabilities          = $this->type_disability->lists('name', 'id');
-		$type_diseases              = $this->type_disease->lists('name', 'id');
-		$type_exams                 = $this->type_exam->lists('name', 'id');
+		$communes = $this->commune->lists('name', 'id');
+		$companies = $this->company->whereLists('state', 'enable', 'firm_name');
+		$countries = $this->country->lists('name', 'id');
+		$degrees = $this->degree->lists('name', 'id');
+		$employees = $this->employee->lists('full_name', 'id');
+		$genders = $this->gender->lists('name', 'id');
+		$institutions = $this->institution->lists('name', 'id');
+		$provinces = $this->province->lists('name', 'id');
+		$regions = $this->region->lists('name', 'id');
+		$relationships = $this->relationship->lists('name', 'id');
+		$type_certifications = $this->type_certification->lists('name', 'id');
+		$type_disabilities = $this->type_disability->lists('name', 'id');
+		$type_diseases = $this->type_disease->lists('name', 'id');
+		$type_exams = $this->type_exam->lists('name', 'id');
 		$type_professional_licenses = $this->type_professional_license->lists('name', 'id');
-		$type_specialities          = $this->type_speciality->lists('name', 'id');
+		$type_specialities = $this->type_speciality->lists('name', 'id');
 
 		return view('human-resources.employees.create', compact(
 			'communes', 'companies', 'countries', 'degrees', 'employees', 'genders', 'institutions',
@@ -171,25 +172,95 @@ class EmployeeController extends Controller {
 		return $this->employee->saveStateDisableEmployee($employee);
 	}
 
+	public function destroySessionStoreEmployee()
+	{
+		Session::forget('step1');
+		Session::forget('male_surname');
+		Session::forget('female_surname');
+		Session::forget('first_name');
+		Session::forget('second_name');
+		Session::forget('rut');
+		Session::forget('birthday');
+		Session::forget('nationality_id');
+		Session::forget('gender_id');
+		Session::forget('address');
+		Session::forget('depto');
+		Session::forget('block');
+		Session::forget('num_home');
+		Session::forget('region_id');
+		Session::forget('province_id');
+		Session::forget('commune_id');
+		Session::forget('email_employee');
+		Session::forget('phone1');
+		Session::forget('phone2');
+		Session::forget('company_id');
+		Session::forget('code');
+		Session::forget('count_contacts');
+		Session::forget('id_contact');
+		Session::forget('contact_relationship_id');
+		Session::forget('name_contact');
+		Session::forget('email_contact');
+		Session::forget('address_contact');
+		Session::forget('tel_contact');
+		Session::forget('count_family_relationships');
+		Session::forget('id_family_relationship');
+		Session::forget('relationship_id');
+		Session::forget('employee_family_id');
+		Session::forget('step2');
+		Session::forget('count_studies');
+		Session::forget('id_study');
+		Session::forget('degree_id');
+		Session::forget('name_study');
+		Session::forget('institution_study_id');
+		Session::forget('date_obtention');
+		Session::forget('count_certifications');
+		Session::forget('id_certification');
+		Session::forget('type_certification_id');
+		Session::forget('institution_certification_id');
+		Session::forget('emission_certification');
+		Session::forget('expired_certification');
+		Session::forget('count_specialities');
+		Session::forget('id_speciality');
+		Session::forget('type_speciality_id');
+		Session::forget('institution_speciality_id');
+		Session::forget('emission_speciality');
+		Session::forget('expired_speciality');
+		Session::forget('count_professional_licenses');
+		Session::forget('id_professional_license');
+		Session::forget('type_professional_license_id');
+		Session::forget('emission_license');
+		Session::forget('expired_license');
+		Session::forget('detail_license');
+
+		for ($i = 0; $i < Session::get('count_professional_licenses'); $i ++)
+		{
+			Session::forget('is_donor');
+		}
+
+		return response()->json([
+			'success' => true
+		]);
+	}
+
 	public function edit($id)
 	{
-		$employee                   = $this->employee->find($id);
-		$communes                   = $this->commune->lists('name', 'id');
-		$companies                  = $this->company->whereLists('state', 'enable', 'firm_name');
-		$countries                  = $this->country->lists('name', 'id');
-		$degrees                    = $this->degree->lists('name', 'id');
-		$employees                  = $this->employee->lists('full_name', 'id');
-		$genders                    = $this->gender->lists('name', 'id');
-		$institutions               = $this->institution->lists('name', 'id');
-		$provinces                  = $this->province->lists('name', 'id');
-		$regions                    = $this->region->lists('name', 'id');
-		$relationships              = $this->relationship->lists('name', 'id');
-		$type_certifications        = $this->type_certification->lists('name', 'id');
-		$type_disabilities          = $this->type_disability->lists('name', 'id');
-		$type_diseases              = $this->type_disease->lists('name', 'id');
-		$type_exams                 = $this->type_exam->lists('name', 'id');
+		$employee = $this->employee->find($id);
+		$communes = $this->commune->lists('name', 'id');
+		$companies = $this->company->whereLists('state', 'enable', 'firm_name');
+		$countries = $this->country->lists('name', 'id');
+		$degrees = $this->degree->lists('name', 'id');
+		$employees = $this->employee->lists('full_name', 'id');
+		$genders = $this->gender->lists('name', 'id');
+		$institutions = $this->institution->lists('name', 'id');
+		$provinces = $this->province->lists('name', 'id');
+		$regions = $this->region->lists('name', 'id');
+		$relationships = $this->relationship->lists('name', 'id');
+		$type_certifications = $this->type_certification->lists('name', 'id');
+		$type_disabilities = $this->type_disability->lists('name', 'id');
+		$type_diseases = $this->type_disease->lists('name', 'id');
+		$type_exams = $this->type_exam->lists('name', 'id');
 		$type_professional_licenses = $this->type_professional_license->lists('name', 'id');
-		$type_specialities          = $this->type_speciality->lists('name', 'id');
+		$type_specialities = $this->type_speciality->lists('name', 'id');
 
 		return view('human-resources.employees.edit', compact(
 			'employee', 'communes', 'companies', 'countries', 'degrees', 'employees', 'genders', 'institutions',
@@ -201,43 +272,53 @@ class EmployeeController extends Controller {
 
 	public function update(Step3Request $request, $id)
 	{
-		$employee = $this->employee->find($id);
+		/*DB::beginTransaction();
 
-		// Update Step1 data
-		$this->employee->update($request->session()->get('step1_update'), $id);
-		$this->contact_employee->destroyArrayId($request->session()->get('id_delete_contact_update'));
-		$this->contact_employee->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
-		$this->family_relationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'));
-		$this->family_relationship->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
+		try
+		{*/
+			$employee = $this->employee->find($id);
 
-		// Update Step2 data
-		$this->study->destroyArrayId($request->session()->get('id_delete_study_update'));
-		$this->study->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
-		$this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'certification');
-		$this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'));
-		$this->certification->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
-		$this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'speciality');
-		$this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'));
-		$this->speciality->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
-		$this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'professional_license');
-		$this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'));
-		$this->professionalLicense->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
+			// Update Step1 data
+			$this->employee->update($request->session()->get('step1_update'), $id);
+			$this->contact_employee->destroyArrayId($request->session()->get('id_delete_contact_update'));
+			$this->contact_employee->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
+			$this->family_relationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'));
+			$this->family_relationship->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
 
-		// Update Step3 data
-		$this->disability->destroyImages($request->get('id_delete_disability'), 'disability');
-		$this->disability->destroyArrayId($request->get('id_delete_disability'));
-		$this->disability->createOrUpdateWithArray($request->all(), $employee);
-		$this->disease->destroyImages($request->get('id_delete_disease'), 'disease');
-		$this->disease->destroyArrayId($request->get('id_delete_disease'));
-		$this->disease->createOrUpdateWithArray($request->all(), $employee);
-		$this->exam->destroyImages($request->get('id_delete_exam'), 'exam');
-		$this->exam->destroyArrayId($request->get('id_delete_exam'));
-		$this->exam->createOrUpdateWithArray($request->all(), $employee);
-		$this->family_responsability->destroyImages($request->get('id_delete_family_responsability'), 'family_responsability');
-		$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'));
-		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
+			// Update Step2 data
+			$this->study->destroyArrayId($request->session()->get('id_delete_study_update'));
+			$this->study->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
+			$this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'certification');
+			$this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'));
+			$this->certification->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
+			$this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'speciality');
+			$this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'));
+			$this->speciality->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
+			$this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'professional_license');
+			$this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'));
+			$this->professionalLicense->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
 
-		$this->checkStateStoreEmployee($employee, $request);
+			// Update Step3 data
+			$this->disability->destroyImages($request->get('id_delete_disability'), 'disability');
+			$this->disability->destroyArrayId($request->get('id_delete_disability'));
+			$this->disability->createOrUpdateWithArray($request->all(), $employee);
+			$this->disease->destroyImages($request->get('id_delete_disease'), 'disease');
+			$this->disease->destroyArrayId($request->get('id_delete_disease'));
+			$this->disease->createOrUpdateWithArray($request->all(), $employee);
+			$this->exam->destroyImages($request->get('id_delete_exam'), 'exam');
+			$this->exam->destroyArrayId($request->get('id_delete_exam'));
+			$this->exam->createOrUpdateWithArray($request->all(), $employee);
+			$this->family_responsability->destroyImages($request->get('id_delete_family_responsability'), 'family_responsability');
+			$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'));
+			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
+
+			$this->employee->checkStateUpdate($id);
+			/*DB::commit();
+
+		} catch ( Exception $e )
+		{
+			DB::rollBack();
+		}*/
 
 		return response()->json([
 			'status' => true,
@@ -280,7 +361,7 @@ class EmployeeController extends Controller {
 
 		if ( $save )
 		{
-			$this->employee->checkState($request->get('employee_id'));
+			$this->employee->checkStateUpdateEmployee($request->get('employee_id'));
 
 			return response()->json(['success' => true]);
 		}
@@ -294,7 +375,7 @@ class EmployeeController extends Controller {
 
 		if ( $destroy )
 		{
-			$this->employee->checkState($request->get('id'));
+			$this->employee->checkStateUpdateEmployee($request->get('id'));
 
 			return response()->json(['success' => true]);
 		}
@@ -376,76 +457,6 @@ class EmployeeController extends Controller {
 
 		return response()->json([
 			'status' => true
-		]);
-	}
-
-	public function destroySessionStoreEmployee()
-	{
-		Session::forget('step1');
-		Session::forget('male_surname');
-		Session::forget('female_surname');
-		Session::forget('first_name');
-		Session::forget('second_name');
-		Session::forget('rut');
-		Session::forget('birthday');
-		Session::forget('nationality_id');
-		Session::forget('gender_id');
-		Session::forget('address');
-		Session::forget('depto');
-		Session::forget('block');
-		Session::forget('num_home');
-		Session::forget('region_id');
-		Session::forget('province_id');
-		Session::forget('commune_id');
-		Session::forget('email_employee');
-		Session::forget('phone1');
-		Session::forget('phone2');
-		Session::forget('company_id');
-		Session::forget('code');
-		Session::forget('count_contacts');
-		Session::forget('id_contact');
-		Session::forget('contact_relationship_id');
-		Session::forget('name_contact');
-		Session::forget('email_contact');
-		Session::forget('address_contact');
-		Session::forget('tel_contact');
-		Session::forget('count_family_relationships');
-		Session::forget('id_family_relationship');
-		Session::forget('relationship_id');
-		Session::forget('employee_family_id');
-		Session::forget('step2');
-		Session::forget('count_studies');
-		Session::forget('id_study');
-		Session::forget('degree_id');
-		Session::forget('name_study');
-		Session::forget('institution_study_id');
-		Session::forget('date_obtention');
-		Session::forget('count_certifications');
-		Session::forget('id_certification');
-		Session::forget('type_certification_id');
-		Session::forget('institution_certification_id');
-		Session::forget('emission_certification');
-		Session::forget('expired_certification');
-		Session::forget('count_specialities');
-		Session::forget('id_speciality');
-		Session::forget('type_speciality_id');
-		Session::forget('institution_speciality_id');
-		Session::forget('emission_speciality');
-		Session::forget('expired_speciality');
-		Session::forget('count_professional_licenses');
-		Session::forget('id_professional_license');
-		Session::forget('type_professional_license_id');
-		Session::forget('emission_license');
-		Session::forget('expired_license');
-		Session::forget('detail_license');
-
-		for ($i = 0; $i < Session::get('count_professional_licenses'); $i ++)
-		{
-			Session::forget('is_donor');
-		}
-
-		return response()->json([
-			'success' => true
 		]);
 	}
 

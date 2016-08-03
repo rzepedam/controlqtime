@@ -504,7 +504,7 @@
              */
 
             wizard.get('#datos_personales').setValidator(function () {
-                alert('datos_personales');
+
                 if (validateStep1()) {
 
                     var full_name   = capitalize($('#first_name').val()) + " " + capitalize($('#second_name').val()) + " " + capitalize($('#male_surname').val()) + " " + capitalize($('#female_surname').val());
