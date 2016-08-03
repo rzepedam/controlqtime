@@ -29,6 +29,7 @@ class CreateEmployeesTable extends Migration
             $table->string('phone2', 20);
             $table->integer('company_id')->unsigned();
             $table->string('code');
+			$table->string('url')->default('');
             $table->enum('state', ['enable', 'disable'])->default('disable');
             $table->enum('condition', ['available', 'unavailable'])->default('unavailable');
 

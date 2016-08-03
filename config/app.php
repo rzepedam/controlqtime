@@ -231,6 +231,8 @@ return [
 		'Excel'    		=> Maatwebsite\Excel\Facades\Excel::class,
 		'Uuid' 	   		=> Webpatser\Uuid\Uuid::class,
 		'Authorizer' 	=> LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
+		'Helper' 		=> Controlqtime\Helpers\Helper::class,
+
 	],
 
 ];
