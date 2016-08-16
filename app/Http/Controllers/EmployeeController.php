@@ -38,7 +38,6 @@ use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
-
 	protected $certification;
 	protected $commune;
 	protected $company;
@@ -140,21 +139,28 @@ class EmployeeController extends Controller
 
 	public function store(Step3Request $request)
 	{
-		$employee = $this->employee->create(Session::get('step1'));
-		$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
-		$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
-		$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
-		$this->certification->createOrUpdateWithArray(Session::get('step2'), $employee);
-		$this->speciality->createOrUpdateWithArray(Session::get('step2'), $employee);
-		$this->professionalLicense->createOrUpdateWithArray(Session::get('step2'), $employee);
-		$this->disability->createOrUpdateWithArray($request->all(), $employee);
-		$this->disease->createOrUpdateWithArray($request->all(), $employee);
-		$this->exam->createOrUpdateWithArray($request->all(), $employee);
-		$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
+		DB::beginTransaction();
+		try
+		{
+			$employee = $this->employee->create(Session::get('step1'));
+			$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
+			$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
+			$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
+			$this->certification->createOrUpdateWithArray(Session::get('step2'), $employee);
+			$this->speciality->createOrUpdateWithArray(Session::get('step2'), $employee);
+			$this->professionalLicense->createOrUpdateWithArray(Session::get('step2'), $employee);
+			$this->disability->createOrUpdateWithArray($request->all(), $employee);
+			$this->disease->createOrUpdateWithArray($request->all(), $employee);
+			$this->exam->createOrUpdateWithArray($request->all(), $employee);
+			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 
-		$this->checkStateStoreEmployee($employee, $request);
+			$this->checkStateStoreEmployee($employee, $request);
+			$this->destroySessionStoreEmployee();
+			DB::commit();
 
-		$this->destroySessionStoreEmployee();
+		} catch ( Exception $e ) {
+			DB::rollBack();
+		}
 
 		return response()->json([
 			'status' => true,
@@ -272,10 +278,9 @@ class EmployeeController extends Controller
 
 	public function update(Step3Request $request, $id)
 	{
-		/*DB::beginTransaction();
-
+		DB::beginTransaction();
 		try
-		{*/
+		{
 			$employee = $this->employee->find($id);
 
 			// Update Step1 data
@@ -313,12 +318,11 @@ class EmployeeController extends Controller
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 
 			$this->employee->checkStateUpdateEmployee($id);
-			/*DB::commit();
+			DB::commit();
 
-		} catch ( Exception $e )
-		{
+		} catch ( Exception $e ) {
 			DB::rollBack();
-		}*/
+		}
 
 		return response()->json([
 			'status' => true,

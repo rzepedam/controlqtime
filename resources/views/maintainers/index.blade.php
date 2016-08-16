@@ -280,7 +280,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-measuring-units" class="counter counter-lg counter-inverse bg-amber-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-measuring-units" class="counter counter-lg counter-inverse bg-amber-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
