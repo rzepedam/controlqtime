@@ -8,9 +8,16 @@ use Controlqtime\Http\Requests\CountryRequest;
 
 class CountryController extends Controller
 {
-    protected $country;
+	/**
+	 * @var CountryRepoInterface
+	 */
+	protected $country;
 
-    public function __construct(CountryRepoInterface $country)
+	/**
+	 * CountryController constructor.
+	 * @param CountryRepoInterface $country
+	 */
+	public function __construct(CountryRepoInterface $country)
     {
         $this->country = $country;
     }
@@ -20,7 +27,11 @@ class CountryController extends Controller
         return view('maintainers.countries.index');
     }
 
-    public function getCountries()
+	/**
+	 * return countries fot Bootstrap-table
+	 * @return mixed
+	 */
+	public function getCountries()
     {
         $countries = $this->country->all();
         return $countries;

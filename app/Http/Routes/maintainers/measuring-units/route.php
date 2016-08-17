@@ -4,6 +4,7 @@
 Route::get('measuring-units', ['as' => 'maintainers.measuring-units', function(){
 	return view('maintainers.measuring-units.index');
 }]);
+
 Route::group(['prefix' => 'measuring-units'], function() {
 
 	// Weight

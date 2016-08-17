@@ -158,6 +158,11 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\ProvinceRepo'
         );
 
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\NumHourRepoInterface',
+			'Controlqtime\Core\Repositories\NumHourRepo'
+		);
+
         $this->app->bind(
             'Controlqtime\Core\Contracts\RegionRepoInterface',
             'Controlqtime\Core\Repositories\RegionRepo'

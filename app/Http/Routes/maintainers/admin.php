@@ -16,6 +16,9 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getCities', ['as' => 'maintainers.getCities', 'uses' => 'CityController@getCities']);
 	Route::resource('cities', 'CityController');
 
+	// Contracts
+	require __DIR__ . '/contracts/route.php';
+
 	// Countries
 	Route::get('getCountries', ['as' => 'maintainers.getCountries', 'uses' => 'CountryController@getCountries']);
 	Route::resource('countries', 'CountryController');
@@ -35,6 +38,9 @@ Route::group(['prefix' => 'maintainers'], function() {
 	// Institutions
 	Route::get('getInstitutions', ['as' => 'maintainers.getInstitutions', 'uses' => 'InstitutionController@getInstitutions']);
 	Route::resource('institutions', 'InstitutionController');
+
+	// Measuring-Units
+	require __DIR__ . '/measuring-units/route.php';
 
 	// Model-Vehicles
 	Route::get('getModelVehicles', ['as' => 'maintainers.getModelVehicles', 'uses' => 'ModelVehicleController@getModelVehicles']);
@@ -114,6 +120,4 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getTypeVehicles', ['as' => 'maintainers.getTypeVehicles', 'uses' => 'TypeVehicleController@getTypeVehicles']);
 	Route::resource('type-vehicles', 'TypeVehicleController');
 
-	// Measuring-Units
-	require __DIR__ . '/measuring-units/route.php';
 });

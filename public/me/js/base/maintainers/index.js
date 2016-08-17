@@ -20,6 +20,10 @@ $(document).ready(function(){
         window.location.href = "/maintainers/fuels";
     });
 
+    $('#redirect-contracts').click(function() {
+        window.location.href = "/maintainers/contracts";
+    });
+
     $('#redirect-type-disabilities').click(function() {
         window.location.href = "/maintainers/type-disabilities";
     });

@@ -19,7 +19,6 @@ class CountryRequest extends SanitizedRequest
         return true;
     }
 
-
     public function rules()
     {
         switch($this->method())
