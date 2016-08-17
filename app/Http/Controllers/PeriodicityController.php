@@ -35,7 +35,7 @@ class PeriodicityController extends Controller
 	 */
 	public function index()
     {
-        return view('maintainers.contracts.periodicities.index');
+        return view('maintainers.periodicities.index');
     }
 
 	/**
@@ -43,7 +43,7 @@ class PeriodicityController extends Controller
 	 */
 	public function create()
     {
-    	return view('maintainers.contracts.periodicities.create');
+    	return view('maintainers.periodicities.create');
     }
 
 	/**
@@ -53,7 +53,7 @@ class PeriodicityController extends Controller
 	public function store(PeriodicityRequest $request)
     {
     	$this->periodiocity->create($request->all());
-		return redirect()->route('maintainers.contracts.periodicities.index');
+		return redirect()->route('maintainers.periodicities.index');
     }
 
 
@@ -64,7 +64,7 @@ class PeriodicityController extends Controller
 	public function edit($id)
     {
     	$periodicity = $this->periodiocity->find($id);
-        return view('maintainers.contracts.periodicities.edit', compact('periodicity'));
+        return view('maintainers.periodicities.edit', compact('periodicity'));
     }
 
 
@@ -76,7 +76,7 @@ class PeriodicityController extends Controller
 	public function update(PeriodicityRequest $request, $id)
     {
         $this->periodiocity->update($request->all(), $id);
-		return redirect()->route('maintainers.contracts.periodicities.index');
+		return redirect()->route('maintainers.periodicities.index');
     }
 
 	/**
@@ -86,6 +86,6 @@ class PeriodicityController extends Controller
 	public function destroy($id)
     {
         $this->periodiocity->delete($id);
-		return redirect()->route('maintainers.contracts.periodicities.index');
+		return redirect()->route('maintainers.periodicities.index');
     }
 }

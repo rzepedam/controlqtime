@@ -26,7 +26,7 @@ class NumHourController extends Controller
 	 */
 	public function index()
     {
-		return view('maintainers.contracts.num-hours.index');
+		return view('maintainers.num-hours.index');
     }
 
 	/**
@@ -43,7 +43,7 @@ class NumHourController extends Controller
 	 */
 	public function create()
     {
-        return view('maintainers.contracts.num-hours.create');
+        return view('maintainers.num-hours.create');
     }
 
 	/**
@@ -53,7 +53,7 @@ class NumHourController extends Controller
 	public function store(NumHourRequest $request)
     {
         $this->numHour->create($request->all());
-		return redirect()->route('maintainers.contracts.num-hours.index');
+		return redirect()->route('maintainers.num-hours.index');
     }
 
 	/**
@@ -63,7 +63,7 @@ class NumHourController extends Controller
 	public function edit($id)
     {
         $numHour = $this->numHour->find($id);
-		return view('maintainers.contracts.num-hours.edit', compact('numHour'));
+		return view('maintainers.num-hours.edit', compact('numHour'));
     }
 
 	/**
@@ -74,7 +74,7 @@ class NumHourController extends Controller
 	public function update(NumHourRequest $request, $id)
     {
         $this->numHour->update($request->all(), $id);
-		return redirect()->route('maintainers.contracts.num-hours.index');
+		return redirect()->route('maintainers.num-hours.index');
     }
 
 	/**
@@ -84,6 +84,6 @@ class NumHourController extends Controller
 	public function destroy($id)
     {
         $this->numHour->delete($id);
-		return redirect()->route('maintainers.contracts.num-hours.index');
+		return redirect()->route('maintainers.num-hours.index');
     }
 }

@@ -48,7 +48,7 @@ $(document).ready(function(){
         window.location.href = "/maintainers/institutions";
     });
 
-    $('#redirect-day-trip').click(function () {
+    $('#redirect-day-trips').click(function () {
         window.location.href = "/maintainers/day-trips";
     });
 
@@ -69,15 +69,15 @@ $(document).ready(function(){
     });
 
     $('#redirect-num-hours').click(function () {
-        window.location.href = "/maintainers/contracts/num-hours";
+        window.location.href = "/maintainers/num-hours";
     });
 
     $('#redirect-countries').click(function() {
         window.location.href = "/maintainers/countries";
     });
 
-    $('#redirect-periodicity').click(function () {
-        window.location.href = "/maintainers/contracts/periodicities";
+    $('#redirect-periodicities').click(function () {
+        window.location.href = "/maintainers/periodicities";
     });
 
     $('#redirect-forecasts').click(function() {

@@ -4,9 +4,8 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.contracts') }}"><i class="md-assignment"></i> Contratos</a></li>
-    <li><a href="{{ route('maintainers.contracts.periodicities.index') }}"><i class="fa fa-repeat"></i> Periocidad</a></li>
-    <li class="active">Nuevo</li>
+    <li><a href="{{ route('maintainers.periodicities.index') }}"><i class="fa fa-repeat"></i> Periocidades</a></li>
+    <li class="active">Editar</li>
 @stop
 
 @section('content')
@@ -15,18 +14,18 @@
 
     <div class="panel">
 
-        {{ Form::model($periodicity, array('route' => array('maintainers.contracts.periodicities.update', $periodicity), 'method' => 'PUT' )) }}
+        {{ Form::model($periodicity, array('route' => array('maintainers.periodicities.update', $periodicity), 'method' => 'PUT' )) }}
 
             <div class="panel-body">
 
-                @include('maintainers.contracts.periodicities.partials.fields')
+                @include('maintainers.periodicities.partials.fields')
 
             </div>
             <br />
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('maintainers.contracts.periodicities.index') }}">Volver</a>
+                        <a href="{{ route('maintainers.periodicities.index') }}">Volver</a>
                         <button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>
@@ -39,7 +38,7 @@
     <br />
     <br />
 
-    @include('maintainers.contracts.periodicities.partials.delete')
+    @include('maintainers.periodicities.partials.delete')
     <br />
 
 @stop

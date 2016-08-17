@@ -134,7 +134,7 @@
     <br />
     <div class="row">
         <div class="col-md-2">
-            <div id="redirect-day-trip" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-day-trips" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -184,7 +184,20 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-countries" class="counter counter-lg counter-inverse bg-deep-purple-200 vertical-align height-150 pointer">
+            <div id="redirect-num-hours" class="counter counter-lg counter-inverse bg-teal-200 vertical-align height-150 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Nº de Horas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <div id="redirect-countries" class="counter counter-lg counter-inverse bg-deep-purple-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-flag" aria-hidden="true"></i>
@@ -193,9 +206,16 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
+        <div class="col-md-2">
+            <div id="redirect-periodicities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 margin-bottom-5 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="fa fa-repeat" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Periocidades</span>
+                </div>
+            </div>
+        </div>
         <div class="col-md-2">
             <div id="redirect-forecasts" class="counter counter-lg counter-inverse bg-cyan-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
@@ -227,7 +247,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-relationships" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-relationships" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="icon md-male-female" aria-hidden="true"></i>
@@ -236,6 +256,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2">
             <div id="redirect-type-representatives" class="counter counter-lg counter-inverse bg-orange-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
@@ -247,7 +270,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-terminals" class="counter counter-lg counter-inverse bg-blue-grey-200 vertical-align height-150 pointer">
+            <div id="redirect-terminals" class="counter counter-lg counter-inverse bg-blue-grey-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-road" aria-hidden="true"></i>
@@ -256,9 +279,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2">
             <div id="redirect-type-companies" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
