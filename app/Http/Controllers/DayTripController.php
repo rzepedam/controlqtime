@@ -27,7 +27,7 @@ class DayTripController extends Controller
 	 */
 	public function index()
     {
-        return view('maintainers.contracts.day-trips.index');
+        return view('maintainers.day-trips.index');
     }
 
 	/**
@@ -44,7 +44,7 @@ class DayTripController extends Controller
 	 */
 	public function create()
     {
-        return view('maintainers.contracts.day-trips.create');
+        return view('maintainers.day-trips.create');
     }
 
 	/**
@@ -54,7 +54,7 @@ class DayTripController extends Controller
 	public function store(DayTripRequest $request)
     {
         $this->dayTrip->create($request->all());
-		return redirect()->route('maintainers.contracts.day-trips.index');
+		return redirect()->route('maintainers.day-trips.index');
     }
 
 	/**
@@ -64,7 +64,7 @@ class DayTripController extends Controller
 	public function edit($id)
     {
         $dayTrip = $this->dayTrip->find($id);
-		return view('maintainers.contracts.day-trips.edit', compact('dayTrip'));
+		return view('maintainers.day-trips.edit', compact('dayTrip'));
     }
 
 	/**
@@ -75,7 +75,7 @@ class DayTripController extends Controller
 	public function update(DayTripRequest $request, $id)
     {
         $this->dayTrip->update($request->all(), $id);
-		return redirect()->route('maintainers.contracts.day-trips.index');
+		return redirect()->route('maintainers.day-trips.index');
     }
 
 	/**
@@ -85,6 +85,6 @@ class DayTripController extends Controller
 	public function destroy($id)
     {
         $this->dayTrip->delete($id);
-		return redirect()->route('maintainers.contracts.day-trips.index');
+		return redirect()->route('maintainers.day-trips.index');
     }
 }

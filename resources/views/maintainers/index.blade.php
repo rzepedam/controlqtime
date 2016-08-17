@@ -58,20 +58,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-contracts" class="counter counter-lg counter-inverse bg-grey-400 vertical-align height-150 pointer">
-                <div class="vertical-align-middle">
-                    <div class="counter-icon margin-bottom-5">
-                        <i class="icon md-assignment" aria-hidden="true"></i>
-                    </div>
-                    <span class="counter-number">Contratos</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-md-2">
-            <div id="redirect-type-disabilities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-type-disabilities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-wheelchair" aria-hidden="true"></i>
@@ -80,8 +67,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-type-diseases" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-type-diseases" class="counter counter-lg counter-inverse bg-grey-400 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-bed" aria-hidden="true"></i>
@@ -121,7 +111,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-degrees" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align height-150 pointer">
+            <div id="redirect-degrees" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-star-half-o" aria-hidden="true"></i>
@@ -130,16 +120,26 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-institutions" class="counter counter-lg counter-inverse bg-amber-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-institutions" class="counter counter-lg counter-inverse bg-amber-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                     </div>
                     <span class="counter-number">Instituciones</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <div id="redirect-day-trip" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 margin-bottom-5 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="fa fa-tasks" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Jornadas Laborales</span>
                 </div>
             </div>
         </div>

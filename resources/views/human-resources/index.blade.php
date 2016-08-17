@@ -25,6 +25,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div id="redirect-access-control" class="counter counter-lg counter-inverse bg-indigo-400 vertical-align height-150 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="icon md-assignment" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Contratos Laborales</span>
+                </div>
+            </div>
+        </div>
     </div>
     <br />
     <br />

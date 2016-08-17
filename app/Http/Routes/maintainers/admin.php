@@ -16,12 +16,13 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getCities', ['as' => 'maintainers.getCities', 'uses' => 'CityController@getCities']);
 	Route::resource('cities', 'CityController');
 
-	// Contracts
-	require __DIR__ . '/contracts/route.php';
-
 	// Countries
 	Route::get('getCountries', ['as' => 'maintainers.getCountries', 'uses' => 'CountryController@getCountries']);
 	Route::resource('countries', 'CountryController');
+
+	// Day-trip
+	Route::get('getDayTrips', ['as' => 'maintainers.day-trips.getDayTrips', 'uses' => 'DayTripController@getDayTrips']);
+	Route::resource('day-trips', 'DayTripController');
 
 	// Degrees
 	Route::get('getDegrees', ['as' => 'maintainers.getDegrees', 'uses' => 'DegreeController@getDegrees']);
@@ -50,9 +51,17 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getMutualities', ['as' => 'maintainers.getMutualities', 'uses' => 'MutualityController@getMutualities']);
 	Route::resource('mutualities', 'MutualityController');
 
+	// Num-hours
+	Route::get('getNumHours', ['as' => 'maintainers.contracts.getNumHours', 'uses' => 'NumHourController@getNumHours']);
+	Route::resource('num-hours', 'NumHourController');
+
 	// Pensions
 	Route::get('getPensions', ['as' => 'maintainers.getPensions', 'uses' => 'PensionController@getPensions']);
 	Route::resource('pensions', 'PensionController');
+
+	// Periodicities
+	Route::get('getPeriodicities', ['as' => 'maintainers.periodicities.getPeriodicities', 'uses' => 'PeriodicityController@getPeriodicities']);
+	Route::resource('periodicities', 'PeriodicityController');
 
 	// Positions
 	Route::get('getPositions', ['as' => 'maintainers.getPositions', 'uses' => 'PositionController@getPositions']);

@@ -20,10 +20,6 @@ $(document).ready(function(){
         window.location.href = "/maintainers/fuels";
     });
 
-    $('#redirect-contracts').click(function() {
-        window.location.href = "/maintainers/contracts";
-    });
-
     $('#redirect-type-disabilities').click(function() {
         window.location.href = "/maintainers/type-disabilities";
     });
@@ -52,6 +48,10 @@ $(document).ready(function(){
         window.location.href = "/maintainers/institutions";
     });
 
+    $('#redirect-day-trip').click(function () {
+        window.location.href = "/maintainers/day-trips";
+    });
+
     $('#redirect-type-professional-licenses').click(function() {
         window.location.href = "/maintainers/type-professional-licenses";
     });
@@ -68,8 +68,16 @@ $(document).ready(function(){
         window.location.href = "/maintainers/mutualities";
     });
 
+    $('#redirect-num-hours').click(function () {
+        window.location.href = "/maintainers/contracts/num-hours";
+    });
+
     $('#redirect-countries').click(function() {
         window.location.href = "/maintainers/countries";
+    });
+
+    $('#redirect-periodicity').click(function () {
+        window.location.href = "/maintainers/contracts/periodicities";
     });
 
     $('#redirect-forecasts').click(function() {
