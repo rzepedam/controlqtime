@@ -173,6 +173,11 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\RelationshipRepo'
         );
 
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\PeriodicityRepoInterface',
+			'Controlqtime\Core\Repositories\PeriodicityRepo'
+		);
+
         $this->app->bind(
             'Controlqtime\Core\Contracts\PositionRepoInterface',
             'Controlqtime\Core\Repositories\PositionRepo'

@@ -11,12 +11,12 @@ Route::group(['prefix' => 'contracts'], function() {
 	Route::get('getNumHours', ['as' => 'maintainers.contracts.getNumHours', 'uses' => 'NumHourController@getNumHours']);
 	Route::resource('num-hours', 'NumHourController');
 
-	//  Periodicities
-	/*Route::get('getPeriodicities', ['as' => 'maintainers.periodicities.getPeriodicities', 'uses' => 'PeriodicityController@getPeriodicities']);
+	// Periodicities
+	Route::get('getPeriodicities', ['as' => 'maintainers.periodicities.getPeriodicities', 'uses' => 'PeriodicityController@getPeriodicities']);
 	Route::resource('periodicities', 'PeriodicityController');
 
 	// Day-trip
-	Route::get('getDayTrips', ['as' => 'maintainers.day-trips.getDayTrips', 'uses' => 'DayTripController@getDayTrips']);
+	/*Route::get('getDayTrips', ['as' => 'maintainers.day-trips.getDayTrips', 'uses' => 'DayTripController@getDayTrips']);
 	Route::resource('day-trips', 'DayTripController');
 
 	// Schedules

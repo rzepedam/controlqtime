@@ -4,7 +4,7 @@ namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class NumHour extends Eloquent
+class Periodicity extends Eloquent
 {
 	protected $fillable = array(
 		'name'
@@ -19,5 +19,4 @@ class NumHour extends Eloquent
 	public function setNameAttribute($value) {
 		$this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
 	}
-
 }

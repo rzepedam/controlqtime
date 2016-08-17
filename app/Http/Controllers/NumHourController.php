@@ -21,7 +21,10 @@ class NumHourController extends Controller
 		$this->numHour= $numHour;
 	}
 
-    public function index()
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
     {
 		return view('maintainers.contracts.num-hours.index');
     }
@@ -35,7 +38,10 @@ class NumHourController extends Controller
 		return $numHours;
 	}
 
-    public function create()
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function create()
     {
         return view('maintainers.contracts.num-hours.create');
     }
@@ -50,7 +56,11 @@ class NumHourController extends Controller
 		return redirect()->route('maintainers.contracts.num-hours.index');
     }
 
-    public function edit($id)
+	/**
+	 * @param $id
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function edit($id)
     {
         $numHour = $this->numHour->find($id);
 		return view('maintainers.contracts.num-hours.edit', compact('numHour'));
