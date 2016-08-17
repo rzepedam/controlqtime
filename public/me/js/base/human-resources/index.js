@@ -4,8 +4,12 @@ $(document).ready(function(){
         window.location.href = "/human-resources/employees";
     });
 
-    $('#redirect-access-control').click(function() {
+    $('#redirect-access-controls').click(function() {
         window.location.href = "/human-resources/access-controls";
+    });
+
+    $('#redirect-contracts').click(function() {
+        window.location.href = "/human-resources/contracts";
     });
 
 });

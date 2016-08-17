@@ -34,4 +34,8 @@ Route::group(['prefix' => 'human-resources'], function(){
 	Route::get('getAccessControls', ['as' => 'human-resources.getAccessControls', 'uses' => 'AccessControlController@getAccessControls']);
 	Route::resource('access-controls', 'AccessControlController');
 
+	// Contracts
+	Route::get('getContracts', ['as' => 'human-resources.getContracts', 'uses' => 'ContractController@getContracts']);
+	Route::resource('contracts', 'ContractController');
+
 });

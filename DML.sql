@@ -874,3 +874,20 @@ INSERT INTO state_vehicles(name) VALUES('Usado');
 INSERT INTO type_representatives(name) VALUES('Administrador de Contrato');
 INSERT INTO type_representatives(name) VALUES('Representante Legal');
 
+/* day_trips | Jornadas Laborales */
+INSERT INTO day_trips(name) VALUES('Lunes a Viernes');
+INSERT INTO day_trips(name) VALUES('Lunes a Sábado');
+INSERT INTO day_trips(name) VALUES('Sábados y Domingo');
+
+/* num_hours | Nº de Horas */
+INSERT INTO num_hours(name) VALUES('45');
+INSERT INTO num_hours(name) VALUES('30');
+INSERT INTO num_hours(name) VALUES('180');
+
+/* periodicities | Periocidad */
+INSERT INTO periodicities(name) VALUES('Mensual');
+INSERT INTO periodicities(name) VALUES('Semanal');
+INSERT INTO periodicities(name) VALUES('Anual');
+
+
+
