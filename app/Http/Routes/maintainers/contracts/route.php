@@ -16,11 +16,11 @@ Route::group(['prefix' => 'contracts'], function() {
 	Route::resource('periodicities', 'PeriodicityController');
 
 	// Day-trip
-	/*Route::get('getDayTrips', ['as' => 'maintainers.day-trips.getDayTrips', 'uses' => 'DayTripController@getDayTrips']);
+	Route::get('getDayTrips', ['as' => 'maintainers.day-trips.getDayTrips', 'uses' => 'DayTripController@getDayTrips']);
 	Route::resource('day-trips', 'DayTripController');
 
 	// Schedules
-	Route::get('getSchedules', ['as' => 'maintainers.schedules.getSchedules', 'uses' => 'ScheduleController@getSchedules']);
+	/*Route::get('getSchedules', ['as' => 'maintainers.schedules.getSchedules', 'uses' => 'ScheduleController@getSchedules']);
 	Route::resource('schedules', 'ScheduleController');*/
 
 });
