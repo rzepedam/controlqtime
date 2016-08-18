@@ -5,9 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\NumHourRepoInterface;
 use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class NumHourRepo extends BaseRepo implements NumHourRepoInterface
 {
+	use ListsTrait;
+
 	/**
 	 * @var NumHour
 	 */

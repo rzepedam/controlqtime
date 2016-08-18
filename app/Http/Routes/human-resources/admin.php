@@ -37,5 +37,9 @@ Route::group(['prefix' => 'human-resources'], function(){
 	// Contracts
 	Route::get('getContracts', ['as' => 'human-resources.getContracts', 'uses' => 'ContractController@getContracts']);
 	Route::resource('contracts', 'ContractController');
+	Route::group(['prefix' => 'contracts'], function() {
+		Route::post('step1', ['as' => 'human-resources.contracts.step1', 'uses' => 'ContractController@step1']);
+		Route::post('step2', ['as' => 'human-resources.contracts.step2', 'uses' => 'ContractController@step2']);
+	});
 
 });

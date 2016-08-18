@@ -27,8 +27,6 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/sweetalert.min.js') }}
-    {{ Html::script('assets/js/config.js') }}
     {{ Html::script('assets/js/bootstrap-table.js') }}
     {{ Html::script('assets/js/bootstrap-table-mobile.js') }}
     {{ Html::script('assets/js/bootstrap-table-es-ES.js') }}

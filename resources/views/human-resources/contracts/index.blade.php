@@ -6,7 +6,10 @@
 
 @stop
 
-@section('title_header') Listado de Contratos @stop
+@section('title_header') Listado de Contratos
+    <br />
+    <a href="{{ route('human-resources.contracts.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Contrato</a>
+@stop
 
 @section('breadcumb')
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
@@ -27,8 +30,6 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/sweetalert.min.js') }}
-    {{ Html::script('assets/js/config.js') }}
     {{ Html::script('assets/js/bootstrap-table.js') }}
     {{ Html::script('assets/js/bootstrap-table-mobile.js') }}
     {{ Html::script('assets/js/bootstrap-table-es-ES.js') }}

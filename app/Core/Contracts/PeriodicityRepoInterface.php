@@ -3,8 +3,9 @@
 namespace Controlqtime\Core\Contracts;
 
 use Controlqtime\Core\Contracts\Base\BaseRepoInterface;
+use Controlqtime\Core\Contracts\Base\BaseRepoListsInterface;
 
-interface PeriodicityRepoInterface extends BaseRepoInterface
+interface PeriodicityRepoInterface extends BaseRepoInterface, BaseRepoListsInterface
 {
 
 }
