@@ -4,7 +4,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.type-companies.index') }}"><i class="md-city-alt"></i> Tipos de Empresa</a></li>
+    <li><a href="{{ route('maintainers.type-companies.index') }}"><i class="md-city-alt"></i> Tipos de Empresas</a></li>
     <li class="active">Editar</li>
 @stop
 

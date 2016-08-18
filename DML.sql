@@ -892,4 +892,6 @@ INSERT INTO periodicities(name) VALUES('Anual');
 /* gratifications | Gratificaciones */
 INSERT INTO gratifications(name) VALUES('25% legal anticipada con tope de 4.75 SMM');
 
-
+/* type_contracts | Tipos de Contratos */
+INSERT INTO type_contracts(name) VALUES('Indefinido');
+INSERT INTO type_contracts(name) VALUES('Part-time');

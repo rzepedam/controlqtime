@@ -50,14 +50,19 @@
         {{ Form::label('init_afternoon', 'Horario Mañana', ['class' => 'control-label']) }}
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
-                {{ Form::text('init_morning', null, ['class' => 'form-control', 'placeholder' => 'Desde...']) }}
+                <div class="input-group">
+                    {{ Form::text('init_morning', null, ['class' => 'form-control', 'placeholder' => 'Desde...']) }}
+                    <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
-                {{ Form::text('end_morning', null, ['class' => 'form-control', 'placeholder' => 'Hasta...']) }}
+                <div class="input-group">
+                    {{ Form::text('end_morning', null, ['class' => 'form-control', 'placeholder' => 'Hasta...']) }}
+                    <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                </div>
             </div>
         </div>
     </div>
-
     <span class="visible-xs visible-sm">
         <br />
     </span>
@@ -67,10 +72,16 @@
         {{ Form::label('init_afternoon', 'Horario Tarde', ['class' => 'control-label']) }}
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
-                {{ Form::text('init_afternoon', null, ['class' => 'form-control', 'placeholder' => 'Desde...']) }}
+                <div class="input-group">
+                    {{ Form::text('init_afternoon', null, ['class' => 'form-control', 'placeholder' => 'Desde...']) }}
+                    <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
-                {{ Form::text('end_afternoon', null, ['class' => 'form-control', 'placeholder' => 'Hasta...']) }}
+                <div class="input-group">
+                    {{ Form::text('end_afternoon', null, ['class' => 'form-control', 'placeholder' => 'Hasta...']) }}
+                    <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                </div>
             </div>
         </div>
     </div>

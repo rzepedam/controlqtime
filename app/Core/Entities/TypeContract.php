@@ -4,7 +4,7 @@ namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Periodicity extends Eloquent
+class TypeContract extends Eloquent
 {
 	protected $fillable = array(
 		'name'

@@ -112,6 +112,10 @@ $(document).ready(function(){
         window.location.href = "/maintainers/terminals";
     });
 
+    $('#redirect-type-contracts').click(function() {
+        window.location.href = "/maintainers/type-contracts";
+    });
+
     $('#redirect-type-companies').click(function() {
         window.location.href = "/maintainers/type-companies";
     });

@@ -101,6 +101,10 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getTypeCompanies', ['as' => 'maintainers.getTypeCompanies', 'uses' => 'TypeCompanyController@getTypeCompanies']);
 	Route::resource('type-companies', 'TypeCompanyController');
 
+	// Type Contract
+	Route::get('getTypeContracts', ['as' => 'maintainers.getTypeContracts', 'uses' => 'TypeContractController@getTypeContracts']);
+	Route::resource('type-contracts', 'TypeContractController');
+
 	// Type-Disabilities
 	Route::get('getTypeDisabilities', ['as' => 'maintainers.getTypeDisabilities', 'uses' => 'TypeDisabilityController@getTypeDisabilities']);
 	Route::resource('type-disabilities', 'TypeDisabilityController');

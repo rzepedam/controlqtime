@@ -13,7 +13,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li class="active">Tipos de Institución</li>
+    <li class="active">Tipos de Instituciones</li>
 @stop
 
 @section('content')

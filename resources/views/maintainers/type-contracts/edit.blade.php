@@ -1,10 +1,10 @@
 @extends('layout.index')
 
-@section('title_header') Editar Tipo Institución: <span class="text-primary">{{ $type_institution->id }}</span> @stop
+@section('title_header') Editar Tipo de Contrato: <span class="text-primary">{{ $typeContract->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.type-institutions.index') }}"><i class="fa fa-university"></i> Tipos de Instituciones</a></li>
+    <li><a href="{{ route('maintainers.type-contracts.index') }}"><i class="fa fa-tasks"></i> Tipos de Contratos</a></li>
     <li class="active">Editar</li>
 @stop
 
@@ -14,18 +14,18 @@
 
     <div class="panel">
 
-        {{ Form::model($type_institution, array('route' => array('maintainers.type-institutions.update', $type_institution), 'method' => 'PUT' )) }}
+        {{ Form::model($typeContract, array('route' => array('maintainers.type-contracts.update', $typeContract), 'method' => 'PUT' )) }}
 
             <div class="panel-body">
 
-                @include('maintainers.type-institutions.partials.fields')
+                @include('maintainers.type-contracts.partials.fields')
 
             </div>
             <br />
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('maintainers.type-institutions.index') }}">Volver</a>
+                        <a href="{{ route('maintainers.type-contracts.index') }}">Volver</a>
                         <button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
     <br />
     <br />
 
-    @include('maintainers.type-institutions.partials.delete')
+    @include('maintainers.type-contracts.partials.delete')
     <br />
 
 @stop
