@@ -5,9 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\GratificationRepoInterface;
 use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class GratificationRepo extends BaseRepo implements GratificationRepoInterface
 {
+	use ListsTrait;
+
 	/**
 	 * @var Gratification
 	 */

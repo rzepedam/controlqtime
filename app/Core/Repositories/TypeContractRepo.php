@@ -5,9 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\TypeContractRepoInterface;
 use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class TypeContractRepo extends BaseRepo implements TypeContractRepoInterface
 {
+	use ListsTrait;
+
 	/**
 	 * @var TypeContract
 	 */

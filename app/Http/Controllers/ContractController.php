@@ -6,9 +6,13 @@ use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ContractRepoInterface;
 use Controlqtime\Core\Contracts\DayTripRepoInterface;
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ForecastRepoInterface;
+use Controlqtime\Core\Contracts\GratificationRepoInterface;
 use Controlqtime\Core\Contracts\NumHourRepoInterface;
+use Controlqtime\Core\Contracts\PensionRepoInterface;
 use Controlqtime\Core\Contracts\PeriodicityRepoInterface;
 use Controlqtime\Core\Contracts\PositionRepoInterface;
+use Controlqtime\Core\Contracts\TypeContractRepoInterface;
 use Illuminate\Http\Request;
 
 class ContractController extends Controller
@@ -41,6 +45,22 @@ class ContractController extends Controller
 	 * @var DayTripRepoInterface
 	 */
 	protected $dayTrips;
+	/**
+	 * @var GratificationRepoInterface
+	 */
+	protected $gratification;
+	/**
+	 * @var TypeContractRepoInterface
+	 */
+	protected $typeContract;
+	/**
+	 * @var PensionRepoInterface
+	 */
+	protected $pension;
+	/**
+	 * @var ForecastRepoInterface
+	 */
+	protected $forecast;
 
 	/**
 	 * ContractController constructor.
@@ -51,8 +71,12 @@ class ContractController extends Controller
 	 * @param NumHourRepoInterface $numHour
 	 * @param PeriodicityRepoInterface $periodicity
 	 * @param DayTripRepoInterface $dayTrips
+	 * @param GratificationRepoInterface $gratification
+	 * @param TypeContractRepoInterface $typeContract
+	 * @param PensionRepoInterface $pension
+	 * @param ForecastRepoInterface $forecast
 	 */
-	public function __construct(ContractRepoInterface $contract, CompanyRepoInterface $company, EmployeeRepoInterface $employee, PositionRepoInterface $position, NumHourRepoInterface $numHour, PeriodicityRepoInterface $periodicity, DayTripRepoInterface $dayTrips)
+	public function __construct(ContractRepoInterface $contract, CompanyRepoInterface $company, EmployeeRepoInterface $employee, PositionRepoInterface $position, NumHourRepoInterface $numHour, PeriodicityRepoInterface $periodicity, DayTripRepoInterface $dayTrips, GratificationRepoInterface $gratification, TypeContractRepoInterface $typeContract, PensionRepoInterface $pension, ForecastRepoInterface $forecast)
 	{
 		$this->contract = $contract;
 		$this->company = $company;
@@ -61,6 +85,10 @@ class ContractController extends Controller
 		$this->numHour = $numHour;
 		$this->periodicity = $periodicity;
 		$this->dayTrips = $dayTrips;
+		$this->gratification = $gratification;
+		$this->typeContract = $typeContract;
+		$this->pension = $pension;
+		$this->forecast = $forecast;
 	}
 
 	/**
@@ -81,7 +109,6 @@ class ContractController extends Controller
 		return view('human-resources.contracts.index');
 	}
 
-
 	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
@@ -93,9 +120,14 @@ class ContractController extends Controller
 		$numHours = $this->numHour->lists('name', 'id');
 		$periodicities = $this->periodicity->lists('name', 'id');
 		$dayTrips = $this->dayTrips->lists('name', 'id');
+		$gratifications = $this->gratification->lists('name', 'id');
+		$typeContracts = $this->typeContract->lists('name', 'id');
+		$pensions = $this->pension->lists('name', 'id');
+		$forecasts = $this->forecast->lists('name', 'id');
 
 		return view('human-resources.contracts.create', compact(
-			'companies', 'employees', 'positions', 'numHours', 'periodicities', 'dayTrips'
+			'companies', 'employees', 'positions', 'numHours', 'periodicities', 'dayTrips',
+			'gratifications', 'typeContracts', 'pensions', 'forecasts'
 		));
 	}
 
