@@ -108,6 +108,11 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\GenderRepo'
         );
 
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\GratificationRepoInterface',
+			'Controlqtime\Core\Repositories\GratificationRepo'
+		);
+
         $this->app->bind(
             'Controlqtime\Core\Contracts\ContactEmployeeRepoInterface',
             'Controlqtime\Core\Repositories\ContactEmployeeRepo'

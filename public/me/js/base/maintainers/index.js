@@ -44,6 +44,10 @@ $(document).ready(function(){
         window.location.href = "/maintainers/degrees";
     });
 
+    $('#redirect-gratifications').click(function() {
+        window.location.href = "/maintainers/gratifications";
+    });
+
     $('#redirect-institutions').click(function() {
         window.location.href = "/maintainers/institutions";
     });

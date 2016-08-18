@@ -5,6 +5,5 @@
             {{ Form::label('salary', 'Sueldo Base', ['class' => 'control-label']) }}
             {{ Form::text('salary', null, ['class' => 'form-control']) }}
         </div>
-        
     </div>
 </div>

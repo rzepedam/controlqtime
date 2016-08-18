@@ -884,10 +884,12 @@ INSERT INTO num_hours(name) VALUES('45');
 INSERT INTO num_hours(name) VALUES('30');
 INSERT INTO num_hours(name) VALUES('180');
 
-/* periodicities | Periocidad */
+/* periodicities | Periocidades */
 INSERT INTO periodicities(name) VALUES('Mensual');
 INSERT INTO periodicities(name) VALUES('Semanal');
 INSERT INTO periodicities(name) VALUES('Anual');
 
+/* gratifications | Gratificaciones */
+INSERT INTO gratifications(name) VALUES('25% legal anticipada con tope de 4.75 SMM');
 
 

@@ -36,6 +36,10 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getFuels', ['as' => 'maintainers.getFuels', 'uses' => 'FuelController@getFuels']);
 	Route::resource('fuels', 'FuelController');
 
+	// Gratifications
+	Route::get('getGratifications', ['as' => 'maintainers.getGratifications', 'uses' => 'GratificationController@getGratifications']);
+	Route::resource('gratifications', 'GratificationController');
+
 	// Institutions
 	Route::get('getInstitutions', ['as' => 'maintainers.getInstitutions', 'uses' => 'InstitutionController@getInstitutions']);
 	Route::resource('institutions', 'InstitutionController');
