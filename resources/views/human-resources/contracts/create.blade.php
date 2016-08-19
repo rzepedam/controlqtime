@@ -2,7 +2,8 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/jquery.timepicker.css') }}
+    {{ Html::style('assets/css/bootstrap-select.css') }}
+    {{ Html::style('assets/css/bootstrap-clockpicker.css') }}
 
 @stop
 
@@ -59,6 +60,17 @@
 
             </div>
         </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-6">
+                <a href="{{ route('human-resources.contracts.index') }}">Volver</a>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <button class="btn btn-squared btn-danger btn-lg waves-effect waves-light pull-right"><i class="fa fa-file-pdf-o"></i> Visualizar</button>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-2">
+                <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+            </div>
+        </div>
 
     {{ Form::close() }}
 
@@ -66,6 +78,9 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/jquery.timepicker.js') }}
+    {{ Html::script('assets/js/bootstrap-clockpicker.js') }}
+    {{ Html::script('assets/js/components/bootstrap-clockpicker.js') }}
+    {{ Html::script('assets/js/bootstrap-select.js') }}
+    {{ Html::script('assets/js/components/bootstrap-select.js') }}
 
 @stop

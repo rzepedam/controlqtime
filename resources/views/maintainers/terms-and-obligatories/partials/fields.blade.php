@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="pull-right">
             <label for="default">Predeterminar</label> <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="top" data-toggle="tooltip" data-original-title="Determina si la cláusula será activada por defecto en la creación de un Contrato"></i>
-            <input type="checkbox" id="default" name="default" class="js-switch" {{ (Route::is('maintainers.terms-and-obligatories.create')) ? null : $termAndObligatory->default }}>
+            <input type="checkbox" name="default" class="js-switch" {{ (Route::is('maintainers.terms-and-obligatories.create')) ? null : $termAndObligatory->default }}>
         </div>
     </div>
 </div>

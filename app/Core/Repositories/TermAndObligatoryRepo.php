@@ -5,6 +5,7 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface;
 use Controlqtime\Core\Entities\TermAndObligatory;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class TermAndObligatoryRepo extends BaseRepo implements TermAndObligatoryRepoInterface
 {

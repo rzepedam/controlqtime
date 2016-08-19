@@ -76,7 +76,14 @@ class TermAndObligatoryController extends Controller
 	 */
 	public function update(TermAndObligatoryRequest $request, $id)
 	{
-		$this->termAndObligatory->update($request->all(), $id);
+		// Al estar desactivado el elemento "predeterminado", no envía nada al Backend.
+		// Es necesario agregar su comportamiento manualmente para su correcta actualización.
+		$data = $request->all();
+
+		if (! array_key_exists('default', $data))
+			$data['default'] = false;
+
+		$this->termAndObligatory->update($data, $id);
 
 		return redirect()->route('maintainers.terms-and-obligatories.index');
 	}
@@ -88,6 +95,7 @@ class TermAndObligatoryController extends Controller
 	public function destroy($id)
 	{
 		$this->termAndObligatory->delete($id);
+
 		return redirect()->route('maintainers.terms-and-obligatories.index');
 	}
 }

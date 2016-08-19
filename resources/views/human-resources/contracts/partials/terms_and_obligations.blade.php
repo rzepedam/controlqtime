@@ -1,34 +1,15 @@
-<ul class="list-task list-group">
-    <li class="list-group-item task-done">
-        <div class="checkbox-custom checkbox-primary">
-            <input type="checkbox" id="inputSchedule" name="inputCheckboxesSchedule" checked="">
-            <label for="inputSchedule">
-                <span>Cláusula 1</span>
-            </label>
-        </div>
-    </li>
-    <li class="list-group-item">
-        <div class="checkbox-custom checkbox-primary">
-            <input type="checkbox" id="inputSchedule2" name="inputCheckboxesBook">
-            <label for="inputSchedule2">
-                <span>Cláusula 2</span>
-            </label>
-        </div>
-    </li>
-    <li class="list-group-item">
-        <div class="checkbox-custom checkbox-primary">
-            <input type="checkbox" id="inputSchedule3" name="inputCheckboxesForward" checked="">
-            <label for="inputSchedule3">
-                <span>Cláusula 3</span>
-            </label>
-        </div>
-    </li>
-    <li class="list-group-item">
-        <div class="checkbox-custom checkbox-primary">
-            <input type="checkbox" id="inputSchedule4" name="inputCheckboxesRecieve">
-            <label for="inputSchedule4">
-                <span>Cláusula 4</span>
-            </label>
-        </div>
-    </li>
+@php ($i = 0)
+<ul class="list-task list-group margin_terms_and_obligatories">
+    @foreach($termsAndObligatories as $termAndObligatory)
+        <li class="list-group-item task-done">
+            <div class="checkbox-custom checkbox-primary text-justify">
+                <input type="checkbox" id="default{{ $i }}" name="default" {{ ($termAndObligatory->default) ? 'checked' : null }}>
+                <label for="default{{ $i }}">
+                    <span>{{ $termAndObligatory->name }}</span>
+                </label>
+            </div>
+        </li>
+        @php ($i ++)
+
+    @endforeach
 </ul>

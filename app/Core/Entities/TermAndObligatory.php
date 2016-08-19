@@ -10,10 +10,6 @@ class TermAndObligatory extends Eloquent
     	'name', 'default'
 	);
 
-	/*
-	 * Mutators
-	 */
-
 	/**
 	 * @param string $value
 	 */
@@ -27,11 +23,9 @@ class TermAndObligatory extends Eloquent
 	public function setDefaultAttribute($value) {
 		if ($value == 'on')
 			$this->attributes['default'] = true;
+		else
+			$this->attributes['default'] = false;
 	}
-
-	/*
-	 * Accesors
-	 */
 
 	/**
 	 * @param boolean $value

@@ -210,3 +210,12 @@ img {
 .pointer {
     cursor: pointer;
 }
+
+.margin_terms_and_obligatories {
+    margin-top: -16px;
+    margin-left: -17px;
+}
+
+.margin_button_with_save {
+    margin-left: 20px;
+}
