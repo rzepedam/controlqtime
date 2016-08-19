@@ -7,7 +7,7 @@
                     <th data-field="id" data-sortable="true">ID</th>
                     <th data-field="name" data-sortable="true" class="text-justify">Nombre</th>
                     <th data-field="default" class="text-center">Predeterminar</th>
-                    <th class="text-center">Acciones</th>
+                    <th class="">Acciones</th>
                 </tr>
             </thead>
         </table>
