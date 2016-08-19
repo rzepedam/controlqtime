@@ -895,3 +895,8 @@ INSERT INTO gratifications(name) VALUES('25% legal anticipada con tope de 4.75 S
 /* type_contracts | Tipos de Contratos */
 INSERT INTO type_contracts(name) VALUES('Indefinido');
 INSERT INTO type_contracts(name) VALUES('Part-time');
+
+/* terms_and_obligatories | Cláusulas y Obligaciones */
+INSERT INTO term_and_obligatories(`name`, `default`) VALUES('El Trabajador se obliga a guardar la más absoluta reserva sobre todo los hechos o informaciones de que tome conocimiento en razón de su trabajo, y hasta los dos años posteriores de terminado el presente Contrato. Asimismo, el Trabajador le queda absolutamente prohibido ejecutar, ya sea por cuenta propia o ajena, durante la vigencia de este Contrato, toda actividad o negociación similar a las comprendidas dentro del giro del Empleador, que no sean aquellas correspondientes a su cargo y obligaciones emanadas del presente Contrato.', false);
+INSERT INTO term_and_obligatories(`name`, `default`) VALUES('Queda prohibido al Trabajador tener en el ejercicio directo o indirecto de su cargo, relaciones directas o indirectas con empresas, entidades o personas con las que tengan interés él o sus familiares, cónyuge o amigos, salvo autorización expresa del Gerente General o quien lo reemplace.', true);
+INSERT INTO term_and_obligatories(`name`, `default`) VALUES('El trabajador se responsabiliza de los daños materiales que le ocasione al vehículo a su cargo, por accidentes y por daños a terceros; además se hace responsable de las notificaciones por infracciones que se le hagan y aquellas que se le deriven del empadronamiento del vehículo', true);

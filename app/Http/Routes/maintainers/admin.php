@@ -89,6 +89,10 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getTerminals', ['as' => 'maintainers.getTerminals', 'uses' => 'TerminalController@getTerminals']);
 	Route::resource('terminals', 'TerminalController');
 
+	// Terms and Obligatories
+	Route::get('getTermsAndObligatories', ['as' => 'maintainers.getTermsAndObligatories', 'uses' => 'TermAndObligatoryController@getTermsAndObligatories']);
+	Route::resource('terms-and-obligatories', 'TermAndObligatoryController');
+
 	// Trademarks
 	Route::get('getTrademarks', ['as' => 'maintainers.getTrademarks', 'uses' => 'TrademarkController@getTrademarks']);
 	Route::resource('trademarks', 'TrademarkController');

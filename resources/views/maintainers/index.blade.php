@@ -48,7 +48,17 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-fuels" class="counter counter-lg counter-inverse bg-indigo-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-terms-and-obligatories" class="counter counter-lg counter-inverse bg-brown-200 vertical-align height-150 margin-bottom-5 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="icon md-lock-open" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Cláusulas y Obligaciones</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div id="redirect-fuels" class="counter counter-lg counter-inverse bg-indigo-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="icon md-gas-station" aria-hidden="true"></i>
@@ -57,8 +67,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-type-disabilities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 pointer">
+            <div id="redirect-type-disabilities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-wheelchair" aria-hidden="true"></i>
@@ -67,9 +80,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2">
             <div id="redirect-type-diseases" class="counter counter-lg counter-inverse bg-grey-400 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
@@ -111,7 +121,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-degrees" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-degrees" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-star-half-o" aria-hidden="true"></i>
@@ -120,8 +130,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-gratifications" class="counter counter-lg counter-inverse bg-purple-200 vertical-align height-150 pointer">
+            <div id="redirect-gratifications" class="counter counter-lg counter-inverse bg-purple-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-diamond" aria-hidden="true"></i>
@@ -130,9 +143,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2">
             <div id="redirect-institutions" class="counter counter-lg counter-inverse bg-amber-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
@@ -174,7 +184,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-model-vehicles" class="counter counter-lg counter-inverse bg-grey-400 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-model-vehicles" class="counter counter-lg counter-inverse bg-grey-400 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-car" aria-hidden="true"></i>
@@ -183,8 +193,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-mutualities" class="counter counter-lg counter-inverse bg-blue-grey-200 vertical-align height-150 pointer">
+            <div id="redirect-mutualities" class="counter counter-lg counter-inverse bg-blue-grey-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-ambulance" aria-hidden="true"></i>
@@ -193,9 +206,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2">
             <div id="redirect-num-hours" class="counter counter-lg counter-inverse bg-teal-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
@@ -237,7 +247,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-professions" class="counter counter-lg counter-inverse bg-deep-orange-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-professions" class="counter counter-lg counter-inverse bg-deep-orange-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
@@ -246,8 +256,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-routes" class="counter counter-lg counter-inverse bg-purple-200 vertical-align height-150 pointer">
+            <div id="redirect-routes" class="counter counter-lg counter-inverse bg-purple-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-map" aria-hidden="true"></i>
@@ -256,9 +269,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2">
             <div id="redirect-relationships" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
@@ -300,7 +310,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-type-companies" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-type-companies" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="icon md-city-alt" aria-hidden="true"></i>
@@ -309,8 +319,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-type-institutions" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 pointer">
+            <div id="redirect-type-institutions" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-university" aria-hidden="true"></i>
@@ -319,9 +332,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2">
             <div id="redirect-type-vehicles" class="counter counter-lg counter-inverse bg-green-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">

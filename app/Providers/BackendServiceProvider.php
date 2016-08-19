@@ -223,6 +223,11 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\SubsidiaryRepo'
         );
 
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface',
+			'Controlqtime\Core\Repositories\TermAndObligatoryRepo'
+		);
+
         $this->app->bind(
             'Controlqtime\Core\Contracts\TerminalRepoInterface',
             'Controlqtime\Core\Repositories\TerminalRepo'

@@ -16,6 +16,10 @@ $(document).ready(function(){
         window.location.href = "/maintainers/cities";
     });
 
+    $('#redirect-terms-and-obligatories').click(function() {
+        window.location.href = "/maintainers/terms-and-obligatories";
+    });
+
     $('#redirect-fuels').click(function() {
         window.location.href = "/maintainers/fuels";
     });
