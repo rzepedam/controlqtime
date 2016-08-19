@@ -55,7 +55,7 @@
             </div>
             <div class="panel-body">
 
-                @include('human-resources.contracts.partials.labor_information')
+                @include('human-resources.contracts.partials.terms_and_obligations')
 
             </div>
         </div>
