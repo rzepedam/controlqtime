@@ -15,7 +15,18 @@ class CreateContractsTable extends Migration
 			$table->unsignedInteger('num_hour_id');
 			$table->unsignedInteger('periodicity_hour_id');
 			$table->unsignedInteger('day_trip_id');
+			$table->string('init_morning', 5);
+			$table->string('end_morning', 5);
+			$table->string('init_afternoon', 5);
+			$table->string('end_afternoon', 5);
 			$table->unsignedInteger('periodicity_work_id');
+			$table->string('salary', 8);
+			$table->string('mobilization', 8);
+			$table->string('collation', 8);
+			$table->unsignedInteger('gratification_id');
+			$table->unsignedInteger('type_contract_id');
+			$table->unsignedInteger('pension_id');
+			$table->unsignedInteger('forecast_id');
             $table->timestamps();
         });
     }

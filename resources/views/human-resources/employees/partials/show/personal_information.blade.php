@@ -60,8 +60,7 @@
                             </tr>
                             <tr>
                                 <td class="col-md-3">Fecha de Nacimiento</td>
-                                <td class="text-center text-capitalize"><i class="fa fa-calendar"
-                                                                           aria-hidden="true"></i> {{ Date::parse($employee->birthday)->format('l j F Y') }}
+                                <td class="text-center text-capitalize"><i class="fa fa-calendar" aria-hidden="true"></i> {{ Date::parse($employee->birthday)->format('l j F Y') }}
                                 </td>
                             </tr>
                             <tr>

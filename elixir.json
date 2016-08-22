@@ -1,0 +1,16 @@
+{
+  "sourcemaps": false,
+  "css": {
+    "folder": "",
+    "cssnano": {
+      "pluginOptions": {
+        "discardComments": {
+          "removeAll": true
+        }
+      }
+    }
+  },
+  "js": {
+    "folder": ""
+  }
+}

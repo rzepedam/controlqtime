@@ -14,7 +14,8 @@ use Controlqtime\Core\Contracts\PeriodicityRepoInterface;
 use Controlqtime\Core\Contracts\PositionRepoInterface;
 use Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface;
 use Controlqtime\Core\Contracts\TypeContractRepoInterface;
-use Illuminate\Http\Request;
+use Controlqtime\Http\Requests\ContractRequest;
+use Illuminate\Support\Facades\DB;
 
 class ContractController extends Controller
 {
@@ -103,7 +104,7 @@ class ContractController extends Controller
 	 */
 	public function getContracts()
 	{
-		$contracts = $this->contract->all();
+		$contracts = $this->contract->all(['employee', 'company']);
 
 		return $contracts;
 	}
@@ -140,14 +141,22 @@ class ContractController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
+	 * @param ContractRequest $request
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function store(Request $request)
+	public function store(ContractRequest $request)
 	{
-		//
+		DB::beginTransaction();
+
+		try {
+			$contract = $this->contract->create($request->all());
+			$this->contract->saveMultipleTermsAndObligatories($request->get('term_and_obligatory_id'), $contract);
+			DB::commit();
+		} catch ( Exception $e ) {
+			DB::rollBack();
+		}
+
+		return redirect()->route('human-resources.contracts.index');
 	}
 
 	/**
@@ -179,7 +188,7 @@ class ContractController extends Controller
 	 * @param  int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(ContractRequest $request, $id)
 	{
 		//
 	}

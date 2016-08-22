@@ -2,8 +2,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/bootstrap-select.css') }}
-    {{ Html::style('assets/css/bootstrap-clockpicker.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/create-contracts.css') }}">
 
 @stop
 
@@ -17,7 +16,7 @@
 
 @section('content')
 
-    {{ Form::open(array('route' => 'human-resources.contracts.step1', 'method' => 'POST')) }}
+    {{ Form::open(array('route' => 'human-resources.contracts.store', 'method' => 'POST')) }}
 
         {{-- Panel Información Laboral --}}
         <div class="panel panel-bordered">
@@ -78,9 +77,6 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/bootstrap-clockpicker.js') }}
-    {{ Html::script('assets/js/components/bootstrap-clockpicker.js') }}
-    {{ Html::script('assets/js/bootstrap-select.js') }}
-    {{ Html::script('assets/js/components/bootstrap-select.js') }}
+    <script type="text/javascript" src="{{ elixir('js/create-contracts.js') }}"></script>
 
 @stop

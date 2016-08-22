@@ -6,9 +6,19 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class TermAndObligatory extends Eloquent
 {
-    protected $fillable = array(
+	/**
+	 * @var array
+	 */
+	protected $fillable = array(
     	'name', 'default'
 	);
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function contracts() {
+		return $this->belongsToMany(Contract::class);
+	}
 
 	/**
 	 * @param string $value

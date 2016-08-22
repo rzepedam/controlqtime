@@ -6,3 +6,6 @@ Homestead.json
 .env
 .idea
 public/storage/
+resources/assets/bower
+
+

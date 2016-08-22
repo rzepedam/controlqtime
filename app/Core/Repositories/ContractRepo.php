@@ -21,4 +21,15 @@ class ContractRepo extends BaseRepo implements ContractRepoInterface
 	{
 		$this->model = $model;
 	}
+
+	/**
+	 * @param array $request
+	 * @param Contract $contract
+	 * @return mixed created
+	 */
+	public function saveMultipleTermsAndObligatories(array $request, $contract)
+	{
+		return $contract->terms_and_obligatories()->attach($request);
+	}
+
 }

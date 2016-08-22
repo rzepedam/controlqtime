@@ -7,7 +7,7 @@
                     <th data-field="id" data-sortable="true">Nº</th>
                     <th data-field="employee_id" data-sortable="true">Trabajador</th>
                     <th data-field="company_id" data-sortable="true">Empresa</th>
-                    <th data-field="created_at" data-sortable="true">Fecha</th>
+                    <th class="text-center" data-field="created_at" data-sortable="true">Fecha</th>
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>

@@ -7,19 +7,36 @@ use Illuminate\Routing\Route;
 
 class CountryRequest extends SanitizedRequest
 {
+	/**
+	 * @var Route
+	 */
 	protected $route;
 
-    public function __construct(Route $route)
+	/**
+	 * CountryRequest constructor.
+	 * @param Route $route
+	 */
+	public function __construct(Route $route)
     {
         $this->route = $route;
     }
 
-    public function authorize()
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
     {
         return true;
     }
 
-    public function rules()
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
     {
         switch($this->method())
         {
