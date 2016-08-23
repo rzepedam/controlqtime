@@ -12,6 +12,7 @@ class CreateContractsTable extends Migration
 			$table->unsignedInteger('company_id');
 			$table->unsignedInteger('employee_id');
 			$table->unsignedInteger('position_id');
+			$table->unsignedInteger('area_id');
 			$table->unsignedInteger('num_hour_id');
 			$table->unsignedInteger('periodicity_hour_id');
 			$table->unsignedInteger('day_trip_id');

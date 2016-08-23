@@ -11,10 +11,10 @@ class Contract extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = array(
-		'company_id', 'employee_id', 'position_id', 'num_hour_id', 'periodicity_hour_id',
-		'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon', 'end_afternoon',
-		'periodicity_work_id', 'salary', 'mobilization', 'collation', 'gratification_id',
-		'type_contract_id', 'pension_id', 'forecast_id'
+		'company_id', 'employee_id', 'position_id', 'area_id', 'num_hour_id',
+		'periodicity_hour_id', 'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon',
+		'end_afternoon', 'periodicity_work_id', 'salary', 'mobilization', 'collation',
+		'gratification_id', 'type_contract_id', 'pension_id', 'forecast_id'
 	);
 
 	/**

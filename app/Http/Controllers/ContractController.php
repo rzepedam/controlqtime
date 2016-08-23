@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\AreaRepoInterface;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ContractRepoInterface;
 use Controlqtime\Core\Contracts\DayTripRepoInterface;
@@ -67,6 +68,10 @@ class ContractController extends Controller
 	 * @var TermAndObligatoryRepoInterface
 	 */
 	protected $termAndObligatory;
+	/**
+	 * @var AreaRepoInterface
+	 */
+	protected $area;
 
 	/**
 	 * ContractController constructor.
@@ -82,8 +87,9 @@ class ContractController extends Controller
 	 * @param PensionRepoInterface $pension
 	 * @param ForecastRepoInterface $forecast
 	 * @param TermAndObligatoryRepoInterface $termAndObligatory
+	 * @param AreaRepoInterface $area
 	 */
-	public function __construct(ContractRepoInterface $contract, CompanyRepoInterface $company, EmployeeRepoInterface $employee, PositionRepoInterface $position, NumHourRepoInterface $numHour, PeriodicityRepoInterface $periodicity, DayTripRepoInterface $dayTrips, GratificationRepoInterface $gratification, TypeContractRepoInterface $typeContract, PensionRepoInterface $pension, ForecastRepoInterface $forecast, TermAndObligatoryRepoInterface $termAndObligatory)
+	public function __construct(ContractRepoInterface $contract, CompanyRepoInterface $company, EmployeeRepoInterface $employee, PositionRepoInterface $position, NumHourRepoInterface $numHour, PeriodicityRepoInterface $periodicity, DayTripRepoInterface $dayTrips, GratificationRepoInterface $gratification, TypeContractRepoInterface $typeContract, PensionRepoInterface $pension, ForecastRepoInterface $forecast, TermAndObligatoryRepoInterface $termAndObligatory, AreaRepoInterface $area)
 	{
 		$this->contract = $contract;
 		$this->company = $company;
@@ -97,6 +103,7 @@ class ContractController extends Controller
 		$this->pension = $pension;
 		$this->forecast = $forecast;
 		$this->termAndObligatory = $termAndObligatory;
+		$this->area = $area;
 	}
 
 	/**
@@ -125,6 +132,7 @@ class ContractController extends Controller
 		$companies = $this->company->lists('firm_name', 'id');
 		$employees = $this->employee->lists('full_name', 'id');
 		$positions = $this->position->lists('name', 'id');
+		$areas = $this->area->lists('name', 'id');
 		$numHours = $this->numHour->lists('name', 'id');
 		$periodicities = $this->periodicity->lists('name', 'id');
 		$dayTrips = $this->dayTrips->lists('name', 'id');
@@ -135,8 +143,9 @@ class ContractController extends Controller
 		$termsAndObligatories = $this->termAndObligatory->all();
 
 		return view('human-resources.contracts.create', compact(
-			'companies', 'employees', 'positions', 'numHours', 'periodicities', 'dayTrips',
-			'gratifications', 'typeContracts', 'pensions', 'forecasts', 'termsAndObligatories'
+			'companies', 'employees', 'positions', 'areas', 'numHours', 'periodicities',
+			'dayTrips', 'gratifications', 'typeContracts', 'pensions', 'forecasts',
+			'termsAndObligatories'
 		));
 	}
 

@@ -1,9 +1,9 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Clear Sans Light', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Clear Sans', sans-serif;
 }
 
 textarea {
@@ -218,4 +218,9 @@ img {
 
 .margin_button_with_save {
     margin-left: 20px;
+}
+
+.custom-select-bootstrap {
+    display: block;
+    background-color: red !important;
 }

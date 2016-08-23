@@ -3,7 +3,7 @@
         {{-- Empresa Form Select --}}
         <div class="form-group">
             {{ Form::label('company_id', 'Empresa', ['class' => 'control-label']) }}
-            {{ Form::select('company_id', $companies, null, ['class' => 'form-control', 'data-plugin' => 'selectpicker', 'data-live-search' => 'true']) }}
+            {{ Form::select('company_id', $companies, null, ['class' => 'form-control custom-select-bootstrap', 'data-plugin' => 'selectpicker', 'data-live-search' => 'true']) }}
         </div>
     </div>
     <div class="col-md-4">
@@ -23,6 +23,13 @@
 </div>
 <div class="row">
     <div class="col-md-4">
+        {{-- Área Form Select --}}
+        <div class="form-group">
+            {{ Form::label('area_id', 'Área', ['class' => 'control-label']) }}
+            {{ Form::select('area_id', $areas, null, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    <div class="col-md-4">
         {{-- Nº de Horas Form Select --}}
         <div class="form-group">
             {{ Form::label('num_hour_id', 'Nº de Horas', ['class' => 'control-label']) }}
@@ -36,6 +43,8 @@
             {{ Form::select('periodicity_hour_id', $periodicities, null, ['class' => 'form-control']) }}
         </div>
     </div>
+</div>
+<div class="row">
     <div class="col-md-4">
         {{-- Jornada Laboral Form Select --}}
         <div class="form-group">
@@ -43,8 +52,6 @@
             {{ Form::select('day_trip_id', $dayTrips, null, ['class' => 'form-control']) }}
         </div>
     </div>
-</div>
-<div class="row">
     {{-- Horario Mañana Input Text --}}
     <div class="col-md-4">
         {{ Form::label('init_afternoon', 'Horario Mañana', ['class' => 'control-label']) }}
@@ -88,6 +95,8 @@
     <span class="visible-xs visible-sm">
         <br />
     </span>
+</div>
+<div class="row">
     <div class="col-md-4">
         {{-- Periocidad Laboral Form Select --}}
         <div class="form-group">
