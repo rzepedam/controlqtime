@@ -16,9 +16,6 @@
                                     <td><i class="fa fa-street-view"></i> {{ $employee->full_name }}</td>
                                 </tr>
                                 <tr class="text-center">
-                                    <td><i class="fa fa-building-o"></i><a href="{{ route('administration.companies.show', $employee->company->id) }}" style="color: #757575"> {{ $employee->company->firm_name }}</a></td>
-                                </tr>
-                                <tr class="text-center">
                                     <td>
                                         <i class="fa fa-envelope"></i> {{ Html::mailto($employee->email_employee, null, ['class' => 'text-muted']) }}
                                     </td>
@@ -26,6 +23,11 @@
                                 <tr>
                                     <td class="text-center">
                                         <i class="fa fa-phone" aria-hidden="true"></i> {{ $employee->phone1 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <i class="fa fa-flag" aria-hidden="true"></i> {{ $employee->nationality->name }}
                                     </td>
                                 </tr>
                                 </tbody>
@@ -60,10 +62,6 @@
                                 <td class="col-md-3">Fecha de Nacimiento</td>
                                 <td class="text-center text-capitalize"><i class="fa fa-calendar" aria-hidden="true"></i> {{ Date::parse($employee->birthday)->format('l j F Y') }}
                                 </td>
-                            </tr>
-                            <tr>
-                                <td class="col-md-3">Nacionalidad</td>
-                                <td class="text-center">{{ $employee->nationality->name }}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-3">Género</td>

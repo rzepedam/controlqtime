@@ -12,8 +12,8 @@ $('#employee_table').bootstrapTable({
             }
         }, {}, {},
         {
-            formatter : function(value,row,index) {
-                return row.company.firm_name;
+            formatter : function(value, row) {
+                return row.nationality.name;
             }
         },
         {

@@ -7,7 +7,7 @@
                     <th data-field="id" data-sortable="true">ID</th>
                     <th data-field="full_name" data-sortable="true">Nombre</th>
                     <th data-field="email_employee" data-sortable="true">Email</th>
-                    <th data-field="company_id" data-sortable="true" class="text-center">Empresa</th>
+                    <th class="text-center" data-field="email_employee" data-sortable="true">Nacionalidad</th>
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>

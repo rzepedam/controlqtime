@@ -8,18 +8,35 @@ use Illuminate\Routing\Route;
 
 class Step1Request extends SanitizedRequest {
 
+	/**
+	 * @var Route
+	 */
 	protected $route;
 
+	/**
+	 * Step1Request constructor.
+	 * @param Route $route
+	 */
 	public function __construct(Route $route)
 	{
 		$this->route   = $route;
 	}
 
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
 	public function authorize()
 	{
 		return true;
 	}
 
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
 	public function rules()
 	{
 		switch ($this->method())
@@ -45,7 +62,6 @@ class Step1Request extends SanitizedRequest {
 					'email_employee' 	=> 'required|email|max:100|unique:employees,email_employee',
 					'phone1'         	=> 'required|max:20',
 					'phone2'         	=> 'max:20',
-					'company_id'     	=> 'required|regex:/[0-9 -()+]+$/',
 					'code'           	=> 'required'
 				];
 
@@ -97,7 +113,6 @@ class Step1Request extends SanitizedRequest {
 					'email_employee' 	=>	'required|email|max:100|unique:employees,email_employee,' . $this->id,
 					'phone1'         	=> 'required|max:20',
 					'phone2'         	=> 'max:20',
-					'company_id'     	=> 'required|regex:/[0-9 -()+]+$/',
 					'code'           	=> 'required'
 				];
 
@@ -135,6 +150,9 @@ class Step1Request extends SanitizedRequest {
 		}
 	}
 
+	/**
+	 * @return array
+	 */
 	public function messages()
 	{
 		return [

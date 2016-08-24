@@ -2,7 +2,6 @@
     <div class="col-md-12">
         <div class="panel">
             <div class="panel-body">
-                <br/>
                 <div class="row">
                     <div class="col-md-offset-1 col-md-10">
                         <ul class="list-task list-group">

@@ -116,10 +116,6 @@
         </div>
     </div>
     <div class="col-md-3 form-group">
-        {{ Form::label('company_id', 'Empresa', ['class' => 'control-label']) }}
-        {{ Form::select('company_id', $companies, null, ['class' => 'form-control']) }}
-    </div>
-    <div class="col-md-3 form-group">
         {{ Form::label('code', 'Cód. Interno', ['class' => 'control-label']) }}
         {{ Form::text('code', null, ['class' => 'form-control']) }}
     </div>

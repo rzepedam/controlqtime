@@ -27,7 +27,6 @@ class CreateEmployeesTable extends Migration
             $table->string('email_employee', 60)->unique();
             $table->string('phone1', 20);
             $table->string('phone2', 20);
-            $table->integer('company_id')->unsigned();
             $table->string('code');
 			$table->string('url')->default('');
             $table->enum('state', ['enable', 'disable'])->default('disable');
@@ -49,12 +48,6 @@ class CreateEmployeesTable extends Migration
                 ->references('id')
                 ->on('communes')
                 ->onUpdate('cascade');
-
-            $table->foreign('company_id')
-                ->references('id')
-                ->on('companies')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
 
         });
     }

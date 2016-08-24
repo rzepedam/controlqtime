@@ -7,49 +7,68 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Employee extends Eloquent
 {
-    protected $fillable = [
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
         'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
         'nationality_id', 'gender_id', 'address', 'depto', 'block', 'num_home', 'commune_id', 'email_employee',
-        'phone1', 'phone2', 'company_id', 'code', 'state'
+        'phone1', 'phone2', 'code', 'state'
     ];
 
-    protected $dates = [
+	/**
+	 * @var array
+	 */
+	protected $dates = [
         'birthday'
     ];
 
-    /*
-     * Relationships
-     */
-    
-    public function company() {
-        return $this->belongsTo(Company::class);
-    }
-
-    public function certifications() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function certifications() {
         return $this->hasMany(Certification::class);
     }
-    
-    public function commune() {
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function commune() {
         return $this->belongsTo(Commune::class);
     }
 
-    public function contactEmployees() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function contactEmployees() {
         return $this->hasMany(ContactEmployee::class);
     }
 
-    public function disabilities() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function disabilities() {
         return $this->hasMany(Disability::class);
     }
 
-    public function diseases() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function diseases() {
         return $this->hasMany(Disease::class);
     }
 
-    public function exams() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function exams() {
         return $this->hasMany(Exam::class);
     }
-    
-    public function familyRelationships() {
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function familyRelationships() {
         return $this->hasMany(FamilyRelationship::class);
     }
 
@@ -57,132 +76,208 @@ class Employee extends Eloquent
         return $this->hasMany(FamilyResponsability::class);
     }
 
-    public function gender() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function gender() {
         return $this->belongsTo(Gender::class);
     }
 
-    public function imageCertificationEmployees() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+	 */
+	public function imageCertificationEmployees() {
         return $this->hasManyThrough(ImageCertificationEmployee::class, Certification::class);
     }
 
-    public function imageDisabilityEmployees() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+	 */
+	public function imageDisabilityEmployees() {
         return $this->hasManyThrough(ImageDisabilityEmployee::class, Disability::class);
     }
 
-    public function imageDiseaseEmployees() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+	 */
+	public function imageDiseaseEmployees() {
         return $this->hasManyThrough(ImageDiseaseEmployee::class, Disease::class);
     }
 
-    public function imageExamEmployees() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+	 */
+	public function imageExamEmployees() {
         return $this->hasManyThrough(ImageExamEmployee::class, Exam::class);
     }
 
-    public function imageFamilyResponsabilityEmployees() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+	 */
+	public function imageFamilyResponsabilityEmployees() {
         return $this->hasManyThrough(ImageFamilyResponsabilityEmployee::class, FamilyResponsability::class);
     }
 
-    public function imageProfessionalLicenses() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+	 */
+	public function imageProfessionalLicenses() {
         return $this->hasManyThrough(ImageProfessionalLicenseEmployee::class, ProfessionalLicense::class);
     }
 
-    public function imageSpecialityEmployees() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+	 */
+	public function imageSpecialityEmployees() {
         return $this->hasManyThrough(ImageSpecialityEmployee::class, Speciality::class);
     }
 
-    public function nationality() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function nationality() {
         return $this->belongsTo(Nationality::class);
     }
 
-    public function professionalLicenses(){
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function professionalLicenses(){
         return $this->hasMany(ProfessionalLicense::class);
     }
-    
-    public function specialities() {
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function specialities() {
         return $this->hasMany(Speciality::class);
     }
 
-    public function studies() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function studies() {
         return $this->hasMany(Study::class);
     }
 
-    /*public function dailyAssistances() {
-        return $this->hasMany('Controlqtime\DailyAssistance');
-    }*/
 
-    /*
-     * Mutators
-     */
-
-    public function setMaleSurnameAttribute($value) {
+	/**
+	 * @param string $value
+	 */
+	public function setMaleSurnameAttribute($value) {
         $this->attributes['male_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-    public function setFemaleSurnameAttribute($value) {
+	/**
+	 * @param string $value
+	 */
+	public function setFemaleSurnameAttribute($value) {
         $this->attributes['female_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-    public function setFirstNameAttribute($value) {
+	/**
+	 * @param string $value
+	 */
+	public function setFirstNameAttribute($value) {
         $this->attributes['first_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-    public function setSecondNameAttribute($value) {
+	/**
+	 * @param string $value
+	 */
+	public function setSecondNameAttribute($value) {
         $this->attributes['second_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
-    
-    public function setAddressAttribute($value) {
+
+	/**
+	 * @param string $value
+	 */
+	public function setAddressAttribute($value) {
         $this->attributes['address'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-    public function setEmailEmployeeAttribute($value) {
+	/**
+	 * @param string $value
+	 */
+	public function setEmailEmployeeAttribute($value) {
         $this->attributes['email_employee'] = strtolower($value);
     }
 
-    public function setBirthdayAttribute($value) {
+	/**
+	 * @param string $value
+	 */
+	public function setBirthdayAttribute($value) {
         $this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
 
-    /*
-     * Accesors
-     */
-
-    public function getNumCertificationsAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumCertificationsAttribute() {
         return count($this->certifications);
     }
 
-    public function getNumContactEmployeesAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumContactEmployeesAttribute() {
         return count($this->contactEmployees);
     }
 
-    public function getNumDisabilitiesAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumDisabilitiesAttribute() {
         return count($this->disabilities);
     }
 
-    public function getNumDiseasesAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumDiseasesAttribute() {
         return count($this->diseases);
     }
 
-    public function getNumExamsAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumExamsAttribute() {
         return count($this->exams);
     }
 
-    public function getNumFamilyRelationshipsAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumFamilyRelationshipsAttribute() {
         return count($this->familyRelationships);
     }
 
-    public function getNumFamilyResponsabilitiesAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumFamilyResponsabilitiesAttribute() {
         return count($this->familyResponsabilities);
     }
 
-    public function getNumProfessionalLicensesAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumProfessionalLicensesAttribute() {
         return count($this->professionalLicenses);
     }
 
-    public function getNumSpecialitiesAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumSpecialitiesAttribute() {
         return count($this->specialities);
     }
 
-    public function getNumStudiesAttribute() {
+	/**
+	 * @return int
+	 */
+	public function getNumStudiesAttribute() {
         return count($this->studies);
     }
     

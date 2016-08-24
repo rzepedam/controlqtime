@@ -4,7 +4,6 @@ namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\CertificationRepoInterface;
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
-use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\CountryRepoInterface;
 use Controlqtime\Core\Contracts\DegreeRepoInterface;
 use Controlqtime\Core\Contracts\DisabilityRepoInterface;
@@ -40,7 +39,6 @@ class EmployeeController extends Controller
 {
 	protected $certification;
 	protected $commune;
-	protected $company;
 	protected $contact_employee;
 	protected $country;
 	protected $degree;
@@ -66,11 +64,10 @@ class EmployeeController extends Controller
 	protected $type_professional_license;
 	protected $type_speciality;
 
-	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, CompanyRepoInterface $company, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam, FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense, DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam, FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee, ImageFactoryInterface $image)
+	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam, FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense, DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam, FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee, ImageFactoryInterface $image)
 	{
 		$this->certification = $certification;
 		$this->commune = $commune;
-		$this->company = $company;
 		$this->contact_employee = $contact_employee;
 		$this->country = $country;
 		$this->degree = $degree;
@@ -105,7 +102,7 @@ class EmployeeController extends Controller
 	// Load data table employee to bootstrap-table
 	public function getEmployees()
 	{
-		$employees = $this->employee->all(['company']);
+		$employees = $this->employee->all(['nationality']);
 
 		return $employees;
 	}
@@ -113,7 +110,6 @@ class EmployeeController extends Controller
 	public function create()
 	{
 		$communes = $this->commune->lists('name', 'id');
-		$companies = $this->company->whereLists('state', 'enable', 'firm_name');
 		$countries = $this->country->lists('name', 'id');
 		$degrees = $this->degree->lists('name', 'id');
 		$employees = $this->employee->lists('full_name', 'id');
@@ -130,8 +126,8 @@ class EmployeeController extends Controller
 		$type_specialities = $this->type_speciality->lists('name', 'id');
 
 		return view('human-resources.employees.create', compact(
-			'communes', 'companies', 'countries', 'degrees', 'employees', 'genders', 'institutions',
-			'provinces', 'regions', 'relationships', 'type_certifications', 'type_disabilities', 'type_diseases',
+			'communes', 'countries', 'degrees', 'employees', 'genders', 'institutions', 'provinces',
+			'regions', 'relationships', 'type_certifications', 'type_disabilities', 'type_diseases',
 			'type_exams', 'type_professional_licenses', 'type_specialities'
 		));
 
@@ -199,7 +195,6 @@ class EmployeeController extends Controller
 		Session::forget('email_employee');
 		Session::forget('phone1');
 		Session::forget('phone2');
-		Session::forget('company_id');
 		Session::forget('code');
 		Session::forget('count_contacts');
 		Session::forget('id_contact');
@@ -252,7 +247,6 @@ class EmployeeController extends Controller
 	{
 		$employee = $this->employee->find($id);
 		$communes = $this->commune->lists('name', 'id');
-		$companies = $this->company->whereLists('state', 'enable', 'firm_name');
 		$countries = $this->country->lists('name', 'id');
 		$degrees = $this->degree->lists('name', 'id');
 		$employees = $this->employee->lists('full_name', 'id');
@@ -269,7 +263,7 @@ class EmployeeController extends Controller
 		$type_specialities = $this->type_speciality->lists('name', 'id');
 
 		return view('human-resources.employees.edit', compact(
-			'employee', 'communes', 'companies', 'countries', 'degrees', 'employees', 'genders', 'institutions',
+			'employee', 'communes', 'countries', 'degrees', 'employees', 'genders', 'institutions',
 			'provinces', 'regions', 'relationships', 'type_certifications', 'type_disabilities', 'type_diseases',
 			'type_exams', 'type_professional_licenses', 'type_specialities'
 		));
@@ -408,7 +402,6 @@ class EmployeeController extends Controller
 		Session::put('email_employee', $request->get('email_employee'));
 		Session::put('phone1', $request->get('phone1'));
 		Session::put('phone2', $request->get('phone2'));
-		Session::put('company_id', $request->get('company_id'));
 		Session::put('code', $request->get('code'));
 		Session::put('count_contacts', $request->get('count_contacts'));
 		Session::put('id_contact', $request->get('id_contact'));
