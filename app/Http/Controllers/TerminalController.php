@@ -60,6 +60,9 @@ class TerminalController extends Controller
 		return view('maintainers.terminals.index');
 	}
 
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function create()
 	{
 		$regions = $this->region->lists('name', 'id');
@@ -71,6 +74,10 @@ class TerminalController extends Controller
 		));
 	}
 
+	/**
+	 * @param TerminalRequest $request
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function store(TerminalRequest $request)
 	{
 		$this->terminal->create($request->all());
@@ -78,6 +85,10 @@ class TerminalController extends Controller
 		return redirect()->route('maintainers.terminals.index');
 	}
 
+	/**
+	 * @param $id
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function edit($id)
 	{
 		$terminal = $this->terminal->find($id);
@@ -90,6 +101,11 @@ class TerminalController extends Controller
 		));
 	}
 
+	/**
+	 * @param TerminalRequest $request
+	 * @param $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function update(TerminalRequest $request, $id)
 	{
 		$this->terminal->update($request->all(), $id);
@@ -97,6 +113,21 @@ class TerminalController extends Controller
 		return redirect()->route('maintainers.terminals.index');
 	}
 
+	/**
+	 * @param $id
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function show($id)
+	{
+		$terminal = $this->terminal->find($id, ['commune']);
+
+		return view('maintainers.terminals.show', compact('terminal'));
+	}
+
+	/**
+	 * @param $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function destroy($id)
 	{
 		$this->terminal->delete($id);

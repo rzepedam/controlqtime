@@ -69,8 +69,7 @@
                             </tr>
                             <tr>
                                 <td class="col-md-3">Domicilio</td>
-                                <td class="text-center"><i class="fa fa-map-marker"
-                                                           aria-hidden="true"></i> {{ $employee->address . ", " . $employee->commune->name . ". " . $employee->commune->province->name . ". " . $employee->commune->province->region->name }}
+                                <td class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $employee->address . ", " . $employee->commune->name . ". " . $employee->commune->province->name . ". " . $employee->commune->province->region->name }}
                                 </td>
                             </tr>
                             @if ($employee->depto)
