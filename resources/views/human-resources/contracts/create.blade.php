@@ -77,6 +77,6 @@
 
 @section('scripts')
 
-    <script type="text/javascript" src="{{ elixir('js/create-contracts.js') }}"></script>
+    <script src="{{ elixir('js/create-contracts.js') }}"></script>
 
 @stop

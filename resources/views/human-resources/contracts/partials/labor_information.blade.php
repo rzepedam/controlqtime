@@ -3,7 +3,7 @@
         {{-- Empresa Form Select --}}
         <div class="form-group">
             {{ Form::label('company_id', 'Empresa', ['class' => 'control-label']) }}
-            {{ Form::select('company_id', $companies, null, ['class' => 'form-control custom-select-bootstrap', 'data-plugin' => 'selectpicker', 'data-live-search' => 'true']) }}
+            {{ Form::select('company_id', $companies, null, ['class' => 'form-control', 'data-plugin' => 'selectpicker', 'data-live-search' => 'true']) }}
         </div>
     </div>
     <div class="col-md-4">

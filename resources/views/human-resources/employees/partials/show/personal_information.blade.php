@@ -16,9 +16,7 @@
                                     <td><i class="fa fa-street-view"></i> {{ $employee->full_name }}</td>
                                 </tr>
                                 <tr class="text-center">
-                                    <td><i class="fa fa-building-o"></i><a
-                                                href="{{ route('administration.companies.show', $employee->company->id) }}"
-                                                style="color: #757575"> {{ $employee->company->firm_name }}</a></td>
+                                    <td><i class="fa fa-building-o"></i><a href="{{ route('administration.companies.show', $employee->company->id) }}" style="color: #757575"> {{ $employee->company->firm_name }}</a></td>
                                 </tr>
                                 <tr class="text-center">
                                     <td>
@@ -122,8 +120,7 @@
                         <table class="table table-striped table-bordered">
                             <tbody>
                             <tr class="text-center success">
-                                <td class="col-md-12" colspan="6"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>
+                                <td class="col-md-12" colspan="6"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Información de Contacto
                                 </td>
                             </tr>

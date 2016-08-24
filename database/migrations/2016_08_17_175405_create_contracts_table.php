@@ -29,6 +29,67 @@ class CreateContractsTable extends Migration
 			$table->unsignedInteger('pension_id');
 			$table->unsignedInteger('forecast_id');
             $table->timestamps();
+
+			$table->foreign('company_id')
+				->references('id')
+				->on('companies')
+				->onUpdate('cascade');
+
+			$table->foreign('employee_id')
+				->references('id')
+				->on('employees')
+				->onUpdate('cascade');
+
+			$table->foreign('position_id')
+				->references('id')
+				->on('positions')
+				->onUpdate('cascade');
+
+			$table->foreign('area_id')
+				->references('id')
+				->on('areas')
+				->onUpdate('cascade');
+
+			$table->foreign('num_hour_id')
+				->references('id')
+				->on('num_hours')
+				->onUpdate('cascade');
+
+			$table->foreign('periodicity_hour_id')
+				->references('id')
+				->on('periodicities')
+				->onUpdate('cascade');
+
+			$table->foreign('day_trip_id')
+				->references('id')
+				->on('day_trips')
+				->onUpdate('cascade');
+
+			$table->foreign('periodicity_work_id')
+				->references('id')
+				->on('periodicities')
+				->onUpdate('cascade');
+
+			$table->foreign('gratification_id')
+				->references('id')
+				->on('gratifications')
+				->onUpdate('cascade');
+
+			$table->foreign('type_contract_id')
+				->references('id')
+				->on('type_contracts')
+				->onUpdate('cascade');
+
+			$table->foreign('pension_id')
+				->references('id')
+				->on('pensions')
+				->onUpdate('cascade');
+
+			$table->foreign('forecast_id')
+				->references('id')
+				->on('forecasts')
+				->onUpdate('cascade');
+
         });
     }
 

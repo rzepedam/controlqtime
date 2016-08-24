@@ -168,15 +168,14 @@ class ContractController extends Controller
 		return redirect()->route('human-resources.contracts.index');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int $id
-	 * @return \Illuminate\Http\Response
-	 */
 	public function show($id)
 	{
-		//
+		$contract = $this->contract->find($id, array(
+			'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
+			'gratification', 'typeContract', 'pension', 'forecast', 'termsAndObligatories'
+		));
+
+		return view('human-resources.contracts.show', compact('contract'));
 	}
 
 	/**

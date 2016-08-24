@@ -34,13 +34,14 @@ elixir(function(mix) {
 
     // Human-Resources > Contracts > Create JS
     .scripts([
-        'bower/bootstrap-select/dist/js/bootstrap-select.js',
         'bower/clockpicker/dist/bootstrap-clockpicker.js',
         'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
+        'bower/bootstrap-select/dist/js/bootstrap-select.js',
         'components/bootstrap-clockpicker.js',
-        'components/bootstrap-select.js',
-        'components/bootstrap-maxlength.js'
+        'components/bootstrap-maxlength.js',
+        'components/bootstrap-select.js'
     ], 'public/js/create-contracts.js')
+
 
     /*
      *  Output with version
@@ -49,7 +50,7 @@ elixir(function(mix) {
         'public/css/index-contracts.css',
         'public/js/index-contracts.js',
         'public/css/create-contracts.css',
-        'public/js/create-contracts.js'
+        'public/js/create-contracts.js',
     ]);
 
 });
