@@ -4,9 +4,10 @@
         <table class="table-hover table-condensed" id="terminal_table" data-mobile-responsive="true">
             <thead>
                 <tr>
-                    <th data-field="id" data-sortable="true">ID</th>
-                    <th data-field="name" data-sortable="true">Nombre</th>
-                    <th class="text-center">Acciones</th>
+                    <th class="col-md-1" data-field="id" data-sortable="true">ID</th>
+                    <th class="col-md-5" data-field="name" data-sortable="true">Nombre</th>
+                    <th class="col-md-4 text-center" data-field="commune_id" data-sortable="true">Comuna</th>
+                    <th class="col-md-2 text-center">Acciones</th>
                 </tr>
             </thead>
         </table>

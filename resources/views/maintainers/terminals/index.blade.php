@@ -2,7 +2,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/bootstrap-table.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/maintainers/terminals/index-terminals.css') }}">
 
 @stop
 
@@ -30,9 +30,6 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/bootstrap-table.js') }}
-    {{ Html::script('assets/js/bootstrap-table-mobile.js') }}
-    {{ Html::script('assets/js/bootstrap-table-es-ES.js') }}
-    {{ Html::script('me/js/base/maintainers/terminals/config_bootstrap_table.js') }}
+    <script src="{{ elixir('js/maintainers/terminals/index-terminals.js') }}"></script>
 
 @stop

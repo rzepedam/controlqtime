@@ -1,6 +1,10 @@
 {
-  "css/create-contracts.css": "css/create-contracts-5e222bccee.css",
-  "css/index-contracts.css": "css/index-contracts-5c6e36f91d.css",
-  "js/create-contracts.js": "js/create-contracts-991d08f4a6.js",
-  "js/index-contracts.js": "js/index-contracts-816a476e91.js"
+  "css/human-resources/contracts/create-contracts.css": "css/human-resources/contracts/create-contracts-5e222bccee.css",
+  "css/human-resources/contracts/index-contracts.css": "css/human-resources/contracts/index-contracts-5c6e36f91d.css",
+  "css/maintainers/terminals/index-terminals.css": "css/maintainers/terminals/index-terminals-5c6e36f91d.css",
+  "js/human-resources/contracts/create-contracts.js": "js/human-resources/contracts/create-contracts-991d08f4a6.js",
+  "js/human-resources/contracts/index-contracts.js": "js/human-resources/contracts/index-contracts-816a476e91.js",
+  "js/maintainers/terminals/create-terminals.js": "js/maintainers/terminals/create-terminals-57829700b0.js",
+  "js/maintainers/terminals/edit-terminals.js": "js/maintainers/terminals/edit-terminals-ff98845727.js",
+  "js/maintainers/terminals/index-terminals.js": "js/maintainers/terminals/index-terminals-5b85f28816.js"
 }

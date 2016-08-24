@@ -844,9 +844,10 @@ INSERT INTO model_vehicles(trademark_id, name) VALUES(2, 'Caio Mondego');
 INSERT INTO model_vehicles(trademark_id, name) VALUES(3, 'Marcopolo Gran Viale LE');
 
 /* terminals | Terminales */
-INSERT INTO terminals(name) VALUES('Terminal Norte');
-INSERT INTO terminals(name) VALUES('Terminal Oriente');
-INSERT INTO terminals(name) VALUES('Terminal Sur');
+INSERT INTO terminals(name, address, commune_id) VALUES('Terminal Norte', 'Santa Raquel 10234', '106');
+INSERT INTO terminals(name, address, commune_id) VALUES('Terminal Oriente', 'Palacio Riesco 3819', '102');
+INSERT INTO terminals(name, address, commune_id) VALUES('Terminal Sur', 'Av. La Florida 1000', '106');
+INSERT INTO terminals(name, address, commune_id) VALUES('Juanita', 'Av. Juanita 1490', '86');
 
 /* areas | Áreas */
 INSERT INTO areas(terminal_id, name) VALUES(1, 'COF');

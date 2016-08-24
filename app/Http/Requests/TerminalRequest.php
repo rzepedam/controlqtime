@@ -3,26 +3,39 @@
 namespace Controlqtime\Http\Requests;
 
 use Controlqtime\Http\Requests\Forms\SanitizedRequest;
-use Controlqtime\Http\Requests\Request;
 use Illuminate\Routing\Route;
 
-
-/**
- * @property mixed route
- */
 class TerminalRequest extends SanitizedRequest
 {
-    public function __construct(Route $route)
+	/**
+	 * @var Route
+	 */
+	protected $route;
+
+	/**
+	 * TerminalRequest constructor.
+	 * @param Route $route
+	 */
+	public function __construct(Route $route)
     {
         $this->route = $route;
     }
 
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
     public function authorize()
     {
         return true;
     }
 
-
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
     public function rules()
     {
         switch($this->method())
@@ -30,14 +43,16 @@ class TerminalRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:75|unique:terminals'
+                    'name'  		=> 'required|max:50|unique:terminals',
+					'commune_id'	=> 'required|regex:/[0-9 -()+]+$/'
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:75|unique:terminals,name,' . $this->route->getParameter('terminals')
+                    'name'  		=> 'required|max:75|unique:terminals,name,' . $this->route->getParameter('terminals'),
+					'commune_id'	=> 'required|regex:/[0-9 -()+]+$/'
                 ];
             }
         }

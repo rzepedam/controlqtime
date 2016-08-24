@@ -36,3 +36,9 @@
     </div>
 
 @stop
+
+@section('scripts')
+
+    <script src="{{ elixir('js/maintainers/terminals/create-terminals.js') }}"></script>
+
+@stop

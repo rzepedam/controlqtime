@@ -29,7 +29,7 @@ class ContractRepo extends BaseRepo implements ContractRepoInterface
 	 */
 	public function saveMultipleTermsAndObligatories(array $request, $contract)
 	{
-		return $contract->terms_and_obligatories()->attach($request);
+		return $contract->termsAndObligatories()->attach($request);
 	}
 
 }

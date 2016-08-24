@@ -45,6 +45,6 @@
 
 @section('scripts')
 
-    {{ Html::script('me/js/delete.js') }}
+    <script src="{{ elixir('js/maintainers/terminals/edit-terminals.js') }}"></script>
 
 @stop

@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/create-contracts.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/human-resources/contracts/create-contracts.css') }}">
 
 @stop
 
@@ -77,6 +77,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-contracts.js') }}"></script>
+    <script src="{{ elixir('js/human-resources/contracts/create-contracts.js') }}"></script>
 
 @stop

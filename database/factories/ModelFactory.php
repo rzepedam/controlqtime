@@ -67,7 +67,6 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'email_employee' => $faker->unique()->email,
 		'phone1'         => $faker->phoneNumber,
 		'phone2'         => $faker->phoneNumber,
-		'company_id'     => rand(1, 25),
 		'code'           => $faker->postcode,
 		'state'			 => 'enable'
 	];

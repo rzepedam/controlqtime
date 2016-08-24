@@ -10,8 +10,15 @@ class CreateTerminalsTable extends Migration
     {
         Schema::create('terminals', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 75);
+            $table->string('name', 50);
+			$table->string('address');
+			$table->unsignedInteger('commune_id');
             $table->timestamps();
+
+			$table->foreign('commune_id')
+				->references('id')
+				->on('communes')
+				->onUpdate('cascade');
         });
     }
 
