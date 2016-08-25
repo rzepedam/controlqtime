@@ -4,10 +4,7 @@ body {
     font-size: 1.2em;
 }
 
-table {
+table, tr, td {
     border: none !important;
-}
-
-td {
-    border: none !important;
+    padding: 0 !important;
 }

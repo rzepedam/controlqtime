@@ -36,16 +36,16 @@
             </td>
             <td class="col-xs-11 text-justify">
                 La Jornada de Trabajo será de {{ $contract->numHour->name }} horas
-                {{ $contract->periodicityHour->name }}(es) de {{ $contract->dayTrip->name }}.
+                {{ $contract->periodicityHour->name }} (es) de {{ $contract->dayTrip->name }}.
                 <table class="table table-bordered table-condensed">
                     <tr>
                         <td>
-                            Mañana de {{ $contract->init_morning }} hrs. a {{ $contract->end_morning }} hrs.
+                            <b>Mañana</b> de <b>{{ $contract->init_morning }} hrs.</b> a <b>{{ $contract->end_morning }} hrs.</b>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Tarde de {{ $contract->init_afternoong }} hrs. a {{ $contract->end_afternoon }} hrs.
+                            <b>Tarde</b> de <b>{{ $contract->init_afternoon }} hrs.</b> a <b>{{ $contract->end_afternoon }} hrs.</b>
                         </td>
                     </tr>
                 </table>

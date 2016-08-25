@@ -5,17 +5,17 @@
                 Nombre del Empleador
             </td>
             <td class="col-xs-1 text-center">:</td>
-            <td class="col-xs-7 text-left">
-                <b>PENDIENTE</b>
+            <td class="col-xs-7 text-left text-primary">
+                <b>{{ $contract->company->firm_name }}</b>
             </td>
         </tr>
         <tr>
-            <td class="col-xs-4">
+            <td class="col-xs-4 ">
                 Rut
             </td>
             <td class="col-xs-1 text-center">:</td>
-            <td class="col-xs-7 text-left">
-                <b>PENDIENTE</b>
+            <td class="col-xs-7 text-left text-primary">
+                <b>{{ Helper::formatedRut($contract->company->rut) }}</b>
             </td>
         </tr>
         <tr>
@@ -23,7 +23,7 @@
                 Representante Legal
             </td>
             <td class="col-xs-1 text-center">:</td>
-            <td class="col-xs-7 text-left">
+            <td class="col-xs-7 text-left text-primary">
                 <b>PENDIENTE</b>
             </td>
         </tr>
