@@ -15,7 +15,7 @@
             </td>
             <td class="col-xs-1 text-center">:</td>
             <td class="col-xs-7 text-left">
-                <b>{{ Helper::formatedRut($contract->employee->rut) }}</b>
+                <b>{{ $contract->employee->rut }}</b>
             </td>
         </tr>
         <tr>
