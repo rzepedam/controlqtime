@@ -12,9 +12,7 @@
             <img src="{{ asset('me/img/Stop_frenos.png') }}">
         </div>
         <div class="col-md-6 pull-right">
-            <span class="text-capitalize">
-                {{ Date::parse(date('d-m-Y'))->format('l j F Y') }}
-            </span>
+
         </div>
     </div>
     <hr />
