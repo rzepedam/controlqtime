@@ -5,7 +5,7 @@
                 Nombre del Empleador
             </td>
             <td class="col-xs-1 text-center">:</td>
-            <td class="col-xs-7 text-left text-primary">
+            <td class="col-xs-7 text-left">
                 <b>{{ $contract->company->firm_name }}</b>
             </td>
         </tr>
@@ -14,7 +14,7 @@
                 Rut
             </td>
             <td class="col-xs-1 text-center">:</td>
-            <td class="col-xs-7 text-left text-primary">
+            <td class="col-xs-7 text-left">
                 <b>{{ $contract->company->rut }}</b>
             </td>
         </tr>
