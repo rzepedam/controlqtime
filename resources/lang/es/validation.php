@@ -162,6 +162,18 @@ return [
 		 */
 
 		'created_at'							=> 'Fecha Creación',
-    ],
+
+		/*
+		 * Contract
+		 */
+
+		'init_morning'							=> 'Desde (Horario Mañana)',
+		'end_morning'							=> 'Hasta (Horario Mañana)',
+		'init_afternoon'						=> 'Desde (Horario Tarde)',
+		'end_afternoon'							=> 'Hasta (Horario Tarde)',
+		'salary'								=> 'Sueldo Base',
+		'mobilization'							=> 'Movilización',
+		'collation'								=> 'Colación',
+	],
 
 ];

@@ -49,26 +49,18 @@ class ContractRequest extends SanitizedRequest
 					'num_hour_id'			=> 'required|regex:/[0-9 -()+]+$/',
 					'periodicity_hour_id'	=> 'required|regex:/[0-9 -()+]+$/',
 					'day_trip_id'			=> 'required|regex:/[0-9 -()+]+$/',
-					'init_morning'			=> '',
-					'end_morning'			=> '',
-					'init_afternoon'		=> '',
-					'end_afternoon'			=> '',
+					'init_morning'			=> 'required',
+					'end_morning'			=> 'required',
+					'init_afternoon'		=> 'required',
+					'end_afternoon'			=> 'required',
 					'periodicity_work_id'	=> 'required|regex:/[0-9 -()+]+$/',
-					'salary'				=> '',
-					'mobilization'			=> '',
-					'collation'				=> '',
+					'salary'				=> 'required|max:8',
+					'mobilization'			=> 'required|max:8',
+					'collation'				=> 'required|max:8',
 					'gratification_id'		=> 'required|regex:/[0-9 -()+]+$/',
 					'type_contract_id'		=> 'required|regex:/[0-9 -()+]+$/',
 					'pension_id'			=> 'required|regex:/[0-9 -()+]+$/',
 					'forecast_id'			=> 'required|regex:/[0-9 -()+]+$/',
-				];
-			}
-
-			case 'PUT':
-			{
-				dd('PUT...');
-				return [
-					'name'  => 'required|max:50|unique:contracts,name,' . $this->route->getParameter('contracts')
 				];
 			}
 		}

@@ -16,6 +16,8 @@
 
 @section('content')
 
+    @include('layout.messages.errors')
+
     {{ Form::open(array('route' => 'human-resources.contracts.store', 'method' => 'POST')) }}
 
         {{-- Panel Información Laboral --}}
