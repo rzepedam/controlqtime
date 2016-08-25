@@ -178,37 +178,25 @@ class ContractController extends Controller
 		return view('human-resources.contracts.show', compact('contract'));
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
+	public function getPdf($id)
 	{
-		//
+		$contract = $this->contract->find($id, array(
+			'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
+			'gratification', 'typeContract', 'pension', 'forecast', 'termsAndObligatories'
+		));
+
+		$header = view('human-resources.contracts.partials.pdf.header', compact('contract'));
+		$footer    = view('human-resources.contracts.partials.pdf.footer');
+		$pdf = \PDF::loadView('human-resources.contracts.partials.pdf.index', compact('contract'))
+			->setOption('page-size', 'letter')
+			->setOption('margin-top', '25mm')
+			->setOption('margin-bottom', '14mm')
+			->setOption('header-spacing', '4')
+			->setOption('header-html', $header)
+			->setOption('footer-html', $footer);
+
+		return $pdf->inline();
+
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  int $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(ContractRequest $request, $id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 }

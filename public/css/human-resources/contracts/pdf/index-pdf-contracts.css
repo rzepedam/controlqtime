@@ -1,0 +1,13 @@
+body {
+    font-family: 'Arial';
+    color: #0b0b0b;
+    font-size: 1.2em;
+}
+
+table {
+    border: none !important;
+}
+
+td {
+    border: none !important;
+}

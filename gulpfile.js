@@ -18,6 +18,7 @@ elixir(function(mix) {
         'bower/bootstrap-table/dist/bootstrap-table.css'
     ], 'public/css/human-resources/contracts/index-contracts.css')
 
+
     // Human-Resources > Contracts > Index JS
     .scripts([
         'bower/bootstrap-table/dist/bootstrap-table.js',
@@ -26,11 +27,13 @@ elixir(function(mix) {
         'me/js/base/human-resources/contracts/config_bootstrap_table.js'
     ], 'public/js/human-resources/contracts/index-contracts.js')
 
+
     // Human-Resources > Contracts > Create CSS
     mix.styles([
         'bower/bootstrap-select/dist/css/bootstrap-select.css',
         'bower/clockpicker/dist/bootstrap-clockpicker.css'
     ], 'public/css/human-resources/contracts/create-contracts.css')
+
 
     // Human-Resources > Contracts > Create JS
     .scripts([
@@ -42,10 +45,12 @@ elixir(function(mix) {
         'components/bootstrap-select.js'
     ], 'public/js/human-resources/contracts/create-contracts.js')
 
+
     // Maintainers > Terminals > Index CSS
     mix.styles([
         'bower/bootstrap-table/dist/bootstrap-table.css'
     ], 'public/css/maintainers/terminals/index-terminals.css')
+
 
     // Maintainers > Terminals > Index JS
     .scripts([
@@ -55,6 +60,7 @@ elixir(function(mix) {
         'me/js/base/maintainers/terminals/config_bootstrap_table.js'
     ], 'public/js/maintainers/terminals/index-terminals.js')
 
+
     // Maintainers > Terminals > Create JS
     .scripts([
         'me/js/utilities/add_csrf_token.js',
@@ -62,12 +68,15 @@ elixir(function(mix) {
         'me/js/change/changeRegionProvince.js'
     ], 'public/js/maintainers/terminals/create-terminals.js')
 
+
+    // Maintainers > Terminals > Edit JS
     .scripts([
         'me/js/utilities/add_csrf_token.js',
         'me/js/utilities/verificaUltimosNumeros.js',
         'me/js/change/changeRegionProvince.js',
         'me/js/utilities/delete.js'
     ], 'public/js/maintainers/terminals/edit-terminals.js')
+
 
     /*
      *  Output with version
