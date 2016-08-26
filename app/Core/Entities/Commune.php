@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Commune extends Eloquent
 {
-    /*
-     * Relationships
-     */
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

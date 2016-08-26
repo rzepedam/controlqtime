@@ -44,6 +44,10 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getInstitutions', ['as' => 'maintainers.getInstitutions', 'uses' => 'InstitutionController@getInstitutions']);
 	Route::resource('institutions', 'InstitutionController');
 
+	// Marital Statuses
+	Route::get('getMaritalStatuses', ['as' => 'maintainers.getMaritalStatuses', 'uses' => 'MaritalStatusController@getMaritalStatuses']);
+	Route::resource('marital-statuses', 'MaritalStatusController');
+
 	// Measuring-Units
 	require __DIR__ . '/measuring-units/route.php';
 

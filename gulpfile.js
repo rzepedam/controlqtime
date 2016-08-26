@@ -46,6 +46,17 @@ elixir(function(mix) {
     ], 'public/js/human-resources/contracts/create-contracts.js')
 
 
+    // Maintainers > Marital-Status > Create CSS
+    .scripts([
+        'me/js/base/maintainers/marital-statuses/config_bootstrap_table.js'
+    ], 'public/js/maintainers/marital-statuses/index-marital-status.js')
+
+
+    // Maintainers > Index JS
+    .scripts([
+        'me/js/base/maintainers/index.js'
+    ], 'public/js/maintainers/index.js')
+
     // Maintainers > Terminals > Index CSS
     mix.styles([
         'bower/bootstrap-table/dist/bootstrap-table.css'
@@ -86,6 +97,8 @@ elixir(function(mix) {
         'public/js/human-resources/contracts/index-contracts.js',
         'public/css/human-resources/contracts/create-contracts.css',
         'public/js/human-resources/contracts/create-contracts.js',
+        'public/js/maintainers/index.js',
+        'public/js/maintainers/marital-statuses/index-marital-status.js',
         'public/css/maintainers/terminals/index-terminals.css',
         'public/js/maintainers/terminals/index-terminals.js',
         'public/js/maintainers/terminals/create-terminals.js',

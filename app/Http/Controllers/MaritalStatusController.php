@@ -1,0 +1,94 @@
+<?php
+
+namespace Controlqtime\Http\Controllers;
+
+use Controlqtime\Core\Contracts\MaritalStatusRepoInterface;
+use Controlqtime\Http\Requests\MaritalStatusRequest;
+
+class MaritalStatusController extends Controller
+{
+	/**
+	 * @var MaritalStatusRepoInterface
+	 */
+	protected $maritalStatus;
+
+	/**
+	 * MaritalStatusController constructor.
+	 * @param MaritalStatusRepoInterface $maritalStatus
+	 */
+	public function __construct(MaritalStatusRepoInterface $maritalStatus)
+	{
+		$this->maritalStatus = $maritalStatus;
+	}
+
+	/**
+	 * @return mixed for Bootstrap Table
+	 */
+	public function getMaritalStatuses()
+	{
+		$maritalStatus = $this->maritalStatus->all();
+
+		return $maritalStatus;
+	}
+
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
+    {
+        return view('maintainers.marital-statuses.index');
+    }
+
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function create()
+    {
+        return view('maintainers.marital-statuses.create');
+    }
+
+	/**
+	 * @param MaritalStatusRequest $request
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function store(MaritalStatusRequest $request)
+    {
+        $this->maritalStatus->create($request->all());
+
+		return redirect()->route('maintainers.marital-statuses.index');
+    }
+
+	/**
+	 * @param $id
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function edit($id)
+    {
+    	$maritalStatus = $this->maritalStatus->find($id);
+
+		return view('maintainers.marital-statuses.edit', compact('maritalStatus'));
+    }
+
+	/**
+	 * @param MaritalStatusRequest $request
+	 * @param $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function update(MaritalStatusRequest $request, $id)
+    {
+        $this->maritalStatus->update($request->all(), $id);
+
+		return redirect()->route('maintainers.marital-statuses.index');
+    }
+
+	/**
+	 * @param $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function destroy($id)
+    {
+        $this->maritalStatus->delete($id);
+
+		return redirect()->route('maintainers.marital-statuses.index');
+    }
+}

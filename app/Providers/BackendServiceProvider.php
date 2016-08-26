@@ -34,18 +34,23 @@ class BackendServiceProvider extends ServiceProvider
         );
 
 		$this->app->bind(
+			'Controlqtime\Core\Contracts\CompanyRepoInterface',
+			'Controlqtime\Core\Repositories\CompanyRepo'
+		);
+
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\ContactEmployeeRepoInterface',
+			'Controlqtime\Core\Repositories\ContactEmployeeRepo'
+		);
+
+		$this->app->bind(
 			'Controlqtime\Core\Contracts\ContractRepoInterface',
 			'Controlqtime\Core\Repositories\ContractRepo'
 		);
 
-        $this->app->bind(
+		$this->app->bind(
             'Controlqtime\Core\Contracts\CountryRepoInterface',
             'Controlqtime\Core\Repositories\CountryRepo'
-        );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\CompanyRepoInterface',
-            'Controlqtime\Core\Repositories\CompanyRepo'
         );
 
 		$this->app->bind(
@@ -114,11 +119,6 @@ class BackendServiceProvider extends ServiceProvider
 		);
 
         $this->app->bind(
-            'Controlqtime\Core\Contracts\ContactEmployeeRepoInterface',
-            'Controlqtime\Core\Repositories\ContactEmployeeRepo'
-        );
-
-        $this->app->bind(
             'Controlqtime\Core\Contracts\ImageFactoryInterface',
             'Controlqtime\Core\Factory\ImageFactory'
         );
@@ -133,10 +133,10 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\LaborUnionRepo'
         );
 
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\RepresentativeCompanyRepoInterface',
-            'Controlqtime\Core\Repositories\RepresentativeCompanyRepo'
-        );
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\MaritalStatusRepoInterface',
+			'Controlqtime\Core\Repositories\MaritalStatusRepo'
+		);
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\ModelVehicleRepoInterface',
@@ -151,6 +151,11 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->bind(
             'Controlqtime\Core\Contracts\NationalityRepoInterface',
             'Controlqtime\Core\Repositories\NationalityRepo'
+        );
+
+        $this->app->bind(
+            'Controlqtime\Core\Contracts\NumHourRepoInterface',
+            'Controlqtime\Core\Repositories\NumHourRepo'
         );
 
         $this->app->bind(
@@ -173,11 +178,6 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\ProvinceRepo'
         );
 
-		$this->app->bind(
-			'Controlqtime\Core\Contracts\NumHourRepoInterface',
-			'Controlqtime\Core\Repositories\NumHourRepo'
-		);
-
         $this->app->bind(
             'Controlqtime\Core\Contracts\RegionRepoInterface',
             'Controlqtime\Core\Repositories\RegionRepo'
@@ -187,6 +187,11 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Contracts\RelationshipRepoInterface',
             'Controlqtime\Core\Repositories\RelationshipRepo'
         );
+
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\RepresentativeCompanyRepoInterface',
+			'Controlqtime\Core\Repositories\RepresentativeCompanyRepo'
+		);
 
 		$this->app->bind(
 			'Controlqtime\Core\Contracts\PeriodicityRepoInterface',
