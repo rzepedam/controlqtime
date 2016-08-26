@@ -53,22 +53,23 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	$secondName    = $faker->firstName;
 
 	return [
-		'male_surname'   => $maleSurname,
-		'female_surname' => $femaleSurname,
-		'first_name'     => $firstName,
-		'second_name'    => $secondName,
-		'full_name'      => "$firstName $secondName $maleSurname $femaleSurname",
-		'rut'            => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
-		'birthday'       => $faker->date($format = 'd-m-Y', $max = 'now'),
-		'nationality_id' => rand(1, 9),
-		'gender_id'      => rand(1, 2),
-		'address'        => $faker->address,
-		'commune_id'     => rand(1, 53),
-		'email_employee' => $faker->unique()->email,
-		'phone1'         => $faker->phoneNumber,
-		'phone2'         => $faker->phoneNumber,
-		'code'           => $faker->postcode,
-		'state'			 => 'enable'
+		'male_surname'   	=> $maleSurname,
+		'female_surname' 	=> $femaleSurname,
+		'first_name'     	=> $firstName,
+		'second_name'    	=> $secondName,
+		'full_name'      	=> "$firstName $secondName $maleSurname $femaleSurname",
+		'rut'            	=> rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
+		'birthday'       	=> $faker->date($format = 'd-m-Y', $max = 'now'),
+		'nationality_id' 	=> rand(1, 9),
+		'gender_id'      	=> rand(1, 2),
+		'marital_status_id'	=> rand(1,4),
+		'address'        	=> $faker->address,
+		'commune_id'     	=> rand(1, 53),
+		'email_employee' 	=> $faker->unique()->email,
+		'phone1'         	=> $faker->phoneNumber,
+		'phone2'         	=> $faker->phoneNumber,
+		'code'           	=> $faker->postcode,
+		'state'			 	=> 'enable'
 	];
 });
 

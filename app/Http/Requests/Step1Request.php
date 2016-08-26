@@ -52,6 +52,7 @@ class Step1Request extends SanitizedRequest {
 					'birthday'       	=> 'required|date',
 					'nationality_id' 	=> 'required|regex:/[0-9 -()+]+$/',
 					'gender_id'      	=> 'required|regex:/[0-9 -()+]+$/',
+					'marital_status_id'	=> 'required|regex:/[0-9 -()+]+$/',
 					'address'        	=> 'required',
 					'depto'				=> 'max:5',
 					'block'				=> 'max:4',
@@ -62,7 +63,6 @@ class Step1Request extends SanitizedRequest {
 					'email_employee' 	=> 'required|email|max:100|unique:employees,email_employee',
 					'phone1'         	=> 'required|max:20',
 					'phone2'         	=> 'max:20',
-					'code'           	=> 'required'
 				];
 
 				if (Request::get('count_contacts') > 0)
@@ -103,6 +103,7 @@ class Step1Request extends SanitizedRequest {
 					'birthday'       	=> 'required|date',
 					'nationality_id' 	=> 'required|regex:/[0-9 -()+]+$/',
 					'gender_id'      	=> 'required|regex:/[0-9 -()+]+$/',
+					'marital_status_id'	=> 'required|regex:/[0-9 -()+]+$/',
 					'address'        	=> 'required',
 					'depto'				=> 'max:5',
 					'block'				=> 'max:4',
@@ -113,7 +114,6 @@ class Step1Request extends SanitizedRequest {
 					'email_employee' 	=>	'required|email|max:100|unique:employees,email_employee,' . $this->id,
 					'phone1'         	=> 'required|max:20',
 					'phone2'         	=> 'max:20',
-					'code'           	=> 'required'
 				];
 
 				if (Request::get('count_family_relationships') > 0)

@@ -19,6 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->date('birthday');
             $table->integer('nationality_id')->unsigned();
             $table->integer('gender_id')->unsigned();
+			$table->unsignedInteger('marital_status_id');
             $table->string('address');
             $table->string('depto', 5);
             $table->string('block', 4);
@@ -27,7 +28,6 @@ class CreateEmployeesTable extends Migration
             $table->string('email_employee', 60)->unique();
             $table->string('phone1', 20);
             $table->string('phone2', 20);
-            $table->string('code');
 			$table->string('url')->default('');
             $table->enum('state', ['enable', 'disable'])->default('disable');
             $table->enum('condition', ['available', 'unavailable'])->default('unavailable');
@@ -43,6 +43,11 @@ class CreateEmployeesTable extends Migration
                 ->references('id')
                 ->on('genders')
                 ->onUpdate('cascade');
+
+			$table->foreign('marital_status_id')
+				->references('id')
+				->on('marital_statuses')
+				->onUpdate('cascade');
 
             $table->foreign('commune_id')
                 ->references('id')

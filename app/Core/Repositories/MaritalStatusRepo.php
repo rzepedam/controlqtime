@@ -5,9 +5,12 @@ namespace Controlqtime\Core\Repositories;
 use Controlqtime\Core\Contracts\MaritalStatusRepoInterface;
 use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\ListsTrait;
 
 class MaritalStatusRepo extends BaseRepo implements MaritalStatusRepoInterface
 {
+	use ListsTrait;
+
 	/**
 	 * @var MaritalStatus
 	 */

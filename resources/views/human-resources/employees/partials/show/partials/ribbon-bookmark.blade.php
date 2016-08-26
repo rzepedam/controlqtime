@@ -12,6 +12,3 @@
     @endif
 
 </div>
-<div class="ribbon ribbon-bookmark ribbon-info">
-    <span class="ribbon-inner">Cód. Interno : {{ $employee->code }}</span>
-</div>

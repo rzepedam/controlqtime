@@ -47,6 +47,11 @@
 
 {{-- third row --}}
 <div class="row">
+    {{-- Estado Civil Form Select --}}
+    <div class="col-md-3 form-group">
+        {{ Form::label('marital_status_id', 'Estado Civil', ['class' => 'control-label']) }}
+        {{ Form::select('marital_status_id', $maritalStatuses, Session::get('marital_status_id'), ['class' => 'form-control']) }}
+    </div>
     <div class="col-md-6 form-group">
         {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
         {{ Form::text('address', Session::get('address'), ['class' => 'form-control']) }}
@@ -66,14 +71,14 @@
         {{ Form::label('num_home', 'Nº Casa', ['class' => 'control-label']) }}
         {{ Form::text('num_home', Session::get('num_home'), ['class' => 'form-control text-center']) }}
     </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-        {{ Form::select('region_id', $regions, Session::get('region_id'), ['class' => 'form-control']) }}
-    </div>
 </div>
 
 {{-- Four row --}}
 <div class="row">
+    <div class="col-md-3 form-group">
+        {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
+        {{ Form::select('region_id', $regions, Session::get('region_id'), ['class' => 'form-control']) }}
+    </div>
     <div class="col-md-3 form-group">
         {{ Form::label('province_id', 'Provincia', ['class' => 'control-label']) }}
         {{ Form::select('province_id', $provinces, Session::get('province_id'), ['class' => 'form-control']) }}
@@ -82,19 +87,6 @@
         {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
         {{ Form::select('commune_id', $communes, Session::get('commune_id'), ['class' => 'form-control']) }}
     </div>
-    <div class="col-md-6 form-group">
-        {{ Form::label('email_employee', 'Email', ['class' => 'control-label']) }}
-        <div class="input-group">
-            <div class="input-group-addon">
-                <i class="fa fa-envelope"></i>
-            </div>
-            {{ Form::text('email_employee', Session::get('email_employee'), ['id' => 'Employee', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
-        </div>
-    </div>
-</div>
-
-{{-- Five row --}}
-<div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('phone1', 'Teléfono 1', ['class' => 'control-label']) }}
         <div class="input-group">
@@ -104,6 +96,10 @@
             {{ Form::text('phone1', Session::get('phone1'), ['class' => 'form-control']) }}
         </div>
     </div>
+</div>
+
+{{-- Five row --}}
+<div class="row">
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('phone2', 'Teléfono 2', ['class' => 'control-label']) }}
@@ -115,9 +111,14 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 form-group">
-        {{ Form::label('code', 'Cód. Interno', ['class' => 'control-label']) }}
-        {{ Form::text('code', Session::get('code'), ['class' => 'form-control']) }}
+    <div class="col-md-6 form-group">
+        {{ Form::label('email_employee', 'Email', ['class' => 'control-label']) }}
+        <div class="input-group">
+            <div class="input-group-addon">
+                <i class="fa fa-envelope"></i>
+            </div>
+            {{ Form::text('email_employee', Session::get('email_employee'), ['id' => 'Employee', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+        </div>
     </div>
 </div>
 <div id="Employee" class="row hide">

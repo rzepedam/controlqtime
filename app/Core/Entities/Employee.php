@@ -12,8 +12,8 @@ class Employee extends Eloquent
 	 */
 	protected $fillable = [
         'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
-        'nationality_id', 'gender_id', 'address', 'depto', 'block', 'num_home', 'commune_id', 'email_employee',
-        'phone1', 'phone2', 'code', 'state'
+        'nationality_id', 'marital_status_id', 'gender_id', 'address', 'depto', 'block', 'num_home',
+		'commune_id', 'email_employee', 'phone1', 'phone2', 'state'
     ];
 
 	/**
@@ -81,6 +81,13 @@ class Employee extends Eloquent
 	 */
 	public function gender() {
         return $this->belongsTo(Gender::class);
+    }
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function maritalStatus() {
+    	return $this->belongsTo(MaritalStatus::class);
     }
 
 	/**

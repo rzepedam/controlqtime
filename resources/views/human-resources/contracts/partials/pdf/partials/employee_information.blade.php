@@ -43,8 +43,8 @@
                 Estado Civil
             </td>
             <td class="col-xs-1 text-center">:</td>
-            <td class="col-xs-7 text-left text-primary">
-                <b>PENDIENTE</b>
+            <td class="col-xs-7 text-left">
+                <b>{{ $contract->employee->maritalStatus->name }}</b>
             </td>
         </tr>
         <tr>

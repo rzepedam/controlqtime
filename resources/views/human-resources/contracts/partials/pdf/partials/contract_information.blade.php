@@ -89,7 +89,7 @@
                             Movilización
                         </td>
                         <td class="col-xs-8">
-                            {{ $contract->mobilization }}
+                            $ {{ $contract->mobilization }}
                         </td>
                     </tr>
                     <tr>
@@ -97,7 +97,7 @@
                             Colación
                         </td>
                         <td class="col-xs-8">
-                            {{ $contract->collation }}
+                            $ {{ $contract->collation }}
                         </td>
                     </tr>
                 </table>
