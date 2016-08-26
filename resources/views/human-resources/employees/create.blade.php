@@ -556,7 +556,7 @@
 
                 if (validateStep3()) {
 
-                    $('.finish').addClass('btn-warning');
+                    $('.finish').addClass('btn-success');
                     $('.replace-icon').html('<i class="fa fa-spinner fa-spin fa-fw"></i> Guardando...');
 
                     $.ajax({

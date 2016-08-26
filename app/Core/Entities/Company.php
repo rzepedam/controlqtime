@@ -3,6 +3,7 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Controlqtime\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Company extends Eloquent
@@ -20,44 +21,83 @@ class Company extends Eloquent
      * Relationships
      */
 
-    public function representativeCompanies() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function representativeCompanies() {
         return $this->hasMany(RepresentativeCompany::class);
     }
 
-    public function imageRolCompanies() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function imageRolCompanies() {
         return $this->hasMany(ImageRolCompany::class);
     }
 
-    public function imagePatentCompanies() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function imagePatentCompanies() {
         return $this->hasMany(ImagePatentCompany::class);
     }
 
-    public function typeCompany() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function typeCompany() {
         return $this->belongsTo(TypeCompany::class);
     }
 
-    public function commune() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function commune() {
         return $this->belongsTo(Commune::class);
     }
 
-    /*
-     * Mutators
-     */
 
-    public function setFirmNameAttribute($value) {
+	/**
+	 * @param string $value format 123.456.789-k
+	 */
+	public function setRutAttribute($value) {
+		$this->attributes['rut'] = str_replace('.', '', $value);
+	}
+
+	/**
+	 * @param $value
+	 */
+	public function setFirmNameAttribute($value) {
         $this->attributes['firm_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-    public function setGyreAttribute($value) {
+	/**
+	 * @param $value
+	 */
+	public function setGyreAttribute($value) {
         $this->attributes['gyre'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
-    public function setEmailCompanyAttribute($value) {
+	/**
+	 * @param $value
+	 */
+	public function setEmailCompanyAttribute($value) {
         $this->attributes['email_company'] = strtolower($value);
     }
 
-    public function setStartActAttribute($value) {
+	/**
+	 * @param $value
+	 */
+	public function setStartActAttribute($value) {
         $this->attributes['start_act'] = Carbon::createFromFormat('d-m-Y', $value);
     }
-    
+
+
+	/**
+	 * @param string $value format 123456789-k
+	 * @return string 123.456.789-k
+	 */
+	public function getRutAttribute($value) {
+		return Helper::formatedRut($value);
+	}
 }

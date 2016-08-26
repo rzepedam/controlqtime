@@ -3,6 +3,7 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Controlqtime\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Employee extends Eloquent
@@ -197,6 +198,13 @@ class Employee extends Eloquent
     }
 
 	/**
+	 * @param string $value format 12.345.678-9
+	 */
+	public function setRutAttribute($value) {
+    	$this->attributes['rut'] = str_replace('.', '', $value);
+    }
+
+	/**
 	 * @param string $value
 	 */
 	public function setAddressAttribute($value) {
@@ -217,6 +225,13 @@ class Employee extends Eloquent
         $this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
+	/**
+	 * @param string $value format 12345678-9
+	 * @return string 12.345.678-9
+	 */
+	public function getRutAttribute($value) {
+    	return Helper::formatedRut($value);
+    }
 
 	/**
 	 * @return int
