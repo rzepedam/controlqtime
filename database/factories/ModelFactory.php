@@ -3,7 +3,7 @@
 use Controlqtime\Core\Api\Entities\AccessControl;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Employee;
-use Controlqtime\Core\Entities\RepresentativeCompany;
+use Controlqtime\Core\Entities\LegalRepresentative;
 
 $factory->define(Company::class, function (Faker\Generator $faker)
 {
@@ -26,11 +26,10 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 
 });
 
-$factory->define(RepresentativeCompany::class, function (Faker\Generator $faker)
+$factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 {
 	return [
 		'company_id'             => rand(1, 25),
-		'type_representative_id' => rand(1, 2),
 		'male_surname'           => $faker->lastName,
 		'female_surname'         => $faker->lastName,
 		'first_name'             => $faker->firstName,

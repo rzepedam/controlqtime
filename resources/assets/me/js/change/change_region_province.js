@@ -1,26 +1,3 @@
-$.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
-function verificaUltimosNumeros(element)
-{
-    var aux = element.charAt(element.length - 2);
-
-    //Verificamos si penúltimo dígito es letra, si lo es solamente me quedo con último N°
-    //Sino, retorno 2 últimos N°s
-    if(isNaN(aux) == true){
-        num_element = element.charAt(element.length - 1);
-    }else{
-        var temp    = element.charAt(element.length - 2);
-        var temp2   = element.charAt(element.length - 1);
-        num_element = temp + temp2;
-    }
-
-    return num_element;
-}
-
 $('#region_id').change(function(){
     
     $.post('/loadProvinces',
@@ -94,20 +71,3 @@ $.fn.changeProvince = function() {
         );
     }
 }
-
-$(document).ready(function(){
-
-    var id;
-    var form;
-
-    $('.btn-delete').click(function(e){
-        e.preventDefault();
-        id   = $(this).data('id');
-        form = $('#form-delete');
-        $("#id_delete").text('Confirma eliminar el registro con ID: ' + id + '?');
-    });
-
-    $('.btn-eliminar').click(function(){
-        form.submit();
-    });
-});

@@ -133,10 +133,6 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getTypeProfessionalLicenses', ['as' => 'maintainers.getTypeProfessionalLicenses', 'uses' => 'TypeProfessionalLicenseController@getTypeProfessionalLicenses']);
 	Route::resource('type-professional-licenses', 'TypeProfessionalLicenseController');
 
-	// Type-Representatives
-	Route::get('getTypeRepresentatives', ['as' => 'maintainers.getTypeRepresentatives', 'uses' => 'TypeRepresentativeController@getTypeRepresentatives']);
-	Route::resource('type-representatives', 'TypeRepresentativeController');
-
 	// Type-Specialities
 	Route::get('getTypeSpecialities', ['as' => 'maintainers.getTypeSpecialities', 'uses' => 'TypeSpecialityController@getTypeSpecialities']);
 	Route::resource('type-specialities', 'TypeSpecialityController');

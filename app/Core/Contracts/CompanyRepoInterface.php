@@ -7,7 +7,7 @@ use Controlqtime\Core\Contracts\Base\BaseRepoListsInterface;
 use Controlqtime\Core\Contracts\Base\BaseRepoUploadFilesInterface;
 use Controlqtime\Core\Contracts\Base\BaseRepoWhereInterface;
 
-interface CompanyRepoInterface extends BaseRepoInterface, BaseRepoListsInterface, BaseRepoWhereInterface
+interface CompanyRepoInterface extends BaseRepoInterface
 {
     public function checkState($id);
 }

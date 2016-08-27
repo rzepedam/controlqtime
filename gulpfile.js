@@ -13,6 +13,40 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
 
+    // Layout > Index CSS
+    mix.styles([
+        'me/img/favicon.ico',
+        'bower/bootstrap/dist/css/bootstrap.css',
+        ''
+    ], 'public/css/layout/index-layout.css')
+
+
+    // Layout > Scripts JS
+    .scripts([
+
+    ], 'public/js/layout/index-layout.js')
+
+
+    // Administration > Companies > Create CSS
+    mix.styles([
+        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+    ], 'public/css/administrations/companies/create-companies.css')
+
+
+    // Administration > Companies > Create JS
+    .scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/validations/valida_rut.js',
+        'me/js/validations/valida_email.js',
+        'me/js/change/change_region_province.js',
+        'me/js/utilities/verifica_ultimos_numeros.js',
+        'bower/jquery-rut-plugin/jquery.Rut.js',
+        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+        'components/bootstrap-datepicker.js'
+    ], 'public/js/administrations/companies/create-companies.js')
+
+
     // Human-Resources > Contracts > Index CSS
     mix.styles([
         'bower/bootstrap-table/dist/bootstrap-table.css'
@@ -75,16 +109,16 @@ elixir(function(mix) {
     // Maintainers > Terminals > Create JS
     .scripts([
         'me/js/utilities/add_csrf_token.js',
-        'me/js/utilities/verificaUltimosNumeros.js',
-        'me/js/change/changeRegionProvince.js'
+        'me/js/utilities/verifica_ultimos_numeros.js',
+        'me/js/change/change_region_province.js'
     ], 'public/js/maintainers/terminals/create-terminals.js')
 
 
     // Maintainers > Terminals > Edit JS
     .scripts([
         'me/js/utilities/add_csrf_token.js',
-        'me/js/utilities/verificaUltimosNumeros.js',
-        'me/js/change/changeRegionProvince.js',
+        'me/js/utilities/verifica_ultimos_numeros.js',
+        'me/js/change/change_region_province.js',
         'me/js/utilities/delete.js'
     ], 'public/js/maintainers/terminals/edit-terminals.js')
 
@@ -93,6 +127,8 @@ elixir(function(mix) {
      *  Output with version
      */
     .version([
+        'public/css/administrations/companies/create-companies.css',
+        'public/js/administrations/companies/create-companies.js',
         'public/css/human-resources/contracts/index-contracts.css',
         'public/js/human-resources/contracts/index-contracts.js',
         'public/css/human-resources/contracts/create-contracts.css',

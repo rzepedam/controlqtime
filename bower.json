@@ -5,6 +5,8 @@
     "jquery": "^3.1.0",
     "bootstrap-select": "https://github.com/silviomoreto/bootstrap-select.git#^1.11.0",
     "clockpicker": "https://github.com/weareoutman/clockpicker.git#^0.0.7",
-    "bootstrap-maxlength": "https://github.com/mimo84/bootstrap-maxlength.git#^1.7.0"
+    "bootstrap-maxlength": "https://github.com/mimo84/bootstrap-maxlength.git#^1.7.0",
+    "bootstrap-datepicker": "https://github.com/eternicode/bootstrap-datepicker.git#^1.6.4",
+    "jquery-rut-plugin": "^0.5.0"
   }
 }

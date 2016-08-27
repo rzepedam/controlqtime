@@ -871,10 +871,6 @@ INSERT INTO type_companies(name) VALUES('Visitas');
 INSERT INTO state_vehicles(name) VALUES('Nuevo');
 INSERT INTO state_vehicles(name) VALUES('Usado');
 
-/* type_representatives | Tipo de Representante */
-INSERT INTO type_representatives(name) VALUES('Administrador de Contrato');
-INSERT INTO type_representatives(name) VALUES('Representante Legal');
-
 /* day_trips | Jornadas Laborales */
 INSERT INTO day_trips(name) VALUES('Lunes a Viernes');
 INSERT INTO day_trips(name) VALUES('Lunes a Sábado');

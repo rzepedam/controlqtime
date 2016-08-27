@@ -4,9 +4,8 @@ namespace Controlqtime\Http\Controllers;
 
 use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\RepresentativeCompanyRepoInterface;
+use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
 use Illuminate\Http\Request;
-use Controlqtime\Http\Requests;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
@@ -14,35 +13,78 @@ use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 
 class AjaxLoadController extends Controller {
 
+	/**
+	 * @var CompanyRepoInterface
+	 */
 	protected $company;
+	/**
+	 * @var EmployeeRepoInterface
+	 */
 	protected $employee;
-	protected $contact_employee;
-	protected $representative_company;
+	/**
+	 * @var ContactEmployeeRepoInterface
+	 */
+	protected $contactEmployee;
+	/**
+	 * @var LegalRepresentativeRepoInterface
+	 */
+	protected $legalRepresentative;
+	/**
+	 * @var ProvinceRepoInterface
+	 */
 	protected $province;
+	/**
+	 * @var RegionRepoInterface
+	 */
 	protected $region;
+	/**
+	 * @var TrademarkRepoInterface
+	 */
 	protected $trademark;
 
-	public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, RepresentativeCompanyRepoInterface $representative_company, TrademarkRepoInterface $trademark, EmployeeRepoInterface $employee, ContactEmployeeRepoInterface $contact_employee)
+	/**
+	 * AjaxLoadController constructor.
+	 * @param RegionRepoInterface $region
+	 * @param ProvinceRepoInterface $province
+	 * @param CompanyRepoInterface $company
+	 * @param LegalRepresentativeRepoInterface $legalRepresentative
+	 * @param TrademarkRepoInterface $trademark
+	 * @param EmployeeRepoInterface $employee
+	 * @param ContactEmployeeRepoInterface $contactEmployee
+	 */
+	public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, LegalRepresentativeRepoInterface $legalRepresentative, TrademarkRepoInterface $trademark, EmployeeRepoInterface $employee, ContactEmployeeRepoInterface $contactEmployee)
 	{
 		$this->company              = $company;
 		$this->employee             = $employee;
-		$this->contact_employee 	= $contact_employee;
-		$this->representative_company = $representative_company;
+		$this->contactEmployee      = $contactEmployee;
+		$this->legalRepresentative  = $legalRepresentative;
 		$this->province             = $province;
 		$this->region               = $region;
 		$this->trademark            = $trademark;
 	}
 
+	/**
+	 * @param Request $request
+	 * @return mixed
+	 */
 	public function loadProvinces(Request $request)
 	{
 		return $this->region->findProvinces($request->get('id'));
 	}
 
+	/**
+	 * @param Request $request
+	 * @return mixed
+	 */
 	public function loadCommunes(Request $request)
 	{
 		return $this->province->findCommunes($request->get('id'));
 	}
 
+	/**
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function verificaEmail(Request $request)
 	{
 		switch ($request->get('element'))
@@ -52,7 +94,7 @@ class AjaxLoadController extends Controller {
 				break;
 
 			case 'Representative':
-				$email = $this->representative_company->whereFirst('email_representative', $request->get('email'), ['email_representative']);
+				$email = $this->legalRepresentative->whereFirst('email_representative', $request->get('email'), ['email_representative']);
 				break;
 
 			case 'Employee':
@@ -60,7 +102,7 @@ class AjaxLoadController extends Controller {
 				break;
 				
 			case 'EmailContactEmployee';
-				$email = $this->contact_employee->whereFirst('email_contact', $request->get('email', ['email_contact']));
+				$email = $this->contactEmployee->whereFirst('email_contact', $request->get('email', ['email_contact']));
 				break;
 		}
 
@@ -70,11 +112,19 @@ class AjaxLoadController extends Controller {
 		return response()->json(['success' => true], 200);
 	}
 
+	/**
+	 * @param Request $request
+	 * @return mixed
+	 */
 	public function loadModelVehicles(Request $request)
 	{
 		return $this->trademark->findModelVehicles($request->get('id'));
 	}
 
+	/**
+	 * @param Request $request
+	 * @return mixed
+	 */
 	public function loadRouteAndVehicleSelectedInRound(Request $request)
 	{
 		$round = Round::with(['route', 'vehicle'])->find($request->get('id'));

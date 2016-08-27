@@ -24,8 +24,8 @@ class Company extends Eloquent
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function representativeCompanies() {
-        return $this->hasMany(RepresentativeCompany::class);
+	public function legalRepresentative() {
+        return $this->hasOne(LegalRepresentative::class);
     }
 
 	/**

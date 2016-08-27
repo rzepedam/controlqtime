@@ -19,7 +19,10 @@ class CompanyRepo extends BaseRepo implements CompanyRepoInterface
         $this->model = $model;
     }
 
-    public function checkState($id)
+	/**
+	 * @param $id
+	 */
+	public function checkState($id)
     {
         $company        = parent::find($id, ['imageRolCompanies', 'imagePatentCompanies']);
         $image_rol      = $company->imageRolCompanies->count();
@@ -33,4 +36,5 @@ class CompanyRepo extends BaseRepo implements CompanyRepoInterface
             $company->save();
         }
     }
+
 }

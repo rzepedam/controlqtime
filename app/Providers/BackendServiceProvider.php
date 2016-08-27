@@ -134,6 +134,11 @@ class BackendServiceProvider extends ServiceProvider
         );
 
 		$this->app->bind(
+			'Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface',
+			'Controlqtime\Core\Repositories\LegalRepresentativeRepo'
+		);
+
+		$this->app->bind(
 			'Controlqtime\Core\Contracts\MaritalStatusRepoInterface',
 			'Controlqtime\Core\Repositories\MaritalStatusRepo'
 		);
@@ -187,11 +192,6 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Contracts\RelationshipRepoInterface',
             'Controlqtime\Core\Repositories\RelationshipRepo'
         );
-
-		$this->app->bind(
-			'Controlqtime\Core\Contracts\RepresentativeCompanyRepoInterface',
-			'Controlqtime\Core\Repositories\RepresentativeCompanyRepo'
-		);
 
 		$this->app->bind(
 			'Controlqtime\Core\Contracts\PeriodicityRepoInterface',
@@ -281,11 +281,6 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->bind(
             'Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface',
             'Controlqtime\Core\Repositories\TypeProfessionalLicenseRepo'
-        );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\TypeRepresentativeRepoInterface',
-            'Controlqtime\Core\Repositories\TypeRepresentativeRepo'
         );
 
         $this->app->bind(
