@@ -8,7 +8,7 @@
                             <tr>
                                 <td>Nombre</td>
                                 <td class="text-center">
-                                    <i class="fa fa-user" aria-hidden="true"></i> {{ $company->legalRepresentative->full_name }}
+                                    {{ $company->legalRepresentative->full_name }}
                                 </td>
                             </tr>
                             <tr>
@@ -35,12 +35,14 @@
                                     <i class="fa fa-phone"></i> {{ $company->legalRepresentative->phone1_representative }}
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Teléfono 2</td>
-                                <td class="text-center">
-                                    {{ $company->legalRepresentative->phone2_representative }}
-                                </td>
-                            </tr>
+                            @if($company->legalRepresentative->phone2_representative)
+                                <tr>
+                                    <td>Teléfono 2</td>
+                                    <td class="text-center">
+                                        {{ $company->legalRepresentative->phone2_representative }}
+                                    </td>
+                                </tr>
+                            @endif
                             <tr>
                                 <td>Email</td>
                                 <td class="text-center">

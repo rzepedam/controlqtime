@@ -10,7 +10,7 @@
 
     <p></p>
     <div class="text-center">
-        <h3>Contrato Laboral</h3>
+        <h3><b>Contrato Laboral</b></h3>
     </div>
     <br />
     <div>
@@ -23,6 +23,7 @@
 
         </div>
     </div>
+    <br />
     <div>
         <b>INDIVIDUALIZACIÓN DEL EMPLEADOR O EMPRESA</b>
     </div>
@@ -33,12 +34,14 @@
 
         </div>
     </div>
+    <br />
     <div class="text-justify">
-        Entre las partes arriba individualizadas, se suscribe el presente contrato de trabajo para cuyos efectos los contratantes convienen en denominarse trabajador y empleador, respectivamente
+        Entre las partes arriba individualizadas, se suscribe el presente contrato de trabajo para cuyos efectos
+        los contratantes convienen en denominarse trabajador y empleador, respectivamente
     </div>
     <br />
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-10 col-xs-offset-1">
 
             @include('human-resources.contracts.partials.pdf.partials.contract_information')
 

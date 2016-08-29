@@ -137,7 +137,7 @@ class CompanyController extends Controller
 	 */
 	public function edit($id)
 	{
-		$company              = $this->company->find($id, ['representativeCompanies']);
+		$company              = $this->company->find($id, ['legalRepresentative']);
 		$regions              = $this->region->lists('name', 'id');
 		$provinces            = $this->region->findProvinces($company->commune->province->region->id);
 		$communes             = $this->province->findCommunes($company->commune->province->id);
@@ -157,10 +157,16 @@ class CompanyController extends Controller
 	 */
 	public function update(CompanyRequest $request, $id)
 	{
-		$company = $this->company->find($id);
-		$this->company->update($request->all(), $id);
-		$this->legalRepresentative->destroyArrayId($request->get('id_delete_representatives'));
-		$this->legalRepresentative->createOrUpdateWithArray($request->all(), $company);
+		DB::beginTransaction();
+
+		try {
+			$this->company->update($request->all(), $id);
+			$this->legalRepresentative->update($request->all(), $request->get('id_representative'));
+
+			DB::commit();
+		}catch( Exception $e ) {
+			DB::rollback();
+		}
 
 		return response()->json(array(
 			'success' => true,

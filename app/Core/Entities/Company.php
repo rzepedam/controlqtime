@@ -96,4 +96,5 @@ class Company extends Eloquent
 	public function getRutAttribute($value) {
 		return Helper::formatedRut($value);
 	}
+
 }

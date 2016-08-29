@@ -109,12 +109,11 @@ class Contract extends Eloquent
 	}
 
 	/**
-	 * @param datetime $date
+	 * @param datetime($value) 2016-01-01 00:00:00
 	 * @return string format('d-m-Y H:i:s')
 	 */
-	public function getCreatedAtAttribute($date)
-	{
-		return $this->attributes['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y H:i:s');
+	public function getCreatedAtAttribute($value) {
+		return $this->attributes['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d-m-Y H:i:s');
 	}
 
 }

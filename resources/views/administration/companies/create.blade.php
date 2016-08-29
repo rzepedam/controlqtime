@@ -31,7 +31,7 @@
             </div>
             <div class="panel-body">
 
-                @include('administration.companies.partials.create.data_company')
+                @include('administration.companies.partials.fields.data_company')
 
             </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="panel-body">
                 <div id="content_legal_representative">
 
-                    @include('administration.companies.partials.create.data_legal_representative')
+                    @include('administration.companies.partials.fields.data_legal_representative')
 
                 </div>
             </div>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="col-md-6 pull-right">
-            <button id="btnSubmitCompany" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+            <button id="btnSubmit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
         </div>
     </div>
 
@@ -69,40 +69,6 @@
 @section('scripts')
 
     <script src="{{ elixir('js/administrations/companies/create-companies.js') }}"></script>
-
-    <script type="text/javascript">
-
-        $(document).ready(function(){
-
-            $('#btnSubmitCompany').click(function(e) {
-
-                e.preventDefault();
-
-                var formCompany         = $('#form-company');
-                var action              = $('#form-company').attr('action');
-                var button              = $(this);
-
-                button.html('<i class="fa fa-refresh fa-spin fa-fw"></i>').css({ width: '122px' });
-                $.post( action,
-                        formCompany.serialize(),
-                        function(response) {
-                    if (response.success) {
-                        window.location.href = response.url;
-                    }
-                }).fail(function(response) {
-                    button.html('<i class="fa fa-floppy-o"></i> Guardar');
-                    var errors = $.parseJSON(response.responseText);
-                    $.each(errors, function (index, value) {
-                        $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
-                        $('#' + index).focus();
-                        return false;
-                    });
-                });
-            });
-
-        });
-
-    </script>
 
 @stop
 

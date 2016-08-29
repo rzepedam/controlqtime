@@ -74,6 +74,13 @@ class LegalRepresentative extends Eloquent
 	}
 
 	/**
+	 * @param string $value format 12.345.678-9
+	 */
+	public function setRutRepresentativeAttribute($value) {
+		$this->attributes['rut_representative'] = str_replace('.', '', $value);
+	}
+
+	/**
 	 * @param $value
 	 */
 	public function setBirthdayAttribute($value) {

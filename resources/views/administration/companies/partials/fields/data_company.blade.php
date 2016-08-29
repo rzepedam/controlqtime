@@ -32,7 +32,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
-                {{ Form::text('start_act', null, ['class' => 'form-control', 'readonly']) }}
+                {{ Form::text('start_act', (Route::is('administration.companies.create')) ? null : $company->start_act->format('d-m-Y'), ['class' => 'form-control', 'readonly']) }}
             </div>
         </div>
     </div>
@@ -123,13 +123,17 @@
                 <div class="input-group-addon">
                     <i class="fa fa-envelope"></i>
                 </div>
-                {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+                @if( Route::is('administration.companies.create') )
+                    {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+                @else
+                    {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control']) }}
+                @endif
             </div>
         </div>
     </div>
 </div>
+<br />
 <div id="Company" class="row hide">
-    <br />
     <div class="col-md-12 text-center">
         @include('layout.ajax.show_spin_icon')
     </div>

@@ -13,7 +13,7 @@
         {{--Listado de Empleados al día [{{ date('d-m-Y') --}}
     </div>
     <div class="col-md-6 pull-right">
-        Página <span class="page text-primary"></span> de <span class="topage"></span>
+        Página <span class="page"></span> de <span class="topage"></span>
     </div>
 </div>
 

@@ -40,76 +40,6 @@ $(document).on('blur', '.check_rut', function() {
         }
     });
 });
-
-	function validaEmail(email) {
-
-		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-		return re.test(email);
-
-	}
-
-	$.fn.checkEmail = function() {
-
-		var element = $(this);
-		var input   = $(this).attr('id');
-
-		if ($(this).val() == '') {
-			element.closest('.form-group').removeClass('has-error has-feedback');
-			return false;
-		}
-
-		if (!validaEmail(element.val())) {
-			element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
-			toastr.error(
-				'Verifique que el email estÃ¡ ingresado correctamente',
-				'Email Incorrecto',
-				{
-					"closeButton": true,
-					"preventDuplicates": true,
-					"progressBar": true,
-				}
-			);
-		}else {
-			$('div#' + input).removeClass('hide');
-			$.ajax ({
-				type: 'POST',
-				url: '/verificaEmail',
-				data: { email: element.val(), element: input },
-				dataType: "json",
-
-				success: function()
-				{
-					$('div#' + input).addClass('hide');
-					element.closest('.form-group').removeClass('has-error has-feedback');
-					toastr.success(
-						'El Email se encuentra disponible en nuestra Base de Datos',
-						'Email VÃ¡lido',
-						{
-							"closeButton": true,
-							"preventDuplicates": true,
-							"progressBar": true,
-						}
-					);
-				},
-
-				error: function(){
-					$('div#' + input).addClass('hide');
-					element.closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
-					toastr.error(
-						'El Email ya se encuentra registrado en nuestra Base de Datos',
-						'Email Registrado',
-						{
-							"preventDuplicates": true,
-							"progressBar": true,
-						}
-					);
-				}
-			});
-		}
-	}
-
-
 $('#region_id').change(function(){
     
     $.post('/loadProvinces',
@@ -201,7 +131,53 @@ function verificaUltimosNumeros(element)
     return num_element;
 }
 
-/* Copyright (c) 2009 José Joaquín Núñez (josejnv@gmail.com) http://joaquinnunez.cl/blog/
+$(document).ready(function(){
+
+    var id;
+    var form;
+
+    $('.btn-delete').click(function(e){
+        e.preventDefault();
+        id   = $(this).data('id');
+        form = $('#form-delete');
+        $("#id_delete").text('Confirma eliminar el registro con ID: ' + id + '?');
+    });
+
+    $('.btn-eliminar').click(function(){
+        form.submit();
+    });
+});
+
+$(document).ready(function(){
+
+    $('#btnSubmit').click(function(e) {
+
+        e.preventDefault();
+
+        var formCompany = $('#form-company');
+        var action      = $('#form-company').attr('action');
+        var button      = $(this);
+
+        button.html('<i class="fa fa-refresh fa-spin fa-fw"></i>').css({ width: '122px' });
+        $.post( action,
+            formCompany.serialize(),
+            function(response) {
+                if (response.success) {
+                    window.location.href = response.url;
+                }
+            }).fail(function(response) {
+                button.html('<i class="fa fa-floppy-o"></i> Guardar');
+                var errors = $.parseJSON(response.responseText);
+                $.each(errors, function (index, value) {
+                    $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
+                    $('#' + index).focus();
+                    return false;
+                });
+            }
+        );
+    });
+});
+/* Copyright (c) 2009 Josï¿½ Joaquï¿½n Nï¿½ï¿½ez (josejnv@gmail.com) http://joaquinnunez.cl/blog/
  * Licensed under GPL (http://www.opensource.org/licenses/gpl-2.0.php)
  * Use only for non-commercial usage.
  *
@@ -2561,34 +2537,4 @@ $.components.register("datepicker", {
     orientation: "bottom",
     endDate: new Date(),
   }
-});
-
-$(document).ready(function(){
-
-    $('#btnSubmit').click(function(e) {
-
-        e.preventDefault();
-
-        var formCompany = $('#form-company');
-        var action      = $('#form-company').attr('action');
-        var button      = $(this);
-
-        button.html('<i class="fa fa-refresh fa-spin fa-fw"></i>').css({ width: '122px' });
-        $.post( action,
-            formCompany.serialize(),
-            function(response) {
-                if (response.success) {
-                    window.location.href = response.url;
-                }
-            }).fail(function(response) {
-                button.html('<i class="fa fa-floppy-o"></i> Guardar');
-                var errors = $.parseJSON(response.responseText);
-                $.each(errors, function (index, value) {
-                    $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
-                    $('#' + index).focus();
-                    return false;
-                });
-            }
-        );
-    });
 });

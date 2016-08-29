@@ -182,7 +182,8 @@ class ContractController extends Controller
     {
         $contract = $this->contract->find($id, array(
             'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
-            'gratification', 'typeContract', 'pension', 'forecast', 'termsAndObligatories'
+            'gratification', 'typeContract', 'pension', 'forecast', 'termsAndObligatories',
+			'company.legalRepresentative'
         ));
 
         $header = view('human-resources.contracts.partials.pdf.header', compact('contract'));
@@ -191,6 +192,8 @@ class ContractController extends Controller
             ->setOption('page-size', 'letter')
             ->setOption('margin-top', '25mm')
             ->setOption('margin-bottom', '14mm')
+			->setOption('margin-left', '20mm')
+			->setOption('margin-right', '20mm')
             ->setOption('header-spacing', '4')
             ->setOption('header-html', $header)
             ->setOption('footer-html', $footer);

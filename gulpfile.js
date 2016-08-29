@@ -60,8 +60,30 @@ elixir(function(mix) {
         'bower/jquery-rut-plugin/jquery.Rut.js',
         'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
-        'components/bootstrap-datepicker.js'
+        'components/bootstrap-datepicker.js',
+        'me/js/base/administrations/companies/custom.js'
     ], 'public/js/administrations/companies/create-companies.js')
+
+
+    // Administration > Companies > Edit CSS
+    mix.styles([
+        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+    ], 'public/css/administrations/companies/edit-companies.css')
+
+
+    // Administration > Companies > Edit JS
+    .scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/validations/valida_rut.js',
+        'me/js/change/change_region_province.js',
+        'me/js/utilities/verifica_ultimos_numeros.js',
+        'me/js/utilities/delete.js',
+        'me/js/base/administrations/companies/custom.js',
+        'bower/jquery-rut-plugin/jquery.Rut.js',
+        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+        'components/bootstrap-datepicker.js',
+    ], 'public/js/administrations/companies/edit-companies.js')
 
 
     // Human-Resources > Contracts > Index CSS
@@ -149,6 +171,8 @@ elixir(function(mix) {
         'public/js/layout/index-layout-components.js',
         'public/css/administrations/companies/create-companies.css',
         'public/js/administrations/companies/create-companies.js',
+        'public/css/administrations/companies/edit-companies.css',
+        'public/js/administrations/companies/edit-companies.js',
         'public/css/human-resources/contracts/index-contracts.css',
         'public/js/human-resources/contracts/index-contracts.js',
         'public/css/human-resources/contracts/create-contracts.css',

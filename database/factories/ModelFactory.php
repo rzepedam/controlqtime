@@ -14,7 +14,7 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 		'gyre'            => $faker->sentence,
 		'start_act'       => $faker->date($format = 'd-m-Y', $max = 'now'),
 		'address'         => $faker->address,
-		'commune_id'      => rand(1, 53),
+		'commune_id'      => 102,
 		'lot'             => rand(1, 99),
 		'ofi'             => rand(1, 50),
 		'floor'           => rand(1, 30),
