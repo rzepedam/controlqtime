@@ -3,6 +3,7 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Controlqtime\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class LegalRepresentative extends Eloquent
@@ -11,7 +12,7 @@ class LegalRepresentative extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'male_surname', 'female_surname', 'first_name', 'second_name', 'rut_representative',
+		'company_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'rut_representative',
 		'birthday', 'nationality_id', 'phone1_representative', 'phone2_representative',
 		'email_representative',
 	];
@@ -79,10 +80,19 @@ class LegalRepresentative extends Eloquent
 		$this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
 	}
 
+
 	/**
 	 * @return string
 	 */
 	public function getFullNameAttribute() {
 		return $this->first_name . " " . $this->second_name . " " . $this->male_surname . " " . $this->female_surname;
+	}
+
+	/**
+	 * @param string $value format 12345678-9
+	 * @return string 12.345.678-9
+	 */
+	public function getRutRepresentativeAttribute($value) {
+		return Helper::formatedRut($value);
 	}
 }

@@ -38,7 +38,7 @@
 
         <div class="panel panel-bordered">
             <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-users text-success"></i> Datos Representante Legal</h3>
+                <h3 class="panel-title"><i class="fa fa-gavel text-success"></i> Datos Representante Legal</h3>
             </div>
 
             <div class="panel-body">

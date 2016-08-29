@@ -7,5 +7,5 @@ use Controlqtime\Core\Contracts\Base\BaseRepoWhereInterface;
 
 interface LegalRepresentativeRepoInterface extends BaseRepoInterface, BaseRepoWhereInterface
 {
-    
+
 }

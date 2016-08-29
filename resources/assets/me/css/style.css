@@ -1,0 +1,221 @@
+body {
+    font-family: 'Clear Sans Light', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Clear Sans', sans-serif;
+}
+
+textarea {
+    resize: none;
+}
+
+a {
+    text-decoration: none!important;
+}
+
+table td {
+    vertical-align: middle !important;
+}
+
+img {
+    max-width: 100%;
+}
+
+/*
+* Fixed buttons in heading Panels
+*/
+@media (max-width: 550px) {
+    .panel-actions {
+        position: relative;
+        top: auto;
+        display: block;
+        right: auto;
+        z-index: 1;
+        padding: 0 30px 20px;
+        -webkit-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        transform: none;
+    }
+}
+
+/**
+* Bradcumb responsive
+**/
+@media screen and (max-width: 767px) {
+    .page-header-actions {
+        position:relative;
+        right: auto;
+        top: auto;
+        padding: 10px 0 0 0;
+        -webkit-transform:none;
+        -ms-transform:none;
+        -o-transform:none;
+        transform: none;
+        margin: auto;
+    }
+}
+
+.breadcrumb > li > a {
+    text-decoration: none;
+}
+
+.delete-elements {
+    color: red!important;
+    font-size: 1.4em;
+    margin-top: -4px;
+    margin-right: -15px;
+    cursor: pointer;
+}
+
+.delete-elements:hover {
+    color: red;
+}
+
+.contiene-titulo-label-seccion{
+    overflow: hidden;
+}
+
+.add_contact_employee{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_contact_employee:hover{
+    color: white;
+    background: #4CAF50;
+}
+
+.add_family_relationship{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_family_relationship:hover {
+    color: white;
+    background: #FF9800;
+}
+
+.add_study{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_study:hover {
+    color: white;
+    background: #00bcd4;
+}
+
+.add_certification{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_certification:hover {
+    color: white;
+    background: #F44336;
+}
+
+.add_speciality {
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_speciality:hover {
+    color: white;
+    background: #FF9800;
+}
+
+.add_professional_license{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_professional_license:hover {
+    color: white;
+    background: #4CAF50;
+}
+
+.add_disabilities{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_disabilities:hover {
+    color: white;
+    background: #FF9800;
+}
+
+.add_diseases{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_diseases:hover {
+    color: white;
+    background: #4CAF50;
+}
+
+.add_exams{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_exams:hover {
+    color: white;
+    background: #00bcd4;
+}
+
+.add_family_responsability{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_family_responsability:hover {
+    color: white;
+    background: #F44336;
+}
+
+.add_license{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_license:hover {
+    color: white;
+    background: #4CAF50;
+}
+
+.add_representative{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.add_representative:hover {
+    color: white;
+    background: #4CAF50;
+}
+
+/*
+* Hide panel buttons step wizard
+*/
+
+.content-step {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.margin_terms_and_obligatories {
+    margin-top: -16px;
+    margin-left: -17px;
+}
+
+.margin_button_with_save {
+    margin-left: 20px;
+}

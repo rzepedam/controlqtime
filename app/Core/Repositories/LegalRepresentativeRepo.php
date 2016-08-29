@@ -3,6 +3,7 @@
 namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
+use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\OperationEntityArray;

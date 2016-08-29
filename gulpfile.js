@@ -17,14 +17,31 @@ elixir(function(mix) {
     mix.styles([
         'me/img/favicon.ico',
         'bower/bootstrap/dist/css/bootstrap.css',
-        ''
+        //'bower/font-awesome/css/font-awesome.css',
+        //'bower/animsition/dist/css/animsition.css',
+        //'bower/jquery-asScrollable/dist/css/asScrollable.css',
+        //'bower/Waves/dist/waves.css',
+        //'bower/toastr/toastr.css',
+        //'me/css/custom-color-toastr',
+        //'bower/material-design-iconic-font/dist/css/material-design-iconic-font.css'
     ], 'public/css/layout/index-layout.css')
 
 
     // Layout > Scripts JS
     .scripts([
-
+        'bower/jquery/dist/jquery.js',
+        'bower/bootstrap/dist/js/bootstrap.js',
+        'bower/animsition/dist/js/animsition.js',
+        'bower/jquery-wheel/jquery.mousewheel.js',
+        'bower/jquery-asScrollable/dist/jquery-asScrollable.js',
+        'bower/Waves/dist/waves.js',
+        'bower/toastr/toastr.js',
     ], 'public/js/layout/index-layout.js')
+
+    .scripts([
+        'components/animsition.js',
+        'components/asscrollable.js',
+    ], 'public/js/layout/index-layout-components.js')
 
 
     // Administration > Companies > Create CSS
@@ -127,6 +144,9 @@ elixir(function(mix) {
      *  Output with version
      */
     .version([
+        'public/css/layout/index-layout.css',
+        'public/js/layout/index-layout.js',
+        'public/js/layout/index-layout-components.js',
         'public/css/administrations/companies/create-companies.css',
         'public/js/administrations/companies/create-companies.js',
         'public/css/human-resources/contracts/index-contracts.css',

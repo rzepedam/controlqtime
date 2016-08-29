@@ -7,6 +7,6 @@ class LegalRepresentativeTableSeeder extends Seeder
 {
     public function run()
     {
-        factory(LegalRepresentative::class, 200)->create();
+        factory(LegalRepresentative::class, 26)->create();
     }
 }

@@ -14,7 +14,7 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 		'gyre'            => $faker->sentence,
 		'start_act'       => $faker->date($format = 'd-m-Y', $max = 'now'),
 		'address'         => $faker->address,
-		'commune_id'      => 102,
+		'commune_id'      => rand(1, 53),
 		'lot'             => rand(1, 99),
 		'ofi'             => rand(1, 50),
 		'floor'           => rand(1, 30),
@@ -29,7 +29,7 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 {
 	return [
-		'company_id'             => rand(1, 25),
+		'company_id'             => factory(Company::class)->create()->id,
 		'male_surname'           => $faker->lastName,
 		'female_surname'         => $faker->lastName,
 		'first_name'             => $faker->firstName,

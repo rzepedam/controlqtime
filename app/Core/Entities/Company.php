@@ -17,10 +17,6 @@ class Company extends Eloquent
         'start_act'
     ];
 
-    /*
-     * Relationships
-     */
-
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */

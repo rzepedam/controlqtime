@@ -13,6 +13,7 @@ use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class CompanyController extends Controller
 {
@@ -112,13 +113,11 @@ class CompanyController extends Controller
 	 */
 	public function store(CompanyRequest $request)
 	{
-		dd($request->all());
 		DB::beginTransaction();
 
 		try {
-			// $company 				= $this->company->create($request->all());
-			$this->legalRepresentative->create($request->all());
-			// $company->legalRepresentative()->associate($legalRepresentative);
+			$company = $this->company->create($request->all());
+			$company->legalRepresentative()->create($request->all());
 
 			DB::commit();
 		}catch ( Exception $e ) {
@@ -176,7 +175,9 @@ class CompanyController extends Controller
 	 */
 	public function show($id)
 	{
-		$company = $this->company->find($id, ['commune.province.region', 'legalRepresentatives.nationality', 'typeCompany']);
+		$company = $this->company->find($id, [
+			'commune.province.region', 'legalRepresentative.nationality', 'typeCompany'
+		]);
 
 		return view('administration.companies.show', compact('company'));
 	}
