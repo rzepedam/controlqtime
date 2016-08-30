@@ -5,7 +5,7 @@
             {{ Form::label('salary', 'Sueldo Base', ['class' => 'control-label']) }}
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                {{ Form::text('salary', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '8']) }}
+                {{ Form::text('salary', null, ['class' => 'form-control text-center money', 'data-plugin' => 'autoNumeric']) }}
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
             {{ Form::label('mobilization', 'Movilización', ['class' => 'control-label']) }}
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                {{ Form::text('mobilization', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '8']) }}
+                {{ Form::text('mobilization', null, ['class' => 'form-control text-center money', 'data-plugin' => 'autoNumeric']) }}
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             {{ Form::label('collation', 'Colación', ['class' => 'control-label']) }}
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                {{ Form::text('collation', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '8']) }}
+                {{ Form::text('collation', null, ['class' => 'form-control text-center money', 'data-plugin' => 'autoNumeric']) }}
             </div>
         </div>
     </div>

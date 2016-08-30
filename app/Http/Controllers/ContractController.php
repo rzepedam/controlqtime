@@ -149,11 +149,12 @@ class ContractController extends Controller
         ));
     }
 
-    /**
-     * @param ContractRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(ContractRequest $request)
+
+	/**
+	 * @param ContractRequest $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function store(ContractRequest $request)
     {
         DB::beginTransaction();
 
@@ -165,7 +166,10 @@ class ContractController extends Controller
             DB::rollBack();
         }
 
-        return redirect()->route('human-resources.contracts.index');
+		return response()->json([
+			'status' => true,
+			'url'    => '/human-resources/contracts'
+		]);
     }
 
     public function show($id)

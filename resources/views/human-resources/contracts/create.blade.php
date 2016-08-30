@@ -16,9 +16,9 @@
 
 @section('content')
 
-    @include('layout.messages.errors')
+    @include('layout.messages.errors-js')
 
-    {{ Form::open(array('route' => 'human-resources.contracts.store', 'method' => 'POST')) }}
+    {{ Form::open(array('route' => 'human-resources.contracts.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
         {{-- Panel Información Laboral --}}
         <div class="panel panel-bordered">
@@ -69,7 +69,7 @@
                 <button class="btn btn-squared btn-danger btn-lg waves-effect waves-light pull-right"><i class="fa fa-file-pdf-o"></i> Visualizar</button>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-2">
-                <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
             </div>
         </div>
 

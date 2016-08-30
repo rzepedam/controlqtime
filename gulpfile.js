@@ -61,7 +61,7 @@ elixir(function(mix) {
         'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
         'components/bootstrap-datepicker.js',
-        'me/js/base/administrations/companies/custom.js'
+        'me/js/base/administrations/companies/create-edit.js'
     ], 'public/js/administrations/companies/create-companies.js')
 
 
@@ -78,7 +78,7 @@ elixir(function(mix) {
         'me/js/change/change_region_province.js',
         'me/js/utilities/verifica_ultimos_numeros.js',
         'me/js/utilities/delete.js',
-        'me/js/base/administrations/companies/custom.js',
+        'me/js/base/administrations/companies/create-edit.js',
         'bower/jquery-rut-plugin/jquery.Rut.js',
         'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
@@ -113,9 +113,12 @@ elixir(function(mix) {
         'bower/clockpicker/dist/bootstrap-clockpicker.js',
         'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
         'bower/bootstrap-select/dist/js/bootstrap-select.js',
+        'bower/autoNumeric/autoNumeric.js',
         'components/bootstrap-clockpicker.js',
-        'components/bootstrap-maxlength.js',
-        'components/bootstrap-select.js'
+        'components/bootstrap-select.js',
+        'components/autoNumeric.js',
+        'me/js/base/human-resources/contracts/create-edit.js',
+        'me/js/utilities/sanitized-money-fields.js'
     ], 'public/js/human-resources/contracts/create-contracts.js')
 
 

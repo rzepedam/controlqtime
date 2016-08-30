@@ -11,4 +11,10 @@ class Helper
 
 		return number_format($rutTmp[0], 0, "", ".") . '-' . $rutTmp[1];
 	}
+
+	// Agrega puntos y $ a campos que contienen dinero
+	public static function formatedMoney($field)
+	{
+		return "$ " . number_format($field, 0, ',', '.');
+	}
 }

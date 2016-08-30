@@ -3,6 +3,7 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Controlqtime\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Contract extends Eloquent
@@ -108,12 +109,38 @@ class Contract extends Eloquent
 		return $this->belongsToMany(TermAndObligatory::class);
 	}
 
+
 	/**
 	 * @param datetime($value) 2016-01-01 00:00:00
 	 * @return string format('d-m-Y H:i:s')
 	 */
 	public function getCreatedAtAttribute($value) {
 		return $this->attributes['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d-m-Y H:i:s');
+	}
+
+
+	/**
+	 * @param $value (250000)
+	 * @return string ($ 250.000) for autoNumeric plugin
+	 */
+	public function getSalaryAttribute($value) {
+		return Helper::formatedMoney($value);
+	}
+
+	/**
+	 * @param $value (15000)
+	 * @return string ($ 15.000) for autoNumeric plugin
+	 */
+	public function getMobilizationAttribute($value) {
+		return Helper::formatedMoney($value);
+	}
+
+	/**
+	 * @param $value (15000)
+	 * @return string ($ 15.000) for autoNumeric plugin
+	 */
+	public function getCollationAttribute($value) {
+		return Helper::formatedMoney($value);
 	}
 
 }
