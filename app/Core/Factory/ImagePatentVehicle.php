@@ -2,7 +2,7 @@
 
 namespace Controlqtime\Core\Factory;
 
-use Exception;
+use DB;
 
 class ImagePatentVehicle extends Image {
 
@@ -20,18 +20,21 @@ class ImagePatentVehicle extends Image {
 
 	public function addImages()
 	{
-		$this->name               = $this->getName();
-		$this->entity->path       = $this->getPath() . $this->name;
-		$this->entity->orig_name  = $this->name;
-		$this->entity->size       = $this->file->getSize();
-		$this->entity->vehicle_id = $this->repoId;
+		DB::beginTransaction();
 
-		if ( ! $this->entity->save() )
-		{
-			throw new Exception('This element not save in DB');
+		try {
+			$this->name               = $this->getName();
+			$this->entity->path       = $this->getPath() . $this->name;
+			$this->entity->orig_name  = $this->name;
+			$this->entity->size       = $this->file->getSize();
+			$this->entity->vehicle_id = $this->repoId;
+			$this->entity->save();
+			$this->moveImage();
+
+		    DB::commit();
+		}catch( Exception $e) {
+		    DB::rollback();
 		}
-
-		$this->moveImage();
 
 		return true;
 	}
