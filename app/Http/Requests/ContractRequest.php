@@ -38,7 +38,6 @@ class ContractRequest extends SanitizedRequest
      */
     public function rules()
     {
-    	dd(Request::all());
 		switch($this->method())
 		{
 			case 'POST':
