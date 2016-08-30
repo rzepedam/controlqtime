@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-md-6 pull-left">
-            <img src="{{ asset('me/img/Stop_frenos.png') }}">
+            <img src="{{ asset('me/img/Stop_Frenos.png') }}">
         </div>
         <div class="col-md-6 pull-right">
 
