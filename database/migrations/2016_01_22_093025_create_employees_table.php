@@ -20,6 +20,8 @@ class CreateEmployeesTable extends Migration
             $table->integer('nationality_id')->unsigned();
             $table->integer('gender_id')->unsigned();
 			$table->unsignedInteger('marital_status_id');
+			$table->unsignedInteger('forecast_id');
+			$table->unsignedInteger('pension_id');
             $table->string('address');
             $table->string('depto', 5);
             $table->string('block', 4);
@@ -47,6 +49,16 @@ class CreateEmployeesTable extends Migration
 			$table->foreign('marital_status_id')
 				->references('id')
 				->on('marital_statuses')
+				->onUpdate('cascade');
+
+			$table->foreign('forecast_id')
+				->references('id')
+				->on('forecasts')
+				->onUpdate('cascade');
+
+			$table->foreign('pension_id')
+				->references('id')
+				->on('pensions')
 				->onUpdate('cascade');
 
             $table->foreign('commune_id')

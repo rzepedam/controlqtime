@@ -26,8 +26,6 @@ class CreateContractsTable extends Migration
 			$table->string('collation', 8);
 			$table->unsignedInteger('gratification_id');
 			$table->unsignedInteger('type_contract_id');
-			$table->unsignedInteger('pension_id');
-			$table->unsignedInteger('forecast_id');
             $table->timestamps();
 
 			$table->foreign('company_id')
@@ -78,16 +76,6 @@ class CreateContractsTable extends Migration
 			$table->foreign('type_contract_id')
 				->references('id')
 				->on('type_contracts')
-				->onUpdate('cascade');
-
-			$table->foreign('pension_id')
-				->references('id')
-				->on('pensions')
-				->onUpdate('cascade');
-
-			$table->foreign('forecast_id')
-				->references('id')
-				->on('forecasts')
 				->onUpdate('cascade');
 
         });

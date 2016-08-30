@@ -45,20 +45,4 @@
             {{ Form::select('type_contract_id', $typeContracts, null, ['class' => 'form-control']) }}
         </div>
     </div>
-    <div class="col-md-4">
-        {{-- AFP Form Select --}}
-        <div class="form-group">
-            {{ Form::label('pension_id', 'AFP', ['class' => 'control-label']) }}
-            {{ Form::select('pension_id', $pensions, null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        {{-- Isapre Form Select --}}
-        <div class="form-group">
-            {{ Form::label('forecast_id', 'Isapre', ['class' => 'control-label']) }}
-            {{ Form::select('forecast_id', $forecasts, null, ['class' => 'form-control']) }}
-        </div>
-    </div>
 </div>

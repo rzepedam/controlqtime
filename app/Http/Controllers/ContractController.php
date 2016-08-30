@@ -7,10 +7,8 @@ use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ContractRepoInterface;
 use Controlqtime\Core\Contracts\DayTripRepoInterface;
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\ForecastRepoInterface;
 use Controlqtime\Core\Contracts\GratificationRepoInterface;
 use Controlqtime\Core\Contracts\NumHourRepoInterface;
-use Controlqtime\Core\Contracts\PensionRepoInterface;
 use Controlqtime\Core\Contracts\PeriodicityRepoInterface;
 use Controlqtime\Core\Contracts\PositionRepoInterface;
 use Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface;
@@ -57,14 +55,6 @@ class ContractController extends Controller
      */
     protected $typeContract;
     /**
-     * @var PensionRepoInterface
-     */
-    protected $pension;
-    /**
-     * @var ForecastRepoInterface
-     */
-    protected $forecast;
-    /**
      * @var TermAndObligatoryRepoInterface
      */
     protected $termAndObligatory;
@@ -84,12 +74,10 @@ class ContractController extends Controller
      * @param DayTripRepoInterface $dayTrips
      * @param GratificationRepoInterface $gratification
      * @param TypeContractRepoInterface $typeContract
-     * @param PensionRepoInterface $pension
-     * @param ForecastRepoInterface $forecast
      * @param TermAndObligatoryRepoInterface $termAndObligatory
      * @param AreaRepoInterface $area
      */
-    public function __construct(ContractRepoInterface $contract, CompanyRepoInterface $company, EmployeeRepoInterface $employee, PositionRepoInterface $position, NumHourRepoInterface $numHour, PeriodicityRepoInterface $periodicity, DayTripRepoInterface $dayTrips, GratificationRepoInterface $gratification, TypeContractRepoInterface $typeContract, PensionRepoInterface $pension, ForecastRepoInterface $forecast, TermAndObligatoryRepoInterface $termAndObligatory, AreaRepoInterface $area)
+    public function __construct(ContractRepoInterface $contract, CompanyRepoInterface $company, EmployeeRepoInterface $employee, PositionRepoInterface $position, NumHourRepoInterface $numHour, PeriodicityRepoInterface $periodicity, DayTripRepoInterface $dayTrips, GratificationRepoInterface $gratification, TypeContractRepoInterface $typeContract, TermAndObligatoryRepoInterface $termAndObligatory, AreaRepoInterface $area)
     {
         $this->contract = $contract;
         $this->company = $company;
@@ -100,8 +88,6 @@ class ContractController extends Controller
         $this->dayTrips = $dayTrips;
         $this->gratification = $gratification;
         $this->typeContract = $typeContract;
-        $this->pension = $pension;
-        $this->forecast = $forecast;
         $this->termAndObligatory = $termAndObligatory;
         $this->area = $area;
     }
@@ -138,14 +124,11 @@ class ContractController extends Controller
         $dayTrips = $this->dayTrips->lists('name', 'id');
         $gratifications = $this->gratification->lists('name', 'id');
         $typeContracts = $this->typeContract->lists('name', 'id');
-        $pensions = $this->pension->lists('name', 'id');
-        $forecasts = $this->forecast->lists('name', 'id');
         $termsAndObligatories = $this->termAndObligatory->all();
 
         return view('human-resources.contracts.create', compact(
             'companies', 'employees', 'positions', 'areas', 'numHours', 'periodicities',
-            'dayTrips', 'gratifications', 'typeContracts', 'pensions', 'forecasts',
-            'termsAndObligatories'
+            'dayTrips', 'gratifications', 'typeContracts', 'termsAndObligatories'
         ));
     }
 
@@ -176,7 +159,7 @@ class ContractController extends Controller
     {
         $contract = $this->contract->find($id, array(
             'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
-            'gratification', 'typeContract', 'pension', 'forecast', 'termsAndObligatories'
+            'gratification', 'typeContract', 'termsAndObligatories'
         ));
 
         return view('human-resources.contracts.show', compact('contract'));
@@ -186,8 +169,7 @@ class ContractController extends Controller
     {
         $contract = $this->contract->find($id, array(
             'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
-            'gratification', 'typeContract', 'pension', 'forecast', 'termsAndObligatories',
-			'company.legalRepresentative'
+            'gratification', 'typeContract', 'termsAndObligatories', 'company.legalRepresentative'
         ));
 
         $header = view('human-resources.contracts.partials.pdf.header', compact('contract'));

@@ -15,7 +15,7 @@ class Contract extends Eloquent
 		'company_id', 'employee_id', 'position_id', 'area_id', 'num_hour_id',
 		'periodicity_hour_id', 'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon',
 		'end_afternoon', 'periodicity_work_id', 'salary', 'mobilization', 'collation',
-		'gratification_id', 'type_contract_id', 'pension_id', 'forecast_id'
+		'gratification_id', 'type_contract_id'
 	);
 
 	/**
@@ -86,20 +86,6 @@ class Contract extends Eloquent
 	 */
 	public function typeContract() {
 		return $this->belongsTo(TypeContract::class);
-	}
-
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function pension() {
-		return $this->belongsTo(Pension::class);
-	}
-
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function forecast() {
-		return $this->belongsTo(Forecast::class);
 	}
 
 	/**

@@ -128,13 +128,13 @@
                                     <tr>
                                         <td class="col-md-3">AFP</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.pensions.index') }}" style="color: #757575"><i class="fa fa-tags" aria-hidden="true"></i> AFP {{ $contract->pension->name }}</a>
+                                            <a href="{{ route('maintainers.pensions.index') }}" style="color: #757575"><i class="fa fa-tags" aria-hidden="true"></i> AFP PENDIENTE</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Isapre</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.forecasts.index') }}" style="color: #757575"><i class="fa fa-heart" aria-hidden="true"></i> Isapre {{ $contract->forecast->name }}</a>
+                                            <a href="{{ route('maintainers.forecasts.index') }}" style="color: #757575"><i class="fa fa-heart" aria-hidden="true"></i> Isapre PENDIENTE</a>
                                         </td>
                                     </tr>
                                 </tbody>

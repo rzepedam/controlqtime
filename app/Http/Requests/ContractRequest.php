@@ -58,9 +58,7 @@ class ContractRequest extends SanitizedRequest
 					'mobilization'			=> 'required|max:8',
 					'collation'				=> 'required|max:8',
 					'gratification_id'		=> 'required|regex:/[0-9 -()+]+$/',
-					'type_contract_id'		=> 'required|regex:/[0-9 -()+]+$/',
-					'pension_id'			=> 'required|regex:/[0-9 -()+]+$/',
-					'forecast_id'			=> 'required|regex:/[0-9 -()+]+$/',
+					'type_contract_id'		=> 'required|regex:/[0-9 -()+]+$/'
 				];
 			}
 		}

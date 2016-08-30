@@ -52,6 +52,16 @@
         {{ Form::label('marital_status_id', 'Estado Civil', ['class' => 'control-label']) }}
         {{ Form::select('marital_status_id', $maritalStatuses, null, ['class' => 'form-control']) }}
     </div>
+    {{-- Previsión Form Select --}}
+    <div class="form-group">
+        {{ Form::label('forecast_id', 'Previsión', ['class' => 'control-label']) }}
+        {{ Form::select('forecast_id', $forecasts, null, ['class' => 'form-control']) }}
+    </div>
+    {{-- Pensión Form Select --}}
+    <div class="form-group">
+        {{ Form::label('pension_id', 'Pensión', ['class' => 'control-label']) }}
+        {{ Form::select('pension_id', $pensions, null, ['class' => 'form-control']) }}
+    </div>
     <div class="col-md-6 form-group">
         {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
         {{ Form::text('address', null, ['class' => 'form-control']) }}

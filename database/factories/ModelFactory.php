@@ -62,6 +62,8 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'nationality_id' 	=> rand(1, 9),
 		'gender_id'      	=> rand(1, 2),
 		'marital_status_id'	=> rand(1,4),
+		'forecast_id'		=> rand(1,14),
+		'pension_id'		=> rand(1,6),
 		'address'        	=> $faker->address,
 		'commune_id'     	=> rand(1, 53),
 		'email_employee' 	=> $faker->unique()->email,
