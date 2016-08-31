@@ -4,7 +4,7 @@ namespace Controlqtime\Core\Factory;
 
 use DB;
 
-class ImagePensionCertificateEmployee extends image
+class ImagePensionCertificateEmployee extends Image
 {
 	public function __construct($id, $repoId, $type, $file, $class, $pathImgDelete)
 	{
