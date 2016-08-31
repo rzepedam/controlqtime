@@ -47,7 +47,8 @@
 
         </div>
     </div>
-    <h3>Cláusulas y Obligaciones</h3>
+    <br />
+    <h4><b>Cláusulas y Obligaciones</b></h4>
     <br />
 
     @include('human-resources.contracts.partials.pdf.partials.terms_information')
