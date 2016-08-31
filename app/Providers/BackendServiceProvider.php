@@ -13,6 +13,12 @@ class BackendServiceProvider extends ServiceProvider
 			'Controlqtime\Core\Repositories\AccessControlRepo'
 		);
 
+		// Interface with class. Not content Repo
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\ActivateEmployeeInterface',
+			'Controlqtime\Core\Entities\ActivateEmployee'
+		);
+
         $this->app->bind(
             'Controlqtime\Core\Contracts\AreaRepoInterface',
             'Controlqtime\Core\Repositories\AreaRepo'

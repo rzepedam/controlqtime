@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Contracts\ActivateEmployeeInterface;
 use Controlqtime\Core\Contracts\AreaRepoInterface;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ContractRepoInterface;
@@ -62,35 +63,41 @@ class ContractController extends Controller
      * @var AreaRepoInterface
      */
     protected $area;
+	/**
+	 * @var ActivateEmployeeInterface
+	 */
+	protected $activateEmployee;
 
-    /**
-     * ContractController constructor.
-     * @param ContractRepoInterface $contract
-     * @param CompanyRepoInterface $company
-     * @param EmployeeRepoInterface $employee
-     * @param PositionRepoInterface $position
-     * @param NumHourRepoInterface $numHour
-     * @param PeriodicityRepoInterface $periodicity
-     * @param DayTripRepoInterface $dayTrips
-     * @param GratificationRepoInterface $gratification
-     * @param TypeContractRepoInterface $typeContract
-     * @param TermAndObligatoryRepoInterface $termAndObligatory
-     * @param AreaRepoInterface $area
-     */
-    public function __construct(ContractRepoInterface $contract, CompanyRepoInterface $company, EmployeeRepoInterface $employee, PositionRepoInterface $position, NumHourRepoInterface $numHour, PeriodicityRepoInterface $periodicity, DayTripRepoInterface $dayTrips, GratificationRepoInterface $gratification, TypeContractRepoInterface $typeContract, TermAndObligatoryRepoInterface $termAndObligatory, AreaRepoInterface $area)
+	/**
+	 * ContractController constructor.
+	 * @param ContractRepoInterface $contract
+	 * @param CompanyRepoInterface $company
+	 * @param EmployeeRepoInterface $employee
+	 * @param PositionRepoInterface $position
+	 * @param NumHourRepoInterface $numHour
+	 * @param PeriodicityRepoInterface $periodicity
+	 * @param DayTripRepoInterface $dayTrips
+	 * @param GratificationRepoInterface $gratification
+	 * @param TypeContractRepoInterface $typeContract
+	 * @param TermAndObligatoryRepoInterface $termAndObligatory
+	 * @param AreaRepoInterface $area
+	 * @param ActivateEmployeeInterface $activateEmployee
+	 */
+    public function __construct(ContractRepoInterface $contract, CompanyRepoInterface $company, EmployeeRepoInterface $employee, PositionRepoInterface $position, NumHourRepoInterface $numHour, PeriodicityRepoInterface $periodicity, DayTripRepoInterface $dayTrips, GratificationRepoInterface $gratification, TypeContractRepoInterface $typeContract, TermAndObligatoryRepoInterface $termAndObligatory, AreaRepoInterface $area, ActivateEmployeeInterface $activateEmployee)
     {
-        $this->contract = $contract;
-        $this->company = $company;
-        $this->employee = $employee;
-        $this->position = $position;
-        $this->numHour = $numHour;
-        $this->periodicity = $periodicity;
-        $this->dayTrips = $dayTrips;
-        $this->gratification = $gratification;
-        $this->typeContract = $typeContract;
-        $this->termAndObligatory = $termAndObligatory;
-        $this->area = $area;
-    }
+        $this->contract 			= $contract;
+        $this->company 				= $company;
+        $this->employee 			= $employee;
+        $this->position 			= $position;
+        $this->numHour 				= $numHour;
+        $this->periodicity 			= $periodicity;
+        $this->dayTrips 			= $dayTrips;
+        $this->gratification 		= $gratification;
+        $this->typeContract 		= $typeContract;
+        $this->termAndObligatory 	= $termAndObligatory;
+        $this->area 				= $area;
+		$this->activateEmployee 	= $activateEmployee;
+	}
 
     /**
      * @return mixed for Bootstrap Table
@@ -144,6 +151,8 @@ class ContractController extends Controller
         try {
             $contract = $this->contract->create($request->all());
             $this->contract->saveMultipleTermsAndObligatories($request->get('term_and_obligatory_id'), $contract);
+			$this->activateEmployee->checkStateUpdateEmployee($request->get('employee_id'));
+
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

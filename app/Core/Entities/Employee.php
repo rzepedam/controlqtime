@@ -46,6 +46,13 @@ class Employee extends Eloquent
     }
 
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function contract() {
+    	return $this->hasOne(Contract::class);
+    }
+
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function disabilities() {

@@ -23,7 +23,6 @@ class CertificationRepo extends BaseRepo implements CertificationRepoInterface {
 	{
 		for ($i = 0; $i < $request['count_certifications']; $i ++)
 		{
-
 			$id = $request['id_certification'][ $i ];
 
 			if ( $id == 0 )
