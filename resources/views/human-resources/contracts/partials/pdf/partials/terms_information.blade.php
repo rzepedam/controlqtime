@@ -6,7 +6,7 @@
             {{ $i }} .-
         </div>
         <div class="col-xs-9 text-justify">
-            {{ $termAndObligatory->name }}
+            {{ $termAndObligatory->name }}.
         </div>
     </div>
     <br />
