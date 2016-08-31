@@ -334,9 +334,11 @@ class EmployeeController extends Controller
 		$countries = $this->country->lists('name', 'id');
 		$degrees = $this->degree->lists('name', 'id');
 		$employees = $this->employee->lists('full_name', 'id');
+		$forecasts = $this->forecast->lists('name', 'id');
 		$genders = $this->gender->lists('name', 'id');
 		$maritalStatuses = $this->maritalStatus->lists('name', 'id');
 		$institutions = $this->institution->lists('name', 'id');
+		$pensions = $this->pension->lists('name', 'id');
 		$provinces = $this->province->lists('name', 'id');
 		$regions = $this->region->lists('name', 'id');
 		$relationships = $this->relationship->lists('name', 'id');
@@ -349,9 +351,9 @@ class EmployeeController extends Controller
 
 		return view('human-resources.employees.edit', compact(
 			'employee', 'communes', 'countries', 'degrees', 'employees', 'genders', 'maritalStatuses',
-			'institutions', 'provinces', 'regions', 'relationships', 'type_certifications',
-			'type_disabilities', 'type_diseases', 'type_exams', 'type_professional_licenses',
-			'type_specialities'
+			'forecasts', 'pensions', 'institutions', 'provinces', 'regions', 'relationships',
+			'type_certifications', 'type_disabilities', 'type_diseases', 'type_exams',
+			'type_professional_licenses', 'type_specialities'
 		));
 
 	}
@@ -423,7 +425,8 @@ class EmployeeController extends Controller
 	{
 		$employee = $this->employee->find($id, array(
 			'commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
-			'studies.degree', 'studies.institution', 'certifications', 'specialities', 'professionalLicenses'
+			'studies.degree', 'studies.institution', 'certifications', 'specialities', 'professionalLicenses',
+			'pension', 'forecast'
 		));
 
 		return view('human-resources.employees.show', compact('employee'));

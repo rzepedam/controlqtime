@@ -591,6 +591,9 @@
 
                     var url    = $('#step3').attr('action');
 
+                    $('.finish').addClass('btn-success');
+                    $('.replace-icon').html('<i class="fa fa-spinner fa-spin fa-fw"></i> Guardando...');
+
                     $.ajax({
                         type: 'POST',
                         url: url,

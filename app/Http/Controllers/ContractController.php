@@ -158,8 +158,8 @@ class ContractController extends Controller
     public function show($id)
     {
         $contract = $this->contract->find($id, array(
-            'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
-            'gratification', 'typeContract', 'termsAndObligatories'
+            'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip',
+			'periodicityWork', 'gratification', 'typeContract', 'termsAndObligatories'
         ));
 
         return view('human-resources.contracts.show', compact('contract'));

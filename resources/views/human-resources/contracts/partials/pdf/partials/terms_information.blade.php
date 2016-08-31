@@ -30,8 +30,8 @@
         {{ $i }} .-
     </div>
     <div class="col-xs-9 text-justify">
-        El Trabajador se encuentra afiliado a <b>Isapre PENDIENTE</b> y
-        <b>AFP PENSION</b>
+        El Trabajador se encuentra afiliado a <b>Isapre {{ $contract->employee->forecast->name }}</b> y
+        <b>AFP {{ $contract->employee->pension->name }}</b>
     </div>
 </div>
 <br />
