@@ -106,6 +106,34 @@ class Employee extends Eloquent
     }
 
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function imageIdentityCardEmployees() {
+    	return $this->hasMany(ImageIdentityCardEmployee::class);
+    }
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function imageCriminalRecordEmployees() {
+    	return $this->hasMany(ImageCriminalRecordEmployee::class);
+    }
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function imageHealthCertificateEmployees() {
+		return $this->hasMany(ImageHealthCertificateEmployee::class);
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function imagePensionCertificateEmployees() {
+		return $this->hasMany(ImagePensionCertificateEmployee::class);
+	}
+
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
 	 */
 	public function imageCertificationEmployees() {

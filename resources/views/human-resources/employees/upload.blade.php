@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Adjuntar imágenes a Trabajador: <span class="text-primary">{{ $id }}</span> @stop
+@section('title_header') Adjuntar Documentos a Trabajador: <span class="text-primary">{{ $id }}</span> @stop
 
 @section('css')
 
@@ -16,40 +16,27 @@
 
 @section('content')
 
-    @if ($employee->num_certifications + $employee->num_disabilities + $employee->num_diseases +
-        $employee->num_exams + $employee->num_family_responsabilities +
-        $employee->num_professional_licenses + $employee->num_specialities)
+    @include('human-resources.employees.partials.upload.identityCard')
 
-        @include('human-resources.employees.partials.upload.certifications')
+    @include('human-resources.employees.partials.upload.criminalRecord')
 
-        @include('human-resources.employees.partials.upload.specialities')
+    @include('human-resources.employees.partials.upload.healthCertificate')
 
-        @include('human-resources.employees.partials.upload.professional_licenses')
+    @include('human-resources.employees.partials.upload.pensionCertificate')
 
-        @include('human-resources.employees.partials.upload.disabilities')
+    @include('human-resources.employees.partials.upload.certifications')
 
-        @include('human-resources.employees.partials.upload.diseases')
+    @include('human-resources.employees.partials.upload.specialities')
 
-        @include('human-resources.employees.partials.upload.exams')
+    @include('human-resources.employees.partials.upload.professional_licenses')
 
-        @include('human-resources.employees.partials.upload.family_responsabilities')
+    @include('human-resources.employees.partials.upload.disabilities')
 
-    @else
-        <div class="panel panel-bordered">
-            <div class="panel-body">
-                <br/>
-                <h3 class="text-center text-success">
-                    No existen elementos asociados para adjuntar imágenes
-                    <br/>
-                    <small>(Pulse <a href="{{ route('human-resources.employees.edit', $employee->id) }}" class="text-success">Aquí</a>  para comenzar su adición)
-                    </small>
-                </h3>
-                <br/>
-                <br/>
-            </div>
-        </div>
+    @include('human-resources.employees.partials.upload.diseases')
 
-    @endif
+    @include('human-resources.employees.partials.upload.exams')
+
+    @include('human-resources.employees.partials.upload.family_responsabilities')
 
     <div class="row">
         <div class="col-md-12">
@@ -67,6 +54,98 @@
     <script>
 
         $(document).ready(function() {
+
+            /*
+             *  Identity Card
+             */
+
+            $("#identityCard").fileinput({
+                initialPreview: [
+                    @foreach($employee->imageIdentityCardEmployees as $image_identity_card)
+                            "<img style='height:160px' src='{{ $image_identity_card->path }}' />",
+                    @endforeach
+                ],
+                initialPreviewConfig: [
+                    @foreach($employee->imageIdentityCardEmployees as $image_identity_card)
+                        { caption: "{{ $image_identity_card->orig_name }}", size: "{{ $image_identity_card->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_identity_card->id }}", extra: { path: "{{ $image_identity_card->path }}", id: "{{ $id }}", type: "IdentityCardEmployee" } },
+                    @endforeach
+                ],
+                uploadUrl: "{{ route('human-resources.employees.addImages') }}",
+                uploadExtraData:  {
+                    employee_id: "{{ $id }}",
+                    repo_id: '',
+                    type: "IdentityCardEmployee"
+                }
+            });
+
+            /*
+             *  Criminal Record
+             */
+
+            $("#criminalRecord").fileinput({
+                initialPreview: [
+                    @foreach($employee->imageCriminalRecordEmployees as $image_criminal_record)
+                            "<img style='height:160px' src='{{ $image_criminal_record->path }}' />",
+                    @endforeach
+                ],
+                initialPreviewConfig: [
+                    @foreach($employee->imageCriminalRecordEmployees as $image_criminal_record)
+                        { caption: "{{ $image_criminal_record->orig_name }}", size: "{{ $image_criminal_record->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_criminal_record->id }}", extra: { path: "{{ $image_criminal_record->path }}", id: "{{ $id }}", type: "CriminalRecordEmployee" } },
+                    @endforeach
+                ],
+                uploadUrl: "{{ route('human-resources.employees.addImages') }}",
+                uploadExtraData:  {
+                    employee_id: "{{ $id }}",
+                    repo_id: '',
+                    type: "CriminalRecordEmployee"
+                }
+            });
+
+            /*
+             *  Health Certificate
+             */
+
+            $("#healthCertificate").fileinput({
+                initialPreview: [
+                    @foreach($employee->imageHealthCertificateEmployees as $image_health_certificate)
+                            "<img style='height:160px' src='{{ $image_health_certificate->path }}' />",
+                    @endforeach
+                ],
+                initialPreviewConfig: [
+                    @foreach($employee->imageHealthCertificateEmployees as $image_health_certificate)
+                        { caption: "{{ $image_health_certificate->orig_name }}", size: "{{ $image_health_certificate->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_health_certificate->id }}", extra: { path: "{{ $image_health_certificate->path }}", id: "{{ $id }}", type: "HealthCertificateEmployee" } },
+                    @endforeach
+                ],
+                uploadUrl: "{{ route('human-resources.employees.addImages') }}",
+                uploadExtraData:  {
+                    employee_id: "{{ $id }}",
+                    repo_id: '',
+                    type: "HealthCertificateEmployee"
+                }
+            });
+
+            /*
+             *  Pension Certificate
+             */
+
+            $("#pensionCertificate").fileinput({
+                initialPreview: [
+                    @foreach($employee->imagePensionCertificateEmployees as $image_pension_certificate)
+                            "<img style='height:160px' src='{{ $image_pension_certificate->path }}' />",
+                    @endforeach
+                ],
+                initialPreviewConfig: [
+                        @foreach($employee->imagePensionCertificateEmployees as $image_pension_certificate)
+                    { caption: "{{ $image_pension_certificate->orig_name }}", size: "{{ $image_pension_certificate->size }}", url: "{{ route('human-resources.employees.deleteFiles') }}", key: "{{ $image_pension_certificate->id }}", extra: { path: "{{ $image_pension_certificate->path }}", id: "{{ $id }}", type: "PensionCertificateEmployee" } },
+                    @endforeach
+                ],
+                uploadUrl: "{{ route('human-resources.employees.addImages') }}",
+                uploadExtraData:  {
+                    employee_id: "{{ $id }}",
+                    repo_id: '',
+                    type: "PensionCertificateEmployee"
+                }
+            });
 
             /**
              *  Certifications

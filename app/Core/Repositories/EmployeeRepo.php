@@ -25,11 +25,24 @@ class EmployeeRepo extends BaseRepo implements EmployeeRepoInterface
 	public function checkStateUpdateEmployee($id)
 	{
 		$employee = parent::find($id, [
-			'certifications.imageCertificationEmployees', 'disabilities.ImageDisabilityEmployees',
-			'diseases.imageDiseaseEmployees', 'exams.imageExamEmployees',
-			'familyResponsabilities.imageFamilyResponsabilityEmployees',
+			'imageIdentityCardEmployees', 'imageCriminalRecordEmployees', 'imageHealthCertificateEmployees',
+			'imagePensionCertificateEmployees', 'certifications.imageCertificationEmployees',
+			'disabilities.ImageDisabilityEmployees', 'diseases.imageDiseaseEmployees',
+			'exams.imageExamEmployees', 'familyResponsabilities.imageFamilyResponsabilityEmployees',
 			'professionalLicenses.imageProfessionalLicenseEmployees', 'specialities.imageSpecialityEmployees'
 		]);
+
+		if ( count($employee->imageIdentityCardEmployees) == 0 )
+			return $this->saveStateDisableEmployee($employee);
+
+		if ( count($employee->imageCriminalRecordEmployees) == 0 )
+			return $this->saveStateDisableEmployee($employee);
+
+		if ( count($employee->imageHealthCertificateEmployees) == 0 )
+			return $this->saveStateDisableEmployee($employee);
+
+		if ( count($employee->imagePensionCertificateEmployees) == 0 )
+			return $this->saveStateDisableEmployee($employee);
 
 		foreach ($employee->certifications as $certification)
 		{

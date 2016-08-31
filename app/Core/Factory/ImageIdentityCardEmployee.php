@@ -4,8 +4,8 @@ namespace Controlqtime\Core\Factory;
 
 use DB;
 
-class ImageCertificationEmployee extends Image {
-
+class ImageIdentityCardEmployee extends Image
+{
 	public function __construct($id, $repoId, $type, $file, $class, $pathImgDelete)
 	{
 		$this->id            = $id;
@@ -27,7 +27,7 @@ class ImageCertificationEmployee extends Image {
 			$this->entity->path             = $this->getPath() . $this->name;
 			$this->entity->orig_name        = $this->name;
 			$this->entity->size             = $this->file->getSize();
-			$this->entity->certification_id = $this->repoId;
+			$this->entity->employee_id 		= $this->id;
 			$this->entity->save();
 			$this->moveImage();
 
@@ -38,5 +38,4 @@ class ImageCertificationEmployee extends Image {
 
 		return true;
 	}
-
 }

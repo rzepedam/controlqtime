@@ -280,8 +280,8 @@ class EmployeeController extends Controller
 	public function store(Step3Request $request)
 	{
 		DB::beginTransaction();
-		try
-		{
+
+		try {
 			$employee = $this->employee->create(Session::get('step1'));
 			$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
 			$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
@@ -293,12 +293,10 @@ class EmployeeController extends Controller
 			$this->disease->createOrUpdateWithArray($request->all(), $employee);
 			$this->exam->createOrUpdateWithArray($request->all(), $employee);
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
-
-			$this->checkStateStoreEmployee($employee, $request);
 			$this->destroySessionStoreEmployee();
-			DB::commit();
 
-		} catch ( Exception $e ) {
+			DB::commit();
+		}catch( Exception $e ) {
 			DB::rollBack();
 		}
 
@@ -306,21 +304,6 @@ class EmployeeController extends Controller
 			'status' => true,
 			'url'    => '/human-resources/employees'
 		]);
-	}
-
-	/**
-	 * @param array $employee
-	 * @param $request
-	 * @return mixed
-	 */
-	public function checkStateStoreEmployee($employee, $request)
-	{
-		if ( Session::get('count_certifications') + Session::get('count_specialities') + Session::get('count_professional_licenses') + $request->get('count_disabilities') + $request->get('count_diseases') + $request->get('count_exams') + $request->get('count_family_responsabilities') == 0 )
-		{
-			return $this->employee->saveStateEnableEmployee($employee);
-		}
-
-		return $this->employee->saveStateDisableEmployee($employee);
 	}
 
 	/**
@@ -366,8 +349,8 @@ class EmployeeController extends Controller
 	public function update(Step3Request $request, $id)
 	{
 		DB::beginTransaction();
-		try
-		{
+
+		try {
 			$employee = $this->employee->find($id);
 
 			// Update Step1 data
@@ -403,11 +386,10 @@ class EmployeeController extends Controller
 			$this->family_responsability->destroyImages($request->get('id_delete_family_responsability'), 'family_responsability');
 			$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'));
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
-
 			$this->employee->checkStateUpdateEmployee($id);
-			DB::commit();
 
-		} catch ( Exception $e ) {
+			DB::commit();
+		}catch( Exception $e ) {
 			DB::rollBack();
 		}
 
@@ -450,9 +432,10 @@ class EmployeeController extends Controller
 	public function getImages($id)
 	{
 		$employee = $this->employee->find($id, array(
-			'certifications.imageCertificationEmployees', 'specialities.imageSpecialityEmployees',
-			'professionalLicenses.imageProfessionalLicenseEmployees', 'disabilities.imageDisabilityEmployees',
-			'diseases.imageDiseaseEmployees', 'exams.imageExamEmployees',
+			'imageIdentityCardEmployees', 'imageCriminalRecordEmployees', 'imageHealthCertificateEmployees',
+			'imagePensionCertificateEmployees', 'certifications.imageCertificationEmployees',
+			'specialities.imageSpecialityEmployees', 'professionalLicenses.imageProfessionalLicenseEmployees',
+			'disabilities.imageDisabilityEmployees', 'diseases.imageDiseaseEmployees', 'exams.imageExamEmployees',
 			'familyResponsabilities.imageFamilyResponsabilityEmployees'
 		));
 
