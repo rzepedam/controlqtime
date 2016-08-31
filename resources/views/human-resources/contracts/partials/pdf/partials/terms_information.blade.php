@@ -20,7 +20,7 @@
     </div>
     <div class="col-xs-9 text-justify">
         Se deja constancia que <b>{{ $contract->employee->full_name }}</b> ingresó al servicio el
-        día <b>{{ Date::parse(date('d-m-Y'))->format('l j F Y') }}</b>
+        día <b>{{ Date::parse(date('d-m-Y'))->format('l j F Y') }}</b>.
     </div>
 </div>
 @php ($i++)
@@ -31,7 +31,7 @@
     </div>
     <div class="col-xs-9 text-justify">
         El Trabajador se encuentra afiliado a <b>Isapre {{ $contract->employee->forecast->name }}</b> y
-        <b>AFP {{ $contract->employee->pension->name }}</b>
+        <b>AFP {{ $contract->employee->pension->name }}</b>.
     </div>
 </div>
 <br />

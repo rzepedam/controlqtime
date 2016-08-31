@@ -60,7 +60,7 @@
         {{ $i }}.-
     </div>
     <div class="col-xs-11 text-justify">
-        El empleador se compromete a remunerar al Trabajador en la forma que se indica.
+        El empleador se compromete a remunerar al Trabajador en la forma que se indica
         <div class="row">
             <div class="col-xs-4 col-xs-offset-1">
                 Sueldo Base
@@ -102,6 +102,6 @@
         {{ $i }}.-
     </div>
     <div class="col-xs-11 text-justify">
-        El presente contrato tendrá una duración de <b>{{ $contract->typeContract->name }}</b>
+        El presente contrato tendrá una duración de <b>{{ $contract->typeContract->name }}</b>.
     </div>
 </div>
