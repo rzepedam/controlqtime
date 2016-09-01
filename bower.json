@@ -2,18 +2,20 @@
   "name": "controlqtime",
   "dependencies": {
     "bootstrap-table": "https://github.com/wenzhixin/bootstrap-table.git#^1.11.0",
-    "jquery": "^3.1.0",
     "bootstrap-select": "https://github.com/silviomoreto/bootstrap-select.git#^1.11.0",
     "clockpicker": "https://github.com/weareoutman/clockpicker.git#^0.0.7",
     "bootstrap-maxlength": "https://github.com/mimo84/bootstrap-maxlength.git#^1.7.0",
     "bootstrap-datepicker": "https://github.com/eternicode/bootstrap-datepicker.git#^1.6.4",
     "jquery-rut-plugin": "^0.5.0",
-    "font-awesome": "https://github.com/FortAwesome/Font-Awesome.git#^4.6.3",
     "animsition": "https://github.com/blivesta/animsition.git#^4.0.2",
     "jquery-asScrollable": "https://github.com/amazingSurge/jquery-asScrollable.git",
     "Waves": "https://github.com/fians/Waves.git#^0.7.5",
     "toastr": "^2.1.3",
-    "material-design-iconic-font": "^2.2.0",
-    "autoNumeric": "https://github.com/BobKnothe/autoNumeric.git#^1.9.43"
+    "autoNumeric": "https://github.com/BobKnothe/autoNumeric.git#^1.9.43",
+    "packages-for-cqtime": "*",
+    "jquery-scrollTo": "https://github.com/amazingSurge/jquery-asScroll.git",
+    "jquery-asHoverScroll": "https://github.com/amazingSurge/jquery-asHoverScroll.git",
+    "font-awesome": "^4.6.3",
+    "breakpoints.js": "^1.0.0"
   }
 }

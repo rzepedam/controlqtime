@@ -77,7 +77,6 @@ $(document).on('blur', '.check_rut', function() {
 				url: '/verificaEmail',
 				data: { email: element.val(), element: input },
 				dataType: "json",
-
 				success: function()
 				{
 					$('div#' + input).addClass('hide');

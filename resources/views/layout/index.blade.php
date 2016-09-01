@@ -4,26 +4,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="CQTime - Where questions find answers">
+    <meta name="author" content="Raúl Elías Meza Mora">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>ControlQTime</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-extend.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/animsition.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/asScrollable.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/waves.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/v1.min.css') }}">
-    {{ Html::style('assets/css/toastr.css') }}
-    {{ Html::style('assets/css/custom-color-toastr.css') }}
-    <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
-    {{ Html::style('me/css/style.css') }}
-    <script src="{{ asset('assets/js/breakpoints.js') }}"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-core.css') }}">
+    <!-- Plugins -->
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-plugin.css') }}">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-fonts.css') }}">
 
     @yield('css')
 
-    {{ Html::style('me/css/style.css') }}
-    <script src="{{ asset('assets/js/breakpoints.js') }}"></script>
+    <!-- Style Owned -->
+    <link rel="stylesheet" href="{{ elixir('css/style.css') }}">
+    <!-- Browsers Utilities -->
+    <script src="{{ elixir('js/index-layout-browser-utilities.js') }}"></script>
     <script>
         Breakpoints();
     </script>
@@ -62,14 +59,12 @@
     {{-- Footer --}}
     {{-- @include('layout.sections.footer') --}}
 
-    <script src="{{ elixir('js/layout/index-layout.js') }}"></script>
-    <script src="{{ asset('assets/js/core.js') }}"></script>
-    <script src="{{ asset('assets/js/site.js') }}"></script>
-    <script src="{{ asset('assets/js/menu.js') }}"></script>
-    <script src="{{ asset('assets/js/menubar.js') }}"></script>
-    <script src="{{ asset('assets/js/sidebar.js') }}"></script>
-    <script src="{{ asset('assets/js/v1.min.js') }}"></script>
-    <script src="{{ elixir('js/layout/index-layout-components.js') }}"></script>
+    <!-- Core  -->
+    <script src="{{ elixir('js/index-layout-core.js') }}"></script>
+    <!-- Scripts -->
+    <script src="{{ elixir('js/index-layout-scripts.js') }}"></script>
+    <!-- Components -->
+    <script src="{{ elixir('js/index-layout-components.js') }}"></script>
 
     @yield('scripts')
 

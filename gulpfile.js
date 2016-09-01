@@ -13,35 +13,67 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
 
-    // Layout > Index CSS
+    // Layout > Stylesheets CSS
     mix.styles([
-        'me/img/favicon.ico',
-        'bower/bootstrap/dist/css/bootstrap.css',
-        //'bower/font-awesome/css/font-awesome.css',
-        //'bower/animsition/dist/css/animsition.css',
-        //'bower/jquery-asScrollable/dist/css/asScrollable.css',
-        //'bower/Waves/dist/waves.css',
-        //'bower/toastr/toastr.css',
-        //'me/css/custom-color-toastr',
-        //'bower/material-design-iconic-font/dist/css/material-design-iconic-font.css'
-    ], 'public/css/layout/index-layout.css')
+        'bower/packages-for-cqtime/css/bootstrap.css',
+        'bower/packages-for-cqtime/css/bootstrap-extend.css',
+        'bower/packages-for-cqtime/css/site.css',
+    ], 'public/css/index-layout-core.css')
+
+    // Layout > Plugins CSS
+    mix.styles([
+        'bower/animsition/dist/css/animsition.css',
+        'bower/jquery-asScrollable/dist/css/asScrollable.css',
+        'bower/Waves/dist/waves.css'
+    ], 'public/css/index-layout-plugin.css')
+
+    // Layout > Fonts CSS
+    mix.styles([
+        'bower/font-awesome/css/font-awesome.css',
+        'bower/packages-for-cqtime/css/material-design.css',
+    ], 'public/css/index-layout-fonts.css')
+
+    // Layout > Style Owned CSS
+    mix.styles([
+        'me/css/style.css'
+    ], 'public/css/style.css')
+
+    // Layout > Script Browsers Utilities
+    mix.styles([
+        'bower/packages-for-cqtime/js/modernizr.js',
+        'bower/breakpoints.js/dist/breakpoints.js'
+    ], 'public/js/index-layout-browser-utilities.js')
+
+    // Layout > Core JS
+    .scripts([
+        'bower/packages-for-cqtime/js/jquery.js',
+        'bower/packages-for-cqtime/js/bootstrap.js',
+        'bower/animsition/dist/js/animsition.js',
+        'bower/jquery-scrollTo/dist/jquery-asScroll.js',
+        'bower/jquery-wheel/jquery.mousewheel.js',
+        'bower/jquery-asScrollable/dist/jquery-asScrollable.js',
+        'bower/jquery-asHoverScroll/dist/jquery-asHoverScroll.js',
+        'bower/Waves/dist/waves.js',
+        'bower/toastr/toastr.js',
+    ], 'public/js/index-layout-core.js')
 
 
     // Layout > Scripts JS
     .scripts([
-        'bower/jquery/dist/jquery.js',
-        'bower/bootstrap/dist/js/bootstrap.js',
-        'bower/animsition/dist/js/animsition.js',
-        'bower/jquery-wheel/jquery.mousewheel.js',
-        'bower/jquery-asScrollable/dist/jquery-asScrollable.js',
-        'bower/Waves/dist/waves.js',
-        'bower/toastr/toastr.js',
-    ], 'public/js/layout/index-layout.js')
+        'bower/packages-for-cqtime/js/core.js',
+        'bower/packages-for-cqtime/js/site.js',
+        'bower/packages-for-cqtime/js/menu.js',
+        'bower/packages-for-cqtime/js/menubar.js',
+        'bower/packages-for-cqtime/js/sidebar.js',
+        'bower/packages-for-cqtime/js/v1.js',
+    ], 'public/js/index-layout-scripts.js')
 
+
+    // Layout > Components JS
     .scripts([
         'components/animsition.js',
         'components/asscrollable.js',
-    ], 'public/js/layout/index-layout-components.js')
+    ], 'public/js/index-layout-components.js')
 
 
     // Administration > Companies > Create CSS
@@ -168,10 +200,15 @@ elixir(function(mix) {
     /*
      *  Output with version
      */
-    .version([
-        'public/css/layout/index-layout.css',
-        'public/js/layout/index-layout.js',
-        'public/js/layout/index-layout-components.js',
+    mix.version([
+        'public/css/index-layout-core.css',
+        'public/css/index-layout-plugin.css',
+        'public/css/index-layout-fonts.css',
+        'public/css/style.css',
+        'public/js/index-layout-browser-utilities.js',
+        'public/js/index-layout-core.js',
+        'public/js/index-layout-scripts.js',
+        'public/js/index-layout-components.js',
         'public/css/administrations/companies/create-companies.css',
         'public/js/administrations/companies/create-companies.js',
         'public/css/administrations/companies/edit-companies.css',
@@ -187,5 +224,12 @@ elixir(function(mix) {
         'public/js/maintainers/terminals/create-terminals.js',
         'public/js/maintainers/terminals/edit-terminals.js'
     ]);
+
+    // Copy fonts Font-Awesome
+    mix.copy('resources/assets/bower/font-awesome/fonts', 'public/build/fonts');
+    // Copy fonts Material-Design-Iconic-Font
+    mix.copy('resources/assets/bower/packages-for-cqtime/fonts', 'public/build/fonts');
+    // Copy fonts Owned
+    mix.copy('resources/assets/me/fonts/', 'public/build/fonts', 'public/build/fonts');
 
 });
