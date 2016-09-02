@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/human-resources/contracts/index-contracts.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/index-common.css') }}">
 
 @stop
 
@@ -30,6 +30,7 @@
 
 @section('scripts')
 
-    <script type="text/javascript" src="{{ elixir('js/human-resources/contracts/index-contracts.js') }}"></script>
+    <script src="{{ elixir('js/index-common.js') }}"></script>
+    <script src="{{ elixir('js/human-resources/contracts/index-custom-contracts.js') }}"></script>
 
 @stop

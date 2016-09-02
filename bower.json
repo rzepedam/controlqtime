@@ -16,6 +16,7 @@
     "jquery-scrollTo": "https://github.com/amazingSurge/jquery-asScroll.git",
     "jquery-asHoverScroll": "https://github.com/amazingSurge/jquery-asHoverScroll.git",
     "font-awesome": "^4.6.3",
-    "breakpoints.js": "^1.0.0"
+    "breakpoints.js": "^1.0.0",
+    "sweetalert": "^1.1.3"
   }
 }

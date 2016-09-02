@@ -473,8 +473,6 @@
 
             wizard.get('#datos_personales').setValidator(function () {
 
-                $('.replace-next').html('<i class="fa fa-spinner fa-spin"></i>')
-
                 if (validateStep1()) {
 
                     var full_name   = capitalize($('#first_name').val()) + " " + capitalize($('#second_name').val()) + " " + capitalize($('#male_surname').val()) + " " + capitalize($('#female_surname').val());

@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 waves-effect waves-light">
             <div id="redirect-employees" class="counter counter-lg counter-inverse bg-brown-400 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 waves-effect waves-light">
             <div id="redirect-access-controls" class="counter counter-lg counter-inverse bg-teal-400 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 waves-effect waves-light">
             <div id="redirect-contracts" class="counter counter-lg counter-inverse bg-indigo-400 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
@@ -43,6 +43,6 @@
 
 @section('scripts')
 
-    {{ Html::script('me/js/base/human-resources/index.js') }}
+    <script src="{{ elixir('js/human-resources/index.js') }}"></script>
 
 @stop

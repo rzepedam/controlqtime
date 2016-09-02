@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ elixir('css/index-common.css') }}">
+
+@stop
+
 @section('title_header') Listado de Sindicatos
     <br />
     <a href="{{ route('maintainers.labor-unions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Sindicato</a>
@@ -12,21 +18,19 @@
 
 @section('content')
 
-    @if ($labor_unions->count())
-
-        @include('maintainers.labor-unions.partials.table')
-
-    @else
-
-        <h3 class="text-center">No se han encontrado Sindicatos</h3>
-
-    @endif
+    @include('maintainers.labor-unions.partials.table')
 
     <div class="row">
         <div class="col-md-12">
-            <a class="pull-left margin-top-30" href="{{ route('maintainers') }}">Volver</a>
-            <span class="pull-right">{{ $labor_unions->links() }}</span>
+            <a href="{{ route('maintainers') }}">Volver</a>
         </div>
     </div>
+
+@stop
+
+@section('scripts')
+
+    <script src="{{ elixir('js/index-common.js') }}"></script>
+    <script src="{{ elixir('js/maintainers/institutions/index-custom-institutions.js') }}"></script>
 
 @stop

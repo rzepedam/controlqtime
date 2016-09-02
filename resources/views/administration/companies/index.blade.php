@@ -2,7 +2,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/bootstrap-table.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/index-common.css') }}">
 
 @stop
 
@@ -30,10 +30,8 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/bootstrap-table.js') }}
-    {{ Html::script('assets/js/bootstrap-table-mobile.js') }}
-    {{ Html::script('assets/js/bootstrap-table-es-ES.js') }}
-    {{ Html::script('me/js/base/administration/companies/config_bootstrap_table.js') }}
+    <script src="{{ elixir('js/index-common.js') }}"></script>
+    <script src="{{ elixir('js/administrations/companies/index-custom-companies.js') }}"></script>
 
 @stop
 

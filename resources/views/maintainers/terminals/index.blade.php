@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/maintainers/terminals/index-terminals.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/index-common.css') }}">
 
 @stop
 
@@ -30,6 +30,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/maintainers/terminals/index-terminals.js') }}"></script>
+    <script src="{{ elixir('js/index-common.js') }}"></script>
+    <script src="{{ elixir('js/maintainers/terminals/index-custom-terminals.js') }}"></script>
 
 @stop

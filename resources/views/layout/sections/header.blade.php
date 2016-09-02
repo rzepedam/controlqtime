@@ -18,7 +18,7 @@
             </ul>
             <div class="navbar-brand navbar-brand-center">
                 <a href="{{ route('home') }}">
-                    <img class="navbar-brand-logo" src="{{ asset('me/img/remark.png') }}" title="ControlQTime">
+                    <img class="navbar-brand-logo" src="{{ asset('img/remark.png') }}" title="ControlQTime">
                 </a>
             </div>
         </div>
