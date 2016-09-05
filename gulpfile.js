@@ -84,9 +84,9 @@ elixir(function(mix) {
 
     // Index Common JS
     .scripts([
-        'bower/bootstrap-table/dist/bootstrap-table.js',
-        'bower/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
-        'bower/bootstrap-table/dist/locale/bootstrap-table-es-ES.js',
+        'custom-configuration/js/bootstrap-table.js',
+        'custom-configuration/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
+        'custom-configuration/js/bootstrap-table-es-ES.js',
     ], 'public/js/index-common.js')
 
     // Create-Edit Common JS
@@ -121,7 +121,7 @@ elixir(function(mix) {
     // Upload Common JS
     .scripts([
         'me/js/utilities/add_csrf_token.js',
-        'bower/bootstrap-fileinput/js/fileinput.js',
+        'custom-configuration/js/fileinput.js',
     ], 'public/js/upload-common.js')
 
 
@@ -148,7 +148,7 @@ elixir(function(mix) {
         'me/js/validations/valida_email.js',
         'me/js/change/change_region_province.js',
         'me/js/utilities/verifica_ultimos_numeros.js',
-        'bower/jquery-rut-plugin/jquery.Rut.js',
+        'custom-configuration/js/jquery.Rut.js',
         'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
         'components/bootstrap-datepicker.js',
@@ -206,7 +206,7 @@ elixir(function(mix) {
 
     // Human-Resources > Employees > Create-Edit Custom CSS
     mix.styles([
-        'bower/jquery-wizard.js/css/wizard.css',
+        'custom-configuration/css/wizard.css',
         'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
     ], 'public/css/human-resources/employees/create-edit-custom-employees.css')
 
@@ -222,8 +222,8 @@ elixir(function(mix) {
         'me/js/validations/employees/step1.js',
         'me/js/validations/employees/step2.js',
         'me/js/validations/employees/step3.js',
-        'bower/jquery-wizard.js/dist/jquery-wizard.js',
-        'bower/jquery-rut-plugin/jquery.Rut.js',
+        'custom-configuration/js/jquery-wizard.js',
+        'custom-configuration/js/jquery.Rut.js',
         'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
         'components/bootstrap-datepicker.js',
