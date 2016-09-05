@@ -46,6 +46,6 @@
 
 @section('scripts')
 
-    {{ Html::script('me/js/delete.js') }}
+    <script src="{{ elixir('js/edit-common.js') }}"></script>
 
 @stop

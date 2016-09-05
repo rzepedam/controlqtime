@@ -181,7 +181,7 @@ class ContractController extends Controller
             'gratification', 'typeContract', 'termsAndObligatories', 'company.legalRepresentative'
         ));
 
-        $header = view('human-resources.contracts.partials.pdf.header', compact('contract'));
+        $header = view('human-resources.contracts.partials.pdf.header');
         $footer = view('human-resources.contracts.partials.pdf.footer');
         $pdf = \PDF::loadView('human-resources.contracts.partials.pdf.index', compact('contract'))
             ->setOption('page-size', 'letter')

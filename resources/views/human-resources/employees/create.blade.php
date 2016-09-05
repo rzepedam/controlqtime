@@ -2,10 +2,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/jquery-wizard.css') }}
-    {{ Html::style('assets/css/ribbon.css') }}
-    {{ Html::style('assets/css/webui-popover.css') }}
-    {{ Html::style('assets/css/bootstrap-datepicker.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/human-resources/employees/create-edit-custom-employees.css') }}">
 
 @stop
 
@@ -51,12 +48,7 @@
                 </div>
                 {{-- End Steps --}}
 
-                {{-- Show Errors Validations --}}
-                <div class="clearfix">
-                    <div class="col-md-12 col-xs-12 alert alert-danger alert-dismissible hide" role="alert" id="js">
-                    </div>
-                </div>
-                {{-- End Show Errors --}}
+                @include('layout.messages.errors-js')
 
                 {{-- Wizard Content --}}
                 <div class="wizard-content">
@@ -396,23 +388,7 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/config.js') }}
-    {{ Html::script('me/js/verificaUltimosNumeros.js') }}
-    {{ Html::script('me/js/capitalize.js') }}
-    {{ Html::script('me/js/changeMethods/changeRegionProvince.js') }}
-    {{ Html::script('me/js/validations/validaRut.js') }}
-    {{ Html::script('me/js/validations/validaEmail.js') }}
-    {{ Html::script('me/js/validations/employees/step1.js') }}
-    {{ Html::script('me/js/validations/employees/step2.js') }}
-    {{ Html::script('me/js/validations/employees/step3.js') }}
-    {{ Html::script('assets/js/jquery.Rut.js') }}
-    {{ Html::script('assets/js/jquery.matchHeight-min.js') }}
-    {{ Html::script('assets/js/jquery-wizard.js') }}
-    {{ Html::script('assets/js/bootstrap-datepicker.js') }}
-    {{ Html::script('assets/js/bootstrap-datepicker.es.min.js') }}
-    {{ Html::script('assets/js/jquery.webui-popover.js') }}
-    {{ Html::script('assets/js/components/matchheight.js') }}
-    {{ Html::script('me/js/common/scrollTop.js') }}
+    <script src="{{ elixir('js/human-resources/employees/create-edit-custom-employees.js') }}"></script>
 
     <script type="text/javascript">
 
@@ -433,11 +409,7 @@
              *  Constructor Wizard
              */
 
-            var wizard = $('#form_new_employee').wizard({
-                onAfterShow: function(){
-                    $('.replace-next').html('<span class="replace-next">Siguiente <i class="fa fa-arrow-circle-right"></i></span>');
-                }
-            }).data('wizard');
+            var wizard = $('#form_new_employee').wizard({}).data('wizard');
 
             /**
              *  Initializa date type (before and after today)
@@ -450,7 +422,13 @@
             function initializaComponentsWithDateBeforeCurrentDate() {
 
                 $('.input-group.date.beforeCurrentDate').datepicker({
+                    autoclose: true,
+                    language: 'es',
+                    format: 'dd-mm-yyyy',
+                    orientation: "bottom",
                     endDate: new Date(),
+                    todayBtn: true,
+                    todayHighlight: true
                 });
 
                 $('.tooltip-primary').tooltip();
@@ -460,7 +438,13 @@
             function initializaComponentsWithDateAfterCurrentDate() {
 
                 $('.input-group.date.afterCurrentDate').datepicker({
+                    autoclose: true,
+                    language: 'es',
+                    format: 'dd-mm-yyyy',
+                    orientation: "bottom",
                     startDate: new Date(),
+                    todayBtn: true,
+                    todayHighlight: true
                 });
 
                 $('.tooltip-primary').tooltip();
@@ -525,6 +509,7 @@
                         dataType: "json",
                         success: function (response) {
                             if (response.status) {
+                                $('#js').addClass('hide');
                                 status = true;
                                 scrollTop();
                             }

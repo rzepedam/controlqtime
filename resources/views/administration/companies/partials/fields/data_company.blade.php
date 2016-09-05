@@ -77,7 +77,7 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-            {{ Form::select('region_id', $regions, null, ['class' => 'form-control']) }}
+            {{ Form::select('region_id', $regions, Route::is('administration.companies.create') ? null : $company->com, ['class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-3">

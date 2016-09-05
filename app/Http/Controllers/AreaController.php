@@ -37,7 +37,11 @@ class AreaController extends Controller
     public function store(AreaRequest $request)
     {
         $this->area->create($request->all());
-        return redirect()->route('maintainers.areas.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/areas'
+		));
     }
 
     public function edit($id)

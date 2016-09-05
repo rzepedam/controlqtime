@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/administrations/companies/create-companies.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/administrations/companies/create-edit-custom-companies.css') }}">
 
 @stop
 
@@ -23,7 +23,7 @@
     </div>
     {{-- End Show Errors --}}
 
-    {{ Form::open(array('route' => 'administration.companies.store', 'method' => 'POST', 'id' => 'form-company')) }}
+    {{ Form::open(array('route' => 'administration.companies.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
         <div class="panel panel-bordered">
             <div class="panel-heading">
@@ -68,7 +68,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/administrations/companies/create-companies.js') }}"></script>
+    <script src="{{ elixir('js/administrations/companies/create-edit-custom-companies.js') }}"></script>
 
 @stop
 

@@ -4,7 +4,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/fileinput.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/upload-common.css') }}">
 
 @stop
 
@@ -48,10 +48,9 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/fileinput.js') }}
-    {{ Html::script('assets/js/config.js') }}
+    <script src="{{ elixir('js/upload-common.js') }}"></script>
 
-    <script>
+    <script type="text/javascript">
 
         $(document).ready(function() {
 

@@ -39,6 +39,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/maintainers/terminals/create-terminals.js') }}"></script>
+    <script src="{{ elixir('js/maintainers/terminals/create-edit-custom-terminals.js') }}"></script>
 
 @stop

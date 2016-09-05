@@ -8,11 +8,6 @@ Route::get('operations', ['as' => 'operations', function(){
 // Operations
 Route::group(['prefix' => 'operations'], function() {
 
-	// Route-Sheet
-	Route::resource('route-sheets', 'RouteSheetController');
-	Route::post('route-sheets/changeStateRoundSheet', ['as' => 'operations.route-sheets.changeStateRoundSheet', 'uses' => 'RouteSheetController@changeStateRoundSheet']);
-	Route::resource('rounds', 'RoundController');
-
 	// Vehicles
 	Route::get('getVehicles', ['as' => 'operations.getVehicles', 'uses' => 'VehicleController@getVehicles']);
 	Route::resource('vehicles', 'VehicleController');

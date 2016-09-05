@@ -2,7 +2,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/bootstrap-datepicker.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/operations/vehicles/create-edit-custom-vehicles.css') }}">
 
 @stop
 
@@ -31,7 +31,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('operations.vehicles.index') }}">Volver</a><button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+                        <a href="{{ route('operations.vehicles.index') }}">Volver</a><button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -50,11 +50,7 @@
 
 @section('scripts')
 
-    {{ Html::script('me/js/changeMethods/changeTrademarkModel.js') }}
-    {{ Html::script('assets/js/config.js') }}
-    {{ Html::script('assets/js/bootstrap-datepicker.js') }}
-    {{ Html::script('assets/js/bootstrap-datepicker.es.min.js') }}
-    {{ Html::script('me/js/delete.js') }}
-    {{ Html::script('me/js/base/operations/vehicles/base.js') }}
+    <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ elixir('js/operations/vehicles/create-edit-custom-vehicles.js') }}"></script>
 
 @stop

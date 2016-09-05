@@ -7,19 +7,12 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
     <title>404 | ControlQTime</title>
-    <link rel="shortcut icon" href="{{ asset('me/img/favicon.ico') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-extend.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/brand-icons/brand-icons.min.css') }}">
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
-    <link rel="stylesheet" href="{{ asset('assets/css/404.css') }}">
-    <script src="{{ asset('assets/js/breakpoints.js') }}"></script>
-    <script>
-      Breakpoints();
-    </script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-core.css') }}">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-fonts.css') }}">
+    <!-- Style Owned -->
+    <link rel="stylesheet" href="{{ asset('css/404.css') }}">
 </head>
 <body class="page-error page-error-404 layout-full">
     <!--[if lt IE 8]>

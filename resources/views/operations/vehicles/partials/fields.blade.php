@@ -25,7 +25,7 @@
     </div>
     <div class="col-md-2 form-group">
         {{ Form::label('acquisition_date', 'Fecha Adquisición', ['class' => 'control-label']) }}
-        <div class="input-group date" id="datePicker">
+        <div class="input-group date" data-plugin="datepicker">
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-2 form-group">
         {{ Form::label('inscription_date', 'Fecha Inscripción', ['class' => 'control-label']) }}
-        <div class="input-group date" id="datePicker">
+        <div class="input-group date" data-plugin="datepicker">
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>

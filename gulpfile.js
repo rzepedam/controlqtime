@@ -89,6 +89,41 @@ elixir(function(mix) {
         'bower/bootstrap-table/dist/locale/bootstrap-table-es-ES.js',
     ], 'public/js/index-common.js')
 
+    // Create-Edit Common JS
+    .scripts([
+        'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
+        'components/bootstrap-maxlength.js',
+        'me/js/utilities/submit-form-ajax.js'
+    ], 'public/js/create-edit-common.js')
+
+    // Edit Common JS
+    .scripts([
+        'me/js/utilities/delete.js'
+    ], 'public/js/edit-common.js')
+
+    // Show With Images Common CSS
+    mix.styles([
+        'bower/magnific-popup/dist/magnific-popup.css'
+    ], 'public/css/show-with-image-common.css')
+
+    // Show With Images Common JS
+    .scripts([
+        'bower/magnific-popup/dist/jquery.magnific-popup.js',
+        'components/magnific-popup.js',
+        'me/js/utilities/download-files.js'
+    ], 'public/js/show-with-image-common.js')
+
+    // Upload Common CSS
+    mix.styles([
+        'bower/bootstrap-fileinput/css/fileinput.css'
+    ], 'public/css/upload-common.css')
+
+    // Upload Common JS
+    .scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'bower/bootstrap-fileinput/js/fileinput.js',
+    ], 'public/js/upload-common.js')
+
 
 
     // Administrations > Index Menú JS
@@ -101,14 +136,12 @@ elixir(function(mix) {
         'me/js/base/administrations/companies/config_bootstrap_table.js'
     ], 'public/js/administrations/companies/index-custom-companies.js')
 
-
-
-    // Administration > Companies > Create CSS
+    // Administration > Companies > Create-Edit Custom CSS
     mix.styles([
         'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
-    ], 'public/css/administrations/companies/create-companies.css')
+    ], 'public/css/administrations/companies/create-edit-custom-companies.css')
 
-    // Administration > Companies > Create JS
+    // Administration > Companies > Create-Edit Custom JS
     .scripts([
         'me/js/utilities/add_csrf_token.js',
         'me/js/validations/valida_rut.js',
@@ -119,27 +152,8 @@ elixir(function(mix) {
         'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
         'components/bootstrap-datepicker.js',
-        'me/js/base/administrations/companies/create-edit.js'
-    ], 'public/js/administrations/companies/create-companies.js')
-
-    // Administration > Companies > Edit CSS
-    mix.styles([
-        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
-    ], 'public/css/administrations/companies/edit-companies.css')
-
-    // Administration > Companies > Edit JS
-    .scripts([
-        'me/js/utilities/add_csrf_token.js',
-        'me/js/validations/valida_rut.js',
-        'me/js/change/change_region_province.js',
-        'me/js/utilities/verifica_ultimos_numeros.js',
-        'me/js/utilities/delete.js',
-        'me/js/base/administrations/companies/create-edit.js',
-        'bower/jquery-rut-plugin/jquery.Rut.js',
-        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
-        'components/bootstrap-datepicker.js',
-    ], 'public/js/administrations/companies/edit-companies.js')
+        'me/js/utilities/submit-form-ajax.js'
+    ], 'public/js/administrations/companies/create-edit-custom-companies.js')
 
 
 
@@ -170,9 +184,6 @@ elixir(function(mix) {
         'me/js/base/human-resources/employees/config_bootstrap_table.js'
     ], 'public/js/human-resources/employees/index-custom-employees.js')
 
-
-
-
     // Human-Resources > Contracts > Create CSS
     mix.styles([
         'bower/bootstrap-select/dist/css/bootstrap-select.css',
@@ -182,15 +193,40 @@ elixir(function(mix) {
     // Human-Resources > Contracts > Create JS
     .scripts([
         'bower/clockpicker/dist/bootstrap-clockpicker.js',
-        'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
         'bower/bootstrap-select/dist/js/bootstrap-select.js',
         'bower/autoNumeric/autoNumeric.js',
         'components/bootstrap-clockpicker.js',
         'components/bootstrap-select.js',
         'components/autoNumeric.js',
-        'me/js/base/human-resources/contracts/create-edit.js',
-        'me/js/utilities/sanitized-money-fields.js'
+        'me/js/utilities/sanitized-money-fields.js',
+        'me/js/base/human-resources/contracts/custom-contracts.js'
     ], 'public/js/human-resources/contracts/create-contracts.js')
+
+    // Human-Resources > Employees > Create-Edit Custom CSS
+    mix.styles([
+        'bower/jquery-wizard.js/css/wizard.css',
+        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+    ], 'public/css/human-resources/employees/create-edit-custom-employees.css')
+
+    // Human-Resources > Employees > Create-Edit Custom JS
+    .scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/utilities/verifica_ultimos_numeros.js',
+        'me/js/utilities/capitalize.js',
+        'me/js/utilities/verifica_ultimos_numeros.js',
+        'me/js/change/change_region_province.js',
+        'me/js/validations/valida_email.js',
+        'me/js/validations/valida_rut.js',
+        'me/js/validations/employees/step1.js',
+        'me/js/validations/employees/step2.js',
+        'me/js/validations/employees/step3.js',
+        'bower/jquery-wizard.js/dist/jquery-wizard.js',
+        'bower/jquery-rut-plugin/jquery.Rut.js',
+        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+        'components/bootstrap-datepicker.js',
+        'me/js/utilities/scrollTop.js'
+    ], 'public/js/human-resources/employees/create-edit-custom-employees.js')
 
 
 
@@ -203,6 +239,20 @@ elixir(function(mix) {
     .scripts([
         'me/js/base/operations/vehicles/config_bootstrap_table.js'
     ], 'public/js/operations/vehicles/index-custom-vehicles.js')
+
+    // Operations > Vehicles > Create-Edit Custom Vehicles CSS
+    mix.styles([
+        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+    ], 'public/css/operations/vehicles/create-edit-custom-vehicles.css')
+
+    // Operations > Vehicles > Create-Edit Custom Vehicles JS
+    .scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/change/change_trademark_model.js',
+        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+        'components/bootstrap-datepicker.js',
+    ], 'public/js/operations/vehicles/create-edit-custom-vehicles.js')
 
 
 
@@ -326,10 +376,28 @@ elixir(function(mix) {
         'me/js/base/maintainers/terminals/config_bootstrap_table.js'
     ], 'public/js/maintainers/terminals/index-custom-terminals.js')
 
+    // Maintainers > Terminals > Create-Edit Custom Terminals JS
+    .scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/utilities/verifica_ultimos_numeros.js',
+        'me/js/change/change_region_province.js'
+    ], 'public/js/maintainers/terminals/create-edit-custom-terminals.js')
+
     // Maintainers > Terms-And-Obligatories > Index Custom Terms-And-Obligatories JS
     .scripts([
         'me/js/base/maintainers/terms-and-obligatories/config_bootstrap_table.js'
     ], 'public/js/maintainers/terms-and-obligatories/index-custom-terms-and-obligatories.js')
+
+    // Maintainers > Terms-And-Obligatories > Create-Edit Custom Terms-And-Obligatories CSS
+    .scripts([
+        'bower/switchery/dist/switchery.css'
+    ], 'public/css/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.css')
+
+    // Maintainers > Terms-And-Obligatories > Create-Edit Custom Terms-And-Obligatories JS
+    .scripts([
+        'bower/switchery/dist/switchery.js',
+        'components/switchery.js'
+    ], 'public/js/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.js')
 
     // Maintainers > Trademarks > Index Custom Trademarks JS
     .scripts([
@@ -388,24 +456,6 @@ elixir(function(mix) {
 
 
 
-
-
-    // Maintainers > Terminals > Create JS
-    .scripts([
-        'me/js/utilities/add_csrf_token.js',
-        'me/js/utilities/verifica_ultimos_numeros.js',
-        'me/js/change/change_region_province.js'
-    ], 'public/js/maintainers/terminals/create-terminals.js')
-
-    // Maintainers > Terminals > Edit JS
-    .scripts([
-        'me/js/utilities/add_csrf_token.js',
-        'me/js/utilities/verifica_ultimos_numeros.js',
-        'me/js/change/change_region_province.js',
-        'me/js/utilities/delete.js'
-    ], 'public/js/maintainers/terminals/edit-terminals.js')
-
-
     /*
      *  Output with version
      */
@@ -418,23 +468,36 @@ elixir(function(mix) {
         'public/js/index-layout-core.js',
         'public/js/index-layout-scripts.js',
         'public/js/index-layout-components.js',
+
         'public/css/index-common.css',
         'public/js/index-common.js',
+        'public/js/create-edit-common.js',
+        'public/js/edit-common.js',
+        'public/css/show-with-image-common.css',
+        'public/js/show-with-image-common.js',
+        'public/css/upload-common.css',
+        'public/js/upload-common.js',
+
         'public/js/administrations/index.js',
-        /*'public/css/administrations/companies/create-companies.css',
-        'public/js/administrations/companies/create-companies.js',
-        'public/css/administrations/companies/edit-companies.css',
-        'public/js/administrations/companies/edit-companies.js',
-        'public/css/human-resources/contracts/create-contracts.css',
-        'public/js/human-resources/contracts/create-contracts.js',*/
-        'public/js/human-resources/index.js',
         'public/js/administrations/companies/index-custom-companies.js',
+        'public/css/administrations/companies/create-edit-custom-companies.css',
+        'public/js/administrations/companies/create-edit-custom-companies.js',
+
+        'public/js/human-resources/index.js',
         'public/js/human-resources/access-controls/index-custom-access-controls.js',
         'public/js/human-resources/contracts/index-custom-contracts.js',
         'public/css/human-resources/employees/index-custom-employees.css',
         'public/js/human-resources/employees/index-custom-employees.js',
+        'public/css/human-resources/contracts/create-contracts.css',
+        'public/js/human-resources/contracts/create-contracts.js',
+        'public/css/human-resources/employees/create-edit-custom-employees.css',
+        'public/js/human-resources/employees/create-edit-custom-employees.js',
+
         'public/js/operations/index.js',
         'public/js/operations/vehicles/index-custom-vehicles.js',
+        'public/css/operations/vehicles/create-edit-custom-vehicles.css',
+        'public/js/operations/vehicles/create-edit-custom-vehicles.js',
+
         'public/js/maintainers/index.js',
         'public/js/maintainers/areas/index-custom-areas.js',
         'public/js/maintainers/cities/index-custom-cities.js',
@@ -459,7 +522,10 @@ elixir(function(mix) {
         'public/js/maintainers/relationships/index-custom-relationships.js',
         'public/js/maintainers/routes/index-custom-routes.js',
         'public/js/maintainers/terminals/index-custom-terminals.js',
+        'public/js/maintainers/terminals/create-edit-custom-terminals.js',
         'public/js/maintainers/terms-and-obligatories/index-custom-terms-and-obligatories.js',
+        'public/css/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.css',
+        'public/js/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.js',
         'public/js/maintainers/trademarks/index-custom-trademarks.js',
         'public/js/maintainers/type-certifications/index-custom-type-certifications.js',
         'public/js/maintainers/type-companies/index-custom-type-companies.js',
@@ -471,8 +537,6 @@ elixir(function(mix) {
         'public/js/maintainers/type-professional-licenses/index-custom-type-professional-licenses.js',
         'public/js/maintainers/type-specialities/index-custom-type-specialities.js',
         'public/js/maintainers/type-vehicles/index-custom-type-vehicles.js',
-        'public/js/maintainers/terminals/create-terminals.js',
-        'public/js/maintainers/terminals/edit-terminals.js'
     ]);
 
     // Copy fonts Font-Awesome
@@ -481,7 +545,27 @@ elixir(function(mix) {
     mix.copy('resources/assets/bower/packages-for-cqtime/fonts', 'public/build/fonts');
     // Copy fonts Owned
     mix.copy('resources/assets/me/fonts/', 'public/build/fonts', 'public/build/fonts');
+    // Copy image Bootstrap-FileInput loading.gif
+    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading.gif', 'public/build/img');
+    // Copy image Bootstrap-FileInput loading-sm.gif
+    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading-sm.gif', 'public/build/img');
+
     // Copy image remark.png
     mix.copy('resources/assets/me/img/remark.png', 'public/img');
+    // Copy image sidebar dashboard-header.png
+    mix.copy('resources/assets/me/img/dashboard-header.jpg', 'public/img');
+    // Copy image for Header PDF-Contracts Stop_Frenos.png
+    mix.copy('resources/assets/me/img/Stop_Frenos.png', 'public/img');
+
+    // Copy Bootstrap for Pdf-Contracts
+    mix.copy('resources/assets/bower/packages-for-cqtime/css/bootstrap.css', 'public/css/human-resources/contracts/pdf');
+    // Copy Index PDF Contracts
+    mix.copy('resources/assets/me/css/human-resources/contracts/pdf/index-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
+    // Copy Header PDF Contracts
+    mix.copy('resources/assets/me/css/human-resources/contracts/pdf/header-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
+    // Copy Footer PDF Contracts
+    mix.copy('resources/assets/me/css/human-resources/contracts/pdf/footer-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
+    // Copy 404 Page CSS
+    mix.copy('resources/assets/me/css/404.css', 'public/css');
 
 });

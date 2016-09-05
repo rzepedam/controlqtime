@@ -1,7 +1,7 @@
 <div class="site-menubar site-menubar-dark site-menubar-dark">
     <div class="site-menubar-header">
         <div class="cover overlay">
-            <img class="cover-image" src="{{ asset('assets/images/dashboard-header.jpg') }}" alt="...">
+            <img class="cover-image" src="{{ asset('img/dashboard-header.jpg') }}">
         </div>
     </div>
     <div class="site-menubar-body">

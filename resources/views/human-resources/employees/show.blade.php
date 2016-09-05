@@ -2,7 +2,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/magnific-popup.min.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/show-with-image-common.css') }}">
 
 @stop
 
@@ -56,9 +56,6 @@
 
 @section('scripts')
 
-    {{ Html::script('assets/js/jquery.magnific-popup.js') }}
-    {{ Html::script('me/js/common/showMagnificImage.js') }}
-    {{ Html::script('assets/js/config.js') }}
-    {{ Html::script('me/js/common/download.js') }}
+    <script src="{{ elixir('js/show-with-image-common.js') }}"></script>
 
 @stop

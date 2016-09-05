@@ -138,6 +138,8 @@ return [
         'model_vehicle_id'                      => 'Modelo',
         'type_vehicle_id'                       => 'Tipo de Vehículo',
 		'trademark_id'							=> 'Marca',
+		'acquisition_date'						=> 'Fecha Adquisición',
+		'inscription_date'						=> 'Fecha Inscripción',
         'year'                                  => 'Año',
         'color'                                 => 'Color',
         'patent'                                => 'Patente',

@@ -2,7 +2,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/bootstrap-datepicker.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/operations/vehicles/create-edit-custom-vehicles.css') }}">
 
 @stop
 
@@ -45,10 +45,6 @@
 
 @section('scripts')
 
-    {{ Html::script('me/js/changeMethods/changeTrademarkModel.js') }}
-    {{ Html::script('assets/js/config.js') }}
-    {{ Html::script('assets/js/bootstrap-datepicker.js') }}
-    {{ Html::script('assets/js/bootstrap-datepicker.es.min.js') }}
-    {{ Html::script('me/js/base/operations/vehicles/base.js') }}
+    <script src="{{ elixir('js/operations/vehicles/create-edit-custom-vehicles.js') }}"></script>
 
 @stop

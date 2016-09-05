@@ -137,7 +137,10 @@ class CompanyController extends Controller
 	 */
 	public function edit($id)
 	{
-		$company              = $this->company->find($id, ['legalRepresentative']);
+		$company              = $this->company->find($id, [
+			'legalRepresentative', 'commune.province.region'
+		]);
+
 		$regions              = $this->region->lists('name', 'id');
 		$provinces            = $this->region->findProvinces($company->commune->province->region->id);
 		$communes             = $this->province->findCommunes($company->commune->province->id);

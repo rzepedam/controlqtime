@@ -2,6 +2,6 @@ $.components.register("maxlength", {
   mode: "default",
   defaults: {
     placement: 'bottom-right-inside',
-    threshold: 20
+    threshold: 10
   }
 });

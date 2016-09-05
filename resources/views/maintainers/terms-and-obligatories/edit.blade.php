@@ -2,7 +2,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/switchery.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.css') }}">
 
 @stop
 
@@ -51,8 +51,7 @@
 
 @section('scripts')
 
-    {{ Html::script('me/js/delete.js') }}
-    {{ Html::script('assets/js/switchery.js') }}
-    {{ Html::script('me/js/common/config_switchery.js') }}
+    <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ elixir('js/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.js') }}"></script>
 
 @stop

@@ -18,10 +18,10 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_certification->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            <a class="icon md-search" href="{{ $image_certification->path }}" data-plugin="magnificPopup"></a>
                                             {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_certification->path }}"></a>
                                             {{ Form::close() }}
-                                            <a class="icon md-search" href="{{ $image_certification->path }}"></a>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -65,10 +65,10 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_speciality->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            <a class="icon md-search" href="{{ $image_speciality->path }}" data-plugin="magnificPopup"></a>
                                             {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_speciality->path }}"></a>
                                             {{ Form::close() }}
-                                            <a class="icon md-search" href="{{ $image_speciality->path }}"></a>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -111,10 +111,10 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_professional_license->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            <a class="icon md-search" href="{{ $image_professional_license->path }}" data-plugin="magnificPopup"></a>
                                             {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_professional_license->path }}"></a>
                                             {{ Form::close() }}
-                                            <a class="icon md-search" href="{{ $image_professional_license->path }}"></a>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -157,10 +157,10 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_disability->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            <a class="icon md-search" href="{{ $image_disability->path }}" data-plugin="magnificPopup"></a>
                                             {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_disability->path }}"></a>
                                             {{ Form::close() }}
-                                            <a class="icon md-search" href="{{ $image_disability->path }}"></a>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -203,10 +203,10 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_disease->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            <a class="icon md-search" href="{{ $image_disease->path }}" data-plugin="magnificPopup"></a>
                                             {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_disease->path }}"></a>
                                             {{ Form::close() }}
-                                            <a class="icon md-search" href="{{ $image_disease->path }}"></a>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -249,10 +249,10 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_exam->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            <a class="icon md-search" href="{{ $image_exam->path }}" data-plugin="magnificPopup"></a>
                                             {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_exam->path }}"></a>
                                             {{ Form::close() }}
-                                            <a class="icon md-search" href="{{ $image_exam->path }}"></a>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -295,10 +295,10 @@
                                     <figure class="widget-header overlay-hover overlay">
                                         <img class="overlay-figure overlay-scale" src="{{ $image_family_responsability->path }}">
                                         <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                            <a class="icon md-search" href="{{ $image_family_responsability->path }}" data-plugin="magnificPopup"></a>
                                             {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_family_responsability->path }}"></a>
                                             {{ Form::close() }}
-                                            <a class="icon md-search" href="{{ $image_family_responsability->path }}"></a>
                                         </figcaption>
                                     </figure>
                                 </div>

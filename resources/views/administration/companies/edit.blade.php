@@ -2,7 +2,7 @@
 
 @section('css')
 
-    {{ Html::style('assets/css/bootstrap-datepicker.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/administrations/companies/create-edit-custom-companies.css') }}">
 
 @stop
 
@@ -23,7 +23,7 @@
     </div>
     {{-- End Show Errors --}}
 
-    {{ Form::model($company, array('route' => array('administration.companies.update', $company), 'method' => 'PUT', 'id' => 'form-company')) }}
+    {{ Form::model($company, array('route' => array('administration.companies.update', $company), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
         <div class="panel panel-bordered">
             <div class="panel-heading">
@@ -61,7 +61,7 @@
             <a href="{{ route('administration.companies.index') }}">Volver</a>
         </div>
         <div class="col-md-6 pull-right">
-            <button id="btnSubmit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+            <button id="btnSubmit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
         </div>
     </div>
 
@@ -76,40 +76,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/administrations/companies/edit-companies.js') }}"></script>
-
-    <script type="text/javascript">
-
-        $(document).ready(function(){
-
-            $('#btnSubmit').click(function(e) {
-
-                e.preventDefault();
-
-                var formCompany = $('#form-company');
-                var action      = $('#form-company').attr('action');
-                var button      = $(this);
-
-                button.html('<i class="fa fa-refresh fa-spin fa-fw"></i>').css({ width: '122px' });
-                $.post( action,
-                        formCompany.serialize(),
-                        function(response) {
-                            if (response.success) {
-                                window.location.href = response.url;
-                            }
-                        }).fail(function(response) {
-                            button.html('<i class="fa fa-refresh"> Actualizar</i>').css({ width: '122px' });
-                            var errors = $.parseJSON(response.responseText);
-                            $.each(errors, function (index, value) {
-                                $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');
-                                $('#' + index).focus();
-                                return false;
-                            });
-                        }
-                );
-            })
-        });
-
-    </script>
+    <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ elixir('js/administrations/companies/create-edit-custom-companies.js') }}"></script>
 
 @stop
