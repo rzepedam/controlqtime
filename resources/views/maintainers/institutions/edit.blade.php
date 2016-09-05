@@ -10,11 +10,11 @@
 
 @section('content')
 
-    @include('layout.messages.errors')
+    @include('layout.messages.errors-js')
 
     <div class="panel">
 
-        {{ Form::model($institution, array('route' => array('maintainers.institutions.update', $institution), 'method' => 'PUT' )) }}
+        {{ Form::model($institution, array('route' => array('maintainers.institutions.update', $institution), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
 
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <a href="{{ route('maintainers.institutions.index') }}">Volver</a>
-                        <button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+                        <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -45,6 +45,7 @@
 
 @section('scripts')
 
+    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
     <script src="{{ elixir('js/edit-common.js') }}"></script>
 
 @stop

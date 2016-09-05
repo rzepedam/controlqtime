@@ -28,7 +28,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     {{ Form::label('name_study', 'Profesión u Oficio') }}
-                    {{ Form::text('name_study[]', $study->name_study, ['class'=> 'form-control']) }}
+                    {{ Form::text('name_study[]', $study->name_study, ['class'=> 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '80']) }}
                 </div>
             </div>
             <div class="col-md-3">

@@ -45,7 +45,11 @@ class CountryController extends Controller
     public function store(CountryRequest $request)
     {
         $this->country->create($request->all());
-        return redirect()->route('maintainers.countries.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/countries'
+		));
     }
 
     public function edit($id)
@@ -57,7 +61,11 @@ class CountryController extends Controller
     public function update(CountryRequest $request, $id)
     {
         $this->country->update($request->all(), $id);
-        return redirect()->route('maintainers.countries.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/countries'
+		));
     }
 
     public function destroy($id)

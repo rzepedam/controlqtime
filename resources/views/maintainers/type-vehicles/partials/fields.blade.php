@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6 form-group">
         {{ Form::label('name', 'Nombre', ['class' => 'control-label']) }}
-        {{ Form::text('name', null, ['class' => 'form-control', 'autofocus']) }}
+        {{ Form::text('name', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '50']) }}
     </div>
     {{-- Unidad Medida Peso Form Select --}}
     <div class="col-md-3 form-group">

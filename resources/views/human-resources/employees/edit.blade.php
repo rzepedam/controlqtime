@@ -409,8 +409,9 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
     <script src="{{ elixir('js/human-resources/employees/create-edit-custom-employees.js') }}"></script>
+    <script src="{{ elixir('js/edit-common.js') }}"></script>
 
     <script type="text/javascript">
 
@@ -616,7 +617,7 @@
 
             $('.add_contact_employee').click(function() {
 
-                var contact = '<span id="contact"><div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"> <span id="num_contact" class="text-success"> Contacto #' + (count_contacts + 1) + ' </span> <a id="contact" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Contacto" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_contact", "ID", ["class"=> "control-label"])}}{{Form::text("id_contact[]", 0, ["id"=> "id_contact", "class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label("contact_relationship_id", "Relación", ["class"=> "control-label"])}}{{Form::select("contact_relationship_id[]", $relationships, null, ["class"=> "form-control"])}}</div></div><div class="col-md-5 form-group">{{Form::label('name_contact', 'Nombre', ['class'=> 'control-label'])}}{{Form::text('name_contact[]', null, ['class'=> 'form-control'])}}</div><div class="col-md-4 form-group">{{Form::label('email_contact', 'Email', ['class'=> 'control-label'])}}{{Form::text('email_contact[]', null, ['id' => 'EmailContactEmployee', 'class'=> 'form-control'])}}</div></div><div class="row"> <div class="col-md-9 form-group">{{Form::label('address_contact', 'Dirección', ['class'=> 'control-label'])}}{{Form::text('address_contact[]', null, ['class'=> 'form-control'])}}</div><div class="col-md-3 form-group">{{Form::label('tel_contact', 'Teléfono', ['class'=> 'control-label'])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text('tel_contact[]', null, ['class'=> 'form-control'])}}</div></div></div><br /></span>';
+                var contact = '<span id="contact"><div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"> <span id="num_contact" class="text-success"> Contacto #' + (count_contacts + 1) + ' </span> <a id="contact" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Contacto" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_contact", "ID", ["class"=> "control-label"])}}{{Form::text("id_contact[]", 0, ["id"=> "id_contact", "class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label("contact_relationship_id", "Relación", ["class"=> "control-label"])}}{{Form::select("contact_relationship_id[]", $relationships, null, ["class"=> "form-control"])}}</div></div><div class="col-md-5 form-group">{{Form::label('name_contact', 'Nombre', ['class'=> 'control-label'])}}{{Form::text('name_contact[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '120'])}}</div><div class="col-md-4 form-group">{{Form::label('email_contact', 'Email', ['class'=> 'control-label'])}}{{Form::text('email_contact[]', null, ['id' => 'EmailContactEmployee', 'class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '60'])}}</div></div><div class="row"> <div class="col-md-9 form-group">{{Form::label('address_contact', 'Dirección', ['class'=> 'control-label'])}}{{Form::text('address_contact[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '100'])}}</div><div class="col-md-3 form-group">{{Form::label('tel_contact', 'Teléfono', ['class'=> 'control-label'])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text('tel_contact[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '20'])}}</div></div></div><br /></span>';
 
                 if (count_contacts == 0)
                     $('#content_contact_employee').html(contact);
@@ -627,6 +628,10 @@
                 $('span#num_contact').attr('id', 'num_contact' + count_contacts);
                 $('#id_contact').attr('id', 'id_contact' + count_contacts);
 
+                $('.maxlength').maxlength({
+                    placement: 'bottom-right-inside',
+                    threshold: 15
+                });
                 $('.tooltip-danger').tooltip();
                 count_contacts++;
 
@@ -660,7 +665,7 @@
 
             $('.add_study').click(function () {
 
-                var study = '<span id="study"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study" class="text-info">Estudio Académico #' + (count_studies + 1) + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('degree_id', 'Nivel Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-4"> <div class="form-group">{{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-2"> <div class="form-group">{{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control', 'readonly'])}}</div></div></div></div><br/></span>'
+                var study = '<span id="study"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study" class="text-info">Estudio Académico #' + (count_studies + 1) + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('degree_id', 'Nivel Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-4"> <div class="form-group">{{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '80'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div></div><div class="col-md-2"> <div class="form-group">{{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control', 'readonly'])}}</div></div></div></div><br/></span>'
 
                 if (count_studies == 0)
                     $('#content_studies').html(study);
@@ -671,6 +676,10 @@
                 $('span#num_study').attr('id', 'num_study' + count_studies);
                 $('#id_study').attr('id', 'id_study' + count_studies);
 
+                $('.maxlength').maxlength({
+                    placement: 'bottom-right-inside',
+                    threshold: 15
+                });
 
                 initializaComponentsWithDateBeforeCurrentDate();
                 count_studies++;
@@ -845,7 +854,7 @@
 
             $('.add_family_responsability').click(function () {
 
-                var family_responsability = '<span id="family_responsability"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-danger alert-dismissible" role="alert"><span id="num_family_responsability" class="text-danger"> Carga Familiar #' + (count_family_responsabilities + 1) + ' </span><a id="family_responsability" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Carga Familiar" data-html="true"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_family_responsability", "ID", ["class"=> "control-label"])}}{{Form::text("id_family_responsability[]", 0, ["id"=> "id_family_responsability", "class"=> "form-control"])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label('name_responsability', 'Nombre Completo', ['class'=> 'control-label'])}}{{Form::text('name_responsability[]', null, ['class'=> 'form-control'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('rut_responsability', 'Rut', ['class'=> 'control-label'])}} <i class="fa fa-info-circle text-primary tooltip-primary" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class=\'text-center\'>Ej: 19317518k</p>" data-html="true"></i>{{Form::text('rut_responsability[]', null, ['class'=> 'form-control check_rut'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('relationship_id', 'Relación', ['class'=> 'control-label'])}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control'])}}</div></div></div><br/></span>';
+                var family_responsability = '<span id="family_responsability"><div class="row"><div class="col-md-12"><div class="alert alert-alt alert-danger alert-dismissible" role="alert"><span id="num_family_responsability" class="text-danger"> Carga Familiar #' + (count_family_responsabilities + 1) + ' </span><a id="family_responsability" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Carga Familiar" data-html="true"><i class="fa fa-trash"></i></a></div></div></div><div class="row"><div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_family_responsability", "ID", ["class"=> "control-label"])}}{{Form::text("id_family_responsability[]", 0, ["id"=> "id_family_responsability", "class"=> "form-control"])}}</div></div><div class="col-md-6"> <div class="form-group">{{Form::label('name_responsability', 'Nombre Completo', ['class'=> 'control-label'])}}{{Form::text('name_responsability[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '120'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('rut_responsability', 'Rut', ['class'=> 'control-label'])}} <i class="fa fa-info-circle text-primary tooltip-primary" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class=\'text-center\'>Ej: 19317518k</p>" data-html="true"></i>{{Form::text('rut_responsability[]', null, ['class'=> 'form-control check_rut'])}}</div></div><div class="col-md-3"> <div class="form-group">{{Form::label('relationship_id', 'Relación', ['class'=> 'control-label'])}}{{Form::select('relationship_id[]', $relationships, null, ['class'=> 'form-control'])}}</div></div></div><br/></span>';
 
                 if (count_family_responsabilities == 0)
                     $('#content_family_responsabilities').html(family_responsability);
@@ -856,6 +865,10 @@
                 $('span#num_family_responsability').attr('id', 'num_family_responsability' + count_family_responsabilities);
                 $('#id_family_responsability').attr('id', 'id_family_responsability' + count_family_responsabilities);
 
+                $('.maxlength').maxlength({
+                    placement: 'bottom-right-inside',
+                    threshold: 15
+                });
                 $('.tooltip-primary').tooltip();
                 $('.tooltip-danger').tooltip();
                 count_family_responsabilities++;

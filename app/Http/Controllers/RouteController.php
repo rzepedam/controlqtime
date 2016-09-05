@@ -38,7 +38,11 @@ class RouteController extends Controller
     public function store(RouteRequest $request)
     {
         $this->route->create($request->all());
-        return redirect()->route('maintainers.routes.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/routes'
+		));
     }
 
     public function edit($id)
@@ -51,7 +55,11 @@ class RouteController extends Controller
     public function update(RouteRequest $request, $id)
     {
         $this->route->update($request->all(), $id);
-        return redirect()->route('maintainers.routes.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/routes'
+		));
     }
 
     public function destroy($id)

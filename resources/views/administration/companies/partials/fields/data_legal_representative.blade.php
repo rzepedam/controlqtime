@@ -8,25 +8,25 @@
 	<div class="col-md-3">
 		<div class="form-group">
 			{{ Form::label('male_surname', 'Apellido Paterno', ['class' => 'control-label']) }}
-			{{ Form::text('male_surname', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->male_surname, ['class' => 'form-control']) }}
+			{{ Form::text('male_surname', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->male_surname, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
 		</div>
 	</div>
 	<div class="col-md-3">
 		<div class="form-group">
 			{{ Form::label('female_surname', 'Apellido Materno', ['class' => 'control-label']) }}
-			{{ Form::text('female_surname', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->female_surname, ['class' => 'form-control']) }}
+			{{ Form::text('female_surname', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->female_surname, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
 		</div>
 	</div>
 	<div class="col-md-3">
 		<div class="form-group">
 			{{ Form::label('first_name', 'Primer Nombre', ['class' => 'control-label']) }}
-			{{ Form::text('first_name', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->first_name, ['class' => 'form-control']) }}
+			{{ Form::text('first_name', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->first_name, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
 		</div>
 	</div>
 	<div class="col-md-3">
 		<div class="form-group">
 			{{ Form::label('second_name', 'Segundo Nombre', ['class' => 'control-label']) }}
-			{{ Form::text('second_name', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->second_name, ['class' => 'form-control']) }}
+			{{ Form::text('second_name', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->second_name, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
 		</div>
 	</div>
 </div>
@@ -61,7 +61,7 @@
 				<div class="input-group-addon">
 					<i class="fa fa-phone"></i>
 				</div>
-				{{ Form::text('phone1_representative', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->phone1_representative, ['class' => 'form-control']) }}
+				{{ Form::text('phone1_representative', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->phone1_representative, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
 			</div>
 		</div>
 	</div>
@@ -74,7 +74,7 @@
 				<div class="input-group-addon">
 					<i class="fa fa-fax"></i>
 				</div>
-				{{ Form::text('phone2_representative', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->phone2_representative, ['class' => 'form-control']) }}
+				{{ Form::text('phone2_representative', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->phone2_representative, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
 			</div>
 		</div>
 	</div>
@@ -86,9 +86,9 @@
 					<i class="fa fa-envelope"></i>
 				</div>
 				@if( Route::is('administration.companies.create') )
-					{{ Form::text('email_representative', null, ['id' => 'Representative', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+					{{ Form::text('email_representative', null, ['id' => 'Representative', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
 				@else
-					{{ Form::text('email_representative', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->email_representative, ['id' => 'Representative', 'class' => 'form-control']) }}
+					{{ Form::text('email_representative', (Route::is('administration.companies.create')) ? null : $company->legalRepresentative->email_representative, ['id' => 'Representative', 'class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
 				@endif
 			</div>
 		</div>

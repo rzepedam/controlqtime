@@ -29,7 +29,11 @@ class LaborUnionController extends Controller
 	public function store(LaborUnionRequest $request)
 	{
 		$this->labor_union->create($request->all());
-		return redirect()->route('maintainers.labor-unions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/labor-unions'
+		));
 	}
 
 	public function edit($id)
@@ -41,7 +45,11 @@ class LaborUnionController extends Controller
 	public function update(LaborUnionRequest $request, $id)
 	{
 		$this->labor_union->update($request->all(), $id);
-		return redirect()->route('maintainers.labor-unions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/labor-unions'
+		));
 	}
 
 	public function destroy($id)

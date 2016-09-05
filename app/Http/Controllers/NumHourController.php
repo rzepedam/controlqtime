@@ -53,7 +53,11 @@ class NumHourController extends Controller
 	public function store(NumHourRequest $request)
     {
         $this->numHour->create($request->all());
-		return redirect()->route('maintainers.num-hours.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/num-hours'
+		));
     }
 
 	/**
@@ -74,7 +78,11 @@ class NumHourController extends Controller
 	public function update(NumHourRequest $request, $id)
     {
         $this->numHour->update($request->all(), $id);
-		return redirect()->route('maintainers.num-hours.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/num-hours'
+		));
     }
 
 	/**

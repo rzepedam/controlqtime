@@ -32,7 +32,11 @@ class PositionController extends Controller
     public function store(PositionRequest $request)
     {
         $this->position->create($request->all());
-        return redirect()->route('maintainers.positions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/positions'
+		));
     }
 
     public function edit($id)
@@ -44,7 +48,11 @@ class PositionController extends Controller
     public function update(PositionRequest $request, $id)
     {
         $this->position->update($request->all(), $id);
-        return redirect()->route('maintainers.positions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/positions'
+		));
     }
 
     public function destroy($id)

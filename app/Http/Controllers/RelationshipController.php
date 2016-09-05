@@ -34,7 +34,11 @@ class RelationshipController extends Controller
     public function store(RelationshipRequest $request)
     {
         $this->relationship->create($request->all());
-        return redirect()->route('maintainers.relationships.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/relationships'
+		));
     }
 
     public function edit($id)
@@ -46,7 +50,11 @@ class RelationshipController extends Controller
     public function update(RelationshipRequest $request, $id)
     {
         $this->relationship->update($request->all(), $id);
-        return redirect()->route('maintainers.relationships.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/relationships'
+		));
     }
 
     public function destroy($id)

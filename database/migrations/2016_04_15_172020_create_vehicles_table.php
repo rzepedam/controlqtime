@@ -19,12 +19,12 @@ class CreateVehiclesTable extends Migration
             $table->string('year', 4);
             $table->string('patent', 15)->unique();
             $table->integer('fuel_id')->unsigned();
-            $table->string('num_motor', 12);
-            $table->string('num_chasis', 17);   
+			$table->string('num_chasis', 17);
+			$table->string('num_motor', 12);
             $table->string('km', 7);
             $table->string('engine_cubic', 4);
             $table->string('weight', 6);
-            $table->string('code');
+            $table->string('code', 50);
             $table->text('obs');
             $table->enum('state', ['enable', 'disable'])->default('disable');
             $table->enum('condition', ['available', 'unavailable'])->default('available');

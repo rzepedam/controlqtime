@@ -34,7 +34,11 @@ class ProfessionController extends Controller
     public function store(ProfessionRequest $request)
     {
         $this->profession->create($request->all());
-        return redirect()->route('maintainers.professions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/professions'
+		));
     }
 
     public function edit($id)
@@ -46,7 +50,11 @@ class ProfessionController extends Controller
     public function update(ProfessionRequest $request, $id)
     {
         $this->profession->update($request->all(), $id);
-        return redirect()->route('maintainers.professions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/professions'
+		));
     }
 
     public function destroy($id)

@@ -521,7 +521,7 @@ $.components.register("maxlength", {
   mode: "default",
   defaults: {
     placement: 'bottom-right-inside',
-    threshold: 10
+    threshold: 15
   }
 });
 
@@ -541,7 +541,7 @@ $('#btnSubmit').click(function(e) {
                 window.location.href = response.url;
             }
         }).fail(function(response) {
-            button.html('<i class="fa fa-floppy-o"></i> Guardar');
+            button.removeClass('btn-success').html('<i class="fa fa-floppy-o"></i> Guardar');
             var errors = $.parseJSON(response.responseText);
             $.each(errors, function (index, value) {
                 $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');

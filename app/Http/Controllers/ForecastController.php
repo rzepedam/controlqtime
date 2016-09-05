@@ -33,7 +33,11 @@ class ForecastController extends Controller
     public function store(ForecastRequest $request)
     {
         $this->forecast->create($request->all());
-        return redirect()->route('maintainers.forecasts.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/forecasts'
+		));
     }
 
     public function edit($id)
@@ -45,7 +49,11 @@ class ForecastController extends Controller
     public function update(ForecastRequest $request, $id)
     {
         $this->forecast->update($request->all(), $id);
-        return redirect()->route('maintainers.forecasts.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/forecasts'
+		));
     }
 
     public function destroy($id)

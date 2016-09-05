@@ -54,7 +54,11 @@ class AreaController extends Controller
     public function update(AreaRequest $request, $id)
     {
         $this->area->update($request->all(), $id);
-        return redirect()->route('maintainers.areas.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/areas'
+		));
     }
 
     public function destroy($id)

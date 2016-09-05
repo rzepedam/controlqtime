@@ -33,7 +33,11 @@ class TypeDisabilityController extends Controller
     public function store(TypeDisabilityRequest $request)
     {
         $this->type_disability->create($request->all());
-        return redirect()->route('maintainers.type-disabilities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-disabilities'
+		));
     }
 
     public function edit($id)
@@ -45,7 +49,11 @@ class TypeDisabilityController extends Controller
     public function update(TypeDisabilityRequest $request, $id)
     {
         $this->type_disability->update($request->all(), $id);
-        return redirect()->route('maintainers.type-disabilities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-disabilities'
+		));
     }
 
     public function destroy($id)

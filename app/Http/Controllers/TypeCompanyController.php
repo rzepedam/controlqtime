@@ -36,7 +36,11 @@ class TypeCompanyController extends Controller
     public function store(TypeCompanyRequest $request)
     {
         $this->type_company->create($request->all());
-		return redirect()->route('maintainers.type-companies.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-companies'
+		));
     }
 
     public function edit($id)
@@ -48,7 +52,11 @@ class TypeCompanyController extends Controller
     public function update(TypeCompanyRequest $request, $id)
     {
 		$this->type_company->update($request->all(), $id);
-		return redirect()->route('maintainers.type-companies.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-companies'
+		));
     }
 
     public function destroy($id)

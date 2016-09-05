@@ -33,7 +33,11 @@ class TypeCertificationController extends Controller
     public function store(TypeCertificationRequest $request)
     {
         $this->type_certification->create($request->all());
-        return redirect()->route('maintainers.type-certifications.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-certifications'
+		));
     }
 
     public function edit($id)
@@ -45,7 +49,11 @@ class TypeCertificationController extends Controller
     public function update(TypeCertificationRequest $request, $id)
     {
         $this->type_certification->update($request->all(), $id);
-        return redirect()->route('maintainers.type-certifications.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-certifications'
+		));
     }
 
     public function destroy($id)

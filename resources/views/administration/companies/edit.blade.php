@@ -61,7 +61,7 @@
             <a href="{{ route('administration.companies.index') }}">Volver</a>
         </div>
         <div class="col-md-6 pull-right">
-            <button id="btnSubmit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+            <button id="btnSubmit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
         </div>
     </div>
 

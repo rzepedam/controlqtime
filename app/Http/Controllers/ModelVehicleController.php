@@ -38,13 +38,18 @@ class ModelVehicleController extends Controller
     public function store(ModelVehicleRequest $request)
     {
         $this->model_vehicle->create($request->all());
-        return redirect()->route('maintainers.model-vehicles.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/model-vehicles'
+		));
     }
 
     public function edit($id)
     {
         $model_vehicle = $this->model_vehicle->find($id);
         $trademarks = $this->trademark->lists('name', 'id');
+
         return view('maintainers.model-vehicles.edit', compact(
             'model_vehicle', 'trademarks'
         ));
@@ -53,7 +58,11 @@ class ModelVehicleController extends Controller
     public function update(ModelVehicleRequest $request, $id)
     {
         $this->model_vehicle->update($request->all(), $id);
-        return redirect()->route('maintainers.model-vehicles.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/model-vehicles'
+		));
     }
 
     public function destroy($id)

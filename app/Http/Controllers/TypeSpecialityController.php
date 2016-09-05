@@ -34,7 +34,11 @@ class TypeSpecialityController extends Controller
     public function store(TypeSpecialityRequest $request)
     {
         $this->type_speciality->create($request->all());
-        return redirect()->route('maintainers.type-specialities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-specialities'
+		));
     }
 
     public function edit($id)
@@ -46,7 +50,11 @@ class TypeSpecialityController extends Controller
     public function update(TypeSpecialityRequest $request, $id)
     {
         $this->type_speciality->update($request->all(), $id);
-        return redirect()->route('maintainers.type-specialities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-specialities'
+		));
     }
 
     public function destroy($id)

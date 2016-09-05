@@ -152,6 +152,8 @@ elixir(function(mix) {
         'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
         'components/bootstrap-datepicker.js',
+        'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
+        'components/bootstrap-maxlength.js',
         'me/js/utilities/submit-form-ajax.js'
     ], 'public/js/administrations/companies/create-edit-custom-companies.js')
 

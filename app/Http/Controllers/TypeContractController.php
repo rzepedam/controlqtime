@@ -53,7 +53,11 @@ class TypeContractController extends Controller
 	public function store(TypeContractRequest $request)
     {
         $this->typeContract->create($request->all());
-		return redirect()->route('maintainers.type-contracts.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-contracts'
+		));
     }
 
 	/**
@@ -74,7 +78,11 @@ class TypeContractController extends Controller
 	public function update(TypeContractRequest $request, $id)
     {
 		$this->typeContract->update($request->all(), $id);
-		return redirect()->route('maintainers.type-contracts.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-contracts'
+		));
     }
 
 	/**

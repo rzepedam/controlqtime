@@ -41,7 +41,11 @@ class CityController extends Controller
     public function store(CityRequest $request)
     {
         $this->city->create($request->all());
-        return redirect()->route('maintainers.cities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/cities'
+		));
     }
 
     public function edit($id)
@@ -54,7 +58,11 @@ class CityController extends Controller
     public function update(CityRequest $request, $id)
     {
         $this->city->update($request->all(), $id);
-        return redirect()->route('maintainers.cities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/cities'
+		));
     }
 
     public function destroy($id)

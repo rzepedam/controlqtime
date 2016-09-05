@@ -10,7 +10,7 @@ class CreateMutualitiesTable extends Migration
     {
         Schema::create('mutualities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 75);
+            $table->string('name', 50);
         });
     }
 

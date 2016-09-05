@@ -33,7 +33,11 @@ class TypeDiseaseController extends Controller
     public function store(TypeDiseaseRequest $request)
     {
         $this->type_disease->create($request->all());
-        return redirect()->route('maintainers.type-diseases.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-diseases'
+		));
     }
 
     public function show($id)
@@ -51,7 +55,11 @@ class TypeDiseaseController extends Controller
     public function update(TypeDiseaseRequest $request, $id)
     {
         $this->type_disease->update($request->all(), $id);
-        return redirect()->route('maintainers.type-diseases.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-diseases'
+		));
     }
 
     public function destroy($id)

@@ -32,7 +32,11 @@ class TrademarkController extends Controller
     public function store(TrademarkRequest $request)
     {
         $this->trademark->create($request->all());
-        return redirect()->route('maintainers.trademarks.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/trademarks'
+		));
     }
 
     public function edit($id)
@@ -44,7 +48,11 @@ class TrademarkController extends Controller
     public function update(TrademarkRequest $request, $id)
     {
         $this->trademark->update($request->all(), $id);
-        return redirect()->route('maintainers.trademarks.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/trademarks'
+		));
     }
 
     public function destroy($id)

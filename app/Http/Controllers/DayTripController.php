@@ -54,7 +54,11 @@ class DayTripController extends Controller
 	public function store(DayTripRequest $request)
     {
         $this->dayTrip->create($request->all());
-		return redirect()->route('maintainers.day-trips.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/day-trips'
+		));
     }
 
 	/**
@@ -75,7 +79,11 @@ class DayTripController extends Controller
 	public function update(DayTripRequest $request, $id)
     {
         $this->dayTrip->update($request->all(), $id);
-		return redirect()->route('maintainers.day-trips.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/day-trips'
+		));
     }
 
 	/**

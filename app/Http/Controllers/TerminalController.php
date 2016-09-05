@@ -82,7 +82,10 @@ class TerminalController extends Controller
 	{
 		$this->terminal->create($request->all());
 
-		return redirect()->route('maintainers.terminals.index');
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/terminals'
+		));
 	}
 
 	/**
@@ -110,7 +113,10 @@ class TerminalController extends Controller
 	{
 		$this->terminal->update($request->all(), $id);
 
-		return redirect()->route('maintainers.terminals.index');
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/terminals'
+		));
 	}
 
 	/**

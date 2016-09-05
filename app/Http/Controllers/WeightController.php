@@ -35,7 +35,11 @@ class WeightController extends Controller
 	public function store(WeightRequest $request)
 	{
 		$this->weight->create($request->all());
-		return redirect()->route('maintainers.measuring-units.weights.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/measuring-units/weights'
+		));
 	}
 
 	public function edit($id)
@@ -47,7 +51,11 @@ class WeightController extends Controller
 	public function update(WeightRequest $request, $id)
 	{
 		$this->weight->update($request->all(), $id);
-		return redirect()->route('maintainers.measuring-units.weights.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/measuring-units/weights'
+		));
 	}
 
 	public function destroy($id)

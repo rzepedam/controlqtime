@@ -16,11 +16,11 @@
 
 @section('content')
 
-    @include('layout.messages.errors')
+    @include('layout.messages.errors-js')
 
     <div class="panel">
 
-        {{ Form::model($termAndObligatory, array('route' => array('maintainers.terms-and-obligatories.update', $termAndObligatory), 'method' => 'PUT' )) }}
+        {{ Form::model($termAndObligatory, array('route' => array('maintainers.terms-and-obligatories.update', $termAndObligatory), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
 
@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <a href="{{ route('maintainers.terms-and-obligatories.index') }}">Volver</a>
-                        <button type="submit" class="btn btn-squared btn-success btn-lg waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+                        <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,8 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
     <script src="{{ elixir('js/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.js') }}"></script>
+    <script src="{{ elixir('js/edit-common.js') }}"></script>
 
 @stop

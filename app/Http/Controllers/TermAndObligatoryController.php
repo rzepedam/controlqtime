@@ -55,7 +55,10 @@ class TermAndObligatoryController extends Controller
 	{
 		$this->termAndObligatory->create($request->all());
 
-		return redirect()->route('maintainers.terms-and-obligatories.index');
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/terms-and-obligatories'
+		));
 	}
 
 	/**
@@ -85,7 +88,10 @@ class TermAndObligatoryController extends Controller
 
 		$this->termAndObligatory->update($data, $id);
 
-		return redirect()->route('maintainers.terms-and-obligatories.index');
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/terms-and-obligatories'
+		));
 	}
 
 	/**

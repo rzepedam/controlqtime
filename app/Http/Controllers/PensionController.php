@@ -33,7 +33,11 @@ class PensionController extends Controller
     public function store(PensionRequest $request)
     {
         $this->pension->create($request->all());
-        return redirect()->route('maintainers.pensions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/pensions'
+		));
     }
 
     public function edit($id)
@@ -45,7 +49,11 @@ class PensionController extends Controller
     public function update(PensionRequest $request, $id)
     {
         $this->pension->update($request->all(), $id);
-        return redirect()->route('maintainers.pensions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/pensions'
+		));
     }
 
     public function destroy($id)

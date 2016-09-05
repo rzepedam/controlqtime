@@ -10,7 +10,7 @@ class CreateTypeDiseasesTable extends Migration
     {
         Schema::create('type_diseases', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 120);
+            $table->string('name', 75);
         });
     }
 

@@ -55,7 +55,10 @@ class MaritalStatusController extends Controller
     {
         $this->maritalStatus->create($request->all());
 
-		return redirect()->route('maintainers.marital-statuses.index');
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/marital-statuses'
+		));
     }
 
 	/**
@@ -78,7 +81,10 @@ class MaritalStatusController extends Controller
     {
         $this->maritalStatus->update($request->all(), $id);
 
-		return redirect()->route('maintainers.marital-statuses.index');
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/marital-statuses'
+		));
     }
 
 	/**

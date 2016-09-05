@@ -13,7 +13,7 @@ class CreateContactEmployeesTable extends Migration
             $table->integer('contact_relationship_id')->unsigned();
             $table->string('name_contact', 120);
             $table->string('email_contact', 60)->unique();
-            $table->string('address_contact');
+            $table->string('address_contact', 100);
             $table->string('tel_contact', 20);
             $table->timestamps();
 

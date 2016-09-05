@@ -34,7 +34,11 @@ class MutualityController extends Controller
     public function store(MutualityRequest $request)
     {
     	$this->mutuality->create($request->all());
-        return redirect()->route('maintainers.mutualities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/mutualities'
+		));
     }
 
     public function edit($id)
@@ -46,7 +50,11 @@ class MutualityController extends Controller
     public function update(MutualityRequest $request, $id)
     {
         $this->mutuality->update($request->all(), $id);
-        return redirect()->route('maintainers.mutualities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/mutualities'
+		));
     }
 
     public function destroy($id)

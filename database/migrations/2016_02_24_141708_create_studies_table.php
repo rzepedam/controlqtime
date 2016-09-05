@@ -11,7 +11,7 @@ class CreateStudiesTable extends Migration
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
             $table->integer('degree_id')->unsigned();
-            $table->string('name_study', 100);
+            $table->string('name_study', 80);
             $table->integer('institution_study_id')->unsigned();
             $table->date('date_obtention');
             $table->timestamps();

@@ -33,7 +33,11 @@ class DegreeController extends Controller
     public function store(DegreeRequest $request)
     {
         $this->degree->create($request->all());
-        return redirect()->route('maintainers.degrees.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/degrees'
+		));
     }
 
     public function edit($id)
@@ -45,7 +49,11 @@ class DegreeController extends Controller
     public function update(DegreeRequest $request, $id)
     {
         $this->degree->update($request->all(), $id);
-        return redirect()->route('maintainers.degrees.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/degrees'
+		));
     }
 
     public function destroy($id)

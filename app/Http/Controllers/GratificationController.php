@@ -54,7 +54,11 @@ class GratificationController extends Controller
 	public function store(GratificationRequest $request)
     {
         $this->gratification->create($request->all());
-		return redirect()->route('maintainers.gratifications.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/gratifications'
+		));
     }
 
 	/**
@@ -75,7 +79,11 @@ class GratificationController extends Controller
 	public function update(GratificationRequest $request, $id)
     {
         $this->gratification->update($request->all(), $id);
-		return redirect()->route('maintainers.gratifications.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/gratifications'
+		));
     }
 
 	/**

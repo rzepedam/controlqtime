@@ -36,7 +36,11 @@ class EngineCubicController extends Controller
 	public function store(EngineCubicRequest $request)
 	{
 		$this->engine_cubic->create($request->all());
-		return redirect()->route('maintainers.measuring-units.engine-cubics.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/measuring-units/engine-cubics'
+		));
 	}
 
 	public function edit($id)
@@ -48,7 +52,11 @@ class EngineCubicController extends Controller
 	public function update(EngineCubicRequest $request, $id)
 	{
 		$this->engine_cubic->update($request->all(), $id);
-		return redirect()->route('maintainers.measuring-units.engine-cubics.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/measuring-units/engine-cubics'
+		));
 	}
 
 	public function destroy($id)

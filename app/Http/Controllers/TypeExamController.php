@@ -33,7 +33,11 @@ class TypeExamController extends Controller
     public function store(TypeExamRequest $request)
     {
         $this->type_exam->create($request->all());
-        return redirect()->route('maintainers.type-exams.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-exams'
+		));
     }
 
     public function edit($id)
@@ -45,7 +49,11 @@ class TypeExamController extends Controller
     public function update(TypeExamRequest $request, $id)
     {
         $this->type_exam->update($request->all(), $id);
-        return redirect()->route('maintainers.type-exams.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-exams'
+		));
     }
 
     public function destroy($id)

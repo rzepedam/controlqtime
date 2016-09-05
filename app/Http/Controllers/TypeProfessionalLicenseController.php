@@ -35,7 +35,11 @@ class TypeProfessionalLicenseController extends Controller
     public function store(TypeProfessionalLicenseRequest $request)
     {
         $this->type_professional_license->create($request->all());
-        return redirect()->route('maintainers.type-professional-licenses.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-professional-licenses'
+		));
     }
 
     public function edit($id)
@@ -47,7 +51,11 @@ class TypeProfessionalLicenseController extends Controller
     public function update(TypeProfessionalLicenseRequest $request, $id)
     {
         $this->type_professional_license->update($request->all(), $id);
-        return redirect()->route('maintainers.type-professional-licenses.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-professional-licenses'
+		));
     }
 
     public function destroy($id)

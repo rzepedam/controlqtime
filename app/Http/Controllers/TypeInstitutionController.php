@@ -34,7 +34,11 @@ class TypeInstitutionController extends Controller
     public function store(TypeInstitutionRequest $request)
     {
         $this->type_institution->create($request->all());
-        return redirect()->route('maintainers.type-institutions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-institutions'
+		));
     }
 
     public function edit($id)
@@ -46,7 +50,11 @@ class TypeInstitutionController extends Controller
     public function update($id, TypeInstitutionRequest $request)
     {
         $this->type_institution->update($request->all(), $id);
-        return redirect()->route('maintainers.type-institutions.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/type-institutions'
+		));
     }
 
     public function destroy($id)

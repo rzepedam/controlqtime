@@ -60,7 +60,7 @@
         </div>
 
         <div class="col-md-6 pull-right">
-            <button id="btnSubmit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+            <button id="btnSubmit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
         </div>
     </div>
 

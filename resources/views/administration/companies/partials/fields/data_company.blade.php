@@ -14,7 +14,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {{ Form::label('firm_name', 'Razón Social', ['class' => 'control-label']) }}
-            {{ Form::text('firm_name', null, ['class' => 'form-control']) }}
+            {{ Form::text('firm_name', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '75']) }}
         </div>
     </div>
 </div>
@@ -22,7 +22,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {{ Form::label('gyre', 'Giro', ['class' => 'control-label']) }}
-            {{ Form::text('gyre', null, ['class' => 'form-control']) }}
+            {{ Form::text('gyre', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
         </div>
     </div>
     <div class="col-md-3">
@@ -39,7 +39,7 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('muni_license', 'Patente Municipal', ['class' => 'control-label']) }}
-            {{ Form::text('muni_license', null, ['class' => 'form-control text-center']) }}
+            {{ Form::text('muni_license', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '25']) }}
         </div>
     </div>
 </div>
@@ -47,31 +47,31 @@
     <div class="col-md-6">
         <div class="form-group">
             {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }} <small class="text-muted"> (Casa Matriz)</small>
-            {{ Form::text('address', null, ['class' => 'form-control']) }}
+            {{ Form::text('address', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
         </div>
     </div>
     <div class="col-md-1">
         <div class="form-group">
             {{ Form::label('lot', 'Lote', ['class' => 'control-label']) }}
-            {{ Form::text('lot', null, ['class' => 'form-control text-center']) }}
+            {{ Form::text('lot', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
         </div>
     </div>
     <div class="col-md-1">
         <div class="form-group">
             {{ Form::label('bod', 'Bodega', ['class' => 'control-label']) }}
-            {{ Form::text('bod', null, ['class' => 'form-control text-center']) }}
+            {{ Form::text('bod', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
         </div>
     </div>
     <div class="col-md-1">
         <div class="form-group">
             {{ Form::label('ofi', 'Oficina', ['class' => 'control-label']) }}
-            {{ Form::text('ofi', null, ['class' => 'form-control text-center']) }}
+            {{ Form::text('ofi', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
         </div>
     </div>
     <div class="col-md-1">
         <div class="form-group">
             {{ Form::label('floor', 'Piso', ['class' => 'control-label']) }}
-            {{ Form::text('floor', null, ['class' => 'form-control text-center']) }}
+            {{ Form::text('floor', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '3', 'threshold' => '3']) }}
         </div>
     </div>
     <div class="col-md-3">
@@ -99,7 +99,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                 </div>
-                {{ Form::text('phone1', null, ['class' => 'form-control']) }}
+                {{ Form::text('phone1', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-fax"></i>
                 </div>
-                {{ Form::text('phone2', null, ['class' => 'form-control']) }}
+                {{ Form::text('phone2', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
             </div>
         </div>
     </div>
@@ -124,9 +124,9 @@
                     <i class="fa fa-envelope"></i>
                 </div>
                 @if( Route::is('administration.companies.create') )
-                    {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+                    {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
                 @else
-                    {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control']) }}
+                    {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
                 @endif
             </div>
         </div>

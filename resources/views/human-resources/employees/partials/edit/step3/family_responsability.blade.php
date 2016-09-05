@@ -22,7 +22,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     {{ Form::label('name_responsability', 'Nombre Completo') }}
-                    {{ Form::text('name_responsability[]', $family_responsability->name_responsability, ['class'=> 'form-control']) }}
+                    {{ Form::text('name_responsability[]', $family_responsability->name_responsability, ['class'=> 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '120']) }}
                 </div>
             </div>
             <div class="col-md-3">

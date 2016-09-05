@@ -10,11 +10,11 @@
 
 @section('content')
 
-    @include('layout.messages.errors')
+    @include('layout.messages.errors-js')
 
     <div class="panel">
 
-        {{ Form::open(array('route' => 'maintainers.cities.store', 'method' => 'POST')) }}
+        {{ Form::open(array('route' => 'maintainers.cities.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
 
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <a href="{{ route('maintainers.cities.index') }}">Volver</a>
-                        <button type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                        <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
                     </div>
                 </div>
             </div>
@@ -34,5 +34,11 @@
         {{ Form::close() }}
 
     </div>
+
+@stop
+
+@section('scripts')
+
+    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
 
 @stop

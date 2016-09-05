@@ -53,7 +53,11 @@ class PeriodicityController extends Controller
 	public function store(PeriodicityRequest $request)
     {
     	$this->periodiocity->create($request->all());
-		return redirect()->route('maintainers.periodicities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/periodicities'
+		));
     }
 
 
@@ -76,7 +80,11 @@ class PeriodicityController extends Controller
 	public function update(PeriodicityRequest $request, $id)
     {
         $this->periodiocity->update($request->all(), $id);
-		return redirect()->route('maintainers.periodicities.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/periodicities'
+		));
     }
 
 	/**

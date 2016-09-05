@@ -33,7 +33,11 @@ class FuelController extends Controller
     public function store(FuelRequest $request)
     {
         $this->fuel->create($request->all());
-        return redirect()->route('maintainers.fuels.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/fuels'
+		));
     }
     
     public function edit($id)
@@ -45,7 +49,11 @@ class FuelController extends Controller
     public function update(FuelRequest $request, $id)
     {
         $this->fuel->update($request->all(), $id);
-        return redirect()->route('maintainers.fuels.index');
+
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/maintainers/fuels'
+		));
     }
     
     public function destroy($id)

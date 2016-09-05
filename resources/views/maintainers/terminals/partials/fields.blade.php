@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-md-4">
         {{ Form::label('name', 'Nombre', ['class' => 'control-label']) }}
-        {{ Form::text('name', null, ['class' => 'form-control', 'autofocus']) }}
+        {{ Form::text('name', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '50']) }}
     </div>
     <div class="col-md-8">
         {{-- Dirección Form Input --}}
         <div class="form-group">
             {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
-            {{ Form::text('address', null, ['class' => 'form-control']) }}
+            {{ Form::text('address', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '255']) }}
         </div>
     </div>
 </div>

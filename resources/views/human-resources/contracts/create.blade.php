@@ -66,10 +66,10 @@
                 <a href="{{ route('human-resources.contracts.index') }}">Volver</a>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
-                <button class="btn btn-squared btn-danger btn-lg waves-effect waves-light pull-right"><i class="fa fa-file-pdf-o"></i> Visualizar</button>
+                <button class="btn btn-squared btn-danger waves-effect waves-light pull-right"><i class="fa fa-file-pdf-o"></i> Visualizar</button>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-2">
-                <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary btn-lg waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
             </div>
         </div>
 

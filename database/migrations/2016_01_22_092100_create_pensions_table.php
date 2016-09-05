@@ -10,7 +10,7 @@ class CreatePensionsTable extends Migration
     {
         Schema::create('pensions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 75);
+            $table->string('name', 50);
         });
     }
 

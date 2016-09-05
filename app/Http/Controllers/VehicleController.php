@@ -68,7 +68,10 @@ class VehicleController extends Controller {
 	{
 		$this->vehicle->create($request->all());
 
-		return redirect()->route('operations.vehicles.index');
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/operations/vehicles'
+		));
 	}
 
 	public function edit($id)
@@ -91,7 +94,10 @@ class VehicleController extends Controller {
 	{
 		$this->vehicle->update($request->all(), $id);
 
-		return redirect()->route('operations.vehicles.index');
+		return response()->json(array(
+			'success' => true,
+			'url'     => '/operations/vehicles'
+		));
 	}
 
 	public function show($id)
