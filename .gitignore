@@ -7,3 +7,7 @@ Homestead.json
 .idea
 public/storage/
 resources/assets/bower
+public/build
+public/css
+public/img
+public/js
