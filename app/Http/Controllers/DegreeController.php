@@ -59,7 +59,7 @@ class DegreeController extends Controller
     public function destroy($id)
     {
         $this->degree->delete($id);
-        return redirect()->route('maintainers.degrees.index');
+        return redirect()->route('degrees.index');
     }
     
 }

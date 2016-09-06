@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.terms-and-obligatories.index') }}"><i class="md-lock-open"></i> Cláusulas y Obligaciones</a></li>
+    <li><a href="{{ route('terms-and-obligatories.index') }}"><i class="md-lock-open"></i> Cláusulas y Obligaciones</a></li>
     <li class="active">Nuevo</li>
 @stop
 
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::open(array('route' => 'maintainers.terms-and-obligatories.store', 'method' => 'POST', 'id' => 'form-submit')) }}
+        {{ Form::open(array('route' => 'terms-and-obligatories.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
 
@@ -31,7 +31,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('maintainers.terms-and-obligatories.index') }}">Volver</a>
+                        <a href="{{ route('terms-and-obligatories.index') }}">Volver</a>
                         <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
                     </div>
                 </div>

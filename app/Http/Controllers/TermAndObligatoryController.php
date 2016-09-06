@@ -102,6 +102,6 @@ class TermAndObligatoryController extends Controller
 	{
 		$this->termAndObligatory->delete($id);
 
-		return redirect()->route('maintainers.terms-and-obligatories.index');
+		return redirect()->route('terms-and-obligatories.index');
 	}
 }

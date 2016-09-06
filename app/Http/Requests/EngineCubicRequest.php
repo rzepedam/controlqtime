@@ -47,7 +47,7 @@ class EngineCubicRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:30|unique_with:engine_cubics,acr,' . $this->route->getParameter('engine_cubics'),
+                    'name'  => 'required|max:30|unique_with:engine_cubics,acr,' . $this->route->getParameter('engine_cubic'),
                     'acr'   => 'required|max:5'
                 ];
             }

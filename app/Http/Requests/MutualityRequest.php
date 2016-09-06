@@ -33,7 +33,7 @@ class MutualityRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:75|unique:mutualities,name,' . $this->route->getParameter('mutualities')
+                    'name'  => 'required|max:75|unique:mutualities,name,' . $this->route->getParameter('mutuality')
                 ];
             }
         }

@@ -34,7 +34,7 @@ class FuelRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:10|unique:fuels,name,' . $this->route->getParameter('fuels')
+                    'name'  => 'required|max:10|unique:fuels,name,' . $this->route->getParameter('fuel')
                 ];
             }
         }

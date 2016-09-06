@@ -34,7 +34,7 @@ class ProfessionRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:100|unique:professions,name,' . $this->route->getParameter('professions')
+                    'name'  => 'required|max:100|unique:professions,name,' . $this->route->getParameter('profession')
                 ];
             }
         }

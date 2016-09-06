@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Tipos de Vehículos
     <br />
-    <a href="{{ route('maintainers.type-vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Tipo de Vehículo</a>
+    <a href="{{ route('type-vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Tipo de Vehículo</a>
 @stop
 
 @section('breadcumb')

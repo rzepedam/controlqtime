@@ -60,6 +60,6 @@ class TypeInstitutionController extends Controller
     public function destroy($id)
     {
         $this->type_institution->delete($id);
-        return redirect()->route('maintainers.type-institutions.index');
+        return redirect()->route('type-institutions.index');
     }
 }

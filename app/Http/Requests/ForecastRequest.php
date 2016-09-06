@@ -33,7 +33,7 @@ class ForecastRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:50|unique:forecasts,name,' . $this->route->getParameter('forecasts')
+                    'name'  => 'required|max:50|unique:forecasts,name,' . $this->route->getParameter('forecast')
                 ];
             }
         }

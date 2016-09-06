@@ -4,7 +4,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.degrees.index') }}"><i class="fa fa-star-half-o"></i> Grados Académicos</a></li>
+    <li><a href="{{ route('degrees.index') }}"><i class="fa fa-star-half-o"></i> Grados Académicos</a></li>
     <li class="active">Nuevo</li>
 @stop
 
@@ -14,7 +14,7 @@
 
     <div class="panel">
 
-        {{ Form::open(array('route' => 'maintainers.degrees.store', 'method' => 'POST', 'id' => 'form-submit')) }}
+        {{ Form::open(array('route' => 'degrees.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
 
@@ -25,7 +25,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('maintainers.degrees.index') }}">Volver</a>
+                        <a href="{{ route('degrees.index') }}">Volver</a>
                         <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
                     </div>
                 </div>

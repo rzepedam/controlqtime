@@ -16,14 +16,14 @@
         {{-- Región Form Select --}}
         <div class="form-group">
             {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-            {{ Form::select('region_id', $regions, Route::is('maintainers.terminals.create') ? null : $terminal->commune->province->region->id, ['class' => 'form-control']) }}
+            {{ Form::select('region_id', $regions, Route::is('terminals.create') ? null : $terminal->commune->province->region->id, ['class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-4">
         {{-- Provincia Form Select --}}
         <div class="form-group">
             {{ Form::label('province_id', 'Provincia', ['class' => 'control-label']) }}
-            {{ Form::select('province_id', $provinces, Route::is('maintainers.terminals.create') ? null : $terminal->commune->province->id, ['class' => 'form-control']) }}
+            {{ Form::select('province_id', $provinces, Route::is('terminals.create') ? null : $terminal->commune->province->id, ['class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-4">

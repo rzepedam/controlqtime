@@ -58,6 +58,6 @@ class TrademarkController extends Controller
     public function destroy($id)
     {
         $this->trademark->delete($id);
-        return redirect()->route('maintainers.trademarks.index');
+        return redirect()->route('trademarks.index');
     }
 }

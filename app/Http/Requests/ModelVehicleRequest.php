@@ -37,7 +37,7 @@ class ModelVehicleRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'  		=> 'required|max:50|unique_with:model_vehicles,trademark_id,' . $this->route->getParameter('model_vehicles'),
+					'name'  		=> 'required|max:50|unique_with:model_vehicles,trademark_id,' . $this->route->getParameter('model_vehicle'),
 					'trademark_id' 	=> 'required|regex:/[0-9 -()+]+$/'
 				];
 			}

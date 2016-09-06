@@ -6,7 +6,6 @@ use Controlqtime\Http\Requests;
 use Controlqtime\Core\Contracts\ModelVehicleRepoInterface;
 use Controlqtime\Http\Requests\ModelVehicleRequest;
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
-use Controlqtime\Core\Entities\Trademark;
 
 class ModelVehicleController extends Controller
 {
@@ -31,7 +30,7 @@ class ModelVehicleController extends Controller
 
     public function create()
     {
-        $trademarks = Trademark::lists('name', 'id');
+        $trademarks = $this->trademark->lists('name', 'id');
         return view('maintainers.model-vehicles.create', compact('trademarks'));
     }
 
@@ -68,7 +67,7 @@ class ModelVehicleController extends Controller
     public function destroy($id)
     {
         $this->model_vehicle->delete($id);
-        return redirect()->route('maintainers.model-vehicles.index');
+        return redirect()->route('model-vehicles.index');
     }
     
 }

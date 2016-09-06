@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('administration') }}"><i class="fa fa-th-large"></i> Administración</a></li>
-    <li><a href="{{ route('administration.companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
+    <li><a href="{{ route('companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
     <li class="active">Nuevo</li>
 @stop
 
@@ -23,7 +23,7 @@
     </div>
     {{-- End Show Errors --}}
 
-    {{ Form::open(array('route' => 'administration.companies.store', 'method' => 'POST', 'id' => 'form-submit')) }}
+    {{ Form::open(array('route' => 'companies.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
         <div class="panel panel-bordered">
             <div class="panel-heading">
@@ -56,7 +56,7 @@
     <br />
     <div class="row">
         <div class="col-md-6">
-            <a href="{{ route('administration.companies.index') }}">Volver</a>
+            <a href="{{ route('companies.index') }}">Volver</a>
         </div>
 
         <div class="col-md-6 pull-right">

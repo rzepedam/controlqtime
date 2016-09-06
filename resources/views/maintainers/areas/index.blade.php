@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Áreas
     <br />
-    <a href="{{ route('maintainers.areas.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Área</a>
+    <a href="{{ route('areas.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Área</a>
 @stop
 
 @section('breadcumb')

@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Terminales
     <br />
-    <a href="{{ route('maintainers.terminals.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Terminal</a>
+    <a href="{{ route('terminals.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Terminal</a>
 @stop
 
 @section('breadcumb')

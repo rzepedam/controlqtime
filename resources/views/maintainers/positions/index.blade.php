@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Cargos
     <br />
-    <a href="{{ route('maintainers.positions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Cargo</a>
+    <a href="{{ route('positions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Cargo</a>
 @stop
 
 @section('breadcumb')

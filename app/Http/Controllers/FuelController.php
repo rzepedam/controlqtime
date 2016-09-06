@@ -59,6 +59,6 @@ class FuelController extends Controller
     public function destroy($id)
     {
         $this->fuel->delete($id);
-        return redirect()->route('maintainers.fuels.index');
+        return redirect()->route('fuels.index');
     }
 }

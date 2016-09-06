@@ -47,7 +47,7 @@ class AreaRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-					'name'  		=> 'required|max:50|unique_with:areas,terminal_id,' . $this->route->getParameter('areas'),
+					'name'  		=> 'required|max:50|unique_with:areas,terminal_id,' . $this->route->getParameter('area'),
 					'terminal_id' 	=> 'required|regex:/[0-9 -()+]+$/'
                 ];
             }

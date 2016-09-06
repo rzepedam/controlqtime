@@ -36,7 +36,7 @@ class TrademarkRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:50|unique:trademarks,name,' . $this->route->getParameter('trademarks')
+                    'name'  => 'required|max:50|unique:trademarks,name,' . $this->route->getParameter('trademark')
                 ];
             }
         }

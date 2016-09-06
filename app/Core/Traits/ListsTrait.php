@@ -6,6 +6,6 @@ trait ListsTrait
 {
     public function lists($column, $id)
     {
-        return $this->model->lists($column, $id);
+        return $this->model->pluck($column, $id);
     }
 }

@@ -40,7 +40,7 @@ class GratificationRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'  => 'required|unique:gratifications,name,' . $this->route->getParameter('gratifications')
+					'name'  => 'required|unique:gratifications,name,' . $this->route->getParameter('gratification')
 				];
 			}
 		}

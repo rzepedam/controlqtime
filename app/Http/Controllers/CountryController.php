@@ -71,6 +71,6 @@ class CountryController extends Controller
     public function destroy($id)
     {
         $this->country->delete($id);
-        return redirect()->route('maintainers.countries.index');
+        return redirect()->route('countries.index');
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
-use Illuminate\Http\Request;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;

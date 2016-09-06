@@ -12,11 +12,10 @@ class TypeCertification extends Eloquent
         'name'
     ];
 
-    /*
-     * Mutators
-     */
-
-    public function setNameAttribute($value) {
+	/**
+	 * @param string $value
+	 */
+	public function setNameAttribute($value) {
         $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 

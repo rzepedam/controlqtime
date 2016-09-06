@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Cláusulas y Obligaciones
     <br />
-    <a href="{{ route('maintainers.terms-and-obligatories.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Cláusula y Obligación</a>
+    <a href="{{ route('terms-and-obligatories.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Cláusula y Obligación</a>
 @stop
 
 @section('breadcumb')

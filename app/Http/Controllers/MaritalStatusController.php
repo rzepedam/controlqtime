@@ -95,6 +95,6 @@ class MaritalStatusController extends Controller
     {
         $this->maritalStatus->delete($id);
 
-		return redirect()->route('maintainers.marital-statuses.index');
+		return redirect()->route('marital-statuses.index');
     }
 }

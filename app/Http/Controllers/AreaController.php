@@ -64,6 +64,6 @@ class AreaController extends Controller
     public function destroy($id)
     {
         $this->area->delete($id);
-        return redirect()->route('maintainers.areas.index');
+        return redirect()->route('areas.index');
     }
 }

@@ -70,7 +70,7 @@ class CompanyRequest extends SanitizedRequest {
 			{
 				$rules = [
 					'type_company_id' => 'required|regex:/[0-9 -()+]+$/',
-					'rut'             => 'required|max:15|unique:companies,rut,' . $this->route->getParameter('companies'),
+					'rut'             => 'required|max:15|unique:companies,rut,' . $this->route->getParameter('company'),
 					'firm_name'       => 'required',
 					'gyre'            => 'required',
 					'start_act'       => 'required|date',
@@ -83,7 +83,7 @@ class CompanyRequest extends SanitizedRequest {
 					'muni_license'    => 'required|max:50',
 					'phone1'          => 'required|max:20',
 					'phone2'          => 'max:20',
-					'email_company'   => 'required|email|max:60|unique:companies,email_company,' . $this->route->getParameter('companies'),
+					'email_company'   => 'required|email|max:60|unique:companies,email_company,' . $this->route->getParameter('company'),
 				];
 
 				if ( Request::get('count_representative_company') > 0 )

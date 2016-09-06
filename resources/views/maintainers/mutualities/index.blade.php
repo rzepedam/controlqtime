@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Mutualidades
     <br />
-    <a href="{{ route('maintainers.mutualities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Mutualidad</a>
+    <a href="{{ route('mutualities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Mutualidad</a>
 @stop
 
 @section('breadcumb')

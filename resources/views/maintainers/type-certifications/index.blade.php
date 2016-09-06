@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Certificaciones
     <br />
-    <a href="{{ route('maintainers.type-certifications.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Certificación</a>
+    <a href="{{ route('type-certifications.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Certificación</a>
 @stop
 
 @section('breadcumb')

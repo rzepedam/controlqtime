@@ -40,7 +40,7 @@ class DayTripRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'  => 'required|max:50|unique:day_trips,name,' . $this->route->getParameter('day_trips')
+					'name'  => 'required|max:50|unique:day_trips,name,' . $this->route->getParameter('day_trip')
 				];
 			}
 		}

@@ -40,7 +40,7 @@ class PeriodicityRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'  => 'required|max:15|unique:periodicities,name,' . $this->route->getParameter('periodicities')
+					'name'  => 'required|max:15|unique:periodicities,name,' . $this->route->getParameter('periodicity')
 				];
 			}
 		}

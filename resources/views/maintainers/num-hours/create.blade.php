@@ -4,7 +4,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.num-hours.index') }}"><i class="fa fa-clock-o"></i> Nº de Horas</a></li>
+    <li><a href="{{ route('num-hours.index') }}"><i class="fa fa-clock-o"></i> Nº de Horas</a></li>
     <li class="active">Nuevo</li>
 @stop
 
@@ -14,7 +14,7 @@
 
     <div class="panel">
 
-        {{ Form::open(array('route' => 'maintainers.num-hours.store', 'method' => 'POST', 'id' => 'form-submit')) }}
+        {{ Form::open(array('route' => 'num-hours.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
 
@@ -25,7 +25,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('maintainers.num-hours.index') }}">Volver</a>
+                        <a href="{{ route('num-hours.index') }}">Volver</a>
                         <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
                     </div>
                 </div>

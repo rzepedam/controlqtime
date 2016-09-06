@@ -75,7 +75,7 @@ class TypeVehicleController extends Controller {
 	{
 		$this->type_vehicle->delete($id);
 
-		return redirect()->route('maintainers.type-vehicles.index');
+		return redirect()->route('type-vehicles.index');
 	}
 
 }

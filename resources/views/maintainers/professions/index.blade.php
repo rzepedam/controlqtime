@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Profesiones
     <br />
-    <a href="{{ route('maintainers.professions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Profesión</a>
+    <a href="{{ route('professions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Profesión</a>
 @stop
 
 @section('breadcumb')

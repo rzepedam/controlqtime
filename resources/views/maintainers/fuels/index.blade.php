@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Combustibles
     <br />
-    <a href="{{ route('maintainers.fuels.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Combustible</a>
+    <a href="{{ route('fuels.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Combustible</a>
 @stop
 
 @section('breadcumb')

@@ -36,7 +36,7 @@ class TypeProfessionalLicenseRequest extends SanitizedRequest
             {
                 return [
 
-                    'name'  => 'required|max:50|unique:type_professional_licenses,name,' . $this->route->getParameter('type_professional_licenses')
+                    'name'  => 'required|max:50|unique:type_professional_licenses,name,' . $this->route->getParameter('type_professional_license')
                 ];
             }
         }

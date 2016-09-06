@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('administration') }}"><i class="fa fa-th-large"></i> Administración</a></li>
-    <li><a href="{{ route('administration.companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
+    <li><a href="{{ route('companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
     <li class="active">Subir Archivos</li>
 @stop
 
@@ -55,7 +55,7 @@
     <br />
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <a href="{{ route('administration.companies.index') }}">Volver</a>
+            <a href="{{ route('companies.index') }}">Volver</a>
         </div>
     </div>
 
@@ -77,10 +77,10 @@
                 ],
                 initialPreviewConfig: [
                     @foreach($company->imageRolCompanies as $image_rut)
-                        { caption: "{{ $image_rut->orig_name }}", size: "{{ $image_rut->size }}", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_rut->id }}", extra: { path: "{{ $image_rut->path }}", id: "{{ $id }}", type: "RolCompany" } },
+                        { caption: "{{ $image_rut->orig_name }}", size: "{{ $image_rut->size }}", url: "{{ route('CompanyDeleteFiles') }}", key: "{{ $image_rut->id }}", extra: { path: "{{ $image_rut->path }}", id: "{{ $id }}", type: "RolCompany" } },
                     @endforeach
                 ],
-                uploadUrl: "{{ route('administration.companies.addImages') }}",
+                uploadUrl: "{{ route('CompanyAddImages') }}",
                 uploadExtraData:  {
                     company_id: "{{ $id }}",
                     type: "RolCompany"
@@ -95,10 +95,10 @@
                 ],
                 initialPreviewConfig: [
                     @foreach($company->imagePatentCompanies as $image_patent)
-                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_patent->size }}", url: "{{ route('administration.companies.deleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "PatentCompany" } },
+                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_patent->size }}", url: "{{ route('CompanyDeleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "PatentCompany" } },
                     @endforeach
                 ],
-                uploadUrl: "{{ route('administration.companies.addImages') }}",
+                uploadUrl: "{{ route('CompanyAddImages') }}",
                 uploadExtraData:  {
                     company_id: "{{ $id }}",
                     type: "PatentCompany"

@@ -94,6 +94,6 @@ class PeriodicityController extends Controller
 	public function destroy($id)
     {
         $this->periodiocity->delete($id);
-		return redirect()->route('maintainers.periodicities.index');
+		return redirect()->route('periodicities.index');
     }
 }

@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('operations') }}"><i class="fa fa-map-pin"></i> Operaciones</a></li>
-    <li><a href="{{ route('operations.vehicles.index') }}"><i class="fa fa-bus"></i> Vehículos</a></li>
+    <li><a href="{{ route('vehicles.index') }}"><i class="fa fa-bus"></i> Vehículos</a></li>
     <li class="active">Editar</li>
 @stop
 
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($vehicle, array('route' => array('operations.vehicles.update', $vehicle), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($vehicle, array('route' => array('vehicles.update', $vehicle), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
 
@@ -31,7 +31,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('operations.vehicles.index') }}">Volver</a>
+                        <a href="{{ route('vehicles.index') }}">Volver</a>
                         <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>

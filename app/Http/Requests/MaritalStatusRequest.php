@@ -50,7 +50,7 @@ class MaritalStatusRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'  => 'required|max:30|unique:marital_statuses,name,' . $this->route->getParameter('marital_statuses')
+					'name'  => 'required|max:30|unique:marital_statuses,name,' . $this->route->getParameter('marital_status')
 				];
 			}
 		}

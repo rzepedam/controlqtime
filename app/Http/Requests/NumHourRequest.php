@@ -40,7 +40,7 @@ class NumHourRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'  => 'required|max:3|regex:/[0-9 -()+]+$/|unique:num_hours,name,' . $this->route->getParameter('num_hours')
+					'name'  => 'required|max:3|regex:/[0-9 -()+]+$/|unique:num_hours,name,' . $this->route->getParameter('num_hour')
 				];
 			}
 		}

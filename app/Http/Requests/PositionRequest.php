@@ -33,7 +33,7 @@ class PositionRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:50|unique:positions,name,' . $this->route->getParameter('positions')
+                    'name'  => 'required|max:50|unique:positions,name,' . $this->route->getParameter('position')
                 ];
             }
         }

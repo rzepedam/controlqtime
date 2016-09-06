@@ -18,7 +18,7 @@ class RegionRepo implements RegionRepoInterface
     }
 
     public function findProvinces($id) {
-        return $this->model->findOrFail($id)->provinces->lists('name', 'id');
+        return $this->model->findOrFail($id)->provinces->pluck('name', 'id');
     }
 
 }

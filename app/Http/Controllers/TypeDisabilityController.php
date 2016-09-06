@@ -59,6 +59,6 @@ class TypeDisabilityController extends Controller
     public function destroy($id)
     {
         $this->type_disability->delete($id);
-        return redirect()->route('maintainers.type-disabilities.index');
+        return redirect()->route('type-disabilities.index');
     }
 }

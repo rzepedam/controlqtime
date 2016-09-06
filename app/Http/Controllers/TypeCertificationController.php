@@ -59,6 +59,6 @@ class TypeCertificationController extends Controller
     public function destroy($id)
     {
         $this->type_certification->delete($id);
-        return redirect()->route('maintainers.type-certifications.index');
+        return redirect()->route('type-certifications.index');
     }
 }

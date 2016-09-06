@@ -93,7 +93,7 @@ class GratificationController extends Controller
 	public function destroy($id)
     {
         $this->gratification->delete($id);
-		return redirect()->route('maintainers.gratifications.index');
+		return redirect()->route('gratifications.index');
     }
 
 }

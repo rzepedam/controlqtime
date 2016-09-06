@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Gratificaciones
     <br />
-    <a href="{{ route('maintainers.gratifications.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Gratificación</a>
+    <a href="{{ route('gratifications.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Gratificación</a>
 @stop
 
 @section('breadcumb')

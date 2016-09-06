@@ -31,7 +31,7 @@
                     <br/>
                     <h3 class="text-center text-success">No existen Imágenes de Rol asociadas a la Empresa actual
                         <br/>
-                        <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('administration.companies.attachFiles', $company->id) }}">Aquí</a>)</small>
+                        <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('CompanyAttachFiles', $company->id) }}">Aquí</a>)</small>
                     </h3>
                     <br/>
                     <br/>
@@ -73,7 +73,7 @@
                     <br/>
                     <h3 class="text-center text-info">No existen Imágenes de Patente asociadas a la Empresa actual
                         <br/>
-                        <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('administration.companies.attachFiles', $company->id) }}">Aquí</a>)</small>
+                        <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('CompanyAttachFiles', $company->id) }}">Aquí</a>)</small>
                     </h3>
                     <br/>
                     <br/>

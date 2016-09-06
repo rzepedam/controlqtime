@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Unidades de Medida para Cilindraje Motor
     <br />
-    <a href="{{ route('maintainers.measuring-units.engine-cubics.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Unidad</a>
+    <a href="{{ route('engine-cubics.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Unidad</a>
 @stop
 
 @section('breadcumb')

@@ -60,6 +60,6 @@ class TypeSpecialityController extends Controller
     public function destroy($id)
     {
         $this->type_speciality->delete($id);
-        return redirect()->route('maintainers.type-specialities.index');
+        return redirect()->route('type-specialities.index');
     }
 }

@@ -8,7 +8,7 @@
                             <tr>
                                 <td>Tipo Empresa</td>
                                 <td class="text-center">
-                                    <a href="{{ route('maintainers.type-companies.index') }}" class="text-muted"><i class="md-city-alt" aria-hidden="true"></i> {{ $company->typeCompany->name }}</a>
+                                    <a href="{{ route('type-companies.index') }}" class="text-muted"><i class="md-city-alt" aria-hidden="true"></i> {{ $company->typeCompany->name }}</a>
                                 </td>
                             </tr>
                             <tr>

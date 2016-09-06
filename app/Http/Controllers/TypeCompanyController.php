@@ -62,6 +62,6 @@ class TypeCompanyController extends Controller
     public function destroy($id)
     {
 		$this->type_company->delete($id);
-		return redirect()->route('maintainers.type-companies.index');
+		return redirect()->route('type-companies.index');
     }
 }

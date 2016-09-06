@@ -65,6 +65,6 @@ class TypeDiseaseController extends Controller
     public function destroy($id)
     {
         $this->type_disease->delete($id);
-        return redirect()->route('maintainers.type-diseases.index');
+        return redirect()->route('type-diseases.index');
     }
 }

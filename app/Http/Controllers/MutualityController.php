@@ -60,6 +60,6 @@ class MutualityController extends Controller
     public function destroy($id)
     {
         $this->mutuality->delete($id);
-        return redirect()->route('maintainers.mutualities.index');
+        return redirect()->route('mutualities.index');
     }
 }

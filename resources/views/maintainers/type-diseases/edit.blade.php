@@ -4,7 +4,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.type-diseases.index') }}"><i class="fa fa-bed"></i> Enfermedades</a></li>
+    <li><a href="{{ route('type-diseases.index') }}"><i class="fa fa-bed"></i> Enfermedades</a></li>
     <li class="active">Editar</li>
 @stop
 
@@ -14,7 +14,7 @@
 
     <div class="panel">
 
-        {{ Form::model($type_disease, array('route' => array('maintainers.type-diseases.update', $type_disease), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($type_disease, array('route' => array('type-diseases.update', $type_disease), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
 
@@ -25,7 +25,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('maintainers.type-diseases.index') }}">Volver</a>
+                        <a href="{{ route('type-diseases.index') }}">Volver</a>
                         <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>

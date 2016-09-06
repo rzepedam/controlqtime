@@ -61,7 +61,7 @@ class WeightController extends Controller
 	public function destroy($id)
 	{
 		$this->weight->delete($id);
-		return redirect()->route('maintainers.measuring-units.weights.index');
+		return redirect()->route('weights.index');
 	}
 
 }

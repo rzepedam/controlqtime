@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Modelo de Vehículos
     <br />
-    <a href="{{ route('maintainers.model-vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Modelo de Vehículo</a>
+    <a href="{{ route('model-vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Modelo de Vehículo</a>
 @stop
 
 @section('breadcumb')

@@ -59,7 +59,7 @@ class ForecastController extends Controller
     public function destroy($id)
     {
         $this->forecast->delete($id);
-        return redirect()->route('maintainers.forecasts.index');
+        return redirect()->route('forecasts.index');
     }
 
 }

@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Periocidades
     <br />
-    <a href="{{ route('maintainers.periodicities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Periocidad</a>
+    <a href="{{ route('periodicities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Periocidad</a>
 @stop
 
 @section('breadcumb')

@@ -62,6 +62,6 @@ class EngineCubicController extends Controller
 	public function destroy($id)
 	{
 		$this->engine_cubic->delete($id);
-		return redirect()->route('maintainers.measuring-units.engine-cubics.index');
+		return redirect()->route('engine-cubics.index');
 	}
 }

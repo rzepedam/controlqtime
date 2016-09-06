@@ -199,7 +199,7 @@ class CompanyController extends Controller
 	{
 		$this->company->delete($id);
 
-		return redirect()->route('administration.companies.index');
+		return redirect()->route('companies.index');
 	}
 
 	/**

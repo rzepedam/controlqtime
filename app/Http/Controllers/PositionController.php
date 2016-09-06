@@ -58,6 +58,6 @@ class PositionController extends Controller
     public function destroy($id)
     {
         $this->position->delete($id);
-        return redirect()->route('maintainers.positions.index');
+        return redirect()->route('positions.index');
     }
 }

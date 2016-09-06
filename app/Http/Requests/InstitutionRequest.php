@@ -34,7 +34,7 @@ class InstitutionRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'                  => 'required|max:75|unique_with:institutions,type_institution_id,' . $this->route->getParameter('institutions'),
+                    'name'                  => 'required|max:75|unique_with:institutions,type_institution_id,' . $this->route->getParameter('institution'),
                     'type_institution_id'   => 'required|regex:/[0-9 -()+]+$/'
                 ];
             }

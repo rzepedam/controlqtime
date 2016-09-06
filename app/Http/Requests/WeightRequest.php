@@ -26,7 +26,7 @@ class WeightRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:30|unique:weights',
+                    'name'  => 'required|max:30|unique_with:weights,acr',
                     'acr'   => 'required|max:5|unique:weights'
                 ];
             }
@@ -34,8 +34,8 @@ class WeightRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:30|unique:weights,name,' . $this->route->getParameter('weights'),
-                    'acr'   => 'required|max:5|unique:weights,acr,' . $this->route->getParameter('weights')
+                    'name'  => 'required|max:30|unique_with:weights,acr,' . $this->route->getParameter('weight'),
+                    'acr'   => 'required|max:5'
                 ];
             }
         }

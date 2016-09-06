@@ -55,6 +55,6 @@ class LaborUnionController extends Controller
 	public function destroy($id)
 	{
 		$this->labor_union->delete($id);
-		return redirect()->route('maintainers.labor-unions.index');
+		return redirect()->route('labor-unions.index');
 	}
 }

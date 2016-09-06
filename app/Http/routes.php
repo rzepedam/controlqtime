@@ -2,18 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-$api = app('Dingo\Api\Routing\Router');
-
-$api->version('v1', function ($api) {
-    $api->group(['namespace' => 'Controlqtime\Core\Api\Http\Controllers'], function($api) {
-        $api->post('/auth/authorize-client', 'OAuthController@authorizeClient');
-        $api->group(['middleware' => 'api.auth'], function($api){
-            $api->resource('access-control', 'AccessControlController');
-			$api->put('updateEmployeeImage', 'EmployeeController@update');
-        });
-    });
-});
-
 Route::group(['middleware' => ['web']], function () {
 
 	Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

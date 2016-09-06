@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Exámenes Preocupacionales
     <br />
-    <a href="{{ route('maintainers.type-exams.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Examen Preocupacional</a>
+    <a href="{{ route('type-exams.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Examen Preocupacional</a>
 @stop
 
 @section('breadcumb')

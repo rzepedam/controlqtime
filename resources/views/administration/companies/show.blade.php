@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('administration') }}"><i class="fa fa-th-large"></i> Administración</a></li>
-    <li><a href="{{ route('administration.companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
+    <li><a href="{{ route('companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
     <li class="active">Ver</li>
 @stop
 
@@ -42,7 +42,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <a href="{{ route('administration.companies.index') }}">Volver</a>
+        <a href="{{ route('companies.index') }}">Volver</a>
     </div>
 </div>
 

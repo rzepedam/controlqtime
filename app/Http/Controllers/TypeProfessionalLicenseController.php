@@ -61,6 +61,6 @@ class TypeProfessionalLicenseController extends Controller
     public function destroy($id)
     {
         $this->type_professional_license->delete($id);
-        return redirect()->route('maintainers.type-professional-licenses.index');
+        return redirect()->route('type-professional-licenses.index');
     }
 }

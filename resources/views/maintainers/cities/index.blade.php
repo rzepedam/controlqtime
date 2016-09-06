@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Ciudades
     <br />
-    <a href="{{ route('maintainers.cities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Ciudad</a>
+    <a href="{{ route('cities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Ciudad</a>
 @stop
 
 @section('breadcumb')

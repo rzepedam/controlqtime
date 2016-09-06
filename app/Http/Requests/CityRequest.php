@@ -47,7 +47,7 @@ class CityRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'          => 'required|max:50|unique_with:cities,country_id,' . $this->route->getParameter('cities'),
+                    'name'          => 'required|max:50|unique_with:cities,country_id,' . $this->route->getParameter('city'),
                     'country_id'    => 'required|regex:/[0-9 -()+]+$/'
                 ];
             }

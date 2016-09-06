@@ -93,6 +93,6 @@ class DayTripController extends Controller
 	public function destroy($id)
     {
         $this->dayTrip->delete($id);
-		return redirect()->route('maintainers.day-trips.index');
+		return redirect()->route('day-trips.index');
     }
 }

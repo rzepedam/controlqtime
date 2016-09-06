@@ -46,7 +46,7 @@ class TypeContractRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'  => 'required|max:30|unique:type_contracts,name,' . $this->route->getParameter('type_contracts')
+					'name'  => 'required|max:30|unique:type_contracts,name,' . $this->route->getParameter('type_contract')
 				];
 			}
 		}

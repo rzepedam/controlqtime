@@ -33,7 +33,7 @@ class RelationshipRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'      => 'required|max:30|unique:relationships,name,' . $this->route->getParameter('relationships')
+                    'name'      => 'required|max:30|unique:relationships,name,' . $this->route->getParameter('relationship')
                 ];
             }
         }

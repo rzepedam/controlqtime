@@ -5,7 +5,7 @@
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('maintainers.measuring-units') }}"><i class="fa fa-sort-amount-asc"></i> Unidades de Medida</a></li>
-    <li><a href="{{ route('maintainers.measuring-units.weights.index') }}"><i class="fa fa-balance-scale"></i> Peso</a></li>
+    <li><a href="{{ route('weights.index') }}"><i class="fa fa-balance-scale"></i> Peso</a></li>
     <li class="active">Editar</li>
 @stop
 
@@ -15,7 +15,7 @@
 
     <div class="panel">
 
-        {{ Form::model($weight, array('route' => array('maintainers.measuring-units.weights.update', $weight), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($weight, array('route' => array('weights.update', $weight), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
 
@@ -26,7 +26,7 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('maintainers.measuring-units.weights.index') }}">Volver</a>
+                        <a href="{{ route('weights.index') }}">Volver</a>
                         <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>

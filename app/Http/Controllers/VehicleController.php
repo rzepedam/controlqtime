@@ -111,7 +111,7 @@ class VehicleController extends Controller {
 	{
 		$this->vehicle->delete($id);
 
-		return redirect()->route('operations.vehicles.index');
+		return redirect()->route('vehicles.index');
 	}
 
 	public function getImages($id)

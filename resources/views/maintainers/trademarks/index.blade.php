@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Marcas de Vehículos
     <br />
-    <a href="{{ route('maintainers.trademarks.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Marca</a>
+    <a href="{{ route('trademarks.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Marca</a>
 @stop
 
 @section('breadcumb')

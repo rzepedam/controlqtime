@@ -59,6 +59,6 @@ class PensionController extends Controller
     public function destroy($id)
     {
         $this->pension->delete($id);
-        return redirect()->route('maintainers.pensions.index');
+        return redirect()->route('pensions.index');
     }
 }

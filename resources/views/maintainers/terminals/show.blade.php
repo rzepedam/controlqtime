@@ -4,7 +4,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('maintainers.terminals.index') }}"><i class="fa fa-road"></i> Terminales</a></li>
+    <li><a href="{{ route('terminals.index') }}"><i class="fa fa-road"></i> Terminales</a></li>
     <li class="active">Ver</li>
 @stop
 
@@ -46,7 +46,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('maintainers.terminals.index') }}">Volver</a>
+            <a href="{{ route('terminals.index') }}">Volver</a>
         </div>
     </div>
 

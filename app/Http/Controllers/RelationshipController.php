@@ -60,6 +60,6 @@ class RelationshipController extends Controller
     public function destroy($id)
     {
         $this->relationship->delete($id);
-        return redirect()->route('maintainers.relationships.index');
+        return redirect()->route('relationships.index');
     }
 }

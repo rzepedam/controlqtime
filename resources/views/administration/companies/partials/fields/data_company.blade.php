@@ -32,7 +32,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
-                {{ Form::text('start_act', (Route::is('administration.companies.create')) ? null : $company->start_act->format('d-m-Y'), ['class' => 'form-control', 'readonly']) }}
+                {{ Form::text('start_act', Route::is('companies.create') ? null : $company->start_act->format('d-m-Y'), ['class' => 'form-control', 'readonly']) }}
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-            {{ Form::select('region_id', $regions, Route::is('administration.companies.create') ? null : $company->com, ['class' => 'form-control']) }}
+            {{ Form::select('region_id', $regions, Route::is('companies.create') ? null : $company->commune->province->region->id, ['class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-3">
@@ -123,7 +123,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-envelope"></i>
                 </div>
-                @if( Route::is('administration.companies.create') )
+                @if( Route::is('companies.create') )
                     {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
                 @else
                     {{ Form::text('email_company', null, ['id' => 'Company', 'class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}

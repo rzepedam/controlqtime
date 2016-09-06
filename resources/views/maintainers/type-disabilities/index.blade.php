@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Discapacidades
     <br />
-    <a href="{{ route('maintainers.type-disabilities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Discapacidad</a>
+    <a href="{{ route('type-disabilities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Discapacidad</a>
 @stop
 
 @section('breadcumb')

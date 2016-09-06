@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-4">
         {{ Form::label('trademark_id', 'Marca', ['class' => 'control-label']) }}
-        {{ Form::select('trademark_id', $trademarks, (Route::currentRouteName() == 'operations.vehicles.create') ? null : $vehicle->modelVehicle->trademark->id, ['class' => 'form-control']) }}
+        {{ Form::select('trademark_id', $trademarks, Route::is('vehicles.create') ? null : $vehicle->modelVehicle->trademark->id, ['class' => 'form-control']) }}
     </div>
     <div class="col-md-4">
         {{ Form::label('model_vehicle_id', 'Modelo', ['class' => 'control-label']) }}
@@ -84,7 +84,7 @@
     </div>
     <div class="col-md-6">
         {{ Form::label('code', 'Cód. Interno', ['class' => 'control-label']) }}
-        {{ Form::text('code', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '50        ']) }}
+        {{ Form::text('code', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '50']) }}
     </div>
 </div>
 <br />

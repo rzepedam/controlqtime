@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
-    <li><a href="{{ route('human-resources.contracts.index') }}"><i class="md-assignment"></i> Contratos</a></li>
+    <li><a href="{{ route('contracts.index') }}"><i class="md-assignment"></i> Contratos</a></li>
     <li class="active">Nuevo</li>
 @stop
 
@@ -18,7 +18,7 @@
 
     @include('layout.messages.errors-js')
 
-    {{ Form::open(array('route' => 'human-resources.contracts.store', 'method' => 'POST', 'id' => 'form-submit')) }}
+    {{ Form::open(array('route' => 'contracts.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
         {{-- Panel Información Laboral --}}
         <div class="panel panel-bordered">
@@ -63,7 +63,7 @@
         </div>
         <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-6">
-                <a href="{{ route('human-resources.contracts.index') }}">Volver</a>
+                <a href="{{ route('contracts.index') }}">Volver</a>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <button class="btn btn-squared btn-danger waves-effect waves-light pull-right"><i class="fa fa-file-pdf-o"></i> Visualizar</button>

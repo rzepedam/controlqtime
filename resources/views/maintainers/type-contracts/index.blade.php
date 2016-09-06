@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Tipos de Contrato
     <br />
-    <a href="{{ route('maintainers.type-contracts.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Tipo Contrato</a>
+    <a href="{{ route('type-contracts.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Tipo Contrato</a>
 @stop
 
 @section('breadcumb')

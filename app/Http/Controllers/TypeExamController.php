@@ -59,6 +59,6 @@ class TypeExamController extends Controller
     public function destroy($id)
     {
         $this->type_exam->delete($id);
-        return redirect()->route('maintainers.type-exams.index');
+        return redirect()->route('type-exams.index');
     }
 }

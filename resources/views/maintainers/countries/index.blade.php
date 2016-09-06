@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Países
     <br />
-    <a href="{{ route('maintainers.countries.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo País</a>
+    <a href="{{ route('countries.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo País</a>
 @stop
 
 @section('breadcumb')

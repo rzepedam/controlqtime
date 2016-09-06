@@ -138,6 +138,6 @@ class TerminalController extends Controller
 	{
 		$this->terminal->delete($id);
 
-		return redirect()->route('maintainers.terminals.index');
+		return redirect()->route('terminals.index');
 	}
 }

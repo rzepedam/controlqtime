@@ -6,7 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
+        "laravel/framework": "5.3.*",
         "fzaninotto/faker": "~1.4",
         "laravelcollective/html": "~5.0",
         "jenssegers/date": "^3.2",
@@ -18,7 +18,6 @@
         "dingo/api": "1.0.*@dev",
         "guzzlehttp/guzzle": "~6.0",
         "webpatser/laravel-uuid": "2.*",
-        "lucadegasperi/oauth2-server-laravel": "5.1.*",
         "felixkiss/uniquewith-validator": "2.*",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0"
     },

@@ -50,7 +50,7 @@ class TermAndObligatoryRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'  	=> 'required|unique:term_and_obligatories,name,' . $this->route->getParameter('terms_and_obligatories')
+					'name'  	=> 'required|unique:term_and_obligatories,name,' . $this->route->getParameter('terms_and_obligatory')
 				];
 			}
 		}

@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Jornadas Laborales
     <br />
-    <a href="{{ route('maintainers.day-trips.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Jornada Laboral</a>
+    <a href="{{ route('day-trips.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Jornada Laboral</a>
 @stop
 
 @section('breadcumb')

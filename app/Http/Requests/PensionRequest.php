@@ -34,7 +34,7 @@ class PensionRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:75|unique:pensions,name,' . $this->route->getParameter('pensions')
+                    'name'  => 'required|max:75|unique:pensions,name,' . $this->route->getParameter('pension')
                 ];
             }
         }

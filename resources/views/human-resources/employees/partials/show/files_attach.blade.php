@@ -32,7 +32,7 @@
                         <br/>
                         <h3 class="text-center text-danger">No existen Imágenes de Certificaciones asociadas al Trabajador actual
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('human-resources.employees.attachFiles', $employee->id) }}">Aquí</a>)
+                            <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
                             </small>
                         </h3>
                         <br/>
@@ -79,7 +79,7 @@
                         <br/>
                         <h3 class="text-center text-warning">No existen Imágenes de Especialidades asociadas al Trabajador actual
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('human-resources.employees.attachFiles', $employee->id) }}">Aquí</a>)
+                            <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
                             </small>
                         </h3>
                         <br/>
@@ -125,7 +125,7 @@
                         <br/>
                         <h3 class="text-center text-success">No existen Imágenes de Licencia Profesional asociadas al Trabajador actual
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('human-resources.employees.attachFiles', $employee->id) }}">Aquí</a>)
+                            <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
                             </small>
                         </h3>
                         <br/>
@@ -171,7 +171,7 @@
                         <br/>
                         <h3 class="text-center text-warning">No existen Imágenes de Discapacidades asociadas al Trabajador actual
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('human-resources.employees.attachFiles', $employee->id) }}">Aquí</a>)
+                            <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
                             </small>
                         </h3>
                         <br/>
@@ -217,7 +217,7 @@
                         <br/>
                         <h3 class="text-center text-success">No existen Imágenes de Enfermedades asociadas al Trabajador actual
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('human-resources.employees.attachFiles', $employee->id) }}">Aquí</a>)
+                            <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
                             </small>
                         </h3>
                         <br/>
@@ -263,7 +263,7 @@
                         <br/>
                         <h3 class="text-center text-info">No existen Imágenes de Examen Preocupacional asociadas al Trabajador actual
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('human-resources.employees.attachFiles', $employee->id) }}">Aquí</a>)
+                            <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
                             </small>
                         </h3>
                         <br/>
@@ -309,7 +309,7 @@
                         <br/>
                         <h3 class="text-center text-danger">No existen Imágenes de Carga Familiar asociadas al Trabajador actual
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('human-resources.employees.attachFiles', $employee->id) }}">Aquí</a>)
+                            <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
                             </small>
                         </h3>
                         <br/>
@@ -330,7 +330,7 @@
             <br/>
             <h3 class="text-center text-primary">No existen Imágenes asociadas al Trabajador actual
                 <br/>
-                <small>(Puede adjuntar la documentación desde <a class="text-primary" href="{{ route('human-resources.employees.edit', $employee->id) }}">Aquí</a>)
+                <small>(Puede adjuntar la documentación desde <a class="text-primary" href="{{ route('employees.edit', $employee->id) }}">Aquí</a>)
                 </small>
             </h3>
             <br/>

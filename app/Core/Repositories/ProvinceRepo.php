@@ -18,6 +18,6 @@ class ProvinceRepo implements ProvinceRepoInterface
     }
 
     public function findCommunes($id) {
-        return $this->model->findOrFail($id)->communes->lists('name', 'id');
+        return $this->model->findOrFail($id)->communes->pluck('name', 'id');
     }
 }

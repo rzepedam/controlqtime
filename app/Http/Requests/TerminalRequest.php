@@ -51,7 +51,7 @@ class TerminalRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  		=> 'required|max:75|unique:terminals,name,' . $this->route->getParameter('terminals'),
+                    'name'  		=> 'required|max:75|unique:terminals,name,' . $this->route->getParameter('terminal'),
 					'commune_id'	=> 'required|regex:/[0-9 -()+]+$/'
                 ];
             }

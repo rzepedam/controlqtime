@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Nº de Horas
     <br />
-    <a href="{{ route('maintainers.num-hours.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Nº de Horas</a>
+    <a href="{{ route('num-hours.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Nº de Horas</a>
 @stop
 
 @section('breadcumb')

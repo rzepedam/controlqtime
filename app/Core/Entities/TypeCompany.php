@@ -11,4 +11,11 @@ class TypeCompany extends Eloquent
 	];
 
 	public $timestamps = false;
+
+	/**
+	 * @param string $value
+	 */
+	public function setNameAttribute($value) {
+		$this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+	}
 }

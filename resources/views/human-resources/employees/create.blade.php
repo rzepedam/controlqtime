@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
-    <li><a href="{{ route('human-resources.employees.index') }}"><i class="md-accounts font-size-16"></i> Trabajadores</a></li>
+    <li><a href="{{ route('employees.index') }}"><i class="md-accounts font-size-16"></i> Trabajadores</a></li>
     <li class="active">Nuevo</li>
 @stop
 
@@ -54,7 +54,7 @@
                 <div class="wizard-content">
                     <div class="wizard-pane active" id="datos_personales" role="tabpanel">
 
-                        {{ Form::open(array("route" => "human-resources.employees.step1", "method" => "POST", "files" => true, "id" => "step1")) }}
+                        {{ Form::open(array("route" => "step1", "method" => "POST", "files" => true, "id" => "step1")) }}
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
@@ -145,7 +145,7 @@
                     </div>
                     <div class="wizard-pane" id="competencias_laborales" role="tabpanel">
 
-                        {{ Form::open(["route" => "human-resources.employees.step2", "method" => "POST", "id" => "step2"]) }}
+                        {{ Form::open(["route" => "step2", "method" => "POST", "id" => "step2"]) }}
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
@@ -274,7 +274,7 @@
                     </div>
                     <div class="wizard-pane" id="info_salud" role="tabpanel">
 
-                        {{ Form::open(["route" => "human-resources.employees.store", "method" => "POST", "id" => "step3"]) }}
+                        {{ Form::open(["route" => "employees.store", "method" => "POST", "id" => "step3"]) }}
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
@@ -380,7 +380,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('human-resources.employees.index') }}">Volver</a>
+            <a href="{{ route('employees.index') }}">Volver</a>
         </div>
     </div>
 
@@ -465,7 +465,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: '{{ route("human-resources.employees.step1") }}',
+                        url: '{{ route("step1") }}',
                         data: $('#step1').serialize() + "&full_name=" + full_name + "&count_family_relationships=" + count_family_relationships + "&count_contacts=" + count_contacts,
                         async: false,
                         dataType: "json",
@@ -504,7 +504,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: '{{ route("human-resources.employees.step2") }}',
+                        url: '{{ route("step2") }}',
                         data: $('#step2').serialize() + "&count_studies=" + count_studies + "&count_certifications=" + count_certifications + "&count_specialities=" + count_specialities + "&count_professional_licenses=" + count_professional_licenses + "&count_disabilities=" + count_disabilities,
                         async: false,
                         dataType: "json",
@@ -545,7 +545,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: '{{ route("human-resources.employees.store") }}',
+                        url: '{{ route("employees.store") }}',
                         data: $('#step3').serialize() + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_exams=" + count_exams + "&count_family_responsabilities=" + count_family_responsabilities,
                         async: true,
                         dataType: "json",

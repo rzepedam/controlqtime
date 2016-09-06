@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Grados Académicos
     <br />
-    <a href="{{ route('maintainers.degrees.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Grado Académico</a>
+    <a href="{{ route('degrees.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Grado Académico</a>
 @stop
 
 @section('breadcumb')

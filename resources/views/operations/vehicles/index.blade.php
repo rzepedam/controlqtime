@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Vehículos
     <br />
-    <a href="{{ route('operations.vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Vehículo</a>
+    <a href="{{ route('vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Vehículo</a>
 @stop
 
 @section('breadcumb')

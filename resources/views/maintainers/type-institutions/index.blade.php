@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Tipos de Institución
     <br />
-    <a href="{{ route('maintainers.type-institutions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Tipo de Institución</a>
+    <a href="{{ route('type-institutions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Tipo de Institución</a>
 @stop
 
 @section('breadcumb')

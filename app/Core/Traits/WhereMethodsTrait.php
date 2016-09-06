@@ -11,7 +11,7 @@ trait WhereMethodsTrait
 
     public function whereLists($attribute, $value, $column)
     {
-        return $this->model->where($attribute, '=', $value)->lists($column, 'id');
+        return $this->model->where($attribute, '=', $value)->pluck($column, 'id');
     }
 
     public function whereIn($value, $columns = array('*'))

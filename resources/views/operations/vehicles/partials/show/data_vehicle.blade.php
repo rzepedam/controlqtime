@@ -14,7 +14,7 @@
                                 <tbody>
                                 <tr>
                                     <td class="col-md-3">Empresa</td>
-                                    <td class="text-center"><i class="fa fa-building"></i> <a href="{{ route('administration.companies.show', $vehicle->company->id) }}" style="color: #757575"> {{ $vehicle->company->firm_name }}</a></td>
+                                    <td class="text-center"><i class="fa fa-building"></i> <a href="{{ route('companies.show', $vehicle->company->id) }}" style="color: #757575"> {{ $vehicle->company->firm_name }}</a></td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-3">Tipo Vehículo</td>

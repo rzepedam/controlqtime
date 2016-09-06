@@ -59,7 +59,7 @@ class VehicleRequest extends SanitizedRequest
                     'inscription_date'  => 'required|date',
                     'color'             => 'required|max:30',
                     'year'              => 'required|max:4',
-                    'patent'            => 'required|max:15|unique:vehicles,patent,' . $this->route->getParameter('vehicles'),
+                    'patent'            => 'required|max:15|unique:vehicles,patent,' . $this->route->getParameter('vehicle'),
                     'fuel_id'           => 'required|regex:/[0-9 -()+]+$/',
 					'num_chasis'        => 'required|max:17',
 					'num_motor'         => 'required|max:12',

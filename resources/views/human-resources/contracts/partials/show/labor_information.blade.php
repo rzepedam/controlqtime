@@ -16,43 +16,43 @@
                                     <tr>
                                         <td class="col-md-3">Empresa</td>
                                         <td class="text-center">
-                                            <a href="{{ route('administration.companies.show', $contract->company->id) }}" style="color: #757575"><i class="fa fa-building-o" aria-hidden="true"></i> {{ $contract->company->firm_name }}</a>
+                                            <a href="{{ route('companies.show', $contract->company->id) }}" style="color: #757575"><i class="fa fa-building-o" aria-hidden="true"></i> {{ $contract->company->firm_name }}</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Trabajador</td>
                                         <td class="text-center">
-                                            <a href="{{ route('human-resources.employees.show', $contract->employee->id) }}" style="color: #757575"><i class="fa fa-street-view" aria-hidden="true"></i> {{ $contract->employee->full_name }}</a>
+                                            <a href="{{ route('employees.show', $contract->employee->id) }}" style="color: #757575"><i class="fa fa-street-view" aria-hidden="true"></i> {{ $contract->employee->full_name }}</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Cargo</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.positions.index') }}" style="color: #757575"><i class="md-seat" aria-hidden="true"></i> {{ $contract->position->name }}</a>
+                                            <a href="{{ route('positions.index') }}" style="color: #757575"><i class="md-seat" aria-hidden="true"></i> {{ $contract->position->name }}</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Área</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.areas.show', $contract->area->id) }}" style="color: #757575"><i class="fa fa-sitemap" aria-hidden="true"></i> {{ $contract->area->name }}</a>
+                                            <a href="{{ route('areas.show', $contract->area->id) }}" style="color: #757575"><i class="fa fa-sitemap" aria-hidden="true"></i> {{ $contract->area->name }}</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Nº de Horas</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.num-hours.index') }}" style="color: #757575"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $contract->numHour->name }} hrs</a>
+                                            <a href="{{ route('num-hours.index') }}" style="color: #757575"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $contract->numHour->name }} hrs</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Periocidad Horas</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.periodicities.index') }}" style="color: #757575"><i class="fa fa-repeat" aria-hidden="true"></i> {{ $contract->periodicityHour->name }}</a>
+                                            <a href="{{ route('periodicities.index') }}" style="color: #757575"><i class="fa fa-repeat" aria-hidden="true"></i> {{ $contract->periodicityHour->name }}</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Jornada Laboral</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.day-trips.index') }}" style="color: #757575"><i class="fa fa-tasks" aria-hidden="true"></i> {{ $contract->dayTrip->name }}</a>
+                                            <a href="{{ route('day-trips.index') }}" style="color: #757575"><i class="fa fa-tasks" aria-hidden="true"></i> {{ $contract->dayTrip->name }}</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -70,7 +70,7 @@
                                     <tr>
                                         <td class="col-md-3">Periocidad Mensual</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.periodicities.index') }}" style="color: #757575"><i class="fa fa-repeat" aria-hidden="true"></i> {{ $contract->periodicityWork->name }}</a>
+                                            <a href="{{ route('periodicities.index') }}" style="color: #757575"><i class="fa fa-repeat" aria-hidden="true"></i> {{ $contract->periodicityWork->name }}</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -116,13 +116,13 @@
                                     <tr>
                                         <td class="col-md-3">Gratificación</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.gratifications.index') }}" style="color: #757575"><i class="fa fa-diamond" aria-hidden="true"></i> {{ $contract->gratification->name }}</a>
+                                            <a href="{{ route('gratifications.index') }}" style="color: #757575"><i class="fa fa-diamond" aria-hidden="true"></i> {{ $contract->gratification->name }}</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Tipo Contrato</td>
                                         <td class="text-center">
-                                            <a href="{{ route('maintainers.type-contracts.index') }}" style="color: #757575"><i class="fa fa-file-text" aria-hidden="true"></i> {{ $contract->typeContract->name }}</a>
+                                            <a href="{{ route('type-contracts.index') }}" style="color: #757575"><i class="fa fa-file-text" aria-hidden="true"></i> {{ $contract->typeContract->name }}</a>
                                         </td>
                                     </tr>
                                 </tbody>

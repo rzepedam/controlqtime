@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Sindicatos
     <br />
-    <a href="{{ route('maintainers.labor-unions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Sindicato</a>
+    <a href="{{ route('labor-unions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Sindicato</a>
 @stop
 
 @section('breadcumb')

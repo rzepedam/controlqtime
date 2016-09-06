@@ -32,7 +32,7 @@ class TypeSpecialityRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'              => 'required|max:100|unique:type_specialities,name,' . $this->route->getParameter('type_specialities')
+                    'name'              => 'required|max:100|unique:type_specialities,name,' . $this->route->getParameter('type_speciality')
                 ];
             }
         }

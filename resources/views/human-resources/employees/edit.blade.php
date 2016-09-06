@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
-    <li><a href="{{ route('human-resources.employees.index') }}"><i class="md-accounts font-size-16"></i> Trabajadores</a></li>
+    <li><a href="{{ route('employees.index') }}"><i class="md-accounts font-size-16"></i> Trabajadores</a></li>
     <li class="active">Editar</li>
 @stop
 
@@ -54,7 +54,7 @@
                 <div class="wizard-content">
                     <div class="wizard-pane active" id="datos_personales" role="tabpanel">
 
-                        {{ Form::model($employee, array("route" => array("human-resources.employees.updateSessionStep1", $employee), "method" => "PUT", "files" => true, "id" => "step1")) }}
+                        {{ Form::model($employee, array("route" => array("updateSessionStep1", $employee), "method" => "PUT", "files" => true, "id" => "step1")) }}
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
@@ -136,7 +136,7 @@
                     </div>
                     <div class="wizard-pane" id="competencias_laborales" role="tabpanel">
 
-                        {{ Form::model($employee, array("route" => array("human-resources.employees.updateSessionStep2", $employee), "method" => "PUT", "id" => "step2")) }}
+                        {{ Form::model($employee, array("route" => array("updateSessionStep2", $employee), "method" => "PUT", "id" => "step2")) }}
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
@@ -261,7 +261,7 @@
                     </div>
                     <div class="wizard-pane" id="info_salud" role="tabpanel">
 
-                        {{ Form::model($employee, array("route" => array("human-resources.employees.update", $employee->id), "method" => "PUT", "id" => "step3")) }}
+                        {{ Form::model($employee, array("route" => array("employees.update", $employee->id), "method" => "PUT", "id" => "step3")) }}
 
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
@@ -394,7 +394,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('human-resources.employees.index') }}">Volver</a>
+            <a href="{{ route('employees.index') }}">Volver</a>
         </div>
     </div>
 

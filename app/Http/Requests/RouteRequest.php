@@ -30,14 +30,16 @@ class RouteRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:5|unique:routes'
+                    'name'  		=> 'required|max:5|unique_with:routes,terminal_id',
+					'terminal_id' 	=> 'required|regex:/[0-9 -()+]+$/'
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:5|unique:routes,name,' . $this->route->getParameter('routes')
+                    'name'  => 'required|max:5|unique_with:routes,terminal_id,' . $this->route->getParameter('route'),
+					'terminal_id' 	=> 'required|regex:/[0-9 -()+]+$/'
                 ];
             }
         }

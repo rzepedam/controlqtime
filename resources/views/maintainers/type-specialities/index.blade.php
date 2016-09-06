@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Especialidades
     <br />
-    <a href="{{ route('maintainers.type-specialities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Especialidad</a>
+    <a href="{{ route('type-specialities.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Especialidad</a>
 @stop
 
 @section('breadcumb')

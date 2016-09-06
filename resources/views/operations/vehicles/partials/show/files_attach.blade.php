@@ -31,7 +31,7 @@
                     <br/>
                     <h3 class="text-center text-success">No existen Imágenes de Padrón asociadas al Vehículo actual
                         <br/>
-                        <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('operations.vehicles.attachFiles', $vehicle->id) }}">Aquí</a>)
+                        <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('VehicleAttachFiles', $vehicle->id) }}">Aquí</a>)
                         </small>
                     </h3>
                     <br/>
@@ -74,7 +74,7 @@
                     <br/>
                     <h3 class="text-center text-info">No existen Imágenes de Seguro Obligatorio asociadas al Vehículo actual
                         <br/>
-                        <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('operations.vehicles.attachFiles', $vehicle->id) }}">Aquí</a>)
+                        <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('VehicleAttachFiles', $vehicle->id) }}">Aquí</a>)
                         </small>
                     </h3>
                     <br/>
@@ -117,7 +117,7 @@
                     <br/>
                     <h3 class="text-center text-warning">No existen Imágenes de Patente asociadas al Vehículo actual
                         <br/>
-                        <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('operations.vehicles.attachFiles', $vehicle->id) }}">Aquí</a>)
+                        <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('VehicleAttachFiles', $vehicle->id) }}">Aquí</a>)
                         </small>
                     </h3>
                     <br/>
@@ -160,7 +160,7 @@
                     <br/>
                     <h3 class="text-center text-danger">No existen Imágenes de Permiso de Circulación asociadas al Vehículo actual
                         <br/>
-                        <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('operations.vehicles.attachFiles', $vehicle->id) }}">Aquí</a>)
+                        <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('VehicleAttachFiles', $vehicle->id) }}">Aquí</a>)
                         </small>
                     </h3>
                     <br/>

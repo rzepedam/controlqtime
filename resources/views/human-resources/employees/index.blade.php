@@ -10,9 +10,9 @@
 @section('title_header') Listado de Trabajadores
     <br/>
     @if (Session::get('step1'))
-        <a href="{{ route('human-resources.employees.create') }}" class="btn btn-primary waves-effect waves-light" id="modalSessionConfirmation"><i class="fa fa-plus"></i> Crear Nuevo Trabajador</a>
+        <a href="{{ route('employees.create') }}" class="btn btn-primary waves-effect waves-light" id="modalSessionConfirmation"><i class="fa fa-plus"></i> Crear Nuevo Trabajador</a>
     @else
-        <a href="{{ route('human-resources.employees.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Trabajador</a>
+        <a href="{{ route('employees.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Trabajador</a>
     @endif
 @stop
 

@@ -33,7 +33,7 @@ class TypeCompanyRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:50|unique:type_companies,name,' . $this->route->getParameter('type_companies')
+                    'name'  => 'required|max:50|unique:type_companies,name,' . $this->route->getParameter('type_company')
                 ];
             }
         }

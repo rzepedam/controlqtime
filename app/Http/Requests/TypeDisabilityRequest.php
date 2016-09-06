@@ -33,7 +33,7 @@ class TypeDisabilityRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:120|unique:type_disabilities,name,' . $this->route->getParameter('type_disabilities')
+                    'name'  => 'required|max:120|unique:type_disabilities,name,' . $this->route->getParameter('type_disability')
                 ];
             }
         }

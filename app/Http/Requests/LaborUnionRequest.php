@@ -33,7 +33,7 @@ class LaborUnionRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|unique:labor_unions,name,' . $this->route->getParameter('labor_unions')
+                    'name'  => 'required|unique:labor_unions,name,' . $this->route->getParameter('labor_union')
                 ];
             }
         }

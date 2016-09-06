@@ -19,6 +19,6 @@ class TrademarkRepo extends BaseRepo implements TrademarkRepoInterface
     }
 
     public function findModelVehicles($id) {
-        return $this->model->findOrFail($id)->modelVehicles->lists('name', 'id');
+        return $this->model->findOrFail($id)->modelVehicles->pluck('name', 'id');
     }
 }

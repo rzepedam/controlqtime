@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Unidades de Medida para Peso
     <br />
-    <a href="{{ route('maintainers.measuring-units.weights.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Unidad</a>
+    <a href="{{ route('weights.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Unidad</a>
 @stop
 
 @section('breadcumb')

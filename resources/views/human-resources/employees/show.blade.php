@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
-    <li><a href="{{ route('human-resources.employees.index') }}"><i class="md-accounts font-size-16"></i> Trabajadores</a></li>
+    <li><a href="{{ route('employees.index') }}"><i class="md-accounts font-size-16"></i> Trabajadores</a></li>
     <li class="active">Ver</li>
 @stop
 
@@ -48,7 +48,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <a href="{{ route('human-resources.employees.index') }}">Volver</a>
+        <a href="{{ route('employees.index') }}">Volver</a>
     </div>
 </div>
 

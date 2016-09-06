@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Recorridos
     <br />
-    <a href="{{ route('maintainers.routes.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Recorrido</a>
+    <a href="{{ route('routes.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Recorrido</a>
 @stop
 
 @section('breadcumb')

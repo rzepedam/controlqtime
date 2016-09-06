@@ -92,6 +92,6 @@ class TypeContractController extends Controller
 	public function destroy($id)
     {
         $this->typeContract->delete($id);
-		return redirect()->route('maintainers.type-contracts.index');
+		return redirect()->route('type-contracts.index');
     }
 }

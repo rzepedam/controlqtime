@@ -138,6 +138,7 @@ return [
 		Illuminate\Foundation\Providers\FoundationServiceProvider::class,
 		Illuminate\Hashing\HashServiceProvider::class,
 		Illuminate\Mail\MailServiceProvider::class,
+		Illuminate\Notifications\NotificationServiceProvider::class,
 		Illuminate\Pagination\PaginationServiceProvider::class,
 		Illuminate\Pipeline\PipelineServiceProvider::class,
 		Illuminate\Queue\QueueServiceProvider::class,
@@ -152,10 +153,10 @@ return [
 		 * Application Service Providers...
 		 */
 		Controlqtime\Providers\AppServiceProvider::class,
+		// Controlqtime\Providers\BroadcastServiceProvider::class,
 		Controlqtime\Providers\AuthServiceProvider::class,
 		Controlqtime\Providers\EventServiceProvider::class,
 		Controlqtime\Providers\RouteServiceProvider::class,
-		Controlqtime\Core\Api\Providers\OAuthServiceProvider::class,
 
 		/*
 		 * Controlqtime Providers
@@ -168,8 +169,6 @@ return [
 		Barryvdh\Snappy\ServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
 		Dingo\Api\Provider\LaravelServiceProvider::class,
-		LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
-		LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
 		Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
 		Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 	],
@@ -204,6 +203,7 @@ return [
 		'Lang'      => Illuminate\Support\Facades\Lang::class,
 		'Log'       => Illuminate\Support\Facades\Log::class,
 		'Mail'      => Illuminate\Support\Facades\Mail::class,
+		'Notification' => Illuminate\Support\Facades\Notification::class,
 		'Password'  => Illuminate\Support\Facades\Password::class,
 		'Queue'     => Illuminate\Support\Facades\Queue::class,
 		'Redirect'  => Illuminate\Support\Facades\Redirect::class,
@@ -230,7 +230,6 @@ return [
 		'Image'    		=> Barryvdh\Snappy\Facades\SnappyImage::class,
 		'Excel'    		=> Maatwebsite\Excel\Facades\Excel::class,
 		'Uuid' 	   		=> Webpatser\Uuid\Uuid::class,
-		'Authorizer' 	=> LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
 		'Helper' 		=> Controlqtime\Helpers\Helper::class,
 
 	],

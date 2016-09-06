@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Empresas
     <br />
-    <a href="{{ route('administration.companies.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Empresa</a>
+    <a href="{{ route('companies.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Empresa</a>
 @stop
 
 @section('breadcumb')

@@ -33,7 +33,7 @@ class DegreeRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:50|unique:degrees,name,' . $this->route->getParameter('degrees')
+                    'name'  => 'required|max:50|unique:degrees,name,' . $this->route->getParameter('degree')
                 ];
             }
         }

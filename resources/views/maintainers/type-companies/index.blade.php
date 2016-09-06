@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Tipos de Empresa
     <br />
-    <a href="{{ route('maintainers.type-companies.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Tipo de Empresa</a>
+    <a href="{{ route('type-companies.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Tipo de Empresa</a>
 @stop
 
 @section('breadcumb')

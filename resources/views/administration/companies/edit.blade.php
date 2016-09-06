@@ -10,7 +10,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('administration') }}"><i class="fa fa-th-large"></i> Administración</a></li>
-    <li><a href="{{ route('administration.companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
+    <li><a href="{{ route('companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
     <li class="active">Editar</li>
 @stop
 
@@ -23,7 +23,7 @@
     </div>
     {{-- End Show Errors --}}
 
-    {{ Form::model($company, array('route' => array('administration.companies.update', $company), 'method' => 'PUT', 'id' => 'form-submit')) }}
+    {{ Form::model($company, array('route' => array('companies.update', $company), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
         <div class="panel panel-bordered">
             <div class="panel-heading">
@@ -58,7 +58,7 @@
     <br />
     <div class="row">
         <div class="col-md-6">
-            <a href="{{ route('administration.companies.index') }}">Volver</a>
+            <a href="{{ route('companies.index') }}">Volver</a>
         </div>
         <div class="col-md-6 pull-right">
             <button id="btnSubmit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>

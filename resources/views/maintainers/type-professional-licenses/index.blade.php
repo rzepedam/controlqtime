@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Licencias Profesionales
     <br />
-    <a href="{{ route('maintainers.type-professional-licenses.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Licencia Profesional</a>
+    <a href="{{ route('type-professional-licenses.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Licencia Profesional</a>
 @stop
 
 @section('breadcumb')

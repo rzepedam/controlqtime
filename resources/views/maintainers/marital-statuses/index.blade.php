@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Estados Civiles
     <br />
-    <a href="{{ route('maintainers.marital-statuses.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Estado Civil</a>
+    <a href="{{ route('marital-statuses.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Estado Civil</a>
 @stop
 
 @section('breadcumb')

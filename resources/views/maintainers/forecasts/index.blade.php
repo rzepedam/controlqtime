@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Previsiones
     <br />
-    <a href="{{ route('maintainers.forecasts.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Previsión</a>
+    <a href="{{ route('forecasts.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Previsión</a>
 @stop
 
 @section('breadcumb')

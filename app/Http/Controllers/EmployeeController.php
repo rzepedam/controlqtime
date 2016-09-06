@@ -430,7 +430,7 @@ class EmployeeController extends Controller
 	{
 		$this->employee->delete($id);
 
-		return redirect()->route('human-resources.employees.index');
+		return redirect()->route('employees.index');
 	}
 
 	/**

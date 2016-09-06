@@ -65,6 +65,6 @@ class RouteController extends Controller
     public function destroy($id)
     {
         $this->route->delete($id);
-        return redirect()->route('maintainers.routes.index');
+        return redirect()->route('routes.index');
     }
 }

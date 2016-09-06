@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Instituciones
     <br />
-    <a href="{{ route('maintainers.institutions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Institución</a>
+    <a href="{{ route('institutions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Institución</a>
 @stop
 
 @section('breadcumb')

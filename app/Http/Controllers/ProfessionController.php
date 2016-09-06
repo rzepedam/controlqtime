@@ -60,6 +60,6 @@ class ProfessionController extends Controller
     public function destroy($id)
     {
         $this->profession->delete($id);
-        return redirect()->route('maintainers.professions.index');
+        return redirect()->route('professions.index');
     }
 }

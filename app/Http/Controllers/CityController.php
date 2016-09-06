@@ -68,6 +68,6 @@ class CityController extends Controller
     public function destroy($id)
     {
         $this->city->delete($id);
-        return redirect()->route('maintainers.cities.index');
+        return redirect()->route('cities.index');
     }
 }

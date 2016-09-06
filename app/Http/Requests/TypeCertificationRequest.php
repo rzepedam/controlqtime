@@ -33,7 +33,7 @@ class TypeCertificationRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:100|unique:type_certifications,name,' . $this->route->getParameter('type_certifications')
+                    'name'  => 'required|max:100|unique:type_certifications,name,' . $this->route->getParameter('type_certification')
                 ];
             }
         }

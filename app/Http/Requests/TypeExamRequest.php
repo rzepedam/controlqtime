@@ -32,7 +32,7 @@ class TypeExamRequest extends SanitizedRequest
             case 'PUT':
             {
                 return [
-                    'name'  => 'required|max:75|unique:type_exams,name,' . $this->route->getParameter('type_exams')
+                    'name'  => 'required|max:75|unique:type_exams,name,' . $this->route->getParameter('type_exam')
                 ];
             }
         }
