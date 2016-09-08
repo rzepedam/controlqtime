@@ -61,7 +61,7 @@
             $("#identityCard").fileinput({
                 initialPreview: [
                     @foreach($employee->imageIdentityCardEmployees as $image_identity_card)
-                            "<img style='height:160px' src='{{ $image_identity_card->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_identity_card->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
@@ -84,7 +84,7 @@
             $("#criminalRecord").fileinput({
                 initialPreview: [
                     @foreach($employee->imageCriminalRecordEmployees as $image_criminal_record)
-                            "<img style='height:160px' src='{{ $image_criminal_record->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_criminal_record->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
@@ -107,7 +107,7 @@
             $("#healthCertificate").fileinput({
                 initialPreview: [
                     @foreach($employee->imageHealthCertificateEmployees as $image_health_certificate)
-                            "<img style='height:160px' src='{{ $image_health_certificate->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_health_certificate->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
@@ -130,7 +130,7 @@
             $("#pensionCertificate").fileinput({
                 initialPreview: [
                     @foreach($employee->imagePensionCertificateEmployees as $image_pension_certificate)
-                            "<img style='height:160px' src='{{ $image_pension_certificate->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_pension_certificate->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
@@ -155,7 +155,7 @@
                 $("#certification{{ $i }}").fileinput({
                     initialPreview: [
                         @foreach($certification->imageCertificationEmployees as $image_certification)
-                            "<img style='height:160px' src='{{ $image_certification->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_certification->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
@@ -182,7 +182,7 @@
                 $("#speciality{{ $i }}").fileinput({
                     initialPreview: [
                         @foreach($speciality->imageSpecialityEmployees as $image_speciality)
-                            "<img style='height:160px' src='{{ $image_speciality->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_speciality->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
@@ -209,7 +209,7 @@
                 $("#professional_license{{ $i }}").fileinput({
                     initialPreview: [
                         @foreach($professional_license->imageProfessionalLicenseEmployees as $image_professional_license)
-                            "<img style='height:160px' src='{{ $image_professional_license->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_professional_license->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
@@ -236,7 +236,7 @@
                 $("#disability{{ $i }}").fileinput({
                     initialPreview: [
                         @foreach($disability->imageDisabilityEmployees as $image_disability)
-                            "<img style='height:160px' src='{{ $image_disability->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_disability->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
@@ -263,7 +263,7 @@
                 $("#disease{{ $i }}").fileinput({
                     initialPreview: [
                         @foreach($disease->imageDiseaseEmployees as $image_disease)
-                            "<img style='height:160px' src='{{ $image_disease->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_disease->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
@@ -290,7 +290,7 @@
                 $("#exam{{ $i }}").fileinput({
                     initialPreview: [
                         @foreach($exam->imageExamEmployees as $image_exam)
-                            "<img style='height:160px' src='{{ $image_exam->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_exam->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
@@ -317,7 +317,7 @@
                 $("#family_responsability{{ $i }}").fileinput({
                     initialPreview: [
                         @foreach($family_responsability->imageFamilyResponsabilityEmployees as $image_family_responsability)
-                            "<img style='height:160px' src='{{ $image_family_responsability->path }}' />",
+                            "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_family_responsability->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [

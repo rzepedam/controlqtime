@@ -2,12 +2,12 @@
 
 namespace Controlqtime\Core\Factory;
 
-use Exception;
-use Illuminate\Support\Facades\File;
+use DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
-abstract class Image {
-
+abstract class Image
+{
 	protected $dirEntity = 'Controlqtime\Core\Entities\\';
 	protected $id;
 	protected $repoId;
@@ -18,39 +18,51 @@ abstract class Image {
 	protected $entity;
 	protected $name;
 	protected $pathImgDelete;
-	private $storage = '/storage/';
+	/**
+	 * @var Storage
+	 */
+	protected $storage;
+
+	/**
+	 * Image constructor.
+	 * @param Storage $storage
+	 */
+	public function __construct(Storage $storage)
+	{
+		$this->storage = $storage;
+	}
 
 	public function getName()
 	{
-		return time() . Str::random(5) . '.' . $this->file->getClientOriginalExtension();
+		return time() . Str::random(15) . '.' . $this->file->getClientOriginalExtension();
 	}
-	
+
 	public function moveImage()
 	{
-		File::makeDirectory($this->getPath(), $mode = 0777, true, true);
-		$this->file->move(public_path() . $this->getPath(), $this->name);
+		$this->file->storeAs($this->getPath(), $this->name, 's3');
 	}
 
 	public function getPath()
 	{
-		return $this->storage . $this->repo . "/" . $this->id . "/" . $this->type . "/" . $this->repoId . "/";
+		return $this->repo . $this->id . $this->type . $this->repoId;
 	}
 
 	public function destroyImage()
 	{
-		if ( is_file(public_path() . $this->pathImgDelete) )
-		{
-			if ( ! $this->entity->destroy($this->repoId) )
+		DB::beginTransaction();
+
+		try {
+			$this->id = str_replace('/', '', $this->id);
+			if ( $this->entity->destroy($this->id) )
 			{
-				throw new Exception('Destroy DB not working');
+				Storage::delete($this->pathImgDelete);
+				DB::commit();
 			}
-
-			unlink(public_path() . $this->pathImgDelete);
-
-			return true;
+		} catch ( Exception $e ) {
+			DB::rollback();
 		}
 
-		throw new Exception('File not exists');
+		return true;
 	}
 
 	abstract protected function addImages();

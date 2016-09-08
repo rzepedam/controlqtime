@@ -219,7 +219,7 @@ class CompanyController extends Controller
 	 */
 	public function addImages(Request $request)
 	{
-		$save = $this->image->build($request->get('type'), null, $request->get('company_id'), $request->file('file_data'), null)->addImages();
+		$save = $this->image->build($request->get('type'), $request->get('company_id'), null, $request->file('file_data'), null)->addImages();
 
 		if ( $save )
 		{
@@ -237,7 +237,7 @@ class CompanyController extends Controller
 	 */
 	public function deleteFiles(Request $request)
 	{
-		$destroy = $this->image->build($request->get('type'), null, $request->get('key'), null, $request->get('path'))->destroyImage();
+		$destroy = $this->image->build($request->get('type'), $request->get('key'), null, null, $request->get('path'))->destroyImage();
 
 		if ( $destroy )
 		{

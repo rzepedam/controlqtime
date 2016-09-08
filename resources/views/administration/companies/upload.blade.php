@@ -72,7 +72,7 @@
             $("#rol").fileinput({
                 initialPreview: [
                     @foreach($company->imageRolCompanies as $image_rut)
-                        "<img style='height:160px' src='{{ $image_rut->path }}' />",
+                        "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_rut->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
@@ -90,7 +90,7 @@
             $("#patent").fileinput({
                 initialPreview: [
                     @foreach($company->imagePatentCompanies as $image_patent)
-                        "<img style='height:160px' src='{{ $image_patent->path }}' />",
+                        "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_patent->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [

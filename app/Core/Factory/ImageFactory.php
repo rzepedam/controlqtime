@@ -9,7 +9,7 @@ class ImageFactory implements ImageFactoryInterface {
 
 	private $dir = 'Controlqtime\Core\Factory\\';
 
-	public function build($type, $id = null, $repoId, $file = null, $pathImgDelete = null)
+	public function build($type, $id, $repoId, $file = null, $pathImgDelete = null)
 	{
 		$class       = 'Image' . $type;
 		$targetClass = $this->dir . $class;

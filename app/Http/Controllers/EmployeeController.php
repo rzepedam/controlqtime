@@ -456,6 +456,8 @@ class EmployeeController extends Controller
 	 */
 	public function addImages(Request $request)
 	{
+		// request()->file('file_data')->store('avatars', 's3');
+
 		$save = $this->image->build($request->get('type'), $request->get('employee_id'), $request->get('repo_id'), $request->file('file_data'))->addImages();
 
 		if ( $save )
@@ -474,7 +476,7 @@ class EmployeeController extends Controller
 	 */
 	public function deleteFiles(Request $request)
 	{
-		$destroy = $this->image->build($request->get('type'), null, $request->get('key'), null, $request->get('path'))->destroyImage();
+		$destroy = $this->image->build($request->get('type'), $request->get('key'), null, null, $request->get('path'))->destroyImage();
 
 		if ( $destroy )
 		{

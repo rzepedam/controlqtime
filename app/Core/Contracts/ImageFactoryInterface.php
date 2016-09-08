@@ -4,6 +4,6 @@ namespace Controlqtime\Core\Contracts;
 
 interface ImageFactoryInterface {
 
-	public function build($type, $id = null, $repoId, $file = null, $path = null);
+	public function build($type, $id, $repoId, $file = null, $path = null);
 
 }

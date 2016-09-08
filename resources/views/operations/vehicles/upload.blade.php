@@ -108,7 +108,7 @@
             $("#padron").fileinput({
                 initialPreview: [
                     @foreach($vehicle->imagePadrones as $image_padron)
-                        "<img style='height:160px' src='{{ $image_padron->path }}' />",
+                        "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_padron->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
@@ -126,7 +126,7 @@
             $("#obligatory_insurance").fileinput({
                 initialPreview: [
                     @foreach($vehicle->imageObligatoryInsurances as $image_obl_ins)
-                        "<img style='height:160px' src='{{ $image_obl_ins->path }}' />",
+                        "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_obl_ins->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
@@ -144,7 +144,7 @@
             $("#patent").fileinput({
                 initialPreview: [
                     @foreach($vehicle->imagePatents as $image_patent)
-                        "<img style='height:160px' src='{{ $image_patent->path }}' />",
+                        "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_patent->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
@@ -162,7 +162,7 @@
             $("#circulation_permit").fileinput({
                 initialPreview: [
                     @foreach($vehicle->imageCirculationPermits as $image_cir_permit)
-                        "<img style='height:160px' src='{{ $image_cir_permit->path }}' />",
+                        "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_cir_permit->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
