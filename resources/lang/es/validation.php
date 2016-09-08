@@ -118,6 +118,15 @@ return [
         'phone2'                                => 'Teléfono 2',
         'email_company'                         => 'Email Empresa',
 
+		/*
+		 * Legal Representative
+		 */
+		'rut_representative'                 	=> 'Rut Representante Legal',
+		'phone1_representative'                 => 'Teléfono Representante Legal',
+		'phone2_representative'                 => 'Teléfono Representante Legal',
+		'email_representative'					=> 'Email Representante Legal',
+
+
         /*
          * Employees
          */

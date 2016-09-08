@@ -1,10 +1,4 @@
 <div class="row">
-	<div class="col-md-1 hide">
-		<div class="form-group">
-			{{ Form::label("id_representative", "ID", ["class" => "control-label"]) }}
-			{{ Form::text("id_representative", (Route::is('companies.create')) ? null : $company->legalRepresentative->id, ["class" => "form-control"]) }}
-		</div>
-	</div>
 	<div class="col-md-3">
 		<div class="form-group">
 			{{ Form::label('male_surname', 'Apellido Paterno', ['class' => 'control-label']) }}
