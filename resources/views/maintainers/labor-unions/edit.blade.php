@@ -4,7 +4,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('labor-unions.index') }}"><i class="fa fa-users"></i> Sindicatos</a></li>
+    <li><a href="{{ route('labor-unions.index') }}"><i class="fa fa-users"></i> Sindicato de Trabajadores</a></li>
     <li class="active">Editar</li>
 @stop
 

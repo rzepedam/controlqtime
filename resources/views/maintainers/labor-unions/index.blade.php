@@ -13,7 +13,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li class="active">Sindicatos</li>
+    <li class="active">Sindicato de Trabajadores</li>
 @stop
 
 @section('content')
@@ -31,6 +31,6 @@
 @section('scripts')
 
     <script src="{{ elixir('js/index-common.js') }}"></script>
-    <script src="{{ elixir('js/maintainers/institutions/index-custom-institutions.js') }}"></script>
+    <script src="{{ elixir('js/maintainers/labor-unions/index-custom-labor-unions.js') }}"></script>
 
 @stop

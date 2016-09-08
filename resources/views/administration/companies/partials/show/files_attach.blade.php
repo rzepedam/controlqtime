@@ -15,11 +15,11 @@
                         <div class="col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
-                                    <img class="overlay-figure overlay-scale" src="{{ $image_rol->path }}">
+                                    <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_rol->path) }}">
                                     <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                        <a class="icon md-search" href="{{ $image_rol->path }}" data-plugin="magnificPopup"></a>
+                                        <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_rol->path) }}" data-plugin="magnificPopup"></a>
                                         {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_rol->path }}"></a>
+                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_rol->path }}" data-name="{{ $image_rol->orig_name }}"></a>
                                         {{ Form::close() }}
                                     </figcaption>
                                 </figure>
@@ -57,11 +57,11 @@
                         <div class="col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
-                                    <img class="overlay-figure overlay-scale" src="{{ $image_patent->path }}">
+                                    <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_patent->path) }}">
                                     <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                        <a class="icon md-search" href="{{ $image_patent->path }}" data-plugin="magnificPopup"></a>
+                                        <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_patent->path) }}" data-plugin="magnificPopup"></a>
                                         {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_patent->path }}"></a>
+                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_patent->path }}" data-name="{{ $image_patent->orig_name }}"></a>
                                         {{ Form::close() }}
                                     </figcaption>
                                 </figure>

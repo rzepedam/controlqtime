@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="alert alert-alt alert-success alert-dismissible" role="alert">
-                            <i class="fa fa-picture-o text-success"></i> Imágenes Padrón
+                            <i class="fa fa-picture-o text-success"></i> Padrón
                         </div>
                     </div>
                 </div>
@@ -15,11 +15,11 @@
                         <div class="col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
-                                    <img class="overlay-figure overlay-scale" src="{{ $image_padron->path }}">
+                                    <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_padron->path) }}">
                                     <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                        <a class="icon md-search" href="{{ $image_padron->path }}" data-plugin="magnificPopup"></a>
+                                        <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_padron->path) }}" data-plugin="magnificPopup"></a>
                                         {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_padron->path }}"></a>
+                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_padron->path }}" data-name="{{ $image_padron->orig_name }}"></a>
                                         {{ Form::close() }}
                                     </figcaption>
                                 </figure>
@@ -48,7 +48,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="alert alert-alt alert-info alert-dismissible" role="alert">
-                            <i class="fa fa-picture-o text-info"></i> Imágenes Seguro Obligatorio
+                            <i class="fa fa-picture-o text-info"></i> Seguro Obligatorio
                         </div>
                     </div>
                 </div>
@@ -58,11 +58,11 @@
                         <div class="col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
-                                    <img class="overlay-figure overlay-scale" src="{{ $image_obligatory_insurance->path }}">
+                                    <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_obligatory_insurance->path) }}">
                                     <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                        <a class="icon md-search" href="{{ $image_obligatory_insurance->path }}" data-plugin="magnificPopup"></a>
+                                        <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_obligatory_insurance->path) }}" data-plugin="magnificPopup"></a>
                                         {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_obligatory_insurance->path }}"></a>
+                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_obligatory_insurance->path }}" data-name="{{ $image_padron->orig_name }}"></a>
                                         {{ Form::close() }}
                                     </figcaption>
                                 </figure>
@@ -91,7 +91,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="alert alert-alt alert-warning alert-dismissible" role="alert">
-                            <i class="fa fa-picture-o text-warning"></i> Imágenes Patente Vehículo
+                            <i class="fa fa-picture-o text-warning"></i> Patente Vehículo
                         </div>
                     </div>
                 </div>
@@ -101,11 +101,11 @@
                         <div class="col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
-                                    <img class="overlay-figure overlay-scale" src="{{ $image_patent->path }}">
+                                    <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_patent->path) }}">
                                     <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                        <a class="icon md-search" href="{{ $image_patent->path }}" data-plugin="magnificPopup"></a>
+                                        <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_patent->path) }}" data-plugin="magnificPopup"></a>
                                         {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_patent->path }}"></a>
+                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_patent->path }}" data-name="{{ $image_patent->orig_name }}"></a>
                                         {{ Form::close() }}
                                     </figcaption>
                                 </figure>
@@ -134,7 +134,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="alert alert-alt alert-danger alert-dismissible" role="alert">
-                            <i class="fa fa-picture-o text-danger"></i> Imágenes Permiso de Circulación
+                            <i class="fa fa-picture-o text-danger"></i> Permiso de Circulación
                         </div>
                     </div>
                 </div>
@@ -144,11 +144,11 @@
                         <div class="col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
-                                    <img class="overlay-figure overlay-scale" src="{{ $image_circulation_permit->path }}">
+                                    <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_circulation_permit->path) }}">
                                     <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                        <a class="icon md-search" href="{{ $image_circulation_permit->path }}" data-plugin="magnificPopup"></a>
+                                        <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_circulation_permit->path) }}" data-plugin="magnificPopup"></a>
                                         {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_circulation_permit->path }}"></a>
+                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_circulation_permit->path }}" data-name="{{ $image_circulation_permit->orig_name }}"></a>
                                         {{ Form::close() }}
                                     </figcaption>
                                 </figure>

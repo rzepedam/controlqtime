@@ -903,3 +903,8 @@ INSERT INTO marital_statuses(name) VALUES('Casado');
 INSERT INTO marital_statuses(name) VALUES('Separado');
 INSERT INTO marital_statuses(name) VALUES('Soltero');
 INSERT INTO marital_statuses(name) VALUES('Viudo');
+
+/* labor_unions | Sindicato de Trabajadores */
+INSERT INTO labor_unions(name) VALUES('Sindicato de Trabajadores San Bernardo Asociados.');
+INSERT INTO labor_unions(name) VALUES('Sindicato 1 Los Andes');
+

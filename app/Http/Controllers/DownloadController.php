@@ -2,12 +2,13 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Illuminate\Http\Request;
-
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 
-class DownloadController extends Controller {
+class DownloadController extends Controller
+{
 
 	protected $employee;
 	protected $excel;
@@ -19,15 +20,19 @@ class DownloadController extends Controller {
 
 	public function getFile(Request $request)
 	{
-		return response()->download(public_path() . $request->get('file'));
+		$file = Storage::disk('s3')->get($request->get('file'));
+
+		return response($file, 200)->withHeaders([
+			'Content-Disposition' => 'attachment; filename="' . $request->get('name') . '"'
+		]);
 	}
 
 	public function getPdf()
 	{
 		$employees = $this->employee->all(['nationality']);
-		$header    = view('human-resources.employees.partials.pdf.header');
-		$footer    = view('human-resources.employees.partials.pdf.footer');
-		$pdf       = \PDF::loadView('human-resources.employees.partials.pdf.index', compact('employees'))
+		$header = view('human-resources.employees.partials.pdf.header');
+		$footer = view('human-resources.employees.partials.pdf.footer');
+		$pdf = \PDF::loadView('human-resources.employees.partials.pdf.index', compact('employees'))
 			->setOption('page-size', 'letter')
 			->setOption('margin-top', '25mm')
 			->setOption('margin-bottom', '14mm')
@@ -48,9 +53,9 @@ class DownloadController extends Controller {
 				$employees = $this->employee->all(['company']);
 
 				$sheet->setBorder('A1:D1', 'thin', 'medium');
-				$sheet->setHeight(array(
+				$sheet->setHeight([
 					'1' => '25'
-				));
+				]);
 
 				for ($i = 1; $i <= count($employees) + 1; $i ++)
 				{

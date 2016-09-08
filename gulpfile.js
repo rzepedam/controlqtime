@@ -85,7 +85,7 @@ elixir(function(mix) {
     // Index Common JS
     .scripts([
         'custom-configuration/js/bootstrap-table.js',
-        'custom-configuration/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
+        'bower/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
         'custom-configuration/js/bootstrap-table-es-ES.js',
     ], 'public/js/index-common.js')
 
@@ -307,6 +307,11 @@ elixir(function(mix) {
     .scripts([
         'me/js/base/maintainers/institutions/config_bootstrap_table.js'
     ], 'public/js/maintainers/institutions/index-custom-institutions.js')
+
+    // Maintainers > Labor-Unions > Index Custom Labor-Unions JS
+    .scripts([
+        'me/js/base/maintainers/labor-unions/config_bootstrap_table.js'
+    ], 'public/js/maintainers/labor-unions/index-custom-labor-unions.js')
 
     // Maintainers > Marital-Statuses > Index Custom Marital-Statuses JS
     .scripts([

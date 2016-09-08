@@ -7,14 +7,24 @@ use Illuminate\Routing\Route;
 
 class LaborUnionRequest extends SanitizedRequest
 {
-    private $route;
+	/**
+	 * @var Route
+	 */
+	protected $route;
 
-    public function __construct(Route $route)
+	/**
+	 * LaborUnionRequest constructor.
+	 * @param Route $route
+	 */
+	public function __construct(Route $route)
     {
         $this->route = $route;
     }
 
-    public function authorize()
+	/**
+	 * @return bool
+	 */
+	public function authorize()
     {
         return true;
     }

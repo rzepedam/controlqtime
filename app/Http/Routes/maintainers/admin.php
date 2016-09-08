@@ -44,6 +44,10 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getInstitutions', ['as' => 'getInstitutions', 'uses' => 'InstitutionController@getInstitutions']);
 	Route::resource('institutions', 'InstitutionController');
 
+	// Labor-Unions
+	Route::get('getLaborUnions', ['as' => 'getLaborUnions', 'uses' => 'LaborUnionController@getLaborUnions']);
+	Route::resource('labor-unions', 'LaborUnionController');
+
 	// Marital Statuses
 	Route::get('getMaritalStatuses', ['as' => 'getMaritalStatuses', 'uses' => 'MaritalStatusController@getMaritalStatuses']);
 	Route::resource('marital-statuses', 'MaritalStatusController');
@@ -86,8 +90,6 @@ Route::group(['prefix' => 'maintainers'], function() {
 	// Routes
 	Route::get('getRoutes', ['as' => 'getRoutes', 'uses' => 'RouteController@getRoutes']);
 	Route::resource('routes', 'RouteController');
-
-	Route::resource('labor-unions', 'LaborUnionController');
 
 	// Terminals
 	Route::get('getTerminals', ['as' => 'getTerminals', 'uses' => 'TerminalController@getTerminals']);

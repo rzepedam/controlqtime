@@ -54,7 +54,7 @@
     </div>
     {{-- Horario Mañana Input Text --}}
     <div class="col-md-4">
-        {{ Form::label('init_afternoon', 'Horario Mañana', ['class' => 'control-label']) }}
+        {{ Form::label('init_afternoon', 'Horario Mañana', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Inicio Jornada Laboral - Término Jornada Laboral únicamente mañana" data-html="true"></i>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="input-group" data-plugin="clockpicker" data-default="09:00">
@@ -76,7 +76,7 @@
 
     {{-- Horario Tarde Input Text --}}
     <div class="col-md-4">
-        {{ Form::label('init_afternoon', 'Horario Tarde', ['class' => 'control-label']) }}
+        {{ Form::label('init_afternoon', 'Horario Tarde', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Inicio Jornada Laboral - Término Jornada Laboral únicamente tarde" data-html="true"></i>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="input-group" data-plugin="clockpicker" data-default="14:00">

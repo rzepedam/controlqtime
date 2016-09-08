@@ -123,6 +123,10 @@ $(document).ready(function(){
         window.location.href = "/maintainers/terminals";
     });
 
+    $('#redirect-labor-unions').click(function() {
+        window.location.href = "/maintainers/labor-unions";
+    });
+
     $('#redirect-type-contracts').click(function() {
         window.location.href = "/maintainers/type-contracts";
     });

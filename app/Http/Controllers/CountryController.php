@@ -22,14 +22,16 @@ class CountryController extends Controller
         $this->country = $country;
     }
 
-    public function index()
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
     {
         return view('maintainers.countries.index');
     }
 
 	/**
-	 * return countries fot Bootstrap-table
-	 * @return mixed
+	 * @return mixed for Bootstrap-table
 	 */
 	public function getCountries()
     {
@@ -37,12 +39,19 @@ class CountryController extends Controller
         return $countries;
     }
 
-    public function create()
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function create()
     {
         return view('maintainers.countries.create');
     }
 
-    public function store(CountryRequest $request)
+	/**
+	 * @param CountryRequest $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function store(CountryRequest $request)
     {
         $this->country->create($request->all());
 
@@ -52,13 +61,22 @@ class CountryController extends Controller
 		));
     }
 
-    public function edit($id)
+	/**
+	 * @param $id
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function edit($id)
     {
         $country = $this->country->find($id);
         return view('maintainers.countries.edit', compact('country'));
     }
 
-    public function update(CountryRequest $request, $id)
+	/**
+	 * @param CountryRequest $request
+	 * @param $id
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function update(CountryRequest $request, $id)
     {
         $this->country->update($request->all(), $id);
 
@@ -68,7 +86,11 @@ class CountryController extends Controller
 		));
     }
 
-    public function destroy($id)
+	/**
+	 * @param $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function destroy($id)
     {
         $this->country->delete($id);
         return redirect()->route('countries.index');
