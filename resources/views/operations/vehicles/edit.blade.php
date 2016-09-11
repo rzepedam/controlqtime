@@ -18,28 +18,39 @@
 
     @include('layout.messages.errors-js')
 
-    <div class="panel">
+    {{ Form::model($vehicle, array('route' => array('vehicles.update', $vehicle), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-        {{ Form::model($vehicle, array('route' => array('vehicles.update', $vehicle), 'method' => 'PUT', 'id' => 'form-submit')) }}
-
+        <div class="panel panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="icon fa fa-bus text-primary" aria-hidden="true"></i> Información del Vehículo</h3>
+            </div>
             <div class="panel-body">
 
-                @include('operations.vehicles.partials.fields')
+                @include('operations.vehicles.partials.fields.info_vehicle')
 
             </div>
             <br />
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-12">
-                        <a href="{{ route('vehicles.index') }}">Volver</a>
-                        <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
-                    </div>
-                </div>
+        </div>
+        <div class="panel panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="icon fa fa-folder-open text-warning" aria-hidden="true"></i> Información de Documentación</h3>
             </div>
+            <div class="panel-body">
 
-        {{ Form::close() }}
+                @include('operations.vehicles.partials.fields.info_documentation')
 
-    </div>
+            </div>
+            <br />
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ route('vehicles.index') }}">Volver</a>
+                <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+            </div>
+        </div>
+
+    {{ Form::close() }}
+
     <br />
     <br />
     <br />
@@ -51,7 +62,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
     <script src="{{ elixir('js/operations/vehicles/create-edit-custom-vehicles.js') }}"></script>
     <script src="{{ elixir('js/edit-common.js') }}"></script>
 

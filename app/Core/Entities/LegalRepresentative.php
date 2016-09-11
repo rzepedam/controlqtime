@@ -3,7 +3,7 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Controlqtime\Helpers\Helper;
+use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class LegalRepresentative extends Eloquent
@@ -100,6 +100,6 @@ class LegalRepresentative extends Eloquent
 	 * @return string 12.345.678-9
 	 */
 	public function getRutRepresentativeAttribute($value) {
-		return Helper::formatedRut($value);
+		return FormatField::rut($value);
 	}
 }

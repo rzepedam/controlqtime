@@ -8,91 +8,144 @@
                 <br />
                 <br />
                 <div class="table-responsive">
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-10">
-                            <table class="table table-striped table-bordered">
-                                <tbody>
+                    <div class="col-md-offset-1 col-md-10">
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                            <tr class="text-center success">
+                                <td class="col-md-12" colspan="2"><i class="fa fa-bus" aria-hidden="true"></i>
+                                    Información Vehículo
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Empresa</td>
+                                <td class="text-center"><i class="fa fa-building"></i> <a href="{{ route('companies.show', $vehicle->company->id) }}" style="color: #757575"> {{ $vehicle->company->firm_name }}</a></td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Tipo Vehículo</td>
+                                <td class="text-center"><i class="fa fa-bus"></i> {{ $vehicle->typeVehicle->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Marca</td>
+                                <td class="text-center">{{ $vehicle->modelVehicle->trademark->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Modelo</td>
+                                <td class="text-center"> {{ $vehicle->modelVehicle->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Estado Vehículo</td>
+                                <td class="text-center">{{ $vehicle->stateVehicle->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Fecha Adquisición</td>
+                                <td class="text-center"><i class="fa fa-calendar"></i> {{ $vehicle->acquisition_date }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Fecha Inscripción</td>
+                                <td class="text-center"><i class="fa fa-calendar"></i> {{ $vehicle->inscription_date }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Año</td>
+                                <td class="text-center">{{ $vehicle->year }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Color</td>
+                                <td class="text-center">{{ $vehicle->detailVehicle->color }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Patente</td>
+                                <td class="text-center">{{ $vehicle->patent }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Combustible</td>
+                                <td class="text-center"><i class="md-gas-station font-size-16" aria-hidden="true" ></i> {{ $vehicle->detailVehicle->fuel->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Nº Chasis</td>
+                                <td class="text-center">{{ $vehicle->detailVehicle->num_chasis }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Nº Motor</td>
+                                <td class="text-center">{{ $vehicle->detailVehicle->num_motor }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Kilometraje</td>
+                                <td class="text-center">{{ $vehicle->detailVehicle->km }} km</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Cilindraje Motor</td>
+                                <td class="text-center">{{ $vehicle->detailVehicle->engine_cubic }} {{ $vehicle->typeVehicle->engineCubic->acr }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Peso</td>
+                                <td class="text-center">{{ $vehicle->detailVehicle->weight }} {{ $vehicle->typeVehicle->weight->acr }}</td>
+                            </tr>
+                            @if ($vehicle->obs)
                                 <tr>
-                                    <td class="col-md-3">Empresa</td>
-                                    <td class="text-center"><i class="fa fa-building"></i> <a href="{{ route('companies.show', $vehicle->company->id) }}" style="color: #757575"> {{ $vehicle->company->firm_name }}</a></td>
+                                    <td class="col-md-4">Observación</td>
+                                    <td class="text-center">{{ $vehicle->detailVehicle->obs }}</td>
+                                </tr>
+                            @endif
+                            <tr>
+                                <td class="col-md-4">Ingresado</td>
+                                <td class="text-center text-capitalize">{{ Date::parse($vehicle->created_at)->format('l j F Y H:i:s') }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Actualizado</td>
+                                <td class="text-center text-capitalize">{{ Date::parse($vehicle->updated_at)->format('l j F Y H:i:s') }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="table-responsive">
+                    <div class="col-md-offset-1 col-md-10">
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                                <tr class="text-center info">
+                                    <td class="col-md-12" colspan="4"><i class="fa fa-folder-open" aria-hidden="true"></i>
+                                        Información Documentación
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-3">Tipo Vehículo</td>
-                                    <td class="text-center"><i class="fa fa-bus"></i> {{ $vehicle->typeVehicle->name }}</td>
+                                    <td class="col-md-4"></td>
+                                    <td class="col-md-4 text-center">
+                                        <i class="fa fa-calendar"></i> Fecha Emisión
+                                    </td>
+                                    <td class="col-md-4 text-center">
+                                        <i class="fa fa-calendar"></i> Fecha Expiración
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-3">Marca</td>
-                                    <td class="text-center">{{ $vehicle->modelVehicle->trademark->name }}</td>
+                                    <td class="col-md-4">Padrón</td>
+                                    <td class="text-center">
+                                        {{ $vehicle->dateDocumentationVehicle->emission_padron }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $vehicle->dateDocumentationVehicle->expiration_padron }}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-3">Modelo</td>
-                                    <td class="text-center"> {{ $vehicle->modelVehicle->name }}</td>
+                                    <td class="col-md-4">Seguro Obligatorio</td>
+                                    <td class="text-center">
+                                        {{ $vehicle->dateDocumentationVehicle->emission_insurance }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $vehicle->dateDocumentationVehicle->expiration_insurance }}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-3">Estado Vehículo</td>
-                                    <td class="text-center">{{ $vehicle->stateVehicle->name }}</td>
+                                    <td class="col-md-4">Permiso de Circulación</td>
+                                    <td class="text-center">
+                                        {{ $vehicle->dateDocumentationVehicle->emission_permission }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $vehicle->dateDocumentationVehicle->expiration_permission }}
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td class="col-md-3">Fecha Adquisición</td>
-                                    <td class="text-center"><i class="fa fa-calendar"></i> {{ $vehicle->acquisition_date }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Fecha Inscripción</td>
-                                    <td class="text-center"><i class="fa fa-calendar"></i> {{ $vehicle->inscription_date }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Color</td>
-                                    <td class="text-center">{{ $vehicle->color }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Año</td>
-                                    <td class="text-center">{{ $vehicle->year }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Patente</td>
-                                    <td class="text-center">{{ $vehicle->patent }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Combustible</td>
-                                    <td class="text-center"><i class="md-gas-station font-size-16" aria-hidden="true" ></i> {{ $vehicle->fuel->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Nº Chasis</td>
-                                    <td class="text-center">{{ $vehicle->num_chasis }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Nº Motor</td>
-                                    <td class="text-center">{{ $vehicle->num_motor }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Kilometraje</td>
-                                    <td class="text-center">{{ $vehicle->km }} km</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Cilindraje Motor</td>
-                                    <td class="text-center">{{ $vehicle->engine_cubic }} {{ $vehicle->typeVehicle->engineCubic->acr }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Peso</td>
-                                    <td class="text-center">{{ $vehicle->weight }} {{ $vehicle->typeVehicle->weight->acr }}</td>
-                                </tr>
-                                @if ($vehicle->obs)
-                                    <tr>
-                                        <td class="col-md-3">Observación</td>
-                                        <td class="text-center">{{ $vehicle->obs }}</td>
-                                    </tr>
-                                @endif
-                                <tr>
-                                    <td class="col-md-3">Ingresado</td>
-                                    <td class="text-center text-capitalize">{{ Date::parse($vehicle->created_at)->format('l j F Y H:i:s') }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Actualizado</td>
-                                    <td class="text-center text-capitalize">{{ Date::parse($vehicle->updated_at)->format('l j F Y H:i:s') }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

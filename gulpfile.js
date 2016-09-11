@@ -190,7 +190,7 @@ elixir(function(mix) {
     mix.styles([
         'bower/bootstrap-select/dist/css/bootstrap-select.css',
         'bower/clockpicker/dist/bootstrap-clockpicker.css'
-    ], 'public/css/human-resources/contracts/create-contracts.css')
+    ], 'public/css/human-resources/contracts/create-custom-contracts.css')
 
     // Human-Resources > Contracts > Create JS
     .scripts([
@@ -200,9 +200,9 @@ elixir(function(mix) {
         'components/bootstrap-clockpicker.js',
         'components/bootstrap-select.js',
         'components/autoNumeric.js',
-        'me/js/utilities/sanitized-money-fields.js',
+        'me/js/utilities/sanitized-fields.js',
         'me/js/base/human-resources/contracts/custom-contracts.js'
-    ], 'public/js/human-resources/contracts/create-contracts.js')
+    ], 'public/js/human-resources/contracts/create-custom-contracts.js')
 
     // Human-Resources > Employees > Create-Edit Custom CSS
     mix.styles([
@@ -229,32 +229,6 @@ elixir(function(mix) {
         'components/bootstrap-datepicker.js',
         'me/js/utilities/scrollTop.js'
     ], 'public/js/human-resources/employees/create-edit-custom-employees.js')
-
-
-
-    // Operations > Index Menú JS
-    .scripts([
-        'me/js/base/operations/index.js'
-    ], 'public/js/operations/index.js')
-
-    // Operations > Vehicles > Index Custom Vehicles JS
-    .scripts([
-        'me/js/base/operations/vehicles/config_bootstrap_table.js'
-    ], 'public/js/operations/vehicles/index-custom-vehicles.js')
-
-    // Operations > Vehicles > Create-Edit Custom Vehicles CSS
-    mix.styles([
-        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
-    ], 'public/css/operations/vehicles/create-edit-custom-vehicles.css')
-
-    // Operations > Vehicles > Create-Edit Custom Vehicles JS
-    .scripts([
-        'me/js/utilities/add_csrf_token.js',
-        'me/js/change/change_trademark_model.js',
-        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
-        'components/bootstrap-datepicker.js',
-    ], 'public/js/operations/vehicles/create-edit-custom-vehicles.js')
 
 
 
@@ -463,6 +437,38 @@ elixir(function(mix) {
 
 
 
+    // Operations > Index Menú JS
+    .scripts([
+        'me/js/base/operations/index.js'
+    ], 'public/js/operations/index.js')
+
+    // Operations > Vehicles > Index Custom Vehicles JS
+    .scripts([
+        'me/js/base/operations/vehicles/config_bootstrap_table.js'
+    ], 'public/js/operations/vehicles/index-custom-vehicles.js')
+
+    // Operations > Vehicles > Create-Edit Custom Vehicles CSS
+    mix.styles([
+        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+    ], 'public/css/operations/vehicles/create-edit-custom-vehicles.css')
+
+    // Operations > Vehicles > Create-Edit Custom Vehicles JS
+    .scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/change/change_trademark_model.js',
+        'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
+        'bower/autoNumeric/autoNumeric.js',
+        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+        'components/bootstrap-maxlength.js',
+        'components/autoNumeric.js',
+        'components/bootstrap-datepicker.js',
+        'me/js/utilities/sanitized-fields.js',
+        'me/js/base/operations/vehicles/custom-vehicles.js'
+    ], 'public/js/operations/vehicles/create-edit-custom-vehicles.js')
+
+
+
     /*
      *  Output with version
      */
@@ -495,15 +501,10 @@ elixir(function(mix) {
         'public/js/human-resources/contracts/index-custom-contracts.js',
         'public/css/human-resources/employees/index-custom-employees.css',
         'public/js/human-resources/employees/index-custom-employees.js',
-        'public/css/human-resources/contracts/create-contracts.css',
-        'public/js/human-resources/contracts/create-contracts.js',
+        'public/css/human-resources/contracts/create-custom-contracts.css',
+        'public/js/human-resources/contracts/create-custom-contracts.js',
         'public/css/human-resources/employees/create-edit-custom-employees.css',
         'public/js/human-resources/employees/create-edit-custom-employees.js',
-
-        'public/js/operations/index.js',
-        'public/js/operations/vehicles/index-custom-vehicles.js',
-        'public/css/operations/vehicles/create-edit-custom-vehicles.css',
-        'public/js/operations/vehicles/create-edit-custom-vehicles.js',
 
         'public/js/maintainers/index.js',
         'public/js/maintainers/areas/index-custom-areas.js',
@@ -544,6 +545,11 @@ elixir(function(mix) {
         'public/js/maintainers/type-professional-licenses/index-custom-type-professional-licenses.js',
         'public/js/maintainers/type-specialities/index-custom-type-specialities.js',
         'public/js/maintainers/type-vehicles/index-custom-type-vehicles.js',
+
+        'public/js/operations/index.js',
+        'public/js/operations/vehicles/index-custom-vehicles.js',
+        'public/css/operations/vehicles/create-edit-custom-vehicles.css',
+        'public/js/operations/vehicles/create-edit-custom-vehicles.js',
     ]);
 
     // Copy fonts Font-Awesome

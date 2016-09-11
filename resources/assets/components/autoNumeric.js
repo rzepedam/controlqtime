@@ -4,7 +4,8 @@ $.components.register("autoNumeric", {
         aSep: '.',
         aDec: ',',
         aSign: '$ ',
-        aPad: false
+        aPad: false,
+        aForm: false
     }
 });
 

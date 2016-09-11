@@ -555,7 +555,7 @@
                             }
                         },
                         error: function (response) {
-                            $('.finish').removeClass('btn-warning').addClass('btn-success');
+                            $('.finish').removeClass('btn-warning').addClass('btn-primary');
                             $('.replace-icon').html('<i class="fa fa-floppy-o"></i> Guardar');
                             var errors = $.parseJSON(response.responseText);
                             $.each(errors, function (index, value) {

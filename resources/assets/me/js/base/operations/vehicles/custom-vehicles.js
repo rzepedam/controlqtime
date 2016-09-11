@@ -8,7 +8,7 @@ $(document).ready(function(){
         var action  = $('#form-submit').attr('action');
         var button  = $(this);
 
-        sanitizedMoneyFields();
+        sanitizedDecimalNumberFields();
         button.addClass('btn-success').html('<i class="fa fa-spinner fa-spin fa-fw"></i> Guardando...');
         $.ajax({
             type: 'POST',
@@ -16,7 +16,7 @@ $(document).ready(function(){
             data: form.serialize(),
             dataType: "json",
             success: function (response) {
-                if (response.status) {
+                if (response.success) {
                     window.location.href = response.url;
                 }
             },
@@ -30,5 +30,7 @@ $(document).ready(function(){
                 });
             }
         });
+
     });
+
 });

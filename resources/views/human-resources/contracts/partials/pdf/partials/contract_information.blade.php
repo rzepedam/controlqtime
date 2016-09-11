@@ -66,7 +66,7 @@
                 Sueldo Base
             </div>
             <div class="col-xs-7">
-                <b>{{ $contract->salary }}</b>
+                <b>$ {{ $contract->salary }}</b>
             </div>
         </div>
         <div class="row">
@@ -74,7 +74,7 @@
                 Movilización
             </div>
             <div class="col-xs-7">
-                <b>{{ $contract->mobilization }}</b>
+                <b>$ {{ $contract->mobilization }}</b>
             </div>
         </div>
         <div class="row">
@@ -82,7 +82,7 @@
                 Colación
             </div>
             <div class="col-xs-7">
-                <b>{{ $contract->collation }}</b>
+                <b>$ {{ $contract->collation }}</b>
             </div>
         </div>
         <div class="row">

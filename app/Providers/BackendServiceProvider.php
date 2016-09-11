@@ -60,6 +60,11 @@ class BackendServiceProvider extends ServiceProvider
         );
 
 		$this->app->bind(
+			'Controlqtime\Core\Contracts\DateDocumentationVehicleRepoInterface',
+			'Controlqtime\Core\Repositories\DateDocumentationVehicleRepo'
+		);
+
+		$this->app->bind(
 			'Controlqtime\Core\Contracts\DayTripRepoInterface',
 			'Controlqtime\Core\Repositories\DayTripRepo'
 		);
@@ -68,6 +73,11 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Contracts\DegreeRepoInterface',
             'Controlqtime\Core\Repositories\DegreeRepo'
         );
+
+		$this->app->bind(
+			'Controlqtime\Core\Contracts\DetailVehicleRepoInterface',
+			'Controlqtime\Core\Repositories\DetailVehicleRepo'
+		);
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\DisabilityRepoInterface',

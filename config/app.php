@@ -169,7 +169,7 @@ return [
 		Barryvdh\Snappy\ServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
 		Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
-		Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+		Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class
 	],
 
 	/*

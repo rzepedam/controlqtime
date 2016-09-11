@@ -18,7 +18,7 @@
 
     <div class="nav-tabs-horizontal">
         <ul class="nav nav-tabs" data-plugin="nav-tabs" role="tablist">
-            <li class="active" role="data_vehicle"><a data-toggle="tab" href="#tab_1" aria-controls="tab_1" role="tab"><i class="fa fa-bus" aria-hidden="true"></i> Datos Vehículo</a></li>
+            <li class="active" role="data_vehicle"><a data-toggle="tab" href="#tab_1" aria-controls="tab_1" role="tab"><i class="fa fa-bus" aria-hidden="true"></i> Información Vehículo</a></li>
             <li role="files_attach"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-file-text-o" aria-hidden="true"></i> Documentos Adjuntos</a></li>
         </ul>
         <div class="tab-content padding-top-20">

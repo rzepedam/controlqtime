@@ -26,9 +26,10 @@ abstract class BaseRepo implements BaseRepoInterface
 
     public function update(array $request, $id)
     {
-        $query = $this->model->findOrFail($id)->fill($request)->save();
+        $model = $this->model->findOrFail($id);
+		$model->fill($request)->save();
         Session::flash('success', 'El registro fue actualizado satisfactoriamente.');
-        return $query;
+        return $model;
     }
 
     public function delete($id)

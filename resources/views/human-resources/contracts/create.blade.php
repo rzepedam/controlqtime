@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/human-resources/contracts/create-contracts.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/human-resources/contracts/create-custom-contracts.css') }}">
 
 @stop
 
@@ -29,7 +29,7 @@
             </div>
             <div class="panel-body">
 
-                @include('human-resources.contracts.partials.labor_information')
+                @include('human-resources.contracts.partials.fields.labor_information')
 
             </div>
         </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="panel-body">
 
-                @include('human-resources.contracts.partials.remuneration')
+                @include('human-resources.contracts.partials.fields.remuneration')
 
             </div>
         </div>
@@ -57,7 +57,7 @@
             </div>
             <div class="panel-body">
 
-                @include('human-resources.contracts.partials.terms_and_obligations')
+                @include('human-resources.contracts.partials.fields.terms_and_obligations')
 
             </div>
         </div>
@@ -79,6 +79,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/human-resources/contracts/create-contracts.js') }}"></script>
+    <script src="{{ elixir('js/human-resources/contracts/create-custom-contracts.js') }}"></script>
 
 @stop

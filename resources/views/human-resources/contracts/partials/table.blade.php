@@ -4,11 +4,11 @@
         <table class="table-hover table-condensed" id="contract_table" data-mobile-responsive="true">
             <thead>
                 <tr>
-                    <th data-field="id" data-sortable="true">Nº</th>
-                    <th data-field="employee_id" data-sortable="true">Trabajador</th>
-                    <th data-field="company_id" data-sortable="true">Empresa</th>
-                    <th class="text-center" data-field="created_at" data-sortable="true">Fecha</th>
-                    <th class="text-center">Acciones</th>
+                    <th class="col-md-1" data-field="id" data-sortable="true">Nº</th>
+                    <th class="col-md-4" data-field="employee_id" data-sortable="true">Trabajador</th>
+                    <th class="col-md-4" data-field="company_id" data-sortable="true">Empresa</th>
+                    <th class="text-center col-md-1" data-field="created_at" data-sortable="true">Fecha</th>
+                    <th class="text-center col-md-2">Acciones</th>
                 </tr>
             </thead>
         </table>

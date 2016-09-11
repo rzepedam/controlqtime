@@ -34,7 +34,7 @@
 	<div class="col-md-3">
 		<div class="form-group">
 			{{ Form::label("birthday", "Fecha de Nacimiento", ['class' => 'control-label']) }}
-			<div class="input-group date" data-plugin="datepicker">
+			<div class="input-group date" data-plugin="datepicker" data-end-date="{{ date('d-m-Y') }}">
 				<div class="input-group-addon">
 					<i class="fa fa-calendar"></i>
 				</div>

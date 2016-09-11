@@ -15,18 +15,10 @@ class CreateVehiclesTable extends Migration
             $table->integer('state_vehicle_id')->unsigned();
             $table->date('acquisition_date');
             $table->date('inscription_date');
-            $table->string('color', 30);
-            $table->string('year', 4);
-            $table->string('patent', 15)->unique();
-            $table->integer('fuel_id')->unsigned();
-			$table->string('num_chasis', 17);
-			$table->string('num_motor', 12);
-            $table->string('km', 7);
-            $table->string('engine_cubic', 4);
-            $table->string('weight', 6);
-            $table->string('code', 50);
-            $table->text('obs');
-            $table->enum('state', ['enable', 'disable'])->default('disable');
+			$table->string('year', 4);
+			$table->string('patent', 15)->unique();
+			$table->string('code', 50);
+			$table->enum('state', ['enable', 'disable'])->default('disable');
             $table->enum('condition', ['available', 'unavailable'])->default('available');
             $table->timestamps();
 
@@ -48,11 +40,6 @@ class CreateVehiclesTable extends Migration
             $table->foreign('state_vehicle_id')
                 ->references('id')
                 ->on('state_vehicles')
-                ->onUpdate('cascade');
-
-            $table->foreign('fuel_id')
-                ->references('id')
-                ->on('fuels')
                 ->onUpdate('cascade');
 
         });

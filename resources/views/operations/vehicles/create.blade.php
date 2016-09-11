@@ -18,34 +18,43 @@
 
     @include('layout.messages.errors-js')
 
-    <div class="panel">
+    {{ Form::open(array('route' => 'vehicles.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
-        {{ Form::open(array('route' => 'vehicles.store', 'method' => 'POST', 'id' => 'form-submit')) }}
-
+        <div class="panel panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="icon fa fa-bus text-primary" aria-hidden="true"></i> Información del Vehículo</h3>
+            </div>
             <div class="panel-body">
 
-                @include('operations.vehicles.partials.fields')
+                @include('operations.vehicles.partials.fields.info_vehicle')
 
             </div>
             <br />
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-12">
-                        <a href="{{ route('vehicles.index') }}">Volver</a>
-                        <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
-                    </div>
-                </div>
+        </div>
+        <div class="panel panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="icon fa fa-folder-open text-warning" aria-hidden="true"></i> Información de Documentación</h3>
             </div>
+            <div class="panel-body">
 
-        {{ Form::close() }}
+                @include('operations.vehicles.partials.fields.info_documentation')
 
-    </div>
+            </div>
+            <br />
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ route('vehicles.index') }}">Volver</a>
+                <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+            </div>
+        </div>
+
+    {{ Form::close() }}
 
 @stop
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
     <script src="{{ elixir('js/operations/vehicles/create-edit-custom-vehicles.js') }}"></script>
 
 @stop

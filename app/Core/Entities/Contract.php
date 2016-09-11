@@ -3,7 +3,7 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Controlqtime\Helpers\Helper;
+use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Contract extends Eloquent
@@ -95,38 +95,41 @@ class Contract extends Eloquent
 		return $this->belongsToMany(TermAndObligatory::class);
 	}
 
-
 	/**
-	 * @param datetime($value) 2016-01-01 00:00:00
-	 * @return string format('d-m-Y H:i:s')
+	 * @param date $value (2016-10-01)
+	 *
+	 * @return string 11-09-2016
 	 */
 	public function getCreatedAtAttribute($value) {
-		return $this->attributes['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d-m-Y H:i:s');
+		return Carbon::parse($value)->format('d-m-Y');
 	}
 
 
 	/**
 	 * @param $value (250000)
+	 *
 	 * @return string ($ 250.000) for autoNumeric plugin
 	 */
 	public function getSalaryAttribute($value) {
-		return Helper::formatedMoney($value);
+		return FormatField::decimalNumber($value);
 	}
 
 	/**
 	 * @param $value (15000)
+	 *
 	 * @return string ($ 15.000) for autoNumeric plugin
 	 */
 	public function getMobilizationAttribute($value) {
-		return Helper::formatedMoney($value);
+		return FormatField::decimalNumber($value);
 	}
 
 	/**
 	 * @param $value (15000)
+	 *
 	 * @return string ($ 15.000) for autoNumeric plugin
 	 */
 	public function getCollationAttribute($value) {
-		return Helper::formatedMoney($value);
+		return FormatField::decimalNumber($value);
 	}
 
 }

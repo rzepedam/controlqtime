@@ -98,19 +98,19 @@
                                     <tr>
                                         <td class="col-md-3">Sueldo Base</td>
                                         <td class="text-center">
-                                            {{ $contract->salary }}
+                                            $ {{ $contract->salary }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Movilización</td>
                                         <td class="text-center">
-                                            {{ $contract->mobilization }}
+                                            $ {{ $contract->mobilization }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-md-3">Colación</td>
                                         <td class="text-center">
-                                            {{ $contract->collation }}
+                                            $ {{ $contract->collation }}
                                         </td>
                                     </tr>
                                     <tr>

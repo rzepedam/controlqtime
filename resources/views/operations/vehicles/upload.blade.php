@@ -55,24 +55,6 @@
     <br />
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <strong>#</strong> Patente Vehículo
-                    </h3>
-                </div>
-                <div class="panel-body">
-
-                    <br />
-                    <input id="patent" type="file" class="file-loading" multiple>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-danger">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -138,24 +120,6 @@
                 uploadExtraData:  {
                     vehicle_id: "{{ $id }}",
                     type: "ObligatoryInsuranceVehicle"
-                }
-            });
-
-            $("#patent").fileinput({
-                initialPreview: [
-                    @foreach($vehicle->imagePatents as $image_patent)
-                        "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_patent->path) }}' />",
-                    @endforeach
-                ],
-                initialPreviewConfig: [
-                    @foreach($vehicle->imagePatents as $image_patent)
-                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_patent->size }}", url: "{{ route('VehicleDeleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "PatentVehicle" } },
-                    @endforeach
-                ],
-                uploadUrl: "{{ route('VehicleAddImages') }}",
-                uploadExtraData:  {
-                    vehicle_id: "{{ $id }}",
-                    type: "PatentVehicle"
                 }
             });
 

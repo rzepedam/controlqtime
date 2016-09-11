@@ -17,13 +17,12 @@ class VehicleRepo extends BaseRepo implements VehicleRepoInterface
 
     public function checkState($id)
     {
-        $vehicle            = parent::find($id, ['imagePadrones', 'imageObligatoryInsurances', 'imagePatents', 'imageCirculationPermits']);
+        $vehicle            = parent::find($id, ['imagePadrones', 'imageObligatoryInsurances', 'imageCirculationPermits']);
         $image_padron       = $vehicle->imagePadrones->count();
         $image_obl_ins      = $vehicle->imageObligatoryInsurances->count();
-        $image_patent       = $vehicle->imagePatents->count();
         $image_cir_permit   = $vehicle->imageCirculationPermits->count();
 
-        if ($image_padron > 0 && $image_obl_ins > 0 && $image_patent > 0 && $image_cir_permit > 0) {
+        if ($image_padron > 0 && $image_obl_ins > 0 && $image_cir_permit > 0) {
             $vehicle->state     = 'enable';
             $vehicle->condition = 'available';
             $vehicle->save();

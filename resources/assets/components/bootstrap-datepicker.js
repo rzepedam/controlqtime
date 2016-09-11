@@ -5,7 +5,6 @@ $.components.register("datepicker", {
     language: 'es',
     format: 'dd-mm-yyyy',
     orientation: "bottom",
-    endDate: new Date(),
     todayBtn: true,
     todayHighlight: true
   }

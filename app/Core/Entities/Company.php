@@ -3,7 +3,7 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Controlqtime\Helpers\Helper;
+use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Company extends Eloquent
@@ -94,7 +94,7 @@ class Company extends Eloquent
 	 * @return string 123.456.789-k
 	 */
 	public function getRutAttribute($value) {
-		return Helper::formatedRut($value);
+		return FormatField::rut($value);
 	}
 
 }
