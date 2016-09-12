@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Controlqtime\Http\Controllers\Auth;
 
-use App\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use Controlqtime\Core\Entities\User;
+use Controlqtime\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -31,8 +31,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {

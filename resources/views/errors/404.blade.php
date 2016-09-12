@@ -27,7 +27,7 @@
             <p class="error-advise">
                 NECESITAS ACCEDER A NUESTRA PÁGINA PRINCIPAL?
             </p>
-            <a class="btn btn-primary btn-round" href="{{ route('home') }}"><i class="icon md-home"></i> Home</a>
+            <a class="btn btn-primary btn-round" href="{{ url('home') }}"><i class="icon md-home"></i> Home</a>
             <footer class="page-copyright">
                 <p>WEBSITE BY @ControlQTime</p>
                 <p>© 2016. Todos los derechos reservados.</p>

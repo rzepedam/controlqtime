@@ -1,4 +1,9 @@
 <?php
 
-//Route::auth();
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Auth::routes();
+
+Route::get('/', function(){
+	return view('welcome');
+});
+
+Route::get('/home', 'HomeController@index');

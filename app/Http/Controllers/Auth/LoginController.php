@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Controlqtime\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Controlqtime\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -27,11 +27,9 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/home';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+	/**
+	 * Create a new controller instance.
+	 */
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);

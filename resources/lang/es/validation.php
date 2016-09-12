@@ -41,7 +41,7 @@ return [
     'min'                  => [
         'numeric' => 'El tamaño de <strong>:attribute</strong> debe ser de al menos :min.',
         'file'    => 'El tamaño de <strong>:attribute</strong> debe ser de al menos :min kilobytes.',
-        'string'  => '<strong>:attribute</strong> debe contener al menos :min caracteres.',
+        'string'  => 'El campo <strong>:attribute</strong> debe contener al menos :min caracteres.',
         'array'   => '<strong>:attribute</strong> debe tener al menos :min elementos.',
     ],
     'not_in'               => '<strong>:attribute</strong> es inválido.',
