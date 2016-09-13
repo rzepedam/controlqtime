@@ -1,9 +1,9 @@
 <?php
 
-use Controlqtime\Core\Api\Entities\AccessControl;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\LegalRepresentative;
+use Controlqtime\Core\Api\Entities\AccessControlApi;
 
 $factory->define(Company::class, function (Faker\Generator $faker)
 {
@@ -73,10 +73,9 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	];
 });
 
-$factory->define(AccessControl::class, function (Faker\Generator $faker)
+$factory->define(AccessControlApi::class, function (Faker\Generator $faker)
 {
 	return array(
-		'uuid'			=> $faker->uuid,
 		'rut'			=> rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'num_device'	=> $faker->macAddress,
 		'status'		=> $faker->boolean
