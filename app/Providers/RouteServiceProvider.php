@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'Controlqtime\Http\Controllers';
+	protected $api = 'Controlqtime\Core\Api\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -70,7 +71,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'api',
-            'namespace' => $this->namespace,
+            'namespace' => $this->api,
             'prefix' => 'api',
         ], function ($router) {
             require base_path('routes/api.php');
