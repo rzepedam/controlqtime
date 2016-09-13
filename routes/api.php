@@ -17,7 +17,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::post('access-control', 'AccessControlApiController@store');
+Route::post('access-control', 'AccessControlApiController@store')->middleware('auth:api');
 
-Route::put('updateEmployeeImage', 'EmployeeApiController@update');
+Route::put('updateEmployeeImage', 'EmployeeApiController@update')->middleware('auth:api');
 
