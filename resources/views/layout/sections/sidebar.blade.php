@@ -11,7 +11,7 @@
 
                     {{-- Home --}}
                     <li class="site-menu-item active">
-                        <a class="animsition-link" href="{{ route('home') }}">
+                        <a class="animsition-link" href="{{ url('home') }}">
                             <i class="site-menu-icon fa fa-home" aria-hidden="true"></i>
                             <span class="site-menu-title">Inicio</span>
                         </a>

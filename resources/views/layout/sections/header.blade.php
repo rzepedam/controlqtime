@@ -17,7 +17,7 @@
                 </li>
             </ul>
             <div class="navbar-brand navbar-brand-center">
-                <a href="{{ route('home') }}">
+                <a href="{{ url('home') }}">
                     <img class="navbar-brand-logo" src="{{ asset('img/remark.png') }}" title="ControlQTime">
                 </a>
             </div>
