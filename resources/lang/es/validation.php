@@ -24,7 +24,7 @@ return [
     'digits'               => 'El campo <strong>:attribute</strong> debe tener :digits dígitos.',
     'digits_between'       => 'El campo <strong>:attribute</strong> debe tener entre :min y :max dígitos.',
     'email'                => 'El <strong>:attribute</strong> no es un correo válido',
-    'exists'               => '<strong>:attribute</strong> es inválido.',
+    'exists'               => 'El campo <strong>:attribute</strong> no es válido.',
     'filled'               => 'El campo <strong>:attribute</strong> es obligatorio.',
     'image'                => '<strong>:attribute</strong> debe ser una imagen.',
     'in'                   => '<strong>:attribute</strong> es inválido.',
