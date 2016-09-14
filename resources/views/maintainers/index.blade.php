@@ -92,7 +92,7 @@
             <div id="redirect-type-specialities" class="counter counter-lg counter-inverse bg-cyan-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
                     </div>
                     <span class="counter-number">Especialidades</span>
                 </div>
@@ -182,7 +182,20 @@
             </div>
         </div>
         <div class="col-md-2 waves-effect waves-light">
-            <div id="redirect-trademarks" class="counter counter-lg counter-inverse bg-brown-200 vertical-align height-150 pointer">
+            <div id="redirect-master-piece-vehicles" class="counter counter-lg counter-inverse bg-red-200 vertical-align height-150 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Maestro Piezas de Vehículos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2 waves-effect waves-light">
+            <div id="redirect-trademarks" class="counter counter-lg counter-inverse bg-brown-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-trademark" aria-hidden="true"></i>
@@ -191,9 +204,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2 waves-effect waves-light">
             <div id="redirect-model-vehicles" class="counter counter-lg counter-inverse bg-grey-400 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
@@ -235,7 +245,7 @@
             </div>
         </div>
         <div class="col-md-2 waves-effect waves-light">
-            <div id="redirect-periodicities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-periodicities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-repeat" aria-hidden="true"></i>
@@ -244,8 +254,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2 waves-effect waves-light">
-            <div id="redirect-forecasts" class="counter counter-lg counter-inverse bg-cyan-200 vertical-align height-150 pointer">
+            <div id="redirect-forecasts" class="counter counter-lg counter-inverse bg-cyan-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-heart" aria-hidden="true"></i>
@@ -254,9 +267,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2 waves-effect waves-light">
             <div id="redirect-professions" class="counter counter-lg counter-inverse bg-deep-orange-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
@@ -298,7 +308,7 @@
             </div>
         </div>
         <div class="col-md-2 waves-effect waves-light">
-            <div id="redirect-terminals" class="counter counter-lg counter-inverse bg-blue-grey-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-terminals" class="counter counter-lg counter-inverse bg-blue-grey-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-road" aria-hidden="true"></i>
@@ -307,8 +317,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-2 waves-effect waves-light">
-            <div id="redirect-type-contracts" class="counter counter-lg counter-inverse bg-teal-200 vertical-align height-150 pointer">
+            <div id="redirect-type-contracts" class="counter counter-lg counter-inverse bg-teal-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-file-text" aria-hidden="true"></i>
@@ -317,9 +330,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2 waves-effect waves-light">
             <div id="redirect-type-companies" class="counter counter-lg counter-inverse bg-pink-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">

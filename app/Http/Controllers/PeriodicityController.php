@@ -68,6 +68,7 @@ class PeriodicityController extends Controller
 	public function edit($id)
     {
     	$periodicity = $this->periodiocity->find($id);
+
         return view('maintainers.periodicities.edit', compact('periodicity'));
     }
 
@@ -94,6 +95,7 @@ class PeriodicityController extends Controller
 	public function destroy($id)
     {
         $this->periodiocity->delete($id);
+
 		return redirect()->route('periodicities.index');
     }
 }

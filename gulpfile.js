@@ -13,16 +13,25 @@ require('laravel-elixir-vue');
  |
  */
 
-elixir(mix => {
-    mix.sass('app.scss')
-    .webpack('app.js');
+/* -------------------------------- Configuration ----------------------------------------- */
+
+elixir.config.css.folder = '';
+elixir.config.js.folder = '';
+elixir.config.sourcemaps = false;
+elixir.config.css.minifier.pluginOptions = {
+    keepSpecialComments: 0
+};
+
+/* --------------------------------------------------------------------------------------- */
+
+elixir(function(mix) {
 
     // Layout > Stylesheets CSS
     mix.styles([
         'bower/packages-for-cqtime/css/bootstrap.css',
         'bower/packages-for-cqtime/css/bootstrap-extend.css',
         'bower/packages-for-cqtime/css/site.css',
-    ], 'public/css/index-layout-core.css')
+    ], 'public/css/index-layout-core.css');
 
     // Layout > Plugins CSS
     mix.styles([
@@ -31,27 +40,27 @@ elixir(mix => {
         'bower/Waves/dist/waves.css',
         'bower/toastr/toastr.css',
         'me/css/custom-color-toastr.css'
-    ], 'public/css/index-layout-plugin.css')
+    ], 'public/css/index-layout-plugin.css');
 
     // Layout > Fonts CSS
     mix.styles([
         'bower/font-awesome/css/font-awesome.css',
         'bower/packages-for-cqtime/css/material-design.css',
-    ], 'public/css/index-layout-fonts.css')
+    ], 'public/css/index-layout-fonts.css');
 
     // Layout > Style Owned CSS
     mix.styles([
         'me/css/style.css'
-    ], 'public/css/style.css')
+    ], 'public/css/style.css');
 
     // Layout > Script Browsers Utilities
     mix.styles([
         'bower/packages-for-cqtime/js/modernizr.js',
         'bower/breakpoints.js/dist/breakpoints.js'
-    ], 'public/js/index-layout-browser-utilities.js')
+    ], 'public/js/index-layout-browser-utilities.js');
 
     // Layout > Core JS
-    .scripts([
+    mix.scripts([
         'bower/packages-for-cqtime/js/jquery.js',
         'bower/packages-for-cqtime/js/bootstrap.js',
         'bower/animsition/dist/js/animsition.js',
@@ -61,92 +70,92 @@ elixir(mix => {
         'bower/jquery-asHoverScroll/dist/jquery-asHoverScroll.js',
         'bower/Waves/dist/waves.js',
         'bower/toastr/toastr.js',
-    ], 'public/js/index-layout-core.js')
+    ], 'public/js/index-layout-core.js');
 
     // Layout > Scripts JS
-    .scripts([
+    mix.scripts([
         'bower/packages-for-cqtime/js/core.js',
         'bower/packages-for-cqtime/js/site.js',
         'bower/packages-for-cqtime/js/menu.js',
         'bower/packages-for-cqtime/js/menubar.js',
         'bower/packages-for-cqtime/js/sidebar.js',
         'bower/packages-for-cqtime/js/v1.js',
-    ], 'public/js/index-layout-scripts.js')
+    ], 'public/js/index-layout-scripts.js');
 
     // Layout > Components JS
-    .scripts([
+    mix.scripts([
         'components/animsition.js',
         'components/asscrollable.js',
-    ], 'public/js/index-layout-components.js')
+    ], 'public/js/index-layout-components.js');
 
 
 
     // Index Common CSS
     mix.styles([
         'bower/bootstrap-table/dist/bootstrap-table.css'
-    ], 'public/css/index-common.css')
+    ], 'public/css/index-common.css');
 
     // Index Common JS
-    .scripts([
+    mix.scripts([
         'custom-configuration/js/bootstrap-table.js',
         'bower/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
         'custom-configuration/js/bootstrap-table-es-ES.js',
-    ], 'public/js/index-common.js')
+    ], 'public/js/index-common.js');
 
     // Create-Edit Common JS
-    .scripts([
+    mix.scripts([
         'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
         'components/bootstrap-maxlength.js',
         'me/js/utilities/submit-form-ajax.js'
-    ], 'public/js/create-edit-common.js')
+    ], 'public/js/create-edit-common.js');
 
     // Edit Common JS
-    .scripts([
+    mix.scripts([
         'me/js/utilities/delete.js'
-    ], 'public/js/edit-common.js')
+    ], 'public/js/edit-common.js');
 
     // Show With Images Common CSS
     mix.styles([
         'bower/magnific-popup/dist/magnific-popup.css'
-    ], 'public/css/show-with-image-common.css')
+    ], 'public/css/show-with-image-common.css');
 
     // Show With Images Common JS
-    .scripts([
+    mix.scripts([
         'bower/magnific-popup/dist/jquery.magnific-popup.js',
         'components/magnific-popup.js',
         'me/js/utilities/download-files.js'
-    ], 'public/js/show-with-image-common.js')
+    ], 'public/js/show-with-image-common.js');
 
     // Upload Common CSS
     mix.styles([
         'bower/bootstrap-fileinput/css/fileinput.css'
-    ], 'public/css/upload-common.css')
+    ], 'public/css/upload-common.css');
 
     // Upload Common JS
-    .scripts([
+    mix.scripts([
         'me/js/utilities/add_csrf_token.js',
         'custom-configuration/js/fileinput.js',
-    ], 'public/js/upload-common.js')
+    ], 'public/js/upload-common.js');
 
 
 
     // Administrations > Index Menú JS
-    .scripts([
+    mix.scripts([
         'me/js/base/administrations/index.js'
-    ], 'public/js/administrations/index.js')
+    ], 'public/js/administrations/index.js');
 
     // Administrations > Companies > Index Custom Companies JS
-    .scripts([
+    mix.scripts([
         'me/js/base/administrations/companies/config_bootstrap_table.js'
-    ], 'public/js/administrations/companies/index-custom-companies.js')
+    ], 'public/js/administrations/companies/index-custom-companies.js');
 
     // Administration > Companies > Create-Edit Custom CSS
     mix.styles([
         'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
-    ], 'public/css/administrations/companies/create-edit-custom-companies.css')
+    ], 'public/css/administrations/companies/create-edit-custom-companies.css');
 
     // Administration > Companies > Create-Edit Custom JS
-    .scripts([
+    mix.scripts([
         'me/js/utilities/add_csrf_token.js',
         'me/js/validations/valida_rut.js',
         'me/js/validations/valida_email.js',
@@ -159,45 +168,45 @@ elixir(mix => {
         'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
         'components/bootstrap-maxlength.js',
         'me/js/utilities/submit-form-ajax.js'
-    ], 'public/js/administrations/companies/create-edit-custom-companies.js')
+    ], 'public/js/administrations/companies/create-edit-custom-companies.js');
 
 
 
     // Human-Resources > Index Menú JS
-    .scripts([
+    mix.scripts([
         'me/js/base/human-resources/index.js'
-    ], 'public/js/human-resources/index.js')
+    ], 'public/js/human-resources/index.js');
 
     // Human-Resources > Access-Control > Index Custom Access-Control JS
-    .scripts([
+    mix.scripts([
         'me/js/base/human-resources/access-controls/config_bootstrap_table.js'
-    ], 'public/js/human-resources/access-controls/index-custom-access-controls.js')
+    ], 'public/js/human-resources/access-controls/index-custom-access-controls.js');
 
     // Human-Resources > Contracts > Index Custom Contracts JS
-    .scripts([
+    mix.scripts([
         'me/js/base/human-resources/contracts/config_bootstrap_table.js'
-    ], 'public/js/human-resources/contracts/index-custom-contracts.js')
+    ], 'public/js/human-resources/contracts/index-custom-contracts.js');
 
     // Human-Resource > Employees > Index Custom Employees CSS
-    .scripts([
+    mix.scripts([
         'bower/sweetalert/dist/sweetalert.css'
-    ], 'public/css/human-resources/employees/index-custom-employees.css')
+    ], 'public/css/human-resources/employees/index-custom-employees.css');
 
     // Human-Resource > Employees > Index Custom Employees JS
-    .scripts([
+    mix.scripts([
         'bower/sweetalert/dist/sweetalert.min.js',
         'me/js/base/human-resources/employees/restore_data_session.js',
         'me/js/base/human-resources/employees/config_bootstrap_table.js'
-    ], 'public/js/human-resources/employees/index-custom-employees.js')
+    ], 'public/js/human-resources/employees/index-custom-employees.js');
 
     // Human-Resources > Contracts > Create CSS
     mix.styles([
         'bower/bootstrap-select/dist/css/bootstrap-select.css',
         'bower/clockpicker/dist/bootstrap-clockpicker.css'
-    ], 'public/css/human-resources/contracts/create-custom-contracts.css')
+    ], 'public/css/human-resources/contracts/create-custom-contracts.css');
 
     // Human-Resources > Contracts > Create JS
-    .scripts([
+    mix.scripts([
         'bower/clockpicker/dist/bootstrap-clockpicker.js',
         'bower/bootstrap-select/dist/js/bootstrap-select.js',
         'bower/autoNumeric/autoNumeric.js',
@@ -206,16 +215,16 @@ elixir(mix => {
         'components/autoNumeric.js',
         'me/js/utilities/sanitized-fields.js',
         'me/js/base/human-resources/contracts/custom-contracts.js'
-    ], 'public/js/human-resources/contracts/create-custom-contracts.js')
+    ], 'public/js/human-resources/contracts/create-custom-contracts.js');
 
     // Human-Resources > Employees > Create-Edit Custom CSS
     mix.styles([
         'custom-configuration/css/wizard.css',
         'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
-    ], 'public/css/human-resources/employees/create-edit-custom-employees.css')
+    ], 'public/css/human-resources/employees/create-edit-custom-employees.css');
 
     // Human-Resources > Employees > Create-Edit Custom JS
-    .scripts([
+    mix.scripts([
         'me/js/utilities/add_csrf_token.js',
         'me/js/utilities/verifica_ultimos_numeros.js',
         'me/js/utilities/capitalize.js',
@@ -232,232 +241,237 @@ elixir(mix => {
         'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
         'components/bootstrap-datepicker.js',
         'me/js/utilities/scrollTop.js'
-    ], 'public/js/human-resources/employees/create-edit-custom-employees.js')
+    ], 'public/js/human-resources/employees/create-edit-custom-employees.js');
 
 
 
     // Maintainers > Index Menú JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/index.js'
-    ], 'public/js/maintainers/index.js')
+    ], 'public/js/maintainers/index.js');
 
     // Maintainers > Áreas > Index Custom Áreas JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/areas/config_bootstrap_table.js'
-    ], 'public/js/maintainers/areas/index-custom-areas.js')
+    ], 'public/js/maintainers/areas/index-custom-areas.js');
 
     // Maintainers > Cities > Index Custom Cities JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/cities/config_bootstrap_table.js'
-    ], 'public/js/maintainers/cities/index-custom-cities.js')
+    ], 'public/js/maintainers/cities/index-custom-cities.js');
 
     // Maintainers > Countries > Index Custom Countries JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/countries/config_bootstrap_table.js'
-    ], 'public/js/maintainers/countries/index-custom-countries.js')
+    ], 'public/js/maintainers/countries/index-custom-countries.js');
 
     // Maintainers > Day-Trips > Index Custom Day-Trips JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/day-trips/config_bootstrap_table.js'
-    ], 'public/js/maintainers/day-trips/index-custom-day-trips.js')
+    ], 'public/js/maintainers/day-trips/index-custom-day-trips.js');
 
     // Maintainers > Degrees > Index Custom Degrees JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/degrees/config_bootstrap_table.js'
-    ], 'public/js/maintainers/degrees/index-custom-degrees.js')
+    ], 'public/js/maintainers/degrees/index-custom-degrees.js');
 
     // Maintainers > Forecasts > Index Custom Forecasts JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/forecasts/config_bootstrap_table.js'
-    ], 'public/js/maintainers/forecasts/index-custom-forecasts.js')
+    ], 'public/js/maintainers/forecasts/index-custom-forecasts.js');
 
     // Maintainers > Fuels > Index Custom Fuels JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/fuels/config_bootstrap_table.js'
-    ], 'public/js/maintainers/fuels/index-custom-fuels.js')
+    ], 'public/js/maintainers/fuels/index-custom-fuels.js');
 
     // Maintainers > Gratifications > Index Custom Gratifications JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/gratifications/config_bootstrap_table.js'
-    ], 'public/js/maintainers/gratifications/index-custom-gratifications.js')
+    ], 'public/js/maintainers/gratifications/index-custom-gratifications.js');
 
     // Maintainers > Institutions > Index Custom Institutions JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/institutions/config_bootstrap_table.js'
-    ], 'public/js/maintainers/institutions/index-custom-institutions.js')
+    ], 'public/js/maintainers/institutions/index-custom-institutions.js');
 
     // Maintainers > Labor-Unions > Index Custom Labor-Unions JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/labor-unions/config_bootstrap_table.js'
-    ], 'public/js/maintainers/labor-unions/index-custom-labor-unions.js')
+    ], 'public/js/maintainers/labor-unions/index-custom-labor-unions.js');
 
     // Maintainers > Marital-Statuses > Index Custom Marital-Statuses JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/marital-statuses/config_bootstrap_table.js'
-    ], 'public/js/maintainers/marital-statuses/index-custom-marital-statuses.js')
+    ], 'public/js/maintainers/marital-statuses/index-custom-marital-statuses.js');
+
+    // Maintainers > Master-Piece-Forms > Index Custom Master-Piece-Forms JS
+    mix.scripts([
+        'me/js/base/maintainers/master-piece-vehicles/config_bootstrap_table.js'
+    ], 'public/js/maintainers/master-piece-vehicles/index-custom-master-piece-vehicles.js');
 
     // Maintainers > Measuring-Units > Index Menú JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/measuring-units/index.js'
-    ], 'public/js/maintainers/measuring-units/index.js')
+    ], 'public/js/maintainers/measuring-units/index.js');
 
     // Maintainers > Measuring-Units > Engine-Cubics > Index Custom Engine-Cubics JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/measuring-units/engine-cubics/config_bootstrap_table.js'
-    ], 'public/js/maintainers/measuring-units/engine-cubics/index-custom-engine-cubics.js')
+    ], 'public/js/maintainers/measuring-units/engine-cubics/index-custom-engine-cubics.js');
 
     // Maintainers > Measuring-Units > Weights > Index Custom Weights JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/measuring-units/weights/config_bootstrap_table.js'
-    ], 'public/js/maintainers/measuring-units/weights/index-custom-weights.js')
+    ], 'public/js/maintainers/measuring-units/weights/index-custom-weights.js');
 
     // Maintainers > Model-Vehicles > Index Custom Model-Vehicles JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/model-vehicles/config_bootstrap_table.js'
-    ], 'public/js/maintainers/model-vehicles/index-custom-model-vehicles.js')
+    ], 'public/js/maintainers/model-vehicles/index-custom-model-vehicles.js');
 
     // Maintainers > Mutualities > Index Custom Mutualities JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/mutualities/config_bootstrap_table.js'
-    ], 'public/js/maintainers/mutualities/index-custom-mutualities.js')
+    ], 'public/js/maintainers/mutualities/index-custom-mutualities.js');
 
     // Maintainers > Num-Hours > Index Custom Num-Hours JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/num-hours/config_bootstrap_table.js'
-    ], 'public/js/maintainers/num-hours/index-custom-num-hours.js')
+    ], 'public/js/maintainers/num-hours/index-custom-num-hours.js');
 
     // Maintainers > Pensions > Index Custom Pensions JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/pensions/config_bootstrap_table.js'
-    ], 'public/js/maintainers/pensions/index-custom-pensions.js')
+    ], 'public/js/maintainers/pensions/index-custom-pensions.js');
 
     // Maintainers > Periodicities > Index Custom Periodicities JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/periodicities/config_bootstrap_table.js'
-    ], 'public/js/maintainers/periodicities/index-custom-periodicities.js')
+    ], 'public/js/maintainers/periodicities/index-custom-periodicities.js');
 
     // Maintainers > Positions > Index Custom Positions JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/positions/config_bootstrap_table.js'
-    ], 'public/js/maintainers/positions/index-custom-positions.js')
+    ], 'public/js/maintainers/positions/index-custom-positions.js');
 
     // Maintainers > Professions > Index Custom Professions JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/professions/config_bootstrap_table.js'
-    ], 'public/js/maintainers/professions/index-custom-professions.js')
+    ], 'public/js/maintainers/professions/index-custom-professions.js');
 
     // Maintainers > Relationships > Index Custom Relationships JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/relationships/config_bootstrap_table.js'
-    ], 'public/js/maintainers/relationships/index-custom-relationships.js')
+    ], 'public/js/maintainers/relationships/index-custom-relationships.js');
 
     // Maintainers > Routes > Index Custom Routes JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/routes/config_bootstrap_table.js'
-    ], 'public/js/maintainers/routes/index-custom-routes.js')
+    ], 'public/js/maintainers/routes/index-custom-routes.js');
 
     // Maintainers > Terminals > Index Custom Terminals JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/terminals/config_bootstrap_table.js'
-    ], 'public/js/maintainers/terminals/index-custom-terminals.js')
+    ], 'public/js/maintainers/terminals/index-custom-terminals.js');
 
     // Maintainers > Terminals > Create-Edit Custom Terminals JS
-    .scripts([
+    mix.scripts([
         'me/js/utilities/add_csrf_token.js',
         'me/js/utilities/verifica_ultimos_numeros.js',
         'me/js/change/change_region_province.js'
-    ], 'public/js/maintainers/terminals/create-edit-custom-terminals.js')
+    ], 'public/js/maintainers/terminals/create-edit-custom-terminals.js');
 
     // Maintainers > Terms-And-Obligatories > Index Custom Terms-And-Obligatories JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/terms-and-obligatories/config_bootstrap_table.js'
-    ], 'public/js/maintainers/terms-and-obligatories/index-custom-terms-and-obligatories.js')
+    ], 'public/js/maintainers/terms-and-obligatories/index-custom-terms-and-obligatories.js');
 
     // Maintainers > Terms-And-Obligatories > Create-Edit Custom Terms-And-Obligatories CSS
-    .scripts([
+    mix.scripts([
         'bower/switchery/dist/switchery.css'
-    ], 'public/css/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.css')
+    ], 'public/css/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.css');
 
     // Maintainers > Terms-And-Obligatories > Create-Edit Custom Terms-And-Obligatories JS
-    .scripts([
+    mix.scripts([
         'bower/switchery/dist/switchery.js',
         'components/switchery.js'
-    ], 'public/js/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.js')
+    ], 'public/js/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.js');
 
     // Maintainers > Trademarks > Index Custom Trademarks JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/trademarks/config_bootstrap_table.js'
-    ], 'public/js/maintainers/trademarks/index-custom-trademarks.js')
+    ], 'public/js/maintainers/trademarks/index-custom-trademarks.js');
 
     // Maintainers > Type-Certifications > Index Custom Type-Certifications JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-certifications/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-certifications/index-custom-type-certifications.js')
+    ], 'public/js/maintainers/type-certifications/index-custom-type-certifications.js');
 
     // Maintainers > Type-Companies > Index Custom Type-Companies JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-companies/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-companies/index-custom-type-companies.js')
+    ], 'public/js/maintainers/type-companies/index-custom-type-companies.js');
 
     // Maintainers > Type-Contracts > Index Custom Type-Contracts JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-contracts/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-contracts/index-custom-type-contracts.js')
+    ], 'public/js/maintainers/type-contracts/index-custom-type-contracts.js');
 
     // Maintainers > Type-Disabilities > Index Custom Type-Disabilities JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-disabilities/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-disabilities/index-custom-type-disabilities.js')
+    ], 'public/js/maintainers/type-disabilities/index-custom-type-disabilities.js');
 
     // Maintainers > Type-Diseases > Index Custom Type-Diseases JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-diseases/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-diseases/index-custom-type-diseases.js')
+    ], 'public/js/maintainers/type-diseases/index-custom-type-diseases.js');
 
     // Maintainers > Type-Exams > Index Custom Type-Exams JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-exams/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-exams/index-custom-type-exams.js')
+    ], 'public/js/maintainers/type-exams/index-custom-type-exams.js');
 
     // Maintainers > Type-Institutions > Index Custom Type-Institutions JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-institutions/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-institutions/index-custom-type-institutions.js')
+    ], 'public/js/maintainers/type-institutions/index-custom-type-institutions.js');
 
     // Maintainers > Type-Professional-licenses > Index Custom Type-Professional-licenses JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-professional-licenses/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-professional-licenses/index-custom-type-professional-licenses.js')
+    ], 'public/js/maintainers/type-professional-licenses/index-custom-type-professional-licenses.js');
 
     // Maintainers > Type-Specialities > Index Custom Type-Specialities JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-specialities/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-specialities/index-custom-type-specialities.js')
+    ], 'public/js/maintainers/type-specialities/index-custom-type-specialities.js');
 
     // Maintainers > Type-Vehicles > Index Custom Type-Vehicles JS
-    .scripts([
+    mix.scripts([
         'me/js/base/maintainers/type-vehicles/config_bootstrap_table.js'
-    ], 'public/js/maintainers/type-vehicles/index-custom-type-vehicles.js')
+    ], 'public/js/maintainers/type-vehicles/index-custom-type-vehicles.js');
 
 
 
     // Operations > Index Menú JS
-    .scripts([
+    mix.scripts([
         'me/js/base/operations/index.js'
-    ], 'public/js/operations/index.js')
+    ], 'public/js/operations/index.js');
 
     // Operations > Vehicles > Index Custom Vehicles JS
-    .scripts([
+    mix.scripts([
         'me/js/base/operations/vehicles/config_bootstrap_table.js'
-    ], 'public/js/operations/vehicles/index-custom-vehicles.js')
+    ], 'public/js/operations/vehicles/index-custom-vehicles.js');
 
     // Operations > Vehicles > Create-Edit Custom Vehicles CSS
     mix.styles([
         'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
-    ], 'public/css/operations/vehicles/create-edit-custom-vehicles.css')
+    ], 'public/css/operations/vehicles/create-edit-custom-vehicles.css');
 
     // Operations > Vehicles > Create-Edit Custom Vehicles JS
-    .scripts([
+    mix.scripts([
         'me/js/utilities/add_csrf_token.js',
         'me/js/change/change_trademark_model.js',
         'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
@@ -469,7 +483,38 @@ elixir(mix => {
         'components/bootstrap-datepicker.js',
         'me/js/utilities/sanitized-fields.js',
         'me/js/base/operations/vehicles/custom-vehicles.js'
-    ], 'public/js/operations/vehicles/create-edit-custom-vehicles.js')
+    ], 'public/js/operations/vehicles/create-edit-custom-vehicles.js');
+
+
+
+    // Copy fonts Font-Awesome
+    mix.copy('resources/assets/bower/font-awesome/fonts', 'public/build/fonts');
+    // Copy fonts Material-Design-Iconic-Font
+    mix.copy('resources/assets/bower/packages-for-cqtime/fonts', 'public/build/fonts');
+    // Copy fonts Owned
+    mix.copy('resources/assets/me/fonts/', 'public/build/fonts', 'public/build/fonts');
+    // Copy image Bootstrap-FileInput loading.gif
+    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading.gif', 'public/build/img');
+    // Copy image Bootstrap-FileInput loading-sm.gif
+    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading-sm.gif', 'public/build/img');
+
+    // Copy image remark.png
+    mix.copy('resources/assets/me/img/remark.png', 'public/img');
+    // Copy image sidebar dashboard-header.png
+    mix.copy('resources/assets/me/img/dashboard-header.jpg', 'public/img');
+    // Copy image for Header PDF-Contracts Stop_Frenos.png
+    mix.copy('resources/assets/me/img/Stop_Frenos.png', 'public/img');
+
+    // Copy Bootstrap for Pdf-Contracts
+    mix.copy('resources/assets/bower/packages-for-cqtime/css/bootstrap.css', 'public/css/human-resources/contracts/pdf');
+    // Copy Index PDF Contracts
+    mix.copy('resources/assets/me/css/human-resources/contracts/pdf/index-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
+    // Copy Header PDF Contracts
+    mix.copy('resources/assets/me/css/human-resources/contracts/pdf/header-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
+    // Copy Footer PDF Contracts
+    mix.copy('resources/assets/me/css/human-resources/contracts/pdf/footer-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
+    // Copy 404 Page CSS
+    mix.copy('resources/assets/me/css/404.css', 'public/css');
 
 
 
@@ -521,6 +566,7 @@ elixir(mix => {
         'public/js/maintainers/gratifications/index-custom-gratifications.js',
         'public/js/maintainers/institutions/index-custom-institutions.js',
         'public/js/maintainers/marital-statuses/index-custom-marital-statuses.js',
+        'public/js/maintainers/master-piece-vehicles/index-custom-master-piece-vehicles.js',
         'public/js/maintainers/measuring-units/index.js',
         'public/js/maintainers/measuring-units/engine-cubics/index-custom-engine-cubics.js',
         'public/js/maintainers/measuring-units/weights/index-custom-weights.js',
@@ -556,33 +602,4 @@ elixir(mix => {
         'public/js/operations/vehicles/create-edit-custom-vehicles.js',
     ]);
 
-    // Copy fonts Font-Awesome
-    mix.copy('resources/assets/bower/font-awesome/fonts', 'public/build/fonts');
-    // Copy fonts Material-Design-Iconic-Font
-    mix.copy('resources/assets/bower/packages-for-cqtime/fonts', 'public/build/fonts');
-    // Copy fonts Owned
-    mix.copy('resources/assets/me/fonts/', 'public/build/fonts', 'public/build/fonts');
-    // Copy image Bootstrap-FileInput loading.gif
-    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading.gif', 'public/build/img');
-    // Copy image Bootstrap-FileInput loading-sm.gif
-    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading-sm.gif', 'public/build/img');
-
-    // Copy image remark.png
-    mix.copy('resources/assets/me/img/remark.png', 'public/img');
-    // Copy image sidebar dashboard-header.png
-    mix.copy('resources/assets/me/img/dashboard-header.jpg', 'public/img');
-    // Copy image for Header PDF-Contracts Stop_Frenos.png
-    mix.copy('resources/assets/me/img/Stop_Frenos.png', 'public/img');
-
-    // Copy Bootstrap for Pdf-Contracts
-    mix.copy('resources/assets/bower/packages-for-cqtime/css/bootstrap.css', 'public/css/human-resources/contracts/pdf');
-    // Copy Index PDF Contracts
-    mix.copy('resources/assets/me/css/human-resources/contracts/pdf/index-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
-    // Copy Header PDF Contracts
-    mix.copy('resources/assets/me/css/human-resources/contracts/pdf/header-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
-    // Copy Footer PDF Contracts
-    mix.copy('resources/assets/me/css/human-resources/contracts/pdf/footer-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
-    // Copy 404 Page CSS
-    mix.copy('resources/assets/me/css/404.css', 'public/css');
-
-});
+})
