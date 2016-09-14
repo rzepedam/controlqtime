@@ -290,9 +290,7 @@ class EmployeeController extends Controller
 
 		try {
 			$employee = $this->employee->create(Session::get('step1'));
-			$employee->contactEmployees()->create(Session::get('step1'));
-
-			/*$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
+			$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
 			$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
 			$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
 			$this->certification->createOrUpdateWithArray(Session::get('step2'), $employee);
@@ -302,7 +300,7 @@ class EmployeeController extends Controller
 			$this->disease->createOrUpdateWithArray($request->all(), $employee);
 			$this->exam->createOrUpdateWithArray($request->all(), $employee);
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
-			$this->destroySessionStoreEmployee();*/
+			$this->destroySessionStoreEmployee();
 
 			DB::commit();
 		}catch( Exception $e ) {
