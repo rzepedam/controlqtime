@@ -3,20 +3,21 @@
 namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
-use Controlqtime\Core\Contracts\CompanyRepoInterface;
-use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
+use Controlqtime\Core\Contracts\CompanyRepoInterface;
+use Controlqtime\Core\Contracts\EmployeeRepoInterface;
+use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
+use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
+use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
 
-class AjaxLoadController extends Controller {
-
+class AjaxLoadController extends Controller
+{
 	/**
 	 * @var CompanyRepoInterface
 	 */
 	protected $company;
+
 	/**
 	 * @var EmployeeRepoInterface
 	 */

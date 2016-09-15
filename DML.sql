@@ -932,3 +932,7 @@ INSERT INTO master_piece_vehicles(name) VALUES('Luces de Frenos');
 INSERT INTO master_piece_vehicles(name) VALUES('Neumáticos');
 INSERT INTO master_piece_vehicles(name) VALUES('Pintura');
 
+/* state_piece_vehicles | Estado Pieza Vehículos */
+INSERT INTO state_piece_vehicles(name) VALUES('Bueno');
+INSERT INTO state_piece_vehicles(name) VALUES('Dañado');
+INSERT INTO state_piece_vehicles(name) VALUES('Faltante');

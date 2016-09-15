@@ -2,72 +2,109 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Http\Requests\CityRequest;
 use Controlqtime\Core\Contracts\CityRepoInterface;
 use Controlqtime\Core\Contracts\CountryRepoInterface;
-use Controlqtime\Core\Entities\City;
-use Controlqtime\Core\Entities\Country;
-use Controlqtime\Http\Requests;
-use Controlqtime\Http\Requests\CityRequest;
-use Illuminate\Support\Facades\Session;
 
 class CityController extends Controller
 {
-    protected $city;
+	/**
+	 * @var CityRepoInterface
+	 */
+	protected $city;
 
-    protected $country;
+	/**
+	 * @var CountryRepoInterface
+	 */
+	protected $country;
 
-    public function __construct(CityRepoInterface $city, CountryRepoInterface $country)
-    {
-        $this->city = $city;
-        $this->country = $country;
-    }
-    
-    public function index()
-    {
-        return view('maintainers.cities.index');
-    }
+	/**
+	 * CityController constructor.
+	 *
+	 * @param CityRepoInterface $city
+	 * @param CountryRepoInterface $country
+	 */
+	public function __construct(CityRepoInterface $city, CountryRepoInterface $country)
+	{
+		$this->city    = $city;
+		$this->country = $country;
+	}
 
-    public function getCities() {
-        $cities = $this->city->all(['country']);
-        return $cities;
-    }
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
+	{
+		return view('maintainers.cities.index');
+	}
 
-    public function create()
-    {
-        $countries = $this->country->lists('name', 'id');
-        return view('maintainers.cities.create', compact('countries'));
-    }
+	/**
+	 * @return mixed for Bootstrap-Table
+	 */
+	public function getCities()
+	{
+		$cities = $this->city->all(['country']);
 
-    public function store(CityRequest $request)
-    {
-        $this->city->create($request->all());
+		return $cities;
+	}
 
-		return response()->json(array(
-			'success' => true,
-			'url'     => '/maintainers/cities'
-		));
-    }
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function create()
+	{
+		$countries = $this->country->lists('name', 'id');
 
-    public function edit($id)
-    {
-        $city      = $this->city->find($id);
-        $countries = $this->country->lists('name', 'id');
-        return view('maintainers.cities.edit', compact('city', 'countries'));
-    }
+		return view('maintainers.cities.create', compact('countries'));
+	}
 
-    public function update(CityRequest $request, $id)
-    {
-        $this->city->update($request->all(), $id);
+	/**
+	 * @param CityRequest $request
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function store(CityRequest $request)
+	{
+		$this->city->create($request->all());
 
-		return response()->json(array(
-			'success' => true,
-			'url'     => '/maintainers/cities'
-		));
-    }
+		return response()->json(array('success' => true, 'url' => '/maintainers/cities'));
+	}
 
-    public function destroy($id)
-    {
-        $this->city->delete($id);
-        return redirect()->route('cities.index');
-    }
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function edit($id)
+	{
+		$city      = $this->city->find($id);
+		$countries = $this->country->lists('name', 'id');
+
+		return view('maintainers.cities.edit', compact('city', 'countries'));
+	}
+
+	/**
+	 * @param CityRequest $request
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function update(CityRequest $request, $id)
+	{
+		$this->city->update($request->all(), $id);
+
+		return response()->json(array('success' => true, 'url' => '/maintainers/cities'));
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function destroy($id)
+	{
+		$this->city->delete($id);
+
+		return redirect()->route('cities.index');
+	}
 }

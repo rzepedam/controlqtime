@@ -36,7 +36,8 @@ class CreateContractsTable extends Migration
 			$table->foreign('employee_id')
 				->references('id')
 				->on('employees')
-				->onUpdate('cascade');
+				->onUpdate('cascade')
+				->onDelete('cascade');
 
 			$table->foreign('position_id')
 				->references('id')

@@ -370,6 +370,11 @@ elixir(function(mix) {
         'me/js/base/maintainers/routes/config_bootstrap_table.js'
     ], 'public/js/maintainers/routes/index-custom-routes.js');
 
+    // Maintainers > State-Piece-Vehicle > Index Custom State-Piece-Vehicle JS
+    mix.scripts([
+        'me/js/base/maintainers/state-piece-vehicles/config_bootstrap_table.js'
+    ], 'public/js/maintainers/state-piece-vehicles/index-custom-state-piece-vehicles.js');
+
     // Maintainers > Terminals > Index Custom Terminals JS
     mix.scripts([
         'me/js/base/maintainers/terminals/config_bootstrap_table.js'
@@ -579,6 +584,7 @@ elixir(function(mix) {
         'public/js/maintainers/professions/index-custom-professions.js',
         'public/js/maintainers/relationships/index-custom-relationships.js',
         'public/js/maintainers/routes/index-custom-routes.js',
+        'public/js/maintainers/state-piece-vehicles/index-custom-state-piece-vehicles.js',
         'public/js/maintainers/terminals/index-custom-terminals.js',
         'public/js/maintainers/terminals/create-edit-custom-terminals.js',
         'public/js/maintainers/terms-and-obligatories/index-custom-terms-and-obligatories.js',

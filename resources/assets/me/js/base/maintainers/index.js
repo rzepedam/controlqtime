@@ -37,6 +37,11 @@ $(document).ready(function(){
         window.location.href = "/maintainers/type-specialities";
     });
 
+    // Estado Pieza Vehículos
+    $('#redirect-state-piece-vehicles').click(function() {
+        window.location.href = "/maintainers/state-piece-vehicles";
+    });
+
     // Estados Civiles
     $('#redirect-marital-statuses').click(function() {
         window.location.href = "/maintainers/marital-statuses";

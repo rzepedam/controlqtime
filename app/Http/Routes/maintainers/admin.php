@@ -95,6 +95,10 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getRoutes', ['as' => 'getRoutes', 'uses' => 'RouteController@getRoutes']);
 	Route::resource('routes', 'RouteController');
 
+	// State-Piece-Vehicles
+	Route::get('getStatePieceVehicles', ['as' => 'getStatePieceVehicles', 'uses' => 'StatePieceVehicleController@getStatePieceVehicles']);
+	Route::resource('state-piece-vehicles', 'StatePieceVehicleController');
+
 	// Terminals
 	Route::get('getTerminals', ['as' => 'getTerminals', 'uses' => 'TerminalController@getTerminals']);
 	Route::resource('terminals', 'TerminalController');

@@ -2,39 +2,65 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Http\Requests\AreaRequest;
 use Controlqtime\Core\Contracts\AreaRepoInterface;
 use Controlqtime\Core\Contracts\TerminalRepoInterface;
-use Controlqtime\Http\Requests;
-use Controlqtime\Http\Requests\AreaRequest;
 
 class AreaController extends Controller
 {
-    protected $area;
-    protected $terminal;
+	/**
+	 * @var AreaRepoInterface
+	 */
+	protected $area;
 
-    public function __construct(AreaRepoInterface $area, TerminalRepoInterface $terminal)
+	/**
+	 * @var TerminalRepoInterface
+	 */
+	protected $terminal;
+
+	/**
+	 * AreaController constructor.
+	 *
+	 * @param AreaRepoInterface $area
+	 * @param TerminalRepoInterface $terminal
+	 */
+	public function __construct(AreaRepoInterface $area, TerminalRepoInterface $terminal)
     {
         $this->area = $area;
         $this->terminal = $terminal;
     }
 
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function index()
     {
         return view('maintainers.areas.index');
     }
 
-    public function getAreas() {
+	/**
+	 * @return mixed for Bootstrap-Table
+	 */
+	public function getAreas() {
         $areas = $this->area->all(['terminal']);
         return $areas;
     }
 
-    public function create()
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function create()
     {
         $terminals = $this->terminal->lists('name', 'id');
         return view('maintainers.areas.create', compact('terminals'));
     }
 
-    public function store(AreaRequest $request)
+	/**
+	 * @param AreaRequest $request
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function store(AreaRequest $request)
     {
         $this->area->create($request->all());
 
@@ -44,14 +70,25 @@ class AreaController extends Controller
 		));
     }
 
-    public function edit($id)
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function edit($id)
     {
         $area       = $this->area->find($id);
         $terminals  = $this->terminal->lists('name', 'id');
         return view('maintainers.areas.edit', compact('area', 'terminals'));
     }
 
-    public function update(AreaRequest $request, $id)
+	/**
+	 * @param AreaRequest $request
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function update(AreaRequest $request, $id)
     {
         $this->area->update($request->all(), $id);
 
@@ -61,7 +98,12 @@ class AreaController extends Controller
 		));
     }
 
-    public function destroy($id)
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function destroy($id)
     {
         $this->area->delete($id);
         return redirect()->route('areas.index');
