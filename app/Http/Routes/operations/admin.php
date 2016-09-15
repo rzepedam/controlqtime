@@ -16,4 +16,9 @@ Route::group(['prefix' => 'operations'], function() {
 		Route::post('attachFiles', ['as' => 'VehicleAddImages', 'uses' => 'VehicleController@addImages']);
 		Route::post('deleteFiles', ['as' => 'VehicleDeleteFiles', 'uses' => 'VehicleController@deleteFiles']);
 	});
+	
+	// Master-Form-Check-Piece-Vehicle
+	Route::get('getMasterFormPieceVehicles', ['as' => 'getMasterFormPieceVehicles', 'uses' =>
+		'MasterFormPieceVehicleController@getMasterFormPieceVehicles']);
+	Route::resource('master-form-piece-vehicles', 'MasterFormPieceVehicleController');
 });

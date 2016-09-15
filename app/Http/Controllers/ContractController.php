@@ -2,20 +2,20 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\ActivateEmployeeInterface;
+use Illuminate\Support\Facades\DB;
+use Controlqtime\Http\Requests\ContractRequest;
 use Controlqtime\Core\Contracts\AreaRepoInterface;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
-use Controlqtime\Core\Contracts\ContractRepoInterface;
 use Controlqtime\Core\Contracts\DayTripRepoInterface;
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\GratificationRepoInterface;
 use Controlqtime\Core\Contracts\NumHourRepoInterface;
-use Controlqtime\Core\Contracts\PeriodicityRepoInterface;
+use Controlqtime\Core\Contracts\ContractRepoInterface;
+use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Controlqtime\Core\Contracts\PositionRepoInterface;
-use Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface;
+use Controlqtime\Core\Contracts\PeriodicityRepoInterface;
+use Controlqtime\Core\Contracts\ActivateEmployeeInterface;
 use Controlqtime\Core\Contracts\TypeContractRepoInterface;
-use Controlqtime\Http\Requests\ContractRequest;
-use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Contracts\GratificationRepoInterface;
+use Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface;
 
 class ContractController extends Controller
 {
@@ -150,7 +150,7 @@ class ContractController extends Controller
 
         try {
             $contract = $this->contract->create($request->all());
-            $this->contract->saveMultipleTermsAndObligatories($request->get('term_and_obligatory_id'), $contract);
+            $contract->termsAndObligatories()->attach($request->get('term_and_obligatory_id'), $contract);
 			$this->activateEmployee->checkStateUpdateEmployee($request->get('employee_id'));
 
             DB::commit();
@@ -163,8 +163,13 @@ class ContractController extends Controller
 			'url'    => '/human-resources/contracts'
 		]);
     }
-
-    public function show($id)
+	
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function show($id)
     {
         $contract = $this->contract->find($id, array(
             'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip',
@@ -173,8 +178,13 @@ class ContractController extends Controller
 
         return view('human-resources.contracts.show', compact('contract'));
     }
-
-    public function getPdf($id)
+	
+	/**
+	 * @param $id
+	 *
+	 * @return pdf generate in new tab
+	 */
+	public function getPdf($id)
     {
         $contract = $this->contract->find($id, array(
             'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',

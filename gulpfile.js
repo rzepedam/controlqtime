@@ -490,6 +490,11 @@ elixir(function(mix) {
         'me/js/base/operations/vehicles/custom-vehicles.js'
     ], 'public/js/operations/vehicles/create-edit-custom-vehicles.js');
 
+    // Operations > Master-Form-Piece-Vehicles > Index Custom Master-Form-Piece-Vehicles JS
+    mix.scripts([
+        'me/js/base/operations/master-form-piece-vehicles/config_bootstrap_table.js'
+    ], 'public/js/operations/master-form-piece-vehicles/index-custom-master-form-piece-vehicles.js');
+
 
 
     // Copy fonts Font-Awesome
@@ -606,6 +611,7 @@ elixir(function(mix) {
         'public/js/operations/vehicles/index-custom-vehicles.js',
         'public/css/operations/vehicles/create-edit-custom-vehicles.css',
         'public/js/operations/vehicles/create-edit-custom-vehicles.js',
+        'public/js/operations/master-form-piece-vehicles/index-custom-master-form-piece-vehicles.js'
     ]);
 
 })

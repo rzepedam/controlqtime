@@ -16,12 +16,12 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div id="redirect-master-form-check-vehicles" class="counter counter-lg counter-inverse bg-red-400 vertical-align height-150 pointer">
+            <div id="redirect-master-form-piece-vehicles" class="counter counter-lg counter-inverse bg-red-400 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-files-o" aria-hidden="true"></i>
                     </div>
-                    <span class="counter-number">Maestro Formulario Chequeo Vehículo</span>
+                    <span class="counter-number">Maestro de Formularios Chequeo Piezas de Vehículos</span>
                 </div>
             </div>
         </div>

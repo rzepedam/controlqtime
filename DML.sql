@@ -909,28 +909,28 @@ INSERT INTO labor_unions(name) VALUES('Sindicato de Trabajadores San Bernardo As
 INSERT INTO labor_unions(name) VALUES('Sindicato 1 Los Andes');
 
 /* piece_vehicles | Piezas de Vehículos */
-INSERT INTO piece_vehicles(name) VALUES('Herramientas');
-INSERT INTO piece_vehicles(name) VALUES('Rueda de Repuesto');
-INSERT INTO piece_vehicles(name) VALUES('Gata');
-INSERT INTO piece_vehicles(name) VALUES('Batería');
-INSERT INTO piece_vehicles(name) VALUES('Triángulo de Seguridad');
-INSERT INTO piece_vehicles(name) VALUES('Retrovisor');
-INSERT INTO piece_vehicles(name) VALUES('Espejo Lateral Derecho');
-INSERT INTO piece_vehicles(name) VALUES('Espejo Lateral Izquierdo');
-INSERT INTO piece_vehicles(name) VALUES('Parabrisas Delantero');
-INSERT INTO piece_vehicles(name) VALUES('Parabrisas Trasero');
-INSERT INTO piece_vehicles(name) VALUES('Plumillas');
-INSERT INTO piece_vehicles(name) VALUES('Asientos');
-INSERT INTO piece_vehicles(name) VALUES('Faro Delantero Derecho');
-INSERT INTO piece_vehicles(name) VALUES('Faro Delantero Izquierdo');
-INSERT INTO piece_vehicles(name) VALUES('Neblinero Izquierdo');
-INSERT INTO piece_vehicles(name) VALUES('Neblinero Derecho');
-INSERT INTO piece_vehicles(name) VALUES('Luces Intermitentes Delanteras');
-INSERT INTO piece_vehicles(name) VALUES('Luces Intermitentes Traseras');
-INSERT INTO piece_vehicles(name) VALUES('Luces Estacionamiento');
-INSERT INTO piece_vehicles(name) VALUES('Luces de Frenos');
-INSERT INTO piece_vehicles(name) VALUES('Neumáticos');
-INSERT INTO piece_vehicles(name) VALUES('Pintura');
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Herramientas', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Rueda de Repuesto', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Gata', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Batería', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Triángulo de Seguridad', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Retrovisor', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Espejo Lateral Derecho', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Espejo Lateral Izquierdo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Parabrisas Delantero', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Parabrisas Trasero', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Plumillas', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Asientos', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Faro Delantero Derecho', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Faro Delantero Izquierdo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Neblinero Izquierdo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Neblinero Derecho', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Luces Intermitentes Delanteras', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Luces Intermitentes Traseras', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Luces Estacionamiento', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Luces de Frenos', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Neumáticos', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO piece_vehicles(name, created_at, updated_at) VALUES('Pintura', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 /* state_piece_vehicles | Estado Pieza Vehículos */
 INSERT INTO state_piece_vehicles(name) VALUES('Bueno');
