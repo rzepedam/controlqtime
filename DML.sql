@@ -908,29 +908,29 @@ INSERT INTO marital_statuses(name) VALUES('Viudo');
 INSERT INTO labor_unions(name) VALUES('Sindicato de Trabajadores San Bernardo Asociados.');
 INSERT INTO labor_unions(name) VALUES('Sindicato 1 Los Andes');
 
-/* master_piece_vehicles | Maestro de Piezas Vehículo */
-INSERT INTO master_piece_vehicles(name) VALUES('Herramientas');
-INSERT INTO master_piece_vehicles(name) VALUES('Rueda de Repuesto');
-INSERT INTO master_piece_vehicles(name) VALUES('Gata');
-INSERT INTO master_piece_vehicles(name) VALUES('Batería');
-INSERT INTO master_piece_vehicles(name) VALUES('Triángulo de Seguridad');
-INSERT INTO master_piece_vehicles(name) VALUES('Retrovisor');
-INSERT INTO master_piece_vehicles(name) VALUES('Espejo Lateral Derecho');
-INSERT INTO master_piece_vehicles(name) VALUES('Espejo Lateral Izquierdo');
-INSERT INTO master_piece_vehicles(name) VALUES('Parabrisas Delantero');
-INSERT INTO master_piece_vehicles(name) VALUES('Parabrisas Trasero');
-INSERT INTO master_piece_vehicles(name) VALUES('Plumillas');
-INSERT INTO master_piece_vehicles(name) VALUES('Asientos');
-INSERT INTO master_piece_vehicles(name) VALUES('Faro Delantero Derecho');
-INSERT INTO master_piece_vehicles(name) VALUES('Faro Delantero Izquierdo');
-INSERT INTO master_piece_vehicles(name) VALUES('Neblinero Izquierdo');
-INSERT INTO master_piece_vehicles(name) VALUES('Neblinero Derecho');
-INSERT INTO master_piece_vehicles(name) VALUES('Luces Intermitentes Delanteras');
-INSERT INTO master_piece_vehicles(name) VALUES('Luces Intermitentes Traseras');
-INSERT INTO master_piece_vehicles(name) VALUES('Luces Estacionamiento');
-INSERT INTO master_piece_vehicles(name) VALUES('Luces de Frenos');
-INSERT INTO master_piece_vehicles(name) VALUES('Neumáticos');
-INSERT INTO master_piece_vehicles(name) VALUES('Pintura');
+/* piece_vehicles | Piezas de Vehículos */
+INSERT INTO piece_vehicles(name) VALUES('Herramientas');
+INSERT INTO piece_vehicles(name) VALUES('Rueda de Repuesto');
+INSERT INTO piece_vehicles(name) VALUES('Gata');
+INSERT INTO piece_vehicles(name) VALUES('Batería');
+INSERT INTO piece_vehicles(name) VALUES('Triángulo de Seguridad');
+INSERT INTO piece_vehicles(name) VALUES('Retrovisor');
+INSERT INTO piece_vehicles(name) VALUES('Espejo Lateral Derecho');
+INSERT INTO piece_vehicles(name) VALUES('Espejo Lateral Izquierdo');
+INSERT INTO piece_vehicles(name) VALUES('Parabrisas Delantero');
+INSERT INTO piece_vehicles(name) VALUES('Parabrisas Trasero');
+INSERT INTO piece_vehicles(name) VALUES('Plumillas');
+INSERT INTO piece_vehicles(name) VALUES('Asientos');
+INSERT INTO piece_vehicles(name) VALUES('Faro Delantero Derecho');
+INSERT INTO piece_vehicles(name) VALUES('Faro Delantero Izquierdo');
+INSERT INTO piece_vehicles(name) VALUES('Neblinero Izquierdo');
+INSERT INTO piece_vehicles(name) VALUES('Neblinero Derecho');
+INSERT INTO piece_vehicles(name) VALUES('Luces Intermitentes Delanteras');
+INSERT INTO piece_vehicles(name) VALUES('Luces Intermitentes Traseras');
+INSERT INTO piece_vehicles(name) VALUES('Luces Estacionamiento');
+INSERT INTO piece_vehicles(name) VALUES('Luces de Frenos');
+INSERT INTO piece_vehicles(name) VALUES('Neumáticos');
+INSERT INTO piece_vehicles(name) VALUES('Pintura');
 
 /* state_piece_vehicles | Estado Pieza Vehículos */
 INSERT INTO state_piece_vehicles(name) VALUES('Bueno');

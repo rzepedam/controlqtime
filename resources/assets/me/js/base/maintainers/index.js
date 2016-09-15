@@ -76,10 +76,6 @@ $(document).ready(function(){
         window.location.href = "/maintainers/type-professional-licenses";
     });
 
-    $('#redirect-master-piece-vehicles').click(function () {
-        window.location.href = "/maintainers/master-piece-vehicles";
-    });
-
     $('#redirect-trademarks').click(function() {
         window.location.href = "/maintainers/trademarks";
     });
@@ -102,6 +98,10 @@ $(document).ready(function(){
 
     $('#redirect-periodicities').click(function () {
         window.location.href = "/maintainers/periodicities";
+    });
+
+    $('#redirect-piece-vehicles').click(function () {
+        window.location.href = "/maintainers/piece-vehicles";
     });
 
     $('#redirect-forecasts').click(function() {

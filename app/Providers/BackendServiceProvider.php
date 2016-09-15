@@ -160,8 +160,8 @@ class BackendServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'Controlqtime\Core\Contracts\MasterPieceVehicleRepoInterface',
-			'Controlqtime\Core\Repositories\MasterPieceVehicleRepo'
+			'Controlqtime\Core\Contracts\PieceVehicleRepoInterface',
+			'Controlqtime\Core\Repositories\PieceVehicleRepo'
 		);
 
         $this->app->bind(

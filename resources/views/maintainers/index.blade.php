@@ -195,16 +195,6 @@
     <br />
     <div class="row">
         <div class="col-md-2">
-            <div id="redirect-master-piece-vehicles" class="counter counter-lg counter-inverse bg-red-200 vertical-align height-150 margin-bottom-5 pointer">
-                <div class="vertical-align-middle">
-                    <div class="counter-icon margin-bottom-5">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
-                    </div>
-                    <span class="counter-number">Maestro Piezas de Vehículos</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
             <div id="redirect-trademarks" class="counter counter-lg counter-inverse bg-brown-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
@@ -245,7 +235,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div id="redirect-countries" class="counter counter-lg counter-inverse bg-deep-purple-200 vertical-align height-150 pointer">
+            <div id="redirect-countries" class="counter counter-lg counter-inverse bg-deep-purple-200 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-flag" aria-hidden="true"></i>
@@ -254,16 +244,26 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br />
-    <div class="row">
         <div class="col-md-2">
-            <div id="redirect-periodicities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 margin-bottom-5 pointer">
+            <div id="redirect-periodicities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-repeat" aria-hidden="true"></i>
                     </div>
                     <span class="counter-number">Periocidades</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <div id="redirect-piece-vehicles" class="counter counter-lg counter-inverse bg-red-200 vertical-align height-150 margin-bottom-5 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Piezas de Vehículos</span>
                 </div>
             </div>
         </div>

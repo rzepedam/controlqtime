@@ -5,7 +5,7 @@ namespace Controlqtime\Http\Requests;
 use Illuminate\Routing\Route;
 use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class MasterPieceVehicleRequest extends SanitizedRequest
+class PieceVehicleRequest extends SanitizedRequest
 {
 	/**
 	 * @var Route
@@ -44,14 +44,14 @@ class MasterPieceVehicleRequest extends SanitizedRequest
 			case 'POST':
 			{
 				return [
-					'name'  => 'required|max:50|unique:master_piece_vehicles'
+					'name'  => 'required|max:50|unique:piece_vehicles'
 				];
 			}
 
 			case 'PUT':
 			{
 				return [
-					'name'  => 'required|max:50|unique:master_piece_vehicles,name,' . $this->route->getParameter('master_piece_vehicle')
+					'name'  => 'required|max:50|unique:piece_vehicles,name,' . $this->route->getParameter('piece_vehicle')
 				];
 			}
 		}

@@ -6,19 +6,19 @@
 
 @stop
 
-@section('title_header') Listado Maestro Piezas de Vehículo
+@section('title_header') Listado Piezas de Vehículos
     <br />
-    <a href="{{ route('master-piece-vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Pieza Maestro Vehículo</a>
+    <a href="{{ route('piece-vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nueva Pieza Vehículo</a>
 @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li class="active">Maestro Piezas de Vehículo</li>
+    <li class="active">Piezas de Vehículos</li>
 @stop
 
 @section('content')
 
-    @include('maintainers.master-piece-vehicles.partials.table')
+    @include('maintainers.piece-vehicles.partials.table')
 
     <div class="row">
         <div class="col-md-12">
@@ -31,6 +31,6 @@
 @section('scripts')
 
     <script src="{{ elixir('js/index-common.js') }}"></script>
-    <script src="{{ elixir('js/maintainers/master-piece-vehicles/index-custom-master-piece-vehicles.js') }}"></script>
+    <script src="{{ elixir('js/maintainers/piece-vehicles/index-custom-piece-vehicles.js') }}"></script>
 
 @stop

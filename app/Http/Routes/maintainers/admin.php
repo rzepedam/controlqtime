@@ -52,10 +52,6 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getMaritalStatuses', ['as' => 'getMaritalStatuses', 'uses' => 'MaritalStatusController@getMaritalStatuses']);
 	Route::resource('marital-statuses', 'MaritalStatusController');
 
-	// Master Piece Vehicles
-	Route::get('getMasterPieceVehicles', ['as' => 'getMasterPieceVehicles', 'uses' => 'MasterPieceVehicleController@getMasterPieceVehicles']);
-	Route::resource('master-piece-vehicles', 'MasterPieceVehicleController');
-
 	// Measuring-Units
 	require __DIR__ . '/measuring-units/route.php';
 
@@ -78,6 +74,10 @@ Route::group(['prefix' => 'maintainers'], function() {
 	// Periodicities
 	Route::get('getPeriodicities', ['as' => 'periodicities.getPeriodicities', 'uses' => 'PeriodicityController@getPeriodicities']);
 	Route::resource('periodicities', 'PeriodicityController');
+	
+	// Piece Vehicles
+	Route::get('getPieceVehicles', ['as' => 'getPieceVehicles', 'uses' => 'PieceVehicleController@getPieceVehicles']);
+	Route::resource('piece-vehicles', 'PieceVehicleController');
 
 	// Positions
 	Route::get('getPositions', ['as' => 'getPositions', 'uses' => 'PositionController@getPositions']);

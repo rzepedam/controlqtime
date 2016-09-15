@@ -305,11 +305,6 @@ elixir(function(mix) {
         'me/js/base/maintainers/marital-statuses/config_bootstrap_table.js'
     ], 'public/js/maintainers/marital-statuses/index-custom-marital-statuses.js');
 
-    // Maintainers > Master-Piece-Forms > Index Custom Master-Piece-Forms JS
-    mix.scripts([
-        'me/js/base/maintainers/master-piece-vehicles/config_bootstrap_table.js'
-    ], 'public/js/maintainers/master-piece-vehicles/index-custom-master-piece-vehicles.js');
-
     // Maintainers > Measuring-Units > Index Menú JS
     mix.scripts([
         'me/js/base/maintainers/measuring-units/index.js'
@@ -349,6 +344,11 @@ elixir(function(mix) {
     mix.scripts([
         'me/js/base/maintainers/periodicities/config_bootstrap_table.js'
     ], 'public/js/maintainers/periodicities/index-custom-periodicities.js');
+
+    // Maintainers > Piece-Vehicles > Index Custom Piece-Vehicles JS
+    mix.scripts([
+        'me/js/base/maintainers/piece-vehicles/config_bootstrap_table.js'
+    ], 'public/js/maintainers/piece-vehicles/index-custom-piece-vehicles.js');
 
     // Maintainers > Positions > Index Custom Positions JS
     mix.scripts([
@@ -571,7 +571,7 @@ elixir(function(mix) {
         'public/js/maintainers/gratifications/index-custom-gratifications.js',
         'public/js/maintainers/institutions/index-custom-institutions.js',
         'public/js/maintainers/marital-statuses/index-custom-marital-statuses.js',
-        'public/js/maintainers/master-piece-vehicles/index-custom-master-piece-vehicles.js',
+        'public/js/maintainers/piece-vehicles/index-custom-piece-vehicles.js',
         'public/js/maintainers/measuring-units/index.js',
         'public/js/maintainers/measuring-units/engine-cubics/index-custom-engine-cubics.js',
         'public/js/maintainers/measuring-units/weights/index-custom-weights.js',

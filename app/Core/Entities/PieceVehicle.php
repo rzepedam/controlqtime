@@ -4,7 +4,7 @@ namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class MasterPieceVehicle extends Eloquent
+class PieceVehicle extends Eloquent
 {
 	/**
 	 * @var array
