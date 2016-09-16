@@ -2,66 +2,100 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\WeightRepoInterface;
 use Controlqtime\Http\Requests\WeightRequest;
-
-use Controlqtime\Http\Requests;
+use Controlqtime\Core\Contracts\WeightRepoInterface;
 
 class WeightController extends Controller
 {
-	protected $weight;
+    /**
+     * @var WeightRepoInterface
+     */
+    protected $weight;
 
-	public function __construct(WeightRepoInterface $weight)
-	{
-		$this->weight = $weight;
-	}
+    /**
+     * WeightController constructor.
+     * @param WeightRepoInterface $weight
+     */
+    public function __construct(WeightRepoInterface $weight)
+    {
+        $this->weight = $weight;
+    }
 
+    /**
+     * @return mixed for Bootstrap-Table
+     */
+    public function getWeights()
+    {
+        $weights = $this->weight->all();
+
+        return $weights;
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
-	{
-		return view('maintainers.measuring-units.weights.index');
-	}
+    {
+        return view('maintainers.measuring-units.weights.index');
+    }
 
-	public function getWeights()
-	{
-		$weights = $this->weight->all();
-		return $weights;
-	}
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('maintainers.measuring-units.weights.create');
+    }
 
-	public function create()
-	{
-		return view('maintainers.measuring-units.weights.create');
-	}
+    /**
+     * @param WeightRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(WeightRequest $request)
+    {
+        $this->weight->create($request->all());
 
-	public function store(WeightRequest $request)
-	{
-		$this->weight->create($request->all());
+        return response()->json([
+            'success' => true,
+            'url'     => '/maintainers/measuring-units/weights'
+        ]);
+    }
 
-		return response()->json(array(
-			'success' => true,
-			'url'     => '/maintainers/measuring-units/weights'
-		));
-	}
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $weight = $this->weight->find($id);
 
-	public function edit($id)
-	{
-		$weight = $this->weight->find($id);
-		return view('maintainers.measuring-units.weights.edit', compact('weight'));
-	}
+        return view('maintainers.measuring-units.weights.edit', compact('weight'));
+    }
 
-	public function update(WeightRequest $request, $id)
-	{
-		$this->weight->update($request->all(), $id);
+    /**
+     * @param WeightRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(WeightRequest $request, $id)
+    {
+        $this->weight->update($request->all(), $id);
 
-		return response()->json(array(
-			'success' => true,
-			'url'     => '/maintainers/measuring-units/weights'
-		));
-	}
+        return response()->json([
+            'success' => true,
+            'url'     => '/maintainers/measuring-units/weights'
+        ]);
+    }
 
-	public function destroy($id)
-	{
-		$this->weight->delete($id);
-		return redirect()->route('weights.index');
-	}
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        $this->weight->delete($id);
+
+        return redirect()->route('weights.index');
+    }
 
 }

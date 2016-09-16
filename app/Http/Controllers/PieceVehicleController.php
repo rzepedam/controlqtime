@@ -2,35 +2,35 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\PieceVehicleRepoInterface;
 use Controlqtime\Http\Requests\PieceVehicleRequest;
+use Controlqtime\Core\Contracts\PieceVehicleRepoInterface;
 
 class PieceVehicleController extends Controller
 {
-	/**
-	 * @var \Controlqtime\Core\Contracts\PieceVehicleRepoInterface
-	 */
-	protected $piece_vehicle;
-	
-	/**
-	 * PieceVehicleController constructor.
-	 *
-	 * @param \Controlqtime\Core\Contracts\PieceVehicleRepoInterface $piece_vehicle
-	 */
-	public function __construct(PieceVehicleRepoInterface $piece_vehicle)
-	{
-		$this->piece_vehicle = $piece_vehicle;
-	}
+    /**
+     * @var \Controlqtime\Core\Contracts\PieceVehicleRepoInterface
+     */
+    protected $piece_vehicle;
 
-	/**
-	 * @return mixed for Bootstrap Table
-	 */
-	public function getPieceVehicles()
-	{
-		$pieceVehicles = $this->piece_vehicle->all();
+    /**
+     * PieceVehicleController constructor.
+     *
+     * @param \Controlqtime\Core\Contracts\PieceVehicleRepoInterface $piece_vehicle
+     */
+    public function __construct(PieceVehicleRepoInterface $piece_vehicle)
+    {
+        $this->piece_vehicle = $piece_vehicle;
+    }
 
-		return $pieceVehicles;
-	}
+    /**
+     * @return mixed for Bootstrap Table
+     */
+    public function getPieceVehicles()
+    {
+        $pieceVehicles = $this->piece_vehicle->all();
+
+        return $pieceVehicles;
+    }
 
     /**
      * Display a listing of the resource.
@@ -39,7 +39,7 @@ class PieceVehicleController extends Controller
      */
     public function index()
     {
-		return view('maintainers.piece-vehicles.index');
+        return view('maintainers.piece-vehicles.index');
     }
 
     /**
@@ -51,26 +51,26 @@ class PieceVehicleController extends Controller
     {
         return view('maintainers.piece-vehicles.create');
     }
-	
-	/**
-	 * @param \Controlqtime\Http\Requests\PieceVehicleRequest $request
-	 *
-	 * @return \Illuminate\Http\JsonResponse
-	 */
-	public function store(PieceVehicleRequest $request)
-    {
-		$this->piece_vehicle->create($request->all());
 
-		return response()->json(array(
-			'success' => true,
-			'url'     => '/maintainers/piece-vehicles'
-		));
+    /**
+     * @param \Controlqtime\Http\Requests\PieceVehicleRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(PieceVehicleRequest $request)
+    {
+        $this->piece_vehicle->create($request->all());
+
+        return response()->json([
+            'success' => true,
+            'url'     => '/maintainers/piece-vehicles'
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -81,42 +81,42 @@ class PieceVehicleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $pieceVehicle = $this->piece_vehicle->find($id);
 
-		return view('maintainers.piece-vehicles.edit', compact('pieceVehicle'));
+        return view('maintainers.piece-vehicles.edit', compact('pieceVehicle'));
     }
 
-	/**
-	 * @param PieceVehicleRequest $request
-	 * @param $id
-	 *
-	 * @return \Illuminate\Http\JsonResponse
-	 */
-	public function update(PieceVehicleRequest $request, $id)
+    /**
+     * @param PieceVehicleRequest $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(PieceVehicleRequest $request, $id)
     {
-		$this->piece_vehicle->update($request->all(), $id);
+        $this->piece_vehicle->update($request->all(), $id);
 
-		return response()->json(array(
-			'success' => true,
-			'url'     => '/maintainers/piece-vehicles'
-		));
+        return response()->json([
+            'success' => true,
+            'url'     => '/maintainers/piece-vehicles'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-		$this->piece_vehicle->delete($id);
+        $this->piece_vehicle->delete($id);
 
-		return redirect()->route('piece-vehicles.index');
+        return redirect()->route('piece-vehicles.index');
     }
 }

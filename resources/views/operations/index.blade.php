@@ -25,6 +25,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div id="redirect-vehicle-check-forms" class="counter counter-lg counter-inverse bg-green-400 vertical-align height-150 pointer">
+                <div class="vertical-align-middle">
+                    <div class="counter-icon margin-bottom-5">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </div>
+                    <span class="counter-number">Formulario Chequeo Vehículo</span>
+                </div>
+            </div>
+        </div>
     </div>
     <br />
     <br />

@@ -4,9 +4,9 @@ namespace Controlqtime\Http\Controllers;
 
 class HomeController extends Controller
 {
-	/**
-	 * Create a new controller instance.
-	 */
+    /**
+     * Create a new controller instance.
+     */
     public function __construct()
     {
         $this->middleware('auth');

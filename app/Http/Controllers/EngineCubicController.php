@@ -2,66 +2,99 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\EngineCubicRepoInterface;
 use Controlqtime\Http\Requests\EngineCubicRequest;
-use Illuminate\Http\Request;
-
-use Controlqtime\Http\Requests;
+use Controlqtime\Core\Contracts\EngineCubicRepoInterface;
 
 class EngineCubicController extends Controller
 {
-	protected $engine_cubic;
+    /**
+     * @var EngineCubicRepoInterface
+     */
+    protected $engine_cubic;
 
-	public function __construct(EngineCubicRepoInterface $engine_cubic)
-	{
-		$this->engine_cubic = $engine_cubic;
-	}
+    /**
+     * EngineCubicController constructor.
+     * @param EngineCubicRepoInterface $engine_cubic
+     */
+    public function __construct(EngineCubicRepoInterface $engine_cubic)
+    {
+        $this->engine_cubic = $engine_cubic;
+    }
 
-	public function index()
-	{
-		return view('maintainers.measuring-units.engine-cubics.index');
-	}
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        return view('maintainers.measuring-units.engine-cubics.index');
+    }
 
-	public function getEngineCubics()
-	{
-		$engine_cubics = $this->engine_cubic->all();
-		return $engine_cubics;
-	}
+    /**
+     * @return mixed for Bootstrap-Table
+     */
+    public function getEngineCubics()
+    {
+        $engine_cubics = $this->engine_cubic->all();
 
-	public function create()
-	{
-		return view('maintainers.measuring-units.engine-cubics.create');
-	}
+        return $engine_cubics;
+    }
 
-	public function store(EngineCubicRequest $request)
-	{
-		$this->engine_cubic->create($request->all());
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('maintainers.measuring-units.engine-cubics.create');
+    }
 
-		return response()->json(array(
-			'success' => true,
-			'url'     => '/maintainers/measuring-units/engine-cubics'
-		));
-	}
+    /**
+     * @param EngineCubicRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(EngineCubicRequest $request)
+    {
+        $this->engine_cubic->create($request->all());
 
-	public function edit($id)
-	{
-		$engine_cubic = $this->engine_cubic->find($id);
-		return view('maintainers.measuring-units.engine-cubics.edit', compact('engine_cubic'));
-	}
+        return response()->json([
+            'success' => true,
+            'url'     => '/maintainers/measuring-units/engine-cubics'
+        ]);
+    }
 
-	public function update(EngineCubicRequest $request, $id)
-	{
-		$this->engine_cubic->update($request->all(), $id);
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $engine_cubic = $this->engine_cubic->find($id);
 
-		return response()->json(array(
-			'success' => true,
-			'url'     => '/maintainers/measuring-units/engine-cubics'
-		));
-	}
+        return view('maintainers.measuring-units.engine-cubics.edit', compact('engine_cubic'));
+    }
 
-	public function destroy($id)
-	{
-		$this->engine_cubic->delete($id);
-		return redirect()->route('engine-cubics.index');
-	}
+    /**
+     * @param EngineCubicRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(EngineCubicRequest $request, $id)
+    {
+        $this->engine_cubic->update($request->all(), $id);
+
+        return response()->json([
+            'success' => true,
+            'url'     => '/maintainers/measuring-units/engine-cubics'
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        $this->engine_cubic->delete($id);
+
+        return redirect()->route('engine-cubics.index');
+    }
 }

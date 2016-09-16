@@ -8,7 +8,7 @@
 <br />
 <div class="row">
     <div class="col-md-12">
-        <h3>Seleccione las piezas que desea incorporar</h3>
+        <h4>Seleccione piezas que desea incorporar</h4>
     </div>
 </div>
 <br />
