@@ -6,26 +6,32 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Relationship extends Eloquent
 {
-    protected $fillable = [
-        'name'
-    ];
-
-    public $timestamps = false;
-
-    /*
-     * Relationships
-     */
-
-    public function manpowers() {
-        return $this->belongsToMany('Controlqtime\Manpower');
-    }
-
-    /*
-     * Mutators
-     */
-
-    public function setNameAttribute($value) {
-        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
-    }
-
+	/**
+	 * @var bool
+	 */
+	public $timestamps = false;
+	
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'name'
+	];
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function employees()
+	{
+		return $this->belongsToMany(Employee::class);
+	}
+	
+	/**
+	 * @param string $value
+	 */
+	public function setNameAttribute($value)
+	{
+		$this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+	}
+	
 }

@@ -6,10 +6,16 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class StateVehicle extends Eloquent
 {
+	/**
+	 * @var bool
+	 */
+	public $timestamps = false;
+	
+	/**
+	 * @var array
+	 */
 	protected $fillable = [
 		'name'
 	];
-
-	public $timestamps = false;
 	
 }

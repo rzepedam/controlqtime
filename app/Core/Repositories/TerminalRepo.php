@@ -2,20 +2,28 @@
 
 namespace Controlqtime\Core\Repositories;
 
-use Controlqtime\Core\Contracts\TerminalRepoInterface;
 use Controlqtime\Core\Entities\Terminal;
-use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\ListsTrait;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Contracts\TerminalRepoInterface;
 
 class TerminalRepo extends BaseRepo implements TerminalRepoInterface
 {
-    use ListsTrait;
-
-    protected $model;
-
-    public function __construct(Terminal $model)
-    {
-        $this->model = $model;
-    }
-    
+	use ListsTrait;
+	
+	/**
+	 * @var Terminal
+	 */
+	protected $model;
+	
+	/**
+	 * TerminalRepo constructor.
+	 *
+	 * @param Terminal $model
+	 */
+	public function __construct(Terminal $model)
+	{
+		$this->model = $model;
+	}
+	
 }

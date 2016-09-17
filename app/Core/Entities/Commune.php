@@ -9,7 +9,8 @@ class Commune extends Eloquent
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function province() {
+    public function province()
+    {
         return $this->belongsTo(Province::class);
     }
 }

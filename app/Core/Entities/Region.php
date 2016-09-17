@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Region extends Eloquent
 {
-    /*
-     * Relationships
-     */
-    
-    public function provinces() {
-    	return $this->hasMany(Province::class);
-    }
+	public function provinces()
+	{
+		return $this->hasMany(Province::class);
+	}
+	
 }

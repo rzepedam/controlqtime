@@ -2,19 +2,28 @@
 
 namespace Controlqtime\Core\Repositories;
 
-use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
-use Controlqtime\Core\Entities\TypeProfessionalLicense;
-use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\ListsTrait;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Entities\TypeProfessionalLicense;
+use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
 
 class TypeProfessionalLicenseRepo extends BaseRepo implements TypeProfessionalLicenseRepoInterface
 {
-    use ListsTrait;
-    
-    protected $model;
-
-    public function __construct(TypeProfessionalLicense $model)
-    {
-        $this->model = $model;
-    }
+	use ListsTrait;
+	
+	/**
+	 * @var TypeProfessionalLicense
+	 */
+	protected $model;
+	
+	/**
+	 * TypeProfessionalLicenseRepo constructor.
+	 *
+	 * @param TypeProfessionalLicense $model
+	 */
+	public function __construct(TypeProfessionalLicense $model)
+	{
+		$this->model = $model;
+	}
+	
 }

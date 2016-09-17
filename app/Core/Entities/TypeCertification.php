@@ -6,17 +6,24 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class TypeCertification extends Eloquent
 {
-    public $timestamps = false;
-
-    protected $fillable = [
-        'name'
-    ];
-
+	/**
+	 * @var bool
+	 */
+	public $timestamps = false;
+	
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'name'
+	];
+	
 	/**
 	 * @param string $value
 	 */
-	public function setNameAttribute($value) {
-        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
-    }
-
+	public function setNameAttribute($value)
+	{
+		$this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+	}
+	
 }

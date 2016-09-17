@@ -13,7 +13,7 @@ class EmployeeApiController extends Controller
 	 * @var EmployeeRepoInterface
 	 */
 	protected $employee;
-
+	
 	/**
 	 * EmployeeApiController constructor.
 	 *
@@ -23,7 +23,7 @@ class EmployeeApiController extends Controller
 	{
 		$this->employee = $employee;
 	}
-
+	
 	/**
 	 * @param EmployeeApiRequest $request
 	 *
@@ -37,10 +37,14 @@ class EmployeeApiController extends Controller
 			$employee      = $this->employee->whereFirst('rut', $request->get('rut'));
 			$employee->url = $request->get('url');
 			$employee->save();
-
-			return response()->json(['success' => true,]);
-		} catch ( Exception $exception ) {
+			
+		} catch (Exception $exception)
+		{
 			throw new Exception($exception);
 		}
+		
+		return response()->json([
+			'success' => true
+		]);
 	}
 }

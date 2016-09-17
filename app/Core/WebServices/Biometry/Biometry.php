@@ -2,21 +2,30 @@
 
 namespace Controlqtime\Core\WebServices\Biometry;
 
-use Controlqtime\Core\Contracts\BiometryInterface;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Config;
+use Controlqtime\Core\Contracts\BiometryInterface;
 
-class Biometry implements BiometryInterface{
-
+class Biometry implements BiometryInterface
+{
+	/**
+	 * @var Client
+	 */
 	private $client;
-
+	
+	/**
+	 * Biometry constructor.
+	 */
 	public function __construct()
 	{
 		$this->client = new Client([
 			'base_uri' => Config::get('biometry.url')
 		]);
-	}   
-
+	}
+	
+	/**
+	 * @param $employee
+	 */
 	public function create($employee)
 	{
 		$this->client->post('createOrUpdatePerson', [
@@ -31,6 +40,9 @@ class Biometry implements BiometryInterface{
 		])->getBody();
 	}
 	
+	/**
+	 * @param $employee
+	 */
 	public function delete($employee)
 	{
 		$this->client->post('createOrUpdatePerson', [
@@ -41,6 +53,6 @@ class Biometry implements BiometryInterface{
 				'passport'   => $employee->rut,
 			]
 		])->getBody();
-
 	}
+	
 }

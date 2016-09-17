@@ -6,21 +6,20 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Province extends Eloquent
 {
-    /*
-     * Relationships
-     */
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function communes() {
-    	return $this->hasMany(Commune::class);
+    public function communes()
+    {
+        return $this->hasMany(Commune::class);
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function region() {
+    public function region()
+    {
         return $this->belongsTo(Region::class);
     }
+    
 }

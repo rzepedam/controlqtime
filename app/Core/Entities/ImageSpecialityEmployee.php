@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class ImageSpecialityEmployee extends Eloquent
 {
-	protected $fillable = [
-		'speciality_id', 'path', 'orig_name', 'size'
-	];
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'speciality_id', 'path', 'orig_name', 'size'
+    ];
 
-	/*
-	 * Relationships
-	 */
-
-	public function speciality() {
-		$this->belongsTo(Speciality::class);
-	}
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function speciality()
+    {
+        return $this->belongsTo(Speciality::class);
+    }
 }

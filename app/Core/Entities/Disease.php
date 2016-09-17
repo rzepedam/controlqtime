@@ -6,19 +6,27 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Disease extends Eloquent
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'type_disease_id', 'treatment_disease', 'detail_disease'
     ];
 
-    /*
-     * Relationships
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-
-    public function imageDiseaseEmployees() {
+    public function imageDiseaseEmployees()
+    {
         return $this->hasMany(ImageDiseaseEmployee::class);
     }
 
-    public function typeDisease() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function typeDisease()
+    {
         return $this->belongsTo(TypeDisease::class);
     }
+
 }

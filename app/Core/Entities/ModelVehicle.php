@@ -6,25 +6,31 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class ModelVehicle extends Eloquent
 {
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * @var array
+     */
     protected $fillable = [
         'name', 'trademark_id'
     ];
 
-    public $timestamps = false;
-
-    /*
-     * Relationships
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
-    public function trademark() {
+    public function trademark()
+    {
         return $this->belongsTo(Trademark::class);
     }
 
-    /*
-     * Mutators
+    /**
+     * @param string $value
      */
-    
-    public function setNameAttribute($value) {
+    public function setNameAttribute($value)
+    {
         $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 

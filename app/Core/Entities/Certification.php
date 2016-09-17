@@ -3,44 +3,61 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Certification extends Eloquent
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'type_certification_id', 'institution_certification_id', 'emission_certification', 'expired_certification'
     ];
 
+    /**
+     * @var array
+     */
     protected $dates = [
         'emission_certification', 'expired_certification'
     ];
 
-    /*
-     * Relationships
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
-    public function typeCertification() {
+    public function typeCertification()
+    {
         return $this->belongsTo(TypeCertification::class);
     }
 
-    public function institution() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function institution()
+    {
         return $this->belongsTo(Institution::class, 'institution_certification_id');
     }
 
-    public function imageCertificationEmployees() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function imageCertificationEmployees()
+    {
         return $this->hasMany(ImageCertificationEmployee::class);
     }
 
-    /*
-     * Mutators
+    /**
+     * @param string $value (01-01-2010)
      */
-
-    public function setEmissionCertificationAttribute($value) {
+    public function setEmissionCertificationAttribute($value)
+    {
         $this->attributes['emission_certification'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
-    public function setExpiredCertificationAttribute($value) {
+    /**
+     * @param string $value (01-01-2010)
+     */
+    public function setExpiredCertificationAttribute($value)
+    {
         $this->attributes['expired_certification'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 

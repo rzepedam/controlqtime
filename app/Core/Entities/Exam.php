@@ -2,41 +2,55 @@
 
 namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Exam extends Eloquent
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'type_exam_id', 'emission_exam', 'expired_exam', 'detail_exam'
     ];
-    
+
+    /**
+     * @var array
+     */
     protected $dates = [
         'emission_exam', 'expired_exam'
     ];
 
-    /*
-     * Relationships
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-
-    public function imageExamEmployees() {
+    public function imageExamEmployees()
+    {
         return $this->hasMany(ImageExamEmployee::class);
     }
 
-    public function typeExam() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function typeExam()
+    {
         return $this->belongsTo(TypeExam::class);
     }
 
-    /*
-     * Mutators
+    /**
+     * @param string $value
      */
-
-    public function setEmissionExamAttribute($value) {
+    public function setEmissionExamAttribute($value)
+    {
         $this->attributes['emission_exam'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
-    public function setExpiredExamAttribute($value) {
+    /**
+     * @param string $value
+     */
+    public function setExpiredExamAttribute($value)
+    {
         $this->attributes['expired_exam'] = Carbon::createFromFormat('d-m-Y', $value);
     }
-    
+
 }

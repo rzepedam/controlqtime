@@ -2,19 +2,28 @@
 
 namespace Controlqtime\Core\Repositories;
 
-use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
+use Controlqtime\Core\Traits\ListsTrait;
 use Controlqtime\Core\Entities\TypeVehicle;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
-use Controlqtime\Core\Traits\ListsTrait;
+use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
 
 class TypeVehicleRepo extends BaseRepo implements TypeVehicleRepoInterface
 {
-    use ListsTrait;
-    
-    protected $model;
-
-    public function __construct(TypeVehicle $model)
-    {
-        $this->model = $model;
-    }
+	use ListsTrait;
+	
+	/**
+	 * @var TypeVehicle
+	 */
+	protected $model;
+	
+	/**
+	 * TypeVehicleRepo constructor.
+	 *
+	 * @param TypeVehicle $model
+	 */
+	public function __construct(TypeVehicle $model)
+	{
+		$this->model = $model;
+	}
+	
 }

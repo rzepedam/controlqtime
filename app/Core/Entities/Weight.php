@@ -6,22 +6,32 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Weight extends Eloquent
 {
-    protected $fillable = [
-		'name', 'acr'
-	];
-
+	/**
+	 * @var bool
+	 */
 	public $timestamps = false;
 	
-	/*
-	 * Mutators
+	/**
+	 * @var array
 	 */
-
-	public function setNameAttribute($value) {
+	protected $fillable = [
+		'name', 'acr'
+	];
+	
+	/**
+	 * @param string $value
+	 */
+	public function setNameAttribute($value)
+	{
 		$this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
 	}
-
-	public function setAcrAttribute($value) {
+	
+	/**
+	 * @param string $value
+	 */
+	public function setAcrAttribute($value)
+	{
 		$this->attributes['acr'] = strtolower($value);
 	}
-
+	
 }

@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class ImagePatentVehicle extends Eloquent
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'path', 'orig_name', 'size'
     ];
 
-    /*
-     * Relationships
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
-    public function vehicle() {
-        $this->belongsTo(Vehicle::class);
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
     }
 }

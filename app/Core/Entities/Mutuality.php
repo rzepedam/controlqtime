@@ -6,18 +6,24 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Mutuality extends Eloquent
 {
-	protected $fillable = [
-		'name'
-	];
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
-	public $timestamps = false;
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name'
+    ];
 
-	/*
-	 * Mutators
-	 */
-
-	public function setNameAttribute($value) {
-		$this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
-	}
+    /**
+     * @param string $value
+     */
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
 
 }

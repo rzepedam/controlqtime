@@ -13,7 +13,7 @@ class AccessControlApiController extends Controller
 	 * @var AccessControlApi
 	 */
 	protected $access_control;
-
+	
 	/**
 	 * AccessControlApiController constructor.
 	 *
@@ -23,7 +23,7 @@ class AccessControlApiController extends Controller
 	{
 		$this->access_control = $access_control;
 	}
-
+	
 	/**
 	 * @param AccessControlApiRequest $request
 	 *
@@ -35,12 +35,14 @@ class AccessControlApiController extends Controller
 		try
 		{
 			$this->access_control->create($request->all());
-
-			return response()->json([
-				'success' => true
-			]);
-		} catch ( Exception $exception ) {
+			
+		} catch (Exception $exception)
+		{
 			throw new Exception($exception);
 		}
+		
+		return response()->json([
+			'success' => true
+		]);
 	}
 }

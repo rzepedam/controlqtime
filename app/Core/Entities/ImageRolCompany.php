@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class ImageRolCompany extends Eloquent
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'path', 'orig_name', 'size'
     ];
 
-    /*
-     * Relationships
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
-    public function company() {
-        $this->belongsTo(Company::class);
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }

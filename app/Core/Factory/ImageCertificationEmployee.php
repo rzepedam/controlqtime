@@ -4,8 +4,18 @@ namespace Controlqtime\Core\Factory;
 
 use DB;
 
-class ImageCertificationEmployee extends Image {
-
+class ImageCertificationEmployee extends Image
+{
+	/**
+	 * ImageCertificationEmployee constructor.
+	 *
+	 * @param \Illuminate\Support\Facades\Storage $id
+	 * @param $repoId
+	 * @param $type
+	 * @param $file
+	 * @param $class
+	 * @param $pathImgDelete
+	 */
 	public function __construct($id, $repoId, $type, $file, $class, $pathImgDelete)
 	{
 		$this->id            = $id . '/';
@@ -17,12 +27,16 @@ class ImageCertificationEmployee extends Image {
 		$this->entity        = new $this->model;
 		$this->pathImgDelete = $pathImgDelete;
 	}
-
+	
+	/**
+	 * @return bool
+	 */
 	public function addImages()
 	{
 		DB::beginTransaction();
-
-		try {
+		
+		try
+		{
 			$this->name                     = $this->getName();
 			$this->entity->path             = $this->getPath() . $this->name;
 			$this->entity->orig_name        = $this->name;
@@ -30,13 +44,14 @@ class ImageCertificationEmployee extends Image {
 			$this->entity->certification_id = $this->repoId;
 			$this->entity->save();
 			$this->moveImage();
-
+			
 			DB::commit();
-		}catch( Exception $e ) {
+		} catch (Exception $e)
+		{
 			DB::rollback();
 		}
-
+		
 		return true;
 	}
-
+	
 }

@@ -2,46 +2,63 @@
 
 namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Speciality extends Eloquent
 {
-    protected $fillable = [
-        'type_speciality_id', 'institution_speciality_id', 'emission_speciality', 'expired_speciality'
-    ];
-
-
-    protected $dates = [
-        'emission_speciality', 'expired_speciality'
-    ];
-
-    /*
-     * Relationships
-     */
-    
-    public function typeSpeciality() {
-        return $this->belongsTo(TypeSpeciality::class);
-    }
-
-    public function institution() {
-        return $this->belongsTo(Institution::class, 'institution_speciality_id');
-    }
-    
-    public function imageSpecialityEmployees () {
-        return $this->hasMany(ImageSpecialityEmployee::class);
-    }
-    
-    /*
-     * Mutators
-     */
-
-    public function setEmissionSpecialityAttribute($value) {
-        $this->attributes['emission_speciality'] = Carbon::createFromFormat('d-m-Y', $value);
-    }
-
-    public function setExpiredSpecialityAttribute($value) {
-        $this->attributes['expired_speciality'] = Carbon::createFromFormat('d-m-Y', $value);
-    }
-
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'type_speciality_id', 'institution_speciality_id', 'emission_speciality', 'expired_speciality'
+	];
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'emission_speciality', 'expired_speciality'
+	];
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function typeSpeciality()
+	{
+		return $this->belongsTo(TypeSpeciality::class);
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function institution()
+	{
+		return $this->belongsTo(Institution::class, 'institution_speciality_id');
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function imageSpecialityEmployees()
+	{
+		return $this->hasMany(ImageSpecialityEmployee::class);
+	}
+	
+	/**
+	 * @param string $value (01-01-2010)
+	 */
+	public function setEmissionSpecialityAttribute($value)
+	{
+		$this->attributes['emission_speciality'] = Carbon::createFromFormat('d-m-Y', $value);
+	}
+	
+	/**
+	 * @param string $value (01-01-2010)
+	 */
+	public function setExpiredSpecialityAttribute($value)
+	{
+		$this->attributes['expired_speciality'] = Carbon::createFromFormat('d-m-Y', $value);
+	}
+	
 }

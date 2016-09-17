@@ -4,7 +4,13 @@ namespace Controlqtime\Core\Traits;
 
 trait ListsTrait
 {
-    public function lists($column, $id)
+	/**
+	 * @param $column
+	 * @param $id
+	 *
+	 * @return list field
+	 */
+	public function lists($column, $id)
     {
         return $this->model->pluck($column, $id);
     }

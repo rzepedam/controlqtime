@@ -2,19 +2,27 @@
 
 namespace Controlqtime\Core\Repositories;
 
-use Controlqtime\Core\Contracts\PositionRepoInterface;
 use Controlqtime\Core\Entities\Position;
-use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\ListsTrait;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Contracts\PositionRepoInterface;
 
 class PositionRepo extends BaseRepo implements PositionRepoInterface
 {
 	use ListsTrait;
-
-    protected $model;
-
-    public function __construct(Position $model)
-    {
-        $this->model = $model;
-    }
+	
+	/**
+	 * @var Position
+	 */
+	protected $model;
+	
+	/**
+	 * PositionRepo constructor.
+	 *
+	 * @param Position $model
+	 */
+	public function __construct(Position $model)
+	{
+		$this->model = $model;
+	}
 }

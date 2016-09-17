@@ -7,75 +7,85 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DetailVehicle extends Eloquent
 {
-	/**
-	 * @var array
-	 */
-	protected $fillable = [
-		'color', 'fuel_id', 'num_chasis', 'num_motor','km', 'engine_cubic', 'weight', 'obs'
-	];
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
-	/**
-	 * @var bool
-	 */
-	public $timestamps = false;
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'color', 'fuel_id', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'obs'
+    ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function vehicle() {
-		return $this->belongsTo(Vehicle::class);
-	}
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function fuel()
+    {
+        return $this->belongsTo(Fuel::class);
+    }
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function fuel() {
-		return $this->belongsTo(Fuel::class);
-	}
+    /**
+     * @param string $value
+     */
+    public function setColorAttribute($value)
+    {
+        $this->attributes['color'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
 
-	/**
-	 * @param string $value
-	 */
-	public function setColorAttribute($value) {
-		$this->attributes['color'] = ucfirst(mb_strtolower($value, 'utf-8'));
-	}
+    /**
+     * @param string $value
+     */
+    public function setNumChasisAttribute($value)
+    {
+        $this->attributes['num_chasis'] = strtoupper($value);
+    }
 
-	/**
-	 * @param string $value
-	 */
-	public function setNumChasisAttribute($value) {
-		$this->attributes['num_chasis'] = strtoupper($value);
-	}
+    /**
+     * @param string $value
+     */
+    public function setNumMotorAttribute($value)
+    {
+        $this->attributes['num_motor'] = strtoupper($value);
+    }
 
-	/**
-	 * @param string $value
-	 */
-	public function setNumMotorAttribute($value) {
-		$this->attributes['num_motor'] = strtoupper($value);
-	}
+    /**
+     * @param string $value (15000)
+     *
+     * @return string (15.000)
+     */
+    public function getKmAttribute($value)
+    {
+        return FormatField::decimalNumber($value);
+    }
 
-	/**
-	 * @param $value (15000)
-	 * @return string (15.000)
-	 */
-	public function getKmAttribute($value) {
-		return FormatField::decimalNumber($value);
-	}
+    /**
+     * @param $value (1600)
+     *
+     * @return string (1.600)
+     */
+    public function getEngineCubicAttribute($value)
+    {
+        return FormatField::decimalNumber($value);
+    }
 
-	/**
-	 * @param $value (1600)
-	 * @return string (1.600)
-	 */
-	public function getEngineCubicAttribute($value) {
-		return FormatField::decimalNumber($value);
-	}
-
-	/**
-	 * @param $value (9500)
-	 * @return string (9.500)
-	 */
-	public function getWeightAttribute($value) {
-		return FormatField::decimalNumber($value);
-	}
+    /**
+     * @param string $value (9500)
+     *
+     * @return string (9.500)
+     */
+    public function getWeightAttribute($value)
+    {
+        return FormatField::decimalNumber($value);
+    }
 }

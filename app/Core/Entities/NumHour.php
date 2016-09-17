@@ -6,18 +6,24 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class NumHour extends Eloquent
 {
-	protected $fillable = array(
-		'name'
-	);
-
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
-	/*
-	 * Mutators
-	 */
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name'
+    ];
 
-	public function setNameAttribute($value) {
-		$this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
-	}
+    /**
+     * @param string $value
+     */
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
 
 }

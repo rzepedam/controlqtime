@@ -2,10 +2,9 @@
 
 namespace Controlqtime\Core\Repositories;
 
-use Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface;
 use Controlqtime\Core\Entities\TermAndObligatory;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
-use Controlqtime\Core\Traits\ListsTrait;
+use Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface;
 
 class TermAndObligatoryRepo extends BaseRepo implements TermAndObligatoryRepoInterface
 {
@@ -13,9 +12,10 @@ class TermAndObligatoryRepo extends BaseRepo implements TermAndObligatoryRepoInt
 	 * @var TermAndObligatory
 	 */
 	protected $model;
-
+	
 	/**
 	 * TermAndObligatoryRepo constructor.
+	 *
 	 * @param TermAndObligatory $model
 	 */
 	public function __construct(TermAndObligatory $model)

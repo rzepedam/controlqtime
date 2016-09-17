@@ -2,52 +2,64 @@
 
 namespace Controlqtime\Core\Repositories;
 
-use Controlqtime\Core\Contracts\SpecialityRepoInterface;
 use Controlqtime\Core\Entities\Speciality;
-use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\DestroyImageFile;
-use Controlqtime\Core\Traits\OperationEntityArray;
 use Controlqtime\Core\Traits\WhereMethodsTrait;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
+use Controlqtime\Core\Traits\OperationEntityArray;
+use Controlqtime\Core\Contracts\SpecialityRepoInterface;
 
-class SpecialityRepo extends BaseRepo implements SpecialityRepoInterface {
-
+class SpecialityRepo extends BaseRepo implements SpecialityRepoInterface
+{
 	use OperationEntityArray, WhereMethodsTrait, DestroyImageFile;
-
+	
+	/**
+	 * @var Speciality
+	 */
 	protected $model;
-
+	
+	/**
+	 * SpecialityRepo constructor.
+	 *
+	 * @param Speciality $model
+	 */
 	public function __construct(Speciality $model)
 	{
 		$this->model = $model;
 	}
-
+	
+	/**
+	 * @param array $request
+	 * @param $entity
+	 */
 	public function createOrUpdateWithArray(array $request, $entity)
 	{
-		for ($i = 0; $i < $request['count_specialities']; $i ++)
+		for ($i = 0; $i < $request['count_specialities']; $i++)
 		{
-
-			$id = $request['id_speciality'][ $i ];
-
-			if ( $id == 0 )
+			
+			$id = $request['id_speciality'][$i];
+			
+			if ($id == 0)
 			{
 				$this->model = new Speciality([
-					'type_speciality_id'        => $request['type_speciality_id'][ $i ],
-					'institution_speciality_id' => $request['institution_speciality_id'][ $i ],
-					'emission_speciality'       => $request['emission_speciality'][ $i ],
-					'expired_speciality'        => $request['expired_speciality'][ $i ],
+					'type_speciality_id'        => $request['type_speciality_id'][$i],
+					'institution_speciality_id' => $request['institution_speciality_id'][$i],
+					'emission_speciality'       => $request['emission_speciality'][$i],
+					'expired_speciality'        => $request['expired_speciality'][$i],
 				]);
-
+				
 				$entity->certifications()->save($this->model);
 				$entity->state = 'disable';
 				$entity->save();
-
+				
 			} else
 			{
 				$this->model                            = $this->model->findOrFail($id);
-				$this->model->type_speciality_id        = $request['type_speciality_id'][ $i ];
-				$this->model->institution_speciality_id = $request['institution_speciality_id'][ $i ];
-				$this->model->emission_speciality       = $request['emission_speciality'][ $i ];
-				$this->model->expired_speciality        = $request['expired_speciality'][ $i ];
-
+				$this->model->type_speciality_id        = $request['type_speciality_id'][$i];
+				$this->model->institution_speciality_id = $request['institution_speciality_id'][$i];
+				$this->model->emission_speciality       = $request['emission_speciality'][$i];
+				$this->model->expired_speciality        = $request['expired_speciality'][$i];
+				
 				$this->model->save();
 			}
 		}

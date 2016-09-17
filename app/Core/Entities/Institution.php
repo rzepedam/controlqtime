@@ -6,25 +6,31 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Institution extends Eloquent
 {
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * @var array
+     */
     protected $fillable = [
         'name', 'type_institution_id'
     ];
 
-    public $timestamps = false;
-
-    /*
-     * Relationships
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
-    public function typeInstitution() {
+    public function typeInstitution()
+    {
         return $this->belongsTo(TypeInstitution::class);
     }
 
-    /*
-     * Mutators
+    /**
+     * @param string $value
      */
-
-    public function setNameAttribute($value) {
+    public function setNameAttribute($value)
+    {
         $this->attributes['name'] = ucfirst($value);
     }
 

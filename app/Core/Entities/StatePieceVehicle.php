@@ -7,22 +7,22 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class StatePieceVehicle extends Eloquent
 {
 	/**
-	 * @var array
-	 */
-	protected $fillable = [
-    	'name'
-	];
-
-	/**
 	 * @var bool
 	 */
 	public $timestamps = false;
-
-
+	
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'name'
+	];
+	
 	/**
 	 * @param string $value
 	 */
-	public function setNameAttribute($value) {
+	public function setNameAttribute($value)
+	{
 		$this->attributes['name'] = ucfirst($value);
 	}
 }

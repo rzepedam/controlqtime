@@ -2,8 +2,8 @@
 
 namespace Controlqtime\Core\Repositories;
 
-use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Entities\StatePieceVehicle;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Contracts\StatePieceVehicleRepoInterface;
 
 class StatePieceVehicleRepo extends BaseRepo implements StatePieceVehicleRepoInterface
@@ -12,7 +12,7 @@ class StatePieceVehicleRepo extends BaseRepo implements StatePieceVehicleRepoInt
 	 * @var StatePieceVehicle
 	 */
 	protected $model;
-
+	
 	/**
 	 * StatePieceVehicleRepo constructor.
 	 *
@@ -22,4 +22,5 @@ class StatePieceVehicleRepo extends BaseRepo implements StatePieceVehicleRepoInt
 	{
 		$this->model = $model;
 	}
+	
 }

@@ -8,8 +8,16 @@ use Controlqtime\Core\Contracts\AccessControlRepoInterface;
 
 class AccessControlRepo extends BaseRepo implements AccessControlRepoInterface
 {
+	/**
+	 * @var AccessControlApi
+	 */
 	protected $model;
-
+	
+	/**
+	 * AccessControlRepo constructor.
+	 *
+	 * @param AccessControlApi $model
+	 */
 	public function __construct(AccessControlApi $model)
 	{
 		$this->model = $model;

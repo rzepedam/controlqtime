@@ -6,7 +6,7 @@ use Controlqtime\Core\Entities\PieceVehicle;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Contracts\PieceVehicleRepoInterface;
 
-class PieceVehicleRepo extends BaseRepo  implements PieceVehicleRepoInterface
+class PieceVehicleRepo extends BaseRepo implements PieceVehicleRepoInterface
 {
 	/**
 	 * @var \Controlqtime\Core\Entities\PieceVehicle
