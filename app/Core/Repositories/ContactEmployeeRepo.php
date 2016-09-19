@@ -35,7 +35,6 @@ class ContactEmployeeRepo implements ContactEmployeeRepoInterface
 	{
 		for ($i = 0; $i < $request['count_contacts']; $i++)
 		{
-			
 			$id = $request['id_contact'][$i];
 			
 			if ($id == 0)

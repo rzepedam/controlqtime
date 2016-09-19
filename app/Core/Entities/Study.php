@@ -50,4 +50,12 @@ class Study extends Eloquent
 		$this->attributes['date_obtention'] = Carbon::createFromFormat('d-m-Y', $value);
 	}
 	
+	/**
+	 * @param string $value
+	 */
+	public function setNameStudyAttribute($value)
+	{
+		$this->attributes['name_study'] = ucfirst(mb_strtolower($value, 'utf-8'));
+	}
+	
 }

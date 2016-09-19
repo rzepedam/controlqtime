@@ -34,10 +34,7 @@ class TermAndObligatory extends Eloquent
 	 */
 	public function setDefaultAttribute($value)
 	{
-		if ($value == 'on')
-			$this->attributes['default'] = true;
-		else
-			$this->attributes['default'] = false;
+		$this->attributes['default'] = ($value === 'on') ? true : false;
 	}
 	
 	/**
@@ -47,7 +44,6 @@ class TermAndObligatory extends Eloquent
 	 */
 	public function getDefaultAttribute($value)
 	{
-		if ($value)
-			return 'checked';
+		return ($value) ? 'checked' : null;
 	}
 }

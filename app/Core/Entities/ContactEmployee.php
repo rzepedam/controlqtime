@@ -34,7 +34,7 @@ class ContactEmployee extends Eloquent
      */
     public function setNameContactAttribute($value)
     {
-        $this->attributes['name_contact'] = ucfirst(mb_strtolower($value, 'UTF-8'));
+        $this->attributes['name_contact'] = ucwords(mb_strtolower($value, 'UTF-8'));
     }
 
     /**
@@ -42,7 +42,7 @@ class ContactEmployee extends Eloquent
      */
     public function setEmailContactAttribute($value)
     {
-        $this->attributes['email_contact'] = strtolower($value);
+        $this->attributes['email_contact'] = mb_strtolower($value, 'utf-8');
     }
 
     /**
@@ -50,7 +50,7 @@ class ContactEmployee extends Eloquent
      */
     public function setAddressContactAttribute($value)
     {
-        $this->attributes['address_contact'] = ucfirst($value);
+        $this->attributes['address_contact'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
 }

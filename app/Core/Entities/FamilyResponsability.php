@@ -37,7 +37,15 @@ class FamilyResponsability extends Eloquent
     {
         return $this->belongsTo(Relationship::class);
     }
-
+	
+	/**
+	 * @param string $value
+	 */
+	public function setNameResponsabilityAttribute($value)
+	{
+		$this->attributes['name_responsability'] = ucwords(mb_strtolower($value, 'UTF-8'));
+	}
+    
     /**
      * @param string $value format 12.345.678-9
      */

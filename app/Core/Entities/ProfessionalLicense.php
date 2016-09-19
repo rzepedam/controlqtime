@@ -52,5 +52,12 @@ class ProfessionalLicense extends Eloquent
     {
         $this->attributes['expired_license'] = Carbon::createFromFormat('d-m-Y', $value);
     }
-
+	
+	/**
+	 * @param string $value
+	 */
+	public function setDetailLicenseAttribute($value)
+    {
+        $this->attributes['detail_license'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
 }
