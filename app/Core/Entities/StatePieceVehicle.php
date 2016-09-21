@@ -18,6 +18,16 @@ class StatePieceVehicle extends Eloquent
 		'name'
 	];
 	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function checkVehicleForms()
+	{
+		return $this->belongsToMany(CheckVehicleForm::class);
+	}
+	
+	
 	/**
 	 * @param string $value
 	 */

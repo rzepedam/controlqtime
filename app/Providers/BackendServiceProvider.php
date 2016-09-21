@@ -18,6 +18,11 @@ class BackendServiceProvider extends ServiceProvider
 			'Controlqtime\Core\Contracts\ActivateEmployeeInterface',
 			'Controlqtime\Core\Entities\ActivateEmployee'
 		);
+	
+	    $this->app->bind(
+		    'Controlqtime\Core\Contracts\ActivateVehicleInterface',
+		    'Controlqtime\Core\Entities\ActivateVehicle'
+	    );
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\AreaRepoInterface',
@@ -33,6 +38,11 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Contracts\CertificationRepoInterface',
             'Controlqtime\Core\Repositories\CertificationRepo'
         );
+	
+	    $this->app->bind(
+		    'Controlqtime\Core\Contracts\CheckVehicleFormRepoInterface',
+		    'Controlqtime\Core\Repositories\CheckVehicleFormRepo'
+	    );
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\CommuneRepoInterface',

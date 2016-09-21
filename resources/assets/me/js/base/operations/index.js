@@ -8,4 +8,8 @@ $(document).ready(function(){
         window.location.href = "/operations/master-form-piece-vehicles";
     });
 
+    $('#redirect-check-vehicle-forms').click(function() {
+        window.location.href = "/operations/check-vehicle-forms";
+    });
+
 });

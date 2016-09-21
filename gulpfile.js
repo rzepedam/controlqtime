@@ -495,6 +495,18 @@ elixir(function(mix) {
         'me/js/base/operations/master-form-piece-vehicles/config_bootstrap_table.js'
     ], 'public/js/operations/master-form-piece-vehicles/index-custom-master-form-piece-vehicles.js');
 
+    // Operations > Check-Vehicle-Forms > Index Custom Check-Vehicle-Forms JS
+    mix.scripts([
+        'me/js/base/operations/check-vehicle-forms/config_bootstrap_table.js'
+    ], 'public/js/operations/check-vehicle-forms/index-custom-check-vehicle-forms.js');
+
+    // Operations > Check-Vehicle-Forms > Create-Edit Custom Check-Vehicle-Forms JS
+    mix.scripts([
+        'me/js/utilities/select-unique-checkbox-group.js',
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/base/operations/check-vehicle-forms/load-detail-vehicle.js'
+    ], 'public/js/operations/check-vehicle-forms/create-edit-custom-check-vehicle-forms.js');
+
 
 
     // Copy fonts Font-Awesome
@@ -611,7 +623,9 @@ elixir(function(mix) {
         'public/js/operations/vehicles/index-custom-vehicles.js',
         'public/css/operations/vehicles/create-edit-custom-vehicles.css',
         'public/js/operations/vehicles/create-edit-custom-vehicles.js',
-        'public/js/operations/master-form-piece-vehicles/index-custom-master-form-piece-vehicles.js'
+        'public/js/operations/master-form-piece-vehicles/index-custom-master-form-piece-vehicles.js',
+        'public/js/operations/check-vehicle-forms/index-custom-check-vehicle-forms.js',
+        'public/js/operations/check-vehicle-forms/create-edit-custom-check-vehicle-forms.js'
     ]);
 
 })

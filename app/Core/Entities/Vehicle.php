@@ -94,6 +94,14 @@ class Vehicle extends Eloquent
 		return $this->hasMany(ImageCirculationPermitVehicle::class);
 	}
 	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function checkVehicleForms()
+	{
+		return $this->hasMany(CheckVehicleForm::class);
+	}
+	
 	
 	/**
 	 * @param string $value (01-10-2016)
