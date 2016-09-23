@@ -5,8 +5,8 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-4 waves-effect waves-light">
-            <div id="redirect-employees" class="counter counter-lg counter-inverse bg-brown-400 vertical-align height-150 margin-bottom-5 pointer">
+        <div class="col-md-4">
+            <div id="redirect-employees" class="counter counter-lg counter-inverse bg-brown-400 vertical-align waves-effect waves-block waves-light height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="icon md-accounts" aria-hidden="true"></i>
@@ -15,8 +15,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 waves-effect waves-light">
-            <div id="redirect-access-controls" class="counter counter-lg counter-inverse bg-teal-400 vertical-align height-150 margin-bottom-5 pointer">
+        <div class="col-md-4">
+            <div id="redirect-access-controls" class="counter counter-lg counter-inverse bg-teal-400 vertical-align waves-effect waves-block waves-light height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="fa fa-key" aria-hidden="true"></i>
@@ -25,8 +25,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 waves-effect waves-light">
-            <div id="redirect-contracts" class="counter counter-lg counter-inverse bg-indigo-400 vertical-align height-150 pointer">
+        <div class="col-md-4">
+            <div id="redirect-contracts" class="counter counter-lg counter-inverse bg-indigo-400 vertical-align waves-effect waves-block waves-light height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
                         <i class="icon md-assignment" aria-hidden="true"></i>

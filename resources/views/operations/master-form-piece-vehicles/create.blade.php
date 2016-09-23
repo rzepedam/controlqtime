@@ -3,8 +3,8 @@
 @section('title_header') Crear Nuevo Maestro de Formulario Pieza Vehículos @stop
 
 @section('breadcumb')
-    <li><a href="{{ route('operations') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li><a href="{{ route('master-form-piece-vehicles.index') }}"><i class="fa fa-files-o"></i> M. F. P. Vehículos</a></li>
+    <li><a href="{{ route('operations') }}"><i class="fa fa-map-pin"></i> Operaciones</a></li>
+    <li><a href="{{ route('master-form-piece-vehicles.index') }}"><i class="md-assignment"></i> M.F.P. Vehículos</a></li>
     <li class="active">Nuevo</li>
 @stop
 

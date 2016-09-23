@@ -6,14 +6,14 @@
 
 @stop
 
-@section('title_header') Listado de Maestros de Formulario Pieza Vehículos
+@section('title_header') Listado de Maestros Formulario Pieza Vehículos
     <br />
-    <a href="{{ route('master-form-piece-vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Maestro de Formulario Pieza Vehículos</a>
+    <a href="{{ route('master-form-piece-vehicles.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Maestro Formulario Pieza Vehículos</a>
 @stop
 
 @section('breadcumb')
-    <li><a href="{{ route('operations') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
-    <li class="active">M. F. P. Vehículos</li>
+    <li><a href="{{ route('operations') }}"><i class="fa fa-map-pin"></i> Operaciones</a></li>
+    <li class="active">M.F.P. Vehículos</li>
 @stop
 
 @section('content')

@@ -4,7 +4,7 @@
 
 @section('breadcumb')
     <li><a href="{{ route('operations') }}"><i class="fa fa-map-pin"></i> Operaciones</a></li>
-    <li><a href="{{ route('check-vehicle-forms.index') }}"><i class="fa fa-files-o"></i> Formulario Chequeo Vehículos</a></li>
+    <li><a href="{{ route('check-vehicle-forms.index') }}"><i class="fa fa-pencil-square-o"></i> Formulario Chequeo Vehículos</a></li>
     <li class="active">Nuevo</li>
 @stop
 

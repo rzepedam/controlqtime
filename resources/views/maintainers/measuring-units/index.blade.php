@@ -10,7 +10,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-4 waves-effect waves-light">
+        <div class="col-md-4 waves-effect waves-block waves-light">
             <div id="redirect-weight" class="counter counter-lg counter-inverse bg-indigo-500 vertical-align height-150 margin-bottom-5 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 waves-effect waves-light">
+        <div class="col-md-4 waves-effect waves-block waves-light">
             <div id="redirect-engine-cubic" class="counter counter-lg counter-inverse bg-green-500 vertical-align height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon margin-bottom-5">
