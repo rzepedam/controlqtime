@@ -8,7 +8,7 @@ use Controlqtime\Core\Api\Entities\AccessControlApi;
 $factory->define(Company::class, function (Faker\Generator $faker)
 {
 	return [
-		'type_company_id' => rand(1, 2),
+		'type_company_id' => rand(1, 3),
 		'rut'             => rand(100, 110) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'firm_name'       => $faker->company . " " . $faker->companySuffix,
 		'gyre'            => $faker->sentence,

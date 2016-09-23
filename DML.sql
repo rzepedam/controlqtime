@@ -865,7 +865,6 @@ INSERT INTO fuels(name) VALUES('97');
 INSERT INTO type_companies(name) VALUES('Operador');
 INSERT INTO type_companies(name) VALUES('Contratista');
 INSERT INTO type_companies(name) VALUES('Proveedor');
-INSERT INTO type_companies(name) VALUES('Visitas');
 
 /* state_vehicles | Estado de vehículo */
 INSERT INTO state_vehicles(name) VALUES('Nuevo');

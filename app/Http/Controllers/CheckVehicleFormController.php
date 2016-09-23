@@ -119,7 +119,9 @@ class CheckVehicleFormController extends Controller
 	 */
 	public function show($id)
 	{
-		//
+		$checkVehicleForm = $this->check_vehicle_form->find($id);
+		
+		return view('operations.check-vehicle-forms', compact('checkVehicleForm'));
 	}
 	
 	/**

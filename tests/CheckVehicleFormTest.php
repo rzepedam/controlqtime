@@ -6,11 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CheckVehicleFormTest extends TestCase
 {
-	/**
-	 * A basic test example.
-	 *
-	 * @return void
-	 */
 	public function test_check_form_vehicle_index()
 	{
 		$this->visit('operations/check-vehicle-forms')
@@ -21,6 +16,13 @@ class CheckVehicleFormTest extends TestCase
 			->see('Patente')
 			->see('Ingresado')
 			->see('Acciones');
+	}
+	
+	public function test_check_form_vehicle_create()
+	{
+		$this->visit('operations/check-vehicle-forms')
+			->click('Crear Nuevo Formulario Chequeo Vehículo')
+			->assertResponseStatus(200);
 	}
 	
 }
