@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Editar Maestro de Formulario Pieza Vehículos: {{ $masterFormPieceVehicle->id }} @stop
+@section('title_header') Editar Maestro de Formulario Pieza Vehículos: <span class="text-primary">{{ $masterFormPieceVehicle->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('operations') }}"><i class="fa fa-map-pin"></i> Operaciones</a></li>
