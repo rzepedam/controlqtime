@@ -4,6 +4,7 @@ use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
+use Controlqtime\Core\Entities\MasterFormPieceVehicle;
 
 $factory->define(Company::class, function (Faker\Generator $faker)
 {
@@ -23,25 +24,25 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 		'phone2'          => $faker->phoneNumber,
 		'email_company'   => $faker->email,
 	];
-
+	
 });
 
 $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 {
 	return [
-		'company_id'             => factory(Company::class)->create()->id,
-		'male_surname'           => $faker->lastName,
-		'female_surname'         => $faker->lastName,
-		'first_name'             => $faker->firstName,
-		'second_name'            => $faker->firstName,
-		'rut_representative'     => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
-		'birthday'               => $faker->date($format = 'd-m-Y', $max = 'now'),
-		'nationality_id'         => rand(1, 9),
-		'phone1_representative'  => $faker->phoneNumber,
-		'phone2_representative'  => $faker->phoneNumber,
-		'email_representative'   => $faker->email,
+		'company_id'            => factory(Company::class)->create()->id,
+		'male_surname'          => $faker->lastName,
+		'female_surname'        => $faker->lastName,
+		'first_name'            => $faker->firstName,
+		'second_name'           => $faker->firstName,
+		'rut_representative'    => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
+		'birthday'              => $faker->date($format = 'd-m-Y', $max = 'now'),
+		'nationality_id'        => rand(1, 9),
+		'phone1_representative' => $faker->phoneNumber,
+		'phone2_representative' => $faker->phoneNumber,
+		'email_representative'  => $faker->email,
 	];
-
+	
 });
 
 $factory->define(Employee::class, function (Faker\Generator $faker)
@@ -50,34 +51,42 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	$femaleSurname = $faker->lastName;
 	$firstName     = $faker->firstName;
 	$secondName    = $faker->firstName;
-
+	
 	return [
-		'male_surname'   	=> $maleSurname,
-		'female_surname' 	=> $femaleSurname,
-		'first_name'     	=> $firstName,
-		'second_name'    	=> $secondName,
-		'full_name'      	=> "$firstName $secondName $maleSurname $femaleSurname",
-		'rut'            	=> rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
-		'birthday'       	=> $faker->date($format = 'd-m-Y', $max = 'now'),
-		'nationality_id' 	=> rand(1, 9),
-		'gender_id'      	=> rand(1, 2),
-		'marital_status_id'	=> rand(1,4),
-		'forecast_id'		=> rand(1,14),
-		'pension_id'		=> rand(1,6),
-		'address'        	=> $faker->address,
-		'commune_id'     	=> rand(1, 53),
-		'email_employee' 	=> $faker->unique()->email,
-		'phone1'         	=> $faker->phoneNumber,
-		'phone2'         	=> $faker->phoneNumber,
-		'state'			 	=> 'disable'
+		'male_surname'      => $maleSurname,
+		'female_surname'    => $femaleSurname,
+		'first_name'        => $firstName,
+		'second_name'       => $secondName,
+		'full_name'         => "$firstName $secondName $maleSurname $femaleSurname",
+		'rut'               => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
+		'birthday'          => $faker->date($format = 'd-m-Y', $max = 'now'),
+		'nationality_id'    => rand(1, 9),
+		'gender_id'         => rand(1, 2),
+		'marital_status_id' => rand(1, 4),
+		'forecast_id'       => rand(1, 14),
+		'pension_id'        => rand(1, 6),
+		'address'           => $faker->address,
+		'commune_id'        => rand(1, 53),
+		'email_employee'    => $faker->unique()->email,
+		'phone1'            => $faker->phoneNumber,
+		'phone2'            => $faker->phoneNumber,
+		'state'             => 'disable'
 	];
 });
 
 $factory->define(AccessControlApi::class, function (Faker\Generator $faker)
 {
-	return array(
-		'rut'			=> rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
-		'num_device'	=> $faker->macAddress,
-		'status'		=> $faker->boolean
-	);
+	return [
+		'rut'        => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
+		'num_device' => $faker->macAddress,
+		'status'     => $faker->boolean
+	];
+});
+
+$factory->define(MasterFormPieceVehicle::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'   => 1,
+		'name' => 'Maestro Formulario Chequeo Vehículos'
+	];
 });
