@@ -96,7 +96,6 @@ $factory->define(MasterFormPieceVehicle::class, function ()
 $factory->define(User::class, function (Faker\Generator $faker)
 {
 	return [
-		'name'     => "$faker->firstName $faker->lastName",
 		'email'    => $faker->email,
 		'password' => bcrypt("$faker->password")
 	];

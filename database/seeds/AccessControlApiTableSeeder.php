@@ -7,6 +7,7 @@ class AccessControlApiTableSeeder extends Seeder
 {
     public function run()
     {
+	    DB::table('access_control_apis')->truncate();
         factory(AccessControlApi::class, 50)->create();
     }
 }

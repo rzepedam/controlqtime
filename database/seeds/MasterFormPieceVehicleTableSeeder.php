@@ -12,6 +12,7 @@ class MasterFormPieceVehicleTableSeeder extends Seeder
 	 */
 	public function run()
 	{
+		DB::table('master_form_piece_vehicles')->truncate();
 		factory(MasterFormPieceVehicle::class, 1)->create()->each(function ($u)
 		{
 			for ($i = 1; $i <= 22; $i++)

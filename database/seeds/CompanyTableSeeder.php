@@ -7,6 +7,7 @@ class CompanyTableSeeder extends Seeder
 {
     public function run()
     {
-        // factory(Company::class, 26)->create();
+	    DB::table('companies')->truncate();
+        factory(Company::class, 26)->create();
     }
 }
