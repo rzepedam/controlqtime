@@ -8,6 +8,5 @@ class CompanyTableSeeder extends Seeder
     public function run()
     {
 	    DB::table('companies')->truncate();
-        factory(Company::class, 26)->create();
     }
 }
