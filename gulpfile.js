@@ -26,6 +26,11 @@ elixir.config.css.minifier.pluginOptions = {
 
 elixir(function(mix) {
 
+    // Default Laravel CSS
+    mix.sass('app.scss');
+
+
+
     // Layout > Stylesheets CSS
     mix.styles([
         'bower/packages-for-cqtime/css/bootstrap.css',
@@ -508,6 +513,9 @@ elixir(function(mix) {
     ], 'public/js/operations/check-vehicle-forms/create-edit-custom-check-vehicle-forms.js');
 
 
+
+    // Copy app.js used default Laravel
+    mix.copy('resources/assets/me/app.js', 'public/js');
 
     // Copy fonts Font-Awesome
     mix.copy('resources/assets/bower/font-awesome/fonts', 'public/build/fonts');

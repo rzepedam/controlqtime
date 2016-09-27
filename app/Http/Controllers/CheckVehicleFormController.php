@@ -52,7 +52,7 @@ class CheckVehicleFormController extends Controller
 	 */
 	public function getCheckVehicleForms()
 	{
-		$checkVehicleForms = $this->check_vehicle_form->all(['vehicle.modelVehicle.trademark']);
+		$checkVehicleForms = $this->check_vehicle_form->all(['vehicle', 'employee']);
 		
 		return $checkVehicleForms;
 	}
@@ -90,6 +90,7 @@ class CheckVehicleFormController extends Controller
 	 */
 	public function store(CheckVehicleFormRequest $request)
 	{
+		$request->request->add(['employee_id' => auth()->user()->employee->id]);
 		$request->request->add(['master_form_piece_vehicle_id' => 1]);
 		DB::beginTransaction();
 		

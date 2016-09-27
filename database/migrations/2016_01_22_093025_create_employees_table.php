@@ -9,7 +9,7 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('photo');
+            $table->unsignedInteger('user_id');
             $table->string('male_surname', 30);
             $table->string('female_surname', 30);
             $table->string('first_name', 30);
@@ -33,8 +33,12 @@ class CreateEmployeesTable extends Migration
 			$table->string('url')->default('');
             $table->enum('state', ['enable', 'disable'])->default('disable');
             $table->enum('condition', ['available', 'unavailable'])->default('unavailable');
-
             $table->timestamps();
+	        
+	        $table->foreign('user_id')
+		        ->references('id')
+		        ->on('users')
+		        ->onUpdate('cascade');
 
             $table->foreign('nationality_id')
                 ->references('id')

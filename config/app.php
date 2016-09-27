@@ -218,10 +218,6 @@ return [
 		'Validator' => Illuminate\Support\Facades\Validator::class,
 		'View'      => Illuminate\Support\Facades\View::class,
 
-		/*
-		 * Propias
-		 */
-
 		'Date'     		=> Jenssegers\Date\Date::class,
 		'Debugbar' 		=> Barryvdh\Debugbar\Facade::class,
 		'Form'     		=> Collective\Html\FormFacade::class,
@@ -229,8 +225,6 @@ return [
 		'PDF'      		=> Barryvdh\Snappy\Facades\SnappyPdf::class,
 		'Image'    		=> Barryvdh\Snappy\Facades\SnappyImage::class,
 		'Excel'    		=> Maatwebsite\Excel\Facades\Excel::class,
-		'Uuid' 	   		=> Webpatser\Uuid\Uuid::class,
-		'Helper' 		=> Controlqtime\Helpers\Helper::class,
 
 	],
 

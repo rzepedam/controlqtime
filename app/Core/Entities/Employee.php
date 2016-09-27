@@ -12,7 +12,7 @@ class Employee extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
+		'user_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
 		'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'gender_id', 'address', 'depto',
 		'block', 'num_home', 'commune_id', 'email_employee', 'phone1', 'phone2', 'state'
 	];
@@ -244,6 +244,15 @@ class Employee extends Eloquent
 	{
 		return $this->hasMany(Study::class);
 	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function user()
+	{
+        return $this->belongsTo(User::class);
+	}
+	
 	
 	/**
 	 * @param string $value

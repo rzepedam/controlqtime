@@ -4,12 +4,7 @@ $('#check_vehicle_form_table').bootstrapTable({
         {},
         {
             formatter : function(value, row) {
-                return row.vehicle.model_vehicle.trademark.name;
-            }
-        },
-        {
-            formatter : function(value, row) {
-                return row.vehicle.model_vehicle.name;
+                return row.employee.full_name;
             }
         },
         {

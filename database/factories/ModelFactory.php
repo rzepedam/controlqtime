@@ -1,5 +1,6 @@
 <?php
 
+use Controlqtime\Core\Entities\User;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\LegalRepresentative;
@@ -53,6 +54,7 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	$secondName    = $faker->firstName;
 	
 	return [
+		'user_id'           => factory(User::class)->create()->id,
 		'male_surname'      => $maleSurname,
 		'female_surname'    => $femaleSurname,
 		'first_name'        => $firstName,
@@ -83,10 +85,19 @@ $factory->define(AccessControlApi::class, function (Faker\Generator $faker)
 	];
 });
 
-$factory->define(MasterFormPieceVehicle::class, function (Faker\Generator $faker)
+$factory->define(MasterFormPieceVehicle::class, function ()
 {
 	return [
 		'id'   => 1,
 		'name' => 'Maestro Formulario Chequeo Vehículos'
+	];
+});
+
+$factory->define(User::class, function (Faker\Generator $faker)
+{
+	return [
+		'name'     => "$faker->firstName $faker->lastName",
+		'email'    => $faker->email,
+		'password' => bcrypt("$faker->password")
 	];
 });

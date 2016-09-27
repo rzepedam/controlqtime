@@ -34,12 +34,9 @@
                     </div>
                     <div class="col-md-2" style="margin-top: 3px;">
                         @if (! is_null($employee->url))
-                            <img src="{{ $employee->url }}" alt="{{ $employee->full_name }}" width="152"
-                                 height="152" class="img-bordered img-bordered-primary">
+                            <img src="{{ $employee->url }}" alt="{{ $employee->full_name }}" width="152" height="152" class="img-bordered img-bordered-primary">
                         @else
-                            <img src="{{ '/storage/employee/500/CertificationEmployee/1/1470247271TdDgw.JPG' }}"
-                                 alt="{{ $employee->full_name }}" width="152" height="152"
-                                 class="img-bordered img-bordered-primary">
+                            <img src="{{ '/storage/employee/500/CertificationEmployee/1/1470247271TdDgw.JPG' }}" alt="{{ $employee->full_name }}" width="152" height="152" class="img-bordered img-bordered-primary">
                         @endif
                     </div>
                 </div>

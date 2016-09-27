@@ -9,6 +9,7 @@ use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
 use Controlqtime\Core\Contracts\ExamRepoInterface;
+use Controlqtime\Core\Contracts\UserRepoInterface;
 use Controlqtime\Core\Contracts\StudyRepoInterface;
 use Controlqtime\Core\Contracts\DegreeRepoInterface;
 use Controlqtime\Core\Contracts\GenderRepoInterface;
@@ -192,6 +193,11 @@ class EmployeeController extends Controller
 	protected $type_speciality;
 	
 	/**
+	 * @var UserRepoInterface
+	 */
+	protected $user;
+	
+	/**
 	 * EmployeeController constructor.
 	 *
 	 * @param EmployeeRepoInterface $employee
@@ -224,8 +230,17 @@ class EmployeeController extends Controller
 	 * @param ForecastRepoInterface $forecast
 	 * @param PensionRepoInterface $pension
 	 * @param ActivateEmployeeInterface $activateEmployee
+	 * @param UserRepoInterface $user
 	 */
-	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality, TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam, FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense, DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam, FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee, ImageFactoryInterface $image, MaritalStatusRepoInterface $maritalStatus, ForecastRepoInterface $forecast, PensionRepoInterface $pension, ActivateEmployeeInterface $activateEmployee)
+	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune,
+		RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution,
+		TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality,
+		TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam,
+		FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense,
+		DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam,
+		FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee,
+		ImageFactoryInterface $image, MaritalStatusRepoInterface $maritalStatus, ForecastRepoInterface $forecast,
+		PensionRepoInterface $pension, ActivateEmployeeInterface $activateEmployee, UserRepoInterface $user)
 	{
 		$this->activateEmployee          = $activateEmployee;
 		$this->certification             = $certification;
@@ -257,6 +272,7 @@ class EmployeeController extends Controller
 		$this->type_exam                 = $type_exam;
 		$this->type_professional_license = $type_professional_license;
 		$this->type_speciality           = $type_speciality;
+		$this->user                      = $user;
 	}
 	
 	/**
@@ -321,6 +337,12 @@ class EmployeeController extends Controller
 		
 		try
 		{
+			$user = $this->user->create([
+				'email'    => Session::get('email_employee'),
+				'password' => bcrypt(Session::get('email_employee'))
+			]);
+			
+			$request->session()->put('step1.user_id', $user->id);
 			$employee = $this->employee->create(Session::get('step1'));
 			$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
 			$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
@@ -472,6 +494,7 @@ class EmployeeController extends Controller
 			
 			// Update Step1 data
 			$this->employee->update($request->session()->get('step1_update'), $id);
+			$this->user->update(['email' => $request->session()->get('step1_update.email_employee')], $employee->user_id);
 			$this->contact_employee->destroyArrayId($request->session()->get('id_delete_contact_update'));
 			$this->contact_employee->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
 			$this->family_relationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'));
@@ -616,6 +639,7 @@ class EmployeeController extends Controller
 	 */
 	public function step1(Step1Request $request)
 	{
+		$request->request->add(['user_id' => 'change']);
 		Session::put('step1', $request->all());
 		Session::put('male_surname', $request->get('male_surname'));
 		Session::put('female_surname', $request->get('female_surname'));

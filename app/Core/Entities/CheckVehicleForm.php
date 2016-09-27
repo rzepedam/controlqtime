@@ -11,9 +11,17 @@ class CheckVehicleForm extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'vehicle_id'
+		'employee_id', 'vehicle_id', 'master_form_piece_vehicle_id'
 	];
 	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function employee()
+	{
+        return $this->belongsTo(Employee::class);
+	}
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -1,14 +1,8 @@
 <div class="site-menubar site-menubar-dark site-menubar-dark">
-    <div class="site-menubar-header">
-        <div class="cover overlay">
-            <img class="cover-image" src="{{ asset('img/dashboard-header.jpg') }}">
-        </div>
-    </div>
     <div class="site-menubar-body">
         <div>
             <div>
                 <ul class="site-menu">
-
                     {{-- Home --}}
                     <li class="site-menu-item active">
                         <a class="animsition-link" href="{{ url('home') }}">
@@ -48,7 +42,6 @@
                             <span class="site-menu-title">Mantenedores</span>
                         </a>
                     </li>
-
                 </ul>
             </div>
         </div>
