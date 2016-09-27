@@ -18,6 +18,14 @@ class CheckVehicleForm extends Eloquent
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
+	public function masterFormPieceVehicle()
+	{
+        return $this->belongsTo(MasterFormPieceVehicle::class);
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function employee()
 	{
         return $this->belongsTo(Employee::class);

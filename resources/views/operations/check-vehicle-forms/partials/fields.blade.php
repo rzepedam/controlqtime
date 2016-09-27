@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-4">
         {{-- Patente Vehículo Form Select --}}
         <div class="form-group">
             {{ Form::label('vehicle_id', 'Patente Vehículo', ['class' => 'control-label']) }}
