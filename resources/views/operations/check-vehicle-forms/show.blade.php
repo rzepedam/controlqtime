@@ -13,18 +13,18 @@
         <div class="panel-body">
             <div class="well well-sm">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-offset-1 col-md-5">
                         <i class="fa fa-bus" aria-hidden="true"></i> Vehículo :  {{ $checkVehicleForm->vehicle->modelVehicle->trademark->name . ', ' . $checkVehicleForm->vehicle->modelVehicle->name . '. Año ' . $checkVehicleForm->vehicle->year }}
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <i class="fa fa-user" aria-hidden="true"></i> Revisor : {{ $checkVehicleForm->employee->full_name }}
                     </div>
                     <span class="visible-xs visible-sm"><br /></span>
-                    <div class="col-md-6">
+                    <div class="col-md-offset-1 col-md-5">
                         <i class="fa fa-tag" aria-hidden="true"></i> Patente : {{ $checkVehicleForm->vehicle->patent }}
                     </div>
-                    <div class="col-md-6">
-                        <i class="fa fa-road" aria-hidden="true"></i> Terminal : Pendiente
+                    <div class="col-md-5">
+                        <i class="fa fa-road" aria-hidden="true"></i> Terminal : <span class="text-primary">Pendiente</span>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($masterFormPieceVehicle as $pieceVehicle)
+                        @foreach($checkVehicleForm->masterFormPieceVehicle->pieceVehicles as $pieceVehicle)
                                 <tr>
                                     <td class="text-center">
                                         {{ $loop->iteration }}
