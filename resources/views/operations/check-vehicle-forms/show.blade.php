@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($checkVehicleForm->masterFormPieceVehicle->pieceVehicles as $pieceVehicle)
+                        @foreach($masterFormPieceVehicle as $pieceVehicle)
                                 <tr>
                                     <td class="text-center">
                                         {{ $loop->iteration }}

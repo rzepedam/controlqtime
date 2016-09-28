@@ -58,9 +58,13 @@ class CheckVehicleFormRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				$rules = [
-					'vehicle_id'             => 'required|regex:/[0-9 -()+]+$/',
-					'state_piece_vehicle_id' => 'required|regex:/[0-9 -()+]+$/'
+					'vehicle_id' => 'required|regex:/[0-9 -()+]+$/',
 				];
+				
+				foreach (range(0, count(Request::get('state_piece_vehicle_id')) - 1) as $index)
+				{
+					$rules['state_piece_vehicle_id.' . $index] = 'required|regex:/[0-9 -()+]+$/';
+				}
 				
 				return $rules;
 			}

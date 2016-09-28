@@ -3,17 +3,29 @@
         {{-- Patente Vehículo Form Select --}}
         <div class="form-group">
             {{ Form::label('vehicle_id', 'Patente Vehículo', ['class' => 'control-label']) }}
-            {{ Form::select('vehicle_id', ['default' => 'Seleccione Vehículo...'] + $vehicles->toArray(), null, ['class' => 'form-control']) }}
+            @if ( Route::is('check-vehicle-forms.create') )
+                {{ Form::select('vehicle_id', ['default' => 'Seleccione Vehículo...'] + $vehicles->toArray(), null, ['class' => 'form-control']) }}
+            @else
+                {{ Form::select('vehicle_id', $vehicles, null, ['class' => 'form-control']) }}
+            @endif
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-2 hide show-detail-vehicle">
+    @if ( Route::is('check-vehicle-forms.create') )
+        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-2 hide show-detail-vehicle">
+    @else
+        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-2 show-detail-vehicle">
+    @endif
         <div class="well well-sm">
             <div class="row">
                 <div class="col-xs-5 col-sm-3 col-md-3">
                     <i class="fa fa-bus" aria-hidden="true"></i> Vehículo
                 </div>
                 <div class="col-xs-7 col-sm-9 col-md-9">
-                    <span id="trademark_vehicle"></span>
+                    @if ( Route::is('check-vehicle-forms.create') )
+                        <span id="trademark_vehicle"></span>
+                    @else
+                        <span id="trademark_vehicle">: {{ $checkVehicleForm->vehicle->patent }}</span>
+                    @endif
                 </div>
             </div>
             <div class="row">
@@ -21,21 +33,28 @@
                     <i class="fa fa-road" aria-hidden="true"></i> Terminal
                 </div>
                 <div class="col-xs-7 col-sm-9 col-md-9">
-                    <span id="terminal_name"></span>
+                    @if ( Route::is('check-vehicle-forms.create') )
+                        <span id="terminal_name"class="text-primary">: Pendiente</span>
+                    @else
+                        <span id="terminal_name" class="text-primary">: Pendiente</span>
+                    @endif
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-5 col-sm-3 col-md-3">
-                    <i class="fa fa-tachometer" aria-hidden="true"></i> Km Actual
+                    <i class="fa fa-user" aria-hidden="true"></i> Revisor
                 </div>
                 <div class="col-xs-7 col-sm-9 col-md-9">
-                    <span id="km"></span>
+                    @if ( Route::is('check-vehicle-forms.create') )
+                        : {{ auth()->user()->employee->full_name }}
+                    @else
+                        : {{ $checkVehicleForm->employee->full_name }}
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br />
 <br />
 <div class="row">
     <div class="col-md-12">
@@ -57,23 +76,35 @@
                             {{ $loop->iteration }}
                         </td>
                         <td>
-                            {{ $pieceVehicle->name }}
+                            {{ $pieceVehicle->name }} {{ Form::hidden('piece_vehicle_id[]', $pieceVehicle->id) }}
                         </td>
                         <td>
                             <span class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[0]->id }}" />
+                                @if ( Route::is('check-vehicle-forms.create') )
+                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[0]->id }}" />
+                                @else
+                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[0]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Bueno') ? 'checked' : null }} />
+                                @endif
                                 <label></label>
                             </span>
                         </td>
                         <td>
                             <span class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[1]->id }}" />
+                                @if ( Route::is('check-vehicle-forms.create') )
+                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[1]->id }}" />
+                                @else
+                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[1]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Dañado') ? 'checked' : null }} />
+                                @endif
                                 <label></label>
                             </span>
                         </td>
                         <td>
                             <span class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[2]->id }}" />
+                                @if ( Route::is('check-vehicle-forms.create') )
+                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[2]->id }}" />
+                                @else
+                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[2]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Faltante') ? 'checked' : null }} />
+                                @endif
                                 <label></label>
                             </span>
                         </td>

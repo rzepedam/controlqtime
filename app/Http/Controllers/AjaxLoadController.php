@@ -147,7 +147,7 @@ class AjaxLoadController extends Controller
 	 */
 	public function loadDetailVehicle(Request $request)
 	{
-		$vehicle = $this->vehicle->find($request->get('id'), ['modelVehicle.trademark', 'detailVehicle']);
+		$vehicle = $this->vehicle->find($request->get('id'), ['modelVehicle.trademark']);
 		
 		return $vehicle;
 	}
