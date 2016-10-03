@@ -26,7 +26,13 @@
             </div>
             <div class="panel-body">
 
-                @include('operations.vehicles.partials.fields.info_vehicle')
+                @if ($vehicle->type_vehicle_id == 1 || $vehicle->type_vehicle_id == 3)
+                    @include('operations.vehicles.partials.edit.info_car_moto_vehicle')
+                @endif
+
+                @if ($vehicle->type_vehicle_id == 2)
+                    @include('operations.vehicles.partials.edit.info_bus_vehicle')
+                @endif
 
             </div>
             <br />

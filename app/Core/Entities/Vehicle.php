@@ -11,8 +11,8 @@ class Vehicle extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'model_vehicle_id', 'type_vehicle_id', 'company_id', 'state_vehicle_id', 'acquisition_date',
-		'inscription_date', 'year', 'patent', 'code'
+		'user_id', 'model_vehicle_id', 'type_vehicle_id', 'company_id', 'state_vehicle_id',
+		'acquisition_date', 'inscription_date', 'year', 'patent', 'code'
 	];
 	
 	/**
@@ -21,6 +21,15 @@ class Vehicle extends Eloquent
 	protected $dates = [
 		'acquisition_date', 'inscription_date'
 	];
+	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function user()
+	{
+        return $this->belongsTo(User::class);
+	}
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasOne

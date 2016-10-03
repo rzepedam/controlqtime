@@ -825,9 +825,9 @@ INSERT INTO engine_cubics(name, acr) VALUES('Centímetros cúbicos', 'cc');
 INSERT INTO engine_cubics(name, acr) VALUES('Caballos de fuerza', 'hp');
 
 /* type_vehicles | Tipos de Vehículos */
-INSERT INTO type_vehicles(name, engine_cubic_id, weight_id) VALUES('Bus', 2, 2);
-INSERT INTO type_vehicles(name, engine_cubic_id, weight_id) VALUES('Moto', 1, 1);
-INSERT INTO type_vehicles(name, engine_cubic_id, weight_id) VALUES('Auto', 1, 1);
+INSERT INTO type_vehicles(id, name, engine_cubic_id, weight_id) VALUES(1, 'Auto', 1, 1);
+INSERT INTO type_vehicles(id, name, engine_cubic_id, weight_id) VALUES(2, 'Bus', 2, 2);
+INSERT INTO type_vehicles(id, name, engine_cubic_id, weight_id) VALUES(3, 'Moto', 1, 1);
 
 /* trademarks | Marcas */
 INSERT INTO trademarks(name) VALUES('Mercedes Benz');

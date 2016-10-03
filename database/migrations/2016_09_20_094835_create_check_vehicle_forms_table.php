@@ -15,16 +15,15 @@ class CreateCheckVehicleFormsTable extends Migration
     {
         Schema::create('check_vehicle_forms', function (Blueprint $table) {
             $table->increments('id');
-	        $table->unsignedInteger('employee_id');
+	        $table->unsignedInteger('user_id');
 	        $table->unsignedInteger('master_form_piece_vehicle_id');
 	        $table->unsignedInteger('vehicle_id');
             $table->timestamps();
             
-	        $table->foreign('employee_id')
+	        $table->foreign('user_id')
 		        ->references('id')
-		        ->on('employees')
-		        ->onUpdate('cascade')
-		        ->onDelete('cascade');
+		        ->on('users')
+		        ->onUpdate('cascade');
 	        
 	        $table->foreign('master_form_piece_vehicle_id')
 	            ->references('id')

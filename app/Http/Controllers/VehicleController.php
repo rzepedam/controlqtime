@@ -11,6 +11,7 @@ use Controlqtime\Core\Contracts\VehicleRepoInterface;
 use Controlqtime\Core\Contracts\ImageFactoryInterface;
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 use Controlqtime\Core\Contracts\ActivateVehicleInterface;
+use Controlqtime\Core\Contracts\DetailBusesRepoInterface;
 use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
 use Controlqtime\Core\Contracts\ModelVehicleRepoInterface;
 use Controlqtime\Core\Contracts\StateVehicleRepoInterface;
@@ -20,9 +21,29 @@ use Controlqtime\Core\Contracts\DateDocumentationVehicleRepoInterface;
 class VehicleController extends Controller
 {
 	/**
+	 * @var ActivateVehicleInterface
+	 */
+	protected $activate_vehicle;
+	
+	/**
 	 * @var CompanyRepoInterface
 	 */
 	protected $company;
+	
+	/**
+	 * @var DateDocumentationVehicleRepoInterface
+	 */
+	protected $dateDocumentationVehicle;
+	
+	/**
+	 * @var DetailBusesRepoInterface
+	 */
+	protected $detail_bus;
+	
+	/**
+	 * @var DetailVehicleRepoInterface
+	 */
+	protected $detailVehicle;
 	
 	/**
 	 * @var FuelRepoInterface
@@ -60,21 +81,6 @@ class VehicleController extends Controller
 	protected $vehicle;
 	
 	/**
-	 * @var DetailVehicleRepoInterface
-	 */
-	protected $detailVehicle;
-	
-	/**
-	 * @var DateDocumentationVehicleRepoInterface
-	 */
-	protected $dateDocumentationVehicle;
-	
-	/**
-	 * @var ActivateVehicleInterface
-	 */
-	protected $activate_vehicle;
-	
-	/**
 	 * VehicleController constructor.
 	 *
 	 * @param VehicleRepoInterface $vehicle
@@ -88,15 +94,18 @@ class VehicleController extends Controller
 	 * @param DetailVehicleRepoInterface $detailVehicle
 	 * @param DateDocumentationVehicleRepoInterface $dateDocumentationVehicle
 	 * @param ActivateVehicleInterface $activate_vehicle
+	 * @param DetailBusesRepoInterface $detail_bus
 	 */
 	public function __construct(VehicleRepoInterface $vehicle, TypeVehicleRepoInterface $type_vehicle,
 		TrademarkRepoInterface $trademark, ModelVehicleRepoInterface $model_vehicle, CompanyRepoInterface $company,
 		FuelRepoInterface $fuel, StateVehicleRepoInterface $state_vehicle, ImageFactoryInterface $image,
 		DetailVehicleRepoInterface $detailVehicle, DateDocumentationVehicleRepoInterface $dateDocumentationVehicle,
-		ActivateVehicleInterface $activate_vehicle)
+		ActivateVehicleInterface $activate_vehicle, DetailBusesRepoInterface $detail_bus)
 	{
 		$this->activate_vehicle         = $activate_vehicle;
 		$this->company                  = $company;
+		$this->dateDocumentationVehicle = $dateDocumentationVehicle;
+		$this->detail_bus               = $detail_bus;
 		$this->detailVehicle            = $detailVehicle;
 		$this->fuel                     = $fuel;
 		$this->image                    = $image;
@@ -105,7 +114,6 @@ class VehicleController extends Controller
 		$this->type_vehicle             = $type_vehicle;
 		$this->state_vehicle            = $state_vehicle;
 		$this->vehicle                  = $vehicle;
-		$this->dateDocumentationVehicle = $dateDocumentationVehicle;
 	}
 	
 	/**
@@ -131,12 +139,12 @@ class VehicleController extends Controller
 	 */
 	public function create()
 	{
+		$companies      = $this->company->whereLists('state', 'enable', 'firm_name');
 		$fuels          = $this->fuel->lists('name', 'id');
 		$model_vehicles = $this->model_vehicle->lists('name', 'id');
+		$state_vehicles = $this->state_vehicle->lists('name', 'id');
 		$trademarks     = $this->trademark->lists('name', 'id');
 		$type_vehicles  = $this->type_vehicle->lists('name', 'id');
-		$companies      = $this->company->whereLists('state', 'enable', 'firm_name');
-		$state_vehicles = $this->state_vehicle->lists('name', 'id');
 		
 		return view('operations.vehicles.create', compact(
 			'trademarks', 'model_vehicles', 'type_vehicles', 'fuels', 'companies', 'state_vehicles'
@@ -150,12 +158,19 @@ class VehicleController extends Controller
 	 */
 	public function store(VehicleRequest $request)
 	{
+		$request->request->add(['user_id' => auth()->user()->id]);
 		DB::beginTransaction();
 		
 		try
 		{
-			$vehicle = $this->vehicle->create($request->all());
-			$vehicle->detailVehicle()->create($request->all());
+			$vehicle       = $this->vehicle->create($request->all());
+			$detailVehicle = $vehicle->detailVehicle()->create($request->all());
+			
+			if ($request->get('type_vehicle_id') == 2)
+			{
+				$detailVehicle->detailBus()->create($request->all());
+			}
+			
 			$vehicle->dateDocumentationVehicle()->create($request->all());
 			
 			DB::commit();
@@ -181,7 +196,7 @@ class VehicleController extends Controller
 		$vehicle        = $this->vehicle->find($id, ['modelVehicle.trademark']);
 		$trademarks     = $this->trademark->lists('name', 'id');
 		$model_vehicles = $this->trademark->findModelVehicles($vehicle->modelVehicle->trademark->id);
-		$type_vehicles  = $this->type_vehicle->lists('name', 'id');
+		$type_vehicles  = $this->type_vehicle->whereLists('id', $vehicle->type_vehicle_id, 'name');
 		$companies      = $this->company->whereLists('state', 'enable', 'firm_name');
 		$fuels          = $this->fuel->lists('name', 'id');
 		$state_vehicles = $this->state_vehicle->lists('name', 'id');
@@ -203,8 +218,14 @@ class VehicleController extends Controller
 		
 		try
 		{
-			$vehicle = $this->vehicle->update($request->all(), $id);
-			$this->detailVehicle->update($request->all(), $vehicle->detailVehicle->id);
+			$vehicle       = $this->vehicle->update($request->all(), $id);
+			$detailVehicle = $this->detailVehicle->update($request->all(), $vehicle->detailVehicle->id);
+			
+			if ($request->get('type_vehicle_id') == 2)
+			{
+				$this->detail_bus->update($request->all(), $detailVehicle->detailBus->id);
+			}
+			
 			$this->dateDocumentationVehicle->update($request->all(), $vehicle->dateDocumentationVehicle->id);
 			
 			DB::commit();
@@ -226,7 +247,9 @@ class VehicleController extends Controller
 	 */
 	public function show($id)
 	{
-		$vehicle = $this->vehicle->find($id);
+		$vehicle = $this->vehicle->find($id, [
+			'modelVehicle', 'typeVehicle', 'detailVehicle.detailBus', 'company', 'user.employee'
+		]);
 		
 		return view('operations.vehicles.show', compact('vehicle'));
 	}

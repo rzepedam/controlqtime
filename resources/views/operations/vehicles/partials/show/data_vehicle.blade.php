@@ -17,12 +17,17 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-md-4">Empresa</td>
-                                <td class="text-center"><i class="fa fa-building"></i> <a href="{{ route('companies.show', $vehicle->company->id) }}" style="color: #757575"> {{ $vehicle->company->firm_name }}</a></td>
-                            </tr>
-                            <tr>
                                 <td class="col-md-4">Tipo Vehículo</td>
-                                <td class="text-center"><i class="fa fa-bus"></i> {{ $vehicle->typeVehicle->name }}</td>
+                                @if ($vehicle->type_vehicle_id == 1)
+                                    <td class="text-center"><i class="fa fa-car"></i> {{ $vehicle->typeVehicle->name }}</td>
+                                @endif
+                                @if ($vehicle->type_vehicle_id == 2)
+                                    <td class="text-center"><i class="fa fa-bus"></i> {{ $vehicle->typeVehicle->name }}</td>
+                                @endif
+                                @if ($vehicle->type_vehicle_id == 3)
+                                    <td class="text-center"><i class="fa fa-motorcycle"></i> {{ $vehicle->typeVehicle->name }}</td>
+                                @endif
+
                             </tr>
                             <tr>
                                 <td class="col-md-4">Marca</td>
@@ -31,6 +36,16 @@
                             <tr>
                                 <td class="col-md-4">Modelo</td>
                                 <td class="text-center"> {{ $vehicle->modelVehicle->name }}</td>
+                            </tr>
+                            @if ($vehicle->type_vehicle_id == 2)
+                                <tr>
+                                    <td class="col-md-4">Carrocería</td>
+                                    <td class="text-center"> {{ $vehicle->detailVehicle->detailBus->carr }}</td>
+                                </tr>
+                            @endif
+                            <tr>
+                                <td class="col-md-4">Empresa</td>
+                                <td class="text-center"><i class="fa fa-building"></i> <a href="{{ route('companies.show', $vehicle->company->id) }}" style="color: #757575"> {{ $vehicle->company->firm_name }}</a></td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">Estado Vehículo</td>
@@ -80,6 +95,18 @@
                                 <td class="col-md-4">Peso</td>
                                 <td class="text-center">{{ $vehicle->detailVehicle->weight }} {{ $vehicle->typeVehicle->weight->acr }}</td>
                             </tr>
+                            @if ($vehicle->type_vehicle_id == 2)
+                                <tr>
+                                    <td class="col-md-4">Tag</td>
+                                    <td class="text-center">{{ $vehicle->detailVehicle->tag }}</td>
+                                </tr>
+                            @endif
+                            @if ($vehicle->type_vehicle_id == 2)
+                                <tr>
+                                    <td class="col-md-4">Nº de Plazas</td>
+                                    <td class="text-center">{{ $vehicle->detailVehicle->detailBus->num_plazas }}</td>
+                                </tr>
+                            @endif
                             @if ($vehicle->obs)
                                 <tr>
                                     <td class="col-md-4">Observación</td>
@@ -88,11 +115,9 @@
                             @endif
                             <tr>
                                 <td class="col-md-4">Ingresado</td>
-                                <td class="text-center text-capitalize">{{ Date::parse($vehicle->created_at)->format('l j F Y H:i:s') }}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-md-4">Actualizado</td>
-                                <td class="text-center text-capitalize">{{ Date::parse($vehicle->updated_at)->format('l j F Y H:i:s') }}</td>
+                                <td class="text-center text-capitalize">
+                                    {{ Date::parse($vehicle->created_at)->format('l j F Y H:i') . ' hrs - ' . $vehicle->user->employee->full_name }}
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -109,7 +134,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"></td>
+                                    <td class="col-md-4 text-center">
+                                        <i class="fa fa-file-text" aria-hidden="true"></i> Documento
+                                    </td>
                                     <td class="col-md-4 text-center">
                                         <i class="fa fa-calendar"></i> Fecha Emisión
                                     </td>

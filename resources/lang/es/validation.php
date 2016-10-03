@@ -157,6 +157,8 @@ return [
 		'km'                        => 'Kilometraje',
 		'engine_cubic'              => 'Cilindraje Motor',
 		'weight'                    => 'Peso',
+	    'carr'                      => 'Carrocería',
+		'num_plazas'                => 'Nº Plazas',
 		
 		/*
 		 * Others

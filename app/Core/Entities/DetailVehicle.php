@@ -16,7 +16,7 @@ class DetailVehicle extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'color', 'fuel_id', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'obs'
+        'color', 'fuel_id', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'tag', 'obs'
     ];
 
     /**
@@ -26,6 +26,14 @@ class DetailVehicle extends Eloquent
     {
         return $this->belongsTo(Vehicle::class);
     }
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function detailBus()
+    {
+        return $this->hasOne(DetailBuses::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -34,7 +42,8 @@ class DetailVehicle extends Eloquent
     {
         return $this->belongsTo(Fuel::class);
     }
-
+    
+    
     /**
      * @param string $value
      */
@@ -50,7 +59,15 @@ class DetailVehicle extends Eloquent
     {
         $this->attributes['num_chasis'] = strtoupper($value);
     }
-
+	
+	/**
+	 * @param string $value
+	 */
+	public function setTagAttribute($value)
+    {
+        $this->attributes['tag'] = strtoupper($value);
+    }
+    
     /**
      * @param string $value
      */

@@ -23,6 +23,7 @@ class CreateDetailVehiclesTable extends Migration
 			$table->string('km', 7);
 			$table->string('engine_cubic', 4);
 			$table->string('weight', 6);
+	        $table->string('tag', 25);
 			$table->text('obs');
 
 			$table->foreign('vehicle_id')

@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    $('#type_vehicle_id').on('')
+
     $('#btnSubmit').click(function(e) {
 
         e.preventDefault();
