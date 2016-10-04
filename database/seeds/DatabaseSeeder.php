@@ -7,9 +7,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 	    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-	    
 	    // Maintainers base
 	    $this->call(GenderTableSeeder::class);
+	    $this->call(CountryTableSeeder::class);
 	    
 	    // Importants tables
 		$this->call(CompanyTableSeeder::class);
