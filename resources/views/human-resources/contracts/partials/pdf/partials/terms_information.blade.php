@@ -41,3 +41,33 @@
     justificadas en confirmidad a las leyes vigentes. El presente contrato se firma en dos ejemplares del mismo
     tenor dejando expresa constancia que en este acto el trabajador recibe uno de ellos.
 </div>
+<br />
+<br />
+<div class="text-justify">
+    En señal de ratificación y conformidad firman:
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col-xs-offset-1 col-xs-5 text-center">
+        <b>{{ $contract->company->legalRepresentative->full_name }}</b>
+    </div>
+    <div class="col-xs-offset-1 col-xs-5 text-center">
+        <b>{{ $contract->employee->full_name }}</b>
+    </div>
+    <div class="col-xs-offset-1 col-xs-5 text-center">
+        <b>{{ $contract->company->firm_name }}</b>
+    </div>
+    <div class="col-xs-offset-1 col-xs-5 text-center">
+        <b>{{ $contract->employee->rut }}</b>
+    </div>
+</div>
