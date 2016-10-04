@@ -17,5 +17,10 @@ class UserTableSeeder extends Seeder
 			'email'    => 'raulmeza@controlqtime.cl',
 			'password' => bcrypt('123456'),
 		]);
+		
+		User::create([
+			'email'    => 'robertozepeda@controlqtime.cl',
+			'password' => bcrypt('123456'),
+		]);
 	}
 }

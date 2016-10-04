@@ -8,6 +8,10 @@ class LegalRepresentativeTableSeeder extends Seeder
     public function run()
     {
 	    DB::table('legal_representatives')->truncate();
-        factory(LegalRepresentative::class, 26)->create();
+	    
+	    if (getenv('APP_ENV') === 'local')
+	    {
+		    factory(LegalRepresentative::class, 26)->create();
+	    }
     }
 }
