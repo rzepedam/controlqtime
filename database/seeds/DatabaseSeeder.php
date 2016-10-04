@@ -8,6 +8,10 @@ class DatabaseSeeder extends Seeder
     {
 	    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 	    
+	    // Maintainers base
+	    $this->call(GenderTableSeeder::class);
+	    
+	    // Importants tables
 		$this->call(CompanyTableSeeder::class);
         $this->call(LegalRepresentativeTableSeeder::class);
 	    $this->call(UserTableSeeder::class);

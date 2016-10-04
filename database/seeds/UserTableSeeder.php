@@ -1,7 +1,7 @@
 <?php
 
-use Controlqtime\Core\Entities\User;
 use Illuminate\Database\Seeder;
+use Controlqtime\Core\Entities\User;
 
 class UserTableSeeder extends Seeder
 {

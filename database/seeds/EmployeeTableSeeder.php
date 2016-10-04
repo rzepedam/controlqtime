@@ -38,7 +38,7 @@ class EmployeeTableSeeder extends Seeder
 		    'full_name'         => 'Roberto Andrés Zepeda Muñoz',
 		    'rut'               => '15679634-4',
 		    'birthday'          => '15-08-1984',
-		    'nationality_id'    => 3,
+		    'nationality_id'    => 4,
 		    'gender_id'         => 1,
 		    'marital_status_id' => 3,
 		    'forecast_id'       => 7,
