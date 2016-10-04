@@ -1,11 +1,7 @@
 /vendor
 /node_modules
-public/storage/*
-Homestead.yaml
-Homestead.json
 .env
 .idea
-public/storage/
 resources/assets/bower
 public/build
 public/css
@@ -13,3 +9,4 @@ public/img
 public/js
 _ide_helper.php
 config/ide-helper.php
+/storage
