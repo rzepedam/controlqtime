@@ -206,7 +206,7 @@ elixir(function(mix) {
 
     // Human-Resources > Contracts > Create CSS
     mix.styles([
-        'bower/bootstrap-select/dist/css/bootstrap-select.css',
+        'custom-configuration/css/bootstrap-select.css',
         'bower/clockpicker/dist/bootstrap-clockpicker.css'
     ], 'public/css/human-resources/contracts/create-custom-contracts.css');
 
