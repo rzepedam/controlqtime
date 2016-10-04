@@ -1,15 +1,4 @@
 
-/* countries | Países */
-INSERT INTO countries(name) VALUES ('Argentina');
-INSERT INTO countries(name) VALUES ('Bolivia');
-INSERT INTO countries(name) VALUES ('Colombia');
-INSERT INTO countries(name) VALUES ('Chile');
-INSERT INTO countries(name) VALUES ('Ecuador');
-INSERT INTO countries(name) VALUES ('Peru');
-INSERT INTO countries(name) VALUES ('Paraguay');
-INSERT INTO countries(name) VALUES ('Uruguay');
-INSERT INTO countries(name) VALUES ('Venezuela');
-
 /* nationalities | Nacionalidades */
 INSERT INTO nationalities(name) VALUES ('Argentina');
 INSERT INTO nationalities(name) VALUES ('Bolivia');
