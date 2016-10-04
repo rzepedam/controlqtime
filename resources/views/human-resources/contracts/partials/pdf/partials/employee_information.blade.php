@@ -53,7 +53,7 @@
             </td>
             <td class="col-xs-1 text-center">:</td>
             <td class="col-xs-7 text-left">
-                <b>{{ $contract->employee->address . ", " . $contract->employee->commune->name . ". " . $contract->employee->commune->province->name . ". " . $contract->employee->commune->province->region->name }}</b>
+                <b>{{ $contract->employee->address->address }}{{ ($contract->employee->address->depto) ? ', Depto ' . $contract->employee->address->depto : '' }}{{ ($contract->employee->address->block) ? ', Block ' . $contract->employee->address->block : '' }}{{ ($contract->employee->address->num_home) ? ', Nº Casa ' . $contract->employee->address->num_home : '' }}{{ ". " . $contract->employee->address->commune->name . ". " . $contract->employee->address->commune->province->name . ". " . $contract->employee->address->commune->province->region->name }}</b>
             </td>
         </tr>
     </tbody>

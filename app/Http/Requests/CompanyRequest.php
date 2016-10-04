@@ -2,9 +2,8 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\Request;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class CompanyRequest extends SanitizedRequest
 {

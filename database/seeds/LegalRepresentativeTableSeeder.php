@@ -1,7 +1,7 @@
 <?php
 
-use Controlqtime\Core\Entities\LegalRepresentative;
 use Illuminate\Database\Seeder;
+use Controlqtime\Core\Entities\LegalRepresentative;
 
 class LegalRepresentativeTableSeeder extends Seeder
 {

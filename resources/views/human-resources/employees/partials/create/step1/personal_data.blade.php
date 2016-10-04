@@ -68,7 +68,7 @@
     </div>
     <div class="col-md-6 form-group">
         {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
-        {{ Form::text('address', Session::get('address'), ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
+        {{ Form::text('address', Session::get('address'), ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '75']) }}
     </div>
     {{-- Depto Form Input --}}
     <div class="col-md-1 form-group">

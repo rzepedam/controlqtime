@@ -14,6 +14,7 @@ use Controlqtime\Core\Contracts\StudyRepoInterface;
 use Controlqtime\Core\Contracts\DegreeRepoInterface;
 use Controlqtime\Core\Contracts\GenderRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
+use Controlqtime\Core\Contracts\AddressRepoInterface;
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
 use Controlqtime\Core\Contracts\CountryRepoInterface;
 use Controlqtime\Core\Contracts\DiseaseRepoInterface;
@@ -46,6 +47,11 @@ class EmployeeController extends Controller
 	 * @var ActivateEmployeeInterface
 	 */
 	protected $activateEmployee;
+	
+	/**
+	 * @var AddressRepoInterface
+	 */
+	protected $address;
 	
 	/**
 	 * @var CertificationRepoInterface
@@ -231,6 +237,7 @@ class EmployeeController extends Controller
 	 * @param PensionRepoInterface $pension
 	 * @param ActivateEmployeeInterface $activateEmployee
 	 * @param UserRepoInterface $user
+	 * @param AddressRepoInterface $address
 	 */
 	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune,
 		RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution,
@@ -240,9 +247,10 @@ class EmployeeController extends Controller
 		DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam,
 		FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee,
 		ImageFactoryInterface $image, MaritalStatusRepoInterface $maritalStatus, ForecastRepoInterface $forecast,
-		PensionRepoInterface $pension, ActivateEmployeeInterface $activateEmployee, UserRepoInterface $user)
+		PensionRepoInterface $pension, ActivateEmployeeInterface $activateEmployee, UserRepoInterface $user, AddressRepoInterface $address)
 	{
 		$this->activateEmployee          = $activateEmployee;
+		$this->address                   = $address;
 		$this->certification             = $certification;
 		$this->commune                   = $commune;
 		$this->contact_employee          = $contact_employee;
@@ -344,6 +352,7 @@ class EmployeeController extends Controller
 			
 			$request->session()->put('step1.user_id', $user->id);
 			$employee = $this->employee->create(Session::get('step1'));
+			$employee->address()->create(Session::get('step1'));
 			$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
 			$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
 			$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
@@ -450,7 +459,9 @@ class EmployeeController extends Controller
 	 */
 	public function edit($id)
 	{
-		$employee                   = $this->employee->find($id);
+		$employee                   = $this->employee->find($id, [
+			'address.commune.province.region'
+		]);
 		$communes                   = $this->commune->lists('name', 'id');
 		$countries                  = $this->country->lists('name', 'id');
 		$degrees                    = $this->degree->lists('name', 'id');
@@ -490,10 +501,11 @@ class EmployeeController extends Controller
 		
 		try
 		{
-			$employee = $this->employee->find($id);
+			// $employee = $this->employee->find($id);
 			
 			// Update Step1 data
-			$this->employee->update($request->session()->get('step1_update'), $id);
+			$employee = $this->employee->update($request->session()->get('step1_update'), $id);
+			$this->address->update($request->session()->get('step1_update'), $employee->address->id);
 			$this->user->update(['email' => $request->session()->get('step1_update.email_employee')], $employee->user_id);
 			$this->contact_employee->destroyArrayId($request->session()->get('id_delete_contact_update'));
 			$this->contact_employee->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
@@ -548,7 +560,7 @@ class EmployeeController extends Controller
 	public function show($id)
 	{
 		$employee = $this->employee->find($id, [
-			'commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
+			'address.commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
 			'studies.degree', 'studies.institution', 'certifications', 'specialities',
 			'professionalLicenses', 'pension', 'forecast'
 		]);

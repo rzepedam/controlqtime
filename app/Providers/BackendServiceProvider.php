@@ -23,6 +23,11 @@ class BackendServiceProvider extends ServiceProvider
 		    'Controlqtime\Core\Contracts\ActivateVehicleInterface',
 		    'Controlqtime\Core\Entities\ActivateVehicle'
 	    );
+	
+	    $this->app->bind(
+		    'Controlqtime\Core\Contracts\AddressRepoInterface',
+		    'Controlqtime\Core\Repositories\AddressRepo'
+	    );
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\AreaRepoInterface',

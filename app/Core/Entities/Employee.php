@@ -13,8 +13,8 @@ class Employee extends Eloquent
 	 */
 	protected $fillable = [
 		'user_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
-		'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'gender_id', 'address', 'depto',
-		'block', 'num_home', 'commune_id', 'email_employee', 'phone1', 'phone2', 'state'
+		'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'gender_id', 'email_employee',
+		'phone1', 'phone2', 'state'
 	];
 	
 	/**
@@ -24,20 +24,21 @@ class Employee extends Eloquent
 		'birthday'
 	];
 	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function address()
+	{
+	    return $this->hasOne(Address::class);
+	}
+	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function certifications()
 	{
 		return $this->hasMany(Certification::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function commune()
-	{
-		return $this->belongsTo(Commune::class);
 	}
 	
 	/**

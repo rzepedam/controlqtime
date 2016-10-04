@@ -76,31 +76,15 @@
                             </tr>
                             <tr>
                                 <td class="col-md-3">Domicilio</td>
-                                <td class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $employee->address . ", " . $employee->commune->name . ". " . $employee->commune->province->name . ". " . $employee->commune->province->region->name }}
+                                <td class="text-center">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    {{ $employee->address->address }}{{ ($employee->address->depto) ? ', Depto ' . $employee->address->depto : '' }}{{ ($employee->address->block) ? ', Block ' . $employee->address->block : '' }}{{ ($employee->address->num_home) ? ', Nº Casa ' . $employee->address->num_home : '' }}{{ ". " . $employee->address->commune->name . ". " . $employee->address->commune->province->name . ". " . $employee->address->commune->province->region->name }}
                                 </td>
                             </tr>
-                            @if ($employee->depto)
-                                <tr>
-                                    <td class="col-md-3">Depto</td>
-                                    <td class="text-center"> {{ $employee->depto }}</td>
-                                </tr>
-                            @endif
-                            @if ($employee->depto)
-                                <tr>
-                                    <td class="col-md-3">Block</td>
-                                    <td class="text-center"> {{ $employee->block }}</td>
-                                </tr>
-                            @endif
-                            @if ($employee->block)
+                            @if ($employee->address->num_home)
                                 <tr>
                                     <td class="col-md-3">Casa</td>
-                                    <td class="text-center"> {{ $employee->block }}</td>
-                                </tr>
-                            @endif
-                            @if ($employee->num_hom)
-                                <tr>
-                                    <td class="col-md-3">Casa</td>
-                                    <td class="text-center"> {{ $employee->num_hom }}</td>
+                                    <td class="text-center"> {{ $employee->address->num_home }}</td>
                                 </tr>
                             @endif
                             <tr>

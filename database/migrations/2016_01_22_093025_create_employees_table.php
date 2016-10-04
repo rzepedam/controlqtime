@@ -22,11 +22,11 @@ class CreateEmployeesTable extends Migration
 			$table->unsignedInteger('marital_status_id');
 			$table->unsignedInteger('forecast_id');
 			$table->unsignedInteger('pension_id');
-            $table->string('address', 100);
-            $table->string('depto', 5);
-            $table->string('block', 5);
-            $table->string('num_home', 5);
-            $table->integer('commune_id')->unsigned();
+	        $table->string('address', 75);
+	        $table->string('depto', 5);
+	        $table->string('block', 5);
+	        $table->string('num_home', 5);
+	        $table->integer('commune_id')->unsigned();
 			$table->string('phone1', 20);
 			$table->string('phone2', 20);
 			$table->string('email_employee', 60)->unique();

@@ -8,6 +8,7 @@ class EmployeeTableSeeder extends Seeder
     public function run()
     {
 	    DB::table('employees')->truncate();
+	    
 	    Employee::create([
 		    'user_id'           => 1,
 		    'male_surname'      => 'Meza',
@@ -22,14 +23,11 @@ class EmployeeTableSeeder extends Seeder
 		    'marital_status_id' => 3,
 		    'forecast_id'       => 7,
 		    'pension_id'        => 1,
-		    'address'           => 'Pérez Valenzuela 1209',
-		    'commune_id'        => 35,
 		    'email_employee'    => 'raulmeza@controlqtime.cl',
 		    'phone1'            => '+56974155784',
 		    'phone2'            => '22624050',
 		    'state'             => 'disable'
 	    ]);
 	    
-        factory(Employee::class, 50)->create();
     }
 }

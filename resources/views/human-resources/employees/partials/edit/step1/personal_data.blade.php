@@ -68,26 +68,26 @@
     </div>
     <div class="col-md-6 form-group">
         {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
-        {{ Form::text('address', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
+        {{ Form::text('address', $employee->address->address, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '75']) }}
     </div>
     {{-- Depto Form Input --}}
     <div class="col-md-1 form-group">
         {{ Form::label('depto', 'Depto', ['class' => 'control-label']) }}
-        {{ Form::text('depto', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
+        {{ Form::text('depto', $employee->address->depto, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     {{-- Block Form Input --}}
     <div class="col-md-1 form-group">
         {{ Form::label('block', 'Block', ['class' => 'control-label']) }}
-        {{ Form::text('block', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
+        {{ Form::text('block', $employee->address->block, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     {{-- Num_home Form Input --}}
     <div class="col-md-1 form-group">
         {{ Form::label('num_home', 'Nº Casa', ['class' => 'control-label']) }}
-        {{ Form::text('num_home', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
+        {{ Form::text('num_home', $employee->address->num_home, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-        {{ Form::select('region_id', $regions, $employee->commune->province->region->id, ['class' => 'form-control']) }}
+        {{ Form::select('region_id', $regions, $employee->address->commune->province->region->id, ['class' => 'form-control']) }}
     </div>
 </div>
 
@@ -95,11 +95,11 @@
 <div class="row">
     <div class="col-md-3 form-group">
         {{ Form::label('province_id', 'Provincia', ['class' => 'control-label']) }}
-        {{ Form::select('province_id', $provinces, $employee->commune->province->id, ['class' => 'form-control']) }}
+        {{ Form::select('province_id', $provinces, $employee->address->commune->province->id, ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
-        {{ Form::select('commune_id', $communes, null, ['class' => 'form-control']) }}
+        {{ Form::select('commune_id', $communes, $employee->address->commune_id, ['class' => 'form-control']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('phone1', 'Teléfono 1', ['class' => 'control-label']) }}

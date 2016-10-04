@@ -1,6 +1,7 @@
 <?php
 
 use Controlqtime\Core\Entities\User;
+use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\LegalRepresentative;
@@ -43,7 +44,6 @@ $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 		'phone2_representative' => $faker->phoneNumber,
 		'email_representative'  => $faker->email,
 	];
-	
 });
 
 $factory->define(Employee::class, function (Faker\Generator $faker)
@@ -67,12 +67,19 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'marital_status_id' => rand(1, 4),
 		'forecast_id'       => rand(1, 14),
 		'pension_id'        => rand(1, 6),
-		'address'           => $faker->address,
-		'commune_id'        => rand(1, 53),
 		'email_employee'    => $faker->unique()->email,
 		'phone1'            => $faker->phoneNumber,
 		'phone2'            => $faker->phoneNumber,
 		'state'             => 'disable'
+	];
+});
+
+$factory->define(Address::class, function (Faker\Generator $faker)
+{
+	return [
+		'employee_id'   => factory(Employee::class)->create()->id,
+		'address'       => $faker->address,
+		'commune_id'    => rand(1, 53),
 	];
 });
 
