@@ -5,6 +5,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AccessControlApiTest extends TestCase
 {
+	use DatabaseTransactions;
+	
 	function test_url_exists()
 	{
 		$response = $this->call('POST', '/api/access-control');
