@@ -157,7 +157,7 @@ return [
 		'km'                        => 'Kilometraje',
 		'engine_cubic'              => 'Cilindraje Motor',
 		'weight'                    => 'Peso',
-	    'carr'                      => 'Carrocería',
+		'carr'                      => 'Carrocería',
 		'num_plazas'                => 'Nº Plazas',
 		
 		/*
@@ -169,6 +169,11 @@ return [
 		'country_id'                => 'País',
 		'type_institution_id'       => 'Tipo de Institución',
 		'created_at'                => 'Fecha Creación',
+		
+		/*
+		 * Api's
+		 */
+		'num_device'                => 'Nº Dispositivo',
 		
 		/*
 		 * Contract

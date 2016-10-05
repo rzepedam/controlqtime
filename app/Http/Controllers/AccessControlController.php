@@ -29,10 +29,12 @@ class AccessControlController extends Controller
 
         return $access_controls;
     }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+	
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
     public function index()
     {
         return view('human-resources.access-controls.index');

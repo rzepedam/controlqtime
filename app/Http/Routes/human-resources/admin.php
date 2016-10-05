@@ -44,4 +44,8 @@ Route::group(['prefix' => 'human-resources'], function ()
 		Route::get('getPdf/{id}', ['as' => 'getPdf', 'uses' => 'ContractController@getPdf']);
 	});
 	
+	// Daily Assistance
+	Route::get('getDailyAssistances', ['as' => 'getDailyAssistances', 'uses' => 'DailyAssistanceController@getDailyAssistances']);
+	Route::resource('daily-assistances', 'DailyAssistanceController');
+	
 });

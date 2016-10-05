@@ -187,6 +187,11 @@ elixir(function(mix) {
         'me/js/base/human-resources/access-controls/config_bootstrap_table.js'
     ], 'public/js/human-resources/access-controls/index-custom-access-controls.js');
 
+    // Human-Resources > Daily-Assistance > Index Custom Daily-Assistance JS
+    mix.scripts([
+        'me/js/base/human-resources/daily-assistances/config_bootstrap_table.js'
+    ], 'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js');
+
     // Human-Resources > Contracts > Index Custom Contracts JS
     mix.scripts([
         'me/js/base/human-resources/contracts/config_bootstrap_table.js'
@@ -577,6 +582,7 @@ elixir(function(mix) {
 
         'public/js/human-resources/index.js',
         'public/js/human-resources/access-controls/index-custom-access-controls.js',
+        'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js',
         'public/js/human-resources/contracts/index-custom-contracts.js',
         'public/css/human-resources/employees/index-custom-employees.css',
         'public/js/human-resources/employees/index-custom-employees.js',

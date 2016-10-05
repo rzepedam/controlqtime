@@ -12,4 +12,7 @@ $(document).ready(function(){
         window.location.href = "/human-resources/contracts";
     });
 
+    $('#redirect-daily-assistances').click(function() {
+        window.location.href = "/human-resources/daily-assistances";
+    });
 });
