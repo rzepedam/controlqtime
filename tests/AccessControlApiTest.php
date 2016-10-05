@@ -129,6 +129,11 @@ class AccessControlApiTest extends TestCase
 		$this->post('/api/access-control', $data, [
 				'Authorization' => getenv('BIOMETRY_BEARER'),
 				'Accept'        => 'application/json'])
+			->assertResponseOk();
+		
+		$this->post('/api/access-control', $data, [
+			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
 				'rut' => ['La combinación de Rut, Fecha Creación ya existe.']
