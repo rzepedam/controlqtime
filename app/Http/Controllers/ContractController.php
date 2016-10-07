@@ -186,9 +186,9 @@ class ContractController extends Controller
 	public function show($id)
 	{
 		$contract = $this->contract->find($id, [
-			'company.company.commune.province', 'employee.address.commune.province.region',
+			'company.commune.province', 'employee.address.commune.province.region',
 			'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
-			'gratification', 'typeContract', 'termsAndObligatories'
+			'gratification', 'typeContract', 'termsAndObligatories', 'company.legalRepresentative'
 		]);
 		
 		return view('human-resources.contracts.show', compact('contract'));
@@ -202,9 +202,9 @@ class ContractController extends Controller
 	public function getPdf($id)
 	{
 		$contract = $this->contract->find($id, [
-			'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip',
-			'periodicityWork', 'gratification', 'typeContract', 'termsAndObligatories',
-			'company.legalRepresentative'
+			'company.commune.province', 'employee.address.commune.province.region',
+			'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
+			'gratification', 'typeContract', 'termsAndObligatories', 'company.legalRepresentative'
 		]);
 		
 		$header = view('human-resources.contracts.partials.pdf.header');
