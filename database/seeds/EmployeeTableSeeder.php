@@ -7,6 +7,7 @@ class EmployeeTableSeeder extends Seeder
 {
     public function run()
     {
+	    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 	    DB::table('employees')->truncate();
 	    
 	    Employee::create([
@@ -48,6 +49,8 @@ class EmployeeTableSeeder extends Seeder
 		    'phone2'            => '',
 		    'state'             => 'disable'
 	    ]);
+	
+	    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	    
     }
 }

@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Province extends Eloquent
 {
+	/**
+	 * @var bool
+	 */
+	public $timestamps = false;
+	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

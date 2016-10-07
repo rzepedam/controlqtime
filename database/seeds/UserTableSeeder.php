@@ -12,7 +12,9 @@ class UserTableSeeder extends Seeder
 	 */
 	public function run()
 	{
+		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('users')->truncate();
+		
 		User::create([
 			'email'    => 'raulmeza@controlqtime.cl',
 			'password' => bcrypt('123456'),
@@ -22,5 +24,7 @@ class UserTableSeeder extends Seeder
 			'email'    => 'robertozepeda@controlqtime.cl',
 			'password' => bcrypt('123456'),
 		]);
+		
+		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 }

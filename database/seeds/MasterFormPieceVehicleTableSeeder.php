@@ -12,7 +12,9 @@ class MasterFormPieceVehicleTableSeeder extends Seeder
 	 */
 	public function run()
 	{
+		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('master_form_piece_vehicles')->truncate();
+		
 		factory(MasterFormPieceVehicle::class, 1)->create()->each(function ($u)
 		{
 			for ($i = 1; $i <= 22; $i++)
@@ -21,5 +23,7 @@ class MasterFormPieceVehicleTableSeeder extends Seeder
 				$i++;
 			}
 		});
+		
+		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 }

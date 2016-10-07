@@ -7,6 +7,7 @@ class AddressTableSeeder extends Seeder
 {
 	public function run()
 	{
+		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('addresses')->truncate();
 		
 		Address::create([
@@ -27,6 +28,8 @@ class AddressTableSeeder extends Seeder
 		{
 			factory(Address::class, 50)->create();
 		}
+		
+		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 		
 	}
 }

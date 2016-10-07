@@ -7,7 +7,9 @@ class CompanyTableSeeder extends Seeder
 {
 	public function run()
 	{
+		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('companies')->truncate();
+		
 		Company::create([
 			'type_company_id' => 1,
 			'rut'             => '76150396-0',
@@ -26,5 +28,8 @@ class CompanyTableSeeder extends Seeder
 			'email_company'   => 'ventas@grupoalfra.cl',
 			'state'           => 'disable'
 		]);
+		
+		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+		
 	}
 }
