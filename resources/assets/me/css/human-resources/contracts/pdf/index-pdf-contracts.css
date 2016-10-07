@@ -4,6 +4,10 @@ body {
     font-size: 1.2em;
 }
 
+h1, h2, h3, h4, h5, h6, hr {
+    color: black !important;
+}
+
 table, td {
     border: none !important;
     padding: 0 !important;

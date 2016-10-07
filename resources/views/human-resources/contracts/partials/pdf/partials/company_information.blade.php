@@ -2,7 +2,7 @@
     <tbody>
         <tr>
             <td class="col-xs-4">
-                Nombre del Empleador
+                Empleador
             </td>
             <td class="col-xs-1 text-center">:</td>
             <td class="col-xs-7 text-left">
@@ -20,20 +20,20 @@
         </tr>
         <tr>
             <td class="col-xs-4">
-                Representante Legal
-            </td>
-            <td class="col-xs-1 text-center">:</td>
-            <td class="col-xs-7 text-left">
-                <b>{{ $contract->company->legalRepresentative->full_name }}</b>
-            </td>
-        </tr>
-        <tr>
-            <td class="col-xs-4">
                 Dirección
             </td>
             <td class="col-xs-1 text-center">:</td>
             <td class="col-xs-7 text-left">
                 <b>{{ $contract->company->address . ", " . $contract->company->commune->name . ". " . $contract->company->commune->province->name . ". " . $contract->company->commune->province->region->name }}</b>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-xs-4">
+                Representante Legal
+            </td>
+            <td class="col-xs-1 text-center">:</td>
+            <td class="col-xs-7 text-left">
+                <b>{{ $contract->company->legalRepresentative->full_name }}. Rut {{ $contract->company->legalRepresentative->rut_representative }}</b>
             </td>
         </tr>
     </tbody>

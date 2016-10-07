@@ -19,7 +19,7 @@ class EmployeeTableSeeder extends Seeder
 		    'full_name'         => 'Raúl Elías Meza Mora',
 		    'rut'               => '17032680-6',
 		    'birthday'          => '11-06-1989',
-		    'nationality_id'    => 3,
+		    'nationality_id'    => 4,
 		    'gender_id'         => 1,
 		    'marital_status_id' => 3,
 		    'forecast_id'       => 7,

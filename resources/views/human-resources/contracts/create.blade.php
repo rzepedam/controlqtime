@@ -6,7 +6,7 @@
 
 @stop
 
-@section('title_header') Crear Nuevo Contrato @stop
+@section('title_header') Crear Nuevo Contrato Laboral @stop
 
 @section('breadcumb')
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>

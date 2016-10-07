@@ -2,7 +2,12 @@ body {
     font-size: 10px;
 }
 
+.text-footer {
+    color: black;
+}
+
 hr {
     margin: 0;
     margin-bottom: 5px;
+    color: black;
 }

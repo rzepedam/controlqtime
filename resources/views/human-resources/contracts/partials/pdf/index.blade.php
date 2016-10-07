@@ -4,54 +4,127 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="{{ asset('css/human-resources/contracts/pdf/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/human-resources/contracts/pdf/index-pdf-contracts.css') }}">
-    <title>Contrato Laboral</title>
+    <title>Contrato de Trabajo</title>
 </head>
 <body>
 
     <p></p>
-    <div class="text-center">
-        <h3><b>Contrato Laboral</b></h3>
-    </div>
-    <br />
-    <div>
-        <b>INDIVIDUALIZACIÓN DEL TRABAJADOR</b>
-    </div>
     <div class="row">
-        <div class="col-xs-12">
-
-            @include('human-resources.contracts.partials.pdf.partials.employee_information')
-
+        <div class="col-xs-12 text-center">
+            <h4><b>CONTRATO DE TRABAJO</b></h4>
         </div>
     </div>
     <br />
-    <div>
-        <b>INDIVIDUALIZACIÓN DEL EMPLEADOR O EMPRESA</b>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+            En <b>{{ $contract->company->commune->province->name }}</b> a <span class="text-capitalize"><b>{{ Date::parse(date('d-m-Y'))->format('l j F Y') }}</b></span>, entre las partes a continuación individualizadas, que convienen en denominarse empleador y trabajador, se suscribe el siguiente contrato de trabajo <b>{{ $contract->typeContract->name }}</b>.
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+            <b>INDIVIDUALIZACIÓN DEL EMPLEADOR</b>
+        </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
 
             @include('human-resources.contracts.partials.pdf.partials.company_information')
 
         </div>
     </div>
     <br />
-    <div class="text-justify">
-        Entre las partes arriba individualizadas, se suscribe el presente contrato de trabajo para cuyos efectos
-        los contratantes convienen en denominarse trabajador y empleador, respectivamente
-    </div>
-    <br />
     <div class="row">
-        <div class="col-xs-10 col-xs-offset-1">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+            <b>INDIVIDUALIZACIÓN DEL TRABAJADOR</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
 
-            @include('human-resources.contracts.partials.pdf.partials.contract_information')
+            @include('human-resources.contracts.partials.pdf.partials.employee_information')
 
         </div>
     </div>
     <br />
-    <h4><b>Cláusulas y Obligaciones</b></h4>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+
+            @include('human-resources.contracts.partials.pdf.partials.terms.first')
+
+        </div>
+    </div>
     <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
 
-    @include('human-resources.contracts.partials.pdf.partials.terms_information')
+            @include('human-resources.contracts.partials.pdf.partials.terms.second')
 
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+
+            @include('human-resources.contracts.partials.pdf.partials.terms.third')
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+
+            @include('human-resources.contracts.partials.pdf.partials.terms.fourth')
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+
+            @include('human-resources.contracts.partials.pdf.partials.terms.fifth')
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+
+            @include('human-resources.contracts.partials.pdf.partials.terms.sixth')
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+
+            @include('human-resources.contracts.partials.pdf.partials.terms.seventh')
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+
+            @include('human-resources.contracts.partials.pdf.partials.terms.eighth')
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+
+            @include('human-resources.contracts.partials.pdf.partials.terms.nineth')
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 text-justify">
+
+            @include('human-resources.contracts.partials.pdf.partials.terms.tenth')
+
+        </div>
+    </div>
 </body>
 </html>

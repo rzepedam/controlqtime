@@ -76,7 +76,7 @@ class Company extends Eloquent
      */
     public function setFirmNameAttribute($value)
     {
-        $this->attributes['firm_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+        $this->attributes['firm_name'] = ucfirst($value);
     }
 
     /**

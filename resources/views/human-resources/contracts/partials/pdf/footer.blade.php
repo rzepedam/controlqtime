@@ -9,11 +9,8 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-6 pull-left">
-        {{--Listado de Empleados al día [{{ date('d-m-Y') --}}
-    </div>
     <div class="col-md-6 pull-right">
-        Página <span class="page"></span> de <span class="topage"></span>
+        <span class="text-footer">Página <span class="page"></span> de <span class="topage"></span></span>
     </div>
 </div>
 
