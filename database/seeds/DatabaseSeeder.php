@@ -7,7 +7,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 	    // Maintainers base
-	    $this->call(CountryTableSeeder::class);
+	    /*$this->call(CountryTableSeeder::class);
 	    $this->call(CityTableSeeder::class);
 	    $this->call(DegreeTableSeeder::class);
 	    $this->call(ForecastTableSeeder::class);
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
 	    $this->call(TypeProfessionalLicenseTableSeeder::class);
 	    $this->call(TypeSpecialityTableSeeder::class);
 	    $this->call(RegionTableSeeder::class);
-	    $this->call(ProvinceTableSeeder::class);
+	    $this->call(ProvinceTableSeeder::class);*/
 	    
 	    // Importants tables
 		// $this->call(CompanyTableSeeder::class);
