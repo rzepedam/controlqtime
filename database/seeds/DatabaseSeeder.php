@@ -6,8 +6,8 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-	    // Maintainers base
-	    /*$this->call(CountryTableSeeder::class);
+	    // Maintainers tables
+	    $this->call(CountryTableSeeder::class);
 	    $this->call(CityTableSeeder::class);
 	    $this->call(DegreeTableSeeder::class);
 	    $this->call(ForecastTableSeeder::class);
@@ -26,10 +26,30 @@ class DatabaseSeeder extends Seeder
 	    $this->call(TypeProfessionalLicenseTableSeeder::class);
 	    $this->call(TypeSpecialityTableSeeder::class);
 	    $this->call(RegionTableSeeder::class);
-	    $this->call(ProvinceTableSeeder::class);*/
+	    $this->call(ProvinceTableSeeder::class);
+	    $this->call(CommuneTableSeeder::class);
+	    $this->call(WeightTableSeeder::class);
+	    $this->call(EngineCubicTableSeeder::class);
+	    $this->call(TypeVehicleTableSeeder::class);
+	    $this->call(TrademarkTableSeeder::class);
+	    $this->call(ModelVehicleTableSeeder::class);
+	    $this->call(TerminalTableSeeder::class);
+	    $this->call(AreaTableSeeder::class);
+	    $this->call(FuelTableSeeder::class);
+	    $this->call(TypeCompanyTableSeeder::class);
+	    $this->call(StateVehicleTableSeeder::class);
+	    $this->call(DayTripTableSeeder::class);
+	    $this->call(NumHourTableSeeder::class);
+	    $this->call(PeriodicityTableSeeder::class);
+	    $this->call(GratificationTableSeeder::class);
+	    $this->call(TypeContractTableSeeder::class);
+	    $this->call(MaritalStatusTableSeeder::class);
+	    $this->call(LaborUnionTableSeeder::class);
+	    $this->call(PieceVehicleTableSeeder::class);
+	    $this->call(StatePieceVehicleTableSeeder::class);
 	    
 	    // Importants tables
-		// $this->call(CompanyTableSeeder::class);
+		$this->call(CompanyTableSeeder::class);
         $this->call(LegalRepresentativeTableSeeder::class);
 	    $this->call(UserTableSeeder::class);
 	    $this->call(EmployeeTableSeeder::class);

@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class PieceVehicle extends Eloquent
 {
     /**
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * @var array
      */
     protected $fillable = [
