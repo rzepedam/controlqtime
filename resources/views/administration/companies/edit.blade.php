@@ -28,7 +28,7 @@
         <div class="panel panel-bordered">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <i class="fa fa-building-o text-primary"></i> Datos Empresa <small>(Información Casa Matriz)</small>
+                    <i class="fa fa-building-o text-primary"></i> Datos Empresa
                 </h3>
             </div>
             <div class="panel-body">

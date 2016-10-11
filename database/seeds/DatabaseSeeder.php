@@ -54,6 +54,8 @@ class DatabaseSeeder extends Seeder
 	    $this->call(UserTableSeeder::class);
 	    $this->call(EmployeeTableSeeder::class);
 	    $this->call(AddressTableSeeder::class);
+	    $this->call(DetailAddressCompanyTableSeeder::class);
+	    $this->call(DetailAddressLegalEmployeeTableSeeder::class);
 	    $this->call(AccessControlApiTableSeeder::class);
 	    $this->call(MasterFormPieceVehicleTableSeeder::class);
 	    

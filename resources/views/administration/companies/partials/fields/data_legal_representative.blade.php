@@ -48,19 +48,70 @@
 			{{ Form::select('nationality_id', $nationalities, (Route::is('companies.create')) ? null : $company->legalRepresentative->nationality->id, ['class' => 'form-control']) }}
 		</div>
 	</div>
-	<div class="col-md-3">
-		<div class="form-group">
-			{{ Form::label('phone1_representative', 'Teléfono 1', ['class' => 'control-label']) }}
-			<div class="input-group">
-				<div class="input-group-addon">
-					<i class="fa fa-phone"></i>
-				</div>
-				{{ Form::text('phone1_representative', (Route::is('companies.create')) ? null : $company->legalRepresentative->phone1_representative, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
-			</div>
-		</div>
-	</div>
 </div>
 <div class="row">
+    {{-- Dirección Text Field --}}
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ Form::label('address_representative', 'Dirección') }}
+            {{ Form::text('address_representative', Route::is('companies.create') ? null : $company->legalRepresentative->address->address, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    {{-- Depto Text Field --}}
+    <div class="col-md-1">
+        <div class="form-group">
+            {{ Form::label('depto', 'Depto') }}
+            {{ Form::text('depto', Route::is('companies.create') ? null : $company->legalRepresentative->address->detailAddressLegalEmployee->depto, ['class' => 'form-control text-center']) }}
+        </div>
+    </div>
+    {{-- Block Text Field --}}
+    <div class="col-md-1">
+        <div class="form-group">
+            {{ Form::label('block', 'Block') }}
+            {{ Form::text('block', Route::is('companies.create') ? null : $company->legalRepresentative->address->detailAddressLegalEmployee->block, ['class' => 'form-control text-center']) }}
+        </div>
+    </div>
+    {{-- Nº Casa Text Field --}}
+    <div class="col-md-1">
+        <div class="form-group">
+            {{ Form::label('num_home', 'Nº Casa') }}
+            {{ Form::text('num_home', Route::is('companies.create') ? null : $company->legalRepresentative->address->detailAddressLegalEmployee->num_home, ['class' => 'form-control text-center']) }}
+        </div>
+    </div>
+    {{-- Región Select Field --}}
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('region_legal_id', 'Región') }}
+            {{ Form::select('region_legal_id', $regions, Route::is('companies.create') ? null : $company->legalRepresentative->address->commune->province->region->id, ['class' => 'form-control']) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    {{-- Provincia Select Field --}}
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('province_legal_id', 'Provincia') }}
+            {{ Form::select('province_legal_id', Route::is('companies.create') ? $provinces : $provincesRep, Route::is('companies.create') ? null : $company->legalRepresentative->address->commune->province->id, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    {{-- Comuna Select Field --}}
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('commune_legal_id', 'Comuna') }}
+            {{ Form::select('commune_legal_id', Route::is('companies.create') ? $communes : $communesRep, Route::is('companies.create') ? null : $company->legalRepresentative->address->commune->id, ['class' => 'form-control']) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label('phone1_representative', 'Teléfono 1', ['class' => 'control-label']) }}
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-phone"></i>
+                </div>
+                {{ Form::text('phone1_representative', Route::is('companies.create') ? null : $company->legalRepresentative->address->phone1, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
+            </div>
+        </div>
+    </div>
 	<div class="col-md-3">
 		<div class="form-group">
 			{{ Form::label('phone2_representative', 'Teléfono 2', ['class' => 'control-label']) }}
@@ -68,7 +119,7 @@
 				<div class="input-group-addon">
 					<i class="fa fa-fax"></i>
 				</div>
-				{{ Form::text('phone2_representative', (Route::is('companies.create')) ? null : $company->legalRepresentative->phone2_representative, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
+				{{ Form::text('phone2_representative', Route::is('companies.create') ? null : $company->legalRepresentative->address->phone2, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
 			</div>
 		</div>
 	</div>

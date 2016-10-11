@@ -73,17 +73,17 @@
     {{-- Depto Form Input --}}
     <div class="col-md-1 form-group">
         {{ Form::label('depto', 'Depto', ['class' => 'control-label']) }}
-        {{ Form::text('depto', $employee->address->depto, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
+        {{ Form::text('depto', $employee->address->detailAddressLegalEmployee->depto, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     {{-- Block Form Input --}}
     <div class="col-md-1 form-group">
         {{ Form::label('block', 'Block', ['class' => 'control-label']) }}
-        {{ Form::text('block', $employee->address->block, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
+        {{ Form::text('block', $employee->address->detailAddressLegalEmployee->block, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     {{-- Num_home Form Input --}}
     <div class="col-md-1 form-group">
         {{ Form::label('num_home', 'Nº Casa', ['class' => 'control-label']) }}
-        {{ Form::text('num_home', $employee->address->num_home, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
+        {{ Form::text('num_home', $employee->address->detailAddressLegalEmployee->num_home, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     <div class="col-md-3 form-group">
         {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
@@ -107,7 +107,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-phone"></i>
             </div>
-            {{ Form::text('phone1', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
+            {{ Form::text('phone1', $employee->address->phone1, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
         </div>
     </div>
     <div class="col-md-3">
@@ -117,7 +117,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-fax"></i>
                 </div>
-                {{ Form::text('phone2', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
+                {{ Form::text('phone2', $employee->address->phone2, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@ class Address extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'address', 'depto', 'block', 'num_home', 'commune_id'
+		'addressable_id', 'addressable_type', 'address', 'commune_id', 'phone1', 'phone2',
 	];
 	
 	/**
@@ -20,6 +20,14 @@ class Address extends Eloquent
 	
 	
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+	 */
+	public function addressable()
+	{
+        return $this->morphTo();
+	}
+	
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function commune()
@@ -27,4 +35,28 @@ class Address extends Eloquent
         return $this->belongsTo(Commune::class);
 	}
 	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function detailAddressLegalEmployee()
+	{
+	    return $this->hasOne(DetailAddressLegalEmployee::class);
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function detailAddressCompany()
+	{
+		return $this->hasOne(DetailAddressCompany::class);
+	}
+	
+	
+	/**
+	 * @param string $value
+	 */
+	public function setAddressAttribute($value)
+	{
+        $this->attributes['address'] = ucfirst($value);
+	}
 }

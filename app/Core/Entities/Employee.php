@@ -13,8 +13,7 @@ class Employee extends Eloquent
 	 */
 	protected $fillable = [
 		'user_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
-		'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'gender_id', 'email_employee',
-		'phone1', 'phone2', 'state'
+		'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'gender_id', 'email_employee', 'state'
 	];
 	
 	/**
@@ -30,7 +29,7 @@ class Employee extends Eloquent
 	 */
 	public function address()
 	{
-	    return $this->hasOne(Address::class);
+	    return $this->morphOne(Address::class, 'addressable');
 	}
 	
 	/**

@@ -40,6 +40,7 @@ use Controlqtime\Core\Contracts\FamilyRelationshipRepoInterface;
 use Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Contracts\FamilyResponsabilityRepoInterface;
 use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
+use Controlqtime\Core\Contracts\DetailAddressLegalEmployeeRepoInterface;
 
 class EmployeeController extends Controller
 {
@@ -77,6 +78,11 @@ class EmployeeController extends Controller
 	 * @var DegreeRepoInterface
 	 */
 	protected $degree;
+	
+	/**
+	 * @var DetailAddressLegalEmployeeRepoInterface
+	 */
+	protected $detail_address;
 	
 	/**
 	 * @var DisabilityRepoInterface
@@ -238,6 +244,7 @@ class EmployeeController extends Controller
 	 * @param ActivateEmployeeInterface $activateEmployee
 	 * @param UserRepoInterface $user
 	 * @param AddressRepoInterface $address
+	 * @param DetailAddressLegalEmployeeRepoInterface $detail_address
 	 */
 	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune,
 		RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution,
@@ -247,7 +254,7 @@ class EmployeeController extends Controller
 		DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam,
 		FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee,
 		ImageFactoryInterface $image, MaritalStatusRepoInterface $maritalStatus, ForecastRepoInterface $forecast,
-		PensionRepoInterface $pension, ActivateEmployeeInterface $activateEmployee, UserRepoInterface $user, AddressRepoInterface $address)
+		PensionRepoInterface $pension, ActivateEmployeeInterface $activateEmployee, UserRepoInterface $user, AddressRepoInterface $address, DetailAddressLegalEmployeeRepoInterface $detail_address)
 	{
 		$this->activateEmployee          = $activateEmployee;
 		$this->address                   = $address;
@@ -256,6 +263,7 @@ class EmployeeController extends Controller
 		$this->contact_employee          = $contact_employee;
 		$this->country                   = $country;
 		$this->degree                    = $degree;
+		$this->detail_address            = $detail_address;
 		$this->disability                = $disability;
 		$this->disease                   = $disease;
 		$this->employee                  = $employee;
@@ -306,7 +314,6 @@ class EmployeeController extends Controller
 	 */
 	public function create()
 	{
-		$communes                   = $this->commune->lists('name', 'id');
 		$countries                  = $this->country->lists('name', 'id');
 		$degrees                    = $this->degree->lists('name', 'id');
 		$employees                  = $this->employee->lists('full_name', 'id');
@@ -315,8 +322,11 @@ class EmployeeController extends Controller
 		$maritalStatuses            = $this->maritalStatus->lists('name', 'id');
 		$institutions               = $this->institution->lists('name', 'id');
 		$pensions                   = $this->pension->lists('name', 'id');
-		$provinces                  = $this->province->lists('name', 'id');
-		$regions                    = $this->region->lists('name', 'id');
+		$regionsColl                = $this->region->all();
+		$provincesColl              = $this->region->find($regionsColl->first()->id)->provinces;
+		$communes                   = $this->province->findCommunes($provincesColl->first()->id);
+		$regions                    = $regionsColl->pluck('name', 'id');
+		$provinces                  = $provincesColl->pluck('name', 'id');
 		$relationships              = $this->relationship->lists('name', 'id');
 		$type_certifications        = $this->type_certification->lists('name', 'id');
 		$type_disabilities          = $this->type_disability->lists('name', 'id');
@@ -352,7 +362,8 @@ class EmployeeController extends Controller
 			
 			$request->session()->put('step1.user_id', $user->id);
 			$employee = $this->employee->create(Session::get('step1'));
-			$employee->address()->create(Session::get('step1'));
+			$address  = $employee->address()->create(Session::get('step1'));
+			$address->detailAddressLegalEmployee()->create(Session::get('step1'));
 			$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
 			$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
 			$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
@@ -460,9 +471,8 @@ class EmployeeController extends Controller
 	public function edit($id)
 	{
 		$employee                   = $this->employee->find($id, [
-			'address.commune.province.region'
+			'address.commune.province.region', 'address.detailAddressLegalEmployee',
 		]);
-		$communes                   = $this->commune->lists('name', 'id');
 		$countries                  = $this->country->lists('name', 'id');
 		$degrees                    = $this->degree->lists('name', 'id');
 		$employees                  = $this->employee->lists('full_name', 'id');
@@ -471,8 +481,11 @@ class EmployeeController extends Controller
 		$maritalStatuses            = $this->maritalStatus->lists('name', 'id');
 		$institutions               = $this->institution->lists('name', 'id');
 		$pensions                   = $this->pension->lists('name', 'id');
-		$provinces                  = $this->province->lists('name', 'id');
-		$regions                    = $this->region->lists('name', 'id');
+		$regionsColl                = $this->region->all();
+		$provincesColl              = $this->region->find($employee->address->commune->province->region->id)->provinces;
+		$communes                   = $this->province->findCommunes($employee->address->commune->province->id);
+		$regions                    = $regionsColl->pluck('name', 'id');
+		$provinces                  = $provincesColl->pluck('name', 'id');
 		$relationships              = $this->relationship->lists('name', 'id');
 		$type_certifications        = $this->type_certification->lists('name', 'id');
 		$type_disabilities          = $this->type_disability->lists('name', 'id');
@@ -501,11 +514,10 @@ class EmployeeController extends Controller
 		
 		try
 		{
-			// $employee = $this->employee->find($id);
-			
 			// Update Step1 data
 			$employee = $this->employee->update($request->session()->get('step1_update'), $id);
-			$this->address->update($request->session()->get('step1_update'), $employee->address->id);
+			$address  = $this->address->update($request->session()->get('step1_update'), $employee->address->id);
+			$this->detail_address->update($request->session()->get('step1_update'), $address->detailAddressLegalEmployee->id);
 			$this->user->update(['email' => $request->session()->get('step1_update.email_employee')], $employee->user_id);
 			$this->contact_employee->destroyArrayId($request->session()->get('id_delete_contact_update'));
 			$this->contact_employee->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
@@ -561,8 +573,8 @@ class EmployeeController extends Controller
 	{
 		$employee = $this->employee->find($id, [
 			'address.commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
-			'studies.degree', 'studies.institution', 'certifications', 'specialities',
-			'professionalLicenses', 'pension', 'forecast'
+			'address.detailAddressLegalEmployee', 'studies.degree', 'studies.institution', 'certifications',
+			'specialities', 'professionalLicenses', 'pension', 'forecast'
 		]);
 		
 		return view('human-resources.employees.show', compact('employee'));

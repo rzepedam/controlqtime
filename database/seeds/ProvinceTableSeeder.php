@@ -186,161 +186,149 @@ class ProvinceTableSeeder extends Seeder
 		Province::create([
 			'id'        => 29,
 			'region_id' => 8,
-			'name'      => 'Cardenal Caro'
+			'name'      => 'Colchagua'
 		]);
 		
 		Province::create([
 			'id'        => 30,
-			'region_id' => 8,
-			'name'      => 'Colchagua'
-		]);
-		
-		Province::create([
-			'id'        => 31,
-			'region_id' => 8,
-			'name'      => 'Colchagua'
-		]);
-		
-		Province::create([
-			'id'        => 32,
 			'region_id' => 9,
 			'name'      => 'Cauquenes'
 		]);
 		
 		Province::create([
-			'id'        => 33,
+			'id'        => 31,
 			'region_id' => 9,
 			'name'      => 'Curicó'
 		]);
 		
 		Province::create([
-			'id'        => 34,
+			'id'        => 32,
 			'region_id' => 9,
 			'name'      => 'Linares'
 		]);
 		
 		Province::create([
-			'id'        => 35,
+			'id'        => 33,
 			'region_id' => 9,
 			'name'      => 'Talca'
 		]);
 		
 		Province::create([
-			'id'        => 36,
+			'id'        => 34,
 			'region_id' => 10,
 			'name'      => 'Arauco'
 		]);
 		
 		Province::create([
-			'id'        => 37,
+			'id'        => 35,
 			'region_id' => 10,
 			'name'      => 'Bio Bío'
 		]);
 		
 		Province::create([
-			'id'        => 38,
+			'id'        => 36,
 			'region_id' => 10,
 			'name'      => 'Concepción'
 		]);
 		
 		Province::create([
-			'id'        => 39,
+			'id'        => 37,
 			'region_id' => 10,
 			'name'      => 'Ñuble'
 		]);
 		
 		Province::create([
-			'id'        => 40,
+			'id'        => 38,
 			'region_id' => 11,
 			'name'      => 'Cautín'
 		]);
 		
 		Province::create([
-			'id'        => 41,
+			'id'        => 39,
 			'region_id' => 11,
 			'name'      => 'Malleco'
 		]);
 		
 		Province::create([
-			'id'        => 42,
+			'id'        => 40,
 			'region_id' => 12,
 			'name'      => 'Valdivia'
 		]);
 		
 		Province::create([
-			'id'        => 43,
+			'id'        => 41,
 			'region_id' => 12,
 			'name'      => 'Ranco'
 		]);
 		
 		Province::create([
-			'id'        => 44,
+			'id'        => 42,
 			'region_id' => 13,
 			'name'      => 'Chiloé'
 		]);
 		
 		Province::create([
-			'id'        => 45,
+			'id'        => 43,
 			'region_id' => 13,
 			'name'      => 'Llanquihue'
 		]);
 		
 		Province::create([
-			'id'        => 46,
+			'id'        => 44,
 			'region_id' => 13,
 			'name'      => 'Osorno'
 		]);
 		
 		Province::create([
-			'id'        => 47,
+			'id'        => 45,
 			'region_id' => 13,
 			'name'      => 'Palena'
 		]);
 		
 		Province::create([
-			'id'        => 48,
+			'id'        => 46,
 			'region_id' => 14,
 			'name'      => 'Aisén'
 		]);
 		
 		Province::create([
-			'id'        => 49,
+			'id'        => 47,
 			'region_id' => 14,
 			'name'      => 'Capitán Prat'
 		]);
 		
 		Province::create([
-			'id'        => 50,
+			'id'        => 48,
 			'region_id' => 14,
 			'name'      => 'Coihaique'
 		]);
 		
 		Province::create([
-			'id'        => 51,
+			'id'        => 49,
 			'region_id' => 14,
 			'name'      => 'General Carrera'
 		]);
 		
 		Province::create([
-			'id'        => 52,
+			'id'        => 50,
 			'region_id' => 15,
 			'name'      => 'Antártica Chilena'
 		]);
 		
 		Province::create([
-			'id'        => 53,
+			'id'        => 51,
 			'region_id' => 15,
 			'name'      => 'Magallanes'
 		]);
 		
 		Province::create([
-			'id'        => 54,
+			'id'        => 52,
 			'region_id' => 15,
 			'name'      => 'Tierra del Fuego'
 		]);
 		
 		Province::create([
-			'id'        => 55,
+			'id'        => 53,
 			'region_id' => 15,
 			'name'      => 'Última Esperanza'
 		]);

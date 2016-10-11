@@ -20,8 +20,6 @@ class LegalRepresentativeTableSeeder extends Seeder
 			'rut_representative'    => '8635558-2',
 			'birthday'              => '01-12-1964',
 			'nationality_id'        => 4,
-			'phone1_representative' => '+56994355002',
-			'phone2_representative' => '',
 			'email_representative'  => 'apina@grupoalfra.cl'
 		]);
 		

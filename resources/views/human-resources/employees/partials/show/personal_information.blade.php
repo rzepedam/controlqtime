@@ -12,21 +12,23 @@
                         <table class="table table-striped table-bordered">
                             <tbody>
                             <tr class="text-center">
-                                <td><i class="fa fa-street-view"></i> {{ $employee->full_name }}</td>
+                                <td><i class="fa fa-street-view"></i>
+                                    {{ $employee->full_name }}
+                                </td>
                             </tr>
                             <tr class="text-center">
-                                <td>
-                                    <i class="fa fa-envelope"></i> {{ Html::mailto($employee->email_employee, null, ['class' => 'text-muted']) }}
+                                <td><i class="fa fa-envelope"></i>
+                                    {{ Html::mailto($employee->email_employee, null, ['class' => 'text-muted']) }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-center">
-                                    <i class="fa fa-phone" aria-hidden="true"></i> {{ $employee->phone1 }}
+                                <td class="text-center"><i class="fa fa-phone" aria-hidden="true"></i>
+                                    {{ $employee->address->phone1 }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-center">
-                                    <i class="fa fa-flag" aria-hidden="true"></i> {{ $employee->nationality->name }}
+                                <td class="text-center"><i class="fa fa-flag" aria-hidden="true"></i>
+                                    {{ $employee->nationality->name }}
                                 </td>
                             </tr>
                             </tbody>
@@ -47,20 +49,27 @@
                             <tbody>
                             <tr>
                                 <td class="col-md-3">Rut</td>
-                                <td class="text-center"> {{ $employee->rut }}</td>
+                                <td class="text-center">
+                                    {{ $employee->rut }}
+                                </td>
                             </tr>
                             <tr>
                                 <td class="col-md-3">Edad</td>
-                                <td class="text-center">{{ $employee->birthday->age . " años" }}</td>
+                                <td class="text-center">
+                                    {{ $employee->birthday->age . " años" }}
+                                </td>
                             </tr>
                             <tr>
                                 <td class="col-md-3">Fecha de Nacimiento</td>
-                                <td class="text-center text-capitalize"><i class="fa fa-calendar" aria-hidden="true"></i> {{ Date::parse($employee->birthday)->format('l j F Y') }}
+                                <td class="text-center text-capitalize"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                    {{ Date::parse($employee->birthday)->format('l j F Y') }}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-3">Género</td>
-                                <td class="text-center">{{ $employee->gender->name }}</td>
+                                <td class="text-center">
+                                    {{ $employee->gender->name }}
+                                </td>
                             </tr>
                             <tr>
                                 <td class="col-md-3">Estado Civil</td>
@@ -76,24 +85,29 @@
                             </tr>
                             <tr>
                                 <td class="col-md-3">Domicilio</td>
-                                <td class="text-center">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                    {{ $employee->address->address }}{{ ($employee->address->depto) ? ', Depto ' . $employee->address->depto : '' }}{{ ($employee->address->block) ? ', Block ' . $employee->address->block : '' }}{{ ($employee->address->num_home) ? ', Nº Casa ' . $employee->address->num_home : '' }}{{ ". " . $employee->address->commune->name . ". " . $employee->address->commune->province->name . ". " . $employee->address->commune->province->region->name }}
+                                <td class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    {{ $employee->address->address }}{{ ($employee->address->detailAddressLegalEmployee->depto) ? ', Depto ' . $employee->address->detailAddressLegalEmployee->depto : '' }}{{ ($employee->address->detailAddressLegalEmployee->block) ? ', Block ' . $employee->address->detailAddressLegalEmployee->block : '' }}{{ ($employee->address->detailAddressLegalEmployee->num_home) ? ', Nº Casa ' . $employee->address->detailAddressLegalEmployee->num_home : '' }}{{ ". " . $employee->address->commune->name . ". " . $employee->address->commune->province->name . ". " . $employee->address->commune->province->region->name }}
                                 </td>
                             </tr>
-                            @if ($employee->address->num_home)
+                            @if ($employee->address->phone2)
                                 <tr>
-                                    <td class="col-md-3">Casa</td>
-                                    <td class="text-center"> {{ $employee->address->num_home }}</td>
+                                    <td class="col-md-3">Teléfono 2</td>
+                                    <td class="text-center">
+                                        {{ $employee->address->phone2 }}
+                                    </td>
                                 </tr>
                             @endif
                             <tr>
                                 <td class="col-md-3">Ingresado</td>
-                                <td class="text-center text-capitalize">{{ Date::parse($employee->created_at)->format('l j F Y H:i:s') }}</td>
+                                <td class="text-center text-capitalize">
+                                    {{ Date::parse($employee->created_at)->format('l j F Y H:i:s') }}
+                                </td>
                             </tr>
                             <tr>
                                 <td class="col-md-3">Actualizado</td>
-                                <td class="text-center text-capitalize">{{ Date::parse($employee->updated_at)->format('l j F Y H:i:s') }}</td>
+                                <td class="text-center text-capitalize">
+                                    {{ Date::parse($employee->updated_at)->format('l j F Y H:i:s') }}
+                                </td>
                             </tr>
                             </tbody>
                         </table>

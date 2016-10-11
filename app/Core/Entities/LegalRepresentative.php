@@ -13,8 +13,7 @@ class LegalRepresentative extends Eloquent
      */
     protected $fillable = [
         'company_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'rut_representative',
-        'birthday', 'nationality_id', 'phone1_representative', 'phone2_representative',
-        'email_representative',
+        'birthday', 'nationality_id', 'email_representative',
     ];
 
     /**
@@ -23,7 +22,16 @@ class LegalRepresentative extends Eloquent
     protected $dates = [
         'birthday'
     ];
-
+	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+	 */
+	public function address()
+	{
+        return $this->morphOne(Address::class, 'addressable');
+	}
+	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -12,8 +12,7 @@ class Company extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'type_company_id', 'rut', 'firm_name', 'gyre', 'start_act', 'address', 'commune_id', 'lot',
-        'bod', 'ofi', 'floor', 'muni_license', 'email_company', 'phone1', 'phone2', 'status'
+        'type_company_id', 'rut', 'firm_name', 'gyre', 'start_act', 'muni_license', 'email_company'
     ];
 
     /**
@@ -22,7 +21,15 @@ class Company extends Eloquent
     protected $dates = [
         'start_act'
     ];
-
+	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+	 */
+	public function address()
+	{
+        return $this->morphOne(Address::class, 'addressable');
+	}
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

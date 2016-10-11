@@ -3,10 +3,11 @@
 namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Entities\Region;
+use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Traits\ListsTrait;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 
-class RegionRepo implements RegionRepoInterface
+class RegionRepo extends BaseRepo implements RegionRepoInterface
 {
 	use ListsTrait;
 	

@@ -18,14 +18,6 @@ class CompanyTableSeeder extends Seeder
 			'gyre'            => 'Venta de partes, piezas y accesorios',
 			'start_act'       => '01-08-2010',
 			'muni_license'    => '203939',
-			'address'         => 'Palacio Riesco 3819',
-			'commune_id'      => 102,
-			'lot'             => '',
-			'bod'             => '14',
-			'ofi'             => '',
-			'floor'           => '',
-			'phone1'          => '+56222479619',
-			'phone2'          => '+56994355002',
 			'email_company'   => 'ventas@grupoalfra.cl',
 			'state'           => 'disable'
 		]);

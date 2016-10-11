@@ -16,14 +16,7 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 		'firm_name'       => $faker->company . " " . $faker->companySuffix,
 		'gyre'            => $faker->sentence,
 		'start_act'       => $faker->date($format = 'd-m-Y', $max = 'now'),
-		'address'         => $faker->address,
-		'commune_id'      => 102,
-		'lot'             => rand(1, 99),
-		'ofi'             => rand(1, 50),
-		'floor'           => rand(1, 30),
 		'muni_license'    => strtoupper($faker->word),
-		'phone1'          => $faker->phoneNumber,
-		'phone2'          => $faker->phoneNumber,
 		'email_company'   => $faker->email,
 	];
 	
@@ -32,17 +25,15 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 {
 	return [
-		'company_id'            => factory(Company::class)->create()->id,
-		'male_surname'          => $faker->lastName,
-		'female_surname'        => $faker->lastName,
-		'first_name'            => $faker->firstName,
-		'second_name'           => $faker->firstName,
-		'rut_representative'    => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
-		'birthday'              => $faker->date($format = 'd-m-Y', $max = 'now'),
-		'nationality_id'        => rand(1, 9),
-		'phone1_representative' => $faker->phoneNumber,
-		'phone2_representative' => $faker->phoneNumber,
-		'email_representative'  => $faker->email,
+		'company_id'           => factory(Company::class)->create()->id,
+		'male_surname'         => $faker->lastName,
+		'female_surname'       => $faker->lastName,
+		'first_name'           => $faker->firstName,
+		'second_name'          => $faker->firstName,
+		'rut_representative'   => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
+		'birthday'             => $faker->date($format = 'd-m-Y', $max = 'now'),
+		'nationality_id'       => rand(1, 9),
+		'email_representative' => $faker->email,
 	];
 });
 
@@ -68,8 +59,6 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'forecast_id'       => rand(1, 14),
 		'pension_id'        => rand(1, 6),
 		'email_employee'    => $faker->unique()->email,
-		'phone1'            => $faker->phoneNumber,
-		'phone2'            => $faker->phoneNumber,
 		'state'             => 'disable'
 	];
 });
@@ -77,9 +66,10 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 $factory->define(Address::class, function (Faker\Generator $faker)
 {
 	return [
-		'employee_id'   => factory(Employee::class)->create()->id,
-		'address'       => $faker->address,
-		'commune_id'    => rand(1, 53),
+		'addressable_id'   => factory(Employee::class)->create()->id,
+		'addressable_type' => 'Controlqtime\Core\Entities\Employee',
+		'address'          => $faker->address,
+		'commune_id'       => rand(1, 53),
 	];
 });
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropAddressColumnsEmployeeTable extends Migration
+class DropAddressColumnsCompanyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class DropAddressColumnsEmployeeTable extends Migration
      */
     public function up()
     {
-        Schema::table('employees', function (Blueprint $table) {
-	        $table->dropForeign(['commune_id']);
-	        $table->dropColumn(['address', 'depto', 'block', 'num_home', 'commune_id']);
-        });
+	    Schema::table('companies', function (Blueprint $table) {
+		    $table->dropForeign(['commune_id']);
+		    $table->dropColumn(['address', 'commune_id', 'lot', 'bod', 'ofi', 'floor']);
+	    });
     }
 
     /**
@@ -26,8 +26,6 @@ class DropAddressColumnsEmployeeTable extends Migration
      */
     public function down()
     {
-        Schema::table('employees', function (Blueprint $table) {
-        	//
-        });
+        //
     }
 }

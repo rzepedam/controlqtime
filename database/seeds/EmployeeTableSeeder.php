@@ -25,8 +25,6 @@ class EmployeeTableSeeder extends Seeder
 		    'forecast_id'       => 7,
 		    'pension_id'        => 1,
 		    'email_employee'    => 'raulmeza@controlqtime.cl',
-		    'phone1'            => '+56974155784',
-		    'phone2'            => '22624050',
 		    'state'             => 'disable'
 	    ]);
 	
@@ -45,8 +43,6 @@ class EmployeeTableSeeder extends Seeder
 		    'forecast_id'       => 7,
 		    'pension_id'        => 1,
 		    'email_employee'    => 'robertozepeda@controlqtime.cl',
-		    'phone1'            => '+56994979953',
-		    'phone2'            => '',
 		    'state'             => 'disable'
 	    ]);
 	

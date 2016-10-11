@@ -46,50 +46,50 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }} <small class="text-muted"> (Casa Matriz)</small>
-            {{ Form::text('address', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
+            {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
+            {{ Form::text('address', Route::is('companies.create') ? null : $company->address->address, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
         </div>
     </div>
     <div class="col-md-1">
         <div class="form-group">
             {{ Form::label('lot', 'Lote', ['class' => 'control-label']) }}
-            {{ Form::text('lot', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
+            {{ Form::text('lot', Route::is('companies.create') ? null : $company->address->detailAddressCompany->lot, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
         </div>
     </div>
     <div class="col-md-1">
         <div class="form-group">
             {{ Form::label('bod', 'Bodega', ['class' => 'control-label']) }}
-            {{ Form::text('bod', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
+            {{ Form::text('bod', Route::is('companies.create') ? null : $company->address->detailAddressCompany->bod, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
         </div>
     </div>
     <div class="col-md-1">
         <div class="form-group">
             {{ Form::label('ofi', 'Oficina', ['class' => 'control-label']) }}
-            {{ Form::text('ofi', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
+            {{ Form::text('ofi', Route::is('companies.create') ? null : $company->address->detailAddressCompany->ofi, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
         </div>
     </div>
     <div class="col-md-1">
         <div class="form-group">
             {{ Form::label('floor', 'Piso', ['class' => 'control-label']) }}
-            {{ Form::text('floor', null, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '3', 'threshold' => '3']) }}
+            {{ Form::text('floor', Route::is('companies.create') ? null : $company->address->detailAddressCompany->floor, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '3', 'threshold' => '3']) }}
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-            {{ Form::select('region_id', $regions, Route::is('companies.create') ? null : $company->commune->province->region->id, ['class' => 'form-control']) }}
+            {{ Form::select('region_id', $regions, Route::is('companies.create') ? null : $company->address->commune->province->region->id, ['class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('province_id', 'Provincia', ['class' => 'control-label'])}}
-            {{ Form::select('province_id', $provinces, null, ['class' => 'form-control']) }}
+            {{ Form::select('province_id', Route::is('companies.create') ? $provinces : $provincesCom, Route::is('companies.create') ? null : $company->address->commune->province->id, ['class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
-            {{ Form::select('commune_id', $communes, null, ['class' => 'form-control']) }}
+            {{ Form::select('commune_id', Route::is('companies.create') ? $communes : $communesCom, Route::is('companies.create') ? null : $company->address->commune->id, ['class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-3">
@@ -99,7 +99,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                 </div>
-                {{ Form::text('phone1', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
+                {{ Form::text('phone1', Route::is('companies.create') ? null : $company->address->phone1, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-fax"></i>
                 </div>
-                {{ Form::text('phone2', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
+                {{ Form::text('phone2', Route::is('companies.create') ? null : $company->address->phone2, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
             </div>
         </div>
     </div>
