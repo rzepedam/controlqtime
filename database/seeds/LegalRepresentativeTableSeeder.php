@@ -23,10 +23,10 @@ class LegalRepresentativeTableSeeder extends Seeder
 			'email_representative'  => 'apina@grupoalfra.cl'
 		]);
 		
-		if (getenv('APP_ENV') === 'local')
+		/*if (getenv('APP_ENV') === 'local')
 		{
 			factory(LegalRepresentative::class, 26)->create();
-		}
+		}*/
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 		

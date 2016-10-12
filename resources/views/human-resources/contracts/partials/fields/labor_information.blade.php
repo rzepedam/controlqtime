@@ -73,7 +73,6 @@
     <span class="visible-xs visible-sm">
         <br />
     </span>
-
     {{-- Horario Tarde Input Text --}}
     <div class="col-md-4">
         {{ Form::label('init_afternoon', 'Horario Tarde', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Inicio Jornada Laboral - Término Jornada Laboral únicamente tarde" data-html="true"></i>

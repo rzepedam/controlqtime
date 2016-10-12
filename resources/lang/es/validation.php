@@ -44,7 +44,7 @@ return [
 		'string'  => 'El campo <strong>:attribute</strong> debe contener al menos :min caracteres.',
 		'array'   => '<strong>:attribute</strong> debe tener al menos :min elementos.',
 	],
-	'not_in'               => '<strong>:attribute</strong> es inválido.',
+	'not_in'               => 'El campo <strong>:attribute</strong> es inválido.',
 	'numeric'              => '<strong>:attribute</strong> debe ser numérico.',
 	'regex'                => 'El formato de <strong>:attribute</strong> es inválido.',
 	'required'             => 'El campo <strong>:attribute</strong> es obligatorio.',
@@ -169,7 +169,8 @@ return [
 		'country_id'                => 'País',
 		'type_institution_id'       => 'Tipo de Institución',
 		'created_at'                => 'Fecha Creación',
-		
+		'dur'                       => 'Nº de Meses',
+	    
 		/*
 		 * Api's
 		 */

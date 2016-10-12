@@ -22,7 +22,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', [], $headers)
-			->seeJson([
+			->dontSeeJson([
 				'error' => 'Unauthenticated.'
 			]);
 	}

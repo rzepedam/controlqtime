@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
 	    $this->call(LaborUnionTableSeeder::class);
 	    $this->call(PieceVehicleTableSeeder::class);
 	    $this->call(StatePieceVehicleTableSeeder::class);
+	    $this->call(TermAndObligatoryTableSeeder::class);
 	    
 	    // Importants tables
 		$this->call(CompanyTableSeeder::class);

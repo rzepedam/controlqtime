@@ -5,7 +5,8 @@
             <thead>
                 <tr>
                     <th data-field="id" data-sortable="true">ID</th>
-                    <th data-field="name" data-sortable="true">Nombre</th>
+                    <th class="text-center" data-field="name" data-sortable="true">Nombre</th>
+                    <th class="text-center" data-field="dur" data-sortable="true">Duración</th>
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>

@@ -122,7 +122,7 @@
                                     <tr>
                                         <td class="col-md-3">Tipo Contrato</td>
                                         <td class="text-center">
-                                            <a href="{{ route('type-contracts.index') }}" style="color: #757575"><i class="fa fa-file-text" aria-hidden="true"></i> {{ $contract->typeContract->name }}</a>
+                                            <a href="{{ route('type-contracts.index') }}" style="color: #757575"><i class="fa fa-file-text" aria-hidden="true"></i> {{ $contract->typeContract->full_name }}</a>
                                         </td>
                                     </tr>
                                 </tbody>

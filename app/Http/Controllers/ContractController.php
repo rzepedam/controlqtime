@@ -142,7 +142,7 @@ class ContractController extends Controller
 		$periodicities        = $this->periodicity->lists('name', 'id');
 		$dayTrips             = $this->dayTrips->lists('name', 'id');
 		$gratifications       = $this->gratification->lists('name', 'id');
-		$typeContracts        = $this->typeContract->lists('name', 'id');
+		$typeContracts        = $this->typeContract->lists('full_name', 'id');
 		$termsAndObligatories = $this->termAndObligatory->all();
 		
 		return view('human-resources.contracts.create', compact(
@@ -202,9 +202,10 @@ class ContractController extends Controller
 	public function getPdf($id)
 	{
 		$contract = $this->contract->find($id, [
-			'company.commune.province', 'employee.address.commune.province.region',
+			'company.address.commune.province.region', 'employee.address.commune.province.region',
 			'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
-			'gratification', 'typeContract', 'termsAndObligatories', 'company.legalRepresentative'
+			'gratification', 'typeContract', 'termsAndObligatories', 'company.legalRepresentative',
+			'company.address.detailAddressCompany', 'employee.address.detailAddressLegalEmployee'
 		]);
 		
 		$header = view('human-resources.contracts.partials.pdf.header');

@@ -24,7 +24,7 @@
             </td>
             <td class="col-xs-1 text-center">:</td>
             <td class="col-xs-7 text-left">
-                <b>{{ $contract->company->address . ", " . $contract->company->commune->name . ". " . $contract->company->commune->province->name . ". " . $contract->company->commune->province->region->name }}</b>
+                <b>{{ $contract->company->address->address . ", " . $contract->company->address->commune->name . ". " . $contract->company->address->commune->province->name . ". " . $contract->company->address->commune->province->region->name }}</b>
             </td>
         </tr>
         <tr>

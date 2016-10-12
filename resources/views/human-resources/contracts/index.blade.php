@@ -8,7 +8,7 @@
 
 @section('title_header') Listado de Contratos
     <br />
-    <a href="{{ route('contracts.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Contrato</a>
+    <a href="{{ route('contracts.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Contrato Laboral</a>
 @stop
 
 @section('breadcumb')

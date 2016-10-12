@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Editar Tipo de Contrato: <span class="text-primary">{{ $typeContract->id }}</span> @stop
+@section('title_header') Editar Tipo Contrato: <span class="text-primary">{{ $typeContract->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -17,9 +17,11 @@
         {{ Form::model($typeContract, array('route' => array('type-contracts.update', $typeContract), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             <div class="panel-body">
+                <span class="content_info_type_contract">
 
-                @include('maintainers.type-contracts.partials.fields')
+                    @include('maintainers.type-contracts.partials.fields')
 
+                </span>
             </div>
             <br />
             <div class="panel-footer">
@@ -45,7 +47,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
     <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ elixir('js/maintainers/type-contracts/create-edit-custom-type-contracts.js') }}"></script>
 
 @stop

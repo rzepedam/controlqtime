@@ -12,20 +12,20 @@
 <br />
 <div class="row">
     <div class="col-xs-12">
-        El Trabajador ejercerá sus funciones en {{ $contract->company->address }}
-        @if ($contract->company->lot)
-            {{ $contract->company->lot }}
+        El Trabajador ejercerá sus funciones en {{ $contract->company->address->address . ", " }}
+        @if ($contract->company->address->detailAddressCompany->lot)
+            {{ "Lote " . $contract->company->address->detailAddressCompany->lot . ", " }}
         @endif
-        @if ($contract->company->bod)
-            {{ $contract->company->bod }}
+        @if ($contract->company->address->detailAddressCompany->bod)
+            {{ "Bodega " . $contract->company->address->detailAddressCompany->bod . ", " }}
         @endif
-        @if ($contract->company->floor)
-            {{ $contract->company->floor }}
+        @if ($contract->company->address->detailAddressCompany->floor)
+            {{ "Piso " . $contract->company->address->detailAddressCompany->floor . ", " }}
         @endif
-        @if ($contract->company->ofi)
-            {{ $contract->company->ofi }}
+        @if ($contract->company->address->detailAddressCompany->ofi)
+            {{ "Oficina " . $contract->company->address->detailAddressCompany->ofi . ", " }}
         @endif
-        de la comuna de {{ $contract->company->commune->name }}, {{ $contract->company->commune->province->name }}, sin perjuicio de lo anterior, podrá ser trasladado y/o desempeñarse también en otros lugares del país o del extranjero, según las necesidades del Empleador, todo ello de conformidad con la ley.
+        Comuna de {{ $contract->company->address->commune->name }}, {{ $contract->company->address->commune->province->name }}, sin perjuicio de lo anterior, podrá ser trasladado y/o desempeñarse también en otros lugares del país o del extranjero, según las necesidades del Empleador, todo ello de conformidad con la ley.
     </div>
 </div>
 <br />

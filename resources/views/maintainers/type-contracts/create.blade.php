@@ -16,20 +16,24 @@
 
         {{ Form::open(array('route' => 'type-contracts.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
-            <div class="panel-body">
+        <div class="panel-body">
+                <span class="content_info_type_contract">
 
-                @include('maintainers.type-contracts.partials.fields')
+                    @include('maintainers.type-contracts.partials.fields')
 
-            </div>
-            <br />
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-12">
-                        <a href="{{ route('type-contracts.index') }}">Volver</a>
-                        <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
-                    </div>
+                </span>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ route('type-contracts.index') }}">Volver</a>
+                    <button id="btnSubmit" type="submit"
+                            class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i
+                                class="fa fa-floppy-o"></i> Guardar
+                    </button>
                 </div>
             </div>
+        </div>
 
         {{ Form::close() }}
 
@@ -39,6 +43,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
+    <script src="{{ elixir('js/maintainers/type-contracts/create-edit-custom-type-contracts.js') }}"></script>
 
 @stop

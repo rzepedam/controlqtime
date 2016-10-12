@@ -21,12 +21,6 @@
 <br />
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 <div class="row">
     <div class="col-xs-offset-1 col-xs-5 text-center">
         <b>{{ $contract->company->legalRepresentative->full_name }}</b>

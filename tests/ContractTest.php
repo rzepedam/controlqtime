@@ -6,32 +6,35 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ContractTest extends TestCase
 {
-	use DatabaseTransactions, WithoutMiddleware;
+	use DatabaseTransactions;
 	
-    public function test_url_ok()
+    function test_url_ok()
     {
 	    $user = User::find(1)->first();
 	    $this->actingAs($user)
-		    ->visit('/human-resources/contracts')
-	        ->see('Crear Nuevo Contrato Laboral')
-	        ->assertResponseStatus(200);
-    }
-    
-    public function test_route_ok()
-    {
-        $this->visitRoute('contracts.index')
-	        ->see('Crear Nuevo Contrato Laboral')
-	        ->assertResponseStatus(200);
-    }
-    
-    /*public function test_save_new_contract()
-    {
-		$user = User::find(1);
-	    $this->be($user);
-	    
-	    $this->visit('/human-resources/contracts/create')
-	        ->see('Crear Nuevo Contrato Laboral')
+	        ->visit('/human-resources/contracts')
+		    ->see('Listado de Contratos')
+		    ->see('Crear Nuevo Contrato Laboral')
 	        ->assertResponseOk();
-    }*/
+    }
+    
+    function test_route_ok()
+    {
+	    $user = User::find(1)->first();
+	    $this->actingAs($user)
+		    ->visitRoute('contracts.index')
+	        ->see('Crear Nuevo Contrato Laboral')
+	        ->assertResponseStatus(200);
+    }
+    
+    function test_save_new_contract()
+    {
+    	// Revisar, no debiese dar Ok al final del test
+	    $user = User::find(1)->first();
+	    $this->actingAs($user)
+	        ->visit('/human-resources/contracts/create')
+		    ->press('Guardar')
+		    ->assertResponseOk();
+    }
     
 }

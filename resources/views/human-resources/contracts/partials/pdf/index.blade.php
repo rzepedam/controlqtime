@@ -17,7 +17,7 @@
     <br />
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 text-justify">
-            En <b>{{ $contract->company->commune->province->name }}</b> a <span class="text-capitalize"><b>{{ Date::parse(date('d-m-Y'))->format('l j F Y') }}</b></span>, entre las partes a continuación individualizadas, que convienen en denominarse empleador y trabajador, se suscribe el siguiente contrato de trabajo <b>{{ $contract->typeContract->name }}</b>.
+            En <b>{{ $contract->company->address->commune->province->name }}</b> a <span class="text-capitalize"><b>{{ Date::parse(date('d-m-Y'))->format('l j F Y') }}</b></span>, entre las partes a continuación individualizadas, que convienen en denominarse empleador y trabajador, se suscribe el siguiente contrato de trabajo <b>{{ $contract->typeContract->name }}</b>.
         </div>
     </div>
     <br />

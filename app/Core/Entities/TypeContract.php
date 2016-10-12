@@ -15,15 +15,7 @@ class TypeContract extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'name'
+		'name', 'dur', 'full_name'
 	];
-	
-	/**
-	 * @param string $value
-	 */
-	public function setNameAttribute($value)
-	{
-		$this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
-	}
 	
 }

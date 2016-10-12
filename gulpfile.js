@@ -433,6 +433,14 @@ elixir(function(mix) {
         'me/js/base/maintainers/type-contracts/config_bootstrap_table.js'
     ], 'public/js/maintainers/type-contracts/index-custom-type-contracts.js');
 
+    // Maintainers > Type-Contracts > Create-Edit Custom Type-Contracts JS
+    mix.scripts([
+        'me/js/utilities/capitalize.js',
+        'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
+        'components/bootstrap-maxlength.js',
+        'me/js/base/maintainers/type-contracts/custom-type-contracts.js'
+    ], 'public/js/maintainers/type-contracts/create-edit-custom-type-contracts.js');
+
     // Maintainers > Type-Disabilities > Index Custom Type-Disabilities JS
     mix.scripts([
         'me/js/base/maintainers/type-disabilities/config_bootstrap_table.js'

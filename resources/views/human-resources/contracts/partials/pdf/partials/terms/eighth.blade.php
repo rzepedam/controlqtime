@@ -6,7 +6,7 @@
 <br />
 <div class="row">
     <div class="col-xs-12">
-        Se deja constacia que el trabajador ingresó al servicio el <span class="text-capitalize"><b>{{ Date::parse(date('d-m-Y'))->format('l j F Y') }}</b></span> y que el presente contrato es {{ $contract->typeContract->name }}.
+        Se deja constacia que el trabajador ingresó al servicio el <span class="text-capitalize"><b>{{ Date::parse($contract->created_at)->format('l j F Y') }}</b></span> y que el presente contrato de {{ $contract->typeContract->name }} durará hasta {{ \Carbon\Carbon::parse($contract->created_at)->addMonths(6) }}.
         <br />
         <br />
         No obstante lo anterior, cualquiera de las partes podrá poner término a este contrato en conformidad con las disposiciones legales vigentes.

@@ -145,5 +145,5 @@ class Contract extends Eloquent
     {
         return FormatField::decimalNumber($value);
     }
-
+    
 }
