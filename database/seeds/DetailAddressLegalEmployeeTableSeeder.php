@@ -16,6 +16,7 @@ class DetailAddressLegalEmployeeTableSeeder extends Seeder
 		DB::table('detail_address_legal_employees')->truncate();
 		
 		DetailAddressLegalEmployee::create([
+			'id'         => 1,
 			'address_id' => 1,
 			'depto'      => '303',
 			'block'      => '',
@@ -23,8 +24,17 @@ class DetailAddressLegalEmployeeTableSeeder extends Seeder
 		]);
 		
 		DetailAddressLegalEmployee::create([
+			'id'         => 2,
 			'address_id' => 2,
 			'depto'      => '1506',
+			'block'      => '',
+			'num_home'   => ''
+		]);
+		
+		DetailAddressLegalEmployee::create([
+			'id'         => 3,
+			'address_id' => 4,
+			'depto'      => '',
 			'block'      => '',
 			'num_home'   => ''
 		]);

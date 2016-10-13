@@ -17,12 +17,12 @@ class UserTableSeeder extends Seeder
 		
 		User::create([
 			'email'    => 'raulmeza@controlqtime.cl',
-			'password' => bcrypt('123456'),
+			'password' => bcrypt('grupo@lfr@12'),
 		]);
 		
 		User::create([
 			'email'    => 'robertozepeda@controlqtime.cl',
-			'password' => bcrypt('123456'),
+			'password' => bcrypt('grupo@lfr@12'),
 		]);
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');

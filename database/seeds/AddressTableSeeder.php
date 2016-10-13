@@ -11,6 +11,7 @@ class AddressTableSeeder extends Seeder
 		DB::table('addresses')->truncate();
 		
 		Address::create([
+			'id'               => 1,
 			'addressable_id'   => 1,
 			'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 			'address'          => 'Pérez Valenzuela 1209',
@@ -20,6 +21,7 @@ class AddressTableSeeder extends Seeder
 		]);
 		
 		Address::create([
+			'id'               => 2,
 			'addressable_id'   => 2,
 			'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 			'address'          => 'José Pedro Alessandri 61',
@@ -29,6 +31,7 @@ class AddressTableSeeder extends Seeder
 		]);
 		
 		Address::create([
+			'id'               => 3,
 			'addressable_id'   => 1,
 			'addressable_type' => 'Controlqtime\Core\Entities\Company',
 			'address'          => 'Palacio Riesco 3819',
@@ -38,6 +41,7 @@ class AddressTableSeeder extends Seeder
 		]);
 		
 		Address::create([
+			'id'               => 4,
 			'addressable_id'   => 1,
 			'addressable_type' => 'Controlqtime\Core\Entities\LegalRepresentative',
 			'address'          => 'Palacio Riesco 3819',
