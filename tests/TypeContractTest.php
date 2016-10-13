@@ -90,7 +90,10 @@ class TypeContractTest extends TestCase
 	function test_edit_url_type_contract_exists()
 	{
 		$user         = User::first();
-		$typeContract = TypeContract::first();
+		$typeContract = TypeContract::create([
+			'name' => 'Plazo Fijo',
+			'dur'  => 6
+		]);
 		
 		$this->actingAs($user)
 			->visit('/maintainers/type-contracts/' . $typeContract->id . '/edit')
