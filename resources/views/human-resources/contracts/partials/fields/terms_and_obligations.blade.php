@@ -3,8 +3,8 @@
     @foreach($termsAndObligatories as $termAndObligatory)
         <li class="list-group-item task-done">
             <div class="checkbox-custom checkbox-primary text-justify">
-                <input type="checkbox" id="default{{ $i }}" name="term_and_obligatory_id[]" value="{{ $termAndObligatory->id }}" {{ ($termAndObligatory->default) ? 'checked' : null }}>
-                <label for="default{{ $i }}">
+                <input type="checkbox" id="act{{ $i }}" name="term_and_obligatory_id[]" value="{{ $termAndObligatory->id }}" {{ ($termAndObligatory->act) ? 'checked' : null }}>
+                <label for="act{{ $i }}">
                     <span>{{ $termAndObligatory->name }}</span>
                 </label>
             </div>

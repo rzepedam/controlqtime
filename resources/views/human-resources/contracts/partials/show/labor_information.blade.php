@@ -76,7 +76,7 @@
                                     <tr>
                                         <td class="col-md-3">Ingresado</td>
                                         <td class="text-center text-capitalize">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i> {{ Date::parse($contract->created_at)->format('l j F Y H:i:s') }}
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> {{ Date::parse($contract->created_at)->format('l j F Y') }}
                                         </td>
                                     </tr>
                                 </tbody>

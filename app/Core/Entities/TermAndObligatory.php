@@ -10,7 +10,7 @@ class TermAndObligatory extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'default'
+		'name', 'act'
 	];
 	
 	/**
@@ -32,9 +32,9 @@ class TermAndObligatory extends Eloquent
 	/**
 	 * @param string $value
 	 */
-	public function setDefaultAttribute($value)
+	public function setActAttribute($value)
 	{
-		$this->attributes['default'] = ($value === 'on') ? true : false;
+		$this->attributes['act'] = ($value === 'on') ? true : false;
 	}
 	
 	/**
@@ -42,7 +42,7 @@ class TermAndObligatory extends Eloquent
 	 *
 	 * @return string
 	 */
-	public function getDefaultAttribute($value)
+	public function getActAttribute($value)
 	{
 		return ($value) ? 'checked' : null;
 	}

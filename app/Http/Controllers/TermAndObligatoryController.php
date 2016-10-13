@@ -83,8 +83,8 @@ class TermAndObligatoryController extends Controller
         // Es necesario agregar su comportamiento manualmente para su correcta actualización.
         $data = $request->all();
 
-        if (! array_key_exists('default', $data))
-            $data['default'] = false;
+        if (! array_key_exists('act', $data))
+            $data['act'] = false;
 
         $this->termAndObligatory->update($data, $id);
 

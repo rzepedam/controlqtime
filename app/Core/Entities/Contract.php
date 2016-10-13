@@ -15,9 +15,16 @@ class Contract extends Eloquent
         'company_id', 'employee_id', 'position_id', 'area_id', 'num_hour_id',
         'periodicity_hour_id', 'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon',
         'end_afternoon', 'periodicity_work_id', 'salary', 'mobilization', 'collation',
-        'gratification_id', 'type_contract_id'
+        'gratification_id', 'type_contract_id', 'expires_at'
     ];
-
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'expires_at'
+	];
+	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -105,9 +112,10 @@ class Contract extends Eloquent
     {
         return $this->belongsToMany(TermAndObligatory::class);
     }
+    
 
     /**
-     * @param date $value (2016-10-01)
+     * @param date $value (2016-10-01 10:22:46)
      *
      * @return string (01-10-2016)
      */

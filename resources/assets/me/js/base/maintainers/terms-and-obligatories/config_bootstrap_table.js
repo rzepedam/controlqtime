@@ -4,7 +4,7 @@ $('#terms_and_obligatory_table').bootstrapTable({
         {}, {},
         {
             formatter : function(value,row,index) {
-                if (row.default)
+                if (row.act)
                     return '<i class="fa fa-check-circle font-size-18 text-success"></i>';
                 else
                     return '<i class="fa fa-times-circle font-size-18 text-danger"></i>';

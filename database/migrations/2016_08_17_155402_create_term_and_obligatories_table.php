@@ -15,7 +15,7 @@ class CreateTermAndObligatoriesTable extends Migration
         Schema::create('term_and_obligatories', function (Blueprint $table) {
             $table->increments('id');
 			$table->text('name');
-			$table->boolean('default')->default(0);
+			$table->boolean('default')->default(false);
             $table->timestamps();
         });
     }

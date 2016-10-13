@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Http\Requests\ContractRequest;
 use Controlqtime\Core\Contracts\AreaRepoInterface;
@@ -162,6 +163,7 @@ class ContractController extends Controller
 		
 		try
 		{
+			$this->defineDateExpiredContract($request);
 			$contract = $this->contract->create($request->all());
 			$contract->termsAndObligatories()->attach($request->get('term_and_obligatory_id'));
 			$this->activateEmployee->checkStateUpdateEmployee($request->get('employee_id'));
@@ -176,6 +178,22 @@ class ContractController extends Controller
 			'status' => true,
 			'url'    => '/human-resources/contracts'
 		]);
+	}
+	
+	/**
+	 * @param $request
+	 *
+	 * @return request with date expired
+	 */
+	private function defineDateExpiredContract($request)
+	{
+		$typeContract = $this->typeContract->find($request->get('type_contract_id'));
+		if ($typeContract->name != 'Indefinido')
+		{
+			return $request->request->add(['expires_at' => Carbon::now()->addMonths($typeContract->dur)]);
+		}
+		
+		return $request->request->add(['expires_at' => Carbon::now()]);
 	}
 	
 	/**
