@@ -104,7 +104,10 @@ class TypeContractTest extends TestCase
 	function test_see_correct_default_values_in_edit()
 	{
 		$user         = User::first();
-		$typeContract = TypeContract::first();
+		$typeContract = $typeContract = TypeContract::create([
+			'name' => 'Plazo Fijo',
+			'dur'  => 6
+		]);
 		
 		$this->actingAs($user)
 			->visit('/maintainers/type-contracts/' . $typeContract->id . '/edit')
