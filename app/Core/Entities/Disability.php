@@ -13,12 +13,13 @@ class Disability extends Eloquent
 		'type_disability_id', 'treatment_disability', 'detail_disability'
 	];
 	
+	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
-	public function imageDisabilityEmployees()
+	public function imagesable()
 	{
-		return $this->hasMany(ImageDisabilityEmployee::class);
+		return $this->morphMany(Image::class, 'imagesable');
 	}
 	
 	/**
@@ -28,6 +29,7 @@ class Disability extends Eloquent
 	{
 		return $this->belongsTo(TypeDisability::class);
 	}
+	
 	
 	/**
 	 * @param string $value

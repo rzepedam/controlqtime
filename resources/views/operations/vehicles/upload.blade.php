@@ -87,57 +87,66 @@
 
         $(document).ready(function() {
 
+            /*
+             * Padron
+             */
             $("#padron").fileinput({
                 initialPreview: [
-                    @foreach($vehicle->imagePadrones as $image_padron)
+                    @foreach($vehicle->images_padron as $image_padron)
                         "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_padron->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
-                    @foreach($vehicle->imagePadrones as $image_padron)
-                        { caption: "{{ $image_padron->orig_name }}", size: "{{ $image_padron->size }}", url: "{{ route('VehicleDeleteFiles') }}", key: "{{ $image_padron->id }}", extra: { path: "{{ $image_padron->path }}", id: "{{ $id }}", type: "PadronVehicle" } },
+                    @foreach($vehicle->images_padron as $image_padron)
+                        { caption: "{{ $image_padron->orig_name }}", size: "{{ $image_padron->size }}", url: "{{ route('VehicleDeleteFiles') }}", key: "{{ $image_padron->id }}", extra: { path: "{{ $image_padron->path }}", id: "{{ $id }}", type: "Vehicle" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('VehicleAddImages') }}",
                 uploadExtraData:  {
                     vehicle_id: "{{ $id }}",
-                    type: "PadronVehicle"
+                    repo_id: '',
+                    type: "Vehicle",
+                    subClass: "Padron/"
                 }
             });
 
             $("#obligatory_insurance").fileinput({
                 initialPreview: [
-                    @foreach($vehicle->imageObligatoryInsurances as $image_obl_ins)
+                    @foreach($vehicle->images_obligatory_insurance as $image_obl_ins)
                         "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_obl_ins->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
-                    @foreach($vehicle->imageObligatoryInsurances as $image_obl_ins)
-                        { caption: "{{ $image_obl_ins->orig_name }}", size: "{{ $image_obl_ins->size }}", url: "{{ route('VehicleDeleteFiles') }}", key: "{{ $image_obl_ins->id }}", extra: { path: "{{ $image_obl_ins->path }}", id: "{{ $id }}", type: "ObligatoryInsuranceVehicle" } },
+                    @foreach($vehicle->images_obligatory_insurance as $image_obl_ins)
+                        { caption: "{{ $image_obl_ins->orig_name }}", size: "{{ $image_obl_ins->size }}", url: "{{ route('VehicleDeleteFiles') }}", key: "{{ $image_obl_ins->id }}", extra: { path: "{{ $image_obl_ins->path }}", id: "{{ $id }}", type: "Vehicle" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('VehicleAddImages') }}",
                 uploadExtraData:  {
                     vehicle_id: "{{ $id }}",
-                    type: "ObligatoryInsuranceVehicle"
+                    repo_id: '',
+                    type: "Vehicle",
+                    subClass: "ObligatoryInsurance/"
                 }
             });
 
             $("#circulation_permit").fileinput({
                 initialPreview: [
-                    @foreach($vehicle->imageCirculationPermits as $image_cir_permit)
+                    @foreach($vehicle->images_circulation_permit as $image_cir_permit)
                         "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_cir_permit->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
-                    @foreach($vehicle->imageCirculationPermits as $image_cir_permit)
-                        { caption: "{{ $image_cir_permit->orig_name }}", size: "{{ $image_cir_permit->size }}", url: "{{ route('VehicleDeleteFiles') }}", key: "{{ $image_cir_permit->id }}", extra: { path: "{{ $image_cir_permit->path }}", id: "{{ $id }}", type: "CirculationPermitVehicle" } },
+                    @foreach($vehicle->images_circulation_permit as $image_cir_permit)
+                        { caption: "{{ $image_cir_permit->orig_name }}", size: "{{ $image_cir_permit->size }}", url: "{{ route('VehicleDeleteFiles') }}", key: "{{ $image_cir_permit->id }}", extra: { path: "{{ $image_cir_permit->path }}", id: "{{ $id }}", type: "Vehicle" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('VehicleAddImages') }}",
                 uploadExtraData:  {
                     vehicle_id: "{{ $id }}",
-                    type: "CirculationPermitVehicle"
+                    repo_id: '',
+                    type: "Vehicle",
+                    subClass: "CirculationPermit/"
                 }
             });
 

@@ -4,11 +4,11 @@ namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Http\Requests\VehicleRequest;
 use Controlqtime\Core\Contracts\FuelRepoInterface;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\VehicleRepoInterface;
-use Controlqtime\Core\Contracts\ImageFactoryInterface;
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 use Controlqtime\Core\Contracts\ActivateVehicleInterface;
 use Controlqtime\Core\Contracts\DetailBusesRepoInterface;
@@ -51,11 +51,6 @@ class VehicleController extends Controller
 	protected $fuel;
 	
 	/**
-	 * @var ImageFactoryInterface
-	 */
-	protected $image;
-	
-	/**
 	 * @var ModelVehicleRepoInterface
 	 */
 	protected $model_vehicle;
@@ -90,7 +85,6 @@ class VehicleController extends Controller
 	 * @param CompanyRepoInterface $company
 	 * @param FuelRepoInterface $fuel
 	 * @param StateVehicleRepoInterface $state_vehicle
-	 * @param ImageFactoryInterface $image
 	 * @param DetailVehicleRepoInterface $detailVehicle
 	 * @param DateDocumentationVehicleRepoInterface $dateDocumentationVehicle
 	 * @param ActivateVehicleInterface $activate_vehicle
@@ -98,9 +92,9 @@ class VehicleController extends Controller
 	 */
 	public function __construct(VehicleRepoInterface $vehicle, TypeVehicleRepoInterface $type_vehicle,
 		TrademarkRepoInterface $trademark, ModelVehicleRepoInterface $model_vehicle, CompanyRepoInterface $company,
-		FuelRepoInterface $fuel, StateVehicleRepoInterface $state_vehicle, ImageFactoryInterface $image,
-		DetailVehicleRepoInterface $detailVehicle, DateDocumentationVehicleRepoInterface $dateDocumentationVehicle,
-		ActivateVehicleInterface $activate_vehicle, DetailBusesRepoInterface $detail_bus)
+		FuelRepoInterface $fuel, StateVehicleRepoInterface $state_vehicle, DetailVehicleRepoInterface $detailVehicle,
+		DateDocumentationVehicleRepoInterface $dateDocumentationVehicle, ActivateVehicleInterface $activate_vehicle,
+		DetailBusesRepoInterface $detail_bus)
 	{
 		$this->activate_vehicle         = $activate_vehicle;
 		$this->company                  = $company;
@@ -108,7 +102,6 @@ class VehicleController extends Controller
 		$this->detail_bus               = $detail_bus;
 		$this->detailVehicle            = $detailVehicle;
 		$this->fuel                     = $fuel;
-		$this->image                    = $image;
 		$this->model_vehicle            = $model_vehicle;
 		$this->trademark                = $trademark;
 		$this->type_vehicle             = $type_vehicle;
@@ -285,7 +278,7 @@ class VehicleController extends Controller
 	 */
 	public function addImages(Request $request)
 	{
-		$save = $this->image->build($request->get('type'), $request->get('vehicle_id'), null, $request->file('file_data'), null)->addImages();
+		$save = new ImageFactory($request->get('vehicle_id'), 'vehicle/', $request->get('repo_id'), $request->get('type'), $request->file('file_data'), null, $request->get('subClass'));
 		
 		if ($save)
 		{
@@ -308,7 +301,7 @@ class VehicleController extends Controller
 	 */
 	public function deleteFiles(Request $request)
 	{
-		$destroy = $this->image->build($request->get('type'), $request->get('key'), null, null, $request->get('path'))->destroyImage();
+		$destroy = new ImageFactory($request->get('key'), 'vehicle/', null, $request->get('type'), null, $request->get('path'));
 		
 		if ($destroy)
 		{

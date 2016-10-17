@@ -12,13 +12,20 @@ class BackendServiceProvider extends ServiceProvider
 			'Controlqtime\Core\Contracts\AccessControlRepoInterface',
 			'Controlqtime\Core\Repositories\AccessControlRepo'
 		);
-
-		// Interface with class. Not content Repo
+	
+	    // Interface with class. Not content Repo
+	    $this->app->bind(
+		    'Controlqtime\Core\Contracts\ActivateCompanyInterface',
+		    'Controlqtime\Core\Entities\ActivateCompany'
+	    );
+	
+	    // Interface with class. Not content Repo
 		$this->app->bind(
 			'Controlqtime\Core\Contracts\ActivateEmployeeInterface',
 			'Controlqtime\Core\Entities\ActivateEmployee'
 		);
 	
+	    // Interface with class. Not content Repo
 	    $this->app->bind(
 		    'Controlqtime\Core\Contracts\ActivateVehicleInterface',
 		    'Controlqtime\Core\Entities\ActivateVehicle'
@@ -170,11 +177,6 @@ class BackendServiceProvider extends ServiceProvider
 		);
 
         $this->app->bind(
-            'Controlqtime\Core\Contracts\ImageFactoryInterface',
-            'Controlqtime\Core\Factory\ImageFactory'
-        );
-
-        $this->app->bind(
             'Controlqtime\Core\Contracts\InstitutionRepoInterface',
             'Controlqtime\Core\Repositories\InstitutionRepo'
         );
@@ -233,6 +235,11 @@ class BackendServiceProvider extends ServiceProvider
 		    'Controlqtime\Core\Contracts\PieceVehicleRepoInterface',
 		    'Controlqtime\Core\Repositories\PieceVehicleRepo'
 	    );
+	
+	    $this->app->bind(
+		    'Controlqtime\Core\Contracts\PositionRepoInterface',
+		    'Controlqtime\Core\Repositories\PositionRepo'
+	    );
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface',
@@ -257,11 +264,6 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->bind(
             'Controlqtime\Core\Contracts\RelationshipRepoInterface',
             'Controlqtime\Core\Repositories\RelationshipRepo'
-        );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\PositionRepoInterface',
-            'Controlqtime\Core\Repositories\PositionRepo'
         );
 
         $this->app->bind(

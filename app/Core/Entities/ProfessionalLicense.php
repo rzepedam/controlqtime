@@ -20,7 +20,16 @@ class ProfessionalLicense extends Eloquent
     protected $dates = [
         'expired_license', 'emission_license'
     ];
-
+	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 */
+	public function imagesable()
+	{
+		return $this->morphMany(Image::class, 'imagesable');
+	}
+	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -29,14 +38,7 @@ class ProfessionalLicense extends Eloquent
         return $this->belongsTo(TypeProfessionalLicense::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function imageProfessionalLicenseEmployees()
-    {
-        return $this->hasMany(ImageProfessionalLicenseEmployee::class);
-    }
-
+    
     /**
      * @param string $value (01-01-2010)
      */

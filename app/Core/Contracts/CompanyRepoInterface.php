@@ -9,5 +9,5 @@ use Controlqtime\Core\Contracts\Base\BaseRepoWhereInterface;
 
 interface CompanyRepoInterface extends BaseRepoInterface, BaseRepoWhereInterface
 {
-    public function checkState($id);
+	//
 }

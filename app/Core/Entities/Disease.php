@@ -13,12 +13,13 @@ class Disease extends Eloquent
 		'type_disease_id', 'treatment_disease', 'detail_disease'
 	];
 	
+	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
-	public function imageDiseaseEmployees()
+	public function imagesable()
 	{
-		return $this->hasMany(ImageDiseaseEmployee::class);
+		return $this->morphMany(Image::class, 'imagesable');
 	}
 	
 	/**

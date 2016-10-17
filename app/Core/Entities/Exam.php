@@ -21,12 +21,13 @@ class Exam extends Eloquent
 		'emission_exam', 'expired_exam'
 	];
 	
+	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
-	public function imageExamEmployees()
+	public function imagesable()
 	{
-		return $this->hasMany(ImageExamEmployee::class);
+		return $this->morphMany(Image::class, 'imagesable');
 	}
 	
 	/**
@@ -36,6 +37,7 @@ class Exam extends Eloquent
 	{
 		return $this->belongsTo(TypeExam::class);
 	}
+	
 	
 	/**
 	 * @param string $value

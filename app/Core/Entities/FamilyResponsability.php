@@ -13,14 +13,15 @@ class FamilyResponsability extends Eloquent
     protected $fillable = [
         'name_responsability', 'rut_responsability', 'relationship_id'
     ];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function imageFamilyResponsabilityEmployees()
-    {
-        return $this->hasMany(ImageFamilyResponsabilityEmployee::class);
-    }
+	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 */
+	public function imagesable()
+	{
+		return $this->morphMany(Image::class, 'imagesable');
+	}
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -38,6 +39,7 @@ class FamilyResponsability extends Eloquent
         return $this->belongsTo(Relationship::class);
     }
 	
+    
 	/**
 	 * @param string $value
 	 */
@@ -53,6 +55,7 @@ class FamilyResponsability extends Eloquent
     {
         $this->attributes['rut_responsability'] = str_replace('.', '', $value);
     }
+
 
     /**
      * @param string $value format 12345678-9

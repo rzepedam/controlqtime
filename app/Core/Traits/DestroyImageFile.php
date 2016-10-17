@@ -2,50 +2,40 @@
 
 namespace Controlqtime\Core\Traits;
 
+use Illuminate\Support\Facades\Storage;
+
 trait DestroyImageFile
 {
 	/**
 	 * @param $id
 	 * @param $entity
+	 *
+	 * @return bool
 	 */
 	public function destroyImages($id, $entity)
 	{
-		$ids = explode(",", $id);
+		$namespace = 'Controlqtime\Core\Entities\\' . $entity;
+		$model     = new $namespace;
+		$ids       = explode(",", $id);
 		
 		if ($ids[0] != '')
 		{
 			foreach ($ids as $item)
 			{
-				if ($entity == 'certification')
-					$images = $this->model->findOrFail($item)->imageCertificationEmployees;
-				
-				if ($entity == 'speciality')
-					$images = $this->model->findOrFail($item)->imageSpecialityEmployees;
-				
-				if ($entity == 'professional_license')
-					$images = $this->model->findOrFail($item)->imageProfessionalLicenseEmployees;
-				
-				if ($entity == 'disability')
-					$images = $this->model->findOrFail($item)->imageDisabilityEmployees;
-				
-				if ($entity == 'disease')
-					$images = $this->model->findOrFail($item)->imageDiseaseEmployees;
-				
-				if ($entity == 'exam')
-					$images = $this->model->findOrFail($item)->imageExamEmployees;
-				
-				if ($entity == 'family_responsability')
-					$images = $this->model->findOrFail($item)->imageFamilyResponsabilityEmployees;
-				
+				$images = $model->findOrFail($item)->imagesable;
 				if (!$images->isEmpty())
 				{
 					foreach ($images as $image)
 					{
-						if (is_file(public_path() . $image->path))
-							unlink(public_path() . $image->path);
+						if (Storage::disk('s3')->exists($image->path))
+						{
+							Storage::disk('s3')->delete($image->path);
+						}
 					}
 				}
 			}
+			
+			return true;
 		}
 	}
 	

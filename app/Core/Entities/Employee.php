@@ -29,7 +29,7 @@ class Employee extends Eloquent
 	 */
 	public function address()
 	{
-	    return $this->morphOne(Address::class, 'addressable');
+		return $this->morphOne(Address::class, 'addressable');
 	}
 	
 	/**
@@ -126,91 +126,11 @@ class Employee extends Eloquent
 	}
 	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
-	public function imageIdentityCardEmployees()
+	public function imagesable()
 	{
-		return $this->hasMany(ImageIdentityCardEmployee::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function imageCriminalRecordEmployees()
-	{
-		return $this->hasMany(ImageCriminalRecordEmployee::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function imageHealthCertificateEmployees()
-	{
-		return $this->hasMany(ImageHealthCertificateEmployee::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function imagePensionCertificateEmployees()
-	{
-		return $this->hasMany(ImagePensionCertificateEmployee::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-	 */
-	public function imageCertificationEmployees()
-	{
-		return $this->hasManyThrough(ImageCertificationEmployee::class, Certification::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-	 */
-	public function imageDisabilityEmployees()
-	{
-		return $this->hasManyThrough(ImageDisabilityEmployee::class, Disability::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-	 */
-	public function imageDiseaseEmployees()
-	{
-		return $this->hasManyThrough(ImageDiseaseEmployee::class, Disease::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-	 */
-	public function imageExamEmployees()
-	{
-		return $this->hasManyThrough(ImageExamEmployee::class, Exam::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-	 */
-	public function imageFamilyResponsabilityEmployees()
-	{
-		return $this->hasManyThrough(ImageFamilyResponsabilityEmployee::class, FamilyResponsability::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-	 */
-	public function imageProfessionalLicenses()
-	{
-		return $this->hasManyThrough(ImageProfessionalLicenseEmployee::class, ProfessionalLicense::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-	 */
-	public function imageSpecialityEmployees()
-	{
-		return $this->hasManyThrough(ImageSpecialityEmployee::class, Speciality::class);
+		return $this->morphMany(Image::class, 'imagesable');
 	}
 	
 	/**
@@ -250,7 +170,7 @@ class Employee extends Eloquent
 	 */
 	public function user()
 	{
-        return $this->belongsTo(User::class);
+		return $this->belongsTo(User::class);
 	}
 	
 	
@@ -317,6 +237,7 @@ class Employee extends Eloquent
 	{
 		$this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
 	}
+	
 	
 	/**
 	 * @param string $value format 12345678-9
@@ -408,4 +329,35 @@ class Employee extends Eloquent
 		return count($this->studies);
 	}
 	
+	/**
+	 * @return all images related with Identity Card
+	 */
+	public function getImagesIdentityCardAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%IdentityCard%')->get();
+	}
+	
+	/**
+	 * @return all images related with Criminal Record
+	 */
+	public function getImagesCriminalRecordAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%CriminalRecord%')->get();
+	}
+	
+	/**
+	 * @return all images related with Health Certificate
+	 */
+	public function getImagesHealthCertificateAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%HealthCertificate%')->get();
+	}
+	
+	/**
+	 * @return all images related with Pension Certificate
+	 */
+	public function getImagesPensionCertificateAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%PensionCertificate%')->get();
+	}
 }

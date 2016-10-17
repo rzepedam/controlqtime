@@ -21,22 +21,22 @@ class TypeDiseaseTableSeeder extends Seeder
 	    ]);
 	
 	    TypeDisease::create([
-		    'id'   => 1,
+		    'id'   => 2,
 		    'name' => 'Dolor de Espalda'
 	    ]);
 	
 	    TypeDisease::create([
-		    'id'   => 1,
+		    'id'   => 3,
 		    'name' => 'Estrés'
 	    ]);
 	
 	    TypeDisease::create([
-		    'id'   => 1,
+		    'id'   => 4,
 		    'name' => 'El Síndrome de la Fatiga Crónica'
 	    ]);
 	
 	    TypeDisease::create([
-		    'id'   => 1,
+		    'id'   => 5,
 		    'name' => 'Síndrome de Tunel Carpiano'
 	    ]);
 	

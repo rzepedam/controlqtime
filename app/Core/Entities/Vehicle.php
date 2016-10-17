@@ -80,27 +80,11 @@ class Vehicle extends Eloquent
 	}
 	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
-	public function imagePadrones()
+	public function imagesable()
 	{
-		return $this->hasMany(ImagePadronVehicle::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function imageObligatoryInsurances()
-	{
-		return $this->hasMany(ImageObligatoryInsuranceVehicle::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function imageCirculationPermits()
-	{
-		return $this->hasMany(ImageCirculationPermitVehicle::class);
+		return $this->morphMany(Image::class, 'imagesable');
 	}
 	
 	/**
@@ -157,4 +141,27 @@ class Vehicle extends Eloquent
 		return Carbon::parse($value)->format('d-m-Y');
 	}
 	
+	/**
+	 * @return all images related with Padron
+	 */
+	public function getImagesPadronAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%Padron%')->get();
+	}
+	
+	/**
+	 * @return all images related with ObligatoryInsurance
+	 */
+	public function getImagesObligatoryInsuranceAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%ObligatoryInsurance%')->get();
+	}
+	
+	/**
+	 * @return all images related with CirculationPermit
+	 */
+	public function getImagesCirculationPermitAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%CirculationPermit%')->get();
+	}
 }

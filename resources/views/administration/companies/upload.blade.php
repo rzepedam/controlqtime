@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Adjuntar imágenes a Empresa: <span class="text-primary">{{ $id }}</span> @stop
+@section('title_header') Adjuntar Documentos a Empresa: <span class="text-primary">{{ $id }}</span> @stop
 
 @section('css')
 
@@ -69,39 +69,49 @@
 
         $(document).ready(function() {
 
+            /*
+             * Rol
+             */
             $("#rol").fileinput({
                 initialPreview: [
-                    @foreach($company->imageRolCompanies as $image_rut)
+                    @foreach($company->images_rol as $image_rut)
                         "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_rut->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
-                    @foreach($company->imageRolCompanies as $image_rut)
-                        { caption: "{{ $image_rut->orig_name }}", size: "{{ $image_rut->size }}", url: "{{ route('CompanyDeleteFiles') }}", key: "{{ $image_rut->id }}", extra: { path: "{{ $image_rut->path }}", id: "{{ $id }}", type: "RolCompany" } },
+                    @foreach($company->images_rol as $image_rut)
+                        { caption: "{{ $image_rut->orig_name }}", size: "{{ $image_rut->size }}", url: "{{ route('CompanyDeleteFiles') }}", key: "{{ $image_rut->id }}", extra: { path: "{{ $image_rut->path }}", id: "{{ $id }}", type: "Company" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('CompanyAddImages') }}",
                 uploadExtraData:  {
                     company_id: "{{ $id }}",
-                    type: "RolCompany"
+                    repo_id: '',
+                    type: "Company",
+                    subClass: "Rol/"
                 }
             });
 
+            /*
+             * Patent
+             */
             $("#patent").fileinput({
                 initialPreview: [
-                    @foreach($company->imagePatentCompanies as $image_patent)
+                    @foreach($company->images_patent as $image_patent)
                         "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_patent->path) }}' />",
                     @endforeach
                 ],
                 initialPreviewConfig: [
-                    @foreach($company->imagePatentCompanies as $image_patent)
-                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_patent->size }}", url: "{{ route('CompanyDeleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "PatentCompany" } },
+                    @foreach($company->images_patent as $image_patent)
+                        { caption: "{{ $image_patent->orig_name }}", size: "{{ $image_patent->size }}", url: "{{ route('CompanyDeleteFiles') }}", key: "{{ $image_patent->id }}", extra: { path: "{{ $image_patent->path }}", id: "{{ $id }}", type: "Company" } },
                     @endforeach
                 ],
                 uploadUrl: "{{ route('CompanyAddImages') }}",
                 uploadExtraData:  {
                     company_id: "{{ $id }}",
-                    type: "PatentCompany"
+                    repo_id: '',
+                    type: "Company",
+                    subClass: "Patent/"
                 }
             });
 

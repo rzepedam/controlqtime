@@ -20,6 +20,15 @@ class Certification extends Eloquent
     protected $dates = [
         'emission_certification', 'expired_certification'
     ];
+	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 */
+	public function imagesable()
+	{
+	    return $this->morphMany(Image::class, 'imagesable');
+	}
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -35,14 +44,6 @@ class Certification extends Eloquent
     public function institution()
     {
         return $this->belongsTo(Institution::class, 'institution_certification_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function imageCertificationEmployees()
-    {
-        return $this->hasMany(ImageCertificationEmployee::class);
     }
 
     /**

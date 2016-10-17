@@ -19,7 +19,7 @@
                                     <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
                                         <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_identity_card->path) }}" data-plugin="magnificPopup"></a>
                                         {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                        <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_identity_card->path }}" data-name="{{ $image_identity_card->orig_name }}"></a>
+                                            <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_identity_card->path }}" data-name="{{ $image_identity_card->orig_name }}"></a>
                                         {{ Form::close() }}
                                     </figcaption>
                                 </figure>

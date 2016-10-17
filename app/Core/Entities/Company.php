@@ -26,32 +26,25 @@ class Company extends Eloquent
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphOne
 	 */
+	public function imagesable()
+	{
+		return $this->morphMany(Image::class, 'imagesable');
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+	 */
 	public function address()
 	{
         return $this->morphOne(Address::class, 'addressable');
 	}
+	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function legalRepresentative()
     {
         return $this->hasOne(LegalRepresentative::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function imageRolCompanies()
-    {
-        return $this->hasMany(ImageRolCompany::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function imagePatentCompanies()
-    {
-        return $this->hasMany(ImagePatentCompany::class);
     }
 
     /**
@@ -119,5 +112,20 @@ class Company extends Eloquent
     {
         return FormatField::rut($value);
     }
-
+	
+	/**
+	 * @return all images related with Rol
+	 */
+	public function getImagesRolAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%Rol%')->get();
+	}
+	
+	/**
+	 * @return all images related with Patent
+	 */
+	public function getImagesPatentAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%Patent%')->get();
+	}
 }

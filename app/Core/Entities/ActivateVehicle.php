@@ -30,17 +30,15 @@ class ActivateVehicle extends Eloquent implements ActivateVehicleInterface
 	 */
 	public function checkStateVehicle($id)
 	{
-		$vehicle = $this->vehicle->find($id, [
-			'imagePadrones', 'imageObligatoryInsurances', 'imageCirculationPermits'
-		]);
+		$vehicle = $this->vehicle->find($id);
 		
-		if ($vehicle->imagePadrones->count() == 0)
+		if ($vehicle->images_padron->isEmpty())
 			return $this->saveStateDisableVehicle($vehicle);
 		
-		if ($vehicle->imageObligatoryInsurances->count() == 0)
+		if ($vehicle->images_obligatory_insurance->isEmpty())
 			return $this->saveStateDisableVehicle($vehicle);
 		
-		if ($vehicle->imageCirculationPermits->count() == 0)
+		if ($vehicle->images_circulation_permit->isEmpty())
 			return $this->saveStateDisableVehicle($vehicle);
 		
 		return $this->saveStateEnableVehicle($vehicle);

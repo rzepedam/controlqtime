@@ -21,6 +21,15 @@ class Speciality extends Eloquent
 		'emission_speciality', 'expired_speciality'
 	];
 	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 */
+	public function imagesable()
+	{
+		return $this->morphMany(Image::class, 'imagesable');
+	}
+	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
@@ -37,13 +46,6 @@ class Speciality extends Eloquent
 		return $this->belongsTo(Institution::class, 'institution_speciality_id');
 	}
 	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function imageSpecialityEmployees()
-	{
-		return $this->hasMany(ImageSpecialityEmployee::class);
-	}
 	
 	/**
 	 * @param string $value (01-01-2010)

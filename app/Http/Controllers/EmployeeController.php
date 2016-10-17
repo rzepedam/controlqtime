@@ -4,6 +4,7 @@ namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Factory\ImageFactory;
 use Illuminate\Support\Facades\Session;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
@@ -21,7 +22,6 @@ use Controlqtime\Core\Contracts\DiseaseRepoInterface;
 use Controlqtime\Core\Contracts\PensionRepoInterface;
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Controlqtime\Core\Contracts\ForecastRepoInterface;
-use Controlqtime\Core\Contracts\ImageFactoryInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\TypeExamRepoInterface;
 use Controlqtime\Core\Contracts\DisabilityRepoInterface;
@@ -123,11 +123,6 @@ class EmployeeController extends Controller
 	 * @var GenderRepoInterface
 	 */
 	protected $gender;
-	
-	/**
-	 * @var ImageFactoryInterface
-	 */
-	protected $image;
 	
 	/**
 	 * @var InstitutionRepoInterface
@@ -237,7 +232,6 @@ class EmployeeController extends Controller
 	 * @param ExamRepoInterface $exam
 	 * @param FamilyResponsabilityRepoInterface $family_responsability
 	 * @param ContactEmployeeRepoInterface $contact_employee
-	 * @param ImageFactoryInterface $image
 	 * @param MaritalStatusRepoInterface $maritalStatus
 	 * @param ForecastRepoInterface $forecast
 	 * @param PensionRepoInterface $pension
@@ -252,8 +246,7 @@ class EmployeeController extends Controller
 		TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam,
 		FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense,
 		DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam,
-		FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee,
-		ImageFactoryInterface $image, MaritalStatusRepoInterface $maritalStatus, ForecastRepoInterface $forecast,
+		FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee, MaritalStatusRepoInterface $maritalStatus, ForecastRepoInterface $forecast,
 		PensionRepoInterface $pension, ActivateEmployeeInterface $activateEmployee, UserRepoInterface $user, AddressRepoInterface $address, DetailAddressLegalEmployeeRepoInterface $detail_address)
 	{
 		$this->activateEmployee          = $activateEmployee;
@@ -272,7 +265,6 @@ class EmployeeController extends Controller
 		$this->family_responsability     = $family_responsability;
 		$this->forecast                  = $forecast;
 		$this->gender                    = $gender;
-		$this->image                     = $image;
 		$this->institution               = $institution;
 		$this->maritalStatus             = $maritalStatus;
 		$this->pension                   = $pension;
@@ -519,38 +511,38 @@ class EmployeeController extends Controller
 			$address  = $this->address->update($request->session()->get('step1_update'), $employee->address->id);
 			$this->detail_address->update($request->session()->get('step1_update'), $address->detailAddressLegalEmployee->id);
 			$this->user->update(['email' => $request->session()->get('step1_update.email_employee')], $employee->user_id);
-			$this->contact_employee->destroyArrayId($request->session()->get('id_delete_contact_update'));
+			$this->contact_employee->destroyArrayId($request->session()->get('id_delete_contact_update'), '');
 			$this->contact_employee->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
-			$this->family_relationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'));
+			$this->family_relationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'), '');
 			$this->family_relationship->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
 			
 			// Update Step2 data
-			$this->study->destroyArrayId($request->session()->get('id_delete_study_update'));
+			$this->study->destroyArrayId($request->session()->get('id_delete_study_update'), '');
 			$this->study->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
-			$this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'certification');
-			$this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'));
+			$this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'Certification');
+			$this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'), 'Certification');
 			$this->certification->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
-			$this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'speciality');
-			$this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'));
+			$this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'Speciality');
+			$this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'), 'Speciality');
 			$this->speciality->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
-			$this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'professional_license');
-			$this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'));
+			$this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
+			$this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
 			$this->professionalLicense->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
 			
 			// Update Step3 data
-			$this->disability->destroyImages($request->get('id_delete_disability'), 'disability');
-			$this->disability->destroyArrayId($request->get('id_delete_disability'));
+			$this->disability->destroyImages($request->get('id_delete_disability'), 'Disability');
+			$this->disability->destroyArrayId($request->get('id_delete_disability'), 'Disability');
 			$this->disability->createOrUpdateWithArray($request->all(), $employee);
-			$this->disease->destroyImages($request->get('id_delete_disease'), 'disease');
-			$this->disease->destroyArrayId($request->get('id_delete_disease'));
+			$this->disease->destroyImages($request->get('id_delete_disease'), 'Disease');
+			$this->disease->destroyArrayId($request->get('id_delete_disease'), 'Disease');
 			$this->disease->createOrUpdateWithArray($request->all(), $employee);
-			$this->exam->destroyImages($request->get('id_delete_exam'), 'exam');
-			$this->exam->destroyArrayId($request->get('id_delete_exam'));
+			$this->exam->destroyImages($request->get('id_delete_exam'), 'Exam');
+			$this->exam->destroyArrayId($request->get('id_delete_exam'), 'Exam');
 			$this->exam->createOrUpdateWithArray($request->all(), $employee);
-			$this->family_responsability->destroyImages($request->get('id_delete_family_responsability'), 'family_responsability');
-			$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'));
+			$this->family_responsability->destroyImages($request->get('id_delete_family_responsability'), 'FamilyResponsability');
+			$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'), 'FamilyResponsability');
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
-			$this->activateEmployee->checkStateUpdateEmployee($id);
+			// $this->activateEmployee->checkStateUpdateEmployee($id);
 			
 			DB::commit();
 		} catch (Exception $e)
@@ -600,11 +592,8 @@ class EmployeeController extends Controller
 	public function getImages($id)
 	{
 		$employee = $this->employee->find($id, [
-			'imageIdentityCardEmployees', 'imageCriminalRecordEmployees', 'imageHealthCertificateEmployees',
-			'imagePensionCertificateEmployees', 'certifications.imageCertificationEmployees',
-			'specialities.imageSpecialityEmployees', 'professionalLicenses.imageProfessionalLicenseEmployees',
-			'disabilities.imageDisabilityEmployees', 'diseases.imageDiseaseEmployees',
-			'exams.imageExamEmployees', 'familyResponsabilities.imageFamilyResponsabilityEmployees'
+			'certifications.imagesable', 'specialities.imagesable', 'professionalLicenses.imagesable',
+		    'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable'
 		]);
 		
 		return view('human-resources.employees.upload', compact('id', 'employee'));
@@ -617,7 +606,7 @@ class EmployeeController extends Controller
 	 */
 	public function addImages(Request $request)
 	{
-		$save = $this->image->build($request->get('type'), $request->get('employee_id'), $request->get('repo_id'), $request->file('file_data'))->addImages();
+		$save = new ImageFactory($request->get('employee_id'), 'employee/', $request->get('repo_id'), $request->get('type'), $request->file('file_data'), null, $request->get('subClass'));
 		
 		if ($save)
 		{
@@ -640,7 +629,7 @@ class EmployeeController extends Controller
 	 */
 	public function deleteFiles(Request $request)
 	{
-		$destroy = $this->image->build($request->get('type'), $request->get('key'), null, null, $request->get('path'))->destroyImage();
+		$destroy = new ImageFactory($request->get('key'), 'employee/', null, $request->get('type'), null, $request->get('path'));
 		
 		if ($destroy)
 		{

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 	    $this->call(RelationshipTableSeeder::class);
 	    $this->call(TypeCertificationTableSeeder::class);
 	    $this->call(TypeDisabilityTableSeeder::class);
+	    $this->call(TypeDiseaseTableSeeder::class);
 	    $this->call(TypeExamTableSeeder::class);
 	    $this->call(TypeInstitutionTableSeeder::class);
 	    $this->call(InstitutionTableSeeder::class);
