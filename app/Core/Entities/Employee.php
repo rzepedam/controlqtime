@@ -3,6 +3,8 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Controlqtime\Core\Api\Entities\AccessControlApi;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 use Illuminate\Notifications\Notifiable;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\Model as Eloquent;
@@ -26,6 +28,14 @@ class Employee extends Eloquent
 		'birthday'
 	];
 	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function accessControls()
+	{
+	    return $this->hasMany(AccessControlApi::class);
+	}
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -57,6 +67,14 @@ class Employee extends Eloquent
 	public function contract()
 	{
 		return $this->hasOne(Contract::class);
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function dailyAssistances()
+	{
+	    return $this->hasMany(DailyAssistanceApi::class);
 	}
 	
 	/**

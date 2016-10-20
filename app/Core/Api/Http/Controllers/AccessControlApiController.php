@@ -4,32 +4,24 @@ namespace Controlqtime\Core\Api\Http\Controllers;
 
 use Exception;
 use Controlqtime\Http\Controllers\Controller;
-use Controlqtime\Core\Api\Entities\AccessControlApi;
-use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
+use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Controlqtime\Core\Api\Http\Request\AccessControlApiRequest;
 
 class AccessControlApiController extends Controller
 {
 	/**
-	 * @var AccessControlApi
+	 * @var EmployeeRepoInterface
 	 */
-	protected $access_control;
-	
-	/**
-	 * @var DailyAssistanceApi
-	 */
-	protected $daily_assistance;
+	protected $employee;
 	
 	/**
 	 * AccessControlApiController constructor.
 	 *
-	 * @param AccessControlApi $access_control
-	 * @param DailyAssistanceApi $daily_assistance
+	 * @param EmployeeRepoInterface $employee
 	 */
-	public function __construct(AccessControlApi $access_control, DailyAssistanceApi $daily_assistance)
+	public function __construct(EmployeeRepoInterface $employee)
 	{
-		$this->access_control   = $access_control;
-		$this->daily_assistance = $daily_assistance;
+		$this->employee = $employee;
 	}
 	
 	/**
@@ -42,14 +34,16 @@ class AccessControlApiController extends Controller
 	{
 		try
 		{
+			$employee = $this->employee->whereFirst('rut', $request->get('rut'));
+			
 			switch ($request->get('num_device'))
 			{
 				case 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA':
-					$this->access_control->create($request->all());
+					$employee->accessControls()->create($request->all());
 					break;
 				
 				case 'BC702909-E80E-4695-9790-E1DBCDF6F4EE':
-					$this->daily_assistance->create($request->all());
+					$employee->dailyAssistances()->create($request->all());
 					break;
 			}
 			
