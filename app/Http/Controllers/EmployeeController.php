@@ -586,7 +586,8 @@ class EmployeeController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->employee->delete($id);
+		$employee = $this->employee->find($id);
+		$this->user->delete($employee->user_id);
 		
 		return redirect()->route('employees.index');
 	}
