@@ -255,6 +255,38 @@ class Employee extends Eloquent
 	/**
 	 * @return int
 	 */
+	public function getNumImagesIdentityCardAttribute()
+	{
+	    return $this->imagesable()->where('path', 'like', '%IdentityCard%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesCriminalRecordAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%CriminalRecord%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesHealthCertificateAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%HealthCertificate%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesPensionCertificateAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%PensionCertificate%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
 	public function getNumCertificationsAttribute()
 	{
 		return count($this->certifications);

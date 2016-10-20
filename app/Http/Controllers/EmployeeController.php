@@ -570,9 +570,10 @@ class EmployeeController extends Controller
 	public function show($id)
 	{
 		$employee = $this->employee->find($id, [
-			'address.commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
-			'address.detailAddressLegalEmployee', 'studies.degree', 'studies.institution', 'certifications',
-			'specialities', 'professionalLicenses', 'pension', 'forecast'
+			'pension', 'forecast', 'address.commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
+			'address.detailAddressLegalEmployee', 'studies.degree', 'studies.institution', 'certifications.imagesable',
+			'specialities.imagesable', 'professionalLicenses.imagesable', 'disabilities.imagesable',
+			'diseases.imagesable', 'exams.imagesable', 'familyResponsabilities.imagesable'
 		]);
 		
 		return view('human-resources.employees.show', compact('employee'));

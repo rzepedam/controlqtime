@@ -9,10 +9,10 @@
                         </div>
                     </div>
                 </div>
-                @if (count($employee->imageIdentityCardEmployees) > 0)
-                    @foreach($employee->imageIdentityCardEmployees as $image_identity_card)
+                @if ($employee->num_images_identity_card > 0)
+                    @foreach($employee->imagesIdentityCard as $image_identity_card)
 
-                        <div class="col-md-4">
+                        <div class="col-sm-4 col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
                                     <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_identity_card->path) }}">
@@ -51,10 +51,10 @@
                         </div>
                     </div>
                 </div>
-                @if (count($employee->imageCriminalRecordEmployees) > 0)
-                    @foreach($employee->imageCriminalRecordEmployees as $image_criminal_record)
+                @if ($employee->num_images_criminal_record > 0)
+                    @foreach($employee->imagesCriminalRecord as $image_criminal_record)
 
-                        <div class="col-md-4">
+                        <div class="col-sm-4 col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
                                     <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_criminal_record->path) }}">
@@ -93,10 +93,10 @@
                         </div>
                     </div>
                 </div>
-                @if (count($employee->imageHealthCertificateEmployees) > 0)
-                    @foreach($employee->imageHealthCertificateEmployees as $image_health_certificate)
+                @if ($employee->num_images_health_certificate > 0)
+                    @foreach($employee->imagesHealthCertificate as $image_health_certificate)
 
-                        <div class="col-md-4">
+                        <div class="col-sm-4 col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
                                     <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_health_certificate->path) }}">
@@ -135,10 +135,10 @@
                         </div>
                     </div>
                 </div>
-                @if (count($employee->imagePensionCertificateEmployees) > 0)
-                    @foreach($employee->imagePensionCertificateEmployees as $image_pension_certificate)
+                @if ($employee->num_images_pension_certificate > 0)
+                    @foreach($employee->imagesPensionCertificate as $image_pension_certificate)
 
-                        <div class="col-md-4">
+                        <div class="col-sm-4 col-md-4">
                             <div class="widget widget-shadow">
                                 <figure class="widget-header overlay-hover overlay">
                                     <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_pension_certificate->path) }}">
@@ -178,34 +178,36 @@
                             </div>
                         </div>
                     </div>
-                    @if($employee->imageCertificationEmployees->count() > 0)
-                        @foreach($employee->imageCertificationEmployees as $image_certification)
+                    @foreach($employee->certifications as $certification)
+                        @if ($certification->imagesable->count() > 0)
+                            @foreach($certification->imagesable as $image_certification)
 
-                            <div class="col-md-4">
-                                <div class="widget widget-shadow">
-                                    <figure class="widget-header overlay-hover overlay">
-                                        <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_certification->path) }}">
-                                        <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                            <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_certification->path) }}" data-plugin="magnificPopup"></a>
-                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_certification->path }}" data-name="{{ $image_certification->orig_name }}"></a>
-                                            {{ Form::close() }}
-                                        </figcaption>
-                                    </figure>
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="widget widget-shadow">
+                                        <figure class="widget-header overlay-hover overlay">
+                                            <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_certification->path) }}">
+                                            <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                                <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_certification->path) }}" data-plugin="magnificPopup"></a>
+                                                {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                    <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_certification->path }}" data-name="{{ $image_certification->orig_name }}"></a>
+                                                {{ Form::close() }}
+                                            </figcaption>
+                                        </figure>
+                                    </div>
                                 </div>
-                            </div>
 
-                        @endforeach
-                    @else
-                        <br/>
-                        <h3 class="text-center text-info">No existen Imágenes de Certificaciones asociadas al Trabajador actual
+                            @endforeach
+                        @else
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                            </small>
-                        </h3>
-                        <br/>
-                        <br/>
-                    @endif
+                            <h3 class="text-center text-info">No existen Imágenes de Certificaciones asociadas al Trabajador actual
+                                <br/>
+                                <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                                </small>
+                            </h3>
+                            <br/>
+                            <br/>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -225,34 +227,36 @@
                             </div>
                         </div>
                     </div>
-                    @if($employee->imageSpecialityEmployees->count() > 0)
-                        @foreach($employee->imageSpecialityEmployees as $image_speciality)
+                    @foreach($employee->specialities as $speciality)
+                        @if ($speciality->imagesable->count() > 0)
+                            @foreach($speciality->imagesable as $image_speciality)
 
-                            <div class="col-md-4">
-                                <div class="widget widget-shadow">
-                                    <figure class="widget-header overlay-hover overlay">
-                                        <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_speciality->path) }}">
-                                        <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                            <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_speciality->path) }}" data-plugin="magnificPopup"></a>
-                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_speciality->path }}" data-name="{{ $image_speciality->orig_name }}"></a>
-                                            {{ Form::close() }}
-                                        </figcaption>
-                                    </figure>
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="widget widget-shadow">
+                                        <figure class="widget-header overlay-hover overlay">
+                                            <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_speciality->path) }}">
+                                            <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                                <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_speciality->path) }}" data-plugin="magnificPopup"></a>
+                                                {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                    <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_speciality->path }}" data-name="{{ $image_speciality->orig_name }}"></a>
+                                                {{ Form::close() }}
+                                            </figcaption>
+                                        </figure>
+                                    </div>
                                 </div>
-                            </div>
 
-                        @endforeach
-                    @else
-                        <br/>
-                        <h3 class="text-center text-success">No existen Imágenes de Especialidades asociadas al Trabajador actual
+                            @endforeach
+                        @else
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                            </small>
-                        </h3>
-                        <br/>
-                        <br/>
-                    @endif
+                            <h3 class="text-center text-success">No existen Imágenes de Especialidades asociadas al Trabajador actual
+                                <br/>
+                                <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                                </small>
+                            </h3>
+                            <br/>
+                            <br/>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -271,34 +275,36 @@
                             </div>
                         </div>
                     </div>
-                    @if ($employee->imageProfessionalLicenses->count() > 0)
-                        @foreach($employee->imageProfessionalLicenses as $image_professional_license)
+                    @foreach($employee->professionalLicenses as $professional_license)
+                        @if ($professional_license->imagesable->count() > 0)
+                            @foreach($professional_license->imagesable as $image_professional_license)
 
-                            <div class="col-md-4">
-                                <div class="widget widget-shadow">
-                                    <figure class="widget-header overlay-hover overlay">
-                                        <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_professional_license->path) }}">
-                                        <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                            <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_professional_license->path) }}" data-plugin="magnificPopup"></a>
-                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_professional_license->path }}" data-name="{{ $image_professional_license->orig_name }}"></a>
-                                            {{ Form::close() }}
-                                        </figcaption>
-                                    </figure>
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="widget widget-shadow">
+                                        <figure class="widget-header overlay-hover overlay">
+                                            <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_professional_license->path) }}">
+                                            <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                                <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_professional_license->path) }}" data-plugin="magnificPopup"></a>
+                                                {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                    <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_professional_license->path }}" data-name="{{ $image_professional_license->orig_name }}"></a>
+                                                {{ Form::close() }}
+                                            </figcaption>
+                                        </figure>
+                                    </div>
                                 </div>
-                            </div>
 
-                        @endforeach
-                    @else
-                        <br/>
-                        <h3 class="text-center text-warning">No existen Imágenes de Licencia Profesional asociadas al Trabajador actual
+                            @endforeach
+                        @else
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                            </small>
-                        </h3>
-                        <br/>
-                        <br/>
-                    @endif
+                            <h3 class="text-center text-warning">No existen Imágenes de Licencia Profesional asociadas al Trabajador actual
+                                <br/>
+                                <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                                </small>
+                            </h3>
+                            <br/>
+                            <br/>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -317,34 +323,36 @@
                             </div>
                         </div>
                     </div>
-                    @if ($employee->imageDisabilityEmployees->count() > 0)
-                        @foreach($employee->imageDisabilityEmployees as $image_disability)
+                    @foreach($employee->disabilities as $disability)
+                        @if ($disability->imagesable->count() > 0)
+                            @foreach($disability->imagesable as $image_disability)
 
-                            <div class="col-md-4">
-                                <div class="widget widget-shadow">
-                                    <figure class="widget-header overlay-hover overlay">
-                                        <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_disability->path) }}">
-                                        <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                            <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_disability->path) }}" data-plugin="magnificPopup"></a>
-                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_disability->path }}" data-name="{{ $image_disability->orig_name }}"></a>
-                                            {{ Form::close() }}
-                                        </figcaption>
-                                    </figure>
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="widget widget-shadow">
+                                        <figure class="widget-header overlay-hover overlay">
+                                            <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_disability->path) }}">
+                                            <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                                <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_disability->path) }}" data-plugin="magnificPopup"></a>
+                                                {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                                    <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_disability->path }}" data-name="{{ $image_disability->orig_name }}"></a>
+                                                {{ Form::close() }}
+                                            </figcaption>
+                                        </figure>
+                                    </div>
                                 </div>
-                            </div>
 
-                        @endforeach
-                    @else
-                        <br/>
-                        <h3 class="text-center text-danger">No existen Imágenes de Discapacidades asociadas al Trabajador actual
+                            @endforeach
+                        @else
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                            </small>
-                        </h3>
-                        <br/>
-                        <br/>
-                    @endif
+                            <h3 class="text-center text-danger">No existen Imágenes de Discapacidades asociadas al Trabajador actual
+                                <br/>
+                                <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                                </small>
+                            </h3>
+                            <br/>
+                            <br/>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -363,34 +371,36 @@
                             </div>
                         </div>
                     </div>
-                    @if ($employee->imageDiseaseEmployees->count() > 0)
-                        @foreach($employee->imageDiseaseEmployees as $image_disease)
+                    @foreach($employee->diseases as $disease)
+                        @if ($disease->imagesable->count() > 0)
+                            @foreach($disease->imagesable as $image_disease)
 
-                            <div class="col-md-4">
-                                <div class="widget widget-shadow">
-                                    <figure class="widget-header overlay-hover overlay">
-                                        <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_disease->path) }}">
-                                        <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                            <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_disease->path) }}" data-plugin="magnificPopup"></a>
-                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="widget widget-shadow">
+                                        <figure class="widget-header overlay-hover overlay">
+                                            <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_disease->path) }}">
+                                            <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                                <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_disease->path) }}" data-plugin="magnificPopup"></a>
+                                                {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_disease->path }}" data-name="{{ $image_disease->orig_name }}"></a>
-                                            {{ Form::close() }}
-                                        </figcaption>
-                                    </figure>
+                                                {{ Form::close() }}
+                                            </figcaption>
+                                        </figure>
+                                    </div>
                                 </div>
-                            </div>
 
-                        @endforeach
-                    @else
-                        <br/>
-                        <h3 class="text-center text-info">No existen Imágenes de Enfermedades asociadas al Trabajador actual
+                            @endforeach
+                        @else
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                            </small>
-                        </h3>
-                        <br/>
-                        <br/>
-                    @endif
+                            <h3 class="text-center text-info">No existen Imágenes de Enfermedades asociadas al Trabajador actual
+                                <br/>
+                                <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                                </small>
+                            </h3>
+                            <br/>
+                            <br/>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -409,34 +419,36 @@
                             </div>
                         </div>
                     </div>
-                    @if ($employee->imageExamEmployees->count() > 0)
-                        @foreach($employee->imageExamEmployees as $image_exam)
+                    @foreach($employee->exams as $exam)
+                        @if ($exam->imagesable->count() > 0)
+                            @foreach($exam->imagesable as $image_exam)
 
-                            <div class="col-md-4">
-                                <div class="widget widget-shadow">
-                                    <figure class="widget-header overlay-hover overlay">
-                                        <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_exam->path) }}">
-                                        <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                            <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_exam->path) }}" data-plugin="magnificPopup"></a>
-                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="widget widget-shadow">
+                                        <figure class="widget-header overlay-hover overlay">
+                                            <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_exam->path) }}">
+                                            <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                                <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_exam->path) }}" data-plugin="magnificPopup"></a>
+                                                {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_exam->path }}" data-name="{{ $image_exam->orig_name }}"></a>
-                                            {{ Form::close() }}
-                                        </figcaption>
-                                    </figure>
+                                                {{ Form::close() }}
+                                            </figcaption>
+                                        </figure>
+                                    </div>
                                 </div>
-                            </div>
 
-                        @endforeach
-                    @else
-                        <br/>
-                        <h3 class="text-center text-success">No existen Imágenes de Examen Preocupacional asociadas al Trabajador actual
+                            @endforeach
+                        @else
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                            </small>
-                        </h3>
-                        <br/>
-                        <br/>
-                    @endif
+                            <h3 class="text-center text-success">No existen Imágenes de Examen Preocupacional asociadas al Trabajador actual
+                                <br/>
+                                <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                                </small>
+                            </h3>
+                            <br/>
+                            <br/>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -455,34 +467,36 @@
                             </div>
                         </div>
                     </div>
-                    @if ($employee->imageFamilyResponsabilityEmployees->count() > 0)
-                        @foreach($employee->imageFamilyResponsabilityEmployees as $image_family_responsability)
+                    @foreach($employee->familyResponsabilities as $family_responsability)
+                        @if ($family_responsability->imagesable->count() > 0)
+                            @foreach($family_responsability->imagesable as $image_family_responsability)
 
-                            <div class="col-md-4">
-                                <div class="widget widget-shadow">
-                                    <figure class="widget-header overlay-hover overlay">
-                                        <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_family_responsability->path) }}">
-                                        <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                            <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_family_responsability->path) }}" data-plugin="magnificPopup"></a>
-                                            {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="widget widget-shadow">
+                                        <figure class="widget-header overlay-hover overlay">
+                                            <img class="overlay-figure overlay-scale" src="{{ Storage::disk('s3')->url($image_family_responsability->path) }}">
+                                            <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                                <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_family_responsability->path) }}" data-plugin="magnificPopup"></a>
+                                                {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
                                                 <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_family_responsability->path }}" data-name="{{ $image_family_responsability->orig_name }}"></a>
-                                            {{ Form::close() }}
-                                        </figcaption>
-                                    </figure>
+                                                {{ Form::close() }}
+                                            </figcaption>
+                                        </figure>
+                                    </div>
                                 </div>
-                            </div>
 
-                        @endforeach
-                    @else
-                        <br/>
-                        <h3 class="text-center text-warning">No existen Imágenes de Carga Familiar asociadas al Trabajador actual
+                            @endforeach
+                        @else
                             <br/>
-                            <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                            </small>
-                        </h3>
-                        <br/>
-                        <br/>
-                    @endif
+                            <h3 class="text-center text-warning">No existen Imágenes de Carga Familiar asociadas al Trabajador actual
+                                <br/>
+                                <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                                </small>
+                            </h3>
+                            <br/>
+                            <br/>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
