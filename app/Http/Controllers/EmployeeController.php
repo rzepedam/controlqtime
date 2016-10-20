@@ -4,8 +4,9 @@ namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Controlqtime\Core\Factory\ImageFactory;
 use Illuminate\Support\Facades\Session;
+use Controlqtime\Events\UserMessageSend;
+use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
@@ -366,9 +367,12 @@ class EmployeeController extends Controller
 			$this->disease->createOrUpdateWithArray($request->all(), $employee);
 			$this->exam->createOrUpdateWithArray($request->all(), $employee);
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
+			
+			event(new UserMessageSend($user));
 			$this->destroySessionStoreEmployee();
 			
 			DB::commit();
+			
 		} catch (Exception $e)
 		{
 			DB::rollBack();
@@ -508,6 +512,7 @@ class EmployeeController extends Controller
 		{
 			// Update Step1 data
 			$employee = $this->employee->update($request->session()->get('step1_update'), $id);
+			$user     = $this->user->update($request->session()->get('step1_update'), $employee->user_id);
 			$address  = $this->address->update($request->session()->get('step1_update'), $employee->address->id);
 			$this->detail_address->update($request->session()->get('step1_update'), $address->detailAddressLegalEmployee->id);
 			$this->user->update(['email' => $request->session()->get('step1_update.email_employee')], $employee->user_id);
@@ -542,8 +547,9 @@ class EmployeeController extends Controller
 			$this->family_responsability->destroyImages($request->get('id_delete_family_responsability'), 'FamilyResponsability');
 			$this->family_responsability->destroyArrayId($request->get('id_delete_family_responsability'), 'FamilyResponsability');
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
-			// $this->activateEmployee->checkStateUpdateEmployee($id);
+			$this->activateEmployee->checkStateUpdateEmployee($id);
 			
+			event(new UserMessageSend($user));
 			DB::commit();
 		} catch (Exception $e)
 		{
@@ -593,7 +599,7 @@ class EmployeeController extends Controller
 	{
 		$employee = $this->employee->find($id, [
 			'certifications.imagesable', 'specialities.imagesable', 'professionalLicenses.imagesable',
-		    'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable'
+			'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable'
 		]);
 		
 		return view('human-resources.employees.upload', compact('id', 'employee'));

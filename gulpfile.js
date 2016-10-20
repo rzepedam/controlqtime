@@ -541,6 +541,8 @@ elixir(function(mix) {
     // Copy image Bootstrap-FileInput loading-sm.gif
     mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading-sm.gif', 'public/build/img');
 
+    // Copy image logo.png
+    mix.copy('resources/assets/me/img/logo.png', 'public/img');
     // Copy image remark.png
     mix.copy('resources/assets/me/img/remark.png', 'public/img');
     // Copy image sidebar dashboard-header.png

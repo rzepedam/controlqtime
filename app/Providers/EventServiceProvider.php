@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Providers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -13,9 +14,13 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Controlqtime\Events\SomeEvent' => [
-            'Controlqtime\Listeners\EventListener',
-        ],
+	    'Illuminate\Auth\Events\Login' => [
+		    'Controlqtime\Listeners\LogLastLogin',
+		    'Controlqtime\Listeners\UpdateLastLoggedAt'
+	    ],
+        'Controlqtime\Events\UserMessageSend' => [
+        	'Controlqtime\Listeners\SendEmailUser'
+        ]
     ];
 
     /**
@@ -26,7 +31,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
     }
 }

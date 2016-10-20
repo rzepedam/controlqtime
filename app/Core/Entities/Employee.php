@@ -3,11 +3,14 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Illuminate\Notifications\Notifiable;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Employee extends Eloquent
 {
+	use Notifiable;
+	
 	/**
 	 * @var array
 	 */

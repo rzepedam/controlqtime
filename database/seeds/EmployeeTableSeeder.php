@@ -43,6 +43,7 @@ class EmployeeTableSeeder extends Seeder
 		    'forecast_id'       => 7,
 		    'pension_id'        => 1,
 		    'email_employee'    => 'robertozepeda@controlqtime.cl',
+		    'url'				=> 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/06/29/163531241838.jpg',
 		    'state'             => 'disable'
 	    ]);
 	
