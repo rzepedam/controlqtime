@@ -19,6 +19,19 @@ trait WhereMethodsTrait
 	/**
 	 * @param $attribute
 	 * @param $value
+	 * @param array $with
+	 * @param array $columns
+	 *
+	 * @return mixed
+	 */
+	public function whereDate($attribute, $value, $with = ['*'], $columns = ['*'])
+	{
+		return $this->model->with($with)->whereDate($attribute, '=', $value)->get($columns);
+	}
+	
+	/**
+	 * @param $attribute
+	 * @param $value
 	 * @param $column
 	 *
 	 * @return mixed

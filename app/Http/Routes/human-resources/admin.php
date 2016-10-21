@@ -9,6 +9,18 @@ Route::get('human-resources', ['as' => 'human-resources', function ()
 // Human-Resources
 Route::group(['prefix' => 'human-resources'], function ()
 {
+	// Daily Assistance
+	Route::get('getDailyAssistances', ['as' => 'getDailyAssistances', 'uses' => 'DailyAssistanceController@getDailyAssistances']);
+	Route::resource('daily-assistances', 'DailyAssistanceController');
+	
+	// Contracts
+	Route::get('getContracts', ['as' => 'getContracts', 'uses' => 'ContractController@getContracts']);
+	Route::resource('contracts', 'ContractController');
+	Route::group(['prefix' => 'contracts'], function ()
+	{
+		Route::get('getPdf/{id}', ['as' => 'getPdf', 'uses' => 'ContractController@getPdf']);
+	});
+	
 	// Employees
 	Route::get('getEmployees', ['as' => 'getEmployees', 'uses' => 'EmployeeController@getEmployees']);
 	Route::resource('employees', 'EmployeeController');
@@ -31,21 +43,5 @@ Route::group(['prefix' => 'human-resources'], function ()
 		Route::get('/session/destroySessionUpdateEmployee', ['as' => 'destroySessionUpdateEmployee', 'uses' => 'EmployeeController@destroySessionUpdateEmployee']);
 		
 	});
-	
-	// Access Controls
-	Route::get('getAccessControls', ['as' => 'getAccessControls', 'uses' => 'AccessControlController@getAccessControls']);
-	Route::resource('access-controls', 'AccessControlController');
-	
-	// Contracts
-	Route::get('getContracts', ['as' => 'getContracts', 'uses' => 'ContractController@getContracts']);
-	Route::resource('contracts', 'ContractController');
-	Route::group(['prefix' => 'contracts'], function ()
-	{
-		Route::get('getPdf/{id}', ['as' => 'getPdf', 'uses' => 'ContractController@getPdf']);
-	});
-	
-	// Daily Assistance
-	Route::get('getDailyAssistances', ['as' => 'getDailyAssistances', 'uses' => 'DailyAssistanceController@getDailyAssistances']);
-	Route::resource('daily-assistances', 'DailyAssistanceController');
 	
 });

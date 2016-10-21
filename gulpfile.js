@@ -182,15 +182,10 @@ elixir(function(mix) {
         'me/js/base/human-resources/index.js'
     ], 'public/js/human-resources/index.js');
 
-    // Human-Resources > Access-Control > Index Custom Access-Control JS
-    mix.scripts([
-        'me/js/base/human-resources/access-controls/config_bootstrap_table.js'
-    ], 'public/js/human-resources/access-controls/index-custom-access-controls.js');
-
-    // Human-Resources > Daily-Assistance > Index Custom Daily-Assistance JS
-    mix.scripts([
-        'me/js/base/human-resources/daily-assistances/config_bootstrap_table.js'
-    ], 'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js');
+    // Human-Resources > Daily-Assistances > Index Custom Daily-Assistances CSS
+    mix.styles([
+        'me/css/human-resources/daily-assistances/work.css'
+    ], 'public/css/human-resources/daily-assistances/index-custom-daily-assistances.css');
 
     // Human-Resources > Contracts > Index Custom Contracts JS
     mix.scripts([
@@ -591,8 +586,7 @@ elixir(function(mix) {
         'public/js/administrations/companies/create-edit-custom-companies.js',
 
         'public/js/human-resources/index.js',
-        'public/js/human-resources/access-controls/index-custom-access-controls.js',
-        'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js',
+        'public/css/human-resources/daily-assistances/index-custom-daily-assistances.css',
         'public/js/human-resources/contracts/index-custom-contracts.js',
         'public/css/human-resources/employees/index-custom-employees.css',
         'public/js/human-resources/employees/index-custom-employees.js',
