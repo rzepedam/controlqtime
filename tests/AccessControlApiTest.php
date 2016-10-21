@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Controlqtime\Core\Entities\Employee;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AccessControlApiTest extends TestCase
@@ -30,15 +31,15 @@ class AccessControlApiTest extends TestCase
 	function test_create_access_control_success()
 	{
 		$data = [
-			'rut'        => '13262628-6',
-			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
-			'status'     => 1,
-			'created_at' => Carbon::now()
+			'rut'         => '17032680-6',
+			'num_device'  => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
+			'status'      => 1,
+			'created_at'  => Carbon::now()
 		];
 		
 		$this->post('/api/access-control', $data, [
-				'Authorization' => getenv('BIOMETRY_BEARER'),
-				'Accept'        => 'application/json'])
+			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Accept'        => 'application/json'])
 			->seeJson([
 				'success' => true,
 			]);
@@ -54,8 +55,8 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-				'Authorization' => getenv('BIOMETRY_BEARER'),
-				'Accept'        => 'application/json'])
+			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
 				'rut' => ['El campo <strong>Rut</strong> es obligatorio.']
@@ -66,15 +67,15 @@ class AccessControlApiTest extends TestCase
 	function test_not_create_access_control_if_num_device_not_exists()
 	{
 		$data = [
-			'rut'        => '13262628-6',
+			'rut'        => '17032680-6',
 			'num_device' => '',
 			'status'     => 1,
 			'created_at' => Carbon::now()
 		];
 		
 		$this->post('/api/access-control', $data, [
-				'Authorization' => getenv('BIOMETRY_BEARER'),
-				'Accept'        => 'application/json'])
+			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
 				'num_device' => ['El campo <strong>Nº Dispositivo</strong> es obligatorio.']
@@ -91,8 +92,8 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-				'Authorization' => getenv('BIOMETRY_BEARER'),
-				'Accept'        => 'application/json'])
+			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
 				'status' => ['El campo <strong>status</strong> es obligatorio.']
@@ -109,8 +110,8 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-				'Authorization' => getenv('BIOMETRY_BEARER'),
-				'Accept'        => 'application/json'])
+			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
 				'created_at' => ['El campo <strong>Fecha Creación</strong> es obligatorio.']
@@ -127,8 +128,8 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-				'Authorization' => getenv('BIOMETRY_BEARER'),
-				'Accept'        => 'application/json'])
+			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Accept'        => 'application/json'])
 			->assertResponseOk();
 		
 		$this->post('/api/access-control', $data, [

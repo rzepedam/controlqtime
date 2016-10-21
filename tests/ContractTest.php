@@ -10,7 +10,7 @@ class ContractTest extends TestCase
 	
     function test_url_ok()
     {
-	    $user = User::find(1)->first();
+	    $user = User::first();
 	    $this->actingAs($user)
 	        ->visit('/human-resources/contracts')
 		    ->see('Listado de Contratos')
@@ -20,7 +20,7 @@ class ContractTest extends TestCase
     
     function test_route_ok()
     {
-	    $user = User::find(1)->first();
+	    $user = User::first();
 	    $this->actingAs($user)
 		    ->visitRoute('contracts.index')
 	        ->see('Crear Nuevo Contrato Laboral')
@@ -30,7 +30,7 @@ class ContractTest extends TestCase
     function test_save_new_contract()
     {
     	// Revisar, no debiese dar Ok al final del test
-	    $user = User::find(1)->first();
+	    $user = User::first();
 	    $this->actingAs($user)
 	        ->visit('/human-resources/contracts/create')
 		    ->press('Guardar')
