@@ -6,19 +6,19 @@
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-offset-1 col-md-offset-1 col-sm-10 col-md-10">
+    <div class="col-sm-10 col-md-10">
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Trabajador</th>
-                        <th>Dispositivo</th>
+                        <th class="text-center">Dispositivo</th>
                         <th class="text-center">Hora</th>
                         <th class="text-center"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="data-access-update">
                     @foreach($accessControls as $accessControl)
                         <tr>
                             <td>
@@ -26,12 +26,18 @@
                             </td>
                             <td>
                                 {{ $accessControl->employee->full_name }}
+                                @if ( $entry->search($accessControl->created_at) )
+                                    <i class="fa fa-sign-in text-success" aria-hidden="true"></i>
+                                @endif
+                                @if ( $output->search($accessControl->created_at) )
+                                    <i class="fa fa-sign-out text-danger" aria-hidden="true"></i>
+                                @endif
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $accessControl->num_device }}
                             </td>
                             <td class="text-center">
-                                {{ Date::parse($accessControl->created_at)->format('H:i:s') }}
+                                {{ $accessControl->created_at }}
                             </td>
                             <td class="text-center">
                                 <a href="{{ route('employees.show', $accessControl->employee->id) }}" class="btn btn-squared btn-info waves-effect waves-light">

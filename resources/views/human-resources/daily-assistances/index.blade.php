@@ -7,7 +7,7 @@
 
 @stop
 
-@section('title_header') Listado Asistencia <span class="text-capitalize text-primary">{{ Date::parse(\Carbon\Carbon::now())->format('l j F') }}</span> @stop
+@section('title_header') Control Asistencia <span class="text-capitalize text-primary">{{ Date::parse(\Carbon\Carbon::now())->format('l j F') }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>
@@ -16,30 +16,28 @@
 
 @section('content')
 
-    <div class="app-work">
-        <div class="panel">
-            <div class="panel-heading">
-
-                @include('human-resources.daily-assistances.partials.heading')
-
-            </div>
+    <div class="panel">
+        <div class="panel-heading">
             <br>
-            <div class="panel-body">
+            <br>
+            @include('human-resources.daily-assistances.partials.heading')
 
-                @include('human-resources.daily-assistances.partials.access')
-
-                <br>
-                <br>
-
-                @include('human-resources.daily-assistances.partials.assistances')
-
-            </div>
         </div>
+        <br>
+        <div class="panel-body">
 
-        <div class="row">
-            <div class="col-md-12">
-                <a href="{{ route('human-resources') }}">Volver</a>
-            </div>
+            @include('human-resources.daily-assistances.partials.access')
+
+            <br>
+            <br>
+
+            @include('human-resources.daily-assistances.partials.assistances')
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ route('human-resources') }}">Volver</a>
         </div>
     </div>
 
@@ -48,5 +46,6 @@
 @section('scripts')
 
     <script src="{{ elixir('js/index-common.js') }}"></script>
+    <script src="{{ elixir('js/human-resources/daily-assistances/index-custom-daily-assistances.js') }}"></script>
 
 @stop

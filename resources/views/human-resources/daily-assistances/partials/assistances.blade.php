@@ -6,19 +6,19 @@
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-offset-1 col-md-offset-1 col-sm-10 col-md-10">
+    <div class="col-sm-10 col-md-10">
         <div class="table-responsive">
             <table class="table">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Trabajador</th>
-                    <th>Dispositivo</th>
+                    <th class="text-center">Dispositivo</th>
                     <th class="text-center">Hora</th>
                     <th class="text-center"></th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="data-daily-update">
                     @foreach($dailyAssistances as $dailyAssistance)
                         <tr>
                             <td>
@@ -27,11 +27,11 @@
                             <td>
                                 {{ $dailyAssistance->employee->full_name }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $dailyAssistance->num_device }}
                             </td>
                             <td class="text-center">
-                                {{ Date::parse($dailyAssistance->created_at)->format('H:i:s') }}
+                                {{ $dailyAssistance->created_at }}
                             </td>
                             <td class="text-center">
                                 <a href="{{ route('employees.show', $dailyAssistance->employee->id) }}" class="btn btn-squared btn-info waves-effect waves-light tooltip-info">

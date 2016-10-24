@@ -184,8 +184,18 @@ elixir(function(mix) {
 
     // Human-Resources > Daily-Assistances > Index Custom Daily-Assistances CSS
     mix.styles([
-        'me/css/human-resources/daily-assistances/work.css'
+        'me/css/human-resources/daily-assistances/index.css',
+        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
     ], 'public/css/human-resources/daily-assistances/index-custom-daily-assistances.css');
+
+    // Human-Resources > Daily-Assistances > Index Custom Daily-Assistances JS
+    mix.scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+        'components/bootstrap-datepicker.js',
+        'me/js/base/human-resources/daily-assistances/index-custom.js',
+    ], 'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js');
 
     // Human-Resources > Contracts > Index Custom Contracts JS
     mix.scripts([
@@ -587,6 +597,7 @@ elixir(function(mix) {
 
         'public/js/human-resources/index.js',
         'public/css/human-resources/daily-assistances/index-custom-daily-assistances.css',
+        'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js',
         'public/js/human-resources/contracts/index-custom-contracts.js',
         'public/css/human-resources/employees/index-custom-employees.css',
         'public/js/human-resources/employees/index-custom-employees.js',
