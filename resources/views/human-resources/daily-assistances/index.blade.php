@@ -30,6 +30,8 @@
 
             <br>
             <br>
+            <br>
+            <br>
 
             @include('human-resources.daily-assistances.partials.assistances')
 

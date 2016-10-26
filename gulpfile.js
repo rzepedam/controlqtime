@@ -184,6 +184,7 @@ elixir(function(mix) {
 
     // Human-Resources > Daily-Assistances > Index Custom Daily-Assistances CSS
     mix.styles([
+        'custom-configuration/css/bootstrap-select.css',
         'me/css/human-resources/daily-assistances/index.css',
         'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
     ], 'public/css/human-resources/daily-assistances/index-custom-daily-assistances.css');
@@ -193,6 +194,8 @@ elixir(function(mix) {
         'me/js/utilities/add_csrf_token.js',
         'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+        'bower/bootstrap-select/dist/js/bootstrap-select.js',
+        'components/bootstrap-select.js',
         'components/bootstrap-datepicker.js',
         'me/js/base/human-resources/daily-assistances/index-custom.js',
     ], 'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js');
