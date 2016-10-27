@@ -19,25 +19,15 @@
                     {{ Form::text("id_contact[]", $contact_employee->id, ["id" => "id_contact" . $i, "class" => "form-control"]) }}
                 </div>
             </div>
-            <div class="col-md-3 form-group">
+            <div class="col-sm-3 col-md-3 form-group">
                 {{ Form::label("contact_relationship_id", "Relación", ["class"=> "control-label"]) }}
                 {{ Form::select("contact_relationship_id[]", $relationships, $contact_employee->relationship->id, ["class"=> "form-control"]) }}
             </div>
-            <div class="col-md-5 form-group">
+            <div class="col-sm-6 col-md-6 form-group">
                 {{ Form::label('name_contact', 'Nombre', ['class' => 'control-label']) }}
                 {{ Form::text('name_contact[]', $contact_employee->name_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '120']) }}
             </div>
-            <div class="col-md-4 form-group">
-                {{ Form::label('email_contact', 'Email', ['class' => 'control-label']) }}
-                {{ Form::text('email_contact[]', $contact_employee->email_contact, ['id' => 'EmailContactEmployee', 'class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-9 form-group">
-                {{ Form::label('address_contact', 'Dirección', ['class' => 'control-label']) }}
-                {{ Form::text('address_contact[]', $contact_employee->address_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
-            </div>
-            <div class="col-md-3 form-group">
+            <div class="col-sm-3 col-md-3 form-group">
                 {{ Form::label('tel_contact', 'Teléfono', ['class' => 'control-label']) }}
                 <div class="input-group">
                     <div class="input-group-addon">
@@ -45,6 +35,16 @@
                     </div>
                     {{ Form::text('tel_contact[]', $contact_employee->tel_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 form-group">
+                {{ Form::label('email_contact', 'Email', ['class' => 'control-label']) }}
+                {{ Form::text('email_contact[]', $contact_employee->email_contact, ['id' => 'EmailContactEmployee', 'class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
+            </div>
+            <div class="col-sm-6 col-md-6 form-group">
+                {{ Form::label('address_contact', 'Dirección', ['class' => 'control-label']) }}
+                {{ Form::text('address_contact[]', $contact_employee->address_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
             </div>
         </div>
         <br />

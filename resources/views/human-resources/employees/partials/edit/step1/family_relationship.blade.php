@@ -19,13 +19,13 @@
                     {{ Form::text("id_family_relationship[]", $family_relationship->id, ["id" => "id_family_relationship" . $i, "class" => "form-control"]) }}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6 col-md-6">
                 <div class="form-group">
                     {{ Form::label('relationship_id', 'Relación', ['class' => 'control-label']) }}
                     {{ Form::select('relationship_id[]', $relationships, $family_relationship->relationship_id, ['class'=> 'form-control']) }}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6 col-md-6">
                 <div class="form-group">
                     {{ Form::label('employee_family_id', 'Nombre Familiar', ['class' => 'control-label'])}}
                     {{ Form::select('employee_family_id[]', $employees, $family_relationship->employee_family_id, ['class'=> 'form-control']) }}
