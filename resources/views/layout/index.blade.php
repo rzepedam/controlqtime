@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{ elixir('css/index-layout-plugin.css') }}">
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ elixir('css/index-layout-fonts.css') }}">
-
     @yield('css')
 
     <!-- Style Owned -->
