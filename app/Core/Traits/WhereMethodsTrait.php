@@ -55,4 +55,19 @@ trait WhereMethodsTrait
 	}
 	
 	
+	/**
+	 * @param $columnDate
+	 * @param $valueDate
+	 * @param $column
+	 * @param $valueColumn
+	 * @param array $with
+	 * @param array $columns
+	 *
+	 * @return mixed
+	 */
+	public function whereDateAndWhereColumn($columnDate, $valueDate, $column, $valueColumn, $with = ['*'], $columns = ['*'])
+	{
+		return $this->model->with($with)->whereDate($columnDate, $valueDate)->where($column, $valueColumn)->get($columns);
+	}
+	
 }

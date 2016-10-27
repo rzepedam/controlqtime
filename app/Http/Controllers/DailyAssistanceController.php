@@ -47,7 +47,7 @@ class DailyAssistanceController extends Controller
 	public function index()
 	{
 		$date      = Carbon::today();
-		$employees = $this->employee->lists('full_name', 'id');
+		$employees = $this->employee->all();
 		list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDate($date);
 		
 		return view('human-resources.daily-assistances.index', compact(
@@ -62,8 +62,19 @@ class DailyAssistanceController extends Controller
 	 */
 	public function getAssistanceByDate(Request $request)
 	{
-		$date = Carbon::parse($request->get('date'))->format('Y-m-d');
-		list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDate($date);
+		$date     = Carbon::parse($request->get('date'))->format('Y-m-d');
+		$employee = $request->get('employee');
+		
+		switch ($employee)
+		{
+			case '*':
+				list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDate($date);
+				break;
+			
+			default:
+				list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDateAndEmployee($employee, $date);
+				break;
+		}
 		
 		return response()->json([
 			'accessControls'   => $accessControls,
@@ -83,6 +94,25 @@ class DailyAssistanceController extends Controller
 	{
 		$accessControls   = $this->access_control->whereDate('created_at', $date, ['employee']);
 		$dailyAssistances = $this->daily_assistance->whereDate('created_at', $date, ['employee']);
+		$num_employees    = $accessControls->unique('rut');
+		$entry            = $accessControls->groupBy('rut')->transform(function ($item)
+		{
+			return $item->min('created_at');
+		});
+		
+		return [$accessControls, $dailyAssistances, $num_employees, $entry];
+	}
+	
+	/**
+	 * @param $employee
+	 * @param $date
+	 *
+	 * @return array
+	 */
+	private function getRecordPerDateAndEmployee($employee, $date)
+	{
+		$accessControls   = $this->access_control->whereDateAndWhereColumn('created_at', $date, 'employee_id', $employee, ['employee']);
+		$dailyAssistances = $this->daily_assistance->whereDateAndWhereColumn('created_at', $date, 'employee_id', $employee, ['employee']);
 		$num_employees    = $accessControls->unique('rut');
 		$entry            = $accessControls->groupBy('rut')->transform(function ($item)
 		{

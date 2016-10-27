@@ -13,7 +13,12 @@
         <div class="col-sm-6 col-md-6">
             <div class="form-group">
                 {{ Form::label('employee_id', 'Trabajador') }}
-                {{ Form::select('employee_id', ['*' => 'Ver Todos'] + $employees->toArray(), null, ['class' => 'form-control', 'data-plugin' => 'selectpicker', 'data-live-search' => 'true']) }}
+                <select id="employee_id" name="employee_id" class="form-control" data-plugin="selectpicker" data-live-search="true">
+                    <option data-icon="fa fa-search" value="*">Ver Todos</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->id }}">{{ $employee->full_name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="col-xs-4 col-sm-1 col-md-1 form-group text-center font-size-20 pull-right">

@@ -11,4 +11,6 @@ interface BaseRepoWhereInterface
 	public function whereIn($value, $columns = ['*']);
 	
 	public function whereDate($attribute, $value, $with = ['*'], $columns = ['*']);
+	
+	public function whereDateAndWhereColumn($columnDate, $valueDate, $column, $valueColumn, $with = ['*'], $columns = ['*']);
 }
