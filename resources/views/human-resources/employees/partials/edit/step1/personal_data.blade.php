@@ -32,7 +32,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            {{ Form::text('birthday', $employee->birthday->format('d-m-Y'), ['class' => 'form-control', "readonly"]) }}
+            {{ Form::text('birthday', $employee->birthday->format('d-m-Y'), ['class' => 'form-control text-center', "readonly"]) }}
         </div>
     </div>
     <div class="col-sm-6 col-md-3 form-group">

@@ -19,32 +19,32 @@
                     {{ Form::text("id_study[]", $study->id, ["id" => "id_study" . $i, "class" => "form-control"]) }}
                 </div>
             </div>
-            <div class="col-sm-4 col-md-3">
+            <div class="col-sm-6 col-md-3">
                 <div class="form-group">
                     {{ Form::label('degree_id', 'Nivel de Estudio') }}
                     {{ Form::select('degree_id[]', $degrees, $study->degree_id, ['class'=> 'form-control']) }}
                 </div>
             </div>
-            <div class="col-sm-8 col-md-4">
+            <div class="col-sm-6 col-md-4">
                 <div class="form-group">
                     {{ Form::label('name_study', 'Profesión u Oficio') }}
                     {{ Form::text('name_study[]', $study->name_study, ['class'=> 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '80']) }}
                 </div>
             </div>
-            <div class="col-sm-4 col-md-3">
+            <div class="col-sm-6 col-md-3">
                 <div class="form-group">
                     {{ Form::label('institution_study_id', 'Institución') }}
                     {{ Form::select('institution_study_id[]', $institutions, $study->institution_study_id, ['class'=> 'form-control']) }}
                 </div>
             </div>
-            <div class="col-sm-3 col-md-2">
+            <div class="col-sm-6 col-md-2">
                 <div class="form-group">
                     {{ Form::label('date_obtention', 'Fecha Obtención') }}
                     <div class="input-group date beforeCurrentDate">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        {{ Form::text('date_obtention[]', $study->date_obtention->format('d-m-Y'), ['class'=> 'form-control', 'readonly']) }}
+                        {{ Form::text('date_obtention[]', $study->date_obtention->format('d-m-Y'), ['class'=> 'form-control text-center', 'readonly']) }}
                     </div>
                 </div>
             </div>
