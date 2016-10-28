@@ -38,11 +38,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-md-6 form-group">
+            <div class="col-sm-6 col-md-6 form-group">
                 {{ Form::label('email_contact', 'Email', ['class' => 'control-label']) }}
                 {{ Form::text('email_contact[]', $contact_employee->email_contact, ['id' => 'EmailContactEmployee', 'class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
             </div>
-            <div class="col-sm-12 col-md-6 form-group">
+            <div class="col-sm-6 col-md-6 form-group">
                 {{ Form::label('address_contact', 'Dirección', ['class' => 'control-label']) }}
                 {{ Form::text('address_contact[]', $contact_employee->address_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
             </div>

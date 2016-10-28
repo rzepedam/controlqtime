@@ -66,22 +66,22 @@
 
 {{-- Four row --}}
 <div class="row">
-    <div class="col-sm-12 col-md-6 form-group">
+    <div class="col-sm-6 col-md-6 form-group">
         {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
         {{ Form::text('address', $employee->address->address, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '75']) }}
     </div>
     {{-- Depto Form Input --}}
-    <div class="col-sm-4 col-md-2 form-group">
+    <div class="col-sm-2 col-md-2 form-group">
         {{ Form::label('depto', 'Depto', ['class' => 'control-label']) }}
         {{ Form::text('depto', $employee->address->detailAddressLegalEmployee->depto, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     {{-- Block Form Input --}}
-    <div class="col-sm-4 col-md-2 form-group">
+    <div class="col-sm-2 col-md-2 form-group">
         {{ Form::label('block', 'Block', ['class' => 'control-label']) }}
         {{ Form::text('block', $employee->address->detailAddressLegalEmployee->block, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     {{-- Num_home Form Input --}}
-    <div class="col-sm-4 col-md-2 form-group">
+    <div class="col-sm-2 col-md-2 form-group">
         {{ Form::label('num_home', 'Casa', ['class' => 'control-label']) }}
         {{ Form::text('num_home', $employee->address->detailAddressLegalEmployee->num_home, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
