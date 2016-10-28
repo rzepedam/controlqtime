@@ -231,3 +231,11 @@ img {
 .margin_button_with_save {
     margin-left: 20px;
 }
+
+.navbar-avatar .avatar {
+    height: 30px;
+}
+
+.avatar img {
+    height: 100%;
+}
