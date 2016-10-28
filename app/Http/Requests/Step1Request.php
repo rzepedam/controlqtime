@@ -141,9 +141,9 @@ class Step1Request extends SanitizedRequest
 						$rules['name_contact.' . $index]            = 'required|max:120';
 						
 						if (Request::get('id_contact')[$index] == 0)
-							$rules['email_contact.' . $index] = 'required|email|max:60|unique:contact_employees,email_contact';
+							$rules['email_contact.' . $index] = 'email|max:60|unique:contact_employees,email_contact';
 						else
-							$rules['email_contact.' . $index] = 'required|email|max:60|unique:contact_employees,email_contact,' . Request::get('id_contact')[$index];
+							$rules['email_contact.' . $index] = 'email|max:60|unique:contact_employees,email_contact,' . Request::get('id_contact')[$index];
 						
 						$rules['address_contact.' . $index] = 'required';
 						$rules['tel_contact.' . $index]     = 'required|max:20';
