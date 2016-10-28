@@ -8,7 +8,8 @@
                     <span id="num_contact{{ $i }}" class="text-success">
                         Contacto #{{ $i + 1 }}
                     </span>
-                    <a id="contact" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Contacto" data-html="true"><i class="fa fa-trash"></i></a>
+                    <a id="contact" class="delete-elements hidden-xs hidden-sm pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Contacto" data-html="true"><i class="fa fa-trash"></i></a>
+                    <a id="contact" class="delete-elements hidden-md hidden-lg pull-right"><i class="fa fa-trash"></i></a>
                 </div>
             </div>
         </div>
