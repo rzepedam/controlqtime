@@ -14,16 +14,14 @@
         </div>
         <div class="row">
             <div class="col-md-1 hide">
-                <div class="form-group">
-                    {{ Form::label("id_disease", "ID", ["class" => "control-label"]) }}
-                    {{ Form::text("id_disease[]", $disease->id, ["id" => "id_disease" . $i, "class" => "form-control"]) }}
-                </div>
+                {{ Form::label("id_disease", "ID", ["class" => "control-label"]) }}
+                {{ Form::text("id_disease[]", $disease->id, ["id" => "id_disease" . $i, "class" => "form-control"]) }}
             </div>
-            <div class="col-xs-6 col-sm-4 col-md-6 form-group">
+            <div class="col-sm-6 col-md-6 form-group">
                 {{ Form::label("type_disease_id", "Nombre") }}
                 {{ Form::select("type_disease_id[]", $type_diseases, $disease->typeDisease->id, ["class"=> "form-control"]) }}
             </div>
-            <div class="col-sm-offset-3 col-md-offset-2 col-xs-6 col-sm-4 col-md-4 form-group">
+            <div class="col-md-offset-2 col-sm-6 col-md-4 form-group text-center">
                 {{ Form::label("treatment_disease", "Está en tratamiento?")}}
                 <ul class="list-unstyled list-inline">
                     <li>

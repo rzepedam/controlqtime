@@ -21,6 +21,23 @@
                 {{ Form::label('type_professional_license_id', 'Tipo Licencia') }}
                 {{ Form::select('type_professional_license_id[]', $type_professional_licenses, $professional_license->type_professional_license_id, ['class'=> 'form-control']) }}
             </div>
+            <div class="col-md-offset-2 col-sm-6 col-md-2 form-group text-center">
+                {{ Form::label("is_donor" . $i, "Es donante?") }}
+                <ul class="list-unstyled list-inline">
+                    <li>
+                        <div class="radio-custom radio-primary">
+                            {{ Form::radio("is_donor" . $i, 1, ($professional_license->is_donor == 1) ? true : false) }}
+                            {{ Form::label("is_donor" . $i, "Si", ['class' => 'control-label']) }}
+                        </div>
+                    </li>
+                    <li>
+                        <div class="radio-custom radio-primary">
+                            {{ Form::radio("is_donor" . $i, 0, ($professional_license->is_donor == 0) ? true : false) }}
+                            {{ Form::label("is_donor" . $i, "No", ['class' => 'control-label']) }}
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <div class="col-sm-6 col-md-2 form-group">
                 {{ Form::label('emission_license', 'Fecha Emisión') }}
                 <div class="input-group date beforeCurrentDate">
@@ -38,23 +55,6 @@
                     </div>
                     {{ Form::text('expired_license[]', $professional_license->expired_license->format('d-m-Y'), ['class'=> 'form-control text-center', 'readonly']) }}
                 </div>
-            </div>
-            <div class="col-md-offset-2 col-sm-6 col-md-2 form-group text-center">
-                {{ Form::label("is_donor" . $i, "Es donante?") }}
-                <ul class="list-unstyled list-inline">
-                    <li>
-                        <div class="radio-custom radio-primary">
-                            {{ Form::radio("is_donor" . $i, 1, ($professional_license->is_donor == 1) ? true : false) }}
-                            {{ Form::label("is_donor" . $i, "Si", ['class' => 'control-label']) }}
-                        </div>
-                    </li>
-                    <li>
-                        <div class="radio-custom radio-primary">
-                            {{ Form::radio("is_donor" . $i, 0, ($professional_license->is_donor == 0) ? true : false) }}
-                            {{ Form::label("is_donor" . $i, "No", ['class' => 'control-label']) }}
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="row">

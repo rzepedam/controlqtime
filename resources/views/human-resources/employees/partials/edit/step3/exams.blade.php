@@ -14,31 +14,29 @@
         </div>
         <div class="row">
             <div class="col-md-1 hide">
-                <div class="form-group">
-                    {{ Form::label("id_exam", "ID", ["class" => "control-label"]) }}
-                    {{ Form::text("id_exam[]", $exam->id, ["id" => "id_exam" . $i, "class" => "form-control"]) }}
-                </div>
+                {{ Form::label("id_exam", "ID", ["class" => "control-label"]) }}
+                {{ Form::text("id_exam[]", $exam->id, ["id" => "id_exam" . $i, "class" => "form-control"]) }}
             </div>
-            <div class="col-sm-4 col-md-4 form-group">
+            <div class="col-sm-12 col-md-4 form-group">
                 {{ Form::label('type_exam_id', 'Examen') }}
                 {{ Form::select('type_exam_id[]', $type_exams, $exam->typeExam->id, ['class'=> 'form-control']) }}
             </div>
-            <div class="col-xs-6 col-sm-3 col-md-2 form-group">
+            <div class="col-sm-6 col-md-2 form-group">
                 {{ Form::label('emission_exam', 'Fecha Emisión') }}
                 <div class="input-group date beforeCurrentDate">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{ Form::text('emission_exam[]', $exam->emission_exam->format('d-m-Y'), ['class'=> 'form-control', 'readonly']) }}
+                    {{ Form::text('emission_exam[]', $exam->emission_exam->format('d-m-Y'), ['class'=> 'form-control text-center', 'readonly']) }}
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-3 col-md-2 form-group">
+            <div class="col-sm-6 col-md-2 form-group">
                 {{ Form::label('expired_exam', 'Fecha Expiración') }}
                 <div class="input-group date afterCurrentDate">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{ Form::text('expired_exam[]', $exam->expired_exam->format('d-m-Y'), ['class'=> 'form-control', 'readonly']) }}
+                    {{ Form::text('expired_exam[]', $exam->expired_exam->format('d-m-Y'), ['class'=> 'form-control text-center', 'readonly']) }}
                 </div>
             </div>
         </div>
