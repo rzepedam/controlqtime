@@ -11,43 +11,33 @@
     </div>
     <div class="row">
         <div class="col-md-1 hide">
-            <div class="form-group">
-                {{ Form::label("id_speciality", "ID", ["class" => "control-label"]) }}
-                {{ Form::text("id_speciality[]", Session::get('id_speciality')[$i], ["id" => "id_speciality", "class" => "form-control"]) }}
-            </div>
+            {{ Form::label("id_speciality", "ID", ["class" => "control-label"]) }}
+            {{ Form::text("id_speciality[]", Session::get('id_speciality')[$i], ["id" => "id_speciality", "class" => "form-control"]) }}
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                {{ Form::label('speciality_id', 'Tipo Especialidad') }}
-                {{ Form::select('type_speciality_id[]', $type_specialities, Session::get('type_speciality_id')[$i], ['class'=> 'form-control']) }}
-            </div>
+        <div class="col-sm-6 col-md-4 form-group">
+            {{ Form::label('speciality_id', 'Tipo Especialidad') }}
+            {{ Form::select('type_speciality_id[]', $type_specialities, Session::get('type_speciality_id')[$i], ['class'=> 'form-control']) }}
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                {{ Form::label('institution_speciality_id', 'Institución') }}
-                {{ Form::select('institution_speciality_id[]', $institutions, Session::get('institution_speciality_id')[$i], ['class'=> 'form-control']) }}
-            </div>
+        <div class="col-sm-6 col-md-4 form-group">
+            {{ Form::label('institution_speciality_id', 'Institución') }}
+            {{ Form::select('institution_speciality_id[]', $institutions, Session::get('institution_speciality_id')[$i], ['class'=> 'form-control']) }}
         </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                {{Form::label('emission_speciality', 'Fecha Emisión', ['class'=> 'control-label'])}}
-                <div class="input-group date beforeCurrentDate">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    {{Form::text('emission_speciality[]', Session::get('emission_speciality')[$i], ['class'=> 'form-control', 'readonly'])}}
+        <div class="col-sm-6 col-md-2 form-group">
+            {{Form::label('emission_speciality', 'Fecha Emisión', ['class'=> 'control-label'])}}
+            <div class="input-group date beforeCurrentDate">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
                 </div>
+                {{Form::text('emission_speciality[]', Session::get('emission_speciality')[$i], ['class'=> 'form-control text-center', 'readonly'])}}
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                {{ Form::label('expired_speciality', 'Fecha Expiración', ['class'=> 'control-label']) }}
-                <div class="input-group date afterCurrentDate">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    {{ Form::text('expired_speciality[]', Session::get('expired_speciality')[$i], ['class'=> 'form-control', 'readonly']) }}
+        <div class="col-sm-6 col-md-2 form-group">
+            {{ Form::label('expired_speciality', 'Fecha Expiración', ['class'=> 'control-label']) }}
+            <div class="input-group date afterCurrentDate">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
                 </div>
+                {{ Form::text('expired_speciality[]', Session::get('expired_speciality')[$i], ['class'=> 'form-control text-center', 'readonly']) }}
             </div>
         </div>
     </div>

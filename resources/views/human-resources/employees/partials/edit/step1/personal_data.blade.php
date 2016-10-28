@@ -1,18 +1,18 @@
 {{-- First row --}}
 <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+    <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('male_surname', 'Apellido Paterno', ['class' => 'control-label']) }}
         {{ Form::text('male_surname', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+    <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('female_surname', 'Apellido Materno', ['class' => 'control-label']) }}
         {{ Form::text('female_surname', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+    <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('first_name', 'Primer Nombre', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Si su nombre es compuesto (Ej: María de los Ángeles), ingresar 'María de los' aquí y 'Ángeles' en campo Segundo Nombre" data-html="true"></i>
         {{ Form::text('first_name', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+    <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('second_name', 'Segundo Nombre', ['class' => 'control-label']) }}
         {{ Form::text('second_name', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
     </div>

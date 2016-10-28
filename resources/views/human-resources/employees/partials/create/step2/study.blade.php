@@ -11,38 +11,28 @@
     </div>
     <div class="row">
         <div class="col-md-1 hide">
-            <div class="form-group">
-                {{ Form::label("id_study", "ID", ["class" => "control-label"]) }}
-                {{ Form::text("id_study[]", Session::get('id_study')[$i], ["id" => "id_study", "class" => "form-control"]) }}
-            </div>
+            {{ Form::label("id_study", "ID", ["class" => "control-label"]) }}
+            {{ Form::text("id_study[]", Session::get('id_study')[$i], ["id" => "id_study", "class" => "form-control"]) }}
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                {{ Form::label('degree_id', 'Nivel de Estudio', ['class' => 'control-label']) }}
-                {{ Form::select('degree_id[]', $degrees, Session::get('degree_id')[$i], ['class'=> 'form-control']) }}
-            </div>
+        <div class="col-sm-6 col-md-3 form-group">
+            {{ Form::label('degree_id', 'Nivel de Estudio', ['class' => 'control-label']) }}
+            {{ Form::select('degree_id[]', $degrees, Session::get('degree_id')[$i], ['class'=> 'form-control']) }}
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                {{ Form::label('name_study', 'Profesión u Oficio', ['class' => 'control-label']) }}
-                {{ Form::text('name_study[]', Session::get('name_study')[$i], ['class'=> 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '80']) }}
-            </div>
+        <div class="col-sm-6 col-md-4 form-group">
+            {{ Form::label('name_study', 'Profesión u Oficio', ['class' => 'control-label']) }}
+            {{ Form::text('name_study[]', Session::get('name_study')[$i], ['class'=> 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '80']) }}
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                {{ Form::label('institution_study_id', 'Institución', ['class' => 'control-label']) }}
-                {{ Form::select('institution_study_id[]', $institutions, Session::get('institution_study_id')[$i], ['class'=> 'form-control']) }}
-            </div>
+        <div class="col-sm-6 col-md-3 form-group">
+            {{ Form::label('institution_study_id', 'Institución', ['class' => 'control-label']) }}
+            {{ Form::select('institution_study_id[]', $institutions, Session::get('institution_study_id')[$i], ['class'=> 'form-control']) }}
         </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                {{ Form::label('date_obtention', 'Fecha Obtención', ['class' => 'control-label']) }}
-                <div class="input-group date beforeCurrentDate">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    {{ Form::text('date_obtention[]', Session::get('date_obtention')[$i], ['class'=> 'form-control', 'readonly']) }}
+        <div class="col-sm-6 col-md-2 form-group">
+            {{ Form::label('date_obtention', 'Fecha Obtención', ['class' => 'control-label']) }}
+            <div class="input-group date beforeCurrentDate">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
                 </div>
+                {{ Form::text('date_obtention[]', Session::get('date_obtention')[$i], ['class'=> 'form-control text-center', 'readonly']) }}
             </div>
         </div>
     </div>

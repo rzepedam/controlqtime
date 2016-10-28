@@ -11,43 +11,33 @@
     </div>
 	<div class="row">
         <div class="col-md-1 hide">
-            <div class="form-group">
-                {{ Form::label("id_certification", "ID", ["class" => "control-label"]) }}
-                {{ Form::text("id_certification[]", Session::get('id_certification')[$i], ["id" => "id_certification", "class" => "form-control"]) }}
-            </div>
+            {{ Form::label("id_certification", "ID", ["class" => "control-label"]) }}
+            {{ Form::text("id_certification[]", Session::get('id_certification')[$i], ["id" => "id_certification", "class" => "form-control"]) }}
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                {{ Form::label('type_certification_id', 'Certificación', ['class' => 'control-label']) }}
-                {{ Form::select('type_certification_id[]', $type_certifications, Session::get('type_certification_id')[$i], ['class'=> 'form-control']) }}
-            </div>
+        <div class="col-sm-6 col-md-4 form-group">
+            {{ Form::label('type_certification_id', 'Certificación', ['class' => 'control-label']) }}
+            {{ Form::select('type_certification_id[]', $type_certifications, Session::get('type_certification_id')[$i], ['class'=> 'form-control']) }}
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                {{ Form::label('institution_certification_id', 'Institución', ['class' => 'control-label']) }}
-                {{ Form::select('institution_certification_id[]', $institutions, Session::get('institution_certification_id')[$i], ['class'=> 'form-control']) }}
-            </div>
+        <div class="col-sm-6 col-md-4 form-group">
+            {{ Form::label('institution_certification_id', 'Institución', ['class' => 'control-label']) }}
+            {{ Form::select('institution_certification_id[]', $institutions, Session::get('institution_certification_id')[$i], ['class'=> 'form-control']) }}
         </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                {{Form::label('emission_certification', 'Fecha Emisión', ['class'=> 'control-label'])}}
-                <div class="input-group date beforeCurrentDate">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    {{Form::text('emission_certification[]', Session::get('emission_certification')[$i], ['class'=> 'form-control', 'readonly'])}}
+        <div class="col-sm-6 col-md-2 form-group">
+            {{Form::label('emission_certification', 'Fecha Emisión', ['class'=> 'control-label'])}}
+            <div class="input-group date beforeCurrentDate">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
                 </div>
+                {{Form::text('emission_certification[]', Session::get('emission_certification')[$i], ['class'=> 'form-control text-center', 'readonly'])}}
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                {{ Form::label('expired_certification', 'Fecha Expiración', ['class' => 'control-label']) }}
-                <div class="input-group date afterCurrentDate">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    {{ Form::text('expired_certification[]', Session::get('expired_certification')[$i], ['class'=> 'form-control', 'readonly']) }}
+        <div class="col-sm-6 col-md-2 form-group">
+            {{ Form::label('expired_certification', 'Fecha Expiración', ['class' => 'control-label']) }}
+            <div class="input-group date afterCurrentDate">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
                 </div>
+                {{ Form::text('expired_certification[]', Session::get('expired_certification')[$i], ['class'=> 'form-control text-center', 'readonly']) }}
             </div>
         </div>
     </div>

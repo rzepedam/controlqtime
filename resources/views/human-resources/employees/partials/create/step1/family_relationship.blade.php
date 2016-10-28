@@ -11,22 +11,16 @@
     </div>
 	<div class="row">
         <div class="col-md-1 hide">
-            <div class="form-group">
-                {{ Form::label("id_family_relationship", "ID", ["class" => "control-label"]) }}
-                {{ Form::text("id_family_relationship[]", Session::get('id_family_relationship')[$i], ["id" => "id_family_relationship", "class" => "form-control"]) }}
-            </div>
+            {{ Form::label("id_family_relationship", "ID", ["class" => "control-label"]) }}
+            {{ Form::text("id_family_relationship[]", Session::get('id_family_relationship')[$i], ["id" => "id_family_relationship", "class" => "form-control"]) }}
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                {{ Form::label('relationship_id', 'Relación', ['class' => 'control-label']) }}
-                {{ Form::select('relationship_id[]', $relationships, Session::get('relationship_id')[$i], ['class'=> 'form-control']) }}
-            </div>
+        <div class="col-sm-6 col-md-6 form-group">
+            {{ Form::label('relationship_id', 'Relación', ['class' => 'control-label']) }}
+            {{ Form::select('relationship_id[]', $relationships, Session::get('relationship_id')[$i], ['class'=> 'form-control']) }}
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                {{ Form::label('employee_family_id', 'Nombre Familiar', ['class' => 'control-label'])}}
-                {{ Form::select('employee_family_id[]', $employees, Session::get('employee_family_id')[$i], ['class'=> 'form-control']) }}
-            </div>
+        <div class="col-sm-6 col-md-6 form-group">
+            {{ Form::label('employee_family_id', 'Nombre Familiar', ['class' => 'control-label'])}}
+            {{ Form::select('employee_family_id[]', $employees, Session::get('employee_family_id')[$i], ['class'=> 'form-control']) }}
         </div>
     </div>
 	<br />

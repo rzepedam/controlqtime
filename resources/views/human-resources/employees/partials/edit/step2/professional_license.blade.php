@@ -59,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 form-group">
-                {{ Form::label('detail_license', 'Detalle') }}
+                {{ Form::label('detail_license', 'Restricciones') }}
                 {{ Form::textarea('detail_license[]', $professional_license->detail_license, ['class'=> 'form-control', 'rows'=> 3]) }}
             </div>
         </div>
