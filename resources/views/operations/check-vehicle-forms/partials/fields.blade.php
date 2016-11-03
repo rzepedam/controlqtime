@@ -48,7 +48,7 @@
                     @if ( Route::is('check-vehicle-forms.create') )
                         : {{ auth()->user()->employee->full_name }}
                     @else
-                        : {{ $checkVehicleForm->employee->full_name }}
+                        : {{ $checkVehicleForm->user->employee->full_name }}
                     @endif
                 </div>
             </div>
@@ -79,34 +79,34 @@
                             {{ $pieceVehicle->name }} {{ Form::hidden('piece_vehicle_id[]', $pieceVehicle->id) }}
                         </td>
                         <td>
-                            <span class="checkbox-custom checkbox-primary">
-                                @if ( Route::is('check-vehicle-forms.create') )
-                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[0]->id }}" />
-                                @else
-                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[0]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Bueno') ? 'checked' : null }} />
-                                @endif
-                                <label></label>
-                            </span>
+                        <span class="checkbox-custom checkbox-primary">
+                            @if ( Route::is('check-vehicle-forms.create') )
+                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[0]->id }}" />
+                            @else
+                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[0]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Bueno') ? 'checked' : null }} />
+                            @endif
+                            <label></label>
+                        </span>
                         </td>
                         <td>
-                            <span class="checkbox-custom checkbox-primary">
-                                @if ( Route::is('check-vehicle-forms.create') )
-                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[1]->id }}" />
-                                @else
-                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[1]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Dañado') ? 'checked' : null }} />
-                                @endif
-                                <label></label>
-                            </span>
+                        <span class="checkbox-custom checkbox-primary">
+                            @if ( Route::is('check-vehicle-forms.create') )
+                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[1]->id }}" />
+                            @else
+                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[1]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Dañado') ? 'checked' : null }} />
+                            @endif
+                            <label></label>
+                        </span>
                         </td>
                         <td>
-                            <span class="checkbox-custom checkbox-primary">
-                                @if ( Route::is('check-vehicle-forms.create') )
-                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[2]->id }}" />
-                                @else
-                                    <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[2]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Faltante') ? 'checked' : null }} />
-                                @endif
-                                <label></label>
-                            </span>
+                        <span class="checkbox-custom checkbox-primary">
+                            @if ( Route::is('check-vehicle-forms.create') )
+                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[2]->id }}" />
+                            @else
+                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[2]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Faltante') ? 'checked' : null }} />
+                            @endif
+                            <label></label>
+                        </span>
                         </td>
                     </tr>
                 @endforeach

@@ -137,20 +137,47 @@ class CheckVehicleFormController extends Controller
 	 */
 	public function edit($id)
 	{
-		//
+		$masterFormPieceVehicle = $this->master_form_piece_vehicle->find(1)->pieceVehicles;
+		$checkVehicleForm       = $this->check_vehicle_form->find($id);
+		$statePieceVehicles     = $this->state_piece_vehicle->all();
+		$vehicles               = $this->vehicle->whereLists('state', 'enable', 'patent');
+		
+		return view('operations.check-vehicle-forms.edit', compact(
+			'masterFormPieceVehicle', 'checkVehicleForm', 'statePieceVehicles', 'vehicles'
+		));
 	}
 	
 	/**
-	 * Update the specified resource in storage.
+	 * @param CheckVehicleFormRequest $request
+	 * @param $id
 	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(CheckVehicleFormRequest $request, $id)
 	{
-		//
+		$request->request->add(['user_id' => auth()->user()->id]);
+		
+		DB::beginTransaction();
+		
+		try
+		{
+			$checkVehicleForm = $this->check_vehicle_form->update($request->all(), $id);
+			$checkVehicleForm->statePieceVehicles()->sync(
+				$request->get('state_piece_vehicle_id'), [
+					'piece_vehicle_id' => $request->get('piece_vehicle_id')
+				]
+			);
+			
+			DB::commit();
+		} catch (Exception $e)
+		{
+			DB::rollback();
+		}
+		
+		return response()->json([
+			'success' => true,
+			'url'     => '/operations/check-vehicle-forms'
+		]);
 	}
 	
 	/**
