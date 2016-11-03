@@ -10,7 +10,7 @@ class AccessControlApiTableSeeder extends Seeder
 	    if (getenv('APP_ENV') === 'local')
 	    {
 		    DB::table('access_control_apis')->truncate();
-		    factory(AccessControlApi::class, 50)->create();
+		    factory(AccessControlApi::class, 10)->create();
 	    }
     }
 }

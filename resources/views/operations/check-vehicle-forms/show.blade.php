@@ -17,7 +17,7 @@
                         <i class="fa fa-bus" aria-hidden="true"></i> Vehículo :  {{ $checkVehicleForm->vehicle->modelVehicle->trademark->name . ', ' . $checkVehicleForm->vehicle->modelVehicle->name . '. Año ' . $checkVehicleForm->vehicle->year }}
                     </div>
                     <div class="col-md-5">
-                        <i class="fa fa-user" aria-hidden="true"></i> Revisor : {{ $checkVehicleForm->employee->full_name }}
+                        <i class="fa fa-user" aria-hidden="true"></i> Revisor : {{ $checkVehicleForm->user->employee->full_name }}
                     </div>
                     <span class="visible-xs visible-sm"><br /></span>
                     <div class="col-md-offset-1 col-md-5">

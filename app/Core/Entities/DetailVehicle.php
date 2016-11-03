@@ -3,21 +3,40 @@
 namespace Controlqtime\Core\Entities;
 
 use Controlqtime\Core\Helpers\FormatField;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DetailVehicle extends Eloquent
 {
+	use SoftDeletes, CascadeSoftDeletes;
+	
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'color', 'fuel_id', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'tag', 'obs'
+	];
+	
+	/**
+	 * @var array
+	 */
+	protected $cascadeDeletes = [
+		'detailBus'
+	];
+	
     /**
      * @var bool
      */
     public $timestamps = false;
-
-    /**
-     * @var array
-     */
-    protected $fillable = [
-        'color', 'fuel_id', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'tag', 'obs'
-    ];
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
+	];
+	
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

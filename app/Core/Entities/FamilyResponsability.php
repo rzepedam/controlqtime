@@ -3,16 +3,26 @@
 namespace Controlqtime\Core\Entities;
 
 use Controlqtime\Core\Helpers\FormatField;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class FamilyResponsability extends Eloquent
 {
+	use SoftDeletes;
+	
     /**
      * @var array
      */
     protected $fillable = [
         'name_responsability', 'rut_responsability', 'relationship_id'
     ];
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'emission_exam', 'expired_exam', 'deleted_at'
+	];
 	
 	
 	/**

@@ -15,10 +15,12 @@ class CreateAccessControlApisTable extends Migration
     {
         Schema::create('access_control_apis', function (Blueprint $table) {
 			$table->increments('id');
+	        $table->unsignedInteger('employee_id')->nullable();
 			$table->string('rut', 10);
 			$table->string('num_device');
 			$table->boolean('status')->default(0);
-			$table->timestamp('created_at');
+			$table->timestamp('created_at')->index();
+	        $table->softDeletes();
         });
     }
 

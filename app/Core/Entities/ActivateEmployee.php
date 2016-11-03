@@ -111,7 +111,7 @@ class ActivateEmployee extends Eloquent implements ActivateEmployeeInterface
 	 *
 	 * @return mixed
 	 */
-	private function saveStateDisableEmployee($employee)
+	public function saveStateDisableEmployee($employee)
 	{
 		if ($employee->state != 'disable')
 		{

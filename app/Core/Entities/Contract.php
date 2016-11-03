@@ -4,10 +4,14 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Controlqtime\Core\Helpers\FormatField;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Contract extends Eloquent
 {
+	use SoftDeletes, CascadeSoftDeletes;
+	
     /**
      * @var array
      */
@@ -21,9 +25,17 @@ class Contract extends Eloquent
 	/**
 	 * @var array
 	 */
-	protected $dates = [
-		'expires_at'
+	protected $cascadeDeletes = [
+		'termsAndObligatories'
 	];
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'expires_at', 'deleted_at'
+	];
+	
 	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

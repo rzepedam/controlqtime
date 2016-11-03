@@ -2,16 +2,27 @@
 
 namespace Controlqtime\Core\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Route extends Eloquent
 {
+	use SoftDeletes;
+	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
 		'name', 'terminal_id'
 	];
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
+	];
+	
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

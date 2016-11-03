@@ -2,10 +2,13 @@
 
 namespace Controlqtime\Core\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DetailBuses extends Eloquent
 {
+	use SoftDeletes;
+	
 	/**
 	 * @var array
 	 */
@@ -17,6 +20,13 @@ class DetailBuses extends Eloquent
 	 * @var bool
 	 */
 	public $timestamps = false;
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
+	];
 	
 	
 	/**

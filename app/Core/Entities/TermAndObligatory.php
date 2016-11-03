@@ -2,16 +2,33 @@
 
 namespace Controlqtime\Core\Entities;
 
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class TermAndObligatory extends Eloquent
 {
+	use SoftDeletes;
+	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'act'
+		'name', 'default'
 	];
+	
+	/**
+	 * @var bool
+	 */
+	public $timestamps = false;
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
+	];
+	
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -32,18 +49,9 @@ class TermAndObligatory extends Eloquent
 	/**
 	 * @param string $value
 	 */
-	public function setActAttribute($value)
+	public function setDefaultAttribute($value)
 	{
-		$this->attributes['act'] = ($value === 'on') ? true : false;
+		$this->attributes['default'] = ($value === 'on') ? true : false;
 	}
 	
-	/**
-	 * @param boolean $value
-	 *
-	 * @return string
-	 */
-	public function getActAttribute($value)
-	{
-		return ($value) ? 'checked' : null;
-	}
 }

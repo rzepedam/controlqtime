@@ -3,10 +3,21 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DateDocumentationVehicle extends Eloquent
 {
+	use SoftDeletes;
+	
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'emission_padron', 'expiration_padron', 'emission_insurance', 'expiration_insurance',
+		'emission_permission', 'expiration_permission'
+	];
+	
     /**
      * @var bool
      */
@@ -15,19 +26,13 @@ class DateDocumentationVehicle extends Eloquent
     /**
      * @var array
      */
-    protected $fillable = [
-        'emission_padron', 'expiration_padron', 'emission_insurance', 'expiration_insurance',
-        'emission_permission', 'expiration_permission'
-    ];
-
-    /**
-     * @var array
-     */
     protected $dates = [
         'emission_padron', 'expiration_padron', 'emission_insurance',
-        'expiration_insurance', 'emission_permission', 'expiration_permission'
+        'expiration_insurance', 'emission_permission', 'expiration_permission',
+        'deleted_at'
     ];
 
+	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

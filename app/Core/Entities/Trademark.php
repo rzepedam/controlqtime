@@ -2,10 +2,20 @@
 
 namespace Controlqtime\Core\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Trademark extends Eloquent
 {
+	use SoftDeletes;
+	
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'name'
+	];
+	
 	/**
 	 * @var bool
 	 */
@@ -14,9 +24,10 @@ class Trademark extends Eloquent
 	/**
 	 * @var array
 	 */
-	protected $fillable = [
-		'name'
+	protected $dates = [
+		'deleted_at'
 	];
+	
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany

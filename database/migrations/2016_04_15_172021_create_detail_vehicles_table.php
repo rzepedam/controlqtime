@@ -15,9 +15,9 @@ class CreateDetailVehiclesTable extends Migration
     {
         Schema::create('detail_vehicles', function (Blueprint $table) {
             $table->increments('id');
-			$table->unsignedInteger('vehicle_id');
-			$table->string('color', 30);
-			$table->unsignedInteger('fuel_id');
+			$table->unsignedInteger('vehicle_id')->nullable();
+	        $table->unsignedInteger('fuel_id')->nullable();
+	        $table->string('color', 30);
 			$table->string('num_chasis', 17);
 			$table->string('num_motor', 12);
 			$table->string('km', 7);
@@ -25,18 +25,7 @@ class CreateDetailVehiclesTable extends Migration
 			$table->string('weight', 6);
 	        $table->string('tag', 25);
 			$table->text('obs');
-
-			$table->foreign('vehicle_id')
-				->references('id')
-				->on('vehicles')
-				->onUpdate('cascade')
-				->onDelete('cascade');
-
-			$table->foreign('fuel_id')
-				->references('id')
-				->on('fuels')
-				->onUpdate('cascade');
-
+	        $table->softDeletes();
         });
     }
 

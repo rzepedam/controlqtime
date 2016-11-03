@@ -5,35 +5,30 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSpecialitiesTable extends Migration
 {
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
     public function up()
     {
         Schema::create('specialities', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id')->unsigned();
-            $table->integer('type_speciality_id')->unsigned();
-            $table->integer('institution_speciality_id')->unsigned();
+            $table->unsignedInteger('employee_id')->nullable();
+            $table->unsignedInteger('type_speciality_id')->nullable();
+            $table->unsignedInteger('institution_speciality_id')->nullable();
             $table->date('emission_speciality');
             $table->date('expired_speciality');
-            $table->timestamps();
-            
-            $table->foreign('employee_id')
-                ->references('id')
-                ->on('employees')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            
-            $table->foreign('type_speciality_id')
-                ->references('id')
-                ->on('type_specialities')
-                ->onUpdate('cascade');
-            
-            $table->foreign('institution_speciality_id')
-                ->references('id')
-                ->on('institutions')
-                ->onUpdate('cascade');
+	        $table->softDeletes();
+	        $table->timestamps();
         });
     }
-    
+	
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
     public function down()
     {
         Schema::drop('specialities');

@@ -4,22 +4,33 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Controlqtime\Core\Helpers\FormatField;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Company extends Eloquent
 {
+	use SoftDeletes, CascadeSoftDeletes;
+	
     /**
      * @var array
      */
     protected $fillable = [
         'type_company_id', 'rut', 'firm_name', 'gyre', 'start_act', 'muni_license', 'email_company'
     ];
+	
+	/**
+	 * @var array
+	 */
+	protected $cascadeDeletes = [
+		'legalRepresentative', 'address', 'vehicles', 'imagesable'
+	];
 
     /**
      * @var array
      */
     protected $dates = [
-        'start_act'
+        'start_act', 'deleted_at'
     ];
 	
 	
@@ -46,6 +57,14 @@ class Company extends Eloquent
     {
         return $this->hasOne(LegalRepresentative::class);
     }
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -53,14 +72,6 @@ class Company extends Eloquent
     public function typeCompany()
     {
         return $this->belongsTo(TypeCompany::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function commune()
-    {
-        return $this->belongsTo(Commune::class);
     }
 
     /**

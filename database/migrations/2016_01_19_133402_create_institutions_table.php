@@ -5,22 +5,26 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateInstitutionsTable extends Migration
 {
-
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
     public function up()
     {
         Schema::create('institutions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 80);
-            $table->integer('type_institution_id')->unsigned();
-
-            $table->foreign('type_institution_id')
-                ->references('id')
-                ->on('type_institutions')
-                ->onUpdate('cascade');
+            $table->string('name', 50);
+            $table->unsignedInteger('type_institution_id')->nullable();
+	        $table->softDeletes();
         });
     }
-
-
+	
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
     public function down()
     {
         Schema::drop('institutions');

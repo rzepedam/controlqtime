@@ -4,10 +4,14 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Controlqtime\Core\Helpers\FormatField;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class LegalRepresentative extends Eloquent
 {
+	use SoftDeletes, CascadeSoftDeletes;
+	
     /**
      * @var array
      */
@@ -15,12 +19,16 @@ class LegalRepresentative extends Eloquent
         'company_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'rut_representative',
         'birthday', 'nationality_id', 'email_representative',
     ];
+	
+	protected $cascadeDeletes = [
+		'address'
+	];
 
     /**
      * @var array
      */
     protected $dates = [
-        'birthday'
+        'birthday', 'deleted_at'
     ];
 	
 	

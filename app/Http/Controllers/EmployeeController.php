@@ -348,13 +348,11 @@ class EmployeeController extends Controller
 		
 		try
 		{
-			$user = $this->user->create([
+			$employee = $this->employee->create(Session::get('step1'));
+			$user     = $employee->user()->create([
 				'email'    => Session::get('email_employee'),
 				'password' => bcrypt(Session::get('email_employee'))
 			]);
-			
-			$request->session()->put('step1.user_id', $user->id);
-			$employee = $this->employee->create(Session::get('step1'));
 			$address  = $employee->address()->create(Session::get('step1'));
 			$address->detailAddressLegalEmployee()->create(Session::get('step1'));
 			$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
@@ -512,10 +510,9 @@ class EmployeeController extends Controller
 		{
 			// Update Step1 data
 			$employee = $this->employee->update($request->session()->get('step1_update'), $id);
-			$user     = $this->user->update($request->session()->get('step1_update'), $employee->user_id);
+			$user     = $this->user->update(['email' => $request->session()->get('step1_update.email_employee')], $employee->user->id);
 			$address  = $this->address->update($request->session()->get('step1_update'), $employee->address->id);
 			$this->detail_address->update($request->session()->get('step1_update'), $address->detailAddressLegalEmployee->id);
-			$this->user->update(['email' => $request->session()->get('step1_update.email_employee')], $employee->user_id);
 			$this->contact_employee->destroyArrayId($request->session()->get('id_delete_contact_update'), '');
 			$this->contact_employee->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
 			$this->family_relationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'), '');
@@ -586,8 +583,19 @@ class EmployeeController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$employee = $this->employee->find($id);
-		$this->user->delete($employee->user_id);
+		DB::beginTransaction();
+		
+		try
+		{
+			$employee = $this->employee->find($id);
+			$this->activateEmployee->saveStateDisableEmployee($employee);
+			$this->employee->delete($id);
+		       
+		    DB::commit();
+		} catch (Exception $e)
+		{
+		    DB::rollback();
+		}
 		
 		return redirect()->route('employees.index');
 	}

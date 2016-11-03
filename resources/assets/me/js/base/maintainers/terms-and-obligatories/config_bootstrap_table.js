@@ -1,10 +1,18 @@
 $('#terms_and_obligatory_table').bootstrapTable({
     url: "/maintainers/getTermsAndObligatories",
     columns: [
-        {}, {},
+        {},
         {
             formatter : function(value,row,index) {
-                if (row.act)
+                if(row.name.length > 150)
+                    return row.name.substring(0,150) + '...';
+
+                return row.name;
+            }
+        },
+        {
+            formatter : function(value,row,index) {
+                if (row.default)
                     return '<i class="fa fa-check-circle font-size-18 text-success"></i>';
                 else
                     return '<i class="fa fa-times-circle font-size-18 text-danger"></i>';

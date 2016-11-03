@@ -15,19 +15,8 @@ class CreateMasterFormPieceVehiclePieceVehicle extends Migration
     {
         Schema::create('master_form_piece_vehicle_piece_vehicle', function (Blueprint $table) {
             $table->increments('id');
-	        $table->unsignedInteger('master_form_piece_vehicle_id');
-	        $table->unsignedInteger('piece_vehicle_id');
-	        
-	        $table->foreign('master_form_piece_vehicle_id', 'master_form')
-		        ->references('id')
-		        ->on('master_form_piece_vehicles')
-		        ->onUpdate('cascade');
-	        
-	        $table->foreign('piece_vehicle_id', 'piece_vehicle')
-	              ->references('id')
-	              ->on('piece_vehicles')
-	              ->onUpdate('cascade');
-	
+	        $table->unsignedInteger('master_form_piece_vehicle_id')->nullable();
+	        $table->unsignedInteger('piece_vehicle_id')->nullable();
         });
     }
 

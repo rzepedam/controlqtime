@@ -14,29 +14,13 @@ class CreateCertificationsTable extends Migration
     {
         Schema::create('certifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id')->unsigned();
-            $table->integer('type_certification_id')->unsigned();
-            $table->integer('institution_certification_id')->unsigned();
+            $table->unsignedInteger('employee_id')->nullable();
+            $table->unsignedInteger('type_certification_id')->nullable();
+            $table->unsignedInteger('institution_certification_id')->nullable();
             $table->date('emission_certification');
             $table->date('expired_certification');
-            $table->timestamps();
-
-            $table->foreign('employee_id')
-                ->references('id')
-                ->on('employees')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('type_certification_id')
-                ->references('id')
-                ->on('type_certifications')
-                ->onUpdate('cascade');
-
-            $table->foreign('institution_certification_id')
-                ->references('id')
-                ->on('institutions')
-                ->onUpdate('cascade');
-
+	        $table->softDeletes();
+	        $table->timestamps();
         });
     }
 

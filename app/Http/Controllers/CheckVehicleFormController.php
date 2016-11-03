@@ -52,7 +52,7 @@ class CheckVehicleFormController extends Controller
 	 */
 	public function getCheckVehicleForms()
 	{
-		$checkVehicleForms = $this->check_vehicle_form->all(['vehicle', 'employee']);
+		$checkVehicleForms = $this->check_vehicle_form->all(['vehicle', 'user.employee']);
 		
 		return $checkVehicleForms;
 	}
@@ -121,12 +121,11 @@ class CheckVehicleFormController extends Controller
 	public function show($id)
 	{
 		$checkVehicleForm = $this->check_vehicle_form->find($id, [
-			'masterFormPieceVehicle.pieceVehicles', 'vehicle.modelVehicle.trademark', 'employee', 'statePieceVehicles'
+			'masterFormPieceVehicle.pieceVehicles', 'vehicle.modelVehicle.trademark',
+			'user.employee', 'statePieceVehicles'
 		]);
 		
-		return view('operations.check-vehicle-forms.show', compact(
-			'checkVehicleForm', 'masterFormPieceVehicle'
-		));
+		return view('operations.check-vehicle-forms.show', compact('checkVehicleForm'));
 	}
 	
 	/**

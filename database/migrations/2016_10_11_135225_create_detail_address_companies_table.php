@@ -15,17 +15,12 @@ class CreateDetailAddressCompaniesTable extends Migration
     {
         Schema::create('detail_address_companies', function (Blueprint $table) {
             $table->increments('id');
-	        $table->unsignedInteger('address_id');
+	        $table->unsignedInteger('address_id')->nullable();
 	        $table->string('lot', 5);
 	        $table->string('bod', 5);
 	        $table->string('ofi', 5);
 	        $table->string('floor', 3);
-	        
-	        $table->foreign('address_id')
-		        ->references('id')
-		        ->on('addresses')
-		        ->onUpdate('cascade')
-	            ->onDelete('cascade');
+	        $table->softDeletes();
         });
     }
 

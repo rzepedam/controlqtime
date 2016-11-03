@@ -5,24 +5,28 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTerminalsTable extends Migration
 {
-
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
     public function up()
     {
         Schema::create('terminals', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
 			$table->string('address');
-			$table->unsignedInteger('commune_id');
+			$table->unsignedInteger('commune_id')->nullable();
+	        $table->softDeletes();
             $table->timestamps();
-
-			$table->foreign('commune_id')
-				->references('id')
-				->on('communes')
-				->onUpdate('cascade');
         });
     }
-
-    
+	
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
     public function down()
     {
         Schema::drop('terminals');

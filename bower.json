@@ -21,6 +21,7 @@
     "switchery": "^0.8.1",
     "jquery-wizard.js": "^0.4.3",
     "magnific-popup": "^1.1.0",
-    "bootstrap-fileinput": "^4.3.5"
+    "bootstrap-fileinput": "^4.3.5",
+    "jquery-asScrollbar": "^0.5.4"
   }
 }

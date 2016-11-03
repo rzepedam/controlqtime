@@ -164,7 +164,7 @@ class ImageFactory
 			$img      = $image->findOrFail($this->id);
 			if ($img->delete())
 			{
-				Storage::disk('s3')->delete($img->path);
+				// Storage::disk('s3')->delete($img->path);
 				DB::commit();
 			}
 		} catch (Exception $e)

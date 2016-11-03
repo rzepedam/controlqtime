@@ -14,24 +14,14 @@ class CreateProfessionalLicensesTable extends Migration
     {
         Schema::create('professional_licenses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id')->unsigned();
-            $table->integer('type_professional_license_id')->unsigned();
+            $table->unsignedInteger('employee_id')->nullable();
+            $table->unsignedInteger('type_professional_license_id')->nullable();
             $table->date('emission_license');
             $table->date('expired_license');
             $table->boolean('is_donor')->default(false);
             $table->string('detail_license');
+	        $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('employee_id')
-                ->references('id')
-                ->on('employees')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('type_professional_license_id')
-                ->references('id')
-                ->on('type_professional_licenses')
-                ->onUpdate('cascade');
         });
     }
 

@@ -14,24 +14,13 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id')->unsigned();
-            $table->integer('type_exam_id')->unsigned();
+            $table->unsignedInteger('employee_id')->nullable();
+            $table->unsignedInteger('type_exam_id')->nullable();
             $table->date('emission_exam');
             $table->date('expired_exam');
             $table->text('detail_exam');
+	        $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('employee_id')
-                ->references('id')
-                ->on('employees')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('type_exam_id')
-                ->references('id')
-                ->on('type_exams')
-                ->onUpdate('cascade');
-
         });
     }
 

@@ -42,6 +42,7 @@ elixir(function(mix) {
     mix.styles([
         'bower/animsition/dist/css/animsition.css',
         'bower/jquery-asScrollable/dist/css/asScrollable.css',
+        'bower/jquery-asScrollbar/dist/css/asScrollbar.css',
         'bower/Waves/dist/waves.css',
         'bower/toastr/toastr.css',
         'me/css/custom-color-toastr.css'
@@ -69,12 +70,13 @@ elixir(function(mix) {
         'bower/packages-for-cqtime/js/jquery.js',
         'bower/packages-for-cqtime/js/bootstrap.js',
         'bower/animsition/dist/js/animsition.js',
-        'bower/jquery-scrollTo/dist/jquery-asScroll.js',
-        'bower/jquery-wheel/jquery.mousewheel.js',
+        'bower/jquery-scrollTo/dist/jquery-scrollTo.js',
+        'bower/jquery-mousewheel/jquery.mousewheel.js',
+        'bower/jquery-asScrollbar/dist/jquery-asScrollbar.js',
         'bower/jquery-asScrollable/dist/jquery-asScrollable.js',
         'bower/jquery-asHoverScroll/dist/jquery-asHoverScroll.js',
         'bower/Waves/dist/waves.js',
-        'bower/toastr/toastr.js',
+        'bower/toastr/toastr.js'
     ], 'public/js/index-layout-core.js');
 
     // Layout > Scripts JS
@@ -90,7 +92,7 @@ elixir(function(mix) {
     // Layout > Components JS
     mix.scripts([
         'components/animsition.js',
-        'components/asscrollable.js',
+        'components/asscrollable.js'
     ], 'public/js/index-layout-components.js');
 
 
@@ -104,7 +106,7 @@ elixir(function(mix) {
     mix.scripts([
         'custom-configuration/js/bootstrap-table.js',
         'bower/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
-        'custom-configuration/js/bootstrap-table-es-ES.js',
+        'custom-configuration/js/bootstrap-table-es-ES.js'
     ], 'public/js/index-common.js');
 
     // Create-Edit Common JS
@@ -139,7 +141,7 @@ elixir(function(mix) {
     // Upload Common JS
     mix.scripts([
         'me/js/utilities/add_csrf_token.js',
-        'custom-configuration/js/fileinput.js',
+        'custom-configuration/js/fileinput.js'
     ], 'public/js/upload-common.js');
 
 
@@ -197,7 +199,7 @@ elixir(function(mix) {
         'bower/bootstrap-select/dist/js/bootstrap-select.js',
         'components/bootstrap-select.js',
         'components/bootstrap-datepicker.js',
-        'me/js/base/human-resources/daily-assistances/index-custom.js',
+        'me/js/base/human-resources/daily-assistances/index-custom.js'
     ], 'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js');
 
     // Human-Resources > Contracts > Index Custom Contracts JS

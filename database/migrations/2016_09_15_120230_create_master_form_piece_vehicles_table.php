@@ -16,7 +16,7 @@ class CreateMasterFormPieceVehiclesTable extends Migration
         Schema::create('master_form_piece_vehicles', function (Blueprint $table) {
             $table->increments('id');
 	        $table->string('name', 50);
-            $table->timestamps();
+	        $table->softDeletes();
         });
     }
 

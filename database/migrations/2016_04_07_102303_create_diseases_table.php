@@ -14,23 +14,12 @@ class CreateDiseasesTable extends Migration
     {
         Schema::create('diseases', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id')->unsigned();
-            $table->integer('type_disease_id')->unsigned();
+            $table->unsignedInteger('employee_id')->nullable();
+            $table->unsignedInteger('type_disease_id')->nullable();
             $table->boolean('treatment_disease')->default(false);
             $table->text('detail_disease');
+	        $table->softDeletes();
             $table->timestamps();
-            
-            $table->foreign('employee_id')
-                ->references('id')
-                ->on('employees')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            
-            $table->foreign('type_disease_id')
-                ->references('id')
-                ->on('type_diseases')
-                ->onUpdate('cascade');
-                        
         });
     }
 

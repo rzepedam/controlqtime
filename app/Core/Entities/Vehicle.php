@@ -3,10 +3,14 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Vehicle extends Eloquent
 {
+	use SoftDeletes, CascadeSoftDeletes;
+	
 	/**
 	 * @var array
 	 */
@@ -18,8 +22,15 @@ class Vehicle extends Eloquent
 	/**
 	 * @var array
 	 */
+	protected $cascadeDeletes = [
+		'detailVehicle', 'dateDocumentationVehicle', 'imagesable', 'checkVehicleForms'
+	];
+	
+	/**
+	 * @var array
+	 */
 	protected $dates = [
-		'acquisition_date', 'inscription_date'
+		'acquisition_date', 'inscription_date', 'deleted_at'
 	];
 	
 	

@@ -15,23 +15,13 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
-	        $table->unsignedInteger('employee_id');
+	        $table->unsignedInteger('commune_id')->nullable();
+	        $table->unsignedInteger('addressable_id')->nullable();
+	        $table->string('addressable_type')->nullable();
 	        $table->string('address', 75);
-	        $table->string('depto', 5);
-	        $table->string('block', 5);
-	        $table->string('num_home', 5);
-	        $table->unsignedInteger('commune_id');
-	
-	        $table->foreign('employee_id')
-		        ->references('id')
-		        ->on('employees')
-		        ->onUpdate('cascade');
-	        
-	        $table->foreign('commune_id')
-		        ->references('id')
-		        ->on('communes')
-		        ->onUpdate('cascade');
-	        
+	        $table->string('phone1', 20);
+	        $table->string('phone2', 20);
+	        $table->softDeletes();
         });
     }
 

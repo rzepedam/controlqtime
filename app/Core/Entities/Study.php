@@ -3,14 +3,12 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Study extends Eloquent
 {
-	/**
-	 * @var bool
-	 */
-	public $timestamps = false;
+	use SoftDeletes;
 	
 	/**
 	 * @var array
@@ -23,7 +21,7 @@ class Study extends Eloquent
 	 * @var array
 	 */
 	protected $dates = [
-		'date_obtention'
+		'date_obtention', 'deleted_at'
 	];
 	
 	/**

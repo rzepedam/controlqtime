@@ -2,15 +2,25 @@
 
 namespace Controlqtime\Core\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Disability extends Eloquent
 {
+	use SoftDeletes;
+	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
 		'type_disability_id', 'treatment_disability', 'detail_disability'
+	];
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
 	];
 	
 	

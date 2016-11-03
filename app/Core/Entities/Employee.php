@@ -3,29 +3,40 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Controlqtime\Core\Api\Entities\AccessControlApi;
-use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 use Illuminate\Notifications\Notifiable;
 use Controlqtime\Core\Helpers\FormatField;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Controlqtime\Core\Api\Entities\AccessControlApi;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class Employee extends Eloquent
 {
-	use Notifiable;
+	use Notifiable, SoftDeletes, CascadeSoftDeletes;
 	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
-		'user_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
+		'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
 		'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'gender_id', 'email_employee', 'state'
 	];
 	
 	/**
 	 * @var array
 	 */
+	protected $cascadeDeletes = [
+		'contactEmployees', 'familyRelationships', 'studies', 'certifications', 'specialities',
+        'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities',
+        'user', 'address', 'contract', 'accessControls', 'dailyAssistances', 'imagesable'
+	];
+	
+	/**
+	 * @var array
+	 */
 	protected $dates = [
-		'birthday'
+		'birthday', 'deleted_at'
 	];
 	
 	
@@ -35,6 +46,14 @@ class Employee extends Eloquent
 	public function accessControls()
 	{
 	    return $this->hasMany(AccessControlApi::class);
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function dailyAssistances()
+	{
+		return $this->hasMany(DailyAssistanceApi::class);
 	}
 	
 	/**
@@ -72,14 +91,6 @@ class Employee extends Eloquent
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function dailyAssistances()
-	{
-	    return $this->hasMany(DailyAssistanceApi::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
 	public function disabilities()
 	{
 		return $this->hasMany(Disability::class);
@@ -109,6 +120,9 @@ class Employee extends Eloquent
 		return $this->hasMany(FamilyRelationship::class);
 	}
 	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function familyResponsabilities()
 	{
 		return $this->hasMany(FamilyResponsability::class);
@@ -186,12 +200,13 @@ class Employee extends Eloquent
 		return $this->hasMany(Study::class);
 	}
 	
+	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
 	 */
 	public function user()
 	{
-		return $this->belongsTo(User::class);
+		return $this->hasOne(User::class);
 	}
 	
 	

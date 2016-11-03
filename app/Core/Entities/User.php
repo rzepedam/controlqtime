@@ -4,11 +4,12 @@ namespace Controlqtime\Core\Entities;
 
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-	use HasApiTokens, Notifiable;
+	use HasApiTokens, Notifiable, SoftDeletes;
 	
 	/**
 	 * The attributes that are mass assignable.
@@ -29,11 +30,18 @@ class User extends Authenticatable
 	];
 	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
+	];
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function employee()
 	{
-		return $this->hasOne(Employee::class);
+		return $this->belongsTo(Employee::class);
 	}
 
 }

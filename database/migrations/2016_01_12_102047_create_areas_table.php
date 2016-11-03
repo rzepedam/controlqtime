@@ -5,22 +5,26 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateAreasTable extends Migration
 {
-
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
     public function up()
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('terminal_id')->unsigned();
+            $table->unsignedInteger('terminal_id')->nullable();
             $table->string('name', 50);
-
-            $table->foreign('terminal_id')
-                ->references('id')
-                ->on('terminals')
-                ->onUpdate('cascade');
+	        $table->softDeletes();
         });
     }
-
-
+	
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
     public function down()
     {
         Schema::drop('areas');

@@ -4,7 +4,7 @@ $('#check_vehicle_form_table').bootstrapTable({
         {},
         {
             formatter : function(value, row) {
-                return row.employee.full_name;
+                return row.user.employee.full_name;
             }
         },
         {

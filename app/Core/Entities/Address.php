@@ -2,10 +2,14 @@
 
 namespace Controlqtime\Core\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Address extends Eloquent
 {
+	use SoftDeletes, CascadeSoftDeletes;
+	
 	/**
 	 * @var array
 	 */
@@ -14,9 +18,23 @@ class Address extends Eloquent
 	];
 	
 	/**
+	 * @var array
+	 */
+	protected $cascadeDeletes = [
+		'detailAddressCompany', 'detailAddressLegalEmployee'
+	];
+	
+	/**
 	 * @var bool
 	 */
 	public $timestamps = false;
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
+	];
 	
 	
 	/**

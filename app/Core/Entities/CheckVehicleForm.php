@@ -3,15 +3,25 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class CheckVehicleForm extends Eloquent
 {
+	use SoftDeletes;
+	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
 		'user_id', 'vehicle_id', 'master_form_piece_vehicle_id'
+	];
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
 	];
 	
 	
@@ -49,7 +59,7 @@ class CheckVehicleForm extends Eloquent
 	
 	
 	/**
-	 * @param date $value (2016-09-21 10:48:45)
+	 * @param $value (2016-09-21 10:48:45)
 	 *
 	 * @return string (01-10-2016)
 	 */

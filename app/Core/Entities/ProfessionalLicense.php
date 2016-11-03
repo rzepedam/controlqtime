@@ -4,9 +4,12 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfessionalLicense extends Eloquent
 {
+	use SoftDeletes;
+	
     /**
      * @var array
      */
@@ -18,7 +21,7 @@ class ProfessionalLicense extends Eloquent
      * @var array
      */
     protected $dates = [
-        'expired_license', 'emission_license'
+        'expired_license', 'emission_license', 'deleted_at'
     ];
 	
 	

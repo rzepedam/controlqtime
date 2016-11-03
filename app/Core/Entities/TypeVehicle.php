@@ -2,10 +2,20 @@
 
 namespace Controlqtime\Core\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class TypeVehicle extends Eloquent
 {
+	use SoftDeletes;
+	
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'name', 'engine_cubic_id', 'weight_id'
+	];
+	
 	/**
 	 * @var bool
 	 */
@@ -14,9 +24,10 @@ class TypeVehicle extends Eloquent
 	/**
 	 * @var array
 	 */
-	protected $fillable = [
-		'name', 'engine_cubic_id', 'weight_id'
+	protected $dates = [
+		'deleted_at'
 	];
+	
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -3,10 +3,13 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Speciality extends Eloquent
 {
+	use SoftDeletes;
+	
 	/**
 	 * @var array
 	 */
@@ -18,7 +21,7 @@ class Speciality extends Eloquent
 	 * @var array
 	 */
 	protected $dates = [
-		'emission_speciality', 'expired_speciality'
+		'emission_speciality', 'expired_speciality', 'deleted_at'
 	];
 	
 	

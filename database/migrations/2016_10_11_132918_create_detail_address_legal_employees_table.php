@@ -15,17 +15,11 @@ class CreateDetailAddressLegalEmployeesTable extends Migration
     {
         Schema::create('detail_address_legal_employees', function (Blueprint $table) {
             $table->increments('id');
-	        $table->unsignedInteger('address_id');
+	        $table->unsignedInteger('address_id')->nullable();
 	        $table->string('depto', 5);
 	        $table->string('block', 5);
 	        $table->string('num_home', 5);
-	        
-	        $table->foreign('address_id')
-		        ->references('id')
-		        ->on('addresses')
-	            ->onUpdate('cascade')
-		        ->onDelete('cascade');
-	        
+	        $table->softDeletes();
         });
     }
 

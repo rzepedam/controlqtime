@@ -2,14 +2,12 @@
 
 namespace Controlqtime\Core\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class City extends Eloquent
 {
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
+	use SoftDeletes;
 
     /**
      * @var array
@@ -17,6 +15,19 @@ class City extends Eloquent
     protected $fillable = [
         'name', 'country_id'
     ];
+	
+	/**
+	 * @var bool
+	 */
+	public $timestamps = false;
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
+	];
+	
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

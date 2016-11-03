@@ -2,17 +2,28 @@
 
 namespace Controlqtime\Core\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class ContactEmployee extends Eloquent
 {
+	use SoftDeletes;
+	
     /**
      * @var array
      */
     protected $fillable = [
         'contact_relationship_id', 'name_contact', 'email_contact', 'address_contact', 'tel_contact'
     ];
-
+	
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'deleted_at'
+	];
+	
+	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

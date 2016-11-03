@@ -76,9 +76,10 @@ $factory->define(Address::class, function (Faker\Generator $faker)
 $factory->define(AccessControlApi::class, function (Faker\Generator $faker)
 {
 	return [
-		'rut'        => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
-		'num_device' => $faker->macAddress,
-		'status'     => $faker->boolean
+		'employee_id' => 1,
+		'rut'         => '17032680-6',
+		'num_device'  => $faker->macAddress,
+		'status'      => $faker->boolean
 	];
 });
 

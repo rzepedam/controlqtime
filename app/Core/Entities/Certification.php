@@ -3,10 +3,13 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Certification extends Eloquent
 {
+	use SoftDeletes;
+	
     /**
      * @var array
      */
@@ -18,7 +21,7 @@ class Certification extends Eloquent
      * @var array
      */
     protected $dates = [
-        'emission_certification', 'expired_certification'
+        'emission_certification', 'expired_certification', 'deleted_at'
     ];
 	
 	

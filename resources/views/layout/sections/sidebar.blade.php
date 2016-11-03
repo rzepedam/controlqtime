@@ -4,7 +4,7 @@
             <div>
                 <ul class="site-menu">
                     {{-- Home --}}
-                    <li class="site-menu-item active">
+                    <li class="site-menu-item {{ Request::is('/') ? 'active' : '' }}">
                         <a class="animsition-link" href="{{ url('home') }}">
                             <i class="site-menu-icon fa fa-home" aria-hidden="true"></i>
                             <span class="site-menu-title">Inicio</span>
@@ -12,7 +12,7 @@
                     </li>
 
                     {{-- Administración --}}
-                    <li class="site-menu-item has-sub">
+                    <li class="site-menu-item {{ Request::is('administration*') ? 'active' : '' }} has-sub">
                         <a class="animsition-link" href="{{ route('administration') }}">
                             <i class="site-menu-icon fa fa-th-large" aria-hidden="true"></i>
                             <span class="site-menu-title">Administración</span>
@@ -20,7 +20,7 @@
                     </li>
 
                     {{-- Recursos Humanos --}}
-                    <li class="site-menu-item has-sub">
+                    <li class="site-menu-item {{ Request::is('human-resources*') ? 'active' : '' }} has-sub">
                         <a class="animsition-link" href="{{ route('human-resources') }}">
                             <i class="site-menu-icon fa fa-street-view" aria-hidden="true"></i>
                             <span class="site-menu-title">Recursos Humanos</span>
@@ -28,7 +28,7 @@
                     </li>
 
                     {{-- Operaciones --}}
-                    <li class="site-menu-item has-sub">
+                    <li class="site-menu-item {{ Request::is('operations*') ? 'active' : '' }} has-sub">
                         <a class="animsition-link" href="{{ route('operations') }}">
                             <i class="site-menu-icon fa fa-map-pin" aria-hidden="true"></i>
                             <span class="site-menu-title">Operaciones</span>
@@ -36,7 +36,7 @@
                     </li>
 
                     {{-- Mantenedores --}}
-                    <li class="site-menu-item">
+                    <li class="site-menu-item {{ Request::is('maintainers*') ? 'active' : '' }}">
                         <a class="animsition-link" href="{{ route('maintainers') }}">
                             <i class="site-menu-icon fa fa-cogs" aria-hidden="true"></i>
                             <span class="site-menu-title">Mantenedores</span>

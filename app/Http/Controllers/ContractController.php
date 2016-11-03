@@ -183,7 +183,7 @@ class ContractController extends Controller
 	/**
 	 * @param $request
 	 *
-	 * @return request with date expired
+	 * @return request with expired_at
 	 */
 	private function defineDateExpiredContract($request)
 	{
@@ -204,9 +204,8 @@ class ContractController extends Controller
 	public function show($id)
 	{
 		$contract = $this->contract->find($id, [
-			'company.commune.province', 'employee.address.commune.province.region',
-			'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
-			'gratification', 'typeContract', 'termsAndObligatories', 'company.legalRepresentative'
+			'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip',
+			'periodicityWork', 'gratification', 'typeContract', 'termsAndObligatories'
 		]);
 		
 		return view('human-resources.contracts.show', compact('contract'));

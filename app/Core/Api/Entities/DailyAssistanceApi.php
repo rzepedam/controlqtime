@@ -4,10 +4,20 @@ namespace Controlqtime\Core\Api\Entities;
 
 use Carbon\Carbon;
 use Controlqtime\Core\Entities\Employee;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DailyAssistanceApi extends Eloquent
 {
+	use SoftDeletes;
+	
+	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'rut', 'num_device', 'status', 'created_at'
+	];
+	
 	/**
 	 * @var bool
 	 */
@@ -16,8 +26,8 @@ class DailyAssistanceApi extends Eloquent
 	/**
 	 * @var array
 	 */
-	protected $fillable = [
-		'rut', 'num_device', 'status', 'created_at'
+	protected $dates = [
+		'deleted_at'
 	];
 	
 	
