@@ -43,5 +43,25 @@ class User extends Authenticatable
 	{
 		return $this->belongsTo(Employee::class);
 	}
-
+	
+	/**
+	 * Route notifications for the Slack channel.
+	 *
+	 * @return string
+	 */
+	public function routeNotificationForSlack()
+	{
+		return config('services.slack.url');
+	}
+	
+	/**
+	 * Route notifications for the Nexmo channel.
+	 *
+	 * @return string
+	 */
+	public function routeNotificationForNexmo()
+	{
+		return $this->employee->address->phone1;
+	}
+	
 }

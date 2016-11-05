@@ -5,7 +5,6 @@ namespace Controlqtime\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Controlqtime\Events\UserMessageSend;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
@@ -21,6 +20,7 @@ use Controlqtime\Core\Contracts\CommuneRepoInterface;
 use Controlqtime\Core\Contracts\CountryRepoInterface;
 use Controlqtime\Core\Contracts\DiseaseRepoInterface;
 use Controlqtime\Core\Contracts\PensionRepoInterface;
+use Controlqtime\Notifications\EmployeeWasRegistered;
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Controlqtime\Core\Contracts\ForecastRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
@@ -546,7 +546,8 @@ class EmployeeController extends Controller
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 			$this->activateEmployee->checkStateUpdateEmployee($id);
 			
-			event(new UserMessageSend($user));
+			$user->notify(new EmployeeWasRegistered($employee));
+			
 			DB::commit();
 		} catch (Exception $e)
 		{

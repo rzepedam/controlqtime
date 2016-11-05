@@ -22,7 +22,8 @@
         "laravel/passport": "^1.0",
         "doctrine/dbal": "^2.5",
         "pda/pheanstalk": "^3.1",
-        "iatstuti/laravel-cascade-soft-deletes": "1.0.*"
+        "iatstuti/laravel-cascade-soft-deletes": "1.0.*",
+        "nexmo/client": "1.0.0-beta3"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

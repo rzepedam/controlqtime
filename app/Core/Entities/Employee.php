@@ -3,7 +3,6 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Illuminate\Notifications\Notifiable;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
@@ -13,7 +12,7 @@ use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class Employee extends Eloquent
 {
-	use Notifiable, SoftDeletes, CascadeSoftDeletes;
+	use SoftDeletes, CascadeSoftDeletes;
 	
 	/**
 	 * @var array

@@ -11,8 +11,6 @@ class UpdateLastLoggedAt
 {
 	/**
 	 * Create the event listener.
-	 *
-	 * @return void
 	 */
 	public function __construct()
 	{
