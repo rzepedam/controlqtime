@@ -1,13 +1,12 @@
 <div class="panel">
     <div class="panel-body">
-        <div id="myToolbar" class="pull-left margin-bottom-10 padding-left-0 col-xs-9 col-sm-8 col-md-6"></div>
         <table class="table-hover table-condensed" id="company_table" data-mobile-responsive="true">
             <thead>
                 <tr>
-                    <th data-field="id" data-sortable="true">ID</th>
-                    <th data-field="firm_name" data-sortable="true">Nombre</th>
-                    <th data-field="email_company" data-sortable="true">Email</th>
-                    <th class="text-center">Acciones</th>
+                    <th class="col-sm-1 col-md-1" data-field="id" data-sortable="true">ID</th>
+                    <th class="col-xs-4 col-sm-5 col-md-5" data-field="firm_name" data-sortable="true">Nombre</th>
+                    <th class="col-xs-4 col-sm-4 col-md-4" data-field="email_company" data-sortable="true">Email</th>
+                    <th class="col-xs-3 col-sm-2 col-md-2 text-center">Acciones</th>
                 </tr>
             </thead>
         </table>
