@@ -239,3 +239,15 @@ img {
 .avatar img {
     height: 100%;
 }
+
+.dropdown-menu-media > .dropdown-menu-footer > .dropdown-menu-footer-btn {
+    color: #4CAF50 !important;
+}
+
+.dropdown-menu-media > .dropdown-menu-footer > .dropdown-menu-footer-btn:hover {
+    color: #4CAF50 !important;
+}
+
+.dropdown-menu-media > .dropdown-menu-footer > a {
+    color: #3f51b5 !important;
+}

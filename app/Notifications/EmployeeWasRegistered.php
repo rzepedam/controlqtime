@@ -35,7 +35,23 @@ class EmployeeWasRegistered extends Notification
 	 */
 	public function via($notifiable)
 	{
-		return ['mail', 'nexmo', 'slack'];
+		// return ['mail', 'nexmo', 'slack'];
+		return ['mail', 'database'];
+	}
+	
+	/**
+	 * Get the array representation of the notification.
+	 *
+	 * @param  mixed $notifiable
+	 *
+	 * @return array
+	 */
+	public function toArray($notifiable)
+	{
+		return [
+			'id'        => auth()->user()->employee->id,
+			'full_name' => auth()->user()->employee->full_name
+		];
 	}
 	
 	/**
@@ -90,20 +106,6 @@ class EmployeeWasRegistered extends Notification
 					'email'        => $this->employee->email_employee
 				]);
 			});
-	}
-	
-	/**
-	 * Get the array representation of the notification.
-	 *
-	 * @param  mixed $notifiable
-	 *
-	 * @return array
-	 */
-	public function toArray($notifiable)
-	{
-		return [
-			//
-		];
 	}
 	
 }

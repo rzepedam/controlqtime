@@ -16,95 +16,70 @@
                     </a>
                 </li>
             </ul>
+
             <!-- Navbar Toolbar Right -->
             <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
                 <li class="dropdown">
-                    <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false"
-                       data-animation="scale-up" role="button">
-                        <i class="icon md-notifications" aria-hidden="true"></i>
-                        <span class="badge badge-danger up">5</span>
+                    <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false" data-animation="scale-up" role="button">
+                        <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                        <span class="badge {{ auth()->user()->num_notifications > 0 ? 'badge-danger' : 'badge-info' }} up">
+                            {{ auth()->user()->num_notifications }}
+                        </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
                         <li class="dropdown-menu-header" role="presentation">
-                            <h5>NOTIFICATIONS</h5>
-                            <span class="label label-round label-danger">New 5</span>
+                            <h5>Notificaciones</h5>
+                            @if (auth()->user()->num_notifications > 0)
+                                <span class="label label-round label-danger padding-5">
+                                    No Leídas {{ auth()->user()->num_notifications }}
+                                </span>
+                            @endif
                         </li>
                         <li class="list-group" role="presentation">
                             <div data-role="container">
                                 <div data-role="content">
-                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                                        <div class="media">
-                                            <div class="media-left padding-right-10">
-                                                <i class="icon md-receipt bg-red-600 white icon-circle" aria-hidden="true"></i>
+                                    @foreach(auth()->user()->notifications as $notification)
+                                        <a href="{{ url("notifications/{$notification->id}") }}" class="list-group-item" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    @if ($notification->read_at == null)
+                                                        <h6 class="media-heading">
+                                                            {{ trans('notifications.' . class_basename($notification->type), $notification->data) }}
+                                                        </h6>
+                                                    @else
+                                                        <span class="media-heading">
+                                                            {{ trans('notifications.' . class_basename($notification->type), $notification->data) }}
+                                                        </span>
+                                                    @endif
+                                                    <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">
+                                                        hace {{ $notification->created_at->diffForHumans() }}
+                                                    </time>
+                                                </div>
                                             </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">A new order has been placed</h6>
-                                                <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">5 hours ago</time>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                                        <div class="media">
-                                            <div class="media-left padding-right-10">
-                                                <i class="icon md-account bg-green-600 white icon-circle" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">Completed the task</h6>
-                                                <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">2 days ago</time>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                                        <div class="media">
-                                            <div class="media-left padding-right-10">
-                                                <i class="icon md-settings bg-red-600 white icon-circle" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">Settings updated</h6>
-                                                <time class="media-meta" datetime="2015-06-11T14:05:00+08:00">2 days ago</time>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                                        <div class="media">
-                                            <div class="media-left padding-right-10">
-                                                <i class="icon md-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">Event started</h6>
-                                                <time class="media-meta" datetime="2015-06-10T13:50:18+08:00">3 days ago</time>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                                        <div class="media">
-                                            <div class="media-left padding-right-10">
-                                                <i class="icon md-comment bg-orange-600 white icon-circle" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">Message received</h6>
-                                                <time class="media-meta" datetime="2015-06-10T12:34:48+08:00">3 days ago</time>
-                                            </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                        @if ($loop->index == 3)
+                                            @break
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </li>
-                        <li class="dropdown-menu-footer" role="presentation">
-                            <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                                <i class="icon md-settings" aria-hidden="true"></i>
-                            </a>
+                        <li class="dropdown-menu-footer padding-top-10" role="presentation">
+                            @if (auth()->user()->num_notifications > 0)
+                                <a href="{{ url('notifications/mark-all-read') }}" class="dropdown-menu-footer-btn" role="button">
+                                    <i class="icon md-check-all" aria-hidden="true"></i>
+                                </a>
+                            @endif
                             <a href="javascript:void(0)" role="menuitem">
-                                All notifications
+                                <i class="icon md-alarm" aria-hidden="true"></i> Ver Historial
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
-                        <span class="avatar avatar-online">
+                        <span class="avatar">
                             <img src="{{ auth()->user()->employee->url }}">
-                            <i></i>
                         </span>
                     </a>
                     <ul class="dropdown-menu" role="menu">

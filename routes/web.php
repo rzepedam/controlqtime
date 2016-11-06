@@ -2,6 +2,8 @@
 
 require base_path() . '/app/Http/Routes/home/admin.php';
 
+require base_path() . '/app/Http/Routes/notifications/admin.php';
+
 require base_path() . '/app/Http/Routes/administration/admin.php';
 
 require base_path() . '/app/Http/Routes/human-resources/admin.php';

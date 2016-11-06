@@ -64,4 +64,12 @@ class User extends Authenticatable
 		return $this->employee->address->phone1;
 	}
 	
+	/**
+	 * @return int
+	 */
+	public function getNumNotificationsAttribute()
+	{
+		return count($this->unreadNotifications);
+	}
+	
 }

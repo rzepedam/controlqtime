@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -366,11 +367,9 @@ class EmployeeController extends Controller
 			$this->exam->createOrUpdateWithArray($request->all(), $employee);
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 			
-			event(new UserMessageSend($user));
+			$user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionStoreEmployee();
-			
 			DB::commit();
-			
 		} catch (Exception $e)
 		{
 			DB::rollBack();
@@ -547,7 +546,6 @@ class EmployeeController extends Controller
 			$this->activateEmployee->checkStateUpdateEmployee($id);
 			
 			$user->notify(new EmployeeWasRegistered($employee));
-			
 			DB::commit();
 		} catch (Exception $e)
 		{
