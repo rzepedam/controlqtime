@@ -124,8 +124,81 @@ class Contract extends Eloquent
     {
         return $this->belongsToMany(TermAndObligatory::class);
     }
+	
     
-
+	/**
+	 * @param string $value (09:00)
+	 */
+	public function setInitMorningAttribute($value)
+    {
+        $this->attributes['init_morning'] = str_replace(":", "", $value);
+    }
+	
+	/**
+	 * @param string $value (13:00)
+	 */
+	public function setEndMorningAttribute($value)
+	{
+		$this->attributes['end_morning'] = str_replace(":", "", $value);
+	}
+	
+	/**
+	 * @param string $value (14:00)
+	 */
+	public function setInitAfternoonAttribute($value)
+	{
+		$this->attributes['init_afternoon'] = str_replace(":", "", $value);
+	}
+	
+	/**
+	 * @param string $value (19:00)
+	 */
+	public function setEndAfternoonAttribute($value)
+	{
+		$this->attributes['end_afternoon'] = str_replace(":", "", $value);
+	}
+	
+	
+	/**
+	 * @param $value (0900)
+	 *
+	 * @return string (09:00)
+	 */
+	public function getInitMorningAttribute($value)
+	{
+		return implode(':', str_split($value, 2));
+	}
+	
+	/**
+	 * @param $value (1300)
+	 *
+	 * @return string (13:00)
+	 */
+	public function getEndMorningAttribute($value)
+	{
+		return implode(':', str_split($value, 2));
+	}
+	
+	/**
+	 * @param $value (1400)
+	 *
+	 * @return string (14:00)
+	 */
+	public function getInitAfternoonAttribute($value)
+	{
+		return implode(':', str_split($value, 2));
+	}
+	
+	/**
+	 * @param $value (1900)
+	 *
+	 * @return string (19:00)
+	 */
+	public function getEndAfternoonAttribute($value)
+	{
+		return implode(':', str_split($value, 2));
+	}
+	
     /**
      * @param date $value (2016-10-01 10:22:46)
      *
