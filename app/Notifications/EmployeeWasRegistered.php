@@ -12,7 +12,7 @@ use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Messages\SlackAttachment;
 
-class EmployeeWasRegistered extends Notification implements ShouldQueue
+class EmployeeWasRegistered extends Notification
 {
 	use Queueable;
 	
@@ -35,8 +35,7 @@ class EmployeeWasRegistered extends Notification implements ShouldQueue
 	 */
 	public function via($notifiable)
 	{
-		// return ['mail', 'nexmo', 'slack'];
-		return ['database', 'mail'];
+		return ['database', 'mail', 'nexmo', 'slack'];
 	}
 	
 	/**
