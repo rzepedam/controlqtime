@@ -82,9 +82,7 @@
                                 <span>
                                     <i class="md-mood text-warning font-size-24" aria-hidden="true"></i>
                                 </span>
-                                <span class="vertical-align-middle">
-                                    No posee notificaciones
-                                </span>
+                                No posee notificaciones
                             </li>
                         </ul>
                     @endif

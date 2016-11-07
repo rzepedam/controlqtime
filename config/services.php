@@ -40,8 +40,12 @@ return [
 		'secret'   => env('NEXMO_SECRET'),
 		'sms_from' => env('NEXMO_PHONE'),
 	],
-    
-    'slack' => [
-    	'url' => env('SLACK_WEBHOOK')
-    ]
+	
+	'slack' => [
+		'url' => env('SLACK_WEBHOOK')
+	],
+	
+	'biometry' => [
+		'bearer' => env('BIOMETRY_BEARER')
+	]
 ];

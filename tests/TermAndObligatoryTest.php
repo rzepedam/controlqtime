@@ -26,7 +26,7 @@ class TermAndObligatoryTest extends TestCase
 			->assertResponseOk();
 	}
 	
-	public function test_create_new_term_and_obligatory_with_act_equals_false()
+	public function test_create_new_term_and_obligatory_with_default_equals_false()
 	{
 		$user = User::first();
 		
@@ -36,37 +36,37 @@ class TermAndObligatoryTest extends TestCase
 			->type('Test to new term and obligatory', 'name')
 			->press('Guardar')
 			->seeInDatabase('term_and_obligatories', [
-				'name' => 'Test to new term and obligatory',
-				'act'  => false
+				'name'    => 'Test to new term and obligatory',
+				'default' => false
 			]);
 	}
 	
-	public function test_create_new_term_and_obligatory_with_act_equals_true()
+	public function test_create_new_term_and_obligatory_with_default_equals_true()
 	{
 		$user = User::first();
 		
 		$this->actingAs($user)
 			->visit('maintainers/terms-and-obligatories/create')
-			->check('act')
+			->check('default')
 			->type('Test to Second create term and obligatory', 'name')
 			->press('Guardar')
 			->seeInDatabase('term_and_obligatories', [
-				'name' => 'Test to Second create term and obligatory',
-				'act'  => true
+				'name'    => 'Test to Second create term and obligatory',
+				'default' => true
 			]);
 	}
 	
-	public function test_dont_see_act_true_in_database_when_is_save_with_false()
+	public function test_dont_see_default_true_in_database_when_is_save_with_false()
 	{
 		$user = User::first();
 		
 		$this->actingAs($user)
 			->visit('maintainers/terms-and-obligatories/create')
-			->type('Test with act equals false', 'name')
+			->type('Test with default equals false', 'name')
 			->press('Guardar')
 			->dontSeeInDatabase('term_and_obligatories', [
-				'name' => 'Test with act equals false',
-				'act'  => true
+				'name'    => 'Test with default equals false',
+				'default' => true
 			]);
 	}
 	
@@ -74,13 +74,13 @@ class TermAndObligatoryTest extends TestCase
 	{
 		$user   = User::first();
 		$term   = TermAndObligatory::first();
-		$method = $term->act ? 'seeIsChecked' : 'dontSeeIsChecked';
+		$method = $term->default ? 'seeIsChecked' : 'dontSeeIsChecked';
 		
 		$this->actingAs($user)
 			->visit('maintainers/terms-and-obligatories/' . $term->id . '/edit')
 			->see('Editar Cláusula y Obligación: <span class="text-primary">' . $term->id . '</span>')
 			->seeInField('name', $term->name)
-			->$method('act')
+			->$method('default')
 			->assertResponseOk();
 	}
 	
@@ -93,8 +93,8 @@ class TermAndObligatoryTest extends TestCase
 			->type('', 'name')
 			->press('Guardar')
 			->dontSeeInDatabase('term_and_obligatories', [
-				'name' => '',
-				'act'  => false
+				'name'    => '',
+				'default' => false
 			])
 			->assertResponseOk();
 	}
@@ -103,32 +103,32 @@ class TermAndObligatoryTest extends TestCase
 	{
 		$user = User::first();
 		$term = TermAndObligatory::first();
-		$act  = $term->act ? true : false;
+		$act  = $term->default ? true : false;
 		
 		$this->actingAs($user)
 			->visit('maintainers/terms-and-obligatories/' . $term->id . '/edit')
 			->type('New text name for Term and Obligatory', 'name')
 			->press('Actualizar')
 			->seeInDatabase('term_and_obligatories', [
-				'id'   => $term->id,
-				'name' => 'New text name for Term and Obligatory',
-				'act'  => $act
+				'id'      => $term->id,
+				'name'    => 'New text name for Term and Obligatory',
+				'default' => $act
 			]);
 	}
 	
-	public function test_edit_act_in_term_and_obligatory()
+	public function test_edit_default_in_term_and_obligatory()
 	{
 		$user = User::first();
 		$term = TermAndObligatory::first();
 		
 		$this->actingAs($user)
 			->visit('maintainers/terms-and-obligatories/' . $term->id . '/edit')
-			->check('act')
+			->check('default')
 			->press('Actualizar')
 			->seeInDatabase('term_and_obligatories', [
-				'id'   => $term->id,
-				'name' => $term->name,
-				'act'  => true
+				'id'      => $term->id,
+				'name'    => $term->name,
+				'default' => true
 			]);
 	}
 }

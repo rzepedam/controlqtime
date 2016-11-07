@@ -38,7 +38,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Authorization' => config('services.biometry.bearer'),
 			'Accept'        => 'application/json'])
 			->seeJson([
 				'success' => true,
@@ -55,7 +55,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Authorization' => config('services.biometry.bearer'),
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
@@ -74,7 +74,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Authorization' => config('services.biometry.bearer'),
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
@@ -92,7 +92,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Authorization' => config('services.biometry.bearer'),
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
@@ -110,7 +110,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Authorization' => config('services.biometry.bearer'),
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
@@ -128,12 +128,12 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Authorization' => config('services.biometry.bearer'),
 			'Accept'        => 'application/json'])
 			->assertResponseOk();
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => getenv('BIOMETRY_BEARER'),
+			'Authorization' => config('services.biometry.bearer'),
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
