@@ -129,5 +129,5 @@ class LegalRepresentative extends Eloquent
     {
         return FormatField::rut($value);
     }
-
+    
 }

@@ -19,10 +19,10 @@ class ActivateCompany extends Eloquent implements ActivateCompanyInterface
 	 * @param CompanyRepoInterface $company
 	 */
 	public function __construct(CompanyRepoInterface $company)
-    {
-	
-	    $this->company = $company;
-    }
+	{
+		
+		$this->company = $company;
+	}
 	
 	public function checkStateCompany($id)
 	{
@@ -32,6 +32,9 @@ class ActivateCompany extends Eloquent implements ActivateCompanyInterface
 			return $this->saveStateDisableCompany($company);
 		
 		if ($company->images_patent->isEmpty())
+			return $this->saveStateDisableCompany($company);
+		
+		if ($company->images_carnet->isEmpty())
 			return $this->saveStateDisableCompany($company);
 		
 		
@@ -45,7 +48,7 @@ class ActivateCompany extends Eloquent implements ActivateCompanyInterface
 	 */
 	public function saveStateDisableCompany($company)
 	{
-		$company->state     = 'disable';
+		$company->state = 'disable';
 		
 		return $company->save();
 	}

@@ -1,68 +1,100 @@
 <!DOCTYPE html>
-<html class="no-js css-menubar" lang="es">
+<html class="no-js css-menubar" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="bootstrap admin template">
-    <meta name="author" content="">
-    <title>
-        @yield('title')
-    </title>
-    <link rel="shortcut icon" href="{{ asset('me/img/favicon.ico') }}">
+    <meta name="description" content="CQTime - Where questions find answers">
+    <meta name="author" content="Raúl Elías Meza Mora">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <title>Login</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-extend.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-core.css') }}">
     <!-- Plugins -->
-    <link rel="stylesheet" href="{{ asset('assets/css/animsition.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/asScrollable.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/waves.css') }}">
-    {{ Html::style('me/css/style.css') }}
-    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/font-awesome.min.css') }}">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <!--[if lt IE 9]>
-    <script src="{{ asset('assets/js/html5shiv.min.js') }}"></script>
-    <![endif]-->
-    <!--[if lt IE 10]>
-    <script src="{{ asset('assets/js/media.match.min.js') }}"></script>
-    <script src="{{ asset('assets/js/respond.min.js') }}"></script>
-    <![endif]-->
-    <!-- Scripts -->
-    <script src="{{ asset('assets/js/modernizr.js') }}"></script>
-    <script src="{{ asset('assets/js/breakpoints.js') }}"></script>
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-plugin.css') }}">
+    <!-- Style Login -->
+    <link rel="stylesheet" href="{{ elixir('css/login/login.css') }}">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-fonts.css') }}">
+    <!-- Browsers Utilities -->
+    <script src="{{ elixir('js/index-layout-browser-utilities.js') }}"></script>
     <script>
         Breakpoints();
     </script>
 </head>
 <body class="page-login-v3 layout-full">
+    <div class="page animsition vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
+        <div class="page-content vertical-align-middle">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="brand">
+                        <img class="brand-img" src="{{ asset('img/logo_login.png') }}" alt="...">
+                        <h2 class="brand-text font-size-18">ControlQTime</h2>
+                    </div>
+                    <form role="form" method="POST" action="{{ url('/login') }}" autocomplete="off">
+                        {{ csrf_field() }}
+                        <div class="form-group form-material floating">
+                            <input type="email" class="form-control" name="email" autocomplete="off" />
+                            <label class="floating-label">Email</label>
+                        </div>
+                        <div class="form-group form-material floating">
+                            <input type="password" class="form-control" name="password" autocomplete="off" />
+                            <label class="floating-label">Password</label>
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="checkbox-custom checkbox-inline checkbox-primary checkbox-lg pull-left">
+                                <input type="checkbox" id="inputCheckbox" name="remember">
+                                <label for="inputCheckbox">Recuérdame</label>
+                            </div>
+                            <a class="pull-right" href="{{ url('/password/reset') }}">Olvidó contraseña?</a>
+                        </div>
+                        @if ($errors->has('email'))
+                            <div class="alert alert-danger alert-dismissible clearfix font-size-12">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </div>
+                        @endif
+                        @if ($errors->has('password'))
+                            <div class="alert alert-danger alert-dismissible clearfix font-size-12">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </div>
+                        @endif
+                        <button type="submit" class="btn btn-primary btn-block btn-lg margin-top-40">Login</button>
+                    </form>
+                </div>
+            </div>
+            <footer class="page-copyright page-copyright-inverse">
+                <p>© 2016. All RIGHT RESERVED.</p>
+                <div class="social">
+                    <a class="btn btn-icon btn-pure" href="javascript:void(0)">
+                        <i class="icon md-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-pure" href="javascript:void(0)">
+                        <i class="icon md-facebook" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-pure" href="javascript:void(0)">
+                        <i class="icon md-google-plus" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </div>
 
-    @yield('content')
-
-    {{-- Core  --}}
-    <script src="{{ asset('assets/js/jquery.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/js/animsition.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-asScroll.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.mousewheel.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.asScrollable.all.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-asHoverScroll.js') }}"></script>
-    <script src="{{ asset('assets/js/waves.js') }}"></script>
-
-    {{-- Scripts --}}
-    <script src="{{ asset('assets/js/core.js') }}"></script>
-    <script src="{{ asset('assets/js/site.js') }}"></script>
-    <script src="{{ asset('assets/js/menu.js') }}"></script>
-    <script src="{{ asset('assets/js/menubar.js') }}"></script>
-    <script src="{{ asset('assets/js/sidebar.js') }}"></script>
-    <script src="{{ asset('assets/js/v1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/components/asscrollable.js') }}"></script>
-    <script src="{{ asset('assets/js/components/animsition.js') }}"></script>
-    <script src="{{ asset('assets/js/components/tabs.js') }}"></script>
-    {{ Html::script('assets/js/config.js') }}
+    <!-- Core  -->
+    <script src="{{ elixir('js/index-layout-core.js') }}"></script>
+    <!-- Scripts -->
+    <script src="{{ elixir('js/index-layout-scripts.js') }}"></script>
+    <!-- Components -->
+    <script src="{{ elixir('js/index-layout-components.js') }}"></script>
+    <!-- Login JS -->
+    <script src="{{ elixir('js/login/login.js') }}"></script>
 
 </body>
 </html>

@@ -139,4 +139,12 @@ class Company extends Eloquent
 	{
 		return $this->imagesable()->where('path', 'like', '%Patent%')->get();
 	}
+	
+	/**
+	 * @return all images related with Carnet Legal Representative
+	 */
+	public function getImagesCarnetAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%Carnet%')->get();
+	}
 }

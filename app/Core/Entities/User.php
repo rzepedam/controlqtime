@@ -69,6 +69,14 @@ class User extends Authenticatable
 	 */
 	public function getNumNotificationsAttribute()
 	{
+		return count($this->notifications);
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumNotificationsUnreadAttribute()
+	{
 		return count($this->unreadNotifications);
 	}
 	

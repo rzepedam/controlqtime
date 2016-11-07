@@ -31,11 +31,22 @@ elixir(function(mix) {
 
 
 
+    // Login CSS
+    mix.styles([
+        'me/css/login/login.css'
+    ], 'public/css/login/login.css');
+
+    // Login JS
+    mix.scripts([
+        'components/material.js'
+    ], 'public/js/login/login.js');
+
+
     // Layout > Stylesheets CSS
     mix.styles([
         'bower/packages-for-cqtime/css/bootstrap.css',
         'bower/packages-for-cqtime/css/bootstrap-extend.css',
-        'bower/packages-for-cqtime/css/site.css',
+        'bower/packages-for-cqtime/css/site.css'
     ], 'public/css/index-layout-core.css');
 
     // Layout > Plugins CSS
@@ -60,7 +71,7 @@ elixir(function(mix) {
     ], 'public/css/style.css');
 
     // Layout > Script Browsers Utilities
-    mix.styles([
+    mix.scripts([
         'bower/packages-for-cqtime/js/modernizr.js',
         'bower/breakpoints.js/dist/breakpoints.js'
     ], 'public/js/index-layout-browser-utilities.js');
@@ -546,19 +557,25 @@ elixir(function(mix) {
     mix.copy('resources/assets/bower/packages-for-cqtime/fonts', 'public/build/fonts');
     // Copy fonts Owned
     mix.copy('resources/assets/me/fonts/', 'public/build/fonts', 'public/build/fonts');
-    // Copy image Bootstrap-FileInput loading.gif
-    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading.gif', 'public/build/img');
-    // Copy image Bootstrap-FileInput loading-sm.gif
-    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading-sm.gif', 'public/build/img');
+
 
     // Copy image logo.png
     mix.copy('resources/assets/me/img/logo.png', 'public/img');
+    // Copy image favicon.ico
+    mix.copy('resources/assets/me/img/favicon.ico', 'public/img');
     // Copy image remark.png
     mix.copy('resources/assets/me/img/remark.png', 'public/img');
     // Copy image sidebar dashboard-header.png
     mix.copy('resources/assets/me/img/dashboard-header.jpg', 'public/img');
     // Copy image for Header PDF-Contracts Stop_Frenos.png
     mix.copy('resources/assets/me/img/Stop_Frenos.png', 'public/img');
+    // Copy image for Login logo_login.png
+    mix.copy('resources/assets/me/img/logo_login.png', 'public/img');
+    // Copy image Bootstrap-FileInput loading.gif
+    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading.gif', 'public/build/img');
+    // Copy image Bootstrap-FileInput loading-sm.gif
+    mix.copy('resources/assets/bower/bootstrap-fileinput/img/loading-sm.gif', 'public/build/img');
+
 
     // Copy Bootstrap for Pdf-Contracts
     mix.copy('resources/assets/bower/packages-for-cqtime/css/bootstrap.css', 'public/css/human-resources/contracts/pdf');
@@ -577,6 +594,9 @@ elixir(function(mix) {
      *  Output with version
      */
     mix.version([
+        'public/css/login/login.css',
+        'public/js/login/login.js',
+
         'public/css/index-layout-core.css',
         'public/css/index-layout-plugin.css',
         'public/css/index-layout-fonts.css',

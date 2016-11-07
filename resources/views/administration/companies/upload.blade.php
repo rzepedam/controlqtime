@@ -55,6 +55,24 @@
     <br />
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <strong>#</strong> Carnet Representante Legal
+                    </h3>
+                </div>
+                <div class="panel-body">
+
+                    <br />
+                    <input id="carnet" type="file" class="file-loading" multiple>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
             <a href="{{ route('companies.index') }}">Volver</a>
         </div>
     </div>
@@ -112,6 +130,29 @@
                     repo_id: '',
                     type: "Company",
                     subClass: "Patent/"
+                }
+            });
+
+            /*
+             * Carnet Identidad
+             */
+            $("#carnet").fileinput({
+                initialPreview: [
+                    @foreach($company->images_carnet as $image_carnet)
+                        "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_carnet->path) }}' />",
+                    @endforeach
+                ],
+                initialPreviewConfig: [
+                    @foreach($company->images_carnet as $image_carnet)
+                        { caption: "{{ $image_carnet->orig_name }}", size: "{{ $image_carnet->size }}", url: "{{ route('CompanyDeleteFiles') }}", key: "{{ $image_carnet->id }}", extra: { path: "{{ $image_carnet->path }}", id: "{{ $id }}", type: "Company" } },
+                    @endforeach
+                ],
+                uploadUrl: "{{ route('CompanyAddImages') }}",
+                uploadExtraData:  {
+                    company_id: "{{ $id }}",
+                    repo_id: '',
+                    type: "Company",
+                    subClass: "Carnet/"
                 }
             });
 
