@@ -12,7 +12,7 @@ use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Messages\SlackAttachment;
 
-class EmployeeWasRegistered extends Notification
+class EmployeeWasRegistered extends Notification implements ShouldQueue
 {
 	use Queueable;
 	
@@ -21,9 +21,12 @@ class EmployeeWasRegistered extends Notification
 	 */
 	public $employee;
 	
+	public $user;
+	
 	public function __construct(Employee $employee)
 	{
 		$this->employee = $employee;
+		$this->user     = auth()->user()->employee;
 	}
 	
 	/**
@@ -48,8 +51,8 @@ class EmployeeWasRegistered extends Notification
 	public function toDatabase($notifiable)
 	{
 		return [
-			'id'   => auth()->user()->employee->id,
-			'name' => auth()->user()->employee->full_name
+			'id'   => $this->user->id,
+			'name' => $this->user->full_name
 		];
 	}
 	
