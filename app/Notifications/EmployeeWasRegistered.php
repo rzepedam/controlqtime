@@ -98,7 +98,7 @@ class EmployeeWasRegistered extends Notification implements ShouldQueue
 	{
 		return (new SlackMessage)
 			->success()
-			->content('Un usuario ha sido actualizado')
+			->content("{$this->user->full_name}Un usuario ha sido actualizado")
 			->attachment(function (SlackAttachment $attachment)
 			{
 				$attachment->fields([
