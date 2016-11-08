@@ -589,11 +589,11 @@ class EmployeeController extends Controller
 			$employee = $this->employee->find($id);
 			$this->activateEmployee->saveStateDisableEmployee($employee);
 			$this->employee->delete($id);
-		       
-		    DB::commit();
+			
+			DB::commit();
 		} catch (Exception $e)
 		{
-		    DB::rollback();
+			DB::rollback();
 		}
 		
 		return redirect()->route('employees.index');

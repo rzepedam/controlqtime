@@ -21,8 +21,16 @@ class EmployeeWasRegistered extends Notification implements ShouldQueue
 	 */
 	public $employee;
 	
+	/**
+	 * @var Employee
+	 */
 	public $user;
 	
+	/**
+	 * EmployeeWasRegistered constructor.
+	 *
+	 * @param Employee $employee
+	 */
 	public function __construct(Employee $employee)
 	{
 		$this->employee = $employee;
@@ -38,7 +46,8 @@ class EmployeeWasRegistered extends Notification implements ShouldQueue
 	 */
 	public function via($notifiable)
 	{
-		return ['database', 'mail', 'nexmo', 'slack'];
+		//return ['database', 'mail', 'nexmo', 'slack'];
+		return ['database', 'mail', 'slack'];
 	}
 	
 	/**
