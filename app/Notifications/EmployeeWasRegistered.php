@@ -46,8 +46,7 @@ class EmployeeWasRegistered extends Notification implements ShouldQueue
 	 */
 	public function via($notifiable)
 	{
-		//return ['database', 'mail', 'nexmo', 'slack'];
-		return ['database', 'mail', 'slack'];
+		return ['database', 'mail', 'nexmo', 'slack'];
 	}
 	
 	/**
