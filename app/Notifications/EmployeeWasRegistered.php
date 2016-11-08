@@ -84,7 +84,7 @@ class EmployeeWasRegistered extends Notification implements ShouldQueue
 	public function toNexmo($notifiable)
 	{
 		return (new NexmoMessage)
-			->content('El usuario ' . FormatField::removeAccents($this->employee->full_name) . ' ha actualizado su perfil en CQTime');
+			->content(FormatField::removeAccents($this->user->full_name) . " ha actualizado tu perfil");
 	}
 	
 	/**
@@ -98,7 +98,7 @@ class EmployeeWasRegistered extends Notification implements ShouldQueue
 	{
 		return (new SlackMessage)
 			->success()
-			->content("{$this->user->full_name}Un usuario ha sido actualizado")
+			->content("{$this->user->full_name} ha actualizado tu perfil")
 			->attachment(function (SlackAttachment $attachment)
 			{
 				$attachment->fields([
