@@ -79,10 +79,9 @@
                     @else
                         <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
                             <li class="dropdown-menu-header text-center" role="presentation">
-                                <span>
-                                    <i class="md-mood text-warning font-size-24" aria-hidden="true"></i>
-                                </span>
+                                <i class="md-mood text-warning font-size-24 vertical-align-middle" aria-hidden="true"></i>
                                 No posee notificaciones
+                            </li>
                             </li>
                         </ul>
                     @endif

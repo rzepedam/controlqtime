@@ -8,6 +8,7 @@
     "bootstrap-datepicker": "^1.6.4",
     "jquery-rut-plugin": "^0.5.0",
     "animsition": "^4.0.2",
+    "jquery-mousewheel": "https://github.com/jquery/jquery-mousewheel.git",
     "jquery-asScrollable": "^0.4.5",
     "Waves": "https://github.com/fians/Waves.git#^0.7.5",
     "toastr": "^2.1.3",
