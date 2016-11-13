@@ -15,7 +15,7 @@ class AccessControlApiTest extends TestCase
 		$this->assertEquals(302, $response->getStatusCode());
 	}
 	
-	function test_unauthenticated_access()
+	/*function test_unauthenticated_access()
 	{
 		$headers = [
 			'Authorization' => 'Bearer test',
@@ -139,6 +139,6 @@ class AccessControlApiTest extends TestCase
 			->seeJsonEquals([
 				'rut' => ['La combinación de Rut, Fecha Creación ya existe.']
 			]);
-	}
+	}*/
 	
 }

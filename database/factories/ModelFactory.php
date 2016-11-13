@@ -4,9 +4,31 @@ use Controlqtime\Core\Entities\User;
 use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\TypeContract;
+use Controlqtime\Core\Entities\TermAndObligatory;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Entities\MasterFormPieceVehicle;
+
+$factory->define(AccessControlApi::class, function (Faker\Generator $faker)
+{
+	return [
+		'employee_id' => 1,
+		'rut'         => '17032680-6',
+		'num_device'  => $faker->macAddress,
+		'status'      => $faker->boolean
+	];
+});
+
+$factory->define(Address::class, function (Faker\Generator $faker)
+{
+	return [
+		'addressable_id'   => factory(Employee::class)->create()->id,
+		'addressable_type' => 'Controlqtime\Core\Entities\Employee',
+		'address'          => $faker->address,
+		'commune_id'       => rand(1, 53),
+	];
+});
 
 $factory->define(Company::class, function (Faker\Generator $faker)
 {
@@ -20,21 +42,6 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 		'email_company'   => $faker->email,
 	];
 	
-});
-
-$factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
-{
-	return [
-		'company_id'           => factory(Company::class)->create()->id,
-		'male_surname'         => $faker->lastName,
-		'female_surname'       => $faker->lastName,
-		'first_name'           => $faker->firstName,
-		'second_name'          => $faker->firstName,
-		'rut_representative'   => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
-		'birthday'             => $faker->date($format = 'd-m-Y', $max = 'now'),
-		'nationality_id'       => rand(1, 9),
-		'email_representative' => $faker->email,
-	];
 });
 
 $factory->define(Employee::class, function (Faker\Generator $faker)
@@ -63,23 +70,18 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	];
 });
 
-$factory->define(Address::class, function (Faker\Generator $faker)
+$factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 {
 	return [
-		'addressable_id'   => factory(Employee::class)->create()->id,
-		'addressable_type' => 'Controlqtime\Core\Entities\Employee',
-		'address'          => $faker->address,
-		'commune_id'       => rand(1, 53),
-	];
-});
-
-$factory->define(AccessControlApi::class, function (Faker\Generator $faker)
-{
-	return [
-		'employee_id' => 1,
-		'rut'         => '17032680-6',
-		'num_device'  => $faker->macAddress,
-		'status'      => $faker->boolean
+		'company_id'           => factory(Company::class)->create()->id,
+		'male_surname'         => $faker->lastName,
+		'female_surname'       => $faker->lastName,
+		'first_name'           => $faker->firstName,
+		'second_name'          => $faker->firstName,
+		'rut_representative'   => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
+		'birthday'             => $faker->date($format = 'd-m-Y', $max = 'now'),
+		'nationality_id'       => rand(1, 9),
+		'email_representative' => $faker->email,
 	];
 });
 
@@ -91,10 +93,27 @@ $factory->define(MasterFormPieceVehicle::class, function ()
 	];
 });
 
+$factory->define(TermAndObligatory::class, function (Faker\Generator $faker)
+{
+	return [
+		'name'    => $faker->sentence,
+		'default' => $faker->boolean
+	];
+});
+
+$factory->define(TypeContract::class, function (Faker\Generator $faker)
+{
+	return [
+		'name' => $faker->word,
+		'dur'  => $faker->numberBetween(1, 12)
+	];
+});
+
 $factory->define(User::class, function (Faker\Generator $faker)
 {
 	return [
-		'email'    => $faker->email,
-		'password' => bcrypt("$faker->password")
+		'employee_id' => 1,
+		'email'       => $faker->email,
+		'password'    => bcrypt("$faker->password")
 	];
 });

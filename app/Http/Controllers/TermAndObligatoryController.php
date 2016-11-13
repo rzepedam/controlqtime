@@ -53,8 +53,14 @@ class TermAndObligatoryController extends Controller
      */
     public function store(TermAndObligatoryRequest $request)
     {
-        $this->termAndObligatory->create($request->all());
-
+	    // Al estar desactivado el elemento "predeterminado", no envía nada al Backend.
+	    // Es necesario agregar su comportamiento manualmente para su correcta actualización.
+	    $data = $request->all();
+	    if (! array_key_exists('default', $data))
+		    $data['default'] = false;
+	    
+        $this->termAndObligatory->create($data);
+		
         return response()->json([
             'success' => true,
             'url'     => '/maintainers/terms-and-obligatories'
