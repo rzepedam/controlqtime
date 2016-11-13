@@ -85,7 +85,7 @@ class AccessControlApiTest extends TestCase
 	function test_not_create_access_control_if_status_not_exists()
 	{
 		$data = [
-			'rut'        => '5809778-0',
+			'rut'        => '17032680-6',
 			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
 			'status'     => '',
 			'created_at' => Carbon::now()
@@ -103,7 +103,7 @@ class AccessControlApiTest extends TestCase
 	function test_not_create_access_control_if_created_at_not_exists()
 	{
 		$data = [
-			'rut'        => '5809778-0',
+			'rut'        => '17032680-6',
 			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
 			'status'     => 1,
 			'created_at' => ''
@@ -123,7 +123,7 @@ class AccessControlApiTest extends TestCase
 		$now = Carbon::now();
 		
 		$data = [
-			'rut'        => '5809778-0',
+			'rut'        => '17032680-6',
 			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
 			'status'     => 1,
 			'created_at' => $now
