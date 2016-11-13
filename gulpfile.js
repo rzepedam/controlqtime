@@ -547,6 +547,7 @@ elixir(function(mix) {
     ], 'public/js/operations/check-vehicle-forms/create-edit-custom-check-vehicle-forms.js');
 
 
+
     // Copy fonts Font-Awesome
     mix.copy('resources/assets/bower/font-awesome/fonts', 'public/build/fonts');
     // Copy fonts Material-Design-Iconic-Font

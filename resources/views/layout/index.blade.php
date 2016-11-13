@@ -66,8 +66,6 @@
 
     </div>
 
-    <!-- Script default Laravel -->
-    <script src="{{ asset('js/app.js') }}"></script>
     <!-- Core  -->
     <script src="{{ elixir('js/index-layout-core.js') }}"></script>
     <!-- Scripts -->

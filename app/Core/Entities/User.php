@@ -2,10 +2,11 @@
 
 namespace Controlqtime\Core\Entities;
 
-use Laravel\Passport\HasApiTokens;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {

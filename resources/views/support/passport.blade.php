@@ -1,4 +1,4 @@
-@extends('layout.index')
+@extends('layout.app')
 
 @section('content')
 
@@ -10,10 +10,4 @@
         </div>
     </div>
 
-@endsection
-
-@section('scripts')
-
-
-
-@endsection
+@stop
