@@ -48,6 +48,21 @@ class AccessControlApiTest extends TestCase
 	function test_not_create_access_control_if_rut_not_exists()
 	{
 		$data = [
+			'rut'        => '21955225-4',
+			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
+			'status'     => 1,
+			'created_at' => Carbon::now()
+		];
+		
+		$this->post('/api/access-control', $data, [
+			'Authorization' => config('services.biometry.bearer'),
+			'Accept'        => 'application/json'])
+			->assertResponseStatus(500);
+	}
+	
+	function test_not_create_access_control_if_rut_is_empty()
+	{
+		$data = [
 			'rut'        => '',
 			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
 			'status'     => 1,
@@ -64,7 +79,7 @@ class AccessControlApiTest extends TestCase
 		
 	}
 	
-	function test_not_create_access_control_if_num_device_not_exists()
+	function test_not_create_access_control_if_num_device_is_empty()
 	{
 		$data = [
 			'rut'        => '17032680-6',
@@ -82,7 +97,7 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
-	function test_not_create_access_control_if_status_not_exists()
+	function test_not_create_access_control_if_status_is_empty()
 	{
 		$data = [
 			'rut'        => '17032680-6',
@@ -100,7 +115,7 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
-	function test_not_create_access_control_if_created_at_not_exists()
+	function test_not_create_access_control_if_created_at_is_empty()
 	{
 		$data = [
 			'rut'        => '17032680-6',

@@ -13,7 +13,7 @@ trait WhereMethodsTrait
 	 */
 	public function whereFirst($attribute, $value, $columns = ['*'])
 	{
-		return $this->model->where($attribute, '=', $value)->first($columns);
+		return $this->model->where($attribute, '=', $value)->firstOrFail($columns);
 	}
 	
 	/**
