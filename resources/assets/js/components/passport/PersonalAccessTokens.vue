@@ -1,37 +1,24 @@
-<style scoped>
-    .action-link {
-        cursor: pointer;
-    }
-
-    .m-b-none {
-        margin-bottom: 0;
-    }
-</style>
-
 <template>
     <div>
         <div>
-            <div class="panel panel-success">
+            <div class="panel">
                 <div class="panel-heading">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span>
-                            Personal Access Tokens
-                        </span>
-
-                        <a class="action-link" @click="showCreateTokenForm">
-                            Create New Token
-                        </a>
-                    </div>
+                    <ul class="panel-actions">
+                        <li><a style="text-decoration: underline" class="pointer" @click="showCreateTokenForm">Create New Token</a></li>
+                    </ul>
+                    <h3 class="panel-title">
+                        Personal Access Tokens
+                    </h3>
                 </div>
 
                 <div class="panel-body">
                     <!-- No Tokens Notice -->
-                    <p class="m-b-none" v-if="tokens.length === 0">
+                    <p v-if="tokens.length === 0">
                         You have not created any personal access tokens.
                     </p>
 
                     <!-- Personal Access Tokens -->
-                    <table class="table table-borderless m-b-none" v-if="tokens.length > 0">
+                    <table class="table" v-if="tokens.length > 0">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -48,7 +35,7 @@
 
                                 <!-- Delete Button -->
                                 <td style="vertical-align: middle;">
-                                    <a class="action-link text-danger" @click="revoke(token)">
+                                    <a style="text-decoration: underline" class="pointer text-danger text-center" @click="revoke(token)">
                                         Delete
                                     </a>
                                 </td>
@@ -64,8 +51,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">
                             Create Token
                         </h4>

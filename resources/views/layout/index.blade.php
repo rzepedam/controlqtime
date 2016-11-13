@@ -18,6 +18,12 @@
 
     <!-- Style Owned -->
     <link rel="stylesheet" href="{{ elixir('css/style.css') }}">
+    <!-- Script Default Laravel -->
+    <script>
+        window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
     <!-- Browsers Utilities -->
     <script src="{{ elixir('js/index-layout-browser-utilities.js') }}"></script>
     <script>
@@ -25,39 +31,43 @@
     </script>
 </head>
 <body class="dashboard">
+    <div id="app">
+        {{-- Header --}}
+        @include('layout.sections.header')
 
-    {{-- Header --}}
-    @include('layout.sections.header')
+        {{-- Sidebar --}}
+        @include('layout.sections.sidebar')
 
-    {{-- Sidebar --}}
-    @include('layout.sections.sidebar')
+        {{-- Content --}}
+        <div class="page animsition">
+            <div class="page-header">
+                <h1 class="page-title">
 
-    {{-- Content --}}
-    <div class="page animsition">
-        <div class="page-header">
-            <h1 class="page-title">
+                    @yield('title_header')
 
-                @yield('title_header')
+                </h1>
+                <div class="page-header-actions">
+                    <ol class="breadcrumb breadcrumb-arrow">
 
-            </h1>
-            <div class="page-header-actions">
-                <ol class="breadcrumb breadcrumb-arrow">
+                        @yield('breadcumb')
 
-                    @yield('breadcumb')
+                    </ol>
+                </div>
+            </div>
+            <div class="page-content">
 
-                </ol>
+                @yield('content')
+
             </div>
         </div>
-        <div class="page-content">
 
-            @yield('content')
+        {{-- Footer --}}
+        {{-- @include('layout.sections.footer') --}}
 
-        </div>
     </div>
 
-    {{-- Footer --}}
-    {{-- @include('layout.sections.footer') --}}
-
+    <!-- Script default Laravel -->
+    <script src="{{ asset('js/app.js') }}"></script>
     <!-- Core  -->
     <script src="{{ elixir('js/index-layout-core.js') }}"></script>
     <!-- Scripts -->

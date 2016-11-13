@@ -10,17 +10,14 @@
 
 <template>
     <div>
-        <div class="panel panel-primary">
+        <div class="panel">
             <div class="panel-heading">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span>
-                        OAuth Clients
-                    </span>
-
-                    <a class="action-link" @click="showCreateClientForm">
-                        Create New Client
-                    </a>
-                </div>
+                <ul class="panel-actions">
+                    <li><a style="text-decoration: underline" class="pointer" @click="showCreateClientForm">Create New Client</a></li>
+                </ul>
+                <h3 class="panel-title">
+                    OAuth Clients
+                </h3>
             </div>
 
             <div class="panel-body">
@@ -29,7 +26,7 @@
                     You have not created any OAuth clients.
                 </p>
 
-                <table class="table table-borderless m-b-none" v-if="clients.length > 0">
+                <table class="table" v-if="clients.length > 0">
                     <thead>
                         <tr>
                             <th>Client ID</th>

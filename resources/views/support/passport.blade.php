@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.index')
 
 @section('content')
 
@@ -9,5 +9,11 @@
             <passport-personal-access-tokens></passport-personal-access-tokens>
         </div>
     </div>
+
+@endsection
+
+@section('scripts')
+
+
 
 @endsection
