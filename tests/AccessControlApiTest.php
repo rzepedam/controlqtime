@@ -120,11 +120,13 @@ class AccessControlApiTest extends TestCase
 	
 	function test_not_save_if_data_is_duplicate()
 	{
+		$now = Carbon::now();
+		
 		$data = [
 			'rut'        => '5809778-0',
 			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
 			'status'     => 1,
-			'created_at' => '2016-10-05 12:00:00'
+			'created_at' => $now
 		];
 		
 		$this->post('/api/access-control', $data, [
