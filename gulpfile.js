@@ -1,6 +1,6 @@
 const elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue');
+require('laravel-elixir-vue-2');
 
 /*
  |--------------------------------------------------------------------------
@@ -27,8 +27,8 @@ elixir.config.css.minifier.pluginOptions = {
 elixir(function(mix) {
 
     // Default Laravel CSS
-    mix.sass('app.scss');
-
+    mix.sass('app.scss')
+        .webpack('js/app.js');
 
 
     // Login CSS
@@ -546,10 +546,6 @@ elixir(function(mix) {
         'me/js/base/operations/check-vehicle-forms/load-detail-vehicle.js'
     ], 'public/js/operations/check-vehicle-forms/create-edit-custom-check-vehicle-forms.js');
 
-
-
-    // Copy app.js used default Laravel
-    mix.copy('resources/assets/me/app.js', 'public/js');
 
     // Copy fonts Font-Awesome
     mix.copy('resources/assets/bower/font-awesome/fonts', 'public/build/fonts');

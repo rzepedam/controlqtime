@@ -1,68 +1,100 @@
-@extends('layout.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="CQTime - Where questions find answers">
+    <meta name="author" content="Raúl Elías Meza Mora">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <title>Login</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-core.css') }}">
+    <!-- Plugins -->
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-plugin.css') }}">
+    <!-- Style Login -->
+    <link rel="stylesheet" href="{{ elixir('css/login/login.css') }}">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{{ elixir('css/index-layout-fonts.css') }}">
+    <!-- Browsers Utilities -->
+    <script src="{{ elixir('js/index-layout-browser-utilities.js') }}"></script>
+    <script>
+        Breakpoints();
+    </script>
+</head>
+<body class="page-login-v3 layout-full">
+    <div class="page animsition vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
+        <div class="page-content vertical-align-middle">
+            <div class="panel">
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    <div class="brand">
+                        <img class="brand-img" src="{{ asset('img/logo_login.png') }}" alt="...">
+                        <h2 class="brand-text font-size-18">ControlQTime</h2>
+                    </div>
+                    <form role="form" method="POST" action="{{ url('/login') }}" autocomplete="off">
                         {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="form-group form-material floating">
+                            <input type="email" class="form-control" name="email" autocomplete="off" />
+                            <label class="floating-label">Email</label>
                         </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="form-group form-material floating">
+                            <input type="password" class="form-control" name="password" autocomplete="off" />
+                            <label class="floating-label">Password</label>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
+                        <div class="form-group clearfix">
+                            <div class="checkbox-custom checkbox-inline checkbox-primary checkbox-lg pull-left">
+                                <input type="checkbox" id="inputCheckbox" name="remember">
+                                <label for="inputCheckbox">Recuérdame</label>
                             </div>
+                            <a class="pull-right" href="{{ url('/password/reset') }}">Olvidó contraseña?</a>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
+                        @if ($errors->has('email'))
+                            <div class="alert alert-danger alert-dismissible clearfix font-size-12">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
                                 </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                    Forgot Your Password?
-                                </a>
+                                <strong>{{ $errors->first('email') }}</strong>
                             </div>
-                        </div>
+                        @endif
+                        @if ($errors->has('password'))
+                            <div class="alert alert-danger alert-dismissible clearfix font-size-12">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </div>
+                        @endif
+                        <button type="submit" class="btn btn-primary btn-block btn-lg margin-top-40">Login</button>
                     </form>
                 </div>
             </div>
+            <footer class="page-copyright page-copyright-inverse">
+                <p>© 2016. All RIGHT RESERVED.</p>
+                <div class="social">
+                    <a class="btn btn-icon btn-pure" href="javascript:void(0)">
+                        <i class="icon md-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-pure" href="javascript:void(0)">
+                        <i class="icon md-facebook" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-pure" href="javascript:void(0)">
+                        <i class="icon md-google-plus" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </footer>
         </div>
     </div>
-</div>
-@endsection
+
+    <!-- Core  -->
+    <script src="{{ elixir('js/index-layout-core.js') }}"></script>
+    <!-- Scripts -->
+    <script src="{{ elixir('js/index-layout-scripts.js') }}"></script>
+    <!-- Components -->
+    <script src="{{ elixir('js/index-layout-components.js') }}"></script>
+    <!-- Login JS -->
+    <script src="{{ elixir('js/login/login.js') }}"></script>
+
+</body>
+</html>

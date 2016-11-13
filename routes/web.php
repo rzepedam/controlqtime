@@ -15,3 +15,5 @@ require base_path() . '/app/Http/Routes/maintainers/admin.php';
 require base_path() . '/app/Http/Routes/ajax/route.php';
 
 require base_path() . '/app/Http/Routes/download/route.php';
+
+require base_path() . '/app/Http/Routes/support/support.php';
