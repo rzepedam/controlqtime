@@ -427,4 +427,5 @@ class Employee extends Eloquent
 	{
 		return $this->imagesable()->where('path', 'like', '%PensionCertificate%')->get();
 	}
+	
 }

@@ -2,6 +2,8 @@
 
 namespace Controlqtime\Core\Traits;
 
+use League\Flysystem\Exception;
+
 trait WhereMethodsTrait
 {
 	/**

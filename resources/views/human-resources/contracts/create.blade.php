@@ -65,10 +65,7 @@
             <div class="col-xs-4 col-sm-4 col-md-6">
                 <a href="{{ route('contracts.index') }}">Volver</a>
             </div>
-            <div class="col-xs-4 col-sm-4 col-md-4">
-                <button class="btn btn-squared btn-danger waves-effect waves-light pull-right"><i class="fa fa-file-pdf-o"></i> Visualizar</button>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-2">
+            <div class="col-xs-8 col-sm-8 col-md-6">
                 <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
             </div>
         </div>

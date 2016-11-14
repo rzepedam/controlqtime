@@ -19,7 +19,7 @@ class CompanyTableSeeder extends Seeder
 			'start_act'       => '01-08-2010',
 			'muni_license'    => '203939',
 			'email_company'   => 'ventas@grupoalfra.cl',
-			'state'           => 'disable'
+			'state'           => 'enable'
 		]);
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');

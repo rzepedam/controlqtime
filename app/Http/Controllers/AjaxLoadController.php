@@ -2,10 +2,11 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Contracts\VehicleRepoInterface;
+use Exception;
 use Illuminate\Http\Request;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Contracts\CompanyRepoInterface;
+use Controlqtime\Core\Contracts\VehicleRepoInterface;
 use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\TrademarkRepoInterface;
@@ -105,29 +106,36 @@ class AjaxLoadController extends Controller
 	 */
 	public function verificaEmail(Request $request)
 	{
-		switch ($request->get('element'))
+		try
 		{
-			case 'Company':
-				$email = $this->company->whereFirst('email_company', $request->get('email'), ['email_company']);
-				break;
+			switch ($request->get('element'))
+			{
+				case 'Company':
+					$this->company->whereFirst('email_company', $request->get('email'), ['email_company']);
+					break;
+				
+				case 'Representative':
+					$this->legalRepresentative->whereFirst('email_representative', $request->get('email'), ['email_representative']);
+					break;
+				
+				case 'Employee':
+					$this->employee->whereFirst('email_employee', $request->get('email', ['email_employee']));
+					break;
+				
+				case 'EmailContactEmployee';
+					$this->contactEmployee->whereFirst('email_contact', $request->get('email', ['email_contact']));
+					break;
+			}
 			
-			case 'Representative':
-				$email = $this->legalRepresentative->whereFirst('email_representative', $request->get('email'), ['email_representative']);
-				break;
-			
-			case 'Employee':
-				$email = $this->employee->whereFirst('email_employee', $request->get('email', ['email_employee']));
-				break;
-			
-			case 'EmailContactEmployee';
-				$email = $this->contactEmployee->whereFirst('email_contact', $request->get('email', ['email_contact']));
-				break;
+			return response()->json(['success' => true], 400);
 		}
-		
-		if ($email)
-			return response()->json(['success' => false], 400);
-		
-		return response()->json(['success' => true], 200);
+		catch(Exception $e)
+		{
+			return response()->json([
+				'success' => 'false',
+				'errors'  => $e->getMessage(),
+			], 200);
+		}
 	}
 	
 	/**

@@ -52,6 +52,7 @@ class DatabaseSeeder extends Seeder
 	    
 	    // Importants tables
 		$this->call(CompanyTableSeeder::class);
+	    $this->call(ImageTableSeeder::class);
         $this->call(LegalRepresentativeTableSeeder::class);
 	    $this->call(EmployeeTableSeeder::class);
 	    $this->call(UserTableSeeder::class);

@@ -3,9 +3,9 @@
 namespace Controlqtime\Core\Factory;
 
 use DB;
+use Exception;
 use Illuminate\Support\Str;
 use Controlqtime\Core\Entities\Image;
-use Illuminate\Support\Facades\Storage;
 
 class ImageFactory
 {

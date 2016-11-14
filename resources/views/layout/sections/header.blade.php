@@ -89,7 +89,11 @@
                 <li class="dropdown">
                     <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
                         <span class="avatar">
-                            <img src="{{ auth()->user()->employee->url }}">
+                            @if (auth()->user()->employee->url != null)
+                                <img src="{{ auth()->user()->employee->url }}">
+                            @else
+                                <img src="{{ asset('img/logo.png') }}">
+                            @endif
                         </span>
                     </a>
                     <ul class="dropdown-menu" role="menu">

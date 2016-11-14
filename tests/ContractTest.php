@@ -31,8 +31,9 @@ class ContractTest extends TestCase
     {
 	    $this->visit('human-resources/contracts/create')
 		    ->see('Crear Nuevo Contrato Laboral')
+		    ->type('50000', 'salary')
 		    ->press('Guardar')
-		    ->assertResponseOk();
+		    ->assertResponseStatus(200);
     }
     
     function test_get_pdf_contract()
