@@ -10,6 +10,9 @@ class CompanyTableSeeder extends Seeder
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('companies')->truncate();
 		
+		
+		$state = getenv('APP_ENV') === 'local' ? 'enable' : 'disable';
+		
 		Company::create([
 			'id'              => 1,
 			'type_company_id' => 1,
@@ -19,7 +22,7 @@ class CompanyTableSeeder extends Seeder
 			'start_act'       => '01-08-2010',
 			'muni_license'    => '203939',
 			'email_company'   => 'ventas@grupoalfra.cl',
-			'state'           => 'enable'
+			'state'           => $state
 		]);
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
