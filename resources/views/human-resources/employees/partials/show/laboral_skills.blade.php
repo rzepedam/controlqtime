@@ -23,7 +23,7 @@
                                         <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                                         <th class="col-md-2 text-center">Grado Académico</th>
                                         <th class="col-md-4 text-center">Estudio</th>
-                                        <th class="col-md-3 text-center">Universidad</th>
+                                        <th class="col-md-3 text-center">Institución</th>
                                         <th class="col-md-2 text-center">Fecha Obtención</th>
                                     </tr>
 
@@ -32,10 +32,21 @@
                                         <tr>
                                             <td class="text-center">{{ $i }}</td>
                                             <td class="text-center">{{ $study->degree->name }}</td>
-                                            <td class="text-center">{{ $study->name_study }}</td>
-                                            <td class="text-center">{{ $study->institution->name }}</td>
-                                            <td class="text-center">{{ $study->date_obtention->format('d-m-Y') }}</td>
 
+                                            @if ($study->type_degree_id === 'school')
+                                                <td class="text-center">-</td>
+                                                <td class="text-center">{{ $study->detailSchoolStudy->name_institution }}</td>
+                                            @endif
+                                            @if ($study->type_degree_id === 'technical')
+                                                <td class="text-center">{{ $study->detailTechnicalStudy->name_study }}</td>
+                                                <td class="text-center">{{ $study->detailTechnicalStudy->name_institution }}</td>
+                                            @endif
+                                            @if ($study->type_degree_id === 'college')
+                                                <td class="text-center">{{ $study->detailCollegeStudy->name_study }}</td>
+                                                <td class="text-center">{{ $study->detailCollegeStudy->institution->name }}</td>
+                                            @endif
+
+                                            <td class="text-center">{{ $study->date_obtention->format('d-m-Y') }}</td>
                                         </tr>
                                         <?php $i++; ?>
 

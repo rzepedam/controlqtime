@@ -23,7 +23,8 @@
             <div id="form_edit_employee" class="wizard">
 
                 {{-- Steps --}}
-                <div class="steps wizard-steps steps-sm row" data-plugin="matchHeight" data-by-row="true" role="tablist">
+                <div class="steps wizard-steps steps-sm row" data-plugin="matchHeight" data-by-row="true"
+                     role="tablist">
                     <div class="step col-sm-4 col-md-4 current" data-target="#datos_personales" role="tab">
                         <span class="step-number">1</span>
                         <div class="step-desc">
@@ -56,79 +57,88 @@
 
                         {{ Form::model($employee, array("route" => array("updateSessionStep1", $employee), "method" => "PUT", "files" => true, "id" => "step1")) }}
 
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-check-square-o text-primary"></i> Datos Personales</h3>
-                                </div>
-                                <div class="panel-body">
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon fa fa-check-square-o text-primary"></i> Datos
+                                    Personales</h3>
+                            </div>
+                            <div class="panel-body">
 
-                                    @include('human-resources.employees.partials.edit.step1.personal_data')
+                                @include('human-resources.employees.partials.edit.step1.personal_data')
 
+                            </div>
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-pencil-square-o text-success"
+                                                           aria-hidden="true"></i> Información de Contacto</h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-success add_contact_employee waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Contacto</span>
                                 </div>
                             </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-pencil-square-o text-success" aria-hidden="true"></i> Información de Contacto</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-success add_contact_employee waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Contacto</span>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="content_contact_employee">
+                            <div class="panel-body">
+                                <div id="content_contact_employee">
 
-                                        @if (count($employee->contactEmployees) > 0)
+                                    @if (count($employee->contactEmployees) > 0)
 
-                                            @include('human-resources.employees.partials.edit.step1.contact_employee')
+                                        @include('human-resources.employees.partials.edit.step1.contact_employee')
 
-                                        @else
+                                    @else
 
+                                        <br/>
+                                        <h3 class="text-center text-success">No existe Información de Contacto Asociada
                                             <br/>
-                                            <h3 class="text-center text-success">No existe Información de Contacto Asociada
-                                                <br/>
-                                                <small>(Pulse "Agregar Contacto" para comenzar su adición)
-                                                </small>
-                                            </h3>
+                                            <small>(Pulse "Agregar Contacto" para comenzar su adición)
+                                            </small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
+
+                                    @endif
+
+                                </div>
+                                <br/>
+
+                            </div>
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon md-male-female text-warning font-size-18"></i>
+                                    Parentescos Familiares</h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-warning add_family_relationship waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div id="content_family_relationships">
+
+                                    @if (count($employee->familyRelationships) > 0)
+
+                                        @include('human-resources.employees.partials.edit.step1.family_relationship')
+
+                                    @else
+
+                                        <br/>
+                                        <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados
                                             <br/>
-                                            <br/>
+                                            <small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)
+                                            </small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
 
-                                        @endif
-
-                                    </div>
-                                    <br/>
-
-                                </div>
-                            </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon md-male-female text-warning font-size-18"></i> Parentescos Familiares</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="content_family_relationships">
-
-                                        @if (count($employee->familyRelationships) > 0)
-
-                                            @include('human-resources.employees.partials.edit.step1.family_relationship')
-
-                                        @else
-
-                                            <br />
-                                            <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados <br /><small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)</small></h3>
-                                            <br />
-                                            <br />
-
-                                        @endif
-
-                                    </div>
-                                    <br />
+                                    @endif
 
                                 </div>
-                            </div>
-                            <div class="panel content-step">
+                                <br/>
 
                             </div>
+                        </div>
+                        <div class="panel content-step">
+
+                        </div>
 
 
                         {{ Form::close() }}
@@ -138,123 +148,134 @@
 
                         {{ Form::model($employee, array("route" => array("updateSessionStep2", $employee), "method" => "PUT", "id" => "step2")) }}
 
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon md-library text-info font-size-18"></i> Estudios Académicos</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-info add_study waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Estudio Académico</span>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="content_studies">
-
-                                        @if (count($employee->studies) > 0)
-
-                                            @include('human-resources.employees.partials.edit.step2.study')
-
-                                        @else
-                                            <br/>
-                                            <h3 class="text-center text-info">No existen Estudios Académicos Asociados <br/>
-                                                <small>(Pulse "Agregar Estudio Académico" para comenzar su adición)</small>
-                                            </h3>
-                                            <br/>
-                                            <br/>
-                                        @endif
-
-                                    </div>
-                                    <br/>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon md-library text-info font-size-18"></i> Estudios
+                                    Académicos</h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-info add_study waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Estudio Académico</span>
                                 </div>
                             </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon md-badge-check text-danger font-size-18"></i> Certificaciones</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-danger add_certification waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Certificación</span>
-                                    </div>
+                            <div class="panel-body">
+                                <div id="content_studies">
+
+                                    @if (count($employee->studies) > 0)
+
+                                        @include('human-resources.employees.partials.edit.step2.study')
+
+                                    @else
+                                        <br/>
+                                        <h3 class="text-center text-info">No existen Estudios Académicos Asociados <br/>
+                                            <small>(Pulse "Agregar Estudio Académico" para comenzar su adición)</small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
+                                    @endif
+
                                 </div>
-                                <div class="panel-body">
-                                    <div id="content_certifications">
-
-                                        @if (count($employee->certifications) > 0)
-
-                                            @include('human-resources.employees.partials.edit.step2.certification')
-
-                                        @else
-
-                                            <br/>
-                                            <h3 class="text-center text-danger">No existen Certificaciones Asociadas <br/>
-                                                <small>(Pulse "Agregar Certificación" para comenzar su adición)</small>
-                                            </h3>
-                                            <br/>
-                                            <br/>
-
-                                        @endif
-
-                                    </div>
-                                    <br/>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon md-badge-check text-danger font-size-18"></i>
+                                    Certificaciones</h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-danger add_certification waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Certificación</span>
                                 </div>
                             </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-wrench text-warning"></i> Especialidades</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-warning add_speciality waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Especialidad</span>
-                                    </div>
+                            <div class="panel-body">
+                                <div id="content_certifications">
+
+                                    @if (count($employee->certifications) > 0)
+
+                                        @include('human-resources.employees.partials.edit.step2.certification')
+
+                                    @else
+
+                                        <br/>
+                                        <h3 class="text-center text-danger">No existen Certificaciones Asociadas <br/>
+                                            <small>(Pulse "Agregar Certificación" para comenzar su adición)</small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
+
+                                    @endif
+
                                 </div>
-                                <div class="panel-body">
-                                    <div id="content_specialities">
-
-                                        @if (count($employee->specialities) > 0)
-
-                                            @include('human-resources.employees.partials.edit.step2.speciality')
-
-                                        @else
-
-                                            <br/>
-                                            <h3 class="text-center text-warning">No existen Especialidades Asociadas <br/>
-                                                <small>(Pulse "Agregar Especialidad" para comenzar su adición)</small>
-                                            </h3>
-                                            <br/>
-                                            <br/>
-
-                                        @endif
-
-                                    </div>
-                                    <br/>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon fa fa-wrench text-warning"></i> Especialidades
+                                </h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-warning add_speciality waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Especialidad</span>
                                 </div>
                             </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-bookmark text-success" style="font-size: 16px;"></i></i> Licencias Profesionales</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-success add_professional_license waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Licencia Profesional</span>
-                                    </div>
+                            <div class="panel-body">
+                                <div id="content_specialities">
+
+                                    @if (count($employee->specialities) > 0)
+
+                                        @include('human-resources.employees.partials.edit.step2.speciality')
+
+                                    @else
+
+                                        <br/>
+                                        <h3 class="text-center text-warning">No existen Especialidades Asociadas <br/>
+                                            <small>(Pulse "Agregar Especialidad" para comenzar su adición)</small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
+
+                                    @endif
+
                                 </div>
-                                <div class="panel-body">
-                                    <div id="content_licenses">
-
-                                        @if (count($employee->professionalLicenses) > 0)
-
-                                            @include('human-resources.employees.partials.edit.step2.professional_license')
-
-                                        @else
-
-                                            <br/>
-                                            <h3 class="text-center text-success">No existen Licencias Profesionales Asociadas<br/>
-                                                <small>(Pulse "Agregar Licencia Profesional" para comenzar su adición)</small>
-                                            </h3>
-                                            <br/>
-                                            <br/>
-
-                                        @endif
-
-                                    </div>
-                                    <br/>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon fa fa-bookmark text-success"
+                                                           style="font-size: 16px;"></i></i> Licencias Profesionales
+                                </h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-success add_professional_license waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Licencia Profesional</span>
                                 </div>
                             </div>
-                            <div class="panel content-step">
+                            <div class="panel-body">
+                                <div id="content_licenses">
 
+                                    @if (count($employee->professionalLicenses) > 0)
+
+                                        @include('human-resources.employees.partials.edit.step2.professional_license')
+
+                                    @else
+
+                                        <br/>
+                                        <h3 class="text-center text-success">No existen Licencias Profesionales
+                                            Asociadas<br/>
+                                            <small>(Pulse "Agregar Licencia Profesional" para comenzar su adición)
+                                            </small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
+
+                                    @endif
+
+                                </div>
+                                <br/>
                             </div>
+                        </div>
+                        <div class="panel content-step">
+
+                        </div>
 
                         {{ Form::close() }}
 
@@ -263,125 +284,133 @@
 
                         {{ Form::model($employee, array("route" => array("employees.update", $employee->id), "method" => "PUT", "id" => "step3")) }}
 
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-wheelchair text-warning"></i> Discapacidades</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-warning add_disabilities waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Discapacidad</span>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="content_disabilities">
-
-                                        @if (count($employee->disabilities) > 0)
-
-                                            @include('human-resources.employees.partials.edit.step3.disability')
-
-                                        @else
-
-                                            <br/>
-                                            <h3 class="text-center text-warning">No existen Discapacidades Asociadas <br/>
-                                                <small>(Pulse "Agregar Discapacidad" para comenzar su adición)</small>
-                                            </h3>
-                                            <br/>
-                                            <br/>
-
-                                        @endif
-
-                                    </div>
-                                    <br/>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon fa fa-wheelchair text-warning"></i>
+                                    Discapacidades</h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-warning add_disabilities waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Discapacidad</span>
                                 </div>
                             </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-bed text-success"></i> Enfermedades</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-success add_diseases waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Enfermedad</span>
-                                    </div>
+                            <div class="panel-body">
+                                <div id="content_disabilities">
+
+                                    @if (count($employee->disabilities) > 0)
+
+                                        @include('human-resources.employees.partials.edit.step3.disability')
+
+                                    @else
+
+                                        <br/>
+                                        <h3 class="text-center text-warning">No existen Discapacidades Asociadas <br/>
+                                            <small>(Pulse "Agregar Discapacidad" para comenzar su adición)</small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
+
+                                    @endif
+
                                 </div>
-                                <div class="panel-body">
-                                    <div id="content_diseases">
-
-                                        @if (count($employee->diseases) > 0)
-
-                                            @include('human-resources.employees.partials.edit.step3.disease')
-
-                                        @else
-
-                                            <br/>
-                                            <h3 class="text-center text-success">No existen Enfermedades Asociadas <br/>
-                                                <small>(Pulse "Agregar Enfermedad" para comenzar su adición)</small>
-                                            </h3>
-                                            <br/>
-                                            <br/>
-
-                                        @endif
-
-                                    </div>
-                                    <br/>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon fa fa-bed text-success"></i> Enfermedades</h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-success add_diseases waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Enfermedad</span>
                                 </div>
                             </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-stethoscope text-info"></i> Exámenes Preocupacionales</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-info add_exams waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Examen Preocupacional</span>
-                                    </div>
+                            <div class="panel-body">
+                                <div id="content_diseases">
+
+                                    @if (count($employee->diseases) > 0)
+
+                                        @include('human-resources.employees.partials.edit.step3.disease')
+
+                                    @else
+
+                                        <br/>
+                                        <h3 class="text-center text-success">No existen Enfermedades Asociadas <br/>
+                                            <small>(Pulse "Agregar Enfermedad" para comenzar su adición)</small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
+
+                                    @endif
+
                                 </div>
-                                <div class="panel-body">
-                                    <div id="content_exams">
-
-                                        @if (count($employee->exams) > 0)
-
-                                            @include('human-resources.employees.partials.edit.step3.exams')
-
-                                        @else
-
-                                            <br/>
-                                            <h3 class="text-center text-info">No existen Exámenes Preocupacionales Asociados<br/>
-                                                <small>(Pulse "Agregar Examen Preocupacional" para comenzar su adición)</small>
-                                            </h3>
-                                            <br/>
-                                            <br/>
-
-                                        @endif
-
-                                    </div>
-                                    <br/>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon fa fa-stethoscope text-info"></i> Exámenes
+                                    Preocupacionales</h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-info add_exams waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Examen Preocupacional</span>
                                 </div>
                             </div>
-                            <div class="panel panel-bordered">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="icon fa fa-child text-danger"></i> Cargas Familiares</h3>
-                                    <div class="panel-actions">
-                                        <span class="label label-outline label-danger add_family_responsability waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Carga Familiar</span>
-                                    </div>
+                            <div class="panel-body">
+                                <div id="content_exams">
+
+                                    @if (count($employee->exams) > 0)
+
+                                        @include('human-resources.employees.partials.edit.step3.exams')
+
+                                    @else
+
+                                        <br/>
+                                        <h3 class="text-center text-info">No existen Exámenes Preocupacionales Asociados<br/>
+                                            <small>(Pulse "Agregar Examen Preocupacional" para comenzar su adición)
+                                            </small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
+
+                                    @endif
+
                                 </div>
-                                <div class="panel-body">
-                                    <div id="content_family_responsabilities">
-
-                                        @if (count($employee->familyResponsabilities) > 0)
-
-                                            @include('human-resources.employees.partials.edit.step3.family_responsability')
-
-                                        @else
-
-                                            <br/>
-                                            <h3 class="text-center text-danger">No existen Cargas Familiares Asociadas <br/>
-                                                <small>(Pulse "Agregar Carga Familiar" para comenzar su adición)</small>
-                                            </h3>
-                                            <br/>
-                                            <br/>
-
-                                        @endif
-
-                                    </div>
-                                    <br/>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="panel panel-bordered">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="icon fa fa-child text-danger"></i> Cargas Familiares
+                                </h3>
+                                <div class="panel-actions">
+                                    <span class="label label-outline label-danger add_family_responsability waves-effect waves-block"><i
+                                                class="fa fa-plus"></i> Agregar Carga Familiar</span>
                                 </div>
                             </div>
-                            <div class="panel content-step">
+                            <div class="panel-body">
+                                <div id="content_family_responsabilities">
 
+                                    @if (count($employee->familyResponsabilities) > 0)
+
+                                        @include('human-resources.employees.partials.edit.step3.family_responsability')
+
+                                    @else
+
+                                        <br/>
+                                        <h3 class="text-center text-danger">No existen Cargas Familiares Asociadas <br/>
+                                            <small>(Pulse "Agregar Carga Familiar" para comenzar su adición)</small>
+                                        </h3>
+                                        <br/>
+                                        <br/>
+
+                                    @endif
+
+                                </div>
+                                <br/>
                             </div>
+                        </div>
+                        <div class="panel content-step">
+
+                        </div>
 
                         {{ Form::close() }}
 
@@ -398,12 +427,12 @@
         </div>
     </div>
 
-    <br />
-    <br />
-    <br />
+    <br/>
+    <br/>
+    <br/>
 
     @include('human-resources.employees.partials.delete')
-    <br />
+    <br/>
 
 @stop
 
@@ -415,18 +444,18 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
-            var count_contacts                  = {{ ($employee->num_contact_employees > 0) ? ($employee->num_contact_employees) : 0 }};
-            var count_family_relationships      = {{ ($employee->num_family_relationships > 0) ? ($employee->num_family_relationships) : 0 }};
-            var count_studies                   = {{ ($employee->num_studies > 0) ? ($employee->num_studies) : 0 }};
-            var count_certifications            = {{ ($employee->num_certifications > 0) ? ($employee->num_certifications) : 0 }};
-            var count_specialities              = {{ ($employee->num_specialities > 0) ? ($employee->num_specialities) : 0 }};
-            var count_professional_licenses     = {{ ($employee->num_professional_licenses > 0) ? ($employee->num_professional_licenses) : 0 }};
-            var count_disabilities              = {{ ($employee->num_disabilities > 0) ? ($employee->num_disabilities) : 0 }};
-            var count_diseases                  = {{ ($employee->num_diseases > 0) ? ($employee->num_diseases) : 0 }};
-            var count_exams                     = {{ ($employee->num_exams > 0) ? ($employee->num_exams) : 0 }};
-            var count_family_responsabilities   = {{ ($employee->num_family_responsabilities > 0) ? ($employee->num_family_responsabilities) : 0 }};
+            var count_contacts                = {{ ($employee->num_contact_employees > 0) ? ($employee->num_contact_employees) : 0 }};
+            var count_family_relationships    = {{ ($employee->num_family_relationships > 0) ? ($employee->num_family_relationships) : 0 }};
+            var count_studies                 = {{ ($employee->num_studies > 0) ? ($employee->num_studies) : 0 }};
+            var count_certifications          = {{ ($employee->num_certifications > 0) ? ($employee->num_certifications) : 0 }};
+            var count_specialities            = {{ ($employee->num_specialities > 0) ? ($employee->num_specialities) : 0 }};
+            var count_professional_licenses   = {{ ($employee->num_professional_licenses > 0) ? ($employee->num_professional_licenses) : 0 }};
+            var count_disabilities            = {{ ($employee->num_disabilities > 0) ? ($employee->num_disabilities) : 0 }};
+            var count_diseases                = {{ ($employee->num_diseases > 0) ? ($employee->num_diseases) : 0 }};
+            var count_exams                   = {{ ($employee->num_exams > 0) ? ($employee->num_exams) : 0 }};
+            var count_family_responsabilities = {{ ($employee->num_family_responsabilities > 0) ? ($employee->num_family_responsabilities) : 0 }};
 
             var id_delete_contact               = [];
             var id_delete_family_relationship   = [];
@@ -444,7 +473,7 @@
              */
 
             var wizard = $('#form_edit_employee').wizard({
-                onFinish: function(){
+                onFinish: function () {
                     alert('onFinish');
                 }
             }).data('wizard');
@@ -497,9 +526,9 @@
 
                 if (validateStep1()) {
 
-                    var full_name   = capitalize($('#first_name').val()) + " " + capitalize($('#second_name').val()) + " " + capitalize($('#male_surname').val()) + " " + capitalize($('#female_surname').val());
-                    var status      = false;
-                    var url         = $('#step1').attr('action');
+                    var full_name = capitalize($('#first_name').val()) + " " + capitalize($('#second_name').val()) + " " + capitalize($('#male_surname').val()) + " " + capitalize($('#female_surname').val());
+                    var status    = false;
+                    var url       = $('#step1').attr('action');
 
                     $.ajax({
                         type: 'PUT',
@@ -579,7 +608,7 @@
 
                 if (validateStep3()) {
 
-                    var url    = $('#step3').attr('action');
+                    var url = $('#step3').attr('action');
 
                     $('.finish').addClass('btn-success');
                     $('.replace-icon').html('<i class="fa fa-spinner fa-spin fa-fw"></i> Guardando...');
@@ -615,7 +644,7 @@
              *  Add Contact
              */
 
-            $('.add_contact_employee').click(function() {
+            $('.add_contact_employee').click(function () {
 
                 var contact = '<span id="contact"><div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-success alert-dismissible" role="alert"> <span id="num_contact" class="text-success"> Contacto #' + (count_contacts + 1) + ' </span> <a id="contact" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Contacto" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_contact", "ID", ["class"=> "control-label"])}}{{Form::text("id_contact[]", 0, ["id"=> "id_contact", "class"=> "form-control"])}}</div></div><div class="col-sm-4 col-md-3"> <div class="form-group">{{Form::label("contact_relationship_id", "Relación", ["class"=> "control-label"])}}{{Form::select("contact_relationship_id[]", $relationships, null, ["class"=> "form-control"])}}</div></div><div class="col-sm-4 col-md-6 form-group">{{Form::label('name_contact', 'Nombre', ['class'=> 'control-label'])}}{{Form::text('name_contact[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '120'])}}</div><div class="col-sm-4 col-md-3 form-group">{{Form::label('tel_contact', 'Teléfono', ['class'=> 'control-label'])}}<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>{{Form::text('tel_contact[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '20'])}}</div></div></div><div class="row"> <div class="col-sm-6 col-md-6 form-group">{{Form::label('email_contact', 'Email', ['class'=> 'control-label'])}}{{Form::text('email_contact[]', null, ['id' => 'EmailContactEmployee', 'class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '60'])}}</div><div class="col-sm-6 col-md-6 form-group">{{Form::label('address_contact', 'Dirección', ['class'=> 'control-label'])}}{{Form::text('address_contact[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '100'])}}</div></div><br /></span>';
 
@@ -665,7 +694,7 @@
 
             $('.add_study').click(function () {
 
-                var study = '<span id="study"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study" class="text-info">Estudio Académico #' + (count_studies + 1) + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 hide"> <div class="form-group">{{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div></div><div class="col-sm-6 col-md-3"> <div class="form-group">{{Form::label('degree_id', 'Nivel Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, null, ['class'=> 'form-control'])}}</div></div><div class="col-sm-6 col-md-4"> <div class="form-group">{{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '80'])}}</div></div><div class="col-sm-6 col-md-3"> <div class="form-group">{{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div></div><div class="col-sm-6 col-md-2"> <div class="form-group">{{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control text-center', 'readonly'])}}</div></div></div></div><br/></span>'
+                var study = '<span id="study"> <div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study" class="text-info">Estudio Académico #' + (count_studies + 1) + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 form-group hide">{{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div><div class="col-sm-6 col-md-3 form-group">{{Form::label('degree_id', 'Nivel de Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, 6, ['class'=> 'form-control degrees'])}}</div><div class="col-sm-6 col-md-4 form-group">{{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '80'])}}</div><div class="col-sm-6 col-md-4 form-group hide">{{Form::label("name_institution", "Institución", ["class"=> "control-label"])}}{{Form::text("name_institution[]", null, ["class"=> "form-control maxlength", "data-plugin"=> "maxlength", "maxlength"=> "80"])}}</div><div class="col-sm-6 col-md-3 form-group">{{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div><div class="col-sm-6 col-md-2 form-group">{{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control text-center', 'readonly'])}}</div></div></div><br/></span>';
 
                 if (count_studies == 0)
                     $('#content_studies').html(study);
@@ -1007,13 +1036,11 @@
                         for (var i = 0; i < span.length; i++) {
 
                             item = verificaUltimosNumeros(span[i].id);
-
-                            $('span#num_study' + item).text('Estudio Académico #' + (i + 1));
-                            $('span#num_study' + item).attr('id', 'num_study' + i);
+                            $('#num_study' + item).text('Estudio Académico #' + (i + 1));
+                            $('#num_study' + item).attr('id', 'num_study' + i);
                             $('span#study' + item).attr('id', 'study' + i);
 
                             $('#id_study' + item).attr('id', 'id_study' + i);
-
                         }
 
                         count_studies--;
@@ -1208,6 +1235,61 @@
                 }
             });
 
+            /**
+             *  Change Study Option Select
+             */
+
+            $(document).on('change', '.degrees', function () {
+
+                var html           = '';
+                var value          = $(this).val();
+                var study          = $(this).parent().parent().parent().attr('id');
+                var num_study      = verificaUltimosNumeros($(this).parent().parent().parent().attr('id'));
+                var text_num_study = verificaUltimosNumeros($.trim($(this).parent().parent().prev().find('span').text()));
+
+                // add num_study a id
+                switch (value) {
+                    case '1':
+                        html = '<div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study' + num_study + '" class="text-info">Estudio Académico #' + text_num_study + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 form-group hide"> {{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label("degree_id", "Nivel de Estudio", ["class"=> "control-label"])}}{{Form::select("degree_id[]", $degrees, 1, ["class"=> "form-control degrees"])}}</div><div class="col-sm-6 col-md-4 form-group hide"> {{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin'=> 'maxlength', 'maxlength'=> '50'])}}</div><div class="col-sm-6 col-md-4 form-group"> {{Form::label("name_institution", "Institución", ["class"=> "control-label"])}}{{Form::text("name_institution[]", null, ["class"=> "form-control maxlength", "data-plugin"=> "maxlength", "maxlength"=> "80"])}}</div><div class="col-sm-6 col-md-3 form-group hide"> {{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div><div class="col-sm-6 col-md-2 form-group"> {{Form::label("date_obtention", "Fecha Obtención", ["class"=> "control-label"])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text("date_obtention[]", null, ["class"=> "form-control text-center", "readonly"])}}</div></div></div><br/>';
+                        break;
+                    case '2':
+                        html = '<div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study' + num_study + '" class="text-info">Estudio Académico #' + text_num_study + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 form-group hide"> {{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label("degree_id", "Nivel de Estudio", ["class"=> "control-label"])}}{{Form::select("degree_id[]", $degrees, 2, ["class"=> "form-control degrees"])}}</div><div class="col-sm-6 col-md-4 form-group hide"> {{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin'=> 'maxlength', 'maxlength'=> '50'])}}</div><div class="col-sm-6 col-md-4 form-group"> {{Form::label("name_institution", "Institución", ["class"=> "control-label"])}}{{Form::text("name_institution[]", null, ["class"=> "form-control maxlength", "data-plugin"=> "maxlength", "maxlength"=> "80"])}}</div><div class="col-sm-6 col-md-3 form-group hide"> {{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div><div class="col-sm-6 col-md-2 form-group"> {{Form::label("date_obtention", "Fecha Obtención", ["class"=> "control-label"])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text("date_obtention[]", null, ["class"=> "form-control text-center", "readonly"])}}</div></div></div><br/>';
+                        break;
+
+                    case '3':
+                        html = '<div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study' + num_study + '" class="text-info">Estudio Académico #' + text_num_study + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"> <div class="col-md-1 form-group hide"> {{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('degree_id', 'Nivel de Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, 3, ['class'=> 'form-control degrees'])}}</div><div class="col-sm-6 col-md-4 form-group"> {{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin'=> 'maxlength', 'maxlength'=> '50'])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('name_institution', 'Institución', ['class'=> 'control-label'])}}{{Form::text('name_institution[]', null, ['class'=> 'form-control maxlength', 'data-plugin'=> 'maxlength', 'maxlength'=> '80'])}}</div><div class="col-sm-6 col-md-3 form-group hide"> {{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div><div class="col-sm-6 col-md-2 form-group"> {{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control text-center', 'readonly'])}}</div></div></div><br/>';
+                        break;
+
+                    case '4':
+                        html = '<div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study' + num_study + '" class="text-info">Estudio Académico #' + text_num_study + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 form-group hide"> {{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('degree_id', 'Nivel de Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, 4, ['class'=> 'form-control degrees'])}}</div><div class="col-sm-6 col-md-4 form-group"> {{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '50'])}}</div><div class="col-sm-6 col-md-4 form-group hide"> {{Form::label("name_institution", "Institución", ["class"=> "control-label"])}}{{Form::text("name_institution[]", null, ["class"=> "form-control maxlength", "data-plugin"=> "maxlength", "maxlength"=> "80"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div><div class="col-sm-6 col-md-2 form-group"> {{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control text-center', 'readonly'])}}</div></div></div><br/>';
+                        break;
+
+                    case '5':
+                        html = '<div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study' + num_study + '" class="text-info">Estudio Académico #' + text_num_study + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 form-group hide"> {{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('degree_id', 'Nivel de Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, 5, ['class'=> 'form-control degrees'])}}</div><div class="col-sm-6 col-md-4 form-group"> {{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '50'])}}</div><div class="col-sm-6 col-md-4 form-group hide"> {{Form::label("name_institution", "Institución", ["class"=> "control-label"])}}{{Form::text("name_institution[]", null, ["class"=> "form-control maxlength", "data-plugin"=> "maxlength", "maxlength"=> "80"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div><div class="col-sm-6 col-md-2 form-group"> {{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control text-center', 'readonly'])}}</div></div></div><br/>';
+                        break;
+
+                    case '6':
+                        html = '<div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study' + num_study + '" class="text-info">Estudio Académico #' + text_num_study + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 form-group hide"> {{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('degree_id', 'Nivel de Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, 6, ['class'=> 'form-control degrees'])}}</div><div class="col-sm-6 col-md-4 form-group"> {{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '50'])}}</div><div class="col-sm-6 col-md-4 form-group hide"> {{Form::label("name_institution", "Institución", ["class"=> "control-label"])}}{{Form::text("name_institution[]", null, ["class"=> "form-control maxlength", "data-plugin"=> "maxlength", "maxlength"=> "80"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div><div class="col-sm-6 col-md-2 form-group"> {{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control text-center', 'readonly'])}}</div></div></div><br/>';
+                        break;
+
+                    case '7':
+                        html = '<div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study' + num_study + '" class="text-info">Estudio Académico #' + text_num_study + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 form-group hide"> {{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('degree_id', 'Nivel de Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, 7, ['class'=> 'form-control degrees'])}}</div><div class="col-sm-6 col-md-4 form-group"> {{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '50'])}}</div><div class="col-sm-6 col-md-4 form-group hide"> {{Form::label("name_institution", "Institución", ["class"=> "control-label"])}}{{Form::text("name_institution[]", null, ["class"=> "form-control maxlength", "data-plugin"=> "maxlength", "maxlength"=> "80"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div><div class="col-sm-6 col-md-2 form-group"> {{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control text-center', 'readonly'])}}</div></div></div><br/>';
+                        break;
+
+                    case '8':
+                        html = '<div class="row"> <div class="col-md-12"> <div class="alert alert-alt alert-info alert-dismissible" role="alert"> <span id="num_study' + num_study + '" class="text-info">Estudio Académico #' + text_num_study + '</span> <a id="study" class="delete-elements pull-right tooltip-danger" data-toggle="tooltip" data-original-title="Eliminar Estudio Académico" data-html="true"><i class="fa fa-trash"></i></a> </div></div></div><div class="row"><div class="col-md-1 form-group hide"> {{Form::label("id_study", "ID", ["class"=> "control-label"])}}{{Form::text("id_study[]", 0, ["id"=> "id_study", "class"=> "form-control"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('degree_id', 'Nivel de Estudio', ['class'=> 'control-label'])}}{{Form::select('degree_id[]', $degrees, 8, ['class'=> 'form-control degrees'])}}</div><div class="col-sm-6 col-md-4 form-group"> {{Form::label('name_study', 'Profesión u Oficio', ['class'=> 'control-label'])}}{{Form::text('name_study[]', null, ['class'=> 'form-control maxlength', 'data-plugin' => 'maxlength', 'maxlength' => '50'])}}</div><div class="col-sm-6 col-md-4 form-group hide"> {{Form::label("name_institution", "Institución", ["class"=> "control-label"])}}{{Form::text("name_institution[]", null, ["class"=> "form-control maxlength", "data-plugin"=> "maxlength", "maxlength"=> "80"])}}</div><div class="col-sm-6 col-md-3 form-group"> {{Form::label('institution_study_id', 'Institución', ['class'=> 'control-label'])}}{{Form::select('institution_study_id[]', $institutions, null, ['class'=> 'form-control'])}}</div><div class="col-sm-6 col-md-2 form-group"> {{Form::label('date_obtention', 'Fecha Obtención', ['class'=> 'control-label'])}}<div class="input-group date beforeCurrentDate"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>{{Form::text('date_obtention[]', null, ['class'=> 'form-control text-center', 'readonly'])}}</div></div></div><br/>';
+                        break;
+                }
+
+                $('#' + study).html(html);
+
+                $('.maxlength').maxlength({
+                    placement: 'bottom-right-inside',
+                    threshold: 15
+                });
+
+                initializaComponentsWithDateBeforeCurrentDate();
+            });
         });
 
     </script>

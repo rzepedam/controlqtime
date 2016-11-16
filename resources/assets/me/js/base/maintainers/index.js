@@ -56,10 +56,6 @@ $(document).ready(function(){
         window.location.href = "/maintainers/pensions";
     });
 
-    $('#redirect-degrees').click(function() {
-        window.location.href = "/maintainers/degrees";
-    });
-
     $('#redirect-gratifications').click(function() {
         window.location.href = "/maintainers/gratifications";
     });

@@ -24,10 +24,6 @@ Route::group(['prefix' => 'maintainers'], function() {
 	Route::get('getDayTrips', ['as' => 'day-trips.getDayTrips', 'uses' => 'DayTripController@getDayTrips']);
 	Route::resource('day-trips', 'DayTripController');
 
-	// Degrees
-	Route::get('getDegrees', ['as' => 'getDegrees', 'uses' => 'DegreeController@getDegrees']);
-	Route::resource('degrees', 'DegreeController');
-
 	// Forecasts
 	Route::get('getForecasts', ['as' => 'getForecasts', 'uses' => 'ForecastController@getForecasts']);
 	Route::resource('forecasts', 'ForecastController');

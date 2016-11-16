@@ -4,17 +4,25 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Study extends Eloquent
 {
-	use SoftDeletes;
+	use SoftDeletes, CascadeSoftDeletes;
 	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
-		'degree_id', 'name_study', 'institution_study_id', 'date_obtention'
+		'employee_id', 'degree_id', 'date_obtention'
+	];
+	
+	/**
+	 * @var array
+	 */
+	protected $cascadeDeletes = [
+		'detailSchoolStudy', 'detailTechnicalStudy', 'detailCollegeStudy'
 	];
 	
 	/**
@@ -35,9 +43,53 @@ class Study extends Eloquent
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function institution()
+	public function employee()
 	{
-		return $this->belongsTo(Institution::class, 'institution_study_id');
+	    return $this->belongsTo(Employee::class);
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function detailCollegeStudy()
+	{
+	    return $this->hasOne(DetailCollegeStudy::class);
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function detailSchoolStudy()
+	{
+	    return $this->hasOne(DetailSchoolStudy::class);
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function detailTechnicalStudy()
+	{
+		return $this->hasOne(DetailTechnicalStudy::class);
+	}
+	
+	
+	public function getTypeDegreeIdAttribute()
+	{
+	    switch ($this->degree_id)
+	    {
+		    case 1:
+		    case 2:
+			    $type = 'school';
+			    break;
+		    case 3:
+			    $type = 'technical';
+		    	break;
+		    default:
+			    $type = 'college';
+		    	break;
+	    }
+	    
+	    return $type;
 	}
 	
 	/**
@@ -46,14 +98,6 @@ class Study extends Eloquent
 	public function setDateObtentionAttribute($value)
 	{
 		$this->attributes['date_obtention'] = Carbon::createFromFormat('d-m-Y', $value);
-	}
-	
-	/**
-	 * @param string $value
-	 */
-	public function setNameStudyAttribute($value)
-	{
-		$this->attributes['name_study'] = ucfirst(mb_strtolower($value, 'utf-8'));
 	}
 	
 }

@@ -15,7 +15,6 @@ class CreateDegreesTable extends Migration
         Schema::create('degrees', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 30);
-	        $table->softDeletes();
         });
     }
 	

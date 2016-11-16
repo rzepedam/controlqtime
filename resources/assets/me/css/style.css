@@ -251,3 +251,7 @@ img {
 .dropdown-menu-media > .dropdown-menu-footer > a {
     color: #3f51b5 !important;
 }
+
+.select-disabled {
+    background: #EEEEEE !important;
+}

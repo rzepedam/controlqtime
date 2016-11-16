@@ -465,6 +465,8 @@ class EmployeeController extends Controller
 	{
 		$employee                   = $this->employee->find($id, [
 			'address.commune.province.region', 'address.detailAddressLegalEmployee',
+			'studies.detailCollegeStudy', 'studies.detailSchoolStudy',
+			'studies.detailTechnicalStudy', 'studies.detailCollegeStudy.institution'
 		]);
 		$countries                  = $this->country->lists('name', 'id');
 		$degrees                    = $this->degree->lists('name', 'id');
@@ -545,7 +547,7 @@ class EmployeeController extends Controller
 			$this->family_responsability->createOrUpdateWithArray($request->all(), $employee);
 			$this->activateEmployee->checkStateUpdateEmployee($id);
 			
-			$user->notify(new EmployeeWasRegistered($employee));
+			// $user->notify(new EmployeeWasRegistered($employee));
 			DB::commit();
 		} catch (Exception $e)
 		{
@@ -566,10 +568,12 @@ class EmployeeController extends Controller
 	public function show($id)
 	{
 		$employee = $this->employee->find($id, [
-			'pension', 'forecast', 'address.commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
-			'address.detailAddressLegalEmployee', 'studies.degree', 'studies.institution', 'certifications.imagesable',
-			'specialities.imagesable', 'professionalLicenses.imagesable', 'disabilities.imagesable',
-			'diseases.imagesable', 'exams.imagesable', 'familyResponsabilities.imagesable'
+			'pension', 'forecast', 'address.commune.province.region', 'contactEmployees.relationship',
+			'familyRelationships.relationship', 'address.detailAddressLegalEmployee', 'studies.degree',
+			'studies.detailCollegeStudy.institution', 'studies.detailSchoolStudy', 'studies.detailTechnicalStudy',
+			'certifications.imagesable', 'specialities.imagesable', 'professionalLicenses.imagesable',
+			'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable',
+			'familyResponsabilities.imagesable'
 		]);
 		
 		return view('human-resources.employees.show', compact('employee'));
@@ -720,6 +724,7 @@ class EmployeeController extends Controller
 		Session::put('id_study', $request->get('id_study'));
 		Session::put('degree_id', $request->get('degree_id'));
 		Session::put('name_study', $request->get('name_study'));
+		Session::put('name_institution', $request->get('name_institution'));
 		Session::put('institution_study_id', $request->get('institution_study_id'));
 		Session::put('date_obtention', $request->get('date_obtention'));
 		Session::put('count_certifications', $request->get('count_certifications'));

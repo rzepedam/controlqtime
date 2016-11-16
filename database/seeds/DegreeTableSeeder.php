@@ -17,31 +17,41 @@ class DegreeTableSeeder extends Seeder
 	
 	    Degree::create([
 		    'id'   => 1,
-		    'name' => 'Técnico Nivel Medio'
+		    'name' => 'Enseñanza Básica'
 	    ]);
 	
 	    Degree::create([
 		    'id'   => 2,
-		    'name' => 'Técnico Nivel Profesional'
+		    'name' => 'Enseñanza Media'
 	    ]);
-	
+	    
 	    Degree::create([
 		    'id'   => 3,
-		    'name' => 'Licenciado'
+		    'name' => 'Técnico Nivel Medio'
 	    ]);
 	
 	    Degree::create([
 		    'id'   => 4,
-		    'name' => 'Título Profesional'
+		    'name' => 'Técnico Nivel Profesional'
 	    ]);
 	
 	    Degree::create([
 		    'id'   => 5,
-		    'name' => 'Magister'
+		    'name' => 'Licenciado'
 	    ]);
 	
 	    Degree::create([
 		    'id'   => 6,
+		    'name' => 'Título Profesional'
+	    ]);
+	
+	    Degree::create([
+		    'id'   => 7,
+		    'name' => 'Magister'
+	    ]);
+	
+	    Degree::create([
+		    'id'   => 8,
 		    'name' => 'Doctorado'
 	    ]);
 	
