@@ -350,11 +350,11 @@ class EmployeeController extends Controller
 		try
 		{
 			$employee = $this->employee->create(Session::get('step1'));
-			$user     = $employee->user()->create([
+			$user    = $employee->user()->create([
 				'email'    => Session::get('email_employee'),
 				'password' => bcrypt(Session::get('email_employee'))
 			]);
-			$address  = $employee->address()->create(Session::get('step1'));
+			$address = $employee->address()->create(Session::get('step1'));
 			$address->detailAddressLegalEmployee()->create(Session::get('step1'));
 			$this->contact_employee->createOrUpdateWithArray(Session::get('step1'), $employee);
 			$this->family_relationship->createOrUpdateWithArray(Session::get('step1'), $employee);
@@ -671,7 +671,6 @@ class EmployeeController extends Controller
 	 */
 	public function step1(Step1Request $request)
 	{
-		$request->request->add(['user_id' => 'change']);
 		Session::put('step1', $request->all());
 		Session::put('male_surname', $request->get('male_surname'));
 		Session::put('female_surname', $request->get('female_surname'));

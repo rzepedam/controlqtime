@@ -64,5 +64,5 @@ class Certification extends Eloquent
     {
         $this->attributes['expired_certification'] = Carbon::createFromFormat('d-m-Y', $value);
     }
-
+    
 }

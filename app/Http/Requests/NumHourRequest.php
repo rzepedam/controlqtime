@@ -33,7 +33,7 @@ class NumHourRequest extends SanitizedRequest
 			case 'POST':
 			{
 				return [
-					'name'  => 'required|max:3|unique:num_hours|regex:/[0-9 -()+]+$/'
+					'name'  => 'required|max:3|regex:/[0-9 -()+]+$/|unique:num_hours,name,NULL,id,deleted_at,NULL'
 				];
 			}
 

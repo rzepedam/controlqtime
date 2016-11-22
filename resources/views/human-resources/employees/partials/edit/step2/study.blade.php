@@ -42,7 +42,7 @@
                     {{ Form::label('name_study', 'Profesión u Oficio') }}
                     {{ Form::text('name_study[]', $study->detailTechnicalStudy->name_study, ['class'=> 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '80']) }}
                 </div>
-                <div class="col-sm-6 col-md-4 form-group">
+                <div class="col-sm-6 col-md-3 form-group">
                     {{ Form::label("name_institution", "Institución", ["class"=> "control-label"]) }}
                     {{ Form::text("name_institution[]", $study->detailTechnicalStudy->name_institution, ["class"=> "form-control maxlength", "data-plugin"=> "maxlength", "maxlength"=> "80"]) }}
                 </div>

@@ -27,8 +27,8 @@ class Employee extends Eloquent
 	 */
 	protected $cascadeDeletes = [
 		'contactEmployees', 'familyRelationships', 'studies', 'certifications', 'specialities',
-        'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities',
-        'user', 'address', 'contract', 'accessControls', 'dailyAssistances', 'imagesable'
+		'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities',
+		'user', 'address', 'contract', 'accessControls', 'dailyAssistances', 'imagesable'
 	];
 	
 	/**
@@ -44,7 +44,7 @@ class Employee extends Eloquent
 	 */
 	public function accessControls()
 	{
-	    return $this->hasMany(AccessControlApi::class);
+		return $this->hasMany(AccessControlApi::class);
 	}
 	
 	/**
@@ -289,7 +289,7 @@ class Employee extends Eloquent
 	 */
 	public function getNumImagesIdentityCardAttribute()
 	{
-	    return $this->imagesable()->where('path', 'like', '%IdentityCard%')->count();
+		return $this->imagesable()->where('path', 'like', '%IdentityCard%')->count();
 	}
 	
 	/**
@@ -428,4 +428,114 @@ class Employee extends Eloquent
 		return $this->imagesable()->where('path', 'like', '%PensionCertificate%')->get();
 	}
 	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesCertificationAttribute()
+	{
+		$sum = 0;
+		foreach ($this->certifications as $certification)
+		{
+			$sum += count($certification->imagesable);
+		}
+		
+		return $sum;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesSpecialityAttribute()
+	{
+		$sum = 0;
+		foreach ($this->specialities as $speciality)
+		{
+			$sum += count($speciality->imagesable);
+		}
+		
+		return $sum;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesProfessionalLicensesAttribute()
+	{
+		$sum = 0;
+		foreach ($this->professionalLicenses as $professionalLicense)
+		{
+			$sum += count($professionalLicense->imagesable);
+		}
+		
+		return $sum;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesDisabilitiesAttribute()
+	{
+		$sum = 0;
+		foreach ($this->disabilities as $disability)
+		{
+			$sum += count($disability->imagesable);
+		}
+		
+		return $sum;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesDiseasesAttribute()
+	{
+		$sum = 0;
+		foreach ($this->diseases as $disease)
+		{
+			$sum += count($disease->imagesable);
+		}
+		
+		return $sum;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesExamsAttribute()
+	{
+		$sum = 0;
+		foreach ($this->exams as $exam)
+		{
+			$sum += count($exam->imagesable);
+		}
+		
+		return $sum;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesFamilyResponsabilitiesAttribute()
+	{
+		$sum = 0;
+		foreach ($this->familyResponsabilities as $family_responsability)
+		{
+			$sum += count($family_responsability->imagesable);
+		}
+		
+		return $sum;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumTotalImagesAttribute()
+	{
+		return $this->getNumImagesIdentityCardAttribute() + $this->getNumImagesCriminalRecordAttribute()
+		+ $this->getNumImagesHealthCertificateAttribute() + $this->getNumImagesPensionCertificateAttribute()
+		+ $this->getNumImagesCertificationAttribute() + $this->getNumImagesSpecialityAttribute()
+		+ $this->getNumImagesProfessionalLicensesAttribute() + $this->getNumImagesDisabilitiesAttribute()
+		+ $this->getNumImagesDiseasesAttribute() + $this->getNumImagesExamsAttribute()
+		+ $this->getNumImagesFamilyResponsabilitiesAttribute();
+	}
 }

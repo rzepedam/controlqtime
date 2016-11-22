@@ -178,10 +178,9 @@
                             </div>
                         </div>
                     </div>
-                    @foreach($employee->certifications as $certification)
-                        @if ($certification->imagesable->count() > 0)
+                    @if ($employee->num_images_certification > 0)
+                        @foreach($employee->certifications as $certification)
                             @foreach($certification->imagesable as $image_certification)
-
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -195,19 +194,18 @@
                                         </figure>
                                     </div>
                                 </div>
-
                             @endforeach
-                        @else
+                        @endforeach
+                    @else
+                        <br/>
+                        <h3 class="text-center text-info">No existen Imágenes de Certificaciones asociadas al Trabajador actual
                             <br/>
-                            <h3 class="text-center text-info">No existen Imágenes de Certificaciones asociadas al Trabajador actual
-                                <br/>
-                                <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                                </small>
-                            </h3>
-                            <br/>
-                            <br/>
-                        @endif
-                    @endforeach
+                            <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                            </small>
+                        </h3>
+                        <br/>
+                        <br/>
+                    @endif
                 </div>
             </div>
         </div>
@@ -227,10 +225,9 @@
                             </div>
                         </div>
                     </div>
-                    @foreach($employee->specialities as $speciality)
-                        @if ($speciality->imagesable->count() > 0)
+                    @if ($employee->num_images_speciality > 0)
+                        @foreach($employee->specialities as $speciality)
                             @foreach($speciality->imagesable as $image_speciality)
-
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -244,19 +241,18 @@
                                         </figure>
                                     </div>
                                 </div>
-
                             @endforeach
-                        @else
+                        @endforeach
+                    @else
+                        <br/>
+                        <h3 class="text-center text-success">No existen Imágenes de Especialidades asociadas al Trabajador actual
                             <br/>
-                            <h3 class="text-center text-success">No existen Imágenes de Especialidades asociadas al Trabajador actual
-                                <br/>
-                                <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                                </small>
-                            </h3>
-                            <br/>
-                            <br/>
-                        @endif
-                    @endforeach
+                            <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                            </small>
+                        </h3>
+                        <br/>
+                        <br/>
+                    @endif
                 </div>
             </div>
         </div>
@@ -275,10 +271,9 @@
                             </div>
                         </div>
                     </div>
-                    @foreach($employee->professionalLicenses as $professional_license)
-                        @if ($professional_license->imagesable->count() > 0)
+                    @if ($employee->num_images_professional_licenses > 0)
+                        @foreach($employee->professionalLicenses as $professional_license)
                             @foreach($professional_license->imagesable as $image_professional_license)
-
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -292,19 +287,18 @@
                                         </figure>
                                     </div>
                                 </div>
-
                             @endforeach
-                        @else
+                        @endforeach
+                    @else
+                        <br/>
+                        <h3 class="text-center text-warning">No existen Imágenes de Licencia Profesional asociadas al Trabajador actual
                             <br/>
-                            <h3 class="text-center text-warning">No existen Imágenes de Licencia Profesional asociadas al Trabajador actual
-                                <br/>
-                                <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                                </small>
-                            </h3>
-                            <br/>
-                            <br/>
-                        @endif
-                    @endforeach
+                            <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                            </small>
+                        </h3>
+                        <br/>
+                        <br/>
+                    @endif
                 </div>
             </div>
         </div>
@@ -323,10 +317,9 @@
                             </div>
                         </div>
                     </div>
-                    @foreach($employee->disabilities as $disability)
-                        @if ($disability->imagesable->count() > 0)
+                    @if ($employee->num_images_disabilities > 0)
+                        @foreach($employee->disabilities as $disability)
                             @foreach($disability->imagesable as $image_disability)
-
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -340,19 +333,18 @@
                                         </figure>
                                     </div>
                                 </div>
-
                             @endforeach
-                        @else
+                        @endforeach
+                    @else
+                        <br/>
+                        <h3 class="text-center text-danger">No existen Imágenes de Discapacidades asociadas al Trabajador actual
                             <br/>
-                            <h3 class="text-center text-danger">No existen Imágenes de Discapacidades asociadas al Trabajador actual
-                                <br/>
-                                <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                                </small>
-                            </h3>
-                            <br/>
-                            <br/>
-                        @endif
-                    @endforeach
+                            <small>(Puede adjuntar la documentación desde <a class="text-danger" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                            </small>
+                        </h3>
+                        <br/>
+                        <br/>
+                    @endif
                 </div>
             </div>
         </div>
@@ -371,10 +363,9 @@
                             </div>
                         </div>
                     </div>
-                    @foreach($employee->diseases as $disease)
-                        @if ($disease->imagesable->count() > 0)
+                    @if ($employee->num_images_diseases > 0)
+                        @foreach($employee->diseases as $disease)
                             @foreach($disease->imagesable as $image_disease)
-
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -382,25 +373,24 @@
                                             <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
                                                 <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_disease->path) }}" data-plugin="magnificPopup"></a>
                                                 {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_disease->path }}" data-name="{{ $image_disease->orig_name }}"></a>
+                                                    <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_disease->path }}" data-name="{{ $image_disease->orig_name }}"></a>
                                                 {{ Form::close() }}
                                             </figcaption>
                                         </figure>
                                     </div>
                                 </div>
-
                             @endforeach
-                        @else
+                        @endforeach
+                    @else
+                        <br/>
+                        <h3 class="text-center text-info">No existen Imágenes de Enfermedades asociadas al Trabajador actual
                             <br/>
-                            <h3 class="text-center text-info">No existen Imágenes de Enfermedades asociadas al Trabajador actual
-                                <br/>
-                                <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                                </small>
-                            </h3>
-                            <br/>
-                            <br/>
-                        @endif
-                    @endforeach
+                            <small>(Puede adjuntar la documentación desde <a class="text-info" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                            </small>
+                        </h3>
+                        <br/>
+                        <br/>
+                    @endif
                 </div>
             </div>
         </div>
@@ -419,10 +409,9 @@
                             </div>
                         </div>
                     </div>
-                    @foreach($employee->exams as $exam)
-                        @if ($exam->imagesable->count() > 0)
+                    @if ($employee->num_images_exams > 0)
+                        @foreach($employee->exams as $exam)
                             @foreach($exam->imagesable as $image_exam)
-
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -430,25 +419,24 @@
                                             <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
                                                 <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_exam->path) }}" data-plugin="magnificPopup"></a>
                                                 {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_exam->path }}" data-name="{{ $image_exam->orig_name }}"></a>
+                                                    <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_exam->path }}" data-name="{{ $image_exam->orig_name }}"></a>
                                                 {{ Form::close() }}
                                             </figcaption>
                                         </figure>
                                     </div>
                                 </div>
-
                             @endforeach
-                        @else
+                        @endforeach
+                    @else
+                        <br/>
+                        <h3 class="text-center text-success">No existen Imágenes de Examen Preocupacional asociadas al Trabajador actual
                             <br/>
-                            <h3 class="text-center text-success">No existen Imágenes de Examen Preocupacional asociadas al Trabajador actual
-                                <br/>
-                                <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                                </small>
-                            </h3>
-                            <br/>
-                            <br/>
-                        @endif
-                    @endforeach
+                            <small>(Puede adjuntar la documentación desde <a class="text-success" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                            </small>
+                        </h3>
+                        <br/>
+                        <br/>
+                    @endif
                 </div>
             </div>
         </div>
@@ -467,10 +455,9 @@
                             </div>
                         </div>
                     </div>
-                    @foreach($employee->familyResponsabilities as $family_responsability)
-                        @if ($family_responsability->imagesable->count() > 0)
+                    @if ($employee->num_images_family_responsabilities > 0)
+                        @foreach($employee->familyResponsabilities as $family_responsability)
                             @foreach($family_responsability->imagesable as $image_family_responsability)
-
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -478,25 +465,24 @@
                                             <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
                                                 <a class="icon md-search" href="{{ Storage::disk('s3')->url($image_family_responsability->path) }}" data-plugin="magnificPopup"></a>
                                                 {{ Form::open(array('route' => array('download.file'), 'method' => 'POST', 'id' => 'form-download', 'style' => 'display: inline')) }}
-                                                <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_family_responsability->path }}" data-name="{{ $image_family_responsability->orig_name }}"></a>
+                                                    <a class="icon md-download download-file" href="javascript:void(0)" data-id="{{ $image_family_responsability->path }}" data-name="{{ $image_family_responsability->orig_name }}"></a>
                                                 {{ Form::close() }}
                                             </figcaption>
                                         </figure>
                                     </div>
                                 </div>
-
                             @endforeach
-                        @else
+                        @endforeach
+                    @else
+                        <br/>
+                        <h3 class="text-center text-warning">No existen Imágenes de Carga Familiar asociadas al Trabajador actual
                             <br/>
-                            <h3 class="text-center text-warning">No existen Imágenes de Carga Familiar asociadas al Trabajador actual
-                                <br/>
-                                <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
-                                </small>
-                            </h3>
-                            <br/>
-                            <br/>
-                        @endif
-                    @endforeach
+                            <small>(Puede adjuntar la documentación desde <a class="text-warning" href="{{ route('EmployeeAttachFiles', $employee->id) }}">Aquí</a>)
+                            </small>
+                        </h3>
+                        <br/>
+                        <br/>
+                    @endif
                 </div>
             </div>
         </div>

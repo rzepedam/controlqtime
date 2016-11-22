@@ -3,6 +3,7 @@
 use Controlqtime\Core\Entities\User;
 use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Company;
+use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Core\Entities\TermAndObligatory;
@@ -115,5 +116,12 @@ $factory->define(User::class, function (Faker\Generator $faker)
 		'employee_id' => 1,
 		'email'       => $faker->email,
 		'password'    => bcrypt("$faker->password")
+	];
+});
+
+$factory->define(NumHour::class, function (Faker\Generator $faker)
+{
+	return [
+		'name' => '60'
 	];
 });

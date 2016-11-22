@@ -114,6 +114,7 @@ class Company extends Eloquent
         $this->attributes['start_act'] = Carbon::createFromFormat('d-m-Y', $value);
     }
 
+    
     /**
      * @param string $value format 123456789-k
      *
@@ -146,5 +147,37 @@ class Company extends Eloquent
 	public function getImagesCarnetAttribute()
 	{
 		return $this->imagesable()->where('path', 'like', '%Carnet%')->get();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesRolAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%Rol%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesPatentAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%Patent%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesCarnetAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%Carnet%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumTotalImagesAttribute()
+	{
+		return $this->getNumImagesRolAttribute() + $this->getNumImagesPatentAttribute() + $this->getNumImagesCarnetAttribute();
 	}
 }

@@ -9,8 +9,8 @@
                         </div>
                     </div>
                 </div>
-                @if (count($vehicle->imagePadrones) > 0)
-                    @foreach($vehicle->imagePadrones as $image_padron)
+                @if ($vehicle->num_images_padron > 0)
+                    @foreach($vehicle->images_padron as $image_padron)
 
                         <div class="col-md-4">
                             <div class="widget widget-shadow">
@@ -52,8 +52,8 @@
                         </div>
                     </div>
                 </div>
-                @if (count($vehicle->imageObligatoryInsurances) > 0)
-                    @foreach($vehicle->imageObligatoryInsurances as $image_obligatory_insurance)
+                @if ($vehicle->num_images_obligatory_insurance > 0)
+                    @foreach($vehicle->images_obligatory_insurance as $image_obligatory_insurance)
 
                         <div class="col-md-4">
                             <div class="widget widget-shadow">
@@ -95,8 +95,8 @@
                         </div>
                     </div>
                 </div>
-                @if (count($vehicle->imageCirculationPermits) > 0)
-                    @foreach($vehicle->imageCirculationPermits as $image_circulation_permit)
+                @if ($vehicle->num_images_circulation_permit > 0)
+                    @foreach($vehicle->images_circulation_permit as $image_circulation_permit)
 
                         <div class="col-md-4">
                             <div class="widget widget-shadow">

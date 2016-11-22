@@ -21,7 +21,7 @@
         <li class="active" role="presentation"><a data-toggle="tab" href="#tab_1" aria-controls="tab_1" role="tab"><i class="fa fa-pencil"></i> Información Personal</a></li>
         <li role="presentation"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-star"></i> Competencias Laborales</a></li>
         <li role="presentation"><a data-toggle="tab" href="#tab_3" aria-controls="tab_3" role="tab"><i class="fa fa-heartbeat"></i> Información de Salud</a></li>
-        <li role="presentation"><a data-toggle="tab" href="#tab_4" aria-controls="tab_4" role="tab"><i class="fa fa-file-text-o"></i> Documentos Adjuntos</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#tab_4" aria-controls="tab_4" role="tab"><i class="fa fa-file-text-o"></i> Documentos Adjuntos <span class="badge badge-warning up">{{ $employee->num_total_images }}</span></a></li>
     </ul>
     <div class="tab-content padding-top-20">
         <div class="tab-pane active" id="tab_1" role="tabpanel">

@@ -13,5 +13,7 @@ interface BaseRepoInterface {
     public function update(array $request, $id);
 
     public function delete($id);
-
+	
+	public function onlyTrashed($attribute, $value);
+	
 }

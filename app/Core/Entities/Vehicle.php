@@ -39,7 +39,7 @@ class Vehicle extends Eloquent
 	 */
 	public function user()
 	{
-        return $this->belongsTo(User::class);
+		return $this->belongsTo(User::class);
 	}
 	
 	/**
@@ -175,4 +175,38 @@ class Vehicle extends Eloquent
 	{
 		return $this->imagesable()->where('path', 'like', '%CirculationPermit%')->get();
 	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesPadronAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%Padron%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesObligatoryInsuranceAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%ObligatoryInsurance%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesCirculationPermitAttribute()
+	{
+		return $this->imagesable()->where('path', 'like', '%CirculationPermit%')->count();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumTotalImagesAttribute()
+	{
+		return $this->getNumImagesPadronAttribute() + $this->getNumImagesObligatoryInsuranceAttribute()
+		+ $this->getNumImagesCirculationPermitAttribute();
+	}
+	
 }

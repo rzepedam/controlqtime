@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Core\Repositories\Base;
 
+use Exception;
 use Illuminate\Support\Facades\Session;
 use Controlqtime\Core\Contracts\Base\BaseRepoInterface;
 
@@ -67,6 +68,25 @@ abstract class BaseRepo implements BaseRepoInterface
 		Session::flash('success', 'El registro fue eliminado satisfactoriamente.');
 		
 		return $query;
+	}
+	
+	/**
+	 * @param $attribute
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
+	public function onlyTrashed($attribute, $value)
+	{
+		try
+		{
+			$model = $this->model->onlyTrashed()->where($attribute, $value)->firstOrFail();
+			
+			return $model->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
 	}
 	
 }
