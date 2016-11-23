@@ -16,7 +16,7 @@ class TermAndObligatoryTest extends TestCase
 		$this->term = factory(TermAndObligatory::class)->create();
 	}
 	
-	function test_route_exists()
+	function test_route_term_and_obligatory_exists()
 	{
 		$this->visitRoute('terms-and-obligatories.index')
 			->assertResponseOk();

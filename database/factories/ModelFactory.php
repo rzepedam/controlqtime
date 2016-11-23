@@ -122,6 +122,8 @@ $factory->define(User::class, function (Faker\Generator $faker)
 $factory->define(NumHour::class, function (Faker\Generator $faker)
 {
 	return [
-		'name' => '60'
+		'id'         => $faker->randomDigit,
+		'name'       => $faker->numberBetween(1, 999),
+		'deleted_at' => null
 	];
 });

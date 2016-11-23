@@ -1,21 +1,33 @@
 <?php
 
 use Carbon\Carbon;
-use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AccessControlApiTest extends TestCase
 {
 	use DatabaseTransactions;
 	
-	function test_url_exists()
+	protected $user;
+	
+	protected $token;
+	
+	function setUp()
+	{
+		parent::setUp();
+		$this->signIn();
+		$this->user  = factory(User::class)->create();
+		$this->token = $this->user->createToken('Biometry')->accessToken;
+	}
+	
+	function test_url_access_control_api_exists()
 	{
 		$response = $this->call('POST', '/api/access-control');
 		
 		$this->assertEquals(302, $response->getStatusCode());
 	}
 	
-	function test_unauthenticated_access()
+	function test_unauthenticated_access_control_api()
 	{
 		$headers = [
 			'Authorization' => 'Bearer test',
@@ -28,17 +40,17 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
-	function test_create_access_control_success()
+	function test_create_access_control_api_success()
 	{
 		$data = [
-			'rut'         => '17032680-6',
-			'num_device'  => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
-			'status'      => 1,
-			'created_at'  => Carbon::now()
+			'rut'        => '17032680-6',
+			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
+			'status'     => 1,
+			'created_at' => Carbon::now()
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => config('services.biometry.bearer'),
+			'Authorization' => 'Bearer ' . $this->token,
 			'Accept'        => 'application/json'])
 			->seeJson([
 				'success' => true,
@@ -55,7 +67,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => config('services.biometry.bearer'),
+			'Authorization' => 'Bearer ' . $this->token,
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(500);
 	}
@@ -70,7 +82,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => config('services.biometry.bearer'),
+			'Authorization' => 'Bearer ' . $this->token,
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
@@ -89,7 +101,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => config('services.biometry.bearer'),
+			'Authorization' => 'Bearer ' . $this->token,
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
@@ -107,7 +119,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => config('services.biometry.bearer'),
+			'Authorization' => 'Bearer ' . $this->token,
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
@@ -125,7 +137,7 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => config('services.biometry.bearer'),
+			'Authorization' => 'Bearer ' . $this->token,
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
@@ -145,12 +157,12 @@ class AccessControlApiTest extends TestCase
 		];
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => config('services.biometry.bearer'),
+			'Authorization' => 'Bearer ' . $this->token,
 			'Accept'        => 'application/json'])
 			->assertResponseOk();
 		
 		$this->post('/api/access-control', $data, [
-			'Authorization' => config('services.biometry.bearer'),
+			'Authorization' => 'Bearer ' . $this->token,
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([

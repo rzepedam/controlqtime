@@ -13,10 +13,14 @@ class NumHourTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->numHour = factory(NumHour::class)->create();
+		$this->numHour = factory(NumHour::class)->create([
+			'id'         => '10',
+			'name'       => '60',
+			'deleted_at' => null
+		]);
 	}
 	
-	function test_route_exists()
+	function test_route_num_hour_exists()
 	{
 		$this->visitRoute('num-hours.index')
 			->assertResponseOk();
@@ -122,21 +126,22 @@ class NumHourTest extends TestCase
 			]);
 	}
 	
-	function test_edit_route_exists()
+	function test_edit_num_hour_route_exists()
 	{
-		$this->visitRoute('num-hours.edit', $this->numHour->id)
+		$this->visitRoute('num-hours.edit', 1)
 			->assertResponseOk();
 	}
 	
-	function test_edit_url_exists()
+	function test_edit_num_hour_url_exists()
 	{
-		$this->visit("maintainers/num-hours/{$this->numHour->id}/edit")
+		$this->visit('maintainers/num-hours/1/edit')
+			->see('Editar')
 			->assertResponseOk();
 	}
 	
 	function test_update_name_num_hour()
 	{
-		$this->visit("maintainers/num-hours/{$this->numHour->id}/edit")
+		$this->visit('maintainers/num-hours/' . $this->numHour->id . '/edit')
 			->see('Editar Nº Hora: <span class="text-primary">' . $this->numHour->id . '</span>')
 			->see('Nombre')
 			->seeInField('name', $this->numHour->name)
