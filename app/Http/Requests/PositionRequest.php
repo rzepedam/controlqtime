@@ -26,7 +26,7 @@ class PositionRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:50|unique:positions',
+                    'name'  => 'required|max:50|unique:positions,name,NULL,id,deleted_at,NULL',
                 ];
             }
 

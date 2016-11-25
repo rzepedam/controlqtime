@@ -53,7 +53,12 @@ class TypeDisabilityController extends Controller
      */
     public function store(TypeDisabilityRequest $request)
     {
-        $this->type_disability->create($request->all());
+	    $typeDisability = $this->type_disability->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $typeDisability)
+	    {
+		    $this->type_disability->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

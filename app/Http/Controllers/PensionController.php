@@ -53,8 +53,13 @@ class PensionController extends Controller
      */
     public function store(PensionRequest $request)
     {
-        $this->pension->create($request->all());
-
+	    $pension = $this->pension->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $pension)
+	    {
+		    $this->pension->create($request->all());
+	    }
+	    
         return response()->json([
             'success' => true,
             'url'     => '/maintainers/pensions'

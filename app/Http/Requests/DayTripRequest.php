@@ -33,7 +33,7 @@ class DayTripRequest extends SanitizedRequest
 			case 'POST':
 			{
 				return [
-					'name'  => 'required|max:50|unique:day_trips'
+					'name'  => 'required|max:50|unique:day_trips,name,NULL,id,deleted_at,NULL'
 				];
 			}
 

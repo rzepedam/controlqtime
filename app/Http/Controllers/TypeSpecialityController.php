@@ -53,7 +53,12 @@ class TypeSpecialityController extends Controller
      */
     public function store(TypeSpecialityRequest $request)
     {
-        $this->type_speciality->create($request->all());
+	    $typeSpeciality = $this->type_speciality->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $typeSpeciality)
+	    {
+		    $this->type_speciality->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

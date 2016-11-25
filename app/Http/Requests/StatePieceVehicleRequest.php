@@ -44,7 +44,7 @@ class StatePieceVehicleRequest extends SanitizedRequest
 			case 'POST':
 			{
 				return [
-					'name'  => 'required|max:20|unique:state_piece_vehicles'
+					'name'  => 'required|max:20|unique:state_piece_vehicles,name,NULL,id,deleted_at,NULL'
 				];
 			}
 

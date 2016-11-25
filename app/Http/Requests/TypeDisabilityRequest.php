@@ -2,8 +2,9 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
+use Illuminate\Validation\Rule;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class TypeDisabilityRequest extends SanitizedRequest
 {
@@ -26,7 +27,7 @@ class TypeDisabilityRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:120|unique:type_disabilities',
+                    'name'  => 'required|max:120|unique:type_disabilities,name,NULL,id,deleted_at,NULL',
                 ];
             }
 

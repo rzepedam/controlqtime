@@ -26,7 +26,7 @@ class TypeCertificationRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:100|unique:type_certifications'
+                    'name'  => 'required|max:100|unique:type_certifications,name,NULL,id,deleted_at,NULL'
                 ];
             }
 

@@ -25,7 +25,7 @@ class TypeDiseaseRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:120|unique:type_diseases',
+                    'name'  => 'required|max:120|unique:type_diseases,name,NULL,id,deleted_at,NULL',
                 ];
             }
 

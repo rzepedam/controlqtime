@@ -53,7 +53,12 @@ class MutualityController extends Controller
      */
     public function store(MutualityRequest $request)
     {
-        $this->mutuality->create($request->all());
+	    $mutuality = $this->mutuality->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $mutuality)
+	    {
+		    $this->mutuality->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

@@ -25,7 +25,7 @@ class TypeExamRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:75|unique:type_exams'
+                    'name'  => 'required|max:75|unique:type_exams,name,NULL,id,deleted_at,NULL'
                 ];
             }
 

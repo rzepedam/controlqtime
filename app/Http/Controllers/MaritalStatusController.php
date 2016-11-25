@@ -53,7 +53,12 @@ class MaritalStatusController extends Controller
      */
     public function store(MaritalStatusRequest $request)
     {
-        $this->maritalStatus->create($request->all());
+	    $marital_status = $this->maritalStatus->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $marital_status)
+	    {
+		    $this->maritalStatus->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

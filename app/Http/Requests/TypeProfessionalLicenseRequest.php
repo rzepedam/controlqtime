@@ -28,7 +28,7 @@ class TypeProfessionalLicenseRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:50|unique:type_professional_licenses',
+                    'name'  => 'required|max:50|unique:type_professional_licenses,name,NULL,id,deleted_at,NULL',
                 ];
             }
 

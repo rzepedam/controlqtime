@@ -59,7 +59,12 @@ class StatePieceVehicleController extends Controller
      */
     public function store(StatePieceVehicleRequest $request)
     {
-        $this->state_piece_vehicle->create($request->all());
+	    $statePieceVehicle = $this->state_piece_vehicle->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $statePieceVehicle)
+	    {
+	        $this->state_piece_vehicle->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

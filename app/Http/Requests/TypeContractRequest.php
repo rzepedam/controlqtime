@@ -35,11 +35,11 @@ class TypeContractRequest extends SanitizedRequest
 	 */
 	public function rules()
 	{
-		switch ($this->method())
+		switch ( $this->method() )
 		{
 			case 'POST':
 			{
-				if (Request::get('name') == 'Plazo Fijo')
+				if ( Request::get('name') == 'Plazo Fijo' )
 				{
 					$rules = [
 						'name' => 'required|unique_with:type_contracts,dur',
@@ -57,13 +57,14 @@ class TypeContractRequest extends SanitizedRequest
 			
 			case 'PUT':
 			{
-				if (Request::get('name') == 'Plazo Fijo')
+				if ( Request::get('name') == 'Plazo Fijo' )
 				{
 					$rules = [
 						'name' => 'required|unique_with:type_contracts,dur,' . $this->route->getParameter('type_contract'),
 						'dur'  => 'required|not_in:0|max:2'
 					];
-				} else {
+				} else
+				{
 					$rules = [
 						'name' => 'required|unique:type_contracts',
 						'dur'  => 'required|in:0'

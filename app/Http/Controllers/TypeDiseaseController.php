@@ -53,7 +53,12 @@ class TypeDiseaseController extends Controller
      */
     public function store(TypeDiseaseRequest $request)
     {
-        $this->type_disease->create($request->all());
+	    $typeDisease = $this->type_disease->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $typeDisease)
+	    {
+		    $this->type_disease->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

@@ -33,7 +33,7 @@ class GratificationRequest extends SanitizedRequest
 			case 'POST':
 			{
 				return [
-					'name'  => 'required|unique:gratifications'
+					'name'  => 'required|unique:gratifications,name,NULL,id,deleted_at,NULL'
 				];
 			}
 

@@ -55,7 +55,12 @@ class DayTripController extends Controller
      */
     public function store(DayTripRequest $request)
     {
-        $this->dayTrip->create($request->all());
+	    $day_trip = $this->dayTrip->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $day_trip)
+	    {
+		    $this->dayTrip->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

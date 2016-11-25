@@ -53,7 +53,12 @@ class TypeExamController extends Controller
      */
     public function store(TypeExamRequest $request)
     {
-        $this->type_exam->create($request->all());
+	    $typeExam = $this->type_exam->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $typeExam)
+	    {
+		    $this->type_exam->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

@@ -27,7 +27,7 @@ class FuelRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:10|unique:fuels'
+                    'name'  => 'required|max:10|unique:fuels,name,NULL,id,deleted_at,NULL'
                 ];
             }
 

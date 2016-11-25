@@ -53,7 +53,12 @@ class PositionController extends Controller
      */
     public function store(PositionRequest $request)
     {
-        $this->position->create($request->all());
+	    $position = $this->position->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $position)
+	    {
+		    $this->position->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

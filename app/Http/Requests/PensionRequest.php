@@ -27,7 +27,7 @@ class PensionRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:75|unique:pensions'
+                    'name'  => 'required|max:75|unique:pensions,name,NULL,id,deleted_at,NULL'
                 ];
             }
 

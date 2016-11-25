@@ -29,7 +29,7 @@ class TrademarkRequest extends SanitizedRequest
             case 'POST':
             {
                 return [
-                    'name'  => 'required|max:50|unique:trademarks'
+                    'name'  => 'required|max:50|unique:trademarks,name,NULL,id,deleted_at,NULL'
                 ];
             }
 

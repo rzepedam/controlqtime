@@ -43,7 +43,7 @@ class MaritalStatusRequest extends SanitizedRequest
 			case 'POST':
 			{
 				return [
-					'name'  => 'required|max:30|unique:marital_statuses'
+					'name'  => 'required|max:30|unique:marital_statuses,name,NULL,id,deleted_at,NULL'
 				];
 			}
 

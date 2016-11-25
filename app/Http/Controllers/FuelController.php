@@ -53,7 +53,12 @@ class FuelController extends Controller
      */
     public function store(FuelRequest $request)
     {
-        $this->fuel->create($request->all());
+	    $fuel = $this->fuel->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $fuel)
+	    {
+		    $this->fuel->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

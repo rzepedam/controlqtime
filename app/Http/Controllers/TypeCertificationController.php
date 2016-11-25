@@ -53,7 +53,12 @@ class TypeCertificationController extends Controller
      */
     public function store(TypeCertificationRequest $request)
     {
-        $this->type_certification->create($request->all());
+	    $type_certification = $this->type_certification->onlyTrashed('name', $request->get('name'));
+	
+	    if (! $type_certification)
+	    {
+		    $this->type_certification->create($request->all());
+	    }
 
         return response()->json([
             'success' => true,

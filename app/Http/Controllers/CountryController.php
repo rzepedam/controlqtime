@@ -55,7 +55,12 @@ class CountryController extends Controller
 	 */
 	public function store(CountryRequest $request)
 	{
-		$this->country->create($request->all());
+		$country = $this->country->onlyTrashed('name', $request->get('name'));
+		
+		if (! $country)
+		{
+			$this->country->create($request->all());
+		}
 		
 		return response()->json([
 			'success' => true,
