@@ -4,12 +4,11 @@ namespace Controlqtime\Core\Entities;
 
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DetailVehicle extends Eloquent
 {
-	use SoftDeletes, CascadeSoftDeletes;
+	use SoftDeletes;
 	
 	/**
 	 * @var array

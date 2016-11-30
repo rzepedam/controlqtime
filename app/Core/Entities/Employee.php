@@ -5,14 +5,13 @@ namespace Controlqtime\Core\Entities;
 use Carbon\Carbon;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class Employee extends Eloquent
 {
-	use SoftDeletes, CascadeSoftDeletes;
+	use SoftDeletes;
 	
 	/**
 	 * @var array

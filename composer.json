@@ -21,7 +21,6 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "doctrine/dbal": "^2.5",
         "pda/pheanstalk": "^3.1",
-        "iatstuti/laravel-cascade-soft-deletes": "1.0.*",
         "nexmo/client": "1.0.0-beta3",
         "laravel/passport": "^1.0"
     },
