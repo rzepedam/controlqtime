@@ -23,6 +23,8 @@ class TypeContractRequest extends SanitizedRequest
 	}
 	
 	/**
+	 * Determine if the user is authorized to make this request.
+	 *
 	 * @return bool
 	 */
 	public function authorize()
@@ -31,6 +33,8 @@ class TypeContractRequest extends SanitizedRequest
 	}
 	
 	/**
+	 * Get the validation rules that apply to the request.
+	 *
 	 * @return array
 	 */
 	public function rules()
@@ -42,7 +46,7 @@ class TypeContractRequest extends SanitizedRequest
 				if ( Request::get('name') == 'Plazo Fijo' )
 				{
 					$rules = [
-						'name' => 'required|unique_with:type_contracts,dur',
+						'name' => 'required|unique_with:type_contracts,dur,deleted_at',
 						'dur'  => 'required|not_in:0|max:2'
 					];
 				} else

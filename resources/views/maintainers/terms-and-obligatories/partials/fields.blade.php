@@ -15,7 +15,7 @@
         {{-- Nombre Form Input --}}
         <div class="form-group">
             {{ Form::label('name', 'Nombre', ['class' => 'control-label']) }}
-            {{ Form::textarea('name', null, ['class' => 'form-control', 'rows' => 5, 'autofocus']) }}
+            {{ Form::textarea('name', null, ['class' => 'form-control find-for-restore', 'rows' => 5, 'autofocus']) }}
         </div>
     </div>
 </div>

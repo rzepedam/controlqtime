@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Mutualidad: <span class="text-primary">{{ $mutuality->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,20 +22,21 @@
 
         {{ Form::model($mutuality, array('route' => array('mutualities.update', $mutuality), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-                <div class="panel-body">
+            {{ Form::hidden('entity', 'mutuality', ['id' => 'entity'])  }}
+            <div class="panel-body">
 
-                    @include('maintainers.mutualities.partials.fields')
+                @include('maintainers.mutualities.partials.fields')
 
-                </div>
-                <br />
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="{{ route('mutualities.index') }}">Volver</a>
-                            <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
-                        </div>
+            </div>
+            <br />
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{ route('mutualities.index') }}">Volver</a>
+                        <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
                     </div>
                 </div>
+            </div>
 
         {{ Form::close() }}
 

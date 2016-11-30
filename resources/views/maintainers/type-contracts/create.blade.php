@@ -27,10 +27,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <a href="{{ route('type-contracts.index') }}">Volver</a>
-                    <button id="btnSubmit" type="submit"
-                            class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i
-                                class="fa fa-floppy-o"></i> Guardar
-                    </button>
+                    <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
                 </div>
             </div>
         </div>

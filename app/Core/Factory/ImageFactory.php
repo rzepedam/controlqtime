@@ -89,7 +89,7 @@ class ImageFactory
 			$this->moveImage();
 			
 			DB::commit();
-		} catch (Exception $e)
+		} catch ( Exception $e )
 		{
 			DB::rollback();
 		}
@@ -162,12 +162,12 @@ class ImageFactory
 			$this->id = str_replace('/', '', $this->id);
 			$image    = new Image();
 			$img      = $image->findOrFail($this->id);
-			if ($img->delete())
+			if ( $img->delete() )
 			{
 				// Storage::disk('s3')->delete($img->path);
 				DB::commit();
 			}
-		} catch (Exception $e)
+		} catch ( Exception $e )
 		{
 			DB::rollback();
 		}

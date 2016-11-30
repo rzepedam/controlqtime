@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@stop
+
 @section('title_header') Editar País: <span class="text-primary">{{ $country->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($country, array('route' => array('countries.update', $country), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'country', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.countries.partials.fields')

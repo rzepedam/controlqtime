@@ -2,8 +2,8 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 /**
  * @property Route route

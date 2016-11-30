@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Institución: <span class="text-primary">{{ $institution->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($institution, array('route' => array('institutions.update', $institution), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'institution', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.institutions.partials.fields')

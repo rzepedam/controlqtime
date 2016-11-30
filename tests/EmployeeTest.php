@@ -12,7 +12,7 @@ class EmployeeTest extends TestCase
 		$this->signIn();
 	}
 	
-    function test_url_exists()
+    function test_url_employee_exists()
     {
 	    $this->visit('human-resources/employees')
 		    ->see('Listado de Trabajadores')
@@ -27,9 +27,7 @@ class EmployeeTest extends TestCase
     
     function test_create_new_employee_with_required_fields()
     {
-        $this->visit('human-resources/employees/create')
-		    ->see('Crear nuevo Trabajador')
-		    ->assertResponseOk();
+        //
     }
     
 }

@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Licencia Profesional: <span class="text-primary">{{ $type_professional_license->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($type_professional_license, array('route' => array('type-professional-licenses.update', $type_professional_license), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'typeProfessionalLicense', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-professional-licenses.partials.fields')

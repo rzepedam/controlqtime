@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Pension: <span class="text-primary">{{ $pension->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($pension, array('route' => array('pensions.update', $pension), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'pension', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.pensions.partials.fields')

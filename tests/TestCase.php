@@ -1,6 +1,7 @@
 <?php
 
 use Controlqtime\Core\Entities\User;
+use Controlqtime\Core\Entities\Employee;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
@@ -10,6 +11,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 	 * @var string
 	 */
 	protected $baseUrl = 'http://controlqtime.dev';
+	
+	protected $employee;
 	
 	protected $user;
 	
@@ -27,14 +30,16 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 		return $app;
 	}
 	
-	public function signIn($user = null)
+	public function signIn($user = null, $employee = null)
 	{
-		if (! $user)
+		if ( ! $user )
 		{
-			$user = factory(User::class)->create();
+			$employee = factory(Employee::class)->create();
+			$user     = factory(User::class)->create();
 		}
 		
-		$this->user = $user;
+		$this->employee = $employee;
+		$this->user     = $user;
 		$this->actingAs($this->user);
 		
 		return $this;

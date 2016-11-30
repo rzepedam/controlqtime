@@ -4,12 +4,13 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Traits\ListsTrait;
 use Controlqtime\Core\Entities\EngineCubic;
+use Controlqtime\Core\Traits\TrashedComposed;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Contracts\EngineCubicRepoInterface;
 
 class EngineCubicRepo extends BaseRepo implements EngineCubicRepoInterface
 {
-	use ListsTrait;
+	use ListsTrait, TrashedComposed;
 	
 	/**
 	 * @var EngineCubic

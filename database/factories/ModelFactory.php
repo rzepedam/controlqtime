@@ -53,7 +53,12 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	$secondName    = $faker->firstName;
 	
 	return [
-		'user_id'           => factory(User::class)->create()->id,
+		'id'                => 1,
+		'nationality_id'    => rand(1, 9),
+		'gender_id'         => rand(1, 2),
+		'marital_status_id' => rand(1, 4),
+		'forecast_id'       => rand(1, 14),
+		'pension_id'        => rand(1, 6),
 		'male_surname'      => $maleSurname,
 		'female_surname'    => $femaleSurname,
 		'first_name'        => $firstName,
@@ -61,12 +66,8 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'full_name'         => "$firstName $secondName $maleSurname $femaleSurname",
 		'rut'               => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'birthday'          => $faker->date($format = 'd-m-Y', $max = 'now'),
-		'nationality_id'    => rand(1, 9),
-		'gender_id'         => rand(1, 2),
-		'marital_status_id' => rand(1, 4),
-		'forecast_id'       => rand(1, 14),
-		'pension_id'        => rand(1, 6),
 		'email_employee'    => $faker->unique()->email,
+		'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
 		'state'             => 'disable'
 	];
 });
@@ -97,6 +98,7 @@ $factory->define(MasterFormPieceVehicle::class, function ()
 $factory->define(TermAndObligatory::class, function (Faker\Generator $faker)
 {
 	return [
+		'id'      => 1,
 		'name'    => $faker->sentence,
 		'default' => $faker->boolean
 	];
@@ -122,7 +124,7 @@ $factory->define(User::class, function (Faker\Generator $faker)
 $factory->define(NumHour::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => $faker->randomDigit,
+		'id'         => '1',
 		'name'       => $faker->numberBetween(1, 999),
 		'deleted_at' => null
 	];

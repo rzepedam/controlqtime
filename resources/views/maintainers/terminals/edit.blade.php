@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@stop
+
 @section('title_header') Editar Terminal: <span class="text-primary">{{ $terminal->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($terminal, array('route' => array('terminals.update', $terminal), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'terminal', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.terminals.partials.fields')

@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@stop
+
 @section('title_header') Editar Tipo Empresa: <span class="text-primary">{{ $type_company->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($type_company, array('route' => array('type-companies.update', $type_company), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'typeCompany', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-companies.partials.fields')

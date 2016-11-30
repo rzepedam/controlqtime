@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Marca: <span class="text-primary">{{ $trademark->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($trademark, array('route' => array('trademarks.update', $trademark), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'trademark', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.trademarks.partials.fields')

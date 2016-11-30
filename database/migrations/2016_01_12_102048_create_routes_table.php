@@ -17,7 +17,6 @@ class CreateRoutesTable extends Migration
 	        $table->unsignedInteger('terminal_id')->nullable();
 	        $table->string('name', 5);
 	        $table->softDeletes();
-            $table->timestamps();
         });
     }
 	

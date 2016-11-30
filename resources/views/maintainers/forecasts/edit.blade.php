@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@stop
+
 @section('title_header') Editar Previsión: <span class="text-primary">{{ $forecast->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($forecast, array('route' => array('forecasts.update', $forecast), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'forecast', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.forecasts.partials.fields')

@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Combustible: <span class="text-primary">{{ $fuel->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($fuel, array('route' => array('fuels.update', $fuel), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'fuel', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.fuels.partials.fields')

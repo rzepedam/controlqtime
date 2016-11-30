@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@stop
+
 @section('title_header') Editar Periocidad: <span class="text-primary">{{ $periodicity->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($periodicity, array('route' => array('periodicities.update', $periodicity), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'periodicity', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.periodicities.partials.fields')

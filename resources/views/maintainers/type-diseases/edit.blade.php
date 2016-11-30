@@ -2,6 +2,12 @@
 
 @section('title_header') Editar Enfermedad: <span class="text-primary">{{ $type_disease->id }}</span> @stop
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('type-diseases.index') }}"><i class="fa fa-bed"></i> Enfermedades</a></li>
@@ -16,6 +22,7 @@
 
         {{ Form::model($type_disease, array('route' => array('type-diseases.update', $type_disease), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'typeDisease', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-diseases.partials.fields')

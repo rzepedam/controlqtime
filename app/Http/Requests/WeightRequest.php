@@ -2,8 +2,8 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class WeightRequest extends SanitizedRequest
 {
@@ -44,8 +44,8 @@ class WeightRequest extends SanitizedRequest
 			case 'POST':
 			{
 				return [
-					'name' => 'required|max:30|unique_with:weights,acr',
-					'acr'  => 'required|max:5|unique:weights'
+					'name' => 'required|max:30|unique_with:weights,acr,deleted_at',
+					'acr'  => 'required|max:5'
 				];
 			}
 			

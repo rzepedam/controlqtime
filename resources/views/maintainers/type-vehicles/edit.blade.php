@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@stop
+
 @section('title_header') Editar Tipo de Vehículo: <span class="text-primary">{{ $type_vehicle->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($type_vehicle, array('route' => array('type-vehicles.update', $type_vehicle), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'typeVehicle', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-vehicles.partials.fields')

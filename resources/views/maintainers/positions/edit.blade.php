@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Cargo: <span class="text-primary">{{ $position->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($position, array('route' => ['positions.update', $position], 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'position', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.positions.partials.fields')

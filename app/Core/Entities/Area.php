@@ -34,7 +34,8 @@ class Area extends Eloquent
      */
     public function terminal()
     {
-        return $this->belongsTo(Terminal::class);
+        return $this->belongsTo(Terminal::class)
+	        ->withTrashed();
     }
 
     /**

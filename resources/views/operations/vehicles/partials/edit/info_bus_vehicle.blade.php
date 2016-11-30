@@ -86,7 +86,7 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label("patent", "Patente", ["class" => "control-label"]) }}
-            {{ Form::text("patent", null, ["class" => "form-control text-center maxlength", "data-plugin" => "maxlength", "maxlength" => "6"]) }}
+            {{ Form::text("patent", null, ["class" => "form-control find-for-restore text-center maxlength", "data-plugin" => "maxlength", "maxlength" => "6"]) }}
         </div>
     </div>
 </div>

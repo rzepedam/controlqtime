@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Certificación: <span class="text-primary">{{ $type_certification->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($type_certification, array('route' => array('type-certifications.update', $type_certification), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'typeCertification', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-certifications.partials.fields')

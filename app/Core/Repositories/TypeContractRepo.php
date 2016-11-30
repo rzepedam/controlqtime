@@ -4,12 +4,13 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Traits\ListsTrait;
 use Controlqtime\Core\Entities\TypeContract;
+use Controlqtime\Core\Traits\TrashedComposed;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Contracts\TypeContractRepoInterface;
 
 class TypeContractRepo extends BaseRepo implements TypeContractRepoInterface
 {
-	use ListsTrait;
+	use ListsTrait, TrashedComposed;
 	
 	/**
 	 * @var TypeContract

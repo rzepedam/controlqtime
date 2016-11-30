@@ -2,6 +2,7 @@
 
 @section('css')
 
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
     <link rel="stylesheet" href="{{ elixir('css/operations/vehicles/create-edit-custom-vehicles.css') }}">
 
 @stop
@@ -20,6 +21,7 @@
 
     {{ Form::model($vehicle, array('route' => array('vehicles.update', $vehicle), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+        {{ Form::hidden('entity', 'vehicle', ['id' => 'entity'])  }}
         <div class="panel panel-bordered">
             <div class="panel-heading">
                 <h3 class="panel-title"><i class="icon fa fa-bus text-primary" aria-hidden="true"></i> Información del Vehículo</h3>

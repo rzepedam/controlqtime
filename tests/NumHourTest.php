@@ -13,23 +13,19 @@ class NumHourTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->numHour = factory(NumHour::class)->create([
-			'id'         => '10',
-			'name'       => '60',
-			'deleted_at' => null
-		]);
+		$this->numHour = factory(NumHour::class)->create();
+	}
+	
+	function test_url_num_hour_exists()
+	{
+		$this->visit('maintainers/num-hours')
+			->see('Listado de Nº de Horas')
+			->assertResponseOk();
 	}
 	
 	function test_route_num_hour_exists()
 	{
 		$this->visitRoute('num-hours.index')
-			->assertResponseOk();
-	}
-	
-	function test_index_url_exists()
-	{
-		$this->visit('maintainers/num-hours')
-			->see('Listado de Nº de Horas')
 			->assertResponseOk();
 	}
 	
@@ -41,8 +37,7 @@ class NumHourTest extends TestCase
 		
 		$this->post('maintainers/num-hours', $data, [
 			'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
-			->seeInDatabase('num_hours', [
-				'name' => '80'])
+			->seeInDatabase('num_hours', ['name' => '80'])
 			->assertResponseOk();
 	}
 	

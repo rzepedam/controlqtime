@@ -65,9 +65,9 @@ class InstitutionController extends Controller
 	 */
 	public function store(InstitutionRequest $request)
 	{
-		$institution = $this->institution->onlyTrashed('name', $request->get('name'));
+		$institution = $this->institution->onlyTrashedComposed('name', 'type_institution_id', $request->get('name'), $request->get('type_institution_id'));
 		
-		if (! $institution)
+		if ( ! $institution )
 		{
 			$this->institution->create($request->all());
 		}

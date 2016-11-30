@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@stop
+
 @section('title_header') Editar Unidad de Medida: <span class="text-primary">{{ $weight->id }}</span> @stop
 
 @section('breadcumb')
@@ -17,6 +23,7 @@
 
         {{ Form::model($weight, array('route' => array('weights.update', $weight), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'weight', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.measuring-units.weights.partials.fields')

@@ -95,10 +95,6 @@ return [
 	*/
 	
 	'attributes' => [
-		
-		/*
-		 * Company
-		 */
 		'type_company_id'           => 'Tipo Empresa',
 		'rut'                       => 'Rut',
 		'firm_name'                 => 'Razón Social',

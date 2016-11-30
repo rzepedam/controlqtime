@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Gratificación: <span class="text-primary">{{ $gratification->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($gratification, array('route' => array('gratifications.update', $gratification), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'gratification', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.gratifications.partials.fields')

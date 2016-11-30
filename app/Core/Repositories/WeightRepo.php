@@ -4,12 +4,13 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Entities\Weight;
 use Controlqtime\Core\Traits\ListsTrait;
+use Controlqtime\Core\Traits\TrashedComposed;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Contracts\WeightRepoInterface;
 
 class WeightRepo extends BaseRepo implements WeightRepoInterface
 {
-	use ListsTrait;
+	use ListsTrait, TrashedComposed;
 	
 	/**
 	 * @var Weight

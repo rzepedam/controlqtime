@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Examen: <span class="text-primary">{{ $type_exam->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($type_exam, array('route' => array('type-exams.update', $type_exam), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'typeExam', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-exams.partials.fields')

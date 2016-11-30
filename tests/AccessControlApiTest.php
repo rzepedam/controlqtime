@@ -1,14 +1,13 @@
 <?php
 
 use Carbon\Carbon;
-use Controlqtime\Core\Entities\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AccessControlApiTest extends TestCase
 {
 	use DatabaseTransactions;
 	
-	protected $user;
+	protected $employee;
 	
 	protected $token;
 	
@@ -16,8 +15,7 @@ class AccessControlApiTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->user  = factory(User::class)->create();
-		$this->token = $this->user->createToken('Biometry')->accessToken;
+		$this->token    = $this->user->createToken('Biometry')->accessToken;
 	}
 	
 	function test_url_access_control_api_exists()
@@ -42,8 +40,10 @@ class AccessControlApiTest extends TestCase
 	
 	function test_create_access_control_api_success()
 	{
+		$rut = str_replace('.', '', $this->employee->rut);
+		
 		$data = [
-			'rut'        => '17032680-6',
+			'rut'        => $rut,
 			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
 			'status'     => 1,
 			'created_at' => Carbon::now()
@@ -148,9 +148,10 @@ class AccessControlApiTest extends TestCase
 	function test_not_save_if_data_is_duplicate()
 	{
 		$now = Carbon::now();
+		$rut = str_replace('.', '', $this->employee->rut);
 		
 		$data = [
-			'rut'        => '17032680-6',
+			'rut'        => $rut,
 			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
 			'status'     => 1,
 			'created_at' => $now
@@ -166,7 +167,7 @@ class AccessControlApiTest extends TestCase
 			'Accept'        => 'application/json'])
 			->assertResponseStatus(422)
 			->seeJsonEquals([
-				'rut' => ['La combinación de Rut, Fecha Creación ya existe.']
+				'rut' => ['La combinación de valores ingresados ya existe.']
 			]);
 	}
 	

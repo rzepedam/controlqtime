@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Discapacidad: <span class="text-primary">{{ $type_disability->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($type_disability, array('route' => array('type-disabilities.update', $type_disability), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'typeDisability', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-disabilities.partials.fields')

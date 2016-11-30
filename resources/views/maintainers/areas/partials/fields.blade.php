@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-7">
         {{ Form::label('name', 'Nombre', ['class' => 'control-label']) }}
-        {{ Form::text('name', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '50']) }}
+        {{ Form::text('name', null, ['class' => 'form-control find-for-restore', 'data-plugin' => 'maxlength', 'maxlength' => '50']) }}
     </div>
     <div class="col-md-5">
         {{ Form::label('terminal_id', 'Terminal', ['class' => 'control-label']) }}

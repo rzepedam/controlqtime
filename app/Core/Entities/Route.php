@@ -17,6 +17,11 @@ class Route extends Eloquent
 	];
 	
 	/**
+	 * @var bool
+	 */
+	public $timestamps = false;
+	
+	/**
 	 * @var array
 	 */
 	protected $dates = [
@@ -29,7 +34,8 @@ class Route extends Eloquent
 	 */
 	public function terminal()
 	{
-		return $this->belongsTo(Terminal::class);
+		return $this->belongsTo(Terminal::class)
+			->withTrashed();
 	}
 	
 	/**

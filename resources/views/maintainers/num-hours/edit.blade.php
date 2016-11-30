@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@endsection
+
 @section('title_header') Editar Nº Hora: <span class="text-primary">{{ $numHour->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($numHour, array('route' => array('num-hours.update', $numHour), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'numHour', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.num-hours.partials.fields')

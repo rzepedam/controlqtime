@@ -120,11 +120,19 @@ elixir(function(mix) {
         'custom-configuration/js/bootstrap-table-es-ES.js'
     ], 'public/js/index-common.js');
 
+    // Create-Edit Common CSS
+    mix.styles([
+        'bower/sweetalert/dist/sweetalert.css'
+    ], 'public/css/create-edit-common.css');
+
     // Create-Edit Common JS
     mix.scripts([
         'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
         'components/bootstrap-maxlength.js',
-        'me/js/utilities/submit-form-ajax.js'
+        'me/js/utilities/submit-form-ajax.js',
+        'bower/sweetalert/dist/sweetalert.min.js',
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/utilities/restore.js',
     ], 'public/js/create-edit-common.js');
 
     // Edit Common JS
@@ -526,6 +534,8 @@ elixir(function(mix) {
         'components/autoNumeric.js',
         'components/bootstrap-datepicker.js',
         'me/js/utilities/sanitized-fields.js',
+        'bower/sweetalert/dist/sweetalert.min.js',
+        'me/js/utilities/restore.js',
         'me/js/base/operations/vehicles/custom-vehicles.js'
     ], 'public/js/operations/vehicles/create-edit-custom-vehicles.js');
 
@@ -605,6 +615,7 @@ elixir(function(mix) {
 
         'public/css/index-common.css',
         'public/js/index-common.js',
+        'public/css/create-edit-common.css',
         'public/js/create-edit-common.js',
         'public/js/edit-common.js',
         'public/css/show-with-image-common.css',

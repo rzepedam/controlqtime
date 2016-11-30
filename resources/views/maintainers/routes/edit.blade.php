@@ -1,5 +1,11 @@
 @extends('layout.index')
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
+@stop
+
 @section('title_header') Editar Recorrido: <span class="text-primary">{{ $route->id }}</span> @stop
 
 @section('breadcumb')
@@ -16,6 +22,7 @@
 
         {{ Form::model($route, array('route' => array('routes.update', $route), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
+            {{ Form::hidden('entity', 'route', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.routes.partials.fields')

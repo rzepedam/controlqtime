@@ -4,12 +4,13 @@ namespace Controlqtime\Core\Repositories;
 
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Traits\ListsTrait;
+use Controlqtime\Core\Traits\TrashedComposed;
 use Controlqtime\Core\Repositories\Base\BaseRepo;
 use Controlqtime\Core\Contracts\AreaRepoInterface;
 
 class AreaRepo extends BaseRepo implements AreaRepoInterface
 {
-	use ListsTrait;
+	use ListsTrait, TrashedComposed;
 	
 	/**
 	 * @var Area

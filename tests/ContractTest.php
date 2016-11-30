@@ -1,5 +1,6 @@
 <?php
 
+use Controlqtime\Core\Entities\Employee;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ContractTest extends TestCase
@@ -12,7 +13,7 @@ class ContractTest extends TestCase
 		$this->signIn();
 	}
 	
-    function test_url_ok()
+    function test_url_contract_exists()
     {
 	    $this->visit('human-resources/contracts')
 	        ->see('Listado de Contratos')
@@ -20,7 +21,7 @@ class ContractTest extends TestCase
 	        ->assertResponseOk();
     }
     
-    function test_route_ok()
+    function test_route_contract_exists()
     {
 	    $this->visitRoute('contracts.index')
 	        ->see('Crear Nuevo Contrato Laboral')

@@ -2,8 +2,8 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class EngineCubicRequest extends SanitizedRequest
 {
@@ -11,46 +11,51 @@ class EngineCubicRequest extends SanitizedRequest
 	 * @var Route
 	 */
 	protected $route;
-
+	
 	/**
 	 * EngineCubicRequest constructor.
+	 *
 	 * @param Route $route
 	 */
 	public function __construct(Route $route)
-    {
-        $this->route = $route;
-    }
-
+	{
+		$this->route = $route;
+	}
+	
 	/**
+	 * Determine if the user is authorized to make this request.
+	 *
 	 * @return bool
 	 */
 	public function authorize()
-    {
-        return true;
-    }
-
+	{
+		return true;
+	}
+	
 	/**
+	 * Get the validation rules that apply to the request.
+	 *
 	 * @return array
 	 */
 	public function rules()
-    {
-        switch($this->method())
-        {
-            case 'POST':
-            {
-                return [
-                    'name'  => 'required|max:30|unique_with:engine_cubics,acr',
-                    'acr'   => 'required|max:5'
-                ];
-            }
-
-            case 'PUT':
-            {
-                return [
-                    'name'  => 'required|max:30|unique_with:engine_cubics,acr,' . $this->route->getParameter('engine_cubic'),
-                    'acr'   => 'required|max:5'
-                ];
-            }
-        }
-    }
+	{
+		switch ( $this->method() )
+		{
+			case 'POST':
+			{
+				return [
+					'name' => 'required|max:30|unique_with:engine_cubics,acr,deleted_at',
+					'acr'  => 'required|max:5'
+				];
+			}
+			
+			case 'PUT':
+			{
+				return [
+					'name' => 'required|max:30|unique_with:engine_cubics,acr,' . $this->route->getParameter('engine_cubic'),
+					'acr'  => 'required|max:5'
+				];
+			}
+		}
+	}
 }
