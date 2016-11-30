@@ -468,6 +468,7 @@ class EmployeeController extends Controller
 			'studies.detailCollegeStudy', 'studies.detailSchoolStudy',
 			'studies.detailTechnicalStudy', 'studies.detailCollegeStudy.institution'
 		]);
+		
 		$countries                  = $this->country->lists('name', 'id');
 		$degrees                    = $this->degree->lists('name', 'id');
 		$employees                  = $this->employee->lists('full_name', 'id');

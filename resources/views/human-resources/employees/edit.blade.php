@@ -2,6 +2,7 @@
 
 @section('css')
 
+    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
     <link rel="stylesheet" href="{{ elixir('css/human-resources/employees/create-edit-custom-employees.css') }}">
 
 @stop
@@ -57,89 +58,89 @@
 
                         {{ Form::model($employee, array("route" => array("updateSessionStep1", $employee), "method" => "PUT", "files" => true, "id" => "step1")) }}
 
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon fa fa-check-square-o text-primary"></i> Datos
-                                    Personales</h3>
-                            </div>
-                            <div class="panel-body">
+                            {{ Form::hidden('entity', 'employee', ['id' => 'entity'])  }}
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon fa fa-check-square-o text-primary"></i> Datos
+                                        Personales</h3>
+                                </div>
+                                <div class="panel-body">
 
-                                @include('human-resources.employees.partials.edit.step1.personal_data')
+                                    @include('human-resources.employees.partials.edit.step1.personal_data')
 
-                            </div>
-                        </div>
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-pencil-square-o text-success"
-                                                           aria-hidden="true"></i> Información de Contacto</h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-success add_contact_employee waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Contacto</span>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="content_contact_employee">
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-pencil-square-o text-success"
+                                                               aria-hidden="true"></i> Información de Contacto</h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-success add_contact_employee waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Contacto</span>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="content_contact_employee">
 
-                                    @if (count($employee->contactEmployees) > 0)
+                                        @if (count($employee->contactEmployees) > 0)
 
-                                        @include('human-resources.employees.partials.edit.step1.contact_employee')
+                                            @include('human-resources.employees.partials.edit.step1.contact_employee')
 
-                                    @else
+                                        @else
 
-                                        <br/>
-                                        <h3 class="text-center text-success">No existe Información de Contacto Asociada
                                             <br/>
-                                            <small>(Pulse "Agregar Contacto" para comenzar su adición)
-                                            </small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
-
-                                    @endif
-
-                                </div>
-                                <br/>
-
-                            </div>
-                        </div>
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon md-male-female text-warning font-size-18"></i>
-                                    Parentescos Familiares</h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-warning add_family_relationship waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <div id="content_family_relationships">
-
-                                    @if (count($employee->familyRelationships) > 0)
-
-                                        @include('human-resources.employees.partials.edit.step1.family_relationship')
-
-                                    @else
-
-                                        <br/>
-                                        <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados
+                                            <h3 class="text-center text-success">No existe Información de Contacto Asociada
+                                                <br/>
+                                                <small>(Pulse "Agregar Contacto" para comenzar su adición)
+                                                </small>
+                                            </h3>
                                             <br/>
-                                            <small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)
-                                            </small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
+                                            <br/>
 
-                                    @endif
+                                        @endif
+
+                                    </div>
+                                    <br/>
 
                                 </div>
-                                <br/>
+                            </div>
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon md-male-female text-warning font-size-18"></i>
+                                        Parentescos Familiares</h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-warning add_family_relationship waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Parentesco Familiar</span>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="content_family_relationships">
+
+                                        @if (count($employee->familyRelationships) > 0)
+
+                                            @include('human-resources.employees.partials.edit.step1.family_relationship')
+
+                                        @else
+
+                                            <br/>
+                                            <h3 class="text-center text-warning">No existen Parentescos Familiares Asociados
+                                                <br/>
+                                                <small>(Pulse "Agregar Parentesco Familiar" para comenzar su adición)
+                                                </small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
+
+                                        @endif
+
+                                    </div>
+                                    <br/>
+
+                                </div>
+                            </div>
+                            <div class="panel content-step">
 
                             </div>
-                        </div>
-                        <div class="panel content-step">
-
-                        </div>
-
 
                         {{ Form::close() }}
 
@@ -148,272 +149,270 @@
 
                         {{ Form::model($employee, array("route" => array("updateSessionStep2", $employee), "method" => "PUT", "id" => "step2")) }}
 
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon md-library text-info font-size-18"></i> Estudios
-                                    Académicos</h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-info add_study waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Estudio Académico</span>
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon md-library text-info font-size-18"></i> Estudios
+                                        Académicos</h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-info add_study waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Estudio Académico</span>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="content_studies">
+
+                                        @if (count($employee->studies) > 0)
+
+                                            @include('human-resources.employees.partials.edit.step2.study')
+
+                                        @else
+                                            <br/>
+                                            <h3 class="text-center text-info">No existen Estudios Académicos Asociados <br/>
+                                                <small>(Pulse "Agregar Estudio Académico" para comenzar su adición)</small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
+                                        @endif
+
+                                    </div>
+                                    <br/>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="content_studies">
-
-                                    @if (count($employee->studies) > 0)
-
-                                        @include('human-resources.employees.partials.edit.step2.study')
-
-                                    @else
-                                        <br/>
-                                        <h3 class="text-center text-info">No existen Estudios Académicos Asociados <br/>
-                                            <small>(Pulse "Agregar Estudio Académico" para comenzar su adición)</small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
-                                    @endif
-
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon md-badge-check text-danger font-size-18"></i>
+                                        Certificaciones</h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-danger add_certification waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Certificación</span>
+                                    </div>
                                 </div>
-                                <br/>
-                            </div>
-                        </div>
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon md-badge-check text-danger font-size-18"></i>
-                                    Certificaciones</h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-danger add_certification waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Certificación</span>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <div id="content_certifications">
+                                <div class="panel-body">
+                                    <div id="content_certifications">
 
-                                    @if (count($employee->certifications) > 0)
+                                        @if (count($employee->certifications) > 0)
 
-                                        @include('human-resources.employees.partials.edit.step2.certification')
+                                            @include('human-resources.employees.partials.edit.step2.certification')
 
-                                    @else
+                                        @else
 
-                                        <br/>
-                                        <h3 class="text-center text-danger">No existen Certificaciones Asociadas <br/>
-                                            <small>(Pulse "Agregar Certificación" para comenzar su adición)</small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
+                                            <br/>
+                                            <h3 class="text-center text-danger">No existen Certificaciones Asociadas <br/>
+                                                <small>(Pulse "Agregar Certificación" para comenzar su adición)</small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
 
-                                    @endif
+                                        @endif
 
-                                </div>
-                                <br/>
-                            </div>
-                        </div>
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon fa fa-wrench text-warning"></i> Especialidades
-                                </h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-warning add_speciality waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Especialidad</span>
+                                    </div>
+                                    <br/>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="content_specialities">
-
-                                    @if (count($employee->specialities) > 0)
-
-                                        @include('human-resources.employees.partials.edit.step2.speciality')
-
-                                    @else
-
-                                        <br/>
-                                        <h3 class="text-center text-warning">No existen Especialidades Asociadas <br/>
-                                            <small>(Pulse "Agregar Especialidad" para comenzar su adición)</small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
-
-                                    @endif
-
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon fa fa-wrench text-warning"></i> Especialidades
+                                    </h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-warning add_speciality waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Especialidad</span>
+                                    </div>
                                 </div>
-                                <br/>
-                            </div>
-                        </div>
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon fa fa-bookmark text-success"
-                                                           style="font-size: 16px;"></i></i> Licencias Profesionales
-                                </h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-success add_professional_license waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Licencia Profesional</span>
+                                <div class="panel-body">
+                                    <div id="content_specialities">
+
+                                        @if (count($employee->specialities) > 0)
+
+                                            @include('human-resources.employees.partials.edit.step2.speciality')
+
+                                        @else
+
+                                            <br/>
+                                            <h3 class="text-center text-warning">No existen Especialidades Asociadas <br/>
+                                                <small>(Pulse "Agregar Especialidad" para comenzar su adición)</small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
+
+                                        @endif
+
+                                    </div>
+                                    <br/>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="content_licenses">
-
-                                    @if (count($employee->professionalLicenses) > 0)
-
-                                        @include('human-resources.employees.partials.edit.step2.professional_license')
-
-                                    @else
-
-                                        <br/>
-                                        <h3 class="text-center text-success">No existen Licencias Profesionales
-                                            Asociadas<br/>
-                                            <small>(Pulse "Agregar Licencia Profesional" para comenzar su adición)
-                                            </small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
-
-                                    @endif
-
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon fa fa-bookmark text-success"
+                                                               style="font-size: 16px;"></i></i> Licencias Profesionales
+                                    </h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-success add_professional_license waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Licencia Profesional</span>
+                                    </div>
                                 </div>
-                                <br/>
-                            </div>
-                        </div>
-                        <div class="panel content-step">
+                                <div class="panel-body">
+                                    <div id="content_licenses">
 
-                        </div>
+                                        @if (count($employee->professionalLicenses) > 0)
+
+                                            @include('human-resources.employees.partials.edit.step2.professional_license')
+
+                                        @else
+
+                                            <br/>
+                                            <h3 class="text-center text-success">No existen Licencias Profesionales
+                                                Asociadas<br/>
+                                                <small>(Pulse "Agregar Licencia Profesional" para comenzar su adición)
+                                                </small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
+
+                                        @endif
+
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                            <div class="panel content-step">
+
+                            </div>
 
                         {{ Form::close() }}
-
                     </div>
                     <div class="wizard-pane" id="info_salud" role="tabpanel">
 
                         {{ Form::model($employee, array("route" => array("employees.update", $employee->id), "method" => "PUT", "id" => "step3")) }}
 
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon fa fa-wheelchair text-warning"></i>
-                                    Discapacidades</h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-warning add_disabilities waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Discapacidad</span>
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon fa fa-wheelchair text-warning"></i>
+                                        Discapacidades</h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-warning add_disabilities waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Discapacidad</span>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="content_disabilities">
+
+                                        @if (count($employee->disabilities) > 0)
+
+                                            @include('human-resources.employees.partials.edit.step3.disability')
+
+                                        @else
+
+                                            <br/>
+                                            <h3 class="text-center text-warning">No existen Discapacidades Asociadas <br/>
+                                                <small>(Pulse "Agregar Discapacidad" para comenzar su adición)</small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
+
+                                        @endif
+
+                                    </div>
+                                    <br/>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="content_disabilities">
-
-                                    @if (count($employee->disabilities) > 0)
-
-                                        @include('human-resources.employees.partials.edit.step3.disability')
-
-                                    @else
-
-                                        <br/>
-                                        <h3 class="text-center text-warning">No existen Discapacidades Asociadas <br/>
-                                            <small>(Pulse "Agregar Discapacidad" para comenzar su adición)</small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
-
-                                    @endif
-
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon fa fa-bed text-success"></i> Enfermedades</h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-success add_diseases waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Enfermedad</span>
+                                    </div>
                                 </div>
-                                <br/>
-                            </div>
-                        </div>
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon fa fa-bed text-success"></i> Enfermedades</h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-success add_diseases waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Enfermedad</span>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <div id="content_diseases">
+                                <div class="panel-body">
+                                    <div id="content_diseases">
 
-                                    @if (count($employee->diseases) > 0)
+                                        @if (count($employee->diseases) > 0)
 
-                                        @include('human-resources.employees.partials.edit.step3.disease')
+                                            @include('human-resources.employees.partials.edit.step3.disease')
 
-                                    @else
+                                        @else
 
-                                        <br/>
-                                        <h3 class="text-center text-success">No existen Enfermedades Asociadas <br/>
-                                            <small>(Pulse "Agregar Enfermedad" para comenzar su adición)</small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
+                                            <br/>
+                                            <h3 class="text-center text-success">No existen Enfermedades Asociadas <br/>
+                                                <small>(Pulse "Agregar Enfermedad" para comenzar su adición)</small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
 
-                                    @endif
+                                        @endif
 
-                                </div>
-                                <br/>
-                            </div>
-                        </div>
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon fa fa-stethoscope text-info"></i> Exámenes
-                                    Preocupacionales</h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-info add_exams waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Examen Preocupacional</span>
+                                    </div>
+                                    <br/>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="content_exams">
-
-                                    @if (count($employee->exams) > 0)
-
-                                        @include('human-resources.employees.partials.edit.step3.exams')
-
-                                    @else
-
-                                        <br/>
-                                        <h3 class="text-center text-info">No existen Exámenes Preocupacionales Asociados<br/>
-                                            <small>(Pulse "Agregar Examen Preocupacional" para comenzar su adición)
-                                            </small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
-
-                                    @endif
-
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon fa fa-stethoscope text-info"></i> Exámenes
+                                        Preocupacionales</h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-info add_exams waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Examen Preocupacional</span>
+                                    </div>
                                 </div>
-                                <br/>
-                            </div>
-                        </div>
-                        <div class="panel panel-bordered">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="icon fa fa-child text-danger"></i> Cargas Familiares
-                                </h3>
-                                <div class="panel-actions">
-                                    <span class="label label-outline label-danger add_family_responsability waves-effect waves-block"><i
-                                                class="fa fa-plus"></i> Agregar Carga Familiar</span>
+                                <div class="panel-body">
+                                    <div id="content_exams">
+
+                                        @if (count($employee->exams) > 0)
+
+                                            @include('human-resources.employees.partials.edit.step3.exams')
+
+                                        @else
+
+                                            <br/>
+                                            <h3 class="text-center text-info">No existen Exámenes Preocupacionales Asociados<br/>
+                                                <small>(Pulse "Agregar Examen Preocupacional" para comenzar su adición)
+                                                </small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
+
+                                        @endif
+
+                                    </div>
+                                    <br/>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="content_family_responsabilities">
-
-                                    @if (count($employee->familyResponsabilities) > 0)
-
-                                        @include('human-resources.employees.partials.edit.step3.family_responsability')
-
-                                    @else
-
-                                        <br/>
-                                        <h3 class="text-center text-danger">No existen Cargas Familiares Asociadas <br/>
-                                            <small>(Pulse "Agregar Carga Familiar" para comenzar su adición)</small>
-                                        </h3>
-                                        <br/>
-                                        <br/>
-
-                                    @endif
-
+                            <div class="panel panel-bordered">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="icon fa fa-child text-danger"></i> Cargas Familiares
+                                    </h3>
+                                    <div class="panel-actions">
+                                        <span class="label label-outline label-danger add_family_responsability waves-effect waves-block"><i
+                                                    class="fa fa-plus"></i> Agregar Carga Familiar</span>
+                                    </div>
                                 </div>
-                                <br/>
-                            </div>
-                        </div>
-                        <div class="panel content-step">
+                                <div class="panel-body">
+                                    <div id="content_family_responsabilities">
 
-                        </div>
+                                        @if (count($employee->familyResponsabilities) > 0)
+
+                                            @include('human-resources.employees.partials.edit.step3.family_responsability')
+
+                                        @else
+
+                                            <br/>
+                                            <h3 class="text-center text-danger">No existen Cargas Familiares Asociadas <br/>
+                                                <small>(Pulse "Agregar Carga Familiar" para comenzar su adición)</small>
+                                            </h3>
+                                            <br/>
+                                            <br/>
+
+                                        @endif
+
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                            <div class="panel content-step">
+
+                            </div>
 
                         {{ Form::close() }}
-
                     </div>
                 </div>
                 {{-- End Wizard Content --}}

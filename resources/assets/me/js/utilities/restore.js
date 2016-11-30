@@ -1,7 +1,7 @@
 $(document).on('focusout', '.find-for-restore', function () {
 
     var field  = $(this).attr('name');
-    var name   = $(this).val().trim();
+    var name   = $(this).val().trim().split('.').join('');
     var entity = $('#entity').attr('value');
     var path   = window.location.pathname.split("/").splice(0, 3).join("/");
 

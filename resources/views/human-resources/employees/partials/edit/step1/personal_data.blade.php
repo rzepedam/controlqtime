@@ -23,7 +23,7 @@
     <div class="col-sm-6 col-md-3">
         <div class="form-group">
             {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
-            {{ Form::text('rut', null, ['class' => 'form-control check_rut']) }}
+            {{ Form::text('rut', null, ['class' => 'form-control check_rut find-for-restore']) }}
         </div>
     </div>
     <div class="col-sm-6 col-md-3 form-group">
