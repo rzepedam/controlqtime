@@ -16,14 +16,14 @@ class TypeContractTest extends TestCase
 		$this->typeContract = factory(TypeContract::class)->create();
 	}
 	
-	function test_url_exists()
+	function test_type_contract_url()
 	{
 		$this->visit('/maintainers/type-contracts')
 			->see('Listado de Tipos de Contrato')
 			->assertResponseOk();
 	}
 	
-	function test_route_exists()
+	function test_type_contract_route()
 	{
 		$this->visitRoute('type-contracts.index')
 			->assertResponseOk();
@@ -65,7 +65,7 @@ class TypeContractTest extends TestCase
 			]);
 	}
 	
-	function test_edit_url_type_contract_exists()
+	function test_edit_url_type_contract()
 	{
 		$this->visit('/maintainers/type-contracts/' . $this->typeContract->id . '/edit')
 			->see('Editar Tipo Contrato: <span class="text-primary">' . $this->typeContract->id . '</span>')

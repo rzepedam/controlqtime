@@ -3,23 +3,23 @@
 namespace Controlqtime\Core\Api\Http\Controllers;
 
 use Exception;
+use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Http\Controllers\Controller;
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Controlqtime\Core\Api\Http\Request\AccessControlApiRequest;
 
 class AccessControlApiController extends Controller
 {
 	/**
-	 * @var EmployeeRepoInterface
+	 * @var Employee
 	 */
 	protected $employee;
 	
 	/**
 	 * AccessControlApiController constructor.
 	 *
-	 * @param EmployeeRepoInterface $employee
+	 * @param Employee $employee
 	 */
-	public function __construct(EmployeeRepoInterface $employee)
+	public function __construct(Employee $employee)
 	{
 		$this->employee = $employee;
 	}
@@ -34,8 +34,8 @@ class AccessControlApiController extends Controller
 	{
 		try
 		{
-			$employee = $this->employee->whereFirst('rut', $request->get('rut'));
-			
+			$employee = $this->employee->where('rut', $request->get('rut'))->firstOrFail();
+		
 			switch ($request->get('num_device'))
 			{
 				case 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA':

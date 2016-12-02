@@ -16,14 +16,14 @@ class TermAndObligatoryTest extends TestCase
 		$this->term = factory(TermAndObligatory::class)->create();
 	}
 	
-	function test_url_term_and_obligatory_exists()
+	function test_url_term_and_obligatory()
 	{
 		$this->visit('maintainers/terms-and-obligatories')
 			->see('Listado de Cláusulas y Obligaciones')
 			->assertResponseOk();
 	}
 	
-	function test_route_term_and_obligatory_exists()
+	function test_route_term_and_obligatory()
 	{
 		$this->visitRoute('terms-and-obligatories.index')
 			->assertResponseOk();

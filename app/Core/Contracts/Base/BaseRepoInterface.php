@@ -14,6 +14,4 @@ interface BaseRepoInterface {
 
     public function delete($id);
 	
-	public function onlyTrashed($attribute, $value);
-	
 }

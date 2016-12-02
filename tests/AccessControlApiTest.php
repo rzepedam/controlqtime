@@ -7,18 +7,16 @@ class AccessControlApiTest extends TestCase
 {
 	use DatabaseTransactions;
 	
-	protected $employee;
-	
 	protected $token;
 	
 	function setUp()
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->token    = $this->user->createToken('Biometry')->accessToken;
+		$this->token = $this->user->createToken('Biometry')->accessToken;
 	}
 	
-	function test_url_access_control_api_exists()
+	function test_url_access_control_api()
 	{
 		$response = $this->call('POST', '/api/access-control');
 		

@@ -3,11 +3,12 @@
 namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Address extends Eloquent
 {
-	use SoftDeletes;
+	use SoftDeletes, SoftCascadeTrait;
 	
 	/**
 	 * @var array
@@ -19,8 +20,8 @@ class Address extends Eloquent
 	/**
 	 * @var array
 	 */
-	protected $cascadeDeletes = [
-		'detailAddressCompany', 'detailAddressLegalEmployee'
+	protected $softCascade = [
+		'detailAddressLegalEmployee', 'detailAddressLegalEmployee'
 	];
 	
 	/**

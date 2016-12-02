@@ -70,23 +70,4 @@ abstract class BaseRepo implements BaseRepoInterface
 		return $query;
 	}
 	
-	/**
-	 * @param $attribute
-	 * @param $value
-	 *
-	 * @return mixed
-	 */
-	public function onlyTrashed($attribute, $value)
-	{
-		try
-		{
-			$model = $this->model->onlyTrashed()->where($attribute, $value)->firstOrFail();
-			
-			return $model->restore();
-		} catch ( Exception $e )
-		{
-			return false;
-		}
-	}
-	
 }

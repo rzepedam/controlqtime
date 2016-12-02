@@ -1,10 +1,18 @@
 <?php
 
+use Controlqtime\Core\Entities\Area;
+use Controlqtime\Core\Entities\City;
+use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Core\Entities\User;
 use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Company;
+use Controlqtime\Core\Entities\Country;
+use Controlqtime\Core\Entities\DayTrip;
 use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\Forecast;
+use Controlqtime\Core\Entities\Terminal;
+use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Core\Entities\TermAndObligatory;
 use Controlqtime\Core\Entities\LegalRepresentative;
@@ -31,6 +39,32 @@ $factory->define(Address::class, function (Faker\Generator $faker)
 	];
 });
 
+$factory->define(Area::class, function ()
+{
+	return [
+		'id'          => 1,
+		'name'        => 'Mantención',
+		'terminal_id' => 1
+	];
+});
+
+$factory->define(City::class, function ()
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Santiago',
+		'country_id' => 1
+	];
+});
+
+$factory->define(Country::class, function ()
+{
+	return [
+		'id'   => 1,
+		'name' => 'Chile',
+	];
+});
+
 $factory->define(Company::class, function (Faker\Generator $faker)
 {
 	return [
@@ -43,6 +77,14 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 		'email_company'   => $faker->email,
 	];
 	
+});
+
+$factory->define(DayTrip::class, function ()
+{
+	return [
+		'id'   => 1,
+		'name' => 'Full-Time',
+	];
 });
 
 $factory->define(Employee::class, function (Faker\Generator $faker)
@@ -72,6 +114,34 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	];
 });
 
+$factory->define(EngineCubic::class, function ()
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Tonelada',
+		'acr'        => 'ton',
+		'deleted_at' => null
+	];
+});
+
+$factory->define(Forecast::class, function ()
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Cruz Blanca',
+		'deleted_at' => null
+	];
+});
+
+$factory->define(Fuel::class, function ()
+{
+	return [
+		'id'         => 1,
+		'name'       => '93',
+		'deleted_at' => null
+	];
+});
+
 $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 {
 	return [
@@ -95,12 +165,31 @@ $factory->define(MasterFormPieceVehicle::class, function ()
 	];
 });
 
+$factory->define(NumHour::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => '1',
+		'name'       => $faker->numberBetween(1, 999),
+		'deleted_at' => null
+	];
+});
+
 $factory->define(TermAndObligatory::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'      => 1,
 		'name'    => $faker->sentence,
 		'default' => $faker->boolean
+	];
+});
+
+$factory->define(Terminal::class, function ()
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Juanita',
+		'address'    => 'Av. Juanita 1490',
+		'commune_id' => '86'
 	];
 });
 
@@ -118,14 +207,5 @@ $factory->define(User::class, function (Faker\Generator $faker)
 		'employee_id' => 1,
 		'email'       => $faker->email,
 		'password'    => bcrypt("$faker->password")
-	];
-});
-
-$factory->define(NumHour::class, function (Faker\Generator $faker)
-{
-	return [
-		'id'         => '1',
-		'name'       => $faker->numberBetween(1, 999),
-		'deleted_at' => null
 	];
 });

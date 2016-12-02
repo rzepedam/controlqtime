@@ -2,31 +2,30 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use DB;
 use Exception;
+use Controlqtime\Core\Entities\Area;
+use Controlqtime\Core\Entities\Terminal;
 use Controlqtime\Http\Requests\AreaRequest;
-use Controlqtime\Core\Contracts\AreaRepoInterface;
-use Controlqtime\Core\Contracts\TerminalRepoInterface;
 
 class AreaController extends Controller
 {
 	/**
-	 * @var AreaRepoInterface
+	 * @var Area
 	 */
 	protected $area;
 	
 	/**
-	 * @var TerminalRepoInterface
+	 * @var Terminal
 	 */
 	protected $terminal;
 	
 	/**
 	 * AreaController constructor.
 	 *
-	 * @param AreaRepoInterface $area
-	 * @param TerminalRepoInterface $terminal
+	 * @param Area     $area
+	 * @param Terminal $terminal
 	 */
-	public function __construct(AreaRepoInterface $area, TerminalRepoInterface $terminal)
+	public function __construct(Area $area, Terminal $terminal)
 	{
 		$this->area     = $area;
 		$this->terminal = $terminal;
@@ -45,7 +44,7 @@ class AreaController extends Controller
 	 */
 	public function getAreas()
 	{
-		$areas = $this->area->all(['terminal']);
+		$areas = $this->area->with(['terminal'])->get();
 		
 		return $areas;
 	}
@@ -55,7 +54,7 @@ class AreaController extends Controller
 	 */
 	public function create()
 	{
-		$terminals = $this->terminal->lists('name', 'id');
+		$terminals = $this->terminal->pluck('name', 'id');
 		
 		return view('maintainers.areas.create', compact('terminals'));
 	}
@@ -67,9 +66,7 @@ class AreaController extends Controller
 	 */
 	public function store(AreaRequest $request)
 	{
-		$area = $this->area->onlyTrashedComposed('name', 'terminal_id', $request->get('name'), $request->get('terminal_id'));
-		
-		if ( ! $area )
+		if ( ! $this->restore($request) )
 		{
 			$this->area->create($request->all());
 		}
@@ -81,32 +78,60 @@ class AreaController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$area = $this->area->onlyTrashed()->where('name', $request->get('name'))->where('terminal_id', $request->get('terminal_id'))->firstOrFail();
+			
+			return $area->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$area      = $this->area->find($id);
-		$terminals = $this->terminal->lists('name', 'id');
+		$area      = $this->area->findOrFail($id);
+		$terminals = $this->terminal->pluck('name', 'id');
 		
-		return view('maintainers.areas.edit', compact('area', 'terminals'));
+		return view('maintainers.areas.edit', compact(
+			'area', 'terminals'
+		));
 	}
 	
 	/**
 	 * @param AreaRequest $request
-	 * @param $id
+	 * @param             $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(AreaRequest $request, $id)
 	{
-		$this->area->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/areas'
-		]);
+		try
+		{
+			$this->area->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/areas'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -116,7 +141,7 @@ class AreaController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->area->delete($id);
+		$this->area->destroy($id);
 		
 		return redirect()->route('areas.index');
 	}

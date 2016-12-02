@@ -4,10 +4,8 @@ namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Controlqtime\Core\WebServices\Biometry\Biometry;
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\ActivateEmployeeInterface;
 
-class ActivateEmployee extends Eloquent implements ActivateEmployeeInterface
+class ActivateEmployee extends Eloquent
 {
 	/**
 	 * @var Biometry
@@ -15,16 +13,16 @@ class ActivateEmployee extends Eloquent implements ActivateEmployeeInterface
 	protected $biometry;
 	
 	/**
-	 * @var EmployeeRepoInterface
+	 * @var Employee
 	 */
 	private $employee;
 	
 	/**
 	 * ActivateEmployee constructor.
 	 *
-	 * @param EmployeeRepoInterface $employee
+	 * @param Employee $employee
 	 */
-	public function __construct(EmployeeRepoInterface $employee)
+	public function __construct(Employee $employee)
 	{
 		$this->biometry = new Biometry();
 		$this->employee = $employee;
@@ -39,7 +37,7 @@ class ActivateEmployee extends Eloquent implements ActivateEmployeeInterface
 	 */
 	public function checkStateUpdateEmployee($id)
 	{
-		$employee = $this->employee->find($id, [
+		$employee = $this->employee->findOrFail($id, [
 			'certifications.imagesable', 'specialities.imagesable', 'professionalLicenses.imagesable',
 			'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable', 'contract'
 		]);

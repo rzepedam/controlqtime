@@ -1,16 +1,14 @@
 $(document).on('focusout', '.find-for-restore', function () {
 
-    var field  = $(this).attr('name');
     var name   = $(this).val().trim().split('.').join('');
-    var entity = $('#entity').attr('value');
     var path   = window.location.pathname.split("/").splice(0, 3).join("/");
 
     $.ajax({
         type: "GET",
-        url: "/find-data-for-restore",
-        data: {field: field, name: name, entity: entity},
+        url: path + "/find-data-for-restore",
+        data: {name: name},
         success: function (response) {
-            if (response.status) {
+            if (response.success) {
                 swal({
                     title: "Desea restaurar registro ?",
                     text: "Existe información asociada a este registro en nuestra base de datos.",
@@ -22,10 +20,10 @@ $(document).on('focusout', '.find-for-restore', function () {
                     cancelButtonText: 'No, no quiero',
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        $.post('/restore',
-                            {field: field, name: name, entity: entity},
+                        $.post(path + "/restore",
+                            {name: name},
                             function (response) {
-                                if (response.status) {
+                                if (response.success) {
                                     swal({
                                         title: "Correcto!",
                                         text: "El registro fue restituido exitosamente!",

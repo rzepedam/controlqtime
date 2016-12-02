@@ -2,22 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Country;
 use Controlqtime\Http\Requests\CountryRequest;
-use Controlqtime\Core\Contracts\CountryRepoInterface;
 
 class CountryController extends Controller
 {
 	/**
-	 * @var CountryRepoInterface
+	 * @var Country
 	 */
 	protected $country;
 	
 	/**
 	 * CountryController constructor.
 	 *
-	 * @param CountryRepoInterface $country
+	 * @param Country $country
 	 */
-	public function __construct(CountryRepoInterface $country)
+	public function __construct(Country $country)
 	{
 		$this->country = $country;
 	}
@@ -55,9 +56,7 @@ class CountryController extends Controller
 	 */
 	public function store(CountryRequest $request)
 	{
-		$country = $this->country->onlyTrashed('name', $request->get('name'));
-		
-		if (! $country)
+		if ( ! $this->restore($request) )
 		{
 			$this->country->create($request->all());
 		}
@@ -69,31 +68,57 @@ class CountryController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$country = $this->country->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $country->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$country = $this->country->find($id);
+		$country = $this->country->findOrFail($id);
 		
 		return view('maintainers.countries.edit', compact('country'));
 	}
 	
 	/**
 	 * @param CountryRequest $request
-	 * @param $id
+	 * @param                $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(CountryRequest $request, $id)
 	{
-		$this->country->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/countries'
-		]);
+		try
+		{
+			$this->country->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/countries'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +128,7 @@ class CountryController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->country->delete($id);
+		$this->country->destroy($id);
 		
 		return redirect()->route('countries.index');
 	}

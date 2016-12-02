@@ -2,24 +2,25 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Http\Requests\EngineCubicRequest;
-use Controlqtime\Core\Contracts\EngineCubicRepoInterface;
 
 class EngineCubicController extends Controller
 {
 	/**
-	 * @var EngineCubicRepoInterface
+	 * @var EngineCubic
 	 */
-	protected $engine_cubic;
+	protected $engineCubic;
 	
 	/**
 	 * EngineCubicController constructor.
 	 *
-	 * @param EngineCubicRepoInterface $engine_cubic
+	 * @param EngineCubic $engineCubic
 	 */
-	public function __construct(EngineCubicRepoInterface $engine_cubic)
+	public function __construct(EngineCubic $engineCubic)
 	{
-		$this->engine_cubic = $engine_cubic;
+		$this->engineCubic = $engineCubic;
 	}
 	
 	/**
@@ -35,9 +36,9 @@ class EngineCubicController extends Controller
 	 */
 	public function getEngineCubics()
 	{
-		$engine_cubics = $this->engine_cubic->all();
+		$engineCubics = $this->engineCubic->all();
 		
-		return $engine_cubics;
+		return $engineCubics;
 	}
 	
 	/**
@@ -55,11 +56,9 @@ class EngineCubicController extends Controller
 	 */
 	public function store(EngineCubicRequest $request)
 	{
-		$engineCubic = $this->engine_cubic->onlyTrashedComposed('name', 'acr', $request->get('name'), $request->get('acr'));
-		
-		if ( ! $engineCubic )
+		if ( ! $this->restore($request) )
 		{
-			$this->engine_cubic->create($request->all());
+			$this->engineCubic->create($request->all());
 		}
 		
 		return response()->json([
@@ -69,31 +68,57 @@ class EngineCubicController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$engineCubic = $this->engineCubic->onlyTrashed()->where('name', $request->get('name'))->where('acr', $request->get('acr'))->firstOrFail();
+			
+			return $engineCubic->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$engine_cubic = $this->engine_cubic->find($id);
+		$engineCubic = $this->engineCubic->findOrFail($id);
 		
-		return view('maintainers.measuring-units.engine-cubics.edit', compact('engine_cubic'));
+		return view('maintainers.measuring-units.engine-cubics.edit', compact('engineCubic'));
 	}
 	
 	/**
 	 * @param EngineCubicRequest $request
-	 * @param $id
+	 * @param                    $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(EngineCubicRequest $request, $id)
 	{
-		$this->engine_cubic->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/measuring-units/engine-cubics'
-		]);
+		try
+		{
+			$this->engineCubic->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/measuring-units/engine-cubics'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +128,7 @@ class EngineCubicController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->engine_cubic->delete($id);
+		$this->engineCubic->destroy($id);
 		
 		return redirect()->route('engine-cubics.index');
 	}

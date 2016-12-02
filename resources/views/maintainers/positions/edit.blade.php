@@ -22,7 +22,6 @@
 
         {{ Form::model($position, array('route' => ['positions.update', $position], 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'position', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.positions.partials.fields')

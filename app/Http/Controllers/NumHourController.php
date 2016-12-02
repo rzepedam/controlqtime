@@ -2,22 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Http\Requests\NumHourRequest;
-use Controlqtime\Core\Contracts\NumHourRepoInterface;
 
 class NumHourController extends Controller
 {
 	/**
-	 * @var NumHourRepoInterface
+	 * @var NumHour
 	 */
 	protected $numHour;
 	
 	/**
 	 * NumHourController constructor.
 	 *
-	 * @param NumHourRepoInterface $numHour
+	 * @param NumHour $numHour
 	 */
-	public function __construct(NumHourRepoInterface $numHour)
+	public function __construct(NumHour $numHour)
 	{
 		$this->numHour = $numHour;
 	}
@@ -55,9 +56,7 @@ class NumHourController extends Controller
 	 */
 	public function store(NumHourRequest $request)
 	{
-		$num_hour = $this->numHour->onlyTrashed('name', $request->get('name'));
-		
-		if (! $num_hour)
+		if ( ! $this->restore($request) )
 		{
 			$this->numHour->create($request->all());
 		}
@@ -69,31 +68,57 @@ class NumHourController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$numHour = $this->numHour->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $numHour->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$numHour = $this->numHour->find($id);
+		$numHour = $this->numHour->findOrFail($id);
 		
 		return view('maintainers.num-hours.edit', compact('numHour'));
 	}
 	
 	/**
 	 * @param NumHourRequest $request
-	 * @param $id
+	 * @param                $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function update(NumHourRequest $request, $id)
 	{
-		$this->numHour->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/num-hours'
-		]);
+		try
+		{
+			$this->numHour->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/num-hours'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**

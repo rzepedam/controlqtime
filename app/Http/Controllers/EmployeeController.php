@@ -5,11 +5,15 @@ namespace Controlqtime\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Entities\Country;
 use Illuminate\Support\Facades\Session;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
+use Controlqtime\Core\Entities\ActivateEmployee;
 use Controlqtime\Core\Contracts\ExamRepoInterface;
 use Controlqtime\Core\Contracts\UserRepoInterface;
 use Controlqtime\Core\Contracts\StudyRepoInterface;
@@ -18,19 +22,15 @@ use Controlqtime\Core\Contracts\GenderRepoInterface;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Contracts\AddressRepoInterface;
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
-use Controlqtime\Core\Contracts\CountryRepoInterface;
 use Controlqtime\Core\Contracts\DiseaseRepoInterface;
 use Controlqtime\Core\Contracts\PensionRepoInterface;
 use Controlqtime\Notifications\EmployeeWasRegistered;
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\ForecastRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\TypeExamRepoInterface;
 use Controlqtime\Core\Contracts\DisabilityRepoInterface;
 use Controlqtime\Core\Contracts\SpecialityRepoInterface;
 use Controlqtime\Core\Contracts\InstitutionRepoInterface;
 use Controlqtime\Core\Contracts\TypeDiseaseRepoInterface;
-use Controlqtime\Core\Contracts\ActivateEmployeeInterface;
 use Controlqtime\Core\Contracts\RelationshipRepoInterface;
 use Controlqtime\Core\Contracts\CertificationRepoInterface;
 use Controlqtime\Core\Contracts\MaritalStatusRepoInterface;
@@ -47,7 +47,7 @@ use Controlqtime\Core\Contracts\DetailAddressLegalEmployeeRepoInterface;
 class EmployeeController extends Controller
 {
 	/**
-	 * @var ActivateEmployeeInterface
+	 * @var ActivateEmployee
 	 */
 	protected $activateEmployee;
 	
@@ -72,7 +72,7 @@ class EmployeeController extends Controller
 	protected $contact_employee;
 	
 	/**
-	 * @var CountryRepoInterface
+	 * @var Country
 	 */
 	protected $country;
 	
@@ -97,7 +97,7 @@ class EmployeeController extends Controller
 	protected $disease;
 	
 	/**
-	 * @var EmployeeRepoInterface
+	 * @var Employee
 	 */
 	protected $employee;
 	
@@ -117,7 +117,7 @@ class EmployeeController extends Controller
 	protected $family_responsability;
 	
 	/**
-	 * @var ForecastRepoInterface
+	 * @var Forecast
 	 */
 	protected $forecast;
 	
@@ -209,47 +209,47 @@ class EmployeeController extends Controller
 	/**
 	 * EmployeeController constructor.
 	 *
-	 * @param EmployeeRepoInterface $employee
-	 * @param CountryRepoInterface $country
-	 * @param GenderRepoInterface $gender
-	 * @param RegionRepoInterface $region
-	 * @param ProvinceRepoInterface $province
-	 * @param CommuneRepoInterface $commune
-	 * @param RelationshipRepoInterface $relationship
-	 * @param DegreeRepoInterface $degree
-	 * @param InstitutionRepoInterface $institution
-	 * @param TypeCertificationRepoInterface $type_certification
-	 * @param TypeSpecialityRepoInterface $type_speciality
-	 * @param TypeProfessionalLicenseRepoInterface $type_professional_license
-	 * @param TypeDisabilityRepoInterface $type_disability
-	 * @param TypeDiseaseRepoInterface $type_disease
-	 * @param TypeExamRepoInterface $type_exam
-	 * @param FamilyRelationshipRepoInterface $family_relationship
-	 * @param StudyRepoInterface $study
-	 * @param CertificationRepoInterface $certification
-	 * @param SpecialityRepoInterface $speciality
-	 * @param ProfessionalLicenseRepoInterface $professionalLicense
-	 * @param DisabilityRepoInterface $disability
-	 * @param DiseaseRepoInterface $disease
-	 * @param ExamRepoInterface $exam
-	 * @param FamilyResponsabilityRepoInterface $family_responsability
-	 * @param ContactEmployeeRepoInterface $contact_employee
-	 * @param MaritalStatusRepoInterface $maritalStatus
-	 * @param ForecastRepoInterface $forecast
-	 * @param PensionRepoInterface $pension
-	 * @param ActivateEmployeeInterface $activateEmployee
-	 * @param UserRepoInterface $user
-	 * @param AddressRepoInterface $address
+	 * @param ActivateEmployee                        $activateEmployee
+	 * @param Country                                 $country
+	 * @param GenderRepoInterface                     $gender
+	 * @param RegionRepoInterface                     $region
+	 * @param ProvinceRepoInterface                   $province
+	 * @param CommuneRepoInterface                    $commune
+	 * @param RelationshipRepoInterface               $relationship
+	 * @param DegreeRepoInterface                     $degree
+	 * @param Employee                                $employee
+	 * @param Forecast                                $forecast
+	 * @param InstitutionRepoInterface                $institution
+	 * @param TypeCertificationRepoInterface          $type_certification
+	 * @param TypeSpecialityRepoInterface             $type_speciality
+	 * @param TypeProfessionalLicenseRepoInterface    $type_professional_license
+	 * @param TypeDisabilityRepoInterface             $type_disability
+	 * @param TypeDiseaseRepoInterface                $type_disease
+	 * @param TypeExamRepoInterface                   $type_exam
+	 * @param FamilyRelationshipRepoInterface         $family_relationship
+	 * @param StudyRepoInterface                      $study
+	 * @param CertificationRepoInterface              $certification
+	 * @param SpecialityRepoInterface                 $speciality
+	 * @param ProfessionalLicenseRepoInterface        $professionalLicense
+	 * @param DisabilityRepoInterface                 $disability
+	 * @param DiseaseRepoInterface                    $disease
+	 * @param ExamRepoInterface                       $exam
+	 * @param FamilyResponsabilityRepoInterface       $family_responsability
+	 * @param ContactEmployeeRepoInterface            $contact_employee
+	 * @param MaritalStatusRepoInterface              $maritalStatus
+	 * @param PensionRepoInterface                    $pension
+	 * @param UserRepoInterface                       $user
+	 * @param AddressRepoInterface                    $address
 	 * @param DetailAddressLegalEmployeeRepoInterface $detail_address
 	 */
-	public function __construct(EmployeeRepoInterface $employee, CountryRepoInterface $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune,
-		RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, InstitutionRepoInterface $institution,
-		TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality,
+	public function __construct(ActivateEmployee $activateEmployee, Country $country, GenderRepoInterface $gender, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune,
+		RelationshipRepoInterface $relationship, DegreeRepoInterface $degree, Employee $employee, Forecast $forecast,
+		InstitutionRepoInterface $institution, TypeCertificationRepoInterface $type_certification, TypeSpecialityRepoInterface $type_speciality,
 		TypeProfessionalLicenseRepoInterface $type_professional_license, TypeDisabilityRepoInterface $type_disability, TypeDiseaseRepoInterface $type_disease, TypeExamRepoInterface $type_exam,
 		FamilyRelationshipRepoInterface $family_relationship, StudyRepoInterface $study, CertificationRepoInterface $certification, SpecialityRepoInterface $speciality, ProfessionalLicenseRepoInterface $professionalLicense,
 		DisabilityRepoInterface $disability, DiseaseRepoInterface $disease, ExamRepoInterface $exam,
-		FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee, MaritalStatusRepoInterface $maritalStatus, ForecastRepoInterface $forecast,
-		PensionRepoInterface $pension, ActivateEmployeeInterface $activateEmployee, UserRepoInterface $user, AddressRepoInterface $address, DetailAddressLegalEmployeeRepoInterface $detail_address)
+		FamilyResponsabilityRepoInterface $family_responsability, ContactEmployeeRepoInterface $contact_employee, MaritalStatusRepoInterface $maritalStatus,
+		PensionRepoInterface $pension, UserRepoInterface $user, AddressRepoInterface $address, DetailAddressLegalEmployeeRepoInterface $detail_address)
 	{
 		$this->activateEmployee          = $activateEmployee;
 		$this->address                   = $address;

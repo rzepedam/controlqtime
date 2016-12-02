@@ -2,22 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Http\Requests\ForecastRequest;
-use Controlqtime\Core\Contracts\ForecastRepoInterface;
 
 class ForecastController extends Controller
 {
 	/**
-	 * @var ForecastRepoInterface
+	 * @var Forecast
 	 */
 	protected $forecast;
 	
 	/**
 	 * ForecastController constructor.
 	 *
-	 * @param ForecastRepoInterface $forecast
+	 * @param Forecast $forecast
 	 */
-	public function __construct(ForecastRepoInterface $forecast)
+	public function __construct(Forecast $forecast)
 	{
 		$this->forecast = $forecast;
 	}
@@ -55,9 +56,7 @@ class ForecastController extends Controller
 	 */
 	public function store(ForecastRequest $request)
 	{
-		$forecast = $this->forecast->onlyTrashed('name', $request->get('name'));
-		
-		if (! $forecast)
+		if ( ! $this->restore($request) )
 		{
 			$this->forecast->create($request->all());
 		}
@@ -69,31 +68,57 @@ class ForecastController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$forecast = $this->forecast->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $forecast->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$forecast = $this->forecast->find($id);
+		$forecast = $this->forecast->findOrFail($id);
 		
 		return view('maintainers.forecasts.edit', compact('forecast'));
 	}
 	
 	/**
 	 * @param ForecastRequest $request
-	 * @param $id
+	 * @param                 $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(ForecastRequest $request, $id)
 	{
-		$this->forecast->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/forecasts'
-		]);
+		try
+		{
+			$this->forecast->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/forecasts'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +128,7 @@ class ForecastController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->forecast->delete($id);
+		$this->forecast->destroy($id);
 		
 		return redirect()->route('forecasts.index');
 	}

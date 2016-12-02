@@ -2,22 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Http\Requests\TypeContractRequest;
-use Controlqtime\Core\Contracts\TypeContractRepoInterface;
 
 class TypeContractController extends Controller
 {
 	/**
-	 * @var TypeContractRepoInterface
+	 * @var TypeContract
 	 */
 	protected $typeContract;
 	
 	/**
 	 * TypeContractController constructor.
 	 *
-	 * @param TypeContractRepoInterface $typeContract
+	 * @param TypeContract $typeContract
 	 */
-	public function __construct(TypeContractRepoInterface $typeContract)
+	public function __construct(TypeContract $typeContract)
 	{
 		$this->typeContract = $typeContract;
 	}
@@ -55,9 +56,7 @@ class TypeContractController extends Controller
 	 */
 	public function store(TypeContractRequest $request)
 	{
-		$type_contract = $this->typeContract->onlyTrashedComposed('name', 'dur', $request->get('name'), $request->get('dur'));
-		
-		if ( ! $type_contract )
+		if ( ! $this->restore($request) )
 		{
 			$this->typeContract->create($request->all());
 		}
@@ -66,6 +65,24 @@ class TypeContractController extends Controller
 			'success' => true,
 			'url'     => '/maintainers/type-contracts'
 		]);
+	}
+	
+	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$numHour = $this->typeContract->onlyTrashed()->where('name', $request->get('name'))->where('dur', $request->get('dur'))->firstOrFail();
+			
+			return $numHour->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
 	}
 	
 	/**
@@ -82,7 +99,7 @@ class TypeContractController extends Controller
 	
 	/**
 	 * @param TypeContractRequest $request
-	 * @param $id
+	 * @param                     $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */

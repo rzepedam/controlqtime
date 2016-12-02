@@ -129,8 +129,8 @@ elixir(function(mix) {
     mix.scripts([
         'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
         'components/bootstrap-maxlength.js',
-        'me/js/utilities/submit-form-ajax.js',
         'bower/sweetalert/dist/sweetalert.min.js',
+        'me/js/utilities/submit-form-ajax.js',
         'me/js/utilities/add_csrf_token.js',
         'me/js/utilities/restore.js',
     ], 'public/js/create-edit-common.js');
@@ -226,6 +226,18 @@ elixir(function(mix) {
         'me/js/base/human-resources/contracts/config_bootstrap_table.js'
     ], 'public/js/human-resources/contracts/index-custom-contracts.js');
 
+    // Human-Resource > Employees > Index Custom Employees CSS
+    mix.scripts([
+        'bower/sweetalert/dist/sweetalert.css'
+    ], 'public/css/human-resources/employees/index-custom-employees.css');
+
+    // Human-Resource > Employees > Index Custom Employees JS
+    mix.scripts([
+        'bower/sweetalert/dist/sweetalert.min.js',
+        'me/js/base/human-resources/employees/restore_data_session.js',
+        'me/js/base/human-resources/employees/config_bootstrap_table.js'
+    ], 'public/js/human-resources/employees/index-custom-employees.js');
+
     // Human-Resources > Contracts > Create CSS
     mix.styles([
         'custom-configuration/css/bootstrap-select.css',
@@ -243,18 +255,6 @@ elixir(function(mix) {
         'me/js/utilities/sanitized-fields.js',
         'me/js/base/human-resources/contracts/custom-contracts.js'
     ], 'public/js/human-resources/contracts/create-custom-contracts.js');
-
-    // Human-Resource > Employees > Index Custom Employees CSS
-    mix.scripts([
-        'bower/sweetalert/dist/sweetalert.css'
-    ], 'public/css/human-resources/employees/index-custom-employees.css');
-
-    // Human-Resource > Employees > Index Custom Employees JS
-    mix.scripts([
-        'bower/sweetalert/dist/sweetalert.min.js',
-        'me/js/base/human-resources/employees/restore_data_session.js',
-        'me/js/base/human-resources/employees/config_bootstrap_table.js'
-    ], 'public/js/human-resources/employees/index-custom-employees.js');
 
     // Human-Resources > Employees > Create-Edit Custom CSS
     mix.styles([

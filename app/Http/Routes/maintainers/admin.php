@@ -74,9 +74,14 @@ Route::group(['prefix' => 'maintainers'], function() {
 	// Piece Vehicles
 	Route::get('getPieceVehicles', ['as' => 'getPieceVehicles', 'uses' => 'PieceVehicleController@getPieceVehicles']);
 	Route::resource('piece-vehicles', 'PieceVehicleController');
+	
 
 	// Positions
 	Route::get('getPositions', ['as' => 'getPositions', 'uses' => 'PositionController@getPositions']);
+	Route::group(['prefix' => 'positions'], function() {
+		Route::get('find-data-for-restore', 'PositionController@findDataForRestore');
+		Route::post('restore', 'PositionController@restore');
+	});
 	Route::resource('positions', 'PositionController');
 
 	// Professions

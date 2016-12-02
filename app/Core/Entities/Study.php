@@ -4,11 +4,12 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Study extends Eloquent
 {
-	use SoftDeletes;
+	use SoftDeletes, SoftCascadeTrait;
 	
 	/**
 	 * @var array
@@ -20,9 +21,7 @@ class Study extends Eloquent
 	/**
 	 * @var array
 	 */
-	protected $cascadeDeletes = [
-		'detailSchoolStudy', 'detailTechnicalStudy', 'detailCollegeStudy'
-	];
+	protected $softCascade = [];
 	
 	/**
 	 * @var array
@@ -44,7 +43,7 @@ class Study extends Eloquent
 	 */
 	public function employee()
 	{
-	    return $this->belongsTo(Employee::class);
+		return $this->belongsTo(Employee::class);
 	}
 	
 	/**
@@ -52,7 +51,7 @@ class Study extends Eloquent
 	 */
 	public function detailCollegeStudy()
 	{
-	    return $this->hasOne(DetailCollegeStudy::class);
+		return $this->hasOne(DetailCollegeStudy::class);
 	}
 	
 	/**
@@ -60,7 +59,7 @@ class Study extends Eloquent
 	 */
 	public function detailSchoolStudy()
 	{
-	    return $this->hasOne(DetailSchoolStudy::class);
+		return $this->hasOne(DetailSchoolStudy::class);
 	}
 	
 	/**
@@ -74,21 +73,21 @@ class Study extends Eloquent
 	
 	public function getTypeDegreeIdAttribute()
 	{
-	    switch ($this->degree_id)
-	    {
-		    case 1:
-		    case 2:
-			    $type = 'school';
-			    break;
-		    case 3:
-			    $type = 'technical';
-		    	break;
-		    default:
-			    $type = 'college';
-		    	break;
-	    }
-	    
-	    return $type;
+		switch ( $this->degree_id )
+		{
+			case 1:
+			case 2:
+				$type = 'school';
+				break;
+			case 3:
+				$type = 'technical';
+				break;
+			default:
+				$type = 'college';
+				break;
+		}
+		
+		return $type;
 	}
 	
 	/**

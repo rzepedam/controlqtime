@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Controlqtime\Core\Entities\NumHour;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -16,14 +17,14 @@ class NumHourTest extends TestCase
 		$this->numHour = factory(NumHour::class)->create();
 	}
 	
-	function test_url_num_hour_exists()
+	function test_url_num_hour()
 	{
 		$this->visit('maintainers/num-hours')
 			->see('Listado de Nº de Horas')
 			->assertResponseOk();
 	}
 	
-	function test_route_num_hour_exists()
+	function test_route_num_hour()
 	{
 		$this->visitRoute('num-hours.index')
 			->assertResponseOk();
@@ -38,6 +39,27 @@ class NumHourTest extends TestCase
 		$this->post('maintainers/num-hours', $data, [
 			'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
 			->seeInDatabase('num_hours', ['name' => '80'])
+			->assertResponseOk();
+	}
+	
+	function test_restore_num_hour()
+	{
+		$numHour = NumHour::create([
+			'name' => '80'
+		]);
+		
+		$numHour->delete();
+		
+		$data = [
+			'name' => '80'
+		];
+		
+		$this->post('maintainers/num-hours', $data, [
+			'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+			->seeInDatabase('num_hours', [
+				'name'       => '80',
+				'deleted_at' => null
+			])
 			->assertResponseOk();
 	}
 	
@@ -99,35 +121,28 @@ class NumHourTest extends TestCase
 	
 	function test_delete_num_hour_from_database()
 	{
-		$id = $this->numHour->id;
+		$this->seeInDatabase('num_hours', [
+			'id'         => $this->numHour->id,
+			'name'       => $this->numHour->name,
+			'deleted_at' => null
+		]);
 		
-		$this->delete("maintainers/num-hours/{$id}")
-			->dontSeeInDatabase('num_hours', [
-				'id'         => $id,
-				'deleted_at' => null]);
+		$this->numHour->delete();
+		
+		$this->dontSeeInDatabase('num_hours', [
+			'id'         => $this->numHour->id,
+			'name'       => $this->numHour->name,
+			'deleted_at' => null
+		]);
 	}
 	
-	function test_restore_data_when_element_has_been_deleted()
-	{
-		$data = [
-			'name' => '60'
-		];
-		
-		$this->post('maintainers/num-hours', $data, [
-			'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
-			->seeInDatabase('num_hours', [
-				'name'       => '60',
-				'deleted_at' => null
-			]);
-	}
-	
-	function test_edit_num_hour_route_exists()
+	function test_edit_num_hour_route()
 	{
 		$this->visitRoute('num-hours.edit', 1)
 			->assertResponseOk();
 	}
 	
-	function test_edit_num_hour_url_exists()
+	function test_edit_num_hour_url()
 	{
 		$this->visit('maintainers/num-hours/1/edit')
 			->see('Editar')

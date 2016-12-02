@@ -2,29 +2,30 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\City;
+use Controlqtime\Core\Entities\Country;
 use Controlqtime\Http\Requests\CityRequest;
-use Controlqtime\Core\Contracts\CityRepoInterface;
-use Controlqtime\Core\Contracts\CountryRepoInterface;
 
 class CityController extends Controller
 {
 	/**
-	 * @var CityRepoInterface
+	 * @var City
 	 */
 	protected $city;
 	
 	/**
-	 * @var CountryRepoInterface
+	 * @var Country
 	 */
 	protected $country;
 	
 	/**
 	 * CityController constructor.
 	 *
-	 * @param CityRepoInterface $city
-	 * @param CountryRepoInterface $country
+	 * @param City    $city
+	 * @param Country $country
 	 */
-	public function __construct(CityRepoInterface $city, CountryRepoInterface $country)
+	public function __construct(City $city, Country $country)
 	{
 		$this->city    = $city;
 		$this->country = $country;
@@ -43,7 +44,7 @@ class CityController extends Controller
 	 */
 	public function getCities()
 	{
-		$cities = $this->city->all(['country']);
+		$cities = $this->city->with(['country'])->get();
 		
 		return $cities;
 	}
@@ -53,7 +54,7 @@ class CityController extends Controller
 	 */
 	public function create()
 	{
-		$countries = $this->country->lists('name', 'id');
+		$countries = $this->country->pluck('name', 'id');
 		
 		return view('maintainers.cities.create', compact('countries'));
 	}
@@ -65,9 +66,7 @@ class CityController extends Controller
 	 */
 	public function store(CityRequest $request)
 	{
-		$city = $this->city->onlyTrashedComposed('name', 'country_id', $request->get('name'), $request->get('country_id'));
-		
-		if ( ! $city )
+		if ( ! $this->restore($request) )
 		{
 			$this->city->create($request->all());
 		}
@@ -79,32 +78,53 @@ class CityController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$area = $this->city->onlyTrashed()->where('name', $request->get('name'))->where('country_id', $request->get('country_id'))->firstOrFail();
+			
+			return $area->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$city      = $this->city->find($id);
-		$countries = $this->country->lists('name', 'id');
+		$city      = $this->city->findOrFail($id);
+		$countries = $this->country->pluck('name', 'id');
 		
 		return view('maintainers.cities.edit', compact('city', 'countries'));
 	}
 	
-	/**
-	 * @param CityRequest $request
-	 * @param $id
-	 *
-	 * @return \Illuminate\Http\JsonResponse
-	 */
+	
 	public function update(CityRequest $request, $id)
 	{
-		$this->city->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/cities'
-		]);
+		try
+		{
+			$this->city->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/cities'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -114,7 +134,7 @@ class CityController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->city->delete($id);
+		$this->city->destroy($id);
 		
 		return redirect()->route('cities.index');
 	}

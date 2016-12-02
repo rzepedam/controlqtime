@@ -6,7 +6,7 @@
 
 @stop
 
-@section('title_header') Editar Unidad de Medida: <span class="text-primary">{{ $engine_cubic->id }}</span> @stop
+@section('title_header') Editar Unidad de Medida: <span class="text-primary">{{ $engineCubic->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -21,7 +21,7 @@
 
     <div class="panel">
 
-        {{ Form::model($engine_cubic, array('route' => array('engine-cubics.update', $engine_cubic), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($engineCubic, array('route' => array('engine-cubics.update', $engineCubic), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'engineCubic', ['id' => 'entity'])  }}
             <div class="panel-body">

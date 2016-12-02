@@ -2,22 +2,15 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\TermAndObligatory;
 use Controlqtime\Http\Requests\TermAndObligatoryRequest;
-use Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface;
 
 class TermAndObligatoryController extends Controller
 {
-	/**
-	 * @var TermAndObligatoryRepoInterface
-	 */
 	protected $termAndObligatory;
 	
-	/**
-	 * TermAndObligatoryController constructor.
-	 *
-	 * @param TermAndObligatoryRepoInterface $termAndObligatory
-	 */
-	public function __construct(TermAndObligatoryRepoInterface $termAndObligatory)
+	public function __construct(TermAndObligatory $termAndObligatory)
 	{
 		$this->termAndObligatory = $termAndObligatory;
 	}
@@ -59,14 +52,12 @@ class TermAndObligatoryController extends Controller
 		// Es necesario agregar su comportamiento manualmente para su correcta actualización.
 		$data = $request->all();
 		
-		if (! array_key_exists('default', $data))
+		if ( ! array_key_exists('default', $data) )
 		{
 			$data['default'] = false;
 		}
 		
-		$term_and_obligatory = $this->termAndObligatory->onlyTrashed('name', $request->get('name'));
-		
-		if (! $term_and_obligatory)
+		if ( ! $this->restore($request) )
 		{
 			$this->termAndObligatory->create($data);
 		}
@@ -75,6 +66,25 @@ class TermAndObligatoryController extends Controller
 			'success' => true,
 			'url'     => '/maintainers/terms-and-obligatories'
 		]);
+	}
+	
+	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$termAndObligatory = $this->termAndObligatory->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $termAndObligatory->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
 	}
 	
 	/**
@@ -101,10 +111,13 @@ class TermAndObligatoryController extends Controller
 		// Es necesario agregar su comportamiento manualmente para su correcta actualización.
 		$data = $request->all();
 		
-		if (! array_key_exists('default', $data))
+		if ( ! array_key_exists('default', $data) )
+		{
 			$data['default'] = false;
+		}
 		
-		$this->termAndObligatory->update($data, $id);
+		$this->termAndObligatory->findOrFail($id)->fill($request->all())->saveOrFail();
+		session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 		
 		return response()->json([
 			'success' => true,

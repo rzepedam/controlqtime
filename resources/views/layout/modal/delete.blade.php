@@ -1,4 +1,4 @@
-<div class="modal fade modal-slide-in-right modal-danger" id="mi_delete" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" style="display: none;">
+<div class="modal fade modal-3d-flip-vertical modal-danger" id="mi_delete" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

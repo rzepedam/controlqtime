@@ -5,11 +5,12 @@ namespace Controlqtime\Core\Entities;
 use Carbon\Carbon;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Company extends Eloquent
 {
-	use SoftDeletes;
+	use SoftDeletes, SoftCascadeTrait;
 	
     /**
      * @var array
@@ -21,7 +22,7 @@ class Company extends Eloquent
 	/**
 	 * @var array
 	 */
-	protected $cascadeDeletes = [
+	protected $softCascade = [
 		'legalRepresentative', 'address', 'vehicles', 'imagesable'
 	];
 

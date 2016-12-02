@@ -5,26 +5,29 @@ namespace Controlqtime\Core\Entities;
 use Carbon\Carbon;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Controlqtime\Core\Traits\WhereMethodsTrait;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class Employee extends Eloquent
 {
-	use SoftDeletes;
+	use SoftDeletes, SoftCascadeTrait;
 	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
 		'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
-		'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'gender_id', 'email_employee', 'state'
+		'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'gender_id', 'email_employee',
+		'state'
 	];
 	
 	/**
 	 * @var array
 	 */
-	protected $cascadeDeletes = [
+	protected $softCascade = [
 		'contactEmployees', 'familyRelationships', 'studies', 'certifications', 'specialities',
 		'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities',
 		'user', 'address', 'contract', 'accessControls', 'dailyAssistances', 'imagesable'

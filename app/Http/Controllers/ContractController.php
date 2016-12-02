@@ -4,112 +4,112 @@ namespace Controlqtime\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Entities\Area;
+use Controlqtime\Core\Entities\Company;
+use Controlqtime\Core\Entities\DayTrip;
+use Controlqtime\Core\Entities\NumHour;
+use Controlqtime\Core\Entities\Contract;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\Position;
+use Controlqtime\Core\Entities\Periodicity;
+use Controlqtime\Core\Entities\TypeContract;
+use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Http\Requests\ContractRequest;
-use Controlqtime\Core\Contracts\AreaRepoInterface;
-use Controlqtime\Core\Contracts\CompanyRepoInterface;
-use Controlqtime\Core\Contracts\DayTripRepoInterface;
-use Controlqtime\Core\Contracts\NumHourRepoInterface;
-use Controlqtime\Core\Contracts\ContractRepoInterface;
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\PositionRepoInterface;
-use Controlqtime\Core\Contracts\PeriodicityRepoInterface;
-use Controlqtime\Core\Contracts\ActivateEmployeeInterface;
-use Controlqtime\Core\Contracts\TypeContractRepoInterface;
-use Controlqtime\Core\Contracts\GratificationRepoInterface;
-use Controlqtime\Core\Contracts\TermAndObligatoryRepoInterface;
+use Controlqtime\Core\Entities\ActivateEmployee;
+use Controlqtime\Core\Entities\TermAndObligatory;
 
 class ContractController extends Controller
 {
 	/**
-	 * @var ContractRepoInterface
-	 */
-	protected $contract;
-	
-	/**
-	 * @var CompanyRepoInterface
-	 */
-	protected $company;
-	
-	/**
-	 * @var EmployeeRepoInterface
-	 */
-	protected $employee;
-	
-	/**
-	 * @var PositionRepoInterface
-	 */
-	protected $position;
-	
-	/**
-	 * @var NumHourRepoInterface
-	 */
-	protected $numHour;
-	
-	/**
-	 * @var PeriodicityRepoInterface
-	 */
-	protected $periodicity;
-	
-	/**
-	 * @var DayTripRepoInterface
-	 */
-	protected $dayTrips;
-	
-	/**
-	 * @var GratificationRepoInterface
-	 */
-	protected $gratification;
-	
-	/**
-	 * @var TypeContractRepoInterface
-	 */
-	protected $typeContract;
-	
-	/**
-	 * @var TermAndObligatoryRepoInterface
-	 */
-	protected $termAndObligatory;
-	
-	/**
-	 * @var AreaRepoInterface
-	 */
-	protected $area;
-	
-	/**
-	 * @var ActivateEmployeeInterface
+	 * @var ActivateEmployee
 	 */
 	protected $activateEmployee;
 	
 	/**
+	 * @var Area
+	 */
+	protected $area;
+	
+	/**
+	 * @var Company
+	 */
+	protected $company;
+	
+	/**
+	 * @var Contract
+	 */
+	protected $contract;
+	
+	/**
+	 * @var DayTrip
+	 */
+	protected $dayTrip;
+	
+	/**
+	 * @var Employee
+	 */
+	protected $employee;
+	
+	/**
+	 * @var Gratification
+	 */
+	protected $gratification;
+	
+	/**
+	 * @var NumHour
+	 */
+	protected $numHour;
+	
+	/**
+	 * @var Periodicity
+	 */
+	protected $periodicity;
+	
+	/**
+	 * @var Position
+	 */
+	protected $position;
+	
+	/**
+	 * @var TermAndObligatory
+	 */
+	protected $termAndObligatory;
+	
+	/**
+	 * @var TypeContract
+	 */
+	protected $typeContract;
+	
+	/**
 	 * ContractController constructor.
 	 *
-	 * @param ContractRepoInterface $contract
-	 * @param CompanyRepoInterface $company
-	 * @param EmployeeRepoInterface $employee
-	 * @param PositionRepoInterface $position
-	 * @param NumHourRepoInterface $numHour
-	 * @param PeriodicityRepoInterface $periodicity
-	 * @param DayTripRepoInterface $dayTrips
-	 * @param GratificationRepoInterface $gratification
-	 * @param TypeContractRepoInterface $typeContract
-	 * @param TermAndObligatoryRepoInterface $termAndObligatory
-	 * @param AreaRepoInterface $area
-	 * @param ActivateEmployeeInterface $activateEmployee
+	 * @param ActivateEmployee  $activateEmployee
+	 * @param Area              $area
+	 * @param Company           $company
+	 * @param Contract          $contract
+	 * @param DayTrip           $dayTrip
+	 * @param Employee          $employee
+	 * @param Gratification     $gratification
+	 * @param NumHour           $numHour
+	 * @param Periodicity       $periodicity
+	 * @param Position          $position
+	 * @param TermAndObligatory $termAndObligatory
+	 * @param TypeContract      $typeContract
 	 */
-	public function __construct(ContractRepoInterface $contract, CompanyRepoInterface $company, EmployeeRepoInterface $employee, PositionRepoInterface $position, NumHourRepoInterface $numHour, PeriodicityRepoInterface $periodicity, DayTripRepoInterface $dayTrips, GratificationRepoInterface $gratification, TypeContractRepoInterface $typeContract, TermAndObligatoryRepoInterface $termAndObligatory, AreaRepoInterface $area, ActivateEmployeeInterface $activateEmployee)
+	public function __construct(ActivateEmployee $activateEmployee, Area $area, Company $company, Contract $contract, DayTrip $dayTrip, Employee $employee, Gratification $gratification, NumHour $numHour, Periodicity $periodicity, Position $position, TermAndObligatory $termAndObligatory, TypeContract $typeContract)
 	{
-		$this->contract          = $contract;
+		$this->activateEmployee  = $activateEmployee;
+		$this->area              = $area;
 		$this->company           = $company;
+		$this->contract          = $contract;
+		$this->dayTrip           = $dayTrip;
 		$this->employee          = $employee;
-		$this->position          = $position;
+		$this->gratification     = $gratification;
 		$this->numHour           = $numHour;
 		$this->periodicity       = $periodicity;
-		$this->dayTrips          = $dayTrips;
-		$this->gratification     = $gratification;
-		$this->typeContract      = $typeContract;
+		$this->position          = $position;
 		$this->termAndObligatory = $termAndObligatory;
-		$this->area              = $area;
-		$this->activateEmployee  = $activateEmployee;
+		$this->typeContract      = $typeContract;
 	}
 	
 	/**
@@ -136,14 +136,14 @@ class ContractController extends Controller
 	public function create()
 	{
 		$companies            = $this->company->whereLists('state', 'enable', 'firm_name');
-		$employees            = $this->employee->lists('full_name', 'id');
-		$positions            = $this->position->lists('name', 'id');
-		$areas                = $this->area->lists('name', 'id');
-		$numHours             = $this->numHour->lists('name', 'id');
-		$periodicities        = $this->periodicity->lists('name', 'id');
-		$dayTrips             = $this->dayTrips->lists('name', 'id');
-		$gratifications       = $this->gratification->lists('name', 'id');
-		$typeContracts        = $this->typeContract->lists('full_name', 'id');
+		$employees            = $this->employee->pluck('full_name', 'id');
+		$positions            = $this->position->pluck('name', 'id');
+		$areas                = $this->area->pluck('name', 'id');
+		$numHours             = $this->numHour->pluck('name', 'id');
+		$periodicities        = $this->periodicity->pluck('name', 'id');
+		$dayTrips             = $this->dayTrip->pluck('name', 'id');
+		$gratifications       = $this->gratification->pluck('name', 'id');
+		$typeContracts        = $this->typeContract->pluck('full_name', 'id');
 		$termsAndObligatories = $this->termAndObligatory->all();
 		
 		return view('human-resources.contracts.create', compact(
@@ -169,7 +169,7 @@ class ContractController extends Controller
 			$this->activateEmployee->checkStateUpdateEmployee($request->get('employee_id'));
 			
 			DB::commit();
-		} catch (Exception $e)
+		} catch ( Exception $e )
 		{
 			DB::rollBack();
 		}
@@ -188,7 +188,7 @@ class ContractController extends Controller
 	private function defineDateExpiredContract($request)
 	{
 		$typeContract = $this->typeContract->find($request->get('type_contract_id'));
-		if ($typeContract->name != 'Indefinido')
+		if ( $typeContract->name != 'Indefinido' )
 		{
 			return $request->request->add(['expires_at' => Carbon::now()->addMonths($typeContract->dur)]);
 		}

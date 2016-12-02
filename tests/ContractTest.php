@@ -13,7 +13,7 @@ class ContractTest extends TestCase
 		$this->signIn();
 	}
 	
-    function test_url_contract_exists()
+    function test_url_contract()
     {
 	    $this->visit('human-resources/contracts')
 	        ->see('Listado de Contratos')
@@ -21,7 +21,7 @@ class ContractTest extends TestCase
 	        ->assertResponseOk();
     }
     
-    function test_route_contract_exists()
+    function test_route_contract()
     {
 	    $this->visitRoute('contracts.index')
 	        ->see('Crear Nuevo Contrato Laboral')
