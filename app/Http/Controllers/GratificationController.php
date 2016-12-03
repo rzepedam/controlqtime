@@ -2,22 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Http\Requests\GratificationRequest;
-use Controlqtime\Core\Contracts\GratificationRepoInterface;
 
 class GratificationController extends Controller
 {
 	/**
-	 * @var GratificationRepoInterface
+	 * @var Gratification
 	 */
 	protected $gratification;
 	
 	/**
 	 * GratificationController constructor.
 	 *
-	 * @param GratificationRepoInterface $gratification
+	 * @param Gratification $gratification
 	 */
-	public function __construct(GratificationRepoInterface $gratification)
+	public function __construct(Gratification $gratification)
 	{
 		$this->gratification = $gratification;
 	}
@@ -55,9 +56,7 @@ class GratificationController extends Controller
 	 */
 	public function store(GratificationRequest $request)
 	{
-		$gratification = $this->gratification->onlyTrashed('name', $request->get('name'));
-		
-		if (! $gratification)
+		if ( ! $this->restore($request) )
 		{
 			$this->gratification->create($request->all());
 		}
@@ -69,31 +68,57 @@ class GratificationController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$gratification = $this->gratification->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $gratification->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$gratification = $this->gratification->find($id);
+		$gratification = $this->gratification->findOrFail($id);
 		
 		return view('maintainers.gratifications.edit', compact('gratification'));
 	}
 	
 	/**
 	 * @param GratificationRequest $request
-	 * @param $id
+	 * @param                      $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function update(GratificationRequest $request, $id)
 	{
-		$this->gratification->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/gratifications'
-		]);
+		try
+		{
+			$this->gratification->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/gratifications'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +128,7 @@ class GratificationController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->gratification->delete($id);
+		$this->gratification->destroy($id);
 		
 		return redirect()->route('gratifications.index');
 	}

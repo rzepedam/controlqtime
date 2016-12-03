@@ -14,6 +14,7 @@ use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Terminal;
 use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Core\Entities\TypeContract;
+use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Entities\TermAndObligatory;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
@@ -138,6 +139,15 @@ $factory->define(Fuel::class, function ()
 	return [
 		'id'         => 1,
 		'name'       => '93',
+		'deleted_at' => null
+	];
+});
+
+$factory->define(Gratification::class, function ()
+{
+	return [
+		'id'         => 1,
+		'name'       => '25% legal anticipada con tope de 4.75 SMM',
 		'deleted_at' => null
 	];
 });
