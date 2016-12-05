@@ -2,34 +2,25 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\PieceVehicle;
 use Controlqtime\Http\Requests\PieceVehicleRequest;
-use Controlqtime\Core\Contracts\PieceVehicleRepoInterface;
 
 class PieceVehicleController extends Controller
 {
 	/**
-	 * @var \Controlqtime\Core\Contracts\PieceVehicleRepoInterface
+	 * @var PieceVehicle
 	 */
-	protected $piece_vehicle;
+	protected $pieceVehicle;
 	
 	/**
 	 * PieceVehicleController constructor.
 	 *
-	 * @param \Controlqtime\Core\Contracts\PieceVehicleRepoInterface $piece_vehicle
+	 * @param PieceVehicle $pieceVehicle
 	 */
-	public function __construct(PieceVehicleRepoInterface $piece_vehicle)
+	public function __construct(PieceVehicle $pieceVehicle)
 	{
-		$this->piece_vehicle = $piece_vehicle;
-	}
-	
-	/**
-	 * @return mixed for Bootstrap Table
-	 */
-	public function getPieceVehicles()
-	{
-		$pieceVehicles = $this->piece_vehicle->all();
-		
-		return $pieceVehicles;
+		$this->pieceVehicle = $pieceVehicle;
 	}
 	
 	/**
@@ -40,6 +31,16 @@ class PieceVehicleController extends Controller
 	public function index()
 	{
 		return view('maintainers.piece-vehicles.index');
+	}
+	
+	/**
+	 * @return mixed for Bootstrap Table
+	 */
+	public function getPieceVehicles()
+	{
+		$pieceVehicles = $this->pieceVehicle->all();
+		
+		return $pieceVehicles;
 	}
 	
 	/**
@@ -59,11 +60,9 @@ class PieceVehicleController extends Controller
 	 */
 	public function store(PieceVehicleRequest $request)
 	{
-		$pieceVehicle = $this->piece_vehicle->onlyTrashed('name', $request->get('name'));
-		
-		if (! $pieceVehicle)
+		if ( ! $this->restore($request) )
 		{
-			$this->piece_vehicle->create($request->all());
+			$this->pieceVehicle->create($request->all());
 		}
 		
 		return response()->json([
@@ -73,15 +72,22 @@ class PieceVehicleController extends Controller
 	}
 	
 	/**
-	 * Display the specified resource.
+	 * @param $request
 	 *
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
+	 * @return bool
 	 */
-	public function show($id)
+	public function restore($request)
 	{
-		//
+		try
+		{
+			$pieceVehicle = $this->pieceVehicle->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $pieceVehicle->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
 	}
 	
 	/**
@@ -93,25 +99,32 @@ class PieceVehicleController extends Controller
 	 */
 	public function edit($id)
 	{
-		$pieceVehicle = $this->piece_vehicle->find($id);
+		$pieceVehicle = $this->pieceVehicle->findOrFail($id);
 		
 		return view('maintainers.piece-vehicles.edit', compact('pieceVehicle'));
 	}
 	
 	/**
 	 * @param PieceVehicleRequest $request
-	 * @param $id
+	 * @param                     $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(PieceVehicleRequest $request, $id)
 	{
-		$this->piece_vehicle->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/piece-vehicles'
-		]);
+		try
+		{
+			$this->pieceVehicle->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/piece-vehicles'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -123,7 +136,7 @@ class PieceVehicleController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->piece_vehicle->delete($id);
+		$this->pieceVehicle->destroy($id);
 		
 		return redirect()->route('piece-vehicles.index');
 	}

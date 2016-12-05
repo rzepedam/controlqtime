@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('title_header') Editar Pension: <span class="text-primary">{{ $pension->id }}</span> @stop
+@section('title_header') Editar Fondo de Pensión: <span class="text-primary">{{ $pension->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>

@@ -6,7 +6,7 @@
 
 @stop
 
-@section('title_header') Listado de Fondos de Pensiones
+@section('title_header') Listado de Fondos de Pensión
     <br />
     <a href="{{ route('pensions.create') }}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> Crear Nuevo Fondo de Pensión</a>
 @stop

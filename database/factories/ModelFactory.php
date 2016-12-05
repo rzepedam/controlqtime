@@ -9,6 +9,7 @@ use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Core\Entities\DayTrip;
 use Controlqtime\Core\Entities\NumHour;
+use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Terminal;
@@ -17,7 +18,9 @@ use Controlqtime\Core\Entities\Trademark;
 use Controlqtime\Core\Entities\LaborUnion;
 use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Core\Entities\Institution;
+use Controlqtime\Core\Entities\Periodicity;
 use Controlqtime\Core\Entities\ModelVehicle;
+use Controlqtime\Core\Entities\PieceVehicle;
 use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Entities\MaritalStatus;
@@ -232,8 +235,35 @@ $factory->define(Mutuality::class, function (Faker\Generator $faker)
 $factory->define(NumHour::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => '1',
+		'id'         => 1,
 		'name'       => $faker->numberBetween(1, 999),
+		'deleted_at' => null
+	];
+});
+
+$factory->define(Pension::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => $faker->word,
+		'deleted_at' => null
+	];
+});
+
+$factory->define(Periodicity::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => $faker->word,
+		'deleted_at' => null
+	];
+});
+
+$factory->define(PieceVehicle::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });

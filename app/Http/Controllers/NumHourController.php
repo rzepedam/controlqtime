@@ -128,7 +128,7 @@ class NumHourController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->numHour->delete($id);
+		$this->numHour->destroy($id);
 		
 		return redirect()->route('num-hours.index');
 	}

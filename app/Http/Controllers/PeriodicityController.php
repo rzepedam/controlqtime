@@ -2,24 +2,33 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Periodicity;
 use Controlqtime\Http\Requests\PeriodicityRequest;
-use Controlqtime\Core\Contracts\PeriodicityRepoInterface;
 
 class PeriodicityController extends Controller
 {
 	/**
-	 * @var PeriodicityRepoInterface
+	 * @var Periodicity
 	 */
 	protected $periodiocity;
 	
 	/**
 	 * PeriodicityController constructor.
 	 *
-	 * @param PeriodicityRepoInterface $periodiocity
+	 * @param Periodicity $periodiocity
 	 */
-	public function __construct(PeriodicityRepoInterface $periodiocity)
+	public function __construct(Periodicity $periodiocity)
 	{
 		$this->periodiocity = $periodiocity;
+	}
+	
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
+	{
+		return view('maintainers.periodicities.index');
 	}
 	
 	/**
@@ -30,14 +39,6 @@ class PeriodicityController extends Controller
 		$periodicities = $this->periodiocity->all();
 		
 		return $periodicities;
-	}
-	
-	/**
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
-	public function index()
-	{
-		return view('maintainers.periodicities.index');
 	}
 	
 	/**
@@ -55,9 +56,7 @@ class PeriodicityController extends Controller
 	 */
 	public function store(PeriodicityRequest $request)
 	{
-		$periodicity = $this->periodiocity->onlyTrashed('name', $request->get('name'));
-		
-		if (! $periodicity)
+		if ( ! $this->restore($request) )
 		{
 			$this->periodiocity->create($request->all());
 		}
@@ -69,13 +68,32 @@ class PeriodicityController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$periodicity = $this->periodiocity->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $periodicity->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$periodicity = $this->periodiocity->find($id);
+		$periodicity = $this->periodiocity->findOrFail($id);
 		
 		return view('maintainers.periodicities.edit', compact('periodicity'));
 	}
@@ -88,12 +106,19 @@ class PeriodicityController extends Controller
 	 */
 	public function update(PeriodicityRequest $request, $id)
 	{
-		$this->periodiocity->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/periodicities'
-		]);
+		try
+		{
+			$this->periodiocity->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/periodicities'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +128,7 @@ class PeriodicityController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->periodiocity->delete($id);
+		$this->periodiocity->destroy($id);
 		
 		return redirect()->route('periodicities.index');
 	}
