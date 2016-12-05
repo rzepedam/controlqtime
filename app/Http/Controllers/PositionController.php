@@ -57,9 +57,12 @@ class PositionController extends Controller
 	 */
 	public function store(PositionRequest $request)
 	{
-		$this->position->create($request->all());
-		session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+		if ( ! $this->restore($request) )
+		{
+			$this->position->create($request->all());
+		}
 		
+		session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 		return response()->json([
 			'success' => true,
 			'url'     => '/maintainers/positions'
@@ -67,21 +70,22 @@ class PositionController extends Controller
 	}
 	
 	/**
-	 * @param Request $request
+	 * @param $request
 	 *
 	 * @return bool
 	 */
-	public function restore(Request $request)
+	public function restore($request)
 	{
 		try
 		{
-			$this->position->onlyTrashed()->where('name', $request->get('name'))->restore();
+			$position = $this->position->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
 			
-			return response()->json(['success' => true]);
+			return $position->restore();
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			return false;
 		}
+		
 	}
 	
 	/**
@@ -126,29 +130,10 @@ class PositionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->position->findOrFail($id)->delete($id);
+		$this->position->destroy($id);
 		session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
 		
 		return redirect()->route('positions.index');
-	}
-	
-	/**
-	 * @param Request $request
-	 *
-	 * @return \Illuminate\Http\JsonResponse
-	 */
-	public function findDataForRestore(Request $request)
-	{
-		try
-		{
-			$this->position->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
-			
-			return response()->json(['success' => true]);
-		} catch ( Exception $e )
-		{
-			return response()->json(['success' => false]);
-		}
-		
 	}
 	
 }

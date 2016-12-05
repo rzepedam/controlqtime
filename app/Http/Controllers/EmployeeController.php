@@ -12,6 +12,7 @@ use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Institution;
 use Controlqtime\Core\Factory\ImageFactory;
+use Controlqtime\Core\Entities\Relationship;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
@@ -32,7 +33,6 @@ use Controlqtime\Core\Contracts\TypeExamRepoInterface;
 use Controlqtime\Core\Contracts\DisabilityRepoInterface;
 use Controlqtime\Core\Contracts\SpecialityRepoInterface;
 use Controlqtime\Core\Contracts\TypeDiseaseRepoInterface;
-use Controlqtime\Core\Contracts\RelationshipRepoInterface;
 use Controlqtime\Core\Contracts\CertificationRepoInterface;
 use Controlqtime\Core\Contracts\TypeDisabilityRepoInterface;
 use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
@@ -157,7 +157,7 @@ class EmployeeController extends Controller
 	protected $region;
 	
 	/**
-	 * @var RelationshipRepoInterface
+	 * @var Relationship
 	 */
 	protected $relationship;
 	
@@ -231,7 +231,7 @@ class EmployeeController extends Controller
 	 * @param ProfessionalLicenseRepoInterface        $professionalLicense
 	 * @param ProvinceRepoInterface                   $province
 	 * @param RegionRepoInterface                     $region
-	 * @param RelationshipRepoInterface               $relationship
+	 * @param Relationship                            $relationship
 	 * @param SpecialityRepoInterface                 $speciality
 	 * @param StudyRepoInterface                      $study
 	 * @param TypeCertificationRepoInterface          $typeCertification
@@ -250,7 +250,7 @@ class EmployeeController extends Controller
 		FamilyRelationshipRepoInterface $familyRelationship, FamilyResponsabilityRepoInterface $familyResponsability,
 		Forecast $forecast, GenderRepoInterface $gender, Institution $institution, MaritalStatus $maritalStatus,
 		Pension $pension, ProfessionalLicenseRepoInterface $professionalLicense, ProvinceRepoInterface $province,
-		RegionRepoInterface $region, RelationshipRepoInterface $relationship, SpecialityRepoInterface $speciality,
+		RegionRepoInterface $region, Relationship $relationship, SpecialityRepoInterface $speciality,
 		StudyRepoInterface $study, TypeCertificationRepoInterface $typeCertification,
 		TypeDisabilityRepoInterface $typeDisability, TypeDiseaseRepoInterface $typeDisease,
 		TypeExamRepoInterface $typeExam, TypeProfessionalLicenseRepoInterface $typeProfessionalLicense,

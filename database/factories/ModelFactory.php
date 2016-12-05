@@ -12,15 +12,18 @@ use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
+use Controlqtime\Core\Entities\Position;
 use Controlqtime\Core\Entities\Terminal;
 use Controlqtime\Core\Entities\Mutuality;
 use Controlqtime\Core\Entities\Trademark;
 use Controlqtime\Core\Entities\LaborUnion;
+use Controlqtime\Core\Entities\Profession;
 use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Core\Entities\Institution;
 use Controlqtime\Core\Entities\Periodicity;
 use Controlqtime\Core\Entities\ModelVehicle;
 use Controlqtime\Core\Entities\PieceVehicle;
+use Controlqtime\Core\Entities\Relationship;
 use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Entities\MaritalStatus;
@@ -260,6 +263,33 @@ $factory->define(Periodicity::class, function (Faker\Generator $faker)
 });
 
 $factory->define(PieceVehicle::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => $faker->word,
+		'deleted_at' => null
+	];
+});
+
+$factory->define(Position::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => $faker->word,
+		'deleted_at' => null
+	];
+});
+
+$factory->define(Profession::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => $faker->word,
+		'deleted_at' => null
+	];
+});
+
+$factory->define(Relationship::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'         => 1,

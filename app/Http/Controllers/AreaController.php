@@ -93,7 +93,6 @@ class AreaController extends Controller
 		{
 			return false;
 		}
-		
 	}
 	
 	/**

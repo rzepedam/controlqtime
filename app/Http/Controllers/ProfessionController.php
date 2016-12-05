@@ -2,22 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Profession;
 use Controlqtime\Http\Requests\ProfessionRequest;
-use Controlqtime\Core\Contracts\ProfessionRepoInterface;
 
 class ProfessionController extends Controller
 {
 	/**
-	 * @var ProfessionRepoInterface
+	 * @var Profession
 	 */
 	protected $profession;
 	
 	/**
 	 * ProfessionController constructor.
 	 *
-	 * @param ProfessionRepoInterface $profession
+	 * @param Profession $profession
 	 */
-	public function __construct(ProfessionRepoInterface $profession)
+	public function __construct(Profession $profession)
 	{
 		$this->profession = $profession;
 	}
@@ -55,9 +56,7 @@ class ProfessionController extends Controller
 	 */
 	public function store(ProfessionRequest $request)
 	{
-		$profession = $this->profession->onlyTrashed('name', $request->get('name'));
-		
-		if ( ! $profession )
+		if ( ! $this->restore($request) )
 		{
 			$this->profession->create($request->all());
 		}
@@ -69,31 +68,57 @@ class ProfessionController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$profession = $this->profession->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $profession->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$profession = $this->profession->find($id);
+		$profession = $this->profession->findOrFail($id);
 		
 		return view('maintainers.professions.edit', compact('profession'));
 	}
 	
 	/**
 	 * @param ProfessionRequest $request
-	 * @param $id
+	 * @param                   $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(ProfessionRequest $request, $id)
 	{
-		$this->profession->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/professions'
-		]);
+		try
+		{
+			$this->profession->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/professions'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +128,7 @@ class ProfessionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->profession->delete($id);
+		$this->profession->destroy($id);
 		
 		return redirect()->route('professions.index');
 	}

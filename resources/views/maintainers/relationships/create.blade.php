@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Crear Nuevo Relación Familiar @stop
+@section('title_header') Crear Nueva Relación Familiar @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>

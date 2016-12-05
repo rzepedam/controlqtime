@@ -2,22 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Relationship;
 use Controlqtime\Http\Requests\RelationshipRequest;
-use Controlqtime\Core\Contracts\RelationshipRepoInterface;
 
 class RelationshipController extends Controller
 {
 	/**
-	 * @var RelationshipRepoInterface
+	 * @var Relationship
 	 */
 	protected $relationship;
 	
 	/**
 	 * RelationshipController constructor.
 	 *
-	 * @param RelationshipRepoInterface $relationship
+	 * @param Relationship $relationship
 	 */
-	public function __construct(RelationshipRepoInterface $relationship)
+	public function __construct(Relationship $relationship)
 	{
 		$this->relationship = $relationship;
 	}
@@ -55,9 +56,7 @@ class RelationshipController extends Controller
 	 */
 	public function store(RelationshipRequest $request)
 	{
-		$relationship = $this->relationship->onlyTrashed('name', $request->get('name'));
-		
-		if ( ! $relationship )
+		if ( ! $this->restore($request) )
 		{
 			$this->relationship->create($request->all());
 		}
@@ -69,13 +68,32 @@ class RelationshipController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$relationship = $this->relationship->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $relationship->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$relationship = $this->relationship->find($id);
+		$relationship = $this->relationship->findOrFail($id);
 		
 		return view('maintainers.relationships.edit', compact('relationship'));
 	}
@@ -88,12 +106,19 @@ class RelationshipController extends Controller
 	 */
 	public function update(RelationshipRequest $request, $id)
 	{
-		$this->relationship->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/relationships'
-		]);
+		try
+		{
+			$this->relationship->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/relationships'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +128,7 @@ class RelationshipController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->relationship->delete($id);
+		$this->relationship->destroy($id);
 		
 		return redirect()->route('relationships.index');
 	}
