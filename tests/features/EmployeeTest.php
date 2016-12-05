@@ -15,7 +15,6 @@ class EmployeeTest extends TestCase
     function test_url_employee_exists()
     {
 	    $this->visit('human-resources/employees')
-		    ->see('Listado de Trabajadores')
 		    ->assertResponseOk();
     }
     

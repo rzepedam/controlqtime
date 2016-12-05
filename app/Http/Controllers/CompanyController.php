@@ -5,14 +5,14 @@ namespace Controlqtime\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Http\Requests\CompanyRequest;
+use Controlqtime\Core\Entities\ActivateCompany;
 use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Contracts\AddressRepoInterface;
 use Controlqtime\Core\Contracts\CommuneRepoInterface;
-use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\ProvinceRepoInterface;
-use Controlqtime\Core\Contracts\ActivateCompanyInterface;
 use Controlqtime\Core\Contracts\NationalityRepoInterface;
 use Controlqtime\Core\Contracts\TypeCompanyRepoInterface;
 use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
@@ -22,9 +22,9 @@ use Controlqtime\Core\Contracts\DetailAddressLegalEmployeeRepoInterface;
 class CompanyController extends Controller
 {
 	/**
-	 * @var ActivateCompanyInterface
+	 * @var ActivateCompany
 	 */
-	protected $activate_company;
+	protected $activateCompany;
 	
 	/**
 	 * @var AddressRepoInterface
@@ -37,19 +37,19 @@ class CompanyController extends Controller
 	protected $commune;
 	
 	/**
-	 * @var CompanyRepoInterface
+	 * @var Company
 	 */
 	protected $company;
 	
 	/**
 	 * @var DetailAddressCompanyRepoInterface
 	 */
-	protected $detail_address_company;
+	protected $detailAddressCompany;
 	
 	/**
 	 * @var DetailAddressLegalEmployeeRepoInterface
 	 */
-	protected $detail_address_legal;
+	protected $detailAddressLegal;
 	
 	/**
 	 * @var LegalRepresentativeRepoInterface
@@ -74,36 +74,41 @@ class CompanyController extends Controller
 	/**
 	 * @var TypeCompanyRepoInterface
 	 */
-	protected $type_company;
+	protected $typeCompany;
+	
 	
 	/**
 	 * CompanyController constructor.
 	 *
-	 * @param TypeCompanyRepoInterface $type_company
-	 * @param CompanyRepoInterface $company
-	 * @param NationalityRepoInterface $nationality
-	 * @param RegionRepoInterface $region
-	 * @param ProvinceRepoInterface $province
-	 * @param CommuneRepoInterface $commune
-	 * @param LegalRepresentativeRepoInterface $legalRepresentative
-	 * @param AddressRepoInterface $address
-	 * @param DetailAddressCompanyRepoInterface $detail_address_company
-	 * @param DetailAddressLegalEmployeeRepoInterface $detail_address_legal
-	 * @param ActivateCompanyInterface $activate_company
+	 * @param ActivateCompany                         $activateCompany
+	 * @param AddressRepoInterface                    $address
+	 * @param CommuneRepoInterface                    $commune
+	 * @param Company                                 $company
+	 * @param DetailAddressCompanyRepoInterface       $detailAddressCompany
+	 * @param DetailAddressLegalEmployeeRepoInterface $detailAddressLegal
+	 * @param LegalRepresentativeRepoInterface        $legalRepresentative
+	 * @param NationalityRepoInterface                $nationality
+	 * @param ProvinceRepoInterface                   $province
+	 * @param RegionRepoInterface                     $region
+	 * @param TypeCompanyRepoInterface                $typeCompany
 	 */
-	public function __construct(TypeCompanyRepoInterface $type_company, CompanyRepoInterface $company, NationalityRepoInterface $nationality, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune, LegalRepresentativeRepoInterface $legalRepresentative, AddressRepoInterface $address, DetailAddressCompanyRepoInterface $detail_address_company, DetailAddressLegalEmployeeRepoInterface $detail_address_legal, ActivateCompanyInterface $activate_company)
+	public function __construct(ActivateCompany $activateCompany, AddressRepoInterface $address,
+		CommuneRepoInterface $commune, Company $company, DetailAddressCompanyRepoInterface $detailAddressCompany,
+		DetailAddressLegalEmployeeRepoInterface $detailAddressLegal,
+		LegalRepresentativeRepoInterface $legalRepresentative, NationalityRepoInterface $nationality,
+		ProvinceRepoInterface $province, RegionRepoInterface $region, TypeCompanyRepoInterface $typeCompany)
 	{
-		$this->activate_company       = $activate_company;
-		$this->address                = $address;
-		$this->commune                = $commune;
-		$this->company                = $company;
-		$this->detail_address_company = $detail_address_company;
-		$this->detail_address_legal   = $detail_address_legal;
-		$this->legalRepresentative    = $legalRepresentative;
-		$this->nationality            = $nationality;
-		$this->province               = $province;
-		$this->region                 = $region;
-		$this->type_company           = $type_company;
+		$this->activateCompany      = $activateCompany;
+		$this->address              = $address;
+		$this->commune              = $commune;
+		$this->company              = $company;
+		$this->detailAddressCompany = $detailAddressCompany;
+		$this->detailAddressLegal   = $detailAddressLegal;
+		$this->legalRepresentative  = $legalRepresentative;
+		$this->nationality          = $nationality;
+		$this->province             = $province;
+		$this->region               = $region;
+		$this->typeCompany          = $typeCompany;
 	}
 	
 	/**
@@ -135,7 +140,7 @@ class CompanyController extends Controller
 		$communes       = $this->province->findCommunes($provincesColl->first()->id);
 		$regions        = $regionsColl->pluck('name', 'id');
 		$provinces      = $provincesColl->pluck('name', 'id');
-		$type_companies = $this->type_company->lists('name', 'id');
+		$type_companies = $this->typeCompany->lists('name', 'id');
 		
 		return view('administration.companies.create', compact(
 			'nationalities', 'regions', 'provinces', 'communes', 'type_companies'
@@ -162,7 +167,7 @@ class CompanyController extends Controller
 			$address->detailAddressLegalEmployee()->create($request);
 			
 			DB::commit();
-		} catch (Exception $e)
+		} catch ( Exception $e )
 		{
 			DB::rollback();
 		}
@@ -213,7 +218,7 @@ class CompanyController extends Controller
 		$communesRep      = $this->province->findCommunes($company->legalRepresentative->address->commune->province->id);
 		$regions          = $regionsColl->pluck('name', 'id');
 		$nationalities    = $this->nationality->lists('name', 'id');
-		$type_companies   = $this->type_company->lists('name', 'id');
+		$type_companies   = $this->typeCompany->lists('name', 'id');
 		
 		return view('administration.companies.edit', compact(
 			'company', 'regions', 'provincesCom', 'provincesRep', 'communesCom', 'communesRep', 'nationalities',
@@ -223,7 +228,7 @@ class CompanyController extends Controller
 	
 	/**
 	 * @param CompanyRequest $request
-	 * @param $id
+	 * @param                $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
@@ -235,14 +240,14 @@ class CompanyController extends Controller
 		{
 			$company = $this->company->update($request->all(), $id);
 			$address = $this->address->update($request->all(), $company->address->id);
-			$this->detail_address_company->update($request->all(), $address->detailAddressCompany->id);
+			$this->detailAddressCompany->update($request->all(), $address->detailAddressCompany->id);
 			$request = $this->changeNamePhoneCommuneAndAddressFieldsToLegalRepresentativeForFillableInPolymorphicTable($request->all());
 			$legal   = $this->legalRepresentative->update($request, $company->legalRepresentative->id);
 			$address = $this->address->update($request, $legal->address->id);
-			$this->detail_address_legal->update($request, $address->detailAddressLegalEmployee->id);
+			$this->detailAddressLegal->update($request, $address->detailAddressLegalEmployee->id);
 			
 			DB::commit();
-		} catch (Exception $e)
+		} catch ( Exception $e )
 		{
 			DB::rollback();
 		}
@@ -303,9 +308,9 @@ class CompanyController extends Controller
 	{
 		$save = new ImageFactory($request->get('company_id'), 'company/', $request->get('repo_id'), $request->get('type'), $request->file('file_data'), null, $request->get('subClass'));
 		
-		if ($save)
+		if ( $save )
 		{
-			$this->activate_company->checkStateCompany($request->get('company_id'));
+			$this->activateCompany->checkStateCompany($request->get('company_id'));
 			
 			return response()->json([
 				'success' => true
@@ -326,9 +331,9 @@ class CompanyController extends Controller
 	{
 		$destroy = new ImageFactory($request->get('key'), 'company/', null, $request->get('type'), null, $request->get('path'));
 		
-		if ($destroy)
+		if ( $destroy )
 		{
-			$this->activate_company->checkStateCompany($request->get('id'));
+			$this->activateCompany->checkStateCompany($request->get('id'));
 			
 			return response()->json([
 				'success' => true

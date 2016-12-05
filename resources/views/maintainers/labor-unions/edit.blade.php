@@ -6,7 +6,7 @@
 
 @stop
 
-@section('title_header') Editar Sindicato: <span class="text-primary">{{ $labor_union->id }}</span> @stop
+@section('title_header') Editar Sindicato: <span class="text-primary">{{ $laborUnion->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($labor_union, array('route' => array('labor-unions.update', $labor_union), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($laborUnion, array('route' => array('labor-unions.update', $laborUnion), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'laborUnion', ['id' => 'entity'])  }}
             <div class="panel-body">

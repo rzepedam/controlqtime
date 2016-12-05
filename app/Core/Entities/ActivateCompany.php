@@ -3,24 +3,21 @@
 namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Controlqtime\Core\Contracts\CompanyRepoInterface;
-use Controlqtime\Core\Contracts\ActivateCompanyInterface;
 
-class ActivateCompany extends Eloquent implements ActivateCompanyInterface
+class ActivateCompany extends Eloquent
 {
 	/**
-	 * @var CompanyRepoInterface
+	 * @var Company
 	 */
 	protected $company;
 	
 	/**
 	 * ActivateCompany constructor.
 	 *
-	 * @param CompanyRepoInterface $company
+	 * @param Company $company
 	 */
-	public function __construct(CompanyRepoInterface $company)
+	public function __construct(Company $company)
 	{
-		
 		$this->company = $company;
 	}
 	
@@ -28,15 +25,14 @@ class ActivateCompany extends Eloquent implements ActivateCompanyInterface
 	{
 		$company = $this->company->find($id);
 		
-		if ($company->images_rol->isEmpty())
+		if ( $company->images_rol->isEmpty() )
 			return $this->saveStateDisableCompany($company);
 		
-		if ($company->images_patent->isEmpty())
+		if ( $company->images_patent->isEmpty() )
 			return $this->saveStateDisableCompany($company);
 		
-		if ($company->images_carnet->isEmpty())
+		if ( $company->images_carnet->isEmpty() )
 			return $this->saveStateDisableCompany($company);
-		
 		
 		return $this->saveStateEnableCompany($company);
 	}

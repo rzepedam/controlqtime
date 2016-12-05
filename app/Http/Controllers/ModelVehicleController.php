@@ -2,32 +2,33 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Trademark;
+use Controlqtime\Core\Entities\ModelVehicle;
 use Controlqtime\Http\Requests\ModelVehicleRequest;
-use Controlqtime\Core\Contracts\TrademarkRepoInterface;
-use Controlqtime\Core\Contracts\ModelVehicleRepoInterface;
 
 class ModelVehicleController extends Controller
 {
 	/**
-	 * @var TrademarkRepoInterface
+	 * @var Trademark
 	 */
 	protected $trademark;
 	
 	/**
-	 * @var ModelVehicleRepoInterface
+	 * @var ModelVehicle
 	 */
-	protected $model_vehicle;
+	protected $modelVehicle;
 	
 	/**
 	 * ModelVehicleController constructor.
 	 *
-	 * @param ModelVehicleRepoInterface $model_vehicle
-	 * @param TrademarkRepoInterface $trademark
+	 * @param ModelVehicle $modelVehicle
+	 * @param Trademark    $trademark
 	 */
-	public function __construct(ModelVehicleRepoInterface $model_vehicle, TrademarkRepoInterface $trademark)
+	public function __construct(ModelVehicle $modelVehicle, Trademark $trademark)
 	{
-		$this->model_vehicle = $model_vehicle;
-		$this->trademark     = $trademark;
+		$this->modelVehicle = $modelVehicle;
+		$this->trademark    = $trademark;
 	}
 	
 	/**
@@ -43,9 +44,9 @@ class ModelVehicleController extends Controller
 	 */
 	public function getModelVehicles()
 	{
-		$model_vehicles = $this->model_vehicle->all(['trademark']);
+		$modelVehicles = $this->modelVehicle->with(['trademark'])->get();
 		
-		return $model_vehicles;
+		return $modelVehicles;
 	}
 	
 	/**
@@ -53,7 +54,7 @@ class ModelVehicleController extends Controller
 	 */
 	public function create()
 	{
-		$trademarks = $this->trademark->lists('name', 'id');
+		$trademarks = $this->trademark->pluck('name', 'id');
 		
 		return view('maintainers.model-vehicles.create', compact('trademarks'));
 	}
@@ -65,11 +66,9 @@ class ModelVehicleController extends Controller
 	 */
 	public function store(ModelVehicleRequest $request)
 	{
-		$modelVehicle = $this->model_vehicle->onlyTrashedComposed('name', 'trademark_id', $request->get('name'), $request->get('trademark_id'));
-		
-		if ( ! $modelVehicle )
+		if ( ! $this->restore($request) )
 		{
-			$this->model_vehicle->create($request->all());
+			$this->modelVehicle->create($request->all());
 		}
 		
 		return response()->json([
@@ -79,34 +78,60 @@ class ModelVehicleController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$modelVehicle = $this->modelVehicle->onlyTrashed()->where('name', $request->get('name'))->where('trademark_id', $request->get('trademark_id'))->firstOrFail();
+			
+			return $modelVehicle->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$model_vehicle = $this->model_vehicle->find($id);
-		$trademarks    = $this->trademark->lists('name', 'id');
+		$modelVehicle = $this->modelVehicle->findOrFail($id);
+		$trademarks   = $this->trademark->pluck('name', 'id');
 		
 		return view('maintainers.model-vehicles.edit', compact(
-			'model_vehicle', 'trademarks'
+			'modelVehicle', 'trademarks'
 		));
 	}
 	
 	/**
 	 * @param ModelVehicleRequest $request
-	 * @param $id
+	 * @param                     $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(ModelVehicleRequest $request, $id)
 	{
-		$this->model_vehicle->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/model-vehicles'
-		]);
+		try
+		{
+			$this->modelVehicle->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/model-vehicles'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -116,7 +141,7 @@ class ModelVehicleController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->model_vehicle->delete($id);
+		$this->modelVehicle->destroy($id);
 		
 		return redirect()->route('model-vehicles.index');
 	}

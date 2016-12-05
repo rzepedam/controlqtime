@@ -76,7 +76,7 @@ class AreaTest extends TestCase
 	function test_update_area()
 	{
 		$id       = $this->area->id + 1;
-		$terminal = Terminal::create([
+		$terminal = factory(Terminal::class)->create([
 			'id'   => $id,
 			'name' => 'Terminal Norte'
 		]);

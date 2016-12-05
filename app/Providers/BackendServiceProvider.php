@@ -12,12 +12,6 @@ class BackendServiceProvider extends ServiceProvider
 		    'Controlqtime\Core\Contracts\AccessControlRepoInterface',
 		    'Controlqtime\Core\Repositories\AccessControlRepo'
 	    );
-	    
-	    // Interface with class. Not content Repo
-	    $this->app->bind(
-		    'Controlqtime\Core\Contracts\ActivateCompanyInterface',
-		    'Controlqtime\Core\Entities\ActivateCompany'
-	    );
 	
 	    // Interface with class. Not content Repo
 	    $this->app->bind(
@@ -135,40 +129,15 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Repositories\GenderRepo'
         );
 
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\InstitutionRepoInterface',
-            'Controlqtime\Core\Repositories\InstitutionRepo'
-        );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\LaborUnionRepoInterface',
-            'Controlqtime\Core\Repositories\LaborUnionRepo'
-        );
-
 		$this->app->bind(
 			'Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface',
 			'Controlqtime\Core\Repositories\LegalRepresentativeRepo'
-		);
-
-		$this->app->bind(
-			'Controlqtime\Core\Contracts\MaritalStatusRepoInterface',
-			'Controlqtime\Core\Repositories\MaritalStatusRepo'
 		);
 	
 	    $this->app->bind(
 		    'Controlqtime\Core\Contracts\MasterFormPieceVehicleRepoInterface',
 		    'Controlqtime\Core\Repositories\MasterFormPieceVehicleRepo'
 	    );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\ModelVehicleRepoInterface',
-            'Controlqtime\Core\Repositories\ModelVehicleRepo'
-        );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\MutualityRepoInterface',
-            'Controlqtime\Core\Repositories\MutualityRepo'
-        );
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\NationalityRepoInterface',
@@ -246,11 +215,6 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'Controlqtime\Core\Contracts\TrademarkRepoInterface',
-            'Controlqtime\Core\Repositories\TrademarkRepo'
-        );
-
-        $this->app->bind(
             'Controlqtime\Core\Contracts\TypeCertificationRepoInterface',
             'Controlqtime\Core\Repositories\TypeCertificationRepo'
         );
@@ -273,11 +237,6 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->bind(
             'Controlqtime\Core\Contracts\TypeExamRepoInterface',
             'Controlqtime\Core\Repositories\TypeExamRepo'
-        );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\TypeInstitutionRepoInterface',
-            'Controlqtime\Core\Repositories\TypeInstitutionRepo'
         );
 
         $this->app->bind(

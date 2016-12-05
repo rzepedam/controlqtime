@@ -2,38 +2,25 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\LaborUnion;
 use Controlqtime\Http\Requests\LaborUnionRequest;
-use Controlqtime\Core\Contracts\LaborUnionRepoInterface;
 
-/**
- * Class LaborUnionController
- * @package Controlqtime\Http\Controllers
- */
 class LaborUnionController extends Controller
 {
 	/**
-	 * @var LaborUnionRepoInterface
+	 * @var LaborUnion
 	 */
-	protected $labor_union;
+	protected $laborUnion;
 	
 	/**
 	 * LaborUnionController constructor.
 	 *
-	 * @param LaborUnionRepoInterface $labor_union
+	 * @param LaborUnion $laborUnion
 	 */
-	public function __construct(LaborUnionRepoInterface $labor_union)
+	public function __construct(LaborUnion $laborUnion)
 	{
-		$this->labor_union = $labor_union;
-	}
-	
-	/**
-	 * @return mixed for Bootstrap-Table
-	 */
-	public function getLaborUnions()
-	{
-		$labor_unions = $this->labor_union->all();
-		
-		return $labor_unions;
+		$this->laborUnion = $laborUnion;
 	}
 	
 	/**
@@ -41,9 +28,19 @@ class LaborUnionController extends Controller
 	 */
 	public function index()
 	{
-		$labor_unions = $this->labor_union->all();
+		$laborUnions = $this->laborUnion->all();
 		
-		return view('maintainers.labor-unions.index', compact('labor_unions'));
+		return view('maintainers.labor-unions.index', compact('laborUnions'));
+	}
+	
+	/**
+	 * @return mixed for Bootstrap-Table
+	 */
+	public function getLaborUnions()
+	{
+		$laborUnions = $this->laborUnion->all();
+		
+		return $laborUnions;
 	}
 	
 	/**
@@ -61,11 +58,9 @@ class LaborUnionController extends Controller
 	 */
 	public function store(LaborUnionRequest $request)
 	{
-		$labor_union = $this->labor_union->onlyTrashed('name', $request->get('name'));
-		
-		if ( ! $labor_union )
+		if ( ! $this->restore($request) )
 		{
-			$this->labor_union->create($request->all());
+			$this->laborUnion->create($request->all());
 		}
 		
 		return response()->json([
@@ -75,31 +70,57 @@ class LaborUnionController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$laborUnion = $this->laborUnion->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $laborUnion->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$labor_union = $this->labor_union->find($id);
+		$laborUnion = $this->laborUnion->findOrFail($id);
 		
-		return view('maintainers.labor-unions.edit', compact('labor_union'));
+		return view('maintainers.labor-unions.edit', compact('laborUnion'));
 	}
 	
 	/**
 	 * @param LaborUnionRequest $request
-	 * @param $id
+	 * @param                   $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(LaborUnionRequest $request, $id)
 	{
-		$this->labor_union->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/labor-unions'
-		]);
+		try
+		{
+			$this->laborUnion->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/labor-unions'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -109,7 +130,7 @@ class LaborUnionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->labor_union->delete($id);
+		$this->laborUnion->destroy($id);
 		
 		return redirect()->route('labor-unions.index');
 	}

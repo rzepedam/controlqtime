@@ -4,16 +4,16 @@ namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Entities\Fuel;
+use Controlqtime\Core\Entities\Company;
+use Controlqtime\Core\Entities\Trademark;
 use Controlqtime\Core\Factory\ImageFactory;
+use Controlqtime\Core\Entities\ModelVehicle;
 use Controlqtime\Http\Requests\VehicleRequest;
-use Controlqtime\Core\Contracts\FuelRepoInterface;
-use Controlqtime\Core\Contracts\CompanyRepoInterface;
 use Controlqtime\Core\Contracts\VehicleRepoInterface;
-use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 use Controlqtime\Core\Contracts\ActivateVehicleInterface;
 use Controlqtime\Core\Contracts\DetailBusesRepoInterface;
 use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
-use Controlqtime\Core\Contracts\ModelVehicleRepoInterface;
 use Controlqtime\Core\Contracts\StateVehicleRepoInterface;
 use Controlqtime\Core\Contracts\DetailVehicleRepoInterface;
 use Controlqtime\Core\Contracts\DateDocumentationVehicleRepoInterface;
@@ -26,7 +26,7 @@ class VehicleController extends Controller
 	protected $activate_vehicle;
 	
 	/**
-	 * @var CompanyRepoInterface
+	 * @var Company
 	 */
 	protected $company;
 	
@@ -38,7 +38,7 @@ class VehicleController extends Controller
 	/**
 	 * @var DetailBusesRepoInterface
 	 */
-	protected $detail_bus;
+	protected $detailBus;
 	
 	/**
 	 * @var DetailVehicleRepoInterface
@@ -46,24 +46,24 @@ class VehicleController extends Controller
 	protected $detailVehicle;
 	
 	/**
-	 * @var FuelRepoInterface
+	 * @var Fuel
 	 */
 	protected $fuel;
 	
 	/**
-	 * @var ModelVehicleRepoInterface
+	 * @var ModelVehicle
 	 */
 	protected $model_vehicle;
 	
 	/**
-	 * @var TrademarkRepoInterface
+	 * @var Trademark
 	 */
 	protected $trademark;
 	
 	/**
 	 * @var TypeVehicleRepoInterface
 	 */
-	protected $type_vehicle;
+	protected $typeVehicle;
 	
 	/**
 	 * @var StateVehicleRepoInterface
@@ -78,33 +78,33 @@ class VehicleController extends Controller
 	/**
 	 * VehicleController constructor.
 	 *
-	 * @param VehicleRepoInterface $vehicle
-	 * @param TypeVehicleRepoInterface $type_vehicle
-	 * @param TrademarkRepoInterface $trademark
-	 * @param ModelVehicleRepoInterface $model_vehicle
-	 * @param CompanyRepoInterface $company
-	 * @param FuelRepoInterface $fuel
-	 * @param StateVehicleRepoInterface $state_vehicle
-	 * @param DetailVehicleRepoInterface $detailVehicle
+	 * @param ActivateVehicleInterface              $activate_vehicle
+	 * @param Company                               $company
+	 * @param Fuel                                  $fuel
+	 * @param ModelVehicle                          $model_vehicle
+	 * @param Trademark                             $trademark
+	 * @param TypeVehicleRepoInterface              $typeVehicle
+	 * @param VehicleRepoInterface                  $vehicle
+	 * @param StateVehicleRepoInterface             $state_vehicle
+	 * @param DetailVehicleRepoInterface            $detailVehicle
 	 * @param DateDocumentationVehicleRepoInterface $dateDocumentationVehicle
-	 * @param ActivateVehicleInterface $activate_vehicle
-	 * @param DetailBusesRepoInterface $detail_bus
+	 * @param DetailBusesRepoInterface              $detailBus
 	 */
-	public function __construct(VehicleRepoInterface $vehicle, TypeVehicleRepoInterface $type_vehicle,
-		TrademarkRepoInterface $trademark, ModelVehicleRepoInterface $model_vehicle, CompanyRepoInterface $company,
-		FuelRepoInterface $fuel, StateVehicleRepoInterface $state_vehicle, DetailVehicleRepoInterface $detailVehicle,
-		DateDocumentationVehicleRepoInterface $dateDocumentationVehicle, ActivateVehicleInterface $activate_vehicle,
-		DetailBusesRepoInterface $detail_bus)
+	public function __construct(ActivateVehicleInterface $activate_vehicle, Company $company, Fuel $fuel,
+		ModelVehicle $model_vehicle, Trademark $trademark, TypeVehicleRepoInterface $typeVehicle,
+		VehicleRepoInterface $vehicle, StateVehicleRepoInterface $state_vehicle,
+		DetailVehicleRepoInterface $detailVehicle, DateDocumentationVehicleRepoInterface $dateDocumentationVehicle,
+		DetailBusesRepoInterface $detailBus)
 	{
 		$this->activate_vehicle         = $activate_vehicle;
 		$this->company                  = $company;
 		$this->dateDocumentationVehicle = $dateDocumentationVehicle;
-		$this->detail_bus               = $detail_bus;
+		$this->detailBus               = $detailBus;
 		$this->detailVehicle            = $detailVehicle;
 		$this->fuel                     = $fuel;
 		$this->model_vehicle            = $model_vehicle;
 		$this->trademark                = $trademark;
-		$this->type_vehicle             = $type_vehicle;
+		$this->typeVehicle             = $typeVehicle;
 		$this->state_vehicle            = $state_vehicle;
 		$this->vehicle                  = $vehicle;
 	}
@@ -137,10 +137,10 @@ class VehicleController extends Controller
 		$model_vehicles = $this->model_vehicle->lists('name', 'id');
 		$state_vehicles = $this->state_vehicle->lists('name', 'id');
 		$trademarks     = $this->trademark->lists('name', 'id');
-		$type_vehicles  = $this->type_vehicle->lists('name', 'id');
+		$typeVehicles  = $this->typeVehicle->lists('name', 'id');
 		
 		return view('operations.vehicles.create', compact(
-			'trademarks', 'model_vehicles', 'type_vehicles', 'fuels', 'companies', 'state_vehicles'
+			'trademarks', 'model_vehicles', 'typeVehicles', 'fuels', 'companies', 'state_vehicles'
 		));
 	}
 	
@@ -159,7 +159,7 @@ class VehicleController extends Controller
 			$vehicle       = $this->vehicle->create($request->all());
 			$detailVehicle = $vehicle->detailVehicle()->create($request->all());
 			
-			if ($request->get('type_vehicle_id') == 2)
+			if ($request->get('typeVehicle_id') == 2)
 			{
 				$detailVehicle->detailBus()->create($request->all());
 			}
@@ -189,13 +189,13 @@ class VehicleController extends Controller
 		$vehicle        = $this->vehicle->find($id, ['modelVehicle.trademark']);
 		$trademarks     = $this->trademark->lists('name', 'id');
 		$model_vehicles = $this->trademark->findModelVehicles($vehicle->modelVehicle->trademark->id);
-		$type_vehicles  = $this->type_vehicle->whereLists('id', $vehicle->type_vehicle_id, 'name');
+		$typeVehicles  = $this->typeVehicle->whereLists('id', $vehicle->typeVehicle_id, 'name');
 		$companies      = $this->company->whereLists('state', 'enable', 'firm_name');
 		$fuels          = $this->fuel->lists('name', 'id');
 		$state_vehicles = $this->state_vehicle->lists('name', 'id');
 		
 		return view('operations.vehicles.edit', compact(
-			'vehicle', 'type_vehicles', 'trademarks', 'model_vehicles', 'companies', 'fuels', 'state_vehicles'
+			'vehicle', 'typeVehicles', 'trademarks', 'model_vehicles', 'companies', 'fuels', 'state_vehicles'
 		));
 	}
 	
@@ -214,9 +214,9 @@ class VehicleController extends Controller
 			$vehicle       = $this->vehicle->update($request->all(), $id);
 			$detailVehicle = $this->detailVehicle->update($request->all(), $vehicle->detailVehicle->id);
 			
-			if ($request->get('type_vehicle_id') == 2)
+			if ($request->get('typeVehicle_id') == 2)
 			{
-				$this->detail_bus->update($request->all(), $detailVehicle->detailBus->id);
+				$this->detailBus->update($request->all(), $detailVehicle->detailBus->id);
 			}
 			
 			$this->dateDocumentationVehicle->update($request->all(), $vehicle->dateDocumentationVehicle->id);

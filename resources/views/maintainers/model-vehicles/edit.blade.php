@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('title_header') Editar Modelo de Vehículo: <span class="text-primary">{{ $model_vehicle->id }}</span> @stop
+@section('title_header') Editar Modelo de Vehículo: <span class="text-primary">{{ $modelVehicle->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($model_vehicle, array('route' => array('model-vehicles.update', $model_vehicle), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($modelVehicle, array('route' => array('model-vehicles.update', $modelVehicle), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'modelVehicle', ['id' => 'entity'])  }}
             <div class="panel-body">
