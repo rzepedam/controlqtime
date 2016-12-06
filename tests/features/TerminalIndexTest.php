@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class IndexTerminalTest extends TestCase
+class TerminalIndexTest extends TestCase
 {
 	use DatabaseTransactions;
 	

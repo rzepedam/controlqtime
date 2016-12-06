@@ -2,24 +2,25 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\TypeCompany;
 use Controlqtime\Http\Requests\TypeCompanyRequest;
-use Controlqtime\Core\Contracts\TypeCompanyRepoInterface;
 
 class TypeCompanyController extends Controller
 {
 	/**
-	 * @var TypeCompanyRepoInterface
+	 * @var TypeCompany
 	 */
-	protected $type_company;
+	protected $typeCompany;
 	
 	/**
 	 * TypeCompanyController constructor.
 	 *
-	 * @param TypeCompanyRepoInterface $type_company
+	 * @param TypeCompany $typeCompany
 	 */
-	public function __construct(TypeCompanyRepoInterface $type_company)
+	public function __construct(TypeCompany $typeCompany)
 	{
-		$this->type_company = $type_company;
+		$this->typeCompany = $typeCompany;
 	}
 	
 	/**
@@ -35,7 +36,7 @@ class TypeCompanyController extends Controller
 	 */
 	public function getTypeCompanies()
 	{
-		$type_companies = $this->type_company->all();
+		$type_companies = $this->typeCompany->all();
 		
 		return $type_companies;
 	}
@@ -55,11 +56,9 @@ class TypeCompanyController extends Controller
 	 */
 	public function store(TypeCompanyRequest $request)
 	{
-		$type_company = $this->type_company->onlyTrashed('name', $request->get('name'));
-		
-		if ( ! $type_company )
+		if ( ! $this->restore($request) )
 		{
-			$this->type_company->create($request->all());
+			$this->typeCompany->create($request->all());
 		}
 		
 		return response()->json([
@@ -69,31 +68,56 @@ class TypeCompanyController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$typeCompany = $this->typeCompany->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $typeCompany->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$type_company = $this->type_company->find($id);
+		$typeCompany = $this->typeCompany->findOrFail($id);
 		
-		return view('maintainers.type-companies.edit', compact('type_company'));
+		return view('maintainers.type-companies.edit', compact('typeCompany'));
 	}
 	
 	/**
 	 * @param TypeCompanyRequest $request
-	 * @param $id
+	 * @param                    $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(TypeCompanyRequest $request, $id)
 	{
-		$this->type_company->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-companies'
-		]);
+		try
+		{
+			$this->typeCompany->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/type-companies'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +127,7 @@ class TypeCompanyController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->type_company->delete($id);
+		$this->typeCompany->destroy($id);
 		
 		return redirect()->route('type-companies.index');
 	}

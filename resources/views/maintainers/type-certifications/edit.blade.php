@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('title_header') Editar Certificación: <span class="text-primary">{{ $type_certification->id }}</span> @stop
+@section('title_header') Editar Certificación: <span class="text-primary">{{ $typeCertification->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($type_certification, array('route' => array('type-certifications.update', $type_certification), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($typeCertification, array('route' => array('type-certifications.update', $typeCertification), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'typeCertification', ['id' => 'entity'])  }}
             <div class="panel-body">

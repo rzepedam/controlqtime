@@ -9,12 +9,12 @@ use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Province;
+use Controlqtime\Core\Entities\TypeCompany;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Http\Requests\CompanyRequest;
 use Controlqtime\Core\Entities\ActivateCompany;
 use Controlqtime\Core\Contracts\AddressRepoInterface;
 use Controlqtime\Core\Contracts\NationalityRepoInterface;
-use Controlqtime\Core\Contracts\TypeCompanyRepoInterface;
 use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
 use Controlqtime\Core\Contracts\DetailAddressCompanyRepoInterface;
 use Controlqtime\Core\Contracts\DetailAddressLegalEmployeeRepoInterface;
@@ -72,7 +72,7 @@ class CompanyController extends Controller
 	protected $region;
 	
 	/**
-	 * @var TypeCompanyRepoInterface
+	 * @var TypeCompany
 	 */
 	protected $typeCompany;
 	
@@ -90,13 +90,13 @@ class CompanyController extends Controller
 	 * @param NationalityRepoInterface                $nationality
 	 * @param Province                                $province
 	 * @param Region                                  $region
-	 * @param TypeCompanyRepoInterface                $typeCompany
+	 * @param TypeCompany                             $typeCompany
 	 */
 	public function __construct(ActivateCompany $activateCompany, AddressRepoInterface $address,
 		Commune $commune, Company $company, DetailAddressCompanyRepoInterface $detailAddressCompany,
 		DetailAddressLegalEmployeeRepoInterface $detailAddressLegal,
 		LegalRepresentativeRepoInterface $legalRepresentative, NationalityRepoInterface $nationality,
-		Province $province, Region $region, TypeCompanyRepoInterface $typeCompany)
+		Province $province, Region $region, TypeCompany $typeCompany)
 	{
 		$this->activateCompany      = $activateCompany;
 		$this->address              = $address;

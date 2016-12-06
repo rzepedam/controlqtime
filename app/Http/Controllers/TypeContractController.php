@@ -92,7 +92,7 @@ class TypeContractController extends Controller
 	 */
 	public function edit($id)
 	{
-		$typeContract = $this->typeContract->find($id);
+		$typeContract = $this->typeContract->findOrFail($id);
 		
 		return view('maintainers.type-contracts.edit', compact('typeContract'));
 	}
@@ -105,12 +105,19 @@ class TypeContractController extends Controller
 	 */
 	public function update(TypeContractRequest $request, $id)
 	{
-		$this->typeContract->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-contracts'
-		]);
+		try
+		{
+			$this->typeContract->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/type-contracts'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -120,7 +127,7 @@ class TypeContractController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeContract->delete($id);
+		$this->typeContract->destroy($id);
 		
 		return redirect()->route('type-contracts.index');
 	}

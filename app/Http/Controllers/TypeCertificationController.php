@@ -2,23 +2,25 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Http\Requests\TypeCertificationRequest;
-use Controlqtime\Core\Contracts\TypeCertificationRepoInterface;
 
 class TypeCertificationController extends Controller
 {
-    /**
-     * @var TypeCertificationRepoInterface
-     */
-    protected $type_certification;
-
-    /**
-     * TypeCertificationController constructor.
-     * @param TypeCertificationRepoInterface $type_certification
-     */
-    public function __construct(TypeCertificationRepoInterface $type_certification)
+	/**
+	 * @var TypeCertification
+	 */
+	protected $typeCertification;
+	
+	/**
+	 * TypeCertificationController constructor.
+	 *
+	 * @param TypeCertification $typeCertification
+	 */
+	public function __construct(TypeCertification $typeCertification)
     {
-        $this->type_certification = $type_certification;
+        $this->typeCertification = $typeCertification;
     }
 
     /**
@@ -34,9 +36,9 @@ class TypeCertificationController extends Controller
      */
     public function getTypeCertifications()
     {
-        $type_certifications = $this->type_certification->all();
+        $typeCertifications = $this->typeCertification->all();
 
-        return $type_certifications;
+        return $typeCertifications;
     }
 
     /**
@@ -53,11 +55,9 @@ class TypeCertificationController extends Controller
      */
     public function store(TypeCertificationRequest $request)
     {
-	    $type_certification = $this->type_certification->onlyTrashed('name', $request->get('name'));
-	
-	    if (! $type_certification)
+	    if ( ! $this->restore($request) )
 	    {
-		    $this->type_certification->create($request->all());
+		    $this->typeCertification->create($request->all());
 	    }
 
         return response()->json([
@@ -65,16 +65,34 @@ class TypeCertificationController extends Controller
             'url'     => '/maintainers/type-certifications'
         ]);
     }
-
+	
+	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$typeCertification = $this->typeCertification->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $typeCertification->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+    
     /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        $type_certification = $this->type_certification->find($id);
+        $typeCertification = $this->typeCertification->findOrFail($id);
 
-        return view('maintainers.type-certifications.edit', compact('type_certification'));
+        return view('maintainers.type-certifications.edit', compact('typeCertification'));
     }
 
     /**
@@ -84,12 +102,19 @@ class TypeCertificationController extends Controller
      */
     public function update(TypeCertificationRequest $request, $id)
     {
-        $this->type_certification->update($request->all(), $id);
-
-        return response()->json([
-            'success' => true,
-            'url'     => '/maintainers/type-certifications'
-        ]);
+	    try
+	    {
+		    $this->typeCertification->findOrFail($id)->fill($request->all())->saveOrFail();
+		    session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+		
+		    return response()->json([
+			    'success' => true,
+			    'url'     => '/maintainers/type-certifications'
+		    ]);
+	    } catch ( Exception $e )
+	    {
+		    return response()->json(['success' => false]);
+	    }
     }
 
     /**
@@ -98,7 +123,7 @@ class TypeCertificationController extends Controller
      */
     public function destroy($id)
     {
-        $this->type_certification->delete($id);
+        $this->typeCertification->destroy($id);
 
         return redirect()->route('type-certifications.index');
     }

@@ -21,6 +21,7 @@ use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
 use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Entities\ActivateEmployee;
+use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Contracts\ExamRepoInterface;
 use Controlqtime\Core\Contracts\UserRepoInterface;
 use Controlqtime\Core\Contracts\StudyRepoInterface;
@@ -37,7 +38,6 @@ use Controlqtime\Core\Contracts\CertificationRepoInterface;
 use Controlqtime\Core\Contracts\TypeDisabilityRepoInterface;
 use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
 use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
-use Controlqtime\Core\Contracts\TypeCertificationRepoInterface;
 use Controlqtime\Core\Contracts\FamilyRelationshipRepoInterface;
 use Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface;
 use Controlqtime\Core\Contracts\FamilyResponsabilityRepoInterface;
@@ -172,7 +172,7 @@ class EmployeeController extends Controller
 	protected $study;
 	
 	/**
-	 * @var TypeCertificationRepoInterface
+	 * @var TypeCertification
 	 */
 	protected $typeCertification;
 	
@@ -234,7 +234,7 @@ class EmployeeController extends Controller
 	 * @param Relationship                            $relationship
 	 * @param SpecialityRepoInterface                 $speciality
 	 * @param StudyRepoInterface                      $study
-	 * @param TypeCertificationRepoInterface          $typeCertification
+	 * @param TypeCertification                       $typeCertification
 	 * @param TypeDisabilityRepoInterface             $typeDisability
 	 * @param TypeDiseaseRepoInterface                $typeDisease
 	 * @param TypeExamRepoInterface                   $typeExam
@@ -251,7 +251,7 @@ class EmployeeController extends Controller
 		Forecast $forecast, GenderRepoInterface $gender, Institution $institution, MaritalStatus $maritalStatus,
 		Pension $pension, ProfessionalLicenseRepoInterface $professionalLicense, Province $province,
 		Region $region, Relationship $relationship, SpecialityRepoInterface $speciality,
-		StudyRepoInterface $study, TypeCertificationRepoInterface $typeCertification,
+		StudyRepoInterface $study, TypeCertification $typeCertification,
 		TypeDisabilityRepoInterface $typeDisability, TypeDiseaseRepoInterface $typeDisease,
 		TypeExamRepoInterface $typeExam, TypeProfessionalLicenseRepoInterface $typeProfessionalLicense,
 		TypeSpecialityRepoInterface $typeSpeciality, UserRepoInterface $user)

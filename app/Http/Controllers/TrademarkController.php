@@ -2,22 +2,23 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Trademark;
 use Controlqtime\Http\Requests\TrademarkRequest;
-use Controlqtime\Core\Contracts\TrademarkRepoInterface;
 
 class TrademarkController extends Controller
 {
 	/**
-	 * @var TrademarkRepoInterface
+	 * @var Trademark
 	 */
 	protected $trademark;
 	
 	/**
 	 * TrademarkController constructor.
 	 *
-	 * @param TrademarkRepoInterface $trademark
+	 * @param Trademark $trademark
 	 */
-	public function __construct(TrademarkRepoInterface $trademark)
+	public function __construct(Trademark $trademark)
 	{
 		$this->trademark = $trademark;
 	}
@@ -55,9 +56,7 @@ class TrademarkController extends Controller
 	 */
 	public function store(TrademarkRequest $request)
 	{
-		$trademark = $this->trademark->onlyTrashed('name', $request->get('name'));
-		
-		if (! $trademark)
+		if ( ! $this->restore($request) )
 		{
 			$this->trademark->create($request->all());
 		}
@@ -69,31 +68,56 @@ class TrademarkController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$trademark = $this->trademark->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $trademark->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$trademark = $this->trademark->find($id);
+		$trademark = $this->trademark->findOrFail($id);
 		
 		return view('maintainers.trademarks.edit', compact('trademark'));
 	}
 	
 	/**
 	 * @param TrademarkRequest $request
-	 * @param $id
+	 * @param                  $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(TrademarkRequest $request, $id)
 	{
-		$this->trademark->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/trademarks'
-		]);
+		try
+		{
+			$this->trademark->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/trademarks'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +127,7 @@ class TrademarkController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->trademark->delete($id);
+		$this->trademark->destroy($id);
 		
 		return redirect()->route('trademarks.index');
 	}

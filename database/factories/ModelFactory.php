@@ -26,6 +26,7 @@ use Controlqtime\Core\Entities\Profession;
 use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Core\Entities\Institution;
 use Controlqtime\Core\Entities\Periodicity;
+use Controlqtime\Core\Entities\TypeCompany;
 use Controlqtime\Core\Entities\ModelVehicle;
 use Controlqtime\Core\Entities\PieceVehicle;
 use Controlqtime\Core\Entities\Relationship;
@@ -35,6 +36,7 @@ use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Entities\TypeInstitution;
 use Controlqtime\Core\Entities\StatePieceVehicle;
 use Controlqtime\Core\Entities\TermAndObligatory;
+use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Entities\MasterFormPieceVehicle;
@@ -379,11 +381,32 @@ $factory->define(Trademark::class, function (Faker\Generator $faker)
 	];
 });
 
+$factory->define(TypeCertification::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Certificación Java',
+		'deleted_at' => null
+	];
+});
+
+$factory->define(TypeCompany::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Operador',
+		'deleted_at' => null
+	];
+});
+
 $factory->define(TypeContract::class, function (Faker\Generator $faker)
 {
 	return [
-		'name' => $faker->word,
-		'dur'  => $faker->numberBetween(1, 12)
+		'id'         => 1,
+		'name'       => 'Plazo Fijo',
+		'dur'        => $faker->numberBetween(1, 12),
+		'full_name'  => '',
+		'deleted_at' => null
 	];
 });
 

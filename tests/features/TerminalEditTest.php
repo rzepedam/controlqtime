@@ -6,7 +6,7 @@ use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\Terminal;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class EditTerminalTest extends TestCase
+class TerminalEditTest extends TestCase
 {
 	use DatabaseTransactions;
 	
