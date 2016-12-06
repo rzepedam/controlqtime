@@ -168,16 +168,7 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Contracts\SubsidiaryRepoInterface',
             'Controlqtime\Core\Repositories\SubsidiaryRepo'
         );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\TypeDiseaseRepoInterface',
-            'Controlqtime\Core\Repositories\TypeDiseaseRepo'
-        );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\TypeExamRepoInterface',
-            'Controlqtime\Core\Repositories\TypeExamRepo'
-        );
+	    
 
         $this->app->bind(
             'Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface',

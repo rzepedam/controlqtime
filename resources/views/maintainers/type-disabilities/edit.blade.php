@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('title_header') Editar Discapacidad: <span class="text-primary">{{ $type_disability->id }}</span> @stop
+@section('title_header') Editar Discapacidad: <span class="text-primary">{{ $typeDisability->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($type_disability, array('route' => array('type-disabilities.update', $type_disability), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($typeDisability, array('route' => array('type-disabilities.update', $typeDisability), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'typeDisability', ['id' => 'entity'])  }}
             <div class="panel-body">

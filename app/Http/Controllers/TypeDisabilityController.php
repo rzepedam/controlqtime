@@ -2,41 +2,43 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\TypeDisability;
 use Controlqtime\Http\Requests\TypeDisabilityRequest;
-use Controlqtime\Core\Contracts\TypeDisabilityRepoInterface;
 
 class TypeDisabilityController extends Controller
 {
-    /**
-     * @var TypeDisabilityRepoInterface
-     */
-    protected $type_disability;
-
-    /**
-     * TypeDisabilityController constructor.
-     * @param TypeDisabilityRepoInterface $type_disability
-     */
-    public function __construct(TypeDisabilityRepoInterface $type_disability)
+	/**
+	 * @var TypeDisability
+	 */
+	protected $typeDisability;
+	
+	/**
+	 * TypeDisabilityController constructor.
+	 *
+	 * @param TypeDisability $typeDisability
+	 */
+	public function __construct(TypeDisability $typeDisability)
     {
-        $this->type_disability = $type_disability;
+        $this->typeDisability = $typeDisability;
     }
-
+	
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
+	{
+		return view('maintainers.type-disabilities.index');
+	}
+	
     /**
      * @return mixed for Bootstrap-Table
      */
     public function getTypeDisabilities()
     {
-        $type_disabilities = $this->type_disability->all();
-
-        return $type_disabilities;
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
-    {
-        return view('maintainers.type-disabilities.index');
+	    $type_disabilities = $this->typeDisability->all();
+	
+	    return $type_disabilities;
     }
 
     /**
@@ -53,11 +55,9 @@ class TypeDisabilityController extends Controller
      */
     public function store(TypeDisabilityRequest $request)
     {
-	    $typeDisability = $this->type_disability->onlyTrashed('name', $request->get('name'));
-	
-	    if (! $typeDisability)
+	    if ( ! $this->restore($request) )
 	    {
-		    $this->type_disability->create($request->all());
+		    $this->typeDisability->create($request->all());
 	    }
 
         return response()->json([
@@ -65,6 +65,24 @@ class TypeDisabilityController extends Controller
             'url'     => '/maintainers/type-disabilities'
         ]);
     }
+	
+	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$typeDisability = $this->typeDisability->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $typeDisability->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
 
     /**
      * @param $id
@@ -72,9 +90,9 @@ class TypeDisabilityController extends Controller
      */
     public function edit($id)
     {
-        $type_disability = $this->type_disability->find($id);
+        $typeDisability = $this->typeDisability->findOrFail($id);
 
-        return view('maintainers.type-disabilities.edit', compact('type_disability'));
+        return view('maintainers.type-disabilities.edit', compact('typeDisability'));
     }
 
     /**
@@ -84,12 +102,19 @@ class TypeDisabilityController extends Controller
      */
     public function update(TypeDisabilityRequest $request, $id)
     {
-        $this->type_disability->update($request->all(), $id);
-
-        return response()->json([
-            'success' => true,
-            'url'     => '/maintainers/type-disabilities'
-        ]);
+	    try
+	    {
+		    $this->typeDisability->findOrFail($id)->fill($request->all())->saveOrFail();
+		    session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+		
+		    return response()->json([
+			    'success' => true,
+			    'url'     => '/maintainers/type-disabilities'
+		    ]);
+	    } catch ( Exception $e )
+	    {
+		    return response()->json(['success' => false]);
+	    }
     }
 
     /**
@@ -98,7 +123,7 @@ class TypeDisabilityController extends Controller
      */
     public function destroy($id)
     {
-        $this->type_disability->delete($id);
+        $this->typeDisability->destroy($id);
 
         return redirect()->route('type-disabilities.index');
     }

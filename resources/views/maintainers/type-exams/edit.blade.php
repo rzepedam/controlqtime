@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('title_header') Editar Examen: <span class="text-primary">{{ $type_exam->id }}</span> @stop
+@section('title_header') Editar Examen: <span class="text-primary">{{ $typeExam->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($type_exam, array('route' => array('type-exams.update', $type_exam), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($typeExam, array('route' => array('type-exams.update', $typeExam), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'typeExam', ['id' => 'entity'])  }}
             <div class="panel-body">

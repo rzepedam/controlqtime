@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Session;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Province;
+use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\Institution;
+use Controlqtime\Core\Entities\TypeDisease;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Core\Entities\Relationship;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
 use Controlqtime\Core\Entities\MaritalStatus;
+use Controlqtime\Core\Entities\TypeDisability;
 use Controlqtime\Core\Entities\ActivateEmployee;
 use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Contracts\ExamRepoInterface;
@@ -30,12 +33,9 @@ use Controlqtime\Core\Contracts\GenderRepoInterface;
 use Controlqtime\Core\Contracts\AddressRepoInterface;
 use Controlqtime\Core\Contracts\DiseaseRepoInterface;
 use Controlqtime\Notifications\EmployeeWasRegistered;
-use Controlqtime\Core\Contracts\TypeExamRepoInterface;
 use Controlqtime\Core\Contracts\DisabilityRepoInterface;
 use Controlqtime\Core\Contracts\SpecialityRepoInterface;
-use Controlqtime\Core\Contracts\TypeDiseaseRepoInterface;
 use Controlqtime\Core\Contracts\CertificationRepoInterface;
-use Controlqtime\Core\Contracts\TypeDisabilityRepoInterface;
 use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
 use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
 use Controlqtime\Core\Contracts\FamilyRelationshipRepoInterface;
@@ -177,17 +177,17 @@ class EmployeeController extends Controller
 	protected $typeCertification;
 	
 	/**
-	 * @var TypeDisabilityRepoInterface
+	 * @var TypeDisability
 	 */
 	protected $typeDisability;
 	
 	/**
-	 * @var TypeDiseaseRepoInterface
+	 * @var TypeDisease
 	 */
 	protected $typeDisease;
 	
 	/**
-	 * @var TypeExamRepoInterface
+	 * @var TypeExam
 	 */
 	protected $typeExam;
 	
@@ -235,9 +235,9 @@ class EmployeeController extends Controller
 	 * @param SpecialityRepoInterface                 $speciality
 	 * @param StudyRepoInterface                      $study
 	 * @param TypeCertification                       $typeCertification
-	 * @param TypeDisabilityRepoInterface             $typeDisability
-	 * @param TypeDiseaseRepoInterface                $typeDisease
-	 * @param TypeExamRepoInterface                   $typeExam
+	 * @param TypeDisability                          $typeDisability
+	 * @param TypeDisease                             $typeDisease
+	 * @param TypeExam                                $typeExam
 	 * @param TypeProfessionalLicenseRepoInterface    $typeProfessionalLicense
 	 * @param TypeSpecialityRepoInterface             $typeSpeciality
 	 * @param UserRepoInterface                       $user
@@ -252,8 +252,8 @@ class EmployeeController extends Controller
 		Pension $pension, ProfessionalLicenseRepoInterface $professionalLicense, Province $province,
 		Region $region, Relationship $relationship, SpecialityRepoInterface $speciality,
 		StudyRepoInterface $study, TypeCertification $typeCertification,
-		TypeDisabilityRepoInterface $typeDisability, TypeDiseaseRepoInterface $typeDisease,
-		TypeExamRepoInterface $typeExam, TypeProfessionalLicenseRepoInterface $typeProfessionalLicense,
+		TypeDisability $typeDisability, TypeDisease $typeDisease,
+		TypeExam $typeExam, TypeProfessionalLicenseRepoInterface $typeProfessionalLicense,
 		TypeSpecialityRepoInterface $typeSpeciality, UserRepoInterface $user)
 	{
 		$this->activateEmployee        = $activateEmployee;

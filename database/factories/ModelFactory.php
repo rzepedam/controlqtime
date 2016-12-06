@@ -19,6 +19,7 @@ use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Position;
 use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\Terminal;
+use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\Mutuality;
 use Controlqtime\Core\Entities\Trademark;
 use Controlqtime\Core\Entities\LaborUnion;
@@ -27,12 +28,14 @@ use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Core\Entities\Institution;
 use Controlqtime\Core\Entities\Periodicity;
 use Controlqtime\Core\Entities\TypeCompany;
+use Controlqtime\Core\Entities\TypeDisease;
 use Controlqtime\Core\Entities\ModelVehicle;
 use Controlqtime\Core\Entities\PieceVehicle;
 use Controlqtime\Core\Entities\Relationship;
 use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Entities\MaritalStatus;
+use Controlqtime\Core\Entities\TypeDisability;
 use Controlqtime\Core\Entities\TypeInstitution;
 use Controlqtime\Core\Entities\StatePieceVehicle;
 use Controlqtime\Core\Entities\TermAndObligatory;
@@ -406,6 +409,33 @@ $factory->define(TypeContract::class, function (Faker\Generator $faker)
 		'name'       => 'Plazo Fijo',
 		'dur'        => $faker->numberBetween(1, 12),
 		'full_name'  => '',
+		'deleted_at' => null
+	];
+});
+
+$factory->define(TypeDisability::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Esclerosis Múltiple',
+		'deleted_at' => null
+	];
+});
+
+$factory->define(TypeDisease::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => 'El Síndrome de la Fatiga Crónica',
+		'deleted_at' => null
+	];
+});
+
+$factory->define(TypeExam::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Glicemia',
 		'deleted_at' => null
 	];
 });

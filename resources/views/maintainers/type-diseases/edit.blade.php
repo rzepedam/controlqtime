@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Editar Enfermedad: <span class="text-primary">{{ $type_disease->id }}</span> @stop
+@section('title_header') Editar Enfermedad: <span class="text-primary">{{ $typeDisease->id }}</span> @stop
 
 @section('css')
 
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($type_disease, array('route' => array('type-diseases.update', $type_disease), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($typeDisease, array('route' => array('type-diseases.update', $typeDisease), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'typeDisease', ['id' => 'entity'])  }}
             <div class="panel-body">

@@ -6,7 +6,7 @@
 
 @stop
 
-@section('title_header') Editar Tipo Institución: <span class="text-primary">{{ $type_institution->id }}</span> @stop
+@section('title_header') Editar Tipo Institución: <span class="text-primary">{{ $typeInstitution->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($type_institution, array('route' => array('type-institutions.update', $type_institution), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($typeInstitution, array('route' => array('type-institutions.update', $typeInstitution), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'typeInstitution', ['id' => 'entity'])  }}
             <div class="panel-body">

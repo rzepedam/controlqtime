@@ -2,34 +2,25 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\TypeInstitution;
 use Controlqtime\Http\Requests\TypeInstitutionRequest;
-use Controlqtime\Core\Contracts\TypeInstitutionRepoInterface;
 
 class TypeInstitutionController extends Controller
 {
 	/**
-	 * @var TypeInstitutionRepoInterface
+	 * @var TypeInstitution
 	 */
-	protected $type_institution;
+	protected $typeInstitution;
 	
 	/**
 	 * TypeInstitutionController constructor.
 	 *
-	 * @param TypeInstitutionRepoInterface $type_institution
+	 * @param TypeInstitution $typeInstitution
 	 */
-	public function __construct(TypeInstitutionRepoInterface $type_institution)
+	public function __construct(TypeInstitution $typeInstitution)
 	{
-		$this->type_institution = $type_institution;
-	}
-	
-	/**
-	 * @return mixed for Bootstrap-Table
-	 */
-	public function getTypeInstitutions()
-	{
-		$type_institutions = $this->type_institution->all();
-		
-		return $type_institutions;
+		$this->typeInstitution = $typeInstitution;
 	}
 	
 	/**
@@ -38,6 +29,16 @@ class TypeInstitutionController extends Controller
 	public function index()
 	{
 		return view('maintainers.type-institutions.index');
+	}
+	
+	/**
+	 * @return mixed for Bootstrap-Table
+	 */
+	public function getTypeInstitutions()
+	{
+		$typeInstitutions = $this->typeInstitution->all();
+		
+		return $typeInstitutions;
 	}
 	
 	/**
@@ -55,11 +56,9 @@ class TypeInstitutionController extends Controller
 	 */
 	public function store(TypeInstitutionRequest $request)
 	{
-		$typeInstitution = $this->type_institution->onlyTrashed('name', $request->get('name'));
-		
-		if ( ! $typeInstitution )
+		if ( ! $this->restore($request) )
 		{
-			$this->type_institution->create($request->all());
+			$this->typeInstitution->create($request->all());
 		}
 		
 		return response()->json([
@@ -69,31 +68,56 @@ class TypeInstitutionController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$typeInstitution = $this->typeInstitution->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $typeInstitution->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$type_institution = $this->type_institution->find($id);
+		$typeInstitution = $this->typeInstitution->findOrFail($id);
 		
-		return view('maintainers.type-institutions.edit', compact('type_institution'));
+		return view('maintainers.type-institutions.edit', compact('typeInstitution'));
 	}
 	
 	/**
-	 * @param $id
+	 * @param                        $id
 	 * @param TypeInstitutionRequest $request
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update($id, TypeInstitutionRequest $request)
 	{
-		$this->type_institution->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-institutions'
-		]);
+		try
+		{
+			$this->typeInstitution->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/type-institutions'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +127,7 @@ class TypeInstitutionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->type_institution->delete($id);
+		$this->typeInstitution->destroy($id);
 		
 		return redirect()->route('type-institutions.index');
 	}
