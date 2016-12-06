@@ -2,29 +2,30 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Route;
+use Controlqtime\Core\Entities\Terminal;
 use Controlqtime\Http\Requests\RouteRequest;
-use Controlqtime\Core\Contracts\RouteRepoInterface;
-use Controlqtime\Core\Contracts\TerminalRepoInterface;
 
 class RouteController extends Controller
 {
 	/**
-	 * @var RouteRepoInterface
+	 * @var Route
 	 */
 	protected $route;
 	
 	/**
-	 * @var TerminalRepoInterface
+	 * @var Terminal
 	 */
 	protected $terminal;
 	
 	/**
 	 * RouteController constructor.
 	 *
-	 * @param RouteRepoInterface $route
-	 * @param TerminalRepoInterface $terminal
+	 * @param Route    $route
+	 * @param Terminal $terminal
 	 */
-	public function __construct(RouteRepoInterface $route, TerminalRepoInterface $terminal)
+	public function __construct(Route $route, Terminal $terminal)
 	{
 		$this->route    = $route;
 		$this->terminal = $terminal;
@@ -43,7 +44,7 @@ class RouteController extends Controller
 	 */
 	public function getRoutes()
 	{
-		$routes = $this->route->all(['terminal']);
+		$routes = $this->route->with(['terminal'])->get();
 		
 		return $routes;
 	}
@@ -53,7 +54,7 @@ class RouteController extends Controller
 	 */
 	public function create()
 	{
-		$terminals = $this->terminal->lists('name', 'id');
+		$terminals = $this->terminal->pluck('name', 'id');
 		
 		return view('maintainers.routes.create', compact('terminals'));
 	}
@@ -65,9 +66,7 @@ class RouteController extends Controller
 	 */
 	public function store(RouteRequest $request)
 	{
-		$route = $this->route->onlyTrashedComposed('name', 'terminal_id', $request->get('name'), $request->get('terminal_id'));
-		
-		if ( ! $route )
+		if ( ! $this->restore($request) )
 		{
 			$this->route->create($request->all());
 		}
@@ -79,32 +78,57 @@ class RouteController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$route = $this->route->onlyTrashed()->where('name', $request->get('name'))->where('terminal_id', $request->get('terminal_id'))->firstOrFail();
+			
+			return $route->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$terminals = $this->terminal->lists('name', 'id');
-		$route     = $this->route->find($id);
+		$route     = $this->route->findOrFail($id);
+		$terminals = $this->terminal->pluck('name', 'id');
 		
 		return view('maintainers.routes.edit', compact('route', 'terminals'));
 	}
 	
 	/**
 	 * @param RouteRequest $request
-	 * @param $id
+	 * @param              $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(RouteRequest $request, $id)
 	{
-		$this->route->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/routes'
-		]);
+		try
+		{
+			$this->route->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/routes'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -114,7 +138,7 @@ class RouteController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->route->delete($id);
+		$this->route->destroy($id);
 		
 		return redirect()->route('routes.index');
 	}

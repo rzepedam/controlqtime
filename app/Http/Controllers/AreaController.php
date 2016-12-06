@@ -105,9 +105,7 @@ class AreaController extends Controller
 		$area      = $this->area->findOrFail($id);
 		$terminals = $this->terminal->pluck('name', 'id');
 		
-		return view('maintainers.areas.edit', compact(
-			'area', 'terminals'
-		));
+		return view('maintainers.areas.edit', compact('area', 'terminals'));
 	}
 	
 	/**

@@ -8,11 +8,27 @@ use Controlqtime\Http\Requests\TermAndObligatoryRequest;
 
 class TermAndObligatoryController extends Controller
 {
+	/**
+	 * @var TermAndObligatory
+	 */
 	protected $termAndObligatory;
 	
+	/**
+	 * TermAndObligatoryController constructor.
+	 *
+	 * @param TermAndObligatory $termAndObligatory
+	 */
 	public function __construct(TermAndObligatory $termAndObligatory)
 	{
 		$this->termAndObligatory = $termAndObligatory;
+	}
+	
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
+	{
+		return view('maintainers.terms-and-obligatories.index');
 	}
 	
 	/**
@@ -23,14 +39,6 @@ class TermAndObligatoryController extends Controller
 		$termAndObligatories = $this->termAndObligatory->all();
 		
 		return $termAndObligatories;
-	}
-	
-	/**
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
-	public function index()
-	{
-		return view('maintainers.terms-and-obligatories.index');
 	}
 	
 	/**
@@ -94,7 +102,7 @@ class TermAndObligatoryController extends Controller
 	 */
 	public function edit($id)
 	{
-		$termAndObligatory = $this->termAndObligatory->find($id);
+		$termAndObligatory = $this->termAndObligatory->findOrFail($id);
 		
 		return view('maintainers.terms-and-obligatories.edit', compact('termAndObligatory'));
 	}
@@ -116,13 +124,19 @@ class TermAndObligatoryController extends Controller
 			$data['default'] = false;
 		}
 		
-		$this->termAndObligatory->findOrFail($id)->fill($request->all())->saveOrFail();
-		session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/terms-and-obligatories'
-		]);
+		try
+		{
+			$this->termAndObligatory->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/terms-and-obligatories'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -132,7 +146,7 @@ class TermAndObligatoryController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->termAndObligatory->delete($id);
+		$this->termAndObligatory->destroy($id);
 		
 		return redirect()->route('terms-and-obligatories.index');
 	}

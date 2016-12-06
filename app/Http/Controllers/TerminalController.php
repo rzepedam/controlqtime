@@ -2,58 +2,49 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Region;
+use Controlqtime\Core\Entities\Commune;
+use Controlqtime\Core\Entities\Province;
+use Controlqtime\Core\Entities\Terminal;
 use Controlqtime\Http\Requests\TerminalRequest;
-use Controlqtime\Core\Contracts\RegionRepoInterface;
-use Controlqtime\Core\Contracts\CommuneRepoInterface;
-use Controlqtime\Core\Contracts\ProvinceRepoInterface;
-use Controlqtime\Core\Contracts\TerminalRepoInterface;
 
 class TerminalController extends Controller
 {
 	/**
-	 * @var TerminalRepoInterface
-	 */
-	protected $terminal;
-	
-	/**
-	 * @var RegionRepoInterface
-	 */
-	protected $region;
-	
-	/**
-	 * @var ProvinceRepoInterface
-	 */
-	protected $province;
-	
-	/**
-	 * @var CommuneRepoInterface
+	 * @var Commune
 	 */
 	protected $commune;
 	
 	/**
-	 * TerminalController constructor.
-	 *
-	 * @param TerminalRepoInterface $terminal
-	 * @param RegionRepoInterface $region
-	 * @param ProvinceRepoInterface $province
-	 * @param CommuneRepoInterface $commune
+	 * @var Province
 	 */
-	public function __construct(TerminalRepoInterface $terminal, RegionRepoInterface $region, ProvinceRepoInterface $province, CommuneRepoInterface $commune)
-	{
-		$this->terminal = $terminal;
-		$this->region   = $region;
-		$this->province = $province;
-		$this->commune  = $commune;
-	}
+	protected $province;
 	
 	/**
-	 * @return mixed for Bootstrap Table
+	 * @var Region
 	 */
-	public function getTerminals()
+	protected $region;
+	
+	/**
+	 * @var Terminal
+	 */
+	protected $terminal;
+	
+	/**
+	 * TerminalController constructor.
+	 *
+	 * @param Commune  $commune
+	 * @param Province $province
+	 * @param Region   $region
+	 * @param Terminal $terminal
+	 */
+	public function __construct(Commune $commune, Province $province, Region $region, Terminal $terminal)
 	{
-		$terminals = $this->terminal->all(['commune']);
-		
-		return $terminals;
+		$this->commune  = $commune;
+		$this->province = $province;
+		$this->region   = $region;
+		$this->terminal = $terminal;
 	}
 	
 	/**
@@ -65,13 +56,23 @@ class TerminalController extends Controller
 	}
 	
 	/**
+	 * @return mixed for Bootstrap Table
+	 */
+	public function getTerminals()
+	{
+		$terminals = $this->terminal->with(['commune'])->get();
+		
+		return $terminals;
+	}
+	
+	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function create()
 	{
-		$regions   = $this->region->lists('name', 'id');
-		$provinces = $this->province->lists('name', 'id');
-		$communes  = $this->commune->lists('name', 'id');
+		$communes  = $this->commune->pluck('name', 'id');
+		$provinces = $this->province->pluck('name', 'id');
+		$regions   = $this->region->pluck('name', 'id');
 		
 		return view('maintainers.terminals.create', compact(
 			'regions', 'provinces', 'communes'
@@ -85,9 +86,7 @@ class TerminalController extends Controller
 	 */
 	public function store(TerminalRequest $request)
 	{
-		$terminal = $this->terminal->onlyTrashed('name', $request->get('name'));
-		
-		if ( ! $terminal )
+		if ( ! $this->restore($request) )
 		{
 			$this->terminal->create($request->all());
 		}
@@ -99,36 +98,61 @@ class TerminalController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$terminal = $this->terminal->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $terminal->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$terminal  = $this->terminal->find($id);
-		$regions   = $this->region->lists('name', 'id');
-		$provinces = $this->province->lists('name', 'id');
-		$communes  = $this->commune->lists('name', 'id');
+		$communes  = $this->commune->pluck('name', 'id');
+		$provinces = $this->province->pluck('name', 'id');
+		$regions   = $this->region->pluck('name', 'id');
+		$terminal  = $this->terminal->findOrFail($id);
 		
 		return view('maintainers.terminals.edit', compact(
-			'terminal', 'regions', 'provinces', 'communes'
+			'communes', 'provinces', 'regions', 'terminal'
 		));
 	}
 	
 	/**
 	 * @param TerminalRequest $request
-	 * @param $id
+	 * @param                 $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function update(TerminalRequest $request, $id)
 	{
-		$this->terminal->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/terminals'
-		]);
+		try
+		{
+			$this->terminal->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/terminals'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -138,7 +162,7 @@ class TerminalController extends Controller
 	 */
 	public function show($id)
 	{
-		$terminal = $this->terminal->find($id, ['commune']);
+		$terminal = $this->terminal->with(['commune'])->findOrFail($id);
 		
 		return view('maintainers.terminals.show', compact('terminal'));
 	}
@@ -150,7 +174,7 @@ class TerminalController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->terminal->delete($id);
+		$this->terminal->destroy($id);
 		
 		return redirect()->route('terminals.index');
 	}

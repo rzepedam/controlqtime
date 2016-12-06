@@ -1,10 +1,14 @@
 <?php
 
+use Carbon\Carbon;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\City;
 use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Core\Entities\User;
+use Controlqtime\Core\Entities\Route;
+use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Entities\Address;
+use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Core\Entities\DayTrip;
@@ -13,6 +17,7 @@ use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Position;
+use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\Terminal;
 use Controlqtime\Core\Entities\Mutuality;
 use Controlqtime\Core\Entities\Trademark;
@@ -28,6 +33,7 @@ use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Entities\TypeInstitution;
+use Controlqtime\Core\Entities\StatePieceVehicle;
 use Controlqtime\Core\Entities\TermAndObligatory;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
@@ -68,6 +74,15 @@ $factory->define(City::class, function ()
 		'id'         => 1,
 		'name'       => 'Santiago',
 		'country_id' => 1
+	];
+});
+
+$factory->define(Commune::class, function ()
+{
+	return [
+		'id'          => 1,
+		'province_id' => 1,
+		'name'        => 'La Florida'
 	];
 });
 
@@ -289,7 +304,43 @@ $factory->define(Profession::class, function (Faker\Generator $faker)
 	];
 });
 
+$factory->define(Province::class, function ()
+{
+	return [
+		'id'        => 1,
+		'region_id' => 1,
+		'name'      => 'Santiago'
+	];
+});
+
+$factory->define(Region::class, function ()
+{
+	return [
+		'id'   => 1,
+		'name' => 'Región Metropolitana de Santiago'
+	];
+});
+
 $factory->define(Relationship::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => $faker->word,
+		'deleted_at' => null
+	];
+});
+
+$factory->define(Route::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'          => 1,
+		'name'        => 'F05',
+		'terminal_id' => 1,
+		'deleted_at'  => null
+	];
+});
+
+$factory->define(StatePieceVehicle::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'         => 1,
@@ -313,7 +364,9 @@ $factory->define(Terminal::class, function ()
 		'id'         => 1,
 		'name'       => 'Juanita',
 		'address'    => 'Av. Juanita 1490',
-		'commune_id' => '86'
+		'commune_id' => 1,
+		'deleted_at' => null,
+		'created_at' => Carbon::now()
 	];
 });
 

@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Jenssegers\Date\Date;
 
 class Terminal extends Eloquent
 {
@@ -48,4 +49,12 @@ class Terminal extends Eloquent
 		$this->attributes['address'] = ucfirst($value);
 	}
 	
+	
+	/**
+	 * @return string (Martes 6 Diciembre 2016 08:50:00)
+	 */
+	public function getFormattedCreatedAtAttribute()
+	{
+		return Date::parse($this->created_at)->format('l j F Y H:i:s');
+	}
 }

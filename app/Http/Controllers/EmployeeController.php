@@ -5,11 +5,14 @@ namespace Controlqtime\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Entities\Region;
+use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Core\Entities\Pension;
 use Illuminate\Support\Facades\Session;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
+use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\Institution;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Core\Entities\Relationship;
@@ -23,12 +26,9 @@ use Controlqtime\Core\Contracts\UserRepoInterface;
 use Controlqtime\Core\Contracts\StudyRepoInterface;
 use Controlqtime\Core\Contracts\DegreeRepoInterface;
 use Controlqtime\Core\Contracts\GenderRepoInterface;
-use Controlqtime\Core\Contracts\RegionRepoInterface;
 use Controlqtime\Core\Contracts\AddressRepoInterface;
-use Controlqtime\Core\Contracts\CommuneRepoInterface;
 use Controlqtime\Core\Contracts\DiseaseRepoInterface;
 use Controlqtime\Notifications\EmployeeWasRegistered;
-use Controlqtime\Core\Contracts\ProvinceRepoInterface;
 use Controlqtime\Core\Contracts\TypeExamRepoInterface;
 use Controlqtime\Core\Contracts\DisabilityRepoInterface;
 use Controlqtime\Core\Contracts\SpecialityRepoInterface;
@@ -62,7 +62,7 @@ class EmployeeController extends Controller
 	protected $certification;
 	
 	/**
-	 * @var CommuneRepoInterface
+	 * @var Commune
 	 */
 	protected $commune;
 	
@@ -147,12 +147,12 @@ class EmployeeController extends Controller
 	protected $professionalLicense;
 	
 	/**
-	 * @var ProvinceRepoInterface
+	 * @var Province
 	 */
 	protected $province;
 	
 	/**
-	 * @var RegionRepoInterface
+	 * @var Region
 	 */
 	protected $region;
 	
@@ -212,7 +212,7 @@ class EmployeeController extends Controller
 	 * @param ActivateEmployee                        $activateEmployee
 	 * @param AddressRepoInterface                    $address
 	 * @param CertificationRepoInterface              $certification
-	 * @param CommuneRepoInterface                    $commune
+	 * @param Commune                                 $commune
 	 * @param ContactEmployeeRepoInterface            $contactEmployee
 	 * @param Country                                 $country
 	 * @param DegreeRepoInterface                     $degree
@@ -229,8 +229,8 @@ class EmployeeController extends Controller
 	 * @param MaritalStatus                           $maritalStatus
 	 * @param Pension                                 $pension
 	 * @param ProfessionalLicenseRepoInterface        $professionalLicense
-	 * @param ProvinceRepoInterface                   $province
-	 * @param RegionRepoInterface                     $region
+	 * @param Province                                $province
+	 * @param Region                                  $region
 	 * @param Relationship                            $relationship
 	 * @param SpecialityRepoInterface                 $speciality
 	 * @param StudyRepoInterface                      $study
@@ -243,14 +243,14 @@ class EmployeeController extends Controller
 	 * @param UserRepoInterface                       $user
 	 */
 	public function __construct(ActivateEmployee $activateEmployee, AddressRepoInterface $address,
-		CertificationRepoInterface $certification, CommuneRepoInterface $commune,
+		CertificationRepoInterface $certification, Commune $commune,
 		ContactEmployeeRepoInterface $contactEmployee, Country $country, DegreeRepoInterface $degree,
 		DetailAddressLegalEmployeeRepoInterface $detailAddress, DisabilityRepoInterface $disability,
 		DiseaseRepoInterface $disease, Employee $employee, ExamRepoInterface $exam,
 		FamilyRelationshipRepoInterface $familyRelationship, FamilyResponsabilityRepoInterface $familyResponsability,
 		Forecast $forecast, GenderRepoInterface $gender, Institution $institution, MaritalStatus $maritalStatus,
-		Pension $pension, ProfessionalLicenseRepoInterface $professionalLicense, ProvinceRepoInterface $province,
-		RegionRepoInterface $region, Relationship $relationship, SpecialityRepoInterface $speciality,
+		Pension $pension, ProfessionalLicenseRepoInterface $professionalLicense, Province $province,
+		Region $region, Relationship $relationship, SpecialityRepoInterface $speciality,
 		StudyRepoInterface $study, TypeCertificationRepoInterface $typeCertification,
 		TypeDisabilityRepoInterface $typeDisability, TypeDiseaseRepoInterface $typeDisease,
 		TypeExamRepoInterface $typeExam, TypeProfessionalLicenseRepoInterface $typeProfessionalLicense,

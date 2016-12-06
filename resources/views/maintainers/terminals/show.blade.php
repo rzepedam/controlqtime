@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Detalle Terminal : <span class="text-primary">{{ $terminal->id }}</span> @stop
+@section('title_header') Detalle Terminal: <span class="text-primary">{{ $terminal->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -33,7 +33,7 @@
                                         </tr>
                                         <tr>
                                             <td class="col-md-3">Ingresado</td>
-                                            <td class="text-center text-capitalize">{{ Date::parse($terminal->created_at)->format('l j F Y H:i:s') }}</td>
+                                            <td class="text-center text-capitalize">{{ $terminal->formatted_created_at }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

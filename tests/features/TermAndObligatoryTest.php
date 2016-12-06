@@ -19,7 +19,6 @@ class TermAndObligatoryTest extends TestCase
 	function test_url_term_and_obligatory()
 	{
 		$this->visit('maintainers/terms-and-obligatories')
-			->see('Listado de Cláusulas y Obligaciones')
 			->assertResponseOk();
 	}
 	
@@ -29,7 +28,16 @@ class TermAndObligatoryTest extends TestCase
 			->assertResponseOk();
 	}
 	
-	function test_create_new_term_and_obligatory_with_default_equals_false()
+	function test_index_term_and_obligatory()
+	{
+		$this->visit('maintainers/terms-and-obligatories')
+			->seeInElement('h1', 'Listado de Cláusulas y Obligaciones')
+			->seeInElement('a', 'Crear Nueva Cláusula y Obligación')
+			->see('Nombre')
+			->see('Predeterminar');
+	}
+	
+	function test_create_term_and_obligatory_with_default_equals_false()
 	{
 		$this->visit('maintainers/terms-and-obligatories/create')
 			->see('Crear Nueva Cláusula y Obligación')
@@ -41,7 +49,7 @@ class TermAndObligatoryTest extends TestCase
 			]);
 	}
 	
-	function test_create_new_term_and_obligatory_with_default_equals_true()
+	function test_create_term_and_obligatory_with_default_equals_true()
 	{
 		$this->visit('maintainers/terms-and-obligatories/create')
 			->check('default')
@@ -64,7 +72,7 @@ class TermAndObligatoryTest extends TestCase
 			]);
 	}
 	
-	function test_edit_url_term_and_obligatory()
+	function test_edit_term_and_obligatory()
 	{
 		$method = $this->term->default ? 'seeIsChecked' : 'dontSeeIsChecked';
 		
@@ -110,6 +118,34 @@ class TermAndObligatoryTest extends TestCase
 				'id'      => $this->term->id,
 				'name'    => $this->term->name,
 				'default' => true
+			]);
+	}
+	
+	function test_delete_term_and_obligatory()
+	{
+		$this->delete('maintainers/terms-and-obligatories/' . $this->term->id)
+			->dontSeeInDatabase('term_and_obligatories', [
+				'id'         => $this->term->id,
+				'name'       => $this->term->name,
+				'default'    => $this->term->default,
+				'deleted_at' => null
+			]);
+	}
+	
+	function test_restore_term_and_obligatory()
+	{
+		$method = $this->term->default ? 'check' : 'uncheck';
+		$this->term->delete();
+		
+		$this->visit('maintainers/terms-and-obligatories/create')
+			->type($this->term->name, 'name')
+			->$method('default')
+			->press('Guardar')
+			->seeInDatabase('term_and_obligatories', [
+				'id'         => $this->term->id,
+				'name'       => $this->term->name,
+				'default'    => $this->term->default,
+				'deleted_at' => null
 			]);
 	}
 	

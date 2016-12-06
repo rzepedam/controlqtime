@@ -45,10 +45,10 @@ class AreaTest extends TestCase
 	function test_create_area()
 	{
 		$this->visit('maintainers/areas/create')
-			->see('Crear Nueva Área')
-			->see($this->terminal->name)
-			->see('Guardar')
-			->assertResponseOk();
+			->seeInElement('h1', 'Crear Nueva Área')
+			->see('Nombre')
+			->seeInElement('#terminal_id', $this->terminal->name)
+			->seeInElement('button', 'Guardar');
 	}
 	
 	function test_store_area()

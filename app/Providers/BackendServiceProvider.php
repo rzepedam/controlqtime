@@ -34,11 +34,6 @@ class BackendServiceProvider extends ServiceProvider
 		    'Controlqtime\Core\Repositories\CheckVehicleFormRepo'
 	    );
 
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\CommuneRepoInterface',
-            'Controlqtime\Core\Repositories\CommuneRepo'
-        );
-
 		$this->app->bind(
 			'Controlqtime\Core\Contracts\ContactEmployeeRepoInterface',
 			'Controlqtime\Core\Repositories\ContactEmployeeRepo'
@@ -150,21 +145,6 @@ class BackendServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'Controlqtime\Core\Contracts\ProvinceRepoInterface',
-            'Controlqtime\Core\Repositories\ProvinceRepo'
-        );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\RegionRepoInterface',
-            'Controlqtime\Core\Repositories\RegionRepo'
-        );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\RouteRepoInterface',
-            'Controlqtime\Core\Repositories\RouteRepo'
-        );
-
-        $this->app->bind(
             'Controlqtime\Core\Contracts\SpecialityRepoInterface',
             'Controlqtime\Core\Repositories\SpecialityRepo'
         );
@@ -188,12 +168,7 @@ class BackendServiceProvider extends ServiceProvider
             'Controlqtime\Core\Contracts\SubsidiaryRepoInterface',
             'Controlqtime\Core\Repositories\SubsidiaryRepo'
         );
-
-        $this->app->bind(
-            'Controlqtime\Core\Contracts\TerminalRepoInterface',
-            'Controlqtime\Core\Repositories\TerminalRepo'
-        );
-
+	    
         $this->app->bind(
             'Controlqtime\Core\Contracts\TypeCertificationRepoInterface',
             'Controlqtime\Core\Repositories\TypeCertificationRepo'
