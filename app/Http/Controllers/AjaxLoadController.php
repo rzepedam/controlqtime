@@ -4,70 +4,72 @@ namespace Controlqtime\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use Controlqtime\Core\Contracts\RegionRepoInterface;
-use Controlqtime\Core\Contracts\CompanyRepoInterface;
-use Controlqtime\Core\Contracts\VehicleRepoInterface;
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\ProvinceRepoInterface;
-use Controlqtime\Core\Contracts\TrademarkRepoInterface;
-use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
-use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
+use Controlqtime\Core\Entities\Region;
+use Controlqtime\Core\Entities\Company;
+use Controlqtime\Core\Entities\Vehicle;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\Province;
+use Controlqtime\Core\Entities\Trademark;
+use Controlqtime\Core\Entities\ContactEmployee;
+use Controlqtime\Core\Entities\LegalRepresentative;
 
 class AjaxLoadController extends Controller
 {
 	/**
-	 * @var CompanyRepoInterface
+	 * @var Company
 	 */
 	protected $company;
 	
 	/**
-	 * @var ContactEmployeeRepoInterface
+	 * @var ContactEmployee
 	 */
 	protected $contactEmployee;
 	
 	/**
-	 * @var EmployeeRepoInterface
+	 * @var Employee
 	 */
 	protected $employee;
 	
 	/**
-	 * @var LegalRepresentativeRepoInterface
+	 * @var LegalRepresentative
 	 */
 	protected $legalRepresentative;
 	
 	/**
-	 * @var ProvinceRepoInterface
+	 * @var Province
 	 */
 	protected $province;
 	
 	/**
-	 * @var RegionRepoInterface
+	 * @var Region
 	 */
 	protected $region;
 	
 	/**
-	 * @var TrademarkRepoInterface
+	 * @var Trademark
 	 */
 	protected $trademark;
 	
 	/**
-	 * @var VehicleRepoInterface
+	 * @var Vehicle
 	 */
 	protected $vehicle;
 	
 	/**
 	 * AjaxLoadController constructor.
 	 *
-	 * @param RegionRepoInterface $region
-	 * @param ProvinceRepoInterface $province
-	 * @param CompanyRepoInterface $company
-	 * @param LegalRepresentativeRepoInterface $legalRepresentative
-	 * @param TrademarkRepoInterface $trademark
-	 * @param EmployeeRepoInterface $employee
-	 * @param ContactEmployeeRepoInterface $contactEmployee
-	 * @param VehicleRepoInterface $vehicle
+	 * @param Company             $company
+	 * @param ContactEmployee     $contactEmployee
+	 * @param Employee            $employee
+	 * @param LegalRepresentative $legalRepresentative
+	 * @param Province            $province
+	 * @param Region              $region
+	 * @param Trademark           $trademark
+	 * @param Vehicle             $vehicle
 	 */
-	public function __construct(RegionRepoInterface $region, ProvinceRepoInterface $province, CompanyRepoInterface $company, LegalRepresentativeRepoInterface $legalRepresentative, TrademarkRepoInterface $trademark, EmployeeRepoInterface $employee, ContactEmployeeRepoInterface $contactEmployee, VehicleRepoInterface $vehicle)
+	public function __construct(Company $company, ContactEmployee $contactEmployee, Employee $employee,
+		LegalRepresentative $legalRepresentative, Province $province, Region $region, Trademark $trademark,
+		Vehicle $vehicle)
 	{
 		$this->company             = $company;
 		$this->contactEmployee     = $contactEmployee;
@@ -108,7 +110,7 @@ class AjaxLoadController extends Controller
 	{
 		try
 		{
-			switch ($request->get('element'))
+			switch ( $request->get('element') )
 			{
 				case 'Company':
 					$this->company->whereFirst('email_company', $request->get('email'), ['email_company']);
@@ -128,8 +130,7 @@ class AjaxLoadController extends Controller
 			}
 			
 			return response()->json(['success' => true], 400);
-		}
-		catch(Exception $e)
+		} catch ( Exception $e )
 		{
 			return response()->json([
 				'success' => 'false',

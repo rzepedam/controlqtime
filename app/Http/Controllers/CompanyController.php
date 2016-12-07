@@ -6,18 +6,18 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Region;
+use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Province;
+use Controlqtime\Core\Entities\Nationality;
 use Controlqtime\Core\Entities\TypeCompany;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Http\Requests\CompanyRequest;
 use Controlqtime\Core\Entities\ActivateCompany;
-use Controlqtime\Core\Contracts\AddressRepoInterface;
-use Controlqtime\Core\Contracts\NationalityRepoInterface;
-use Controlqtime\Core\Contracts\LegalRepresentativeRepoInterface;
-use Controlqtime\Core\Contracts\DetailAddressCompanyRepoInterface;
-use Controlqtime\Core\Contracts\DetailAddressLegalEmployeeRepoInterface;
+use Controlqtime\Core\Entities\LegalRepresentative;
+use Controlqtime\Core\Entities\DetailAddressCompany;
+use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
 
 class CompanyController extends Controller
 {
@@ -27,7 +27,7 @@ class CompanyController extends Controller
 	protected $activateCompany;
 	
 	/**
-	 * @var AddressRepoInterface
+	 * @var Address
 	 */
 	protected $address;
 	
@@ -42,22 +42,22 @@ class CompanyController extends Controller
 	protected $company;
 	
 	/**
-	 * @var DetailAddressCompanyRepoInterface
+	 * @var DetailAddressCompany
 	 */
 	protected $detailAddressCompany;
 	
 	/**
-	 * @var DetailAddressLegalEmployeeRepoInterface
+	 * @var DetailAddressLegalEmployee
 	 */
 	protected $detailAddressLegal;
 	
 	/**
-	 * @var LegalRepresentativeRepoInterface
+	 * @var LegalRepresentative
 	 */
 	protected $legalRepresentative;
 	
 	/**
-	 * @var NationalityRepoInterface
+	 * @var Nationality
 	 */
 	protected $nationality;
 	
@@ -80,22 +80,22 @@ class CompanyController extends Controller
 	/**
 	 * CompanyController constructor.
 	 *
-	 * @param ActivateCompany                         $activateCompany
-	 * @param AddressRepoInterface                    $address
-	 * @param Commune                                 $commune
-	 * @param Company                                 $company
-	 * @param DetailAddressCompanyRepoInterface       $detailAddressCompany
-	 * @param DetailAddressLegalEmployeeRepoInterface $detailAddressLegal
-	 * @param LegalRepresentativeRepoInterface        $legalRepresentative
-	 * @param NationalityRepoInterface                $nationality
-	 * @param Province                                $province
-	 * @param Region                                  $region
-	 * @param TypeCompany                             $typeCompany
+	 * @param ActivateCompany            $activateCompany
+	 * @param Address                    $address
+	 * @param Commune                    $commune
+	 * @param Company                    $company
+	 * @param DetailAddressCompany       $detailAddressCompany
+	 * @param DetailAddressLegalEmployee $detailAddressLegal
+	 * @param LegalRepresentative        $legalRepresentative
+	 * @param Nationality                $nationality
+	 * @param Province                   $province
+	 * @param Region                     $region
+	 * @param TypeCompany                $typeCompany
 	 */
-	public function __construct(ActivateCompany $activateCompany, AddressRepoInterface $address,
-		Commune $commune, Company $company, DetailAddressCompanyRepoInterface $detailAddressCompany,
-		DetailAddressLegalEmployeeRepoInterface $detailAddressLegal,
-		LegalRepresentativeRepoInterface $legalRepresentative, NationalityRepoInterface $nationality,
+	public function __construct(ActivateCompany $activateCompany, Address $address,
+		Commune $commune, Company $company, DetailAddressCompany $detailAddressCompany,
+		DetailAddressLegalEmployee $detailAddressLegal,
+		LegalRepresentative $legalRepresentative, Nationality $nationality,
 		Province $province, Region $region, TypeCompany $typeCompany)
 	{
 		$this->activateCompany      = $activateCompany;

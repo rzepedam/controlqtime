@@ -177,7 +177,6 @@ return [
 		Collective\Html\HtmlServiceProvider::class,
 		Jenssegers\Date\DateServiceProvider::class,
 		Barryvdh\Debugbar\ServiceProvider::class,
-		Controlqtime\Providers\BackendServiceProvider::class,
 		Barryvdh\Snappy\ServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
 		Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,

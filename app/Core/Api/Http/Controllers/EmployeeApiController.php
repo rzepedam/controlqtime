@@ -3,23 +3,23 @@
 namespace Controlqtime\Core\Api\Http\Controllers;
 
 use Exception;
+use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Http\Controllers\Controller;
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
 use Controlqtime\Core\Api\Http\Request\EmployeeApiRequest;
 
 class EmployeeApiController extends Controller
 {
 	/**
-	 * @var EmployeeRepoInterface
+	 * @var Employee
 	 */
 	protected $employee;
 	
 	/**
 	 * EmployeeApiController constructor.
 	 *
-	 * @param EmployeeRepoInterface $employee
+	 * @param Employee $employee
 	 */
-	public function __construct(EmployeeRepoInterface $employee)
+	public function __construct(Employee $employee)
 	{
 		$this->employee = $employee;
 	}

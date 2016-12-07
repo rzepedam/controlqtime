@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('title_header') Editar Licencia Profesional: <span class="text-primary">{{ $type_professional_license->id }}</span> @stop
+@section('title_header') Editar Licencia Profesional: <span class="text-primary">{{ $typeProfessionalLicense->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($type_professional_license, array('route' => array('type-professional-licenses.update', $type_professional_license), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($typeProfessionalLicense, array('route' => array('type-professional-licenses.update', $typeProfessionalLicense), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'typeProfessionalLicense', ['id' => 'entity'])  }}
             <div class="panel-body">

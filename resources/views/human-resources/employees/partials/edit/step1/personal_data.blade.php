@@ -37,11 +37,11 @@
     </div>
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('nationality_id', 'Nacionalidad', ['class' => 'control-label']) }}
-        {{ Form::select('nationality_id', $countries, null, ['class' => 'form-control']) }}
+        {{ Form::select('nationality_id', $nationalities, null, ['class' => 'form-control']) }}
     </div>
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('gender_id', 'Sexo', ['class' => 'control-label']) }}
-        {{ Form::select('gender_id', $genders, null, ['class' => 'form-control']) }}
+        {{ Form::select('gender_id', Config::get('enums.genders'), null, ['class' => 'form-control']) }}
     </div>
 </div>
 

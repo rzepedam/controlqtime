@@ -2,50 +2,41 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Weight;
+use Controlqtime\Core\Entities\TypeVehicle;
+use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Http\Requests\TypeVehicleRequest;
-use Controlqtime\Core\Contracts\WeightRepoInterface;
-use Controlqtime\Core\Contracts\EngineCubicRepoInterface;
-use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
 
 class TypeVehicleController extends Controller
 {
 	/**
-	 * @var EngineCubicRepoInterface
+	 * @var EngineCubic
 	 */
-	protected $engine_cubic;
+	protected $engineCubic;
 	
 	/**
-	 * @var TypeVehicleRepoInterface
+	 * @var TypeVehicle
 	 */
-	protected $type_vehicle;
+	protected $typeVehicle;
 	
 	/**
-	 * @var WeightRepoInterface
+	 * @var Weight
 	 */
 	protected $weight;
 	
 	/**
 	 * TypeVehicleController constructor.
 	 *
-	 * @param TypeVehicleRepoInterface $type_vehicle
-	 * @param WeightRepoInterface $weight
-	 * @param EngineCubicRepoInterface $engine_cubic
+	 * @param EngineCubic $engineCubic
+	 * @param TypeVehicle $typeVehicle
+	 * @param Weight      $weight
 	 */
-	public function __construct(TypeVehicleRepoInterface $type_vehicle, WeightRepoInterface $weight, EngineCubicRepoInterface $engine_cubic)
+	public function __construct(EngineCubic $engineCubic, TypeVehicle $typeVehicle, Weight $weight)
 	{
-		$this->engine_cubic = $engine_cubic;
-		$this->type_vehicle = $type_vehicle;
-		$this->weight       = $weight;
-	}
-	
-	/**
-	 * @return mixed for Bootstrap-Table
-	 */
-	public function getTypeVehicles()
-	{
-		$type_vehicles = $this->type_vehicle->all(['engineCubic', 'weight']);
-		
-		return $type_vehicles;
+		$this->engineCubic = $engineCubic;
+		$this->typeVehicle = $typeVehicle;
+		$this->weight      = $weight;
 	}
 	
 	/**
@@ -57,14 +48,24 @@ class TypeVehicleController extends Controller
 	}
 	
 	/**
+	 * @return mixed for Bootstrap-Table
+	 */
+	public function getTypeVehicles()
+	{
+		$typeVehicles = $this->typeVehicle->with(['engineCubic', 'weight'])->get();
+		
+		return $typeVehicles;
+	}
+	
+	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function create()
 	{
-		$engine_cubics = $this->engine_cubic->lists('acr', 'id');
-		$weights       = $this->weight->lists('acr', 'id');
+		$engineCubics = $this->engineCubic->pluck('acr', 'id');
+		$weights      = $this->weight->pluck('acr', 'id');
 		
-		return view('maintainers.type-vehicles.create', compact('engine_cubics', 'weights'));
+		return view('maintainers.type-vehicles.create', compact('engineCubics', 'weights'));
 	}
 	
 	/**
@@ -74,11 +75,9 @@ class TypeVehicleController extends Controller
 	 */
 	public function store(TypeVehicleRequest $request)
 	{
-		$typeVehicle = $this->type_vehicle->onlyTrashed('name', $request->get('name'));
-		
-		if ( ! $typeVehicle )
+		if ( ! $this->restore($request) )
 		{
-			$this->type_vehicle->create($request->all());
+			$this->typeVehicle->create($request->all());
 		}
 		
 		return response()->json([
@@ -88,35 +87,60 @@ class TypeVehicleController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$typeVehicle = $this->typeVehicle->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $typeVehicle->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$engine_cubics = $this->engine_cubic->lists('acr', 'id');
-		$type_vehicle  = $this->type_vehicle->find($id);
-		$weights       = $this->weight->lists('acr', 'id');
+		$engineCubics = $this->engineCubic->pluck('acr', 'id');
+		$typeVehicle  = $this->typeVehicle->findOrFail($id);
+		$weights      = $this->weight->pluck('acr', 'id');
 		
 		return view('maintainers.type-vehicles.edit', compact(
-			'engine_cubics', 'type_vehicle', 'weights'
+			'engineCubics', 'typeVehicle', 'weights'
 		));
 	}
 	
 	/**
 	 * @param TypeVehicleRequest $request
-	 * @param $id
+	 * @param                    $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(TypeVehicleRequest $request, $id)
 	{
-		$this->type_vehicle->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-vehicles'
-		]);
+		try
+		{
+			$this->typeVehicle->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/type-vehicles'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -126,7 +150,7 @@ class TypeVehicleController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->type_vehicle->delete($id);
+		$this->typeVehicle->destroy($id);
 		
 		return redirect()->route('type-vehicles.index');
 	}

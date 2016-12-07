@@ -4,11 +4,12 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Controlqtime\Core\Traits\WhereMethodsTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Vehicle extends Eloquent
 {
-	use SoftDeletes;
+	use SoftDeletes, WhereMethodsTrait;
 	
 	/**
 	 * @var array

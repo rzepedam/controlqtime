@@ -2,59 +2,51 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
 use Illuminate\Support\Facades\DB;
-use Controlqtime\Core\Contracts\VehicleRepoInterface;
+use Controlqtime\Core\Entities\Vehicle;
+use Controlqtime\Core\Entities\CheckVehicleForm;
+use Controlqtime\Core\Entities\StatePieceVehicle;
+use Controlqtime\Core\Entities\MasterFormPieceVehicle;
 use Controlqtime\Http\Requests\CheckVehicleFormRequest;
-use Controlqtime\Core\Contracts\CheckVehicleFormRepoInterface;
-use Controlqtime\Core\Contracts\StatePieceVehicleRepoInterface;
-use Controlqtime\Core\Contracts\MasterFormPieceVehicleRepoInterface;
 
 class CheckVehicleFormController extends Controller
 {
 	/**
-	 * @var CheckVehicleFormRepoInterface
+	 * @var CheckVehicleForm
 	 */
-	protected $check_vehicle_form;
+	protected $checkVehicleForm;
 	
 	/**
-	 * @var MasterFormPieceVehicleRepoInterface
+	 * @var MasterFormPieceVehicle
 	 */
-	protected $master_form_piece_vehicle;
+	protected $masterFormPieceVehicle;
 	
 	/**
-	 * @var StatePieceVehicleRepoInterface
+	 * @var StatePieceVehicle
 	 */
-	protected $state_piece_vehicle;
+	protected $statePieceVehicle;
 	
 	/**
-	 * @var VehicleRepoInterface
+	 * @var Vehicle
 	 */
 	protected $vehicle;
 	
 	/**
 	 * CheckVehicleFormController constructor.
 	 *
-	 * @param CheckVehicleFormRepoInterface $check_vehicle_form
-	 * @param MasterFormPieceVehicleRepoInterface $master_form_piece_vehicle
-	 * @param StatePieceVehicleRepoInterface $state_piece_vehicle
-	 * @param VehicleRepoInterface $vehicle
+	 * @param CheckVehicleForm       $checkVehicleForm
+	 * @param MasterFormPieceVehicle $masterFormPieceVehicle
+	 * @param StatePieceVehicle      $statePieceVehicle
+	 * @param Vehicle                $vehicle
 	 */
-	public function __construct(CheckVehicleFormRepoInterface $check_vehicle_form, MasterFormPieceVehicleRepoInterface $master_form_piece_vehicle, StatePieceVehicleRepoInterface $state_piece_vehicle, VehicleRepoInterface $vehicle)
+	public function __construct(CheckVehicleForm $checkVehicleForm, MasterFormPieceVehicle $masterFormPieceVehicle,
+		StatePieceVehicle $statePieceVehicle, Vehicle $vehicle)
 	{
-		$this->check_vehicle_form        = $check_vehicle_form;
-		$this->master_form_piece_vehicle = $master_form_piece_vehicle;
-		$this->state_piece_vehicle       = $state_piece_vehicle;
-		$this->vehicle                   = $vehicle;
-	}
-	
-	/**
-	 * @return mixed for Bootstrap-Table
-	 */
-	public function getCheckVehicleForms()
-	{
-		$checkVehicleForms = $this->check_vehicle_form->all(['vehicle', 'user.employee']);
-		
-		return $checkVehicleForms;
+		$this->checkVehicleForm       = $checkVehicleForm;
+		$this->masterFormPieceVehicle = $masterFormPieceVehicle;
+		$this->statePieceVehicle      = $statePieceVehicle;
+		$this->vehicle                = $vehicle;
 	}
 	
 	/**
@@ -68,14 +60,24 @@ class CheckVehicleFormController extends Controller
 	}
 	
 	/**
+	 * @return mixed for Bootstrap-Table
+	 */
+	public function getCheckVehicleForms()
+	{
+		$checkVehicleForms = $this->checkVehicleForm->with(['vehicle', 'user.employee'])->get();
+		
+		return $checkVehicleForms;
+	}
+	
+	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create()
 	{
-		$masterFormPieceVehicle = $this->master_form_piece_vehicle->find(1)->pieceVehicles;
-		$statePieceVehicles     = $this->state_piece_vehicle->all();
+		$masterFormPieceVehicle = $this->masterFormPieceVehicle->findOrFail(1)->pieceVehicles;
+		$statePieceVehicles     = $this->statePieceVehicle->all();
 		$vehicles               = $this->vehicle->whereLists('state', 'enable', 'patent');
 		
 		return view('operations.check-vehicle-forms.create', compact(
@@ -91,16 +93,16 @@ class CheckVehicleFormController extends Controller
 	public function store(CheckVehicleFormRequest $request)
 	{
 		$request->request->add(['user_id' => auth()->user()->id]);
-		$request->request->add(['master_form_piece_vehicle_id' => 1]);
+		$request->request->add(['masterFormPieceVehicle_id' => 1]);
 		DB::beginTransaction();
 		
 		try
 		{
-			$checkVehicleForm = $this->check_vehicle_form->create($request->all());
-			$checkVehicleForm->statePieceVehicles()->attach($request->get('state_piece_vehicle_id'));
+			$checkVehicleForm = $this->checkVehicleForm->create($request->all());
+			$checkVehicleForm->statePieceVehicles()->attach($request->get('statePieceVehicle_id'));
 			
 			DB::commit();
-		} catch (Exception $e)
+		} catch ( Exception $e )
 		{
 			DB::rollback();
 		}
@@ -120,10 +122,10 @@ class CheckVehicleFormController extends Controller
 	 */
 	public function show($id)
 	{
-		$checkVehicleForm = $this->check_vehicle_form->find($id, [
+		$checkVehicleForm = $this->checkVehicleForm->with([
 			'masterFormPieceVehicle.pieceVehicles', 'vehicle.modelVehicle.trademark',
 			'user.employee', 'statePieceVehicles'
-		]);
+		])->findOrFail($id);
 		
 		return view('operations.check-vehicle-forms.show', compact('checkVehicleForm'));
 	}
@@ -137,9 +139,9 @@ class CheckVehicleFormController extends Controller
 	 */
 	public function edit($id)
 	{
-		$masterFormPieceVehicle = $this->master_form_piece_vehicle->find(1)->pieceVehicles;
-		$checkVehicleForm       = $this->check_vehicle_form->find($id);
-		$statePieceVehicles     = $this->state_piece_vehicle->all();
+		$masterFormPieceVehicle = $this->masterFormPieceVehicle->findOrFail(1)->pieceVehicles;
+		$checkVehicleForm       = $this->checkVehicleForm->findOrFail($id);
+		$statePieceVehicles     = $this->statePieceVehicle->all();
 		$vehicles               = $this->vehicle->whereLists('state', 'enable', 'patent');
 		
 		return view('operations.check-vehicle-forms.edit', compact(
@@ -149,7 +151,7 @@ class CheckVehicleFormController extends Controller
 	
 	/**
 	 * @param CheckVehicleFormRequest $request
-	 * @param $id
+	 * @param                         $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
@@ -161,15 +163,15 @@ class CheckVehicleFormController extends Controller
 		
 		try
 		{
-			$checkVehicleForm = $this->check_vehicle_form->update($request->all(), $id);
+			$checkVehicleForm = $this->checkVehicleForm->findOrFail($id)->fill($request->all())->saveOrFail();
 			$checkVehicleForm->statePieceVehicles()->sync(
-				$request->get('state_piece_vehicle_id'), [
+				$request->get('statePieceVehicle_id'), [
 					'piece_vehicle_id' => $request->get('piece_vehicle_id')
 				]
 			);
 			
 			DB::commit();
-		} catch (Exception $e)
+		} catch ( Exception $e )
 		{
 			DB::rollback();
 		}

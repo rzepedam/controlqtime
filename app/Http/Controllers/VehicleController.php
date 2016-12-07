@@ -6,24 +6,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Core\Entities\Company;
+use Controlqtime\Core\Entities\Vehicle;
 use Controlqtime\Core\Entities\Trademark;
+use Controlqtime\Core\Entities\DetailBus;
+use Controlqtime\Core\Entities\TypeVehicle;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Core\Entities\ModelVehicle;
+use Controlqtime\Core\Entities\StateVehicle;
+use Controlqtime\Core\Entities\DetailVehicle;
 use Controlqtime\Http\Requests\VehicleRequest;
-use Controlqtime\Core\Contracts\VehicleRepoInterface;
-use Controlqtime\Core\Contracts\ActivateVehicleInterface;
-use Controlqtime\Core\Contracts\DetailBusesRepoInterface;
-use Controlqtime\Core\Contracts\TypeVehicleRepoInterface;
-use Controlqtime\Core\Contracts\StateVehicleRepoInterface;
-use Controlqtime\Core\Contracts\DetailVehicleRepoInterface;
-use Controlqtime\Core\Contracts\DateDocumentationVehicleRepoInterface;
+use Controlqtime\Core\Entities\ActivateVehicle;
+use Controlqtime\Core\Entities\DateDocumentationVehicle;
 
 class VehicleController extends Controller
 {
 	/**
-	 * @var ActivateVehicleInterface
+	 * @var ActivateVehicle
 	 */
-	protected $activate_vehicle;
+	protected $activateVehicle;
 	
 	/**
 	 * @var Company
@@ -31,17 +31,17 @@ class VehicleController extends Controller
 	protected $company;
 	
 	/**
-	 * @var DateDocumentationVehicleRepoInterface
+	 * @var DateDocumentationVehicle
 	 */
 	protected $dateDocumentationVehicle;
 	
 	/**
-	 * @var DetailBusesRepoInterface
+	 * @var DetailBus
 	 */
 	protected $detailBus;
 	
 	/**
-	 * @var DetailVehicleRepoInterface
+	 * @var DetailVehicle
 	 */
 	protected $detailVehicle;
 	
@@ -53,7 +53,7 @@ class VehicleController extends Controller
 	/**
 	 * @var ModelVehicle
 	 */
-	protected $model_vehicle;
+	protected $modelVehicle;
 	
 	/**
 	 * @var Trademark
@@ -61,51 +61,51 @@ class VehicleController extends Controller
 	protected $trademark;
 	
 	/**
-	 * @var TypeVehicleRepoInterface
+	 * @var TypeVehicle
 	 */
 	protected $typeVehicle;
 	
 	/**
-	 * @var StateVehicleRepoInterface
+	 * @var StateVehicle
 	 */
-	protected $state_vehicle;
+	protected $stateVehicle;
 	
 	/**
-	 * @var VehicleRepoInterface
+	 * @var Vehicle
 	 */
 	protected $vehicle;
 	
 	/**
 	 * VehicleController constructor.
 	 *
-	 * @param ActivateVehicleInterface              $activate_vehicle
-	 * @param Company                               $company
-	 * @param Fuel                                  $fuel
-	 * @param ModelVehicle                          $model_vehicle
-	 * @param Trademark                             $trademark
-	 * @param TypeVehicleRepoInterface              $typeVehicle
-	 * @param VehicleRepoInterface                  $vehicle
-	 * @param StateVehicleRepoInterface             $state_vehicle
-	 * @param DetailVehicleRepoInterface            $detailVehicle
-	 * @param DateDocumentationVehicleRepoInterface $dateDocumentationVehicle
-	 * @param DetailBusesRepoInterface              $detailBus
+	 * @param ActivateVehicle          $activateVehicle
+	 * @param Company                  $company
+	 * @param DateDocumentationVehicle $dateDocumentationVehicle
+	 * @param DetailBus                $detailBus
+	 * @param DetailVehicle            $detailVehicle
+	 * @param Fuel                     $fuel
+	 * @param ModelVehicle             $modelVehicle
+	 * @param StateVehicle             $stateVehicle
+	 * @param Trademark                $trademark
+	 * @param TypeVehicle              $typeVehicle
+	 * @param Vehicle                  $vehicle
 	 */
-	public function __construct(ActivateVehicleInterface $activate_vehicle, Company $company, Fuel $fuel,
-		ModelVehicle $model_vehicle, Trademark $trademark, TypeVehicleRepoInterface $typeVehicle,
-		VehicleRepoInterface $vehicle, StateVehicleRepoInterface $state_vehicle,
-		DetailVehicleRepoInterface $detailVehicle, DateDocumentationVehicleRepoInterface $dateDocumentationVehicle,
-		DetailBusesRepoInterface $detailBus)
+	public function __construct(ActivateVehicle $activateVehicle, Company $company,
+		DateDocumentationVehicle $dateDocumentationVehicle, DetailBus $detailBus,
+		DetailVehicle $detailVehicle, Fuel $fuel, ModelVehicle $modelVehicle,
+		StateVehicle $stateVehicle, Trademark $trademark, TypeVehicle $typeVehicle,
+		Vehicle $vehicle)
 	{
-		$this->activate_vehicle         = $activate_vehicle;
+		$this->activateVehicle          = $activateVehicle;
 		$this->company                  = $company;
 		$this->dateDocumentationVehicle = $dateDocumentationVehicle;
-		$this->detailBus               = $detailBus;
+		$this->detailBus                = $detailBus;
 		$this->detailVehicle            = $detailVehicle;
 		$this->fuel                     = $fuel;
-		$this->model_vehicle            = $model_vehicle;
+		$this->modelVehicle             = $modelVehicle;
 		$this->trademark                = $trademark;
-		$this->typeVehicle             = $typeVehicle;
-		$this->state_vehicle            = $state_vehicle;
+		$this->typeVehicle              = $typeVehicle;
+		$this->stateVehicle             = $stateVehicle;
 		$this->vehicle                  = $vehicle;
 	}
 	
@@ -132,15 +132,15 @@ class VehicleController extends Controller
 	 */
 	public function create()
 	{
-		$companies      = $this->company->whereLists('state', 'enable', 'firm_name');
-		$fuels          = $this->fuel->lists('name', 'id');
-		$model_vehicles = $this->model_vehicle->lists('name', 'id');
-		$state_vehicles = $this->state_vehicle->lists('name', 'id');
-		$trademarks     = $this->trademark->lists('name', 'id');
+		$companies     = $this->company->whereLists('state', 'enable', 'firm_name');
+		$fuels         = $this->fuel->lists('name', 'id');
+		$modelVehicles = $this->modelVehicle->lists('name', 'id');
+		$stateVehicles = $this->stateVehicle->lists('name', 'id');
+		$trademarks    = $this->trademark->lists('name', 'id');
 		$typeVehicles  = $this->typeVehicle->lists('name', 'id');
 		
 		return view('operations.vehicles.create', compact(
-			'trademarks', 'model_vehicles', 'typeVehicles', 'fuels', 'companies', 'state_vehicles'
+			'trademarks', 'modelVehicles', 'typeVehicles', 'fuels', 'companies', 'stateVehicles'
 		));
 	}
 	
@@ -159,7 +159,7 @@ class VehicleController extends Controller
 			$vehicle       = $this->vehicle->create($request->all());
 			$detailVehicle = $vehicle->detailVehicle()->create($request->all());
 			
-			if ($request->get('typeVehicle_id') == 2)
+			if ( $request->get('typeVehicle_id') == 2 )
 			{
 				$detailVehicle->detailBus()->create($request->all());
 			}
@@ -167,7 +167,7 @@ class VehicleController extends Controller
 			$vehicle->dateDocumentationVehicle()->create($request->all());
 			
 			DB::commit();
-		} catch (Exception $e)
+		} catch ( Exception $e )
 		{
 			DB::rollback();
 		}
@@ -186,22 +186,22 @@ class VehicleController extends Controller
 	 */
 	public function edit($id)
 	{
-		$vehicle        = $this->vehicle->find($id, ['modelVehicle.trademark']);
-		$trademarks     = $this->trademark->lists('name', 'id');
-		$model_vehicles = $this->trademark->findModelVehicles($vehicle->modelVehicle->trademark->id);
+		$vehicle       = $this->vehicle->find($id, ['modelVehicle.trademark']);
+		$trademarks    = $this->trademark->lists('name', 'id');
+		$modelVehicles = $this->trademark->findModelVehicles($vehicle->modelVehicle->trademark->id);
 		$typeVehicles  = $this->typeVehicle->whereLists('id', $vehicle->typeVehicle_id, 'name');
-		$companies      = $this->company->whereLists('state', 'enable', 'firm_name');
-		$fuels          = $this->fuel->lists('name', 'id');
-		$state_vehicles = $this->state_vehicle->lists('name', 'id');
+		$companies     = $this->company->whereLists('state', 'enable', 'firm_name');
+		$fuels         = $this->fuel->lists('name', 'id');
+		$stateVehicles = $this->stateVehicle->lists('name', 'id');
 		
 		return view('operations.vehicles.edit', compact(
-			'vehicle', 'typeVehicles', 'trademarks', 'model_vehicles', 'companies', 'fuels', 'state_vehicles'
+			'vehicle', 'typeVehicles', 'trademarks', 'modelVehicles', 'companies', 'fuels', 'stateVehicles'
 		));
 	}
 	
 	/**
 	 * @param VehicleRequest $request
-	 * @param $id
+	 * @param                $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
@@ -214,7 +214,7 @@ class VehicleController extends Controller
 			$vehicle       = $this->vehicle->update($request->all(), $id);
 			$detailVehicle = $this->detailVehicle->update($request->all(), $vehicle->detailVehicle->id);
 			
-			if ($request->get('typeVehicle_id') == 2)
+			if ( $request->get('typeVehicle_id') == 2 )
 			{
 				$this->detailBus->update($request->all(), $detailVehicle->detailBus->id);
 			}
@@ -222,7 +222,7 @@ class VehicleController extends Controller
 			$this->dateDocumentationVehicle->update($request->all(), $vehicle->dateDocumentationVehicle->id);
 			
 			DB::commit();
-		} catch (Exception $e)
+		} catch ( Exception $e )
 		{
 			DB::rollback();
 		}
@@ -280,9 +280,9 @@ class VehicleController extends Controller
 	{
 		$save = new ImageFactory($request->get('vehicle_id'), 'vehicle/', $request->get('repo_id'), $request->get('type'), $request->file('file_data'), null, $request->get('subClass'));
 		
-		if ($save)
+		if ( $save )
 		{
-			$this->activate_vehicle->checkStateVehicle($request->get('vehicle_id'));
+			$this->activateVehicle->checkStateVehicle($request->get('vehicle_id'));
 			
 			return response()->json([
 				'success' => true
@@ -303,9 +303,9 @@ class VehicleController extends Controller
 	{
 		$destroy = new ImageFactory($request->get('key'), 'vehicle/', null, $request->get('type'), null, $request->get('path'));
 		
-		if ($destroy)
+		if ( $destroy )
 		{
-			$this->activate_vehicle->checkStateVehicle($request->get('id'));
+			$this->activateVehicle->checkStateVehicle($request->get('id'));
 			
 			return response()->json([
 				'success' => true

@@ -3,22 +3,20 @@
 namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Controlqtime\Core\Contracts\VehicleRepoInterface;
-use Controlqtime\Core\Contracts\ActivateVehicleInterface;
 
-class ActivateVehicle extends Eloquent implements ActivateVehicleInterface
+class ActivateVehicle extends Eloquent
 {
 	/**
-	 * @var VehicleRepoInterface
+	 * @var Vehicle
 	 */
 	protected $vehicle;
 	
 	/**
 	 * ActivateVehicle constructor.
 	 *
-	 * @param VehicleRepoInterface $vehicle
+	 * @param Vehicle $vehicle
 	 */
-	public function __construct(VehicleRepoInterface $vehicle)
+	public function __construct(Vehicle $vehicle)
 	{
 		$this->vehicle = $vehicle;
 	}
@@ -32,13 +30,13 @@ class ActivateVehicle extends Eloquent implements ActivateVehicleInterface
 	{
 		$vehicle = $this->vehicle->find($id);
 		
-		if ($vehicle->images_padron->isEmpty())
+		if ( $vehicle->images_padron->isEmpty() )
 			return $this->saveStateDisableVehicle($vehicle);
 		
-		if ($vehicle->images_obligatory_insurance->isEmpty())
+		if ( $vehicle->images_obligatory_insurance->isEmpty() )
 			return $this->saveStateDisableVehicle($vehicle);
 		
-		if ($vehicle->images_circulation_permit->isEmpty())
+		if ( $vehicle->images_circulation_permit->isEmpty() )
 			return $this->saveStateDisableVehicle($vehicle);
 		
 		return $this->saveStateEnableVehicle($vehicle);

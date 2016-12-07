@@ -5,44 +5,44 @@ namespace Controlqtime\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Entities\Exam;
+use Controlqtime\Core\Entities\User;
+use Controlqtime\Core\Entities\Study;
+use Controlqtime\Core\Entities\Degree;
+use Controlqtime\Core\Entities\Gender;
 use Controlqtime\Core\Entities\Region;
+use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Commune;
-use Controlqtime\Core\Entities\Country;
+use Controlqtime\Core\Entities\Disease;
 use Controlqtime\Core\Entities\Pension;
 use Illuminate\Support\Facades\Session;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\TypeExam;
+use Controlqtime\Core\Entities\Disability;
+use Controlqtime\Core\Entities\Speciality;
 use Controlqtime\Core\Entities\Institution;
+use Controlqtime\Core\Entities\Nationality;
 use Controlqtime\Core\Entities\TypeDisease;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Core\Entities\Relationship;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
+use Controlqtime\Core\Entities\Certification;
 use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Entities\TypeDisability;
+use Controlqtime\Core\Entities\TypeSpeciality;
+use Controlqtime\Core\Entities\ContactEmployee;
 use Controlqtime\Core\Entities\ActivateEmployee;
 use Controlqtime\Core\Entities\TypeCertification;
-use Controlqtime\Core\Contracts\ExamRepoInterface;
-use Controlqtime\Core\Contracts\UserRepoInterface;
-use Controlqtime\Core\Contracts\StudyRepoInterface;
-use Controlqtime\Core\Contracts\DegreeRepoInterface;
-use Controlqtime\Core\Contracts\GenderRepoInterface;
-use Controlqtime\Core\Contracts\AddressRepoInterface;
-use Controlqtime\Core\Contracts\DiseaseRepoInterface;
+use Controlqtime\Core\Entities\FamilyRelationship;
+use Controlqtime\Core\Entities\ProfessionalLicense;
+use Controlqtime\Core\Entities\FamilyResponsability;
 use Controlqtime\Notifications\EmployeeWasRegistered;
-use Controlqtime\Core\Contracts\DisabilityRepoInterface;
-use Controlqtime\Core\Contracts\SpecialityRepoInterface;
-use Controlqtime\Core\Contracts\CertificationRepoInterface;
-use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
-use Controlqtime\Core\Contracts\ContactEmployeeRepoInterface;
-use Controlqtime\Core\Contracts\FamilyRelationshipRepoInterface;
-use Controlqtime\Core\Contracts\ProfessionalLicenseRepoInterface;
-use Controlqtime\Core\Contracts\FamilyResponsabilityRepoInterface;
-use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
-use Controlqtime\Core\Contracts\DetailAddressLegalEmployeeRepoInterface;
+use Controlqtime\Core\Entities\TypeProfessionalLicense;
+use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
 
 class EmployeeController extends Controller
 {
@@ -52,12 +52,12 @@ class EmployeeController extends Controller
 	protected $activateEmployee;
 	
 	/**
-	 * @var AddressRepoInterface
+	 * @var Address
 	 */
 	protected $address;
 	
 	/**
-	 * @var CertificationRepoInterface
+	 * @var Certification
 	 */
 	protected $certification;
 	
@@ -67,32 +67,27 @@ class EmployeeController extends Controller
 	protected $commune;
 	
 	/**
-	 * @var ContactEmployeeRepoInterface
+	 * @var ContactEmployee
 	 */
 	protected $contactEmployee;
 	
 	/**
-	 * @var Country
-	 */
-	protected $country;
-	
-	/**
-	 * @var DegreeRepoInterface
+	 * @var Degree
 	 */
 	protected $degree;
 	
 	/**
-	 * @var DetailAddressLegalEmployeeRepoInterface
+	 * @var DetailAddressLegalEmployee
 	 */
 	protected $detailAddress;
 	
 	/**
-	 * @var DisabilityRepoInterface
+	 * @var Disability
 	 */
 	protected $disability;
 	
 	/**
-	 * @var DiseaseRepoInterface
+	 * @var Disease
 	 */
 	protected $disease;
 	
@@ -102,17 +97,17 @@ class EmployeeController extends Controller
 	protected $employee;
 	
 	/**
-	 * @var ExamRepoInterface
+	 * @var Exam
 	 */
 	protected $exam;
 	
 	/**
-	 * @var FamilyRelationshipRepoInterface
+	 * @var FamilyRelationship
 	 */
 	protected $familyRelationship;
 	
 	/**
-	 * @var FamilyResponsabilityRepoInterface
+	 * @var FamilyResponsability
 	 */
 	protected $familyResponsability;
 	
@@ -122,7 +117,7 @@ class EmployeeController extends Controller
 	protected $forecast;
 	
 	/**
-	 * @var GenderRepoInterface
+	 * @var Gender
 	 */
 	protected $gender;
 	
@@ -137,12 +132,17 @@ class EmployeeController extends Controller
 	protected $maritalStatus;
 	
 	/**
+	 * @var Nationality
+	 */
+	protected $nationality;
+	
+	/**
 	 * @var Pension
 	 */
 	protected $pension;
 	
 	/**
-	 * @var ProfessionalLicenseRepoInterface
+	 * @var ProfessionalLicense
 	 */
 	protected $professionalLicense;
 	
@@ -162,12 +162,12 @@ class EmployeeController extends Controller
 	protected $relationship;
 	
 	/**
-	 * @var SpecialityRepoInterface
+	 * @var Speciality
 	 */
 	protected $speciality;
 	
 	/**
-	 * @var StudyRepoInterface
+	 * @var Study
 	 */
 	protected $study;
 	
@@ -192,76 +192,71 @@ class EmployeeController extends Controller
 	protected $typeExam;
 	
 	/**
-	 * @var TypeProfessionalLicenseRepoInterface
+	 * @var TypeProfessionalLicense
 	 */
 	protected $typeProfessionalLicense;
 	
 	/**
-	 * @var TypeSpecialityRepoInterface
+	 * @var TypeSpeciality
 	 */
 	protected $typeSpeciality;
 	
 	/**
-	 * @var UserRepoInterface
+	 * @var User
 	 */
 	protected $user;
 	
 	/**
 	 * EmployeeController constructor.
 	 *
-	 * @param ActivateEmployee                        $activateEmployee
-	 * @param AddressRepoInterface                    $address
-	 * @param CertificationRepoInterface              $certification
-	 * @param Commune                                 $commune
-	 * @param ContactEmployeeRepoInterface            $contactEmployee
-	 * @param Country                                 $country
-	 * @param DegreeRepoInterface                     $degree
-	 * @param DetailAddressLegalEmployeeRepoInterface $detailAddress
-	 * @param DisabilityRepoInterface                 $disability
-	 * @param DiseaseRepoInterface                    $disease
-	 * @param Employee                                $employee
-	 * @param ExamRepoInterface                       $exam
-	 * @param FamilyRelationshipRepoInterface         $familyRelationship
-	 * @param FamilyResponsabilityRepoInterface       $familyResponsability
-	 * @param Forecast                                $forecast
-	 * @param GenderRepoInterface                     $gender
-	 * @param Institution                             $institution
-	 * @param MaritalStatus                           $maritalStatus
-	 * @param Pension                                 $pension
-	 * @param ProfessionalLicenseRepoInterface        $professionalLicense
-	 * @param Province                                $province
-	 * @param Region                                  $region
-	 * @param Relationship                            $relationship
-	 * @param SpecialityRepoInterface                 $speciality
-	 * @param StudyRepoInterface                      $study
-	 * @param TypeCertification                       $typeCertification
-	 * @param TypeDisability                          $typeDisability
-	 * @param TypeDisease                             $typeDisease
-	 * @param TypeExam                                $typeExam
-	 * @param TypeProfessionalLicenseRepoInterface    $typeProfessionalLicense
-	 * @param TypeSpecialityRepoInterface             $typeSpeciality
-	 * @param UserRepoInterface                       $user
+	 * @param ActivateEmployee           $activateEmployee
+	 * @param Address                    $address
+	 * @param Certification              $certification
+	 * @param Commune                    $commune
+	 * @param ContactEmployee            $contactEmployee
+	 * @param Degree                     $degree
+	 * @param DetailAddressLegalEmployee $detailAddress
+	 * @param Disability                 $disability
+	 * @param Disease                    $disease
+	 * @param Employee                   $employee
+	 * @param Exam                       $exam
+	 * @param FamilyRelationship         $familyRelationship
+	 * @param FamilyResponsability       $familyResponsability
+	 * @param Forecast                   $forecast
+	 * @param Gender                     $gender
+	 * @param Institution                $institution
+	 * @param MaritalStatus              $maritalStatus
+	 * @param Nationality                $nationality
+	 * @param Pension                    $pension
+	 * @param ProfessionalLicense        $professionalLicense
+	 * @param Province                   $province
+	 * @param Region                     $region
+	 * @param Relationship               $relationship
+	 * @param Speciality                 $speciality
+	 * @param Study                      $study
+	 * @param TypeCertification          $typeCertification
+	 * @param TypeDisability             $typeDisability
+	 * @param TypeDisease                $typeDisease
+	 * @param TypeExam                   $typeExam
+	 * @param TypeProfessionalLicense    $typeProfessionalLicense
+	 * @param TypeSpeciality             $typeSpeciality
+	 * @param User                       $user
 	 */
-	public function __construct(ActivateEmployee $activateEmployee, AddressRepoInterface $address,
-		CertificationRepoInterface $certification, Commune $commune,
-		ContactEmployeeRepoInterface $contactEmployee, Country $country, DegreeRepoInterface $degree,
-		DetailAddressLegalEmployeeRepoInterface $detailAddress, DisabilityRepoInterface $disability,
-		DiseaseRepoInterface $disease, Employee $employee, ExamRepoInterface $exam,
-		FamilyRelationshipRepoInterface $familyRelationship, FamilyResponsabilityRepoInterface $familyResponsability,
-		Forecast $forecast, GenderRepoInterface $gender, Institution $institution, MaritalStatus $maritalStatus,
-		Pension $pension, ProfessionalLicenseRepoInterface $professionalLicense, Province $province,
-		Region $region, Relationship $relationship, SpecialityRepoInterface $speciality,
-		StudyRepoInterface $study, TypeCertification $typeCertification,
-		TypeDisability $typeDisability, TypeDisease $typeDisease,
-		TypeExam $typeExam, TypeProfessionalLicenseRepoInterface $typeProfessionalLicense,
-		TypeSpecialityRepoInterface $typeSpeciality, UserRepoInterface $user)
+	public function __construct(ActivateEmployee $activateEmployee, Address $address, Certification $certification,
+		Commune $commune, ContactEmployee $contactEmployee, Degree $degree, DetailAddressLegalEmployee $detailAddress,
+		Disability $disability, Disease $disease, Employee $employee, Exam $exam,
+		FamilyRelationship $familyRelationship, FamilyResponsability $familyResponsability, Forecast $forecast,
+		Gender $gender, Institution $institution, MaritalStatus $maritalStatus, Nationality $nationality,
+		Pension $pension, ProfessionalLicense $professionalLicense, Province $province, Region $region,
+		Relationship $relationship, Speciality $speciality, Study $study, TypeCertification $typeCertification,
+		TypeDisability $typeDisability, TypeDisease $typeDisease, TypeExam $typeExam,
+		TypeProfessionalLicense $typeProfessionalLicense, TypeSpeciality $typeSpeciality, User $user)
 	{
 		$this->activateEmployee        = $activateEmployee;
 		$this->address                 = $address;
 		$this->certification           = $certification;
 		$this->commune                 = $commune;
 		$this->contactEmployee         = $contactEmployee;
-		$this->country                 = $country;
 		$this->degree                  = $degree;
 		$this->detailAddress           = $detailAddress;
 		$this->disability              = $disability;
@@ -274,6 +269,7 @@ class EmployeeController extends Controller
 		$this->gender                  = $gender;
 		$this->institution             = $institution;
 		$this->maritalStatus           = $maritalStatus;
+		$this->nationality             = $nationality;
 		$this->pension                 = $pension;
 		$this->professionalLicense     = $professionalLicense;
 		$this->province                = $province;
@@ -295,7 +291,7 @@ class EmployeeController extends Controller
 	 */
 	public function getEmployees()
 	{
-		$employees = $this->employee->all(['nationality']);
+		$employees = $this->employee->with(['nationality'])->get();
 		
 		return $employees;
 	}
@@ -313,29 +309,28 @@ class EmployeeController extends Controller
 	 */
 	public function create()
 	{
-		$countries                = $this->country->lists('name', 'id');
-		$degrees                  = $this->degree->lists('name', 'id');
-		$employees                = $this->employee->lists('full_name', 'id');
-		$forecasts                = $this->forecast->lists('name', 'id');
-		$genders                  = $this->gender->lists('name', 'id');
-		$maritalStatuses          = $this->maritalStatus->lists('name', 'id');
-		$institutions             = $this->institution->lists('name', 'id');
-		$pensions                 = $this->pension->lists('name', 'id');
+		$nationalities            = $this->nationality->pluck('name', 'id');
+		$degrees                  = $this->degree->pluck('name', 'id');
+		$employees                = $this->employee->pluck('full_name', 'id');
+		$forecasts                = $this->forecast->pluck('name', 'id');
+		$maritalStatuses          = $this->maritalStatus->pluck('name', 'id');
+		$institutions             = $this->institution->pluck('name', 'id');
+		$pensions                 = $this->pension->pluck('name', 'id');
 		$regionsColl              = $this->region->all();
-		$provincesColl            = $this->region->find($regionsColl->first()->id)->provinces;
-		$communes                 = $this->province->findCommunes($provincesColl->first()->id);
+		$provincesColl            = $this->region->findOrFail($regionsColl->first()->id)->provinces;
+		$communes                 = $this->province->findOrFail($provincesColl->first()->id)->communes->pluck('name', 'id');
 		$regions                  = $regionsColl->pluck('name', 'id');
 		$provinces                = $provincesColl->pluck('name', 'id');
-		$relationships            = $this->relationship->lists('name', 'id');
-		$typeCertifications       = $this->typeCertification->lists('name', 'id');
-		$typeDisabilities         = $this->typeDisability->lists('name', 'id');
-		$typeDiseases             = $this->typeDisease->lists('name', 'id');
-		$typeExams                = $this->typeExam->lists('name', 'id');
-		$typeProfessionalLicenses = $this->typeProfessionalLicense->lists('name', 'id');
-		$typeSpecialities         = $this->typeSpeciality->lists('name', 'id');
+		$relationships            = $this->relationship->pluck('name', 'id');
+		$typeCertifications       = $this->typeCertification->pluck('name', 'id');
+		$typeDisabilities         = $this->typeDisability->pluck('name', 'id');
+		$typeDiseases             = $this->typeDisease->pluck('name', 'id');
+		$typeExams                = $this->typeExam->pluck('name', 'id');
+		$typeProfessionalLicenses = $this->typeProfessionalLicense->pluck('name', 'id');
+		$typeSpecialities         = $this->typeSpeciality->pluck('name', 'id');
 		
 		return view('human-resources.employees.create', compact(
-			'communes', 'countries', 'degrees', 'employees', 'forecasts', 'maritalStatuses',
+			'communes', 'nationalities', 'degrees', 'employees', 'forecasts', 'maritalStatuses',
 			'genders', 'institutions', 'pensions', 'provinces', 'regions', 'relationships',
 			'typeCertifications', 'typeDisabilities', 'typeDiseases', 'typeExams',
 			'typeProfessionalLicenses', 'typeSpecialities'
@@ -371,9 +366,9 @@ class EmployeeController extends Controller
 			$this->disease->createOrUpdateWithArray($request->all(), $employee);
 			$this->exam->createOrUpdateWithArray($request->all(), $employee);
 			$this->familyResponsability->createOrUpdateWithArray($request->all(), $employee);
-			
 			$user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionStoreEmployee();
+			
 			DB::commit();
 		} catch ( Exception $e )
 		{
@@ -468,35 +463,34 @@ class EmployeeController extends Controller
 	 */
 	public function edit($id)
 	{
-		$employee = $this->employee->find($id, [
+		$employee = $this->employee->with([
 			'address.commune.province.region', 'address.detailAddressLegalEmployee',
 			'studies.detailCollegeStudy', 'studies.detailSchoolStudy',
 			'studies.detailTechnicalStudy', 'studies.detailCollegeStudy.institution'
-		]);
+		])->findOrFail($id);
 		
-		$countries                = $this->country->lists('name', 'id');
-		$degrees                  = $this->degree->lists('name', 'id');
-		$employees                = $this->employee->lists('full_name', 'id');
-		$forecasts                = $this->forecast->lists('name', 'id');
-		$genders                  = $this->gender->lists('name', 'id');
-		$maritalStatuses          = $this->maritalStatus->lists('name', 'id');
-		$institutions             = $this->institution->lists('name', 'id');
-		$pensions                 = $this->pension->lists('name', 'id');
+		$nationalities            = $this->nationality->pluck('name', 'id');
+		$degrees                  = $this->degree->pluck('name', 'id');
+		$employees                = $this->employee->pluck('full_name', 'id');
+		$forecasts                = $this->forecast->pluck('name', 'id');
+		$maritalStatuses          = $this->maritalStatus->pluck('name', 'id');
+		$institutions             = $this->institution->pluck('name', 'id');
+		$pensions                 = $this->pension->pluck('name', 'id');
 		$regionsColl              = $this->region->all();
-		$provincesColl            = $this->region->find($employee->address->commune->province->region->id)->provinces;
-		$communes                 = $this->province->findCommunes($employee->address->commune->province->id);
+		$provincesColl            = $this->region->findOrFail($employee->address->commune->province->region->id)->provinces;
+		$communes                 = $this->province->findOrFail($id)->communes->pluck('name', 'id');
 		$regions                  = $regionsColl->pluck('name', 'id');
 		$provinces                = $provincesColl->pluck('name', 'id');
-		$relationships            = $this->relationship->lists('name', 'id');
-		$typeCertifications       = $this->typeCertification->lists('name', 'id');
-		$typeDisabilities         = $this->typeDisability->lists('name', 'id');
-		$typeDiseases             = $this->typeDisease->lists('name', 'id');
-		$typeExams                = $this->typeExam->lists('name', 'id');
-		$typeProfessionalLicenses = $this->typeProfessionalLicense->lists('name', 'id');
-		$typeSpecialities         = $this->typeSpeciality->lists('name', 'id');
+		$relationships            = $this->relationship->pluck('name', 'id');
+		$typeCertifications       = $this->typeCertification->pluck('name', 'id');
+		$typeDisabilities         = $this->typeDisability->pluck('name', 'id');
+		$typeDiseases             = $this->typeDisease->pluck('name', 'id');
+		$typeExams                = $this->typeExam->pluck('name', 'id');
+		$typeProfessionalLicenses = $this->typeProfessionalLicense->pluck('name', 'id');
+		$typeSpecialities         = $this->typeSpeciality->pluck('name', 'id');
 		
 		return view('human-resources.employees.edit', compact(
-			'employee', 'communes', 'countries', 'degrees', 'employees', 'genders',
+			'employee', 'communes', 'nationalities', 'degrees', 'employees', 'genders',
 			'maritalStatuses', 'forecasts', 'pensions', 'institutions', 'provinces', 'regions',
 			'relationships', 'typeCertifications', 'typeDisabilities', 'typeDiseases', 'typeExams',
 			'typeProfessionalLicenses', 'typeSpecialities'

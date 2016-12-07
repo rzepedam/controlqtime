@@ -11,6 +11,6 @@
     {{-- Unidad Medida Cilindraje Motor Form Select --}}
     <div class="col-md-3 form-group">
         {{ Form::label('engine_cubic_id', 'Un. Medida Cilindraje Motor', ['class' => 'control-label']) }}
-        {{ Form::select('engine_cubic_id', $engine_cubics, null, ['class' => 'form-control']) }}
+        {{ Form::select('engine_cubic_id', $engineCubics, null, ['class' => 'form-control']) }}
     </div>
 </div>

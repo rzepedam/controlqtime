@@ -3,10 +3,12 @@
 use Carbon\Carbon;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\City;
+use Controlqtime\Core\Entities\Degree;
 use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Core\Entities\User;
 use Controlqtime\Core\Entities\Route;
 use Controlqtime\Core\Entities\Region;
+use Controlqtime\Core\Entities\Weight;
 use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Company;
@@ -26,9 +28,11 @@ use Controlqtime\Core\Entities\LaborUnion;
 use Controlqtime\Core\Entities\Profession;
 use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Core\Entities\Institution;
+use Controlqtime\Core\Entities\Nationality;
 use Controlqtime\Core\Entities\Periodicity;
 use Controlqtime\Core\Entities\TypeCompany;
 use Controlqtime\Core\Entities\TypeDisease;
+use Controlqtime\Core\Entities\TypeVehicle;
 use Controlqtime\Core\Entities\ModelVehicle;
 use Controlqtime\Core\Entities\PieceVehicle;
 use Controlqtime\Core\Entities\Relationship;
@@ -36,6 +40,7 @@ use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Entities\TypeDisability;
+use Controlqtime\Core\Entities\TypeSpeciality;
 use Controlqtime\Core\Entities\TypeInstitution;
 use Controlqtime\Core\Entities\StatePieceVehicle;
 use Controlqtime\Core\Entities\TermAndObligatory;
@@ -43,6 +48,8 @@ use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Entities\MasterFormPieceVehicle;
+use Controlqtime\Core\Entities\TypeProfessionalLicense;
+use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
 
 $factory->define(AccessControlApi::class, function (Faker\Generator $faker)
 {
@@ -57,10 +64,11 @@ $factory->define(AccessControlApi::class, function (Faker\Generator $faker)
 $factory->define(Address::class, function (Faker\Generator $faker)
 {
 	return [
-		'addressable_id'   => factory(Employee::class)->create()->id,
+		'id'               => 1,
+		'addressable_id'   => 1,
 		'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 		'address'          => $faker->address,
-		'commune_id'       => rand(1, 53),
+		'commune_id'       => 1,
 	];
 });
 
@@ -121,6 +129,25 @@ $factory->define(DayTrip::class, function ()
 	];
 });
 
+$factory->define(Degree::class, function ()
+{
+	return [
+		'id'   => 1,
+		'name' => 'Título Profesional',
+	];
+});
+
+$factory->define(DetailAddressLegalEmployee::class, function ()
+{
+	return [
+		'id'         => 1,
+		'address_id' => 1,
+		'depto'      => '303',
+		'block'      => '',
+		'num_home'   => ''
+	];
+});
+
 $factory->define(Employee::class, function (Faker\Generator $faker)
 {
 	$maleSurname   = $faker->lastName;
@@ -152,8 +179,8 @@ $factory->define(EngineCubic::class, function ()
 {
 	return [
 		'id'         => 1,
-		'name'       => 'Tonelada',
-		'acr'        => 'ton',
+		'name'       => 'Caballos de fuerza',
+		'acr'        => 'hp',
 		'deleted_at' => null
 	];
 });
@@ -189,7 +216,7 @@ $factory->define(Institution::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'                  => 1,
-		'name'                => $faker->word,
+		'name'                => 'Universidad Católica de Chile',
 		'type_institution_id' => 1,
 		'deleted_at'          => null
 	];
@@ -223,7 +250,7 @@ $factory->define(MaritalStatus::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'         => 1,
-		'name'       => $faker->word,
+		'name'       => 'Soltero',
 		'deleted_at' => null
 	];
 });
@@ -255,6 +282,14 @@ $factory->define(Mutuality::class, function (Faker\Generator $faker)
 	];
 });
 
+$factory->define(Nationality::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'   => 1,
+		'name' => 'Chile',
+	];
+});
+
 $factory->define(NumHour::class, function (Faker\Generator $faker)
 {
 	return [
@@ -268,7 +303,7 @@ $factory->define(Pension::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'         => 1,
-		'name'       => $faker->word,
+		'name'       => 'Hábitat',
 		'deleted_at' => null
 	];
 });
@@ -330,7 +365,7 @@ $factory->define(Relationship::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'         => 1,
-		'name'       => $faker->word,
+		'name'       => 'Padre',
 		'deleted_at' => null
 	];
 });
@@ -444,8 +479,37 @@ $factory->define(TypeInstitution::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'         => 1,
-		'name'       => $faker->word,
+		'name'       => 'Universidad',
 		'deleted_at' => null
+	];
+});
+
+$factory->define(TypeProfessionalLicense::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Licencia B',
+		'deleted_at' => null
+	];
+});
+
+$factory->define(TypeSpeciality::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Muebles y terminaciones de la madera',
+		'deleted_at' => null
+	];
+});
+
+$factory->define(TypeVehicle::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'              => 1,
+		'name'            => 'Bus',
+		'engine_cubic_id' => 1,
+		'weight_id'       => 1,
+		'deleted_at'      => null
 	];
 });
 
@@ -455,5 +519,15 @@ $factory->define(User::class, function (Faker\Generator $faker)
 		'employee_id' => 1,
 		'email'       => $faker->email,
 		'password'    => bcrypt("$faker->password")
+	];
+});
+
+$factory->define(Weight::class, function (Faker\Generator $faker)
+{
+	return [
+		'id'         => 1,
+		'name'       => 'Kilógramo',
+		'acr'        => 'kg',
+		'deleted_at' => null
 	];
 });

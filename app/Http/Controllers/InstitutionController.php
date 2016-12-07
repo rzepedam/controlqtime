@@ -3,8 +3,8 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
-use Controlqtime\Core\Entities\TypeInstitution;
 use Controlqtime\Core\Entities\Institution;
+use Controlqtime\Core\Entities\TypeInstitution;
 use Controlqtime\Http\Requests\InstitutionRequest;
 
 class InstitutionController extends Controller

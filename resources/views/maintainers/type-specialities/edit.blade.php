@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('title_header') Editar Especialidad: <span class="text-primary">{{ $type_speciality->id }}</span> @stop
+@section('title_header') Editar Especialidad: <span class="text-primary">{{ $typeSpeciality->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
@@ -20,7 +20,7 @@
 
     <div class="panel">
 
-        {{ Form::model($type_speciality, array('route' => array('type-specialities.update', $type_speciality), 'method' => 'PUT', 'id' => 'form-submit')) }}
+        {{ Form::model($typeSpeciality, array('route' => array('type-specialities.update', $typeSpeciality), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             {{ Form::hidden('entity', 'typeSpeciality', ['id' => 'entity'])  }}
             <div class="panel-body">

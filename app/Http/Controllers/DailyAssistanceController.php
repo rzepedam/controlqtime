@@ -4,39 +4,39 @@ namespace Controlqtime\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Controlqtime\Core\Contracts\EmployeeRepoInterface;
-use Controlqtime\Core\Contracts\AccessControlRepoInterface;
-use Controlqtime\Core\Contracts\DailyAssistanceRepoInterface;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Api\Entities\AccessControlApi;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class DailyAssistanceController extends Controller
 {
 	/**
-	 * @var AccessControlRepoInterface
+	 * @var AccessControlApi
 	 */
-	protected $access_control;
+	protected $accessControl;
 	
 	/**
-	 * @var DailyAssistanceRepoInterface
+	 * @var DailyAssistanceApi
 	 */
-	protected $daily_assistance;
+	protected $dailyAssistance;
 	
 	/**
-	 * @var EmployeeRepoInterface
+	 * @var Employee
 	 */
 	protected $employee;
 	
 	/**
 	 * DailyAssistanceController constructor.
 	 *
-	 * @param AccessControlRepoInterface $access_control
-	 * @param DailyAssistanceRepoInterface $daily_assistance
-	 * @param EmployeeRepoInterface $employee
+	 * @param AccessControlApi   $accessControl
+	 * @param DailyAssistanceApi $dailyAssistance
+	 * @param Employee           $employee
 	 */
-	public function __construct(AccessControlRepoInterface $access_control, DailyAssistanceRepoInterface $daily_assistance, EmployeeRepoInterface $employee)
+	public function __construct(AccessControlApi $accessControl, DailyAssistanceApi $dailyAssistance, Employee $employee)
 	{
-		$this->access_control   = $access_control;
-		$this->daily_assistance = $daily_assistance;
-		$this->employee         = $employee;
+		$this->accessControl   = $accessControl;
+		$this->dailyAssistance = $dailyAssistance;
+		$this->employee        = $employee;
 	}
 	
 	/**
@@ -65,7 +65,7 @@ class DailyAssistanceController extends Controller
 		$date     = Carbon::parse($request->get('date'))->format('Y-m-d');
 		$employee = $request->get('employee');
 		
-		switch ($employee)
+		switch ( $employee )
 		{
 			case '*':
 				list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDate($date);
@@ -92,8 +92,8 @@ class DailyAssistanceController extends Controller
 	 */
 	private function getRecordPerDate($date)
 	{
-		$accessControls   = $this->access_control->whereDate('created_at', $date, ['employee']);
-		$dailyAssistances = $this->daily_assistance->whereDate('created_at', $date, ['employee']);
+		$accessControls   = $this->accessControl->whereDate('created_at', $date, ['employee']);
+		$dailyAssistances = $this->dailyAssistance->whereDate('created_at', $date, ['employee']);
 		$num_employees    = $accessControls->unique('rut');
 		$entry            = $accessControls->groupBy('rut')->transform(function ($item)
 		{
@@ -111,8 +111,8 @@ class DailyAssistanceController extends Controller
 	 */
 	private function getRecordPerDateAndEmployee($employee, $date)
 	{
-		$accessControls   = $this->access_control->whereDateAndWhereColumn('created_at', $date, 'employee_id', $employee, ['employee']);
-		$dailyAssistances = $this->daily_assistance->whereDateAndWhereColumn('created_at', $date, 'employee_id', $employee, ['employee']);
+		$accessControls   = $this->accessControl->whereDateAndWhereColumn('created_at', $date, 'employee_id', $employee, ['employee']);
+		$dailyAssistances = $this->dailyAssistance->whereDateAndWhereColumn('created_at', $date, 'employee_id', $employee, ['employee']);
 		$num_employees    = $accessControls->unique('rut');
 		$entry            = $accessControls->groupBy('rut')->transform(function ($item)
 		{

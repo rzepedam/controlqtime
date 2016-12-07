@@ -2,104 +2,133 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\TypeSpeciality;
 use Controlqtime\Http\Requests\TypeSpecialityRequest;
-use Controlqtime\Core\Contracts\TypeSpecialityRepoInterface;
 
 class TypeSpecialityController extends Controller
 {
-    /**
-     * @var TypeSpecialityRepoInterface
-     */
-    protected $type_speciality;
-
-    /**
-     * TypeSpecialityController constructor.
-     * @param TypeSpecialityRepoInterface $type_speciality
-     */
-    public function __construct(TypeSpecialityRepoInterface $type_speciality)
-    {
-        $this->type_speciality = $type_speciality;
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
-    {
-        return view('maintainers.type-specialities.index');
-    }
-
-    /**
-     * @return mixed for Bootstrap-Table
-     */
-    public function getTypeSpecialities()
-    {
-        $type_specialities = $this->type_speciality->all();
-
-        return $type_specialities;
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('maintainers.type-specialities.create');
-    }
-
-    /**
-     * @param TypeSpecialityRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function store(TypeSpecialityRequest $request)
-    {
-	    $typeSpeciality = $this->type_speciality->onlyTrashed('name', $request->get('name'));
+	/**
+	 * @var TypeSpeciality
+	 */
+	protected $typeSpeciality;
 	
-	    if (! $typeSpeciality)
-	    {
-		    $this->type_speciality->create($request->all());
-	    }
-
-        return response()->json([
-            'success' => true,
-            'url'     => '/maintainers/type-specialities'
-        ]);
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $type_speciality = $this->type_speciality->find($id);
-
-        return view('maintainers.type-specialities.edit', compact('type_speciality'));
-    }
-
-    /**
-     * @param TypeSpecialityRequest $request
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(TypeSpecialityRequest $request, $id)
-    {
-        $this->type_speciality->update($request->all(), $id);
-
-        return response()->json([
-            'success' => true,
-            'url'     => '/maintainers/type-specialities'
-        ]);
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy($id)
-    {
-        $this->type_speciality->delete($id);
-
-        return redirect()->route('type-specialities.index');
-    }
+	/**
+	 * TypeSpecialityController constructor.
+	 *
+	 * @param TypeSpeciality $typeSpeciality
+	 */
+	public function __construct(TypeSpeciality $typeSpeciality)
+	{
+		$this->typeSpeciality = $typeSpeciality;
+	}
+	
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
+	{
+		return view('maintainers.type-specialities.index');
+	}
+	
+	/**
+	 * @return mixed for Bootstrap-Table
+	 */
+	public function getTypeSpecialities()
+	{
+		$type_specialities = $this->typeSpeciality->all();
+		
+		return $type_specialities;
+	}
+	
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function create()
+	{
+		return view('maintainers.type-specialities.create');
+	}
+	
+	/**
+	 * @param TypeSpecialityRequest $request
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function store(TypeSpecialityRequest $request)
+	{
+		if ( ! $this->restore($request) )
+		{
+			$this->typeSpeciality->create($request->all());
+		}
+		
+		return response()->json([
+			'success' => true,
+			'url'     => '/maintainers/type-specialities'
+		]);
+	}
+	
+	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$typeSpeciality = $this->typeSpeciality->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $typeSpeciality->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+	
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function edit($id)
+	{
+		$typeSpeciality = $this->typeSpeciality->findOrFail($id);
+		
+		return view('maintainers.type-specialities.edit', compact('typeSpeciality'));
+	}
+	
+	/**
+	 * @param TypeSpecialityRequest $request
+	 * @param                       $id
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function update(TypeSpecialityRequest $request, $id)
+	{
+		try
+		{
+			$this->typeSpeciality->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/type-specialities'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
+	}
+	
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function destroy($id)
+	{
+		$this->typeSpeciality->destroy($id);
+		
+		return redirect()->route('type-specialities.index');
+	}
 }

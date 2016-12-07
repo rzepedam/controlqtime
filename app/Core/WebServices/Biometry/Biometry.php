@@ -4,9 +4,8 @@ namespace Controlqtime\Core\WebServices\Biometry;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Config;
-use Controlqtime\Core\Contracts\BiometryInterface;
 
-class Biometry implements BiometryInterface
+class Biometry
 {
 	/**
 	 * @var Client

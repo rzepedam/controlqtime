@@ -2,24 +2,25 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Controlqtime\Http\Requests\TypeProfessionalLicenseRequest;
-use Controlqtime\Core\Contracts\TypeProfessionalLicenseRepoInterface;
 
 class TypeProfessionalLicenseController extends Controller
 {
 	/**
-	 * @var TypeProfessionalLicenseRepoInterface
+	 * @var TypeProfessionalLicense
 	 */
-	protected $type_professional_license;
+	protected $typeProfessionalLicense;
 	
 	/**
 	 * TypeProfessionalLicenseController constructor.
 	 *
-	 * @param TypeProfessionalLicenseRepoInterface $type_professional_license
+	 * @param TypeProfessionalLicense $typeProfessionalLicense
 	 */
-	public function __construct(TypeProfessionalLicenseRepoInterface $type_professional_license)
+	public function __construct(TypeProfessionalLicense $typeProfessionalLicense)
 	{
-		$this->type_professional_license = $type_professional_license;
+		$this->typeProfessionalLicense = $typeProfessionalLicense;
 	}
 	
 	/**
@@ -35,9 +36,9 @@ class TypeProfessionalLicenseController extends Controller
 	 */
 	public function getTypeProfessionalLicenses()
 	{
-		$type_professional_licenses = $this->type_professional_license->all();
+		$typeProfessionalLicenses = $this->typeProfessionalLicense->all();
 		
-		return $type_professional_licenses;
+		return $typeProfessionalLicenses;
 	}
 	
 	/**
@@ -55,11 +56,9 @@ class TypeProfessionalLicenseController extends Controller
 	 */
 	public function store(TypeProfessionalLicenseRequest $request)
 	{
-		$typeProfessionalLicense = $this->type_professional_license->onlyTrashed('name', $request->get('name'));
-		
-		if (! $typeProfessionalLicense)
+		if ( ! $this->restore($request) )
 		{
-			$this->type_professional_license->create($request->all());
+			$this->typeProfessionalLicense->create($request->all());
 		}
 		
 		return response()->json([
@@ -69,31 +68,56 @@ class TypeProfessionalLicenseController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$typeProfessionalLicense = $this->typeProfessionalLicense->onlyTrashed()->where('name', $request->get('name'))->firstOrFail();
+			
+			return $typeProfessionalLicense->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$type_professional_license = $this->type_professional_license->find($id);
+		$typeProfessionalLicense = $this->typeProfessionalLicense->findOrFail($id);
 		
-		return view('maintainers.type-professional-licenses.edit', compact('type_professional_license'));
+		return view('maintainers.type-professional-licenses.edit', compact('typeProfessionalLicense'));
 	}
 	
 	/**
 	 * @param TypeProfessionalLicenseRequest $request
-	 * @param $id
+	 * @param                                $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update(TypeProfessionalLicenseRequest $request, $id)
 	{
-		$this->type_professional_license->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-professional-licenses'
-		]);
+		try
+		{
+			$this->typeProfessionalLicense->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/type-professional-licenses'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +127,7 @@ class TypeProfessionalLicenseController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->type_professional_license->delete($id);
+		$this->typeProfessionalLicense->destroy($id);
 		
 		return redirect()->route('type-professional-licenses.index');
 	}

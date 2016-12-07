@@ -2,24 +2,33 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
+use Controlqtime\Core\Entities\Weight;
 use Controlqtime\Http\Requests\WeightRequest;
-use Controlqtime\Core\Contracts\WeightRepoInterface;
 
 class WeightController extends Controller
 {
 	/**
-	 * @var WeightRepoInterface
+	 * @var Weight
 	 */
 	protected $weight;
 	
 	/**
 	 * WeightController constructor.
 	 *
-	 * @param WeightRepoInterface $weight
+	 * @param Weight $weight
 	 */
-	public function __construct(WeightRepoInterface $weight)
+	public function __construct(Weight $weight)
 	{
 		$this->weight = $weight;
+	}
+	
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
+	{
+		return view('maintainers.measuring-units.weights.index');
 	}
 	
 	/**
@@ -30,14 +39,6 @@ class WeightController extends Controller
 		$weights = $this->weight->all();
 		
 		return $weights;
-	}
-	
-	/**
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
-	public function index()
-	{
-		return view('maintainers.measuring-units.weights.index');
 	}
 	
 	/**
@@ -55,9 +56,7 @@ class WeightController extends Controller
 	 */
 	public function store(WeightRequest $request)
 	{
-		$weight = $this->weight->onlyTrashedComposed('name', 'acr', $request->get('name'), $request->get('acr'));
-		
-		if ( ! $weight )
+		if ( ! $this->restore($request) )
 		{
 			$this->weight->create($request->all());
 		}
@@ -69,13 +68,31 @@ class WeightController extends Controller
 	}
 	
 	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function restore($request)
+	{
+		try
+		{
+			$weight = $this->weight->onlyTrashed()->where('name', $request->get('name'))->where('acr', $request->get('acr'))->firstOrFail();
+			
+			return $weight->restore();
+		} catch ( Exception $e )
+		{
+			return false;
+		}
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id)
 	{
-		$weight = $this->weight->find($id);
+		$weight = $this->weight->findOrFail($id);
 		
 		return view('maintainers.measuring-units.weights.edit', compact('weight'));
 	}
@@ -88,12 +105,19 @@ class WeightController extends Controller
 	 */
 	public function update(WeightRequest $request, $id)
 	{
-		$this->weight->update($request->all(), $id);
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/measuring-units/weights'
-		]);
+		try
+		{
+			$this->weight->findOrFail($id)->fill($request->all())->saveOrFail();
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
+			
+			return response()->json([
+				'success' => true,
+				'url'     => '/maintainers/measuring-units/weights'
+			]);
+		} catch ( Exception $e )
+		{
+			return response()->json(['success' => false]);
+		}
 	}
 	
 	/**
@@ -103,7 +127,7 @@ class WeightController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->weight->delete($id);
+		$this->weight->destroy($id);
 		
 		return redirect()->route('weights.index');
 	}

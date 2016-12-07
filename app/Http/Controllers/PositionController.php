@@ -3,7 +3,6 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
-use Illuminate\Http\Request;
 use Controlqtime\Core\Entities\Position;
 use Controlqtime\Http\Requests\PositionRequest;
 
