@@ -5,12 +5,11 @@ namespace Controlqtime\Core\Entities;
 use Carbon\Carbon;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Company extends Eloquent
 {
-	use SoftDeletes, SoftCascadeTrait;
+	use SoftDeletes;
 	
     /**
      * @var array
@@ -18,13 +17,6 @@ class Company extends Eloquent
     protected $fillable = [
         'type_company_id', 'rut', 'firm_name', 'gyre', 'start_act', 'muni_license', 'email_company'
     ];
-	
-	/**
-	 * @var array
-	 */
-	protected $softCascade = [
-		'legalRepresentative', 'address', 'vehicles', 'imagesable'
-	];
 
     /**
      * @var array
@@ -74,6 +66,7 @@ class Company extends Eloquent
         return $this->belongsTo(TypeCompany::class);
     }
 
+    
     /**
      * @param string $value format 123.456.789-k
      */
@@ -81,7 +74,7 @@ class Company extends Eloquent
     {
         $this->attributes['rut'] = str_replace('.', '', $value);
     }
-
+	
     /**
      * @param string $value
      */

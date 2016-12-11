@@ -94,9 +94,8 @@ class CompanyController extends Controller
 	 */
 	public function __construct(ActivateCompany $activateCompany, Address $address,
 		Commune $commune, Company $company, DetailAddressCompany $detailAddressCompany,
-		DetailAddressLegalEmployee $detailAddressLegal,
-		LegalRepresentative $legalRepresentative, Nationality $nationality,
-		Province $province, Region $region, TypeCompany $typeCompany)
+		DetailAddressLegalEmployee $detailAddressLegal, LegalRepresentative $legalRepresentative,
+		Nationality $nationality, Province $province, Region $region, TypeCompany $typeCompany)
 	{
 		$this->activateCompany      = $activateCompany;
 		$this->address              = $address;
@@ -134,16 +133,16 @@ class CompanyController extends Controller
 	 */
 	public function create()
 	{
-		$nationalities  = $this->nationality->lists('name', 'id');
-		$regionsColl    = $this->region->all();
-		$provincesColl  = $this->region->find($regionsColl->first()->id)->provinces;
-		$communes       = $this->province->findCommunes($provincesColl->first()->id);
-		$regions        = $regionsColl->pluck('name', 'id');
-		$provinces      = $provincesColl->pluck('name', 'id');
-		$type_companies = $this->typeCompany->lists('name', 'id');
+		$nationalities = $this->nationality->pluck('name', 'id');
+		$regionsColl   = $this->region->all();
+		$provincesColl = $this->region->findOrFail($regionsColl->first()->id)->provinces;
+		$communes      = $this->province->findOrFail($provincesColl->first()->id)->communes->pluck('name', 'id');
+		$regions       = $regionsColl->pluck('name', 'id');
+		$provinces     = $provincesColl->pluck('name', 'id');
+		$typeCompanies = $this->typeCompany->pluck('name', 'id');
 		
 		return view('administration.companies.create', compact(
-			'nationalities', 'regions', 'provinces', 'communes', 'type_companies'
+			'nationalities', 'regions', 'provinces', 'communes', 'typeCompanies'
 		));
 	}
 	
@@ -205,24 +204,23 @@ class CompanyController extends Controller
 	 */
 	public function edit($id)
 	{
-		$company = $this->company->find($id, [
-			'legalRepresentative.address.commune.province.region', 'address.commune.province.region'
-		]);
+		$company = $this->company->with([
+			'legalRepresentative.address.commune.province.region', 'address.commune.province.region',
+			'legalRepresentative.address.detailAddressCompany'
+		])->findOrFail($id);
 		
-		$regionsColl      = $this->region->all();
-		$provincesCollCom = $this->region->find($company->address->commune->province->region->id)->provinces;
-		$provincesCom     = $provincesCollCom->pluck('name', 'id');
-		$communesCom      = $this->province->findCommunes($company->address->commune->province->id);
-		$provincesCollRep = $this->region->find($company->legalRepresentative->address->commune->province->region->id)->provinces;
-		$provincesRep     = $provincesCollRep->pluck('name', 'id');
-		$communesRep      = $this->province->findCommunes($company->legalRepresentative->address->commune->province->id);
-		$regions          = $regionsColl->pluck('name', 'id');
-		$nationalities    = $this->nationality->lists('name', 'id');
-		$type_companies   = $this->typeCompany->lists('name', 'id');
+		$regionsColl    = $this->region->all();
+		$regions        = $regionsColl->pluck('name', 'id');
+		$provinces      = $this->region->findOrFail($company->address->commune->province->region->id)->provinces->pluck('name', 'id');
+		$communes       = $this->province->findOrFail($company->address->commune->province->id)->communes->pluck('name', 'id');
+		$provincesLegal = $this->region->findOrFail($company->legalRepresentative->address->commune->province->region->id)->provinces->pluck('name', 'id');
+		$communesLegal  = $this->province->findOrFail($company->legalRepresentative->address->commune->province->id)->communes->pluck('name', 'id');
+		$nationalities  = $this->nationality->pluck('name', 'id');
+		$typeCompanies  = $this->typeCompany->pluck('name', 'id');
 		
 		return view('administration.companies.edit', compact(
-			'company', 'regions', 'provincesCom', 'provincesRep', 'communesCom', 'communesRep', 'nationalities',
-			'type_companies'
+			'company', 'regions', 'provinces', 'provincesLegal', 'communes', 'communesLegal', 'nationalities',
+			'typeCompanies'
 		));
 	}
 	
@@ -238,13 +236,14 @@ class CompanyController extends Controller
 		
 		try
 		{
-			$company = $this->company->update($request->all(), $id);
-			$address = $this->address->update($request->all(), $company->address->id);
-			$this->detailAddressCompany->update($request->all(), $address->detailAddressCompany->id);
+			$company = $this->company->findOrFail($id);
+			$company->update($request->all());
+			$company->address->update($request->all());
+			$company->address->detailAddressCompany->update($request->all());
 			$request = $this->changeNamePhoneCommuneAndAddressFieldsToLegalRepresentativeForFillableInPolymorphicTable($request->all());
-			$legal   = $this->legalRepresentative->update($request, $company->legalRepresentative->id);
-			$address = $this->address->update($request, $legal->address->id);
-			$this->detailAddressLegal->update($request, $address->detailAddressLegalEmployee->id);
+			$company->legalRepresentative->update($request);
+			$company->legalRepresentative->address->update($request);
+			$company->legalRepresentative->address->detailAddressLegalEmployee->update($request);
 			
 			DB::commit();
 		} catch ( Exception $e )

@@ -52,18 +52,17 @@
             </div>
 
         </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{ route('companies.index') }}">Volver</a>
+            </div>
+            <div class="col-md-6 pull-right">
+                <button id="btnSubmit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
+            </div>
+        </div>
 
     {{ Form::close() }}
-
-    <br />
-    <div class="row">
-        <div class="col-md-6">
-            <a href="{{ route('companies.index') }}">Volver</a>
-        </div>
-        <div class="col-md-6 pull-right">
-            <button id="btnSubmit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
-        </div>
-    </div>
 
     <br />
     <br />

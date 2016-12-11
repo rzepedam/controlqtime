@@ -39,36 +39,36 @@ class CompanyRequest extends SanitizedRequest
 	 */
 	public function rules()
 	{
-		switch ($this->method())
+		switch ( $this->method() )
 		{
 			case 'POST':
 			{
 				$rules = [
-					'type_company_id'      => 'required|regex:/[0-9 -()+]+$/',
-					'rut'                  => 'required|unique:companies,rut|max:15',
-					'firm_name'            => 'required',
-					'gyre'                 => 'required',
-					'start_act'            => 'required|date',
-					'address'              => 'required',
-					'commune_id'           => 'required|integer',
-					'lot'                  => 'max:5',
-					'bod'                  => 'max:5',
-					'ofi'                  => 'max:5',
-					'floor'                => 'regex:/[0-9 -()+]+$/|digits_between:1,3',
-					'muni_license'         => 'required|max:50',
-					'phone1'               => 'required|max:20',
-					'phone2'               => 'max:20',
-					'email_company'        => 'required|email|unique:companies,email_company|max:60',
-					'male_surname'         => 'required|max:30',
-					'female_surname'       => 'required|max:30',
-					'first_name'           => 'required|max:30',
-					'second_name'          => 'max:30',
-					'rut_representative'   => 'required|max:15|unique:legal_representatives,rut_representative',
-					'birthday'             => 'required|date',
-					'nationality_id'       => 'required|regex:/[0-9 -()+]+$/',
-					'phone1'               => 'required|max:20',
-					'phone2'               => 'max:20',
-					'email_representative' => 'required|max:60|email|unique:legal_representatives,email_representative',
+					'type_company_id'       => 'required|regex:/[0-9 -()+]+$/',
+					'rut'                   => 'required|unique:companies,rut|max:15',
+					'firm_name'             => 'required',
+					'gyre'                  => 'required',
+					'start_act'             => 'required|date',
+					'address'               => 'required',
+					'commune_id'            => 'required|regex:/[0-9 -()+]+$/',
+					'lot'                   => 'max:5',
+					'bod'                   => 'max:5',
+					'ofi'                   => 'max:5',
+					'floor'                 => 'regex:/[0-9 -()+]+$/|digits_between:1,3',
+					'muni_license'          => 'required|max:50',
+					'phone1'                => 'required|max:20',
+					'phone2'                => 'max:20',
+					'email_company'         => 'required|email|unique:companies,email_company|max:60',
+					'male_surname'          => 'required|max:30',
+					'female_surname'        => 'required|max:30',
+					'first_name'            => 'required|max:30',
+					'second_name'           => 'max:30',
+					'rut_representative'    => 'required|max:15|unique:legal_representatives,rut_representative',
+					'birthday'              => 'required|date',
+					'nationality_id'        => 'required|regex:/[0-9 -()+]+$/',
+					'phone1_representative' => 'required|max:20',
+					'phone2_representative' => 'max:20',
+					'email_representative'  => 'required|max:60|email|unique:legal_representatives,email_representative',
 				];
 				
 				return $rules;
@@ -101,7 +101,7 @@ class CompanyRequest extends SanitizedRequest
 					'nationality_id'        => 'required|regex:/[0-9 -()+]+$/',
 					'phone1_representative' => 'required|max:20',
 					'phone2_representative' => 'max:20',
-					// 'email_representative'  => 'required|max:60|email|unique:legal_representatives,email_representative,' . $this->route->getParameter('company')
+					'email_representative'  => 'required|max:60|email|unique:legal_representatives,email_representative,' . $this->route->getParameter('company')
 				];
 				
 				return $rules;

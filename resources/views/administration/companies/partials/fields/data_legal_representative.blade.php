@@ -66,12 +66,12 @@
     {{-- Provincia Select Field --}}
     <div class="col-sm-4 col-md-3 form-group">
 		{{ Form::label('province_legal_id', 'Provincia') }}
-		{{ Form::select('province_legal_id', Route::is('companies.create') ? $provinces : $provincesRep, Route::is('companies.create') ? null : $company->legalRepresentative->address->commune->province->id, ['class' => 'form-control']) }}
+		{{ Form::select('province_legal_id', Route::is('companies.create') ? $provinces : $provincesLegal, Route::is('companies.create') ? null : $company->legalRepresentative->address->commune->province->id, ['class' => 'form-control']) }}
     </div>
     {{-- Comuna Select Field --}}
     <div class="col-sm-4 col-md-3 form-group">
 		{{ Form::label('commune_legal_id', 'Comuna') }}
-		{{ Form::select('commune_legal_id', Route::is('companies.create') ? $communes : $communesRep, Route::is('companies.create') ? null : $company->legalRepresentative->address->commune->id, ['class' => 'form-control']) }}
+		{{ Form::select('commune_legal_id', Route::is('companies.create') ? $communes : $communesLegal, Route::is('companies.create') ? null : $company->legalRepresentative->address->commune->id, ['class' => 'form-control']) }}
     </div>
     <div class="col-sm-6 col-md-3 form-group">
 		{{ Form::label('phone1_representative', 'Teléfono 1', ['class' => 'control-label']) }}

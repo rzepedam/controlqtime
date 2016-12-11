@@ -113,7 +113,7 @@ class EmployeeWasRegistered extends Notification implements ShouldQueue
 					'Nombre'       => FormatField::removeAccents($this->employee->full_name),
 					'Nacionalidad' => $this->employee->nationality->name,
 					'Teléfono'     => $this->employee->address->phone1,
-					'email'        => $this->employee->email_employee
+					'Email'        => $this->employee->email_employee
 				]);
 			});
 	}

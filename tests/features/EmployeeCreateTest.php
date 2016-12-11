@@ -1,17 +1,10 @@
 <?php
 
 use Controlqtime\Core\Entities\Degree;
-use Controlqtime\Core\Entities\Region;
-use Controlqtime\Core\Entities\Commune;
-use Controlqtime\Core\Entities\Pension;
-use Controlqtime\Core\Entities\Forecast;
-use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\Institution;
-use Controlqtime\Core\Entities\Nationality;
 use Controlqtime\Core\Entities\TypeDisease;
 use Controlqtime\Core\Entities\Relationship;
-use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Entities\TypeDisability;
 use Controlqtime\Core\Entities\TypeSpeciality;
 use Controlqtime\Core\Entities\TypeCertification;
@@ -24,21 +17,7 @@ class EmployeeCreateTest extends TestCase
 	
 	protected $degree;
 	
-	protected $forecast;
-	
-	protected $maritalStatus;
-	
-	protected $nationality;
-	
 	protected $institution;
-	
-	protected $pension;
-	
-	protected $region;
-	
-	protected $province;
-	
-	protected $commune;
 	
 	protected $relationship;
 	
@@ -54,22 +33,12 @@ class EmployeeCreateTest extends TestCase
 	
 	protected $typeSpeciality;
 	
-	protected $gender;
-	
 	function setUp()
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->nationality             = factory(Nationality::class)->create();
-		$this->gender                  = Config::get('enums.genders');
 		$this->degree                  = factory(Degree::class)->create();
-		$this->forecast                = factory(Forecast::class)->create();
-		$this->maritalStatus           = factory(MaritalStatus::class)->create();
 		$this->institution             = factory(Institution::class)->create();
-		$this->pension                 = factory(Pension::class)->create();
-		$this->region                  = factory(Region::class)->create();
-		$this->commune                 = factory(Commune::class)->create();
-		$this->province                = factory(Province::class)->create();
 		$this->relationship            = factory(Relationship::class)->create();
 		$this->typeCertification       = factory(TypeCertification::class)->create();
 		$this->typeDisability          = factory(TypeDisability::class)->create();
@@ -84,7 +53,7 @@ class EmployeeCreateTest extends TestCase
 		$this->visit('human-resources/employees/create')
 			->seeInElement('h1', 'Crear Nuevo Trabajador')
 			->seeInElement('#nationality_id', $this->nationality->name)
-			->seeInElement('#gender_id', $this->gender[2])
+			->seeIsSelected('is_male', 'M')
 			->seeInElement('#marital_status_id', $this->maritalStatus->name)
 			->seeInElement('#forecast_id', $this->forecast->name)
 			->seeInElement('#pension_id', $this->pension->name)
@@ -101,15 +70,15 @@ class EmployeeCreateTest extends TestCase
 			'female_surname'             => 'Parra',
 			'first_name'                 => 'Marcelo',
 			'second_name'                => 'Pedro',
-			'rut'                        => '10486861-4',
+			'rut'                        => '10.486.861-4',
 			'birthday'                   => '11-06-1989',
-			'nationality_id'             => 1,
-			'gender_id'                  => 1,
-			'marital_status_id'          => 1,
-			'forecast_id'                => 1,
-			'pension_id'                 => 1,
+			'nationality_id'             => $this->nationality->id,
+			'is_male'                    => 'M',
+			'marital_status_id'          => $this->maritalStatus->id,
+			'forecast_id'                => $this->forecast->id,
+			'pension_id'                 => $this->pension->id,
 			'address'                    => 'Vicuña Mackenna 2209',
-			'commune_id'                 => 1,
+			'commune_id'                 => $this->commune->id,
 			'phone1'                     => '+56988102910',
 			'email_employee'             => 'marcelocandia@gmail.com',
 			'count_contacts'             => 0,
@@ -135,8 +104,7 @@ class EmployeeCreateTest extends TestCase
 			'count_family_responsabilities' => 0
 		];
 		
-		$this->post('human-resources/employees', $data, [
-			'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+		$this->post('human-resources/employees', $data)
 			->seeInDatabase('employees', [
 				'male_surname'      => 'Candia',
 				'female_surname'    => 'Parra',
@@ -145,12 +113,33 @@ class EmployeeCreateTest extends TestCase
 				'rut'               => '10486861-4',
 				'birthday'          => '1989-06-11',
 				'nationality_id'    => 1,
-				'gender_id'         => 1,
+				'is_male'           => true,
 				'marital_status_id' => 1,
 				'forecast_id'       => 1,
 				'pension_id'        => 1,
 				'email_employee'    => 'marcelocandia@gmail.com',
+				'url'               => null,
+				'state'             => 'disable',
+				'condition'         => 'unavailable',
 				'deleted_at'        => null
 			]);
+		
+		$this->seeInDatabase('users', [
+			'email' => 'marcelocandia@gmail.com'
+		]);
+		
+		$this->seeInDatabase('addresses', [
+			'addressable_type' => 'Controlqtime\Core\Entities\Employee',
+			'address'          => 'Vicuña Mackenna 2209',
+			'commune_id'       => 1,
+			'phone1'           => '+56988102910',
+			'phone2'           => ''
+		]);
+		
+		$this->seeInDatabase('detail_address_legal_employees', [
+			'depto'    => '',
+			'block'    => '',
+			'num_home' => ''
+		]);
 	}
 }

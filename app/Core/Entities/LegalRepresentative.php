@@ -18,11 +18,7 @@ class LegalRepresentative extends Eloquent
         'company_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'rut_representative',
         'birthday', 'nationality_id', 'email_representative',
     ];
-	
-	protected $cascadeDeletes = [
-		'address'
-	];
-
+    
     /**
      * @var array
      */

@@ -47,6 +47,7 @@ use Controlqtime\Core\Entities\TermAndObligatory;
 use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
+use Controlqtime\Core\Entities\DetailAddressCompany;
 use Controlqtime\Core\Entities\MasterFormPieceVehicle;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
@@ -64,7 +65,6 @@ $factory->define(AccessControlApi::class, function (Faker\Generator $faker)
 $factory->define(Address::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'               => 1,
 		'addressable_id'   => 1,
 		'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 		'address'          => $faker->address,
@@ -93,7 +93,6 @@ $factory->define(City::class, function ()
 $factory->define(Commune::class, function ()
 {
 	return [
-		'id'          => 1,
 		'province_id' => 1,
 		'name'        => 'La Florida'
 	];
@@ -129,7 +128,7 @@ $factory->define(DayTrip::class, function ()
 	];
 });
 
-$factory->define(Degree::class, function ()
+$factory->define(Degree::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'   => 1,
@@ -137,14 +136,22 @@ $factory->define(Degree::class, function ()
 	];
 });
 
-$factory->define(DetailAddressLegalEmployee::class, function ()
+$factory->define(DetailAddressCompany::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'address_id' => 1,
-		'depto'      => '303',
-		'block'      => '',
-		'num_home'   => ''
+		'lot'   => rand(1, 10) . $faker->randomLetter,
+		'bod'   => rand(1, 99),
+		'ofi'   => rand(1, 10),
+		'floor' => rand(1, 10)
+	];
+});
+
+$factory->define(DetailAddressLegalEmployee::class, function (Faker\Generator $faker)
+{
+	return [
+		'depto'    => rand(1, 999),
+		'block'    => rand(1, 99),
+		'num_home' => rand(1, 99)
 	];
 });
 
@@ -156,9 +163,7 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	$secondName    = $faker->firstName;
 	
 	return [
-		'id'                => 1,
-		'nationality_id'    => rand(1, 9),
-		'gender_id'         => rand(1, 2),
+		'nationality_id'    => 1,
 		'marital_status_id' => rand(1, 4),
 		'forecast_id'       => rand(1, 14),
 		'pension_id'        => rand(1, 6),
@@ -169,13 +174,14 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'full_name'         => "$firstName $secondName $maleSurname $femaleSurname",
 		'rut'               => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'birthday'          => $faker->date($format = 'd-m-Y', $max = 'now'),
+		'is_male'           => true,
 		'email_employee'    => $faker->unique()->email,
 		'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
 		'state'             => 'disable'
 	];
 });
 
-$factory->define(EngineCubic::class, function ()
+$factory->define(EngineCubic::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'         => 1,
@@ -185,11 +191,10 @@ $factory->define(EngineCubic::class, function ()
 	];
 });
 
-$factory->define(Forecast::class, function ()
+$factory->define(Forecast::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Cruz Blanca',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -234,7 +239,6 @@ $factory->define(LaborUnion::class, function (Faker\Generator $faker)
 $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 {
 	return [
-		'company_id'           => factory(Company::class)->create()->id,
 		'male_surname'         => $faker->lastName,
 		'female_surname'       => $faker->lastName,
 		'first_name'           => $faker->firstName,
@@ -249,8 +253,7 @@ $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 $factory->define(MaritalStatus::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Soltero',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -285,8 +288,7 @@ $factory->define(Mutuality::class, function (Faker\Generator $faker)
 $factory->define(Nationality::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'   => 1,
-		'name' => 'Chile',
+		'name' => $faker->word,
 	];
 });
 
@@ -302,8 +304,7 @@ $factory->define(NumHour::class, function (Faker\Generator $faker)
 $factory->define(Pension::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Hábitat',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -347,7 +348,6 @@ $factory->define(Profession::class, function (Faker\Generator $faker)
 $factory->define(Province::class, function ()
 {
 	return [
-		'id'        => 1,
 		'region_id' => 1,
 		'name'      => 'Santiago'
 	];
@@ -356,7 +356,6 @@ $factory->define(Province::class, function ()
 $factory->define(Region::class, function ()
 {
 	return [
-		'id'   => 1,
 		'name' => 'Región Metropolitana de Santiago'
 	];
 });
@@ -431,8 +430,7 @@ $factory->define(TypeCertification::class, function (Faker\Generator $faker)
 $factory->define(TypeCompany::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Operador',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });

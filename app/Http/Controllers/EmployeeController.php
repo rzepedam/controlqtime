@@ -9,7 +9,6 @@ use Controlqtime\Core\Entities\Exam;
 use Controlqtime\Core\Entities\User;
 use Controlqtime\Core\Entities\Study;
 use Controlqtime\Core\Entities\Degree;
-use Controlqtime\Core\Entities\Gender;
 use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Commune;
@@ -117,11 +116,6 @@ class EmployeeController extends Controller
 	protected $forecast;
 	
 	/**
-	 * @var Gender
-	 */
-	protected $gender;
-	
-	/**
 	 * @var Institution
 	 */
 	protected $institution;
@@ -223,7 +217,6 @@ class EmployeeController extends Controller
 	 * @param FamilyRelationship         $familyRelationship
 	 * @param FamilyResponsability       $familyResponsability
 	 * @param Forecast                   $forecast
-	 * @param Gender                     $gender
 	 * @param Institution                $institution
 	 * @param MaritalStatus              $maritalStatus
 	 * @param Nationality                $nationality
@@ -246,7 +239,7 @@ class EmployeeController extends Controller
 		Commune $commune, ContactEmployee $contactEmployee, Degree $degree, DetailAddressLegalEmployee $detailAddress,
 		Disability $disability, Disease $disease, Employee $employee, Exam $exam,
 		FamilyRelationship $familyRelationship, FamilyResponsability $familyResponsability, Forecast $forecast,
-		Gender $gender, Institution $institution, MaritalStatus $maritalStatus, Nationality $nationality,
+		Institution $institution, MaritalStatus $maritalStatus, Nationality $nationality,
 		Pension $pension, ProfessionalLicense $professionalLicense, Province $province, Region $region,
 		Relationship $relationship, Speciality $speciality, Study $study, TypeCertification $typeCertification,
 		TypeDisability $typeDisability, TypeDisease $typeDisease, TypeExam $typeExam,
@@ -266,7 +259,6 @@ class EmployeeController extends Controller
 		$this->familyRelationship      = $familyRelationship;
 		$this->familyResponsability    = $familyResponsability;
 		$this->forecast                = $forecast;
-		$this->gender                  = $gender;
 		$this->institution             = $institution;
 		$this->maritalStatus           = $maritalStatus;
 		$this->nationality             = $nationality;
@@ -331,9 +323,8 @@ class EmployeeController extends Controller
 		
 		return view('human-resources.employees.create', compact(
 			'communes', 'nationalities', 'degrees', 'employees', 'forecasts', 'maritalStatuses',
-			'genders', 'institutions', 'pensions', 'provinces', 'regions', 'relationships',
-			'typeCertifications', 'typeDisabilities', 'typeDiseases', 'typeExams',
-			'typeProfessionalLicenses', 'typeSpecialities'
+			'institutions', 'pensions', 'provinces', 'regions', 'relationships', 'typeCertifications',
+			'typeDisabilities', 'typeDiseases', 'typeExams', 'typeProfessionalLicenses', 'typeSpecialities'
 		));
 		
 	}
@@ -350,25 +341,26 @@ class EmployeeController extends Controller
 		try
 		{
 			$employee = $this->employee->create(Session::get('step1'));
+			
 			$user     = $employee->user()->create([
 				'email'    => Session::get('email_employee'),
 				'password' => bcrypt(Session::get('email_employee'))
 			]);
 			$address  = $employee->address()->create(Session::get('step1'));
 			$address->detailAddressLegalEmployee()->create(Session::get('step1'));
-			$this->contactEmployee->createOrUpdateWithArray(Session::get('step1'), $employee);
-			$this->familyRelationship->createOrUpdateWithArray(Session::get('step1'), $employee);
-			$this->study->createOrUpdateWithArray(Session::get('step2'), $employee);
-			$this->certification->createOrUpdateWithArray(Session::get('step2'), $employee);
-			$this->speciality->createOrUpdateWithArray(Session::get('step2'), $employee);
-			$this->professionalLicense->createOrUpdateWithArray(Session::get('step2'), $employee);
-			$this->disability->createOrUpdateWithArray($request->all(), $employee);
-			$this->disease->createOrUpdateWithArray($request->all(), $employee);
-			$this->exam->createOrUpdateWithArray($request->all(), $employee);
-			$this->familyResponsability->createOrUpdateWithArray($request->all(), $employee);
+			$employee->createContacts(Session::get('step1'));
+			$employee->createRelationships(Session::get('step1'));
+			$employee->createStudies(Session::get('step2'));
+			$employee->createCertifications(Session::get('step2'));
+			$employee->createSpecialities(Session::get('step2'));
+			$employee->createLicenses(Session::get('step2'));
+			$employee->createDisabilities($request->all());
+			$employee->createDiseases($request->all());
+			$employee->createExams($request->all());
+			$employee->createResponsabilities($request->all());
+			
 			$user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionStoreEmployee();
-			
 			DB::commit();
 		} catch ( Exception $e )
 		{
@@ -394,7 +386,7 @@ class EmployeeController extends Controller
 		Session::forget('rut');
 		Session::forget('birthday');
 		Session::forget('nationality_id');
-		Session::forget('gender_id');
+		Session::forget('is_male');
 		Session::forget('marital_status_id');
 		Session::forget('forecast_id');
 		Session::forget('pension_id');
@@ -490,10 +482,10 @@ class EmployeeController extends Controller
 		$typeSpecialities         = $this->typeSpeciality->pluck('name', 'id');
 		
 		return view('human-resources.employees.edit', compact(
-			'employee', 'communes', 'nationalities', 'degrees', 'employees', 'genders',
-			'maritalStatuses', 'forecasts', 'pensions', 'institutions', 'provinces', 'regions',
-			'relationships', 'typeCertifications', 'typeDisabilities', 'typeDiseases', 'typeExams',
-			'typeProfessionalLicenses', 'typeSpecialities'
+			'employee', 'communes', 'nationalities', 'degrees', 'employees', 'maritalStatuses',
+			'forecasts', 'pensions', 'institutions', 'provinces', 'regions', 'relationships',
+			'typeCertifications', 'typeDisabilities', 'typeDiseases', 'typeExams', 'typeProfessionalLicenses',
+			'typeSpecialities'
 		));
 	}
 	
@@ -510,44 +502,50 @@ class EmployeeController extends Controller
 		try
 		{
 			// Update Step1 data
-			$employee = $this->employee->update($request->session()->get('step1_update'), $id);
-			$user     = $this->user->update(['email' => $request->session()->get('step1_update.email_employee')], $employee->user->id);
-			$address  = $this->address->update($request->session()->get('step1_update'), $employee->address->id);
-			$this->detailAddress->update($request->session()->get('step1_update'), $address->detailAddressLegalEmployee->id);
-			$this->contactEmployee->destroyArrayId($request->session()->get('id_delete_contact_update'), '');
-			$this->contactEmployee->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
-			$this->familyRelationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'), '');
-			$this->familyRelationship->createOrUpdateWithArray($request->session()->get('step1_update'), $employee);
+			$employee = $this->employee->findOrFail($id);
+			$employee->fill(Session::get('step1_update'))->saveOrFail();
+			$employee->user->update(['email' => Session::get('step1_update.email_employee')]);
+			$employee->address->update(Session::get('step1_update'));
+			$employee->address->detailAddressLegalEmployee->update(Session::get('step1_update'));
+			// $employee->createContacts()->destroyArrayId(Session::get('id_delete_contact_update'), '');
+			$employee->createContacts(Session::get('step1_update'));
+			// $this->familyRelationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'), '');
+			$employee->createRelationships(Session::get('step1_update'));
 			
 			// Update Step2 data
-			$this->study->destroyArrayId($request->session()->get('id_delete_study_update'), '');
-			$this->study->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
-			$this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'Certification');
-			$this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'), 'Certification');
-			$this->certification->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
-			$this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'Speciality');
-			$this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'), 'Speciality');
-			$this->speciality->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
-			$this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
-			$this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
-			$this->professionalLicense->createOrUpdateWithArray($request->session()->get('step2_update'), $employee);
+			// $this->study->destroyArrayId($request->session()->get('id_delete_study_update'), '');
+			$employee->createStudies(Session::get('step2_update'));
+			// $this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'Certification');
+			// $this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'), 'Certification');
+			$employee->createCertifications(Session::get('step2_update'));
+			// $this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'Speciality');
+			// $this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'), 'Speciality');
+			$employee->createSpecialities(Session::get('step2_update'));
+			// $this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
+			// $this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
+			$employee->createLicenses(Session::get('step2_update'));
 			
 			// Update Step3 data
-			$this->disability->destroyImages($request->get('id_delete_disability'), 'Disability');
-			$this->disability->destroyArrayId($request->get('id_delete_disability'), 'Disability');
-			$this->disability->createOrUpdateWithArray($request->all(), $employee);
-			$this->disease->destroyImages($request->get('id_delete_disease'), 'Disease');
-			$this->disease->destroyArrayId($request->get('id_delete_disease'), 'Disease');
-			$this->disease->createOrUpdateWithArray($request->all(), $employee);
-			$this->exam->destroyImages($request->get('id_delete_exam'), 'Exam');
-			$this->exam->destroyArrayId($request->get('id_delete_exam'), 'Exam');
-			$this->exam->createOrUpdateWithArray($request->all(), $employee);
-			$this->familyResponsability->destroyImages($request->get('id_delete_family_responsability'), 'FamilyResponsability');
-			$this->familyResponsability->destroyArrayId($request->get('id_delete_family_responsability'), 'FamilyResponsability');
-			$this->familyResponsability->createOrUpdateWithArray($request->all(), $employee);
+			// $this->disability->destroyImages($request->get('id_delete_disability'), 'Disability');
+			// $this->disability->destroyArrayId($request->get('id_delete_disability'), 'Disability');
+			$employee->createDisabilities($request->all());
+			// $this->disease->destroyImages($request->get('id_delete_disease'), 'Disease');
+			// $this->disease->destroyArrayId($request->get('id_delete_disease'), 'Disease');
+			$employee->createDiseases($request->all());
+			// $this->exam->destroyImages($request->get('id_delete_exam'), 'Exam');
+			// $this->exam->destroyArrayId($request->get('id_delete_exam'), 'Exam');
+			$employee->createExams($request->all());
+			// $this->familyResponsability->destroyImages($request->get('id_delete_family_responsability'), 'FamilyResponsability');
+			// $this->familyResponsability->destroyArrayId($request->get('id_delete_family_responsability'), 'FamilyResponsability');
+			$employee->createResponsabilities($request->all());
+			
 			$this->activateEmployee->checkStateUpdateEmployee($id);
 			
+			/* @todo Fixed $user value. Actually is boolean not object */
 			// $user->notify(new EmployeeWasRegistered($employee));
+			
+			/* @todo destroy session data update */
+			
 			DB::commit();
 		} catch ( Exception $e )
 		{
@@ -590,9 +588,10 @@ class EmployeeController extends Controller
 		
 		try
 		{
-			$employee = $this->employee->find($id);
+			$employee = $this->employee->findOrFail($id);
 			$this->activateEmployee->saveStateDisableEmployee($employee);
-			$this->employee->delete($id);
+			// $employee->address->delete();
+			$employee->delete($id);
 			
 			DB::commit();
 		} catch ( Exception $e )
@@ -679,7 +678,7 @@ class EmployeeController extends Controller
 		Session::put('rut', $request->get('rut'));
 		Session::put('birthday', $request->get('birthday'));
 		Session::put('nationality_id', $request->get('nationality_id'));
-		Session::put('gender_id', $request->get('gender_id'));
+		Session::put('is_male', $request->get('is_male'));
 		Session::put('marital_status_id', $request->get('marital_status_id'));
 		Session::put('forecast_id', $request->get('forecast_id'));
 		Session::put('pension_id', $request->get('pension_id'));

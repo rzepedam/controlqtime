@@ -15,7 +15,6 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
 	        $table->unsignedInteger('nationality_id')->nullable();
-	        $table->unsignedInteger('gender_id')->nullable();
 	        $table->unsignedInteger('marital_status_id')->nullable();
 	        $table->unsignedInteger('forecast_id')->nullable();
 	        $table->unsignedInteger('pension_id')->nullable();
@@ -26,8 +25,9 @@ class CreateEmployeesTable extends Migration
 	        $table->string('full_name', 120);
 	        $table->string('rut', 10)->unique();
 	        $table->date('birthday');
+	        $table->boolean('is_male')->default(false);
 			$table->string('email_employee', 60)->unique();
-			$table->string('url')->default('');
+			$table->string('url')->nullable();
             $table->enum('state', ['enable', 'disable'])->default('disable');
             $table->enum('condition', ['available', 'unavailable'])->default('unavailable');
 	        $table->softDeletes();

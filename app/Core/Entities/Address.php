@@ -3,25 +3,17 @@
 namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Address extends Eloquent
 {
-	use SoftDeletes, SoftCascadeTrait;
+	use SoftDeletes;
 	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
 		'addressable_id', 'addressable_type', 'address', 'commune_id', 'phone1', 'phone2',
-	];
-	
-	/**
-	 * @var array
-	 */
-	protected $softCascade = [
-		'detailAddressLegalEmployee', 'detailAddressLegalEmployee'
 	];
 	
 	/**

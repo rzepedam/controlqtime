@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('type_company_id', 'Tipo Empresa', ['class' => 'control-label']) }}
-        {{ Form::select('type_company_id', $type_companies, null, ['class' => 'form-control']) }}
+        {{ Form::select('type_company_id', $typeCompanies, null, ['class' => 'form-control']) }}
     </div>
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle text-primary tooltip-primary" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class=\'text-center\'>Ej: 19317518k</p>" data-html="true"></i>
@@ -60,11 +60,11 @@
     </div>
     <div class="col-sm-4 col-md-3 form-group">
         {{ Form::label('province_id', 'Provincia', ['class' => 'control-label'])}}
-        {{ Form::select('province_id', Route::is('companies.create') ? $provinces : $provincesCom, Route::is('companies.create') ? null : $company->address->commune->province->id, ['class' => 'form-control']) }}
+        {{ Form::select('province_id', Route::is('companies.create') ? $provinces : $provinces, Route::is('companies.create') ? null : $company->address->commune->province->id, ['class' => 'form-control']) }}
     </div>
     <div class="col-sm-4 col-md-3 form-group">
         {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
-        {{ Form::select('commune_id', Route::is('companies.create') ? $communes : $communesCom, Route::is('companies.create') ? null : $company->address->commune->id, ['class' => 'form-control']) }}
+        {{ Form::select('commune_id', Route::is('companies.create') ? $communes : $communes, Route::is('companies.create') ? null : $company->address->commune->id, ['class' => 'form-control']) }}
     </div>
 </div>
 <div class="row">

@@ -38,8 +38,20 @@
         {{ Form::select('nationality_id', $nationalities, Session::get('nationality_id'), ['class' => 'form-control']) }}
     </div>
     <div class="col-sm-6 col-md-3 form-group">
-        {{ Form::label('gender_id', 'Sexo', ['class' => 'control-label']) }}
-        {{ Form::select('gender_id', Config::get('enums.genders'), Session::get('gender_id'), ['class' => 'form-control']) }}
+        <ul class="list-unstyled list-inline">
+            <li>
+                <div class="radio-custom">
+                    <input type="radio" id="male" name="is_male" value="M" checked="checked" />
+                    <label for="male">M</label>
+                </div>
+            </li>
+            <li>
+                <div class="radio-custom">
+                    <input type="radio" id="female" name="is_male" value="F" />
+                    <label for="female">F</label>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 

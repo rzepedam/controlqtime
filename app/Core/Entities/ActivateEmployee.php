@@ -10,7 +10,7 @@ class ActivateEmployee extends Eloquent
 	/**
 	 * @var Biometry
 	 */
-	protected $biometry;
+	private $biometry;
 	
 	/**
 	 * @var Employee
@@ -20,12 +20,11 @@ class ActivateEmployee extends Eloquent
 	/**
 	 * ActivateEmployee constructor.
 	 *
-	 * @param Employee $employee
 	 */
-	public function __construct(Employee $employee)
+	public function __construct()
 	{
 		$this->biometry = new Biometry();
-		$this->employee = $employee;
+		$this->employee = new Employee();
 	}
 	
 	/**
@@ -37,65 +36,65 @@ class ActivateEmployee extends Eloquent
 	 */
 	public function checkStateUpdateEmployee($id)
 	{
-		$employee = $this->employee->findOrFail($id, [
+		$employee = $this->employee->with([
 			'certifications.imagesable', 'specialities.imagesable', 'professionalLicenses.imagesable',
 			'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable', 'contract'
-		]);
+		])->findOrFail($id);
 		
-		if (is_null($employee->contract))
+		if ( is_null($employee->contract) )
 			return $this->saveStateDisableEmployee($employee);
 		
-		if ($employee->images_identity_card->isEmpty())
+		if ( $employee->images_identity_card->isEmpty() )
 			return $this->saveStateDisableEmployee($employee);
 		
-		if ($employee->images_criminal_record->isEmpty())
+		if ( $employee->images_criminal_record->isEmpty() )
 			return $this->saveStateDisableEmployee($employee);
 		
-		if ($employee->images_health_certificate->isEmpty())
+		if ( $employee->images_health_certificate->isEmpty() )
 			return $this->saveStateDisableEmployee($employee);
 		
-		if ($employee->images_pension_certificate->isEmpty())
+		if ( $employee->images_pension_certificate->isEmpty() )
 			return $this->saveStateDisableEmployee($employee);
 		
-		foreach ($employee->certifications as $certification)
+		foreach ( $employee->certifications as $certification )
 		{
-			if ($certification->imagesable->count() == 0)
+			if ( $certification->imagesable->count() == 0 )
 				return $this->saveStateDisableEmployee($employee);
 		}
 		
-		foreach ($employee->disabilities as $disability)
+		foreach ( $employee->disabilities as $disability )
 		{
-			if ($disability->imagesable->count() == 0)
+			if ( $disability->imagesable->count() == 0 )
 				return $this->saveStateDisableEmployee($employee);
 		}
 		
-		foreach ($employee->diseases as $disease)
+		foreach ( $employee->diseases as $disease )
 		{
-			if ($disease->imagesable->count() == 0)
+			if ( $disease->imagesable->count() == 0 )
 				return $this->saveStateDisableEmployee($employee);
 		}
 		
-		foreach ($employee->exams as $exam)
+		foreach ( $employee->exams as $exam )
 		{
-			if ($exam->imagesable->count() == 0)
+			if ( $exam->imagesable->count() == 0 )
 				return $this->saveStateDisableEmployee($employee);
 		}
 		
-		foreach ($employee->familyResponsabilities as $family_responsability)
+		foreach ( $employee->familyResponsabilities as $family_responsability )
 		{
-			if ($family_responsability->imagesable->count() == 0)
+			if ( $family_responsability->imagesable->count() == 0 )
 				return $this->saveStateDisableEmployee($employee);
 		}
 		
-		foreach ($employee->professionalLicenses as $professional_license)
+		foreach ( $employee->professionalLicenses as $professional_license )
 		{
-			if ($professional_license->imagesable->count() == 0)
+			if ( $professional_license->imagesable->count() == 0 )
 				return $this->saveStateDisableEmployee($employee);
 		}
 		
-		foreach ($employee->specialities as $speciality)
+		foreach ( $employee->specialities as $speciality )
 		{
-			if ($speciality->imagesable->count() == 0)
+			if ( $speciality->imagesable->count() == 0 )
 				return $this->saveStateDisableEmployee($employee);
 		}
 		
@@ -111,7 +110,7 @@ class ActivateEmployee extends Eloquent
 	 */
 	public function saveStateDisableEmployee($employee)
 	{
-		if ($employee->state != 'disable')
+		if ( $employee->state != 'disable' )
 		{
 			$this->biometry->delete($employee);
 		}
@@ -131,7 +130,7 @@ class ActivateEmployee extends Eloquent
 	 */
 	private function saveStateEnableEmployee($employee)
 	{
-		if ($employee->state != 'enable')
+		if ( $employee->state != 'enable' )
 		{
 			$this->biometry->create($employee);
 		}

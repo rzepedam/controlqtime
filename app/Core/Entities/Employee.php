@@ -5,32 +5,21 @@ namespace Controlqtime\Core\Entities;
 use Carbon\Carbon;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Controlqtime\Core\Traits\WhereMethodsTrait;
-use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class Employee extends Eloquent
 {
-	use SoftDeletes, SoftCascadeTrait;
+	use SoftDeletes;
 	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
 		'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
-		'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'gender_id', 'email_employee',
+		'is_male', 'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'email_employee',
 		'state'
-	];
-	
-	/**
-	 * @var array
-	 */
-	protected $softCascade = [
-		'contactEmployees', 'familyRelationships', 'studies', 'certifications', 'specialities',
-		'professionalLicenses', 'disabilities', 'diseases', 'exams', 'familyResponsabilities',
-		'user', 'address', 'contract', 'accessControls', 'dailyAssistances', 'imagesable'
 	];
 	
 	/**
@@ -58,19 +47,11 @@ class Employee extends Eloquent
 	}
 	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphOne
 	 */
 	public function address()
 	{
 		return $this->morphOne(Address::class, 'addressable');
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function certifications()
-	{
-		return $this->hasMany(Certification::class);
 	}
 	
 	/**
@@ -81,36 +62,9 @@ class Employee extends Eloquent
 		return $this->hasMany(ContactEmployee::class);
 	}
 	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
-	 */
-	public function contract()
+	public function createContacts($contacts)
 	{
-		return $this->hasOne(Contract::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function disabilities()
-	{
-		return $this->hasMany(Disability::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function diseases()
-	{
-		return $this->hasMany(Disease::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function exams()
-	{
-		return $this->hasMany(Exam::class);
+		/* @todo Add create contacts code */
 	}
 	
 	/**
@@ -121,6 +75,102 @@ class Employee extends Eloquent
 		return $this->hasMany(FamilyRelationship::class);
 	}
 	
+	public function createRelationships($relationships)
+	{
+		/* @todo Add create relationships code */
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function studies()
+	{
+		return $this->hasMany(Study::class);
+	}
+	
+	public function createStudies($studies)
+	{
+		/* @todo Add create studies code */
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function certifications()
+	{
+		return $this->hasMany(Certification::class);
+	}
+	
+	public function createCertifications($certifications)
+	{
+		/* @todo Add create certifications code */
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function specialities()
+	{
+		return $this->hasMany(Speciality::class);
+	}
+	
+	public function createSpecialities($specialities)
+	{
+		/* @todo Add create specialities code */
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function professionalLicenses()
+	{
+		return $this->hasMany(ProfessionalLicense::class);
+	}
+	
+	public function createLicenses($licenses)
+	{
+		/* @todo Add create licenses code */
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function disabilities()
+	{
+		return $this->hasMany(Disability::class);
+	}
+	
+	public function createDisabilities($disabilities)
+	{
+		/* @todo Add create disabilities code */
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function diseases()
+	{
+		return $this->hasMany(Disease::class);
+	}
+	
+	public function createDiseases($diseases)
+	{
+		/* @todo Add create diseases code */
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function exams()
+	{
+		return $this->hasMany(Exam::class);
+	}
+	
+	public function createExams($exams)
+	{
+		/* @todo Add create exams code */
+	}
+	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
@@ -129,12 +179,17 @@ class Employee extends Eloquent
 		return $this->hasMany(FamilyResponsability::class);
 	}
 	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function gender()
+	public function createResponsabilities($responsabilities)
 	{
-		return $this->belongsTo(Gender::class);
+		/* @todo Add create responsabilities code */
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function contract()
+	{
+		return $this->hasOne(Contract::class);
 	}
 	
 	/**
@@ -176,31 +231,6 @@ class Employee extends Eloquent
 	{
 		return $this->belongsTo(Nationality::class);
 	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function professionalLicenses()
-	{
-		return $this->hasMany(ProfessionalLicense::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function specialities()
-	{
-		return $this->hasMany(Speciality::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function studies()
-	{
-		return $this->hasMany(Study::class);
-	}
-	
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -252,6 +282,21 @@ class Employee extends Eloquent
 	}
 	
 	/**
+	 * @param $value (M or F)
+	 *
+	 * @return bool
+	 */
+	public function setIsMaleAttribute($value)
+	{
+		if ( 'M' === $value )
+		{
+			return $this->attributes['is_male'] = true;
+		}
+		
+		return $this->attributes['is_male'] = false;
+	}
+	
+	/**
 	 * @param string $value
 	 */
 	public function setAddressAttribute($value)
@@ -284,6 +329,11 @@ class Employee extends Eloquent
 	public function getRutAttribute($value)
 	{
 		return FormatField::rut($value);
+	}
+	
+	public function getBirthdayAttribute($value)
+	{
+		return Carbon::parse($value)->format('d-m-Y');
 	}
 	
 	/**
@@ -436,7 +486,7 @@ class Employee extends Eloquent
 	public function getNumImagesCertificationAttribute()
 	{
 		$sum = 0;
-		foreach ($this->certifications as $certification)
+		foreach ( $this->certifications as $certification )
 		{
 			$sum += count($certification->imagesable);
 		}
@@ -450,7 +500,7 @@ class Employee extends Eloquent
 	public function getNumImagesSpecialityAttribute()
 	{
 		$sum = 0;
-		foreach ($this->specialities as $speciality)
+		foreach ( $this->specialities as $speciality )
 		{
 			$sum += count($speciality->imagesable);
 		}
@@ -464,7 +514,7 @@ class Employee extends Eloquent
 	public function getNumImagesProfessionalLicensesAttribute()
 	{
 		$sum = 0;
-		foreach ($this->professionalLicenses as $professionalLicense)
+		foreach ( $this->professionalLicenses as $professionalLicense )
 		{
 			$sum += count($professionalLicense->imagesable);
 		}
@@ -478,7 +528,7 @@ class Employee extends Eloquent
 	public function getNumImagesDisabilitiesAttribute()
 	{
 		$sum = 0;
-		foreach ($this->disabilities as $disability)
+		foreach ( $this->disabilities as $disability )
 		{
 			$sum += count($disability->imagesable);
 		}
@@ -492,7 +542,7 @@ class Employee extends Eloquent
 	public function getNumImagesDiseasesAttribute()
 	{
 		$sum = 0;
-		foreach ($this->diseases as $disease)
+		foreach ( $this->diseases as $disease )
 		{
 			$sum += count($disease->imagesable);
 		}
@@ -506,7 +556,7 @@ class Employee extends Eloquent
 	public function getNumImagesExamsAttribute()
 	{
 		$sum = 0;
-		foreach ($this->exams as $exam)
+		foreach ( $this->exams as $exam )
 		{
 			$sum += count($exam->imagesable);
 		}
@@ -520,7 +570,7 @@ class Employee extends Eloquent
 	public function getNumImagesFamilyResponsabilitiesAttribute()
 	{
 		$sum = 0;
-		foreach ($this->familyResponsabilities as $family_responsability)
+		foreach ( $this->familyResponsabilities as $family_responsability )
 		{
 			$sum += count($family_responsability->imagesable);
 		}
@@ -534,10 +584,10 @@ class Employee extends Eloquent
 	public function getNumTotalImagesAttribute()
 	{
 		return $this->getNumImagesIdentityCardAttribute() + $this->getNumImagesCriminalRecordAttribute()
-		+ $this->getNumImagesHealthCertificateAttribute() + $this->getNumImagesPensionCertificateAttribute()
-		+ $this->getNumImagesCertificationAttribute() + $this->getNumImagesSpecialityAttribute()
-		+ $this->getNumImagesProfessionalLicensesAttribute() + $this->getNumImagesDisabilitiesAttribute()
-		+ $this->getNumImagesDiseasesAttribute() + $this->getNumImagesExamsAttribute()
-		+ $this->getNumImagesFamilyResponsabilitiesAttribute();
+			+ $this->getNumImagesHealthCertificateAttribute() + $this->getNumImagesPensionCertificateAttribute()
+			+ $this->getNumImagesCertificationAttribute() + $this->getNumImagesSpecialityAttribute()
+			+ $this->getNumImagesProfessionalLicensesAttribute() + $this->getNumImagesDisabilitiesAttribute()
+			+ $this->getNumImagesDiseasesAttribute() + $this->getNumImagesExamsAttribute()
+			+ $this->getNumImagesFamilyResponsabilitiesAttribute();
 	}
 }
