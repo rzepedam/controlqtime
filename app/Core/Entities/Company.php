@@ -37,7 +37,6 @@ class Company extends Eloquent
 	    return $query->whereState('enable');
 	}
 	
-	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */

@@ -2,8 +2,8 @@
 
 namespace Controlqtime\Listeners;
 
-use Illuminate\Log\Writer as Log;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Log\Writer as Log;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 

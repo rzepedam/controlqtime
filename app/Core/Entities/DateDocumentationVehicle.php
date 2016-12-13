@@ -14,7 +14,7 @@ class DateDocumentationVehicle extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'emission_padron', 'expiration_padron', 'emission_insurance', 'expiration_insurance',
+		'vehicle_id', 'emission_padron', 'expiration_padron', 'emission_insurance', 'expiration_insurance',
 		'emission_permission', 'expiration_permission'
 	];
 	

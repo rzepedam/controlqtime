@@ -13,7 +13,7 @@ class ModelVehicle extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'trademark_id'
+		'trademark_id', 'name'
 	];
 	
     /**

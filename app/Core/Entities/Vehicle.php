@@ -28,6 +28,16 @@ class Vehicle extends Eloquent
 	
 	
 	/**
+	 * @param $query
+	 *
+	 * @return enable $vehicles
+	 */
+	public function scopeEnabled($query)
+	{
+		return $query->whereState('enable');
+	}
+	
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function user()

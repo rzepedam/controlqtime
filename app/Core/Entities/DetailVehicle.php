@@ -14,7 +14,7 @@ class DetailVehicle extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'vehicle_id', 'color', 'fuel_id', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'tag', 'obs'
+		'vehicle_id', 'fuel_id', 'color', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'tag', 'obs'
 	];
 	
     /**

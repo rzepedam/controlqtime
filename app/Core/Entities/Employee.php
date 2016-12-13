@@ -32,6 +32,16 @@ class Employee extends Eloquent
 	
 	
 	/**
+	 * @param $query
+	 *
+	 * @return enable $employees
+	 */
+	public function scopeEnabled($query)
+	{
+		return $query->whereState('enable');
+	}
+	
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function accessControls()

@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Detalle Contrato Nº : <span class="text-primary">{{ $contract->id }}</span> @stop
+@section('title_header') Detalle Contrato: <span class="text-primary">{{ $contract->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>

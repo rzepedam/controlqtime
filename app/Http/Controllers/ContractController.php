@@ -2,7 +2,9 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
 use Carbon\Carbon;
+use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\Company;
@@ -56,6 +58,11 @@ class ContractController extends Controller
 	protected $gratification;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * @var NumHour
 	 */
 	protected $numHour;
@@ -90,13 +97,17 @@ class ContractController extends Controller
 	 * @param DayTrip           $dayTrip
 	 * @param Employee          $employee
 	 * @param Gratification     $gratification
+	 * @param Log               $log
 	 * @param NumHour           $numHour
 	 * @param Periodicity       $periodicity
 	 * @param Position          $position
 	 * @param TermAndObligatory $termAndObligatory
 	 * @param TypeContract      $typeContract
 	 */
-	public function __construct(ActivateEmployee $activateEmployee, Area $area, Company $company, Contract $contract, DayTrip $dayTrip, Employee $employee, Gratification $gratification, NumHour $numHour, Periodicity $periodicity, Position $position, TermAndObligatory $termAndObligatory, TypeContract $typeContract)
+	public function __construct(ActivateEmployee $activateEmployee, Area $area, Company $company,
+		Contract $contract, DayTrip $dayTrip, Employee $employee, Gratification $gratification, Log $log,
+		NumHour $numHour, Periodicity $periodicity, Position $position, TermAndObligatory $termAndObligatory,
+		TypeContract $typeContract)
 	{
 		$this->activateEmployee  = $activateEmployee;
 		$this->area              = $area;
@@ -105,6 +116,7 @@ class ContractController extends Controller
 		$this->dayTrip           = $dayTrip;
 		$this->employee          = $employee;
 		$this->gratification     = $gratification;
+		$this->log               = $log;
 		$this->numHour           = $numHour;
 		$this->periodicity       = $periodicity;
 		$this->position          = $position;
@@ -117,7 +129,7 @@ class ContractController extends Controller
 	 */
 	public function getContracts()
 	{
-		$contracts = $this->contract->all(['employee', 'company']);
+		$contracts = $this->contract->with(['employee', 'company'])->get();
 		
 		return $contracts;
 	}
@@ -135,8 +147,8 @@ class ContractController extends Controller
 	 */
 	public function create()
 	{
-		$companies            = $this->company->whereLists('state', 'enable', 'firm_name');
-		$employees            = $this->employee->pluck('full_name', 'id');
+		$companies            = $this->company->enabled()->pluck('firm_name', 'id');
+		$employees            = $this->employee->enabled()->pluck('full_name', 'id');
 		$positions            = $this->position->pluck('name', 'id');
 		$areas                = $this->area->pluck('name', 'id');
 		$numHours             = $this->numHour->pluck('name', 'id');
@@ -167,17 +179,21 @@ class ContractController extends Controller
 			$contract = $this->contract->create($request->all());
 			$contract->termsAndObligatories()->attach($request->get('term_and_obligatory_id'));
 			$this->activateEmployee->checkStateUpdateEmployee($request->get('employee_id'));
-			
 			DB::commit();
+			
+			return response()->json([
+				'status' => true,
+				'url'    => '/human-resources/contracts'
+			]);
 		} catch ( Exception $e )
 		{
+			$this->log->info("Error store Contract: " . $e->getMessage());
 			DB::rollBack();
+			
+			return response()->json([
+				'status' => false,
+			]);
 		}
-		
-		return response()->json([
-			'status' => true,
-			'url'    => '/human-resources/contracts'
-		]);
 	}
 	
 	/**
@@ -187,7 +203,8 @@ class ContractController extends Controller
 	 */
 	private function defineDateExpiredContract($request)
 	{
-		$typeContract = $this->typeContract->find($request->get('type_contract_id'));
+		$typeContract = $this->typeContract->findOrFail($request->get('type_contract_id'));
+		
 		if ( $typeContract->name != 'Indefinido' )
 		{
 			return $request->request->add(['expires_at' => Carbon::now()->addMonths($typeContract->dur)]);
@@ -203,10 +220,10 @@ class ContractController extends Controller
 	 */
 	public function show($id)
 	{
-		$contract = $this->contract->find($id, [
-			'company', 'employee', 'position', 'area', 'numHour', 'periodicityHour', 'dayTrip',
-			'periodicityWork', 'gratification', 'typeContract', 'termsAndObligatories'
-		]);
+		$contract = $this->contract->with([
+			'company', 'employee', 'position', 'area', 'numHour', 'periodicity', 'dayTrip',
+			'gratification', 'typeContract', 'termsAndObligatories'
+		])->findOrFail($id);
 		
 		return view('human-resources.contracts.show', compact('contract'));
 	}

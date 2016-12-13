@@ -39,8 +39,8 @@
     <div class="col-md-4">
         {{-- Periocidad Horas Form Select --}}
         <div class="form-group">
-            {{ Form::label('periodicity_hour_id', 'Periocidad Horas', ['class' => 'control-label']) }}
-            {{ Form::select('periodicity_hour_id', $periodicities, null, ['class' => 'form-control']) }}
+            {{ Form::label('periodicity_id', 'Periocidad Horas', ['class' => 'control-label']) }}
+            {{ Form::select('periodicity_id', $periodicities, null, ['class' => 'form-control']) }}
         </div>
     </div>
 </div>
@@ -94,15 +94,6 @@
     <span class="visible-xs visible-sm">
         <br />
     </span>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        {{-- Periocidad Laboral Form Select --}}
-        <div class="form-group">
-            {{ Form::label('periodicity_work_id', 'Periocidad Laboral', ['class' => 'control-label']) }}
-            {{ Form::select('periodicity_work_id', $periodicities, null, ['class' => 'form-control']) }}
-        </div>
-    </div>
 </div>
 
 

@@ -3,6 +3,7 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
@@ -16,17 +17,9 @@ class Contract extends Eloquent
      */
     protected $fillable = [
         'company_id', 'employee_id', 'position_id', 'area_id', 'num_hour_id',
-        'periodicity_hour_id', 'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon',
-        'end_afternoon', 'periodicity_work_id', 'salary', 'mobilization', 'collation',
-        'gratification_id', 'type_contract_id', 'expires_at'
+        'periodicity_id', 'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon',
+        'end_afternoon', 'salary', 'mobilization', 'collation', 'gratification_id', 'type_contract_id', 'expires_at'
     ];
-	
-	/**
-	 * @var array
-	 */
-	protected $cascadeDeletes = [
-		'termsAndObligatories'
-	];
 	
 	/**
 	 * @var array
@@ -79,9 +72,9 @@ class Contract extends Eloquent
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function periodicityHour()
+    public function periodicity()
     {
-        return $this->belongsTo(Periodicity::class, 'periodicity_hour_id');
+        return $this->belongsTo(Periodicity::class);
     }
 
     /**
@@ -206,6 +199,11 @@ class Contract extends Eloquent
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value)->format('d-m-Y');
+    }
+    
+    public function getCreatedAtToSpanishFormatAttribute()
+    {
+	    return Date::parse($this->created_at)->format('l j F Y');
     }
 
     /**

@@ -94,7 +94,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 				'name'        => 'La Florida'
 			]);
 			
-			$employee = factory(Employee::class)->create([
+			$employee = factory(Employee::class)->states('enable')->create([
 				'id'                => 1,
 				'nationality_id'    => $this->nationality->id,
 				'marital_status_id' => $this->maritalStatus->id,
@@ -110,7 +110,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 				'is_male'           => 'M',
 				'email_employee'    => 'raulmeza@controlqtime.cl',
 				'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
-				'state'             => 'disable',
 				'created_at'        => '2016-12-12 09:13:21',
 				'updated_at'        => '2016-12-12 10:13:21'
 			]);

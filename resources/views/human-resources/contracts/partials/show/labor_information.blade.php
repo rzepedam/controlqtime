@@ -45,7 +45,7 @@
                                 <tr>
                                     <td class="col-md-3">Periocidad Horas</td>
                                     <td class="text-center">
-                                        <a href="{{ route('periodicities.index') }}" style="color: #757575"><i class="fa fa-repeat" aria-hidden="true"></i> {{ $contract->periodicityHour->name }}</a>
+                                        <a href="{{ route('periodicities.index') }}" style="color: #757575"><i class="fa fa-repeat" aria-hidden="true"></i> {{ $contract->periodicity->name }}</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -67,15 +67,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-3">Periocidad Mensual</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('periodicities.index') }}" style="color: #757575"><i class="fa fa-repeat" aria-hidden="true"></i> {{ $contract->periodicityWork->name }}</a>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td class="col-md-3">Ingresado</td>
                                     <td class="text-center text-capitalize">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i> {{ Date::parse($contract->created_at)->format('l j F Y') }}
+                                        <i class="fa fa-calendar" aria-hidden="true"></i> {{ $contract->created_at_to_spanish_format }}
                                     </td>
                                 </tr>
                             </tbody>

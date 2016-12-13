@@ -17,6 +17,7 @@ use Controlqtime\Core\Entities\DayTrip;
 use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Core\Entities\Vehicle;
+use Controlqtime\Core\Entities\Contract;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Position;
@@ -77,36 +78,35 @@ $factory->define(Address::class, function (Faker\Generator $faker)
 	];
 });
 
-$factory->define(Area::class, function ()
+$factory->define(Area::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'          => 1,
-		'name'        => 'Mantención',
-		'terminal_id' => 1
+		'name'        => $faker->word,
+		'terminal_id' => factory(Terminal::class)->create()->id
 	];
 });
 
-$factory->define(City::class, function ()
+$factory->define(City::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'         => 1,
-		'name'       => 'Santiago',
-		'country_id' => 1
+		'name'       => $faker->city,
+		'country_id' => factory(Country::class)->create()->id
 	];
 });
 
-$factory->define(Commune::class, function ()
+$factory->define(Commune::class, function (Faker\Generator $faker)
 {
 	return [
-		'province_id' => 1,
-		'name'        => 'La Florida'
+		'province_id' => factory(Province::class)->create()->id,
+		'name'        => $faker->word
 	];
 });
 
 $factory->define(Company::class, function (Faker\Generator $faker)
 {
 	return [
-		'type_company_id' => rand(1, 3),
+		'type_company_id' => factory(TypeCompany::class)->create()->id,
 		'rut'             => rand(100, 110) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'firm_name'       => $faker->company . " " . $faker->companySuffix,
 		'gyre'            => $faker->sentence,
@@ -130,17 +130,40 @@ $factory->state(Company::class, 'disable', function ()
 	];
 });
 
-$factory->define(Country::class, function ()
+$factory->define(Contract::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'   => 1,
-		'name' => 'Chile',
+		'company_id'       => factory(Company::class)->states('enable')->create()->id,
+		'employee_id'      => factory(Employee::class)->states('enable')->create()->id,
+		'position_id'      => factory(Position::class)->create()->id,
+		'area_id'          => factory(Area::class)->create()->id,
+		'num_hour_id'      => factory(NumHour::class)->create()->id,
+		'periodicity_id'   => factory(Periodicity::class)->create()->id,
+		'day_trip_id'      => factory(DayTrip::class)->create()->id,
+		'init_morning'     => '09:00',
+		'end_morning'      => '13:00',
+		'init_afternoon'   => '14:00',
+		'end_afternoon'    => '19:00',
+		'salary'           => rand(300000, 2990000),
+		'mobilization'     => rand(100000, 150000),
+		'collation'        => rand(50000, 99000),
+		'gratification_id' => factory(Gratification::class)->create()->id,
+		'type_contract_id' => factory(TypeContract::class)->create()->id,
+		'expires_at'       => Carbon::parse('+1 year')
 	];
 });
 
-$factory->define(DateDocumentationVehicle::class, function ()
+$factory->define(Country::class, function (Faker\Generator $faker)
 {
 	return [
+		'name' => $faker->country,
+	];
+});
+
+$factory->define(DateDocumentationVehicle::class, function (Faker\Generator $faker)
+{
+	return [
+		'vehicle_id'            => factory(Vehicle::class)->states('enable')->create()->id,
 		'emission_padron'       => Carbon::parse('-1 year')->format('d-m-Y'),
 		'expiration_padron'     => Carbon::parse('+1 year')->format('d-m-Y'),
 		'emission_insurance'    => Carbon::parse('-10 weeks')->format('d-m-Y'),
@@ -150,19 +173,17 @@ $factory->define(DateDocumentationVehicle::class, function ()
 	];
 });
 
-$factory->define(DayTrip::class, function ()
+$factory->define(DayTrip::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'   => 1,
-		'name' => 'Full-Time',
+		'name' => $faker->word,
 	];
 });
 
 $factory->define(Degree::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'   => 1,
-		'name' => 'Título Profesional',
+		'name' => $faker->word
 	];
 });
 
@@ -196,6 +217,8 @@ $factory->define(DetailBus::class, function (Faker\Generator $faker)
 $factory->define(DetailVehicle::class, function (Faker\Generator $faker)
 {
 	return [
+		'vehicle_id'   => factory(Vehicle::class)->states('enable')->create()->id,
+		'fuel_id'      => factory(Fuel::class)->create()->id,
 		'color'        => $faker->word,
 		'num_chasis'   => rand(10000000000000, 99999999999999),
 		'num_motor'    => rand(10000000000000, 99999999999999),
@@ -215,10 +238,10 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	$secondName    = $faker->firstName;
 	
 	return [
-		'nationality_id'    => 1,
-		'marital_status_id' => rand(1, 4),
-		'forecast_id'       => rand(1, 14),
-		'pension_id'        => rand(1, 6),
+		'nationality_id'    => factory(Nationality::class)->create()->id,
+		'marital_status_id' => factory(MaritalStatus::class)->create()->id,
+		'forecast_id'       => factory(Forecast::class)->create()->id,
+		'pension_id'        => factory(Pension::class)->create()->id,
 		'male_surname'      => $maleSurname,
 		'female_surname'    => $femaleSurname,
 		'first_name'        => $firstName,
@@ -229,8 +252,21 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'is_male'           => true,
 		'email_employee'    => $faker->unique()->email,
 		'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
-		'state'             => 'disable',
 		'created_at'        => Carbon::now()
+	];
+});
+
+$factory->state(Employee::class, 'enable', function ()
+{
+	return [
+		'state' => 'enable'
+	];
+});
+
+$factory->state(Employee::class, 'disable', function ()
+{
+	return [
+		'state' => 'disable'
 	];
 });
 
@@ -259,11 +295,10 @@ $factory->define(Fuel::class, function (Faker\Generator $faker)
 	];
 });
 
-$factory->define(Gratification::class, function ()
+$factory->define(Gratification::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => '25% legal anticipada con tope de 4.75 SMM',
+		'name'       => $faker->words(20, true),
 		'deleted_at' => null
 	];
 });
@@ -273,7 +308,7 @@ $factory->define(Institution::class, function (Faker\Generator $faker)
 	return [
 		'id'                  => 1,
 		'name'                => 'Universidad Católica de Chile',
-		'type_institution_id' => 1,
+		'type_institution_id' => factory(TypeInstitution::class)->create()->id,
 		'deleted_at'          => null
 	];
 });
@@ -281,7 +316,6 @@ $factory->define(Institution::class, function (Faker\Generator $faker)
 $factory->define(LaborUnion::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
 		'name'       => $faker->word,
 		'deleted_at' => null
 	];
@@ -290,13 +324,14 @@ $factory->define(LaborUnion::class, function (Faker\Generator $faker)
 $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 {
 	return [
+		'company_id'           => factory(Company::class)->states('enable')->create()->id,
 		'male_surname'         => $faker->lastName,
 		'female_surname'       => $faker->lastName,
 		'first_name'           => $faker->firstName,
 		'second_name'          => $faker->firstName,
 		'rut_representative'   => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
 		'birthday'             => $faker->date($format = 'd-m-Y', $max = 'now'),
-		'nationality_id'       => rand(1, 9),
+		'nationality_id'       => factory(Nationality::class)->create()->id,
 		'email_representative' => $faker->email,
 	];
 });
@@ -312,7 +347,6 @@ $factory->define(MaritalStatus::class, function (Faker\Generator $faker)
 $factory->define(MasterFormPieceVehicle::class, function ()
 {
 	return [
-		'id'   => 1,
 		'name' => 'Maestro Formulario Chequeo Vehículos'
 	];
 });
@@ -320,8 +354,8 @@ $factory->define(MasterFormPieceVehicle::class, function ()
 $factory->define(ModelVehicle::class, function (Faker\Generator $faker)
 {
 	return [
+		'trademark_id' => factory(Trademark::class)->create()->id,
 		'name'         => $faker->words(8, true),
-		'trademark_id' => 1,
 		'deleted_at'   => null
 	];
 });
@@ -329,7 +363,6 @@ $factory->define(ModelVehicle::class, function (Faker\Generator $faker)
 $factory->define(Mutuality::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
 		'name'       => $faker->word,
 		'deleted_at' => null
 	];
@@ -345,7 +378,6 @@ $factory->define(Nationality::class, function (Faker\Generator $faker)
 $factory->define(NumHour::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
 		'name'       => $faker->numberBetween(1, 999),
 		'deleted_at' => null
 	];
@@ -362,7 +394,6 @@ $factory->define(Pension::class, function (Faker\Generator $faker)
 $factory->define(Periodicity::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
 		'name'       => $faker->word,
 		'deleted_at' => null
 	];
@@ -371,7 +402,6 @@ $factory->define(Periodicity::class, function (Faker\Generator $faker)
 $factory->define(PieceVehicle::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
 		'name'       => $faker->word,
 		'deleted_at' => null
 	];
@@ -380,7 +410,6 @@ $factory->define(PieceVehicle::class, function (Faker\Generator $faker)
 $factory->define(Position::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
 		'name'       => $faker->word,
 		'deleted_at' => null
 	];
@@ -389,31 +418,29 @@ $factory->define(Position::class, function (Faker\Generator $faker)
 $factory->define(Profession::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
 		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
 
-$factory->define(Province::class, function ()
+$factory->define(Province::class, function (Faker\Generator $faker)
 {
 	return [
-		'region_id' => 1,
-		'name'      => 'Santiago'
+		'region_id' => factory(Region::class)->create()->id,
+		'name'      => $faker->word
 	];
 });
 
-$factory->define(Region::class, function ()
+$factory->define(Region::class, function (Faker\Generator $faker)
 {
 	return [
-		'name' => 'Región Metropolitana de Santiago'
+		'name' => $faker->words(20, true)
 	];
 });
 
 $factory->define(Relationship::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
 		'name'       => 'Padre',
 		'deleted_at' => null
 	];
@@ -423,8 +450,8 @@ $factory->define(Route::class, function (Faker\Generator $faker)
 {
 	return [
 		'id'          => 1,
-		'name'        => 'F05',
-		'terminal_id' => 1,
+		'name'        => strtoupper($faker->randomLetter) . '0' . rand(0, 9),
+		'terminal_id' => factory(Terminal::class)->create()->id,
 		'deleted_at'  => null
 	];
 });
@@ -432,7 +459,6 @@ $factory->define(Route::class, function (Faker\Generator $faker)
 $factory->define(StatePieceVehicle::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
 		'name'       => $faker->word,
 		'deleted_at' => null
 	];
@@ -449,19 +475,16 @@ $factory->define(StateVehicle::class, function (Faker\Generator $faker)
 $factory->define(TermAndObligatory::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'      => 1,
 		'name'    => $faker->sentence,
 		'default' => $faker->boolean
 	];
 });
 
-$factory->define(Terminal::class, function ()
+$factory->define(Terminal::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Juanita',
-		'address'    => 'Av. Juanita 1490',
-		'commune_id' => 1,
+		'name'       => $faker->word,
+		'address'    => $faker->address,
 		'deleted_at' => null,
 		'created_at' => Carbon::now()
 	];
@@ -478,8 +501,7 @@ $factory->define(Trademark::class, function (Faker\Generator $faker)
 $factory->define(TypeCertification::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Certificación Java',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -495,10 +517,9 @@ $factory->define(TypeCompany::class, function (Faker\Generator $faker)
 $factory->define(TypeContract::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Plazo Fijo',
-		'dur'        => $faker->numberBetween(1, 12),
-		'full_name'  => '',
+		'name'       => $faker->word,
+		'dur'        => $faker->numberBetween(2, 12),
+		'full_name'  => $faker->word . ' ' . $faker->numberBetween(2, 12) . ' meses',
 		'deleted_at' => null
 	];
 });
@@ -506,8 +527,7 @@ $factory->define(TypeContract::class, function (Faker\Generator $faker)
 $factory->define(TypeDisability::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Esclerosis Múltiple',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -515,8 +535,7 @@ $factory->define(TypeDisability::class, function (Faker\Generator $faker)
 $factory->define(TypeDisease::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'El Síndrome de la Fatiga Crónica',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -524,8 +543,7 @@ $factory->define(TypeDisease::class, function (Faker\Generator $faker)
 $factory->define(TypeExam::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Glicemia',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -533,8 +551,7 @@ $factory->define(TypeExam::class, function (Faker\Generator $faker)
 $factory->define(TypeInstitution::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Universidad',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -542,8 +559,7 @@ $factory->define(TypeInstitution::class, function (Faker\Generator $faker)
 $factory->define(TypeProfessionalLicense::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Licencia B',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -551,8 +567,7 @@ $factory->define(TypeProfessionalLicense::class, function (Faker\Generator $fake
 $factory->define(TypeSpeciality::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Muebles y terminaciones de la madera',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
@@ -560,23 +575,30 @@ $factory->define(TypeSpeciality::class, function (Faker\Generator $faker)
 $factory->define(TypeVehicle::class, function (Faker\Generator $faker)
 {
 	return [
-		'name'       => $faker->word,
-		'deleted_at' => null
+		'name'            => $faker->word,
+		'engine_cubic_id' => factory(EngineCubic::class)->create()->id,
+		'weight_id'       => factory(Weight::class)->create()->id,
+		'deleted_at'      => null
 	];
 });
 
 $factory->define(User::class, function (Faker\Generator $faker)
 {
 	return [
-		'employee_id' => 1,
+		'employee_id' => factory(Employee::class)->states('enable')->create()->id,
 		'email'       => $faker->email,
-		'password'    => bcrypt("$faker->password")
+		'password'    => bcrypt("$faker->email")
 	];
 });
 
 $factory->define(Vehicle::class, function (Faker\Generator $faker)
 {
 	return [
+		'user_id'          => factory(User::class)->create()->id,
+		'type_vehicle_id'  => factory(TypeVehicle::class)->create()->id,
+		'model_vehicle_id' => factory(ModelVehicle::class)->create()->id,
+		'company_id'       => factory(Company::class)->states('enable')->create()->id,
+		'state_vehicle_id' => factory(StateVehicle::class)->create()->id,
 		'acquisition_date' => Carbon::now()->format('d-m-Y'),
 		'inscription_date' => Carbon::now()->format('d-m-Y'),
 		'year'             => $faker->year,
@@ -603,7 +625,7 @@ $factory->state(Vehicle::class, 'disable', function ()
 $factory->define(Weight::class, function (Faker\Generator $faker)
 {
 	return [
-		'name'       => $faker->words(10, true),
+		'name'       => $faker->word,
 		'acr'        => $faker->randomLetter . $faker->randomLetter,
 		'deleted_at' => null
 	];
