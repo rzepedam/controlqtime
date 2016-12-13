@@ -54,7 +54,7 @@
                             <tr>
                                 <td>Inicio Actividad</td>
                                 <td class="text-center text-capitalize"><i class="fa fa-calendar"></i>
-                                    {{ Date::parse($company->start_act)->format('l j F Y') }}
+                                    {{ $company->start_act_to_spanish_format }}
                                 </td>
                             </tr>
                             <tr>
@@ -66,7 +66,7 @@
                             <tr>
                                 <td class="col-md-3">Ingresado</td>
                                 <td class="text-center text-capitalize">
-                                    {{ Date::parse($company->created_at)->format('l j F Y H:i:s') }}
+                                    {{ $company->created_at_to_spanish_format }}
                                 </td>
                             </tr>
                         </tbody>

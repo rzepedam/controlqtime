@@ -13,7 +13,10 @@ class EngineCubicTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->engineCubic = factory(EngineCubic::class)->create();
+		$this->engineCubic = factory(EngineCubic::class)->create([
+			'name' => 'Caballos de fuerza',
+			'acr'  => 'hp'
+		]);
 	}
 	
 	function test_url_engine_cubic()

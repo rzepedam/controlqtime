@@ -20,7 +20,7 @@
                             <tr>
                                 <td>Edad</td>
                                 <td class="text-center">
-                                    {{ $company->legalRepresentative->birthday->age . " años" }}
+                                    {{ $company->legalRepresentative->age . " años" }}
                                 </td>
                             </tr>
                             <tr>

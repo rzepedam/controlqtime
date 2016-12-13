@@ -23,7 +23,7 @@
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
             </div>
-            {{ Form::text('start_act', Route::is('companies.create') ? null : $company->start_act->format('d-m-Y'), ['class' => 'form-control text-center', 'readonly']) }}
+            {{ Form::text('start_act', Route::is('companies.create') ? null : $company->start_act, ['class' => 'form-control text-center', 'readonly']) }}
         </div>
     </div>
     <div class="col-sm-6 col-md-3 form-group">

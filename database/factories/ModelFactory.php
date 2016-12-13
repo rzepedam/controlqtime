@@ -3,10 +3,10 @@
 use Carbon\Carbon;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\City;
-use Controlqtime\Core\Entities\Degree;
 use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Core\Entities\User;
 use Controlqtime\Core\Entities\Route;
+use Controlqtime\Core\Entities\Degree;
 use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Entities\Weight;
 use Controlqtime\Core\Entities\Address;
@@ -16,12 +16,14 @@ use Controlqtime\Core\Entities\Country;
 use Controlqtime\Core\Entities\DayTrip;
 use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\Pension;
+use Controlqtime\Core\Entities\Vehicle;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Position;
 use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\Terminal;
 use Controlqtime\Core\Entities\TypeExam;
+use Controlqtime\Core\Entities\DetailBus;
 use Controlqtime\Core\Entities\Mutuality;
 use Controlqtime\Core\Entities\Trademark;
 use Controlqtime\Core\Entities\LaborUnion;
@@ -36,7 +38,9 @@ use Controlqtime\Core\Entities\TypeVehicle;
 use Controlqtime\Core\Entities\ModelVehicle;
 use Controlqtime\Core\Entities\PieceVehicle;
 use Controlqtime\Core\Entities\Relationship;
+use Controlqtime\Core\Entities\StateVehicle;
 use Controlqtime\Core\Entities\TypeContract;
+use Controlqtime\Core\Entities\DetailVehicle;
 use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Entities\TypeDisability;
@@ -50,6 +54,7 @@ use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Entities\DetailAddressCompany;
 use Controlqtime\Core\Entities\MasterFormPieceVehicle;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
+use Controlqtime\Core\Entities\DateDocumentationVehicle;
 use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
 
 $factory->define(AccessControlApi::class, function (Faker\Generator $faker)
@@ -98,14 +103,6 @@ $factory->define(Commune::class, function ()
 	];
 });
 
-$factory->define(Country::class, function ()
-{
-	return [
-		'id'   => 1,
-		'name' => 'Chile',
-	];
-});
-
 $factory->define(Company::class, function (Faker\Generator $faker)
 {
 	return [
@@ -117,7 +114,40 @@ $factory->define(Company::class, function (Faker\Generator $faker)
 		'muni_license'    => strtoupper($faker->word),
 		'email_company'   => $faker->email,
 	];
-	
+});
+
+$factory->state(Company::class, 'enable', function ()
+{
+	return [
+		'state' => 'enable'
+	];
+});
+
+$factory->state(Company::class, 'disable', function ()
+{
+	return [
+		'state' => 'disable'
+	];
+});
+
+$factory->define(Country::class, function ()
+{
+	return [
+		'id'   => 1,
+		'name' => 'Chile',
+	];
+});
+
+$factory->define(DateDocumentationVehicle::class, function ()
+{
+	return [
+		'emission_padron'       => Carbon::parse('-1 year')->format('d-m-Y'),
+		'expiration_padron'     => Carbon::parse('+1 year')->format('d-m-Y'),
+		'emission_insurance'    => Carbon::parse('-10 weeks')->format('d-m-Y'),
+		'expiration_insurance'  => Carbon::parse('+2 years')->format('d-m-Y'),
+		'emission_permission'   => Carbon::parse('-3 years')->format('d-m-Y'),
+		'expiration_permission' => Carbon::parse('+5 years')->format('d-m-Y')
+	];
 });
 
 $factory->define(DayTrip::class, function ()
@@ -155,6 +185,28 @@ $factory->define(DetailAddressLegalEmployee::class, function (Faker\Generator $f
 	];
 });
 
+$factory->define(DetailBus::class, function (Faker\Generator $faker)
+{
+	return [
+		'carr'       => $faker->word,
+		'num_plazas' => rand(50, 100),
+	];
+});
+
+$factory->define(DetailVehicle::class, function (Faker\Generator $faker)
+{
+	return [
+		'color'        => $faker->word,
+		'num_chasis'   => rand(10000000000000, 99999999999999),
+		'num_motor'    => rand(10000000000000, 99999999999999),
+		'km'           => rand(1, 200000),
+		'engine_cubic' => rand(1000, 3000),
+		'weight'       => rand(1000, 5000),
+		'tag'          => rand(10000000000000, 99999999999999),
+		'obs'          => $faker->paragraph
+	];
+});
+
 $factory->define(Employee::class, function (Faker\Generator $faker)
 {
 	$maleSurname   = $faker->lastName;
@@ -177,16 +229,16 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 		'is_male'           => true,
 		'email_employee'    => $faker->unique()->email,
 		'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
-		'state'             => 'disable'
+		'state'             => 'disable',
+		'created_at'        => Carbon::now()
 	];
 });
 
 $factory->define(EngineCubic::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Caballos de fuerza',
-		'acr'        => 'hp',
+		'name'       => $faker->words(10, true),
+		'acr'        => $faker->randomLetter . $faker->randomLetter,
 		'deleted_at' => null
 	];
 });
@@ -199,11 +251,10 @@ $factory->define(Forecast::class, function (Faker\Generator $faker)
 	];
 });
 
-$factory->define(Fuel::class, function ()
+$factory->define(Fuel::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => '93',
+		'name'       => rand(90, 99),
 		'deleted_at' => null
 	];
 });
@@ -269,8 +320,7 @@ $factory->define(MasterFormPieceVehicle::class, function ()
 $factory->define(ModelVehicle::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'           => 1,
-		'name'         => $faker->word,
+		'name'         => $faker->words(8, true),
 		'trademark_id' => 1,
 		'deleted_at'   => null
 	];
@@ -388,6 +438,14 @@ $factory->define(StatePieceVehicle::class, function (Faker\Generator $faker)
 	];
 });
 
+$factory->define(StateVehicle::class, function (Faker\Generator $faker)
+{
+	return [
+		'name'       => $faker->word,
+		'deleted_at' => null
+	];
+});
+
 $factory->define(TermAndObligatory::class, function (Faker\Generator $faker)
 {
 	return [
@@ -412,8 +470,7 @@ $factory->define(Terminal::class, function ()
 $factory->define(Trademark::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => $faker->word,
+		'name'       => $faker->words(10, true),
 		'deleted_at' => null
 	];
 });
@@ -503,11 +560,8 @@ $factory->define(TypeSpeciality::class, function (Faker\Generator $faker)
 $factory->define(TypeVehicle::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'              => 1,
-		'name'            => 'Bus',
-		'engine_cubic_id' => 1,
-		'weight_id'       => 1,
-		'deleted_at'      => null
+		'name'       => $faker->word,
+		'deleted_at' => null
 	];
 });
 
@@ -520,12 +574,37 @@ $factory->define(User::class, function (Faker\Generator $faker)
 	];
 });
 
+$factory->define(Vehicle::class, function (Faker\Generator $faker)
+{
+	return [
+		'acquisition_date' => Carbon::now()->format('d-m-Y'),
+		'inscription_date' => Carbon::now()->format('d-m-Y'),
+		'year'             => $faker->year,
+		'patent'           => strtoupper($faker->randomLetter . $faker->randomLetter) . rand(1, 99) . rand(1, 99),
+		'code'             => rand(10000000000000, 99999999999999),
+		'created_at'       => Carbon::now()
+	];
+});
+
+$factory->state(Vehicle::class, 'enable', function ()
+{
+	return [
+		'state' => 'enable'
+	];
+});
+
+$factory->state(Vehicle::class, 'disable', function ()
+{
+	return [
+		'state' => 'disable'
+	];
+});
+
 $factory->define(Weight::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => 'Kilógramo',
-		'acr'        => 'kg',
+		'name'       => $faker->words(10, true),
+		'acr'        => $faker->randomLetter . $faker->randomLetter,
 		'deleted_at' => null
 	];
 });

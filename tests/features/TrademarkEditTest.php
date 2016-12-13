@@ -13,7 +13,9 @@ class TrademarkEditTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->trademark = factory(Trademark::class)->create();
+		$this->trademark = factory(Trademark::class)->create([
+			'name' => 'Mercedes Benz'
+		]);
 	}
 	
 	function test_edit_trademark()

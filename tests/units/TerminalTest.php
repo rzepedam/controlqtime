@@ -13,7 +13,7 @@ class TerminalTest extends TestCase
 		$this->signIn();
 	}
 	
-    function test_can_get_formatted_date()
+    function test_can_get_formatted_date_terminal()
     {
         $terminal = factory(Terminal::class)->create([
             'created_at' => '2016-12-06 08:50:00',

@@ -54,19 +54,19 @@
                     <tr>
                         <td class="col-md-3">Edad</td>
                         <td class="text-center">
-                            {{ $employee->birthday->age . " años" }}
+                            {{ $employee->age . " años" }}
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-3">Fecha de Nacimiento</td>
                         <td class="text-center text-capitalize"><i class="fa fa-calendar" aria-hidden="true"></i>
-                            {{ Date::parse($employee->birthday)->format('l j F Y') }}
+                            {{ $employee->birthday_to_spanish_format }}
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-3">Género</td>
                         <td class="text-center">
-                            {{ $employee->gender->name }}
+                            {{ $employee->is_male }}
                         </td>
                     </tr>
                     <tr>
@@ -98,13 +98,13 @@
                     <tr>
                         <td class="col-md-3">Ingresado</td>
                         <td class="text-center text-capitalize">
-                            {{ Date::parse($employee->created_at)->format('l j F Y H:i:s') }}
+                            {{ $employee->created_at_to_spanish_format }}
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-3">Actualizado</td>
                         <td class="text-center text-capitalize">
-                            {{ Date::parse($employee->updated_at)->format('l j F Y H:i:s') }}
+                            {{ $employee->updated_at_to_spanish_format }}
                         </td>
                     </tr>
                     </tbody>

@@ -6,7 +6,7 @@
 
 @stop
 
-@section('title_header') Detalle Trabajador : <span class="text-primary">{{ $employee->id }}</span> @stop
+@section('title_header') Detalle Trabajador: <span class="text-primary">{{ $employee->id }}</span> @stop
 
 @section('breadcumb')
     <li><a href="{{ route('human-resources') }}"><i class="fa fa-street-view"></i> Recursos Humanos</a></li>

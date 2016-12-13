@@ -342,11 +342,11 @@ class EmployeeController extends Controller
 		{
 			$employee = $this->employee->create(Session::get('step1'));
 			
-			$user     = $employee->user()->create([
+			$user    = $employee->user()->create([
 				'email'    => Session::get('email_employee'),
 				'password' => bcrypt(Session::get('email_employee'))
 			]);
-			$address  = $employee->address()->create(Session::get('step1'));
+			$address = $employee->address()->create(Session::get('step1'));
 			$address->detailAddressLegalEmployee()->create(Session::get('step1'));
 			$employee->createContacts(Session::get('step1'));
 			$employee->createRelationships(Session::get('step1'));
@@ -565,14 +565,14 @@ class EmployeeController extends Controller
 	 */
 	public function show($id)
 	{
-		$employee = $this->employee->find($id, [
+		$employee = $this->employee->with([
 			'pension', 'forecast', 'address.commune.province.region', 'contactEmployees.relationship',
 			'familyRelationships.relationship', 'address.detailAddressLegalEmployee', 'studies.degree',
 			'studies.detailCollegeStudy.institution', 'studies.detailSchoolStudy', 'studies.detailTechnicalStudy',
 			'certifications.imagesable', 'specialities.imagesable', 'professionalLicenses.imagesable',
 			'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable',
 			'familyResponsabilities.imagesable'
-		]);
+		])->findOrFail($id);
 		
 		return view('human-resources.employees.show', compact('employee'));
 	}

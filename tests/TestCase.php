@@ -104,13 +104,15 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 				'female_surname'    => 'Mora',
 				'first_name'        => 'Raúl',
 				'second_name'       => 'Elías',
-				'full_name'         => "Raúl Elías Meza Mora",
+				'full_name'         => 'Raúl Elías Meza Mora',
 				'rut'               => '17032680-6',
 				'birthday'          => '11-06-1989',
-				'is_male'            => 'M',
+				'is_male'           => 'M',
 				'email_employee'    => 'raulmeza@controlqtime.cl',
 				'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
-				'state'             => 'disable'
+				'state'             => 'disable',
+				'created_at'        => '2016-12-12 09:13:21',
+				'updated_at'        => '2016-12-12 10:13:21'
 			]);
 			
 			$this->address = factory(Address::class)->create([

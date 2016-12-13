@@ -19,9 +19,21 @@ class TypeVehicleEditTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->engineCubic = factory(EngineCubic::class)->create();
-		$this->weight      = factory(Weight::class)->create();
-		$this->typeVehicle = factory(TypeVehicle::class)->create();
+		$this->engineCubic = factory(EngineCubic::class)->create([
+			'name' => 'Caballos de fuerza',
+			'acr'  => 'hp'
+		]);
+		
+		$this->weight = factory(Weight::class)->create([
+			'name' => 'Kilógramo',
+			'acr'  => 'kg',
+		]);
+		
+		$this->typeVehicle = factory(TypeVehicle::class)->create([
+			'name'            => 'Bus',
+			'engine_cubic_id' => $this->engineCubic->id,
+			'weight_id'       => $this->weight->id,
+		]);
 	}
 	
 	function test_edit_type_vehicle()

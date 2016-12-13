@@ -12,7 +12,7 @@ class LegalRepresentativeTest extends TestCase
 		$this->signIn();
 	}
 	
-	function test_can_formatted_rut()
+	function test_can_formatted_rut_legal_representative()
 	{
 		$legalRepresentative = factory(\Controlqtime\Core\Entities\LegalRepresentative::class)->create([
 			'rut_representative' => '17.638.322-4'
@@ -24,7 +24,16 @@ class LegalRepresentativeTest extends TestCase
 		]);
 	}
 	
-	function test_can_formatted_birthday()
+	function test_get_rut_with_points_legal_representative()
+	{
+		$legalRepresentative = factory(\Controlqtime\Core\Entities\LegalRepresentative::class)->create([
+			'rut_representative' => '17.638.322-4'
+		]);
+		
+		$this->assertEquals('17.638.322-4', $legalRepresentative->rut_representative);
+	}
+	
+	function test_can_formatted_birthday_legalRepresentative()
 	{
 		$legalRepresentative = factory(\Controlqtime\Core\Entities\LegalRepresentative::class)->create([
 			'birthday' => '11-04-1980',
@@ -34,5 +43,14 @@ class LegalRepresentativeTest extends TestCase
 			'id'       => $legalRepresentative->id,
 			'birthday' => '1980-04-11'
 		]);
+	}
+	
+	function test_get_age_legal_representative()
+	{
+		$legalRepresentative = factory(\Controlqtime\Core\Entities\LegalRepresentative::class)->create([
+			'birthday' => '11-04-1980',
+		]);
+		
+		$this->assertEquals('36', $legalRepresentative->age);
 	}
 }

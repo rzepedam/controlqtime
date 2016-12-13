@@ -3,6 +3,7 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
@@ -331,9 +332,56 @@ class Employee extends Eloquent
 		return FormatField::rut($value);
 	}
 	
+	/**
+	 * @param $value '1980-12-01'
+	 *
+	 * @return string '01-12-1980'
+	 */
 	public function getBirthdayAttribute($value)
 	{
 		return Carbon::parse($value)->format('d-m-Y');
+	}
+	
+	/**
+	 * @return string 'Lunes 12 Diciembre 2016'
+	 */
+	public function getBirthdayToSpanishFormatAttribute()
+	{
+		return Date::parse($this->birthday)->format('l j F Y');
+	}
+	
+	/**
+	 * @return mixed '36'
+	 */
+	public function getAgeAttribute()
+	{
+		return Carbon::parse($this->birthday)->age;
+	}
+	
+	/**
+	 * @return string 'Lunes 12 Diciembre 2016'
+	 */
+	public function getCreatedAtToSpanishFormatAttribute()
+	{
+		return Date::parse($this->created_at)->format('l j F Y H:i:s');
+	}
+	
+	/**
+	 * @return string 'Lunes 12 Diciembre 2016'
+	 */
+	public function getUpdatedAtToSpanishFormatAttribute()
+	{
+		return Date::parse($this->updated_at)->format('l j F Y H:i:s');
+	}
+	
+	/**
+	 * @param $value 'true' or 'false'
+	 *
+	 * @return string 'Masculino' or 'Femenino'
+	 */
+	public function getIsMaleAttribute($value)
+	{
+	    return $value ? 'Masculino' : 'Femenino';
 	}
 	
 	/**

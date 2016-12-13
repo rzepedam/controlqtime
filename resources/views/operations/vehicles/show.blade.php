@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title_header') Detalle Vehículo : <span class="text-primary">{{ $vehicle->id }}</span> @stop
+@section('title_header') Detalle Vehículo: <span class="text-primary">{{ $vehicle->id }}</span> @stop
 
 @section('css')
 

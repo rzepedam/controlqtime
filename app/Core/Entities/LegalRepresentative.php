@@ -124,5 +124,13 @@ class LegalRepresentative extends Eloquent
     {
         return FormatField::rut($value);
     }
+	
+	/**
+	 * @return mixed '36'
+	 */
+	public function getAgeAttribute()
+    {
+        return $this->birthday->age;
+    }
     
 }

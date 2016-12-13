@@ -14,14 +14,7 @@ class DetailVehicle extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'color', 'fuel_id', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'tag', 'obs'
-	];
-	
-	/**
-	 * @var array
-	 */
-	protected $cascadeDeletes = [
-		'detailBus'
+		'vehicle_id', 'color', 'fuel_id', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'tag', 'obs'
 	];
 	
     /**
@@ -50,7 +43,7 @@ class DetailVehicle extends Eloquent
 	 */
 	public function detailBus()
     {
-        return $this->hasOne(DetailBuses::class);
+        return $this->hasOne(DetailBus::class);
     }
 
     /**

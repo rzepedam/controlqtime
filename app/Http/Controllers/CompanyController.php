@@ -264,10 +264,10 @@ class CompanyController extends Controller
 	 */
 	public function show($id)
 	{
-		$company = $this->company->find($id, [
+		$company = $this->company->with([
 			'address.commune.province.region', 'legalRepresentative.nationality', 'typeCompany',
 			'address.detailAddressLegalEmployee', 'address.detailAddressCompany'
-		]);
+		])->findOrFail($id);
 		
 		return view('administration.companies.show', compact('company'));
 	}

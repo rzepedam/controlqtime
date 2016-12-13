@@ -16,8 +16,13 @@ class ModelVehicleTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->trademark    = factory(Trademark::class)->create();
-		$this->modelVehicle = factory(ModelVehicle::class)->create();
+		$this->trademark    = factory(Trademark::class)->create([
+			'name' => 'Mercedes Benz'
+		]);
+		$this->modelVehicle = factory(ModelVehicle::class)->create([
+			'name'         => 'Caio Foz',
+			'trademark_id' => $this->trademark->id,
+		]);
 	}
 	
 	function test_url_model_vehicle()
@@ -109,12 +114,12 @@ class ModelVehicleTest extends TestCase
 		
 		$this->visit('maintainers/model-vehicles/create')
 			->type($this->modelVehicle->name, 'name')
-			->select($this->modelVehicle->trademark_id, '#trademark_id')
+			->select($this->trademark->id, '#trademark_id')
 			->press('Guardar')
 			->seeInDatabase('model_vehicles', [
 				'id'           => $this->modelVehicle->id,
-				'name'         => $this->modelVehicle->name,
-				'trademark_id' => $this->modelVehicle->trademark_id,
+				'name'         => 'Caio Foz',
+				'trademark_id' => $this->trademark->id,
 				'deleted_at'   => null
 			]);
 	}

@@ -12,9 +12,9 @@ class DetailBus extends Eloquent
 	/**
 	 * @var array
 	 */
-	protected $fillable =[
-		'num_plazas', 'carr'
-    ];
+	protected $fillable = [
+		'detail_vehicle_id', 'carr', 'num_plazas'
+	];
 	
 	/**
 	 * @var bool
@@ -32,9 +32,9 @@ class DetailBus extends Eloquent
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function detailBus()
+	public function detailVehicle()
 	{
-        return $this->belongsTo(DetailVehicle::class);
+		return $this->belongsTo(DetailVehicle::class);
 	}
 	
 	/**

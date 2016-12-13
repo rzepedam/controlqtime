@@ -53,11 +53,11 @@
                             </tr>
                             <tr>
                                 <td class="col-md-4">Fecha Adquisición</td>
-                                <td class="text-center"><i class="fa fa-calendar"></i> {{ $vehicle->acquisition_date }}</td>
+                                <td class="text-center"><i class="fa fa-calendar"></i> {{ $vehicle->acquisition_date_to_spanish_format }}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">Fecha Inscripción</td>
-                                <td class="text-center"><i class="fa fa-calendar"></i> {{ $vehicle->inscription_date }}</td>
+                                <td class="text-center"><i class="fa fa-calendar"></i> {{ $vehicle->inscription_date_to_spanish_format }}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">Año</td>
@@ -116,7 +116,7 @@
                             <tr>
                                 <td class="col-md-4">Ingresado</td>
                                 <td class="text-center text-capitalize">
-                                    {{ Date::parse($vehicle->created_at)->format('l j F Y H:i') . ' hrs - ' . $vehicle->user->employee->full_name }}
+                                    {{ $vehicle->created_at_to_spanish_format . ' hrs - ' . $vehicle->user->employee->full_name }}
                                 </td>
                             </tr>
                             </tbody>

@@ -39,26 +39,26 @@ class VehicleRequest extends SanitizedRequest
 	 */
 	public function rules()
 	{
-		switch ($this->method())
+		switch ( $this->method() )
 		{
 			case 'POST':
 			{
 				$rules = [
-					'model_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'type_vehicle_id'       => 'required|regex:/[0-9 -()+]+$/',
+					'model_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'company_id'            => 'required|regex:/[0-9 -()+]+$/',
 					'state_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'acquisition_date'      => 'required|date',
 					'inscription_date'      => 'required|date',
 					'color'                 => 'required|max:30',
 					'year'                  => 'required|max:4',
-					'patent'                => 'required|max:15|unique:vehicles',
 					'fuel_id'               => 'required|regex:/[0-9 -()+]+$/',
+					'patent'                => 'required|max:15|unique:vehicles',
 					'num_chasis'            => 'required|max:17',
 					'num_motor'             => 'required|max:12',
 					'km'                    => 'required|max:7|regex:/[0-9 -()+]+$/',
 					'engine_cubic'          => 'required|max:4|regex:/[0-9 -()+]+$/',
-					'weight'                => 'required|regex:/[0-9 -()+]+$/',
+					'weight'                => 'required|max:6|regex:/[0-9 -()+]+$/',
 					'tag'                   => 'required|max:25',
 					'code'                  => 'required|max:20',
 					'emission_padron'       => 'required|date',
@@ -69,7 +69,7 @@ class VehicleRequest extends SanitizedRequest
 					'expiration_permission' => 'required|date'
 				];
 				
-				if (Request::get('type_vehicle_id') == 2)
+				if ( Request::get('type_vehicle_id') == 2 )
 				{
 					$rules['carr']       = 'required|max:20';
 					$rules['num_plazas'] = 'required|max:3|regex:/[0-9 -()+]+$/';
@@ -81,16 +81,16 @@ class VehicleRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				$rules = [
-					'model_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'type_vehicle_id'       => 'required|regex:/[0-9 -()+]+$/',
+					'model_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'company_id'            => 'required|regex:/[0-9 -()+]+$/',
 					'state_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'acquisition_date'      => 'required|date',
 					'inscription_date'      => 'required|date',
 					'color'                 => 'required|max:30',
 					'year'                  => 'required|max:4',
-					'patent'                => 'required|max:15|unique:vehicles,patent,' . $this->route->getParameter('vehicle'),
 					'fuel_id'               => 'required|regex:/[0-9 -()+]+$/',
+					'patent'                => 'required|max:15|unique:vehicles,patent,' . $this->route->getParameter('vehicle'),
 					'num_chasis'            => 'required|max:17',
 					'num_motor'             => 'required|max:12',
 					'km'                    => 'required|max:7|regex:/[0-9 -()+]+$/',
@@ -106,7 +106,7 @@ class VehicleRequest extends SanitizedRequest
 					'expiration_permission' => 'required|date'
 				];
 				
-				if (Request::get('type_vehicle_id') == 2)
+				if ( Request::get('type_vehicle_id') == 2 )
 				{
 					$rules['carr']       = 'required|max:20';
 					$rules['num_plazas'] = 'required|max:3|regex:/[0-9 -()+]+$/';

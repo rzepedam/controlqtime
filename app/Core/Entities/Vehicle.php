@@ -3,27 +3,20 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Controlqtime\Core\Traits\WhereMethodsTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Vehicle extends Eloquent
 {
-	use SoftDeletes, WhereMethodsTrait;
+	use SoftDeletes;
 	
 	/**
 	 * @var array
 	 */
 	protected $fillable = [
-		'user_id', 'model_vehicle_id', 'type_vehicle_id', 'company_id', 'state_vehicle_id',
+		'user_id', 'type_vehicle_id', 'model_vehicle_id', 'company_id', 'state_vehicle_id',
 		'acquisition_date', 'inscription_date', 'year', 'patent', 'code'
-	];
-	
-	/**
-	 * @var array
-	 */
-	protected $cascadeDeletes = [
-		'detailVehicle', 'dateDocumentationVehicle', 'imagesable', 'checkVehicleForms'
 	];
 	
 	/**
@@ -140,6 +133,30 @@ class Vehicle extends Eloquent
 	public function getAcquisitionDateAttribute($value)
 	{
 		return Carbon::parse($value)->format('d-m-Y');
+	}
+	
+	/**
+	 * @return mixed 'lunes 12 diciembre 2016'
+	 */
+	public function getAcquisitionDateToSpanishFormatAttribute()
+	{
+	    return Date::parse($this->acquisition_date)->format('l j F Y');
+	}
+	
+	/**
+	 * @return mixed 'lunes 12 diciembre 2016'
+	 */
+	public function getInscriptionDateToSpanishFormatAttribute()
+	{
+		return Date::parse($this->inscription_date)->format('l j F Y');
+	}
+	
+	/**
+	 * @return mixed 'lunes 12 diciembre 2016'
+	 */
+	public function getCreatedAtToSpanishFormatAttribute()
+	{
+		return Date::parse($this->created_at)->format('l j F Y H:i:s');
 	}
 	
 	/**

@@ -13,7 +13,10 @@ class WeightEditTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->weight = factory(Weight::class)->create();
+		$this->weight = factory(Weight::class)->create([
+			'name' => 'Kilógramo',
+			'acr'  => 'kg'
+		]);
 	}
 	
 	function test_edit_weight()

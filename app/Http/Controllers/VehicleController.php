@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Fuel;
@@ -114,7 +115,7 @@ class VehicleController extends Controller
 	 */
 	public function getVehicles()
 	{
-		$vehicles = $this->vehicle->all(['typeVehicle', 'modelVehicle']);
+		$vehicles = $this->vehicle->with(['typeVehicle', 'modelVehicle'])->get();
 		
 		return $vehicles;
 	}
@@ -132,12 +133,12 @@ class VehicleController extends Controller
 	 */
 	public function create()
 	{
-		$companies     = $this->company->whereLists('state', 'enable', 'firm_name');
-		$fuels         = $this->fuel->lists('name', 'id');
-		$modelVehicles = $this->modelVehicle->lists('name', 'id');
-		$stateVehicles = $this->stateVehicle->lists('name', 'id');
-		$trademarks    = $this->trademark->lists('name', 'id');
-		$typeVehicles  = $this->typeVehicle->lists('name', 'id');
+		$companies     = $this->company->enabled()->pluck('firm_name', 'id');
+		$fuels         = $this->fuel->pluck('name', 'id');
+		$modelVehicles = $this->modelVehicle->pluck('name', 'id');
+		$stateVehicles = $this->stateVehicle->pluck('name', 'id');
+		$trademarks    = $this->trademark->pluck('name', 'id');
+		$typeVehicles  = $this->typeVehicle->pluck('name', 'id');
 		
 		return view('operations.vehicles.create', compact(
 			'trademarks', 'modelVehicles', 'typeVehicles', 'fuels', 'companies', 'stateVehicles'
@@ -159,7 +160,7 @@ class VehicleController extends Controller
 			$vehicle       = $this->vehicle->create($request->all());
 			$detailVehicle = $vehicle->detailVehicle()->create($request->all());
 			
-			if ( $request->get('typeVehicle_id') == 2 )
+			if ( $request->get('type_vehicle_id') == 2 )
 			{
 				$detailVehicle->detailBus()->create($request->all());
 			}
@@ -186,13 +187,16 @@ class VehicleController extends Controller
 	 */
 	public function edit($id)
 	{
-		$vehicle       = $this->vehicle->find($id, ['modelVehicle.trademark']);
-		$trademarks    = $this->trademark->lists('name', 'id');
-		$modelVehicles = $this->trademark->findModelVehicles($vehicle->modelVehicle->trademark->id);
-		$typeVehicles  = $this->typeVehicle->whereLists('id', $vehicle->typeVehicle_id, 'name');
-		$companies     = $this->company->whereLists('state', 'enable', 'firm_name');
-		$fuels         = $this->fuel->lists('name', 'id');
-		$stateVehicles = $this->stateVehicle->lists('name', 'id');
+		$vehicle = $this->vehicle->with([
+			'modelVehicle.trademark'
+		])->findOrFail($id);
+		
+		$trademarks    = $this->trademark->pluck('name', 'id');
+		$modelVehicles = $this->trademark->findOrFail($vehicle->modelVehicle->trademark->id)->modelVehicles->pluck('name', 'id');
+		$typeVehicles  = $this->typeVehicle->where('id', $vehicle->typeVehicle->id)->pluck('name', 'id');
+		$companies     = $this->company->enabled()->pluck('firm_name', 'id');
+		$fuels         = $this->fuel->pluck('name', 'id');
+		$stateVehicles = $this->stateVehicle->pluck('name', 'id');
 		
 		return view('operations.vehicles.edit', compact(
 			'vehicle', 'typeVehicles', 'trademarks', 'modelVehicles', 'companies', 'fuels', 'stateVehicles'
@@ -207,19 +211,21 @@ class VehicleController extends Controller
 	 */
 	public function update(VehicleRequest $request, $id)
 	{
+		$request->request->add(['user_id' => auth()->user()->id]);
 		DB::beginTransaction();
 		
 		try
 		{
-			$vehicle       = $this->vehicle->update($request->all(), $id);
-			$detailVehicle = $this->detailVehicle->update($request->all(), $vehicle->detailVehicle->id);
+			$vehicle = $this->vehicle->findOrFail($id);
+			$vehicle->update($request->all());
+			$vehicle->detailVehicle->update($request->all());
 			
-			if ( $request->get('typeVehicle_id') == 2 )
+			if ( $request->get('type_vehicle_id') == 2 )
 			{
-				$this->detailBus->update($request->all(), $detailVehicle->detailBus->id);
+				$vehicle->detailVehicle->detailBus->update($request->all());
 			}
 			
-			$this->dateDocumentationVehicle->update($request->all(), $vehicle->dateDocumentationVehicle->id);
+			$vehicle->dateDocumentationVehicle->update($request->all());
 			
 			DB::commit();
 		} catch ( Exception $e )
@@ -240,9 +246,9 @@ class VehicleController extends Controller
 	 */
 	public function show($id)
 	{
-		$vehicle = $this->vehicle->find($id, [
+		$vehicle = $this->vehicle->with([
 			'modelVehicle', 'typeVehicle', 'detailVehicle.detailBus', 'company', 'user.employee'
-		]);
+		])->findOrFail($id);
 		
 		return view('operations.vehicles.show', compact('vehicle'));
 	}
