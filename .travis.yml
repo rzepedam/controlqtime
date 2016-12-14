@@ -5,7 +5,7 @@ php:
 
 before_script:
   - cp .env.travis .env
-  - mysql -e 'create database controqtime_tests;'
+  - mysql -e 'create database controlqtime_tests;'
   - composer install --prefer-dist --no-interaction
   - php artisan migrate --force
   - php artisan passport:install
