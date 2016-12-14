@@ -107,7 +107,8 @@ class TypeContractController extends Controller
 	{
 		try
 		{
-			$this->typeContract->findOrFail($id)->fill($request->all())->saveOrFail();
+			$typeContract = $this->typeContract->findOrFail($id);
+			$typeContract->update($request->all());
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
 			return response()->json([

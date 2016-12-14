@@ -25,7 +25,7 @@ class InstitutionEditTest extends TestCase
 		$this->visit('maintainers/institutions/' . $this->institution->id . '/edit')
 			->seeInElement('h1', 'Editar Institución: <span class="text-primary">' . $this->institution->id . '</span>')
 			->seeInField('#name', $this->institution->name)
-			->seeInElement('#type_institution_id', $this->institution->id)
+			->seeInElement('#type_institution_id', $this->typeInstitution->id)
 			->see('Actualizar');
 	}
 	

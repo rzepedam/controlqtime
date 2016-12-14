@@ -19,7 +19,9 @@ class ContractShowTest extends TestCase
 		parent::setUp();
 		$this->signIn();
 		
-		$this->contract = factory(\Controlqtime\Core\Entities\Contract::class)->create();
+		$this->contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
+			'created_at' => '2016-12-13 08:50:45'
+		]);
 		
 		$this->obligationsAndProhibitionsA = factory(\Controlqtime\Core\Entities\TermAndObligatory::class)->create([
 			'default' => 'on'

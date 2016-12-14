@@ -10,21 +10,12 @@ class TerminalEditTest extends TestCase
 {
 	use DatabaseTransactions;
 	
-	protected $commune;
-	
-	protected $province;
-	
-	protected $region;
-	
 	protected $terminal;
 	
 	function setUp()
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->region   = factory(Region::class)->create();
-		$this->province = factory(Province::class)->create();
-		$this->commune  = factory(Commune::class)->create();
 		$this->terminal = factory(Terminal::class)->create();
 	}
 	
@@ -42,25 +33,18 @@ class TerminalEditTest extends TestCase
 	
 	function test_update_terminal()
 	{
-		$idRegion   = $this->region->id + 1;
-		$idProvince = $this->province->id + 1;
-		$idCommune  = $this->commune->id + 1;
-		
 		$region = factory(Region::class)->create([
-			'id'   => $idRegion,
 			'name' => 'Región B'
 		]);
 		
 		$province = factory(Province::class)->create([
-			'id'        => $idProvince,
 			'name'      => 'Province B',
-			'region_id' => $idRegion
+			'region_id' => $region->id
 		]);
 		
 		$commune = factory(Commune::class)->create([
-			'id'          => $idCommune,
 			'name'        => 'Comuna B',
-			'province_id' => $idProvince
+			'province_id' => $province->id
 		]);
 		
 		$this->visit('maintainers/terminals/' . $this->terminal->id . '/edit')

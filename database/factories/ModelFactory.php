@@ -149,7 +149,8 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 		'collation'        => rand(50000, 99000),
 		'gratification_id' => factory(Gratification::class)->create()->id,
 		'type_contract_id' => factory(TypeContract::class)->create()->id,
-		'expires_at'       => Carbon::parse('+1 year')
+		'expires_at'       => Carbon::parse('+1 year'),
+		'created_at'       => Carbon::now()
 	];
 });
 
@@ -485,6 +486,7 @@ $factory->define(Terminal::class, function (Faker\Generator $faker)
 	return [
 		'name'       => $faker->word,
 		'address'    => $faker->address,
+		'commune_id' => factory(Commune::class)->create()->id,
 		'deleted_at' => null,
 		'created_at' => Carbon::now()
 	];
@@ -519,7 +521,7 @@ $factory->define(TypeContract::class, function (Faker\Generator $faker)
 	return [
 		'name'       => $faker->word,
 		'dur'        => $faker->numberBetween(2, 12),
-		'full_name'  => $faker->word . ' ' . $faker->numberBetween(2, 12) . ' meses',
+		'full_name'  => '',
 		'deleted_at' => null
 	];
 });

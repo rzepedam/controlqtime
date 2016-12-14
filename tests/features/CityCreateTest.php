@@ -16,7 +16,6 @@ class CityCreateTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->country = factory(Country::class)->create();
 		$this->city    = factory(City::class)->create();
 	}
 	
@@ -24,7 +23,7 @@ class CityCreateTest extends TestCase
 	{
 		$this->visit('maintainers/cities/create')
 			->see('Crear Nueva Ciudad')
-			->see($this->country->name)
+			->see($this->city->country->name)
 			->see('Guardar')
 			->assertResponseOk();
 	}
@@ -33,11 +32,11 @@ class CityCreateTest extends TestCase
 	{
 		$this->visit('maintainers/cities/create')
 			->type('test', 'name')
-			->select($this->country->id, 'country_id')
+			->select($this->city->country->id, 'country_id')
 			->press('Guardar')
 			->seeInDatabase('cities', [
 				'name'       => 'test',
-				'country_id' => $this->country->id,
+				'country_id' => $this->city->country->id,
 				'deleted_at' => null
 			]);
 	}

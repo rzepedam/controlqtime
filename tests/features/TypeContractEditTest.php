@@ -13,7 +13,9 @@ class TypeContractEditTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->typeContract = factory(TypeContract::class)->create();
+		$this->typeContract = factory(TypeContract::class)->create([
+			'name' => 'Plazo Fijo'
+		]);
 	}
 	
 	function test_edit_type_contract()
@@ -28,13 +30,13 @@ class TypeContractEditTest extends TestCase
 	function test_update_type_contract()
 	{
 		$this->visit('maintainers/type-contracts/' . $this->typeContract->id . '/edit')
-			->select('Indefinido', 'name')
-			->type('0', 'dur')
+			->select($this->typeContract->name, '#name')
+			->type('24', 'dur')
 			->press('Actualizar')
 			->seeInDatabase('type_contracts', [
 				'id'         => $this->typeContract->id,
-				'name'       => 'Indefinido',
-				'dur'        => 0,
+				'name'       => 'Plazo Fijo',
+				'dur'        => '24',
 				'full_name'  => '',
 				'deleted_at' => null
 			]);

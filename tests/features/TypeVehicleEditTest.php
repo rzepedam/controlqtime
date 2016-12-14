@@ -48,17 +48,12 @@ class TypeVehicleEditTest extends TestCase
 	
 	function test_update_type_vehicle()
 	{
-		$idWeight      = $this->weight->id + 1;
-		$idEngineCubic = $this->engineCubic->id + 1;
-		
 		$weight = factory(Weight::class)->create([
-			'id'   => $idWeight,
 			'name' => 'Tonelada',
 			'acr'  => 'ton'
 		]);
 		
 		$engineCubic = factory(EngineCubic::class)->create([
-			'id'   => $idEngineCubic,
 			'name' => 'Caballos de Fuerza',
 			'acr'  => 'hp'
 		]);
