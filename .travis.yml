@@ -3,6 +3,8 @@ language: php
 php:
   - 7.1
 
+sudo: required
+
 before_script:
   - cp .env.travis .env
   - mysql -e 'create database controlqtime_tests;'
