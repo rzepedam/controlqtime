@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 7.1
+
+before_script:
+  - cp .env.travis .env
+  - mysql -e 'create database controqtime_tests;'
+  - composer install --prefer-dist --no-interaction
+  - php artisan migrate --force
+  - php artisan passport:install
+  - gulp
+
+script:
+  - vendor/bin/phpunit
