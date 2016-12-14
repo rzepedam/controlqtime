@@ -4,6 +4,7 @@ namespace Controlqtime\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Exam;
 use Controlqtime\Core\Entities\User;
@@ -121,6 +122,11 @@ class EmployeeController extends Controller
 	protected $institution;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * @var MaritalStatus
 	 */
 	protected $maritalStatus;
@@ -218,6 +224,7 @@ class EmployeeController extends Controller
 	 * @param FamilyResponsability       $familyResponsability
 	 * @param Forecast                   $forecast
 	 * @param Institution                $institution
+	 * @param Log                        $log
 	 * @param MaritalStatus              $maritalStatus
 	 * @param Nationality                $nationality
 	 * @param Pension                    $pension
@@ -237,13 +244,13 @@ class EmployeeController extends Controller
 	 */
 	public function __construct(ActivateEmployee $activateEmployee, Address $address, Certification $certification,
 		Commune $commune, ContactEmployee $contactEmployee, Degree $degree, DetailAddressLegalEmployee $detailAddress,
-		Disability $disability, Disease $disease, Employee $employee, Exam $exam,
-		FamilyRelationship $familyRelationship, FamilyResponsability $familyResponsability, Forecast $forecast,
-		Institution $institution, MaritalStatus $maritalStatus, Nationality $nationality,
-		Pension $pension, ProfessionalLicense $professionalLicense, Province $province, Region $region,
-		Relationship $relationship, Speciality $speciality, Study $study, TypeCertification $typeCertification,
-		TypeDisability $typeDisability, TypeDisease $typeDisease, TypeExam $typeExam,
-		TypeProfessionalLicense $typeProfessionalLicense, TypeSpeciality $typeSpeciality, User $user)
+		Disability $disability, Disease $disease, Employee $employee, Exam $exam, FamilyRelationship $familyRelationship,
+		FamilyResponsability $familyResponsability, Forecast $forecast, Institution $institution, Log $log,
+		MaritalStatus $maritalStatus, Nationality $nationality, Pension $pension, ProfessionalLicense $professionalLicense,
+		Province $province, Region $region, Relationship $relationship, Speciality $speciality, Study $study,
+		TypeCertification $typeCertification, TypeDisability $typeDisability, TypeDisease $typeDisease,
+		TypeExam $typeExam, TypeProfessionalLicense $typeProfessionalLicense, TypeSpeciality $typeSpeciality,
+		User $user)
 	{
 		$this->activateEmployee        = $activateEmployee;
 		$this->address                 = $address;
@@ -260,6 +267,7 @@ class EmployeeController extends Controller
 		$this->familyResponsability    = $familyResponsability;
 		$this->forecast                = $forecast;
 		$this->institution             = $institution;
+		$this->log                     = $log;
 		$this->maritalStatus           = $maritalStatus;
 		$this->nationality             = $nationality;
 		$this->pension                 = $pension;
@@ -346,10 +354,11 @@ class EmployeeController extends Controller
 				'email'    => Session::get('email_employee'),
 				'password' => bcrypt(Session::get('email_employee'))
 			]);
+			
 			$address = $employee->address()->create(Session::get('step1'));
 			$address->detailAddressLegalEmployee()->create(Session::get('step1'));
 			$employee->createContacts(Session::get('step1'));
-			$employee->createRelationships(Session::get('step1'));
+			$employee->createFamilyRelationships(Session::get('step1'));
 			$employee->createStudies(Session::get('step2'));
 			$employee->createCertifications(Session::get('step2'));
 			$employee->createSpecialities(Session::get('step2'));
@@ -359,11 +368,12 @@ class EmployeeController extends Controller
 			$employee->createExams($request->all());
 			$employee->createResponsabilities($request->all());
 			
-			$user->notify(new EmployeeWasRegistered($employee));
+			// $user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionStoreEmployee();
 			DB::commit();
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error store Employee: " . $e->getMessage());
 			DB::rollBack();
 		}
 		
@@ -508,36 +518,36 @@ class EmployeeController extends Controller
 			$employee->address->update(Session::get('step1_update'));
 			$employee->address->detailAddressLegalEmployee->update(Session::get('step1_update'));
 			// $employee->createContacts()->destroyArrayId(Session::get('id_delete_contact_update'), '');
-			$employee->createContacts(Session::get('step1_update'));
+			//$employee->createContacts(Session::get('step1_update'));
 			// $this->familyRelationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'), '');
-			$employee->createRelationships(Session::get('step1_update'));
+			//$employee->createRelationships(Session::get('step1_update'));
 			
 			// Update Step2 data
 			// $this->study->destroyArrayId($request->session()->get('id_delete_study_update'), '');
-			$employee->createStudies(Session::get('step2_update'));
+			//$employee->createStudies(Session::get('step2_update'));
 			// $this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'Certification');
 			// $this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'), 'Certification');
-			$employee->createCertifications(Session::get('step2_update'));
+			//$employee->createCertifications(Session::get('step2_update'));
 			// $this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'Speciality');
 			// $this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'), 'Speciality');
-			$employee->createSpecialities(Session::get('step2_update'));
+			//$employee->createSpecialities(Session::get('step2_update'));
 			// $this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
 			// $this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
-			$employee->createLicenses(Session::get('step2_update'));
+			//$employee->createLicenses(Session::get('step2_update'));
 			
 			// Update Step3 data
 			// $this->disability->destroyImages($request->get('id_delete_disability'), 'Disability');
 			// $this->disability->destroyArrayId($request->get('id_delete_disability'), 'Disability');
-			$employee->createDisabilities($request->all());
+			//$employee->createDisabilities($request->all());
 			// $this->disease->destroyImages($request->get('id_delete_disease'), 'Disease');
 			// $this->disease->destroyArrayId($request->get('id_delete_disease'), 'Disease');
-			$employee->createDiseases($request->all());
+			//$employee->createDiseases($request->all());
 			// $this->exam->destroyImages($request->get('id_delete_exam'), 'Exam');
 			// $this->exam->destroyArrayId($request->get('id_delete_exam'), 'Exam');
-			$employee->createExams($request->all());
+			//$employee->createExams($request->all());
 			// $this->familyResponsability->destroyImages($request->get('id_delete_family_responsability'), 'FamilyResponsability');
 			// $this->familyResponsability->destroyArrayId($request->get('id_delete_family_responsability'), 'FamilyResponsability');
-			$employee->createResponsabilities($request->all());
+			//$employee->createResponsabilities($request->all());
 			
 			$this->activateEmployee->checkStateUpdateEmployee($id);
 			

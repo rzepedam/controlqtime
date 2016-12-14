@@ -106,7 +106,7 @@ class Step1Request extends SanitizedRequest
 					'rut'               => 'required|max:15|unique:employees,rut,' . $this->id,
 					'birthday'          => 'required|date',
 					'nationality_id'    => 'required|regex:/[0-9 -()+]+$/',
-					'gender'            => 'required',
+					// 'gender'            => 'required',
 					'marital_status_id' => 'required|regex:/[0-9 -()+]+$/',
 					'forecast_id'       => 'required|regex:/[0-9 -()+]+$/',
 					'pension_id'        => 'required|regex:/[0-9 -()+]+$/',

@@ -114,38 +114,31 @@ class EmployeeEditTest extends TestCase
 	function test_update_employee()
 	{
 		$nationality = factory(Nationality::class)->create([
-			'id'   => 2,
 			'name' => 'Argentina'
 		]);
 		
 		$maritalStatus = factory(MaritalStatus::class)->create([
-			'id'   => 2,
 			'name' => 'Viudo'
 		]);
 		
 		$forecast = factory(Forecast::class)->create([
-			'id'   => 2,
 			'name' => 'Banmédica'
 		]);
 		
 		$pension = factory(Pension::class)->create([
-			'id'   => 2,
 			'name' => 'Modelo'
 		]);
 		
 		$region = factory(Region::class)->create([
-			'id'   => 2,
 			'name' => 'Región de Arica y Parinacota'
 		]);
 		
 		$province = factory(Province::class)->create([
-			'id'        => 2,
 			'region_id' => $region->id,
 			'name'      => 'Parinacota'
 		]);
 		
 		$commune = factory(Commune::class)->create([
-			'id'          => 2,
 			'province_id' => $province->id,
 			'name'        => 'Camarones'
 		]);
@@ -205,11 +198,11 @@ class EmployeeEditTest extends TestCase
 				'second_name'       => 'Alejandra',
 				'rut'               => '12214257-4',
 				'birthday'          => '1982-04-15',
-				'nationality_id'    => 2,
+				'nationality_id'    => $nationality->id,
 				'is_male'           => false,
-				'marital_status_id' => 2,
-				'forecast_id'       => 2,
-				'pension_id'        => 2,
+				'marital_status_id' => $maritalStatus->id,
+				'forecast_id'       => $forecast->id,
+				'pension_id'        => $pension->id,
 				'email_employee'    => 'test@gmail.com',
 				'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
 				'state'             => 'disable',
@@ -224,7 +217,7 @@ class EmployeeEditTest extends TestCase
 		$this->seeInDatabase('addresses', [
 			'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 			'address'          => 'José Miguel Carrera 1391. Villa San Alberto',
-			'commune_id'       => 2,
+			'commune_id'       => $commune->id,
 			'phone1'           => '+569112233445',
 			'phone2'           => '221122334'
 		]);

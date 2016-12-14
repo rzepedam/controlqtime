@@ -307,8 +307,7 @@ $factory->define(Gratification::class, function (Faker\Generator $faker)
 $factory->define(Institution::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'                  => 1,
-		'name'                => 'Universidad Católica de Chile',
+		'name'                => $faker->word . ' ' . $faker->word,
 		'type_institution_id' => factory(TypeInstitution::class)->create()->id,
 		'deleted_at'          => null
 	];
@@ -442,7 +441,7 @@ $factory->define(Region::class, function (Faker\Generator $faker)
 $factory->define(Relationship::class, function (Faker\Generator $faker)
 {
 	return [
-		'name'       => 'Padre',
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });

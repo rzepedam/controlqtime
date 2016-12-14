@@ -16,7 +16,7 @@ class Study extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'employee_id', 'degree_id', 'date_obtention'
+		'degree_id', 'date_obtention'
 	];
 	
 	/**

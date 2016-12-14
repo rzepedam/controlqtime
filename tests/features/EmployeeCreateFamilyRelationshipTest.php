@@ -1,6 +1,7 @@
 <?php
 
 use Controlqtime\Core\Entities\Degree;
+use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\Institution;
 use Controlqtime\Core\Entities\TypeDisease;
@@ -11,7 +12,7 @@ use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class EmployeeCreateTest extends TestCase
+class EmployeeCreateFamilyRelationshipTest extends TestCase
 {
 	use DatabaseTransactions;
 	
@@ -69,8 +70,7 @@ class EmployeeCreateTest extends TestCase
 			'commune_id'        => $this->commune->id,
 			'phone1'            => '+56988102910',
 			'email_employee'    => 'marcelocandia@gmail.com',
-			'count_contacts'             => 0,
-			'count_family_relationships' => 0
+			'count_contacts'    => 0
 		];
 		
 		$this->sessionStep2 = [
@@ -87,65 +87,57 @@ class EmployeeCreateTest extends TestCase
 			'count_family_responsabilities' => 0
 		];
 		
+		Session::put('step2', $this->sessionStep2);
 		Session::put('email_employee', 'marcelocandia@gmail.com');
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
+	}
+	
+	function test_store_with_family_relationship_employee()
+	{
+		$this->sessionStep1 += [
+			'relationship_id'            => [$this->relationship->id],
+			'employee_family_id'         => [$this->employee->id],
+			'count_family_relationships' => 1
+		];
+		
 		Session::put('step1', $this->sessionStep1);
-		Session::put('step2', $this->sessionStep2);
-	}
-	
-	function test_create_employee()
-	{
-		$this->visit('human-resources/employees/create')
-			->seeInElement('h1', 'Crear Nuevo Trabajador')
-			->seeInElement('#nationality_id', $this->nationality->name)
-			->seeIsSelected('is_male', 'M')
-			->seeInElement('#marital_status_id', $this->maritalStatus->name)
-			->seeInElement('#forecast_id', $this->forecast->name)
-			->seeInElement('#pension_id', $this->pension->name)
-			->seeInElement('#region_id', $this->region->name)
-			->seeInElement('#province_id', $this->province->name)
-			->seeInElement('#commune_id', $this->commune->name)
-			->assertResponseOk();
-	}
-	
-	function test_store_employee()
-	{
+		
 		$this->post('human-resources/employees', $this->sessionStep3)
-			->seeInDatabase('employees', [
-				'male_surname'      => 'Candia',
-				'female_surname'    => 'Parra',
-				'first_name'        => 'Marcelo',
-				'second_name'       => 'Pedro',
-				'rut'               => '10486861-4',
-				'birthday'          => '1989-06-11',
-				'nationality_id'    => 1,
-				'is_male'           => true,
-				'marital_status_id' => 1,
-				'forecast_id'       => 1,
-				'pension_id'        => 1,
-				'email_employee'    => 'marcelocandia@gmail.com',
-				'url'               => null,
-				'state'             => 'disable',
-				'condition'         => 'unavailable',
-				'deleted_at'        => null
+			->seeInDatabase('family_relationships', [
+				'relationship_id'    => $this->relationship->id,
+				'employee_family_id' => $this->employee->id,
+				'deleted_at'         => null
 			]);
+	}
+	
+	function test_store_with_multiple_family_relationship_employee()
+	{
+		$relationshipB = factory(Relationship::class)->create();
+		$relationshipC = factory(Relationship::class)->create();
+		$employeeB     = factory(Employee::class)->states('enable')->create();
+		$employeeC     = factory(Employee::class)->states('enable')->create();
 		
-		$this->seeInDatabase('users', [
-			'email' => 'marcelocandia@gmail.com'
-		]);
+		$this->sessionStep1 += [
+			'relationship_id'            => [$this->relationship->id, $relationshipB->id, $relationshipC->id],
+			'employee_family_id'         => [$this->employee->id, $employeeB->id, $employeeC->id],
+			'count_family_relationships' => 3
+		];
 		
-		$this->seeInDatabase('addresses', [
-			'addressable_type' => 'Controlqtime\Core\Entities\Employee',
-			'address'          => 'Vicuña Mackenna 2209',
-			'commune_id'       => 1,
-			'phone1'           => '+56988102910',
-			'phone2'           => ''
-		]);
+		Session::put('step1', $this->sessionStep1);
 		
-		$this->seeInDatabase('detail_address_legal_employees', [
-			'depto'    => '',
-			'block'    => '',
-			'num_home' => ''
-		]);
+		$this->post('human-resources/employees', $this->sessionStep3)
+			->seeInDatabase('family_relationships', [
+				'relationship_id'    => $this->relationship->id,
+				'employee_family_id' => $this->employee->id,
+				'deleted_at'         => null])
+			->seeInDatabase('family_relationships', [
+				'relationship_id'    => $relationshipB->id,
+				'employee_family_id' => $employeeB->id,
+				'deleted_at'         => null])
+			->seeInDatabase('family_relationships', [
+				'relationship_id'    => $relationshipC->id,
+				'employee_family_id' => $employeeC->id,
+				'deleted_at'         => null
+			]);
 	}
 }

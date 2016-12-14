@@ -73,9 +73,21 @@ class Employee extends Eloquent
 		return $this->hasMany(ContactEmployee::class);
 	}
 	
-	public function createContacts($contacts)
+	/**
+	 * @param $request 'Session step 1'
+	 */
+	public function createContacts($request)
 	{
-		/* @todo Add create contacts code */
+		for ( $i = 0; $i < $request['count_contacts']; $i++ )
+		{
+			$this->contactEmployees()->create([
+				'contact_relationship_id' => $request['contact_relationship_id'][$i],
+				'name_contact'            => $request['name_contact'][$i],
+				'email_contact'           => $request['email_contact'][$i],
+				'address_contact'         => $request['address_contact'][$i],
+				'tel_contact'             => $request['tel_contact'][$i]
+			]);
+		}
 	}
 	
 	/**
@@ -86,9 +98,15 @@ class Employee extends Eloquent
 		return $this->hasMany(FamilyRelationship::class);
 	}
 	
-	public function createRelationships($relationships)
+	public function createFamilyRelationships($request)
 	{
-		/* @todo Add create relationships code */
+		for ( $i = 0; $i < $request['count_family_relationships']; $i++ )
+		{
+			$this->familyRelationships()->create([
+				'relationship_id'    => $request['relationship_id'][$i],
+				'employee_family_id' => $request['employee_family_id'][$i]
+			]);
+		}
 	}
 	
 	/**
@@ -99,9 +117,41 @@ class Employee extends Eloquent
 		return $this->hasMany(Study::class);
 	}
 	
-	public function createStudies($studies)
+	public function createStudies($request)
 	{
-		/* @todo Add create studies code */
+		for ( $i = 0; $i < $request['count_studies']; $i++ )
+		{
+			$study = $this->studies()->create([
+				'degree_id'      => $request['degree_id'][$i],
+				'date_obtention' => $request['date_obtention'][$i]
+			]);
+			
+			switch ( $request['degree_id'][$i] )
+			{
+				case 1:
+				case 2:
+					$study->detailSchoolStudy()->create([
+						'name_institution' => $request['name_institution'][$i]
+					]);
+					break;
+				case 3:
+					$study->detailTechnicalStudy()->create([
+						'name_study'       => $request['name_study'][$i],
+						'name_institution' => $request['name_institution'][$i]
+					]);
+					break;
+				case 4:
+				case 5:
+				case 6:
+				case 7:
+				case 8:
+					$study->detailCollegeStudy()->create([
+						'name_study'           => $request['name_study'][$i],
+						'institution_study_id' => $request['institution_study_id'][$i]
+					]);
+					break;
+			}
+		}
 	}
 	
 	/**
@@ -391,7 +441,7 @@ class Employee extends Eloquent
 	 */
 	public function getIsMaleAttribute($value)
 	{
-	    return $value ? 'Masculino' : 'Femenino';
+		return $value ? 'Masculino' : 'Femenino';
 	}
 	
 	/**

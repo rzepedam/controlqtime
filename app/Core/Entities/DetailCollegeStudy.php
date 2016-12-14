@@ -13,8 +13,8 @@ class DetailCollegeStudy extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-        'name_study', 'institution_study_id'
-    ];
+        'institution_study_id', 'name_study'
+	];
 	
 	/**
 	 * @var bool
