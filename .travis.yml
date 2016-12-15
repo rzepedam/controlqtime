@@ -12,7 +12,7 @@ before_script:
   - composer install --prefer-dist --no-interaction
   - php artisan migrate --force
   - php artisan passport:install
-  - npm -g install npm@latest
+  - npm install -g npm@3
   - npm install -g gulp --no-bin-links
 
 script:
