@@ -3,6 +3,10 @@ language: php
 php:
   - 7.0
 
+node_js:
+  - "6.1"
+
+
 cache:
   - composer: true
 
@@ -13,7 +17,7 @@ before_script:
   - composer install --prefer-dist --no-interaction
   - php artisan migrate --force
   - php artisan passport:install
-  - npm install
+  - npm install -g npm@3
   - npm install -g gulp --no-bin-links
 
 script:
