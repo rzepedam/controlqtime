@@ -13,7 +13,8 @@ before_script:
   - php artisan migrate --force
   - php artisan passport:install
   - npm install -g npm@3
-  - gulp
+  - npm install -g gulp
 
 script:
+  - gulp
   - vendor/bin/phpunit
