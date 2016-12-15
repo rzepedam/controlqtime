@@ -3,7 +3,8 @@ language: php
 php:
   - 7.0
 
-sudo: required
+cache:
+  - composer: true
 
 before_script:
   - cp .env.travis .env
@@ -12,7 +13,7 @@ before_script:
   - composer install --prefer-dist --no-interaction
   - php artisan migrate --force
   - php artisan passport:install
-  - npm install -g npm@3
+  - npm install
   - npm install -g gulp --no-bin-links
 
 script:
