@@ -13,7 +13,7 @@ before_script:
   - php artisan migrate --force
   - php artisan passport:install
   - npm install -g npm@3
-  - npm install -g gulp
+  - npm install gulp
 
 script:
   - gulp
