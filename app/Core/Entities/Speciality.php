@@ -3,15 +3,13 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Controlqtime\Core\Traits\DestroyImageFile;
-use Controlqtime\Core\Traits\OperationEntityArray;
-use Controlqtime\Core\Traits\WhereMethodsTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Controlqtime\Core\Traits\DestroyImageFile;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Speciality extends Eloquent
 {
-	use SoftDeletes, OperationEntityArray, WhereMethodsTrait, DestroyImageFile;
+	use SoftDeletes, DestroyImageFile;
 	
 	/**
 	 * @var array

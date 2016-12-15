@@ -98,6 +98,9 @@ class Employee extends Eloquent
 		return $this->hasMany(FamilyRelationship::class);
 	}
 	
+	/**
+	 * @param $request 'Session step 1'
+	 */
 	public function createFamilyRelationships($request)
 	{
 		for ( $i = 0; $i < $request['count_family_relationships']; $i++ )
@@ -117,6 +120,9 @@ class Employee extends Eloquent
 		return $this->hasMany(Study::class);
 	}
 	
+	/**
+	 * @param $request 'Session step 2'
+	 */
 	public function createStudies($request)
 	{
 		for ( $i = 0; $i < $request['count_studies']; $i++ )
@@ -162,9 +168,20 @@ class Employee extends Eloquent
 		return $this->hasMany(Certification::class);
 	}
 	
-	public function createCertifications($certifications)
+	/**
+	 * @param $request 'Session step 2'
+	 */
+	public function createCertifications($request)
 	{
-		/* @todo Add create certifications code */
+		for ( $i = 0; $i < $request['count_certifications']; $i++ )
+		{
+			$this->certifications()->create([
+				'type_certification_id'        => $request['type_certification_id'][$i],
+				'institution_certification_id' => $request['institution_certification_id'][$i],
+				'emission_certification'       => $request['emission_certification'][$i],
+				'expired_certification'        => $request['expired_certification'][$i]
+			]);
+		}
 	}
 	
 	/**
@@ -175,9 +192,20 @@ class Employee extends Eloquent
 		return $this->hasMany(Speciality::class);
 	}
 	
-	public function createSpecialities($specialities)
+	/**
+	 * @param $request 'Session step 2'
+	 */
+	public function createSpecialities($request)
 	{
-		/* @todo Add create specialities code */
+		for ( $i = 0; $i < $request['count_specialities']; $i++ )
+		{
+			$this->specialities()->create([
+				'type_speciality_id'        => $request['type_speciality_id'][$i],
+				'institution_speciality_id' => $request['institution_speciality_id'][$i],
+				'emission_speciality'       => $request['emission_speciality'][$i],
+				'expired_speciality'        => $request['expired_speciality'][$i]
+			]);
+		}
 	}
 	
 	/**

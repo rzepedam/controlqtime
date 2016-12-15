@@ -1,0 +1,17 @@
+language: php
+
+php:
+  - 7.0
+
+sudo: required
+
+before_script:
+  - cp .env.travis .env
+  - mysql -e 'create database controlqtime_tests;'
+  - composer self-update
+  - composer install --prefer-dist --no-interaction
+  - php artisan passport:install
+  - sudo npm install
+
+script:
+  - vendor/bin/phpunit
