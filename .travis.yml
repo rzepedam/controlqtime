@@ -12,7 +12,7 @@ before_script:
   - composer install --prefer-dist --no-interaction
   - php artisan migrate --force
   - php artisan passport:install
-  - sudo npm install
+  - npm install
 
 script:
   - vendor/bin/phpunit
