@@ -216,9 +216,21 @@ class Employee extends Eloquent
 		return $this->hasMany(ProfessionalLicense::class);
 	}
 	
-	public function createLicenses($licenses)
+	/**
+	 * @param $request 'Session step 2'
+	 */
+	public function createLicenses($request)
 	{
-		/* @todo Add create licenses code */
+		for ( $i = 0; $i < $request['count_professional_licenses']; $i++ )
+		{
+			$this->professionalLicenses()->create([
+				'type_professional_license_id' => $request['type_professional_license_id'][$i],
+				'emission_license'             => $request['emission_license'][$i],
+				'expired_license'              => $request['expired_license'][$i],
+				'is_donor'                     => $request['is_donor' . $i],
+				'detail_license'               => $request['detail_license'][$i]
+			]);
+		}
 	}
 	
 	/**
@@ -229,9 +241,19 @@ class Employee extends Eloquent
 		return $this->hasMany(Disability::class);
 	}
 	
-	public function createDisabilities($disabilities)
+	/**
+	 * @param $request 'Session step 3'
+	 */
+	public function createDisabilities($request)
 	{
-		/* @todo Add create disabilities code */
+		for ( $i = 0; $i < $request['count_disabilities']; $i++ )
+		{
+			$this->disabilities()->create([
+				'type_disability_id'   => $request['type_disability_id'][$i],
+				'treatment_disability' => $request['treatment_disability' . $i],
+				'detail_disability'    => $request['detail_disability'][$i]
+			]);
+		}
 	}
 	
 	/**
@@ -242,9 +264,19 @@ class Employee extends Eloquent
 		return $this->hasMany(Disease::class);
 	}
 	
-	public function createDiseases($diseases)
+	/**
+	 * @param $request 'Session step 3'
+	 */
+	public function createDiseases($request)
 	{
-		/* @todo Add create diseases code */
+		for ( $i = 0; $i < $request['count_diseases']; $i++ )
+		{
+			$this->diseases()->create([
+				'type_disease_id'   => $request['type_disease_id'][$i],
+				'treatment_disease' => $request['treatment_disease' . $i],
+				'detail_disease'    => $request['detail_disease'][$i]
+			]);
+		}
 	}
 	
 	/**
@@ -255,9 +287,20 @@ class Employee extends Eloquent
 		return $this->hasMany(Exam::class);
 	}
 	
-	public function createExams($exams)
+	/**
+	 * @param $request 'Session step 3'
+	 */
+	public function createExams($request)
 	{
-		/* @todo Add create exams code */
+		for ( $i = 0; $i < $request['count_exams']; $i++ )
+		{
+			$this->exams()->create([
+				'type_exam_id'  => $request['type_exam_id'][$i],
+				'emission_exam' => $request['emission_exam'][$i],
+				'expired_exam'  => $request['expired_exam'][$i],
+				'detail_exam'   => $request['detail_exam'][$i]
+			]);
+		}
 	}
 	
 	/**
@@ -268,9 +311,19 @@ class Employee extends Eloquent
 		return $this->hasMany(FamilyResponsability::class);
 	}
 	
-	public function createResponsabilities($responsabilities)
+	/**
+	 * @param $request 'Session step 3'
+	 */
+	public function createResponsabilities($request)
 	{
-		/* @todo Add create responsabilities code */
+		for ( $i = 0; $i < $request['count_family_responsabilities']; $i++ )
+		{
+			$this->familyResponsabilities()->create([
+				'name_responsability' => $request['name_responsability'][$i],
+				'rut_responsability'  => $request['rut_responsability'][$i],
+				'relationship_id'     => $request['relationship_id'][$i]
+			]);
+		}
 	}
 	
 	/**

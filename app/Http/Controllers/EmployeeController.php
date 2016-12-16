@@ -349,7 +349,6 @@ class EmployeeController extends Controller
 		try
 		{
 			$employee = $this->employee->create(Session::get('step1'));
-			
 			$user    = $employee->user()->create([
 				'email'    => Session::get('email_employee'),
 				'password' => bcrypt(Session::get('email_employee'))

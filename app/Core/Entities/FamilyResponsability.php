@@ -5,12 +5,11 @@ namespace Controlqtime\Core\Entities;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Controlqtime\Core\Traits\DestroyImageFile;
-use Controlqtime\Core\Traits\OperationEntityArray;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class FamilyResponsability extends Eloquent
 {
-	use SoftDeletes, OperationEntityArray, DestroyImageFile;
+	use SoftDeletes, DestroyImageFile;
 	
     /**
      * @var array
@@ -79,35 +78,4 @@ class FamilyResponsability extends Eloquent
         return FormatField::rut($value);
     }
 	
-	/**
-	 * @param array $request
-	 * @param $entity
-	 */
-	public function createOrUpdateWithArray(array $request, $entity)
-	{
-		for ($i = 0; $i < $request['count_family_responsabilities']; $i++)
-		{
-			$id = $request['id_family_responsability'][$i];
-			
-			if ($id == 0)
-			{
-				$this->model = new FamilyResponsability([
-					'name_responsability' => $request['name_responsability'][$i],
-					'rut_responsability'  => $request['rut_responsability'][$i],
-					'relationship_id'     => $request['relationship_id'][$i],
-				]);
-				
-				$entity->familyResponsabilities()->save($this->model);
-				
-			} else
-			{
-				$this->model                      = $this->model->find($id);
-				$this->model->name_responsability = $request['name_responsability'][$i];
-				$this->model->rut_responsability  = $request['rut_responsability'][$i];
-				$this->model->relationship_id     = $request['relationship_id'][$i];
-				
-				$this->model->save();
-			}
-		}
-	}
 }

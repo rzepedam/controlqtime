@@ -5,12 +5,11 @@ namespace Controlqtime\Core\Entities;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Controlqtime\Core\Traits\DestroyImageFile;
-use Controlqtime\Core\Traits\OperationEntityArray;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Exam extends Eloquent
 {
-	use OperationEntityArray, DestroyImageFile, SoftDeletes;
+	use DestroyImageFile, SoftDeletes;
 	
 	/**
 	 * @var array
@@ -66,40 +65,6 @@ class Exam extends Eloquent
 	public function setDetailExamAttribute($value)
 	{
 		$this->attributes['detail_exam'] = ucfirst(mb_strtolower($value, 'utf-8'));
-	}
-	
-	/**
-	 * @param array $request
-	 * @param $entity
-	 */
-	public function createOrUpdateWithArray(array $request, $entity)
-	{
-		for ($i = 0; $i < $request['count_exams']; $i++)
-		{
-			$id = $request['id_exam'][$i];
-			
-			if ($id == 0)
-			{
-				$this->model = new Exam([
-					'type_exam_id'  => $request['type_exam_id'][$i],
-					'emission_exam' => $request['emission_exam'][$i],
-					'expired_exam'  => $request['expired_exam'][$i],
-					'detail_exam'   => $request['detail_exam'][$i],
-				]);
-				
-				$entity->exams()->save($this->model);
-				
-			} else
-			{
-				$this->model                = $this->model->find($id);
-				$this->model->type_exam_id  = $request['type_exam_id'][$i];
-				$this->model->emission_exam = $request['emission_exam'][$i];
-				$this->model->expired_exam  = $request['expired_exam'][$i];
-				$this->model->detail_exam   = $request['detail_exam'][$i];
-				
-				$this->model->save();
-			}
-		}
 	}
 	
 }
