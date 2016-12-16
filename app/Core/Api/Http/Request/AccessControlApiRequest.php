@@ -57,4 +57,11 @@ class AccessControlApiRequest extends SanitizedRequest
 				return $rules;
 		}
 	}
+	
+	public function messages()
+	{
+		return [
+			'unique_with' => 'La combinación de valores ingresados ya existe.'
+		];
+	}
 }

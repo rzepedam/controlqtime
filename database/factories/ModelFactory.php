@@ -299,7 +299,7 @@ $factory->define(Fuel::class, function (Faker\Generator $faker)
 $factory->define(Gratification::class, function (Faker\Generator $faker)
 {
 	return [
-		'name'       => $faker->words(20, true),
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });

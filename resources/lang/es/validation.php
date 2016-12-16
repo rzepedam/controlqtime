@@ -64,7 +64,6 @@ return [
 	'string'               => 'El campo <strong>:attribute</strong> debe ser una cadena de caracteres.',
 	'timezone'             => 'El <strong>:attribute</strong> debe ser una zona válida.',
 	'unique'               => 'El campo <strong>:attribute</strong> ya ha sido registrado.',
-	'unique_with'          => 'La combinación de valores ingresados ya existe.',
 	'url'                  => 'El formato <strong>:attribute</strong> es inválido.',
 	
 	/*
@@ -80,7 +79,7 @@ return [
 	
 	'custom' => [
 		'attribute-name' => [
-			'unique_with' => 'La combinación de valores ingresados ya existe.',
+		
 		],
 	],
 	
