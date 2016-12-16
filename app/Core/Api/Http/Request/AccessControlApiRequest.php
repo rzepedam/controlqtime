@@ -7,54 +7,54 @@ use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class AccessControlApiRequest extends SanitizedRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-	    switch (Request::get('num_device'))
-	    {
-		    case 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA':
-			    $rules = [
-				    'rut' 			=> 'required|max:10|unique_with:access_control_apis,created_at',
-				    'num_device'	=> 'required',
-				    'status' 		=> 'required',
-				    'created_at'	=> 'required|date'
-			    ];
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
+	{
+		return true;
+	}
+	
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		switch ( Request::get('num_device') )
+		{
+			case 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA':
+				$rules = [
+					'rut'        => 'required|max:10|unique_with:access_control_apis,created_at',
+					'num_device' => 'required',
+					'status'     => 'required',
+					'created_at' => 'required|date'
+				];
 				
-			    return $rules;
-		
-		    case 'BC702909-E80E-4695-9790-E1DBCDF6F4EE':
-			    $rules = [
-				    'rut' 			=> 'required|max:10|unique_with:daily_assistance_apis,created_at',
-				    'num_device'	=> 'required',
-				    'status' 		=> 'required',
-				    'created_at'	=> 'required|date'
-			    ];
-				
-			    return $rules;
-		    
-		    default:
-			    $rules = [
-				    'rut' 			=> 'required|max:10',
-				    'num_device'	=> 'required',
-				    'status' 		=> 'required',
-				    'created_at'	=> 'required|date'
-			    ];
+				return $rules;
 			
-			    return $rules;
-	    }
-    }
+			case 'BC702909-E80E-4695-9790-E1DBCDF6F4EE':
+				$rules = [
+					'rut'        => 'required|max:10|unique_with:daily_assistance_apis,created_at',
+					'num_device' => 'required',
+					'status'     => 'required',
+					'created_at' => 'required|date'
+				];
+				
+				return $rules;
+			
+			default:
+				$rules = [
+					'rut'        => 'required|max:10',
+					'num_device' => 'required',
+					'status'     => 'required',
+					'created_at' => 'required|date'
+				];
+				
+				return $rules;
+		}
+	}
 }
