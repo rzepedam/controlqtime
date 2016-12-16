@@ -1,7 +1,6 @@
 <?php
 
 use Controlqtime\Core\Entities\Degree;
-use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\Institution;
 use Controlqtime\Core\Entities\TypeDisease;
@@ -12,7 +11,7 @@ use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class EmployeeCreateFamilyRelationshipTest extends TestCase
+class EmployeeEditFamilyRelationshipTest extends TestCase
 {
 	use DatabaseTransactions;
 	
@@ -34,11 +33,13 @@ class EmployeeCreateFamilyRelationshipTest extends TestCase
 	
 	protected $typeSpeciality;
 	
-	protected $sessionStep1;
+	protected $step1_update;
 	
-	protected $sessionStep2;
+	protected $step2_update;
 	
-	protected $sessionStep3;
+	protected $step3_update;
+	
+	protected $familyRelationship;
 	
 	function setUp()
 	{
@@ -54,7 +55,7 @@ class EmployeeCreateFamilyRelationshipTest extends TestCase
 		$this->typeProfessionalLicense = factory(TypeProfessionalLicense::class)->create();
 		$this->typeSpeciality          = factory(TypeSpeciality::class)->create();
 		
-		$this->sessionStep1 = [
+		$this->step1_update = [
 			'male_surname'      => 'Candia',
 			'female_surname'    => 'Parra',
 			'first_name'        => 'Marcelo',
@@ -73,72 +74,51 @@ class EmployeeCreateFamilyRelationshipTest extends TestCase
 			'count_contacts'    => 0
 		];
 		
-		$this->sessionStep2 = [
+		$this->step2_update = [
 			'count_studies'               => 0,
 			'count_certifications'        => 0,
 			'count_specialities'          => 0,
 			'count_professional_licenses' => 0
 		];
 		
-		$this->sessionStep3 = [
+		$this->step3_update = [
 			'count_disabilities'            => 0,
 			'count_diseases'                => 0,
 			'count_exams'                   => 0,
 			'count_family_responsabilities' => 0
 		];
 		
-		Session::put('step2', $this->sessionStep2);
+		Session::put('step2', $this->step2_update);
 		Session::put('email_employee', 'marcelocandia@gmail.com');
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
+		
+		$this->familyRelationship = $this->employee->familyRelationships()->create([
+			'id_family_relationship' => 0,
+			'relationship_id'        => $this->relationship->id,
+			'employee_family_id'     => $this->employee->id
+		]);
 	}
 	
-	function test_store_with_family_relationship_employee()
+	function test_update_family_relationship_employee()
 	{
-		$this->sessionStep1 += [
-			'id_family_relationship'     => [0],
-			'relationship_id'            => [$this->relationship->id],
-			'employee_family_id'         => [$this->employee->id],
+		$relationship = factory(Relationship::class)->create();
+		$employee     = factory(\Controlqtime\Core\Entities\Employee::class)->states('enable')->create();
+		
+		$this->step1_update += [
+			'id_family_relationship'     => [$this->familyRelationship->id],
+			'relationship_id'            => [$relationship->id],
+			'employee_family_id'         => [$employee->id],
 			'count_family_relationships' => 1
 		];
 		
-		Session::put('step1', $this->sessionStep1);
+		Session::put('step1_update', $this->step1_update);
 		
-		$this->post('human-resources/employees', $this->sessionStep3)
+		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->seeInDatabase('family_relationships', [
-				'relationship_id'    => $this->relationship->id,
-				'employee_family_id' => $this->employee->id,
-				'deleted_at'         => null
-			]);
-	}
-	
-	function test_store_with_multiple_family_relationship_employee()
-	{
-		$relationshipB = factory(Relationship::class)->create();
-		$relationshipC = factory(Relationship::class)->create();
-		$employeeB     = factory(Employee::class)->states('enable')->create();
-		$employeeC     = factory(Employee::class)->states('enable')->create();
-		
-		$this->sessionStep1 += [
-			'id_family_relationship'     => [0, 0, 0],
-			'relationship_id'            => [$this->relationship->id, $relationshipB->id, $relationshipC->id],
-			'employee_family_id'         => [$this->employee->id, $employeeB->id, $employeeC->id],
-			'count_family_relationships' => 3
-		];
-		
-		Session::put('step1', $this->sessionStep1);
-		
-		$this->post('human-resources/employees', $this->sessionStep3)
-			->seeInDatabase('family_relationships', [
-				'relationship_id'    => $this->relationship->id,
-				'employee_family_id' => $this->employee->id,
-				'deleted_at'         => null])
-			->seeInDatabase('family_relationships', [
-				'relationship_id'    => $relationshipB->id,
-				'employee_family_id' => $employeeB->id,
-				'deleted_at'         => null])
-			->seeInDatabase('family_relationships', [
-				'relationship_id'    => $relationshipC->id,
-				'employee_family_id' => $employeeC->id,
+				'id'                 => $this->familyRelationship->id,
+				'employee_id'        => $this->employee->id,
+				'relationship_id'    => $relationship->id,
+				'employee_family_id' => $employee->id,
 				'deleted_at'         => null
 			]);
 	}

@@ -54,21 +54,21 @@ class EmployeeCreateTest extends TestCase
 		$this->typeSpeciality          = factory(TypeSpeciality::class)->create();
 		
 		$this->sessionStep1 = [
-			'male_surname'               => 'Candia',
-			'female_surname'             => 'Parra',
-			'first_name'                 => 'Marcelo',
-			'second_name'                => 'Pedro',
-			'rut'                        => '10.486.861-4',
-			'birthday'                   => '11-06-1989',
-			'nationality_id'             => $this->nationality->id,
-			'is_male'                    => 'M',
-			'marital_status_id'          => $this->maritalStatus->id,
-			'forecast_id'                => $this->forecast->id,
-			'pension_id'                 => $this->pension->id,
-			'address'                    => 'Vicuña Mackenna 2209',
-			'commune_id'                 => $this->commune->id,
-			'phone1'                     => '+56988102910',
-			'email_employee'             => 'marcelocandia@gmail.com',
+			'male_surname'      => 'Candia',
+			'female_surname'    => 'Parra',
+			'first_name'        => 'Marcelo',
+			'second_name'       => 'Pedro',
+			'rut'               => '10.486.861-4',
+			'birthday'          => '11-06-1989',
+			'nationality_id'    => $this->nationality->id,
+			'is_male'           => 'M',
+			'marital_status_id' => $this->maritalStatus->id,
+			'forecast_id'       => $this->forecast->id,
+			'pension_id'        => $this->pension->id,
+			'address'           => 'Vicuña Mackenna 2209',
+			'commune_id'        => $this->commune->id,
+			'phone1'            => '+56988102910',
+			'email_employee'    => 'marcelocandia@gmail.com',
 		];
 		
 		Session::put('email_employee', 'marcelocandia@gmail.com');
@@ -95,7 +95,7 @@ class EmployeeCreateTest extends TestCase
 		$this->sessionStep1 += [
 			'count_contacts'             => 0,
 			'count_family_relationships' => 0
-	    ];
+		];
 		
 		$this->sessionStep2 = [
 			'count_studies'               => 0,
@@ -156,11 +156,13 @@ class EmployeeCreateTest extends TestCase
 	function test_store_with_contact_relationship_study_certification_speciality_license_disability_disease_exam_responsability_employee()
 	{
 		$this->sessionStep1 += [
+			'id_contact'                 => [0],
 			'contact_relationship_id'    => [$this->relationship->id],
 			'name_contact'               => ['José Miguel Osorio Sepúlveda'],
 			'email_contact'              => ['joseosorio@gmail.com'],
 			'address_contact'            => ['Pje. Limahuida 1990'],
 			'tel_contact'                => ['+56983401021'],
+			'id_family_relationship'     => [0],
 			'relationship_id'            => [$this->relationship->id],
 			'employee_family_id'         => [$this->employee->id],
 			'count_contacts'             => 1,
@@ -170,17 +172,21 @@ class EmployeeCreateTest extends TestCase
 		$degreeSchool = factory(Degree::class)->create(['id' => 2]);
 		
 		$this->sessionStep2 = [
+			'id_study'                     => [0],
 			'degree_id'                    => [$degreeSchool->id],
 			'date_obtention'               => ['17-07-1998'],
 			'name_institution'             => ['Colegio Altos de Lircay'],
+			'id_certification'             => [0],
 			'type_certification_id'        => [$this->typeCertification->id],
 			'institution_certification_id' => [$this->institution->id],
 			'emission_certification'       => ['13-02-2005'],
 			'expired_certification'        => ['13-02-2015'],
+			'id_speciality'                => [0],
 			'type_speciality_id'           => [$this->typeSpeciality->id],
 			'institution_speciality_id'    => [$this->institution->id],
 			'emission_speciality'          => ['18-11-2009'],
 			'expired_speciality'           => ['25-04-2017'],
+			'id_professional_license'      => [0],
 			'type_professional_license_id' => [$this->typeProfessionalLicense->id],
 			'emission_license'             => ['12-08-2014'],
 			'expired_license'              => ['17-08-2019'],
@@ -193,16 +199,20 @@ class EmployeeCreateTest extends TestCase
 		];
 		
 		$this->sessionStep3 = [
+			'id_disability'                 => [0],
 			'type_disability_id'            => [$this->typeDisability->id],
 			'treatment_disability0'         => true,
 			'detail_disability'             => ['Lorem ipsum dolor sit amet, consectetuer adipiscing elit'],
+			'id_disease'                    => [0],
 			'type_disease_id'               => [$this->typeDisease->id],
 			'treatment_disease0'            => true,
 			'detail_disease'                => ['Lorem ipsum dolor sit amet, consectetuer adipiscing elit'],
+			'id_exam'                       => [0],
 			'type_exam_id'                  => [$this->typeExam->id],
 			'emission_exam'                 => ['07-04-2008'],
 			'expired_exam'                  => ['19-10-2011'],
 			'detail_exam'                   => ['Lorem ipsum dolor sit amet, consectetuer adipiscing elit'],
+			'id_family_responsability'      => [0],
 			'name_responsability'           => ['José Miguel Escobar Sepúlveda'],
 			'rut_responsability'            => ['15.257.414-2'],
 			'relationship_id'               => [$this->relationship->id],

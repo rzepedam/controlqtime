@@ -54,8 +54,6 @@ class EmployeeEditTest extends TestCase
 	
 	protected $typeSpeciality;
 	
-	protected $gender;
-	
 	protected $address;
 	
 	protected $detailAddressLegalEmployee;
@@ -65,7 +63,6 @@ class EmployeeEditTest extends TestCase
 		parent::setUp();
 		$this->signIn();
 		$this->nationality             = factory(Nationality::class)->create();
-		$this->gender                  = Config::get('enums.genders');
 		$this->degree                  = factory(Degree::class)->create();
 		$this->forecast                = factory(Forecast::class)->create();
 		$this->maritalStatus           = factory(MaritalStatus::class)->create();

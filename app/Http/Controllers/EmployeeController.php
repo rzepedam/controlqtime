@@ -517,22 +517,22 @@ class EmployeeController extends Controller
 			$employee->address->update(Session::get('step1_update'));
 			$employee->address->detailAddressLegalEmployee->update(Session::get('step1_update'));
 			// $employee->createContacts()->destroyArrayId(Session::get('id_delete_contact_update'), '');
-			//$employee->createContacts(Session::get('step1_update'));
+			$employee->createContacts(Session::get('step1_update'));
 			// $this->familyRelationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'), '');
-			//$employee->createRelationships(Session::get('step1_update'));
+			$employee->createFamilyRelationships(Session::get('step1_update'));
 			
 			// Update Step2 data
 			// $this->study->destroyArrayId($request->session()->get('id_delete_study_update'), '');
-			//$employee->createStudies(Session::get('step2_update'));
+			$employee->createStudies(Session::get('step2_update'));
 			// $this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'Certification');
 			// $this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'), 'Certification');
-			//$employee->createCertifications(Session::get('step2_update'));
+			$employee->createCertifications(Session::get('step2_update'));
 			// $this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'Speciality');
 			// $this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'), 'Speciality');
-			//$employee->createSpecialities(Session::get('step2_update'));
+			$employee->createSpecialities(Session::get('step2_update'));
 			// $this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
 			// $this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
-			//$employee->createLicenses(Session::get('step2_update'));
+			$employee->createLicenses(Session::get('step2_update'));
 			
 			// Update Step3 data
 			// $this->disability->destroyImages($request->get('id_delete_disability'), 'Disability');
@@ -558,6 +558,7 @@ class EmployeeController extends Controller
 			DB::commit();
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error update Employee: " . $e->getMessage());
 			DB::rollBack();
 		}
 		

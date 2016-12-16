@@ -80,7 +80,8 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_contacts']; $i++ )
 		{
-			$this->contactEmployees()->create([
+			$this->contactEmployees()->updateOrCreate(
+				['id' => $request['id_contact'][$i]], [
 				'contact_relationship_id' => $request['contact_relationship_id'][$i],
 				'name_contact'            => $request['name_contact'][$i],
 				'email_contact'           => $request['email_contact'][$i],
@@ -105,7 +106,8 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_family_relationships']; $i++ )
 		{
-			$this->familyRelationships()->create([
+			$this->familyRelationships()->updateOrCreate(
+				['id' => $request['id_family_relationship'][$i]], [
 				'relationship_id'    => $request['relationship_id'][$i],
 				'employee_family_id' => $request['employee_family_id'][$i]
 			]);
@@ -127,7 +129,10 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_studies']; $i++ )
 		{
-			$study = $this->studies()->create([
+			$method = ($request['id_study'][$i] == '0') ? 'create' : 'update';
+			
+			$study = $this->studies()->updateOrCreate(
+				['id' => $request['id_study'][$i]], [
 				'degree_id'      => $request['degree_id'][$i],
 				'date_obtention' => $request['date_obtention'][$i]
 			]);
@@ -136,12 +141,12 @@ class Employee extends Eloquent
 			{
 				case 1:
 				case 2:
-					$study->detailSchoolStudy()->create([
+					$study->detailSchoolStudy()->$method([
 						'name_institution' => $request['name_institution'][$i]
 					]);
 					break;
 				case 3:
-					$study->detailTechnicalStudy()->create([
+					$study->detailTechnicalStudy()->$method([
 						'name_study'       => $request['name_study'][$i],
 						'name_institution' => $request['name_institution'][$i]
 					]);
@@ -151,7 +156,7 @@ class Employee extends Eloquent
 				case 6:
 				case 7:
 				case 8:
-					$study->detailCollegeStudy()->create([
+					$study->detailCollegeStudy()->$method([
 						'name_study'           => $request['name_study'][$i],
 						'institution_study_id' => $request['institution_study_id'][$i]
 					]);
@@ -175,7 +180,8 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_certifications']; $i++ )
 		{
-			$this->certifications()->create([
+			$this->certifications()->updateOrCreate(
+				['id' => $request['id_certification'][$i]], [
 				'type_certification_id'        => $request['type_certification_id'][$i],
 				'institution_certification_id' => $request['institution_certification_id'][$i],
 				'emission_certification'       => $request['emission_certification'][$i],
@@ -199,7 +205,8 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_specialities']; $i++ )
 		{
-			$this->specialities()->create([
+			$this->specialities()->updateOrCreate(
+				['id' => $request['id_speciality'][$i]], [
 				'type_speciality_id'        => $request['type_speciality_id'][$i],
 				'institution_speciality_id' => $request['institution_speciality_id'][$i],
 				'emission_speciality'       => $request['emission_speciality'][$i],
@@ -223,7 +230,8 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_professional_licenses']; $i++ )
 		{
-			$this->professionalLicenses()->create([
+			$this->professionalLicenses()->updateOrCreate(
+				['id' => $request['id_professional_license'][$i]], [
 				'type_professional_license_id' => $request['type_professional_license_id'][$i],
 				'emission_license'             => $request['emission_license'][$i],
 				'expired_license'              => $request['expired_license'][$i],
@@ -248,7 +256,8 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_disabilities']; $i++ )
 		{
-			$this->disabilities()->create([
+			$this->disabilities()->updateOrCreate(
+				['id' => $request['id_disability'][$i]], [
 				'type_disability_id'   => $request['type_disability_id'][$i],
 				'treatment_disability' => $request['treatment_disability' . $i],
 				'detail_disability'    => $request['detail_disability'][$i]
@@ -271,7 +280,8 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_diseases']; $i++ )
 		{
-			$this->diseases()->create([
+			$this->diseases()->updateOrCreate(
+				['id' => $request['id_disease'][$i]], [
 				'type_disease_id'   => $request['type_disease_id'][$i],
 				'treatment_disease' => $request['treatment_disease' . $i],
 				'detail_disease'    => $request['detail_disease'][$i]
@@ -294,7 +304,8 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_exams']; $i++ )
 		{
-			$this->exams()->create([
+			$this->exams()->updateOrCreate(
+				['id' => $request['id_exam'][$i]], [
 				'type_exam_id'  => $request['type_exam_id'][$i],
 				'emission_exam' => $request['emission_exam'][$i],
 				'expired_exam'  => $request['expired_exam'][$i],
@@ -318,7 +329,8 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_family_responsabilities']; $i++ )
 		{
-			$this->familyResponsabilities()->create([
+			$this->familyResponsabilities()->updateOrCreate(
+				['id' => $request['id_family_responsability'][$i]], [
 				'name_responsability' => $request['name_responsability'][$i],
 				'rut_responsability'  => $request['rut_responsability'][$i],
 				'relationship_id'     => $request['relationship_id'][$i]

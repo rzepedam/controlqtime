@@ -95,6 +95,7 @@ class EmployeeCreateExamTest extends TestCase
 	function test_store_with_exam_employee()
 	{
 		$this->sessionStep3 += [
+			'id_exam'       => [0],
 			'type_exam_id'  => [$this->typeExam->id],
 			'emission_exam' => ['07-04-2008'],
 			'expired_exam'  => ['19-10-2011'],
@@ -119,6 +120,7 @@ class EmployeeCreateExamTest extends TestCase
 		$typeExamC = factory(TypeExam::class)->create();
 		
 		$this->sessionStep3 += [
+			'id_exam'       => [0, 0, 0],
 			'type_exam_id'  => [$typeExamA->id, $typeExamB->id, $typeExamC->id],
 			'emission_exam' => ['07-04-2008', '14-11-2001', '21-08-2015'],
 			'expired_exam'  => ['19-10-2011', '17-02-2010', '06-07-2019'],

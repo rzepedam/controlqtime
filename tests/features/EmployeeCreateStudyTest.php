@@ -96,6 +96,7 @@ class EmployeeCreateStudyTest extends TestCase
 		$degreeSchool = factory(Degree::class)->create(['id' => 2]);
 		
 		$this->sessionStep2 += [
+			'id_study'         => [0],
 			'degree_id'        => [$degreeSchool->id],
 			'date_obtention'   => ['17-07-1998'],
 			'name_institution' => ['Colegio Altos de Lircay'],
@@ -119,6 +120,7 @@ class EmployeeCreateStudyTest extends TestCase
 		$degreeSchoolB = factory(Degree::class)->create(['id' => 2]);
 		
 		$this->sessionStep2 += [
+			'id_study'         => [0, 0, 0],
 			'degree_id'        => [$degreeSchoolA->id, $degreeSchoolB->id],
 			'date_obtention'   => ['17-07-1998', '22-09-2011'],
 			'name_institution' => ['Colegio Altos de Lircay', 'Colegio Agustinas'],
@@ -145,6 +147,7 @@ class EmployeeCreateStudyTest extends TestCase
 		$degreeTechnical = factory(Degree::class)->create(['id' => 3]);
 		
 		$this->sessionStep2 += [
+			'id_study'         => [0, 0, 0],
 			'degree_id'        => [$degreeTechnical->id],
 			'date_obtention'   => ['25-02-2009'],
 			'name_study'       => ['Carpintería Mención Madera'],
@@ -169,6 +172,7 @@ class EmployeeCreateStudyTest extends TestCase
 		$degreeTechnical = factory(Degree::class)->create(['id' => 3]);
 		
 		$this->sessionStep2 += [
+			'id_study'         => [0, 0, 0],
 			'degree_id'        => [$degreeTechnical->id, $degreeTechnical->id, $degreeTechnical->id],
 			'date_obtention'   => ['25-02-2009', '03-03-2010', '13-12-2016'],
 			'name_study'       => ['Carpintería Mención Madera', 'Soldador en Estructuras Metálicas', 'Contabilidad en Primer Grado'],
@@ -205,6 +209,7 @@ class EmployeeCreateStudyTest extends TestCase
 		$degreeCollege = factory(Degree::class)->create(['id' => 8]);
 		
 		$this->sessionStep2 += [
+			'id_study'             => [0, 0, 0],
 			'degree_id'            => [$degreeCollege->id],
 			'date_obtention'       => ['09-12-2015'],
 			'name_study'           => ['Ingeniería Informática'],
@@ -239,6 +244,7 @@ class EmployeeCreateStudyTest extends TestCase
 		$institutionE = factory(Institution::class)->create();
 		
 		$this->sessionStep2 += [
+			'id_study'             => [0, 0, 0, 0, 0],
 			'degree_id'            => [$degreeCollegeA->id, $degreeCollegeB->id, $degreeCollegeC->id, $degreeCollegeD->id, $degreeCollegeE->id],
 			'date_obtention'       => ['09-12-2015', '30-01-2001', '19-05-2010', '21-08-2015', '19-11-2012'],
 			'name_study'           => ['Ingeniería Informática', 'Ingeniería en Madera', 'Ingeniería Industrial', 'Pedagogia en Educación Física', 'Astronomía'],
@@ -289,6 +295,7 @@ class EmployeeCreateStudyTest extends TestCase
 		$degreeCollege   = factory(Degree::class)->create(['id' => 8]);
 		
 		$this->sessionStep2 += [
+			'id_study'             => [0, 0, 0],
 			'degree_id'            => [$degreeSchool->id, $degreeTechnical->id, $degreeCollege->id],
 			'date_obtention'       => ['17-07-1998', '25-02-2009', '09-12-2015'],
 			'name_study'           => ['', 'Carpintería Mención Madera', 'Ingeniería Informática'],

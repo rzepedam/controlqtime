@@ -11,7 +11,7 @@ use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class EmployeeCreateFamilyResponsabilityTest extends TestCase
+class EmployeeEditLicenseTest extends TestCase
 {
 	use DatabaseTransactions;
 	
@@ -33,11 +33,13 @@ class EmployeeCreateFamilyResponsabilityTest extends TestCase
 	
 	protected $typeSpeciality;
 	
-	protected $sessionStep1;
+	protected $step1_update;
 	
-	protected $sessionStep2;
+	protected $step2_update;
 	
-	protected $sessionStep3;
+	protected $step3_update;
+	
+	protected $license;
 	
 	function setUp()
 	{
@@ -53,7 +55,7 @@ class EmployeeCreateFamilyResponsabilityTest extends TestCase
 		$this->typeProfessionalLicense = factory(TypeProfessionalLicense::class)->create();
 		$this->typeSpeciality          = factory(TypeSpeciality::class)->create();
 		
-		$this->sessionStep1 = [
+		$this->step1_update = [
 			'male_surname'               => 'Candia',
 			'female_surname'             => 'Parra',
 			'first_name'                 => 'Marcelo',
@@ -73,71 +75,59 @@ class EmployeeCreateFamilyResponsabilityTest extends TestCase
 			'count_family_relationships' => 0
 		];
 		
-		$this->sessionStep2 = [
-			'count_studies'               => 0,
-			'count_certifications'        => 0,
-			'count_specialities'          => 0,
-			'count_professional_licenses' => 0
+		$this->step2_update = [
+			'count_studies'        => 0,
+			'count_certifications' => 0,
+			'count_specialities'   => 0
 		];
 		
-		$this->sessionStep3 = [
-			'count_diseases'     => 0,
-			'count_disabilities' => 0,
-			'count_exams'        => 0
+		$this->step3_update = [
+			'count_disabilities'            => 0,
+			'count_diseases'                => 0,
+			'count_exams'                   => 0,
+			'count_family_responsabilities' => 0
 		];
 		
-		Session::put('step1', $this->sessionStep1);
-		Session::put('step2', $this->sessionStep2);
+		Session::put('step1_update', $this->step1_update);
 		Session::put('email_employee', 'marcelocandia@gmail.com');
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
+		
+		$this->license = $this->employee->professionalLicenses()->create([
+			'id_professional_license'      => 0,
+			'type_professional_license_id' => $this->typeProfessionalLicense->id,
+			'emission_license'             => '08-10-2000',
+			'expired_license'              => '08-10-2007',
+			'is_donor'                     => true,
+			'detail_license'               => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
+		]);
 	}
 	
-	function test_store_with_family_responsability_employee()
+	function test_update_license_employee()
 	{
-		$this->sessionStep3 += [
-			'id_family_responsability'      => [0],
-			'name_responsability'           => ['José Miguel Escobar Sepúlveda'],
-			'rut_responsability'            => ['15.257.414-2'],
-			'relationship_id'               => [$this->relationship->id],
-			'count_family_responsabilities' => 1
+		$typeProfessionalLicense = factory(TypeProfessionalLicense::class)->create();
+		
+		$this->step2_update += [
+			'id_professional_license'      => [$this->license->id],
+			'type_professional_license_id' => [$typeProfessionalLicense->id],
+			'emission_license'             => ['27-04-2014'],
+			'expired_license'              => ['15-02-2022'],
+			'is_donor0'                    => false,
+			'detail_license'               => [''],
+			'count_professional_licenses'  => 1
 		];
 		
-		$this->post('human-resources/employees', $this->sessionStep3)
-			->seeInDatabase('family_responsabilities', [
-				'name_responsability' => 'José Miguel Escobar Sepúlveda',
-				'rut_responsability'  => '15257414-2',
-				'relationship_id'     => $this->relationship->id
+		Session::put('step2_update', $this->step2_update);
+		
+		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
+			->seeInDatabase('professional_licenses', [
+				'id'                           => $this->license->id,
+				'employee_id'                  => $this->employee->id,
+				'type_professional_license_id' => $typeProfessionalLicense->id,
+				'emission_license'             => '2014-04-27',
+				'expired_license'              => '2022-02-15',
+				'is_donor'                     => false,
+				'detail_license'               => '',
+				'deleted_at'                   => null
 			]);
 	}
-	
-	function test_store_with_multiple_family_responsability_employee()
-	{
-		$relationshipA = factory(Relationship::class)->create();
-		$relationshipB = factory(Relationship::class)->create();
-		$relationshipC = factory(Relationship::class)->create();
-		
-		$this->sessionStep3 += [
-			'id_family_responsability'      => [0, 0, 0],
-			'name_responsability'           => ['José Miguel Escobar Sepúlveda', 'María Soto Quiróz', 'Arturo Cáceres Oliva'],
-			'rut_responsability'            => ['15.257.414-2', '20.003.720-0', '13.547.147-k'],
-			'relationship_id'               => [$relationshipA->id, $relationshipB->id, $relationshipC->id],
-			'count_family_responsabilities' => 3
-		];
-		
-		$this->post('human-resources/employees', $this->sessionStep3)
-			->seeInDatabase('family_responsabilities', [
-				'name_responsability' => 'José Miguel Escobar Sepúlveda',
-				'rut_responsability'  => '15257414-2',
-				'relationship_id'     => $relationshipA->id])
-			->seeInDatabase('family_responsabilities', [
-				'name_responsability' => 'María Soto Quiróz',
-				'rut_responsability'  => '20003720-0',
-				'relationship_id'     => $relationshipB->id])
-			->seeInDatabase('family_responsabilities', [
-				'name_responsability' => 'Arturo Cáceres Oliva',
-				'rut_responsability'  => '13547147-k',
-				'relationship_id'     => $relationshipC->id
-			]);
-	}
-	
 }

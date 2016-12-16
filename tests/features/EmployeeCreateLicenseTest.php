@@ -94,6 +94,7 @@ class EmployeeCreateLicenseTest extends TestCase
 	function test_store_with_professional_license_employee()
 	{
 		$this->sessionStep2 += [
+			'id_professional_license'      => [0],
 			'type_professional_license_id' => [$this->typeProfessionalLicense->id],
 			'emission_license'             => ['12-08-2014'],
 			'expired_license'              => ['17-08-2019'],
@@ -122,6 +123,7 @@ class EmployeeCreateLicenseTest extends TestCase
 		$typeLicensesC = factory(TypeProfessionalLicense::class)->create();
 		
 		$this->sessionStep2 += [
+			'id_professional_license'      => [0, 0, 0],
 			'type_professional_license_id' => [$typeLicensesA->id, $typeLicensesB->id, $typeLicensesC->id],
 			'emission_license'             => ['12-08-2014', '11-05-2010', '27-11-2015'],
 			'expired_license'              => ['17-08-2019', '09-03-2018', '10-10-2016'],

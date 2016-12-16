@@ -95,6 +95,7 @@ class EmployeeCreateDisabilityTest extends TestCase
 	function test_store_with_disability_employee()
 	{
 		$this->sessionStep3 += [
+			'id_disability'         => [0],
 			'type_disability_id'    => [$this->typeDisability->id],
 			'treatment_disability0' => true,
 			'detail_disability'     => ['Lorem ipsum dolor sit amet, consectetuer adipiscing elit'],
@@ -117,6 +118,7 @@ class EmployeeCreateDisabilityTest extends TestCase
 		$typeDisabilityC = factory(TypeDisability::class)->create();
 		
 		$this->sessionStep3 += [
+			'id_disability'         => [0, 0, 0],
 			'type_disability_id'    => [$typeDisabilityA->id, $typeDisabilityB->id, $typeDisabilityC->id],
 			'treatment_disability0' => true,
 			'treatment_disability1' => false,

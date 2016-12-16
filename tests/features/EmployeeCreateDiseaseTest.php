@@ -95,6 +95,7 @@ class EmployeeCreateDiseaseTest extends TestCase
 	function test_store_with_disease_employee()
 	{
 		$this->sessionStep3 += [
+			'id_disease'         => [0],
 			'type_disease_id'    => [$this->typeDisease->id],
 			'treatment_disease0' => true,
 			'detail_disease'     => ['Lorem ipsum dolor sit amet, consectetuer adipiscing elit'],
@@ -117,6 +118,7 @@ class EmployeeCreateDiseaseTest extends TestCase
 		$typeDiseaseC = factory(TypeDisease::class)->create();
 		
 		$this->sessionStep3 += [
+			'id_disease'         => [0, 0, 0],
 			'type_disease_id'    => [$typeDiseaseA->id, $typeDiseaseB->id, $typeDiseaseC->id],
 			'treatment_disease0' => true,
 			'treatment_disease1' => true,

@@ -11,7 +11,7 @@ use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class EmployeeCreateContactTest extends TestCase
+class EmployeeEditCertificationTest extends TestCase
 {
 	use DatabaseTransactions;
 	
@@ -33,11 +33,13 @@ class EmployeeCreateContactTest extends TestCase
 	
 	protected $typeSpeciality;
 	
-	protected $sessionStep1;
+	protected $step1_update;
 	
-	protected $sessionStep2;
+	protected $step2_update;
 	
-	protected $sessionStep3;
+	protected $step3_update;
+	
+	protected $certification;
 	
 	function setUp()
 	{
@@ -53,7 +55,7 @@ class EmployeeCreateContactTest extends TestCase
 		$this->typeProfessionalLicense = factory(TypeProfessionalLicense::class)->create();
 		$this->typeSpeciality          = factory(TypeSpeciality::class)->create();
 		
-		$this->sessionStep1 = [
+		$this->step1_update = [
 			'male_surname'               => 'Candia',
 			'female_surname'             => 'Parra',
 			'first_name'                 => 'Marcelo',
@@ -69,85 +71,61 @@ class EmployeeCreateContactTest extends TestCase
 			'commune_id'                 => $this->commune->id,
 			'phone1'                     => '+56988102910',
 			'email_employee'             => 'marcelocandia@gmail.com',
+			'count_contacts'             => 0,
 			'count_family_relationships' => 0
 		];
 		
-		$this->sessionStep2 = [
+		$this->step2_update = [
 			'count_studies'               => 0,
-			'count_certifications'        => 0,
 			'count_specialities'          => 0,
 			'count_professional_licenses' => 0
 		];
 		
-		$this->sessionStep3 = [
+		$this->step3_update = [
 			'count_disabilities'            => 0,
 			'count_diseases'                => 0,
 			'count_exams'                   => 0,
 			'count_family_responsabilities' => 0
 		];
 		
+		Session::put('step1_update', $this->step1_update);
 		Session::put('email_employee', 'marcelocandia@gmail.com');
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
-		Session::put('step2', $this->sessionStep2);
+		
+		$this->certification = $this->employee->certifications()->create([
+			'id_certification'             => 0,
+			'type_certification_id'        => $this->typeCertification->id,
+			'institution_certification_id' => $this->institution->id,
+			'emission_certification'       => '22-10-1996',
+			'expired_certification'        => '28-03-2010'
+		]);
 	}
 	
-	function test_store_with_contact_information_employee()
+	function test_update_certification_employee()
 	{
-		$this->sessionStep1 += [
-			'id_contact'              => [0],
-			'contact_relationship_id' => [$this->relationship->id],
-			'name_contact'            => ['José Miguel Osorio Sepúlveda'],
-			'email_contact'           => ['joseosorio@gmail.com'],
-			'address_contact'         => ['Pje. Limahuida 1990'],
-			'tel_contact'             => ['+56983401021'],
-			'count_contacts'          => 1
+		$typeCertification = factory(TypeCertification::class)->create();
+		$institution       = factory(Institution::class)->create();
+		
+		$this->step2_update += [
+			'id_certification'             => [$this->certification->id],
+			'type_certification_id'        => [$typeCertification->id],
+			'institution_certification_id' => [$institution->id],
+			'emission_certification'       => ['12-08-2010'],
+			'expired_certification'        => ['28-07-2020'],
+			'count_certifications'         => 1
 		];
 		
-		Session::put('step1', $this->sessionStep1);
+		Session::put('step2_update', $this->step2_update);
 		
-		$this->post('human-resources/employees', $this->sessionStep3)
-			->seeInDatabase('contact_employees', [
-				'name_contact'    => 'José Miguel Osorio Sepúlveda',
-				'email_contact'   => 'joseosorio@gmail.com',
-				'address_contact' => 'Pje. Limahuida 1990',
-				'tel_contact'     => '+56983401021',
-				'deleted_at'      => null
-			]);
-	}
-	
-	function test_store_with_multiple_contact_information_employees()
-	{
-		$this->sessionStep1 += [
-			'id_contact'              => [0, 0, 0],
-			'contact_relationship_id' => $this->relationship->id,
-			'name_contact'            => ['José Miguel Osorio Sepúlveda', 'Alejandro Pablo López Zaldivia', 'Rodrigo Ángel Céspedes Mondaca'],
-			'email_contact'           => ['joseosorio@gmail.com', 'alelopez@gmail.com', 'rodrigoangel@gmail.com'],
-			'address_contact'         => ['Pje. Limahuida 1990', 'Calle Uno 919', 'Av. Conquistadores 701'],
-			'tel_contact'             => ['+56983401021', '+56976192110', '+56994021990'],
-			'count_contacts'          => 3
-		];
-		
-		Session::put('step1', $this->sessionStep1);
-		
-		$this->post('human-resources/employees', $this->sessionStep3)
-			->seeInDatabase('contact_employees', [
-				'name_contact'    => 'José Miguel Osorio Sepúlveda',
-				'email_contact'   => 'joseosorio@gmail.com',
-				'address_contact' => 'Pje. Limahuida 1990',
-				'tel_contact'     => '+56983401021',
-				'deleted_at'      => null])
-			->seeInDatabase('contact_employees', [
-				'name_contact'    => 'Alejandro Pablo López Zaldivia',
-				'email_contact'   => 'alelopez@gmail.com',
-				'address_contact' => 'Calle Uno 919',
-				'tel_contact'     => '+56976192110',
-				'deleted_at'      => null])
-			->seeInDatabase('contact_employees', [
-				'name_contact'    => 'Rodrigo Ángel Céspedes Mondaca',
-				'email_contact'   => 'rodrigoangel@gmail.com',
-				'address_contact' => 'Av. Conquistadores 701',
-				'tel_contact'     => '+56994021990',
-				'deleted_at'      => null
+		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
+			->seeInDatabase('certifications', [
+				'id'                           => $this->certification->id,
+				'employee_id'                  => $this->employee->id,
+				'type_certification_id'        => $typeCertification->id,
+				'institution_certification_id' => $institution->id,
+				'emission_certification'       => '2010-08-12',
+				'expired_certification'        => '2020-07-28',
+				'deleted_at'                   => null
 			]);
 	}
 }

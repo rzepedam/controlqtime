@@ -94,6 +94,7 @@ class EmployeeCreateCertificationTest extends TestCase
 	function test_store_with_certification_employee()
 	{
 		$this->sessionStep2 += [
+			'id_certification'             => [0],
 			'type_certification_id'        => [$this->typeCertification->id],
 			'institution_certification_id' => [$this->institution->id],
 			'emission_certification'       => ['13-02-2005'],
@@ -124,6 +125,7 @@ class EmployeeCreateCertificationTest extends TestCase
 		$institutionC = factory(Institution::class)->create();
 		
 		$this->sessionStep2 += [
+			'id_certification'             => [0, 0, 0],
 			'type_certification_id'        => [$typeCertificationA->id, $typeCertificationB->id, $typeCertificationC->id],
 			'institution_certification_id' => [$institutionA->id, $institutionB->id, $institutionC->id],
 			'emission_certification'       => ['13-02-2005', '24-01-2010', '09-06-2013'],

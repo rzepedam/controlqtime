@@ -94,6 +94,7 @@ class EmployeeCreateSpecialityTest extends TestCase
 	function test_store_with_speciality_employee()
 	{
 		$this->sessionStep2 += [
+			'id_speciality'             => [0],
 			'type_speciality_id'        => [$this->typeSpeciality->id],
 			'institution_speciality_id' => [$this->institution->id],
 			'emission_speciality'       => ['18-11-2009'],
@@ -124,6 +125,7 @@ class EmployeeCreateSpecialityTest extends TestCase
 		$institutionC = factory(Institution::class)->create();
 		
 		$this->sessionStep2 += [
+			'id_speciality'             => [0, 0, 0],
 			'type_speciality_id'        => [$typeSpecialityA->id, $typeSpecialityB->id, $typeSpecialityC->id],
 			'institution_speciality_id' => [$institutionA->id, $institutionB->id, $institutionC->id],
 			'emission_speciality'       => ['18-11-2009', '21-09-1998', '11-08-2016'],
