@@ -274,7 +274,7 @@ $factory->state(Employee::class, 'disable', function ()
 $factory->define(EngineCubic::class, function (Faker\Generator $faker)
 {
 	return [
-		'name'       => $faker->words(10, true),
+		'name'       => $faker->word,
 		'acr'        => $faker->randomLetter . $faker->randomLetter,
 		'deleted_at' => null
 	];
@@ -355,7 +355,7 @@ $factory->define(ModelVehicle::class, function (Faker\Generator $faker)
 {
 	return [
 		'trademark_id' => factory(Trademark::class)->create()->id,
-		'name'         => $faker->words(8, true),
+		'name'         => $faker->word,
 		'deleted_at'   => null
 	];
 });
@@ -434,7 +434,7 @@ $factory->define(Province::class, function (Faker\Generator $faker)
 $factory->define(Region::class, function (Faker\Generator $faker)
 {
 	return [
-		'name' => $faker->words(20, true)
+		'name' => $faker->word
 	];
 });
 
@@ -494,7 +494,7 @@ $factory->define(Terminal::class, function (Faker\Generator $faker)
 $factory->define(Trademark::class, function (Faker\Generator $faker)
 {
 	return [
-		'name'       => $faker->words(10, true),
+		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });
