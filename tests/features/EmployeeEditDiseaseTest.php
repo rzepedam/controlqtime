@@ -1,16 +1,13 @@
 <?php
 
-use Controlqtime\Core\Entities\Institution;
-use Controlqtime\Core\Entities\TypeSpeciality;
+use Controlqtime\Core\Entities\TypeDisease;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class EmployeeEditSpecialityTest extends TestCase
+class EmployeeEditDiseaseTest extends TestCase
 {
 	use DatabaseTransactions;
 	
-	protected $institution;
-	
-	protected $typeSpeciality;
+	protected $typeDisease;
 	
 	protected $step1_update;
 	
@@ -18,14 +15,13 @@ class EmployeeEditSpecialityTest extends TestCase
 	
 	protected $step3_update;
 	
-	protected $speciality;
+	protected $disease;
 	
 	function setUp()
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->institution    = factory(Institution::class)->create();
-		$this->typeSpeciality = factory(TypeSpeciality::class)->create();
+		$this->typeDisease = factory(TypeDisease::class)->create();
 		
 		$this->step1_update = [
 			'male_surname'               => 'Candia',
@@ -50,54 +46,49 @@ class EmployeeEditSpecialityTest extends TestCase
 		$this->step2_update = [
 			'count_studies'               => 0,
 			'count_certifications'        => 0,
+			'count_specialities'          => 0,
 			'count_professional_licenses' => 0
 		];
 		
 		$this->step3_update = [
 			'count_disabilities'            => 0,
-			'count_diseases'                => 0,
 			'count_exams'                   => 0,
 			'count_family_responsabilities' => 0
 		];
 		
 		Session::put('step1_update', $this->step1_update);
+		Session::put('step2_update', $this->step2_update);
 		Session::put('email_employee', 'marcelocandia@gmail.com');
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		
-		$this->speciality = $this->employee->specialities()->create([
-			'id_speciality'             => 0,
-			'type_speciality_id'        => $this->typeSpeciality->id,
-			'institution_speciality_id' => $this->institution->id,
-			'emission_speciality'       => '22-10-1996',
-			'expired_speciality'        => '28-03-2010'
+		$this->disease = $this->employee->diseases()->create([
+			'id_disease'        => 0,
+			'type_disease_id'   => $this->typeDisease->id,
+			'treatment_disease' => true,
+			'detail_disease'    => 'Lorem ipsum dolor sit amet'
 		]);
 	}
 	
-	function test_update_speciality_employee()
+	function test_update_disease_employee()
 	{
-		$typeSpeciality = factory(TypeSpeciality::class)->create();
-		$institution    = factory(Institution::class)->create();
+		$typeDisease = factory(TypeDisease::class)->create();
 		
-		$this->step2_update += [
-			'id_speciality'             => [$this->speciality->id],
-			'type_speciality_id'        => [$typeSpeciality->id],
-			'institution_speciality_id' => [$institution->id],
-			'emission_speciality'       => ['13-01-2005'],
-			'expired_speciality'        => ['13-08-2015'],
-			'count_specialities'        => 1,
+		$this->step3_update += [
+			'id_disease'         => [$this->disease->id],
+			'type_disease_id'    => [$typeDisease->id],
+			'treatment_disease0' => false,
+			'detail_disease'     => [''],
+			'count_diseases'     => 1
 		];
 		
-		Session::put('step2_update', $this->step2_update);
-		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
-			->seeInDatabase('specialities', [
-				'id'                        => $this->speciality->id,
-				'employee_id'               => $this->employee->id,
-				'type_speciality_id'        => $typeSpeciality->id,
-				'institution_speciality_id' => $institution->id,
-				'emission_speciality'       => '2005-01-13',
-				'expired_speciality'        => '2015-08-13',
-				'deleted_at'                => null
+			->seeInDatabase('diseases', [
+				'id'                => $this->disease->id,
+				'employee_id'       => $this->employee->id,
+				'type_disease_id'   => $typeDisease->id,
+				'treatment_disease' => false,
+				'detail_disease'    => '',
+				'deleted_at'        => null
 			]);
 	}
 }

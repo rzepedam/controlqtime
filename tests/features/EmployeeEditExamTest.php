@@ -1,16 +1,11 @@
 <?php
 
-use Controlqtime\Core\Entities\Institution;
-use Controlqtime\Core\Entities\TypeSpeciality;
+use Controlqtime\Core\Entities\TypeExam;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class EmployeeEditSpecialityTest extends TestCase
+class EmployeeEditExamTest extends TestCase
 {
 	use DatabaseTransactions;
-	
-	protected $institution;
-	
-	protected $typeSpeciality;
 	
 	protected $step1_update;
 	
@@ -18,14 +13,15 @@ class EmployeeEditSpecialityTest extends TestCase
 	
 	protected $step3_update;
 	
-	protected $speciality;
+	protected $typeExam;
+	
+	protected $exam;
 	
 	function setUp()
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->institution    = factory(Institution::class)->create();
-		$this->typeSpeciality = factory(TypeSpeciality::class)->create();
+		$this->typeExam = factory(TypeExam::class)->create();
 		
 		$this->step1_update = [
 			'male_surname'               => 'Candia',
@@ -50,54 +46,53 @@ class EmployeeEditSpecialityTest extends TestCase
 		$this->step2_update = [
 			'count_studies'               => 0,
 			'count_certifications'        => 0,
+			'count_specialities'          => 0,
 			'count_professional_licenses' => 0
 		];
 		
 		$this->step3_update = [
 			'count_disabilities'            => 0,
 			'count_diseases'                => 0,
-			'count_exams'                   => 0,
 			'count_family_responsabilities' => 0
 		];
 		
 		Session::put('step1_update', $this->step1_update);
+		Session::put('step2_update', $this->step2_update);
 		Session::put('email_employee', 'marcelocandia@gmail.com');
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		
-		$this->speciality = $this->employee->specialities()->create([
-			'id_speciality'             => 0,
-			'type_speciality_id'        => $this->typeSpeciality->id,
-			'institution_speciality_id' => $this->institution->id,
-			'emission_speciality'       => '22-10-1996',
-			'expired_speciality'        => '28-03-2010'
+		$this->exam = $this->employee->exams()->create([
+			'id_exam'       => 0,
+			'type_exam_id'  => $this->typeExam->id,
+			'emission_exam' => '28-07-2001',
+			'expired_exam'  => '28-07-2002',
+			'detail_exam'   => 'Lorem ipsum dolor sit amet'
 		]);
 	}
 	
-	function test_update_speciality_employee()
+	function test_update_exam_employee()
 	{
-		$typeSpeciality = factory(TypeSpeciality::class)->create();
-		$institution    = factory(Institution::class)->create();
+		$typeExam = factory(TypeExam::class)->create();
 		
-		$this->step2_update += [
-			'id_speciality'             => [$this->speciality->id],
-			'type_speciality_id'        => [$typeSpeciality->id],
-			'institution_speciality_id' => [$institution->id],
-			'emission_speciality'       => ['13-01-2005'],
-			'expired_speciality'        => ['13-08-2015'],
-			'count_specialities'        => 1,
+		$this->step3_update += [
+			'id_exam'       => [$this->exam->id],
+			'type_exam_id'  => [$typeExam->id],
+			'emission_exam' => ['13-03-2008'],
+			'expired_exam'  => ['17-04-2009'],
+			'detail_exam'   => ['Lorem ipsum solot'],
+			'count_exams'   => 1,
 		];
 		
-		Session::put('step2_update', $this->step2_update);
-		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
-			->seeInDatabase('specialities', [
-				'id'                        => $this->speciality->id,
-				'employee_id'               => $this->employee->id,
-				'type_speciality_id'        => $typeSpeciality->id,
-				'institution_speciality_id' => $institution->id,
-				'emission_speciality'       => '2005-01-13',
-				'expired_speciality'        => '2015-08-13',
-				'deleted_at'                => null
+			->seeInDatabase('exams', [
+				'id'            => $this->exam->id,
+				'employee_id'   => $this->employee->id,
+				'type_exam_id'  => $typeExam->id,
+				'emission_exam' => '2008-03-13',
+				'expired_exam'  => '2009-04-17',
+				'detail_exam'   => 'Lorem ipsum solot',
+				'deleted_at'    => null
 			]);
 	}
 }
+

@@ -325,7 +325,7 @@ class Employee extends Eloquent
 	/**
 	 * @param $request 'Session step 3'
 	 */
-	public function createResponsabilities($request)
+	public function createFamilyResponsabilities($request)
 	{
 		for ( $i = 0; $i < $request['count_family_responsabilities']; $i++ )
 		{

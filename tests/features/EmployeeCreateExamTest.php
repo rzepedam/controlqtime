@@ -1,37 +1,13 @@
 <?php
 
-use Controlqtime\Core\Entities\Degree;
 use Controlqtime\Core\Entities\TypeExam;
-use Controlqtime\Core\Entities\Institution;
-use Controlqtime\Core\Entities\TypeDisease;
-use Controlqtime\Core\Entities\Relationship;
-use Controlqtime\Core\Entities\TypeDisability;
-use Controlqtime\Core\Entities\TypeSpeciality;
-use Controlqtime\Core\Entities\TypeCertification;
-use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class EmployeeCreateExamTest extends TestCase
 {
 	use DatabaseTransactions;
 	
-	protected $degree;
-	
-	protected $institution;
-	
-	protected $relationship;
-	
-	protected $typeCertification;
-	
-	protected $typeDisability;
-	
-	protected $typeDisease;
-	
 	protected $typeExam;
-	
-	protected $typeProfessionalLicense;
-	
-	protected $typeSpeciality;
 	
 	protected $sessionStep1;
 	
@@ -43,15 +19,7 @@ class EmployeeCreateExamTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->degree                  = factory(Degree::class)->create();
-		$this->institution             = factory(Institution::class)->create();
-		$this->relationship            = factory(Relationship::class)->create();
-		$this->typeCertification       = factory(TypeCertification::class)->create();
-		$this->typeDisability          = factory(TypeDisability::class)->create();
-		$this->typeDisease             = factory(TypeDisease::class)->create();
-		$this->typeExam                = factory(TypeExam::class)->create();
-		$this->typeProfessionalLicense = factory(TypeProfessionalLicense::class)->create();
-		$this->typeSpeciality          = factory(TypeSpeciality::class)->create();
+		$this->typeExam = factory(TypeExam::class)->create();
 		
 		$this->sessionStep1 = [
 			'male_surname'               => 'Candia',

@@ -365,7 +365,7 @@ class EmployeeController extends Controller
 			$employee->createDisabilities($request->all());
 			$employee->createDiseases($request->all());
 			$employee->createExams($request->all());
-			$employee->createResponsabilities($request->all());
+			$employee->createFamilyResponsabilities($request->all());
 			
 			// $user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionStoreEmployee();
@@ -537,16 +537,16 @@ class EmployeeController extends Controller
 			// Update Step3 data
 			// $this->disability->destroyImages($request->get('id_delete_disability'), 'Disability');
 			// $this->disability->destroyArrayId($request->get('id_delete_disability'), 'Disability');
-			//$employee->createDisabilities($request->all());
+			$employee->createDisabilities($request->all());
 			// $this->disease->destroyImages($request->get('id_delete_disease'), 'Disease');
 			// $this->disease->destroyArrayId($request->get('id_delete_disease'), 'Disease');
-			//$employee->createDiseases($request->all());
+			$employee->createDiseases($request->all());
 			// $this->exam->destroyImages($request->get('id_delete_exam'), 'Exam');
 			// $this->exam->destroyArrayId($request->get('id_delete_exam'), 'Exam');
-			//$employee->createExams($request->all());
+			$employee->createExams($request->all());
 			// $this->familyResponsability->destroyImages($request->get('id_delete_family_responsability'), 'FamilyResponsability');
 			// $this->familyResponsability->destroyArrayId($request->get('id_delete_family_responsability'), 'FamilyResponsability');
-			//$employee->createResponsabilities($request->all());
+			$employee->createFamilyResponsabilities($request->all());
 			
 			$this->activateEmployee->checkStateUpdateEmployee($id);
 			

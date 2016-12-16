@@ -1,14 +1,7 @@
 <?php
 
 use Controlqtime\Core\Entities\Degree;
-use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\Institution;
-use Controlqtime\Core\Entities\TypeDisease;
-use Controlqtime\Core\Entities\Relationship;
-use Controlqtime\Core\Entities\TypeDisability;
-use Controlqtime\Core\Entities\TypeSpeciality;
-use Controlqtime\Core\Entities\TypeCertification;
-use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class EmployeeEditStudyTest extends TestCase
@@ -16,20 +9,6 @@ class EmployeeEditStudyTest extends TestCase
 	use DatabaseTransactions;
 	
 	protected $institution;
-	
-	protected $relationship;
-	
-	protected $typeCertification;
-	
-	protected $typeDisability;
-	
-	protected $typeDisease;
-	
-	protected $typeExam;
-	
-	protected $typeProfessionalLicense;
-	
-	protected $typeSpeciality;
 	
 	protected $step1_update;
 	
@@ -63,13 +42,6 @@ class EmployeeEditStudyTest extends TestCase
 		$this->degreeDetailTechnical   = factory(Degree::class)->create(['id' => '3']);
 		$this->degreeDetailCollege     = factory(Degree::class)->create(['id' => '6']);
 		$this->institution             = factory(Institution::class)->create();
-		$this->relationship            = factory(Relationship::class)->create();
-		$this->typeCertification       = factory(TypeCertification::class)->create();
-		$this->typeDisability          = factory(TypeDisability::class)->create();
-		$this->typeDisease             = factory(TypeDisease::class)->create();
-		$this->typeExam                = factory(TypeExam::class)->create();
-		$this->typeProfessionalLicense = factory(TypeProfessionalLicense::class)->create();
-		$this->typeSpeciality          = factory(TypeSpeciality::class)->create();
 		
 		$this->step1_update = [
 			'male_surname'               => 'Candia',
