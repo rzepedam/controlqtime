@@ -101,8 +101,8 @@ class DailyAssistanceController extends Controller
 	 */
 	private function getRecordPerDate($date)
 	{
-		$accessControls   = $this->accessControl->whereDate('created_at', $date, ['employee']);
-		$dailyAssistances = $this->dailyAssistance->whereDate('created_at', $date, ['employee']);
+		$accessControls   = $this->accessControl->with(['employee'])->whereDate('created_at', $date)->get();
+		$dailyAssistances = $this->dailyAssistance->with(['employee'])->whereDate('created_at', $date)->get();
 		$num_employees    = $accessControls->unique('rut');
 		$entry            = $accessControls->groupBy('rut')->transform(function ($item)
 		{
@@ -120,8 +120,8 @@ class DailyAssistanceController extends Controller
 	 */
 	private function getRecordPerDateAndEmployee($employee, $date)
 	{
-		$accessControls   = $this->accessControl->whereDateAndWhereColumn('created_at', $date, 'employee_id', $employee, ['employee']);
-		$dailyAssistances = $this->dailyAssistance->whereDateAndWhereColumn('created_at', $date, 'employee_id', $employee, ['employee']);
+		$accessControls   = $this->accessControl->with(['employee'])->whereDate('created_at', $date)->where('employee_id', $employee)->get();
+		$dailyAssistances = $this->dailyAssistance->with(['employee'])->whereDate('created_at', $date)->where('employee_id', $employee)->get();
 		$num_employees    = $accessControls->unique('rut');
 		$entry            = $accessControls->groupBy('rut')->transform(function ($item)
 		{

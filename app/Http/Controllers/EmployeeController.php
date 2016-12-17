@@ -614,10 +614,10 @@ class EmployeeController extends Controller
 	 */
 	public function getImages($id)
 	{
-		$employee = $this->employee->find($id, [
+		$employee = $this->employee->with([
 			'certifications.imagesable', 'specialities.imagesable', 'professionalLicenses.imagesable',
 			'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable'
-		]);
+		])->findOrFail($id);
 		
 		return view('human-resources.employees.upload', compact('id', 'employee'));
 	}

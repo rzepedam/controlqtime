@@ -86,7 +86,7 @@ class CheckVehicleFormController extends Controller
 	{
 		$masterFormPieceVehicle = $this->masterFormPieceVehicle->findOrFail(1)->pieceVehicles;
 		$statePieceVehicles     = $this->statePieceVehicle->all();
-		$vehicles               = $this->vehicle->whereLists('state', 'enable', 'patent');
+		$vehicles               = $this->vehicle->enabled()->pluck('patent', 'id');
 		
 		return view('operations.check-vehicle-forms.create', compact(
 			'masterFormPieceVehicle', 'statePieceVehicles', 'vehicles'
@@ -150,7 +150,7 @@ class CheckVehicleFormController extends Controller
 		$masterFormPieceVehicle = $this->masterFormPieceVehicle->findOrFail(1)->pieceVehicles;
 		$checkVehicleForm       = $this->checkVehicleForm->findOrFail($id);
 		$statePieceVehicles     = $this->statePieceVehicle->all();
-		$vehicles               = $this->vehicle->whereLists('state', 'enable', 'patent');
+		$vehicles               = $this->vehicle->enabled()->pluck('patent', 'id');
 		
 		return view('operations.check-vehicle-forms.edit', compact(
 			'masterFormPieceVehicle', 'checkVehicleForm', 'statePieceVehicles', 'vehicles'

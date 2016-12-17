@@ -104,18 +104,6 @@ class TypeDiseaseController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function show($id)
-	{
-		$typeDisease = $this->typeDisease->find($id);
-		
-		return view('maintainers.type-diseases.show', compact('typeDisease'));
-	}
-	
-	/**
-	 * @param $id
-	 *
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
 	public function edit($id)
 	{
 		$typeDisease = $this->typeDisease->findOrFail($id);

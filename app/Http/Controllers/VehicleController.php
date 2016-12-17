@@ -193,9 +193,7 @@ class VehicleController extends Controller
 	 */
 	public function edit($id)
 	{
-		$vehicle = $this->vehicle->with([
-			'modelVehicle.trademark'
-		])->findOrFail($id);
+		$vehicle = $this->vehicle->with(['modelVehicle.trademark'])->findOrFail($id);
 		
 		$trademarks    = $this->trademark->pluck('name', 'id');
 		$modelVehicles = $this->trademark->findOrFail($vehicle->modelVehicle->trademark->id)->modelVehicles->pluck('name', 'id');
@@ -277,7 +275,7 @@ class VehicleController extends Controller
 	 */
 	public function getImages($id)
 	{
-		$vehicle = $this->vehicle->find($id);
+		$vehicle = $this->vehicle->findOrFail($id);
 		
 		return view('operations.vehicles.upload', compact('id', 'vehicle'));
 	}

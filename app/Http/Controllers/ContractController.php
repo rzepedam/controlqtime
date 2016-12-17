@@ -231,12 +231,12 @@ class ContractController extends Controller
 	 */
 	public function getPdf($id)
 	{
-		$contract = $this->contract->find($id, [
+		$contract = $this->contract->with([
 			'company.address.commune.province.region', 'employee.address.commune.province.region',
 			'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
 			'gratification', 'typeContract', 'termsAndObligatories', 'company.legalRepresentative',
 			'company.address.detailAddressCompany', 'employee.address.detailAddressLegalEmployee'
-		]);
+		])->findOrFail($id);
 		
 		$header = view('human-resources.contracts.partials.pdf.header');
 		$footer = view('human-resources.contracts.partials.pdf.footer');
@@ -251,7 +251,6 @@ class ContractController extends Controller
 			->setOption('footer-html', $footer);
 		
 		return $pdf->inline();
-		
 	}
 	
 }

@@ -299,9 +299,7 @@ class CompanyController extends Controller
 	 */
 	public function getImages($id)
 	{
-		$company = $this->company->find($id, [
-			'imagesable'
-		]);
+		$company = $this->company->with(['imagesable'])->findOrFail($id);
 		
 		return view('administration.companies.upload', compact('id', 'company'));
 	}

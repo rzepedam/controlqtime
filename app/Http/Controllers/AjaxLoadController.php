@@ -88,7 +88,7 @@ class AjaxLoadController extends Controller
 	 */
 	public function loadProvinces(Request $request)
 	{
-		return $this->region->findProvinces($request->get('id'));
+		return $this->region->findOrFail($request->get('id'))->provinces->pluck('name', 'id');
 	}
 	
 	/**
@@ -98,7 +98,7 @@ class AjaxLoadController extends Controller
 	 */
 	public function loadCommunes(Request $request)
 	{
-		return $this->province->findCommunes($request->get('id'));
+		return $this->province->findOrFail($request->get('id'))->communes->pluck('name', 'id');
 	}
 	
 	/**
@@ -143,7 +143,7 @@ class AjaxLoadController extends Controller
 	 */
 	public function loadModelVehicles(Request $request)
 	{
-		return $this->trademark->findModelVehicles($request->get('id'));
+		return $this->trademark->findOrFail($request->get('id'))->modelVehicles->pluck('name', 'id');
 	}
 	
 	/**
@@ -153,7 +153,7 @@ class AjaxLoadController extends Controller
 	 */
 	public function loadDetailVehicle(Request $request)
 	{
-		$vehicle = $this->vehicle->find($request->get('id'), ['modelVehicle.trademark']);
+		$vehicle = $this->vehicle->with(['modelVehicle.trademark'])->findOrFail($request->get('id'));
 		
 		return $vehicle;
 	}
