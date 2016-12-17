@@ -37,16 +37,18 @@
         {{ Form::label('nationality_id', 'Nacionalidad', ['class' => 'control-label']) }}
         {{ Form::select('nationality_id', $nationalities, Session::get('nationality_id'), ['class' => 'form-control']) }}
     </div>
-    <div class="col-sm-6 col-md-3 form-group">
-        <ul class="list-unstyled list-inline">
+    <div class="col-sm-6 col-md-3 form-group margin-0">
+        {{ Form::label('male', 'Sexo') }}
+        <ul class="list-unstyled list-inline text-center">
             <li>
-                <div class="radio-custom">
+                <div class="radio-custom radio-primary">
                     <input type="radio" id="male" name="is_male" value="M" {{ Session::get('is_male') == 'M' ? 'checked' : '' }} />
                     <label for="male">M</label>
                 </div>
             </li>
+            <li></li>
             <li>
-                <div class="radio-custom">
+                <div class="radio-custom radio-primary">
                     <input type="radio" id="female" name="is_male" value="F" {{ Session::get('is_male') == 'F' ? 'checked' : '' }} />
                     <label for="female">F</label>
                 </div>

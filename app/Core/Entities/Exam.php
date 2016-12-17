@@ -4,12 +4,11 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Controlqtime\Core\Traits\DestroyImageFile;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Exam extends Eloquent
 {
-	use DestroyImageFile, SoftDeletes;
+	use SoftDeletes;
 	
 	/**
 	 * @var array

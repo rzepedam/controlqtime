@@ -5,12 +5,11 @@ namespace Controlqtime\Core\Api\Entities;
 use Carbon\Carbon;
 use Controlqtime\Core\Entities\Employee;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Controlqtime\Core\Traits\WhereMethodsTrait;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class AccessControlApi extends Eloquent
 {
-	use SoftDeletes, WhereMethodsTrait;
+	use SoftDeletes;
 	
 	/**
 	 * @var array

@@ -3,12 +3,11 @@
 namespace Controlqtime\Core\Entities;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Controlqtime\Core\Traits\DestroyImageFile;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Disability extends Eloquent
 {
-	use SoftDeletes, DestroyImageFile;
+	use SoftDeletes;
 	
 	/**
 	 * @var array

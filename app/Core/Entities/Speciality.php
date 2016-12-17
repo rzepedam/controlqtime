@@ -4,12 +4,11 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Controlqtime\Core\Traits\DestroyImageFile;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Speciality extends Eloquent
 {
-	use SoftDeletes, DestroyImageFile;
+	use SoftDeletes;
 	
 	/**
 	 * @var array
@@ -65,42 +64,5 @@ class Speciality extends Eloquent
 	public function setExpiredSpecialityAttribute($value)
 	{
 		$this->attributes['expired_speciality'] = Carbon::createFromFormat('d-m-Y', $value);
-	}
-	
-	/**
-	 * @param array $request
-	 * @param $entity
-	 */
-	public function createOrUpdateWithArray(array $request, $entity)
-	{
-		for ($i = 0; $i < $request['count_specialities']; $i++)
-		{
-			
-			$id = $request['id_speciality'][$i];
-			
-			if ($id == 0)
-			{
-				$this->model = new Speciality([
-					'type_speciality_id'        => $request['type_speciality_id'][$i],
-					'institution_speciality_id' => $request['institution_speciality_id'][$i],
-					'emission_speciality'       => $request['emission_speciality'][$i],
-					'expired_speciality'        => $request['expired_speciality'][$i],
-				]);
-				
-				$entity->certifications()->save($this->model);
-				$entity->state = 'disable';
-				$entity->save();
-				
-			} else
-			{
-				$this->model                            = $this->model->findOrFail($id);
-				$this->model->type_speciality_id        = $request['type_speciality_id'][$i];
-				$this->model->institution_speciality_id = $request['institution_speciality_id'][$i];
-				$this->model->emission_speciality       = $request['emission_speciality'][$i];
-				$this->model->expired_speciality        = $request['expired_speciality'][$i];
-				
-				$this->model->save();
-			}
-		}
 	}
 }

@@ -576,6 +576,7 @@
                         dataType: "json",
                         success: function (response) {
                             if (response.status) {
+                                $('#js').addClass('hide');
                                 status = true;
                                 scrollTop();
                             } else {

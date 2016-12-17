@@ -4,43 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "178018fa5212aeb7efda282b0f7f0993",
-    "content-hash": "f12f1ed0fb00360815dd16410f4bc138",
+    "hash": "34acd2a98ceff54037f2d834fb261333",
+    "content-hash": "aeb3b72381c423a47b635fb826943055",
     "packages": [
-        {
-            "name": "askedio/laravel5-soft-cascade",
-            "version": "1.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Askedio/laravel5-soft-cascade.git",
-                "reference": "2a5d297c37d607fcbdd733e73f261586345d4fbe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Askedio/laravel5-soft-cascade/zipball/2a5d297c37d607fcbdd733e73f261586345d4fbe",
-                "reference": "2a5d297c37d607fcbdd733e73f261586345d4fbe",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "codacy/coverage": "dev-master",
-                "laravel/framework": "5.*",
-                "laravel/laravel": "5.*",
-                "laravel/lumen-framework": "5.*",
-                "phpunit/phpunit": "4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Askedio\\SoftCascade\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "Soft Delete & Restore Cascader",
-            "time": "2016-10-06 05:15:43"
-        },
         {
             "name": "aws/aws-sdk-php",
             "version": "3.20.7",

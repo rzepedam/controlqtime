@@ -4,12 +4,11 @@ namespace Controlqtime\Core\Entities;
 
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Controlqtime\Core\Traits\DestroyImageFile;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class FamilyResponsability extends Eloquent
 {
-	use SoftDeletes, DestroyImageFile;
+	use SoftDeletes;
 	
     /**
      * @var array
