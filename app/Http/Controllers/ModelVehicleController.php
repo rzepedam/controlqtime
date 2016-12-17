@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Trademark;
 use Controlqtime\Core\Entities\ModelVehicle;
 use Controlqtime\Http\Requests\ModelVehicleRequest;
@@ -10,9 +11,9 @@ use Controlqtime\Http\Requests\ModelVehicleRequest;
 class ModelVehicleController extends Controller
 {
 	/**
-	 * @var Trademark
+	 * @var Log
 	 */
-	protected $trademark;
+	protected $log;
 	
 	/**
 	 * @var ModelVehicle
@@ -20,13 +21,20 @@ class ModelVehicleController extends Controller
 	protected $modelVehicle;
 	
 	/**
+	 * @var Trademark
+	 */
+	protected $trademark;
+	
+	/**
 	 * ModelVehicleController constructor.
 	 *
+	 * @param Log          $log
 	 * @param ModelVehicle $modelVehicle
 	 * @param Trademark    $trademark
 	 */
-	public function __construct(ModelVehicle $modelVehicle, Trademark $trademark)
+	public function __construct(Log $log, ModelVehicle $modelVehicle, Trademark $trademark)
 	{
+		$this->log          = $log;
 		$this->modelVehicle = $modelVehicle;
 		$this->trademark    = $trademark;
 	}
@@ -66,15 +74,21 @@ class ModelVehicleController extends Controller
 	 */
 	public function store(ModelVehicleRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->modelVehicle->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->modelVehicle->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/model-vehicles']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store ModelVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/model-vehicles'
-		]);
 	}
 	
 	/**
@@ -124,13 +138,12 @@ class ModelVehicleController extends Controller
 			$this->modelVehicle->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/model-vehicles'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/model-vehicles']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update ModelVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

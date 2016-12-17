@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Http\Requests\NumHourRequest;
 
 class NumHourController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var NumHour
 	 */
@@ -16,10 +22,12 @@ class NumHourController extends Controller
 	/**
 	 * NumHourController constructor.
 	 *
+	 * @param Log     $log
 	 * @param NumHour $numHour
 	 */
-	public function __construct(NumHour $numHour)
+	public function __construct(Log $log, NumHour $numHour)
 	{
+		$this->log     = $log;
 		$this->numHour = $numHour;
 	}
 	
@@ -56,15 +64,21 @@ class NumHourController extends Controller
 	 */
 	public function store(NumHourRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->numHour->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->numHour->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/num-hours']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store NumHour: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/num-hours'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class NumHourController extends Controller
 			$this->numHour->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/num-hours'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/num-hours']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update NumHour: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

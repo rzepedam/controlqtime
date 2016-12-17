@@ -22,7 +22,6 @@
 
         {{ Form::model($typeCertification, array('route' => array('type-certifications.update', $typeCertification), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'typeCertification', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-certifications.partials.fields')

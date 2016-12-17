@@ -41,13 +41,13 @@
         <ul class="list-unstyled list-inline">
             <li>
                 <div class="radio-custom">
-                    <input type="radio" id="male" name="is_male" value="M" checked="checked" />
+                    <input type="radio" id="male" name="is_male" value="M" {{ Session::get('is_male') == 'M' ? 'checked' : '' }} />
                     <label for="male">M</label>
                 </div>
             </li>
             <li>
                 <div class="radio-custom">
-                    <input type="radio" id="female" name="is_male" value="F" />
+                    <input type="radio" id="female" name="is_male" value="F" {{ Session::get('is_male') == 'F' ? 'checked' : '' }} />
                     <label for="female">F</label>
                 </div>
             </li>

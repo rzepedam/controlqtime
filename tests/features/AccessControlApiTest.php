@@ -51,7 +51,7 @@ class AccessControlApiTest extends TestCase
 			'Authorization' => 'Bearer ' . $this->token,
 			'Accept'        => 'application/json'])
 			->seeJson([
-				'success' => true,
+				'status' => true,
 			]);
 	}
 	

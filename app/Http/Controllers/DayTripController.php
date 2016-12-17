@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\DayTrip;
 use Controlqtime\Http\Requests\DayTripRequest;
 
@@ -14,13 +15,20 @@ class DayTripController extends Controller
 	protected $dayTrip;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * DayTripController constructor.
 	 *
 	 * @param DayTrip $dayTrip
+	 * @param Log     $log
 	 */
-	public function __construct(DayTrip $dayTrip)
+	public function __construct(DayTrip $dayTrip, Log $log)
 	{
 		$this->dayTrip = $dayTrip;
+		$this->log     = $log;
 	}
 	
 	/**
@@ -56,15 +64,21 @@ class DayTripController extends Controller
 	 */
 	public function store(DayTripRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->dayTrip->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->dayTrip->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/day-trips']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store DayTrip: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/day-trips'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class DayTripController extends Controller
 			$this->dayTrip->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/day-trips'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/day-trips']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update DayTrip: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

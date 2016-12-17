@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Http\Requests\PensionRequest;
 
 class PensionController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var Pension
 	 */
@@ -16,10 +22,12 @@ class PensionController extends Controller
 	/**
 	 * PensionController constructor.
 	 *
+	 * @param Log     $log
 	 * @param Pension $pension
 	 */
-	public function __construct(Pension $pension)
+	public function __construct(Log $log, Pension $pension)
 	{
+		$this->log     = $log;
 		$this->pension = $pension;
 	}
 	
@@ -56,15 +64,21 @@ class PensionController extends Controller
 	 */
 	public function store(PensionRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->pension->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->pension->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/pensions']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Pension: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/pensions'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class PensionController extends Controller
 			$this->pension->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/pensions'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/pensions']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Pension: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

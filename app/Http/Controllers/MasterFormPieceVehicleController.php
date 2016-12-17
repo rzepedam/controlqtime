@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\PieceVehicle;
 use Controlqtime\Core\Entities\MasterFormPieceVehicle;
@@ -10,6 +11,11 @@ use Controlqtime\Http\Requests\MasterFormPieceVehicleRequest;
 
 class MasterFormPieceVehicleController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var MasterFormPieceVehicle
 	 */
@@ -23,11 +29,13 @@ class MasterFormPieceVehicleController extends Controller
 	/**
 	 * MasterFormPieceVehicleController constructor.
 	 *
+	 * @param Log                    $log
 	 * @param MasterFormPieceVehicle $masterFormPieceVehicle
 	 * @param PieceVehicle           $pieceVehicle
 	 */
-	public function __construct(MasterFormPieceVehicle $masterFormPieceVehicle, PieceVehicle $pieceVehicle)
+	public function __construct(Log $log, MasterFormPieceVehicle $masterFormPieceVehicle, PieceVehicle $pieceVehicle)
 	{
+		$this->log                    = $log;
 		$this->masterFormPieceVehicle = $masterFormPieceVehicle;
 		$this->pieceVehicle           = $pieceVehicle;
 	}
@@ -77,17 +85,17 @@ class MasterFormPieceVehicleController extends Controller
 		{
 			$masterFormPieceVehicle = $this->masterFormPieceVehicle->create($request->all());
 			$masterFormPieceVehicle->pieceVehicles()->attach($request->get('piece_id'));
-			
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/operations/master-form-piece-vehicles']);
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error Store MasterFormPieceVehicle: " . $e->getMessage());
 			DB::rollback();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/operations/master-form-piece-vehicles'
-		]);
 	}
 	
 	/**
@@ -121,17 +129,16 @@ class MasterFormPieceVehicleController extends Controller
 		{
 			$masterFormPieceVehicle = $this->masterFormPieceVehicle->findOrFail($id)->fill($request->all())->saveOrFail();
 			$masterFormPieceVehicle->pieceVehicles()->sync($request->get('piece_id'));
-			
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/operations/master-form-piece-vehicles']);
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error Update MasterFormPieceVehicle: " . $e->getMessage());
 			DB::rollback();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/operations/master-form-piece-vehicles'
-		]);
 	}
 	
 	/**

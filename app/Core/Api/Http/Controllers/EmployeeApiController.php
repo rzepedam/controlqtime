@@ -44,7 +44,7 @@ class EmployeeApiController extends Controller
 		}
 		
 		return response()->json([
-			'success' => true
+			'status' => true
 		]);
 	}
 }

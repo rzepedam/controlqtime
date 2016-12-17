@@ -113,29 +113,26 @@ class AjaxLoadController extends Controller
 			switch ( $request->get('element') )
 			{
 				case 'Company':
-					$this->company->whereFirst('email_company', $request->get('email'), ['email_company']);
+					$this->company->where('email_company', $request->get('email'))->firstOrFail();
 					break;
 				
 				case 'Representative':
-					$this->legalRepresentative->whereFirst('email_representative', $request->get('email'), ['email_representative']);
+					$this->legalRepresentative->where('email_representative', $request->get('email'))->firstOrFail();
 					break;
 				
 				case 'Employee':
-					$this->employee->whereFirst('email_employee', $request->get('email', ['email_employee']));
+					$this->employee->where('email_employee', $request->get('email'))->firstOrFail();
 					break;
 				
 				case 'EmailContactEmployee';
-					$this->contactEmployee->whereFirst('email_contact', $request->get('email', ['email_contact']));
+					$this->contactEmployee->where('email_contact', $request->get('email'))->firstOrFail();
 					break;
 			}
 			
-			return response()->json(['success' => true], 400);
+			return response()->json(['status' => true], 400);
 		} catch ( Exception $e )
 		{
-			return response()->json([
-				'success' => 'false',
-				'errors'  => $e->getMessage(),
-			], 200);
+			return response()->json(['status' => 'false', 'errors' => $e->getMessage()], 200);
 		}
 	}
 	

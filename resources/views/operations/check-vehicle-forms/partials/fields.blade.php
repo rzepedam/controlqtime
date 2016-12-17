@@ -76,7 +76,7 @@
                             {{ $loop->iteration }}
                         </td>
                         <td>
-                            {{ $pieceVehicle->name }} {{ Form::hidden('piece_vehicle_id[]', $pieceVehicle->id) }}
+                            {{ $pieceVehicle->name }}
                         </td>
                         <td>
                         <span class="checkbox-custom checkbox-primary">

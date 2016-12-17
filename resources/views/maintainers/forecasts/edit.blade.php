@@ -22,7 +22,6 @@
 
         {{ Form::model($forecast, array('route' => array('forecasts.update', $forecast), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'forecast', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.forecasts.partials.fields')

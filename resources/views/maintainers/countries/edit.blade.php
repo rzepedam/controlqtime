@@ -22,7 +22,6 @@
 
         {{ Form::model($country, array('route' => array('countries.update', $country), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'country', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.countries.partials.fields')

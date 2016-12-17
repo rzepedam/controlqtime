@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\City;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Http\Requests\CityRequest;
@@ -20,15 +21,22 @@ class CityController extends Controller
 	protected $country;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * CityController constructor.
 	 *
 	 * @param City    $city
 	 * @param Country $country
+	 * @param Log     $log
 	 */
-	public function __construct(City $city, Country $country)
+	public function __construct(City $city, Country $country, Log $log)
 	{
 		$this->city    = $city;
 		$this->country = $country;
+		$this->log     = $log;
 	}
 	
 	/**
@@ -66,15 +74,21 @@ class CityController extends Controller
 	 */
 	public function store(CityRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->city->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->city->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/cities']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store City: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/cities'
-		]);
 	}
 	
 	/**
@@ -117,13 +131,12 @@ class CityController extends Controller
 			$this->city->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/cities'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/cities']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update City: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

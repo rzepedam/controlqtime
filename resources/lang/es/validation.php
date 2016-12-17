@@ -131,7 +131,7 @@ return [
 		'second_name'               => 'Segundo Nombre',
 		'birthday'                  => 'Fecha de Nac.',
 		'nationality_id'            => 'Nacionalidad',
-		'gender_id'                 => 'Sexo',
+		'is_male'                   => 'Sexo',
 		'num_home'                  => 'Nº Casa',
 		'company_id'                => 'Empresa',
 		'code'                      => 'Cód. Interno',

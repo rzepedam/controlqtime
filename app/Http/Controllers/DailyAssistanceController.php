@@ -4,6 +4,7 @@ namespace Controlqtime\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
@@ -26,17 +27,25 @@ class DailyAssistanceController extends Controller
 	protected $employee;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * DailyAssistanceController constructor.
 	 *
 	 * @param AccessControlApi   $accessControl
 	 * @param DailyAssistanceApi $dailyAssistance
 	 * @param Employee           $employee
+	 * @param Log                $log
 	 */
-	public function __construct(AccessControlApi $accessControl, DailyAssistanceApi $dailyAssistance, Employee $employee)
+	public function __construct(AccessControlApi $accessControl, DailyAssistanceApi $dailyAssistance,
+		Employee $employee, Log $log)
 	{
 		$this->accessControl   = $accessControl;
 		$this->dailyAssistance = $dailyAssistance;
 		$this->employee        = $employee;
+		$this->log             = $log;
 	}
 	
 	/**

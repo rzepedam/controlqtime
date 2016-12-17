@@ -2,9 +2,9 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class Step1Request extends SanitizedRequest
 {
@@ -53,7 +53,7 @@ class Step1Request extends SanitizedRequest
 					'rut'               => 'required|max:15|unique:employees,rut',
 					'birthday'          => 'required|date',
 					'nationality_id'    => 'required|regex:/[0-9 -()+]+$/',
-					'gender'            => 'required',
+					'is_male'           => 'required|max:1',
 					'marital_status_id' => 'required|regex:/[0-9 -()+]+$/',
 					'forecast_id'       => 'required|regex:/[0-9 -()+]+$/',
 					'pension_id'        => 'required|regex:/[0-9 -()+]+$/',
@@ -106,7 +106,7 @@ class Step1Request extends SanitizedRequest
 					'rut'               => 'required|max:15|unique:employees,rut,' . $this->id,
 					'birthday'          => 'required|date',
 					'nationality_id'    => 'required|regex:/[0-9 -()+]+$/',
-					// 'gender'            => 'required',
+					'is_male'           => 'required|max:1',
 					'marital_status_id' => 'required|regex:/[0-9 -()+]+$/',
 					'forecast_id'       => 'required|regex:/[0-9 -()+]+$/',
 					'pension_id'        => 'required|regex:/[0-9 -()+]+$/',

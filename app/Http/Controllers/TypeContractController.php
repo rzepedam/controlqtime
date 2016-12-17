@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Http\Requests\TypeContractRequest;
 
 class TypeContractController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var TypeContract
 	 */
@@ -16,10 +22,12 @@ class TypeContractController extends Controller
 	/**
 	 * TypeContractController constructor.
 	 *
+	 * @param Log          $log
 	 * @param TypeContract $typeContract
 	 */
-	public function __construct(TypeContract $typeContract)
+	public function __construct(Log $log, TypeContract $typeContract)
 	{
+		$this->log          = $log;
 		$this->typeContract = $typeContract;
 	}
 	
@@ -56,15 +64,21 @@ class TypeContractController extends Controller
 	 */
 	public function store(TypeContractRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->typeContract->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->typeContract->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/type-contracts']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store TypeContract: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-contracts'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class TypeContractController extends Controller
 			$typeContract->update($request->all());
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/type-contracts'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/type-contracts']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update TypeContract: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

@@ -58,7 +58,6 @@
 
                         {{ Form::model($employee, array("route" => array("updateSessionStep1", $employee), "method" => "PUT", "files" => true, "id" => "step1")) }}
 
-                            {{ Form::hidden('entity', 'employee', ['id' => 'entity'])  }}
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="icon fa fa-check-square-o text-primary"></i> Datos
@@ -72,11 +71,9 @@
                             </div>
                             <div class="panel panel-bordered">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-pencil-square-o text-success"
-                                                               aria-hidden="true"></i> Información de Contacto</h3>
+                                    <h3 class="panel-title"><i class="fa fa-pencil-square-o text-success" aria-hidden="true"></i> Información de Contacto</h3>
                                     <div class="panel-actions">
-                                        <span class="label label-outline label-success add_contact_employee waves-effect waves-block"><i
-                                                    class="fa fa-plus"></i> Agregar Contacto</span>
+                                        <span class="label label-outline label-success add_contact_employee waves-effect waves-block"><i class="fa fa-plus"></i> Agregar Contacto</span>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -539,6 +536,8 @@
                             if (response.status) {
                                 status = true;
                                 scrollTop();
+                            } else {
+                                swal("Oops", "Ha ocurrido un error. No es posible conectar con el servidor.", "error");
                             }
                         },
                         error: function (response) {
@@ -579,6 +578,8 @@
                             if (response.status) {
                                 status = true;
                                 scrollTop();
+                            } else {
+                                swal("Oops", "Ha ocurrido un error. No es posible conectar con el servidor.", "error");
                             }
                         },
                         error: function (response) {
@@ -621,6 +622,8 @@
                         success: function (response) {
                             if (response.status) {
                                 window.location.href = response.url;
+                            } else {
+                                swal("Oops", "Ha ocurrido un error. No es posible conectar con el servidor.", "error");
                             }
                         },
                         error: function (response) {

@@ -22,7 +22,6 @@
 
         {{ Form::model($typeDisability, array('route' => array('type-disabilities.update', $typeDisability), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'typeDisability', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-disabilities.partials.fields')

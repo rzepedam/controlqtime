@@ -10,7 +10,7 @@ $('#btnSubmit').click(function (e) {
     $.post(action,
         form.serialize(),
         function (response) {
-            if (response.success) {
+            if (response.status) {
                 window.location.href = response.url;
             } else {
                 swal("Oops", "Ha ocurrido un error. No es posible conectar con el servidor.", "error");

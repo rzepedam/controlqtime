@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Position;
 use Controlqtime\Http\Requests\PositionRequest;
 
 class PositionController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var Position
 	 */
@@ -16,10 +22,12 @@ class PositionController extends Controller
 	/**
 	 * PositionController constructor.
 	 *
+	 * @param Log      $log
 	 * @param Position $position
 	 */
-	public function __construct(Position $position)
+	public function __construct(Log $log, Position $position)
 	{
+		$this->log      = $log;
 		$this->position = $position;
 	}
 	
@@ -56,16 +64,21 @@ class PositionController extends Controller
 	 */
 	public function store(PositionRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->position->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->position->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/positions']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Position: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/positions'
-		]);
 	}
 	
 	/**
@@ -101,7 +114,7 @@ class PositionController extends Controller
 	
 	/**
 	 * @param PositionRequest $request
-	 * @param $id
+	 * @param                 $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
@@ -112,13 +125,12 @@ class PositionController extends Controller
 			$this->position->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'    => '/maintainers/positions'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/positions']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Position: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

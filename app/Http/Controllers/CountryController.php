@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Http\Requests\CountryRequest;
 
@@ -14,13 +15,20 @@ class CountryController extends Controller
 	protected $country;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * CountryController constructor.
 	 *
 	 * @param Country $country
+	 * @param Log     $log
 	 */
-	public function __construct(Country $country)
+	public function __construct(Country $country, Log $log)
 	{
 		$this->country = $country;
+		$this->log     = $log;
 	}
 	
 	/**
@@ -56,15 +64,21 @@ class CountryController extends Controller
 	 */
 	public function store(CountryRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->country->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->country->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/countries']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Country: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/countries'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class CountryController extends Controller
 			$this->country->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/countries'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/countries']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Country: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

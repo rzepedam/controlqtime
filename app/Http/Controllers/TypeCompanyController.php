@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\TypeCompany;
 use Controlqtime\Http\Requests\TypeCompanyRequest;
 
 class TypeCompanyController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var TypeCompany
 	 */
@@ -16,10 +22,12 @@ class TypeCompanyController extends Controller
 	/**
 	 * TypeCompanyController constructor.
 	 *
+	 * @param Log         $log
 	 * @param TypeCompany $typeCompany
 	 */
-	public function __construct(TypeCompany $typeCompany)
+	public function __construct(Log $log, TypeCompany $typeCompany)
 	{
+		$this->log         = $log;
 		$this->typeCompany = $typeCompany;
 	}
 	
@@ -56,15 +64,21 @@ class TypeCompanyController extends Controller
 	 */
 	public function store(TypeCompanyRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->typeCompany->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->typeCompany->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/type-companies']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store TypeCompany: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-companies'
-		]);
 	}
 	
 	/**
@@ -110,13 +124,12 @@ class TypeCompanyController extends Controller
 			$this->typeCompany->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/type-companies'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/type-companies']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update TypeCompany: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

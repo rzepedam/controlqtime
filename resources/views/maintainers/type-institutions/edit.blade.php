@@ -22,7 +22,6 @@
 
         {{ Form::model($typeInstitution, array('route' => array('type-institutions.update', $typeInstitution), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'typeInstitution', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-institutions.partials.fields')

@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\TypeDisease;
 use Controlqtime\Http\Requests\TypeDiseaseRequest;
 
 class TypeDiseaseController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var TypeDisease
 	 */
@@ -16,10 +22,12 @@ class TypeDiseaseController extends Controller
 	/**
 	 * TypeDiseaseController constructor.
 	 *
+	 * @param Log         $log
 	 * @param TypeDisease $typeDisease
 	 */
-	public function __construct(TypeDisease $typeDisease)
+	public function __construct(Log $log, TypeDisease $typeDisease)
 	{
+		$this->log         = $log;
 		$this->typeDisease = $typeDisease;
 	}
 	
@@ -56,15 +64,21 @@ class TypeDiseaseController extends Controller
 	 */
 	public function store(TypeDiseaseRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->typeDisease->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->typeDisease->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/type-diseases']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store TypeDisease: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-diseases'
-		]);
 	}
 	
 	/**
@@ -122,13 +136,12 @@ class TypeDiseaseController extends Controller
 			$this->typeDisease->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/type-diseases'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/type-diseases']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update TypeDisease: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

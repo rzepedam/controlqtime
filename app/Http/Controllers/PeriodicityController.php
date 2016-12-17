@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Periodicity;
 use Controlqtime\Http\Requests\PeriodicityRequest;
 
 class PeriodicityController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var Periodicity
 	 */
@@ -16,10 +22,12 @@ class PeriodicityController extends Controller
 	/**
 	 * PeriodicityController constructor.
 	 *
+	 * @param Log         $log
 	 * @param Periodicity $periodiocity
 	 */
-	public function __construct(Periodicity $periodiocity)
+	public function __construct(Log $log, Periodicity $periodiocity)
 	{
+		$this->log          = $log;
 		$this->periodiocity = $periodiocity;
 	}
 	
@@ -56,15 +64,21 @@ class PeriodicityController extends Controller
 	 */
 	public function store(PeriodicityRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->periodiocity->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->periodiocity->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/periodicities']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Periodicity: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/periodicities'
-		]);
 	}
 	
 	/**
@@ -100,7 +114,7 @@ class PeriodicityController extends Controller
 	
 	/**
 	 * @param PeriodicityRequest $request
-	 * @param $id
+	 * @param                    $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -111,13 +125,12 @@ class PeriodicityController extends Controller
 			$this->periodiocity->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/periodicities'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/periodicities']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Periodicity: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

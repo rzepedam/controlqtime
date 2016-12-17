@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Trademark;
 use Controlqtime\Http\Requests\TrademarkRequest;
 
 class TrademarkController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var Trademark
 	 */
@@ -16,10 +22,12 @@ class TrademarkController extends Controller
 	/**
 	 * TrademarkController constructor.
 	 *
+	 * @param Log       $log
 	 * @param Trademark $trademark
 	 */
-	public function __construct(Trademark $trademark)
+	public function __construct(Log $log, Trademark $trademark)
 	{
+		$this->log       = $log;
 		$this->trademark = $trademark;
 	}
 	
@@ -56,15 +64,21 @@ class TrademarkController extends Controller
 	 */
 	public function store(TrademarkRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->trademark->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->trademark->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/trademarks']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Trademark: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/trademarks'
-		]);
 	}
 	
 	/**
@@ -110,13 +124,12 @@ class TrademarkController extends Controller
 			$this->trademark->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/trademarks'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/trademarks']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Trademark: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

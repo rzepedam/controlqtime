@@ -23,7 +23,6 @@
 
         {{ Form::model($weight, array('route' => array('weights.update', $weight), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'weight', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.measuring-units.weights.partials.fields')

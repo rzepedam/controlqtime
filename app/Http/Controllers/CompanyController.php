@@ -4,6 +4,7 @@ namespace Controlqtime\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Entities\Address;
@@ -57,6 +58,11 @@ class CompanyController extends Controller
 	protected $legalRepresentative;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * @var Nationality
 	 */
 	protected $nationality;
@@ -87,6 +93,7 @@ class CompanyController extends Controller
 	 * @param DetailAddressCompany       $detailAddressCompany
 	 * @param DetailAddressLegalEmployee $detailAddressLegal
 	 * @param LegalRepresentative        $legalRepresentative
+	 * @param Log                        $log
 	 * @param Nationality                $nationality
 	 * @param Province                   $province
 	 * @param Region                     $region
@@ -95,7 +102,7 @@ class CompanyController extends Controller
 	public function __construct(ActivateCompany $activateCompany, Address $address,
 		Commune $commune, Company $company, DetailAddressCompany $detailAddressCompany,
 		DetailAddressLegalEmployee $detailAddressLegal, LegalRepresentative $legalRepresentative,
-		Nationality $nationality, Province $province, Region $region, TypeCompany $typeCompany)
+		Log $log, Nationality $nationality, Province $province, Region $region, TypeCompany $typeCompany)
 	{
 		$this->activateCompany      = $activateCompany;
 		$this->address              = $address;
@@ -104,6 +111,7 @@ class CompanyController extends Controller
 		$this->detailAddressCompany = $detailAddressCompany;
 		$this->detailAddressLegal   = $detailAddressLegal;
 		$this->legalRepresentative  = $legalRepresentative;
+		$this->log                  = $log;
 		$this->nationality          = $nationality;
 		$this->province             = $province;
 		$this->region               = $region;
@@ -164,17 +172,17 @@ class CompanyController extends Controller
 			$legal   = $company->legalRepresentative()->create($request);
 			$address = $legal->address()->create($request);
 			$address->detailAddressLegalEmployee()->create($request);
-			
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/administration/companies']);
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error Store Company: " . $e->getMessage());
 			DB::rollback();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/administration/companies'
-		]);
 		
 	}
 	
@@ -244,17 +252,17 @@ class CompanyController extends Controller
 			$company->legalRepresentative->update($request);
 			$company->legalRepresentative->address->update($request);
 			$company->legalRepresentative->address->detailAddressLegalEmployee->update($request);
-			
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/administration/companies']);
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error Update Company: " . $e->getMessage());
 			DB::rollback();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/administration/companies'
-		]);
 	}
 	
 	/**
@@ -312,12 +320,12 @@ class CompanyController extends Controller
 			$this->activateCompany->checkStateCompany($request->get('company_id'));
 			
 			return response()->json([
-				'success' => true
+				'status' => true
 			]);
 		}
 		
 		return response()->json([
-			'success' => false
+			'status' => false
 		]);
 	}
 	
@@ -335,12 +343,12 @@ class CompanyController extends Controller
 			$this->activateCompany->checkStateCompany($request->get('id'));
 			
 			return response()->json([
-				'success' => true
+				'status' => true
 			]);
 		}
 		
 		return response()->json([
-			'success' => false
+			'status' => false
 		]);
 	}
 	

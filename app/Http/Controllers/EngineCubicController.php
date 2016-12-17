@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Http\Requests\EngineCubicRequest;
 
@@ -14,13 +15,20 @@ class EngineCubicController extends Controller
 	protected $engineCubic;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * EngineCubicController constructor.
 	 *
 	 * @param EngineCubic $engineCubic
+	 * @param Log         $log
 	 */
-	public function __construct(EngineCubic $engineCubic)
+	public function __construct(EngineCubic $engineCubic, Log $log)
 	{
 		$this->engineCubic = $engineCubic;
+		$this->log         = $log;
 	}
 	
 	/**
@@ -56,15 +64,21 @@ class EngineCubicController extends Controller
 	 */
 	public function store(EngineCubicRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->engineCubic->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->engineCubic->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/measuring-units/engine-cubics']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store EngineCubic: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/measuring-units/engine-cubics'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class EngineCubicController extends Controller
 			$this->engineCubic->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/measuring-units/engine-cubics'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/measuring-units/engine-cubics']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update EngineCubic: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

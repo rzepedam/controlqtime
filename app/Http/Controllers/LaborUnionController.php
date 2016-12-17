@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\LaborUnion;
 use Controlqtime\Http\Requests\LaborUnionRequest;
 
@@ -14,13 +15,20 @@ class LaborUnionController extends Controller
 	protected $laborUnion;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * LaborUnionController constructor.
 	 *
 	 * @param LaborUnion $laborUnion
+	 * @param Log        $log
 	 */
-	public function __construct(LaborUnion $laborUnion)
+	public function __construct(LaborUnion $laborUnion, Log $log)
 	{
 		$this->laborUnion = $laborUnion;
+		$this->log        = $log;
 	}
 	
 	/**
@@ -58,15 +66,21 @@ class LaborUnionController extends Controller
 	 */
 	public function store(LaborUnionRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->laborUnion->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->laborUnion->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/labor-unions']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store LaborUnion: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/labor-unions'
-		]);
 	}
 	
 	/**
@@ -113,13 +127,12 @@ class LaborUnionController extends Controller
 			$this->laborUnion->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/labor-unions'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/labor-unions']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update LaborUnion: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

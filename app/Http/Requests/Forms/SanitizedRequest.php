@@ -10,6 +10,7 @@ abstract class SanitizedRequest extends Request {
 
 	public function all()
 	{
+		Request::merge(['rut' => str_replace('.', '', Request::get('rut'))]);
 		return $this->sanitize(parent::all());
 	}
 

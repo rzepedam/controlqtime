@@ -22,7 +22,6 @@
 
         {{ Form::model($typeSpeciality, array('route' => array('type-specialities.update', $typeSpeciality), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'typeSpeciality', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-specialities.partials.fields')

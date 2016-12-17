@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Http\Requests\ForecastRequest;
 
@@ -14,13 +15,20 @@ class ForecastController extends Controller
 	protected $forecast;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * ForecastController constructor.
 	 *
 	 * @param Forecast $forecast
+	 * @param Log      $log
 	 */
-	public function __construct(Forecast $forecast)
+	public function __construct(Forecast $forecast, Log $log)
 	{
 		$this->forecast = $forecast;
+		$this->log      = $log;
 	}
 	
 	/**
@@ -56,15 +64,21 @@ class ForecastController extends Controller
 	 */
 	public function store(ForecastRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->forecast->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->forecast->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/forecasts']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Forecast: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/forecasts'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class ForecastController extends Controller
 			$this->forecast->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/forecasts'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/forecasts']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Forecast: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

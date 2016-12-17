@@ -22,7 +22,6 @@
 
         {{ Form::model($modelVehicle, array('route' => array('model-vehicles.update', $modelVehicle), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'modelVehicle', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.model-vehicles.partials.fields')

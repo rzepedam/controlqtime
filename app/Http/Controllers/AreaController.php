@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\Terminal;
 use Controlqtime\Http\Requests\AreaRequest;
@@ -15,6 +16,11 @@ class AreaController extends Controller
 	protected $area;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * @var Terminal
 	 */
 	protected $terminal;
@@ -23,11 +29,13 @@ class AreaController extends Controller
 	 * AreaController constructor.
 	 *
 	 * @param Area     $area
+	 * @param Log      $log
 	 * @param Terminal $terminal
 	 */
-	public function __construct(Area $area, Terminal $terminal)
+	public function __construct(Area $area, Log $log, Terminal $terminal)
 	{
 		$this->area     = $area;
+		$this->log      = $log;
 		$this->terminal = $terminal;
 	}
 	
@@ -66,15 +74,21 @@ class AreaController extends Controller
 	 */
 	public function store(AreaRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->area->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->area->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/areas']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Area: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/areas'
-		]);
 	}
 	
 	/**
@@ -121,13 +135,12 @@ class AreaController extends Controller
 			$this->area->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/areas'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/areas']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Area: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

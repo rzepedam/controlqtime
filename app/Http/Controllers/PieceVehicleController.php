@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\PieceVehicle;
 use Controlqtime\Http\Requests\PieceVehicleRequest;
 
 class PieceVehicleController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var PieceVehicle
 	 */
@@ -16,10 +22,12 @@ class PieceVehicleController extends Controller
 	/**
 	 * PieceVehicleController constructor.
 	 *
+	 * @param Log          $log
 	 * @param PieceVehicle $pieceVehicle
 	 */
-	public function __construct(PieceVehicle $pieceVehicle)
+	public function __construct(Log $log, PieceVehicle $pieceVehicle)
 	{
+		$this->log          = $log;
 		$this->pieceVehicle = $pieceVehicle;
 	}
 	
@@ -60,15 +68,21 @@ class PieceVehicleController extends Controller
 	 */
 	public function store(PieceVehicleRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->pieceVehicle->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->pieceVehicle->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/piece-vehicles']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store PieceVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/piece-vehicles'
-		]);
 	}
 	
 	/**
@@ -117,13 +131,12 @@ class PieceVehicleController extends Controller
 			$this->pieceVehicle->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/piece-vehicles'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/piece-vehicles']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update PieceVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

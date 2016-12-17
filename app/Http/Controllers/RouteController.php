@@ -3,12 +3,18 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Route;
 use Controlqtime\Core\Entities\Terminal;
 use Controlqtime\Http\Requests\RouteRequest;
 
 class RouteController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var Route
 	 */
@@ -22,11 +28,13 @@ class RouteController extends Controller
 	/**
 	 * RouteController constructor.
 	 *
+	 * @param Log      $log
 	 * @param Route    $route
 	 * @param Terminal $terminal
 	 */
-	public function __construct(Route $route, Terminal $terminal)
+	public function __construct(Log $log, Route $route, Terminal $terminal)
 	{
+		$this->log      = $log;
 		$this->route    = $route;
 		$this->terminal = $terminal;
 	}
@@ -66,15 +74,21 @@ class RouteController extends Controller
 	 */
 	public function store(RouteRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->route->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->route->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/routes']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Route: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/routes'
-		]);
 	}
 	
 	/**
@@ -121,13 +135,12 @@ class RouteController extends Controller
 			$this->route->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/routes'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/routes']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Route: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

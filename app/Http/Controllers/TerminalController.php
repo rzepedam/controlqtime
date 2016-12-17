@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Province;
@@ -15,6 +16,11 @@ class TerminalController extends Controller
 	 * @var Commune
 	 */
 	protected $commune;
+	
+	/**
+	 * @var Log
+	 */
+	protected $log;
 	
 	/**
 	 * @var Province
@@ -35,13 +41,15 @@ class TerminalController extends Controller
 	 * TerminalController constructor.
 	 *
 	 * @param Commune  $commune
+	 * @param Log      $log
 	 * @param Province $province
 	 * @param Region   $region
 	 * @param Terminal $terminal
 	 */
-	public function __construct(Commune $commune, Province $province, Region $region, Terminal $terminal)
+	public function __construct(Commune $commune, Log $log, Province $province, Region $region, Terminal $terminal)
 	{
 		$this->commune  = $commune;
+		$this->log      = $log;
 		$this->province = $province;
 		$this->region   = $region;
 		$this->terminal = $terminal;
@@ -86,15 +94,21 @@ class TerminalController extends Controller
 	 */
 	public function store(TerminalRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->terminal->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->terminal->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/terminals']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Terminal: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/terminals'
-		]);
 	}
 	
 	/**
@@ -145,13 +159,12 @@ class TerminalController extends Controller
 			$this->terminal->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/terminals'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/terminals']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Terminal: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

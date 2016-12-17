@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Vehicle;
 use Controlqtime\Core\Entities\CheckVehicleForm;
@@ -16,6 +17,11 @@ class CheckVehicleFormController extends Controller
 	 * @var CheckVehicleForm
 	 */
 	protected $checkVehicleForm;
+	
+	/**
+	 * @var Log
+	 */
+	protected $log;
 	
 	/**
 	 * @var MasterFormPieceVehicle
@@ -36,14 +42,16 @@ class CheckVehicleFormController extends Controller
 	 * CheckVehicleFormController constructor.
 	 *
 	 * @param CheckVehicleForm       $checkVehicleForm
+	 * @param Log                    $log
 	 * @param MasterFormPieceVehicle $masterFormPieceVehicle
 	 * @param StatePieceVehicle      $statePieceVehicle
 	 * @param Vehicle                $vehicle
 	 */
-	public function __construct(CheckVehicleForm $checkVehicleForm, MasterFormPieceVehicle $masterFormPieceVehicle,
-		StatePieceVehicle $statePieceVehicle, Vehicle $vehicle)
+	public function __construct(CheckVehicleForm $checkVehicleForm, Log $log,
+		MasterFormPieceVehicle $masterFormPieceVehicle, StatePieceVehicle $statePieceVehicle, Vehicle $vehicle)
 	{
 		$this->checkVehicleForm       = $checkVehicleForm;
+		$this->log                    = $log;
 		$this->masterFormPieceVehicle = $masterFormPieceVehicle;
 		$this->statePieceVehicle      = $statePieceVehicle;
 		$this->vehicle                = $vehicle;
@@ -100,17 +108,17 @@ class CheckVehicleFormController extends Controller
 		{
 			$checkVehicleForm = $this->checkVehicleForm->create($request->all());
 			$checkVehicleForm->statePieceVehicles()->attach($request->get('statePieceVehicle_id'));
-			
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/operations/check-vehicle-forms']);
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error Store CheckVehicleForm: " . $e->getMessage());
 			DB::rollback();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/operations/check-vehicle-forms'
-		]);
 	}
 	
 	/**
@@ -158,7 +166,6 @@ class CheckVehicleFormController extends Controller
 	public function update(CheckVehicleFormRequest $request, $id)
 	{
 		$request->request->add(['user_id' => auth()->user()->id]);
-		
 		DB::beginTransaction();
 		
 		try
@@ -169,17 +176,17 @@ class CheckVehicleFormController extends Controller
 					'piece_vehicle_id' => $request->get('piece_vehicle_id')
 				]
 			);
-			
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/operations/check-vehicle-forms']);
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error Update CheckVehicleForm: " . $e->getMessage());
 			DB::rollback();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/operations/check-vehicle-forms'
-		]);
 	}
 	
 	/**

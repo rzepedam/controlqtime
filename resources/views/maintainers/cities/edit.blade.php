@@ -22,7 +22,6 @@
 
         {{ Form::model($city, array('route' => array('cities.update', $city), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'city', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.cities.partials.fields')

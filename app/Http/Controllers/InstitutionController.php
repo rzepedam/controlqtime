@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Institution;
 use Controlqtime\Core\Entities\TypeInstitution;
 use Controlqtime\Http\Requests\InstitutionRequest;
@@ -15,6 +16,11 @@ class InstitutionController extends Controller
 	protected $institution;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * @var TypeInstitution
 	 */
 	protected $type_institution;
@@ -23,11 +29,13 @@ class InstitutionController extends Controller
 	 * InstitutionController constructor.
 	 *
 	 * @param Institution     $institution
+	 * @param Log             $log
 	 * @param TypeInstitution $type_institution
 	 */
-	public function __construct(Institution $institution, TypeInstitution $type_institution)
+	public function __construct(Institution $institution, Log $log, TypeInstitution $type_institution)
 	{
 		$this->institution      = $institution;
+		$this->log              = $log;
 		$this->type_institution = $type_institution;
 	}
 	
@@ -66,15 +74,21 @@ class InstitutionController extends Controller
 	 */
 	public function store(InstitutionRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->institution->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->institution->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/institutions']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Institution: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/institutions'
-		]);
 	}
 	
 	/**
@@ -122,13 +136,12 @@ class InstitutionController extends Controller
 			$this->institution->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/institutions'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/institutions']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Institution: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

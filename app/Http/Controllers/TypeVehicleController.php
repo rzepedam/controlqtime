@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Weight;
 use Controlqtime\Core\Entities\TypeVehicle;
 use Controlqtime\Core\Entities\EngineCubic;
@@ -10,6 +11,11 @@ use Controlqtime\Http\Requests\TypeVehicleRequest;
 
 class TypeVehicleController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var EngineCubic
 	 */
@@ -29,12 +35,14 @@ class TypeVehicleController extends Controller
 	 * TypeVehicleController constructor.
 	 *
 	 * @param EngineCubic $engineCubic
+	 * @param Log         $log
 	 * @param TypeVehicle $typeVehicle
 	 * @param Weight      $weight
 	 */
-	public function __construct(EngineCubic $engineCubic, TypeVehicle $typeVehicle, Weight $weight)
+	public function __construct(EngineCubic $engineCubic, Log $log, TypeVehicle $typeVehicle, Weight $weight)
 	{
 		$this->engineCubic = $engineCubic;
+		$this->log         = $log;
 		$this->typeVehicle = $typeVehicle;
 		$this->weight      = $weight;
 	}
@@ -75,15 +83,21 @@ class TypeVehicleController extends Controller
 	 */
 	public function store(TypeVehicleRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->typeVehicle->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->typeVehicle->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/type-vehicles']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store TypeVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-vehicles'
-		]);
 	}
 	
 	/**
@@ -133,13 +147,12 @@ class TypeVehicleController extends Controller
 			$this->typeVehicle->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/type-vehicles'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/type-vehicles']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update TypeVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

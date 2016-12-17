@@ -23,7 +23,7 @@
     <div class="col-sm-6 col-md-3">
         <div class="form-group">
             {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
-            {{ Form::text('rut', null, ['class' => 'form-control check_rut find-for-restore']) }}
+            {{ Form::text('rut', null, ['class' => 'form-control check_rut']) }}
         </div>
     </div>
     <div class="col-sm-6 col-md-3 form-group">
@@ -43,13 +43,13 @@
         <ul class="list-unstyled list-inline">
             <li>
                 <div class="radio-custom">
-                    <input type="radio" id="male" name="is_male" value="M" {{ $employee->is_male ? 'checked' : '' }} />
+                    <input type="radio" id="male" name="is_male" value="M" {{ $employee->is_male_edit ? 'checked' : '' }} />
                     <label for="male">M</label>
                 </div>
             </li>
             <li>
                 <div class="radio-custom">
-                    <input type="radio" id="female" name="is_male" value="F" {{ ! $employee->is_male ? 'checked' : '' }} />
+                    <input type="radio" id="female" name="is_male" value="F" {{ ! $employee->is_male_edit ? 'checked' : '' }} />
                     <label for="female">F</label>
                 </div>
             </li>

@@ -22,7 +22,6 @@
 
         {{ Form::model($periodicity, array('route' => array('periodicities.update', $periodicity), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'periodicity', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.periodicities.partials.fields')

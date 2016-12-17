@@ -22,7 +22,6 @@
 
         {{ Form::model($laborUnion, array('route' => array('labor-unions.update', $laborUnion), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'laborUnion', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.labor-unions.partials.fields')

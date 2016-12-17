@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Controlqtime\Http\Requests\TypeProfessionalLicenseRequest;
 
 class TypeProfessionalLicenseController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var TypeProfessionalLicense
 	 */
@@ -16,10 +22,12 @@ class TypeProfessionalLicenseController extends Controller
 	/**
 	 * TypeProfessionalLicenseController constructor.
 	 *
+	 * @param Log                     $log
 	 * @param TypeProfessionalLicense $typeProfessionalLicense
 	 */
-	public function __construct(TypeProfessionalLicense $typeProfessionalLicense)
+	public function __construct(Log $log, TypeProfessionalLicense $typeProfessionalLicense)
 	{
+		$this->log                     = $log;
 		$this->typeProfessionalLicense = $typeProfessionalLicense;
 	}
 	
@@ -56,15 +64,21 @@ class TypeProfessionalLicenseController extends Controller
 	 */
 	public function store(TypeProfessionalLicenseRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->typeProfessionalLicense->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->typeProfessionalLicense->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/type-professional-licenses']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store TypeProfessionalLicense: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-professional-licenses'
-		]);
 	}
 	
 	/**
@@ -110,13 +124,12 @@ class TypeProfessionalLicenseController extends Controller
 			$this->typeProfessionalLicense->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/type-professional-licenses'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/type-professional-licenses']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update TypeProfessionalLicense: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

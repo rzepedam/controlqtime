@@ -349,7 +349,7 @@ class EmployeeController extends Controller
 		try
 		{
 			$employee = $this->employee->create(Session::get('step1'));
-			$user    = $employee->user()->create([
+			$user     = $employee->user()->create([
 				'email'    => Session::get('email_employee'),
 				'password' => bcrypt(Session::get('email_employee'))
 			]);
@@ -366,20 +366,19 @@ class EmployeeController extends Controller
 			$employee->createDiseases($request->all());
 			$employee->createExams($request->all());
 			$employee->createFamilyResponsabilities($request->all());
-			
 			// $user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionStoreEmployee();
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/human-resources/employees']);
 		} catch ( Exception $e )
 		{
-			$this->log->error("Error store Employee: " . $e->getMessage());
+			$this->log->error("Error Store Employee: " . $e->getMessage());
 			DB::rollBack();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'status' => true,
-			'url'    => '/human-resources/employees'
-		]);
 	}
 	
 	/**
@@ -453,7 +452,7 @@ class EmployeeController extends Controller
 		}
 		
 		return response()->json([
-			'success' => true
+			'status' => true
 		]);
 	}
 	
@@ -547,25 +546,21 @@ class EmployeeController extends Controller
 			// $this->familyResponsability->destroyImages($request->get('id_delete_family_responsability'), 'FamilyResponsability');
 			// $this->familyResponsability->destroyArrayId($request->get('id_delete_family_responsability'), 'FamilyResponsability');
 			$employee->createFamilyResponsabilities($request->all());
-			
 			$this->activateEmployee->checkStateUpdateEmployee($id);
-			
 			/* @todo Fixed $user value. Actually is boolean not object */
 			// $user->notify(new EmployeeWasRegistered($employee));
-			
 			/* @todo destroy session data update */
-			
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/human-resources/employees']);
 		} catch ( Exception $e )
 		{
 			$this->log->error("Error update Employee: " . $e->getMessage());
 			DB::rollBack();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'status' => true,
-			'url'    => '/human-resources/employees'
-		]);
 	}
 	
 	/**
@@ -641,12 +636,12 @@ class EmployeeController extends Controller
 			$this->activateEmployee->checkStateUpdateEmployee($request->get('employee_id'));
 			
 			return response()->json([
-				'success' => true
+				'status' => true
 			]);
 		}
 		
 		return response()->json([
-			'success' => false
+			'status' => false
 		]);
 	}
 	
@@ -664,12 +659,12 @@ class EmployeeController extends Controller
 			$this->activateEmployee->checkStateUpdateEmployee($request->get('id'));
 			
 			return response()->json([
-				'success' => true
+				'status' => true
 			]);
 		}
 		
 		return response()->json([
-			'success' => false
+			'status' => false
 		]);
 	}
 	

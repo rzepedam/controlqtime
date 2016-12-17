@@ -22,7 +22,6 @@
 
         {{ Form::model($mutuality, array('route' => array('mutualities.update', $mutuality), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'mutuality', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.mutualities.partials.fields')

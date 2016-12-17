@@ -22,7 +22,6 @@
 
         {{ Form::model($fuel, array('route' => array('fuels.update', $fuel), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'fuel', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.fuels.partials.fields')

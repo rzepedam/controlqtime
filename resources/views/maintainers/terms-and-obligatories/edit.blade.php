@@ -23,7 +23,6 @@
 
         {{ Form::model($termAndObligatory, array('route' => array('terms-and-obligatories.update', $termAndObligatory), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'termAndObligatory', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.terms-and-obligatories.partials.fields')

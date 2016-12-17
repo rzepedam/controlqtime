@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Weight;
 use Controlqtime\Http\Requests\WeightRequest;
 
 class WeightController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var Weight
 	 */
@@ -16,10 +22,12 @@ class WeightController extends Controller
 	/**
 	 * WeightController constructor.
 	 *
+	 * @param Log    $log
 	 * @param Weight $weight
 	 */
-	public function __construct(Weight $weight)
+	public function __construct(Log $log, Weight $weight)
 	{
+		$this->log    = $log;
 		$this->weight = $weight;
 	}
 	
@@ -56,15 +64,21 @@ class WeightController extends Controller
 	 */
 	public function store(WeightRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->weight->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->weight->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/measuring-units/weights']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Weight: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/measuring-units/weights'
-		]);
 	}
 	
 	/**
@@ -99,7 +113,7 @@ class WeightController extends Controller
 	
 	/**
 	 * @param WeightRequest $request
-	 * @param $id
+	 * @param               $id
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
@@ -110,13 +124,12 @@ class WeightController extends Controller
 			$this->weight->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/measuring-units/weights'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/measuring-units/weights']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Weight: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

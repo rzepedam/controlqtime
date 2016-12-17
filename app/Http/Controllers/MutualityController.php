@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Mutuality;
 use Controlqtime\Http\Requests\MutualityRequest;
 
 class MutualityController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var Mutuality
 	 */
@@ -16,10 +22,12 @@ class MutualityController extends Controller
 	/**
 	 * MutualityController constructor.
 	 *
+	 * @param Log       $log
 	 * @param Mutuality $mutuality
 	 */
-	public function __construct(Mutuality $mutuality)
+	public function __construct(Log $log, Mutuality $mutuality)
 	{
+		$this->log       = $log;
 		$this->mutuality = $mutuality;
 	}
 	
@@ -56,15 +64,21 @@ class MutualityController extends Controller
 	 */
 	public function store(MutualityRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->mutuality->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->mutuality->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/mutualities']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Mutuality: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/mutualities'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class MutualityController extends Controller
 			$this->mutuality->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/mutualities'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/mutualities']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Mutuality: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

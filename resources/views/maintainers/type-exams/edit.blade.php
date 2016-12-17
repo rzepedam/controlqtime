@@ -22,7 +22,6 @@
 
         {{ Form::model($typeExam, array('route' => array('type-exams.update', $typeExam), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'typeExam', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-exams.partials.fields')

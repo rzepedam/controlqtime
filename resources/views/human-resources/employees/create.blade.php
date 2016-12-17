@@ -2,6 +2,7 @@
 
 @section('css')
 
+    <link rel="stylesheet" href="{{ elixir('css/create-edit-common.css') }}">
     <link rel="stylesheet" href="{{ elixir('css/human-resources/employees/create-edit-custom-employees.css') }}">
 
 @stop
@@ -473,6 +474,8 @@
                             if (response.status) {
                                 status = true;
                                 scrollTop();
+                            } else {
+                                swal("Oops", "Ha ocurrido un error. No es posible conectar con el servidor.", "error");
                             }
                         },
                         error: function (response) {
@@ -513,6 +516,8 @@
                                 $('#js').addClass('hide');
                                 status = true;
                                 scrollTop();
+                            } else {
+                                swal("Oops", "Ha ocurrido un error. No es posible conectar con el servidor.", "error");
                             }
                         },
                         error: function (response) {
@@ -552,6 +557,8 @@
                         success: function (response) {
                             if (response.status) {
                                 window.location.href = response.url;
+                            } else {
+                                swal("Oops", "Ha ocurrido un error. No es posible conectar con el servidor.", "error");
                             }
                         },
                         error: function (response) {

@@ -22,7 +22,6 @@
 
         {{ Form::model($numHour, array('route' => array('num-hours.update', $numHour), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'numHour', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.num-hours.partials.fields')

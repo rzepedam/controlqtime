@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Controlqtime\Core\Entities\Employee;
@@ -15,13 +16,20 @@ class DownloadController extends Controller
 	protected $employee;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * DownloadController constructor.
 	 *
 	 * @param Employee $employee
+	 * @param Log      $log
 	 */
-	public function __construct(Employee $employee)
+	public function __construct(Employee $employee, Log $log)
 	{
 		$this->employee = $employee;
+		$this->log      = $log;
 	}
 	
 	/**

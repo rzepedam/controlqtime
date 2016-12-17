@@ -538,6 +538,15 @@ class Employee extends Eloquent
 	}
 	
 	/**
+	 *
+	 * @return Boolean 'Masculino' => true or 'Femenino' => false
+	 */
+	public function getIsMaleEditAttribute()
+	{
+ 		return $this->is_male === 'Masculino';
+	}
+	
+	/**
 	 * @return int
 	 */
 	public function getNumImagesIdentityCardAttribute()

@@ -81,7 +81,7 @@ class EmployeeTest extends TestCase
 		$this->assertEquals('27', $employee->age);
 	}
 	
-	function test_get_birthday_to_spanish_format()
+	function test_get_birthday_to_spanish_format_employee()
 	{
 		$employee = factory(\Controlqtime\Core\Entities\Employee::class)->create([
 			'birthday' => '11-06-1989',
@@ -90,7 +90,7 @@ class EmployeeTest extends TestCase
 		$this->assertEquals('domingo 11 junio 1989', $employee->birthday_to_spanish_format);
 	}
 	
-	function test_get_created_at_to_spanish_format()
+	function test_get_created_at_to_spanish_format_employee()
 	{
 		$employee = factory(\Controlqtime\Core\Entities\Employee::class)->create([
 			'created_at' => '2016-12-12 09:13:21',
@@ -99,13 +99,31 @@ class EmployeeTest extends TestCase
 		$this->assertEquals('lunes 12 diciembre 2016 09:13:21', $employee->created_at_to_spanish_format);
 	}
 	
-	function test_get_updated_at_to_spanish_format()
+	function test_get_updated_at_to_spanish_format_employee()
 	{
 		$employee = factory(\Controlqtime\Core\Entities\Employee::class)->create([
 			'created_at' => '2016-12-12 09:13:21'
 		]);
 		
 		$this->assertEquals('lunes 12 diciembre 2016 09:13:21', $employee->created_at_to_spanish_format);
+	}
+	
+	function test_get_is_male_true_for_edit_view_employee()
+	{
+		$employee = factory(\Controlqtime\Core\Entities\Employee::class)->create([
+			'is_male' => 'M'
+		]);
+		
+		$this->assertEquals(true, $employee->is_male_edit);
+	}
+	
+	function test_get_is_male_false_for_edit_view_employee()
+	{
+		$employee = factory(\Controlqtime\Core\Entities\Employee::class)->create([
+			'is_male' => 'F'
+		]);
+		
+		$this->assertEquals(false, $employee->is_male_edit);
 	}
 	
 }

@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\TypeSpeciality;
 use Controlqtime\Http\Requests\TypeSpecialityRequest;
 
 class TypeSpecialityController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var TypeSpeciality
 	 */
@@ -16,10 +22,12 @@ class TypeSpecialityController extends Controller
 	/**
 	 * TypeSpecialityController constructor.
 	 *
+	 * @param Log            $log
 	 * @param TypeSpeciality $typeSpeciality
 	 */
-	public function __construct(TypeSpeciality $typeSpeciality)
+	public function __construct(Log $log, TypeSpeciality $typeSpeciality)
 	{
+		$this->log            = $log;
 		$this->typeSpeciality = $typeSpeciality;
 	}
 	
@@ -56,15 +64,21 @@ class TypeSpecialityController extends Controller
 	 */
 	public function store(TypeSpecialityRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->typeSpeciality->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->typeSpeciality->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/type-specialities']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store TypeSpeciality: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/type-specialities'
-		]);
 	}
 	
 	/**
@@ -110,13 +124,12 @@ class TypeSpecialityController extends Controller
 			$this->typeSpeciality->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/type-specialities'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/type-specialities']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update TypeSpeciality: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

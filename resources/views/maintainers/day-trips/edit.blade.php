@@ -20,7 +20,6 @@
 
     <div class="panel">
 
-        {{ Form::hidden('entity', 'dayTrip', ['id' => 'entity'])  }}
         {{ Form::model($dayTrip, array('route' => array('day-trips.update', $dayTrip), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
             <div class="panel-body">

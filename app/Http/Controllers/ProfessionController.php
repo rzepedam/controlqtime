@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Profession;
 use Controlqtime\Http\Requests\ProfessionRequest;
 
 class ProfessionController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var Profession
 	 */
@@ -16,10 +22,12 @@ class ProfessionController extends Controller
 	/**
 	 * ProfessionController constructor.
 	 *
+	 * @param Log        $log
 	 * @param Profession $profession
 	 */
-	public function __construct(Profession $profession)
+	public function __construct(Log $log, Profession $profession)
 	{
+		$this->log        = $log;
 		$this->profession = $profession;
 	}
 	
@@ -56,15 +64,21 @@ class ProfessionController extends Controller
 	 */
 	public function store(ProfessionRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->profession->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->profession->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/professions']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Profession: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/professions'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class ProfessionController extends Controller
 			$this->profession->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/professions'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/professions']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Profession: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

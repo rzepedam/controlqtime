@@ -42,7 +42,7 @@ $('#btnSubmit').click(function (e) {
         data: form.serialize() + "&full_name=" + full_name,
         dataType: "json",
         success: function (response) {
-            if (response.success) {
+            if (response.status) {
                 window.location.href = response.url;
             }
         },

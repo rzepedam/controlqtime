@@ -22,7 +22,6 @@
 
         {{ Form::model($relationship, array('route' => array('relationships.update', $relationship), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'relationship', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.relationships.partials.fields')

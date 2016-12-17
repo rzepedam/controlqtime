@@ -132,7 +132,6 @@ elixir(function(mix) {
         'bower/sweetalert/dist/sweetalert.min.js',
         'me/js/utilities/submit-form-ajax.js',
         'me/js/utilities/add_csrf_token.js',
-        'me/js/utilities/restore.js',
     ], 'public/js/create-edit-common.js');
 
     // Edit Common JS
@@ -535,7 +534,6 @@ elixir(function(mix) {
         'components/bootstrap-datepicker.js',
         'me/js/utilities/sanitized-fields.js',
         'bower/sweetalert/dist/sweetalert.min.js',
-        'me/js/utilities/restore.js',
         'me/js/base/operations/vehicles/custom-vehicles.js'
     ], 'public/js/operations/vehicles/create-edit-custom-vehicles.js');
 

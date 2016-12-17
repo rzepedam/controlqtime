@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Http\Requests\FuelRequest;
 
@@ -14,13 +15,20 @@ class FuelController extends Controller
 	protected $fuel;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * FuelController constructor.
 	 *
 	 * @param Fuel $fuel
+	 * @param Log  $log
 	 */
-	public function __construct(Fuel $fuel)
+	public function __construct(Fuel $fuel, Log $log)
 	{
 		$this->fuel = $fuel;
+		$this->log  = $log;
 	}
 	
 	/**
@@ -56,15 +64,21 @@ class FuelController extends Controller
 	 */
 	public function store(FuelRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->fuel->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->fuel->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/fuels']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Fuel: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/fuels'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class FuelController extends Controller
 			$this->fuel->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/fuels'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/fuels']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Fuel: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

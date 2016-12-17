@@ -22,7 +22,6 @@
 
         {{ Form::model($maritalStatus, array('route' => array('marital-statuses.update', $maritalStatus), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'maritalStatus', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.marital-statuses.partials.fields')

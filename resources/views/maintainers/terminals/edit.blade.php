@@ -22,7 +22,6 @@
 
         {{ Form::model($terminal, array('route' => array('terminals.update', $terminal), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'terminal', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.terminals.partials.fields')

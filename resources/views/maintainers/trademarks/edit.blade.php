@@ -22,7 +22,6 @@
 
         {{ Form::model($trademark, array('route' => array('trademarks.update', $trademark), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'trademark', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.trademarks.partials.fields')

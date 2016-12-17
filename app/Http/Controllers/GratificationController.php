@@ -3,6 +3,7 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Http\Requests\GratificationRequest;
 
@@ -14,13 +15,20 @@ class GratificationController extends Controller
 	protected $gratification;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * GratificationController constructor.
 	 *
 	 * @param Gratification $gratification
+	 * @param Log           $log
 	 */
-	public function __construct(Gratification $gratification)
+	public function __construct(Gratification $gratification, Log $log)
 	{
 		$this->gratification = $gratification;
+		$this->log           = $log;
 	}
 	
 	/**
@@ -56,15 +64,21 @@ class GratificationController extends Controller
 	 */
 	public function store(GratificationRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->gratification->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->gratification->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/gratifications']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store Gratification: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/gratifications'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class GratificationController extends Controller
 			$this->gratification->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/gratifications'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/gratifications']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update Gratification: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

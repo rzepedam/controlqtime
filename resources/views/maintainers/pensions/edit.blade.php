@@ -22,7 +22,6 @@
 
         {{ Form::model($pension, array('route' => array('pensions.update', $pension), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'pension', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.pensions.partials.fields')

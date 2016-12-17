@@ -22,7 +22,6 @@
 
         {{ Form::model($typeProfessionalLicense, array('route' => array('type-professional-licenses.update', $typeProfessionalLicense), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'typeProfessionalLicense', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.type-professional-licenses.partials.fields')

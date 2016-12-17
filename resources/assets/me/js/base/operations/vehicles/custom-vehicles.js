@@ -18,7 +18,7 @@ $(document).ready(function(){
             data: form.serialize(),
             dataType: "json",
             success: function (response) {
-                if (response.success) {
+                if (response.status) {
                     window.location.href = response.url;
                 }
             },

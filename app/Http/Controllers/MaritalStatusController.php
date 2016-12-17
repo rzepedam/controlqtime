@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Http\Requests\MaritalStatusRequest;
 
 class MaritalStatusController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var MaritalStatus
 	 */
@@ -16,10 +22,12 @@ class MaritalStatusController extends Controller
 	/**
 	 * MaritalStatusController constructor.
 	 *
+	 * @param Log           $log
 	 * @param MaritalStatus $maritalStatus
 	 */
-	public function __construct(MaritalStatus $maritalStatus)
+	public function __construct(Log $log, MaritalStatus $maritalStatus)
 	{
+		$this->log           = $log;
 		$this->maritalStatus = $maritalStatus;
 	}
 	
@@ -56,15 +64,21 @@ class MaritalStatusController extends Controller
 	 */
 	public function store(MaritalStatusRequest $request)
 	{
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->maritalStatus->create($request->all());
+			if ( ! $this->restore($request) )
+			{
+				$this->maritalStatus->create($request->all());
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/marital-statuses']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store MaritalStatus: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/marital-statuses'
-		]);
 	}
 	
 	/**
@@ -111,13 +125,12 @@ class MaritalStatusController extends Controller
 			$this->maritalStatus->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/marital-statuses'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/marital-statuses']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update MaritalStatus: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

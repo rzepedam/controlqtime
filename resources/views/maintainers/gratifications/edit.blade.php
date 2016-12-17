@@ -22,7 +22,6 @@
 
         {{ Form::model($gratification, array('route' => array('gratifications.update', $gratification), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'gratification', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.gratifications.partials.fields')

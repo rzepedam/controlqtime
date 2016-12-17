@@ -22,7 +22,6 @@
 
         {{ Form::model($typeContract, array('route' => array('type-contracts.update', $typeContract), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'typeContract', ['id' => 'entity'])  }}
             <div class="panel-body">
                 <span class="content_info_type_contract">
 

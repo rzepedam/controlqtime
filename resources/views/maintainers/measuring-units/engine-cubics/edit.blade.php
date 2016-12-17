@@ -23,7 +23,6 @@
 
         {{ Form::model($engineCubic, array('route' => array('engine-cubics.update', $engineCubic), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'engineCubic', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.measuring-units.engine-cubics.partials.fields')

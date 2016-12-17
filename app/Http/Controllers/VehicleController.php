@@ -4,6 +4,7 @@ namespace Controlqtime\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Core\Entities\Company;
@@ -52,6 +53,11 @@ class VehicleController extends Controller
 	protected $fuel;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * @var ModelVehicle
 	 */
 	protected $modelVehicle;
@@ -85,6 +91,7 @@ class VehicleController extends Controller
 	 * @param DetailBus                $detailBus
 	 * @param DetailVehicle            $detailVehicle
 	 * @param Fuel                     $fuel
+	 * @param Log                      $log
 	 * @param ModelVehicle             $modelVehicle
 	 * @param StateVehicle             $stateVehicle
 	 * @param Trademark                $trademark
@@ -93,7 +100,7 @@ class VehicleController extends Controller
 	 */
 	public function __construct(ActivateVehicle $activateVehicle, Company $company,
 		DateDocumentationVehicle $dateDocumentationVehicle, DetailBus $detailBus,
-		DetailVehicle $detailVehicle, Fuel $fuel, ModelVehicle $modelVehicle,
+		DetailVehicle $detailVehicle, Fuel $fuel, Log $log, ModelVehicle $modelVehicle,
 		StateVehicle $stateVehicle, Trademark $trademark, TypeVehicle $typeVehicle,
 		Vehicle $vehicle)
 	{
@@ -103,6 +110,7 @@ class VehicleController extends Controller
 		$this->detailBus                = $detailBus;
 		$this->detailVehicle            = $detailVehicle;
 		$this->fuel                     = $fuel;
+		$this->log                      = $log;
 		$this->modelVehicle             = $modelVehicle;
 		$this->trademark                = $trademark;
 		$this->typeVehicle              = $typeVehicle;
@@ -164,20 +172,18 @@ class VehicleController extends Controller
 			{
 				$detailVehicle->detailBus()->create($request->all());
 			}
-			
 			$vehicle->dateDocumentationVehicle()->create($request->all());
-			
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/operations/vehicles']);
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error Store Vehicle: " . $e->getMessage());
 			DB::rollback();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/operations/vehicles'
-		]);
-		
 	}
 	
 	/**
@@ -224,19 +230,18 @@ class VehicleController extends Controller
 			{
 				$vehicle->detailVehicle->detailBus->update($request->all());
 			}
-			
 			$vehicle->dateDocumentationVehicle->update($request->all());
-			
+			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			DB::commit();
+			
+			return response()->json(['status' => true, 'url' => '/operations/vehicles']);
 		} catch ( Exception $e )
 		{
+			$this->log->error("Error Update Vehicle: " . $e->getMessage());
 			DB::rollback();
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/operations/vehicles'
-		]);
 	}
 	
 	/**
@@ -291,12 +296,12 @@ class VehicleController extends Controller
 			$this->activateVehicle->checkStateVehicle($request->get('vehicle_id'));
 			
 			return response()->json([
-				'success' => true
+				'status' => true
 			]);
 		}
 		
 		return response()->json([
-			'success' => false
+			'status' => false
 		]);
 	}
 	
@@ -314,12 +319,12 @@ class VehicleController extends Controller
 			$this->activateVehicle->checkStateVehicle($request->get('id'));
 			
 			return response()->json([
-				'success' => true
+				'status' => true
 			]);
 		}
 		
 		return response()->json([
-			'success' => false
+			'status' => false
 		]);
 	}
 	

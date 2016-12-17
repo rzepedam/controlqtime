@@ -22,7 +22,6 @@
 
         {{ Form::model($profession, array('route' => array('professions.update', $profession), 'method' => 'PUT', 'id' => 'form-submit')) }}
 
-            {{ Form::hidden('entity', 'profession', ['id' => 'entity'])  }}
             <div class="panel-body">
 
                 @include('maintainers.professions.partials.fields')

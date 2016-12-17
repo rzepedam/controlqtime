@@ -3,11 +3,17 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\TermAndObligatory;
 use Controlqtime\Http\Requests\TermAndObligatoryRequest;
 
 class TermAndObligatoryController extends Controller
 {
+	/**
+	 * @var Log
+	 */
+	protected $log;
+	
 	/**
 	 * @var TermAndObligatory
 	 */
@@ -16,10 +22,12 @@ class TermAndObligatoryController extends Controller
 	/**
 	 * TermAndObligatoryController constructor.
 	 *
+	 * @param Log               $log
 	 * @param TermAndObligatory $termAndObligatory
 	 */
-	public function __construct(TermAndObligatory $termAndObligatory)
+	public function __construct(Log $log, TermAndObligatory $termAndObligatory)
 	{
+		$this->log               = $log;
 		$this->termAndObligatory = $termAndObligatory;
 	}
 	
@@ -57,7 +65,7 @@ class TermAndObligatoryController extends Controller
 	public function store(TermAndObligatoryRequest $request)
 	{
 		// Al estar desactivado el elemento "predeterminado", no envía nada al Backend.
-		// Es necesario agregar su comportamiento manualmente para su correcta actualización.
+		// Es necesario agregar su comportamiento manualmente para su actualización.
 		$data = $request->all();
 		
 		if ( ! array_key_exists('default', $data) )
@@ -65,15 +73,21 @@ class TermAndObligatoryController extends Controller
 			$data['default'] = false;
 		}
 		
-		if ( ! $this->restore($request) )
+		try
 		{
-			$this->termAndObligatory->create($data);
+			if ( ! $this->restore($request) )
+			{
+				$this->termAndObligatory->create($data);
+			}
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
+			
+			return response()->json(['status' => true, 'url' => '/maintainers/terms-and-obligatories']);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Store TermAndObligatory: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'success' => true,
-			'url'     => '/maintainers/terms-and-obligatories'
-		]);
 	}
 	
 	/**
@@ -109,7 +123,7 @@ class TermAndObligatoryController extends Controller
 	
 	/**
 	 * @param TermAndObligatoryRequest $request
-	 * @param $id
+	 * @param                          $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -129,13 +143,12 @@ class TermAndObligatoryController extends Controller
 			$this->termAndObligatory->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json([
-				'success' => true,
-				'url'     => '/maintainers/terms-and-obligatories'
-			]);
+			return response()->json(['status' => true, 'url' => '/maintainers/terms-and-obligatories']);
 		} catch ( Exception $e )
 		{
-			return response()->json(['success' => false]);
+			$this->log->error("Error Update TermAndObligatory: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
 	}
 	

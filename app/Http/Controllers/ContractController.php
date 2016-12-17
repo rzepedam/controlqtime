@@ -179,20 +179,16 @@ class ContractController extends Controller
 			$contract = $this->contract->create($request->all());
 			$contract->termsAndObligatories()->attach($request->get('term_and_obligatory_id'));
 			$this->activateEmployee->checkStateUpdateEmployee($request->get('employee_id'));
+			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
 			
-			return response()->json([
-				'status' => true,
-				'url'    => '/human-resources/contracts'
-			]);
+			return response()->json(['status' => true, 'url' => '/human-resources/contracts']);
 		} catch ( Exception $e )
 		{
 			$this->log->info("Error store Contract: " . $e->getMessage());
 			DB::rollBack();
 			
-			return response()->json([
-				'status' => false,
-			]);
+			return response()->json(['status' => false]);
 		}
 	}
 	
