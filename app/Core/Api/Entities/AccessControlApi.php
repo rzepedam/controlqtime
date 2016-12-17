@@ -27,7 +27,7 @@ class AccessControlApi extends Eloquent
 	 * @var array
 	 */
 	protected $dates = [
-		'deleted_at'
+		'deleted_at', 'created_at'
 	];
 	
 	
@@ -46,7 +46,7 @@ class AccessControlApi extends Eloquent
 	 */
 	public function getCreatedAtAttribute($value)
 	{
-	    return Carbon::parse($value)->format('H:i:s');
+		return Carbon::parse($value)->format('H:i:s');
 	}
 	
 }

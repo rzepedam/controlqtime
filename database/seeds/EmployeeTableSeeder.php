@@ -25,7 +25,7 @@ class EmployeeTableSeeder extends Seeder
 			'is_male'           => true,
 			'email_employee'    => 'raulmeza@controlqtime.cl',
 			'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
-			'state'             => 'disable'
+			'state'             => 'enable'
 		]);
 		
 		Employee::create([
@@ -43,7 +43,7 @@ class EmployeeTableSeeder extends Seeder
 			'is_male'           => true,
 			'email_employee'    => 'robertozepeda@controlqtime.cl',
 			'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/06/29/163531241838.jpg',
-			'state'             => 'disable'
+			'state'             => 'enable'
 		]);
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');

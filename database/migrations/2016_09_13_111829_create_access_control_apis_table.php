@@ -19,7 +19,7 @@ class CreateAccessControlApisTable extends Migration
 			$table->string('rut', 10);
 			$table->string('num_device');
 			$table->boolean('status')->default(0);
-			$table->timestamp('created_at')->index();
+			$table->timestamp('created_at');
 	        $table->softDeletes();
         });
     }

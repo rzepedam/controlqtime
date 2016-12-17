@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Exception;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
@@ -56,12 +57,38 @@ class DailyAssistanceController extends Controller
 	public function index()
 	{
 		$date      = Carbon::today();
-		$employees = $this->employee->all();
+		$employees = $this->employee->enabled()->get();
 		list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDate($date);
 		
 		return view('human-resources.daily-assistances.index', compact(
 			'accessControls', 'dailyAssistances', 'num_employees', 'entry', 'output', 'employees'
 		));
+	}
+	
+	/**
+	 * @param $date
+	 *
+	 * @return array
+	 */
+	private function getRecordPerDate($date)
+	{
+		try
+		{
+			$accessControls   = $this->accessControl->with(['employee'])->whereDate('created_at', $date)->get();
+			$dailyAssistances = $this->dailyAssistance->with(['employee'])->whereDate('created_at', $date)->get();
+			$num_employees    = $accessControls->unique('rut');
+			$entry            = $accessControls->groupBy('rut')->transform(function ($item)
+			{
+				return $item->min('created_at');
+			});
+			
+			return [$accessControls, $dailyAssistances, $num_employees, $entry];
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Get DailyAssistance: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 	
 	/**
@@ -92,24 +119,6 @@ class DailyAssistanceController extends Controller
 			'entry'            => $entry,
 			'success'          => true
 		], 200);
-	}
-	
-	/**
-	 * @param $date
-	 *
-	 * @return array
-	 */
-	private function getRecordPerDate($date)
-	{
-		$accessControls   = $this->accessControl->with(['employee'])->whereDate('created_at', $date)->get();
-		$dailyAssistances = $this->dailyAssistance->with(['employee'])->whereDate('created_at', $date)->get();
-		$num_employees    = $accessControls->unique('rut');
-		$entry            = $accessControls->groupBy('rut')->transform(function ($item)
-		{
-			return $item->min('created_at');
-		});
-		
-		return [$accessControls, $dailyAssistances, $num_employees, $entry];
 	}
 	
 	/**

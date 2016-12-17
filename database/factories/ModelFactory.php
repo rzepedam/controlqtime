@@ -14,7 +14,6 @@ use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Core\Entities\DayTrip;
-use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Core\Entities\Vehicle;
 use Controlqtime\Core\Entities\Contract;
@@ -27,6 +26,7 @@ use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\DetailBus;
 use Controlqtime\Core\Entities\Mutuality;
 use Controlqtime\Core\Entities\Trademark;
+use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\LaborUnion;
 use Controlqtime\Core\Entities\Profession;
 use Controlqtime\Core\Entities\EngineCubic;
@@ -53,6 +53,7 @@ use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Entities\DetailAddressCompany;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 use Controlqtime\Core\Entities\MasterFormPieceVehicle;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Controlqtime\Core\Entities\DateDocumentationVehicle;
@@ -64,7 +65,8 @@ $factory->define(AccessControlApi::class, function (Faker\Generator $faker)
 		'employee_id' => 1,
 		'rut'         => '17032680-6',
 		'num_device'  => $faker->macAddress,
-		'status'      => $faker->boolean
+		'status'      => $faker->boolean,
+		'created_at'  => Carbon::now()
 	];
 });
 
@@ -171,6 +173,17 @@ $factory->define(DateDocumentationVehicle::class, function (Faker\Generator $fak
 		'expiration_insurance'  => Carbon::parse('+2 years')->format('d-m-Y'),
 		'emission_permission'   => Carbon::parse('-3 years')->format('d-m-Y'),
 		'expiration_permission' => Carbon::parse('+5 years')->format('d-m-Y')
+	];
+});
+
+$factory->define(DailyAssistanceApi::class, function (Faker\Generator $faker)
+{
+	return [
+		'employee_id' => 1,
+		'rut'         => '17032680-6',
+		'num_device'  => $faker->macAddress,
+		'status'      => $faker->boolean,
+		'created_at'  => Carbon::now()
 	];
 });
 
