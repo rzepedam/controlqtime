@@ -127,7 +127,8 @@ class MasterFormPieceVehicleController extends Controller
 		
 		try
 		{
-			$masterFormPieceVehicle = $this->masterFormPieceVehicle->findOrFail($id)->fill($request->all())->saveOrFail();
+			$masterFormPieceVehicle = $this->masterFormPieceVehicle->findOrFail($id);
+			$masterFormPieceVehicle->fill($request->all())->saveOrFail();
 			$masterFormPieceVehicle->pieceVehicles()->sync($request->get('piece_id'));
 			DB::commit();
 			

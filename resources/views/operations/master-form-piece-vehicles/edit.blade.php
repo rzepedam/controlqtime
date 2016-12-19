@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-12">
                 <a href="{{ route('master-form-piece-vehicles.index') }}">Volver</a>
-                <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+                <button id="btnSubmit" type="submit" class="btn btn-squared btn-success waves-effect waves-light pull-right"><i class="fa fa-refresh"></i> Actualizar</button>
             </div>
         </div>
 

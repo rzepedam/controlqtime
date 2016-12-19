@@ -357,10 +357,11 @@ $factory->define(MaritalStatus::class, function (Faker\Generator $faker)
 	];
 });
 
-$factory->define(MasterFormPieceVehicle::class, function ()
+$factory->define(MasterFormPieceVehicle::class, function (Faker\Generator $faker)
 {
 	return [
-		'name' => 'Maestro Formulario Chequeo Vehículos'
+		'name'       => $faker->word,
+		'deleted_at' => null
 	];
 });
 
