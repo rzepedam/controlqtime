@@ -515,7 +515,7 @@ class EmployeeController extends Controller
 			$employee->user->update(['email' => Session::get('step1_update.email_employee')]);
 			$employee->address->update(Session::get('step1_update'));
 			$employee->address->detailAddressLegalEmployee->update(Session::get('step1_update'));
-			// $employee->createContacts()->destroyArrayId(Session::get('id_delete_contact_update'), '');
+			$employee->deleteContacts(Session::get('id_delete_contact_update'));
 			$employee->createContacts(Session::get('step1_update'));
 			// $this->familyRelationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'), '');
 			$employee->createFamilyRelationships(Session::get('step1_update'));

@@ -19,7 +19,7 @@
             </div>
             <div class="col-sm-12 col-md-4 form-group">
                 {{ Form::label('type_exam_id', 'Examen') }}
-                {{ Form::select('type_exam_id[]', $type_exams, $exam->typeExam->id, ['class'=> 'form-control']) }}
+                {{ Form::select('type_exam_id[]', $typeExams, $exam->typeExam->id, ['class'=> 'form-control']) }}
             </div>
             <div class="col-sm-6 col-md-2 form-group">
                 {{ Form::label('emission_exam', 'Fecha Emisión') }}

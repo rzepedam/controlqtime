@@ -19,7 +19,7 @@
             </div>
             <div class="col-sm-6 col-md-4 form-group">
                 {{ Form::label('type_speciality_id', 'Especialidad') }}
-                {{ Form::select('type_speciality_id[]', $type_specialities, $speciality->type_speciality_id, ['class'=> 'form-control']) }}
+                {{ Form::select('type_speciality_id[]', $typeSpecialities, $speciality->type_speciality_id, ['class'=> 'form-control']) }}
             </div>
             <div class="col-sm-6 col-md-4 form-group">
                 {{ Form::label('institution_speciality_id', 'Institución') }}

@@ -19,9 +19,9 @@
             </div>
             <div class="col-sm-6 col-md-3 form-group">
                 {{ Form::label('type_professional_license_id', 'Tipo Licencia') }}
-                {{ Form::select('type_professional_license_id[]', $type_professional_licenses, $professional_license->type_professional_license_id, ['class'=> 'form-control']) }}
+                {{ Form::select('type_professional_license_id[]', $typeProfessionalLicenses, $professional_license->type_professional_license_id, ['class'=> 'form-control']) }}
             </div>
-            <div class="col-md-offset-2 col-sm-6 col-md-2 form-group text-center">
+            <div class="col-sm-6 col-md-offset-2 col-md-2 form-group text-center">
                 {{ Form::label("is_donor" . $i, "Es donante?") }}
                 <ul class="list-unstyled list-inline">
                     <li>

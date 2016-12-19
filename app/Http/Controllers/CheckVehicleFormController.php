@@ -107,7 +107,7 @@ class CheckVehicleFormController extends Controller
 		try
 		{
 			$checkVehicleForm = $this->checkVehicleForm->create($request->all());
-			$checkVehicleForm->statePieceVehicles()->attach($request->get('statePieceVehicle_id'));
+			$checkVehicleForm->statePieceVehicles()->attach([$request->get('state_piece_vehicle_id')]);
 			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
 			

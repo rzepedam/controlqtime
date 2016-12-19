@@ -74,6 +74,14 @@ class Employee extends Eloquent
 	}
 	
 	/**
+	 * @param $request 'id_delete_contact_update'
+	 */
+	public function deleteContacts($request)
+	{
+	    // dd($request);
+	}
+	
+	/**
 	 * @param $request 'Session step 1'
 	 */
 	public function createContacts($request)

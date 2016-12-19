@@ -77,11 +77,12 @@
                         </td>
                         <td>
                             {{ $pieceVehicle->name }}
+                            <input type="hidden" name="piece_vehicle_id[]" value="{{ $pieceVehicle->id }}">
                         </td>
                         <td>
                         <span class="checkbox-custom checkbox-primary">
                             @if ( Route::is('check-vehicle-forms.create') )
-                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[0]->id }}" />
+                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="B" />
                             @else
                                 <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[0]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Bueno') ? 'checked' : null }} />
                             @endif
@@ -91,7 +92,7 @@
                         <td>
                         <span class="checkbox-custom checkbox-primary">
                             @if ( Route::is('check-vehicle-forms.create') )
-                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[1]->id }}" />
+                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="D" />
                             @else
                                 <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[1]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Dañado') ? 'checked' : null }} />
                             @endif
@@ -101,7 +102,7 @@
                         <td>
                         <span class="checkbox-custom checkbox-primary">
                             @if ( Route::is('check-vehicle-forms.create') )
-                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[2]->id }}" />
+                                <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="F" />
                             @else
                                 <input type="checkbox" name="state_piece_vehicle_id[]{{ $loop->iteration }}" value="{{ $statePieceVehicles[2]->id }}" {{ ($checkVehicleForm->statePieceVehicles[$loop->index]->name == 'Faltante') ? 'checked' : null }} />
                             @endif

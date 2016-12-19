@@ -19,7 +19,7 @@
             </div>
             <div class="col-sm-6 col-md-6 form-group">
                 {{ Form::label("type_disease_id", "Nombre") }}
-                {{ Form::select("type_disease_id[]", $type_diseases, $disease->typeDisease->id, ["class"=> "form-control"]) }}
+                {{ Form::select("type_disease_id[]", $typeDiseases, $disease->typeDisease->id, ["class"=> "form-control"]) }}
             </div>
             <div class="col-md-offset-2 col-sm-6 col-md-4 form-group text-center">
                 {{ Form::label("treatment_disease", "Está en tratamiento?")}}
