@@ -74,8 +74,7 @@ class EmployeeCreateFamilyRelationshipTest extends TestCase
 		$this->post('human-resources/employees', $this->sessionStep3)
 			->seeInDatabase('family_relationships', [
 				'relationship_id'    => $this->relationship->id,
-				'employee_family_id' => $this->employee->id,
-				'deleted_at'         => null
+				'employee_family_id' => $this->employee->id
 			]);
 	}
 	
@@ -98,16 +97,13 @@ class EmployeeCreateFamilyRelationshipTest extends TestCase
 		$this->post('human-resources/employees', $this->sessionStep3)
 			->seeInDatabase('family_relationships', [
 				'relationship_id'    => $this->relationship->id,
-				'employee_family_id' => $this->employee->id,
-				'deleted_at'         => null])
+				'employee_family_id' => $this->employee->id])
 			->seeInDatabase('family_relationships', [
 				'relationship_id'    => $relationshipB->id,
-				'employee_family_id' => $employeeB->id,
-				'deleted_at'         => null])
+				'employee_family_id' => $employeeB->id])
 			->seeInDatabase('family_relationships', [
 				'relationship_id'    => $relationshipC->id,
-				'employee_family_id' => $employeeC->id,
-				'deleted_at'         => null
+				'employee_family_id' => $employeeC->id
 			]);
 	}
 }

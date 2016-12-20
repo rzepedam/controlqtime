@@ -6,7 +6,6 @@ use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class Step3Request extends SanitizedRequest
 {
-	
 	public function authorize()
 	{
 		return true;

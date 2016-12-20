@@ -18,7 +18,6 @@ class CreateDetailCollegeStudiesTable extends Migration
             $table->unsignedInteger('study_id')->nullable();
 	        $table->unsignedInteger('institution_study_id')->nullable();
 	        $table->string('name_study', 50);
-	        $table->softDeletes();
         });
     }
 

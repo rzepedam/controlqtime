@@ -24,6 +24,7 @@ class EmployeeEditSpecialityTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
+		
 		$this->institution    = factory(Institution::class)->create();
 		$this->typeSpeciality = factory(TypeSpeciality::class)->create();
 		

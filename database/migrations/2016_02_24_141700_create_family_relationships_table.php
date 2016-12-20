@@ -17,7 +17,6 @@ class CreateFamilyRelationshipsTable extends Migration
 	        $table->unsignedInteger('employee_id')->nullable();
             $table->unsignedInteger('relationship_id')->nullable();
             $table->unsignedInteger('employee_family_id')->nullable();
-	        $table->softDeletes();
 	        $table->timestamps();
         });
     }

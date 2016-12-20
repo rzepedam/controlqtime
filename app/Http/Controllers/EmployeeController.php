@@ -2,6 +2,8 @@
 
 namespace Controlqtime\Http\Controllers;
 
+use Controlqtime\Core\Entities\DetailSchoolStudy;
+use Controlqtime\Core\Entities\Image;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
@@ -515,19 +517,19 @@ class EmployeeController extends Controller
 			$employee->user->update(['email' => Session::get('step1_update.email_employee')]);
 			$employee->address->update(Session::get('step1_update'));
 			$employee->address->detailAddressLegalEmployee->update(Session::get('step1_update'));
-			$employee->deleteContacts(Session::get('id_delete_contact_update'));
+			$employee->deleteContacts(Session::get('id_delete_contact'));
 			$employee->createContacts(Session::get('step1_update'));
-			// $this->familyRelationship->destroyArrayId($request->session()->get('id_delete_family_relationship_update'), '');
+			$employee->deleteFamilyRelationships(Session::get('id_delete_family_relationship'));
 			$employee->createFamilyRelationships(Session::get('step1_update'));
 			
 			// Update Step2 data
-			// $this->study->destroyArrayId($request->session()->get('id_delete_study_update'), '');
+			$employee->deleteStudies(Session::get('id_delete_study'));
 			$employee->createStudies(Session::get('step2_update'));
-			// $this->certification->destroyImages($request->session()->get('id_delete_certification_update'), 'Certification');
-			// $this->certification->destroyArrayId($request->session()->get('id_delete_certification_update'), 'Certification');
+			// $this->certification->destroyImages($request->session()->get('id_delete_certification'), 'Certification');
+			$employee->deleteCertifications(Session::get('id_delete_certification'));
 			$employee->createCertifications(Session::get('step2_update'));
-			// $this->speciality->destroyImages($request->session()->get('id_delete_speciality_update'), 'Speciality');
-			// $this->speciality->destroyArrayId($request->session()->get('id_delete_speciality_update'), 'Speciality');
+			// $this->speciality->destroyImages($request->session()->get('id_delete_speciality'), 'Speciality');
+			$employee->deleteSpecialities(Session::get('id_delete_speciality'));
 			$employee->createSpecialities(Session::get('step2_update'));
 			// $this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
 			// $this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
@@ -767,8 +769,8 @@ class EmployeeController extends Controller
 	public function updateSessionStep1(Step1Request $request)
 	{
 		$request->session()->put('step1_update', $request->all());
-		$request->session()->put('id_delete_contact_update', $request->get('id_delete_contact'));
-		$request->session()->put('id_delete_family_relationship_update', $request->get('id_delete_family_relationship'));
+		$request->session()->put('id_delete_contact', $request->get('id_delete_contact'));
+		$request->session()->put('id_delete_family_relationship', $request->get('id_delete_family_relationship'));
 		
 		return response()->json([
 			'status' => true
@@ -783,9 +785,9 @@ class EmployeeController extends Controller
 	public function updateSessionStep2(Step2Request $request)
 	{
 		$request->session()->put('step2_update', $request->all());
-		$request->session()->put('id_delete_study_update', $request->get('id_delete_study'));
-		$request->session()->put('id_delete_certification_update', $request->get('id_delete_certification'));
-		$request->session()->put('id_delete_speciality_update', $request->get('id_delete_speciality'));
+		$request->session()->put('id_delete_study', $request->get('id_delete_study'));
+		$request->session()->put('id_delete_certification', $request->get('id_delete_certification'));
+		$request->session()->put('id_delete_speciality', $request->get('id_delete_speciality'));
 		$request->session()->put('id_delete_professional_license_update', $request->get('id_delete_professional_license'));
 		
 		return response()->json([
@@ -799,12 +801,12 @@ class EmployeeController extends Controller
 	public function destroySessionUpdateEmployee(Request $request)
 	{
 		$request->session()->forget('step1_update');
-		$request->session()->forget('id_delete_contact_update');
-		$request->session()->forget('id_delete_family_relationship_update');
+		$request->session()->forget('id_delete_contact');
+		$request->session()->forget('id_delete_family_relationship');
 		$request->session()->forget('step2_update');
-		$request->session()->forget('id_delete_study_update');
-		$request->session()->forget('id_delete_certification_update');
-		$request->session()->forget('id_delete_speciality_update');
+		$request->session()->forget('id_delete_study');
+		$request->session()->forget('id_delete_certification');
+		$request->session()->forget('id_delete_speciality');
 		$request->session()->forget('id_delete_professional_license_update');
 	}
 	

@@ -19,7 +19,6 @@ class CreateSpecialitiesTable extends Migration
             $table->unsignedInteger('institution_speciality_id')->nullable();
             $table->date('emission_speciality');
             $table->date('expired_speciality');
-	        $table->softDeletes();
 	        $table->timestamps();
         });
     }

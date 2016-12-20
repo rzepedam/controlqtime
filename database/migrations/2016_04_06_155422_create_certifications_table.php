@@ -19,7 +19,6 @@ class CreateCertificationsTable extends Migration
             $table->unsignedInteger('institution_certification_id')->nullable();
             $table->date('emission_certification');
             $table->date('expired_certification');
-	        $table->softDeletes();
 	        $table->timestamps();
         });
     }

@@ -1,10 +1,12 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\City;
 use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Core\Entities\User;
+use Controlqtime\Core\Entities\Image;
 use Controlqtime\Core\Entities\Route;
 use Controlqtime\Core\Entities\Degree;
 use Controlqtime\Core\Entities\Region;
@@ -14,6 +16,7 @@ use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Core\Entities\DayTrip;
+use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Core\Entities\Vehicle;
 use Controlqtime\Core\Entities\Contract;
@@ -26,7 +29,6 @@ use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\DetailBus;
 use Controlqtime\Core\Entities\Mutuality;
 use Controlqtime\Core\Entities\Trademark;
-use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\LaborUnion;
 use Controlqtime\Core\Entities\Profession;
 use Controlqtime\Core\Entities\EngineCubic;
@@ -317,6 +319,17 @@ $factory->define(Gratification::class, function (Faker\Generator $faker)
 	];
 });
 
+$factory->define(Image::class, function (Faker\Generator $faker)
+{
+	return [
+		'imagesable_id'   => '',
+		'imagesable_type' => '',
+		'path'            => $faker->word . '/' . $faker->word . '/' . $faker->word,
+		'orig_name'       => Str::random(15) . '.png',
+		'size'            => $faker->numberBetween(10000, 20000)
+	];
+});
+
 $factory->define(Institution::class, function (Faker\Generator $faker)
 {
 	return [
@@ -343,7 +356,7 @@ $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 		'first_name'           => $faker->firstName,
 		'second_name'          => $faker->firstName,
 		'rut_representative'   => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
-		'birthday'             => $faker->date($format = 'd-m-Y', $max = 'now'),
+		'birthday'             => $faker->date($format = 'd - m - Y', $max = 'now'),
 		'nationality_id'       => factory(Nationality::class)->create()->id,
 		'email_representative' => $faker->email,
 	];
@@ -614,8 +627,8 @@ $factory->define(Vehicle::class, function (Faker\Generator $faker)
 		'model_vehicle_id' => factory(ModelVehicle::class)->create()->id,
 		'company_id'       => factory(Company::class)->states('enable')->create()->id,
 		'state_vehicle_id' => factory(StateVehicle::class)->create()->id,
-		'acquisition_date' => Carbon::now()->format('d-m-Y'),
-		'inscription_date' => Carbon::now()->format('d-m-Y'),
+		'acquisition_date' => Carbon::now()->format('d - m - Y'),
+		'inscription_date' => Carbon::now()->format('d - m - Y'),
 		'year'             => $faker->year,
 		'patent'           => strtoupper($faker->randomLetter . $faker->randomLetter) . rand(1, 99) . rand(1, 99),
 		'code'             => rand(10000000000000, 99999999999999),

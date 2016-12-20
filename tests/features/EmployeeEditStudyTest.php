@@ -38,10 +38,11 @@ class EmployeeEditStudyTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
-		$this->degreeDetailSchool      = factory(Degree::class)->create(['id' => '2']);
-		$this->degreeDetailTechnical   = factory(Degree::class)->create(['id' => '3']);
-		$this->degreeDetailCollege     = factory(Degree::class)->create(['id' => '6']);
-		$this->institution             = factory(Institution::class)->create();
+		
+		$this->degreeDetailSchool    = factory(Degree::class)->create(['id' => '2']);
+		$this->degreeDetailTechnical = factory(Degree::class)->create(['id' => '3']);
+		$this->degreeDetailCollege   = factory(Degree::class)->create(['id' => '6']);
+		$this->institution           = factory(Institution::class)->create();
 		
 		$this->step1_update = [
 			'male_surname'               => 'Candia',
@@ -102,7 +103,6 @@ class EmployeeEditStudyTest extends TestCase
 		]);
 		
 		$this->studyCollege = $this->employee->studies()->create([
-			'id_study'       => 0,
 			'degree_id'      => $this->degreeDetailCollege->id,
 			'date_obtention' => '19-01-2016'
 		]);
@@ -136,8 +136,7 @@ class EmployeeEditStudyTest extends TestCase
 			->seeInDatabase('detail_school_studies', [
 				'id'               => $this->detailSchool->id,
 				'study_id'         => $this->studySchool->id,
-				'name_institution' => 'Colegio Los Almendros',
-				'deleted_at'       => null
+				'name_institution' => 'Colegio Los Almendros'
 			]);
 	}
 	
@@ -164,8 +163,7 @@ class EmployeeEditStudyTest extends TestCase
 				'id'               => $this->detailTechnical->id,
 				'study_id'         => $this->studyTechnical->id,
 				'name_study'       => 'Soldadura en Piezas de Relojería',
-				'name_institution' => 'Instituto Arévalo Henríquez',
-				'deleted_at'       => null
+				'name_institution' => 'Instituto Arévalo Henríquez'
 			]);
 	}
 	
@@ -190,14 +188,12 @@ class EmployeeEditStudyTest extends TestCase
 				'id'             => $this->studyCollege->id,
 				'employee_id'    => $this->employee->id,
 				'degree_id'      => $degreeCollege->id,
-				'date_obtention' => '2015-02-28',
-				'deleted_at'     => null])
+				'date_obtention' => '2015-02-28'])
 			->seeInDatabase('detail_college_studies', [
 				'id'                   => $this->detailCollege->id,
 				'study_id'             => $this->studyCollege->id,
 				'name_study'           => 'Ingeniería Mecánica',
-				'institution_study_id' => $institution->id,
-				'deleted_at'           => null
+				'institution_study_id' => $institution->id
 			]);
 	}
 }

@@ -20,7 +20,6 @@ class CreateImagesTable extends Migration
 	        $table->string('path');
 	        $table->string('orig_name');
 	        $table->string('size', 7);
-	        $table->softDeletes();
             $table->timestamps();
         });
     }

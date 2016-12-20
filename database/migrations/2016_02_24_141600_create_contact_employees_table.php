@@ -20,7 +20,6 @@ class CreateContactEmployeesTable extends Migration
             $table->string('email_contact', 60)->unique();
             $table->string('address_contact', 100);
             $table->string('tel_contact', 20);
-	        $table->softDeletes();
 	        $table->timestamps();
         });
     }

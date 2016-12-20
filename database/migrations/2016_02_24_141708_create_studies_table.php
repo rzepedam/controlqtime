@@ -19,7 +19,6 @@ class CreateStudiesTable extends Migration
 	        $table->unsignedInteger('institution_study_id')->nullable();
 	        $table->string('name_study', 50);
             $table->date('date_obtention');
-	        $table->softDeletes();
 	        $table->timestamps();
         });
     }

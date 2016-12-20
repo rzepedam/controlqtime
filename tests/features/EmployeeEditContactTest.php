@@ -24,22 +24,23 @@ class EmployeeEditContactTest extends TestCase
 		$this->relationship = factory(Relationship::class)->create();
 		
 		$this->step1_update = [
-			'male_surname'               => 'Candia',
-			'female_surname'             => 'Parra',
-			'first_name'                 => 'Marcelo',
-			'second_name'                => 'Pedro',
-			'rut'                        => '10.486.861-4',
-			'birthday'                   => '11-06-1989',
-			'nationality_id'             => $this->nationality->id,
-			'is_male'                    => 'M',
-			'marital_status_id'          => $this->maritalStatus->id,
-			'forecast_id'                => $this->forecast->id,
-			'pension_id'                 => $this->pension->id,
-			'address'                    => 'Vicuña Mackenna 2209',
-			'commune_id'                 => $this->commune->id,
-			'phone1'                     => '+56988102910',
-			'email_employee'             => 'marcelocandia@gmail.com',
-			'count_family_relationships' => 0
+			'male_surname'                  => 'Candia',
+			'female_surname'                => 'Parra',
+			'first_name'                    => 'Marcelo',
+			'second_name'                   => 'Pedro',
+			'rut'                           => '10.486.861-4',
+			'birthday'                      => '11-06-1989',
+			'nationality_id'                => $this->nationality->id,
+			'is_male'                       => 'M',
+			'marital_status_id'             => $this->maritalStatus->id,
+			'forecast_id'                   => $this->forecast->id,
+			'pension_id'                    => $this->pension->id,
+			'address'                       => 'Vicuña Mackenna 2209',
+			'commune_id'                    => $this->commune->id,
+			'phone1'                        => '+56988102910',
+			'email_employee'                => 'marcelocandia@gmail.com',
+			'count_family_relationships'    => 0,
+			'id_delete_family_relationship' => ''
 		];
 		
 		$this->step2_update = [
@@ -59,6 +60,7 @@ class EmployeeEditContactTest extends TestCase
 		Session::put('step2', $this->step2_update);
 		Session::put('email_employee', 'marcelocandia@gmail.com');
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
+		Session::put('id_delete_contact_update', '');
 		
 		$this->contact = $this->employee->contactEmployees()->create([
 			'id_contact'              => 0,
@@ -93,8 +95,7 @@ class EmployeeEditContactTest extends TestCase
 				'name_contact'    => 'Iván Osvaldo Flores Mondaca',
 				'email_contact'   => 'ivanosvaldo@gmail.com',
 				'address_contact' => 'Av. Tres 0554',
-				'tel_contact'     => '+56976109211',
-				'deleted_at'      => null
+				'tel_contact'     => '+56976109211'
 			]);
 	}
 	

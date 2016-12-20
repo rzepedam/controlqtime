@@ -65,7 +65,6 @@ class EmployeeEditCertificationTest extends TestCase
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		
 		$this->certification = $this->employee->certifications()->create([
-			'id_certification'             => 0,
 			'type_certification_id'        => $this->typeCertification->id,
 			'institution_certification_id' => $this->institution->id,
 			'emission_certification'       => '22-10-1996',

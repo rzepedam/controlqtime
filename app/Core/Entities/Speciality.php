@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Speciality extends Eloquent
 {
-	use SoftDeletes;
-	
 	/**
 	 * @var array
 	 */

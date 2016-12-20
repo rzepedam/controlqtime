@@ -3,13 +3,10 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Study extends Eloquent
 {
-	use SoftDeletes;
-	
 	/**
 	 * @var array
 	 */

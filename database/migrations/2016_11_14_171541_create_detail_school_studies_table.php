@@ -17,7 +17,6 @@ class CreateDetailSchoolStudiesTable extends Migration
             $table->increments('id');
 	        $table->unsignedInteger('study_id')->nullable();
 	        $table->string('name_institution', 80);
-	        $table->softDeletes();
         });
     }
 

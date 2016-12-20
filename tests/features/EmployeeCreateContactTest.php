@@ -78,8 +78,7 @@ class EmployeeCreateContactTest extends TestCase
 				'name_contact'    => 'José Miguel Osorio Sepúlveda',
 				'email_contact'   => 'joseosorio@gmail.com',
 				'address_contact' => 'Pje. Limahuida 1990',
-				'tel_contact'     => '+56983401021',
-				'deleted_at'      => null
+				'tel_contact'     => '+56983401021'
 			]);
 	}
 	
@@ -102,20 +101,17 @@ class EmployeeCreateContactTest extends TestCase
 				'name_contact'    => 'José Miguel Osorio Sepúlveda',
 				'email_contact'   => 'joseosorio@gmail.com',
 				'address_contact' => 'Pje. Limahuida 1990',
-				'tel_contact'     => '+56983401021',
-				'deleted_at'      => null])
+				'tel_contact'     => '+56983401021'])
 			->seeInDatabase('contact_employees', [
 				'name_contact'    => 'Alejandro Pablo López Zaldivia',
 				'email_contact'   => 'alelopez@gmail.com',
 				'address_contact' => 'Calle Uno 919',
-				'tel_contact'     => '+56976192110',
-				'deleted_at'      => null])
+				'tel_contact'     => '+56976192110'])
 			->seeInDatabase('contact_employees', [
 				'name_contact'    => 'Rodrigo Ángel Céspedes Mondaca',
 				'email_contact'   => 'rodrigoangel@gmail.com',
 				'address_contact' => 'Av. Conquistadores 701',
-				'tel_contact'     => '+56994021990',
-				'deleted_at'      => null
+				'tel_contact'     => '+56994021990'
 			]);
 	}
 }

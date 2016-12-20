@@ -74,11 +74,14 @@ class Employee extends Eloquent
 	}
 	
 	/**
-	 * @param $request 'id_delete_contact_update'
+	 * @param $request 'id_delete_contact'
 	 */
 	public function deleteContacts($request)
 	{
-	    // dd($request);
+		if ( ! empty($request) )
+		{
+			$this->contactEmployees()->whereIn('id', $request)->delete();
+		}
 	}
 	
 	/**
@@ -108,6 +111,17 @@ class Employee extends Eloquent
 	}
 	
 	/**
+	 * @param $request 'id_delete_family_relationship'
+	 */
+	public function deleteFamilyRelationships($request)
+	{
+		if ( ! empty($request) )
+		{
+			$this->familyRelationships()->whereIn('id', $request)->delete();
+		}
+	}
+	
+	/**
 	 * @param $request 'Session step 1'
 	 */
 	public function createFamilyRelationships($request)
@@ -128,6 +142,39 @@ class Employee extends Eloquent
 	public function studies()
 	{
 		return $this->hasMany(Study::class);
+	}
+	
+	/**
+	 * @param $request 'id_delete_study'
+	 */
+	public function deleteStudies($request)
+	{
+		if ( ! empty($request) )
+		{
+			for ( $i = 0; $i < count($request); $i++ )
+			{
+				$study = $this->studies()->findOrFail($request[$i]);
+				
+				switch ( $study->degree_id )
+				{
+					case 1:
+					case 2:
+						$study->detailSchoolStudy()->delete();
+						break;
+					case 3:
+						$study->detailTechnicalStudy()->delete();
+						break;
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+						$study->detailCollegeStudy()->delete();
+						break;
+				}
+			}
+			$this->studies()->whereIn('id', $request)->delete();
+		}
 	}
 	
 	/**
@@ -182,6 +229,23 @@ class Employee extends Eloquent
 	}
 	
 	/**
+	 * @param $request 'id_delete_certification'
+	 */
+	public function deleteCertifications($request)
+	{
+		if ( ! empty($request) )
+		{
+			for ( $i = 0; $i < count($request); $i++ )
+			{
+				$certification = $this->certifications()->findOrFail($request[$i]);
+				$certification->imagesable()->delete();
+			}
+			
+			$this->certifications()->whereIn('id', $request)->delete();
+		}
+	}
+	
+	/**
 	 * @param $request 'Session step 2'
 	 */
 	public function createCertifications($request)
@@ -204,6 +268,23 @@ class Employee extends Eloquent
 	public function specialities()
 	{
 		return $this->hasMany(Speciality::class);
+	}
+	
+	/**
+	 * @param $request 'id_delete_speciality'
+	 */
+	public function deleteSpecialities($request)
+	{
+		if ( ! empty($request) )
+		{
+			for ( $i = 0; $i < count($request); $i++ )
+			{
+				$speciality = $this->specialities()->findOrFail($request[$i]);
+				$speciality->imagesable()->delete();
+			}
+			
+			$this->specialities()->whereIn('id', $request)->delete();
+		}
 	}
 	
 	/**
@@ -551,7 +632,7 @@ class Employee extends Eloquent
 	 */
 	public function getIsMaleEditAttribute()
 	{
- 		return $this->is_male === 'Masculino';
+		return $this->is_male === 'Masculino';
 	}
 	
 	/**

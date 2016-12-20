@@ -86,8 +86,7 @@ class EmployeeEditFamilyRelationshipTest extends TestCase
 				'id'                 => $this->familyRelationship->id,
 				'employee_id'        => $this->employee->id,
 				'relationship_id'    => $relationship->id,
-				'employee_family_id' => $employee->id,
-				'deleted_at'         => null
+				'employee_family_id' => $employee->id
 			]);
 	}
 }

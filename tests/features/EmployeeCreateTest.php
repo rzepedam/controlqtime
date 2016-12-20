@@ -260,12 +260,10 @@ class EmployeeCreateTest extends TestCase
 				'name_contact'    => 'José Miguel Osorio Sepúlveda',
 				'email_contact'   => 'joseosorio@gmail.com',
 				'address_contact' => 'Pje. Limahuida 1990',
-				'tel_contact'     => '+56983401021',
-				'deleted_at'      => null])
+				'tel_contact'     => '+56983401021'])
 			->seeInDatabase('family_relationships', [
 				'relationship_id'    => $this->relationship->id,
-				'employee_family_id' => $this->employee->id,
-				'deleted_at'         => null])
+				'employee_family_id' => $this->employee->id])
 			->seeInDatabase('studies', [
 				'degree_id'      => $degreeSchool->id,
 				'date_obtention' => '1998-07-17'])
