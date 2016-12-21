@@ -21,6 +21,7 @@ class EmployeeEditFamilyResponsabilityTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
+		
 		$this->relationship = factory(Relationship::class)->create();
 		
 		$this->step1_update = [
@@ -62,7 +63,6 @@ class EmployeeEditFamilyResponsabilityTest extends TestCase
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		
 		$this->familyResponsability = $this->employee->familyResponsabilities()->create([
-			'id_family_responsability' => 0,
 			'name_responsability'      => 'Andrés Camargo Salas',
 			'rut_responsability'       => '15.257.414-2',
 			'relationship_id'          => $this->relationship->id,
@@ -87,8 +87,7 @@ class EmployeeEditFamilyResponsabilityTest extends TestCase
 				'employee_id'         => $this->employee->id,
 				'name_responsability' => 'Enrique Olivares Mena',
 				'rut_responsability'  => '20003720-0',
-				'relationship_id'     => $relationship->id,
-				'deleted_at'          => null
+				'relationship_id'     => $relationship->id
 			]);
 	}
 }

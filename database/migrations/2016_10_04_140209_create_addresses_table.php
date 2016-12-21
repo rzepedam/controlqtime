@@ -21,7 +21,6 @@ class CreateAddressesTable extends Migration
 	        $table->string('address', 75);
 	        $table->string('phone1', 20);
 	        $table->string('phone2', 20);
-	        $table->softDeletes();
         });
     }
 

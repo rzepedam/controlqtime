@@ -62,7 +62,6 @@ class EmployeeEditDiseaseTest extends TestCase
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		
 		$this->disease = $this->employee->diseases()->create([
-			'id_disease'        => 0,
 			'type_disease_id'   => $this->typeDisease->id,
 			'treatment_disease' => true,
 			'detail_disease'    => 'Lorem ipsum dolor sit amet'
@@ -87,8 +86,7 @@ class EmployeeEditDiseaseTest extends TestCase
 				'employee_id'       => $this->employee->id,
 				'type_disease_id'   => $typeDisease->id,
 				'treatment_disease' => false,
-				'detail_disease'    => '',
-				'deleted_at'        => null
+				'detail_disease'    => ''
 			]);
 	}
 }

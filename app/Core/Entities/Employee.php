@@ -313,6 +313,23 @@ class Employee extends Eloquent
 	}
 	
 	/**
+	 * @param $request 'id_delete_professional_license'
+	 */
+	public function deleteProfessionalLicenses($request)
+	{
+		if ( ! empty($request) )
+		{
+			for ( $i = 0; $i < count($request); $i++ )
+			{
+				$professionalLicense = $this->professionalLicenses()->findOrFail($request[$i]);
+				$professionalLicense->imagesable()->delete();
+			}
+			
+			$this->professionalLicenses()->whereIn('id', $request)->delete();
+		}
+	}
+	
+	/**
 	 * @param $request 'Session step 2'
 	 */
 	public function createLicenses($request)
@@ -336,6 +353,23 @@ class Employee extends Eloquent
 	public function disabilities()
 	{
 		return $this->hasMany(Disability::class);
+	}
+	
+	/**
+	 * @param $request 'id_delete_disability'
+	 */
+	public function deleteDisabilities($request)
+	{
+		if ( ! empty($request) )
+		{
+			for ( $i = 0; $i < count($request); $i++ )
+			{
+				$disability = $this->disabilities()->findOrFail($request[$i]);
+				$disability->imagesable()->delete();
+			}
+			
+			$this->disabilities()->whereIn('id', $request)->delete();
+		}
 	}
 	
 	/**
@@ -363,6 +397,23 @@ class Employee extends Eloquent
 	}
 	
 	/**
+	 * @param $request 'id_delete_disease'
+	 */
+	public function deleteDiseases($request)
+	{
+		if ( ! empty($request) )
+		{
+			for ( $i = 0; $i < count($request); $i++ )
+			{
+				$disease = $this->diseases()->findOrFail($request[$i]);
+				$disease->imagesable()->delete();
+			}
+			
+			$this->diseases()->whereIn('id', $request)->delete();
+		}
+	}
+	
+	/**
 	 * @param $request 'Session step 3'
 	 */
 	public function createDiseases($request)
@@ -384,6 +435,23 @@ class Employee extends Eloquent
 	public function exams()
 	{
 		return $this->hasMany(Exam::class);
+	}
+	
+	/**
+	 * @param $request 'id_delete_exam'
+	 */
+	public function deleteExams($request)
+	{
+		if ( ! empty($request) )
+		{
+			for ( $i = 0; $i < count($request); $i++ )
+			{
+				$exam = $this->exams()->findOrFail($request[$i]);
+				$exam->imagesable()->delete();
+			}
+			
+			$this->exams()->whereIn('id', $request)->delete();
+		}
 	}
 	
 	/**
@@ -409,6 +477,23 @@ class Employee extends Eloquent
 	public function familyResponsabilities()
 	{
 		return $this->hasMany(FamilyResponsability::class);
+	}
+	
+	/**
+	 * @param $request 'id_delete_family_responsability'
+	 */
+	public function deleteFamilyResponsabilities($request)
+	{
+		if ( ! empty($request) )
+		{
+			for ( $i = 0; $i < count($request); $i++ )
+			{
+				$familyResponsability = $this->familyResponsabilities()->findOrFail($request[$i]);
+				$familyResponsability->imagesable()->delete();
+			}
+			
+			$this->familyResponsabilities()->whereIn('id', $request)->delete();
+		}
 	}
 	
 	/**

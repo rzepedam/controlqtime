@@ -74,8 +74,7 @@ class EmployeeCreateDisabilityTest extends TestCase
 			->seeInDatabase('disabilities', [
 				'type_disability_id'   => $this->typeDisability->id,
 				'treatment_disability' => true,
-				'detail_disability'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-				'deleted_at'           => null
+				'detail_disability'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'
 			]);
 	}
 	
@@ -99,18 +98,15 @@ class EmployeeCreateDisabilityTest extends TestCase
 			->seeInDatabase('disabilities', [
 				'type_disability_id'   => $typeDisabilityA->id,
 				'treatment_disability' => true,
-				'detail_disability'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-				'deleted_at'           => null])
+				'detail_disability'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'])
 			->seeInDatabase('disabilities', [
 				'type_disability_id'   => $typeDisabilityB->id,
 				'treatment_disability' => false,
-				'detail_disability'    => 'Lorem ipsum',
-				'deleted_at'           => null])
+				'detail_disability'    => 'Lorem ipsum'])
 			->seeInDatabase('disabilities', [
 				'type_disability_id'   => $typeDisabilityC->id,
 				'treatment_disability' => true,
-				'detail_disability'    => ', consectetuer adipiscing elit',
-				'deleted_at'           => null
+				'detail_disability'    => ', consectetuer adipiscing elit'
 			]);
 	}
 	

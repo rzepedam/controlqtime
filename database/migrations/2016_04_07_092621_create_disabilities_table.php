@@ -18,7 +18,6 @@ class CreateDisabilitiesTable extends Migration
             $table->unsignedInteger('type_disability_id')->nullable();
             $table->boolean('treatment_disability')->default(false);
             $table->text('detail_disability');
-	        $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -81,8 +81,7 @@ class EmployeeCreateSpecialityTest extends TestCase
 				'type_speciality_id'        => $this->typeSpeciality->id,
 				'institution_speciality_id' => $this->institution->id,
 				'emission_speciality'       => '2009-11-18',
-				'expired_speciality'        => '2017-04-25',
-				'deleted_at'                => null
+				'expired_speciality'        => '2017-04-25'
 			]);
 	}
 	
@@ -112,20 +111,17 @@ class EmployeeCreateSpecialityTest extends TestCase
 				'type_speciality_id'        => $typeSpecialityA->id,
 				'institution_speciality_id' => $institutionA->id,
 				'emission_speciality'       => '2009-11-18',
-				'expired_speciality'        => '2017-04-25',
-				'deleted_at'                => null])
+				'expired_speciality'        => '2017-04-25'])
 			->seeInDatabase('specialities', [
 				'type_speciality_id'        => $typeSpecialityB->id,
 				'institution_speciality_id' => $institutionB->id,
 				'emission_speciality'       => '1998-09-21',
-				'expired_speciality'        => '2002-01-12',
-				'deleted_at'                => null])
+				'expired_speciality'        => '2002-01-12'])
 			->seeInDatabase('specialities', [
 				'type_speciality_id'        => $typeSpecialityC->id,
 				'institution_speciality_id' => $institutionC->id,
 				'emission_speciality'       => '2016-08-11',
-				'expired_speciality'        => '2022-09-17',
-				'deleted_at'                => null
+				'expired_speciality'        => '2022-09-17'
 			]);
 	}
 }

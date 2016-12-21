@@ -97,8 +97,7 @@ class EmployeeEditSpecialityTest extends TestCase
 				'type_speciality_id'        => $typeSpeciality->id,
 				'institution_speciality_id' => $institution->id,
 				'emission_speciality'       => '2005-01-13',
-				'expired_speciality'        => '2015-08-13',
-				'deleted_at'                => null
+				'expired_speciality'        => '2015-08-13'
 			]);
 	}
 }

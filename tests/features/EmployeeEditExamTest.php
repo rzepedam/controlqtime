@@ -21,6 +21,7 @@ class EmployeeEditExamTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
+		
 		$this->typeExam = factory(TypeExam::class)->create();
 		
 		$this->step1_update = [
@@ -62,7 +63,6 @@ class EmployeeEditExamTest extends TestCase
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		
 		$this->exam = $this->employee->exams()->create([
-			'id_exam'       => 0,
 			'type_exam_id'  => $this->typeExam->id,
 			'emission_exam' => '28-07-2001',
 			'expired_exam'  => '28-07-2002',
@@ -90,8 +90,7 @@ class EmployeeEditExamTest extends TestCase
 				'type_exam_id'  => $typeExam->id,
 				'emission_exam' => '2008-03-13',
 				'expired_exam'  => '2009-04-17',
-				'detail_exam'   => 'Lorem ipsum solot',
-				'deleted_at'    => null
+				'detail_exam'   => 'Lorem ipsum solot'
 			]);
 	}
 }

@@ -74,8 +74,7 @@ class EmployeeCreateDiseaseTest extends TestCase
 			->seeInDatabase('diseases', [
 				'type_disease_id'   => $this->typeDisease->id,
 				'treatment_disease' => true,
-				'detail_disease'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-				'deleted_at'        => null
+				'detail_disease'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'
 			]);
 	}
 	
@@ -99,18 +98,15 @@ class EmployeeCreateDiseaseTest extends TestCase
 			->seeInDatabase('diseases', [
 				'type_disease_id'   => $typeDiseaseA->id,
 				'treatment_disease' => true,
-				'detail_disease'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-				'deleted_at'        => null])
+				'detail_disease'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'])
 			->seeInDatabase('diseases', [
 				'type_disease_id'   => $typeDiseaseB->id,
 				'treatment_disease' => true,
-				'detail_disease'    => 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to',
-				'deleted_at'        => null])
+				'detail_disease'    => 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, to'])
 			->seeInDatabase('diseases', [
 				'type_disease_id'   => $typeDiseaseC->id,
 				'treatment_disease' => false,
-				'detail_disease'    => '',
-				'deleted_at'        => null
+				'detail_disease'    => ''
 			]);
 	}
 }

@@ -19,7 +19,6 @@ class CreateExamsTable extends Migration
             $table->date('emission_exam');
             $table->date('expired_exam');
             $table->text('detail_exam');
-	        $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -2,13 +2,10 @@
 
 namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Address extends Eloquent
 {
-	use SoftDeletes;
-	
 	/**
 	 * @var array
 	 */

@@ -81,8 +81,7 @@ class EmployeeCreateCertificationTest extends TestCase
 				'type_certification_id'        => $this->typeCertification->id,
 				'institution_certification_id' => $this->institution->id,
 				'emission_certification'       => '2005-02-13',
-				'expired_certification'        => '2015-02-13',
-				'deleted_at'                   => null
+				'expired_certification'        => '2015-02-13'
 			]);
 	}
 	
@@ -112,20 +111,17 @@ class EmployeeCreateCertificationTest extends TestCase
 				'type_certification_id'        => $typeCertificationA->id,
 				'institution_certification_id' => $institutionA->id,
 				'emission_certification'       => '2005-02-13',
-				'expired_certification'        => '2015-02-13',
-				'deleted_at'                   => null])
+				'expired_certification'        => '2015-02-13'])
 			->seeInDatabase('certifications', [
 				'type_certification_id'        => $typeCertificationB->id,
 				'institution_certification_id' => $institutionB->id,
 				'emission_certification'       => '2010-01-24',
-				'expired_certification'        => '2015-01-24',
-				'deleted_at'                   => null])
+				'expired_certification'        => '2015-01-24'])
 			->seeInDatabase('certifications', [
 				'type_certification_id'        => $typeCertificationC->id,
 				'institution_certification_id' => $institutionC->id,
 				'emission_certification'       => '2013-06-09',
-				'expired_certification'        => '2015-02-08',
-				'deleted_at'                   => null
+				'expired_certification'        => '2015-02-08'
 			]);
 	}
 }

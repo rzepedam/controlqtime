@@ -76,8 +76,7 @@ class EmployeeCreateExamTest extends TestCase
 				'type_exam_id'  => $this->typeExam->id,
 				'emission_exam' => '2008-04-07',
 				'expired_exam'  => '2011-10-19',
-				'detail_exam'   => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-				'deleted_at'    => null
+				'detail_exam'   => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'
 			]);
 	}
 	
@@ -101,20 +100,17 @@ class EmployeeCreateExamTest extends TestCase
 				'type_exam_id'  => $typeExamA->id,
 				'emission_exam' => '2008-04-07',
 				'expired_exam'  => '2011-10-19',
-				'detail_exam'   => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-				'deleted_at'    => null])
+				'detail_exam'   => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'])
 			->seeInDatabase('exams', [
 				'type_exam_id'  => $typeExamB->id,
 				'emission_exam' => '2001-11-14',
 				'expired_exam'  => '2010-02-17',
-				'detail_exam'   => '',
-				'deleted_at'    => null])
+				'detail_exam'   => ''])
 			->seeInDatabase('exams', [
 				'type_exam_id'  => $typeExamC->id,
 				'emission_exam' => '2015-08-21',
 				'expired_exam'  => '2019-07-06',
-				'detail_exam'   => '',
-				'deleted_at'    => null
+				'detail_exam'   => ''
 			]);
 	}
 }

@@ -3,13 +3,10 @@
 namespace Controlqtime\Core\Entities;
 
 use Controlqtime\Core\Helpers\FormatField;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class FamilyResponsability extends Eloquent
 {
-	use SoftDeletes;
-	
     /**
      * @var array
      */

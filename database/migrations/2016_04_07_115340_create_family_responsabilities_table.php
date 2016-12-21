@@ -18,7 +18,6 @@ class CreateFamilyResponsabilitiesTable extends Migration
 	        $table->unsignedInteger('relationship_id')->nullable();
 	        $table->string('name_responsability', 120);
 	        $table->string('rut_responsability', 15);
-            $table->softDeletes();
 	        $table->timestamps();
         });
     }

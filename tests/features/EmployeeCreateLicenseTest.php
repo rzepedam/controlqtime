@@ -79,8 +79,7 @@ class EmployeeCreateLicenseTest extends TestCase
 				'emission_license'             => '2014-08-12',
 				'expired_license'              => '2019-08-17',
 				'is_donor'                     => true,
-				'detail_license'               => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m',
-				'deleted_at'                   => null
+				'detail_license'               => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m'
 			]);
 	}
 	
@@ -110,22 +109,19 @@ class EmployeeCreateLicenseTest extends TestCase
 				'emission_license'             => '2014-08-12',
 				'expired_license'              => '2019-08-17',
 				'is_donor'                     => true,
-				'detail_license'               => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m',
-				'deleted_at'                   => null])
+				'detail_license'               => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m'])
 			->seeInDatabase('professional_licenses', [
 				'type_professional_license_id' => $typeLicensesB->id,
 				'emission_license'             => '2010-05-11',
 				'expired_license'              => '2018-03-09',
 				'is_donor'                     => false,
-				'detail_license'               => 'Aenean m',
-				'deleted_at'                   => null])
+				'detail_license'               => 'Aenean m'])
 			->seeInDatabase('professional_licenses', [
 				'type_professional_license_id' => $typeLicensesC->id,
 				'emission_license'             => '2015-11-27',
 				'expired_license'              => '2016-10-10',
 				'is_donor'                     => false,
-				'detail_license'               => 'Aenean commodo ligula eget dolor.',
-				'deleted_at'                   => null
+				'detail_license'               => 'Aenean commodo ligula eget dolor.'
 			]);
 	}
 }

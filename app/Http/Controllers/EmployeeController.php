@@ -2,8 +2,6 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Entities\DetailSchoolStudy;
-use Controlqtime\Core\Entities\Image;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
@@ -531,22 +529,22 @@ class EmployeeController extends Controller
 			// $this->speciality->destroyImages($request->session()->get('id_delete_speciality'), 'Speciality');
 			$employee->deleteSpecialities(Session::get('id_delete_speciality'));
 			$employee->createSpecialities(Session::get('step2_update'));
-			// $this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
-			// $this->professionalLicense->destroyArrayId($request->session()->get('id_delete_professional_license_update'), 'ProfessionalLicense');
+			// $this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license'), 'ProfessionalLicense');
+			$employee->deleteProfessionalLicenses(Session::get('id_delete_professional_license'));
 			$employee->createLicenses(Session::get('step2_update'));
 			
 			// Update Step3 data
 			// $this->disability->destroyImages($request->get('id_delete_disability'), 'Disability');
-			// $this->disability->destroyArrayId($request->get('id_delete_disability'), 'Disability');
+			$employee->deleteDisabilities($request->get('id_delete_disability'));
 			$employee->createDisabilities($request->all());
 			// $this->disease->destroyImages($request->get('id_delete_disease'), 'Disease');
-			// $this->disease->destroyArrayId($request->get('id_delete_disease'), 'Disease');
+			$employee->deleteDiseases($request->get('id_delete_disease'));
 			$employee->createDiseases($request->all());
 			// $this->exam->destroyImages($request->get('id_delete_exam'), 'Exam');
-			// $this->exam->destroyArrayId($request->get('id_delete_exam'), 'Exam');
+			$employee->deleteExams($request->get('id_delete_exam'));
 			$employee->createExams($request->all());
 			// $this->familyResponsability->destroyImages($request->get('id_delete_family_responsability'), 'FamilyResponsability');
-			// $this->familyResponsability->destroyArrayId($request->get('id_delete_family_responsability'), 'FamilyResponsability');
+			$employee->deleteFamilyResponsabilities($request->get('id_delete_family_responsability'));
 			$employee->createFamilyResponsabilities($request->all());
 			$this->activateEmployee->checkStateUpdateEmployee($id);
 			/* @todo Fixed $user value. Actually is boolean not object */
@@ -597,13 +595,15 @@ class EmployeeController extends Controller
 		{
 			$employee = $this->employee->findOrFail($id);
 			$this->activateEmployee->saveStateDisableEmployee($employee);
-			// $employee->address->delete();
-			$employee->delete($id);
+			$employee->delete();
 			
 			DB::commit();
 		} catch ( Exception $e )
 		{
-			DB::rollback();
+			$this->log->error("Error delete Employee: " . $e->getMessage());
+			DB::rollBack();
+			
+			return response()->json(['status' => false]);
 		}
 		
 		return redirect()->route('employees.index');
@@ -788,7 +788,7 @@ class EmployeeController extends Controller
 		$request->session()->put('id_delete_study', $request->get('id_delete_study'));
 		$request->session()->put('id_delete_certification', $request->get('id_delete_certification'));
 		$request->session()->put('id_delete_speciality', $request->get('id_delete_speciality'));
-		$request->session()->put('id_delete_professional_license_update', $request->get('id_delete_professional_license'));
+		$request->session()->put('id_delete_professional_license', $request->get('id_delete_professional_license'));
 		
 		return response()->json([
 			'status' => true
@@ -807,7 +807,7 @@ class EmployeeController extends Controller
 		$request->session()->forget('id_delete_study');
 		$request->session()->forget('id_delete_certification');
 		$request->session()->forget('id_delete_speciality');
-		$request->session()->forget('id_delete_professional_license_update');
+		$request->session()->forget('id_delete_professional_license');
 	}
 	
 }

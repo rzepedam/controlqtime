@@ -242,8 +242,7 @@ class EmployeeCreateTest extends TestCase
 				'email_employee'    => 'marcelocandia@gmail.com',
 				'url'               => null,
 				'state'             => 'disable',
-				'condition'         => 'unavailable',
-				'deleted_at'        => null])
+				'condition'         => 'unavailable'])
 			->seeInDatabase('users', [
 				'email' => 'marcelocandia@gmail.com'])
 			->seeInDatabase('addresses', [
@@ -273,37 +272,31 @@ class EmployeeCreateTest extends TestCase
 				'type_certification_id'        => $this->typeCertification->id,
 				'institution_certification_id' => $this->institution->id,
 				'emission_certification'       => '2005-02-13',
-				'expired_certification'        => '2015-02-13',
-				'deleted_at'                   => null])
+				'expired_certification'        => '2015-02-13'])
 			->seeInDatabase('specialities', [
 				'type_speciality_id'        => $this->typeSpeciality->id,
 				'institution_speciality_id' => $this->institution->id,
 				'emission_speciality'       => '2009-11-18',
-				'expired_speciality'        => '2017-04-25',
-				'deleted_at'                => null])
+				'expired_speciality'        => '2017-04-25'])
 			->seeInDatabase('professional_licenses', [
 				'type_professional_license_id' => $this->typeProfessionalLicense->id,
 				'emission_license'             => '2014-08-12',
 				'expired_license'              => '2019-08-17',
 				'is_donor'                     => true,
-				'detail_license'               => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m',
-				'deleted_at'                   => null])
+				'detail_license'               => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m'])
 			->seeInDatabase('disabilities', [
 				'type_disability_id'   => $this->typeDisability->id,
 				'treatment_disability' => true,
-				'detail_disability'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-				'deleted_at'           => null])
+				'detail_disability'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'])
 			->seeInDatabase('diseases', [
 				'type_disease_id'   => $this->typeDisease->id,
 				'treatment_disease' => true,
-				'detail_disease'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-				'deleted_at'        => null])
+				'detail_disease'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'])
 			->seeInDatabase('exams', [
 				'type_exam_id'  => $this->typeExam->id,
 				'emission_exam' => '2008-04-07',
 				'expired_exam'  => '2011-10-19',
-				'detail_exam'   => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-				'deleted_at'    => null])
+				'detail_exam'   => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit'])
 			->seeInDatabase('family_responsabilities', [
 				'name_responsability' => 'José Miguel Escobar Sepúlveda',
 				'rut_responsability'  => '15257414-2',

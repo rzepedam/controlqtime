@@ -21,6 +21,7 @@ class EmployeeEditContactTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
+		
 		$this->relationship = factory(Relationship::class)->create();
 		
 		$this->step1_update = [
@@ -63,7 +64,6 @@ class EmployeeEditContactTest extends TestCase
 		Session::put('id_delete_contact_update', '');
 		
 		$this->contact = $this->employee->contactEmployees()->create([
-			'id_contact'              => 0,
 			'contact_relationship_id' => $this->relationship->id,
 			'name_contact'            => 'José Miguel Osorio Sepúlveda',
 			'email_contact'           => 'joseosorio@gmail.com',

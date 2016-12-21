@@ -82,7 +82,6 @@ class EmployeeEditStudyTest extends TestCase
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		
 		$this->studySchool = $this->employee->studies()->create([
-			'id_study'       => 0,
 			'degree_id'      => $this->degreeDetailSchool->id,
 			'date_obtention' => '11-08-2009'
 		]);
@@ -92,7 +91,6 @@ class EmployeeEditStudyTest extends TestCase
 		]);
 		
 		$this->studyTechnical = $this->employee->studies()->create([
-			'id_study'       => 0,
 			'degree_id'      => $this->degreeDetailTechnical->id,
 			'date_obtention' => '15-05-1994'
 		]);

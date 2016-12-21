@@ -95,8 +95,7 @@ class EmployeeEditCertificationTest extends TestCase
 				'type_certification_id'        => $typeCertification->id,
 				'institution_certification_id' => $institution->id,
 				'emission_certification'       => '2010-08-12',
-				'expired_certification'        => '2020-07-28',
-				'deleted_at'                   => null
+				'expired_certification'        => '2020-07-28'
 			]);
 	}
 }

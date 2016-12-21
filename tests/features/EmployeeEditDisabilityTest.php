@@ -21,6 +21,7 @@ class EmployeeEditDisabilityTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
+		
 		$this->typeDisability = factory(TypeDisability::class)->create();
 		
 		$this->step1_update = [
@@ -62,7 +63,6 @@ class EmployeeEditDisabilityTest extends TestCase
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		
 		$this->disability = $this->employee->disabilities()->create([
-			'id_disability'        => 0,
 			'type_disability_id'   => $this->typeDisability->id,
 			'treatment_disability' => true,
 			'detail_disability'    => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
@@ -87,8 +87,7 @@ class EmployeeEditDisabilityTest extends TestCase
 				'employee_id'          => $this->employee->id,
 				'type_disability_id'   => $typeDisability->id,
 				'treatment_disability' => false,
-				'detail_disability'    => 'Lorem',
-				'deleted_at'           => null
+				'detail_disability'    => 'Lorem'
 			]);
 	}
 }

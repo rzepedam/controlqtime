@@ -20,7 +20,6 @@ class CreateProfessionalLicensesTable extends Migration
             $table->date('expired_license');
             $table->boolean('is_donor')->default(false);
             $table->string('detail_license');
-	        $table->softDeletes();
             $table->timestamps();
         });
     }

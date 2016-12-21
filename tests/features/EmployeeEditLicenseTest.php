@@ -21,6 +21,7 @@ class EmployeeEditLicenseTest extends TestCase
 	{
 		parent::setUp();
 		$this->signIn();
+		
 		$this->typeProfessionalLicense = factory(TypeProfessionalLicense::class)->create();
 		
 		$this->step1_update = [
@@ -61,7 +62,6 @@ class EmployeeEditLicenseTest extends TestCase
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		
 		$this->license = $this->employee->professionalLicenses()->create([
-			'id_professional_license'      => 0,
 			'type_professional_license_id' => $this->typeProfessionalLicense->id,
 			'emission_license'             => '08-10-2000',
 			'expired_license'              => '08-10-2007',
@@ -94,8 +94,7 @@ class EmployeeEditLicenseTest extends TestCase
 				'emission_license'             => '2014-04-27',
 				'expired_license'              => '2022-02-15',
 				'is_donor'                     => false,
-				'detail_license'               => '',
-				'deleted_at'                   => null
+				'detail_license'               => ''
 			]);
 	}
 }

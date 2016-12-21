@@ -19,7 +19,6 @@ class CreateDetailAddressLegalEmployeesTable extends Migration
 	        $table->string('depto', 5);
 	        $table->string('block', 5);
 	        $table->string('num_home', 5);
-	        $table->softDeletes();
         });
     }
 

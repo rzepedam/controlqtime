@@ -18,7 +18,6 @@ class CreateDiseasesTable extends Migration
             $table->unsignedInteger('type_disease_id')->nullable();
             $table->boolean('treatment_disease')->default(false);
             $table->text('detail_disease');
-	        $table->softDeletes();
             $table->timestamps();
         });
     }
