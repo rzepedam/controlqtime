@@ -72,7 +72,7 @@ class EmployeeDeleteLicenseTest extends TestCase
 	
 	function test_delete_a_license_employee()
 	{
-		Session::put('id_delete_professional_license', [$this->license->id]);
+		Session::put('id_delete_professional_license', json_encode([$this->license->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('professional_licenses', [
@@ -93,7 +93,7 @@ class EmployeeDeleteLicenseTest extends TestCase
 			'imagesable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense'
 		]);
 		
-		Session::put('id_delete_professional_license', [$this->license->id]);
+		Session::put('id_delete_professional_license', json_encode([$this->license->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('professional_licenses', [
@@ -126,7 +126,7 @@ class EmployeeDeleteLicenseTest extends TestCase
 			'detail_license'               => 'Lorem ipsum'
 		]);
 		
-		Session::put('id_delete_professional_license', [$this->license->id, $license->id]);
+		Session::put('id_delete_professional_license', json_encode([$this->license->id, $license->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('professional_licenses', [
@@ -170,7 +170,7 @@ class EmployeeDeleteLicenseTest extends TestCase
 			'imagesable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense'
 		]);
 		
-		Session::put('id_delete_professional_license', [$this->license->id, $license->id]);
+		Session::put('id_delete_professional_license', json_encode([$this->license->id, $license->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('professional_licenses', [

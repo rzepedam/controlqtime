@@ -4,6 +4,7 @@ namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
 use Jenssegers\Date\Date;
+use Illuminate\Support\Facades\Storage;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
@@ -78,9 +79,15 @@ class Employee extends Eloquent
 	 */
 	public function deleteContacts($request)
 	{
-		if ( ! empty($request) )
+		$decodeRequest = json_decode($request);
+		
+		if ( ! empty($decodeRequest) )
 		{
-			$this->contactEmployees()->whereIn('id', $request)->delete();
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
+			{
+				$contact = $this->contactEmployees()->findOrFail($decodeRequest[$i]);
+				$contact->delete();
+			}
 		}
 	}
 	
@@ -115,9 +122,15 @@ class Employee extends Eloquent
 	 */
 	public function deleteFamilyRelationships($request)
 	{
+		$decodeRequest = json_decode($request);
+		
 		if ( ! empty($request) )
 		{
-			$this->familyRelationships()->whereIn('id', $request)->delete();
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
+			{
+				$familyRelationship = $this->familyRelationships()->findOrFail($decodeRequest[$i]);
+				$familyRelationship->delete();
+			}
 		}
 	}
 	
@@ -149,11 +162,13 @@ class Employee extends Eloquent
 	 */
 	public function deleteStudies($request)
 	{
-		if ( ! empty($request) )
+		$decodeRequest = json_decode($request);
+		
+		if ( ! empty($decodeRequest) )
 		{
-			for ( $i = 0; $i < count($request); $i++ )
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
 			{
-				$study = $this->studies()->findOrFail($request[$i]);
+				$study = $this->studies()->findOrFail($decodeRequest[$i]);
 				
 				switch ( $study->degree_id )
 				{
@@ -172,8 +187,9 @@ class Employee extends Eloquent
 						$study->detailCollegeStudy()->delete();
 						break;
 				}
+				
+				$study->delete();
 			}
-			$this->studies()->whereIn('id', $request)->delete();
 		}
 	}
 	
@@ -233,15 +249,16 @@ class Employee extends Eloquent
 	 */
 	public function deleteCertifications($request)
 	{
-		if ( ! empty($request) )
+		$decodeRequest = json_decode($request);
+		
+		if ( ! empty($decodeRequest) )
 		{
-			for ( $i = 0; $i < count($request); $i++ )
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
 			{
-				$certification = $this->certifications()->findOrFail($request[$i]);
+				$certification = $this->certifications()->findOrFail($decodeRequest[$i]);
 				$certification->imagesable()->delete();
+				$certification->delete();
 			}
-			
-			$this->certifications()->whereIn('id', $request)->delete();
 		}
 	}
 	
@@ -275,15 +292,16 @@ class Employee extends Eloquent
 	 */
 	public function deleteSpecialities($request)
 	{
-		if ( ! empty($request) )
+		$decodeRequest = json_decode($request);
+		
+		if ( ! empty($decodeRequest) )
 		{
-			for ( $i = 0; $i < count($request); $i++ )
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
 			{
-				$speciality = $this->specialities()->findOrFail($request[$i]);
+				$speciality = $this->specialities()->findOrFail($decodeRequest[$i]);
 				$speciality->imagesable()->delete();
+				$speciality->delete();
 			}
-			
-			$this->specialities()->whereIn('id', $request)->delete();
 		}
 	}
 	
@@ -317,15 +335,16 @@ class Employee extends Eloquent
 	 */
 	public function deleteProfessionalLicenses($request)
 	{
-		if ( ! empty($request) )
+		$decodeRequest = json_decode($request);
+		
+		if ( ! empty($decodeRequest) )
 		{
-			for ( $i = 0; $i < count($request); $i++ )
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
 			{
-				$professionalLicense = $this->professionalLicenses()->findOrFail($request[$i]);
+				$professionalLicense = $this->professionalLicenses()->findOrFail($decodeRequest[$i]);
 				$professionalLicense->imagesable()->delete();
+				$professionalLicense->delete();
 			}
-			
-			$this->professionalLicenses()->whereIn('id', $request)->delete();
 		}
 	}
 	
@@ -360,15 +379,16 @@ class Employee extends Eloquent
 	 */
 	public function deleteDisabilities($request)
 	{
-		if ( ! empty($request) )
+		$decodeRequest = json_decode($request);
+		
+		if ( ! empty($decodeRequest) )
 		{
-			for ( $i = 0; $i < count($request); $i++ )
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
 			{
-				$disability = $this->disabilities()->findOrFail($request[$i]);
+				$disability = $this->disabilities()->findOrFail($decodeRequest[$i]);
 				$disability->imagesable()->delete();
+				$disability->delete();
 			}
-			
-			$this->disabilities()->whereIn('id', $request)->delete();
 		}
 	}
 	
@@ -401,15 +421,16 @@ class Employee extends Eloquent
 	 */
 	public function deleteDiseases($request)
 	{
-		if ( ! empty($request) )
+		$decodeRequest = json_decode($request);
+		
+		if ( ! empty($decodeRequest) )
 		{
-			for ( $i = 0; $i < count($request); $i++ )
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
 			{
-				$disease = $this->diseases()->findOrFail($request[$i]);
+				$disease = $this->diseases()->findOrFail($decodeRequest[$i]);
 				$disease->imagesable()->delete();
+				$disease->delete();
 			}
-			
-			$this->diseases()->whereIn('id', $request)->delete();
 		}
 	}
 	
@@ -442,15 +463,16 @@ class Employee extends Eloquent
 	 */
 	public function deleteExams($request)
 	{
-		if ( ! empty($request) )
+		$decodeRequest = json_decode($request);
+		
+		if ( ! empty($decodeRequest) )
 		{
-			for ( $i = 0; $i < count($request); $i++ )
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
 			{
-				$exam = $this->exams()->findOrFail($request[$i]);
+				$exam = $this->exams()->findOrFail($decodeRequest[$i]);
 				$exam->imagesable()->delete();
+				$exam->delete();
 			}
-			
-			$this->exams()->whereIn('id', $request)->delete();
 		}
 	}
 	
@@ -480,19 +502,20 @@ class Employee extends Eloquent
 	}
 	
 	/**
-	 * @param $request 'id_delete_family_responsability'
+	 * @param $request
 	 */
 	public function deleteFamilyResponsabilities($request)
 	{
-		if ( ! empty($request) )
+		$decodeRequest = json_decode($request);
+		
+		if ( ! empty($decodeRequest) )
 		{
-			for ( $i = 0; $i < count($request); $i++ )
+			for ( $i = 0; $i < count($decodeRequest); $i++ )
 			{
-				$familyResponsability = $this->familyResponsabilities()->findOrFail($request[$i]);
+				$familyResponsability = $this->familyResponsabilities()->findOrFail($decodeRequest[$i]);
 				$familyResponsability->imagesable()->delete();
+				$familyResponsability->delete();
 			}
-			
-			$this->familyResponsabilities()->whereIn('id', $request)->delete();
 		}
 	}
 	

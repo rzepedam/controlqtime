@@ -77,7 +77,6 @@
                         </td>
                         <td>
                             {{ $pieceVehicle->name }}
-                            <input type="hidden" name="piece_vehicle_id[]" value="{{ $pieceVehicle->id }}">
                         </td>
                         <td>
                         <span class="checkbox-custom checkbox-primary">

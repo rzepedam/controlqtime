@@ -71,7 +71,7 @@ class EmployeeDeleteFamilyResponsabilityTest extends TestCase
 	function test_delete_a_family_responsability_employee()
 	{
 		$this->step3_update += [
-			'id_delete_family_responsability' => [$this->familyResponsability->id]
+			'id_delete_family_responsability' => json_encode([$this->familyResponsability->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -92,7 +92,7 @@ class EmployeeDeleteFamilyResponsabilityTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_family_responsability' => [$this->familyResponsability->id]
+			'id_delete_family_responsability' => json_encode([$this->familyResponsability->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -123,7 +123,7 @@ class EmployeeDeleteFamilyResponsabilityTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_family_responsability' => [$this->familyResponsability->id, $familyResponsability->id]
+			'id_delete_family_responsability' => json_encode([$this->familyResponsability->id, $familyResponsability->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -153,7 +153,7 @@ class EmployeeDeleteFamilyResponsabilityTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_family_responsability' => [$this->familyResponsability->id, $familyResponsability->id]
+			'id_delete_family_responsability' => json_encode([$this->familyResponsability->id, $familyResponsability->id])
 		];
 		
 		$image1 = factory(\Controlqtime\Core\Entities\Image::class)->create([

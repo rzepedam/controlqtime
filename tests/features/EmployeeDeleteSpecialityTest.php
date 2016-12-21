@@ -75,7 +75,7 @@ class EmployeeDeleteSpecialityTest extends TestCase
 	
 	function test_delete_a_speciality_employee()
 	{
-		Session::put('id_delete_speciality', [$this->speciality->id]);
+		Session::put('id_delete_speciality', json_encode([$this->speciality->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('specialities', [
@@ -95,7 +95,7 @@ class EmployeeDeleteSpecialityTest extends TestCase
 			'imagesable_type' => 'Controlqtime\Core\Entities\Speciality'
 		]);
 		
-		Session::put('id_delete_speciality', [$this->speciality->id]);
+		Session::put('id_delete_speciality', json_encode([$this->speciality->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('specialities', [
@@ -127,7 +127,7 @@ class EmployeeDeleteSpecialityTest extends TestCase
 			'expired_speciality'        => '27-05-2022'
 		]);
 		
-		Session::put('id_delete_speciality', [$this->speciality->id, $speciality->id]);
+		Session::put('id_delete_speciality', json_encode([$this->speciality->id, $speciality->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('specialities', [
@@ -169,7 +169,7 @@ class EmployeeDeleteSpecialityTest extends TestCase
 			'imagesable_type' => 'Controlqtime\Core\Entities\Speciality'
 		]);
 		
-		Session::put('id_delete_speciality', [$this->speciality->id, $speciality->id]);
+		Session::put('id_delete_speciality', json_encode([$this->speciality->id, $speciality->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('specialities', [

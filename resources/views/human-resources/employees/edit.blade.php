@@ -529,7 +529,7 @@
                     $.ajax({
                         type: 'PUT',
                         url: url,
-                        data: $('#step1').serialize() + "&full_name=" + full_name + "&count_contacts=" + count_contacts + "&count_family_relationships=" + count_family_relationships + "&id_delete_contact=" + id_delete_contact + "&id_delete_family_relationship=" + id_delete_family_relationship,
+                        data: $('#step1').serialize() + "&full_name=" + full_name + "&count_contacts=" + count_contacts + "&count_family_relationships=" + count_family_relationships + "&id_delete_contact=" + JSON.stringify(id_delete_contact) + "&id_delete_family_relationship=" + JSON.stringify(id_delete_family_relationship),
                         async: false,
                         dataType: "json",
                         success: function (response) {
@@ -571,7 +571,7 @@
                     $.ajax({
                         type: 'PUT',
                         url: url,
-                        data: $('#step2').serialize() + "&count_studies=" + count_studies + "&count_certifications=" + count_certifications + "&count_specialities=" + count_specialities + "&count_professional_licenses=" + count_professional_licenses + "&id_delete_study=" + id_delete_study + "&id_delete_certification=" + id_delete_certification + "&id_delete_speciality=" + id_delete_speciality + "&id_delete_professional_license=" + id_delete_professional_license,
+                        data: $('#step2').serialize() + "&count_studies=" + count_studies + "&count_certifications=" + count_certifications + "&count_specialities=" + count_specialities + "&count_professional_licenses=" + count_professional_licenses + "&id_delete_study=" + JSON.stringify(id_delete_study) + "&id_delete_certification=" + JSON.stringify(id_delete_certification) + "&id_delete_speciality=" + JSON.stringify(id_delete_speciality) + "&id_delete_professional_license=" + JSON.stringify(id_delete_professional_license),
                         async: false,
                         dataType: "json",
                         success: function (response) {
@@ -617,7 +617,7 @@
                     $.ajax({
                         type: 'POST',
                         url: url,
-                        data: $('#step3').serialize() + "&count_certifications=" + count_certifications + "&count_specialities=" + count_specialities + "&count_professional_licenses=" + count_professional_licenses + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_exams=" + count_exams + "&count_family_responsabilities=" + count_family_responsabilities + "&id_delete_disability=" + id_delete_disability + "&id_delete_disease=" + id_delete_disease + "&id_delete_exam=" + id_delete_exam + "&id_delete_family_responsability=" + id_delete_family_responsability,
+                        data: $('#step3').serialize() + "&count_certifications=" + count_certifications + "&count_specialities=" + count_specialities + "&count_professional_licenses=" + count_professional_licenses + "&count_disabilities=" + count_disabilities + "&count_diseases=" + count_diseases + "&count_exams=" + count_exams + "&count_family_responsabilities=" + count_family_responsabilities + "&id_delete_disability=" + JSON.stringify(id_delete_disability) + "&id_delete_disease=" + JSON.stringify(id_delete_disease) + "&id_delete_exam=" + JSON.stringify(id_delete_exam) + "&id_delete_family_responsability=" + JSON.stringify(id_delete_family_responsability),
                         async: false,
                         dataType: "json",
                         success: function (response) {

@@ -49,7 +49,7 @@ class CheckVehicleFormRequest extends SanitizedRequest
 				
 				foreach (range(0, count(Request::get('state_piece_vehicle_id')) - 1) as $index)
 				{
-					$rules['state_piece_vehicle_id.' . $index] = 'required|regex:/[0-9 -()+]+$/';
+					$rules['state_piece_vehicle_id.' . $index] = 'required';
 				}
 				
 				return $rules;
@@ -63,7 +63,7 @@ class CheckVehicleFormRequest extends SanitizedRequest
 				
 				foreach (range(0, count(Request::get('state_piece_vehicle_id')) - 1) as $index)
 				{
-					$rules['state_piece_vehicle_id.' . $index] = 'required|regex:/[0-9 -()+]+$/';
+					$rules['state_piece_vehicle_id.' . $index] = 'required';
 				}
 				
 				return $rules;

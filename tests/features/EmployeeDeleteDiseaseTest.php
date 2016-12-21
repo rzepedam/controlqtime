@@ -71,7 +71,7 @@ class EmployeeDeleteDiseaseTest extends TestCase
 	function test_delete_a_disease_employee()
 	{
 		$this->step3_update += [
-			'id_delete_disease' => [$this->disease->id]
+			'id_delete_disease' => json_encode([$this->disease->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -92,7 +92,7 @@ class EmployeeDeleteDiseaseTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_disease' => [$this->disease->id]
+			'id_delete_disease' => json_encode([$this->disease->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -123,7 +123,7 @@ class EmployeeDeleteDiseaseTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_disease' => [$this->disease->id, $disease->id]
+			'id_delete_disease' => json_encode([$this->disease->id, $disease->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -153,7 +153,7 @@ class EmployeeDeleteDiseaseTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_disease' => [$this->disease->id, $disease->id]
+			'id_delete_disease' => json_encode([$this->disease->id, $disease->id])
 		];
 		
 		$image1 = factory(\Controlqtime\Core\Entities\Image::class)->create([

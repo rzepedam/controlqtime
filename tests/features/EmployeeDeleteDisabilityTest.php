@@ -71,7 +71,7 @@ class EmployeeDeleteDisabilityTest extends TestCase
 	function test_delete_a_disability_employee()
 	{
 		$this->step3_update += [
-			'id_delete_disability' => [$this->disability->id]
+			'id_delete_disability' => json_encode([$this->disability->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -92,7 +92,7 @@ class EmployeeDeleteDisabilityTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_disability' => [$this->disability->id]
+			'id_delete_disability' => json_encode([$this->disability->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -123,7 +123,7 @@ class EmployeeDeleteDisabilityTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_disability' => [$this->disability->id, $disability->id]
+			'id_delete_disability' => json_encode([$this->disability->id, $disability->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -163,7 +163,7 @@ class EmployeeDeleteDisabilityTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_disability' => [$this->disability->id, $disability->id]
+			'id_delete_disability' => json_encode([$this->disability->id, $disability->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)

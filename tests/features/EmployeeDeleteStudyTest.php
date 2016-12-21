@@ -113,7 +113,7 @@ class EmployeeDeleteStudyTest extends TestCase
 	
 	function test_delete_a_school_study_employee()
 	{
-		Session::put('id_delete_study', [$this->studySchool->id]);
+		Session::put('id_delete_study', json_encode([$this->studySchool->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('studies', [
@@ -141,7 +141,7 @@ class EmployeeDeleteStudyTest extends TestCase
 			'name_institution' => 'Colegio Alcántara'
 		]);
 		
-		Session::put('id_delete_study', [$this->studySchool->id, $studySchool->id]);
+		Session::put('id_delete_study', json_encode([$this->studySchool->id, $studySchool->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('studies', [
@@ -167,7 +167,7 @@ class EmployeeDeleteStudyTest extends TestCase
 	
 	function test_delete_a_technical_study_employee()
 	{
-		Session::put('id_delete_study', [$this->studyTechnical->id]);
+		Session::put('id_delete_study', json_encode([$this->studyTechnical->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('studies', [
@@ -195,7 +195,7 @@ class EmployeeDeleteStudyTest extends TestCase
 			'name_institution' => 'PA Los Andes'
 		]);
 		
-		Session::put('id_delete_study', [$this->studyTechnical->id, $studyTechnical->id]);
+		Session::put('id_delete_study', json_encode([$this->studyTechnical->id, $studyTechnical->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('studies', [
@@ -223,7 +223,7 @@ class EmployeeDeleteStudyTest extends TestCase
 	
 	function test_delete_a_college_study_employee()
 	{
-		Session::put('id_delete_study', [$this->studyCollege->id]);
+		Session::put('id_delete_study', json_encode([$this->studyCollege->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('studies', [
@@ -253,7 +253,7 @@ class EmployeeDeleteStudyTest extends TestCase
 			'institution_study_id' => $this->institution->id,
 		]);
 		
-		Session::put('id_delete_study', [$this->studyCollege->id, $studyCollege->id]);
+		Session::put('id_delete_study', json_encode([$this->studyCollege->id, $studyCollege->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('studies', [

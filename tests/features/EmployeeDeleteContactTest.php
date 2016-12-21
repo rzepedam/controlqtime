@@ -71,7 +71,7 @@ class EmployeeDeleteContactTest extends TestCase
 	
 	function test_delete_a_contact_employee()
 	{
-		Session::put('id_delete_contact', [$this->contact->id]);
+		Session::put('id_delete_contact', json_encode([$this->contact->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('contact_employees', [
@@ -94,7 +94,7 @@ class EmployeeDeleteContactTest extends TestCase
 			'tel_contact'             => '+56979811220',
 		]);
 		
-		Session::put('id_delete_contact', [$this->contact->id, $contact->id]);
+		Session::put('id_delete_contact', json_encode([$this->contact->id, $contact->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('contact_employees', [

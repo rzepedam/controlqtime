@@ -75,7 +75,7 @@ class EmployeeDeleteCertificationTest extends TestCase
 	
 	function test_delete_a_certification_employee()
 	{
-		Session::put('id_delete_certification', [$this->certification->id]);
+		Session::put('id_delete_certification', json_encode([$this->certification->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('certifications', [
@@ -95,7 +95,7 @@ class EmployeeDeleteCertificationTest extends TestCase
 			'imagesable_type' => 'Controlqtime\Core\Entities\Certification'
 		]);
 		
-		Session::put('id_delete_certification', [$this->certification->id]);
+		Session::put('id_delete_certification', json_encode([$this->certification->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('certifications', [
@@ -127,7 +127,7 @@ class EmployeeDeleteCertificationTest extends TestCase
 			'expired_certification'        => '31-01-2007'
 		]);
 		
-		Session::put('id_delete_certification', [$this->certification->id, $certification->id]);
+		Session::put('id_delete_certification', json_encode([$this->certification->id, $certification->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('certifications', [
@@ -169,7 +169,7 @@ class EmployeeDeleteCertificationTest extends TestCase
 			'imagesable_type' => 'Controlqtime\Core\Entities\Certification'
 		]);
 		
-		Session::put('id_delete_certification', [$this->certification->id, $certification->id]);
+		Session::put('id_delete_certification', json_encode([$this->certification->id, $certification->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('certifications', [

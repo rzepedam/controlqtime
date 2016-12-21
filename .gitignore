@@ -1,6 +1,7 @@
 /vendor
 /node_modules
 .env
+.env.codeship
 .idea
 resources/assets/bower
 public/build

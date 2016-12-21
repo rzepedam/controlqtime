@@ -72,7 +72,7 @@ class EmployeeDeleteExamTest extends TestCase
 	function test_delete_a_exam_employee()
 	{
 		$this->step3_update += [
-			'id_delete_exam' => [$this->exam->id]
+			'id_delete_exam' => json_encode([$this->exam->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -94,7 +94,7 @@ class EmployeeDeleteExamTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_exam' => [$this->exam->id]
+			'id_delete_exam' => json_encode([$this->exam->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -127,7 +127,7 @@ class EmployeeDeleteExamTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_exam' => [$this->exam->id, $exam->id]
+			'id_delete_exam' => json_encode([$this->exam->id, $exam->id])
 		];
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
@@ -160,7 +160,7 @@ class EmployeeDeleteExamTest extends TestCase
 		]);
 		
 		$this->step3_update += [
-			'id_delete_exam' => [$this->exam->id, $exam->id]
+			'id_delete_exam' => json_encode([$this->exam->id, $exam->id])
 		];
 		
 		$image1 = factory(\Controlqtime\Core\Entities\Image::class)->create([

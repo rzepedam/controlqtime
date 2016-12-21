@@ -69,7 +69,7 @@ class EmployeeDeleteFamilyRelationshipTest extends TestCase
 	
 	function test_delete_a_family_relationship()
 	{
-		Session::put('id_delete_family_relationship', [$this->familyRelationship->id]);
+		Session::put('id_delete_family_relationship', json_encode([$this->familyRelationship->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('family_relationships', [
@@ -90,7 +90,7 @@ class EmployeeDeleteFamilyRelationshipTest extends TestCase
 			'employee_family_id' => $employee->id
 		]);
 		
-		Session::put('id_delete_family_relationship', [$this->familyRelationship->id, $familyRelationship->id]);
+		Session::put('id_delete_family_relationship', json_encode([$this->familyRelationship->id, $familyRelationship->id]));
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->dontSeeInDatabase('family_relationships', [
