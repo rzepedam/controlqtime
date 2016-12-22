@@ -4,30 +4,37 @@ namespace Controlqtime\Http\Requests\Forms;
 
 use Controlqtime\Http\Requests\Request;
 
-abstract class SanitizedRequest extends Request {
-
+abstract class SanitizedRequest extends Request
+{
 	private $clean = false;
-
+	
 	public function all()
 	{
-		Request::merge(['rut' => str_replace('.', '', Request::get('rut'))]);
+		if (Request::route()->getName() == 'step1')
+		{
+			Request::merge(['rut' => str_replace('.', '', Request::get('rut'))]);
+		}
+		
 		return $this->sanitize(parent::all());
 	}
-
+	
 	protected function sanitize(Array $inputs)
 	{
 		if ( $this->clean )
+		{
 			return $inputs;
-
-		foreach ($inputs as $i => $item)
+		}
+		
+		foreach ( $inputs as $i => $item )
 		{
 			if ( is_string($item) )
-				$inputs[ $i ] = trim($item);
+			{
+				$inputs[$i] = trim($item);
+			}
 		}
-
+		
 		$this->replace($inputs);
 		$this->clean = true;
-
 		return $inputs;
 	}
 }

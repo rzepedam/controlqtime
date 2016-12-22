@@ -13,7 +13,7 @@ $('#btnSubmit').click(function (e) {
             if (response.status) {
                 window.location.href = response.url;
             } else {
-                swal("Oops", "Ha ocurrido un error. No es posible conectar con el servidor.", "error");
+                alert("Oops, ha ocurrido un error. No es posible conectar con el servidor.");
             }
         }).fail(function (response) {
             button.removeClass('btn-success').html('<i class="fa fa-floppy-o"></i> Guardar');

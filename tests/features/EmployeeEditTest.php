@@ -160,7 +160,7 @@ class EmployeeEditTest extends TestCase
 			'region_id'                  => $region->id,
 			'province_id'                => $province->id,
 			'commune_id'                 => $commune->id,
-			'phone1'                     => '+569112233445',
+			'phone1'                     => '+56974155784',
 			'phone2'                     => '221122334',
 			'email_employee'             => 'test@gmail.com',
 			'count_contacts'             => 0,
@@ -215,7 +215,7 @@ class EmployeeEditTest extends TestCase
 			'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 			'address'          => 'José Miguel Carrera 1391. Villa San Alberto',
 			'commune_id'       => $commune->id,
-			'phone1'           => '+569112233445',
+			'phone1'           => '+56974155784',
 			'phone2'           => '221122334'
 		]);
 		

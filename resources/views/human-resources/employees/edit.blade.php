@@ -2,9 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
     <link rel="stylesheet" href="{{ elixir('css/human-resources/employees/create-edit-custom-employees.css') }}">
-
 @stop
 
 @section('title_header') Editar Trabajador: <span class="text-primary">{{ $employee->id }}</span> @stop

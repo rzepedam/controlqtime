@@ -148,7 +148,7 @@ class ContractController extends Controller
 	public function create()
 	{
 		$companies            = $this->company->enabled()->pluck('firm_name', 'id');
-		$employees            = $this->employee->enabled()->pluck('full_name', 'id');
+		$employees            = $this->employee->pluck('full_name', 'id');
 		$positions            = $this->position->pluck('name', 'id');
 		$areas                = $this->area->pluck('name', 'id');
 		$numHours             = $this->numHour->pluck('name', 'id');

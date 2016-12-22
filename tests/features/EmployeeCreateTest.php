@@ -67,7 +67,7 @@ class EmployeeCreateTest extends TestCase
 			'pension_id'        => $this->pension->id,
 			'address'           => 'Vicuña Mackenna 2209',
 			'commune_id'        => $this->commune->id,
-			'phone1'            => '+56988102910',
+			'phone1'            => '+56974155784',
 			'email_employee'    => 'marcelocandia@gmail.com',
 		];
 		
@@ -143,7 +143,7 @@ class EmployeeCreateTest extends TestCase
 			'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 			'address'          => 'Vicuña Mackenna 2209',
 			'commune_id'       => 1,
-			'phone1'           => '+56988102910',
+			'phone1'           => '+56974155784',
 			'phone2'           => ''
 		]);
 		
@@ -249,7 +249,7 @@ class EmployeeCreateTest extends TestCase
 				'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 				'address'          => 'Vicuña Mackenna 2209',
 				'commune_id'       => 1,
-				'phone1'           => '+56988102910',
+				'phone1'           => '+56974155784',
 				'phone2'           => ''])
 			->seeInDatabase('detail_address_legal_employees', [
 				'depto'    => '',

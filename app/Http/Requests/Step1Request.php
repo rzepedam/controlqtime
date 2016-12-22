@@ -8,7 +8,6 @@ use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class Step1Request extends SanitizedRequest
 {
-	
 	/**
 	 * @var Route
 	 */

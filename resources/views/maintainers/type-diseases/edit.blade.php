@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
+
 
 @endsection
 

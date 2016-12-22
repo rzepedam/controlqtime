@@ -334,7 +334,6 @@ class EmployeeController extends Controller
 			'institutions', 'pensions', 'provinces', 'regions', 'relationships', 'typeCertifications',
 			'typeDisabilities', 'typeDiseases', 'typeExams', 'typeProfessionalLicenses', 'typeSpecialities'
 		));
-		
 	}
 	
 	/**
@@ -353,8 +352,7 @@ class EmployeeController extends Controller
 				'email'    => Session::get('email_employee'),
 				'password' => bcrypt(Session::get('email_employee'))
 			]);
-			
-			$address = $employee->address()->create(Session::get('step1'));
+			$address  = $employee->address()->create(Session::get('step1'));
 			$address->detailAddressLegalEmployee()->create(Session::get('step1'));
 			$employee->createContacts(Session::get('step1'));
 			$employee->createFamilyRelationships(Session::get('step1'));
@@ -366,7 +364,10 @@ class EmployeeController extends Controller
 			$employee->createDiseases($request->all());
 			$employee->createExams($request->all());
 			$employee->createFamilyResponsabilities($request->all());
-			// $user->notify(new EmployeeWasRegistered($employee));
+			if (getenv('APP_ENV') === 'production')
+			{
+				$user->notify(new EmployeeWasRegistered($employee));
+			}
 			$this->destroySessionStoreEmployee();
 			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
@@ -379,81 +380,6 @@ class EmployeeController extends Controller
 			
 			return response()->json(['status' => false]);
 		}
-	}
-	
-	/**
-	 * @return \Illuminate\Http\JsonResponse
-	 */
-	public function destroySessionStoreEmployee()
-	{
-		Session::forget('step1');
-		Session::forget('male_surname');
-		Session::forget('female_surname');
-		Session::forget('first_name');
-		Session::forget('second_name');
-		Session::forget('rut');
-		Session::forget('birthday');
-		Session::forget('nationality_id');
-		Session::forget('is_male');
-		Session::forget('marital_status_id');
-		Session::forget('forecast_id');
-		Session::forget('pension_id');
-		Session::forget('address');
-		Session::forget('depto');
-		Session::forget('block');
-		Session::forget('num_home');
-		Session::forget('region_id');
-		Session::forget('province_id');
-		Session::forget('commune_id');
-		Session::forget('email_employee');
-		Session::forget('phone1');
-		Session::forget('phone2');
-		Session::forget('code');
-		Session::forget('count_contacts');
-		Session::forget('id_contact');
-		Session::forget('contact_relationship_id');
-		Session::forget('name_contact');
-		Session::forget('email_contact');
-		Session::forget('address_contact');
-		Session::forget('tel_contact');
-		Session::forget('count_family_relationships');
-		Session::forget('id_family_relationship');
-		Session::forget('relationship_id');
-		Session::forget('employee_family_id');
-		Session::forget('step2');
-		Session::forget('count_studies');
-		Session::forget('id_study');
-		Session::forget('degree_id');
-		Session::forget('name_study');
-		Session::forget('institution_study_id');
-		Session::forget('date_obtention');
-		Session::forget('count_certifications');
-		Session::forget('id_certification');
-		Session::forget('type_certification_id');
-		Session::forget('institution_certification_id');
-		Session::forget('emission_certification');
-		Session::forget('expired_certification');
-		Session::forget('count_specialities');
-		Session::forget('id_speciality');
-		Session::forget('type_speciality_id');
-		Session::forget('institution_speciality_id');
-		Session::forget('emission_speciality');
-		Session::forget('expired_speciality');
-		Session::forget('count_professional_licenses');
-		Session::forget('id_professional_license');
-		Session::forget('type_professional_license_id');
-		Session::forget('emission_license');
-		Session::forget('expired_license');
-		Session::forget('detail_license');
-		
-		for ( $i = 0; $i < Session::get('count_professional_licenses'); $i++ )
-		{
-			Session::forget('is_donor');
-		}
-		
-		return response()->json([
-			'status' => true
-		]);
 	}
 	
 	/**
@@ -509,7 +435,7 @@ class EmployeeController extends Controller
 		
 		try
 		{
-			// Update Step1 data
+			// Update Step1
 			$employee = $this->employee->findOrFail($id);
 			$employee->fill(Session::get('step1_update'))->saveOrFail();
 			$employee->user->update(['email' => Session::get('step1_update.email_employee')]);
@@ -520,36 +446,31 @@ class EmployeeController extends Controller
 			$employee->deleteFamilyRelationships(Session::get('id_delete_family_relationship'));
 			$employee->createFamilyRelationships(Session::get('step1_update'));
 			
-			// Update Step2 data
+			// Update Step2
 			$employee->deleteStudies(Session::get('id_delete_study'));
 			$employee->createStudies(Session::get('step2_update'));
-			// $this->certification->destroyImages($request->session()->get('id_delete_certification'), 'Certification');
 			$employee->deleteCertifications(Session::get('id_delete_certification'));
 			$employee->createCertifications(Session::get('step2_update'));
-			// $this->speciality->destroyImages($request->session()->get('id_delete_speciality'), 'Speciality');
 			$employee->deleteSpecialities(Session::get('id_delete_speciality'));
 			$employee->createSpecialities(Session::get('step2_update'));
-			// $this->professionalLicense->destroyImages($request->session()->get('id_delete_professional_license'), 'ProfessionalLicense');
 			$employee->deleteProfessionalLicenses(Session::get('id_delete_professional_license'));
 			$employee->createLicenses(Session::get('step2_update'));
 			
-			// Update Step3 data
-			// $this->disability->destroyImages($request->get('id_delete_disability'), 'Disability');
+			// Update Step3
 			$employee->deleteDisabilities($request->get('id_delete_disability'));
 			$employee->createDisabilities($request->all());
-			// $this->disease->destroyImages($request->get('id_delete_disease'), 'Disease');
 			$employee->deleteDiseases($request->get('id_delete_disease'));
 			$employee->createDiseases($request->all());
-			// $this->exam->destroyImages($request->get('id_delete_exam'), 'Exam');
 			$employee->deleteExams($request->get('id_delete_exam'));
 			$employee->createExams($request->all());
-			// $this->familyResponsability->destroyImages($request->get('id_delete_family_responsability'), 'FamilyResponsability');
 			$employee->deleteFamilyResponsabilities($request->get('id_delete_family_responsability'));
 			$employee->createFamilyResponsabilities($request->all());
 			$this->activateEmployee->checkStateUpdateEmployee($id);
-			/* @todo Fixed $user value. Actually is boolean not object */
-			// $user->notify(new EmployeeWasRegistered($employee));
-			/* @todo destroy session data update */
+			if (getenv('APP_ENV') === 'production')
+			{
+				$employee->user->notify(new EmployeeWasRegistered($employee));
+			}
+			$this->destroySessionUpdateEmployee();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			DB::commit();
 			
@@ -796,18 +717,90 @@ class EmployeeController extends Controller
 	}
 	
 	/**
-	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function destroySessionUpdateEmployee(Request $request)
+	public function destroySessionStoreEmployee()
 	{
-		$request->session()->forget('step1_update');
-		$request->session()->forget('id_delete_contact');
-		$request->session()->forget('id_delete_family_relationship');
-		$request->session()->forget('step2_update');
-		$request->session()->forget('id_delete_study');
-		$request->session()->forget('id_delete_certification');
-		$request->session()->forget('id_delete_speciality');
-		$request->session()->forget('id_delete_professional_license');
+		Session::forget('step1');
+		Session::forget('male_surname');
+		Session::forget('female_surname');
+		Session::forget('first_name');
+		Session::forget('second_name');
+		Session::forget('rut');
+		Session::forget('birthday');
+		Session::forget('nationality_id');
+		Session::forget('is_male');
+		Session::forget('marital_status_id');
+		Session::forget('forecast_id');
+		Session::forget('pension_id');
+		Session::forget('address');
+		Session::forget('depto');
+		Session::forget('block');
+		Session::forget('num_home');
+		Session::forget('region_id');
+		Session::forget('province_id');
+		Session::forget('commune_id');
+		Session::forget('email_employee');
+		Session::forget('phone1');
+		Session::forget('phone2');
+		Session::forget('code');
+		Session::forget('count_contacts');
+		Session::forget('id_contact');
+		Session::forget('contact_relationship_id');
+		Session::forget('name_contact');
+		Session::forget('email_contact');
+		Session::forget('address_contact');
+		Session::forget('tel_contact');
+		Session::forget('count_family_relationships');
+		Session::forget('id_family_relationship');
+		Session::forget('relationship_id');
+		Session::forget('employee_family_id');
+		Session::forget('step2');
+		Session::forget('count_studies');
+		Session::forget('id_study');
+		Session::forget('degree_id');
+		Session::forget('name_study');
+		Session::forget('institution_study_id');
+		Session::forget('date_obtention');
+		Session::forget('count_certifications');
+		Session::forget('id_certification');
+		Session::forget('type_certification_id');
+		Session::forget('institution_certification_id');
+		Session::forget('emission_certification');
+		Session::forget('expired_certification');
+		Session::forget('count_specialities');
+		Session::forget('id_speciality');
+		Session::forget('type_speciality_id');
+		Session::forget('institution_speciality_id');
+		Session::forget('emission_speciality');
+		Session::forget('expired_speciality');
+		Session::forget('count_professional_licenses');
+		Session::forget('id_professional_license');
+		Session::forget('type_professional_license_id');
+		Session::forget('emission_license');
+		Session::forget('expired_license');
+		Session::forget('detail_license');
+		
+		for ( $i = 0; $i < Session::get('count_professional_licenses'); $i++ )
+		{
+			Session::forget('is_donor');
+		}
+		
+		return response()->json([
+			'status' => true
+		]);
+	}
+	
+	public function destroySessionUpdateEmployee()
+	{
+		Session::forget('step1_update');
+		Session::forget('id_delete_contact');
+		Session::forget('id_delete_family_relationship');
+		Session::forget('step2_update');
+		Session::forget('id_delete_study');
+		Session::forget('id_delete_certification');
+		Session::forget('id_delete_speciality');
+		Session::forget('id_delete_professional_license');
 	}
 	
 }
