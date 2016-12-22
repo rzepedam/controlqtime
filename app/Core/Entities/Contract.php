@@ -66,7 +66,8 @@ class Contract extends Eloquent
      */
     public function numHour()
     {
-        return $this->belongsTo(NumHour::class);
+        return $this->belongsTo(NumHour::class)
+	        ->withTrashed();
     }
 
     /**
@@ -74,7 +75,8 @@ class Contract extends Eloquent
      */
     public function periodicity()
     {
-        return $this->belongsTo(Periodicity::class);
+        return $this->belongsTo(Periodicity::class)
+	        ->withTrashed();
     }
 
     /**
