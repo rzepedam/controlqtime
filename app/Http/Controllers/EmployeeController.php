@@ -364,10 +364,7 @@ class EmployeeController extends Controller
 			$employee->createDiseases($request->all());
 			$employee->createExams($request->all());
 			$employee->createFamilyResponsabilities($request->all());
-			if (getenv('APP_ENV') === 'production')
-			{
-				$user->notify(new EmployeeWasRegistered($employee));
-			}
+			$user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionStoreEmployee();
 			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
@@ -466,10 +463,7 @@ class EmployeeController extends Controller
 			$employee->deleteFamilyResponsabilities($request->get('id_delete_family_responsability'));
 			$employee->createFamilyResponsabilities($request->all());
 			$this->activateEmployee->checkStateUpdateEmployee($id);
-			if (getenv('APP_ENV') === 'production')
-			{
-				$employee->user->notify(new EmployeeWasRegistered($employee));
-			}
+			$employee->user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionUpdateEmployee();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			DB::commit();
