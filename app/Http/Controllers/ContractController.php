@@ -233,9 +233,9 @@ class ContractController extends Controller
 	{
 		$contract = $this->contract->with([
 			'company.address.commune.province.region', 'employee.address.commune.province.region',
-			'position', 'area', 'numHour', 'periodicityHour', 'dayTrip', 'periodicityWork',
-			'gratification', 'typeContract', 'termsAndObligatories', 'company.legalRepresentative',
-			'company.address.detailAddressCompany', 'employee.address.detailAddressLegalEmployee'
+			'position', 'area', 'numHour', 'dayTrip', 'periodicityWork', 'gratification', 'typeContract',
+			'termsAndObligatories', 'company.legalRepresentative', 'company.address.detailAddressCompany',
+			'employee.address.detailAddressLegalEmployee'
 		])->findOrFail($id);
 		
 		$header = view('human-resources.contracts.partials.pdf.header');
