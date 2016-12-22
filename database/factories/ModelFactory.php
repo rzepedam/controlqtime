@@ -161,7 +161,7 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 $factory->define(Country::class, function (Faker\Generator $faker)
 {
 	return [
-		'name' => $faker->country,
+		'name' => $faker->word,
 	];
 });
 
