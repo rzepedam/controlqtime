@@ -140,9 +140,18 @@ class WeightController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->weight->destroy($id);
-		
-		return redirect()->route('weights.index');
+		try
+		{
+			$this->weight->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('weights.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Weight: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 	
 }

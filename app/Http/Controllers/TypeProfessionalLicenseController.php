@@ -140,8 +140,17 @@ class TypeProfessionalLicenseController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeProfessionalLicense->destroy($id);
-		
-		return redirect()->route('type-professional-licenses.index');
+		try
+		{
+			$this->typeProfessionalLicense->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('type-professional-licenses.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TypeProfessionalLicense: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

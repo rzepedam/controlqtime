@@ -141,9 +141,18 @@ class ForecastController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->forecast->destroy($id);
-		
-		return redirect()->route('forecasts.index');
+		try
+		{
+			$this->forecast->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('forecasts.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Forecast: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 	
 }

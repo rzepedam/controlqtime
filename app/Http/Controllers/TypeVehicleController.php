@@ -163,9 +163,18 @@ class TypeVehicleController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeVehicle->destroy($id);
-		
-		return redirect()->route('type-vehicles.index');
+		try
+		{
+			$this->typeVehicle->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('type-vehicles.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TypeVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 	
 }

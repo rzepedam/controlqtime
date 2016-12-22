@@ -140,8 +140,17 @@ class TypeDisabilityController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeDisability->destroy($id);
-		
-		return redirect()->route('type-disabilities.index');
+		try
+		{
+			$this->typeDisability->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('type-disabilities.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TypeDisability: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

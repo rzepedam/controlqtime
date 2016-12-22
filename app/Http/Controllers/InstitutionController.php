@@ -152,8 +152,17 @@ class InstitutionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->institution->destroy($id);
-		
-		return redirect()->route('institutions.index');
+		try
+		{
+			$this->institution->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('institutions.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Institution: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

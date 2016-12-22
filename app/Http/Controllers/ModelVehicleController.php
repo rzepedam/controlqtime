@@ -154,9 +154,17 @@ class ModelVehicleController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->modelVehicle->destroy($id);
-		
-		return redirect()->route('model-vehicles.index');
+		try
+		{
+			$this->modelVehicle->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('model-vehicles.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete ModelVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
-	
 }

@@ -74,7 +74,8 @@ class Company extends Eloquent
 	 */
 	public function typeCompany()
 	{
-		return $this->belongsTo(TypeCompany::class);
+		return $this->belongsTo(TypeCompany::class)
+			->withTrashed();
 	}
 	
 	

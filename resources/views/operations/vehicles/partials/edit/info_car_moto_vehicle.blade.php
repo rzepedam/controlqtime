@@ -2,7 +2,7 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label("type_vehicle_id", "Tipo de Vehículo", ["class" => "control-label"]) }}
-            {{ Form::select("type_vehicle_id", $type_vehicles, null, ["class" => "form-control"]) }}
+            {{ Form::select("type_vehicle_id", $typeVehicles, null, ["class" => "form-control"]) }}
         </div>
     </div>
     <div class="col-md-3">
@@ -14,7 +14,7 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label("model_vehicle_id", "Modelo", ["class" => "control-label"]) }}
-            {{ Form::select("model_vehicle_id", $model_vehicles, null, ["class" => "form-control"]) }}
+            {{ Form::select("model_vehicle_id", $modelVehicles, null, ["class" => "form-control"]) }}
         </div>
     </div>
     {{-- Empresa Select Field --}}
@@ -30,7 +30,7 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label("state_vehicle_id", "Estado Vehículo", ["class" => "control-label"]) }}
-            {{ Form::select("state_vehicle_id", $state_vehicles, null, ["class" => "form-control"]) }}
+            {{ Form::select("state_vehicle_id", $stateVehicles, null, ["class" => "form-control"]) }}
         </div>
     </div>
     <div class="col-md-3">

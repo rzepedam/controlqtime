@@ -364,7 +364,7 @@ class EmployeeController extends Controller
 			$employee->createDiseases($request->all());
 			$employee->createExams($request->all());
 			$employee->createFamilyResponsabilities($request->all());
-			if (getenv('APP_ENV') === 'production')
+			if ( getenv('APP_ENV') === 'production' )
 			{
 				$user->notify(new EmployeeWasRegistered($employee));
 			}
@@ -466,7 +466,7 @@ class EmployeeController extends Controller
 			$employee->deleteFamilyResponsabilities($request->get('id_delete_family_responsability'));
 			$employee->createFamilyResponsabilities($request->all());
 			$this->activateEmployee->checkStateUpdateEmployee($id);
-			if (getenv('APP_ENV') === 'production')
+			if ( getenv('APP_ENV') === 'production' )
 			{
 				$employee->user->notify(new EmployeeWasRegistered($employee));
 			}
@@ -517,8 +517,9 @@ class EmployeeController extends Controller
 			$employee = $this->employee->findOrFail($id);
 			$this->activateEmployee->saveStateDisableEmployee($employee);
 			$employee->delete();
-			
 			DB::commit();
+			
+			return redirect()->route('employees.index');
 		} catch ( Exception $e )
 		{
 			$this->log->error("Error delete Employee: " . $e->getMessage());
@@ -526,8 +527,6 @@ class EmployeeController extends Controller
 			
 			return response()->json(['status' => false]);
 		}
-		
-		return redirect()->route('employees.index');
 	}
 	
 	/**

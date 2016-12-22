@@ -187,8 +187,17 @@ class TerminalController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->terminal->destroy($id);
-		
-		return redirect()->route('terminals.index');
+		try
+		{
+			$this->terminal->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('terminals.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Terminal: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

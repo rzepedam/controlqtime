@@ -140,8 +140,17 @@ class TrademarkController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->trademark->destroy($id);
-		
-		return redirect()->route('trademarks.index');
+		try
+		{
+			$this->trademark->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('trademarks.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Trademark: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

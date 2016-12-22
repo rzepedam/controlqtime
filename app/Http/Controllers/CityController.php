@@ -147,8 +147,17 @@ class CityController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->city->destroy($id);
-		
-		return redirect()->route('cities.index');
+		try
+		{
+			$this->city->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('cities.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete City: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

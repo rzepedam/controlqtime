@@ -159,8 +159,17 @@ class TermAndObligatoryController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->termAndObligatory->destroy($id);
-		
-		return redirect()->route('terms-and-obligatories.index');
+		try
+		{
+			$this->termAndObligatory->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('terms-and-obligatories.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TermAndObligatory: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

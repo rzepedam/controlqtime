@@ -141,8 +141,17 @@ class NumHourController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->numHour->destroy($id);
-		
-		return redirect()->route('num-hours.index');
+		try
+		{
+			$this->numHour->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('num-hours.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete NumHour: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

@@ -141,8 +141,17 @@ class FuelController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->fuel->destroy($id);
-		
-		return redirect()->route('fuels.index');
+		try
+		{
+			$this->fuel->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('fuels.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Fuel: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

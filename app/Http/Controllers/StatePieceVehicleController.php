@@ -148,8 +148,17 @@ class StatePieceVehicleController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->statePieceVehicle->destroy($id);
-		
-		return redirect()->route('state-piece-vehicles.index');
+		try
+		{
+			$this->statePieceVehicle->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('state-piece-vehicles.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete StatePieceVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

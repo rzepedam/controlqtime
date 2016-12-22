@@ -287,9 +287,22 @@ class CompanyController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->company->delete($id);
+		DB::beginTransaction();
 		
-		return redirect()->route('companies.index');
+		try
+		{
+			$this->company->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			DB::commit();
+			
+			return redirect()->route('companies.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Company: " . $e->getMessage());
+			DB::rollback();
+			
+			return response()->json(['status' => false]);
+		}
 	}
 	
 	/**

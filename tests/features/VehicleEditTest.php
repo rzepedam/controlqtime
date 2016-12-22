@@ -30,7 +30,7 @@ class VehicleEditTest extends TestCase
 	
 	protected $weight;
 	
-	protected $typeVehicle;
+	protected $typeVehicleBus;
 	
 	protected $trademark;
 	
@@ -41,6 +41,10 @@ class VehicleEditTest extends TestCase
 	protected $fuel;
 	
 	protected $dateDocumentationVehicle;
+	
+	protected $typeVehicleAuto;
+	
+	protected $typeVehicleMoto;
 	
 	function setUp()
 	{
@@ -59,9 +63,23 @@ class VehicleEditTest extends TestCase
 			'acr'  => 'kg',
 		]);
 		
-		$this->typeVehicle = factory(TypeVehicle::class)->create([
+		$this->typeVehicleBus = factory(TypeVehicle::class)->create([
 			'id'              => 2,
 			'name'            => 'Bus',
+			'engine_cubic_id' => $this->engineCubic->id,
+			'weight_id'       => $this->weight->id,
+		]);
+		
+		$this->typeVehicleAuto = factory(TypeVehicle::class)->create([
+			'id'              => 1,
+			'name'            => 'Auto',
+			'engine_cubic_id' => $this->engineCubic->id,
+			'weight_id'       => $this->weight->id,
+		]);
+		
+		$this->typeVehicleMoto = factory(TypeVehicle::class)->create([
+			'id'              => 3,
+			'name'            => 'Moto',
 			'engine_cubic_id' => $this->engineCubic->id,
 			'weight_id'       => $this->weight->id,
 		]);
@@ -84,7 +102,7 @@ class VehicleEditTest extends TestCase
 		]);
 		
 		$this->vehicle = factory(Vehicle::class)->states('enable')->create([
-			'type_vehicle_id'  => $this->typeVehicle->id,
+			'type_vehicle_id'  => $this->typeVehicleBus->id,
 			'model_vehicle_id' => $this->modelVehicle->id,
 			'company_id'       => $this->company->id,
 			'state_vehicle_id' => $this->stateVehicle->id,
@@ -125,7 +143,7 @@ class VehicleEditTest extends TestCase
 		]);
 	}
 	
-	function test_edit_vehicle()
+	function test_edit_bus_vehicle()
 	{
 		$this->visit('operations/vehicles/' . $this->vehicle->id . '/edit')
 			->seeInElement('h1', 'Editar Vehículo: <span class="text-primary">' . $this->vehicle->id . '</span>')
@@ -158,6 +176,88 @@ class VehicleEditTest extends TestCase
 			->seeInField('#expiration_permission', $this->vehicle->dateDocumentationVehicle->expiration_permission)
 			->seeInElement('button', 'Actualizar')
 			->seeInElement('button', 'Eliminar');
+	}
+	
+	function test_edit_auto_vehicle()
+	{
+		$vehicleAuto = factory(Vehicle::class)->states('enable')->create([
+			'type_vehicle_id'  => $this->typeVehicleAuto->id,
+			'model_vehicle_id' => $this->modelVehicle->id,
+			'company_id'       => $this->company->id,
+			'state_vehicle_id' => $this->stateVehicle->id,
+			'acquisition_date' => '12-12-2016',
+			'inscription_date' => '12-12-2016',
+			'year'             => '2012',
+			'patent'           => 'AZ1090',
+			'code'             => '1216876745735',
+		]);
+		
+		$detailVehicleAuto = factory(DetailVehicle::class)->create([
+			'vehicle_id'   => $vehicleAuto->id,
+			'color'        => 'Verde',
+			'fuel_id'      => $this->fuel->id,
+			'num_chasis'   => 'i4237623784621',
+			'num_motor'    => '87263872648729',
+			'km'           => '18000',
+			'engine_cubic' => '2800',
+			'weight'       => '15000',
+			'tag'          => '908129473283627845',
+			'obs'          => 'Descripción vehículo'
+		]);
+		
+		$dateDocumentationVehicleAuto = factory(DateDocumentationVehicle::class)->create([
+			'vehicle_id'            => $vehicleAuto->id,
+			'emission_padron'       => '08-01-2014',
+			'expiration_padron'     => '01-17-2017',
+			'emission_insurance'    => '10-17-2015',
+			'expiration_insurance'  => '10-17-2018',
+			'emission_permission'   => '03-29-2010',
+			'expiration_permission' => '05-29-2022'
+		]);
+		
+		$this->visit('operations/vehicles/' . $vehicleAuto->id . '/edit')
+			->assertResponseOk();
+	}
+	
+	function test_edit_moto_vehicle()
+	{
+		$vehicleMoto = factory(Vehicle::class)->states('enable')->create([
+			'type_vehicle_id'  => $this->typeVehicleMoto->id,
+			'model_vehicle_id' => $this->modelVehicle->id,
+			'company_id'       => $this->company->id,
+			'state_vehicle_id' => $this->stateVehicle->id,
+			'acquisition_date' => '12-12-2016',
+			'inscription_date' => '12-12-2016',
+			'year'             => '2012',
+			'patent'           => 'PO1090',
+			'code'             => '1216876745735',
+		]);
+		
+		$detailVehicleMoto = factory(DetailVehicle::class)->create([
+			'vehicle_id'   => $vehicleMoto->id,
+			'color'        => 'Verde',
+			'fuel_id'      => $this->fuel->id,
+			'num_chasis'   => 'i4237623784621',
+			'num_motor'    => '87263872648729',
+			'km'           => '18000',
+			'engine_cubic' => '2800',
+			'weight'       => '15000',
+			'tag'          => '908129473283627845',
+			'obs'          => 'Descripción vehículo'
+		]);
+		
+		$dateDocumentationVehicleMoto = factory(DateDocumentationVehicle::class)->create([
+			'vehicle_id'            => $vehicleMoto->id,
+			'emission_padron'       => '08-01-2014',
+			'expiration_padron'     => '01-17-2017',
+			'emission_insurance'    => '10-17-2015',
+			'expiration_insurance'  => '10-17-2018',
+			'emission_permission'   => '03-29-2010',
+			'expiration_permission' => '05-29-2022'
+		]);
+		
+		$this->visit('operations/vehicles/' . $vehicleMoto->id . '/edit')
+			->assertResponseOk();
 	}
 	
 	function test_update_vehicle()

@@ -141,9 +141,18 @@ class GratificationController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->gratification->destroy($id);
-		
-		return redirect()->route('gratifications.index');
+		try
+		{
+			$this->gratification->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('gratifications.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Gratification: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 	
 }

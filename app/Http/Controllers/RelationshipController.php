@@ -141,8 +141,17 @@ class RelationshipController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->relationship->destroy($id);
-		
-		return redirect()->route('relationships.index');
+		try
+		{
+			$this->relationship->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('relationships.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Relationship: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

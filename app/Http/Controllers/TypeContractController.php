@@ -141,8 +141,17 @@ class TypeContractController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeContract->destroy($id);
-		
-		return redirect()->route('type-contracts.index');
+		try
+		{
+			$this->typeContract->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('type-contracts.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TypeContract: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

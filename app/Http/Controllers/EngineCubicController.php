@@ -141,8 +141,17 @@ class EngineCubicController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->engineCubic->destroy($id);
-		
-		return redirect()->route('engine-cubics.index');
+		try
+		{
+			$this->engineCubic->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('engine-cubics.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete EngineCubic: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

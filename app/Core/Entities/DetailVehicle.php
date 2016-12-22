@@ -3,13 +3,10 @@
 namespace Controlqtime\Core\Entities;
 
 use Controlqtime\Core\Helpers\FormatField;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DetailVehicle extends Eloquent
 {
-	use SoftDeletes;
-	
 	/**
 	 * @var array
 	 */
@@ -21,14 +18,6 @@ class DetailVehicle extends Eloquent
      * @var bool
      */
     public $timestamps = false;
-	
-	/**
-	 * @var array
-	 */
-	protected $dates = [
-		'deleted_at'
-	];
-	
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

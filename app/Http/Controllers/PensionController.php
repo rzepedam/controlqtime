@@ -141,8 +141,17 @@ class PensionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->pension->destroy($id);
-		
-		return redirect()->route('pensions.index');
+		try
+		{
+			$this->pension->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('pensions.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Pension: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

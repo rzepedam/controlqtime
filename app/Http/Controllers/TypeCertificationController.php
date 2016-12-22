@@ -140,8 +140,17 @@ class TypeCertificationController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeCertification->destroy($id);
-		
-		return redirect()->route('type-certifications.index');
+		try
+		{
+			$this->typeCertification->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('type-certifications.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TypeCertification: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

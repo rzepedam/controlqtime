@@ -151,8 +151,17 @@ class AreaController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->area->destroy($id);
-		
-		return redirect()->route('areas.index');
+		try
+		{
+			$this->area->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('areas.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Area: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

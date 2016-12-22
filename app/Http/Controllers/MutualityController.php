@@ -141,8 +141,17 @@ class MutualityController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->mutuality->destroy($id);
-		
-		return redirect()->route('mutualities.index');
+		try
+		{
+			$this->mutuality->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('mutualities.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Mutuality: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

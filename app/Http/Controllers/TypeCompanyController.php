@@ -140,8 +140,17 @@ class TypeCompanyController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeCompany->destroy($id);
-		
-		return redirect()->route('type-companies.index');
+		try
+		{
+			$this->typeCompany->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('type-companies.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TypeCompany: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

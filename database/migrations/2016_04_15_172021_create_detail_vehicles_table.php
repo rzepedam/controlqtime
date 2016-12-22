@@ -25,7 +25,6 @@ class CreateDetailVehiclesTable extends Migration
 			$table->string('weight', 6);
 	        $table->string('tag', 25);
 			$table->text('obs');
-	        $table->softDeletes();
         });
     }
 

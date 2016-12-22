@@ -191,8 +191,7 @@ class VehicleCreateTest extends TestCase
 				'engine_cubic' => '2600',
 				'weight'       => '4500',
 				'tag'          => '2749823657845',
-				'obs'          => 'Nuevo Vehículo ingresado',
-				'deleted_at'   => null])
+				'obs'          => 'Nuevo Vehículo ingresado'])
 			->seeInDatabase('detail_buses', [
 				'carr'       => 'Marcopolo',
 				'num_plazas' => '129'])

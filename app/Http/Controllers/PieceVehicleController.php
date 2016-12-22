@@ -149,8 +149,17 @@ class PieceVehicleController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->pieceVehicle->destroy($id);
-		
-		return redirect()->route('piece-vehicles.index');
+		try
+		{
+			$this->pieceVehicle->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('piece-vehicles.index');
+		}catch(Exception $e)
+		{
+			$this->log->error("Error Delete PieceVehicle: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

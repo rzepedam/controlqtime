@@ -18,7 +18,6 @@ class CreateDetailBusesTable extends Migration
 	        $table->unsignedInteger('detail_vehicle_id')->nullable();
             $table->string('carr', 20);
 	        $table->string('num_plazas', 3);
-	        $table->softDeletes();
         });
     }
 

@@ -151,8 +151,17 @@ class RouteController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->route->destroy($id);
-		
-		return redirect()->route('routes.index');
+		try
+		{
+			$this->route->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('routes.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Route: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

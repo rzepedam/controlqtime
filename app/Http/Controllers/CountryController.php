@@ -141,8 +141,17 @@ class CountryController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->country->destroy($id);
-		
-		return redirect()->route('countries.index');
+		try
+		{
+			$this->country->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('countries.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Country: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

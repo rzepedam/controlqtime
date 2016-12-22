@@ -23,7 +23,6 @@ class CreateLegalRepresentativesTable extends Migration
 	        $table->string('rut_representative', 10);
 	        $table->date('birthday');
             $table->string('email_representative', 60)->unique();
-	        $table->softDeletes();
 	        $table->timestamps();
         });
     }

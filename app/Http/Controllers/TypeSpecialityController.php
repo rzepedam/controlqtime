@@ -140,8 +140,17 @@ class TypeSpecialityController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeSpeciality->destroy($id);
-		
-		return redirect()->route('type-specialities.index');
+		try
+		{
+			$this->typeSpeciality->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('type-specialities.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TypeSpeciality: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

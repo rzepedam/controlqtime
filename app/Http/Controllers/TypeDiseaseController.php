@@ -140,8 +140,17 @@ class TypeDiseaseController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeDisease->destroy($id);
-		
-		return redirect()->route('type-diseases.index');
+		try
+		{
+			$this->typeDisease->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('type-diseases.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TypeDisease: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

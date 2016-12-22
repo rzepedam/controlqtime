@@ -141,8 +141,17 @@ class PeriodicityController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->periodiocity->destroy($id);
-		
-		return redirect()->route('periodicities.index');
+		try
+		{
+			$this->periodiocity->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('periodicities.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Periodicity: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

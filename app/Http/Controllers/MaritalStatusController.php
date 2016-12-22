@@ -141,8 +141,17 @@ class MaritalStatusController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->maritalStatus->destroy($id);
-		
-		return redirect()->route('marital-statuses.index');
+		try
+		{
+			$this->maritalStatus->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('marital-statuses.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete MaritalStatus: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

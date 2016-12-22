@@ -141,8 +141,17 @@ class DayTripController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->dayTrip->destroy($id);
-		
-		return redirect()->route('day-trips.index');
+		try
+		{
+			$this->dayTrip->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('day-trips.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete DayTrip: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

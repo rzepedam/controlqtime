@@ -20,7 +20,6 @@ class CreateDetailAddressCompaniesTable extends Migration
 	        $table->string('bod', 5);
 	        $table->string('ofi', 5);
 	        $table->string('floor', 3);
-	        $table->softDeletes();
         });
     }
 

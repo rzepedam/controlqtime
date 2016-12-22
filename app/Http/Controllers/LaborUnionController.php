@@ -143,8 +143,17 @@ class LaborUnionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->laborUnion->destroy($id);
-		
-		return redirect()->route('labor-unions.index');
+		try
+		{
+			$this->laborUnion->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('labor-unions.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete LaborUnion: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

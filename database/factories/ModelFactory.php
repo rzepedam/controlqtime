@@ -79,6 +79,8 @@ $factory->define(Address::class, function (Faker\Generator $faker)
 		'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 		'address'          => $faker->address,
 		'commune_id'       => 1,
+		'phone1'           => $faker->word,
+		'phone2'           => $faker->word
 	];
 });
 
@@ -93,8 +95,7 @@ $factory->define(Area::class, function (Faker\Generator $faker)
 $factory->define(City::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'         => 1,
-		'name'       => $faker->city,
+		'name'       => $faker->word,
 		'country_id' => factory(Country::class)->create()->id
 	];
 });
@@ -237,7 +238,7 @@ $factory->define(DetailVehicle::class, function (Faker\Generator $faker)
 		'fuel_id'      => factory(Fuel::class)->create()->id,
 		'color'        => $faker->word,
 		'num_chasis'   => rand(10000000000000, 99999999999999),
-		'num_motor'    => rand(10000000000000, 99999999999999),
+		'num_motor'    => rand(10000000000, 99999999999),
 		'km'           => rand(1, 200000),
 		'engine_cubic' => rand(1000, 3000),
 		'weight'       => rand(1000, 5000),
@@ -355,8 +356,8 @@ $factory->define(LegalRepresentative::class, function (Faker\Generator $faker)
 		'female_surname'       => $faker->lastName,
 		'first_name'           => $faker->firstName,
 		'second_name'          => $faker->firstName,
-		'rut_representative'   => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
-		'birthday'             => $faker->date($format = 'd-m-Y', $max = 'now'),
+		'rut_representative'   => rand(3, 24) . "." . rand(100, 999) . "." . rand(100, 999) . "-" . rand(1, 9),
+		'birthday'             => Carbon::parse('-20 years')->format('d-m-Y'),
 		'nationality_id'       => factory(Nationality::class)->create()->id,
 		'email_representative' => $faker->email,
 	];
@@ -476,7 +477,6 @@ $factory->define(Relationship::class, function (Faker\Generator $faker)
 $factory->define(Route::class, function (Faker\Generator $faker)
 {
 	return [
-		'id'          => 1,
 		'name'        => strtoupper($faker->randomLetter) . '0' . rand(0, 9),
 		'terminal_id' => factory(Terminal::class)->create()->id,
 		'deleted_at'  => null

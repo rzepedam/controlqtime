@@ -140,8 +140,17 @@ class TypeExamController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->typeExam->destroy($id);
-		
-		return redirect()->route('type-exams.index');
+		try
+		{
+			$this->typeExam->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('type-exams.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete TypeExam: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

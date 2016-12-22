@@ -22,7 +22,6 @@ class CreateDateDocumentationVehiclesTable extends Migration
 			$table->date('expiration_insurance');
 			$table->date('emission_permission');
 			$table->date('expiration_permission');
-			$table->softDeletes();
         });
     }
 

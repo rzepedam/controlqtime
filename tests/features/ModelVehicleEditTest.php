@@ -36,9 +36,7 @@ class ModelVehicleEditTest extends TestCase
 	
 	function test_update_model_vehicle()
 	{
-		$id        = $this->modelVehicle->id + 1;
 		$trademark = factory(Trademark::class)->create([
-			'id'   => $id,
 			'name' => 'test',
 		]);
 		

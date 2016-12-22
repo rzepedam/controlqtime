@@ -141,8 +141,17 @@ class ProfessionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->profession->destroy($id);
-		
-		return redirect()->route('professions.index');
+		try
+		{
+			$this->profession->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('professions.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Profession: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 }

@@ -18,13 +18,6 @@ class DetailAddressLegalEmployee extends Eloquent
 	 */
 	public $timestamps = false;
 	
-	/**
-	 * @var array
-	 */
-	protected $dates = [
-		'deleted_at'
-	];
-	
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

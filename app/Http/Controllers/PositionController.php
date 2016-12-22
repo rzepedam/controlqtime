@@ -141,10 +141,18 @@ class PositionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->position->destroy($id);
-		session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
-		
-		return redirect()->route('positions.index');
+		try
+		{
+			$this->position->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			
+			return redirect()->route('positions.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Position: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
 	}
 	
 }

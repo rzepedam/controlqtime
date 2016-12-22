@@ -263,9 +263,22 @@ class VehicleController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->vehicle->delete($id);
+		DB::beginTransaction();
 		
-		return redirect()->route('vehicles.index');
+		try
+		{
+			$this->vehicle->destroy($id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			DB::commit();
+			
+			return redirect()->route('vehicles.index');
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Delete Vehicle: " . $e->getMessage());
+			DB::rollback();
+			
+			return response()->json(['status' => false]);
+		}
 	}
 	
 	/**
