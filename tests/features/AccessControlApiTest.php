@@ -169,4 +169,20 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
+	function test_update_image_profile_employee_when_is_registry_in_biometry()
+	{
+		$data = [
+			'rut' => '17032689-6',
+		    'url' => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg'
+		];
+		
+		$this->put('api/updateEmployeeImage', $data, [
+			'Authorization' => 'Bearer ' . $this->token,
+			'Accept'        => 'application/json'])
+			->seeInDatabase('employees', [
+				'rut' => '17032680-6',
+			    'url' => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg'
+			]);
+	}
+	
 }
