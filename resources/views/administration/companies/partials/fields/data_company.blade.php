@@ -1,7 +1,11 @@
 <div class="row">
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('type_company_id', 'Tipo Empresa', ['class' => 'control-label']) }}
-        {{ Form::select('type_company_id', $typeCompanies, null, ['class' => 'form-control']) }}
+        @if (Route::is('companies.create'))
+            {{ Form::select('type_company_id', $typeCompanies, null, ['class' => 'form-control']) }}
+        @else
+            {{ Form::select('type_company_id', is_null($company->typeCompany->deleted_at) ? $typeCompanies : ['default' => 'Seleccione Tipo Empresa...'] + $typeCompanies->toArray(), null, ['class' => 'form-control']) }}
+        @endif
     </div>
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle text-primary tooltip-primary" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class=\'text-center\'>Ej: 19317518k</p>" data-html="true"></i>

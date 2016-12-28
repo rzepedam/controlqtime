@@ -17,20 +17,20 @@
             {{ Form::select("model_vehicle_id", $modelVehicles, null, ["class" => "form-control"]) }}
         </div>
     </div>
-    {{-- Carrocería Text Field --}}
-    <div class="col-md-3">
-        <div class="form-group">
-            {{ Form::label("carr", "Carrocería") }}
-            {{ Form::text("carr", null, ["class" => "form-control", "data-plugin" => "maxlength", "maxlength" => "20"]) }}
-        </div>
-    </div>
-</div>
-<div class="row">
     {{-- Empresa Select Field --}}
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label("company_id", "Empresa", ["class" => "control-label"]) }}
             {{ Form::select("company_id", $companies, null, ["class" => "form-control"]) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    {{-- Carrocería Text Field --}}
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label("carr", "Carrocería") }}
+            {{ Form::text("carr", null, ["class" => "form-control", "data-plugin" => "maxlength", "maxlength" => "20"]) }}
         </div>
     </div>
     {{-- Estado Vehículo Select Field --}}

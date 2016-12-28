@@ -34,7 +34,8 @@ class ContactEmployee extends Eloquent
 	 */
 	public function relationship()
 	{
-		return $this->belongsTo(Relationship::class, 'contact_relationship_id');
+		return $this->belongsTo(Relationship::class, 'contact_relationship_id')
+			->withTrashed();
 	}
 	
 	/**

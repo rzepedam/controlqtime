@@ -34,7 +34,8 @@ class TypeVehicle extends Eloquent
 	 */
 	public function engineCubic()
 	{
-		return $this->belongsTo(EngineCubic::class);
+		return $this->belongsTo(EngineCubic::class)
+			->withTrashed();
 	}
 	
 	/**
@@ -42,7 +43,8 @@ class TypeVehicle extends Eloquent
 	 */
 	public function weight()
 	{
-		return $this->belongsTo(Weight::class);
+		return $this->belongsTo(Weight::class)
+			->withTrashed();
 	}
 	
 	/**

@@ -5,6 +5,10 @@
     </div>
     <div class="col-md-5">
         {{ Form::label('type_institution_id', 'Tipo de Institución', ['class' => 'control-label']) }}
-        {{ Form::select('type_institution_id', $type_institutions, null, ['class' => 'form-control']) }}
+        @if (Route::is('institutions.create'))
+            {{ Form::select('type_institution_id', $type_institutions, null, ['class' => 'form-control']) }}
+        @else
+            {{ Form::select('type_institution_id', is_null($institution->typeInstitution->deleted_at) ? $type_institutions : ['default' => 'Seleccione Tipo Institución...'] + $type_institutions->toArray(), null, ['class' => 'form-control']) }}
+        @endif
     </div>
 </div>

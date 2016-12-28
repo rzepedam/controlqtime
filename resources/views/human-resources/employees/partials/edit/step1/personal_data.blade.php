@@ -64,17 +64,17 @@
     {{-- Estado Civil Form Select --}}
     <div class="col-sm-4 col-md-3 form-group">
         {{ Form::label('marital_status_id', 'Estado Civil', ['class' => 'control-label']) }}
-        {{ Form::select('marital_status_id', $maritalStatuses, null, ['class' => 'form-control']) }}
+        {{ Form::select('marital_status_id', is_null($employee->maritalStatus->deleted_at) ? $maritalStatuses : ['default' => 'Seleccione Estado Civil...'] + $maritalStatuses->toArray(), null, ['class' => 'form-control']) }}
     </div>
     {{-- Previsión Form Select --}}
     <div class="col-sm-4 col-md-3 form-group">
         {{ Form::label('forecast_id', 'Previsión', ['class' => 'control-label']) }}
-        {{ Form::select('forecast_id', $forecasts, null, ['class' => 'form-control']) }}
+        {{ Form::select('forecast_id', is_null($employee->forecast->deleted_at) ? $forecasts : ['default' => 'Seleccione Previsión...'] + $forecasts->toArray(), null, ['class' => 'form-control']) }}
     </div>
     {{-- Pensión Form Select --}}
     <div class="col-sm-4 col-md-3 form-group">
         {{ Form::label('pension_id', 'Pensión', ['class' => 'control-label']) }}
-        {{ Form::select('pension_id', $pensions, null, ['class' => 'form-control']) }}
+        {{ Form::select('pension_id', is_null($employee->pension->deleted_at) ? $pensions : ['default' => 'Seleccione Fondo de Pensión...'] + $pensions->toArray(), null, ['class' => 'form-control']) }}
     </div>
 </div>
 

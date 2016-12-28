@@ -5,6 +5,10 @@
     </div>
     <div class="col-md-5">
         {{ Form::label('trademark_id', 'Marca Vehículo', ['class' => 'control-label']) }}
-        {{ Form::select('trademark_id', $trademarks, null, ['class' => 'form-control']) }}
+        @if (Route::is('model-vehicles.create'))
+            {{ Form::select('trademark_id', $trademarks, null, ['class' => 'form-control']) }}
+        @else
+            {{ Form::select('trademark_id', is_null($modelVehicle->trademark->deleted_at) ? $trademarks : ['default' => 'Seleccione marca...'] + $trademarks->toArray(), null, ['class' => 'form-control']) }}
+        @endif
     </div>
 </div>

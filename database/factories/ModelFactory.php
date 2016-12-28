@@ -48,6 +48,7 @@ use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Entities\TypeDisability;
 use Controlqtime\Core\Entities\TypeSpeciality;
+use Controlqtime\Core\Entities\ContactEmployee;
 use Controlqtime\Core\Entities\TypeInstitution;
 use Controlqtime\Core\Entities\StatePieceVehicle;
 use Controlqtime\Core\Entities\TermAndObligatory;
@@ -132,6 +133,18 @@ $factory->state(Company::class, 'disable', function ()
 {
 	return [
 		'state' => 'disable'
+	];
+});
+
+$factory->define(ContactEmployee::class, function (Faker\Generator $faker)
+{
+	return [
+		'employee_id'             => factory(Employee::class)->states('enable')->create()->id,
+		'contact_relationship_id' => factory(Relationship::class)->create()->id,
+		'name_contact'            => $faker->firstName . ' ' . $faker->lastName,
+		'email_contact'           => $faker->email,
+		'address_contact'         => $faker->address,
+		'tel_contact'             => '+56974155784',
 	];
 });
 
@@ -653,8 +666,7 @@ $factory->state(Vehicle::class, 'disable', function ()
 $factory->define(Weight::class, function (Faker\Generator $faker)
 {
 	return [
-		'name'       => $faker->word,
-		'acr'        => $faker->randomLetter . $faker->randomLetter,
-		'deleted_at' => null
+		'name' => $faker->word,
+		'acr'  => $faker->randomLetter . $faker->randomLetter
 	];
 });

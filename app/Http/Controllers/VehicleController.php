@@ -193,18 +193,24 @@ class VehicleController extends Controller
 	 */
 	public function edit($id)
 	{
-		$vehicle = $this->vehicle->with(['modelVehicle.trademark'])->findOrFail($id);
-		
-		$trademarks    = $this->trademark->pluck('name', 'id');
-		$modelVehicles = $this->trademark->findOrFail($vehicle->modelVehicle->trademark->id)->modelVehicles->pluck('name', 'id');
-		$typeVehicles  = $this->typeVehicle->where('id', $vehicle->typeVehicle->id)->pluck('name', 'id');
-		$companies     = $this->company->enabled()->pluck('firm_name', 'id');
-		$fuels         = $this->fuel->pluck('name', 'id');
-		$stateVehicles = $this->stateVehicle->pluck('name', 'id');
-		
-		return view('operations.vehicles.edit', compact(
-			'vehicle', 'typeVehicles', 'trademarks', 'modelVehicles', 'companies', 'fuels', 'stateVehicles'
-		));
+		try
+		{
+			$vehicle = $this->vehicle->with(['modelVehicle.trademark'])->findOrFail($id);
+			
+			$trademarks    = $this->trademark->pluck('name', 'id');
+			$modelVehicles = $this->trademark->withTrashed()->findOrFail($vehicle->modelVehicle->trademark->id)->modelVehicles->pluck('name', 'id');
+			$typeVehicles  = $this->typeVehicle->where('id', $vehicle->typeVehicle->id)->pluck('name', 'id');
+			$companies     = $this->company->enabled()->pluck('firm_name', 'id');
+			$fuels         = $this->fuel->pluck('name', 'id');
+			$stateVehicles = $this->stateVehicle->pluck('name', 'id');
+			
+			return view('operations.vehicles.edit', compact(
+				'vehicle', 'typeVehicles', 'trademarks', 'modelVehicles', 'companies', 'fuels', 'stateVehicles'
+			));
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error Edit Vehicle: " . $e->getMessage());
+		}
 	}
 	
 	/**

@@ -11,7 +11,8 @@ class DetailVehicle extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'vehicle_id', 'fuel_id', 'color', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight', 'tag', 'obs'
+		'vehicle_id', 'fuel_id', 'color', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight',
+		'tag', 'obs'
 	];
 	
     /**
@@ -40,7 +41,8 @@ class DetailVehicle extends Eloquent
      */
     public function fuel()
     {
-        return $this->belongsTo(Fuel::class);
+        return $this->belongsTo(Fuel::class)
+	        ->withTrashed();
     }
     
     

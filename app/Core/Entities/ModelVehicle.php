@@ -34,7 +34,8 @@ class ModelVehicle extends Eloquent
      */
     public function trademark()
     {
-        return $this->belongsTo(Trademark::class);
+        return $this->belongsTo(Trademark::class)
+	        ->withTrashed();
     }
 
     /**

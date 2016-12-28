@@ -548,7 +548,8 @@ class Employee extends Eloquent
 	 */
 	public function maritalStatus()
 	{
-		return $this->belongsTo(MaritalStatus::class);
+		return $this->belongsTo(MaritalStatus::class)
+			->withTrashed();
 	}
 	
 	/**
@@ -556,7 +557,8 @@ class Employee extends Eloquent
 	 */
 	public function forecast()
 	{
-		return $this->belongsTo(Forecast::class);
+		return $this->belongsTo(Forecast::class)
+			->withTrashed();
 	}
 	
 	/**
@@ -564,7 +566,8 @@ class Employee extends Eloquent
 	 */
 	public function pension()
 	{
-		return $this->belongsTo(Pension::class);
+		return $this->belongsTo(Pension::class)
+			->withTrashed();
 	}
 	
 	/**

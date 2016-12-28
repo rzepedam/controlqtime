@@ -21,7 +21,7 @@
             </div>
             <div class="col-sm-4 col-md-3 form-group">
                 {{ Form::label("contact_relationship_id", "Relación", ["class"=> "control-label"]) }}
-                {{ Form::select("contact_relationship_id[]", $relationships, $contact_employee->relationship->id, ["class"=> "form-control"]) }}
+                {{ Form::select("contact_relationship_id[]", is_null($contact_employee->relationship->deleted_at) ? $relationships : ['default' => 'Seleccione Relación...'] + $relationships->toArray(), $contact_employee->relationship->id, ["class"=> "form-control"]) }}
             </div>
             <div class="col-sm-4 col-md-6 form-group">
                 {{ Form::label('name_contact', 'Nombre', ['class' => 'control-label']) }}

@@ -34,7 +34,8 @@ class Institution extends Eloquent
 	 */
 	public function typeInstitution()
 	{
-		return $this->belongsTo(TypeInstitution::class);
+		return $this->belongsTo(TypeInstitution::class)
+			->withTrashed();
 	}
 	
 	/**

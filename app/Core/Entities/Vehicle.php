@@ -74,7 +74,8 @@ class Vehicle extends Eloquent
 	 */
 	public function modelVehicle()
 	{
-		return $this->belongsTo(ModelVehicle::class);
+		return $this->belongsTo(ModelVehicle::class)
+			->withTrashed();
 	}
 	
 	/**
@@ -82,7 +83,8 @@ class Vehicle extends Eloquent
 	 */
 	public function company()
 	{
-		return $this->belongsTo(Company::class);
+		return $this->belongsTo(Company::class)
+			->withTrashed();
 	}
 	
 	/**

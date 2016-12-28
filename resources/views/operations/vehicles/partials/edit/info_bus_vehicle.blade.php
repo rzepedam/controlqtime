@@ -8,29 +8,29 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label("trademark_id", "Marca", ["class" => "control-label"]) }}
-            {{ Form::select("trademark_id", $trademarks, $vehicle->modelVehicle->trademark->id, ["class" => "form-control"]) }}
+            {{ Form::select("trademark_id", is_null($vehicle->modelVehicle->trademark->deleted_at) ? $trademarks : ['default' => 'Seleccione Marca...'] + $trademarks->toArray(), is_null($vehicle->modelVehicle->trademark->deleted_at) ? $vehicle->modelVehicle->trademark->id : null, ["class" => "form-control"]) }}
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label("model_vehicle_id", "Modelo", ["class" => "control-label"]) }}
-            {{ Form::select("model_vehicle_id", $modelVehicles, null, ["class" => "form-control"]) }}
+            {{ Form::select("model_vehicle_id", is_null($vehicle->modelVehicle->deleted_at) ? $modelVehicles : ['default' => 'Seleccione Modelo...'] + $modelVehicles->toArray(), is_null($vehicle->modelVehicle->deleted_at) ? $vehicle->modelVehicle->id : null, ["class" => "form-control"]) }}
         </div>
     </div>
+    {{-- Empresa Select Field --}}
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ Form::label("company_id", "Empresa", ["class" => "control-label"]) }}
+            {{ Form::select("company_id", is_null($vehicle->company->deleted_at) ? $companies : ['default' => 'Seleccione Empresa...'] + $companies->toArray(), is_null($vehicle->company->deleted_at) ? $vehicle->company->id : null, ["class" => "form-control"]) }}
+        </div>
+    </div>
+</div>
+<div class="row">
     {{-- Carrocería Text Field --}}
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label("carr", "Carrocería") }}
             {{ Form::text("carr", $vehicle->detailVehicle->detailBus->carr, ["class" => "form-control", "data-plugin" => "maxlength", "maxlength" => "20"]) }}
-        </div>
-    </div>
-</div>
-<div class="row">
-    {{-- Empresa Select Field --}}
-    <div class="col-md-3">
-        <div class="form-group">
-            {{ Form::label("company_id", "Empresa", ["class" => "control-label"]) }}
-            {{ Form::select("company_id", $companies, null, ["class" => "form-control"]) }}
         </div>
     </div>
     {{-- Estado Vehículo Select Field --}}
@@ -79,7 +79,7 @@
     <div class="col-md-3">
         <div class="form-group">
             {{ Form::label("fuel_id", "Combustible", ["class" => "control-label"]) }}
-            {{ Form::select("fuel_id", $fuels, $vehicle->detailVehicle->fuel->id, ["class" => "form-control"]) }}
+            {{ Form::select("fuel_id", is_null($vehicle->detailVehicle->fuel->deleted_at) ? $fuels : ['default' => 'Seleccione Combustible...'] + $fuels->toArray(), is_null($vehicle->detailVehicle->fuel->deleted_at) ? $vehicle->detailVehicle->fuel->id : null, ["class" => "form-control"]) }}
         </div>
     </div>
     {{-- Patente Text Field --}}

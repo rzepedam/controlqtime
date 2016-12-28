@@ -5,6 +5,10 @@
     </div>
     <div class="col-md-5">
         {{ Form::label('terminal_id', 'Terminal', ['class' => 'control-label']) }}
-        {{ Form::select('terminal_id', $terminals, null, ['class' => 'form-control']) }}
+        @if (Route::is('areas.create'))
+            {{ Form::select('terminal_id', $terminals, null, ['class' => 'form-control']) }}
+        @else
+            {{ Form::select('terminal_id', is_null($area->terminal->deleted_at) ? $terminals : ['default' => 'Seleccione Terminal...'] + $terminals->toArray(), null, ['class' => 'form-control']) }}
+        @endif
     </div>
 </div>

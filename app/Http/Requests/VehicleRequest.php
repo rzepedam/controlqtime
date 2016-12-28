@@ -45,6 +45,7 @@ class VehicleRequest extends SanitizedRequest
 			{
 				$rules = [
 					'type_vehicle_id'       => 'required|regex:/[0-9 -()+]+$/',
+					'trademark_id'          => 'required|regex:/[0-9 -()+]+$/',
 					'model_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'company_id'            => 'required|regex:/[0-9 -()+]+$/',
 					'state_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
@@ -82,6 +83,7 @@ class VehicleRequest extends SanitizedRequest
 			{
 				$rules = [
 					'type_vehicle_id'       => 'required|regex:/[0-9 -()+]+$/',
+					'trademark_id'          => 'required|regex:/[0-9 -()+]+$/',
 					'model_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'company_id'            => 'required|regex:/[0-9 -()+]+$/',
 					'state_vehicle_id'      => 'required|regex:/[0-9 -()+]+$/',
