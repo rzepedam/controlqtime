@@ -323,11 +323,6 @@ elixir(function(mix) {
         'me/js/base/maintainers/fuels/config_bootstrap_table.js'
     ], 'public/js/maintainers/fuels/index-custom-fuels.js');
 
-    // Maintainers > Gratifications > Index Custom Gratifications JS
-    mix.scripts([
-        'me/js/base/maintainers/gratifications/config_bootstrap_table.js'
-    ], 'public/js/maintainers/gratifications/index-custom-gratifications.js');
-
     // Maintainers > Institutions > Index Custom Institutions JS
     mix.scripts([
         'me/js/base/maintainers/institutions/config_bootstrap_table.js'
@@ -645,7 +640,6 @@ elixir(function(mix) {
         'public/js/maintainers/degrees/index-custom-degrees.js',
         'public/js/maintainers/forecasts/index-custom-forecasts.js',
         'public/js/maintainers/fuels/index-custom-fuels.js',
-        'public/js/maintainers/gratifications/index-custom-gratifications.js',
         'public/js/maintainers/institutions/index-custom-institutions.js',
         'public/js/maintainers/marital-statuses/index-custom-marital-statuses.js',
         'public/js/maintainers/piece-vehicles/index-custom-piece-vehicles.js',

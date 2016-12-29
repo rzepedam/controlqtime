@@ -41,7 +41,6 @@ class DatabaseSeeder extends Seeder
 	    $this->call(DayTripTableSeeder::class);
 	    $this->call(NumHourTableSeeder::class);
 	    $this->call(PeriodicityTableSeeder::class);
-	    $this->call(GratificationTableSeeder::class);
 	    $this->call(TypeContractTableSeeder::class);
 	    $this->call(MaritalStatusTableSeeder::class);
 	    $this->call(LaborUnionTableSeeder::class);

@@ -60,7 +60,6 @@ class ContractShowTest extends TestCase
 	        ->seeInElement('td', $this->contract->salary)
 	        ->seeInElement('td', $this->contract->mobilization)
 	        ->seeInElement('td', $this->contract->collation)
-	        ->seeInElement('td', $this->contract->gratification->name)
 	        ->seeInElement('td', $this->contract->typeContract->name)
 	        ->see($this->obligationsAndProhibitionsA->name)
 	        ->see($this->obligationsAndProhibitionsB->name)

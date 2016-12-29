@@ -44,7 +44,6 @@ use Controlqtime\Core\Entities\Relationship;
 use Controlqtime\Core\Entities\StateVehicle;
 use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Core\Entities\DetailVehicle;
-use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Core\Entities\MaritalStatus;
 use Controlqtime\Core\Entities\TypeDisability;
 use Controlqtime\Core\Entities\TypeSpeciality;
@@ -165,7 +164,6 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 		'salary'           => rand(300000, 2990000),
 		'mobilization'     => rand(100000, 150000),
 		'collation'        => rand(50000, 99000),
-		'gratification_id' => factory(Gratification::class)->create()->id,
 		'type_contract_id' => factory(TypeContract::class)->create()->id,
 		'expires_at'       => Carbon::parse('+1 year'),
 		'created_at'       => Carbon::now()
@@ -321,14 +319,6 @@ $factory->define(Fuel::class, function (Faker\Generator $faker)
 {
 	return [
 		'name'       => rand(90, 99),
-		'deleted_at' => null
-	];
-});
-
-$factory->define(Gratification::class, function (Faker\Generator $faker)
-{
-	return [
-		'name'       => $faker->word,
 		'deleted_at' => null
 	];
 });

@@ -32,13 +32,6 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        {{-- Gratificación Form Select --}}
-        <div class="form-group">
-            {{ Form::label('gratification_id', 'Gratificación', ['class' => 'control-label']) }}
-            {{ Form::select('gratification_id', $gratifications, null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-    <div class="col-md-4">
         {{-- Tipo Contrato Form Select --}}
         <div class="form-group">
             {{ Form::label('type_contract_id', 'Tipo Contrato', ['class' => 'control-label']) }}

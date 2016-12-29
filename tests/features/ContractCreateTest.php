@@ -20,8 +20,6 @@ class ContractCreateTest extends TestCase
 	
 	protected $dayTrip;
 	
-	protected $gratification;
-	
 	protected $typeContract;
 	
 	protected $obligationsAndProhibitionsA;
@@ -80,10 +78,6 @@ class ContractCreateTest extends TestCase
 			'name' => 'Lunes a viernes'
 		]);
 		
-		$this->gratification = factory(\Controlqtime\Core\Entities\Gratification::class)->create([
-			'name' => '25% legal anticipada con tope de 4.75 SMM'
-		]);
-		
 		$this->typeContract = factory(\Controlqtime\Core\Entities\TypeContract::class)->create([
 			'name'      => 'Plazo Fijo',
 			'dur'       => '12',
@@ -119,7 +113,6 @@ class ContractCreateTest extends TestCase
 			->seeInField('#end_morning', '13:00')
 			->seeInField('#init_afternoon', '14:00')
 			->seeInField('#end_afternoon', '19:00')
-			->seeInElement('#gratification_id', '25% legal anticipada con tope de 4.75 SMM')
 			->seeInElement('#type_contract_id', 'Plazo Fijo 12 meses')
 			->seeIsChecked('#default0')
 			->dontSeeIsChecked('#default1')
@@ -142,7 +135,6 @@ class ContractCreateTest extends TestCase
 			->type('13:00', 'end_morning')
 			->type('14:00', 'init_afternoon')
 			->type('19:00', 'end_afternoon')
-			->select($this->gratification->id, '#gratification_id')
 			->select($this->typeContract->id, '#type_contract_id')
 			->submitForm('Guardar', [
 				'salary'                    => '580000',
@@ -165,7 +157,6 @@ class ContractCreateTest extends TestCase
 				'salary'           => '580000',
 				'mobilization'     => '80000',
 				'collation'        => '125000',
-				'gratification_id' => $this->gratification->id,
 				'type_contract_id' => $this->typeContract->id])
 			->seeInDatabase('contract_term_and_obligatory', [
 				'term_and_obligatory_id' => $this->obligationsAndProhibitionsA->id])

@@ -3,7 +3,7 @@
     <div class="col-md-4">
         <div class="form-group">
             {{ Form::label('name', 'Tipo Contrato') }}
-            {{ Form::select('name', Config::get('enums.type_contracts') , null, ['class' => 'form-control']) }}
+            {{ Form::select('name', Config::get('enums.type_contracts'), null, ['class' => 'form-control']) }}
         </div>
     </div>
     {{-- Nº Meses Text Field --}}

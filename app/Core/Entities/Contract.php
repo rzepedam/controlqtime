@@ -18,7 +18,7 @@ class Contract extends Eloquent
     protected $fillable = [
         'company_id', 'employee_id', 'position_id', 'area_id', 'num_hour_id',
         'periodicity_id', 'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon',
-        'end_afternoon', 'salary', 'mobilization', 'collation', 'gratification_id', 'type_contract_id', 'expires_at'
+        'end_afternoon', 'salary', 'mobilization', 'collation', 'type_contract_id', 'expires_at'
     ];
 	
 	/**
@@ -93,14 +93,6 @@ class Contract extends Eloquent
     public function periodicityWork()
     {
         return $this->belongsTo(Periodicity::class, 'periodicity_work_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function gratification()
-    {
-        return $this->belongsTo(Gratification::class);
     }
 
     /**

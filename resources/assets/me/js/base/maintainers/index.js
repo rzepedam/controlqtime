@@ -56,10 +56,6 @@ $(document).ready(function(){
         window.location.href = "/maintainers/pensions";
     });
 
-    $('#redirect-gratifications').click(function() {
-        window.location.href = "/maintainers/gratifications";
-    });
-
     $('#redirect-institutions').click(function() {
         window.location.href = "/maintainers/institutions";
     });
@@ -118,10 +114,6 @@ $(document).ready(function(){
 
     $('#redirect-type-representatives').click(function() {
         window.location.href = "/maintainers/type-representatives";
-    });
-
-    $('#redirect-labor-unions').click(function() {
-        window.location.href = "/maintainers/labor-unions";
     });
 
     $('#redirect-terminals').click(function() {

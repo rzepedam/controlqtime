@@ -15,7 +15,6 @@ use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Position;
 use Controlqtime\Core\Entities\Periodicity;
 use Controlqtime\Core\Entities\TypeContract;
-use Controlqtime\Core\Entities\Gratification;
 use Controlqtime\Http\Requests\ContractRequest;
 use Controlqtime\Core\Entities\ActivateEmployee;
 use Controlqtime\Core\Entities\TermAndObligatory;
@@ -51,11 +50,6 @@ class ContractController extends Controller
 	 * @var Employee
 	 */
 	protected $employee;
-	
-	/**
-	 * @var Gratification
-	 */
-	protected $gratification;
 	
 	/**
 	 * @var Log
@@ -96,7 +90,6 @@ class ContractController extends Controller
 	 * @param Contract          $contract
 	 * @param DayTrip           $dayTrip
 	 * @param Employee          $employee
-	 * @param Gratification     $gratification
 	 * @param Log               $log
 	 * @param NumHour           $numHour
 	 * @param Periodicity       $periodicity
@@ -105,8 +98,8 @@ class ContractController extends Controller
 	 * @param TypeContract      $typeContract
 	 */
 	public function __construct(ActivateEmployee $activateEmployee, Area $area, Company $company,
-		Contract $contract, DayTrip $dayTrip, Employee $employee, Gratification $gratification, Log $log,
-		NumHour $numHour, Periodicity $periodicity, Position $position, TermAndObligatory $termAndObligatory,
+		Contract $contract, DayTrip $dayTrip, Employee $employee, Log $log, NumHour $numHour,
+		Periodicity $periodicity, Position $position, TermAndObligatory $termAndObligatory,
 		TypeContract $typeContract)
 	{
 		$this->activateEmployee  = $activateEmployee;
@@ -115,7 +108,6 @@ class ContractController extends Controller
 		$this->contract          = $contract;
 		$this->dayTrip           = $dayTrip;
 		$this->employee          = $employee;
-		$this->gratification     = $gratification;
 		$this->log               = $log;
 		$this->numHour           = $numHour;
 		$this->periodicity       = $periodicity;
@@ -154,13 +146,12 @@ class ContractController extends Controller
 		$numHours             = $this->numHour->pluck('name', 'id');
 		$periodicities        = $this->periodicity->pluck('name', 'id');
 		$dayTrips             = $this->dayTrip->pluck('name', 'id');
-		$gratifications       = $this->gratification->pluck('name', 'id');
 		$typeContracts        = $this->typeContract->pluck('full_name', 'id');
 		$termsAndObligatories = $this->termAndObligatory->all();
 		
 		return view('human-resources.contracts.create', compact(
 			'companies', 'employees', 'positions', 'areas', 'numHours', 'periodicities', 'dayTrips',
-			'gratifications', 'typeContracts', 'termsAndObligatories'
+			'typeContracts', 'termsAndObligatories'
 		));
 	}
 	
@@ -218,7 +209,7 @@ class ContractController extends Controller
 	{
 		$contract = $this->contract->with([
 			'company', 'employee', 'position', 'area', 'numHour', 'periodicity', 'dayTrip',
-			'gratification', 'typeContract', 'termsAndObligatories'
+			'typeContract', 'termsAndObligatories'
 		])->findOrFail($id);
 		
 		return view('human-resources.contracts.show', compact('contract'));
@@ -233,7 +224,7 @@ class ContractController extends Controller
 	{
 		$contract = $this->contract->with([
 			'company.address.commune.province.region', 'employee.address.commune.province.region',
-			'position', 'area', 'numHour', 'dayTrip', 'periodicityWork', 'gratification', 'typeContract',
+			'position', 'area', 'numHour', 'dayTrip', 'periodicityWork', 'typeContract',
 			'termsAndObligatories', 'company.legalRepresentative', 'company.address.detailAddressCompany',
 			'employee.address.detailAddressLegalEmployee'
 		])->findOrFail($id);

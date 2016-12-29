@@ -142,17 +142,6 @@
     <br />
     <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-2">
-            <div id="redirect-gratifications" class="counter counter-lg counter-inverse bg-purple-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
-                <div class="vertical-align-middle">
-                    <div class="counter-icon">
-                        <i class="fa fa-diamond" aria-hidden="true"></i>
-                    </div>
-                    <span class="counter-number">Gratificaciones</span>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix visible-xs margin-bottom-20"></div>
-        <div class="col-xs-12 col-sm-4 col-md-2">
             <div id="redirect-institutions" class="counter counter-lg counter-inverse bg-amber-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon">
@@ -173,7 +162,7 @@
                 </div>
             </div>
         </div>
-        <div class="clearfix hidden-lg hidden-md margin-bottom-20"></div>
+        <div class="clearfix visible-xs margin-bottom-20"></div>
         <div class="col-xs-12 col-sm-4 col-md-2">
             <div id="redirect-type-professional-licenses" class="counter counter-lg counter-inverse bg-orange-200 vertical-align waves-effect waves-block wave-light height-150 pointer">
                 <div class="vertical-align-middle">
@@ -184,7 +173,7 @@
                 </div>
             </div>
         </div>
-        <div class="clearfix visible-xs margin-bottom-20"></div>
+        <div class="clearfix hidden-lg hidden-md margin-bottom-20"></div>
         <div class="col-xs-12 col-sm-4 col-md-2">
             <div id="redirect-trademarks" class="counter counter-lg counter-inverse bg-brown-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
                 <div class="vertical-align-middle">
@@ -206,6 +195,7 @@
                 </div>
             </div>
         </div>
+        <div class="clearfix visible-xs margin-bottom-20"></div>
     </div>
     <br />
     <div class="row">
