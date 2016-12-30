@@ -1000,4 +1000,45 @@ class Employee extends Eloquent
 			+ $this->getNumImagesDiseasesAttribute() + $this->getNumImagesExamsAttribute()
 			+ $this->getNumImagesFamilyResponsabilitiesAttribute();
 	}
+	
+	
+	/**
+	 * @return string '590.300'
+	 */
+	public function totalPension()
+	{
+		$totalPension = $this->contract->totalImponible() * ($this->pension->com + 0.10);
+		
+		return $totalPension;
+	}
+	
+	/**
+	 * @return string '590.300'
+	 */
+	public function totalForecast()
+	{
+		$totalForecast = $this->contract->totalImponible() * 0.07;
+		
+		return $totalForecast;
+	}
+	
+	/**
+	 * @return string '129.800'
+	 */
+	public function desctosAfectos()
+	{
+	    $desctosAfectos = $this->totalPension() + $this->totalForecast();
+	    
+	    return $desctosAfectos;
+	}
+	
+	/**
+	 * @return string '186.000'
+	 */
+	public function baseTributable()
+	{
+	    $baseTributable = $this->contract->totalImponible() - $this->desctosAfectos();
+	    
+	    return $baseTributable;
+	}
 }

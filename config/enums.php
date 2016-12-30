@@ -5,8 +5,4 @@ return [
 		'Plazo Fijo' => 'Plazo Fijo',
 		'Indefinido' => 'Indefinido',
 	],
-    
-    'gratifications' => [
-    	0 => '4.75  '
-    ]
 ];

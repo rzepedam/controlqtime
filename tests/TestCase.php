@@ -74,7 +74,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 			
 			$this->pension = factory(\Controlqtime\Core\Entities\Pension::class)->create([
 				'id'   => 1,
-				'name' => 'Hábitat'
+				'name' => 'Hábitat',
+				'com'  => 0.0127
 			]);
 			
 			$this->region = factory(Region::class)->create([

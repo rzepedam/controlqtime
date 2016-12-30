@@ -105,6 +105,12 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="col-md-3">Gratificación</td>
+                                    <td class="text-center">
+                                        25% legal anticipada con tope de 4.75 SMM
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="col-md-3">Tipo Contrato</td>
                                     <td class="text-center">
                                         <a href="{{ route('type-contracts.index') }}" style="color: #757575"><i class="fa fa-file-text" aria-hidden="true"></i> {{ $contract->typeContract->full_name }}</a>

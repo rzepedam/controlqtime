@@ -55,6 +55,7 @@ use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\LegalRepresentative;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Entities\DetailAddressCompany;
+use Controlqtime\Core\Entities\FamilyResponsability;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 use Controlqtime\Core\Entities\MasterFormPieceVehicle;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
@@ -161,7 +162,7 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 		'end_morning'      => '13:00',
 		'init_afternoon'   => '14:00',
 		'end_afternoon'    => '19:00',
-		'salary'           => rand(300000, 2990000),
+		'salary'           => rand(100000, 6000000),
 		'mobilization'     => rand(100000, 150000),
 		'collation'        => rand(50000, 99000),
 		'type_contract_id' => factory(TypeContract::class)->create()->id,
@@ -304,6 +305,16 @@ $factory->define(EngineCubic::class, function (Faker\Generator $faker)
 		'name'       => $faker->word,
 		'acr'        => $faker->randomLetter . $faker->randomLetter,
 		'deleted_at' => null
+	];
+});
+
+$factory->define(FamilyResponsability::class, function (Faker\Generator $faker)
+{
+	return [
+		'employee_id'         => factory(Employee::class)->states('enable')->create()->id,
+		'name_responsability' => $faker->firstName . ' ' . $faker->lastName,
+		'rut_responsability'  => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
+		'relationship_id'     => factory(Relationship::class)->create()->id
 	];
 });
 

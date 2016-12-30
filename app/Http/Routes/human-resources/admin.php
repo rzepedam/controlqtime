@@ -45,4 +45,7 @@ Route::group(['prefix' => 'human-resources'], function ()
 		
 	});
 	
+	// Remuneration
+	Route::get('remunerations', 'RemunerationController@index');
+	
 });

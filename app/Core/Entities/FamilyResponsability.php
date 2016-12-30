@@ -73,5 +73,5 @@ class FamilyResponsability extends Eloquent
     {
         return FormatField::rut($value);
     }
-	
+    
 }
