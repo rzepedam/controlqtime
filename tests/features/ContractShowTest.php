@@ -62,6 +62,8 @@ class ContractShowTest extends TestCase
 	        ->seeInElement('td', $this->contract->collation)
 	        ->seeInElement('td', '25% legal anticipada con tope de 4.75 SMM')
 	        ->seeInElement('td', $this->contract->typeContract->name)
+	        ->seeInElement('td', $this->contract->forecast->name)
+	        ->seeInElement('td', $this->contract->pension->name)
 	        ->see($this->obligationsAndProhibitionsA->name)
 	        ->see($this->obligationsAndProhibitionsB->name)
 	        ->see($this->obligationsAndProhibitionsC->name)

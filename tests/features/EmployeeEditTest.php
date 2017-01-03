@@ -3,8 +3,6 @@
 use Controlqtime\Core\Entities\Degree;
 use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Entities\Commune;
-use Controlqtime\Core\Entities\Pension;
-use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\Institution;
@@ -24,15 +22,11 @@ class EmployeeEditTest extends TestCase
 	
 	protected $degree;
 	
-	protected $forecast;
-	
 	protected $maritalStatus;
 	
 	protected $nationality;
 	
 	protected $institution;
-	
-	protected $pension;
 	
 	protected $region;
 	
@@ -64,10 +58,8 @@ class EmployeeEditTest extends TestCase
 		$this->signIn();
 		$this->nationality             = factory(Nationality::class)->create();
 		$this->degree                  = factory(Degree::class)->create();
-		$this->forecast                = factory(Forecast::class)->create();
 		$this->maritalStatus           = factory(MaritalStatus::class)->create();
 		$this->institution             = factory(Institution::class)->create();
-		$this->pension                 = factory(Pension::class)->create();
 		$this->region                  = factory(Region::class)->create();
 		$this->commune                 = factory(Commune::class)->create();
 		$this->province                = factory(Province::class)->create();
@@ -93,8 +85,6 @@ class EmployeeEditTest extends TestCase
 			->seeInElement('#nationality_id', $this->employee->nationality->name)
 			->seeIsSelected('is_male', 'M')
 			->seeInElement('#marital_status_id', $this->employee->maritalStatus->id)
-			->seeInElement('#forecast_id', $this->employee->forecast->id)
-			->seeInElement('#pension_id', $this->employee->pension->id)
 			->seeInField('#address', $this->employee->address->address)
 			->seeInField('#depto', $this->employee->address->detailAddressLegalEmployee->depto)
 			->seeInField('#block', $this->employee->address->detailAddressLegalEmployee->block)
@@ -116,14 +106,6 @@ class EmployeeEditTest extends TestCase
 		
 		$maritalStatus = factory(MaritalStatus::class)->create([
 			'name' => 'Viudo'
-		]);
-		
-		$forecast = factory(Forecast::class)->create([
-			'name' => 'Banmédica'
-		]);
-		
-		$pension = factory(Pension::class)->create([
-			'name' => 'Modelo'
 		]);
 		
 		$region = factory(Region::class)->create([
@@ -151,8 +133,6 @@ class EmployeeEditTest extends TestCase
 			'nationality_id'             => $nationality->id,
 			'is_male'                    => 'F',
 			'marital_status_id'          => $maritalStatus->id,
-			'forecast_id'                => $forecast->id,
-			'pension_id'                 => $pension->id,
 			'address'                    => 'José Miguel Carrera 1391. Villa San Alberto',
 			'depto'                      => '303',
 			'block'                      => '',
@@ -198,8 +178,6 @@ class EmployeeEditTest extends TestCase
 				'nationality_id'    => $nationality->id,
 				'is_male'           => false,
 				'marital_status_id' => $maritalStatus->id,
-				'forecast_id'       => $forecast->id,
-				'pension_id'        => $pension->id,
 				'email_employee'    => 'test@gmail.com',
 				'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
 				'state'             => 'disable',

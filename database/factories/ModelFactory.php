@@ -76,7 +76,7 @@ $factory->define(AccessControlApi::class, function (Faker\Generator $faker)
 $factory->define(Address::class, function (Faker\Generator $faker)
 {
 	return [
-		'addressable_id'   => 1,
+		'addressable_id'   => factory(Employee::class)->states('enable')->create(),
 		'addressable_type' => 'Controlqtime\Core\Entities\Employee',
 		'address'          => $faker->address,
 		'commune_id'       => 1,
@@ -158,6 +158,8 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 		'num_hour_id'      => factory(NumHour::class)->create()->id,
 		'periodicity_id'   => factory(Periodicity::class)->create()->id,
 		'day_trip_id'      => factory(DayTrip::class)->create()->id,
+		'forecast_id'      => factory(Forecast::class)->create()->id,
+		'pension_id'       => factory(Pension::class)->create()->id,
 		'init_morning'     => '09:00',
 		'end_morning'      => '13:00',
 		'init_afternoon'   => '14:00',
@@ -269,8 +271,6 @@ $factory->define(Employee::class, function (Faker\Generator $faker)
 	return [
 		'nationality_id'    => factory(Nationality::class)->create()->id,
 		'marital_status_id' => factory(MaritalStatus::class)->create()->id,
-		'forecast_id'       => factory(Forecast::class)->create()->id,
-		'pension_id'        => factory(Pension::class)->create()->id,
 		'male_surname'      => $maleSurname,
 		'female_surname'    => $femaleSurname,
 		'first_name'        => $firstName,

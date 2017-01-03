@@ -27,12 +27,12 @@
         </div>
         <div class="clearfix visible-xs margin-bottom-20"></div>
         <div class="col-xs-12 col-sm-4 col-md-4">
-            <div id="redirect-employees" class="counter counter-lg counter-inverse bg-blue-grey-400 vertical-align waves-effect waves-block waves-light height-150 pointer">
+            <div id="redirect-remunerations" class="counter counter-lg counter-inverse bg-orange-400 vertical-align waves-effect waves-block waves-light height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon">
-                        <i class="icon md-accounts" aria-hidden="true"></i>
+                        <i class="fa fa-line-chart" aria-hidden="true"></i>
                     </div>
-                    <span class="counter-number">Trabajadores</span>
+                    <span class="counter-number">Remuneraciones</span>
                 </div>
             </div>
         </div>
@@ -40,12 +40,12 @@
     <br />
     <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-4">
-            <div id="redirect-remunerations" class="counter counter-lg counter-inverse bg-orange-400 vertical-align waves-effect waves-block waves-light height-150 pointer">
+            <div id="redirect-employees" class="counter counter-lg counter-inverse bg-blue-grey-400 vertical-align waves-effect waves-block waves-light height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon">
-                        <i class="fa fa-line-chart" aria-hidden="true"></i>
+                        <i class="icon md-accounts" aria-hidden="true"></i>
                     </div>
-                    <span class="counter-number">Remuneraciones</span>
+                    <span class="counter-number">Trabajadores</span>
                 </div>
             </div>
         </div>

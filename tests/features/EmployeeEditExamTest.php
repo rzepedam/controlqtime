@@ -34,8 +34,6 @@ class EmployeeEditExamTest extends TestCase
 			'nationality_id'             => $this->nationality->id,
 			'is_male'                    => 'M',
 			'marital_status_id'          => $this->maritalStatus->id,
-			'forecast_id'                => $this->forecast->id,
-			'pension_id'                 => $this->pension->id,
 			'address'                    => 'Vicuña Mackenna 2209',
 			'commune_id'                 => $this->commune->id,
 			'phone1'                     => '+56988102910',

@@ -1,4 +1,3 @@
-{{-- First row --}}
 <div class="row">
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('male_surname', 'Apellido Paterno', ['class' => 'control-label']) }}
@@ -17,8 +16,6 @@
         {{ Form::text('second_name', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
     </div>
 </div>
-
-{{-- Second row --}}
 <div class="row">
     <div class="col-sm-6 col-md-3">
         <div class="form-group">
@@ -62,59 +59,48 @@
 {{-- Third row --}}
 <div class="row">
     {{-- Estado Civil Form Select --}}
-    <div class="col-sm-4 col-md-3 form-group">
+    <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('marital_status_id', 'Estado Civil', ['class' => 'control-label']) }}
         {{ Form::select('marital_status_id', is_null($employee->maritalStatus->deleted_at) ? $maritalStatuses : ['default' => 'Seleccione Estado Civil...'] + $maritalStatuses->toArray(), null, ['class' => 'form-control']) }}
     </div>
-    {{-- Previsión Form Select --}}
-    <div class="col-sm-4 col-md-3 form-group">
-        {{ Form::label('forecast_id', 'Previsión', ['class' => 'control-label']) }}
-        {{ Form::select('forecast_id', is_null($employee->forecast->deleted_at) ? $forecasts : ['default' => 'Seleccione Previsión...'] + $forecasts->toArray(), null, ['class' => 'form-control']) }}
-    </div>
-    {{-- Pensión Form Select --}}
-    <div class="col-sm-4 col-md-3 form-group">
-        {{ Form::label('pension_id', 'Pensión', ['class' => 'control-label']) }}
-        {{ Form::select('pension_id', is_null($employee->pension->deleted_at) ? $pensions : ['default' => 'Seleccione Fondo de Pensión...'] + $pensions->toArray(), null, ['class' => 'form-control']) }}
-    </div>
-</div>
-
-{{-- Four row --}}
-<div class="row">
+    {{-- Address Form Input --}}
     <div class="col-sm-6 col-md-6 form-group">
         {{ Form::label('address', 'Dirección', ['class' => 'control-label']) }}
         {{ Form::text('address', $employee->address->address, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '75']) }}
     </div>
     {{-- Depto Form Input --}}
-    <div class="col-sm-2 col-md-2 form-group">
+    <div class="col-sm-4 col-md-1 form-group">
         {{ Form::label('depto', 'Depto', ['class' => 'control-label']) }}
         {{ Form::text('depto', $employee->address->detailAddressLegalEmployee->depto, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     {{-- Block Form Input --}}
-    <div class="col-sm-2 col-md-2 form-group">
+    <div class="col-sm-4 col-md-1 form-group">
         {{ Form::label('block', 'Block', ['class' => 'control-label']) }}
         {{ Form::text('block', $employee->address->detailAddressLegalEmployee->block, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
     {{-- Num_home Form Input --}}
-    <div class="col-sm-2 col-md-2 form-group">
+    <div class="col-sm-4 col-md-1 form-group">
         {{ Form::label('num_home', 'Casa', ['class' => 'control-label']) }}
         {{ Form::text('num_home', $employee->address->detailAddressLegalEmployee->num_home, ['class' => 'form-control text-center', 'data-plugin' => 'maxlength', 'maxlength' => '5', 'threshold' => '5']) }}
     </div>
 </div>
-
-{{-- Five row --}}
 <div class="row">
+    {{-- Region Form Select --}}
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
         {{ Form::select('region_id', $regions, $employee->address->commune->province->region->id, ['class' => 'form-control']) }}
     </div>
+    {{-- Province Form Select --}}
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('province_id', 'Provincia', ['class' => 'control-label']) }}
         {{ Form::select('province_id', $provinces, $employee->address->commune->province->id, ['class' => 'form-control']) }}
     </div>
+    {{-- Commune Form Select --}}
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
         {{ Form::select('commune_id', $communes, $employee->address->commune_id, ['class' => 'form-control']) }}
     </div>
+    {{-- Phone1 Form Input --}}
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('phone1', 'Teléfono 1', ['class' => 'control-label']) }}
         <div class="input-group">
@@ -125,9 +111,8 @@
         </div>
     </div>
 </div>
-
-{{-- Five row --}}
 <div class="row">
+    {{-- Phone2 Form Input --}}
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('phone2', 'Teléfono 2', ['class' => 'control-label']) }}
         <div class="input-group">
@@ -137,6 +122,7 @@
             {{ Form::text('phone2', $employee->address->phone2, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
         </div>
     </div>
+    {{-- Email Form Input --}}
     <div class="col-sm-6 col-md-6 form-group">
         {{ Form::label('email_employee', 'Email', ['class' => 'control-label']) }}
         <div class="input-group">

@@ -13,8 +13,6 @@ class EmployeeTableSeeder extends Seeder
 		Employee::create([
 			'nationality_id'    => 4,
 			'marital_status_id' => 3,
-			'forecast_id'       => 7,
-			'pension_id'        => 1,
 			'male_surname'      => 'Meza',
 			'female_surname'    => 'Mora',
 			'first_name'        => 'Raúl',
@@ -31,8 +29,6 @@ class EmployeeTableSeeder extends Seeder
 		Employee::create([
 			'nationality_id'    => 4,
 			'marital_status_id' => 3,
-			'forecast_id'       => 7,
-			'pension_id'        => 1,
 			'male_surname'      => 'Zepeda',
 			'female_surname'    => 'Muñoz',
 			'first_name'        => 'Roberto',

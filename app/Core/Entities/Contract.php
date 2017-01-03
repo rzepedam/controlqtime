@@ -19,7 +19,8 @@ class Contract extends Eloquent
 	protected $fillable = [
 		'company_id', 'employee_id', 'position_id', 'area_id', 'num_hour_id',
 		'periodicity_id', 'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon',
-		'end_afternoon', 'salary', 'mobilization', 'collation', 'type_contract_id', 'expires_at'
+		'end_afternoon', 'salary', 'mobilization', 'collation', 'type_contract_id',
+		'forecast_id', 'pension_id', 'expires_at'
 	];
 	
 	/**
@@ -91,9 +92,17 @@ class Contract extends Eloquent
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function periodicityWork()
+	public function pension()
 	{
-		return $this->belongsTo(Periodicity::class, 'periodicity_work_id');
+		return $this->belongsTo(Pension::class);
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function forecast()
+	{
+	    return $this->belongsTo(Forecast::class);
 	}
 	
 	/**
@@ -259,15 +268,15 @@ class Contract extends Eloquent
 		switch ( $this->salary )
 		{
 			case ($this->salary <= 270196):
-				return Config::get('constants.familyAllowance')[0] * $this->num_family_responsabilities;
+				return Config::get('constants.familyAllowance')[0] * $this->employee->num_family_responsabilities;
 				break;
 			
 			case ($this->salary > 270196 && $this->salary <= 394651):
-				return Config::get('constants.familyAllowance')[1] * $this->num_family_responsabilities;
+				return Config::get('constants.familyAllowance')[1] * $this->employee->num_family_responsabilities;
 				break;
 			
 			case ($this->salary > 394651 && $this->salary <= 615521):
-				return Config::get('constants.familyAllowance')[2] * $this->num_family_responsabilities;
+				return Config::get('constants.familyAllowance')[2] * $this->employee->num_family_responsabilities;
 				break;
 			
 			default:
@@ -281,10 +290,49 @@ class Contract extends Eloquent
 	 */
 	public function totalHaber()
 	{
-		$totalHaber = $this->totalImponible() + $this->asignacionFamiliar() + $this->mobilization +
-			$this->collation;
+		$totalHaber = $this->totalImponible() + $this->asignacionFamiliar() + $this->mobilization + $this->collation;
 		
 		return $totalHaber;
+	}
+	
+	/**
+	 * @return string '590.300'
+	 */
+	public function totalPension()
+	{
+		$totalPension = $this->totalImponible() * ($this->pension->com + 0.10);
+		
+		return $totalPension;
+	}
+	
+	/**
+	 * @return string '590.300'
+	 */
+	public function totalForecast()
+	{
+		$totalForecast = $this->totalImponible() * 0.07;
+		
+		return $totalForecast;
+	}
+	
+	/**
+	 * @return string '129.800'
+	 */
+	public function descuentosAfectos()
+	{
+		$descuentosAfectos = $this->totalPension() + $this->totalForecast();
+		
+		return $descuentosAfectos;
+	}
+	
+	/**
+	 * @return string '186.000'
+	 */
+	public function baseTributable()
+	{
+		$baseTributable = $this->totalImponible() - $this->descuentosAfectos();
+		
+		return $baseTributable;
 	}
 	
 	/**
@@ -376,7 +424,7 @@ class Contract extends Eloquent
 	 */
 	public function totalDescuentos()
 	{
-		$totalDescuentos = $this->employee->desctosAfectos() + $this->impuestoUnico();
+		$totalDescuentos = $this->descuentosAfectos() + $this->impuestoUnico();
 		
 		return $totalDescuentos;
 	}

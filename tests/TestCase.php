@@ -6,6 +6,7 @@ use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Province;
+use Illuminate\Support\Facades\Notification;
 use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
@@ -20,10 +21,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 	protected $nationality;
 	
 	protected $maritalStatus;
-	
-	protected $forecast;
-	
-	protected $pension;
 	
 	protected $employee;
 	
@@ -67,17 +64,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 				'name' => 'Soltero'
 			]);
 			
-			$this->forecast = factory(\Controlqtime\Core\Entities\Forecast::class)->create([
-				'id'   => 1,
-				'name' => 'Cruz Blanca'
-			]);
-			
-			$this->pension = factory(\Controlqtime\Core\Entities\Pension::class)->create([
-				'id'   => 1,
-				'name' => 'Hábitat',
-				'com'  => 0.0127
-			]);
-			
 			$this->region = factory(Region::class)->create([
 				'id'   => 1,
 				'name' => 'Región Metropolitana de Santiago'
@@ -99,8 +85,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 				'id'                => 1,
 				'nationality_id'    => $this->nationality->id,
 				'marital_status_id' => $this->maritalStatus->id,
-				'forecast_id'       => $this->forecast->id,
-				'pension_id'        => $this->pension->id,
 				'male_surname'      => 'Meza',
 				'female_surname'    => 'Mora',
 				'first_name'        => 'Raúl',
@@ -144,6 +128,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 		$this->detailAddressLegalEmployee = $detailAddressLegalEmployee;
 		$this->user                       = $user;
 		$this->actingAs($this->user);
+		Notification::fake();
 		
 		return $this;
 	}

@@ -12,7 +12,7 @@
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table table-striped">
         <tbody>
             <tr>
                 <td>Sueldo Base</td>
@@ -20,27 +20,31 @@
             </tr>
             <tr>
                 <td>Gratificación</td>
-            </tr>
-            <tr>
                 <td>{{ $employee->contract->gratification() }}</td>
             </tr>
             <tr>
                 <td>Horas Extras</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Comisión</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Bono Imponible</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Inasistencias</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Atrasos</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Total Asistencia y Atrasos</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Total Imponible</td>
@@ -60,6 +64,7 @@
             </tr>
             <tr>
                 <td>Bono No Imponible</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Total Haber</td>
@@ -67,31 +72,35 @@
             </tr>
             <tr>
                 <td>AFP</td>
-                <td>{{ $employee->totalPension() }}</td>
+                <td>{{ $employee->contract->totalPension() }}</td>
             </tr>
             <tr>
                 <td>APV</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Seguro Cesantía</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Salud</td>
-                <td>{{ $employee->totalForecast() }}</td>
+                <td>{{ $employee->contract->totalForecast() }}</td>
             </tr>
             <tr>
                 <td>Cotización Adicional Isapre</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Valor Plan</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Descuentos Afectos</td>
-                <td>{{ $employee->desctosAfectos() }}</td>
+                <td>{{ $employee->contract->descuentosAfectos() }}</td>
             </tr>
             <tr>
                 <td>Base Tributable</td>
-                <td>{{ $employee->baseTributable() }}</td>
+                <td>{{ $employee->contract->baseTributable() }}</td>
             </tr>
             <tr>
                 <td>Impuesto</td>
@@ -107,6 +116,7 @@
             </tr>
             <tr>
                 <td>Descuentos Varios</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Total Descuentos</td>
@@ -114,6 +124,7 @@
             </tr>
             <tr>
                 <td>Anticipos</td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Sueldo Líquido</td>

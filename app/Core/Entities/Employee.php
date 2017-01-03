@@ -20,8 +20,7 @@ class Employee extends Eloquent
 	 */
 	protected $fillable = [
 		'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name', 'rut', 'birthday',
-		'is_male', 'nationality_id', 'marital_status_id', 'forecast_id', 'pension_id', 'email_employee',
-		'state'
+		'is_male', 'nationality_id', 'marital_status_id', 'email_employee', 'state'
 	];
 	
 	/**
@@ -553,24 +552,6 @@ class Employee extends Eloquent
 	}
 	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function forecast()
-	{
-		return $this->belongsTo(Forecast::class)
-			->withTrashed();
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function pension()
-	{
-		return $this->belongsTo(Pension::class)
-			->withTrashed();
-	}
-	
-	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
 	public function imagesable()
@@ -999,46 +980,5 @@ class Employee extends Eloquent
 			+ $this->getNumImagesProfessionalLicensesAttribute() + $this->getNumImagesDisabilitiesAttribute()
 			+ $this->getNumImagesDiseasesAttribute() + $this->getNumImagesExamsAttribute()
 			+ $this->getNumImagesFamilyResponsabilitiesAttribute();
-	}
-	
-	
-	/**
-	 * @return string '590.300'
-	 */
-	public function totalPension()
-	{
-		$totalPension = $this->contract->totalImponible() * ($this->pension->com + 0.10);
-		
-		return $totalPension;
-	}
-	
-	/**
-	 * @return string '590.300'
-	 */
-	public function totalForecast()
-	{
-		$totalForecast = $this->contract->totalImponible() * 0.07;
-		
-		return $totalForecast;
-	}
-	
-	/**
-	 * @return string '129.800'
-	 */
-	public function desctosAfectos()
-	{
-	    $desctosAfectos = $this->totalPension() + $this->totalForecast();
-	    
-	    return $desctosAfectos;
-	}
-	
-	/**
-	 * @return string '186.000'
-	 */
-	public function baseTributable()
-	{
-	    $baseTributable = $this->contract->totalImponible() - $this->desctosAfectos();
-	    
-	    return $baseTributable;
 	}
 }

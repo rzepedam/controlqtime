@@ -16,8 +16,6 @@ class CreateEmployeesTable extends Migration
             $table->increments('id');
 	        $table->unsignedInteger('nationality_id')->nullable();
 	        $table->unsignedInteger('marital_status_id')->nullable();
-	        $table->unsignedInteger('forecast_id')->nullable();
-	        $table->unsignedInteger('pension_id')->nullable();
 	        $table->string('male_surname', 30);
 	        $table->string('female_surname', 30);
 	        $table->string('first_name', 30);

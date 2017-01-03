@@ -63,8 +63,6 @@ class EmployeeCreateTest extends TestCase
 			'nationality_id'    => $this->nationality->id,
 			'is_male'           => 'M',
 			'marital_status_id' => $this->maritalStatus->id,
-			'forecast_id'       => $this->forecast->id,
-			'pension_id'        => $this->pension->id,
 			'address'           => 'Vicuña Mackenna 2209',
 			'commune_id'        => $this->commune->id,
 			'phone1'            => '+56974155784',
@@ -83,8 +81,6 @@ class EmployeeCreateTest extends TestCase
 			->dontSeeIsSelected('is_male', 'M')
 			->dontSeeIsSelected('is_male', 'F')
 			->seeInElement('#marital_status_id', $this->maritalStatus->name)
-			->seeInElement('#forecast_id', $this->forecast->name)
-			->seeInElement('#pension_id', $this->pension->name)
 			->seeInElement('#region_id', $this->region->name)
 			->seeInElement('#province_id', $this->province->name)
 			->seeInElement('#commune_id', $this->commune->name)
@@ -126,8 +122,6 @@ class EmployeeCreateTest extends TestCase
 				'nationality_id'    => 1,
 				'is_male'           => true,
 				'marital_status_id' => 1,
-				'forecast_id'       => 1,
-				'pension_id'        => 1,
 				'email_employee'    => 'marcelocandia@gmail.com',
 				'url'               => null,
 				'state'             => 'disable',
@@ -237,8 +231,6 @@ class EmployeeCreateTest extends TestCase
 				'nationality_id'    => 1,
 				'is_male'           => true,
 				'marital_status_id' => 1,
-				'forecast_id'       => 1,
-				'pension_id'        => 1,
 				'email_employee'    => 'marcelocandia@gmail.com',
 				'url'               => null,
 				'state'             => 'disable',

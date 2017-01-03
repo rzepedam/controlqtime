@@ -14,10 +14,8 @@ use Controlqtime\Core\Entities\Region;
 use Controlqtime\Core\Entities\Address;
 use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Disease;
-use Controlqtime\Core\Entities\Pension;
 use Illuminate\Support\Facades\Session;
 use Controlqtime\Core\Entities\Employee;
-use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\TypeExam;
 use Controlqtime\Core\Entities\Disability;
@@ -112,11 +110,6 @@ class EmployeeController extends Controller
 	protected $familyResponsability;
 	
 	/**
-	 * @var Forecast
-	 */
-	protected $forecast;
-	
-	/**
 	 * @var Institution
 	 */
 	protected $institution;
@@ -135,11 +128,6 @@ class EmployeeController extends Controller
 	 * @var Nationality
 	 */
 	protected $nationality;
-	
-	/**
-	 * @var Pension
-	 */
-	protected $pension;
 	
 	/**
 	 * @var ProfessionalLicense
@@ -222,12 +210,10 @@ class EmployeeController extends Controller
 	 * @param Exam                       $exam
 	 * @param FamilyRelationship         $familyRelationship
 	 * @param FamilyResponsability       $familyResponsability
-	 * @param Forecast                   $forecast
 	 * @param Institution                $institution
 	 * @param Log                        $log
 	 * @param MaritalStatus              $maritalStatus
 	 * @param Nationality                $nationality
-	 * @param Pension                    $pension
 	 * @param ProfessionalLicense        $professionalLicense
 	 * @param Province                   $province
 	 * @param Region                     $region
@@ -245,12 +231,11 @@ class EmployeeController extends Controller
 	public function __construct(ActivateEmployee $activateEmployee, Address $address, Certification $certification,
 		Commune $commune, ContactEmployee $contactEmployee, Degree $degree, DetailAddressLegalEmployee $detailAddress,
 		Disability $disability, Disease $disease, Employee $employee, Exam $exam, FamilyRelationship $familyRelationship,
-		FamilyResponsability $familyResponsability, Forecast $forecast, Institution $institution, Log $log,
-		MaritalStatus $maritalStatus, Nationality $nationality, Pension $pension, ProfessionalLicense $professionalLicense,
-		Province $province, Region $region, Relationship $relationship, Speciality $speciality, Study $study,
-		TypeCertification $typeCertification, TypeDisability $typeDisability, TypeDisease $typeDisease,
-		TypeExam $typeExam, TypeProfessionalLicense $typeProfessionalLicense, TypeSpeciality $typeSpeciality,
-		User $user)
+		FamilyResponsability $familyResponsability, Institution $institution, Log $log, MaritalStatus $maritalStatus,
+		Nationality $nationality, ProfessionalLicense $professionalLicense, Province $province, Region $region,
+		Relationship $relationship, Speciality $speciality, Study $study, TypeCertification $typeCertification,
+		TypeDisability $typeDisability, TypeDisease $typeDisease, TypeExam $typeExam,
+		TypeProfessionalLicense $typeProfessionalLicense, TypeSpeciality $typeSpeciality, User $user)
 	{
 		$this->activateEmployee        = $activateEmployee;
 		$this->address                 = $address;
@@ -265,12 +250,10 @@ class EmployeeController extends Controller
 		$this->exam                    = $exam;
 		$this->familyRelationship      = $familyRelationship;
 		$this->familyResponsability    = $familyResponsability;
-		$this->forecast                = $forecast;
 		$this->institution             = $institution;
 		$this->log                     = $log;
 		$this->maritalStatus           = $maritalStatus;
 		$this->nationality             = $nationality;
-		$this->pension                 = $pension;
 		$this->professionalLicense     = $professionalLicense;
 		$this->province                = $province;
 		$this->region                  = $region;
@@ -312,10 +295,8 @@ class EmployeeController extends Controller
 		$nationalities            = $this->nationality->pluck('name', 'id');
 		$degrees                  = $this->degree->pluck('name', 'id');
 		$employees                = $this->employee->pluck('full_name', 'id');
-		$forecasts                = $this->forecast->pluck('name', 'id');
 		$maritalStatuses          = $this->maritalStatus->pluck('name', 'id');
 		$institutions             = $this->institution->pluck('name', 'id');
-		$pensions                 = $this->pension->pluck('name', 'id');
 		$regionsColl              = $this->region->all();
 		$provincesColl            = $this->region->findOrFail($regionsColl->first()->id)->provinces;
 		$communes                 = $this->province->findOrFail($provincesColl->first()->id)->communes->pluck('name', 'id');
@@ -330,9 +311,9 @@ class EmployeeController extends Controller
 		$typeSpecialities         = $this->typeSpeciality->pluck('name', 'id');
 		
 		return view('human-resources.employees.create', compact(
-			'communes', 'nationalities', 'degrees', 'employees', 'forecasts', 'maritalStatuses',
-			'institutions', 'pensions', 'provinces', 'regions', 'relationships', 'typeCertifications',
-			'typeDisabilities', 'typeDiseases', 'typeExams', 'typeProfessionalLicenses', 'typeSpecialities'
+			'communes', 'nationalities', 'degrees', 'employees', 'maritalStatuses', 'institutions',
+			'provinces', 'regions', 'relationships', 'typeCertifications', 'typeDisabilities', 'typeDiseases',
+			'typeExams', 'typeProfessionalLicenses', 'typeSpecialities'
 		));
 	}
 	
@@ -364,10 +345,7 @@ class EmployeeController extends Controller
 			$employee->createDiseases($request->all());
 			$employee->createExams($request->all());
 			$employee->createFamilyResponsabilities($request->all());
-			if ( getenv('APP_ENV') === 'production' )
-			{
-				$user->notify(new EmployeeWasRegistered($employee));
-			}
+			$user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionStoreEmployee();
 			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			DB::commit();
@@ -398,10 +376,8 @@ class EmployeeController extends Controller
 		$nationalities            = $this->nationality->pluck('name', 'id');
 		$degrees                  = $this->degree->pluck('name', 'id');
 		$employees                = $this->employee->pluck('full_name', 'id');
-		$forecasts                = $this->forecast->pluck('name', 'id');
 		$maritalStatuses          = $this->maritalStatus->pluck('name', 'id');
 		$institutions             = $this->institution->pluck('name', 'id');
-		$pensions                 = $this->pension->pluck('name', 'id');
 		$regionsColl              = $this->region->all();
 		$provincesColl            = $this->region->findOrFail($employee->address->commune->province->region->id)->provinces;
 		$communes                 = $this->province->findOrFail($id)->communes->pluck('name', 'id');
@@ -417,9 +393,8 @@ class EmployeeController extends Controller
 		
 		return view('human-resources.employees.edit', compact(
 			'employee', 'communes', 'nationalities', 'degrees', 'employees', 'maritalStatuses',
-			'forecasts', 'pensions', 'institutions', 'provinces', 'regions', 'relationships',
-			'typeCertifications', 'typeDisabilities', 'typeDiseases', 'typeExams', 'typeProfessionalLicenses',
-			'typeSpecialities'
+			'institutions', 'provinces', 'regions', 'relationships', 'typeCertifications', 'typeDisabilities',
+			'typeDiseases', 'typeExams', 'typeProfessionalLicenses', 'typeSpecialities'
 		));
 	}
 	
@@ -466,10 +441,7 @@ class EmployeeController extends Controller
 			$employee->deleteFamilyResponsabilities($request->get('id_delete_family_responsability'));
 			$employee->createFamilyResponsabilities($request->all());
 			$this->activateEmployee->checkStateUpdateEmployee($id);
-			if ( getenv('APP_ENV') === 'production' )
-			{
-				$employee->user->notify(new EmployeeWasRegistered($employee));
-			}
+			$employee->user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionUpdateEmployee();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			DB::commit();
@@ -492,12 +464,11 @@ class EmployeeController extends Controller
 	public function show($id)
 	{
 		$employee = $this->employee->with([
-			'pension', 'forecast', 'address.commune.province.region', 'contactEmployees.relationship',
-			'familyRelationships.relationship', 'address.detailAddressLegalEmployee', 'studies.degree',
-			'studies.detailCollegeStudy.institution', 'studies.detailSchoolStudy', 'studies.detailTechnicalStudy',
-			'certifications.imagesable', 'specialities.imagesable', 'professionalLicenses.imagesable',
-			'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable',
-			'familyResponsabilities.imagesable'
+			'address.commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
+			'address.detailAddressLegalEmployee', 'studies.degree', 'studies.detailCollegeStudy.institution',
+			'studies.detailSchoolStudy', 'studies.detailTechnicalStudy', 'certifications.imagesable',
+			'specialities.imagesable', 'professionalLicenses.imagesable', 'disabilities.imagesable',
+			'diseases.imagesable', 'exams.imagesable', 'familyResponsabilities.imagesable'
 		])->findOrFail($id);
 		
 		return view('human-resources.employees.show', compact('employee'));
@@ -607,8 +578,6 @@ class EmployeeController extends Controller
 		Session::put('nationality_id', $request->get('nationality_id'));
 		Session::put('is_male', $request->get('is_male'));
 		Session::put('marital_status_id', $request->get('marital_status_id'));
-		Session::put('forecast_id', $request->get('forecast_id'));
-		Session::put('pension_id', $request->get('pension_id'));
 		Session::put('address', $request->get('address'));
 		Session::put('depto', $request->get('depto'));
 		Session::put('block', $request->get('block'));
@@ -730,8 +699,6 @@ class EmployeeController extends Controller
 		Session::forget('nationality_id');
 		Session::forget('is_male');
 		Session::forget('marital_status_id');
-		Session::forget('forecast_id');
-		Session::forget('pension_id');
 		Session::forget('address');
 		Session::forget('depto');
 		Session::forget('block');

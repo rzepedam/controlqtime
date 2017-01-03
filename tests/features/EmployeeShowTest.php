@@ -30,8 +30,6 @@ class EmployeeShowTest extends TestCase
 	        ->seeInElement('td', 'Domingo 11 Junio 1989')
 	        ->seeInElement('td', 'Masculino')
 	        ->seeInElement('td', 'Soltero')
-	        ->seeInElement('td', 'Cruz Blanca')
-	        ->seeInElement('td', 'Hábitat')
 	        ->seeInElement('td', 'Santa Amalia 273, Depto 303. La Florida. Santiago. Región Metropolitana de Santiago')
 	        ->seeInElement('td', '222624050')
 	        ->seeInElement('td', 'Lunes 12 Diciembre 2016 09:13:21')

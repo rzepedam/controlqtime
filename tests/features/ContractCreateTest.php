@@ -28,6 +28,10 @@ class ContractCreateTest extends TestCase
 	
 	protected $obligationsAndProhibitionsC;
 	
+	protected $forecast;
+	
+	protected $pension;
+	
 	function setUp()
 	{
 		parent::setUp();
@@ -84,6 +88,10 @@ class ContractCreateTest extends TestCase
 			'full_name' => 'Plazo Fijo 12 meses'
 		]);
 		
+		$this->forecast = factory(\Controlqtime\Core\Entities\Forecast::class)->create();
+		
+		$this->pension = factory(\Controlqtime\Core\Entities\Pension::class)->create();
+		
 		$this->obligationsAndProhibitionsA = factory(\Controlqtime\Core\Entities\TermAndObligatory::class)->create([
 			'default' => 'on'
 		]);
@@ -114,6 +122,8 @@ class ContractCreateTest extends TestCase
 			->seeInField('#init_afternoon', '14:00')
 			->seeInField('#end_afternoon', '19:00')
 			->seeInElement('#type_contract_id', 'Plazo Fijo 12 meses')
+			->seeInElement('#forecast_id', $this->forecast->name)
+			->seeInElement('#pension_id', $this->pension->name)
 			->seeIsChecked('#default0')
 			->dontSeeIsChecked('#default1')
 			->seeIsChecked('#default2')
@@ -136,6 +146,8 @@ class ContractCreateTest extends TestCase
 			->type('14:00', 'init_afternoon')
 			->type('19:00', 'end_afternoon')
 			->select($this->typeContract->id, '#type_contract_id')
+			->select($this->forecast->id, '#forecast_id')
+			->select($this->pension->id, '#pension_id')
 			->submitForm('Guardar', [
 				'salary'                    => '580000',
 				'mobilization'              => '80000',
@@ -157,7 +169,9 @@ class ContractCreateTest extends TestCase
 				'salary'           => '580000',
 				'mobilization'     => '80000',
 				'collation'        => '125000',
-				'type_contract_id' => $this->typeContract->id])
+				'type_contract_id' => $this->typeContract->id,
+				'forecast_id'      => $this->forecast->id,
+				'pension_id'       => $this->pension->id])
 			->seeInDatabase('contract_term_and_obligatory', [
 				'term_and_obligatory_id' => $this->obligationsAndProhibitionsA->id])
 			->dontseeInDatabase('contract_term_and_obligatory', [

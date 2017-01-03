@@ -116,6 +116,18 @@
                                         <a href="{{ route('type-contracts.index') }}" style="color: #757575"><i class="fa fa-file-text" aria-hidden="true"></i> {{ $contract->typeContract->full_name }}</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="col-md-3">Previsión</td>
+                                    <td class="text-center">
+                                        <i class="fa fa-heart" aria-hidden="true"></i> {{ $contract->forecast->name }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-3">AFP</td>
+                                    <td class="text-center">
+                                        <i class="fa fa-tag" aria-hidden="true"></i> {{ $contract->pension->name }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

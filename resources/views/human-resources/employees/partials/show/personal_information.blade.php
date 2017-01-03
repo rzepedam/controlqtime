@@ -74,14 +74,6 @@
                         <td class="text-center">{{ $employee->maritalStatus->name }}</td>
                     </tr>
                     <tr>
-                        <td class="col-md-3">Previsión</td>
-                        <td class="text-center">{{ $employee->forecast->name }}</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-3">AFP</td>
-                        <td class="text-center">{{ $employee->pension->name }}</td>
-                    </tr>
-                    <tr>
                         <td class="col-md-3">Domicilio</td>
                         <td class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i>
                             {{ $employee->address->address }}{{ ($employee->address->detailAddressLegalEmployee->depto) ? ', Depto ' . $employee->address->detailAddressLegalEmployee->depto : '' }}{{ ($employee->address->detailAddressLegalEmployee->block) ? ', Block ' . $employee->address->detailAddressLegalEmployee->block : '' }}{{ ($employee->address->detailAddressLegalEmployee->num_home) ? ', Nº Casa ' . $employee->address->detailAddressLegalEmployee->num_home : '' }}{{ ". " . $employee->address->commune->name . ". " . $employee->address->commune->province->name . ". " . $employee->address->commune->province->region->name }}
