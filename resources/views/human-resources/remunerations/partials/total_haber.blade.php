@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Bono No Imponible</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ {{ $employee->contract->bono_no_imponible }}</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8" style="visibility: collapse">Total Haber</td>

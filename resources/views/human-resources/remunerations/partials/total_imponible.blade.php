@@ -19,11 +19,11 @@
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Comisión</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ 0</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Bono Imponible</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ 0</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Inasistencias</td>

@@ -259,6 +259,14 @@ class Contract extends Eloquent
 	}
 	
 	/**
+	 * @return string '120.000'
+	 */
+	public function getBonoNoImponibleAttribute()
+	{
+		return FormatField::decimalNumber($this->bonoNoImponible());
+	}
+	
+	/**
 	 * @return string '835.000'
 	 */
 	public function getTotalHaberAttribute()
@@ -272,6 +280,14 @@ class Contract extends Eloquent
 	public function getTotalPensionAttribute()
 	{
 		return FormatField::decimalNumber($this->totalPension());
+	}
+	
+	/**
+	 * @return string '3.512'
+	 */
+	public function getSeguroCesantiaAttribute()
+	{
+		return FormatField::decimalNumber($this->seguroCesantia());
 	}
 	
 	/**
@@ -374,9 +390,16 @@ class Contract extends Eloquent
 		}
 	}
 	
+	public function bonoNoImponible()
+	{
+        $bonoNoImponible = $this->mobilization + $this->collation;
+        
+        return $bonoNoImponible;
+	}
+	
 	public function totalHaber()
 	{
-		$totalHaber = $this->totalImponible() + $this->asignacionFamiliar() + $this->mobilization + $this->collation;
+		$totalHaber = $this->totalImponible() + $this->asignacionFamiliar() + $this->bonoNoImponible();
 		
 		return $totalHaber;
 	}
@@ -388,6 +411,13 @@ class Contract extends Eloquent
 		return $totalPension;
 	}
 	
+	public function seguroCesantia()
+	{
+	    $seguroCesantia = $this->totalImponible() * 0.006;
+	    
+	    return $seguroCesantia;
+	}
+	
 	public function totalForecast()
 	{
 		$totalForecast = $this->totalImponible() * 0.07;
@@ -397,7 +427,7 @@ class Contract extends Eloquent
 	
 	public function descuentosAfectos()
 	{
-		$descuentosAfectos = $this->totalPension() + $this->totalForecast();
+		$descuentosAfectos = $this->totalPension() + $this->seguroCesantia() + $this->totalForecast();
 		
 		return $descuentosAfectos;
 	}
@@ -417,31 +447,31 @@ class Contract extends Eloquent
 		switch ( $this->salary )
 		{
 			case ($this->salary <= 624091):
-				return ($this->salary * Config::get('constants.impuestoSegundaCategoria')[0]);
+				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[0]);
 				break;
 			
 			case ($this->salary > 624091 && $this->salary <= 1386870):
-				return ($this->salary * Config::get('constants.impuestoSegundaCategoria')[1]);
+				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[1]);
 				break;
 			
 			case ($this->salary > 1386870 && $this->salary <= 2311450):
-				return ($this->salary * Config::get('constants.impuestoSegundaCategoria')[2]);
+				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[2]);
 				break;
 			
 			case ($this->salary > 2311450 && $this->salary <= 3236030):
-				return ($this->salary * Config::get('constants.impuestoSegundaCategoria')[3]);
+				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[3]);
 				break;
 			
 			case ($this->salary > 3236030 && $this->salary <= 4160610):
-				return ($this->salary * Config::get('constants.impuestoSegundaCategoria')[4]);
+				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[4]);
 				break;
 			
 			case ($this->salary > 4160610 && $this->salary <= 5547480):
-				return ($this->salary * Config::get('constants.impuestoSegundaCategoria')[5]);
+				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[5]);
 				break;
 			
 			case ($this->salary > 5547480):
-				return ($this->salary * Config::get('constants.impuestoSegundaCategoria')[6]);
+				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[6]);
 				break;
 		}
 	}

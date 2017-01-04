@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Descuentos Varios</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ 0</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Total Descuentos</td>
@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Anticipos</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ 0</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8" style="visibility: collapse">Sueldo Líquido</td>

@@ -11,11 +11,11 @@
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">APV</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ 0</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Seguro Cesantía</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ {{ $employee->contract->seguro_cesantia }}</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Salud</td>
@@ -23,11 +23,11 @@
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Cotización Adicional Isapre</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ 0</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Valor Plan</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ 0</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Descuentos Afectos</td>

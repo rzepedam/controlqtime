@@ -148,6 +148,25 @@ class RemunerationTest extends TestCase
 		$this->assertEquals('27.000', $contract->collation_money_field);
 	}
 	
+	function test_can_formatted_bono_no_imponible_to_money_field()
+	{
+		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
+			'mobilization' => 50000,
+			'collation'    => 50000
+		]);
+		
+		$this->assertEquals('100.000', $contract->bono_no_imponible);
+	}
+	
+	function test_can_formatted_seguro_cesantia_to_money_field()
+	{
+		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
+			'salary' => 1000000
+		]);
+		
+		$this->assertEquals('6.612', $contract->seguro_cesantia);
+	}
+	
 	function test_can_formatted_total_haber_to_money_field()
 	{
 		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
@@ -250,7 +269,7 @@ class RemunerationTest extends TestCase
 			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('195.812', $contract->descuentos_afectos);
+		$this->assertEquals('202.424', $contract->descuentos_afectos);
 	}
 	
 	function test_can_formatted_base_tributable_to_money_field()
@@ -260,7 +279,7 @@ class RemunerationTest extends TestCase
 			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('906.115', $contract->base_tributable);
+		$this->assertEquals('899.503', $contract->base_tributable);
 	}
 	
 	function test_can_formatted_valor_impuesto_segunda_categoria_for_first_segment_to_money_field()
@@ -275,55 +294,61 @@ class RemunerationTest extends TestCase
 	function test_can_formatted_valor_impuesto_segunda_categoria_for_second_segment_to_money_field()
 	{
 		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
-			'salary' => 1190000,
+			'salary'     => 1190000,
+			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('47.600', $contract->valor_impuesto_segunda_categoria);
+		$this->assertEquals('42.184', $contract->valor_impuesto_segunda_categoria);
 	}
 	
 	function test_can_formatted_valor_impuesto_segunda_categoria_for_third_segment_to_money_field()
 	{
 		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
-			'salary' => 1800000,
+			'salary'     => 1800000,
+			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('144.000', $contract->valor_impuesto_segunda_categoria);
+		$this->assertEquals('124.203', $contract->valor_impuesto_segunda_categoria);
 	}
 	
 	function test_can_formatted_valor_impuesto_segunda_categoria_for_fourth_segment_to_money_field()
 	{
 		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
-			'salary' => 2500000,
+			'salary'     => 2500000,
+			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('337.500', $contract->valor_impuesto_segunda_categoria);
+		$this->assertEquals('286.734', $contract->valor_impuesto_segunda_categoria);
 	}
 	
 	function test_can_formatted_valor_impuesto_segunda_categoria_for_fifth_segment_to_money_field()
 	{
 		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
-			'salary' => 4000000,
+			'salary'     => 4000000,
+			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('920.000', $contract->valor_impuesto_segunda_categoria);
+		$this->assertEquals('770.133', $contract->valor_impuesto_segunda_categoria);
 	}
 	
 	function test_can_formatted_valor_impuesto_segunda_categoria_for_sixth_segment_to_money_field()
 	{
 		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
-			'salary' => 4850000,
+			'salary'     => 4850000,
+			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('1.474.400', $contract->valor_impuesto_segunda_categoria);
+		$this->assertEquals('1.228.846', $contract->valor_impuesto_segunda_categoria);
 	}
 	
 	function test_can_formatted_valor_impuesto_segunda_categoria_for_seventh_segment_to_money_field()
 	{
 		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
-			'salary' => 11500000,
+			'salary'     => 11500000,
+			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('4.025.000', $contract->valor_impuesto_segunda_categoria);
+		$this->assertEquals('3.314.729', $contract->valor_impuesto_segunda_categoria);
 	}
 	
 	function test_can_formatted_rebaja_impuesto_for_first_segment_to_money_field()
@@ -392,19 +417,21 @@ class RemunerationTest extends TestCase
 	function test_can_formatted_impuesto_unico_to_money_field()
 	{
 		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
-			'salary' => 1000000,
+			'salary'     => 1000000,
+			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('15.725', $contract->impuesto_unico);
+		$this->assertEquals('11.705', $contract->impuesto_unico);
 	}
 	
 	function test_can_formatted_total_descuentos_to_money_field()
 	{
 		$contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
-			'salary' => 1000000
+			'salary'     => 1000000,
+			'pension_id' => factory(\Controlqtime\Core\Entities\Pension::class)->create(['com' => '0.0077'])->id
 		]);
 		
-		$this->assertEquals('203.053', $contract->total_descuentos);
+		$this->assertEquals('214.129', $contract->total_descuentos);
 	}
 	
 	function test_can_formatted_sueldo_liquido_to_money_field()
@@ -416,6 +443,6 @@ class RemunerationTest extends TestCase
 			'collation'    => 50000
 		]);
 		
-		$this->assertEquals('990.390', $contract->sueldo_liquido);
+		$this->assertEquals('987.798', $contract->sueldo_liquido);
 	}
 }
