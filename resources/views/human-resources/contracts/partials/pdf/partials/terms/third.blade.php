@@ -8,7 +8,7 @@
     <div class="col-xs-12">
         El empleador remunerará al trabajador, por el desempeño de sus funciones y por los servicios integra y oportunamente prestados, con el sueldo base mensual que se indica:
         <br />
-        Sueldo Base: $ {{ $contract->salary }} .-
+        Sueldo Base: $ {{ $contract->sueldo_base }} .-
         <br />
     </div>
     <br />

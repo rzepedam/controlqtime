@@ -428,8 +428,8 @@ $factory->define(NumHour::class, function (Faker\Generator $faker)
 $factory->define(Pension::class, function (Faker\Generator $faker)
 {
 	return [
-		'name'       => $faker->word,
-		'deleted_at' => null
+		'name' => $faker->word,
+		'com'  => rand(0.01, 0.02)
 	];
 });
 

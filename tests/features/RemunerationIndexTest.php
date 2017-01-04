@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class RemunerationTest extends TestCase
+class RemunerationIndexTest extends TestCase
 {
 	use DatabaseTransactions;
 	
@@ -30,9 +30,9 @@ class RemunerationTest extends TestCase
 			->seeInElement('h1', 'Remuneraciones')
 			->seeInElement('#employee_id', $this->employee->fullName)
 			->seeInElement('td', 'Sueldo Base')
-			->seeInElement('td', $this->employee->contract->salary)
+			->seeInElement('td', $this->employee->contract->sueldo_base)
 			->seeInElement('td', 'Gratificación')
-			->seeInElement('td', $this->employee->contract->gratification())
+			->seeInElement('td', $this->employee->contract->gratification)
 			->seeInElement('td', 'Horas Extras')
 			->seeInElement('td', 'Comisión')
 			->seeInElement('td', 'Bono Imponible')
@@ -40,40 +40,40 @@ class RemunerationTest extends TestCase
 			->seeInElement('td', 'Atrasos')
 			->seeInElement('td', 'Total Asistencia y Atrasos')
 			->seeInElement('td', 'Total Imponible')
-			->seeInElement('td', $this->employee->contract->totalImponible())
+			->seeInElement('td', $this->employee->contract->total_imponible)
 			->seeInElement('td', 'Cargas Familiares')
-			->seeInElement('td', $this->employee->contract->asignacionFamiliar())
+			->seeInElement('td', $this->employee->contract->asignacion_familiar)
 			->seeInElement('td', 'Locomoción')
-			->seeInElement('td', $this->employee->contract->mobilization)
+			->seeInElement('td', $this->employee->contract->mobilization_money_field)
 			->seeInElement('td', 'Colación')
-			->seeInElement('td', $this->employee->contract->collation)
+			->seeInElement('td', $this->employee->contract->collation_money_field)
 			->seeInElement('td', 'Bono No Imponible')
 			->seeInElement('td', 'Total Haber')
-			->seeInElement('td', $this->employee->contract->totalHaber())
+			->seeInElement('td', $this->employee->contract->total_haber)
 			->seeInElement('td', 'AFP')
-			->seeInElement('td', $this->employee->contract->totalPension())
+			->seeInElement('td', $this->employee->contract->total_pension)
 			->seeInElement('td', 'APV')
 			->seeInElement('td', 'Seguro Cesantía')
 			->seeInElement('td', 'Salud')
-			->seeInElement('td', $this->employee->contract->totalForecast())
+			->seeInElement('td', $this->employee->contract->total_forecast)
 			->seeInElement('td', 'Cotización Adicional Isapre')
 			->seeInElement('td', 'Valor Plan')
 			->seeInElement('td', 'Descuentos Afectos')
-			->seeInElement('td', $this->employee->contract->descuentosAfectos())
+			->seeInElement('td', $this->employee->contract->descuentos_afectos)
 			->seeInElement('td', 'Base Tributable')
-			->seeInElement('td', $this->employee->contract->baseTributable())
+			->seeInElement('td', $this->employee->contract->base_tributable)
 			->seeInElement('td', 'Impuesto')
-			->seeInElement('td', $this->employee->contract->valorImpuestoSegundaCategoria())
+			->seeInElement('td', $this->employee->contract->valor_impuesto_segunda_categoria)
 			->seeInElement('td', 'Rebaja')
-			->seeInElement('td', $this->employee->contract->rebajaImpuesto())
+			->seeInElement('td', $this->employee->contract->rebaja_impuesto)
 			->seeInElement('td', 'Impuesto Único')
-			->seeInElement('td', $this->employee->contract->impuestoUnico())
+			->seeInElement('td', $this->employee->contract->impuesto_unico)
 			->seeInElement('td', 'Descuentos Varios')
 			->seeInElement('td', 'Total Descuentos')
-			->seeInElement('td', $this->employee->contract->totalDescuentos())
+			->seeInElement('td', $this->employee->contract->total_descuentos)
 			->seeInElement('td', 'Anticipos')
 			->seeInElement('td', 'Sueldo Líquido')
-			->seeInElement('td', $this->employee->contract->sueldoLiquido());
+			->seeInElement('td', $this->employee->contract->sueldo_liquido);
 		
 		/*
 		 * @todo unit tests to $this->employee->contract->salary, $this->employee->contract->gratification()

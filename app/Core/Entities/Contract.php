@@ -102,7 +102,7 @@ class Contract extends Eloquent
 	 */
 	public function forecast()
 	{
-	    return $this->belongsTo(Forecast::class);
+		return $this->belongsTo(Forecast::class);
 	}
 	
 	/**
@@ -211,48 +211,140 @@ class Contract extends Eloquent
 	}
 	
 	/**
-	 * @param $value (15000)
-	 *
-	 * @return string ($ 15.000) for autoNumeric plugin
+	 * @return string '15.000'
 	 */
-	public function getMobilizationAttribute($value)
+	public function getMobilizationMoneyFieldAttribute()
 	{
-		return FormatField::decimalNumber($value);
+		return FormatField::decimalNumber($this->mobilization);
 	}
 	
 	/**
-	 * @param $value (15000)
-	 *
-	 * @return string ($ 15.000) for autoNumeric plugin
+	 * @return string '15.000'
 	 */
-	public function getCollationAttribute($value)
+	public function getCollationMoneyFieldAttribute()
 	{
-		return FormatField::decimalNumber($value);
+		return FormatField::decimalNumber($this->collation);
 	}
 	
 	/**
-	 * @param $value '250000'
-	 *
 	 * @return string '250.000'
 	 */
-	public function salaryWithPoints($value)
+	public function getSueldoBaseAttribute()
 	{
-		return FormatField::decimalNumber($value);
+		return FormatField::decimalNumber($this->salary);
 	}
 	
 	/**
 	 * @return string '716.909'
 	 */
-	public function gratification()
+	public function getGratificationAttribute()
 	{
-		$gratification = (Config::get('constants.sueldo_minimo') * 4.75) / 12;
-		
-		return FormatField::decimalNumber($gratification);
+		return FormatField::decimalNumber($this->gratification());
 	}
 	
 	/**
 	 * @return string '550.500'
 	 */
+	public function getTotalImponibleAttribute()
+	{
+		return FormatField::decimalNumber($this->totalImponible());
+	}
+	
+	/**
+	 * @return string '550.500'
+	 */
+	public function getAsignacionFamiliarAttribute()
+	{
+		return FormatField::decimalNumber($this->asignacionFamiliar());
+	}
+	
+	/**
+	 * @return string '835.000'
+	 */
+	public function getTotalHaberAttribute()
+	{
+		return FormatField::decimalNumber($this->totalHaber());
+	}
+	
+	/**
+	 * @return string '75.000'
+	 */
+	public function getTotalPensionAttribute()
+	{
+		return FormatField::decimalNumber($this->totalPension());
+	}
+	
+	/**
+	 * @return string '45.000'
+	 */
+	public function getTotalForecastAttribute()
+	{
+		return FormatField::decimalNumber($this->totalForecast());
+	}
+	
+	/**
+	 * @return string '120.000'
+	 */
+	public function getDescuentosAfectosAttribute()
+	{
+		return FormatField::decimalNumber($this->descuentosAfectos());
+	}
+	
+	/**
+	 * @return string '167.344'
+	 */
+	public function getBaseTributableAttribute()
+	{
+		return FormatField::decimalNumber($this->baseTributable());
+	}
+	
+	/**
+	 * @return string '14.120'
+	 */
+	public function getValorImpuestoSegundaCategoriaAttribute()
+	{
+		return FormatField::decimalNumber($this->valorImpuestoSegundaCategoria());
+	}
+	
+	/**
+	 * @return string '56.800'
+	 */
+	public function getRebajaImpuestoAttribute()
+	{
+		return FormatField::decimalNumber($this->rebajaImpuesto());
+	}
+	
+	/**
+	 * @return string '12.897'
+	 */
+	public function getImpuestoUnicoAttribute()
+	{
+		return FormatField::decimalNumber($this->impuestoUnico());
+	}
+	
+	/**
+	 * @return string '179.810'
+	 */
+	public function getTotalDescuentosAttribute()
+	{
+		return FormatField::decimalNumber($this->totalDescuentos());
+	}
+	
+	/**
+	 * @return string '1.109.000'
+	 */
+	public function getSueldoLiquidoAttribute()
+	{
+		return FormatField::decimalNumber($this->sueldoLiquido());
+	}
+	
+	public function gratification()
+	{
+		$gratification = (Config::get('constants.sueldo_minimo') * 4.75) / 12;
+		
+		return $gratification;
+	}
+	
 	public function totalImponible()
 	{
 		$totalImponible = $this->salary + $this->gratification();
@@ -260,9 +352,6 @@ class Contract extends Eloquent
 		return $totalImponible;
 	}
 	
-	/**
-	 * @return string '550.500'
-	 */
 	public function asignacionFamiliar()
 	{
 		switch ( $this->salary )
@@ -285,9 +374,6 @@ class Contract extends Eloquent
 		}
 	}
 	
-	/**
-	 * @return string '590.300'
-	 */
 	public function totalHaber()
 	{
 		$totalHaber = $this->totalImponible() + $this->asignacionFamiliar() + $this->mobilization + $this->collation;
@@ -295,9 +381,6 @@ class Contract extends Eloquent
 		return $totalHaber;
 	}
 	
-	/**
-	 * @return string '590.300'
-	 */
 	public function totalPension()
 	{
 		$totalPension = $this->totalImponible() * ($this->pension->com + 0.10);
@@ -305,9 +388,6 @@ class Contract extends Eloquent
 		return $totalPension;
 	}
 	
-	/**
-	 * @return string '590.300'
-	 */
 	public function totalForecast()
 	{
 		$totalForecast = $this->totalImponible() * 0.07;
@@ -315,9 +395,6 @@ class Contract extends Eloquent
 		return $totalForecast;
 	}
 	
-	/**
-	 * @return string '129.800'
-	 */
 	public function descuentosAfectos()
 	{
 		$descuentosAfectos = $this->totalPension() + $this->totalForecast();
@@ -325,9 +402,6 @@ class Contract extends Eloquent
 		return $descuentosAfectos;
 	}
 	
-	/**
-	 * @return string '186.000'
-	 */
 	public function baseTributable()
 	{
 		$baseTributable = $this->totalImponible() - $this->descuentosAfectos();
@@ -431,9 +505,9 @@ class Contract extends Eloquent
 	
 	public function sueldoLiquido()
 	{
-	    $sueldoLiquido = $this->totalHaber() - $this->totalDescuentos();
-	    
-	    return $sueldoLiquido;
+		$sueldoLiquido = $this->totalHaber() - $this->totalDescuentos();
+		
+		return $sueldoLiquido;
 	}
 }
 
