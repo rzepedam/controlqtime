@@ -7,7 +7,7 @@ $(document).ready(function(){
         var form    = $('#form-submit');
         var action  = $('#form-submit').attr('action');
         var button  = $(this);
-
+        
         sanitizedMoneyFields();
         button.addClass('btn-success').html('<i class="fa fa-spinner fa-spin fa-fw"></i> Guardando...');
         $.ajax({

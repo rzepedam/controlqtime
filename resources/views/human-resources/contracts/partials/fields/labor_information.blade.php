@@ -29,19 +29,15 @@
             {{ Form::select('area_id', $areas, null, ['class' => 'form-control']) }}
         </div>
     </div>
-    <div class="col-md-4">
-        {{-- Nº de Horas Form Select --}}
-        <div class="form-group">
-            {{ Form::label('num_hour_id', 'Nº de Horas', ['class' => 'control-label']) }}
-            {{ Form::select('num_hour_id', $numHours, null, ['class' => 'form-control']) }}
-        </div>
+    {{-- Tipo Contrato Form Select --}}
+    <div class="col-sm-6 col-md-4 form-group">
+        {{ Form::label('type_contract_id', 'Tipo Contrato', ['class' => 'control-label']) }}
+        {{ Form::select('type_contract_id', $typeContracts, null, ['class' => 'form-control']) }}
     </div>
-    <div class="col-md-4">
-        {{-- Periocidad Horas Form Select --}}
-        <div class="form-group">
-            {{ Form::label('periodicity_id', 'Periocidad Horas', ['class' => 'control-label']) }}
-            {{ Form::select('periodicity_id', $periodicities, null, ['class' => 'form-control']) }}
-        </div>
+    {{-- Nº de Horas Text Field --}}
+    <div class="col-sm-6 col-md-2 form-group">
+        {{ Form::label('num_hour', 'Nº de Horas') }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Ingrese valor comprendido entre 1 - 45" data-html="true"></i>
+        {{ Form::text('num_hour', null, ['class' => 'form-control text-center']) }}
     </div>
 </div>
 <div class="row">

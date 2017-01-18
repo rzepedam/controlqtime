@@ -211,17 +211,6 @@
         </div>
         <div class="clearfix visible-xs margin-bottom-20"></div>
         <div class="col-xs-12 col-sm-4 col-md-2">
-            <div id="redirect-num-hours" class="counter counter-lg counter-inverse bg-teal-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
-                <div class="vertical-align-middle">
-                    <div class="counter-icon">
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    </div>
-                    <span class="counter-number">Nº de Horas</span>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix visible-xs margin-bottom-20"></div>
-        <div class="col-xs-12 col-sm-4 col-md-2">
             <div id="redirect-terms-and-obligatories" class="counter counter-lg counter-inverse bg-brown-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon">
@@ -239,17 +228,6 @@
                         <i class="fa fa-flag" aria-hidden="true"></i>
                     </div>
                     <span class="counter-number">Países</span>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix visible-xs margin-bottom-20"></div>
-        <div class="col-xs-12 col-sm-4 col-md-2">
-            <div id="redirect-periodicities" class="counter counter-lg counter-inverse bg-blue-200 vertical-align waves-effect waves-block wave-light height-150 pointer">
-                <div class="vertical-align-middle">
-                    <div class="counter-icon">
-                        <i class="fa fa-repeat" aria-hidden="true"></i>
-                    </div>
-                    <span class="counter-number">Periocidades</span>
                 </div>
             </div>
         </div>

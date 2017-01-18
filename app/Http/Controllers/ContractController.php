@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\DayTrip;
-use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Core\Entities\Contract;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Forecast;
 use Controlqtime\Core\Entities\Position;
-use Controlqtime\Core\Entities\Periodicity;
 use Controlqtime\Core\Entities\TypeContract;
 use Controlqtime\Http\Requests\ContractRequest;
 use Controlqtime\Core\Entities\ActivateEmployee;
@@ -64,19 +62,9 @@ class ContractController extends Controller
 	protected $log;
 	
 	/**
-	 * @var NumHour
-	 */
-	protected $numHour;
-	
-	/**
 	 * @var Pension
 	 */
 	protected $pension;
-	
-	/**
-	 * @var Periodicity
-	 */
-	protected $periodicity;
 	
 	/**
 	 * @var Position
@@ -104,17 +92,14 @@ class ContractController extends Controller
 	 * @param Employee          $employee
 	 * @param Forecast          $forecast
 	 * @param Log               $log
-	 * @param NumHour           $numHour
 	 * @param Pension           $pension
-	 * @param Periodicity       $periodicity
 	 * @param Position          $position
 	 * @param TermAndObligatory $termAndObligatory
 	 * @param TypeContract      $typeContract
 	 */
 	public function __construct(ActivateEmployee $activateEmployee, Area $area, Company $company,
 		Contract $contract, DayTrip $dayTrip, Employee $employee, Forecast $forecast, Log $log,
-		NumHour $numHour, Pension $pension, Periodicity $periodicity, Position $position,
-		TermAndObligatory $termAndObligatory, TypeContract $typeContract)
+		Pension $pension, Position $position, TermAndObligatory $termAndObligatory, TypeContract $typeContract)
 	{
 		$this->activateEmployee  = $activateEmployee;
 		$this->area              = $area;
@@ -124,9 +109,7 @@ class ContractController extends Controller
 		$this->employee          = $employee;
 		$this->forecast          = $forecast;
 		$this->log               = $log;
-		$this->numHour           = $numHour;
 		$this->pension           = $pension;
-		$this->periodicity       = $periodicity;
 		$this->position          = $position;
 		$this->termAndObligatory = $termAndObligatory;
 		$this->typeContract      = $typeContract;
@@ -160,16 +143,14 @@ class ContractController extends Controller
 		$dayTrips             = $this->dayTrip->pluck('name', 'id');
 		$employees            = $this->employee->pluck('full_name', 'id');
 		$forecasts            = $this->forecast->pluck('name', 'id');
-		$numHours             = $this->numHour->pluck('name', 'id');
 		$pensions             = $this->pension->pluck('name', 'id');
-		$periodicities        = $this->periodicity->pluck('name', 'id');
 		$positions            = $this->position->pluck('name', 'id');
 		$termsAndObligatories = $this->termAndObligatory->all();
 		$typeContracts        = $this->typeContract->pluck('full_name', 'id');
 		
 		return view('human-resources.contracts.create', compact(
-			'areas', 'companies', 'dayTrips', 'employees', 'forecasts', 'numHours', 'pensions',
-			'periodicities', 'positions', 'termsAndObligatories', 'typeContracts'
+			'areas', 'companies', 'dayTrips', 'employees', 'forecasts', 'pensions',
+			'positions', 'termsAndObligatories', 'typeContracts'
 		));
 	}
 	
@@ -226,8 +207,7 @@ class ContractController extends Controller
 	public function show($id)
 	{
 		$contract = $this->contract->with([
-			'company', 'employee', 'position', 'area', 'numHour', 'periodicity', 'dayTrip',
-			'typeContract', 'termsAndObligatories'
+			'company', 'employee', 'position', 'area', 'dayTrip', 'typeContract', 'termsAndObligatories'
 		])->findOrFail($id);
 		
 		return view('human-resources.contracts.show', compact('contract'));
@@ -242,7 +222,7 @@ class ContractController extends Controller
 	{
 		$contract = $this->contract->with([
 			'company.address.commune.province.region', 'employee.address.commune.province.region',
-			'position', 'area', 'numHour', 'dayTrip', 'typeContract', 'termsAndObligatories',
+			'position', 'area', 'dayTrip', 'typeContract', 'termsAndObligatories',
 			'company.legalRepresentative', 'company.address.detailAddressCompany',
 			'employee.address.detailAddressLegalEmployee'
 		])->findOrFail($id);

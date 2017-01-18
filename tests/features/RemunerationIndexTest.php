@@ -24,16 +24,22 @@ class RemunerationIndexTest extends TestCase
 		]);
 	}
 	
-	function test_index_remuneration()
+	/** @test */
+	function index_remuneration()
 	{
 		$this->visit('human-resources/remunerations')
 			->seeInElement('h1', 'Remuneraciones')
 			->seeInElement('#employee_id', $this->employee->fullName)
+			->seeInElement('.well', $this->employee->days_worked_in_the_month)
+			->seeInElement('.well', $this->employee->days_delays_in_the_month)
+			->seeInElement('.well', $this->employee->days_non_assistance_in_the_month)
+			->seeInElement('.well', $this->employee->days_extra_hours_in_the_month)
 			->seeInElement('td', 'Sueldo Base')
 			->seeInElement('td', $this->employee->contract->sueldo_base)
 			->seeInElement('td', 'Gratificación')
 			->seeInElement('td', $this->employee->contract->gratification)
 			->seeInElement('td', 'Horas Extras')
+			->seeInElement('td', $this->employee->contract->horas_extra)
 			->seeInElement('td', 'Comisión')
 			->seeInElement('td', '0')
 			->seeInElement('td', 'Bono Imponible')

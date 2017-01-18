@@ -80,16 +80,8 @@ $(document).ready(function(){
         window.location.href = "/maintainers/mutualities";
     });
 
-    $('#redirect-num-hours').click(function () {
-        window.location.href = "/maintainers/num-hours";
-    });
-
     $('#redirect-countries').click(function() {
         window.location.href = "/maintainers/countries";
-    });
-
-    $('#redirect-periodicities').click(function () {
-        window.location.href = "/maintainers/periodicities";
     });
 
     $('#redirect-piece-vehicles').click(function () {

@@ -166,6 +166,7 @@ return [
 		'type_institution_id'       => 'Tipo de Institución',
 		'created_at'                => 'Fecha Creación',
 		'dur'                       => 'Nº de Meses',
+		'num_hour'                  => 'Nº de Horas',
 		
 		/*
 		 * Api's

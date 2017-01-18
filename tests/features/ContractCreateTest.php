@@ -14,10 +14,6 @@ class ContractCreateTest extends TestCase
 	
 	protected $area;
 	
-	protected $numHour;
-	
-	protected $periodicity;
-	
 	protected $dayTrip;
 	
 	protected $typeContract;
@@ -70,14 +66,6 @@ class ContractCreateTest extends TestCase
 			'terminal_id' => $terminal->id
 		]);
 		
-		$this->numHour = factory(\Controlqtime\Core\Entities\NumHour::class)->create([
-			'name' => '65'
-		]);
-		
-		$this->periodicity = factory(\Controlqtime\Core\Entities\Periodicity::class)->create([
-			'name' => 'Mensual'
-		]);
-		
 		$this->dayTrip = factory(\Controlqtime\Core\Entities\DayTrip::class)->create([
 			'name' => 'Lunes a viernes'
 		]);
@@ -105,7 +93,8 @@ class ContractCreateTest extends TestCase
 		]);
 	}
 	
-	function test_create_contract()
+	/** @test */
+	function create_contract()
 	{
 		$this->visit('human-resources/contracts/create')
 			->seeInElement('h1', 'Crear Nuevo Contrato Laboral')
@@ -114,14 +103,13 @@ class ContractCreateTest extends TestCase
 			->seeInElement('#employee_id', 'Raúl Elías Meza Mora')
 			->seeInElement('#position_id', 'Administrador')
 			->seeInElement('#area_id', 'Mantención')
-			->seeInElement('#num_hour_id', '65')
-			->seeInElement('#periodicity_id', 'Mensual')
+			->seeInElement('#type_contract_id', 'Plazo Fijo 12 meses')
+			->seeInField('#num_hour', '')
 			->seeInElement('#day_trip_id', 'Lunes a viernes')
 			->seeInField('#init_morning', '09:00')
 			->seeInField('#end_morning', '13:00')
 			->seeInField('#init_afternoon', '14:00')
 			->seeInField('#end_afternoon', '19:00')
-			->seeInElement('#type_contract_id', 'Plazo Fijo 12 meses')
 			->seeInElement('#forecast_id', $this->forecast->name)
 			->seeInElement('#pension_id', $this->pension->name)
 			->seeIsChecked('#default0')
@@ -131,27 +119,23 @@ class ContractCreateTest extends TestCase
 			->seeInElement('button', 'Guardar');
 	}
 	
-	function test_store_contract()
+	/** @test */
+	function store_contract()
 	{
 		$this->visit('human-resources/contracts/create')
 			->select($this->companyA->id, '#company_id')
 			->select($this->employee->id, '#employee_id')
 			->select($this->position->id, '#position_id')
 			->select($this->area->id, '#area_id')
-			->select($this->numHour->id, '#num_hour_id')
-			->select($this->periodicity->id, '#periodicity_id')
-			->select($this->dayTrip->id, '#day_trip_id')
-			->type('09:00', 'init_morning')
-			->type('13:00', 'end_morning')
-			->type('14:00', 'init_afternoon')
-			->type('19:00', 'end_afternoon')
 			->select($this->typeContract->id, '#type_contract_id')
+			->select($this->dayTrip->id, '#day_trip_id')
 			->select($this->forecast->id, '#forecast_id')
 			->select($this->pension->id, '#pension_id')
 			->submitForm('Guardar', [
 				'salary'                    => '580000',
 				'mobilization'              => '80000',
 				'collation'                 => '125000',
+				'num_hour'                  => '45',
 				'term_and_obligatory_id[0]' => $this->obligationsAndProhibitionsA->id,
 				'term_and_obligatory_id[2]' => $this->obligationsAndProhibitionsC->id])
 			->seeInDatabase('contracts', [
@@ -159,8 +143,8 @@ class ContractCreateTest extends TestCase
 				'employee_id'      => $this->employee->id,
 				'position_id'      => $this->position->id,
 				'area_id'          => $this->area->id,
-				'num_hour_id'      => $this->numHour->id,
-				'periodicity_id'   => $this->periodicity->id,
+				'type_contract_id' => $this->typeContract->id,
+				'num_hour'         => '45',
 				'day_trip_id'      => $this->dayTrip->id,
 				'init_morning'     => '0900',
 				'end_morning'      => '1300',
@@ -169,7 +153,6 @@ class ContractCreateTest extends TestCase
 				'salary'           => '580000',
 				'mobilization'     => '80000',
 				'collation'        => '125000',
-				'type_contract_id' => $this->typeContract->id,
 				'forecast_id'      => $this->forecast->id,
 				'pension_id'       => $this->pension->id])
 			->seeInDatabase('contract_term_and_obligatory', [
@@ -179,5 +162,57 @@ class ContractCreateTest extends TestCase
 			->seeInDatabase('contract_term_and_obligatory', [
 				'term_and_obligatory_id' => $this->obligationsAndProhibitionsC->id
 			]);
+	}
+	
+	/** @test */
+	function num_hour_should_not_be_less_than_1()
+	{
+		$this->json('POST', 'human-resources/contracts', [
+			'company_id'       => $this->companyA->id,
+			'employee_id'      => $this->employee->id,
+			'position_id'      => $this->position->id,
+			'area_id'          => $this->area->id,
+			'type_contract_id' => $this->typeContract->id,
+			'num_hour'         => '0',
+			'day_trip_id'      => $this->dayTrip->id,
+			'init_morning'     => '09:00',
+			'end_morning'      => '13:00',
+			'init_afternoon'   => '14:00',
+			'end_afternoon'    => '18:00',
+			'salary'           => '1000000',
+			'mobilization'     => '50000',
+			'collation'        => '50000',
+			'forecast_id'      => $this->forecast->id,
+			'pension_id'       => $this->pension->id
+		]);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('num_hour', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function num_hour_must_be_grater_than_45()
+	{
+		$this->json('POST', 'human-resources/contracts', [
+			'company_id'       => $this->companyA->id,
+			'employee_id'      => $this->employee->id,
+			'position_id'      => $this->position->id,
+			'area_id'          => $this->area->id,
+			'type_contract_id' => $this->typeContract->id,
+			'num_hour'         => '72',
+			'day_trip_id'      => $this->dayTrip->id,
+			'init_morning'     => '09:00',
+			'end_morning'      => '13:00',
+			'init_afternoon'   => '14:00',
+			'end_afternoon'    => '18:00',
+			'salary'           => '1000000',
+			'mobilization'     => '50000',
+			'collation'        => '50000',
+			'forecast_id'      => $this->forecast->id,
+			'pension_id'       => $this->pension->id
+		]);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('num_hour', $this->decodeResponseJson());
 	}
 }

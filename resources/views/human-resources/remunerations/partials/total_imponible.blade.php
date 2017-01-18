@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Horas Extras</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ {{ $employee->contract->horas_extra }}</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Comisión</td>
@@ -27,15 +27,15 @@
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Inasistencias</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ {{ $employee->contract->valor_inasistencia }}</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Atrasos</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ 0</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8">Total Asistencia y Atrasos</td>
-            <td class="col-sm-8 col-md-8 text-center">-</td>
+            <td class="col-sm-8 col-md-8 text-center">$ 0</td>
         </tr>
         <tr>
             <td class="col-sm-8 col-md-8" style="visibility: collapse">Total Imponible</td>

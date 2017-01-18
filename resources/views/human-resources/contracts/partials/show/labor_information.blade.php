@@ -39,13 +39,7 @@
                                 <tr>
                                     <td class="col-md-3">Nº de Horas</td>
                                     <td class="text-center">
-                                        <a href="{{ route('num-hours.index') }}" style="color: #757575"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $contract->numHour->name }} hrs</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-3">Periocidad Horas</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('periodicities.index') }}" style="color: #757575"><i class="fa fa-repeat" aria-hidden="true"></i> {{ $contract->periodicity->name }}</a>
+                                         {{ $contract->num_hour }} hrs semanales
                                     </td>
                                 </tr>
                                 <tr>

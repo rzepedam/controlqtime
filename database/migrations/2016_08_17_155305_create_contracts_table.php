@@ -18,10 +18,9 @@ class CreateContractsTable extends Migration
 	        $table->unsignedInteger('company_id')->nullable();
 			$table->unsignedInteger('position_id')->nullable();
 			$table->unsignedInteger('area_id')->nullable();
-			$table->unsignedInteger('num_hour_id')->nullable();
-			$table->unsignedInteger('periodicity_id')->nullable();
-			$table->unsignedInteger('day_trip_id')->nullable();
 	        $table->unsignedInteger('type_contract_id')->nullable();
+	        $table->string('num_hour', 2);
+	        $table->unsignedInteger('day_trip_id')->nullable();
 	        $table->unsignedInteger('forecast_id')->nullable();
 	        $table->unsignedInteger('pension_id')->nullable();
 	        $table->string('init_morning', 5);

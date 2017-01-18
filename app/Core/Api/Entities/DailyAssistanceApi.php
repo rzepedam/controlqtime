@@ -40,13 +40,10 @@ class DailyAssistanceApi extends Eloquent
 	}
 	
 	/**
-	 * @param $value "2016-10-21 17:08_05"
-	 *
 	 * @return mixed "17:08:05"
 	 */
-	public function getCreatedAtAttribute($value)
+	public function getCreatedAtToHisFormatAttribute()
 	{
-		return Carbon::parse($value)->format('H:i:s');
+		return Carbon::parse($this->created_at)->format('H:i:s');
 	}
-	
 }

@@ -16,7 +16,6 @@ use Controlqtime\Core\Entities\Commune;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Country;
 use Controlqtime\Core\Entities\DayTrip;
-use Controlqtime\Core\Entities\NumHour;
 use Controlqtime\Core\Entities\Pension;
 use Controlqtime\Core\Entities\Vehicle;
 use Controlqtime\Core\Entities\Contract;
@@ -34,7 +33,6 @@ use Controlqtime\Core\Entities\Profession;
 use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Core\Entities\Institution;
 use Controlqtime\Core\Entities\Nationality;
-use Controlqtime\Core\Entities\Periodicity;
 use Controlqtime\Core\Entities\TypeCompany;
 use Controlqtime\Core\Entities\TypeDisease;
 use Controlqtime\Core\Entities\TypeVehicle;
@@ -155,8 +153,8 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 		'employee_id'      => factory(Employee::class)->states('enable')->create()->id,
 		'position_id'      => factory(Position::class)->create()->id,
 		'area_id'          => factory(Area::class)->create()->id,
-		'num_hour_id'      => factory(NumHour::class)->create()->id,
-		'periodicity_id'   => factory(Periodicity::class)->create()->id,
+		'type_contract_id' => factory(TypeContract::class)->create()->id,
+		'num_hour'         => '45',
 		'day_trip_id'      => factory(DayTrip::class)->create()->id,
 		'forecast_id'      => factory(Forecast::class)->create()->id,
 		'pension_id'       => factory(Pension::class)->create()->id,
@@ -167,7 +165,6 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 		'salary'           => rand(100000, 6000000),
 		'mobilization'     => rand(100000, 150000),
 		'collation'        => rand(50000, 99000),
-		'type_contract_id' => factory(TypeContract::class)->create()->id,
 		'expires_at'       => Carbon::parse('+1 year'),
 		'created_at'       => Carbon::now()
 	];
@@ -417,27 +414,11 @@ $factory->define(Nationality::class, function (Faker\Generator $faker)
 	];
 });
 
-$factory->define(NumHour::class, function (Faker\Generator $faker)
-{
-	return [
-		'name'       => $faker->numberBetween(1, 999),
-		'deleted_at' => null
-	];
-});
-
 $factory->define(Pension::class, function (Faker\Generator $faker)
 {
 	return [
 		'name' => $faker->word,
 		'com'  => rand(0.01, 0.02)
-	];
-});
-
-$factory->define(Periodicity::class, function (Faker\Generator $faker)
-{
-	return [
-		'name'       => $faker->word,
-		'deleted_at' => null
 	];
 });
 

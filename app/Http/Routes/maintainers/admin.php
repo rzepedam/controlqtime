@@ -54,23 +54,14 @@ Route::group(['prefix' => 'maintainers'], function() {
 	// Mutualities
 	Route::get('getMutualities', ['as' => 'getMutualities', 'uses' => 'MutualityController@getMutualities']);
 	Route::resource('mutualities', 'MutualityController');
-
-	// Num-hours
-	Route::get('getNumHours', ['as' => 'contracts.getNumHours', 'uses' => 'NumHourController@getNumHours']);
-	Route::resource('num-hours', 'NumHourController');
-
+	
 	// Pensions
 	Route::get('getPensions', ['as' => 'getPensions', 'uses' => 'PensionController@getPensions']);
 	Route::resource('pensions', 'PensionController');
-
-	// Periodicities
-	Route::get('getPeriodicities', ['as' => 'periodicities.getPeriodicities', 'uses' => 'PeriodicityController@getPeriodicities']);
-	Route::resource('periodicities', 'PeriodicityController');
 	
 	// Piece Vehicles
 	Route::get('getPieceVehicles', ['as' => 'getPieceVehicles', 'uses' => 'PieceVehicleController@getPieceVehicles']);
 	Route::resource('piece-vehicles', 'PieceVehicleController');
-	
 
 	// Positions
 	Route::get('getPositions', ['as' => 'getPositions', 'uses' => 'PositionController@getPositions']);

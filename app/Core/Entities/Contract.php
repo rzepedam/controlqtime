@@ -17,10 +17,9 @@ class Contract extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'company_id', 'employee_id', 'position_id', 'area_id', 'num_hour_id',
-		'periodicity_id', 'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon',
-		'end_afternoon', 'salary', 'mobilization', 'collation', 'type_contract_id',
-		'forecast_id', 'pension_id', 'expires_at'
+		'company_id', 'employee_id', 'position_id', 'area_id', 'type_contract_id', 'num_hour',
+		'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon', 'end_afternoon', 'salary',
+		'mobilization', 'collation', 'forecast_id', 'pension_id', 'expires_at'
 	];
 	
 	/**
@@ -61,24 +60,6 @@ class Contract extends Eloquent
 	public function area()
 	{
 		return $this->belongsTo(Area::class);
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function numHour()
-	{
-		return $this->belongsTo(NumHour::class)
-			->withTrashed();
-	}
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function periodicity()
-	{
-		return $this->belongsTo(Periodicity::class)
-			->withTrashed();
 	}
 	
 	/**
@@ -354,6 +335,22 @@ class Contract extends Eloquent
 		return FormatField::decimalNumber($this->sueldoLiquido());
 	}
 	
+	/**
+	 * @return string '5.190'
+	 */
+	public function getHorasExtraAttribute()
+	{
+		return FormatField::decimalNumber($this->horasExtra());
+	}
+	
+	/**
+	 * @return string '7.340'
+	 */
+	public function getValorInasistenciaAttribute()
+	{
+		return FormatField::decimalNumber($this->valorInasistencia());
+	}
+	
 	public function gratification()
 	{
 		$gratification = (Config::get('constants.sueldo_minimo') * 4.75) / 12;
@@ -392,9 +389,9 @@ class Contract extends Eloquent
 	
 	public function bonoNoImponible()
 	{
-        $bonoNoImponible = $this->mobilization + $this->collation;
-        
-        return $bonoNoImponible;
+		$bonoNoImponible = $this->mobilization + $this->collation;
+		
+		return $bonoNoImponible;
 	}
 	
 	public function totalHaber()
@@ -413,9 +410,9 @@ class Contract extends Eloquent
 	
 	public function seguroCesantia()
 	{
-	    $seguroCesantia = $this->totalImponible() * 0.006;
-	    
-	    return $seguroCesantia;
+		$seguroCesantia = $this->totalImponible() * 0.006;
+		
+		return $seguroCesantia;
 	}
 	
 	public function totalForecast()
@@ -538,6 +535,34 @@ class Contract extends Eloquent
 		$sueldoLiquido = $this->totalHaber() - $this->totalDescuentos();
 		
 		return $sueldoLiquido;
+	}
+	
+	public function valorHora()
+	{
+		$valorHora = (config('constants.sueldo_minimo') / 30 * 28) / $this->num_hour;
+		
+		return $valorHora;
+	}
+	
+	public function valorHoraExtra()
+	{
+		$valorHoraExtra = $this->valorHora() * config('constants.valor_hora_extra');
+		
+		return $valorHoraExtra;
+	}
+	
+	public function horasExtra()
+	{
+		$horasExtra = $this->valorHoraExtra() * $this->employee->getDaysExtraHoursInTheMonthAttribute();
+		
+		return $horasExtra;
+	}
+	
+	public function valorInasistencia()
+	{
+		$valorInasistencia = $this->valorHoraExtra() * $this->employee->getDaysNonAssistanceInTheMonthAttribute();
+		
+		return $valorInasistencia;
 	}
 }
 

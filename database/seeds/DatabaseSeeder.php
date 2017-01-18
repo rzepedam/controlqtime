@@ -39,8 +39,6 @@ class DatabaseSeeder extends Seeder
 	    $this->call(TypeCompanyTableSeeder::class);
 	    $this->call(StateVehicleTableSeeder::class);
 	    $this->call(DayTripTableSeeder::class);
-	    $this->call(NumHourTableSeeder::class);
-	    $this->call(PeriodicityTableSeeder::class);
 	    $this->call(TypeContractTableSeeder::class);
 	    $this->call(MaritalStatusTableSeeder::class);
 	    $this->call(LaborUnionTableSeeder::class);

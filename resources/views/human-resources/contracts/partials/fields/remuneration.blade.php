@@ -31,11 +31,6 @@
     </div>
 </div>
 <div class="row">
-    {{-- Tipo Contrato Form Select --}}
-    <div class="col-sm-6 col-md-4 form-group">
-        {{ Form::label('type_contract_id', 'Tipo Contrato', ['class' => 'control-label']) }}
-        {{ Form::select('type_contract_id', $typeContracts, null, ['class' => 'form-control']) }}
-    </div>
     {{-- Previsión Select Field --}}
     <div class="col-sm-6 col-md-4 form-group">
         {{ Form::label('forecast_id', 'Previsión') }}

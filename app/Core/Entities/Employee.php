@@ -981,4 +981,141 @@ class Employee extends Eloquent
 			+ $this->getNumImagesDiseasesAttribute() + $this->getNumImagesExamsAttribute()
 			+ $this->getNumImagesFamilyResponsabilitiesAttribute();
 	}
+	
+	/**
+	 * @return mixed
+	 */
+	private function dailyAssistanceForRemuneration()
+	{
+		$dailyAssistances = $this->dailyAssistances()
+			->whereBetween('created_at', [config('constants.init_month'), config('constants.end_month')])
+			->get()
+			->groupBy(function ($item)
+			{
+				return Carbon::parse($item->created_at)->format('d');
+			});
+		
+		return $dailyAssistances;
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getDaysWorkedInTheMonthAttribute()
+	{
+		$assistance     = collect();
+		$realAssistance = collect();
+		$initMonth      = config('constants.init_month');
+		$endMonth       = config('constants.end_month');
+		
+		if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
+		{
+			$this->dailyAssistanceForRemuneration()->transform(function ($item) use ($assistance)
+			{
+				$assistance[] = Carbon::parse($item->min('created_at'))->format('Y-m-d');
+			});
+			
+			while ( $endMonth >= $initMonth )
+			{
+				if ( $initMonth->isWeekday() )
+				{
+					if ( $assistance->contains($initMonth->format('Y-m-d')) )
+					{
+						$realAssistance[] = 1;
+					}
+				}
+				
+				$initMonth->addDay();
+			}
+		}
+		
+		return $realAssistance->count();
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getDaysDelaysInTheMonthAttribute()
+	{
+		$assistance = collect();
+		$delays     = collect();
+		
+		if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
+		{
+			$this->dailyAssistanceForRemuneration()->transform(function ($item) use ($assistance)
+			{
+				$assistance[] = Carbon::parse($item->min('created_at'))->format('H:i:s');
+			});
+			
+			$assistance->each(function ($item) use ($delays)
+			{
+				if ( $item > config('constants.time_limit') )
+				{
+					$delays[] = 1;
+				}
+			});
+		}
+		
+		return $delays->count();
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getDaysNonAssistanceInTheMonthAttribute()
+	{
+		$assistance          = collect();
+		$realAssistance      = collect();
+		$totalDaysAssistance = collect();
+		$initMonth           = config('constants.init_month');
+		$now                 = config('constants.end_month');
+		
+		if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
+		{
+			$this->dailyAssistanceForRemuneration()->transform(function ($item) use ($assistance)
+			{
+				$assistance[] = Carbon::parse($item->min('created_at'))->format('Y-m-d');
+			});
+			
+			while ( $now >= $initMonth )
+			{
+				if ( $initMonth->isWeekday() )
+				{
+					if ( $assistance->contains($initMonth->format('Y-m-d')) )
+					{
+						$realAssistance[] = 1;
+					}
+					
+					$totalDaysAssistance[] = 1;
+				}
+				
+				$initMonth->addDay();
+			}
+		}
+		
+		$nonAssistance = $totalDaysAssistance->sum() - $realAssistance->sum();
+		
+		return $nonAssistance;
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getDaysExtraHoursInTheMonthAttribute()
+	{
+		$extraHours = collect();
+		
+		$this->dailyAssistanceForRemuneration()->transform(function ($item) use ($extraHours)
+		{
+			$maxAssistance = Carbon::parse($item->max('created_at'));
+			$workOut       = Carbon::createFromFormat('Y-m-d H:i', $maxAssistance->format('Y-m-d') . ' ' . $this->contract->end_afternoon);
+			
+			if ( $maxAssistance > $workOut )
+			{
+				$extraHours[] = $maxAssistance->diffInHours($workOut);
+			}
+		});
+		
+		return $extraHours->sum();
+	}
 }

@@ -2,8 +2,8 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
+use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
 class ContractRequest extends SanitizedRequest
 {
@@ -48,8 +48,8 @@ class ContractRequest extends SanitizedRequest
 					'employee_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'position_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'area_id'          => 'required|regex:/[0-9 -()+]+$/',
-					'num_hour_id'      => 'required|regex:/[0-9 -()+]+$/',
-					'periodicity_id'   => 'required|regex:/[0-9 -()+]+$/',
+					'type_contract_id' => 'required|regex:/[0-9 -()+]+$/',
+					'num_hour'         => 'required|integer|between:1,45',
 					'day_trip_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'init_morning'     => 'required|max:5',
 					'end_morning'      => 'required|max:5',
@@ -58,7 +58,6 @@ class ContractRequest extends SanitizedRequest
 					'salary'           => 'required|max:8',
 					'mobilization'     => 'required|max:8',
 					'collation'        => 'required|max:8',
-					'type_contract_id' => 'required|regex:/[0-9 -()+]+$/',
 					'forecast_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'pension_id'       => 'required|regex:/[0-9 -()+]+$/'
 				];

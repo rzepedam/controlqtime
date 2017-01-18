@@ -17,13 +17,8 @@
         </div>
         <div class="panel-body">
 
-            <div class="row">
-                {{-- Trabajador Select Field --}}
-                <div class="col-xs-12 col-sm-6 col-md-4 form-group">
-                    {{ Form::label('employee_id', 'Seleccione Trabajador') }}
-                    {{ Form::select('employee_id', $employees, $employee->id, ['class' => 'form-control']) }}
-                </div>
-            </div>
+            @include('human-resources.remunerations.partials.header')
+
             <br />
             <div class="row">
                 <div class="table-responsive">

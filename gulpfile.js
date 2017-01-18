@@ -363,20 +363,10 @@ elixir(function(mix) {
         'me/js/base/maintainers/mutualities/config_bootstrap_table.js'
     ], 'public/js/maintainers/mutualities/index-custom-mutualities.js');
 
-    // Maintainers > Num-Hours > Index Custom Num-Hours JS
-    mix.scripts([
-        'me/js/base/maintainers/num-hours/config_bootstrap_table.js'
-    ], 'public/js/maintainers/num-hours/index-custom-num-hours.js');
-
     // Maintainers > Pensions > Index Custom Pensions JS
     mix.scripts([
         'me/js/base/maintainers/pensions/config_bootstrap_table.js'
     ], 'public/js/maintainers/pensions/index-custom-pensions.js');
-
-    // Maintainers > Periodicities > Index Custom Periodicities JS
-    mix.scripts([
-        'me/js/base/maintainers/periodicities/config_bootstrap_table.js'
-    ], 'public/js/maintainers/periodicities/index-custom-periodicities.js');
 
     // Maintainers > Piece-Vehicles > Index Custom Piece-Vehicles JS
     mix.scripts([
@@ -648,9 +638,7 @@ elixir(function(mix) {
         'public/js/maintainers/measuring-units/weights/index-custom-weights.js',
         'public/js/maintainers/model-vehicles/index-custom-model-vehicles.js',
         'public/js/maintainers/mutualities/index-custom-mutualities.js',
-        'public/js/maintainers/num-hours/index-custom-num-hours.js',
         'public/js/maintainers/pensions/index-custom-pensions.js',
-        'public/js/maintainers/periodicities/index-custom-periodicities.js',
         'public/js/maintainers/positions/index-custom-positions.js',
         'public/js/maintainers/professions/index-custom-professions.js',
         'public/js/maintainers/relationships/index-custom-relationships.js',
