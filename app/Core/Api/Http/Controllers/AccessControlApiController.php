@@ -41,8 +41,8 @@ class AccessControlApiController extends Controller
 				case 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA':
 					$employee->accessControls()->create($request->all());
 					break;
-				
-				case 'BC702909-E80E-4695-9790-E1DBCDF6F4EE':
+					
+				case '187783A1-7985-4839-B8C1-2F0ACC290E13':
 					$employee->dailyAssistances()->create($request->all());
 					break;
 			}

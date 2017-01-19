@@ -36,7 +36,7 @@ class AccessControlApiRequest extends SanitizedRequest
 				
 				return $rules;
 			
-			case 'BC702909-E80E-4695-9790-E1DBCDF6F4EE':
+			case '187783A1-7985-4839-B8C1-2F0ACC290E13':
 				$rules = [
 					'rut'        => 'required|max:10|unique_with:daily_assistance_apis,created_at',
 					'num_device' => 'required',

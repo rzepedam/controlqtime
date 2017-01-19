@@ -15,7 +15,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 0,
 			    'created_at'  => '2017-01-01 08:54:39'
 		    ]);
@@ -23,7 +23,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 0,
 			    'created_at'  => '2017-01-01 17:58:40'
 		    ]);
@@ -31,7 +31,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-02 08:55:32'
 		    ]);
@@ -39,7 +39,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 0,
 			    'created_at'  => '2017-01-02 20:21:02'
 		    ]);
@@ -47,7 +47,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-03 09:21:00'
 		    ]);
@@ -55,7 +55,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 0,
 			    'created_at'  => '2017-01-03 17:57:09'
 		    ]);
@@ -63,7 +63,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-04 07:53:19'
 		    ]);
@@ -71,7 +71,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 0,
 			    'created_at'  => '2017-01-04 19:55:00'
 		    ]);
@@ -79,7 +79,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-05 11:34:46'
 		    ]);
@@ -87,7 +87,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-05 18:01:58'
 		    ]);
@@ -95,7 +95,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-06 08:58:04'
 		    ]);
@@ -103,7 +103,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-06 17:55:18'
 		    ]);
@@ -111,7 +111,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-07 08:59:10'
 		    ]);
@@ -119,7 +119,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-07 18:02:45'
 		    ]);
@@ -127,7 +127,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 0,
 			    'created_at'  => '2017-01-08 09:15:15'
 		    ]);
@@ -135,7 +135,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 0,
 			    'created_at'  => '2017-01-08 20:15:00'
 		    ]);
@@ -143,7 +143,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 0,
 			    'created_at'  => '2017-01-09 10:18:00'
 		    ]);
@@ -151,7 +151,7 @@ class DailyAssistanceApiTableSeeder extends Seeder
 		    DailyAssistanceApi::create([
 			    'employee_id' => 1,
 			    'rut'         => '17032680-6',
-			    'num_device'  => 'BC702909-E80E-4695-9790-E1DBCDF6F4EE',
+			    'num_device'  => '187783A1-7985-4839-B8C1-2F0ACC290E13',
 			    'status'      => 1,
 			    'created_at'  => '2017-01-09 18:01:56'
 		    ]);
