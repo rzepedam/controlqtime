@@ -91,5 +91,7 @@
 
     @include('layout.messages.success')
 
+    @include('layout.messages.error')
+
 </body>
 </html>

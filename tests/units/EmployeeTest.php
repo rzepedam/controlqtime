@@ -251,7 +251,7 @@ class EmployeeTest extends TestCase
 			}
 		}
 		
-		$this->assertEquals(9, $nonAssistance->sum());
+		$this->assertEquals(12, $nonAssistance->sum());
 	}
 	
 	/** @test */

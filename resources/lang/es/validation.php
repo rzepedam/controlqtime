@@ -135,6 +135,7 @@ return [
 		'num_home'                  => 'Nº Casa',
 		'company_id'                => 'Empresa',
 		'code'                      => 'Cód. Interno',
+		'phone'                     => 'Teléfono',
 		
 		/*
 		 * Vehículos

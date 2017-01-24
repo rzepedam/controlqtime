@@ -15,16 +15,16 @@ require('laravel-elixir-vue-2');
 
 /* -------------------------------- Configuration ----------------------------------------- */
 
-elixir.config.css.folder = '';
-elixir.config.js.folder = '';
-elixir.config.sourcemaps = false;
+elixir.config.css.folder                 = '';
+elixir.config.js.folder                  = '';
+elixir.config.sourcemaps                 = false;
 elixir.config.css.minifier.pluginOptions = {
     keepSpecialComments: 0
 };
 
 /* --------------------------------------------------------------------------------------- */
 
-elixir(function(mix) {
+elixir(function (mix) {
 
     // Default Laravel CSS
     mix.sass('app.scss')
@@ -107,7 +107,6 @@ elixir(function(mix) {
     ], 'public/js/index-layout-components.js');
 
 
-
     // Index Common CSS
     mix.styles([
         'bower/bootstrap-table/dist/bootstrap-table.css'
@@ -163,7 +162,6 @@ elixir(function(mix) {
     ], 'public/js/upload-common.js');
 
 
-
     // Administrations > Index Menú JS
     mix.scripts([
         'me/js/base/administrations/index.js'
@@ -194,7 +192,6 @@ elixir(function(mix) {
         'components/bootstrap-maxlength.js',
         'me/js/utilities/submit-form-ajax.js'
     ], 'public/js/administrations/companies/create-edit-custom-companies.js');
-
 
 
     // Human-Resources > Index Menú JS
@@ -266,7 +263,6 @@ elixir(function(mix) {
         'me/js/utilities/add_csrf_token.js',
         'me/js/utilities/verifica_ultimos_numeros.js',
         'me/js/utilities/capitalize.js',
-        'me/js/utilities/verifica_ultimos_numeros.js',
         'me/js/change/change_region_province.js',
         'me/js/validations/valida_email.js',
         'me/js/validations/valida_rut.js',
@@ -281,6 +277,47 @@ elixir(function(mix) {
         'me/js/utilities/scrollTop.js'
     ], 'public/js/human-resources/employees/create-edit-custom-employees.js');
 
+
+    // Visits > Index Menú JS
+    mix.scripts([
+        'me/js/base/visits/index.js'
+    ], 'public/js/visits/index.js');
+
+    // Visits > Sign-In-Visits > Index Custom Sign-In-Visits JS
+    mix.scripts([
+        'me/js/base/visits/sign-in-visits/config_bootstrap_table.js'
+    ], 'public/js/visits/sign-in-visits/index-custom-sign-in-visits.js');
+
+    // Visits > Sign-In-Visits > Create-Edit Custom Sign-In-Visits CSS
+    mix.styles([
+        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+    ], 'public/css/visits/sign-in-visits/create-edit-custom-sign-in-visits.css');
+
+    // Visits > Sign-In-Visits > Create-Edit Custom Sign-In-Visits JS
+    mix.scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/utilities/capitalize.js',
+        'me/js/validations/valida_rut.js',
+        'custom-configuration/js/jquery.Rut.js',
+        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+        'components/bootstrap-datepicker.js',
+        'me/js/validations/valida_email.js',
+        'me/js/base/visits/sign-in-visits/custom_sign_in_visits.js'
+    ], 'public/js/visits/sign-in-visits/create-edit-custom-sign-in-visits.js');
+
+    // Visits > Sign-In-Visits > Show Sign-In-Visits CSS
+    mix.styles([
+        'bower/dropzone/dist/dropzone.css',
+        'bower/lity/dist/lity.css',
+    ], 'public/css/visits/sign-in-visits/show-custom-sign-in-visits.css');
+
+    // Visits > Sign-In-Visits > Show Sign-In-Visits JS
+    mix.scripts([
+        'bower/dropzone/dist/dropzone.js',
+        'custom-configuration/js/dropzone.js',
+        'bower/lity/dist/lity.js'
+    ], 'public/js/visits/sign-in-visits/show-custom-sign-in-visits.js');
 
 
     // Maintainers > Index Menú JS
@@ -490,7 +527,6 @@ elixir(function(mix) {
     ], 'public/js/maintainers/type-vehicles/index-custom-type-vehicles.js');
 
 
-
     // Operations > Index Menú JS
     mix.scripts([
         'me/js/base/operations/index.js'
@@ -540,7 +576,6 @@ elixir(function(mix) {
     ], 'public/js/operations/check-vehicle-forms/create-edit-custom-check-vehicle-forms.js');
 
 
-
     // Copy fonts Font-Awesome
     mix.copy('resources/assets/bower/font-awesome/fonts', 'public/build/fonts');
     // Copy fonts Material-Design-Iconic-Font
@@ -577,7 +612,6 @@ elixir(function(mix) {
     mix.copy('resources/assets/me/css/human-resources/contracts/pdf/footer-pdf-contracts.css', 'public/css/human-resources/contracts/pdf');
     // Copy 404 Page CSS
     mix.copy('resources/assets/me/css/404.css', 'public/css');
-
 
 
     /*
@@ -621,6 +655,13 @@ elixir(function(mix) {
         'public/js/human-resources/contracts/create-custom-contracts.js',
         'public/css/human-resources/employees/create-edit-custom-employees.css',
         'public/js/human-resources/employees/create-edit-custom-employees.js',
+
+        'public/js/visits/index.js',
+        'public/js/visits/sign-in-visits/index-custom-sign-in-visits.js',
+        'public/css/visits/sign-in-visits/create-edit-custom-sign-in-visits.css',
+        'public/js/visits/sign-in-visits/create-edit-custom-sign-in-visits.js',
+        'public/css/visits/sign-in-visits/show-custom-sign-in-visits.css',
+        'public/js/visits/sign-in-visits/show-custom-sign-in-visits.js',
 
         'public/js/maintainers/index.js',
         'public/js/maintainers/areas/index-custom-areas.js',

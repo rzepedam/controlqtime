@@ -10,6 +10,7 @@ use Controlqtime\Core\Entities\Vehicle;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\Province;
 use Controlqtime\Core\Entities\Trademark;
+use Controlqtime\Core\Entities\SignInVisit;
 use Controlqtime\Core\Entities\ContactEmployee;
 use Controlqtime\Core\Entities\LegalRepresentative;
 
@@ -46,6 +47,11 @@ class AjaxLoadController extends Controller
 	protected $region;
 	
 	/**
+	 * @var SignInVisit
+	 */
+	protected $signInVisit;
+	
+	/**
 	 * @var Trademark
 	 */
 	protected $trademark;
@@ -54,6 +60,7 @@ class AjaxLoadController extends Controller
 	 * @var Vehicle
 	 */
 	protected $vehicle;
+	
 	
 	/**
 	 * AjaxLoadController constructor.
@@ -64,12 +71,13 @@ class AjaxLoadController extends Controller
 	 * @param LegalRepresentative $legalRepresentative
 	 * @param Province            $province
 	 * @param Region              $region
+	 * @param SignInVisit         $signInVisit
 	 * @param Trademark           $trademark
 	 * @param Vehicle             $vehicle
 	 */
 	public function __construct(Company $company, ContactEmployee $contactEmployee, Employee $employee,
-		LegalRepresentative $legalRepresentative, Province $province, Region $region, Trademark $trademark,
-		Vehicle $vehicle)
+		LegalRepresentative $legalRepresentative, Province $province, Region $region, SignInVisit $signInVisit,
+		Trademark $trademark, Vehicle $vehicle)
 	{
 		$this->company             = $company;
 		$this->contactEmployee     = $contactEmployee;
@@ -77,6 +85,7 @@ class AjaxLoadController extends Controller
 		$this->legalRepresentative = $legalRepresentative;
 		$this->province            = $province;
 		$this->region              = $region;
+		$this->signInVisit         = $signInVisit;
 		$this->trademark           = $trademark;
 		$this->vehicle             = $vehicle;
 	}
@@ -126,6 +135,10 @@ class AjaxLoadController extends Controller
 				
 				case 'EmailContactEmployee';
 					$this->contactEmployee->where('email_contact', $request->get('email'))->firstOrFail();
+					break;
+					
+				case 'SignInVisit':
+					$this->signInVisit->where('email', request('email'))->firstOrFail();
 					break;
 			}
 			

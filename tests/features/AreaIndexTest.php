@@ -12,19 +12,22 @@ class AreaIndexTest extends TestCase
 		$this->signIn();
 	}
 	
-	function test_url_area()
+	/** @test */
+	function url_area()
 	{
 		$this->visit('maintainers/areas')
 			->assertResponseOk();
 	}
 	
-	function test_route_area()
+	/** @test */
+	function route_area()
 	{
 		$this->visitRoute('areas.index')
 			->assertResponseOk();
 	}
 	
-	function test_index_area()
+	/** @test */
+	function index_area()
 	{
 		$this->visit('maintainers/areas')
 			->see('Listado de Áreas')

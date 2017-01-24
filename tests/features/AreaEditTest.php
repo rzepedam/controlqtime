@@ -20,21 +20,20 @@ class AreaEditTest extends TestCase
 		$this->terminal = factory(Terminal::class)->create();
 	}
 	
-	function test_edit_area()
+	/** @test */
+	function edit_area()
 	{
 		$this->visit('maintainers/areas/' . $this->area->id . '/edit')
 			->see('Editar Área: <span class="text-primary">' . $this->area->id . '</span>')
 			->seeInField('#name', $this->area->name)
-			->seeInElement('#terminal_id', $this->area->terminal_id)
-			->see('Actualizar')
-			->assertResponseOk();
+			->seeInElement('#terminal_id', $this->area->terminal->id)
+			->seeInElement('button', 'Actualizar');
 	}
 	
-	function test_update_area()
+	/** @test */
+	function update_area()
 	{
-		$id       = $this->area->id + 1;
 		$terminal = factory(Terminal::class)->create([
-			'id'   => $id,
 			'name' => 'Terminal Norte'
 		]);
 		

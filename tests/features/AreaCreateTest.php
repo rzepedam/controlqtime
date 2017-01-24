@@ -20,7 +20,8 @@ class AreaCreateTest extends TestCase
 		$this->terminal = factory(Terminal::class)->create();
 	}
 	
-	function test_create_area()
+	/** @test */
+	function create_area()
 	{
 		$this->visit('maintainers/areas/create')
 			->seeInElement('h1', 'Crear Nueva Área')
@@ -29,7 +30,8 @@ class AreaCreateTest extends TestCase
 			->seeInElement('button', 'Guardar');
 	}
 	
-	function test_store_area()
+	/** @test */
+	function store_area()
 	{
 		$this->visit('maintainers/areas/create')
 			->type('test', 'name')

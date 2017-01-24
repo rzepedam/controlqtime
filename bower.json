@@ -23,6 +23,8 @@
     "jquery-wizard.js": "^0.4.3",
     "magnific-popup": "^1.1.0",
     "bootstrap-fileinput": "^4.3.5",
-    "jquery-asScrollbar": "^0.5.4"
+    "jquery-asScrollbar": "^0.5.4",
+    "dropzone": "https://github.com/enyo/dropzone.git#^4.3.0",
+    "lity": "https://github.com/jsor/lity.git#^2.2.2"
   }
 }

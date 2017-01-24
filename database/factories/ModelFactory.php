@@ -32,6 +32,7 @@ use Controlqtime\Core\Entities\LaborUnion;
 use Controlqtime\Core\Entities\Profession;
 use Controlqtime\Core\Entities\EngineCubic;
 use Controlqtime\Core\Entities\Institution;
+use Controlqtime\Core\Entities\SignInVisit;
 use Controlqtime\Core\Entities\Nationality;
 use Controlqtime\Core\Entities\TypeCompany;
 use Controlqtime\Core\Entities\TypeDisease;
@@ -475,6 +476,21 @@ $factory->define(Route::class, function (Faker\Generator $faker)
 		'name'        => strtoupper($faker->randomLetter) . '0' . rand(0, 9),
 		'terminal_id' => factory(Terminal::class)->create()->id,
 		'deleted_at'  => null
+	];
+});
+
+$factory->define(SignInVisit::class, function (Faker\Generator $faker)
+{
+	return [
+		'male_surname'   => $faker->lastName,
+		'female_surname' => $faker->lastName,
+		'first_name'     => $faker->firstName,
+		'second_name'    => $faker->firstName,
+		'rut'            => rand(3, 24) . rand(100, 999) . rand(100, 999) . "-" . rand(1, 9),
+		'birthday'       => $faker->date($format = 'd-m-Y', $max = 'now'),
+		'is_male'        => $faker->boolean,
+		'phone'          => $faker->word,
+		'email'          => $faker->email
 	];
 });
 
