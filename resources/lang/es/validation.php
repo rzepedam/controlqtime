@@ -113,18 +113,10 @@ return [
 		'phone1'                    => 'Teléfono 1',
 		'phone2'                    => 'Teléfono 2',
 		'email_company'             => 'Email Empresa',
-		
-		/*
-		 * Legal Representative
-		 */
 		'rut_representative'        => 'Rut Representante Legal',
 		'phone1_representative'     => 'Teléfono Representante Legal',
 		'phone2_representative'     => 'Teléfono Representante Legal',
 		'email_representative'      => 'Email Representante Legal',
-		
-		/*
-		 * Employees
-		 */
 		'male_surname'              => 'Apellido Paterno',
 		'female_surname'            => 'Apellido Materno',
 		'first_name'                => 'Primer Nombre',
@@ -136,10 +128,6 @@ return [
 		'company_id'                => 'Empresa',
 		'code'                      => 'Cód. Interno',
 		'phone'                     => 'Teléfono',
-		
-		/*
-		 * Vehículos
-		 */
 		'model_vehicle_id'          => 'Modelo',
 		'type_vehicle_id'           => 'Tipo de Vehículo',
 		'trademark_id'              => 'Marca',
@@ -156,10 +144,6 @@ return [
 		'weight'                    => 'Peso',
 		'carr'                      => 'Carrocería',
 		'num_plazas'                => 'Nº Plazas',
-		
-		/*
-		 * Others
-		 */
 		'acr'                       => 'Acrónimo',
 		'name'                      => 'Nombre',
 		'terminal_id'               => 'Terminal',
@@ -168,15 +152,7 @@ return [
 		'created_at'                => 'Fecha Creación',
 		'dur'                       => 'Nº de Meses',
 		'num_hour'                  => 'Nº de Horas',
-		
-		/*
-		 * Api's
-		 */
 		'num_device'                => 'Nº Dispositivo',
-		
-		/*
-		 * Contract
-		 */
 		'init_morning'              => 'Desde (Horario Mañana)',
 		'end_morning'               => 'Hasta (Horario Mañana)',
 		'init_afternoon'            => 'Desde (Horario Tarde)',
@@ -184,10 +160,10 @@ return [
 		'salary'                    => 'Sueldo Base',
 		'mobilization'              => 'Movilización',
 		'collation'                 => 'Colación',
-		
-		/*
-		 * Check-Vehicle-Form
-		 */
+		'name_contact'              => 'Nombre Contacto',
+		'tel_contact'               => 'Teléfono Contacto',
+		'email_contact'             => 'Email Contacto',
+		'address_contact'           => 'Dirección Contacto',
 		'state_piece_vehicle_id.0'  => 'Estado Pieza Vehículo 1',
 		'state_piece_vehicle_id.1'  => 'Estado Pieza Vehículo 2',
 		'state_piece_vehicle_id.2'  => 'Estado Pieza Vehículo 3',

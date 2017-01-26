@@ -58,7 +58,7 @@ class EmployeeDeleteContactTest extends TestCase
 		Session::put('step2_update', $this->step2_update);
 		
 		$this->relationship = factory(Relationship::class)->create();
-		$this->contact      = $this->employee->contactEmployees()->create([
+		$this->contact      = $this->employee->contactsable()->create([
 			'contact_relationship_id' => $this->relationship->id,
 			'name_contact'            => 'José Miguel Osorio Sepúlveda',
 			'email_contact'           => 'joseosorio@gmail.com',
@@ -67,7 +67,8 @@ class EmployeeDeleteContactTest extends TestCase
 		]);
 	}
 	
-	function test_delete_a_contact_employee()
+	/** @test */
+	function delete_a_contact_employee()
 	{
 		Session::put('id_delete_contact', json_encode([$this->contact->id]));
 		
@@ -82,9 +83,10 @@ class EmployeeDeleteContactTest extends TestCase
 			]);
 	}
 	
-	function test_delete_more_than_one_contacts_employee()
+	/** @test */
+	function delete_more_than_one_contacts_employee()
 	{
-		$contact = $this->employee->contactEmployees()->create([
+		$contact = $this->employee->contactsable()->create([
 			'contact_relationship_id' => $this->relationship->id,
 			'name_contact'            => 'Arévalo Martínez González',
 			'email_contact'           => 'are.gon@gmail.com',

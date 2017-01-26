@@ -65,12 +65,13 @@ class Employee extends Eloquent
 		return $this->morphOne(Address::class, 'addressable');
 	}
 	
+	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
-	public function contactEmployees()
+	public function contactsable()
 	{
-		return $this->hasMany(ContactEmployee::class);
+		return $this->morphMany(ContactEmployee::class, 'contactsable');
 	}
 	
 	/**
@@ -84,7 +85,7 @@ class Employee extends Eloquent
 		{
 			for ( $i = 0; $i < count($decodeRequest); $i++ )
 			{
-				$contact = $this->contactEmployees()->findOrFail($decodeRequest[$i]);
+				$contact = $this->contactsable()->findOrFail($decodeRequest[$i]);
 				$contact->delete();
 			}
 		}
@@ -97,8 +98,9 @@ class Employee extends Eloquent
 	{
 		for ( $i = 0; $i < $request['count_contacts']; $i++ )
 		{
-			$this->contactEmployees()->updateOrCreate(
+			$this->contactsable()->updateOrCreate(
 				['id' => $request['id_contact'][$i]], [
+				'contactsable_type'       => 'Controlqtime\Core\Entities\Employee',
 				'contact_relationship_id' => $request['contact_relationship_id'][$i],
 				'name_contact'            => $request['name_contact'][$i],
 				'email_contact'           => $request['email_contact'][$i],
@@ -106,6 +108,7 @@ class Employee extends Eloquent
 				'tel_contact'             => $request['tel_contact'][$i]
 			]);
 		}
+		
 	}
 	
 	/**
@@ -772,7 +775,7 @@ class Employee extends Eloquent
 	 */
 	public function getNumContactEmployeesAttribute()
 	{
-		return count($this->contactEmployees);
+		return count($this->contactsable);
 	}
 	
 	/**
@@ -1010,7 +1013,7 @@ class Employee extends Eloquent
 		
 		if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
 		{
-			$this->dailyAssistanceForRemuneration()->transform(function ($item) use ($assistance)
+			$this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance)
 			{
 				$assistance[] = Carbon::parse($item->min('created_at'))->format('Y-m-d');
 			});
@@ -1042,7 +1045,7 @@ class Employee extends Eloquent
 		
 		if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
 		{
-			$this->dailyAssistanceForRemuneration()->transform(function ($item) use ($assistance)
+			$this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance)
 			{
 				$assistance[] = Carbon::parse($item->min('created_at'))->format('H:i:s');
 			});

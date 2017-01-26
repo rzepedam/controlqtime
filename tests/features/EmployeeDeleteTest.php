@@ -21,13 +21,15 @@ class EmployeeDeleteTest extends TestCase
 		$this->signIn();
 	}
 	
-	function test_delete_url_employee()
+	/** @test */
+	function delete_url_employee()
 	{
 		$response = $this->call('DELETE', 'human-resources/employees/' . $this->employee->id);
 		$this->assertEquals(302, $response->getStatusCode());
 	}
 	
-	function test_delete_employee()
+	/** @test */
+	function delete_employee()
 	{
 		$employee = factory(\Controlqtime\Core\Entities\Employee::class)->states('enable')->create();
 		
@@ -39,12 +41,14 @@ class EmployeeDeleteTest extends TestCase
 			]);
 	}
 	
-	function test_delete_employee_and_not_delete_contacts_relationships_studies_etc()
+	/** @test */
+	function delete_employee_and_not_delete_contacts_relationships_studies_etc()
 	{
 		$employee = factory(\Controlqtime\Core\Entities\Employee::class)->states('enable')->create();
 		
 		$relationship = factory(Relationship::class)->create();
-		$employee->contactEmployees()->create([
+		$employee->contactsable()->create([
+			'contactsable_type'       => 'Controlqtime\Core\Entities\Employee',
 			'contact_relationship_id' => $relationship->id,
 			'name_contact'            => 'José Miguel Osorio Sepúlveda',
 			'email_contact'           => 'joseosorio@gmail.com',
@@ -128,7 +132,7 @@ class EmployeeDeleteTest extends TestCase
 				'state'      => 'enable',
 				'deleted_at' => null])
 			->seeInDatabase('contact_employees', [
-				'employee_id'             => $employee->id,
+				'contactsable_type'       => 'Controlqtime\Core\Entities\Employee',
 				'contact_relationship_id' => $relationship->id,
 				'name_contact'            => 'José Miguel Osorio Sepúlveda',
 				'email_contact'           => 'joseosorio@gmail.com',

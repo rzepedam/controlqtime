@@ -28,6 +28,14 @@ class SignInVisit extends Eloquent
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
+	public function contactsable()
+	{
+		return $this->morphOne(ContactEmployee::class, 'contactsable');
+	}
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 */
 	public function imagesable()
 	{
 		return $this->morphMany(Image::class, 'imagesable');
@@ -133,4 +141,12 @@ class SignInVisit extends Eloquent
 		return $this->is_male ? 'Masculino' : 'Femenino';
 	}
 	
+	/**
+	 * @return int
+	 */
+	public function getNumImagesVisitAttribute()
+	{
+		dd($this->imagesable()->count());
+		return $this->imagesable()->count();
+	}
 }

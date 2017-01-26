@@ -16,14 +16,16 @@ class AccessControlApiTest extends TestCase
 		$this->token = $this->user->createToken('Biometry')->accessToken;
 	}
 	
-	function test_url_access_control_api()
+	/** @test */
+	function url_access_control_api()
 	{
 		$response = $this->call('POST', '/api/access-control');
 		
 		$this->assertEquals(302, $response->getStatusCode());
 	}
 	
-	function test_unauthenticated_access_control_api()
+	/** @test */
+	function unauthenticated_access_control_api()
 	{
 		$headers = [
 			'Authorization' => 'Bearer test',
@@ -36,7 +38,8 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
-	function test_create_access_control_api_success()
+	/** @test */
+	function create_access_control_api_success()
 	{
 		$rut = str_replace('.', '', $this->employee->rut);
 		
@@ -55,7 +58,8 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
-	function test_not_create_access_control_if_rut_not_exists()
+	/** @test */
+	function not_create_access_control_if_rut_not_exists()
 	{
 		$data = [
 			'rut'        => '21955225-4',
@@ -70,7 +74,8 @@ class AccessControlApiTest extends TestCase
 			->assertResponseStatus(500);
 	}
 	
-	function test_not_create_access_control_if_rut_is_empty()
+	/** @test */
+	function not_create_access_control_if_rut_is_empty()
 	{
 		$data = [
 			'rut'        => '',
@@ -89,7 +94,8 @@ class AccessControlApiTest extends TestCase
 		
 	}
 	
-	function test_not_create_access_control_if_num_device_is_empty()
+	/** @test */
+	function not_create_access_control_if_num_device_is_empty()
 	{
 		$data = [
 			'rut'        => '17032680-6',
@@ -107,7 +113,8 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
-	function test_not_create_access_control_if_status_is_empty()
+	/** @test */
+	function not_create_access_control_if_status_is_empty()
 	{
 		$data = [
 			'rut'        => '17032680-6',
@@ -125,7 +132,8 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
-	function test_not_create_access_control_if_created_at_is_empty()
+	/** @test */
+	function not_create_access_control_if_created_at_is_empty()
 	{
 		$data = [
 			'rut'        => '17032680-6',
@@ -143,7 +151,8 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
-	function test_not_save_if_data_is_duplicate()
+	/** @test */
+	function not_save_if_data_is_duplicate()
 	{
 		$now = Carbon::now();
 		$rut = str_replace('.', '', $this->employee->rut);
@@ -169,7 +178,8 @@ class AccessControlApiTest extends TestCase
 			]);
 	}
 	
-	function test_update_image_profile_employee_when_is_registry_in_biometry()
+	/** @test */
+	function update_image_profile_employee_when_is_registry_in_biometry()
 	{
 		$data = [
 			'rut' => '17032689-6',

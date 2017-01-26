@@ -77,7 +77,7 @@
                                 <div class="panel-body">
                                     <div id="content_contact_employee">
 
-                                        @if (count($employee->contactEmployees) > 0)
+                                        @if ($employee->contactsable->count() > 0)
 
                                             @include('human-resources.employees.partials.edit.step1.contact_employee')
 

@@ -17,6 +17,7 @@ class SignInVisitCreateTest extends TestCase
 	{
 		$this->visit('visits/sign-in-visits/create')
 			->seeInElement('h1', 'Crear Nuevo Registro Visita')
+			->seeInElement('h3', 'Datos Personales')
 			->see('Apellido Paterno')
 			->see('Apellido Materno')
 			->see('Primer Nombre')
@@ -28,6 +29,12 @@ class SignInVisitCreateTest extends TestCase
 			->see('F')
 			->see('Celular')
 			->see('Email')
+			->seeInElement('h3', 'Información de Contacto')
+			->see('Relación')
+			->see('Nombre')
+			->see('Celular')
+			->see('Email')
+			->see('Dirección')
 			->seeInElement('a', 'Volver')
 			->seeInElement('button', 'Guardar');
 	}
@@ -36,15 +43,20 @@ class SignInVisitCreateTest extends TestCase
 	function store_sign_in_visit()
 	{
 		$data = [
-			'male_surname'   => 'Meza',
-			'female_surname' => 'Mora',
-			'first_name'     => 'Raúl',
-			'second_name'    => 'Elías',
-			'rut'            => '17.032.680-6',
-			'birthday'       => '11-06-1989',
-			'is_male'        => 'M',
-			'phone'          => '+56974155784',
-			'email'          => 'raulmeza@controlqtime.cl'
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'email_contact'           => 'emilia@hotmail.com',
+			'address_contact'         => 'Los Andes 1990',
+			'tel_contact'             => '+56988012310',
 		];
 		
 		$this->json('POST', 'visits/sign-in-visits', $data);
@@ -58,8 +70,15 @@ class SignInVisitCreateTest extends TestCase
 			'birthday'       => '1989-06-11',
 			'is_male'        => true,
 			'phone'          => '+56974155784',
-			'email'          => 'raulmeza@controlqtime.cl'
-		]);
+			'email'          => 'raulmeza@controlqtime.cl'])
+			->seeInDatabase('contact_employees', [
+				'contactsable_type'       => 'Controlqtime\Core\Entities\SignInVisit',
+				'contact_relationship_id' => 1,
+				'name_contact'            => 'Emilia Andrea Céspedes Canales',
+				'email_contact'           => 'emilia@hotmail.com',
+				'address_contact'         => 'Los Andes 1990',
+				'tel_contact'             => '+56988012310'
+			]);
 	}
 	
 	/** @test */
@@ -417,5 +436,291 @@ class SignInVisitCreateTest extends TestCase
 		
 		$this->assertResponseStatus(422);
 		$this->assertArrayHasKey('email', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function contact_relationship_is_required_to_store_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => '',
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'tel_contact'             => '+56988012310',
+			'email_contact'           => 'emilia@hotmail.com',
+			'address_contact'         => 'Los Andes 1990'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('contact_relationship_id', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function contact_relationship_is_integer_to_store_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 'AR',
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'tel_contact'             => '+56988012310',
+			'email_contact'           => 'emilia@hotmail.com',
+			'address_contact'         => 'Los Andes 1990'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('contact_relationship_id', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function name_contact_is_required_to_store_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => '',
+			'tel_contact'             => '+56988012310',
+			'email_contact'           => 'emilia@hotmail.com',
+			'address_contact'         => 'Los Andes 1990'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('name_contact', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function name_contact_it_is_max_120_letters_in_length_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => 'Lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit-Aenean-commodo-ligula-eget-dolor-Aenean-massa-Cum-sociis-nato-commodo',
+			'tel_contact'             => '+56988012310',
+			'email_contact'           => 'emilia@hotmail.com',
+			'address_contact'         => 'Los Andes 1990'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('name_contact', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function tel_contact_is_required_to_store_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'tel_contact'             => '',
+			'email_contact'           => 'emilia@hotmail.com',
+			'address_contact'         => 'Los Andes 1990'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('tel_contact', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function tel_contact_it_is_max_12_letters_in_length_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'tel_contact'             => 'phone-with-more-than-12-letters-in-length',
+			'email_contact'           => 'emilia@hotmail.com',
+			'address_contact'         => 'Los Andes 1990'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('tel_contact', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function email_contact_is_required_to_store_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'tel_contact'             => '+56988012310',
+			'email_contact'           => '',
+			'address_contact'         => 'Los Andes 1990'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('email_contact', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function email_contact_must_be_valid_to_store_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'tel_contact'             => '+56988012310',
+			'email_contact'           => 'non-valid-email',
+			'address_contact'         => 'Los Andes 1990'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('email_contact', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function email_contact_it_is_max_60_letters_in_length_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'tel_contact'             => '+56988012310',
+			'email_contact'           => 'email_address_with_more_than_60_letters_in_length_more@gmail.com',
+			'address_contact'         => 'Los Andes 1990'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('email_contact', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function address_contact_is_required_to_store_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'tel_contact'             => '+56988012310',
+			'email_contact'           => 'emilia@hotmail.com',
+			'address_contact'         => ''
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('address_contact', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function address_contact_it_is_max_150_letters_in_length_sign_in_visit()
+	{
+		$data = [
+			'male_surname'            => 'Meza',
+			'female_surname'          => 'Mora',
+			'first_name'              => 'Raúl',
+			'second_name'             => 'Elías',
+			'rut'                     => '17.032.680-6',
+			'birthday'                => '11-06-1989',
+			'is_male'                 => 'M',
+			'phone'                   => '+56974155784',
+			'email'                   => 'raulmeza@controlqtime.cl',
+			'contact_relationship_id' => 1,
+			'name_contact'            => 'Emilia Andrea Céspedes Canales',
+			'tel_contact'             => '+56988012310',
+			'email_contact'           => 'emilia@hotmail.com',
+			'address_contact'         => 'Lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit-Aenean-commodo-ligula-eget-dolor-Aenean-massa-Cum-sociis-natoque-penatibus-et-magnis-dis-parturient-montes-na'
+		];
+		
+		$this->json('POST', 'visits/sign-in-visits', $data);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('address_contact', $this->decodeResponseJson());
 	}
 }

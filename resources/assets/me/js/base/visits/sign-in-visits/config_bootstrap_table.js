@@ -1,7 +1,16 @@
 $('#sign_in_visit_table').bootstrapTable({
     url: "/visits/getSignInVisits",
     columns: [
-        {}, {}, {}, {},
+        {
+            formatter : function(value,row,index) {
+                if (row.state === 'disable') {
+                    var $state = row.id + ' <a href="/visits/sign-in-visits/' + row.id +'" class="tooltip-danger" data-toggle="tooltip" data-original-title="Activar Visita"><i class="fa fa-exclamation-circle text-danger pointer" aria-hidden="true"></i></a>'
+                    return $state;
+                }else {
+                    return row.id;
+                }
+            }
+        }, {}, {}, {},
         {
             formatter : function(value,row,index) {
                 return  '<a href="/visits/sign-in-visits/' + row.id + '" class="btn btn-squared btn-info btn-sm waves-effect waves-light hidden-xs hidden-sm tooltip-info" data-toggle="tooltip" data-original-title="Ver"><i class="fa fa-search"></i></a> ' +

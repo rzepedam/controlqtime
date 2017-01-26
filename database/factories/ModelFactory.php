@@ -138,7 +138,8 @@ $factory->state(Company::class, 'disable', function ()
 $factory->define(ContactEmployee::class, function (Faker\Generator $faker)
 {
 	return [
-		'employee_id'             => factory(Employee::class)->states('enable')->create()->id,
+		'contactsable_id'         => factory(SignInVisit::class)->create()->id,
+		'contactsable_type'       => 'Controlqtime\Core\Entities\SignInVisit',
 		'contact_relationship_id' => factory(Relationship::class)->create()->id,
 		'name_contact'            => $faker->firstName . ' ' . $faker->lastName,
 		'email_contact'           => $faker->email,

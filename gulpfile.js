@@ -290,11 +290,16 @@ elixir(function (mix) {
 
     // Visits > Sign-In-Visits > Create-Edit Custom Sign-In-Visits CSS
     mix.styles([
-        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
+        'bower/sweetalert/dist/sweetalert.css'
     ], 'public/css/visits/sign-in-visits/create-edit-custom-sign-in-visits.css');
 
     // Visits > Sign-In-Visits > Create-Edit Custom Sign-In-Visits JS
     mix.scripts([
+        'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
+        'components/bootstrap-maxlength.js',
+        'bower/sweetalert/dist/sweetalert.min.js',
+        'me/js/utilities/submit-form-ajax.js',
         'me/js/utilities/add_csrf_token.js',
         'me/js/utilities/capitalize.js',
         'me/js/validations/valida_rut.js',
@@ -712,3 +717,8 @@ elixir(function (mix) {
     ]);
 
 })
+
+/*
+ *  Cuando se agrega un custom JS, no agregar en vista create-edit-common, copiar estos archivos
+ *  y agregar a su sección custom y eliminar el submit-form, ya que en el custom, ya está el submit del form.
+ */

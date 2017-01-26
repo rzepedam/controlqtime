@@ -1,5 +1,5 @@
 <?php $i = 0; ?>
-@foreach($employee->contactEmployees as $contact_employee)
+@foreach($employee->contactsable as $contactEmployee)
 
     <span id="contact{{ $i }}">
         <div class="row">
@@ -16,16 +16,16 @@
             <div class="col-md-1 hide">
                 <div class="form-group">
                     {{ Form::label("id_contact", "ID", ["class" => "control-label"]) }}
-                    {{ Form::text("id_contact[]", $contact_employee->id, ["id" => "id_contact" . $i, "class" => "form-control"]) }}
+                    {{ Form::text("id_contact[]", $contactEmployee->id, ["id" => "id_contact" . $i, "class" => "form-control"]) }}
                 </div>
             </div>
             <div class="col-sm-4 col-md-3 form-group">
                 {{ Form::label("contact_relationship_id", "Relación", ["class"=> "control-label"]) }}
-                {{ Form::select("contact_relationship_id[]", is_null($contact_employee->relationship->deleted_at) ? $relationships : ['default' => 'Seleccione Relación...'] + $relationships->toArray(), $contact_employee->relationship->id, ["class"=> "form-control"]) }}
+                {{ Form::select("contact_relationship_id[]", is_null($contactEmployee->relationship->deleted_at) ? $relationships : ['default' => 'Seleccione Relación...'] + $relationships->toArray(), $contactEmployee->relationship->id, ["class"=> "form-control"]) }}
             </div>
             <div class="col-sm-4 col-md-6 form-group">
                 {{ Form::label('name_contact', 'Nombre', ['class' => 'control-label']) }}
-                {{ Form::text('name_contact[]', $contact_employee->name_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '120']) }}
+                {{ Form::text('name_contact[]', $contactEmployee->name_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '120']) }}
             </div>
             <div class="col-sm-4 col-md-3 form-group">
                 {{ Form::label('tel_contact', 'Teléfono', ['class' => 'control-label']) }}
@@ -33,18 +33,18 @@
                     <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
                     </div>
-                    {{ Form::text('tel_contact[]', $contact_employee->tel_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
+                    {{ Form::text('tel_contact[]', $contactEmployee->tel_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '20']) }}
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6 col-md-6 form-group">
                 {{ Form::label('email_contact', 'Email', ['class' => 'control-label']) }}
-                {{ Form::text('email_contact[]', $contact_employee->email_contact, ['id' => 'EmailContactEmployee', 'class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
+                {{ Form::text('email_contact[]', $contactEmployee->email_contact, ['id' => 'EmailContactEmployee', 'class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
             </div>
             <div class="col-sm-6 col-md-6 form-group">
                 {{ Form::label('address_contact', 'Dirección', ['class' => 'control-label']) }}
-                {{ Form::text('address_contact[]', $contact_employee->address_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
+                {{ Form::text('address_contact[]', $contactEmployee->address_contact, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '100']) }}
             </div>
         </div>
         <br />

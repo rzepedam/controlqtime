@@ -20,10 +20,23 @@
 
     {{ Form::open(array('route' => 'sign-in-visits.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
-        <div class="panel">
+        <div class="panel panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="icon fa fa-check-square-o text-primary"></i> Datos Personales</h3>
+            </div>
             <div class="panel-body">
 
-                @include('visits.sign-in-visits.partials.fields')
+                @include('visits.sign-in-visits.partials.info_personal')
+
+            </div>
+        </div>
+        <div class="panel panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil-square-o text-success" aria-hidden="true"></i> Información de Contacto</h3>
+            </div>
+            <div class="panel-body">
+
+                @include('visits.sign-in-visits.partials.info_contacto')
 
             </div>
         </div>

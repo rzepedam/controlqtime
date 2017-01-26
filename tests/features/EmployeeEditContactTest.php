@@ -61,7 +61,7 @@ class EmployeeEditContactTest extends TestCase
 		Session::put('password', bcrypt('marcelocandia@gmail.com'));
 		Session::put('id_delete_contact_update', '');
 		
-		$this->contact = $this->employee->contactEmployees()->create([
+		$this->contact = $this->employee->contactsable()->create([
 			'contact_relationship_id' => $this->relationship->id,
 			'name_contact'            => 'José Miguel Osorio Sepúlveda',
 			'email_contact'           => 'joseosorio@gmail.com',
@@ -70,7 +70,8 @@ class EmployeeEditContactTest extends TestCase
 		]);
 	}
 	
-	function test_update_contact_employee()
+	/** @test */
+	function update_contact_employee()
 	{
 		$relationship = factory(Relationship::class)->create();
 		
@@ -88,12 +89,12 @@ class EmployeeEditContactTest extends TestCase
 		
 		$this->put('human-resources/employees/' . $this->employee->id, $this->step3_update)
 			->seeInDatabase('contact_employees', [
-				'id'              => $this->contact->id,
-				'employee_id'     => $this->employee->id,
-				'name_contact'    => 'Iván Osvaldo Flores Mondaca',
-				'email_contact'   => 'ivanosvaldo@gmail.com',
-				'address_contact' => 'Av. Tres 0554',
-				'tel_contact'     => '+56976109211'
+				'id'                => $this->contact->id,
+				'contactsable_type' => 'Controlqtime\Core\Entities\Employee',
+				'name_contact'      => 'Iván Osvaldo Flores Mondaca',
+				'email_contact'     => 'ivanosvaldo@gmail.com',
+				'address_contact'   => 'Av. Tres 0554',
+				'tel_contact'       => '+56976109211'
 			]);
 	}
 	

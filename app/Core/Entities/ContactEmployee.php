@@ -10,7 +10,8 @@ class ContactEmployee extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'contact_relationship_id', 'name_contact', 'email_contact', 'address_contact', 'tel_contact'
+		'contactsable_id', 'contactsable_type', 'contact_relationship_id', 'name_contact',
+		'email_contact', 'address_contact', 'tel_contact'
 	];
 	
 	/**
@@ -20,6 +21,14 @@ class ContactEmployee extends Eloquent
 		'deleted_at'
 	];
 	
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+	 */
+	public function contactsable()
+	{
+		return $this->morphTo();
+	}
 	
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

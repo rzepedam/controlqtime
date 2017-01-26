@@ -72,7 +72,8 @@ class EmployeeEditTest extends TestCase
 		$this->typeSpeciality          = factory(TypeSpeciality::class)->create();
 	}
 	
-	function test_edit_employee()
+	/** @test */
+	function edit_employee()
 	{
 		$this->visit('human-resources/employees/' . $this->employee->id . '/edit')
 			->seeInElement('h1', 'Editar Trabajador: <span class="text-primary">' . $this->employee->id . '</span>')
@@ -98,7 +99,8 @@ class EmployeeEditTest extends TestCase
 			->assertResponseOk();
 	}
 	
-	function test_update_employee()
+	/** @test */
+	function update_employee()
 	{
 		$nationality = factory(Nationality::class)->create([
 			'name' => 'Argentina'

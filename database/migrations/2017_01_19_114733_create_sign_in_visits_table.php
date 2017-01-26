@@ -25,6 +25,7 @@ class CreateSignInVisitsTable extends Migration
 	        $table->boolean('is_male')->default(false);
 	        $table->string('phone', 12);
 	        $table->string('email', 60)->unique();
+	        $table->enum('state', ['enable', 'disable'])->default('disable');
             $table->timestamps();
         });
     }

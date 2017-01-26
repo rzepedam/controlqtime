@@ -2,29 +2,29 @@
     {{-- Apellido Paterno Text Field --}}
     <div class="col-md-3 form-group">
         {{ Form::label('male_surname', 'Apellido Paterno') }}
-        {{ Form::text('male_surname', null, ['class' => 'form-control']) }}
+        {{ Form::text('male_surname', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
     </div>
     {{-- Apellido Materno Text Field --}}
     <div class="col-md-3 form-group">
         {{ Form::label('female_surname', 'Apellido Materno') }}
-        {{ Form::text('female_surname', null, ['class' => 'form-control']) }}
+        {{ Form::text('female_surname', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
     </div>
     {{-- Primer Nombre Text Field --}}
     <div class="col-md-3 form-group">
-        {{ Form::label('first_name', 'Primer Nombre') }}
-        {{ Form::text('first_name', null, ['class' => 'form-control']) }}
+        {{ Form::label('first_name', 'Primer Nombre') }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Si su nombre es compuesto (Ej: María de los Ángeles), ingresar 'María de los' aquí y 'Ángeles' en campo Segundo Nombre" data-html="true"></i>
+        {{ Form::text('first_name', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
     </div>
     {{-- Segundo Nombre Text Field --}}
     <div class="col-md-3 form-group">
         {{ Form::label('second_name', 'Segundo Nombre') }}
-        {{ Form::text('second_name', null, ['class' => 'form-control']) }}
+        {{ Form::text('second_name', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '30']) }}
     </div>
 </div>
 <div class="row">
     {{-- Rut Text Field --}}
     <div class="col-md-3 form-group">
         {{ Form::label('rut', 'Rut') }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
-        {{ Form::text('rut', null, ['class' => 'form-control check_rut']) }}
+        {{ Form::text('rut', null, ['class' => 'form-control check_rut', 'data-plugin' => 'maxlength', 'maxlength' => '9']) }}
     </div>
     {{-- Fecha Nacimiento Text Field --}}
     <div class="col-md-3 form-group">
@@ -65,14 +65,24 @@
     {{-- Celular Text Field --}}
     <div class="col-md-3 form-group">
         {{ Form::label('phone', 'Celular') }}
-        {{ Form::text('phone', null, ['class' => 'form-control']) }}
+        <div class="input-group">
+            <div class="input-group-addon">
+                <i class="fa fa-phone"></i>
+            </div>
+            {{ Form::text('phone', null, ['class' => 'form-control', 'data-plugin' => 'maxlength', 'maxlength' => '12']) }}
+        </div>
     </div>
 </div>
 <div class="row">
     {{-- Email Text Field --}}
     <div class="col-md-6 form-group">
         {{ Form::label('email', 'Email') }}
-        {{ Form::text('email', null, ['id' => 'SignInVisit', 'class' => 'form-control', 'onBlur' => '$(this).checkEmail(this)']) }}
+        <div class="input-group">
+            <div class="input-group-addon">
+                <i class="fa fa-envelope"></i>
+            </div>
+            {{ Form::text('email', null, ['id' => 'SignInVisit', 'class' => 'form-control', Route::is('sign-in-visits.edit') ? '' : 'onBlur' => '$(this).checkEmail(this)', 'data-plugin' => 'maxlength', 'maxlength' => '60']) }}
+        </div>
     </div>
 </div>
 <div id="SignInVisit" class="row hide">

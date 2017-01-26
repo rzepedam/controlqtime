@@ -116,7 +116,7 @@
                         Información de Contacto
                     </td>
                 </tr>
-                @if (count($employee->contactEmployees) > 0)
+                @if ($employee->contactsable->count() > 0)
                     <tr class="active">
                         <th class="col-md-1 text-center"><i class="fa fa-hashtag"></i></th>
                         <th class="col-md-1 text-center">Parentesco</th>
@@ -125,14 +125,14 @@
                         <th class="col-md-4 text-center">Dirección</th>
                         <th class="col-md-1 text-center">Teléfono</th>
                     </tr>
-                    @foreach($employee->contactEmployees as $contact_employee)
+                    @foreach($employee->contactsable as $contactEmployee)
                         <tr>
                             <td class="text-center">{{ $i }}</td>
-                            <td class="text-center">{{ $contact_employee->relationship->name }}</td>
-                            <td class="text-center">{{ $contact_employee->name_contact }}</td>
-                            <td class="text-center">{{ Html::mailto($contact_employee->email_contact, null, ['class' => 'text-muted']) }}</td>
-                            <td class="text-center">{{ $contact_employee->address_contact }}</td>
-                            <td class="text-center">{{ $contact_employee->tel_contact }}</td>
+                            <td class="text-center">{{ $contactEmployee->relationship->name }}</td>
+                            <td class="text-center">{{ $contactEmployee->name_contact }}</td>
+                            <td class="text-center">{{ Html::mailto($contactEmployee->email_contact, null, ['class' => 'text-muted']) }}</td>
+                            <td class="text-center">{{ $contactEmployee->address_contact }}</td>
+                            <td class="text-center">{{ $contactEmployee->tel_contact }}</td>
                         </tr>
                         <?php $i ++; ?>
                     @endforeach

@@ -17,6 +17,11 @@ use Controlqtime\Core\Entities\LegalRepresentative;
 class AjaxLoadController extends Controller
 {
 	/**
+	 * @var string
+	 */
+	private $dirEntity = 'Controlqtime\Core\Entities\\';
+	
+	/**
 	 * @var Company
 	 */
 	protected $company;
@@ -97,7 +102,7 @@ class AjaxLoadController extends Controller
 	 */
 	public function loadProvinces(Request $request)
 	{
-		return $this->region->findOrFail($request->get('id'))->provinces->pluck('name', 'id');
+		return $this->region->findOrFail(request('id'))->provinces->pluck('name', 'id');
 	}
 	
 	/**
@@ -107,7 +112,7 @@ class AjaxLoadController extends Controller
 	 */
 	public function loadCommunes(Request $request)
 	{
-		return $this->province->findOrFail($request->get('id'))->communes->pluck('name', 'id');
+		return $this->province->findOrFail(request('id'))->communes->pluck('name', 'id');
 	}
 	
 	/**
@@ -119,26 +124,29 @@ class AjaxLoadController extends Controller
 	{
 		try
 		{
-			switch ( $request->get('element') )
+			switch ( request('element') )
 			{
 				case 'Company':
-					$this->company->where('email_company', $request->get('email'))->firstOrFail();
+					$this->company->where('email_company', request('email'))->firstOrFail();
 					break;
 				
 				case 'Representative':
-					$this->legalRepresentative->where('email_representative', $request->get('email'))->firstOrFail();
+					$this->legalRepresentative->where('email_representative', request('email'))->firstOrFail();
 					break;
 				
 				case 'Employee':
-					$this->employee->where('email_employee', $request->get('email'))->firstOrFail();
+					$this->employee->where('email_employee', request('email'))->firstOrFail();
 					break;
 				
-				case 'EmailContactEmployee';
-					$this->contactEmployee->where('email_contact', $request->get('email'))->firstOrFail();
-					break;
-					
 				case 'SignInVisit':
 					$this->signInVisit->where('email', request('email'))->firstOrFail();
+					break;
+				
+				default:
+					$classPolimorphic = explode(',', request('element'));
+					$this->contactEmployee->where('email_contact', request('email'))
+						->where('contactsable_type', $this->dirEntity . $classPolimorphic[1])
+						->firstOrFail();
 					break;
 			}
 			
@@ -156,7 +164,7 @@ class AjaxLoadController extends Controller
 	 */
 	public function loadModelVehicles(Request $request)
 	{
-		return $this->trademark->findOrFail($request->get('id'))->modelVehicles->pluck('name', 'id');
+		return $this->trademark->findOrFail(request('id'))->modelVehicles->pluck('name', 'id');
 	}
 	
 	/**
@@ -166,7 +174,7 @@ class AjaxLoadController extends Controller
 	 */
 	public function loadDetailVehicle(Request $request)
 	{
-		$vehicle = $this->vehicle->with(['modelVehicle.trademark'])->findOrFail($request->get('id'));
+		$vehicle = $this->vehicle->with(['modelVehicle.trademark'])->findOrFail(request('id'));
 		
 		return $vehicle;
 	}

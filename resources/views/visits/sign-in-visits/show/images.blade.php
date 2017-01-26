@@ -18,9 +18,12 @@
                     </div>
                 @endforeach
             @else
-                <br/>
-                <h3 class="text-center text-info">No existen Imágenes asociadas a la Visita actual</h3>
-                <br/>
+                <br />
+                <div class="text-center">
+                    <h3 class="text-info">No existen Imágenes asociadas a la Visita actual</h3>
+                    <span class="note">(Debe agregar a lo menos el anverso de la cédula de identidad para activar Visita)</span>
+                </div>
+                <br />
             @endif
         </div>
         <br />
@@ -35,7 +38,7 @@
                     {{ csrf_field() }}
                     <div class="dz-message">
                         <h3>Arrastre sus archivos hasta aquí</h3>
-                        <span class="note">(También puede hacer click y seleccionar los archivos manualmente).</span>
+                        <span class="note">También puede hacer click y seleccionar los archivos manualmente</span>
                     </div>
                 </form>
             </div>

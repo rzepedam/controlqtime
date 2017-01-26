@@ -450,6 +450,7 @@ class EmployeeController extends Controller
 		} catch ( Exception $e )
 		{
 			$this->log->error("Error update Employee: " . $e->getMessage());
+			session()->flash('error', 'Hubo un error en el servidor. Comunique con personal especializado.');
 			DB::rollBack();
 			
 			return response()->json(['status' => false]);
@@ -464,7 +465,7 @@ class EmployeeController extends Controller
 	public function show($id)
 	{
 		$employee = $this->employee->with([
-			'address.commune.province.region', 'contactEmployees.relationship', 'familyRelationships.relationship',
+			'address.commune.province.region', 'contactsable.relationship', 'familyRelationships.relationship',
 			'address.detailAddressLegalEmployee', 'studies.degree', 'studies.detailCollegeStudy.institution',
 			'studies.detailSchoolStudy', 'studies.detailTechnicalStudy', 'certifications.imagesable',
 			'specialities.imagesable', 'professionalLicenses.imagesable', 'disabilities.imagesable',

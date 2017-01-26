@@ -57,7 +57,8 @@ class EmployeeCreateContactTest extends TestCase
 		Session::put('step2', $this->sessionStep2);
 	}
 	
-	function test_store_with_contact_information_employee()
+	/** @test */
+	function store_with_contact_information_employee()
 	{
 		$this->sessionStep1 += [
 			'id_contact'              => [0],
@@ -80,7 +81,8 @@ class EmployeeCreateContactTest extends TestCase
 			]);
 	}
 	
-	function test_store_with_multiple_contact_information_employees()
+	/** @test */
+	function store_with_multiple_contact_information_employees()
 	{
 		$this->sessionStep1 += [
 			'id_contact'              => [0, 0, 0],

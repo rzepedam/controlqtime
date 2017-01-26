@@ -14,12 +14,13 @@ class CreateContactEmployeesTable extends Migration
     {
         Schema::create('contact_employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('employee_id')->nullable();
+	        $table->unsignedInteger('contactsable_id')->nullable();
+	        $table->string('contactsable_type');
             $table->unsignedInteger('contact_relationship_id')->nullable();
             $table->string('name_contact', 120);
-            $table->string('email_contact', 60)->unique();
-            $table->string('address_contact', 100);
-            $table->string('tel_contact', 20);
+	        $table->string('tel_contact', 12);
+	        $table->string('email_contact', 60)->unique();
+	        $table->string('address_contact', 150);
 	        $table->timestamps();
         });
     }
