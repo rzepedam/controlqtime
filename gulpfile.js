@@ -299,7 +299,6 @@ elixir(function (mix) {
         'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
         'components/bootstrap-maxlength.js',
         'bower/sweetalert/dist/sweetalert.min.js',
-        'me/js/utilities/submit-form-ajax.js',
         'me/js/utilities/add_csrf_token.js',
         'me/js/utilities/capitalize.js',
         'me/js/validations/valida_rut.js',
