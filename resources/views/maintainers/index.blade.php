@@ -128,16 +128,7 @@
             </div>
         </div>
         <div class="clearfix visible-xs margin-bottom-20"></div>
-        <div class="col-xs-12 col-sm-4 col-md-2">
-            <div id="redirect-pensions" class="counter counter-lg counter-inverse bg-green-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
-                <div class="vertical-align-middle">
-                    <div class="counter-icon">
-                        <i class="fa fa-tags" aria-hidden="true"></i>
-                    </div>
-                    <span class="counter-number">Fondos de Pensión</span>
-                </div>
-            </div>
-        </div>
+
     </div>
     <br />
     <div class="row">

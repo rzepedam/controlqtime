@@ -4,6 +4,7 @@ namespace Controlqtime\Http\Controllers;
 
 use Exception;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Area;

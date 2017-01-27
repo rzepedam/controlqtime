@@ -52,10 +52,6 @@ $(document).ready(function(){
         window.location.href = "/maintainers/type-exams";
     });
 
-    $('#redirect-pensions').click(function() {
-        window.location.href = "/maintainers/pensions";
-    });
-
     $('#redirect-institutions').click(function() {
         window.location.href = "/maintainers/institutions";
     });

@@ -1075,7 +1075,7 @@ class Employee extends Eloquent
 		
 		if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
 		{
-			$this->dailyAssistanceForRemuneration()->transform(function ($item) use ($assistance)
+			$this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance)
 			{
 				$assistance[] = Carbon::parse($item->min('created_at'))->format('Y-m-d');
 			});
@@ -1108,7 +1108,7 @@ class Employee extends Eloquent
 	{
 		$extraHours = collect();
 		
-		$this->dailyAssistanceForRemuneration()->transform(function ($item) use ($extraHours)
+		$this->dailyAssistanceForRemuneration()->each(function ($item) use ($extraHours)
 		{
 			$maxAssistance = Carbon::parse($item->max('created_at'));
 			$workOut       = Carbon::createFromFormat('Y-m-d H:i', $maxAssistance->format('Y-m-d') . ' ' . $this->contract->end_afternoon);

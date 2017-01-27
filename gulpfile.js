@@ -237,7 +237,8 @@ elixir(function (mix) {
     // Human-Resources > Contracts > Create CSS
     mix.styles([
         'custom-configuration/css/bootstrap-select.css',
-        'bower/clockpicker/dist/bootstrap-clockpicker.css'
+        'bower/clockpicker/dist/bootstrap-clockpicker.css',
+        'me/css/human-resources/contracts/preview/preview-contracts.css'
     ], 'public/css/human-resources/contracts/create-custom-contracts.css');
 
     // Human-Resources > Contracts > Create JS
@@ -249,6 +250,7 @@ elixir(function (mix) {
         'components/bootstrap-select.js',
         'components/autoNumeric.js',
         'me/js/utilities/sanitized-fields.js',
+        'components/tabs.js',
         'me/js/base/human-resources/contracts/custom-contracts.js'
     ], 'public/js/human-resources/contracts/create-custom-contracts.js');
 
@@ -403,11 +405,6 @@ elixir(function (mix) {
     mix.scripts([
         'me/js/base/maintainers/mutualities/config_bootstrap_table.js'
     ], 'public/js/maintainers/mutualities/index-custom-mutualities.js');
-
-    // Maintainers > Pensions > Index Custom Pensions JS
-    mix.scripts([
-        'me/js/base/maintainers/pensions/config_bootstrap_table.js'
-    ], 'public/js/maintainers/pensions/index-custom-pensions.js');
 
     // Maintainers > Piece-Vehicles > Index Custom Piece-Vehicles JS
     mix.scripts([
@@ -683,7 +680,6 @@ elixir(function (mix) {
         'public/js/maintainers/measuring-units/weights/index-custom-weights.js',
         'public/js/maintainers/model-vehicles/index-custom-model-vehicles.js',
         'public/js/maintainers/mutualities/index-custom-mutualities.js',
-        'public/js/maintainers/pensions/index-custom-pensions.js',
         'public/js/maintainers/positions/index-custom-positions.js',
         'public/js/maintainers/professions/index-custom-professions.js',
         'public/js/maintainers/relationships/index-custom-relationships.js',

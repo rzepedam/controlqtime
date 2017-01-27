@@ -66,11 +66,14 @@
                 <a href="{{ route('contracts.index') }}">Volver</a>
             </div>
             <div class="col-xs-8 col-sm-8 col-md-6">
+                <button id="btn-preview-contract" class="btn btn-squared btn-danger waves-effect waves-light" data-toggle="modal" data-target="#preview_contract"><i class="fa fa-file-pdf-o"></i> Vista Previa</button>
                 <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
             </div>
         </div>
 
     {{ Form::close() }}
+
+    @include('human-resources.contracts.partials.preview')
 
 @stop
 

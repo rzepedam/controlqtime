@@ -16,7 +16,6 @@ class CreatePensionsTable extends Migration
             $table->increments('id');
             $table->string('name', 30);
             $table->float('com', 5, 4);
-	        $table->softDeletes();
         });
     }
 	
