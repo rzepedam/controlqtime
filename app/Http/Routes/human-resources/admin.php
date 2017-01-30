@@ -19,6 +19,7 @@ Route::group(['prefix' => 'human-resources'], function ()
 	Route::resource('contracts', 'ContractController');
 	Route::group(['prefix' => 'contracts'], function ()
 	{
+		Route::post('loadDataPreviewContract', ['as' => 'loadDataPreviewContract', 'uses' => 'ContractController@loadDataPreviewContract']);
 		Route::get('getPdf/{id}', ['as' => 'getPdf', 'uses' => 'ContractController@getPdf']);
 	});
 	

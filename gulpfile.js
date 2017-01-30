@@ -249,6 +249,7 @@ elixir(function (mix) {
         'components/bootstrap-clockpicker.js',
         'components/bootstrap-select.js',
         'components/autoNumeric.js',
+        'me/js/utilities/add_csrf_token.js',
         'me/js/utilities/sanitized-fields.js',
         'components/tabs.js',
         'me/js/base/human-resources/contracts/custom-contracts.js'

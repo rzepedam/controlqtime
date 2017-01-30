@@ -1,21 +1,21 @@
-<div class="modal fade modal-fade-in-scale-up modal-lg in" id="preview_contract" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" style="display: none;">
-    <div class="modal-dialog">
+<div class="modal fade modal-fade-in-scale-up example-modal-lg in" id="preview_contract" aria-hidden="true" aria-labelledby="exampleOptionalLarge" role="dialog" tabindex="-1" style="display: none;">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Contrato Laboral</h4>
+                <h3 class="modal-title text-center">Contrato Laboral</h3>
             </div>
             <ul class="nav nav-tabs nav-tabs-line" data-plugin="nav-tabs" role="tablist">
-                <li class="active" role="presentation">
+                <li class="active font-size-16" role="presentation">
                     <a data-toggle="tab" href="#exampleLine1" aria-controls="exampleLine1" role="tab" aria-expanded="true"> Información </a>
                 </li>
-                <li role="presentation" class="">
-                    <a data-toggle="tab" href="#exampleLine2" aria-controls="exampleLine2" role="tab" aria-expanded="false"> Cláusulas</a>
+                <li role="presentation" class="font-size-16">
+                    <a data-toggle="tab" href="#exampleLine2" aria-controls="exampleLine2" role="tab" aria-expanded="false"> Cláusulas y Ob. <span class="badge badge-sm up badge-primary">1</span></a>
                 </li>
-                <li role="presentation" class="">
-                    <a data-toggle="tab" href="#exampleLine3" aria-controls="exampleLine3" role="tab" aria-expanded="false"> Obligaciones</a>
+                <li role="presentation" class="font-size-16">
+                    <a data-toggle="tab" href="#exampleLine3" aria-controls="exampleLine3" role="tab" aria-expanded="false"> Cláusulas y Ob. <span class="badge badge-sm up badge-primary">2</span></a>
                 </li>
             </ul>
             <div class="modal-body">

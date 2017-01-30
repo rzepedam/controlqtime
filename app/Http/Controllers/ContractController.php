@@ -215,6 +215,32 @@ class ContractController extends Controller
 	}
 	
 	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function loadDataPreviewContract(Request $request)
+	{
+		try
+		{
+			$company = $this->company->with([
+				'address.detailAddressCompany', 'address.commune.province.region', 'legalRepresentative'
+			])->findOrFail(request('company'));
+			
+			$employee = $this->employee->with([
+				'maritalStatus', 'nationality', 'address.detailAddressLegalEmployee', 'address.commune.province.region'
+			])->findOrFail(request('employee'));
+			
+			return response()->json(['company' => $company, 'employee' => $employee, 'status' => true]);
+		} catch ( Exception $e )
+		{
+			$this->log->error("Error LoadDataPreviewContract: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
+		}
+	}
+	
+	/**
 	 * @param $id
 	 *
 	 * @return pdf generate in new tab
