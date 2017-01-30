@@ -10,7 +10,7 @@
         y oportunamente prestados, con el sueldo base mensual que se indica:
         <br />
         <br />
-        <span class="col-xs-12 col-sm-12 col-md-12 text-center">Sueldo Base: $ <span id="salary_preview"></span> .-</span>
+        <span class="col-xs-12 col-sm-12 col-md-12 text-center">Sueldo Base: $ <span id="salary_preview" class="text-danger"></span></span>
         <br />
     </div>
     <br />

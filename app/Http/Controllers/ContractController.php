@@ -4,6 +4,7 @@ namespace Controlqtime\Http\Controllers;
 
 use Exception;
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
@@ -190,7 +191,7 @@ class ContractController extends Controller
 	 */
 	private function defineDateExpiredContract($request)
 	{
-		$typeContract = $this->typeContract->findOrFail($request->get('type_contract_id'));
+		$typeContract = $this->typeContract->findOrFail(request('type_contract_id'));
 		
 		if ( $typeContract->name != 'Indefinido' )
 		{
@@ -231,7 +232,11 @@ class ContractController extends Controller
 				'maritalStatus', 'nationality', 'address.detailAddressLegalEmployee', 'address.commune.province.region'
 			])->findOrFail(request('employee'));
 			
-			return response()->json(['company' => $company, 'employee' => $employee, 'status' => true]);
+			$this->defineDateExpiredContract($request);
+			
+			return response()->json([
+				'company' => $company, 'employee' => $employee, 'expiresAt' => Date::parse(request('expires_at'))->format('l j F Y'), 'status' => true
+			]);
 		} catch ( Exception $e )
 		{
 			$this->log->error("Error LoadDataPreviewContract: " . $e->getMessage());

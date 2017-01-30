@@ -7,17 +7,19 @@
                 </button>
                 <h3 class="modal-title text-center">Contrato Laboral</h3>
             </div>
-            <ul class="nav nav-tabs nav-tabs-line" data-plugin="nav-tabs" role="tablist">
-                <li class="active font-size-16" role="presentation">
-                    <a data-toggle="tab" href="#exampleLine1" aria-controls="exampleLine1" role="tab" aria-expanded="true"> Información </a>
-                </li>
-                <li role="presentation" class="font-size-16">
-                    <a data-toggle="tab" href="#exampleLine2" aria-controls="exampleLine2" role="tab" aria-expanded="false"> Cláusulas y Ob. <span class="badge badge-sm up badge-primary">1</span></a>
-                </li>
-                <li role="presentation" class="font-size-16">
-                    <a data-toggle="tab" href="#exampleLine3" aria-controls="exampleLine3" role="tab" aria-expanded="false"> Cláusulas y Ob. <span class="badge badge-sm up badge-primary">2</span></a>
-                </li>
-            </ul>
+            <div class="center-ul">
+                <ul class="nav nav-tabs nav-tabs-line" data-plugin="nav-tabs" role="tablist">
+                    <li class="active font-size-14" role="presentation">
+                        <a data-toggle="tab" href="#exampleLine1" aria-controls="exampleLine1" role="tab" aria-expanded="true"> Información </a>
+                    </li>
+                    <li role="presentation" class="font-size-14">
+                        <a data-toggle="tab" href="#exampleLine2" aria-controls="exampleLine2" role="tab" aria-expanded="false"> Cláusulas y Oblig. </a>
+                    </li>
+                    <li role="presentation" class="font-size-14">
+                        <a data-toggle="tab" href="#exampleLine3" aria-controls="exampleLine3" role="tab" aria-expanded="false"> Cláusulas y Oblig. </a>
+                    </li>
+                </ul>
+            </div>
             <div class="modal-body">
                 <div class="tab-content padding-top-10">
                     <div class="tab-pane active" id="exampleLine1" role="tabpanel">
@@ -54,7 +56,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary waves-effect waves-light" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

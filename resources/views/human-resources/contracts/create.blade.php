@@ -62,12 +62,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-6">
+            <div class="col-xs-12 col-sm-4 col-md-6">
                 <a href="{{ route('contracts.index') }}">Volver</a>
             </div>
-            <div class="col-xs-8 col-sm-8 col-md-6">
-                <button id="btn-preview-contract" class="btn btn-squared btn-danger waves-effect waves-light" data-toggle="modal" data-target="#preview_contract"><i class="fa fa-search"></i> Vista Previa</button>
-                <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right"><i class="fa fa-floppy-o"></i> Guardar</button>
+            <div class="col-xs-12 col-sm-8 col-md-6">
+                <button id="btnSubmit" type="submit" class="btn btn-squared btn-primary waves-effect waves-light pull-right margin-left-10"><i class="fa fa-floppy-o"></i> Guardar</button>
+                <button id="btn-preview-contract" class="btn btn-squared btn-danger waves-effect waves-light pull-right" data-toggle="modal" data-target="#preview_contract"><i class="fa fa-search"></i> Vista Previa</button>
             </div>
         </div>
 
