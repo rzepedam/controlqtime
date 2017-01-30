@@ -20,6 +20,7 @@ class CreateLegalRepresentativesTable extends Migration
 	        $table->string('female_surname', 30);
 	        $table->string('first_name', 30);
 	        $table->string('second_name', 30);
+	        $table->string('full_name', 120);
 	        $table->string('rut_representative', 10);
 	        $table->date('birthday');
             $table->string('email_representative', 60)->unique();
