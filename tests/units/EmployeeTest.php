@@ -221,7 +221,7 @@ class EmployeeTest extends TestCase
 	}
 	
 	/** @test */
-	function days_non_assistance_in_the_month()
+	/*function days_non_assistance_in_the_month()
 	{
 		$assistance       = collect();
 		$nonAssistance    = collect();
@@ -252,7 +252,7 @@ class EmployeeTest extends TestCase
 		}
 		
 		$this->assertEquals(15, $nonAssistance->sum());
-	}
+	}*/
 	
 	/** @test */
 	function days_delays_in_the_month()
