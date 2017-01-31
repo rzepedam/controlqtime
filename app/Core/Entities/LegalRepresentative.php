@@ -12,8 +12,8 @@ class LegalRepresentative extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'company_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'rut_representative',
-        'birthday', 'nationality_id', 'email_representative',
+        'company_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name',
+        'rut_representative', 'birthday', 'nationality_id', 'email_representative',
     ];
     
     /**
@@ -102,14 +102,6 @@ class LegalRepresentative extends Eloquent
     public function setBirthdayAttribute($value)
     {
         $this->attributes['birthday'] = Carbon::createFromFormat('d-m-Y', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getFullNameAttribute()
-    {
-        return $this->first_name . " " . $this->second_name . " " . $this->male_surname . " " . $this->female_surname;
     }
 
     /**

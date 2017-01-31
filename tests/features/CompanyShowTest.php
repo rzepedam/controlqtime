@@ -95,7 +95,8 @@ class CompanyShowTest extends TestCase
 		]);
 	}
 	
-	function test_show_company()
+	/** @test */
+	function show_company()
 	{
 		$this->visit('administration/companies/' . $this->company->id)
 			->seeInElement('h1', 'Detalle Empresa : <span class="text-primary">' . $this->company->id . '</span>')
@@ -110,7 +111,6 @@ class CompanyShowTest extends TestCase
 			->see('Domingo 11 Diciembre 2016')
 			->see('8924798374')
 			->see('Domingo 11 Diciembre 2016 20:50:18')
-			->see('Alejandro Ulises Piña Ocayo')
 			->see('17.638.322-4')
 			->see('36 años')
 			->see('Av. La Florida 1909, Depto 839, Block 12, Nº Casa 14. La Florida. Santiago. Región Metropolitana de Santiago')

@@ -72,7 +72,8 @@ class CompanyEditTest extends TestCase
 		]);
 	}
 	
-	function test_edit_company()
+	/** @test */
+	function edit_company()
 	{
 		$this->visit('administration/companies/' . $this->company->id . '/edit')
 			->seeInElement('h1', 'Editar Empresa: <span class="text-primary">' . $this->company->id . '</span>')
@@ -113,7 +114,8 @@ class CompanyEditTest extends TestCase
 			->seeInElement('button', 'Actualizar');
 	}
 	
-	function test_update_company()
+	/** @test */
+	function update_company()
 	{
 		$typeCompany = factory(\Controlqtime\Core\Entities\TypeCompany::class)->create([
 			'name' => 'Contratista'

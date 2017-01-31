@@ -51,13 +51,15 @@ class CompanyDeleteTest extends TestCase
 		]);
 	}
 	
-	function test_delete_url_company()
+	/** @test */
+	function delete_url_company()
 	{
 		$response = $this->call('DELETE', 'administration/companies/' . $this->company->id);
 		$this->assertEquals(302, $response->getStatusCode());
 	}
 	
-	function test_delete_company()
+	/** @test */
+	function delete_company()
 	{
 		$this->delete('administration/companies/' . $this->company->id)
 			->dontSeeInDatabase('companies', [

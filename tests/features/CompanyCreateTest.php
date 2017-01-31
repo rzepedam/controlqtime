@@ -15,7 +15,8 @@ class CompanyCreateTest extends TestCase
 		$this->typeCompany = factory(\Controlqtime\Core\Entities\TypeCompany::class)->create();
 	}
 	
-	function test_create_company()
+	/** @test */
+	function create_company()
 	{
 		$this->visit('administration/companies/create')
 			->seeInElement('h1', 'Crear Nueva Empresa')
@@ -31,7 +32,8 @@ class CompanyCreateTest extends TestCase
 			->assertResponseOk();
 	}
 	
-	function test_store_company()
+	/** @test */
+	function store_company()
 	{
 		$this->visit('administration/companies/create')
 			->select($this->typeCompany->id, '#type_company_id')

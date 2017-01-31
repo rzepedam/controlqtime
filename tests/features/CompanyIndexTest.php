@@ -12,19 +12,22 @@ class CompanyIndexTest extends TestCase
 		$this->signIn();
 	}
 	
-    function test_url_company()
+	/** @test */
+    function url_company()
     {
         $this->visit('administration/companies')
 	        ->assertResponseOk();
     }
     
-    function test_route_company()
+    /** @test */
+    function route_company()
     {
     	$this->visitRoute('companies.index')
 		    ->assertResponseOk();
     }
     
-    function test_index_company()
+    /** @test */
+    function index_company()
     {
     	$this->visit('administration/companies')
 		    ->seeInElement('h1', 'Listado de Empresas')

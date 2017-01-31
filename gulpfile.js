@@ -179,6 +179,7 @@ elixir(function (mix) {
 
     // Administration > Companies > Create-Edit Custom JS
     mix.scripts([
+        'me/js/utilities/capitalize.js',
         'me/js/utilities/add_csrf_token.js',
         'me/js/validations/valida_rut.js',
         'me/js/validations/valida_email.js',
@@ -190,7 +191,7 @@ elixir(function (mix) {
         'components/bootstrap-datepicker.js',
         'bower/bootstrap-maxlength/src/bootstrap-maxlength.js',
         'components/bootstrap-maxlength.js',
-        'me/js/utilities/submit-form-ajax.js'
+        'me/js/base/administrations/companies/custom_companies.js'
     ], 'public/js/administrations/companies/create-edit-custom-companies.js');
 
 

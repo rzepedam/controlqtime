@@ -60,7 +60,8 @@ class CompanyWithTrashedTest extends TestCase
 		]);
 	}
 	
-	function test_edit_company_when_type_company_is_deleted()
+	/** @test */
+	function edit_company_when_type_company_is_deleted()
 	{
 		$this->delete('maintainers/type-companies/' . $this->company->typeCompany->id);
 		
