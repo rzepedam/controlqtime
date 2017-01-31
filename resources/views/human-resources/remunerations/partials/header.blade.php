@@ -17,7 +17,7 @@
             Área: {{ $employee->contract->area->name }}
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6">
-            Días Atrasos: {{ $employee->days_delays_in_the_month }}
+            Días Atrasos: {{ $employee->num_days_delays_in_the_month }}
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6">
             Cargo: {{ $employee->contract->position->name }}

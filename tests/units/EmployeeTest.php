@@ -175,8 +175,11 @@ class EmployeeTest extends TestCase
 	 */
 	private function groupByDailyAssistances($contract)
 	{
+		$initMonth = Carbon::parse('first day of this month 00:00:00');
+		$endMonth  = Carbon::now();
+		
 		$dailyAssistance = $contract->employee->dailyAssistances()
-			->whereBetween('created_at', [config('constants.init_month'), config('constants.end_month')])
+			->whereBetween('created_at', [$initMonth, $endMonth])
 			->get()
 			->groupBy(function ($item)
 			{
@@ -187,14 +190,14 @@ class EmployeeTest extends TestCase
 	}
 	
 	/** @test */
-	function days_worked_in_the_month()
+	function days_worked_in_the_month_employee()
 	{
 		$assistance       = collect();
 		$realAssistance   = collect();
 		$contract         = $this->seederCreatedAtForDailyAssistances();
 		$dailyAssistances = $this->groupByDailyAssistances($contract);
-		$initMonth        = config('constants.init_month');
-		$endMonth         = config('constants.end_month');
+		$initMonth        = Carbon::parse('first day of this month 00:00:00');
+		$endMonth         = Carbon::now();
 		
 		if ( $contract->dayTrip->name === 'Lunes a viernes' )
 		{
@@ -221,7 +224,7 @@ class EmployeeTest extends TestCase
 	}
 	
 	/** @test */
-	/*function days_non_assistance_in_the_month()
+	/*function days_non_assistance_in_the_month_employee()
 	{
 		$assistance       = collect();
 		$nonAssistance    = collect();
@@ -255,7 +258,7 @@ class EmployeeTest extends TestCase
 	}*/
 	
 	/** @test */
-	function days_delays_in_the_month()
+	function days_delays_in_the_month_employee()
 	{
 		$assistance       = collect();
 		$delays           = collect();
@@ -271,7 +274,7 @@ class EmployeeTest extends TestCase
 			
 			$assistance->each(function ($item) use ($delays)
 			{
-				if ( $item > config('constants.time_limit') )
+				if ( $item > config('constants.time_limit')->format('H:i:s') )
 				{
 					$delays[] = 1;
 				}
@@ -282,7 +285,7 @@ class EmployeeTest extends TestCase
 	}
 	
 	/** @test */
-	function days_extra_hour_in_the_month()
+	function days_extra_hour_in_the_month_employee()
 	{
 		$extraHours       = collect();
 		$contract         = $this->seederCreatedAtForDailyAssistances();

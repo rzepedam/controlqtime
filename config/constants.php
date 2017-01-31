@@ -6,9 +6,7 @@ return [
 	
 	'sueldo_minimo'    => '257500',
 	'valor_hora_extra' => '1.5',
-	'init_month'       => Carbon::parse('first day of this month 00:00:00'),
-	'end_month'        => Carbon::now(),
-	'time_limit'       => '09:30:00',
+	'time_limit'       => Carbon::parse('09:30:00'),
 	
 	'feriados2017' => [
 		0  => Carbon::parse('2017-01-01'),

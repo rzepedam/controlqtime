@@ -990,8 +990,11 @@ class Employee extends Eloquent
 	 */
 	private function dailyAssistanceForRemuneration()
 	{
+		$initMonth = Carbon::parse('first day of this month 00:00:00');
+		$endMonth  = Carbon::now();
+		
 		$dailyAssistances = $this->dailyAssistances()
-			->whereBetween('created_at', [config('constants.init_month'), config('constants.end_month')])
+			->whereBetween('created_at', [$initMonth, $endMonth])
 			->get()
 			->groupBy(function ($item)
 			{
@@ -1008,8 +1011,8 @@ class Employee extends Eloquent
 	{
 		$assistance     = collect();
 		$realAssistance = collect();
-		$initMonth      = config('constants.init_month');
-		$endMonth       = config('constants.end_month');
+		$initMonth      = Carbon::parse('first day of this month 00:00:00');
+		$endMonth       = Carbon::now();
 		
 		if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
 		{
@@ -1038,28 +1041,58 @@ class Employee extends Eloquent
 	/**
 	 * @return array
 	 */
-	public function getDaysDelaysInTheMonthAttribute()
+	private function daysDelaysInTheMonthAttribute()
 	{
 		$assistance = collect();
-		$delays     = collect();
 		
 		if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
 		{
 			$this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance)
 			{
-				$assistance[] = Carbon::parse($item->min('created_at'))->format('H:i:s');
-			});
-			
-			$assistance->each(function ($item) use ($delays)
-			{
-				if ( $item > config('constants.time_limit') )
-				{
-					$delays[] = 1;
-				}
+				$assistance[] = Carbon::parse($item->min('created_at'));
 			});
 		}
 		
+		return $assistance;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getNumDaysDelaysInTheMonthAttribute()
+	{
+		$delays = collect();
+		
+		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays)
+		{
+			if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
+			{
+				$delays[] = 1;
+			}
+		});
+		
 		return $delays->count();
+	}
+	
+	/**
+	 * @return \Illuminate\Support\Collection
+	 */
+	public function detailDaysDelaysInTheMonth()
+	{
+		$delays = collect();
+		
+		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays)
+		{
+			$timeLimitString = $item->format('Y-m-d') . ' ' . config('constants.time_limit')->format('H:i:s');
+			$timeLimitCarbon = Carbon::createFromFormat('Y-m-d H:i:s', $timeLimitString);
+			
+			if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
+			{
+				$delays[] = $timeLimitCarbon->diffInHours($item);
+			}
+		});
+		
+		return $delays->sum();
 	}
 	
 	/**
@@ -1070,8 +1103,8 @@ class Employee extends Eloquent
 		$assistance          = collect();
 		$realAssistance      = collect();
 		$totalDaysAssistance = collect();
-		$initMonth           = config('constants.init_month');
-		$now                 = config('constants.end_month');
+		$initMonth           = Carbon::parse('first day of this month 00:00:00');
+		$now                 = Carbon::now();
 		
 		if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
 		{
@@ -1091,9 +1124,9 @@ class Employee extends Eloquent
 					
 					$totalDaysAssistance[] = 1;
 				}
-				
 				$initMonth->addDay();
 			}
+			
 		}
 		
 		$nonAssistance = $totalDaysAssistance->sum() - $realAssistance->sum();
@@ -1107,7 +1140,6 @@ class Employee extends Eloquent
 	public function getDaysExtraHoursInTheMonthAttribute()
 	{
 		$extraHours = collect();
-		
 		$this->dailyAssistanceForRemuneration()->each(function ($item) use ($extraHours)
 		{
 			$maxAssistance = Carbon::parse($item->max('created_at'));

@@ -32,6 +32,10 @@ $(document).ready(function () {
         });
     });
 
+    $('#preview_contract').on('shown.bs.modal', function () {
+        $('.modal-body').asScrollable({});
+    });
+
     $('#btn-preview-contract').on('click', function (e) {
         e.preventDefault();
 

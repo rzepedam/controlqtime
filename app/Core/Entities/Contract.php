@@ -224,6 +224,38 @@ class Contract extends Eloquent
 	}
 	
 	/**
+	 * @return string '9.500'
+	 */
+	public function getValorTotalHorasExtraAttribute()
+	{
+		return FormatField::decimalNumber($this->valorTotalHorasExtra());
+	}
+	
+	/**
+	 * @return string '7.340'
+	 */
+	public function getValorInasistenciaAttribute()
+	{
+		return FormatField::decimalNumber($this->valorInasistencia());
+	}
+	
+	/**
+	 * @return string '20.129'
+	 */
+	public function getValorAtrasoAttribute()
+	{
+		return FormatField::decimalNumber($this->valorAtraso());
+	}
+	
+	/**
+	 * @return string '239.100'
+	 */
+	public function getTotalAsistenciaAtrasosAttribute()
+	{
+		return FormatField::decimalNumber($this->totalAsistenciaAtrasos());
+	}
+	
+	/**
 	 * @return string '550.500'
 	 */
 	public function getTotalImponibleAttribute()
@@ -335,22 +367,6 @@ class Contract extends Eloquent
 		return FormatField::decimalNumber($this->sueldoLiquido());
 	}
 	
-	/**
-	 * @return string '5.190'
-	 */
-	public function getHorasExtraAttribute()
-	{
-		return FormatField::decimalNumber($this->horasExtra());
-	}
-	
-	/**
-	 * @return string '7.340'
-	 */
-	public function getValorInasistenciaAttribute()
-	{
-		return FormatField::decimalNumber($this->valorInasistencia());
-	}
-	
 	public function gratification()
 	{
 		$gratification = (Config::get('constants.sueldo_minimo') * 4.75) / 12;
@@ -358,9 +374,51 @@ class Contract extends Eloquent
 		return $gratification;
 	}
 	
+	public function valorHora()
+	{
+		$valorHora = ($this->salary / 30 * 28) / 180;
+		
+		return $valorHora;
+	}
+	
+	public function valorHoraExtra()
+	{
+		$valorHoraExtra = $this->valorHora() * config('constants.valor_hora_extra');
+		
+		return $valorHoraExtra;
+	}
+	
+	public function valorTotalHorasExtra()
+	{
+		$valorTotalHorasExtra = $this->valorHoraExtra() * $this->employee->getDaysExtraHoursInTheMonthAttribute();
+		
+		return $valorTotalHorasExtra;
+	}
+	
+	public function valorInasistencia()
+	{
+		$valorInasistencia = $this->valorHoraExtra() * $this->employee->getDaysNonAssistanceInTheMonthAttribute();
+		
+		return $valorInasistencia;
+	}
+	
+	public function valorAtraso()
+	{
+		$valorAtraso = $this->employee->detailDaysDelaysInTheMonth() * $this->valorHoraExtra();
+		
+		return $valorAtraso;
+	}
+	
+	public function totalAsistenciaAtrasos()
+	{
+		$totalAsistenciaAtrasos = $this->valorInasistencia() + $this->valorAtraso();
+		
+		return $totalAsistenciaAtrasos;
+	}
+	
 	public function totalImponible()
 	{
-		$totalImponible = $this->salary + $this->gratification();
+		$totalImponible = $this->salary + $this->gratification() + $this->valorTotalHorasExtra() - $this->totalAsistenciaAtrasos();
 		
 		return $totalImponible;
 	}
@@ -444,7 +502,7 @@ class Contract extends Eloquent
 		switch ( $this->salary )
 		{
 			case ($this->salary <= 624091):
-				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[0]);
+				return ($this->baseTributable() * config('constants.impuestoSegundaCategoria')[0]);
 				break;
 			
 			case ($this->salary > 624091 && $this->salary <= 1386870):
@@ -535,34 +593,6 @@ class Contract extends Eloquent
 		$sueldoLiquido = $this->totalHaber() - $this->totalDescuentos();
 		
 		return $sueldoLiquido;
-	}
-	
-	public function valorHora()
-	{
-		$valorHora = (config('constants.sueldo_minimo') / 30 * 28) / $this->num_hour;
-		
-		return $valorHora;
-	}
-	
-	public function valorHoraExtra()
-	{
-		$valorHoraExtra = $this->valorHora() * config('constants.valor_hora_extra');
-		
-		return $valorHoraExtra;
-	}
-	
-	public function horasExtra()
-	{
-		$horasExtra = $this->valorHoraExtra() * $this->employee->getDaysExtraHoursInTheMonthAttribute();
-		
-		return $horasExtra;
-	}
-	
-	public function valorInasistencia()
-	{
-		$valorInasistencia = $this->valorHoraExtra() * $this->employee->getDaysNonAssistanceInTheMonthAttribute();
-		
-		return $valorInasistencia;
 	}
 }
 
