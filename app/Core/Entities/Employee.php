@@ -1061,27 +1061,20 @@ class Employee extends Eloquent
 	 */
 	public function getNumDaysDelaysInTheMonthAttribute()
 	{
-		$delays    = collect();
-		$initMonth = Carbon::parse('first day of this month 00:00:00');
-		$endMonth  = Carbon::now();
+		$delays = collect();
 		
-		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays, $initMonth, $endMonth)
+		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays)
 		{
-			while ( $endMonth >= $initMonth )
+			if ( $item->isWeekday() )
 			{
-				if ( $initMonth->isWeekday() )
+				if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
 				{
-					if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
-					{
-						$delays[] = 1;
-					}
+					$delays[] = 1;
 				}
-				
-				$initMonth->addDay();
 			}
 		});
 		
-		return $delays->count();
+		return $delays->sum();
 	}
 	
 	/**
@@ -1089,26 +1082,19 @@ class Employee extends Eloquent
 	 */
 	public function detailDaysDelaysInTheMonth()
 	{
-		$delays    = collect();
-		$initMonth = Carbon::parse('first day of this month 00:00:00');
-		$endMonth  = Carbon::now();
+		$delays = collect();
 		
-		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays, $initMonth, $endMonth)
+		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays)
 		{
 			$timeLimitString = $item->format('Y-m-d') . ' ' . config('constants.time_limit')->format('H:i:s');
 			$timeLimitCarbon = Carbon::createFromFormat('Y-m-d H:i:s', $timeLimitString);
 			
-			while ( $endMonth >= $initMonth )
+			if ( $item->isWeekday() )
 			{
-				if ( $initMonth->isWeekday() )
+				if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
 				{
-					if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
-					{
-						$delays[] = $timeLimitCarbon->diffInHours($item);
-					}
+					$delays[] = $timeLimitCarbon->diffInHours($item);
 				}
-				
-				$initMonth->addDay();
 			}
 		});
 		
@@ -1159,15 +1145,24 @@ class Employee extends Eloquent
 	 */
 	public function getDaysExtraHoursInTheMonthAttribute()
 	{
+		$assistance = collect();
 		$extraHours = collect();
-		$this->dailyAssistanceForRemuneration()->each(function ($item) use ($extraHours)
+		
+		$this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance)
 		{
-			$maxAssistance = Carbon::parse($item->max('created_at'));
-			$workOut       = Carbon::createFromFormat('Y-m-d H:i', $maxAssistance->format('Y-m-d') . ' ' . $this->contract->end_afternoon);
+			$assistance[] = Carbon::parse($item->max('created_at'));
+		});
+		
+		$assistance->each(function ($item) use ($extraHours)
+		{
+			$workOut = Carbon::createFromFormat('Y-m-d H:i', $item->format('Y-m-d') . ' ' . $this->contract->end_afternoon);
 			
-			if ( $maxAssistance > $workOut )
+			if ( $item->isWeekday() )
 			{
-				$extraHours[] = $maxAssistance->diffInHours($workOut);
+				if ( $item > $workOut )
+				{
+					$extraHours[] = $item->diffInHours($workOut);
+				}
 			}
 		});
 		
