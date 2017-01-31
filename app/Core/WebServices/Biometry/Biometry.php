@@ -18,7 +18,7 @@ class Biometry
 	public function __construct()
 	{
 		$this->client = new Client([
-			'base_uri' => Config::get('biometry.url')
+			'base_uri' => config('biometry.url')
 		]);
 	}
 	
@@ -29,8 +29,8 @@ class Biometry
 	{
 		$this->client->post('createOrUpdatePerson', [
 			'form_params' => [
-				'secret_key' => Config::get('biometry.secret_key'),
-				'client'     => Config::get('biometry.client'),
+				'secret_key' => config('biometry.secret_key'),
+				'client'     => config('biometry.client'),
 				'action'     => 'add',
 				'passport'   => $employee->rut,
 				'first_name' => $employee->first_name,
@@ -46,8 +46,8 @@ class Biometry
 	{
 		$this->client->post('createOrUpdatePerson', [
 			'form_params' => [
-				'secret_key' => Config::get('biometry.secret_key'),
-				'client'     => Config::get('biometry.client'),
+				'secret_key' => config('biometry.secret_key'),
+				'client'     => config('biometry.client'),
 				'action'     => 'delete',
 				'passport'   => $employee->rut,
 			]

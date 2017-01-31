@@ -1061,13 +1061,23 @@ class Employee extends Eloquent
 	 */
 	public function getNumDaysDelaysInTheMonthAttribute()
 	{
-		$delays = collect();
+		$delays    = collect();
+		$initMonth = Carbon::parse('first day of this month 00:00:00');
+		$endMonth  = Carbon::now();
 		
-		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays)
+		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays, $initMonth, $endMonth)
 		{
-			if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
+			while ( $endMonth >= $initMonth )
 			{
-				$delays[] = 1;
+				if ( $initMonth->isWeekday() )
+				{
+					if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
+					{
+						$delays[] = 1;
+					}
+				}
+				
+				$initMonth->addDay();
 			}
 		});
 		
@@ -1079,16 +1089,26 @@ class Employee extends Eloquent
 	 */
 	public function detailDaysDelaysInTheMonth()
 	{
-		$delays = collect();
+		$delays    = collect();
+		$initMonth = Carbon::parse('first day of this month 00:00:00');
+		$endMonth  = Carbon::now();
 		
-		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays)
+		$this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays, $initMonth, $endMonth)
 		{
 			$timeLimitString = $item->format('Y-m-d') . ' ' . config('constants.time_limit')->format('H:i:s');
 			$timeLimitCarbon = Carbon::createFromFormat('Y-m-d H:i:s', $timeLimitString);
 			
-			if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
+			while ( $endMonth >= $initMonth )
 			{
-				$delays[] = $timeLimitCarbon->diffInHours($item);
+				if ( $initMonth->isWeekday() )
+				{
+					if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
+					{
+						$delays[] = $timeLimitCarbon->diffInHours($item);
+					}
+				}
+				
+				$initMonth->addDay();
 			}
 		});
 		
