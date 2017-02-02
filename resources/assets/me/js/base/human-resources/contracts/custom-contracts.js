@@ -62,7 +62,6 @@ $(document).ready(function () {
         $('#employee_marital_status_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
         $('#employee_nationality_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
         $('#employee_address_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
-        $('#company_address_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
         $('#company_lot_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
         $('#company_bod_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
         $('#company_floor_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
@@ -106,8 +105,8 @@ $(document).ready(function () {
                 $('#end_afternoon_preview').html(endAfternoon);
                 $('#salary_preview').html(salary);
                 $('#expires_at_contract_preview').html(expiresAt);
+                $('#btnSubmit').attr('disabled', false);
             }
         );
-
     });
 });
