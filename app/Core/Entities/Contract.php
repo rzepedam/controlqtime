@@ -369,7 +369,7 @@ class Contract extends Eloquent
 	
 	public function gratification()
 	{
-		$gratification = (Config::get('constants.sueldo_minimo') * 4.75) / 12;
+		$gratification = (config('constants.sueldo_minimo') * 4.75) / 12;
 		
 		return $gratification;
 	}
@@ -397,7 +397,7 @@ class Contract extends Eloquent
 	
 	public function valorInasistencia()
 	{
-		$valorInasistencia = $this->valorHoraExtra() * $this->employee->getDaysNonAssistanceInTheMonthAttribute();
+		$valorInasistencia = $this->valorHoraExtra() * $this->employee->getDaysNonAssistanceInTheMonthAttribute() * 9;
 		
 		return $valorInasistencia;
 	}
@@ -428,15 +428,15 @@ class Contract extends Eloquent
 		switch ( $this->salary )
 		{
 			case ($this->salary <= 270196):
-				return Config::get('constants.familyAllowance')[0] * $this->employee->num_family_responsabilities;
+				return config('constants.familyAllowance')[0] * $this->employee->num_family_responsabilities;
 				break;
 			
 			case ($this->salary > 270196 && $this->salary <= 394651):
-				return Config::get('constants.familyAllowance')[1] * $this->employee->num_family_responsabilities;
+				return config('constants.familyAllowance')[1] * $this->employee->num_family_responsabilities;
 				break;
 			
 			case ($this->salary > 394651 && $this->salary <= 615521):
-				return Config::get('constants.familyAllowance')[2] * $this->employee->num_family_responsabilities;
+				return config('constants.familyAllowance')[2] * $this->employee->num_family_responsabilities;
 				break;
 			
 			default:
@@ -506,27 +506,27 @@ class Contract extends Eloquent
 				break;
 			
 			case ($this->salary > 624091 && $this->salary <= 1386870):
-				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[1]);
+				return ($this->baseTributable() * config('constants.impuestoSegundaCategoria')[1]);
 				break;
 			
 			case ($this->salary > 1386870 && $this->salary <= 2311450):
-				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[2]);
+				return ($this->baseTributable() * config('constants.impuestoSegundaCategoria')[2]);
 				break;
 			
 			case ($this->salary > 2311450 && $this->salary <= 3236030):
-				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[3]);
+				return ($this->baseTributable() * config('constants.impuestoSegundaCategoria')[3]);
 				break;
 			
 			case ($this->salary > 3236030 && $this->salary <= 4160610):
-				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[4]);
+				return ($this->baseTributable() * config('constants.impuestoSegundaCategoria')[4]);
 				break;
 			
 			case ($this->salary > 4160610 && $this->salary <= 5547480):
-				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[5]);
+				return ($this->baseTributable() * config('constants.impuestoSegundaCategoria')[5]);
 				break;
 			
 			case ($this->salary > 5547480):
-				return ($this->baseTributable() * Config::get('constants.impuestoSegundaCategoria')[6]);
+				return ($this->baseTributable() * config('constants.impuestoSegundaCategoria')[6]);
 				break;
 		}
 	}
@@ -539,31 +539,31 @@ class Contract extends Eloquent
 		switch ( $this->salary )
 		{
 			case ($this->salary <= 624091):
-				return Config::get('constants.rebajaImpuesto')[0];
+				return config('constants.rebajaImpuesto')[0];
 				break;
 			
 			case ($this->salary > 624091 && $this->salary <= 1386870):
-				return Config::get('constants.rebajaImpuesto')[1];
+				return config('constants.rebajaImpuesto')[1];
 				break;
 			
 			case ($this->salary > 1386870 && $this->salary <= 2311450):
-				return Config::get('constants.rebajaImpuesto')[2];
+				return config('constants.rebajaImpuesto')[2];
 				break;
 			
 			case ($this->salary > 2311450 && $this->salary <= 3236030):
-				return Config::get('constants.rebajaImpuesto')[3];
+				return config('constants.rebajaImpuesto')[3];
 				break;
 			
 			case ($this->salary > 3236030 && $this->salary <= 4160610):
-				return Config::get('constants.rebajaImpuesto')[4];
+				return config('constants.rebajaImpuesto')[4];
 				break;
 			
 			case ($this->salary > 4160610 && $this->salary <= 5547480):
-				return Config::get('constants.rebajaImpuesto')[5];
+				return config('constants.rebajaImpuesto')[5];
 				break;
 			
 			case ($this->salary > 5547480):
-				return Config::get('constants.rebajaImpuesto')[6];
+				return config('constants.rebajaImpuesto')[6];
 				break;
 		}
 	}

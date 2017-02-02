@@ -28,7 +28,6 @@ Route::group(['prefix' => 'human-resources'], function ()
 	Route::resource('employees', 'EmployeeController');
 	Route::group(['prefix' => 'employees'], function ()
 	{
-		
 		/* Upload Images */
 		Route::get('attachFiles/{id}', ['as' => 'EmployeeAttachFiles', 'uses' => 'EmployeeController@getImages']);
 		Route::post('attachFiles', ['as' => 'EmployeeAddImages', 'uses' => 'EmployeeController@addImages']);
@@ -43,10 +42,12 @@ Route::group(['prefix' => 'human-resources'], function ()
 		Route::put('updateSessionStep1/{id}', ['as' => 'updateSessionStep1', 'uses' => 'EmployeeController@updateSessionStep1']);
 		Route::put('updateSessionStep2/{id}', ['as' => 'updateSessionStep2', 'uses' => 'EmployeeController@updateSessionStep2']);
 		Route::get('/session/destroySessionUpdateEmployee', ['as' => 'destroySessionUpdateEmployee', 'uses' => 'EmployeeController@destroySessionUpdateEmployee']);
-		
 	});
 	
 	// Remuneration
 	Route::get('remunerations', 'RemunerationController@index');
-	
+	Route::group(['prefix' => 'remunerations'], function ()
+	{
+		Route::post('loadDataForEmployeeSelected', 'RemunerationController@loadDataForEmployeeSelected');
+	});
 });

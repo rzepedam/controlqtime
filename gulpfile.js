@@ -223,6 +223,12 @@ elixir(function (mix) {
         'me/js/base/human-resources/contracts/config_bootstrap_table.js'
     ], 'public/js/human-resources/contracts/index-custom-contracts.js');
 
+    // Human-Resources > Remunerations > Index Custom Remunerations JS
+    mix.scripts([
+        'me/js/utilities/add_csrf_token.js',
+        'me/js/base/human-resources/remunerations/custom-remunerations.js'
+    ], 'public/js/human-resources/remunerations/index-custom-remunerations.js');
+
     // Human-Resource > Employees > Index Custom Employees CSS
     mix.scripts([
         'bower/sweetalert/dist/sweetalert.css'
@@ -652,6 +658,7 @@ elixir(function (mix) {
         'public/css/human-resources/daily-assistances/index-custom-daily-assistances.css',
         'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js',
         'public/js/human-resources/contracts/index-custom-contracts.js',
+        'public/js/human-resources/remunerations/index-custom-remunerations.js',
         'public/css/human-resources/employees/index-custom-employees.css',
         'public/js/human-resources/employees/index-custom-employees.js',
         'public/css/human-resources/contracts/create-custom-contracts.css',
