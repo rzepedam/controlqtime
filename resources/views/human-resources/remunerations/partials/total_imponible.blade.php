@@ -52,7 +52,7 @@
         <tr>
             <td class="col-sm-8 col-md-8" style="visibility: collapse">Total Imponible</td>
             <td class="col-sm-8 col-md-8 text-center font-size-16">
-                <b>$ {{ $employee->contract->total_imponible }}</b>
+                <b>$ <span id="total_imponible">{{ $employee->contract->total_imponible }}</span></b>
             </td>
         </tr>
     </tbody>
