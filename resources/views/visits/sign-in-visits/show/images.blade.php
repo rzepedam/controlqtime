@@ -6,7 +6,7 @@
         <div class="row">
             @if ($signInVisit->imagesable->count() > 0 )
                 @foreach($signInVisit->imagesable as $image)
-                    <div class="col-md-3 gallery_image">
+                    <div class="col-xs-12 col-sm-4 col-md-3 gallery_image">
                         <a href="{{ Storage::disk('s3')->url($image->path) }}" data-lity>
                             <img src="{{ Storage::disk('s3')->url($image->path) }}" alt="" style="height: 200px">
                         </a>
