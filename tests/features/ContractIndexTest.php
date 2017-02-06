@@ -12,19 +12,22 @@ class ContractIndexTest extends TestCase
 		$this->signIn();
 	}
 	
-    function test_url_contract()
+	/** @test */
+    function url_contract()
     {
         $this->visit('human-resources/contracts')
 	        ->assertResponseOk();
     }
     
-    function test_route_contract()
+    /** @test */
+    function route_contract()
     {
     	$this->visitRoute('contracts.index')
 		    ->assertResponseOk();
     }
     
-    function test_index_contract()
+    /** @test */
+    function index_contract()
     {
     	$this->visit('human-resources/contracts')
 		    ->seeInElement('h1', 'Listado de Contratos')
@@ -32,7 +35,7 @@ class ContractIndexTest extends TestCase
 		    ->seeInElement('th', 'Nº')
 		    ->seeInElement('th', 'Trabajador')
 		    ->seeInElement('th', 'Empresa')
-		    ->seeInElement('th', 'Fecha')
+		    ->seeInElement('th', 'Inicio')
 		    ->seeInElement('a', 'Volver');
     }
 }

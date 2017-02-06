@@ -153,6 +153,7 @@ return [
 		'dur'                       => 'Nº de Meses',
 		'num_hour'                  => 'Nº de Horas',
 		'num_device'                => 'Nº Dispositivo',
+		'start_contract'            => 'Inicio Contrato',
 		'init_morning'              => 'Desde (Horario Mañana)',
 		'end_morning'               => 'Hasta (Horario Mañana)',
 		'init_afternoon'            => 'Desde (Horario Tarde)',

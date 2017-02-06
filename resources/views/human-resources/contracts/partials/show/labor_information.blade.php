@@ -25,6 +25,12 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="col-md-3">Inicio Contrato</td>
+                                    <td class="text-center text-capitalize">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i> {{ $contract->start_contract_to_spanish_format }}
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="col-md-3">Cargo</td>
                                     <td class="text-center">
                                         <a href="{{ route('positions.index') }}" style="color: #757575"><i class="md-seat" aria-hidden="true"></i> {{ $contract->position->name }}</a>

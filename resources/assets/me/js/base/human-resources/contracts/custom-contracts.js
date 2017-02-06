@@ -50,9 +50,11 @@ $(document).ready(function () {
         var initAfternoon    = $('#init_afternoon').val();
         var endAfternoon     = $('#end_afternoon').val();
         var salary           = $('#salary').val();
+        var startContract    = $('#start_contract').val();
 
         $('#company_city_contract_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
-        $('#company_firm_name_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
+        $('#company_firm_nc' +
+            'ame_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
         $('#company_rut_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
         $('#company_address_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
         $('#legal_representative_preview').html('<i class="fa fa-spinner fa-pulse fa-fw text-primary"></i>');
@@ -105,6 +107,7 @@ $(document).ready(function () {
                 $('#end_afternoon_preview').html(endAfternoon);
                 $('#salary_preview').html(salary);
                 $('#expires_at_contract_preview').html(expiresAt);
+                $('#start_contract_contract_preview').html(startContract);
                 $('#btnSubmit').attr('disabled', false);
             }
         );

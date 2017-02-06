@@ -153,6 +153,7 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 	return [
 		'company_id'       => factory(Company::class)->states('enable')->create()->id,
 		'employee_id'      => factory(Employee::class)->states('enable')->create()->id,
+		'start_contract'   => Carbon::parse('2016-12-13')->format('d-m-Y'),
 		'position_id'      => factory(Position::class)->create()->id,
 		'area_id'          => factory(Area::class)->create()->id,
 		'type_contract_id' => factory(TypeContract::class)->create()->id,
@@ -167,8 +168,7 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 		'salary'           => rand(100000, 6000000),
 		'mobilization'     => rand(100000, 150000),
 		'collation'        => rand(50000, 99000),
-		'expires_at'       => Carbon::parse('+1 year'),
-		'created_at'       => Carbon::now()
+		'expires_at'       => Carbon::parse('+1 year')
 	];
 });
 

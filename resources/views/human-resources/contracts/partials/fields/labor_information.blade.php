@@ -9,13 +9,23 @@
         {{ Form::label('employee_id', 'Trabajador', ['class' => 'control-label']) }}
         {{ Form::select('employee_id', $employees, null, ['class' => 'form-control', 'data-plugin' => 'selectpicker', 'data-live-search' => 'true']) }}
     </div>
+    {{-- Inicio Contrato Text Field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+        {{ Form::label('start_contract', 'Inicio Contrato', ['class' => 'control-label']) }}
+        <div class="input-group date" data-plugin="datepicker">
+            <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </div>
+            {{ Form::text('start_contract', null, ['class' => 'form-control text-center', 'readonly']) }}
+        </div>
+    </div>
     {{-- Cargo Form Select --}}
-    <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('position_id', 'Cargo', ['class' => 'control-label']) }}
         {{ Form::select('position_id', $positions, null, ['class' => 'form-control']) }}
     </div>
     {{-- Área Form Select --}}
-    <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('area_id', 'Área', ['class' => 'control-label']) }}
         {{ Form::select('area_id', $areas, null, ['class' => 'form-control']) }}
     </div>

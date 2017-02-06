@@ -46,6 +46,7 @@ class ContractRequest extends SanitizedRequest
 				return [
 					'company_id'       => 'required|regex:/[0-9 -()+]+$/',
 					'employee_id'      => 'required|regex:/[0-9 -()+]+$/',
+					'start_contract'   => ['required', 'date_format:d-m-Y'],
 					'position_id'      => 'required|regex:/[0-9 -()+]+$/',
 					'area_id'          => 'required|regex:/[0-9 -()+]+$/',
 					'type_contract_id' => 'required|regex:/[0-9 -()+]+$/',

@@ -245,6 +245,7 @@ elixir(function (mix) {
     mix.styles([
         'custom-configuration/css/bootstrap-select.css',
         'bower/clockpicker/dist/bootstrap-clockpicker.css',
+        'bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
         'me/css/human-resources/contracts/preview/preview-contracts.css'
     ], 'public/css/human-resources/contracts/create-custom-contracts.css');
 
@@ -259,6 +260,9 @@ elixir(function (mix) {
         'me/js/utilities/add_csrf_token.js',
         'me/js/utilities/sanitized-fields.js',
         'components/tabs.js',
+        'bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        'bower/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+        'components/bootstrap-datepicker.js',
         'me/js/base/human-resources/contracts/custom-contracts.js'
     ], 'public/js/human-resources/contracts/create-custom-contracts.js');
 

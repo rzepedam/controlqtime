@@ -17,16 +17,16 @@ class Contract extends Eloquent
 	 * @var array
 	 */
 	protected $fillable = [
-		'company_id', 'employee_id', 'position_id', 'area_id', 'type_contract_id', 'num_hour',
-		'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon', 'end_afternoon', 'salary',
-		'mobilization', 'collation', 'forecast_id', 'pension_id', 'expires_at'
+		'company_id', 'employee_id', 'start_contract', 'position_id', 'area_id', 'type_contract_id',
+		'num_hour', 'day_trip_id', 'init_morning', 'end_morning', 'init_afternoon', 'end_afternoon',
+		'salary', 'mobilization', 'collation', 'forecast_id', 'pension_id', 'expires_at'
 	];
 	
 	/**
 	 * @var array
 	 */
 	protected $dates = [
-		'expires_at', 'deleted_at'
+		'start_contract', 'expires_at', 'deleted_at'
 	];
 	
 	
@@ -102,6 +102,10 @@ class Contract extends Eloquent
 		return $this->belongsToMany(TermAndObligatory::class);
 	}
 	
+	public function setStartContractAttribute($value)
+	{
+		$this->attributes['start_contract'] = Carbon::createFromFormat('d-m-Y', $value);
+	}
 	
 	/**
 	 * @param string $value (09:00)
@@ -177,18 +181,39 @@ class Contract extends Eloquent
 	}
 	
 	/**
-	 * @param date $value (2016-10-01 10:22:46)
+	 * @param date '2016-10-01 10:22:46'
 	 *
-	 * @return string (01-10-2016)
+	 * @return string '01-10-2016'
 	 */
 	public function getCreatedAtAttribute($value)
 	{
 		return Carbon::parse($value)->format('d-m-Y');
 	}
 	
+	/**
+	 * @param date '2016-10-01 10:22:46'
+	 *
+	 * @return string '01-10-2016'
+	 */
+	public function getStartContractAttribute($value)
+	{
+		return Carbon::parse($value)->format('d-m-Y');
+	}
+
+	/*
+	* @return string 'martes 13 diciembre 2016'
+	*/
 	public function getCreatedAtToSpanishFormatAttribute()
 	{
 		return Date::parse($this->created_at)->format('l j F Y');
+	}
+	
+	/**
+	 * @return string 'martes 13 diciembre 2016'
+	 */
+	public function getStartContractToSpanishFormatAttribute()
+	{
+		return Date::parse($this->start_contract)->format('l j F Y');
 	}
 	
 	/**

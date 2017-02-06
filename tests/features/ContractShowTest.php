@@ -19,9 +19,7 @@ class ContractShowTest extends TestCase
 		parent::setUp();
 		$this->signIn();
 		
-		$this->contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
-			'created_at' => '2016-12-13 08:50:45'
-		]);
+		$this->contract = factory(\Controlqtime\Core\Entities\Contract::class)->create();
 		
 		$this->obligationsAndProhibitionsA = factory(\Controlqtime\Core\Entities\TermAndObligatory::class)->create([
 			'default' => 'on'
@@ -40,7 +38,8 @@ class ContractShowTest extends TestCase
 		$this->contract->termsAndObligatories()->attach($this->obligationsAndProhibitionsC->id);
 	}
 	
-	function test_show_contract()
+	/** @test */
+	function show_contract()
     {
         $this->visit('human-resources/contracts/' . $this->contract->id)
 	        ->seeInElement('h1', 'Detalle Contrato: <span class="text-primary">' . $this->contract->id . '</span>')
@@ -49,13 +48,13 @@ class ContractShowTest extends TestCase
 	        ->seeInElement('td', 'Información Laboral')
 	        ->seeInElement('td', $this->contract->company->firm_name)
 	        ->seeInElement('td', $this->contract->employee->full_name)
+	        ->seeInElement('td', 'martes 13 diciembre 2016')
 	        ->seeInElement('td', $this->contract->position->name)
 	        ->seeInElement('td', $this->contract->area->name)
 	        ->seeInElement('td', $this->contract->num_hour . ' hrs semanales')
 	        ->seeInElement('td', $this->contract->dayTrip->name)
 	        ->seeInElement('td', '09:00 - 13:00 hrs')
 	        ->seeInElement('td', '14:00 - 19:00 hrs')
-	        ->seeInElement('td', 'martes 13 diciembre 2016')
 	        ->seeInElement('td', $this->contract->sueldo_base)
 	        ->seeInElement('td', $this->contract->mobilization_money_field)
 	        ->seeInElement('td', $this->contract->collation_money_field)

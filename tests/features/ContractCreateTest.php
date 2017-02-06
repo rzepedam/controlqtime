@@ -132,6 +132,7 @@ class ContractCreateTest extends TestCase
 			->select($this->forecast->id, '#forecast_id')
 			->select($this->pension->id, '#pension_id')
 			->submitForm('Guardar', [
+				'start_contract'            => '13-02-2017',
 				'salary'                    => '580000',
 				'mobilization'              => '80000',
 				'collation'                 => '125000',
@@ -141,6 +142,7 @@ class ContractCreateTest extends TestCase
 			->seeInDatabase('contracts', [
 				'company_id'       => $this->companyA->id,
 				'employee_id'      => $this->employee->id,
+				'start_contract'   => '2017-02-13',
 				'position_id'      => $this->position->id,
 				'area_id'          => $this->area->id,
 				'type_contract_id' => $this->typeContract->id,
@@ -162,6 +164,59 @@ class ContractCreateTest extends TestCase
 			->seeInDatabase('contract_term_and_obligatory', [
 				'term_and_obligatory_id' => $this->obligationsAndProhibitionsC->id
 			]);
+	}
+	
+	/** @test */
+	function start_contract_is_required()
+	{
+		$this->json('POST', 'human-resources/contracts', [
+			'company_id'       => $this->companyA->id,
+			'employee_id'      => $this->employee->id,
+			'position_id'      => $this->position->id,
+			'area_id'          => $this->area->id,
+			'type_contract_id' => $this->typeContract->id,
+			'num_hour'         => '45',
+			'day_trip_id'      => $this->dayTrip->id,
+			'init_morning'     => '09:00',
+			'end_morning'      => '13:00',
+			'init_afternoon'   => '14:00',
+			'end_afternoon'    => '18:00',
+			'salary'           => '1000000',
+			'mobilization'     => '50000',
+			'collation'        => '50000',
+			'forecast_id'      => $this->forecast->id,
+			'pension_id'       => $this->pension->id
+		]);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('start_contract', $this->decodeResponseJson());
+	}
+	
+	/** @test */
+	function start_contract_must_be_d_m_Y_format()
+	{
+		$this->json('POST', 'human-resources/contracts', [
+			'company_id'       => $this->companyA->id,
+			'employee_id'      => $this->employee->id,
+			'start_contract'   => '2017-02-13',
+			'position_id'      => $this->position->id,
+			'area_id'          => $this->area->id,
+			'type_contract_id' => $this->typeContract->id,
+			'num_hour'         => '45',
+			'day_trip_id'      => $this->dayTrip->id,
+			'init_morning'     => '09:00',
+			'end_morning'      => '13:00',
+			'init_afternoon'   => '14:00',
+			'end_afternoon'    => '18:00',
+			'salary'           => '1000000',
+			'mobilization'     => '50000',
+			'collation'        => '50000',
+			'forecast_id'      => $this->forecast->id,
+			'pension_id'       => $this->pension->id
+		]);
+		
+		$this->assertResponseStatus(422);
+		$this->assertArrayHasKey('start_contract', $this->decodeResponseJson());
 	}
 	
 	/** @test */
