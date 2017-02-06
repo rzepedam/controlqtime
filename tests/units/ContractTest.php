@@ -32,7 +32,7 @@ class ContractTest extends TestCase
 			'start_contract' => '17-02-2017'
 		]);
 		
-		$this->assertEquals('viernes 17 febrero 2017', $contract->start_contract);
+		$this->assertEquals('viernes 17 febrero 2017', $contract->start_contract_to_spanish_format);
 	}
 	
 	/** @test */
