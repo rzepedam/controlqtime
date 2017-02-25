@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class MutualityRequest extends SanitizedRequest
+class MutualityRequest extends Request
 {
 	protected $route;
 	
@@ -22,7 +21,7 @@ class MutualityRequest extends SanitizedRequest
 	
 	public function rules()
 	{
-		switch ($this->method())
+		switch ( $this->method() )
 		{
 			case 'POST':
 			{
@@ -34,7 +33,7 @@ class MutualityRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:75|unique:mutualities,name,' . $this->route->getParameter('mutuality')
+					'name' => 'required|max:75|unique:mutualities,name,' . $this->route->parameter('mutuality')
 				];
 			}
 		}

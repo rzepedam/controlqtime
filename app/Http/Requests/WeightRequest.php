@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class WeightRequest extends SanitizedRequest
+class WeightRequest extends Request
 {
 	/**
 	 * @var Route
@@ -52,7 +51,7 @@ class WeightRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:30|unique_with:weights,acr,' . $this->route->getParameter('weight'),
+					'name' => 'required|max:30|unique_with:weights,acr,' . $this->route->parameter('weight'),
 					'acr'  => 'required|max:5'
 				];
 			}

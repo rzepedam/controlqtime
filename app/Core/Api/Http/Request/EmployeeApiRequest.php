@@ -2,9 +2,9 @@
 
 namespace Controlqtime\Core\Api\Http\Request;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
+use Controlqtime\Http\Requests\Request;
 
-class EmployeeApiRequest extends SanitizedRequest
+class EmployeeApiRequest extends Request
 {
 	/**
 	 * Determine if the user is authorized to make this request.

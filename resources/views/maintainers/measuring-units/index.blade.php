@@ -43,6 +43,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/maintainers/measuring-units/index.js') }}"></script>
+    <script src="{{ elixir('Unit') }}"></script>
 
 @stop

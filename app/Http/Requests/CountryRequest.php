@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class CountryRequest extends SanitizedRequest
+class CountryRequest extends Request
 {
 	/**
 	 * @var Route
@@ -39,7 +38,7 @@ class CountryRequest extends SanitizedRequest
 	 */
 	public function rules()
 	{
-		switch ($this->method())
+		switch ( $this->method() )
 		{
 			case 'POST':
 			{
@@ -51,7 +50,7 @@ class CountryRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:50|unique:countries,name,' . $this->route->getParameter('country')
+					'name' => 'required|max:50|unique:countries,name,' . $this->route->parameter('country')
 				];
 			}
 		}

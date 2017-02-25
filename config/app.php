@@ -181,7 +181,8 @@ return [
 		Maatwebsite\Excel\ExcelServiceProvider::class,
 		Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
 		Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
-		Laravel\Passport\PassportServiceProvider::class
+		Laravel\Passport\PassportServiceProvider::class,
+		Laravel\Tinker\TinkerServiceProvider::class,
 	],
 	
 	/*

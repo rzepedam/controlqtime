@@ -70,6 +70,7 @@ class TypeContractController extends Controller
 			{
 				$this->typeContract->create($request->all());
 			}
+			
 			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			
 			return response()->json(['status' => true, 'url' => '/maintainers/type-contracts']);

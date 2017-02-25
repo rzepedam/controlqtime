@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class EngineCubicRequest extends SanitizedRequest
+class EngineCubicRequest extends Request
 {
 	/**
 	 * @var Route
@@ -52,7 +51,7 @@ class EngineCubicRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:30|unique_with:engine_cubics,acr,' . $this->route->getParameter('engine_cubic'),
+					'name' => 'required|max:30|unique_with:engine_cubics,acr,' . $this->route->parameter('engine_cubic'),
 					'acr'  => 'required|max:5'
 				];
 			}

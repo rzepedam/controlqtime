@@ -2,9 +2,7 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class SignInVisitRequest extends FormRequest
+class SignInVisitRequest extends Request
 {
 	/**
 	 * Determine if the user is authorized to make this request.

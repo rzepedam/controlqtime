@@ -15,8 +15,8 @@ class CreateTypeContractsTable extends Migration
         Schema::create('type_contracts', function (Blueprint $table) {
             $table->increments('id');
 	        $table->enum('name', ['Plazo Fijo', 'Indefinido']);
-	        $table->tinyInteger('dur')->default(0);
-	        $table->string('full_name', 20);
+	        $table->tinyInteger('dur')->nullable();
+	        $table->string('full_name', 20)->nullable();
 	        $table->softDeletes();
         });
     }

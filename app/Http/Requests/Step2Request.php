@@ -2,9 +2,7 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
-
-class Step2Request extends SanitizedRequest
+class Step2Request extends Request
 {
 	
 	public function authorize()
@@ -14,17 +12,17 @@ class Step2Request extends SanitizedRequest
 	
 	public function rules()
 	{
-		switch ($this->method())
+		switch ( $this->method() )
 		{
 			case 'POST':
 			{
-				if (Request::get('count_studies') > 0)
+				if ( request('count_studies') > 0 )
 				{
-					foreach (range(0, Request::get('count_studies') - 1) as $index)
+					foreach ( range(0, request('count_studies') - 1) as $index )
 					{
 						$rules['id_study.' . $index]  = 'required|regex:/[0-9 -()+]+$/';
 						$rules['degree_id.' . $index] = 'required|regex:/[0-9 -()+]+$/';
-						switch (Request::get('degree_id')[$index])
+						switch ( request('degree_id')[$index] )
 						{
 							case '3':
 								$rules['name_study.' . $index]       = 'required|max:50';
@@ -48,9 +46,9 @@ class Step2Request extends SanitizedRequest
 					}
 				}
 				
-				if (Request::get('count_certifications') > 0)
+				if ( request('count_certifications') > 0 )
 				{
-					foreach (range(0, Request::get('count_certifications') - 1) as $index)
+					foreach ( range(0, request('count_certifications') - 1) as $index )
 					{
 						$rules['id_certification.' . $index]             = 'required|in:0';
 						$rules['type_certification_id.' . $index]        = 'required|regex:/[0-9 -()+]+$/';
@@ -60,9 +58,9 @@ class Step2Request extends SanitizedRequest
 					}
 				}
 				
-				if (Request::get('count_specialities') > 0)
+				if ( request('count_specialities') > 0 )
 				{
-					foreach (range(0, Request::get('count_specialities') - 1) as $index)
+					foreach ( range(0, request('count_specialities') - 1) as $index )
 					{
 						$rules['id_speciality.' . $index]             = 'required|in:0';
 						$rules['type_speciality_id.' . $index]        = 'required|regex:/[0-9 -()+]+$/';
@@ -72,9 +70,9 @@ class Step2Request extends SanitizedRequest
 					}
 				}
 				
-				if (Request::get('count_professional_licenses') > 0)
+				if ( request('count_professional_licenses') > 0 )
 				{
-					foreach (range(0, Request::get('count_professional_licenses') - 1) as $index)
+					foreach ( range(0, request('count_professional_licenses') - 1) as $index )
 					{
 						$rules['id_professional_license.' . $index]      = 'required|in:0';
 						$rules['type_professional_license_id.' . $index] = 'required|regex:/[0-9 -()+]+$/';
@@ -88,7 +86,7 @@ class Step2Request extends SanitizedRequest
 				 * Inicializamos rules en caso de no entrar en un if
 			 	 */
 				
-				if (Request::get('count_studies') + Request::get('count_certifications') + Request::get('count_specialities') + Request::get('count_professional_licenses') == 0)
+				if ( request('count_studies') + request('count_certifications') + request('count_specialities') + request('count_professional_licenses') == 0 )
 				{
 					$rules = ['success' => 'OK'];
 				}
@@ -99,13 +97,13 @@ class Step2Request extends SanitizedRequest
 			
 			case 'PUT':
 			{
-				if (Request::get('count_studies') > 0)
+				if ( request('count_studies') > 0 )
 				{
-					foreach (range(0, Request::get('count_studies') - 1) as $index)
+					foreach ( range(0, request('count_studies') - 1) as $index )
 					{
 						$rules['id_study.' . $index]  = 'required|regex:/[0-9 -()+]+$/';
 						$rules['degree_id.' . $index] = 'required|regex:/[0-9 -()+]+$/';
-						switch (Request::get('degree_id')[$index])
+						switch ( request('degree_id')[$index] )
 						{
 							case '3':
 								$rules['name_study.' . $index]       = 'required|max:50';
@@ -129,9 +127,9 @@ class Step2Request extends SanitizedRequest
 					}
 				}
 				
-				if (Request::get('count_certifications') > 0)
+				if ( request('count_certifications') > 0 )
 				{
-					foreach (range(0, Request::get('count_certifications') - 1) as $index)
+					foreach ( range(0, request('count_certifications') - 1) as $index )
 					{
 						$rules['id_certification.' . $index]             = 'required|regex:/[0-9 -()+]+$/';
 						$rules['type_certification_id.' . $index]        = 'required|regex:/[0-9 -()+]+$/';
@@ -141,9 +139,9 @@ class Step2Request extends SanitizedRequest
 					}
 				}
 				
-				if (Request::get('count_specialities') > 0)
+				if ( request('count_specialities') > 0 )
 				{
-					foreach (range(0, Request::get('count_specialities') - 1) as $index)
+					foreach ( range(0, request('count_specialities') - 1) as $index )
 					{
 						$rules['id_speciality.' . $index]             = 'required|regex:/[0-9 -()+]+$/';
 						$rules['type_speciality_id.' . $index]        = 'required|regex:/[0-9 -()+]+$/';
@@ -153,9 +151,9 @@ class Step2Request extends SanitizedRequest
 					}
 				}
 				
-				if (Request::get('count_professional_licenses') > 0)
+				if ( request('count_professional_licenses') > 0 )
 				{
-					foreach (range(0, Request::get('count_professional_licenses') - 1) as $index)
+					foreach ( range(0, request('count_professional_licenses') - 1) as $index )
 					{
 						$rules['id_professional_license.' . $index]      = 'required|regex:/[0-9 -()+]+$/';
 						$rules['type_professional_license_id.' . $index] = 'required|regex:/[0-9 -()+]+$/';
@@ -169,7 +167,7 @@ class Step2Request extends SanitizedRequest
 				 * Inicializamos rules en caso de no entrar en un if
 			 	 */
 				
-				if (Request::get('count_studies') + Request::get('count_certifications') + Request::get('count_specialities') + Request::get('count_professional_licenses') == 0)
+				if ( request('count_studies') + request('count_certifications') + request('count_specialities') + request('count_professional_licenses') == 0 )
 				{
 					$rules = ['success' => 'OK'];
 				}

@@ -3,6 +3,7 @@
 namespace Controlqtime\Core\Api\Http\Controllers;
 
 use Exception;
+use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Http\Controllers\Controller;
 use Controlqtime\Core\Api\Http\Request\AccessControlApiRequest;
@@ -15,13 +16,20 @@ class AccessControlApiController extends Controller
 	protected $employee;
 	
 	/**
+	 * @var Log
+	 */
+	protected $log;
+	
+	/**
 	 * AccessControlApiController constructor.
 	 *
 	 * @param Employee $employee
+	 * @param Log      $log
 	 */
-	public function __construct(Employee $employee)
+	public function __construct(Employee $employee, Log $log)
 	{
 		$this->employee = $employee;
+		$this->log      = $log;
 	}
 	
 	/**
@@ -34,26 +42,25 @@ class AccessControlApiController extends Controller
 	{
 		try
 		{
-			$employee = $this->employee->where('rut', $request->get('rut'))->firstOrFail();
-		
-			switch ($request->get('num_device'))
+			$employee = $this->employee->where('rut', request('rut'))->firstOrFail();
+			
+			switch ( request('num_device') )
 			{
 				case 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA':
 					$employee->accessControls()->create($request->all());
 					break;
-					
+				
 				case '187783A1-7985-4839-B8C1-2F0ACC290E13':
 					$employee->dailyAssistances()->create($request->all());
 					break;
 			}
 			
-		} catch (Exception $e)
+			return response()->json(['status' => true]);
+		} catch ( Exception $e )
 		{
-			throw new Exception($e);
+			$this->log->error("Error Store AccessControlApi: " . $e->getMessage());
+			
+			return response()->json(['status' => false]);
 		}
-		
-		return response()->json([
-			'status' => true
-		]);
 	}
 }

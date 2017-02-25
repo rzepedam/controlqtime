@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class CityRequest extends SanitizedRequest
+class CityRequest extends Request
 {
 	/**
 	 * @var Route
@@ -52,7 +51,7 @@ class CityRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'       => 'required|max:50|unique_with:cities,country_id,' . $this->route->getParameter('city'),
+					'name'       => 'required|max:50|unique_with:cities,country_id,' . $this->route->parameter('city'),
 					'country_id' => 'required|regex:/[0-9 -()+]+$/'
 				];
 			}

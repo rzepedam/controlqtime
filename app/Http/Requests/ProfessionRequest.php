@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class ProfessionRequest extends SanitizedRequest
+class ProfessionRequest extends Request
 {
 	/**
 	 * @var Route
@@ -51,7 +50,7 @@ class ProfessionRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:100|unique:professions,name,' . $this->route->getParameter('profession')
+					'name' => 'required|max:100|unique:professions,name,' . $this->route->parameter('profession')
 				];
 			}
 		}

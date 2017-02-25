@@ -128,8 +128,8 @@ $(document).ready(function(){
         window.location.href = "/maintainers/type-vehicles";
     });
 
-    $('#redirect-measuring-units').click(function() {
-        window.location.href = "/maintainers/measuring-units";
+    $('#redirect-measuring-Unit').click(function() {
+        window.location.href = "/maintainers/measuring-Unit";
     });
 
 });

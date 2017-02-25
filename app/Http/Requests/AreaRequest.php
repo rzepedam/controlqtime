@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class AreaRequest extends SanitizedRequest
+class AreaRequest extends Request
 {
 	/**
 	 * @var Route
@@ -52,7 +51,7 @@ class AreaRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'        => 'required|max:50|unique_with:areas,terminal_id,' . $this->route->getParameter('area'),
+					'name'        => 'required|max:50|unique_with:areas,terminal_id,' . $this->route->parameter('area'),
 					'terminal_id' => 'required|regex:/[0-9 -()+]+$/'
 				];
 			}

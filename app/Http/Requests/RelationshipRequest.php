@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class RelationshipRequest extends SanitizedRequest
+class RelationshipRequest extends Request
 {
 	/**
 	 * @var Route
@@ -51,7 +50,7 @@ class RelationshipRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:30|unique:relationships,name,' . $this->route->getParameter('relationship')
+					'name' => 'required|max:30|unique:relationships,name,' . $this->route->parameter('relationship')
 				];
 			}
 		}

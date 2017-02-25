@@ -3,24 +3,42 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class TypeSpecialityRequest extends SanitizedRequest
+class TypeSpecialityRequest extends Request
 {
+	/**
+	 * @var Route
+	 */
+	protected $route;
 	
+	/**
+	 * TypeSpecialityRequest constructor.
+	 *
+	 * @param Route $route
+	 */
 	public function __construct(Route $route)
 	{
 		$this->route = $route;
 	}
 	
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
 	public function authorize()
 	{
 		return true;
 	}
 	
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
 	public function rules()
 	{
-		switch ($this->method())
+		switch ( $this->method() )
 		{
 			case 'POST':
 			{
@@ -32,7 +50,7 @@ class TypeSpecialityRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:100|unique:type_specialities,name,' . $this->route->getParameter('type_speciality')
+					'name' => 'required|max:100|unique:type_specialities,name,' . $this->route->parameter('type_speciality')
 				];
 			}
 		}

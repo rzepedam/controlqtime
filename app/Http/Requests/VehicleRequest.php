@@ -2,10 +2,9 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class VehicleRequest extends SanitizedRequest
+class VehicleRequest extends Request
 {
 	/**
 	 * @var Route
@@ -92,7 +91,7 @@ class VehicleRequest extends SanitizedRequest
 					'color'                 => 'required|max:30',
 					'year'                  => 'required|max:4',
 					'fuel_id'               => 'required|regex:/[0-9 -()+]+$/',
-					'patent'                => 'required|max:15|unique:vehicles,patent,' . $this->route->getParameter('vehicle'),
+					'patent'                => 'required|max:15|unique:vehicles,patent,' . $this->route->parameter('vehicle'),
 					'num_chasis'            => 'required|max:17',
 					'num_motor'             => 'required|max:12',
 					'km'                    => 'required|max:7|regex:/[0-9 -()+]+$/',

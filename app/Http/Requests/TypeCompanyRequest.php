@@ -2,10 +2,9 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class TypeCompanyRequest extends SanitizedRequest
+class TypeCompanyRequest extends Request
 {
 	/**
 	 * @var Route
@@ -51,7 +50,7 @@ class TypeCompanyRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:50|unique:type_companies,name,' . $this->route->getParameter('type_company')
+					'name' => 'required|max:50|unique:type_companies,name,' . $this->route->parameter('type_company')
 				];
 			}
 		}

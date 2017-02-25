@@ -23,7 +23,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('maintainers.measuring-units') }}">Volver</a>
+            <a href="{{ route('maintainers') }}">Volver</a>
         </div>
     </div>
 

@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class LaborUnionRequest extends SanitizedRequest
+class LaborUnionRequest extends Request
 {
 	/**
 	 * @var Route
@@ -51,7 +50,7 @@ class LaborUnionRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|unique:labor_unions,name,' . $this->route->getParameter('labor_union')
+					'name' => 'required|unique:labor_unions,name,' . $this->route->parameter('labor_union')
 				];
 			}
 		}

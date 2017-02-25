@@ -156,7 +156,7 @@ $factory->define(Contract::class, function (Faker\Generator $faker)
 		'start_contract'   => Carbon::parse('2016-12-13')->format('d-m-Y'),
 		'position_id'      => factory(Position::class)->create()->id,
 		'area_id'          => factory(Area::class)->create()->id,
-		'type_contract_id' => factory(TypeContract::class)->create()->id,
+		'type_contract_id' => factory(TypeContract::class)->create(['name' => 'Plazo Fijo'])->id,
 		'num_hour'         => '45',
 		'day_trip_id'      => factory(DayTrip::class)->create()->id,
 		'forecast_id'      => factory(Forecast::class)->create()->id,
@@ -556,11 +556,12 @@ $factory->define(TypeCompany::class, function (Faker\Generator $faker)
 
 $factory->define(TypeContract::class, function (Faker\Generator $faker)
 {
+	$dur = $faker->numberBetween(2, 12);
+	
 	return [
-		'name'       => $faker->word,
-		'dur'        => $faker->numberBetween(2, 12),
-		'full_name'  => '',
-		'deleted_at' => null
+		'name'       => 'Plazo Fijo',
+		'dur'        => $dur,
+		'full_name'  => "Plazo Fijo {$dur}"
 	];
 });
 

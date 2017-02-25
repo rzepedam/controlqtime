@@ -72,7 +72,7 @@ class EngineCubicController extends Controller
 			}
 			session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
 			
-			return response()->json(['status' => true, 'url' => '/maintainers/measuring-units/engine-cubics']);
+			return response()->json(['status' => true, 'url' => '/maintainers/measuring-Unit/engine-cubics']);
 		} catch ( Exception $e )
 		{
 			$this->log->error("Error Store EngineCubic: " . $e->getMessage());
@@ -125,7 +125,7 @@ class EngineCubicController extends Controller
 			$this->engineCubic->findOrFail($id)->fill($request->all())->saveOrFail();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			
-			return response()->json(['status' => true, 'url' => '/maintainers/measuring-units/engine-cubics']);
+			return response()->json(['status' => true, 'url' => '/maintainers/measuring-Unit/engine-cubics']);
 		} catch ( Exception $e )
 		{
 			$this->log->error("Error Update EngineCubic: " . $e->getMessage());

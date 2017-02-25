@@ -5,9 +5,8 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "5.3.*",
-        "fzaninotto/faker": "~1.4",
+        "php": ">=5.6.4",
+        "laravel/framework": "5.4.*",
         "laravelcollective/html": "~5.0",
         "jenssegers/date": "^3.2",
         "barryvdh/laravel-debugbar": "^2.2",
@@ -22,20 +21,23 @@
         "doctrine/dbal": "^2.5",
         "pda/pheanstalk": "^3.1",
         "nexmo/client": "1.0.0-beta3",
-        "laravel/passport": "^1.0"
+        "laravel/passport": "^1.0",
+        "laravel/tinker": "^1.0",
+        "laravel/browser-kit-testing": "^1.0",
+        "laravel/dusk": "^1.0"
     },
     "require-dev": {
+        "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~4.0",
-        "symfony/css-selector": "2.8.*|3.0.*",
-        "symfony/dom-crawler": "2.8.*|3.0.*"
+        "phpunit/phpunit": "~5.7"
     },
     "autoload": {
         "classmap": [
             "database"
         ],
         "psr-4": {
-            "Controlqtime\\": "app"
+            "Controlqtime\\": "app",
+            "Tests\\": "tests/"
         },
         "files": [
             "app/Core/Helpers/FormatField.php"
@@ -43,7 +45,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/TestCase.php"
+            "tests/TestCase.php",
+            "tests/BrowserKitTestCase.php"
         ]
     },
     "scripts": {
@@ -65,6 +68,7 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true
     }
 }

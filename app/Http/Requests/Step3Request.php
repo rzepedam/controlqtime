@@ -2,9 +2,7 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
-
-class Step3Request extends SanitizedRequest
+class Step3Request extends Request
 {
 	public function authorize()
 	{

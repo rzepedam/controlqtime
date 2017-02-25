@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class CheckVehicleFormRequest extends SanitizedRequest
+class CheckVehicleFormRequest extends Request
 {
 	/**
 	 * @var Route
@@ -39,7 +38,7 @@ class CheckVehicleFormRequest extends SanitizedRequest
 	 */
 	public function rules()
 	{
-		switch ($this->method())
+		switch ( $this->method() )
 		{
 			case 'POST':
 			{
@@ -47,7 +46,7 @@ class CheckVehicleFormRequest extends SanitizedRequest
 					'vehicle_id' => 'required|regex:/[0-9 -()+]+$/',
 				];
 				
-				foreach (range(0, count(Request::get('state_piece_vehicle_id')) - 1) as $index)
+				foreach ( range(0, count(Request::get('state_piece_vehicle_id')) - 1) as $index )
 				{
 					$rules['state_piece_vehicle_id.' . $index] = 'required';
 				}
@@ -61,7 +60,7 @@ class CheckVehicleFormRequest extends SanitizedRequest
 					'vehicle_id' => 'required|regex:/[0-9 -()+]+$/',
 				];
 				
-				foreach (range(0, count(Request::get('state_piece_vehicle_id')) - 1) as $index)
+				foreach ( range(0, count(Request::get('state_piece_vehicle_id')) - 1) as $index )
 				{
 					$rules['state_piece_vehicle_id.' . $index] = 'required';
 				}

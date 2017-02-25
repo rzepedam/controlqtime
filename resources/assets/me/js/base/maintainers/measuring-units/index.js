@@ -1,11 +1,11 @@
 $(document).ready(function(){
 
     $('#redirect-weight').click(function() {
-        window.location.href = "/maintainers/measuring-units/weights";
+        window.location.href = "/maintainers/measuring-Unit/weights";
     });
 
     $('#redirect-engine-cubic').click(function() {
-        window.location.href = "/maintainers/measuring-units/engine-cubics";
+        window.location.href = "/maintainers/measuring-Unit/engine-cubics";
     });
 
 });

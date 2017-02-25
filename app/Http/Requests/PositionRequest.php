@@ -2,10 +2,9 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class PositionRequest extends SanitizedRequest
+class PositionRequest extends Request
 {
 	/**
 	 * @var Route
@@ -51,7 +50,7 @@ class PositionRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:50|unique:positions,name,' . $this->route->getParameter('position')
+					'name' => 'required|max:50|unique:positions,name,' . $this->route->parameter('position')
 				];
 			}
 		}

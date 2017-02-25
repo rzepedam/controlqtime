@@ -2,10 +2,9 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class TerminalRequest extends SanitizedRequest
+class TerminalRequest extends Request
 {
 	/**
 	 * @var Route
@@ -52,7 +51,7 @@ class TerminalRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'       => 'required|max:75|unique:terminals,name,' . $this->route->getParameter('terminal'),
+					'name'       => 'required|max:75|unique:terminals,name,' . $this->route->parameter('terminal'),
 					'commune_id' => 'required|regex:/[0-9 -()+]+$/'
 				];
 			}

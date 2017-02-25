@@ -2,11 +2,9 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class Step1Request extends SanitizedRequest
+class Step1Request extends Request
 {
 	/**
 	 * @var Route

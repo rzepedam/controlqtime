@@ -2,43 +2,57 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
-use Controlqtime\Http\Requests\Request;
 use Illuminate\Routing\Route;
 
-/**
- * @property mixed route
- */
-class TrademarkRequest extends SanitizedRequest
+class TrademarkRequest extends Request
 {
-    public function __construct(Route $route)
-    {
-        $this->route = $route;
-    }
-
-    public function authorize()
-    {
-        return true;
-    }
-
-
-    public function rules()
-    {
-        switch($this->method())
-        {
-            case 'POST':
-            {
-                return [
-                    'name'  => 'required|max:50|unique:trademarks,name,NULL,id,deleted_at,NULL'
-                ];
-            }
-
-            case 'PUT':
-            {
-                return [
-                    'name'  => 'required|max:50|unique:trademarks,name,' . $this->route->getParameter('trademark')
-                ];
-            }
-        }
-    }
+	/**
+	 * @var Route
+	 */
+	protected $route;
+	
+	/**
+	 * TrademarkRequest constructor.
+	 *
+	 * @param Route $route
+	 */
+	public function __construct(Route $route)
+	{
+		$this->route = $route;
+	}
+	
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
+	{
+		return true;
+	}
+	
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		switch ( $this->method() )
+		{
+			case 'POST':
+			{
+				return [
+					'name' => 'required|max:50|unique:trademarks,name,NULL,id,deleted_at,NULL'
+				];
+			}
+			
+			case 'PUT':
+			{
+				return [
+					'name' => 'required|max:50|unique:trademarks,name,' . $this->route->parameter('trademark')
+				];
+			}
+		}
+	}
 }

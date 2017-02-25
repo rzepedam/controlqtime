@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class ContractRequest extends SanitizedRequest
+class ContractRequest extends Request
 {
 	/**
 	 * @var Route

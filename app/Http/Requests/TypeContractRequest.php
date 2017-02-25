@@ -2,10 +2,9 @@
 
 namespace Controlqtime\Http\Requests;
 
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 use Illuminate\Routing\Route;
 
-class TypeContractRequest extends SanitizedRequest
+class TypeContractRequest extends Request
 {
 	/**
 	 * @var Route
@@ -43,7 +42,7 @@ class TypeContractRequest extends SanitizedRequest
 		{
 			case 'POST':
 			{
-				if ( Request::get('name') == 'Plazo Fijo' )
+				if ( request('name') === 'Plazo Fijo' )
 				{
 					$rules = [
 						'name' => 'required|unique_with:type_contracts,dur,deleted_at',
@@ -61,10 +60,10 @@ class TypeContractRequest extends SanitizedRequest
 			
 			case 'PUT':
 			{
-				if ( Request::get('name') == 'Plazo Fijo' )
+				if ( request('name') == 'Plazo Fijo' )
 				{
 					$rules = [
-						'name' => 'required|unique_with:type_contracts,dur,' . $this->route->getParameter('type_contract'),
+						'name' => 'required|unique_with:type_contracts,dur,' . $this->route->parameter('type_contract'),
 						'dur'  => 'required|not_in:0|max:2'
 					];
 				} else

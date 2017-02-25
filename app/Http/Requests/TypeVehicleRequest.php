@@ -3,12 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-/**
- * @property Route route
- */
-class TypeVehicleRequest extends SanitizedRequest
+class TypeVehicleRequest extends Request
 {
 	/**
 	 * @var Route
@@ -56,7 +52,7 @@ class TypeVehicleRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name'            => 'required|max:50|unique:type_vehicles,name,' . $this->route->getParameter('type_vehicle'),
+					'name'            => 'required|max:50|unique:type_vehicles,name,' . $this->route->parameter('type_vehicle'),
 					'weight_id'       => 'required|regex:/[0-9 -()+]+$/',
 					'engine_cubic_id' => 'required|regex:/[0-9 -()+]+$/'
 				];

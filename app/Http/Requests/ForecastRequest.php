@@ -3,9 +3,8 @@
 namespace Controlqtime\Http\Requests;
 
 use Illuminate\Routing\Route;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
 
-class ForecastRequest extends SanitizedRequest
+class ForecastRequest extends Request
 {
 	/**
 	 * @var Route
@@ -39,7 +38,7 @@ class ForecastRequest extends SanitizedRequest
 	 */
 	public function rules()
 	{
-		switch ($this->method())
+		switch ( $this->method() )
 		{
 			case 'POST':
 			{
@@ -51,7 +50,7 @@ class ForecastRequest extends SanitizedRequest
 			case 'PUT':
 			{
 				return [
-					'name' => 'required|max:50|unique:forecasts,name,' . $this->route->getParameter('forecast')
+					'name' => 'required|max:50|unique:forecasts,name,' . $this->route->parameter('forecast')
 				];
 			}
 		}

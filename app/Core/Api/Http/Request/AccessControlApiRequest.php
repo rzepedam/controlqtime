@@ -2,10 +2,9 @@
 
 namespace Controlqtime\Core\Api\Http\Request;
 
-use Illuminate\Support\Facades\Request;
-use Controlqtime\Http\Requests\Forms\SanitizedRequest;
+use Controlqtime\Http\Requests\Request;
 
-class AccessControlApiRequest extends SanitizedRequest
+class AccessControlApiRequest extends Request
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -24,7 +23,7 @@ class AccessControlApiRequest extends SanitizedRequest
 	 */
 	public function rules()
 	{
-		switch ( Request::get('num_device') )
+		switch ( request('num_device') )
 		{
 			case 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA':
 				$rules = [
@@ -60,8 +59,6 @@ class AccessControlApiRequest extends SanitizedRequest
 	
 	public function messages()
 	{
-		return [
-			'unique_with' => 'La combinación de valores ingresados ya existe.'
-		];
+		return ['unique_with' => 'La combinación de valores ingresados ya existe.'];
 	}
 }
