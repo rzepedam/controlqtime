@@ -144,9 +144,9 @@ class EmployeeCreateTest extends BrowserKitTestCase
 		]);
 		
 		$this->seeInDatabase('detail_address_legal_employees', [
-			'depto'    => '',
-			'block'    => '',
-			'num_home' => ''
+			'depto'    => null,
+			'block'    => null,
+			'num_home' => null
 		]);
 	}
 	
@@ -247,9 +247,9 @@ class EmployeeCreateTest extends BrowserKitTestCase
 				'phone1'           => '+56974155784',
 				'phone2'           => null])
 			->seeInDatabase('detail_address_legal_employees', [
-				'depto'    => '',
-				'block'    => '',
-				'num_home' => ''])
+				'depto'    => null,
+				'block'    => null,
+				'num_home' => null])
 			->seeInDatabase('contact_employees', [
 				'name_contact'    => 'José Miguel Osorio Sepúlveda',
 				'email_contact'   => 'joseosorio@gmail.com',
