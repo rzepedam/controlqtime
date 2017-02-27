@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSignInVisitsTable extends Migration
 {
@@ -17,15 +17,15 @@ class CreateSignInVisitsTable extends Migration
             $table->increments('id');
             $table->string('male_surname', 30);
             $table->string('female_surname', 30);
-	        $table->string('first_name', 30);
-	        $table->string('second_name', 30);
-	        $table->string('full_name', 120);
-	        $table->string('rut', 10)->unique();
-	        $table->date('birthday');
-	        $table->boolean('is_male')->default(false);
-	        $table->string('phone', 12);
-	        $table->string('email', 60)->unique();
-	        $table->enum('state', ['enable', 'disable'])->default('disable');
+            $table->string('first_name', 30);
+            $table->string('second_name', 30);
+            $table->string('full_name', 120);
+            $table->string('rut', 10)->unique();
+            $table->date('birthday');
+            $table->boolean('is_male')->default(false);
+            $table->string('phone', 12);
+            $table->string('email', 60)->unique();
+            $table->enum('state', ['enable', 'disable'])->default('disable');
             $table->timestamps();
         });
     }

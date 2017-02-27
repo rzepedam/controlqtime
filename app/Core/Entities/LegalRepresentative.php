@@ -15,23 +15,22 @@ class LegalRepresentative extends Eloquent
         'company_id', 'male_surname', 'female_surname', 'first_name', 'second_name', 'full_name',
         'rut_representative', 'birthday', 'nationality_id', 'email_representative',
     ];
-    
+
     /**
      * @var array
      */
     protected $dates = [
-        'birthday'
+        'birthday',
     ];
-	
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\MorphOne
-	 */
-	public function address()
-	{
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function address()
+    {
         return $this->morphOne(Address::class, 'addressable');
-	}
-	
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -113,13 +112,12 @@ class LegalRepresentative extends Eloquent
     {
         return FormatField::rut($value);
     }
-	
-	/**
-	 * @return mixed '36'
-	 */
-	public function getAgeAttribute()
+
+    /**
+     * @return mixed '36'
+     */
+    public function getAgeAttribute()
     {
         return $this->birthday->age;
     }
-    
 }

@@ -20,4 +20,3 @@ use Illuminate\Http\Request;
 Route::post('access-control', 'AccessControlApiController@store')->middleware('auth:api');
 
 Route::put('updateEmployeeImage', 'EmployeeApiController@update')->middleware('auth:api');
-

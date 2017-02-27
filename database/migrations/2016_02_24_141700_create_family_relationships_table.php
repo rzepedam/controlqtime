@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateFamilyRelationshipsTable extends Migration
 {
@@ -14,10 +14,10 @@ class CreateFamilyRelationshipsTable extends Migration
     {
         Schema::create('family_relationships', function (Blueprint $table) {
             $table->increments('id');
-	        $table->unsignedInteger('employee_id')->nullable();
+            $table->unsignedInteger('employee_id')->nullable();
             $table->unsignedInteger('relationship_id')->nullable();
             $table->unsignedInteger('employee_family_id')->nullable();
-	        $table->timestamps();
+            $table->timestamps();
         });
     }
 

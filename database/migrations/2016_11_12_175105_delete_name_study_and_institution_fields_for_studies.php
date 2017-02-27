@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class DeleteNameStudyAndInstitutionFieldsForStudies extends Migration
 {
@@ -25,9 +25,9 @@ class DeleteNameStudyAndInstitutionFieldsForStudies extends Migration
      */
     public function down()
     {
-	    Schema::table('studies', function (Blueprint $table) {
-		    $table->unsignedInteger('institution_study_id')->nullable();
-		    $table->string('name_study', 50);
-	    });
+        Schema::table('studies', function (Blueprint $table) {
+            $table->unsignedInteger('institution_study_id')->nullable();
+            $table->string('name_study', 50);
+        });
     }
 }

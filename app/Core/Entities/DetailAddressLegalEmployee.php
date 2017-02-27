@@ -6,24 +6,23 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DetailAddressLegalEmployee extends Eloquent
 {
-	/**
-	 * @var array
-	 */
-	protected $fillable = [
-    	'depto', 'block', 'num_home'
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'depto', 'block', 'num_home',
     ];
-	
-	/**
-	 * @var bool
-	 */
-	public $timestamps = false;
-	
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function address()
-	{
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function address()
+    {
         return $this->belongsTo(Address::class);
-	}
+    }
 }

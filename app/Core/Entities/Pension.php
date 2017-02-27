@@ -6,19 +6,18 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Pension extends Eloquent
 {
-	/**
-	 * @var array
-	 */
-	protected $fillable = [
-		'name'
-	];
-	
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+    ];
+
     /**
      * @var bool
      */
     public $timestamps = false;
-	
-	
+
     /**
      * @param string $value
      */
@@ -26,5 +25,4 @@ class Pension extends Eloquent
     {
         $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
-
 }

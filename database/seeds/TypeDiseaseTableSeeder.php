@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Controlqtime\Core\Entities\TypeDisease;
+use Illuminate\Database\Seeder;
 
 class TypeDiseaseTableSeeder extends Seeder
 {
@@ -12,35 +12,34 @@ class TypeDiseaseTableSeeder extends Seeder
      */
     public function run()
     {
-	    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-	    DB::table('type_diseases')->truncate();
-	
-	    TypeDisease::create([
-		    'id'   => 1,
-		    'name' => 'Fatiga Visual'
-	    ]);
-	
-	    TypeDisease::create([
-		    'id'   => 2,
-		    'name' => 'Dolor de Espalda'
-	    ]);
-	
-	    TypeDisease::create([
-		    'id'   => 3,
-		    'name' => 'Estrés'
-	    ]);
-	
-	    TypeDisease::create([
-		    'id'   => 4,
-		    'name' => 'El Síndrome de la Fatiga Crónica'
-	    ]);
-	
-	    TypeDisease::create([
-		    'id'   => 5,
-		    'name' => 'Síndrome de Tunel Carpiano'
-	    ]);
-	
-	    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-	    
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('type_diseases')->truncate();
+
+        TypeDisease::create([
+            'id'   => 1,
+            'name' => 'Fatiga Visual',
+        ]);
+
+        TypeDisease::create([
+            'id'   => 2,
+            'name' => 'Dolor de Espalda',
+        ]);
+
+        TypeDisease::create([
+            'id'   => 3,
+            'name' => 'Estrés',
+        ]);
+
+        TypeDisease::create([
+            'id'   => 4,
+            'name' => 'El Síndrome de la Fatiga Crónica',
+        ]);
+
+        TypeDisease::create([
+            'id'   => 5,
+            'name' => 'Síndrome de Tunel Carpiano',
+        ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

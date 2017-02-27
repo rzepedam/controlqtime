@@ -2,32 +2,31 @@
 
 namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MaritalStatus extends Eloquent
 {
-	use SoftDeletes;
+    use SoftDeletes;
 
     /**
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
     ];
-	
-	/**
-	 * @var bool
-	 */
-	public $timestamps = false;
-	
-	/**
-	 * @var array
-	 */
-	protected $dates = [
-		'deleted_at'
-	];
-	
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at',
+    ];
 
     /**
      * @param string $value
@@ -36,5 +35,4 @@ class MaritalStatus extends Eloquent
     {
         $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
-
 }

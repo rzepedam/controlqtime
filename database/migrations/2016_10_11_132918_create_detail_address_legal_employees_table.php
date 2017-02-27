@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDetailAddressLegalEmployeesTable extends Migration
 {
@@ -15,10 +15,10 @@ class CreateDetailAddressLegalEmployeesTable extends Migration
     {
         Schema::create('detail_address_legal_employees', function (Blueprint $table) {
             $table->increments('id');
-	        $table->unsignedInteger('address_id')->nullable();
-	        $table->string('depto', 5)->nullable();
-	        $table->string('block', 5)->nullable();
-	        $table->string('num_home', 5)->nullable();
+            $table->unsignedInteger('address_id')->nullable();
+            $table->string('depto', 5)->nullable();
+            $table->string('block', 5)->nullable();
+            $table->string('num_home', 5)->nullable();
         });
     }
 

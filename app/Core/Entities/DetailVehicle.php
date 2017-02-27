@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DetailVehicle extends Eloquent
 {
-	/**
-	 * @var array
-	 */
-	protected $fillable = [
-		'vehicle_id', 'fuel_id', 'color', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight',
-		'tag', 'obs'
-	];
-	
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'vehicle_id', 'fuel_id', 'color', 'num_chasis', 'num_motor', 'km', 'engine_cubic', 'weight',
+        'tag', 'obs',
+    ];
+
     /**
      * @var bool
      */
@@ -27,11 +27,11 @@ class DetailVehicle extends Eloquent
     {
         return $this->belongsTo(Vehicle::class);
     }
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
-	 */
-	public function detailBus()
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function detailBus()
     {
         return $this->hasOne(DetailBus::class);
     }
@@ -42,10 +42,9 @@ class DetailVehicle extends Eloquent
     public function fuel()
     {
         return $this->belongsTo(Fuel::class)
-	        ->withTrashed();
+            ->withTrashed();
     }
-    
-    
+
     /**
      * @param string $value
      */
@@ -61,15 +60,15 @@ class DetailVehicle extends Eloquent
     {
         $this->attributes['num_chasis'] = strtoupper($value);
     }
-	
-	/**
-	 * @param string $value
-	 */
-	public function setTagAttribute($value)
+
+    /**
+     * @param string $value
+     */
+    public function setTagAttribute($value)
     {
         $this->attributes['tag'] = strtoupper($value);
     }
-    
+
     /**
      * @param string $value
      */

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Controlqtime\Core\Entities\TypeCertification;
+use Illuminate\Database\Seeder;
 
 class TypeCertificationTableSeeder extends Seeder
 {
@@ -12,29 +12,29 @@ class TypeCertificationTableSeeder extends Seeder
      */
     public function run()
     {
-	    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-	    DB::table('type_certifications')->truncate();
-	
-	    TypeCertification::create([
-		    'id'   => 1,
-		    'name' => 'Certificación Java'
-	    ]);
-	
-	    TypeCertification::create([
-		    'id'   => 2,
-		    'name' => 'Certificación RIGGR'
-	    ]);
-	
-	    TypeCertification::create([
-		    'id'   => 3,
-		    'name' => 'Certificación Conducción a la Defensiva'
-	    ]);
-	
-	    TypeCertification::create([
-		    'id'   => 4,
-		    'name' => 'Certificación Cero Daño'
-	    ]);
-	    
-	    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('type_certifications')->truncate();
+
+        TypeCertification::create([
+            'id'   => 1,
+            'name' => 'Certificación Java',
+        ]);
+
+        TypeCertification::create([
+            'id'   => 2,
+            'name' => 'Certificación RIGGR',
+        ]);
+
+        TypeCertification::create([
+            'id'   => 3,
+            'name' => 'Certificación Conducción a la Defensiva',
+        ]);
+
+        TypeCertification::create([
+            'id'   => 4,
+            'name' => 'Certificación Cero Daño',
+        ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

@@ -2,33 +2,32 @@
 
 namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Position extends Eloquent
 {
-	use SoftDeletes;
-	
-	/**
-	 * @var array
-	 */
-	protected $fillable = [
-		'name'
-	];
-	
+    use SoftDeletes;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+    ];
+
     /**
      * @var bool
      */
     public $timestamps = false;
-	
-	/**
-	 * @var array
-	 */
-	protected $dates = [
-		'deleted_at'
-	];
 
-	
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at',
+    ];
+
     /**
      * @param string $value
      */
@@ -36,5 +35,4 @@ class Position extends Eloquent
     {
         $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
-
 }

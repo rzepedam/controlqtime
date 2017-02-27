@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateMasterFormPieceVehiclesTable extends Migration
 {
@@ -15,8 +15,8 @@ class CreateMasterFormPieceVehiclesTable extends Migration
     {
         Schema::create('master_form_piece_vehicles', function (Blueprint $table) {
             $table->increments('id');
-	        $table->string('name', 50);
-	        $table->softDeletes();
+            $table->string('name', 50);
+            $table->softDeletes();
         });
     }
 

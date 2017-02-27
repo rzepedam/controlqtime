@@ -11,25 +11,24 @@ class ProfessionalLicense extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'type_professional_license_id', 'emission_license', 'expired_license', 'is_donor', 'detail_license'
+        'type_professional_license_id', 'emission_license', 'expired_license', 'is_donor', 'detail_license',
     ];
 
     /**
      * @var array
      */
     protected $dates = [
-        'expired_license', 'emission_license', 'deleted_at'
+        'expired_license', 'emission_license', 'deleted_at',
     ];
-	
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-	 */
-	public function imagesable()
-	{
-		return $this->morphMany(Image::class, 'imagesable');
-	}
-	
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function imagesable()
+    {
+        return $this->morphMany(Image::class, 'imagesable');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -38,7 +37,6 @@ class ProfessionalLicense extends Eloquent
         return $this->belongsTo(TypeProfessionalLicense::class);
     }
 
-    
     /**
      * @param string $value (01-01-2010)
      */
@@ -54,13 +52,12 @@ class ProfessionalLicense extends Eloquent
     {
         $this->attributes['expired_license'] = Carbon::createFromFormat('d-m-Y', $value);
     }
-	
-	/**
-	 * @param string $value
-	 */
-	public function setDetailLicenseAttribute($value)
+
+    /**
+     * @param string $value
+     */
+    public function setDetailLicenseAttribute($value)
     {
         $this->attributes['detail_license'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
-	
 }

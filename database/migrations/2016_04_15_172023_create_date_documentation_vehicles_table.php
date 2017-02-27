@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDateDocumentationVehiclesTable extends Migration
 {
@@ -15,13 +15,13 @@ class CreateDateDocumentationVehiclesTable extends Migration
     {
         Schema::create('date_documentation_vehicles', function (Blueprint $table) {
             $table->increments('id');
-			$table->unsignedInteger('vehicle_id')->nullable();
-			$table->date('emission_padron');
-			$table->date('expiration_padron');
-			$table->date('emission_insurance');
-			$table->date('expiration_insurance');
-			$table->date('emission_permission');
-			$table->date('expiration_permission');
+            $table->unsignedInteger('vehicle_id')->nullable();
+            $table->date('emission_padron');
+            $table->date('expiration_padron');
+            $table->date('emission_insurance');
+            $table->date('expiration_insurance');
+            $table->date('emission_permission');
+            $table->date('expiration_permission');
         });
     }
 

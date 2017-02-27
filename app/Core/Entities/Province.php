@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Province extends Eloquent
 {
-	/**
-	 * @var bool
-	 */
-	public $timestamps = false;
-	
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -26,5 +26,4 @@ class Province extends Eloquent
     {
         return $this->belongsTo(Region::class);
     }
-    
 }

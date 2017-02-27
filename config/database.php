@@ -62,20 +62,20 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
             'strict'    => false,
-            'timezone'  => '-03:00'
+            'timezone'  => '-03:00',
         ],
 
         'mysql_tests' => [
-	        'driver'    => 'mysql',
-	        'host'      => env('DB_HOST', 'localhost'),
-	        'database'  => env('DB_DATABASE', 'forge') . '_tests',
-	        'username'  => env('MYSQL_USER', env('DB_USERNAME', 'forge')),
-	        'password'  => env('MYSQL_PASSWORD', env('DB_PASSWORD', '')),
-	        'charset'   => 'utf8',
-	        'collation' => 'utf8_unicode_ci',
-	        'prefix'    => '',
-	        'strict'    => false,
-	        'timezone'  => '-03:00'
+            'driver'    => 'mysql',
+            'host'      => env('DB_HOST', 'localhost'),
+            'database'  => env('DB_DATABASE', 'forge').'_tests',
+            'username'  => env('MYSQL_USER', env('DB_USERNAME', 'forge')),
+            'password'  => env('MYSQL_PASSWORD', env('DB_PASSWORD', '')),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+            'timezone'  => '-03:00',
         ],
 
         'pgsql' => [
@@ -114,7 +114,6 @@ return [
 
     'migrations' => 'migrations',
 
-
     /*
     |--------------------------------------------------------------------------
     | Redis Databases
@@ -127,15 +126,15 @@ return [
     */
 
     'redis' => [
-	
-	    'client' => 'predis',
-	
-	    'default' => [
-		    'host' => env('REDIS_HOST', '127.0.0.1'),
-		    'password' => env('REDIS_PASSWORD', null),
-		    'port' => env('REDIS_PORT', 6379),
-		    'database' => 0,
-	    ],
+
+        'client' => 'predis',
+
+        'default' => [
+            'host'     => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port'     => env('REDIS_PORT', 6379),
+            'database' => 0,
+        ],
     ],
 
 ];

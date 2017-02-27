@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Controlqtime\Core\Entities\Trademark;
+use Illuminate\Database\Seeder;
 
 class TrademarkTableSeeder extends Seeder
 {
@@ -12,30 +12,29 @@ class TrademarkTableSeeder extends Seeder
      */
     public function run()
     {
-	    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-	    DB::table('trademarks')->truncate();
-	
-	    Trademark::create([
-		    'id'   => 1,
-		    'name' => 'Mercedes Benz'
-	    ]);
-	
-	    Trademark::create([
-		    'id'   => 2,
-		    'name' => 'Volvo'
-	    ]);
-	
-	    Trademark::create([
-		    'id'   => 3,
-		    'name' => 'Scannia'
-	    ]);
-	
-	    Trademark::create([
-		    'id'   => 4,
-		    'name' => 'Honda'
-	    ]);
-	
-	    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-	    
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('trademarks')->truncate();
+
+        Trademark::create([
+            'id'   => 1,
+            'name' => 'Mercedes Benz',
+        ]);
+
+        Trademark::create([
+            'id'   => 2,
+            'name' => 'Volvo',
+        ]);
+
+        Trademark::create([
+            'id'   => 3,
+            'name' => 'Scannia',
+        ]);
+
+        Trademark::create([
+            'id'   => 4,
+            'name' => 'Honda',
+        ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

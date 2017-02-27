@@ -2,9 +2,8 @@
 
 namespace Controlqtime\Providers;
 
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -14,13 +13,13 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-	    'Illuminate\Auth\Events\Login' => [
-		    'Controlqtime\Listeners\LogLastLogin',
-		    'Controlqtime\Listeners\UpdateLastLoggedAt'
-	    ],
+        'Illuminate\Auth\Events\Login' => [
+            'Controlqtime\Listeners\LogLastLogin',
+            'Controlqtime\Listeners\UpdateLastLoggedAt',
+        ],
         'Controlqtime\Events\UserMessageSend' => [
-        	'Controlqtime\Listeners\SendEmailUser'
-        ]
+            'Controlqtime\Listeners\SendEmailUser',
+        ],
     ];
 
     /**

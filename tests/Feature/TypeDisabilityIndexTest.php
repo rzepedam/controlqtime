@@ -4,31 +4,31 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TypeDisabilityIndexTest extends BrowserKitTestCase
 {
-	use DatabaseTransactions;
-	
-	function setUp()
-	{
-		parent::setUp();
-		$this->signIn();
-	}
-	
-    function test_url_type_disability()
+    use DatabaseTransactions;
+
+    public function setUp()
     {
-    	$this->visit('maintainers/type-disabilities')
-		    ->assertResponseOk();
+        parent::setUp();
+        $this->signIn();
     }
-    
-    function test_route_type_disability()
+
+    public function test_url_type_disability()
     {
-    	$this->visitRoute('type-disabilities.index')
-		    ->assertResponseOk();
+        $this->visit('maintainers/type-disabilities')
+            ->assertResponseOk();
     }
-    
-    function test_index_type_disability()
+
+    public function test_route_type_disability()
     {
-    	$this->visit('maintainers/type-disabilities')
-		    ->seeInElement('h1', 'Listado de Discapacidades')
-		    ->seeInElement('a', 'Crear Nueva Discapacidad')
-		    ->see('Nombre');
+        $this->visitRoute('type-disabilities.index')
+            ->assertResponseOk();
+    }
+
+    public function test_index_type_disability()
+    {
+        $this->visit('maintainers/type-disabilities')
+            ->seeInElement('h1', 'Listado de Discapacidades')
+            ->seeInElement('a', 'Crear Nueva Discapacidad')
+            ->see('Nombre');
     }
 }

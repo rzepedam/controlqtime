@@ -11,24 +11,23 @@ class Certification extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'type_certification_id', 'institution_certification_id', 'emission_certification', 'expired_certification'
+        'type_certification_id', 'institution_certification_id', 'emission_certification', 'expired_certification',
     ];
 
     /**
      * @var array
      */
     protected $dates = [
-        'emission_certification', 'expired_certification', 'deleted_at'
+        'emission_certification', 'expired_certification', 'deleted_at',
     ];
-	
-	
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-	 */
-	public function imagesable()
-	{
-	    return $this->morphMany(Image::class, 'imagesable');
-	}
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function imagesable()
+    {
+        return $this->morphMany(Image::class, 'imagesable');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -61,5 +60,4 @@ class Certification extends Eloquent
     {
         $this->attributes['expired_certification'] = Carbon::createFromFormat('d-m-Y', $value);
     }
-	
 }

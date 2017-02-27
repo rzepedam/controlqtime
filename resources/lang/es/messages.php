@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'position' => 'Cargo'
+    'position' => 'Cargo',
 ];

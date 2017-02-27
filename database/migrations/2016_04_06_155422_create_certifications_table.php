@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCertificationsTable extends Migration
 {
@@ -19,7 +19,7 @@ class CreateCertificationsTable extends Migration
             $table->unsignedInteger('institution_certification_id')->nullable();
             $table->date('emission_certification');
             $table->date('expired_certification');
-	        $table->timestamps();
+            $table->timestamps();
         });
     }
 
