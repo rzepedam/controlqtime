@@ -334,7 +334,7 @@ class EmployeeController extends Controller
 				'password' => bcrypt(Session::get('email_employee'))
 			]);
 			$address  = $employee->address()->create(Session::get('step1'));
-			$test = $address->detailAddressLegalEmployee()->create(Session::get('step1'));
+			$address->detailAddressLegalEmployee()->create(Session::get('step1'));
 			$employee->createContacts(Session::get('step1'));
 			$employee->createFamilyRelationships(Session::get('step1'));
 			$employee->createStudies(Session::get('step2'));
