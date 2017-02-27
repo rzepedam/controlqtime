@@ -5,31 +5,30 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DailyAssistanceIndexTest extends BrowserKitTestCase
 {
-	use DatabaseTransactions;
-	
-	function setUp()
-	{
-		parent::setUp();
-		$this->signIn();
-	}
-	
-    function test_url_daily_assistance()
+    use DatabaseTransactions;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->signIn();
+    }
+
+    public function test_url_daily_assistance()
     {
         $this->visit('human-resources/daily-assistances')
-	        ->assertResponseOk();
+            ->assertResponseOk();
     }
-    
-    function test_route_daily_assistance()
+
+    public function test_route_daily_assistance()
     {
-    	$this->visitRoute('daily-assistances.index')
-		    ->assertResponseOk();
+        $this->visitRoute('daily-assistances.index')
+            ->assertResponseOk();
     }
-    
-    function test_index_daily_assistance()
+
+    public function test_index_daily_assistance()
     {
         $this->visit('human-resources/daily-assistances')
-	        ->seeInField('#date', Carbon::today()->format('d-m-Y'))
-	        ->seeInElement('#employee_id', 'Ver Todos');
+            ->seeInField('#date', Carbon::today()->format('d-m-Y'))
+            ->seeInElement('#employee_id', 'Ver Todos');
     }
-    
 }

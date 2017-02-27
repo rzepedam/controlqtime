@@ -4,17 +4,17 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class EmployeeUploadFilesTest extends BrowserKitTestCase
 {
-	use DatabaseTransactions;
-	
-	function setUp()
-	{
-		parent::setUp();
-		$this->signIn();
-	}
-	
-    function test_url_upload_employee()
+    use DatabaseTransactions;
+
+    public function setUp()
     {
-        $this->visit('human-resources/employees/attachFiles/' . $this->employee->id)
-	        ->assertResponseOk();
+        parent::setUp();
+        $this->signIn();
+    }
+
+    public function test_url_upload_employee()
+    {
+        $this->visit('human-resources/employees/attachFiles/'.$this->employee->id)
+            ->assertResponseOk();
     }
 }

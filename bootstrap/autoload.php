@@ -33,6 +33,6 @@ if (file_exists($compiledPath)) {
     require $compiledPath;
 }
 
-if(env('APP_ENV') == 'testing') {
-	ini_set('memory_limit', '2G');
+if (env('APP_ENV') == 'testing') {
+    ini_set('memory_limit', '2G');
 }

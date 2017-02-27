@@ -2,40 +2,39 @@
 
 namespace Controlqtime\Core\Entities;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ModelVehicle extends Eloquent
 {
-	use SoftDeletes;
-	
-	/**
-	 * @var array
-	 */
-	protected $fillable = [
-		'trademark_id', 'name'
-	];
-	
+    use SoftDeletes;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'trademark_id', 'name',
+    ];
+
     /**
      * @var bool
      */
     public $timestamps = false;
-	
-	/**
-	 * @var array
-	 */
-	protected $dates = [
-		'deleted_at'
-	];
-	
-	
+
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function trademark()
     {
         return $this->belongsTo(Trademark::class)
-	        ->withTrashed();
+            ->withTrashed();
     }
 
     /**
@@ -45,5 +44,4 @@ class ModelVehicle extends Eloquent
     {
         $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
-
 }

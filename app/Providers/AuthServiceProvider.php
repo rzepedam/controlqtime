@@ -2,8 +2,8 @@
 
 namespace Controlqtime\Providers;
 
-use Laravel\Passport\Passport;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,15 +16,15 @@ class AuthServiceProvider extends ServiceProvider
         'Controlqtime\Model' => 'Controlqtime\Policies\ModelPolicy',
     ];
 
-	/**
-	 * Register any authentication / authorization services.
-	 *
-	 * @return void
-	 */
+    /**
+     * Register any authentication / authorization services.
+     *
+     * @return void
+     */
     public function boot()
     {
-	    $this->registerPolicies();
-	
-	    Passport::routes();
+        $this->registerPolicies();
+
+        Passport::routes();
     }
 }

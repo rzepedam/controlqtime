@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'EmployeeWasRegistered' => ':name ha actualizado tu perfil'
+    'EmployeeWasRegistered' => ':name ha actualizado tu perfil',
 ];

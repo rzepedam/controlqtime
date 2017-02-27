@@ -4,30 +4,29 @@ namespace Controlqtime\Listeners;
 
 use Illuminate\Auth\Events\Login;
 use Illuminate\Log\Writer as Log;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class LogLastLogin
 {
-	/**
-	 * @var Log
-	 */
-	protected $log;
-	
-	/**
-	 * Create the event listener.
-	 *
-	 * @param Log $log
-	 */
+    /**
+     * @var Log
+     */
+    protected $log;
+
+    /**
+     * Create the event listener.
+     *
+     * @param Log $log
+     */
     public function __construct(Log $log)
     {
-	    $this->log = $log;
+        $this->log = $log;
     }
 
     /**
      * Handle the event.
      *
-     * @param  Login  $event
+     * @param Login $event
+     *
      * @return void
      */
     public function handle(Login $event)

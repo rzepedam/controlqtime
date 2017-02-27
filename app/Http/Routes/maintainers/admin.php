@@ -1,138 +1,137 @@
 <?php
 
 // Index
-Route::get('maintainers', ['as' => 'maintainers', function(){
-	return view('maintainers.index');
+Route::get('maintainers', ['as' => 'maintainers', function () {
+    return view('maintainers.index');
 }]);
 
 // Features List
-Route::group(['prefix' => 'maintainers'], function() {
+Route::group(['prefix' => 'maintainers'], function () {
 
-	// Areas
-	Route::get('getAreas', ['as' => 'getAreas', 'uses' => 'AreaController@getAreas']);
-	Route::resource('areas', 'AreaController');
+    // Areas
+    Route::get('getAreas', ['as' => 'getAreas', 'uses' => 'AreaController@getAreas']);
+    Route::resource('areas', 'AreaController');
 
-	// Cities
-	Route::get('getCities', ['as' => 'getCities', 'uses' => 'CityController@getCities']);
-	Route::resource('cities', 'CityController');
+    // Cities
+    Route::get('getCities', ['as' => 'getCities', 'uses' => 'CityController@getCities']);
+    Route::resource('cities', 'CityController');
 
-	// Countries
-	Route::get('getCountries', ['as' => 'getCountries', 'uses' => 'CountryController@getCountries']);
-	Route::resource('countries', 'CountryController');
+    // Countries
+    Route::get('getCountries', ['as' => 'getCountries', 'uses' => 'CountryController@getCountries']);
+    Route::resource('countries', 'CountryController');
 
-	// Day-trip
-	Route::get('getDayTrips', ['as' => 'day-trips.getDayTrips', 'uses' => 'DayTripController@getDayTrips']);
-	Route::resource('day-trips', 'DayTripController');
+    // Day-trip
+    Route::get('getDayTrips', ['as' => 'day-trips.getDayTrips', 'uses' => 'DayTripController@getDayTrips']);
+    Route::resource('day-trips', 'DayTripController');
 
-	// Forecasts
-	Route::get('getForecasts', ['as' => 'getForecasts', 'uses' => 'ForecastController@getForecasts']);
-	Route::resource('forecasts', 'ForecastController');
+    // Forecasts
+    Route::get('getForecasts', ['as' => 'getForecasts', 'uses' => 'ForecastController@getForecasts']);
+    Route::resource('forecasts', 'ForecastController');
 
-	// Fuels
-	Route::get('getFuels', ['as' => 'getFuels', 'uses' => 'FuelController@getFuels']);
-	Route::resource('fuels', 'FuelController');
+    // Fuels
+    Route::get('getFuels', ['as' => 'getFuels', 'uses' => 'FuelController@getFuels']);
+    Route::resource('fuels', 'FuelController');
 
-	// Institutions
-	Route::get('getInstitutions', ['as' => 'getInstitutions', 'uses' => 'InstitutionController@getInstitutions']);
-	Route::resource('institutions', 'InstitutionController');
+    // Institutions
+    Route::get('getInstitutions', ['as' => 'getInstitutions', 'uses' => 'InstitutionController@getInstitutions']);
+    Route::resource('institutions', 'InstitutionController');
 
-	// Labor-Unions
-	Route::get('getLaborUnions', ['as' => 'getLaborUnions', 'uses' => 'LaborUnionController@getLaborUnions']);
-	Route::resource('labor-unions', 'LaborUnionController');
+    // Labor-Unions
+    Route::get('getLaborUnions', ['as' => 'getLaborUnions', 'uses' => 'LaborUnionController@getLaborUnions']);
+    Route::resource('labor-unions', 'LaborUnionController');
 
-	// Marital Statuses
-	Route::get('getMaritalStatuses', ['as' => 'getMaritalStatuses', 'uses' => 'MaritalStatusController@getMaritalStatuses']);
-	Route::resource('marital-statuses', 'MaritalStatusController');
+    // Marital Statuses
+    Route::get('getMaritalStatuses', ['as' => 'getMaritalStatuses', 'uses' => 'MaritalStatusController@getMaritalStatuses']);
+    Route::resource('marital-statuses', 'MaritalStatusController');
 
-	// Measuring-Units
-	require __DIR__ . '/measuring-units/route.php';
+    // Measuring-Units
+    require __DIR__.'/measuring-units/route.php';
 
-	// Model-Vehicles
-	Route::get('getModelVehicles', ['as' => 'getModelVehicles', 'uses' => 'ModelVehicleController@getModelVehicles']);
-	Route::resource('model-vehicles', 'ModelVehicleController');
+    // Model-Vehicles
+    Route::get('getModelVehicles', ['as' => 'getModelVehicles', 'uses' => 'ModelVehicleController@getModelVehicles']);
+    Route::resource('model-vehicles', 'ModelVehicleController');
 
-	// Mutualities
-	Route::get('getMutualities', ['as' => 'getMutualities', 'uses' => 'MutualityController@getMutualities']);
-	Route::resource('mutualities', 'MutualityController');
-	
-	// Piece Vehicles
-	Route::get('getPieceVehicles', ['as' => 'getPieceVehicles', 'uses' => 'PieceVehicleController@getPieceVehicles']);
-	Route::resource('piece-vehicles', 'PieceVehicleController');
+    // Mutualities
+    Route::get('getMutualities', ['as' => 'getMutualities', 'uses' => 'MutualityController@getMutualities']);
+    Route::resource('mutualities', 'MutualityController');
 
-	// Positions
-	Route::get('getPositions', ['as' => 'getPositions', 'uses' => 'PositionController@getPositions']);
-	Route::group(['prefix' => 'positions'], function() {
-		Route::get('find-data-for-restore', 'PositionController@findDataForRestore');
-		Route::post('restore', 'PositionController@restore');
-	});
-	Route::resource('positions', 'PositionController');
+    // Piece Vehicles
+    Route::get('getPieceVehicles', ['as' => 'getPieceVehicles', 'uses' => 'PieceVehicleController@getPieceVehicles']);
+    Route::resource('piece-vehicles', 'PieceVehicleController');
 
-	// Professions
-	Route::get('getProfessions', ['as' => 'getProfessions', 'uses' => 'ProfessionController@getProfessions']);
-	Route::resource('professions', 'ProfessionController');
+    // Positions
+    Route::get('getPositions', ['as' => 'getPositions', 'uses' => 'PositionController@getPositions']);
+    Route::group(['prefix' => 'positions'], function () {
+        Route::get('find-data-for-restore', 'PositionController@findDataForRestore');
+        Route::post('restore', 'PositionController@restore');
+    });
+    Route::resource('positions', 'PositionController');
 
-	// Relationships
-	Route::get('getRelationships', ['as' => 'getRelationships', 'uses' => 'RelationshipController@getRelationships']);
-	Route::resource('relationships', 'RelationshipController');
+    // Professions
+    Route::get('getProfessions', ['as' => 'getProfessions', 'uses' => 'ProfessionController@getProfessions']);
+    Route::resource('professions', 'ProfessionController');
 
-	// Routes
-	Route::get('getRoutes', ['as' => 'getRoutes', 'uses' => 'RouteController@getRoutes']);
-	Route::resource('routes', 'RouteController');
+    // Relationships
+    Route::get('getRelationships', ['as' => 'getRelationships', 'uses' => 'RelationshipController@getRelationships']);
+    Route::resource('relationships', 'RelationshipController');
 
-	// State-Piece-Vehicles
-	Route::get('getStatePieceVehicles', ['as' => 'getStatePieceVehicles', 'uses' => 'StatePieceVehicleController@getStatePieceVehicles']);
-	Route::resource('state-piece-vehicles', 'StatePieceVehicleController');
+    // Routes
+    Route::get('getRoutes', ['as' => 'getRoutes', 'uses' => 'RouteController@getRoutes']);
+    Route::resource('routes', 'RouteController');
 
-	// Terminals
-	Route::get('getTerminals', ['as' => 'getTerminals', 'uses' => 'TerminalController@getTerminals']);
-	Route::resource('terminals', 'TerminalController');
+    // State-Piece-Vehicles
+    Route::get('getStatePieceVehicles', ['as' => 'getStatePieceVehicles', 'uses' => 'StatePieceVehicleController@getStatePieceVehicles']);
+    Route::resource('state-piece-vehicles', 'StatePieceVehicleController');
 
-	// Terms and Obligatories
-	Route::get('getTermsAndObligatories', ['as' => 'getTermsAndObligatories', 'uses' => 'TermAndObligatoryController@getTermsAndObligatories']);
-	Route::resource('terms-and-obligatories', 'TermAndObligatoryController');
+    // Terminals
+    Route::get('getTerminals', ['as' => 'getTerminals', 'uses' => 'TerminalController@getTerminals']);
+    Route::resource('terminals', 'TerminalController');
 
-	// Trademarks
-	Route::get('getTrademarks', ['as' => 'getTrademarks', 'uses' => 'TrademarkController@getTrademarks']);
-	Route::resource('trademarks', 'TrademarkController');
+    // Terms and Obligatories
+    Route::get('getTermsAndObligatories', ['as' => 'getTermsAndObligatories', 'uses' => 'TermAndObligatoryController@getTermsAndObligatories']);
+    Route::resource('terms-and-obligatories', 'TermAndObligatoryController');
 
-	// Type-Certifications
-	Route::get('getTypeCertifications', ['as' => 'getTypeCertifications', 'uses' => 'TypeCertificationController@getTypeCertifications']);
-	Route::resource('type-certifications', 'TypeCertificationController');
+    // Trademarks
+    Route::get('getTrademarks', ['as' => 'getTrademarks', 'uses' => 'TrademarkController@getTrademarks']);
+    Route::resource('trademarks', 'TrademarkController');
 
-	// Type-Companies
-	Route::get('getTypeCompanies', ['as' => 'getTypeCompanies', 'uses' => 'TypeCompanyController@getTypeCompanies']);
-	Route::resource('type-companies', 'TypeCompanyController');
+    // Type-Certifications
+    Route::get('getTypeCertifications', ['as' => 'getTypeCertifications', 'uses' => 'TypeCertificationController@getTypeCertifications']);
+    Route::resource('type-certifications', 'TypeCertificationController');
 
-	// Type Contract
-	Route::get('getTypeContracts', ['as' => 'getTypeContracts', 'uses' => 'TypeContractController@getTypeContracts']);
-	Route::resource('type-contracts', 'TypeContractController');
+    // Type-Companies
+    Route::get('getTypeCompanies', ['as' => 'getTypeCompanies', 'uses' => 'TypeCompanyController@getTypeCompanies']);
+    Route::resource('type-companies', 'TypeCompanyController');
 
-	// Type-Disabilities
-	Route::get('getTypeDisabilities', ['as' => 'getTypeDisabilities', 'uses' => 'TypeDisabilityController@getTypeDisabilities']);
-	Route::resource('type-disabilities', 'TypeDisabilityController');
+    // Type Contract
+    Route::get('getTypeContracts', ['as' => 'getTypeContracts', 'uses' => 'TypeContractController@getTypeContracts']);
+    Route::resource('type-contracts', 'TypeContractController');
 
-	// Type-Diseases
-	Route::get('getTypeDiseases', ['as' => 'getTypeDiseases', 'uses' => 'TypeDiseaseController@getTypeDiseases']);
-	Route::resource('type-diseases', 'TypeDiseaseController');
+    // Type-Disabilities
+    Route::get('getTypeDisabilities', ['as' => 'getTypeDisabilities', 'uses' => 'TypeDisabilityController@getTypeDisabilities']);
+    Route::resource('type-disabilities', 'TypeDisabilityController');
 
-	// Type-Exams
-	Route::get('getTypeExams', ['as' => 'getTypeExams', 'uses' => 'TypeExamController@getTypeExams']);
-	Route::resource('type-exams', 'TypeExamController');
+    // Type-Diseases
+    Route::get('getTypeDiseases', ['as' => 'getTypeDiseases', 'uses' => 'TypeDiseaseController@getTypeDiseases']);
+    Route::resource('type-diseases', 'TypeDiseaseController');
 
-	// Type-Institutions
-	Route::get('getTypeInstitutions', ['as' => 'getTypeInstitutions', 'uses' => 'TypeInstitutionController@getTypeInstitutions']);
-	Route::resource('type-institutions', 'TypeInstitutionController');
+    // Type-Exams
+    Route::get('getTypeExams', ['as' => 'getTypeExams', 'uses' => 'TypeExamController@getTypeExams']);
+    Route::resource('type-exams', 'TypeExamController');
 
-	// Type-Professional-Licenses
-	Route::get('getTypeProfessionalLicenses', ['as' => 'getTypeProfessionalLicenses', 'uses' => 'TypeProfessionalLicenseController@getTypeProfessionalLicenses']);
-	Route::resource('type-professional-licenses', 'TypeProfessionalLicenseController');
+    // Type-Institutions
+    Route::get('getTypeInstitutions', ['as' => 'getTypeInstitutions', 'uses' => 'TypeInstitutionController@getTypeInstitutions']);
+    Route::resource('type-institutions', 'TypeInstitutionController');
 
-	// Type-Specialities
-	Route::get('getTypeSpecialities', ['as' => 'getTypeSpecialities', 'uses' => 'TypeSpecialityController@getTypeSpecialities']);
-	Route::resource('type-specialities', 'TypeSpecialityController');
+    // Type-Professional-Licenses
+    Route::get('getTypeProfessionalLicenses', ['as' => 'getTypeProfessionalLicenses', 'uses' => 'TypeProfessionalLicenseController@getTypeProfessionalLicenses']);
+    Route::resource('type-professional-licenses', 'TypeProfessionalLicenseController');
 
-	// Type-Vehicles
-	Route::get('getTypeVehicles', ['as' => 'getTypeVehicles', 'uses' => 'TypeVehicleController@getTypeVehicles']);
-	Route::resource('type-vehicles', 'TypeVehicleController');
+    // Type-Specialities
+    Route::get('getTypeSpecialities', ['as' => 'getTypeSpecialities', 'uses' => 'TypeSpecialityController@getTypeSpecialities']);
+    Route::resource('type-specialities', 'TypeSpecialityController');
 
+    // Type-Vehicles
+    Route::get('getTypeVehicles', ['as' => 'getTypeVehicles', 'uses' => 'TypeVehicleController@getTypeVehicles']);
+    Route::resource('type-vehicles', 'TypeVehicleController');
 });

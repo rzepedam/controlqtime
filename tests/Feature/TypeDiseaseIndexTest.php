@@ -4,32 +4,31 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TypeDiseaseIndexTest extends BrowserKitTestCase
 {
-	use DatabaseTransactions;
-	
-	function setUp()
-	{
-		parent::setUp();
-		$this->signIn();
-	}
-	
-    function test_url_type_disease()
+    use DatabaseTransactions;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->signIn();
+    }
+
+    public function test_url_type_disease()
     {
         $this->visit('maintainers/type-diseases')
-	        ->assertResponseOk();
+            ->assertResponseOk();
     }
-    
-    function test_route_type_disease()
+
+    public function test_route_type_disease()
     {
-    	$this->visitRoute('type-diseases.index')
-		    ->assertResponseOk();
+        $this->visitRoute('type-diseases.index')
+            ->assertResponseOk();
     }
-    
-    function test_index_type_disease()
+
+    public function test_index_type_disease()
     {
-    	$this->visit('maintainers/type-diseases')
-		    ->seeInElement('h1', 'Listado de Enfermedades')
-		    ->seeInElement('a', 'Crear Nueva Enfermedad')
-		    ->see('Nombre');
+        $this->visit('maintainers/type-diseases')
+            ->seeInElement('h1', 'Listado de Enfermedades')
+            ->seeInElement('a', 'Crear Nueva Enfermedad')
+            ->see('Nombre');
     }
-    
 }

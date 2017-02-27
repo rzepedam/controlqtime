@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Controlqtime\Core\Entities\StateVehicle;
+use Illuminate\Database\Seeder;
 
 class StateVehicleTableSeeder extends Seeder
 {
@@ -12,19 +12,19 @@ class StateVehicleTableSeeder extends Seeder
      */
     public function run()
     {
-	    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-	    DB::table('state_vehicles')->truncate();
-	
-	    StateVehicle::create([
-		    'id'   => 1,
-		    'name' => 'Nuevo'
-	    ]);
-	    
-	    StateVehicle::create([
-		    'id'   => 2,
-		    'name' => 'Usado'
-	    ]);
-	
-	    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('state_vehicles')->truncate();
+
+        StateVehicle::create([
+            'id'   => 1,
+            'name' => 'Nuevo',
+        ]);
+
+        StateVehicle::create([
+            'id'   => 2,
+            'name' => 'Usado',
+        ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

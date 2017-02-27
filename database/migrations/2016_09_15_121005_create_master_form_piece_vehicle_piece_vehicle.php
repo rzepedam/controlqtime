@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateMasterFormPieceVehiclePieceVehicle extends Migration
 {
@@ -15,8 +15,8 @@ class CreateMasterFormPieceVehiclePieceVehicle extends Migration
     {
         Schema::create('master_form_piece_vehicle_piece_vehicle', function (Blueprint $table) {
             $table->increments('id');
-	        $table->unsignedInteger('master_form_piece_vehicle_id')->nullable();
-	        $table->unsignedInteger('piece_vehicle_id')->nullable();
+            $table->unsignedInteger('master_form_piece_vehicle_id')->nullable();
+            $table->unsignedInteger('piece_vehicle_id')->nullable();
         });
     }
 

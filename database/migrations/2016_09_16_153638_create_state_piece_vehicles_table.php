@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateStatePieceVehiclesTable extends Migration
 {
@@ -16,7 +16,7 @@ class CreateStatePieceVehiclesTable extends Migration
         Schema::create('state_piece_vehicles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 20);
-	        $table->softDeletes();
+            $table->softDeletes();
         });
     }
 

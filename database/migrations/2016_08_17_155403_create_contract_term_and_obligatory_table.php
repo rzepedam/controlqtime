@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateContractTermAndObligatoryTable extends Migration
 {
@@ -14,9 +14,9 @@ class CreateContractTermAndObligatoryTable extends Migration
     {
         Schema::create('contract_term_and_obligatory', function (Blueprint $table) {
             $table->increments('id');
-			$table->unsignedInteger('contract_id')->nullable();
-			$table->unsignedInteger('term_and_obligatory_id')->nullable();
-	        $table->softDeletes();
+            $table->unsignedInteger('contract_id')->nullable();
+            $table->unsignedInteger('term_and_obligatory_id')->nullable();
+            $table->softDeletes();
         });
     }
 

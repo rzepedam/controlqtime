@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddStartContractColumnContractsTable extends Migration
 {
@@ -25,8 +25,8 @@ class AddStartContractColumnContractsTable extends Migration
      */
     public function down()
     {
-	    Schema::table('contracts', function (Blueprint $table) {
-		    $table->dropColumn('start_contract');
-	    });
+        Schema::table('contracts', function (Blueprint $table) {
+            $table->dropColumn('start_contract');
+        });
     }
 }

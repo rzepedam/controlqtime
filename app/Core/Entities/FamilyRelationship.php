@@ -10,16 +10,15 @@ class FamilyRelationship extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'relationship_id', 'employee_family_id'
+        'relationship_id', 'employee_family_id',
     ];
-	
-	/**
-	 * @var array
-	 */
-	protected $dates = [
-		'deleted_at'
-	];
-	
+
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

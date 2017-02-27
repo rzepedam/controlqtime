@@ -6,13 +6,13 @@ use Illuminate\Contracts\Console\Kernel;
 
 trait CreatesApplication
 {
-	/**
-	 * The base URL to use while testing the application.
-	 *
-	 * @var string
-	 */
-	protected $baseUrl;
-	
+    /**
+     * The base URL to use while testing the application.
+     *
+     * @var string
+     */
+    protected $baseUrl;
+
     /**
      * Creates the application.
      *

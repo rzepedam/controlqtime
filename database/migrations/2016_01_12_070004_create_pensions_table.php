@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePensionsTable extends Migration
 {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('pensions', function (Blueprint $table) {
@@ -18,12 +18,12 @@ class CreatePensionsTable extends Migration
             $table->float('com', 5, 4);
         });
     }
-	
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::drop('pensions');
