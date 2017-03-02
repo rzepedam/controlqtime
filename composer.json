@@ -9,7 +9,6 @@
         "laravel/framework": "5.4.*",
         "laravelcollective/html": "~5.0",
         "jenssegers/date": "^3.2",
-        "barryvdh/laravel-debugbar": "^2.2",
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "h4cc/wkhtmltoimage-amd64": "0.12.x",
         "barryvdh/laravel-snappy": "^0.3.0",

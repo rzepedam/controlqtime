@@ -176,7 +176,6 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
@@ -231,7 +230,6 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
 
         'Date'              => Jenssegers\Date\Date::class,
-        'Debugbar'          => Barryvdh\Debugbar\Facade::class,
         'Form'              => Collective\Html\FormFacade::class,
         'Html'              => Collective\Html\HtmlFacade::class,
         'PDF'               => Barryvdh\Snappy\Facades\SnappyPdf::class,
