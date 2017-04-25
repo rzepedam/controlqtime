@@ -642,7 +642,7 @@ $factory->define(Visit::class, function (Faker\Generator $faker) {
 		'start_date'     => $startDate[$rand - 1],
 		'end_date'       => $endDate[$rand - 1],
 		'obs'            => $faker->sentence,
-		'url'            => '/sign-in-visits/visits-pendings/',
+		'url'            => 'sign-in-visits/visits-pendings/',
 		'key'            => Str::random(10)
 	];
 });
