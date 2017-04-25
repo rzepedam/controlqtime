@@ -12,7 +12,6 @@ class TypeVehicleTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('type_vehicles')->truncate();
 
         TypeVehicle::create([
@@ -35,7 +34,5 @@ class TypeVehicleTableSeeder extends Seeder
             'engine_cubic_id' => 1,
             'weight_id'       => 1,
         ]);
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

@@ -89,8 +89,8 @@ class EmployeeDeleteSpecialityTest extends BrowserKitTestCase
     public function test_delete_a_speciality_and_image_employee()
     {
         $image = factory(\Controlqtime\Core\Entities\Image::class)->create([
-            'imagesable_id'   => $this->speciality->id,
-            'imagesable_type' => 'Controlqtime\Core\Entities\Speciality',
+            'imageable_id'   => $this->speciality->id,
+            'imageable_type' => 'Controlqtime\Core\Entities\Speciality',
         ]);
 
         Session::put('id_delete_speciality', json_encode([$this->speciality->id]));
@@ -105,8 +105,8 @@ class EmployeeDeleteSpecialityTest extends BrowserKitTestCase
                 'expired_speciality'        => '2010-03-28', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image->id,
-                'imagesable_id'   => $this->speciality->id,
-                'imagesable_type' => 'Controlqtime\Core\Entities\Speciality',
+                'imageable_id'   => $this->speciality->id,
+                'imageable_type' => 'Controlqtime\Core\Entities\Speciality',
                 'path'            => $image->path,
                 'orig_name'       => $image->orig_name,
                 'size'            => $image->size,
@@ -158,13 +158,13 @@ class EmployeeDeleteSpecialityTest extends BrowserKitTestCase
         ]);
 
         $image1 = factory(\Controlqtime\Core\Entities\Image::class)->create([
-            'imagesable_id'   => $this->speciality->id,
-            'imagesable_type' => 'Controlqtime\Core\Entities\Speciality',
+            'imageable_id'   => $this->speciality->id,
+            'imageable_type' => 'Controlqtime\Core\Entities\Speciality',
         ]);
 
         $image2 = factory(\Controlqtime\Core\Entities\Image::class)->create([
-            'imagesable_id'   => $speciality->id,
-            'imagesable_type' => 'Controlqtime\Core\Entities\Speciality',
+            'imageable_id'   => $speciality->id,
+            'imageable_type' => 'Controlqtime\Core\Entities\Speciality',
         ]);
 
         Session::put('id_delete_speciality', json_encode([$this->speciality->id, $speciality->id]));
@@ -179,8 +179,8 @@ class EmployeeDeleteSpecialityTest extends BrowserKitTestCase
                 'expired_speciality'        => '2010-03-28', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image1->id,
-                'imagesable_id'   => $this->speciality->id,
-                'imagesable_type' => 'Controlqtime\Core\Entities\Speciality',
+                'imageable_id'   => $this->speciality->id,
+                'imageable_type' => 'Controlqtime\Core\Entities\Speciality',
                 'path'            => $image1->path,
                 'orig_name'       => $image1->orig_name,
                 'size'            => $image1->size, ])
@@ -193,8 +193,8 @@ class EmployeeDeleteSpecialityTest extends BrowserKitTestCase
                 'expired_speciality'        => '2026-01-02', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image2->id,
-                'imagesable_id'   => $speciality->id,
-                'imagesable_type' => 'Controlqtime\Core\Entities\Speciality',
+                'imageable_id'   => $speciality->id,
+                'imageable_type' => 'Controlqtime\Core\Entities\Speciality',
                 'path'            => $image2->path,
                 'orig_name'       => $image2->orig_name,
                 'size'            => $image2->size,

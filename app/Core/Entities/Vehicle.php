@@ -97,9 +97,9 @@ class Vehicle extends Eloquent
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function imagesable()
+    public function imageable()
     {
-        return $this->morphMany(Image::class, 'imagesable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     /**
@@ -183,7 +183,7 @@ class Vehicle extends Eloquent
      */
     public function getImagesPadronAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%Padron%')->get();
+        return $this->imageable()->where('path', 'like', '%Padron%')->get();
     }
 
     /**
@@ -191,7 +191,7 @@ class Vehicle extends Eloquent
      */
     public function getImagesObligatoryInsuranceAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%ObligatoryInsurance%')->get();
+        return $this->imageable()->where('path', 'like', '%ObligatoryInsurance%')->get();
     }
 
     /**
@@ -199,7 +199,7 @@ class Vehicle extends Eloquent
      */
     public function getImagesCirculationPermitAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%CirculationPermit%')->get();
+        return $this->imageable()->where('path', 'like', '%CirculationPermit%')->get();
     }
 
     /**
@@ -207,7 +207,7 @@ class Vehicle extends Eloquent
      */
     public function getNumImagesPadronAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%Padron%')->count();
+        return $this->imageable()->where('path', 'like', '%Padron%')->count();
     }
 
     /**
@@ -215,7 +215,7 @@ class Vehicle extends Eloquent
      */
     public function getNumImagesObligatoryInsuranceAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%ObligatoryInsurance%')->count();
+        return $this->imageable()->where('path', 'like', '%ObligatoryInsurance%')->count();
     }
 
     /**
@@ -223,7 +223,7 @@ class Vehicle extends Eloquent
      */
     public function getNumImagesCirculationPermitAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%CirculationPermit%')->count();
+        return $this->imageable()->where('path', 'like', '%CirculationPermit%')->count();
     }
 
     /**

@@ -85,8 +85,8 @@ class EmployeeDeleteFamilyResponsabilityTest extends BrowserKitTestCase
     public function test_delete_a_family_responsability_and_image_employee()
     {
         $image = factory(\Controlqtime\Core\Entities\Image::class)->create([
-            'imagesable_id'   => $this->familyResponsability->id,
-            'imagesable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
+            'imageable_id'   => $this->familyResponsability->id,
+            'imageable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
         ]);
 
         $this->step3_update += [
@@ -102,8 +102,8 @@ class EmployeeDeleteFamilyResponsabilityTest extends BrowserKitTestCase
                 'relationship_id'     => $this->relationship->id, ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image->id,
-                'imagesable_id'   => $this->familyResponsability->id,
-                'imagesable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
+                'imageable_id'   => $this->familyResponsability->id,
+                'imageable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
                 'path'            => $image->path,
                 'orig_name'       => $image->orig_name,
                 'size'            => $image->size,
@@ -155,13 +155,13 @@ class EmployeeDeleteFamilyResponsabilityTest extends BrowserKitTestCase
         ];
 
         $image1 = factory(\Controlqtime\Core\Entities\Image::class)->create([
-            'imagesable_id'   => $this->familyResponsability->id,
-            'imagesable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
+            'imageable_id'   => $this->familyResponsability->id,
+            'imageable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
         ]);
 
         $image2 = factory(\Controlqtime\Core\Entities\Image::class)->create([
-            'imagesable_id'   => $familyResponsability->id,
-            'imagesable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
+            'imageable_id'   => $familyResponsability->id,
+            'imageable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
         ]);
 
         $this->put('human-resources/employees/'.$this->employee->id, $this->step3_update)
@@ -173,8 +173,8 @@ class EmployeeDeleteFamilyResponsabilityTest extends BrowserKitTestCase
                 'relationship_id'     => $this->relationship->id, ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image1->id,
-                'imagesable_id'   => $this->familyResponsability->id,
-                'imagesable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
+                'imageable_id'   => $this->familyResponsability->id,
+                'imageable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
                 'path'            => $image1->path,
                 'orig_name'       => $image1->orig_name,
                 'size'            => $image1->size, ])
@@ -186,8 +186,8 @@ class EmployeeDeleteFamilyResponsabilityTest extends BrowserKitTestCase
                 'relationship_id'     => $relationship->id, ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image2->id,
-                'imagesable_id'   => $familyResponsability->id,
-                'imagesable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
+                'imageable_id'   => $familyResponsability->id,
+                'imageable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
                 'path'            => $image2->path,
                 'orig_name'       => $image2->orig_name,
                 'size'            => $image2->size,

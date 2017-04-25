@@ -1,21 +1,8 @@
-@font-face {
-    font-family: 'ClearSans-Regular';
-    src: url('../fonts/ClearSans-Regular.eot');
-    src: url('../fonts/ClearSans-Regular.eot') format('embedded-opentype'), url('../fonts/ClearSans-Regular.woff') format('woff'), url('../fonts/ClearSans-Regular.ttf') format('truetype'), url('../fonts/ClearSans-Regular.svg') format('svg');
-}
-
-@font-face {
-    font-family: 'ClearSans-Light';
-    src: url('../fonts/ClearSans-Light.eot');
-    src: url('../fonts/ClearSans-Light.eot') format('embedded-opentype'), url('../fonts/ClearSans-Light.woff') format('woff'), url('../fonts/ClearSans-Light.ttf') format('truetype'), url('../fonts/ClearSans-Light.svg') format('svg');
-}
-
 body {
-    font-family: 'ClearSans-Light', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
-
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'ClearSans-Regular', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 textarea {

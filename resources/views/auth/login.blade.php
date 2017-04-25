@@ -8,21 +8,22 @@
     <meta name="author" content="Raúl Elías Meza Mora">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Login</title>
-    <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ elixir('css/index-layout-core.css') }}">
-    <!-- Plugins -->
-    <link rel="stylesheet" href="{{ elixir('css/index-layout-plugin.css') }}">
-    <!-- Style Login -->
-    <link rel="stylesheet" href="{{ elixir('css/login/login.css') }}">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="{{ elixir('css/index-layout-fonts.css') }}">
-    <!-- Browsers Utilities -->
-    <script src="{{ elixir('js/index-layout-browser-utilities.js') }}"></script>
-    <script>
-        Breakpoints();
-    </script>
+    <link rel="stylesheet" href="{{ elixir('css/core.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/login.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/fonts.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+    <script src="{{ elixir('js/breakpoints.js') }}"></script>
+    <script>Breakpoints();</script>
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
 </head>
 <body class="page-login-v3 layout-full">
     <div class="page animsition vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
@@ -31,7 +32,7 @@
                 <div class="panel-body">
                     <div class="brand">
                         <img class="brand-img" src="{{ asset('img/logo_login.png') }}" alt="...">
-                        <h2 class="brand-text font-size-18">ControlQTime</h2>
+                        <h2 class="brand-text font-size-18">Controlqtime</h2>
                     </div>
                     <form role="form" method="POST" action="{{ url('/login') }}" autocomplete="off">
                         {{ csrf_field() }}
@@ -74,13 +75,13 @@
                 <p>© 2016. All RIGHT RESERVED.</p>
                 <div class="social">
                     <a class="btn btn-icon btn-pure" href="javascript:void(0)">
-                        <i class="icon md-twitter" aria-hidden="true"></i>
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
                     </a>
                     <a class="btn btn-icon btn-pure" href="javascript:void(0)">
-                        <i class="icon md-facebook" aria-hidden="true"></i>
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
                     </a>
                     <a class="btn btn-icon btn-pure" href="javascript:void(0)">
-                        <i class="icon md-google-plus" aria-hidden="true"></i>
+                        <i class="fa fa-google-plus" aria-hidden="true"></i>
                     </a>
                 </div>
             </footer>
@@ -88,13 +89,13 @@
     </div>
 
     <!-- Core  -->
-    <script src="{{ elixir('js/index-layout-core.js') }}"></script>
+    <script src="{{ elixir('js/core.js') }}"></script>
     <!-- Scripts -->
-    <script src="{{ elixir('js/index-layout-scripts.js') }}"></script>
+    <script src="{{ elixir('js/plugins.js') }}"></script>
     <!-- Components -->
-    <script src="{{ elixir('js/index-layout-components.js') }}"></script>
+    <script src="{{ elixir('js/components.js') }}"></script>
     <!-- Login JS -->
-    <script src="{{ elixir('js/login/login.js') }}"></script>
+    <script src="{{ elixir('js/login.js') }}"></script>
 
 </body>
 </html>

@@ -12,7 +12,6 @@ class WeightTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('weights')->truncate();
 
         Weight::create([
@@ -26,7 +25,5 @@ class WeightTableSeeder extends Seeder
             'name' => 'Tonelada',
             'acr'  => 'ton',
         ]);
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

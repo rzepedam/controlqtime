@@ -37,7 +37,7 @@
 
                     {{-- Registro de Visitas --}}
                     <li class="site-menu-item {{ Request::is('visits*') ? 'active' : '' }} has-sub">
-                        <a class="animsition-link" href="{{ route('visits') }}">
+                        <a class="animsition-link" href="{{ route('sign-in-visits') }}">
                             <i class="site-menu-icon fa fa-tasks" aria-hidden="true"></i>
                             <span class="site-menu-title">Registro de Visitas</span>
                         </a>
@@ -48,6 +48,14 @@
                         <a class="animsition-link" href="{{ route('maintainers') }}">
                             <i class="site-menu-icon fa fa-cogs" aria-hidden="true"></i>
                             <span class="site-menu-title">Mantenedores</span>
+                        </a>
+                    </li>
+
+                    {{-- Nueva Empresa --}}
+                    <li class="site-menu-item {{ Request::is('tickets') ? 'active' : '' }}">
+                        <a class="animsition-link" href="{{ route('tickets.index') }}">
+                            <i class="site-menu-icon fa fa-star" aria-hidden="true"></i>
+                            <span class="site-menu-title">Nueva Empresa</span>
                         </a>
                     </li>
                 </ul>

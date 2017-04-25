@@ -63,7 +63,10 @@ class Step1Request extends Request
                     'phone2'            => 'max:20',
                 ];
 
-                if (Request::get('count_contacts') > 0) {
+                function __construct($foo = null)
+                {
+                    $this->foo = $foo;
+                }
                     foreach (range(0, Request::get('count_contacts') - 1) as $index) {
                         $rules['id_contact.'.$index] = 'required|in:0';
                         $rules['contact_relationship_id.'.$index] = 'required|regex:/[0-9 -()+]+$/';

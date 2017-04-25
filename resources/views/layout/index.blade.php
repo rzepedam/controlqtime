@@ -7,28 +7,20 @@
     <meta name="description" content="CQTime - Where questions find answers">
     <meta name="author" content="Raúl Elías Meza Mora">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>ControlQTime</title>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ elixir('css/index-layout-core.css') }}">
-    <!-- Plugins -->
-    <link rel="stylesheet" href="{{ elixir('css/index-layout-plugin.css') }}">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="{{ elixir('css/index-layout-fonts.css') }}">
+    <title>Controlqtime</title>
+    <link rel="stylesheet" href="{{ elixir('css/core.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/fonts.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
     @yield('css')
-
-    <!-- Style Owned -->
     <link rel="stylesheet" href="{{ elixir('css/style.css') }}">
-    <!-- Script Default Laravel -->
     <script>
         window.Laravel = <?php echo json_encode([
                 'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-    <!-- Browsers Utilities -->
-    <script src="{{ elixir('js/index-layout-browser-utilities.js') }}"></script>
-    <script>
-        Breakpoints();
-    </script>
+    <script src="{{ elixir('js/breakpoints.js') }}"></script>
+    <script>Breakpoints();</script>
 </head>
 <body class="dashboard">
     <div id="app">
@@ -66,28 +58,11 @@
 
     </div>
 
-    <!-- Core  -->
-    <script src="{{ elixir('js/index-layout-core.js') }}"></script>
-    <!-- Scripts -->
-    <script src="{{ elixir('js/index-layout-scripts.js') }}"></script>
-    <!-- Components -->
-    <script src="{{ elixir('js/index-layout-components.js') }}"></script>
+    <script src="{{ elixir('js/core.js') }}"></script>
+    <script src="{{ elixir('js/plugins.js') }}"></script>
+    <script src="{{ elixir('js/components.js') }}"></script>
 
     @yield('scripts')
-
-    @if ( getenv('APP_ENV') === 'production' )
-        <!-- Hotjar Tracking Code for https://controlqtime.cl -->
-        <script>
-            (function(h,o,t,j,a,r){
-                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                h._hjSettings={hjid:372972,hjsv:5};
-                a=o.getElementsByTagName('head')[0];
-                r=o.createElement('script');r.async=1;
-                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-                a.appendChild(r);
-            })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
-        </script>
-    @endif
 
     @include('layout.messages.success')
 

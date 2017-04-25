@@ -39,9 +39,9 @@ class Company extends Eloquent
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function imagesable()
+    public function imageable()
     {
-        return $this->morphMany(Image::class, 'imagesable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     /**
@@ -158,7 +158,7 @@ class Company extends Eloquent
      */
     public function getImagesRolAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%Rol%')->get();
+        return $this->imageable()->where('path', 'like', '%Rol%')->get();
     }
 
     /**
@@ -166,7 +166,7 @@ class Company extends Eloquent
      */
     public function getImagesPatentAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%Patent%')->get();
+        return $this->imageable()->where('path', 'like', '%Patent%')->get();
     }
 
     /**
@@ -174,7 +174,7 @@ class Company extends Eloquent
      */
     public function getImagesCarnetAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%Carnet%')->get();
+        return $this->imageable()->where('path', 'like', '%Carnet%')->get();
     }
 
     /**
@@ -182,7 +182,7 @@ class Company extends Eloquent
      */
     public function getNumImagesRolAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%Rol%')->count();
+        return $this->imageable()->where('path', 'like', '%Rol%')->count();
     }
 
     /**
@@ -190,7 +190,7 @@ class Company extends Eloquent
      */
     public function getNumImagesPatentAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%Patent%')->count();
+        return $this->imageable()->where('path', 'like', '%Patent%')->count();
     }
 
     /**
@@ -198,7 +198,7 @@ class Company extends Eloquent
      */
     public function getNumImagesCarnetAttribute()
     {
-        return $this->imagesable()->where('path', 'like', '%Carnet%')->count();
+        return $this->imageable()->where('path', 'like', '%Carnet%')->count();
     }
 
     /**

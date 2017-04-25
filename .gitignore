@@ -3,7 +3,6 @@
 .env
 .env.codeship
 .idea
-resources/assets/bower
 public/build
 public/css
 public/img
@@ -11,3 +10,8 @@ public/js
 storage
 _ide_helper.php
 .rnd
+.DS_Store
+public/.DS_Store
+resources/views/layout/.DS_Store
+public/fonts/
+public/mix-manifest.json

@@ -87,8 +87,8 @@ class EmployeeDeleteLicenseTest extends BrowserKitTestCase
     public function test_delete_a_license_and_image_employee()
     {
         $image = factory(\Controlqtime\Core\Entities\Image::class)->create([
-            'imagesable_id'   => $this->license->id,
-            'imagesable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
+            'imageable_id'   => $this->license->id,
+            'imageable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
         ]);
 
         Session::put('id_delete_professional_license', json_encode([$this->license->id]));
@@ -104,8 +104,8 @@ class EmployeeDeleteLicenseTest extends BrowserKitTestCase
                 'detail_license'               => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image->id,
-                'imagesable_id'   => $this->license->id,
-                'imagesable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
+                'imageable_id'   => $this->license->id,
+                'imageable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
                 'path'            => $image->path,
                 'orig_name'       => $image->orig_name,
                 'size'            => $image->size,
@@ -159,13 +159,13 @@ class EmployeeDeleteLicenseTest extends BrowserKitTestCase
         ]);
 
         $image1 = factory(\Controlqtime\Core\Entities\Image::class)->create([
-            'imagesable_id'   => $this->license->id,
-            'imagesable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
+            'imageable_id'   => $this->license->id,
+            'imageable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
         ]);
 
         $image2 = factory(\Controlqtime\Core\Entities\Image::class)->create([
-            'imagesable_id'   => $license->id,
-            'imagesable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
+            'imageable_id'   => $license->id,
+            'imageable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
         ]);
 
         Session::put('id_delete_professional_license', json_encode([$this->license->id, $license->id]));
@@ -189,15 +189,15 @@ class EmployeeDeleteLicenseTest extends BrowserKitTestCase
                 'detail_license'               => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image1->id,
-                'imagesable_id'   => $this->license->id,
-                'imagesable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
+                'imageable_id'   => $this->license->id,
+                'imageable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
                 'path'            => $image1->path,
                 'orig_name'       => $image1->orig_name,
                 'size'            => $image1->size, ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image2->id,
-                'imagesable_id'   => $license->id,
-                'imagesable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
+                'imageable_id'   => $license->id,
+                'imageable_type' => 'Controlqtime\Core\Entities\ProfessionalLicense',
                 'path'            => $image2->path,
                 'orig_name'       => $image2->orig_name,
                 'size'            => $image2->size,

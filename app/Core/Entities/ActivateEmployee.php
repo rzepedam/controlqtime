@@ -36,8 +36,8 @@ class ActivateEmployee extends Eloquent
     public function checkStateUpdateEmployee($id)
     {
         $employee = $this->employee->with([
-            'certifications.imagesable', 'specialities.imagesable', 'professionalLicenses.imagesable',
-            'disabilities.imagesable', 'diseases.imagesable', 'exams.imagesable', 'contract',
+            'certifications.imageable', 'specialities.imageable', 'professionalLicenses.imageable',
+            'disabilities.imageable', 'diseases.imageable', 'exams.imageable', 'contract',
         ])->findOrFail($id);
 
         if (is_null($employee->contract)) {
@@ -61,43 +61,43 @@ class ActivateEmployee extends Eloquent
         }
 
         foreach ($employee->certifications as $certification) {
-            if ($certification->imagesable->count() == 0) {
+            if ($certification->imageable->count() == 0) {
                 return $this->saveStateDisableEmployee($employee);
             }
         }
 
         foreach ($employee->disabilities as $disability) {
-            if ($disability->imagesable->count() == 0) {
+            if ($disability->imageable->count() == 0) {
                 return $this->saveStateDisableEmployee($employee);
             }
         }
 
         foreach ($employee->diseases as $disease) {
-            if ($disease->imagesable->count() == 0) {
+            if ($disease->imageable->count() == 0) {
                 return $this->saveStateDisableEmployee($employee);
             }
         }
 
         foreach ($employee->exams as $exam) {
-            if ($exam->imagesable->count() == 0) {
+            if ($exam->imageable->count() == 0) {
                 return $this->saveStateDisableEmployee($employee);
             }
         }
 
         foreach ($employee->familyResponsabilities as $family_responsability) {
-            if ($family_responsability->imagesable->count() == 0) {
+            if ($family_responsability->imageable->count() == 0) {
                 return $this->saveStateDisableEmployee($employee);
             }
         }
 
         foreach ($employee->professionalLicenses as $professional_license) {
-            if ($professional_license->imagesable->count() == 0) {
+            if ($professional_license->imageable->count() == 0) {
                 return $this->saveStateDisableEmployee($employee);
             }
         }
 
         foreach ($employee->specialities as $speciality) {
-            if ($speciality->imagesable->count() == 0) {
+            if ($speciality->imageable->count() == 0) {
                 return $this->saveStateDisableEmployee($employee);
             }
         }

@@ -10,20 +10,13 @@ class Image extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'imagesable_id', 'imagesable_type', 'path', 'orig_name', 'size',
-    ];
-
-    /**
-     * @var array
-     */
-    protected $dates = [
-        'deleted_at',
+        'imageable_id', 'imageable_type', 'path', 'orig_name', 'size',
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function imagesable()
+    public function imageable()
     {
         return $this->morphTo();
     }

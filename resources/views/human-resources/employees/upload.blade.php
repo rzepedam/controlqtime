@@ -153,12 +153,12 @@
             @foreach($employee->certifications as $certification)
                 $("#certification{{ $i }}").fileinput({
                     initialPreview: [
-                        @foreach($certification->imagesable as $image_certification)
+                        @foreach($certification->imageable as $image_certification)
                             "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_certification->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
-                        @foreach($certification->imagesable as $image_certification)
+                        @foreach($certification->imageable as $image_certification)
                             { caption: "{{ $image_certification->orig_name }}", size: "{{ $image_certification->size }}", url: "{{ route('EmployeeDeleteFiles') }}", key: "{{ $image_certification->id }}", extra: { path: "{{ $image_certification->path }}", id: "{{ $id }}", type: "Certification" } },
                         @endforeach
                     ],
@@ -179,12 +179,12 @@
             @foreach($employee->specialities as $speciality)
                 $("#speciality{{ $i }}").fileinput({
                     initialPreview: [
-                        @foreach($speciality->imagesable as $image_speciality)
+                        @foreach($speciality->imageable as $image_speciality)
                             "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_speciality->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
-                        @foreach($speciality->imagesable as $image_speciality)
+                        @foreach($speciality->imageable as $image_speciality)
                             { caption: "{{ $image_speciality->orig_name }}", size: "{{ $image_speciality->size }}", url: "{{ route('EmployeeDeleteFiles') }}", key: "{{ $image_speciality->id }}", extra: { path: "{{ $image_speciality->path }}", id: "{{ $id }}", type: "Speciality" } },
                         @endforeach
                     ],
@@ -205,12 +205,12 @@
             @foreach($employee->professionalLicenses as $professional_license)
                 $("#professional_license{{ $i }}").fileinput({
                     initialPreview: [
-                        @foreach($professional_license->imagesable as $image_professional_license)
+                        @foreach($professional_license->imageable as $image_professional_license)
                             "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_professional_license->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
-                        @foreach($professional_license->imagesable as $image_professional_license)
+                        @foreach($professional_license->imageable as $image_professional_license)
                             { caption: "{{ $image_professional_license->orig_name }}", size: "{{ $image_professional_license->size }}", url: "{{ route('EmployeeDeleteFiles') }}", key: "{{ $image_professional_license->id }}", extra: { path: "{{ $image_professional_license->path }}", id: "{{ $id }}", type: "ProfessionalLicense" } },
                         @endforeach
                     ],
@@ -231,12 +231,12 @@
             @foreach($employee->disabilities as $disability)
                 $("#disability{{ $i }}").fileinput({
                     initialPreview: [
-                        @foreach($disability->imagesable as $image_disability)
+                        @foreach($disability->imageable as $image_disability)
                             "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_disability->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
-                        @foreach($disability->imagesable as $image_disability)
+                        @foreach($disability->imageable as $image_disability)
                             { caption: "{{ $image_disability->orig_name }}", size: "{{ $image_disability->size }}", url: "{{ route('EmployeeDeleteFiles') }}", key: "{{ $image_disability->id }}", extra: { path: "{{ $image_disability->path }}", id: "{{ $id }}", type: "Disability" } },
                         @endforeach
                     ],
@@ -257,12 +257,12 @@
             @foreach($employee->diseases as $disease)
                 $("#disease{{ $i }}").fileinput({
                     initialPreview: [
-                        @foreach($disease->imagesable as $image_disease)
+                        @foreach($disease->imageable as $image_disease)
                             "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_disease->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
-                        @foreach($disease->imagesable as $image_disease)
+                        @foreach($disease->imageable as $image_disease)
                             { caption: "{{ $image_disease->orig_name }}", size: "{{ $image_disease->size }}", url: "{{ route('EmployeeDeleteFiles') }}", key: "{{ $image_disease->id }}", extra: { path: "{{ $image_disease->path }}", id: "{{ $id }}", type: "Disease" } },
                         @endforeach
                     ],
@@ -283,12 +283,12 @@
             @foreach($employee->exams as $exam)
                 $("#exam{{ $i }}").fileinput({
                     initialPreview: [
-                        @foreach($exam->imagesable as $image_exam)
+                        @foreach($exam->imageable as $image_exam)
                             "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_exam->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
-                        @foreach($exam->imagesable as $image_exam)
+                        @foreach($exam->imageable as $image_exam)
                             { caption: "{{ $image_exam->orig_name }}", size: "{{ $image_exam->size }}", url: "{{ route('EmployeeDeleteFiles') }}", key: "{{ $image_exam->id }}", extra: { path: "{{ $image_exam->path }}", id: "{{ $id }}", type: "Exam" } },
                         @endforeach
                     ],
@@ -309,12 +309,12 @@
             @foreach($employee->familyResponsabilities as $family_responsability)
                 $("#family_responsability{{ $i }}").fileinput({
                     initialPreview: [
-                        @foreach($family_responsability->imagesable as $image_family_responsability)
+                        @foreach($family_responsability->imageable as $image_family_responsability)
                             "<img style='height:160px' src='{{ Storage::disk('s3')->url($image_family_responsability->path) }}' />",
                         @endforeach
                     ],
                     initialPreviewConfig: [
-                        @foreach($family_responsability->imagesable as $image_family_responsability)
+                        @foreach($family_responsability->imageable as $image_family_responsability)
                             { caption: "{{ $image_family_responsability->orig_name }}", size: "{{ $image_family_responsability->size }}", url: "{{ route('EmployeeDeleteFiles') }}", key: "{{ $image_family_responsability->id }}", extra: { path: "{{ $image_family_responsability->path }}", id: "{{ $id }}", type: "FamilyResponsability" } },
                         @endforeach
                     ],

@@ -23,9 +23,9 @@ class Disability extends Eloquent
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function imagesable()
+    public function imageable()
     {
-        return $this->morphMany(Image::class, 'imagesable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     /**
