@@ -2,7 +2,6 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/create-edit-common.css') }}">
     <link rel="stylesheet" href="{{ elixir('css/human-resources/employees/create-edit-custom-employees.css') }}">
 
 @stop

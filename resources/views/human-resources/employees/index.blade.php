@@ -3,7 +3,6 @@
 @section('css')
 
     <link rel="stylesheet" href="{{ elixir('css/index-common.css') }}">
-    <link rel="stylesheet" href="{{ elixir('css/human-resources/employees/index-custom-employees.css') }}">
 
 @stop
 
