@@ -81,7 +81,6 @@
 		{{ Form::text('email', null, ['class' => 'form-control']) }}
 	</div>
 	<span id="span_date">
-		{{-- Fecha Visita text field --}}
 		{{-- Fecha Visita date field --}}
 		<div class="col-xs-12 col-sm-3 col-md-3 form-group">
 		    {{ Form::label("date", "Fecha Visita", ["class" => "control-label"]) }}

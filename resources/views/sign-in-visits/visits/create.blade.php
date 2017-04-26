@@ -40,7 +40,8 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/sign-in-visits/visits/create-edit-custom-visits.js') }}"></script>
+    <script src="{{ elixir('/js/create-edit-common.js') }}"></script>
+    <script src="{{ elixir('/js/sign-in-visits/visits/create-edit-custom-visits.js') }}"></script>
 
     <script type="text/javascript">
 

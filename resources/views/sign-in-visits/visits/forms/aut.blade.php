@@ -57,7 +57,7 @@
                 <div class="panel-body">
 
                     @if ( is_null( $visit->formVisit ) )
-                        {{ Form::open(['route' => 'form-visits.store', 'method' => 'POST', 'id' => 'form-submit']) }}
+                        {{ Form::open(['route' => 'visits', 'method' => 'POST', 'id' => 'form-submit']) }}
                         {{ Form::hidden('id', $visit->id) }}
                     @else
                         {{ Form::model($visit, ['route' => ['form-visits.update', $visit], 'method' => 'PUT', 'id' => 'form-submit']) }}
@@ -124,7 +124,7 @@
 <script src="{{ elixir('js/index-layout-scripts.js') }}"></script>
 <!-- Components -->
 <script src="{{ elixir('js/index-layout-components.js') }}"></script>
-<script src="{{ elixir('js/sign-in-visits/form-visits/create-edit-custom-form-visits.js') }}"></script>
+<script src="{{ elixir('visits') }}"></script>
 <script src="{{ elixir('js/upload-common.js') }}"></script>
 
 <script type="text/javascript">

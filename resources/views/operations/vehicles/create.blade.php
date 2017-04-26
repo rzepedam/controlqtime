@@ -57,6 +57,7 @@
 
 @section('scripts')
 
+    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
     <script src="{{ elixir('js/operations/vehicles/create-edit-custom-vehicles.js') }}"></script>
 
     <script type="text/javascript">

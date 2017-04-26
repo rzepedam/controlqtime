@@ -11,11 +11,11 @@ const { mix } = require('laravel-mix');
 // Fonts
     mix.combine([
         'node_modules/font-awesome/css/font-awesome.min.css',
-        'node_modules/material-design-iconic-font/dist/css/material-design-iconic-font.min.css',
+        'resources/assets/custom-remark/css/material-design.css',
     ], 'public/css/fonts.css')
     .copy([
-        'node_modules/material-design-iconic-font/dist/fonts',
-        'node_modules/font-awesome/fonts'
+        'node_modules/font-awesome/fonts',
+        'resources/assets/custom-remark/fonts'
     ], 'public/fonts');
 
 // Style owned
@@ -81,6 +81,9 @@ const { mix } = require('laravel-mix');
 
 // Breakpoint
     mix.scripts('node_modules/breakpoints-js/dist/breakpoints.min.js', 'public/js/breakpoints.js');
+
+// 404
+    mix.copy('resources/assets/me/css/404.css', 'public/css');
 
 // Index
     mix.combine([
@@ -245,5 +248,77 @@ const { mix } = require('laravel-mix');
                 'resources/assets/me/js/utilities/scrollTop.js'
             ], 'public/js/human-resources/employees/create-edit-custom-employees.js');
 
+// Operations
+    // Menú
+        mix.scripts([
+            'resources/assets/me/js/base/operations/index.js'
+        ], 'public/js/operations/index.js');
 
+    // Vehicles
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/operations/vehicles/config_bootstrap_table.js'
+            ], 'public/js/operations/vehicles/index-custom-vehicles.js');
 
+        // Create-Edit
+            mix.combine([
+                'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
+            ], 'public/css/operations/vehicles/create-edit-custom-vehicles.css')
+            .scripts([
+                'resources/assets/me/js/change/change_trademark_model.js',
+                'node_modules/autonumeric/autoNumeric-min.js',
+                'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+                'node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+                'resources/assets/components/bootstrap-datepicker.js',
+                'resources/assets/components/autoNumeric.js',
+                'resources/assets/me/js/utilities/sanitized-fields.js',
+                'resources/assets/me/js/base/operations/vehicles/custom-vehicles.js'
+        ], 'public/js/operations/vehicles/create-edit-custom-vehicles.js');
+
+    // Master-Form-Piece-Vehicles
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/operations/master-form-piece-vehicles/config_bootstrap_table.js'
+            ], 'public/js/operations/master-form-piece-vehicles/index-custom-master-form-piece-vehicles.js');
+
+    // Check-Vehicle-Form
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/operations/check-vehicle-forms/config_bootstrap_table.js'
+            ], 'public/js/operations/check-vehicle-forms/index-custom-check-vehicle-forms.js');
+
+        // Create-Edit
+        mix.scripts([
+            'resources/assets/me/js/utilities/select-unique-checkbox-group.js',
+            'resources/assets/me/js/utilities/add_csrf_token.js',
+            'resources/assets/me/js/base/operations/check-vehicle-forms/load-detail-vehicle.js'
+        ], 'public/js/operations/check-vehicle-forms/create-edit-custom-check-vehicle-forms.js');
+
+// Sign-in-Visits
+    // Menú
+        mix.scripts([
+            'resources/assets/me/js/base/sign-in-visits/index.js'
+        ], 'public/js/sign-in-visits/index.js');
+
+    // Visits
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/sign-in-visits/visits/config_bootstrap_table.js'
+            ], 'public/js/sign-in-visits/visits/index-custom-visits.js');
+
+        // Create-Edit
+            mix.combine([
+                'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+                'node_modules/clockpicker/dist/bootstrap-clockpicker.min.css'
+            ], 'public/css/sign-in-visits/visits/create-edit-custom-visits.css')
+            .scripts([
+                'resources/assets/me/js/utilities/capitalize.js',
+                'resources/assets/me/js/validations/valida_rut.js',
+                'resources/assets/custom-remark/js/jquery.Rut.js',
+                'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+                'node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+                'resources/assets/components/bootstrap-datepicker.js',
+                'node_modules/clockpicker/dist/bootstrap-clockpicker.min.js',
+                'resources/assets/me/js/validations/valida_email.js',
+                'resources/assets/me/js/base/sign-in-visits/visits/custom_visits.js'
+            ], 'public/js/sign-in-visits/visits/create-edit-custom-visits.js');

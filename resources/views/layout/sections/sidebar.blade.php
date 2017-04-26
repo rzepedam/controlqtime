@@ -37,7 +37,7 @@
 
                     {{-- Registro de Visitas --}}
                     <li class="site-menu-item {{ Request::is('visits*') ? 'active' : '' }} has-sub">
-                        <a class="animsition-link" href="{{ route('sign-in-visits') }}">
+                        <a class="animsition-link" href="{{ route('visits.index') }}">
                             <i class="site-menu-icon fa fa-tasks" aria-hidden="true"></i>
                             <span class="site-menu-title">Registro de Visitas</span>
                         </a>

@@ -112,7 +112,7 @@
                 <div class="panel-body">
 
                     @if ( is_null( $visit->formVisit ) )
-                        {{ Form::open(['route' => 'form-visits.store', 'method' => 'POST', 'id' => 'form-submit']) }}
+                        {{ Form::open(['route' => 'visits', 'method' => 'POST', 'id' => 'form-submit']) }}
                         {{ Form::hidden('id', $visit->id) }}
                     @else
                         {{ Form::model($visit, ['route' => ['form-visits.update', $visit], 'method' => 'PUT', 'id' => 'form-submit']) }}

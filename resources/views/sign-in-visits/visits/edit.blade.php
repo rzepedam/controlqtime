@@ -26,7 +26,7 @@
             </div>
             <div class="panel-body">
 
-                @include('visits.sign-in-visits.partials.info_personal')
+                @include('visits')
 
             </div>
         </div>
@@ -53,7 +53,7 @@
     <br />
     <br />
 
-    @include('visits.sign-in-visits.partials.delete')
+    @include('visits')
     <br />
 
 @stop

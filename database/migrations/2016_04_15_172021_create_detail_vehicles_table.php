@@ -24,7 +24,7 @@ class CreateDetailVehiclesTable extends Migration
             $table->string('engine_cubic', 4);
             $table->string('weight', 6);
             $table->string('tag', 25);
-            $table->text('obs');
+            $table->text('obs')->nullable();
         });
     }
 

@@ -6,7 +6,7 @@ Te informamos que la visita coordinada para el día <b>{{ $visit->date_more_hour
 <br /><br />
 Si deseas ver el detalle, puedes acceder del botón que se encuentra aquí debajo.
 
-@component('mail::button', ['url' => $url . '/sign-in-visits/visits/' . $visit->id] )
+@component('mail::button', ['url' => $url . 'visits' . $visit->id] )
     Ver Detalle
 @endcomponent
 <br />
@@ -17,7 +17,7 @@ Equipo {{ config('app.name') }}.
 
 @component('mail::subcopy')
 Si tiene problemas al hacer click en el botón, copie y pegue el siguiente enlace en su navegador
-<a href="{{ $url . '/sign-in-visits/visits/' . $visit->id }}" target="_blank">{{ $url . '/sign-in-visits/visits/' . $visit->id }}</a>
+<a href="{{ $url . '/sign-in-visits/visits/' . $visit->id }}" target="_blank">{{ $url . 'sign-in-visits' . $visit->id }}</a>
 @endcomponent
 
 @endcomponent
