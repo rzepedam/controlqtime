@@ -16,3 +16,4 @@ resources/views/layout/.DS_Store
 public/fonts/
 public/mix-manifest.json
 resources/assets/.DS_Store
+yarn.lock
