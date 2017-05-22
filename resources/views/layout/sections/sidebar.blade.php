@@ -52,12 +52,12 @@
                     </li>
 
                     {{-- Nueva Empresa --}}
-                    <li class="site-menu-item {{ Request::is('tickets') ? 'active' : '' }}">
-                        <a class="animsition-link" href="{{ route('tickets.index') }}">
+                    <!--<li class="site-menu-item {{-- Request::is('tickets') ? 'active' : '' --}}">
+                        <a class="animsition-link" href="{{-- route('tickets.index') --}}">
                             <i class="site-menu-icon fa fa-star" aria-hidden="true"></i>
                             <span class="site-menu-title">Nueva Empresa</span>
                         </a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>

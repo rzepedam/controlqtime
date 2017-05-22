@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/visits/sign-in-visits/create-edit-custom-sign-in-visits.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/visits/sign-in-visits/create-edit-custom-sign-in-visits.css') }}">
 
 @stop
 
@@ -60,7 +60,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/visits/sign-in-visits/create-edit-custom-sign-in-visits.js') }}"></script>
-    <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ mix('js/visits/sign-in-visits/create-edit-custom-sign-in-visits.js') }}"></script>
+    <script src="{{ mix('js/edit-common.js') }}"></script>
 
 @stop

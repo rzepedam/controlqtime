@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/operations/vehicles/create-edit-custom-vehicles.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/operations/vehicles/create-edit-custom-vehicles.css') }}">
 
 @stop
 
@@ -57,8 +57,8 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
-    <script src="{{ elixir('js/operations/vehicles/create-edit-custom-vehicles.js') }}"></script>
+    <script src="{{ mix('js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('js/operations/vehicles/create-edit-custom-vehicles.js') }}"></script>
 
     <script type="text/javascript">
 

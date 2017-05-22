@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/index-common.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/index-common.css') }}">
 
 @stop
 
@@ -30,7 +30,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/index-common.js') }}"></script>
-    <script src="{{ elixir('js/maintainers/routes/index-custom-routes.js') }}"></script>
+    <script src="{{ mix('js/index-common.js') }}"></script>
+    <script src="{{ mix('js/maintainers/routes/index-custom-routes.js') }}"></script>
 
 @stop

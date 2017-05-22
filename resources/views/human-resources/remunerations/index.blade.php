@@ -72,6 +72,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/human-resources/remunerations/index-custom-remunerations.js') }}"></script>
+    <script src="{{ mix('js/human-resources/remunerations/index-custom-remunerations.js') }}"></script>
 
 @stop

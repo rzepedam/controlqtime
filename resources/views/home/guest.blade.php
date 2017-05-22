@@ -7,10 +7,10 @@
     <meta name="description" content="CQTime - Where questions find answers">
     <meta name="author" content="Raúl Elías Meza Mora">
     <title>ControlQTime</title>
-    <link rel="stylesheet" href="{{ elixir('css/core.css') }}">
-    <link rel="stylesheet" href="{{ elixir('css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/core.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/fonts.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
-    <script src="{{ elixir('js/breakpoints.js') }}"></script>
+    <script src="{{ mix('js/breakpoints.js') }}"></script>
     <script>Breakpoints();</script>
     <style>
         body {

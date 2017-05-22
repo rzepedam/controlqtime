@@ -322,3 +322,6 @@ const { mix } = require('laravel-mix');
                 'resources/assets/me/js/validations/valida_email.js',
                 'resources/assets/me/js/base/sign-in-visits/visits/custom_visits.js'
             ], 'public/js/sign-in-visits/visits/create-edit-custom-visits.js');
+
+// Versioning
+    mix.version();

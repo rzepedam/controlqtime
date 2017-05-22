@@ -366,6 +366,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/maintainers/index.js') }}"></script>
+    <script src="{{ mix('js/maintainers/index.js') }}"></script>
 
 @stop

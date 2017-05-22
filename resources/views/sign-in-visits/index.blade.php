@@ -21,6 +21,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/sign-in-visits/index.js') }}"></script>
+    <script src="{{ mix('js/sign-in-visits/index.js') }}"></script>
 
 @stop

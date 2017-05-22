@@ -43,6 +43,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('Unit') }}"></script>
+    <script src="{{ mix('Unit') }}"></script>
 
 @stop

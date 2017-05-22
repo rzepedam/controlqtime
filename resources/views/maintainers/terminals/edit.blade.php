@@ -51,8 +51,8 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
-    <script src="{{ elixir('js/maintainers/terminals/create-edit-custom-terminals.js') }}"></script>
-    <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ mix('js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('js/maintainers/terminals/create-edit-custom-terminals.js') }}"></script>
+    <script src="{{ mix('js/edit-common.js') }}"></script>
 
 @stop

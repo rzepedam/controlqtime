@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/sign-in-visits/visits/create-edit-custom-visits.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/sign-in-visits/visits/create-edit-custom-visits.css') }}">
 
 @stop
 
@@ -40,8 +40,8 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('/js/create-edit-common.js') }}"></script>
-    <script src="{{ elixir('/js/sign-in-visits/visits/create-edit-custom-visits.js') }}"></script>
+    <script src="{{ mix('/js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('/js/sign-in-visits/visits/create-edit-custom-visits.js') }}"></script>
 
     <script type="text/javascript">
 

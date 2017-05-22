@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/show-with-image-common.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/show-with-image-common.css') }}">
 
 @stop
 
@@ -44,6 +44,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/show-with-image-common.js') }}"></script>
+    <script src="{{ mix('js/show-with-image-common.js') }}"></script>
 
 @stop

@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/administrations/companies/create-edit-custom-companies.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/administrations/companies/create-edit-custom-companies.css') }}">
 
 @stop
 
@@ -68,7 +68,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/administrations/companies/create-edit-custom-companies.js') }}"></script>
+    <script src="{{ mix('js/administrations/companies/create-edit-custom-companies.js') }}"></script>
 
 @stop
 

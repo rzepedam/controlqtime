@@ -39,7 +39,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('js/create-edit-common.js') }}"></script>
 
 @stop
 

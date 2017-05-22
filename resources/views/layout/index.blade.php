@@ -7,19 +7,20 @@
     <meta name="description" content="CQTime - Where questions find answers">
     <meta name="author" content="Raúl Elías Meza Mora">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="icon" href="{{ asset('img/logo.png') }}">
     <title>Controlqtime</title>
-    <link rel="stylesheet" href="{{ elixir('css/core.css') }}">
-    <link rel="stylesheet" href="{{ elixir('css/plugins.css') }}">
-    <link rel="stylesheet" href="{{ elixir('css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/core.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/fonts.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
     @yield('css')
-    <link rel="stylesheet" href="{{ elixir('css/style.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/style.css') }}">
     <script>
         window.Laravel = <?php echo json_encode([
                 'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-    <script src="{{ elixir('js/breakpoints.js') }}"></script>
+    <script src="{{ mix('js/breakpoints.js') }}"></script>
     <script>Breakpoints();</script>
 </head>
 <body class="dashboard">
@@ -58,9 +59,9 @@
 
     </div>
 
-    <script src="{{ elixir('js/core.js') }}"></script>
-    <script src="{{ elixir('js/plugins.js') }}"></script>
-    <script src="{{ elixir('js/components.js') }}"></script>
+    <script src="{{ mix('js/core.js') }}"></script>
+    <script src="{{ mix('js/plugins.js') }}"></script>
+    <script src="{{ mix('js/components.js') }}"></script>
 
     @yield('scripts')
 

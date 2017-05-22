@@ -23,6 +23,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/administrations/index.js') }}"></script>
+    <script src="{{ mix('js/administrations/index.js') }}"></script>
 
 @stop

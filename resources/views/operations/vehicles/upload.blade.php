@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/upload-common.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/upload-common.css') }}">
 
 @stop
 
@@ -81,7 +81,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/upload-common.js') }}"></script>
+    <script src="{{ mix('js/upload-common.js') }}"></script>
 
     <script>
 

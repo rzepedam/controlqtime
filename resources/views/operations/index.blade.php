@@ -45,6 +45,6 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/operations/index.js') }}"></script>
+    <script src="{{ mix('js/operations/index.js') }}"></script>
 
 @stop

@@ -3,7 +3,7 @@
 @section('css')
 
 
-    <link rel="stylesheet" href="{{ elixir('css/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.css') }}">
 
 @stop
 
@@ -52,8 +52,8 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
-    <script src="{{ elixir('js/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.js') }}"></script>
-    <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ mix('js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('js/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.js') }}"></script>
+    <script src="{{ mix('js/edit-common.js') }}"></script>
 
 @stop

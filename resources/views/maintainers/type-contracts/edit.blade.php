@@ -53,7 +53,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/edit-common.js') }}"></script>
-    <script src="{{ elixir('js/maintainers/type-contracts/create-edit-custom-type-contracts.js') }}"></script>
+    <script src="{{ mix('js/edit-common.js') }}"></script>
+    <script src="{{ mix('js/maintainers/type-contracts/create-edit-custom-type-contracts.js') }}"></script>
 
 @stop

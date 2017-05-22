@@ -9,14 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>ControlQTime</title>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ elixir('css/index-layout-core.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/index-layout-core.css') }}">
     <!-- Plugins -->
-    <link rel="stylesheet" href="{{ elixir('css/index-layout-plugin.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/index-layout-plugin.css') }}">
     <!-- Fonts -->
-    <link rel="stylesheet" href="{{ elixir('css/index-layout-fonts.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/index-layout-fonts.css') }}">
     <!-- Style Owned -->
-    <link rel="stylesheet" href="{{ elixir('css/style.css') }}">
-    <link rel="stylesheet" href="{{ elixir('css/upload-common.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/style.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/upload-common.css') }}">
     <style>
         body {
             padding-top: 0px;
@@ -30,7 +30,7 @@
         ]); ?>
     </script>
     <!-- Browsers Utilities -->
-    <script src="{{ elixir('js/index-layout-browser-utilities.js') }}"></script>
+    <script src="{{ mix('js/index-layout-browser-utilities.js') }}"></script>
     <script>
         Breakpoints();
     </script>
@@ -189,13 +189,13 @@
 </div>
 
 <!-- Core  -->
-<script src="{{ elixir('js/index-layout-core.js') }}"></script>
+<script src="{{ mix('js/index-layout-core.js') }}"></script>
 <!-- Scripts -->
-<script src="{{ elixir('js/index-layout-scripts.js') }}"></script>
+<script src="{{ mix('js/index-layout-scripts.js') }}"></script>
 <!-- Components -->
-<script src="{{ elixir('js/index-layout-components.js') }}"></script>
-<script src="{{ elixir('js/sign-in-visits/form-visits/create-edit-custom-form-visits.js') }}"></script>
-<script src="{{ elixir('js/upload-common.js') }}"></script>
+<script src="{{ mix('js/index-layout-components.js') }}"></script>
+<script src="{{ mix('js/sign-in-visits/form-visits/create-edit-custom-form-visits.js') }}"></script>
+<script src="{{ mix('js/upload-common.js') }}"></script>
 
 <script type="text/javascript">
 

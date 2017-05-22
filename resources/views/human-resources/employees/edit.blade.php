@@ -2,7 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/human-resources/employees/create-edit-custom-employees.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/human-resources/employees/create-edit-custom-employees.css') }}">
 @stop
 
 @section('title_header') Editar Trabajador: <span class="text-primary">{{ $employee->id }}</span> @stop
@@ -432,9 +432,9 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
-    <script src="{{ elixir('js/human-resources/employees/create-edit-custom-employees.js') }}"></script>
-    <script src="{{ elixir('js/edit-common.js') }}"></script>
+    <script src="{{ mix('js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('js/human-resources/employees/create-edit-custom-employees.js') }}"></script>
+    <script src="{{ mix('js/edit-common.js') }}"></script>
 
     <script type="text/javascript">
 

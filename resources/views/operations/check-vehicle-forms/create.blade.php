@@ -34,7 +34,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
-    <script src="{{ elixir('js/operations/check-vehicle-forms/create-edit-custom-check-vehicle-forms.js') }}"></script>
+    <script src="{{ mix('js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('js/operations/check-vehicle-forms/create-edit-custom-check-vehicle-forms.js') }}"></script>
 
 @stop

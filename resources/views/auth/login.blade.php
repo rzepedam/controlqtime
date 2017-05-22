@@ -9,12 +9,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Login</title>
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
-    <link rel="stylesheet" href="{{ elixir('css/core.css') }}">
-    <link rel="stylesheet" href="{{ elixir('css/plugins.css') }}">
-    <link rel="stylesheet" href="{{ elixir('css/login.css') }}">
-    <link rel="stylesheet" href="{{ elixir('css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/core.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/login.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/fonts.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
-    <script src="{{ elixir('js/breakpoints.js') }}"></script>
+    <script src="{{ mix('js/breakpoints.js') }}"></script>
     <script>Breakpoints();</script>
     <style>
         body {
@@ -89,13 +89,13 @@
     </div>
 
     <!-- Core  -->
-    <script src="{{ elixir('js/core.js') }}"></script>
+    <script src="{{ mix('js/core.js') }}"></script>
     <!-- Scripts -->
-    <script src="{{ elixir('js/plugins.js') }}"></script>
+    <script src="{{ mix('js/plugins.js') }}"></script>
     <!-- Components -->
-    <script src="{{ elixir('js/components.js') }}"></script>
+    <script src="{{ mix('js/components.js') }}"></script>
     <!-- Login JS -->
-    <script src="{{ elixir('js/login.js') }}"></script>
+    <script src="{{ mix('js/login.js') }}"></script>
 
 </body>
 </html>
