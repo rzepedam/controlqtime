@@ -31,6 +31,6 @@
 @section('scripts')
 
     <script src="{{ mix('js/index-common.js') }}"></script>
-    <script src="{{ mix('js/maintainers/model-vehicles/index-custom-model-vehicles.js') }}"></script>
+    <script src="{{ mix('js/maintainers/model-vehicles/index.js') }}"></script>
 
 @stop

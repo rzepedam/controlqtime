@@ -7,7 +7,6 @@ use Controlqtime\Core\Entities\City;
 use Controlqtime\Core\Entities\Fuel;
 use Controlqtime\Core\Entities\User;
 use Controlqtime\Core\Entities\Image;
-use Controlqtime\Core\Entities\Route;
 use Controlqtime\Core\Entities\Visit;
 use Controlqtime\Core\Entities\Degree;
 use Controlqtime\Core\Entities\Region;
@@ -424,14 +423,6 @@ $factory->define(Relationship::class, function (Faker\Generator $faker) {
 	return [
 		'name'       => $faker->word,
 		'deleted_at' => null,
-	];
-});
-
-$factory->define(Route::class, function (Faker\Generator $faker) {
-	return [
-		'name'        => strtoupper($faker->randomLetter) . '0' . rand(0, 9),
-		'terminal_id' => factory(Terminal::class)->create()->id,
-		'deleted_at'  => null,
 	];
 });
 

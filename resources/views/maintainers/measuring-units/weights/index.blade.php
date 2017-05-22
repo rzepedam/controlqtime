@@ -32,6 +32,6 @@
 @section('scripts')
 
     <script src="{{ mix('js/index-common.js') }}"></script>
-    <script src="{{ mix('js/maintainers/measuring-units/weights/index-custom-weights.js') }}"></script>
+    <script src="{{ mix('js/maintainers/measuring-units/weights/index.js') }}"></script>
 
 @stop

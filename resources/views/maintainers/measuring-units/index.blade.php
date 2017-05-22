@@ -43,6 +43,6 @@
 
 @section('scripts')
 
-    <script src="{{ mix('Unit') }}"></script>
+    <script src="{{ mix('js/maintainers/measuring-units/index.js') }}"></script>
 
 @stop

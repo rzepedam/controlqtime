@@ -32,6 +32,6 @@
 @section('scripts')
 
     <script src="{{ mix('js/index-common.js') }}"></script>
-    <script src="{{ mix('js/maintainers/measuring-units/engine-cubics/index-custom-engine-cubics.js') }}"></script>
+    <script src="{{ mix('js/maintainers/measuring-units/engine-cubics/index.js') }}"></script>
 
 @stop

@@ -31,6 +31,6 @@
 @section('scripts')
 
     <script src="{{ mix('js/index-common.js') }}"></script>
-    <script src="{{ mix('js/maintainers/trademarks/index-custom-trademarks.js') }}"></script>
+    <script src="{{ mix('js/maintainers/trademarks/index.js') }}"></script>
 
 @stop

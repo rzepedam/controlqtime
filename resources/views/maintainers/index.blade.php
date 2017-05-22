@@ -96,17 +96,6 @@
         </div>
         <div class="clearfix visible-xs margin-bottom-20"></div>
         <div class="col-xs-12 col-sm-4 col-md-2">
-            <div id="redirect-state-piece-vehicles" class="counter counter-lg counter-inverse bg-red-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
-                <div class="vertical-align-middle">
-                    <div class="counter-icon">
-                        <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
-                    </div>
-                    <span class="counter-number">Estado Pieza Vehículos</span>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix hidden-lg hidden-md margin-bottom-20"></div>
-        <div class="col-xs-12 col-sm-4 col-md-2">
             <div id="redirect-marital-statuses" class="counter counter-lg counter-inverse bg-blue-grey-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon">
@@ -116,7 +105,7 @@
                 </div>
             </div>
         </div>
-        <div class="clearfix visible-xs margin-bottom-20"></div>
+        <div class="clearfix hidden-lg hidden-md margin-bottom-20"></div>
         <div class="col-xs-12 col-sm-4 col-md-2">
             <div id="redirect-type-exams" class="counter counter-lg counter-inverse bg-teal-200 vertical-align waves-effect waves-block wave-light height-150 pointer">
                 <div class="vertical-align-middle">
@@ -128,7 +117,6 @@
             </div>
         </div>
         <div class="clearfix visible-xs margin-bottom-20"></div>
-
     </div>
     <br />
     <div class="row">
@@ -259,17 +247,6 @@
         </div>
         <div class="clearfix visible-xs margin-bottom-20"></div>
         <div class="col-xs-12 col-sm-4 col-md-2">
-            <div id="redirect-routes" class="counter counter-lg counter-inverse bg-purple-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
-                <div class="vertical-align-middle">
-                    <div class="counter-icon">
-                        <i class="fa fa-map" aria-hidden="true"></i>
-                    </div>
-                    <span class="counter-number">Recorridos</span>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix hidden-lg hidden-md margin-bottom-20"></div>
-        <div class="col-xs-12 col-sm-4 col-md-2">
             <div id="redirect-relationships" class="counter counter-lg counter-inverse bg-light-green-200 vertical-align waves-effect waves-block waves-light height-150 pointer">
                 <div class="vertical-align-middle">
                     <div class="counter-icon">
@@ -279,6 +256,7 @@
                 </div>
             </div>
         </div>
+        <div class="clearfix hidden-lg hidden-md margin-bottom-20"></div>
         <div class="clearfix visible-xs margin-bottom-20"></div>
         <div class="col-xs-12 col-sm-4 col-md-2">
             <div id="redirect-labor-unions" class="counter counter-lg counter-inverse bg-brown-200 vertical-align waves-effect waves-block wave-light height-150 pointer">

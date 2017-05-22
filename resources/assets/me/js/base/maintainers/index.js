@@ -37,11 +37,6 @@ $(document).ready(function(){
         window.location.href = "/maintainers/type-specialities";
     });
 
-    // Estado Pieza Vehículos
-    $('#redirect-state-piece-vehicles').click(function() {
-        window.location.href = "/maintainers/state-piece-vehicles";
-    });
-
     // Estados Civiles
     $('#redirect-marital-statuses').click(function() {
         window.location.href = "/maintainers/marital-statuses";
@@ -92,10 +87,6 @@ $(document).ready(function(){
         window.location.href = "/maintainers/professions";
     });
 
-    $('#redirect-routes').click(function() {
-        window.location.href = "/maintainers/routes";
-    });
-
     $('#redirect-relationships').click(function() {
         window.location.href = "/maintainers/relationships";
     });
@@ -128,8 +119,8 @@ $(document).ready(function(){
         window.location.href = "/maintainers/type-vehicles";
     });
 
-    $('#redirect-measuring-Unit').click(function() {
-        window.location.href = "/maintainers/measuring-Unit";
+    $('#redirect-measuring-units').click(function() {
+        window.location.href = "/maintainers/measuring-units";
     });
 
 });

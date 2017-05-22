@@ -323,5 +323,198 @@ const { mix } = require('laravel-mix');
                 'resources/assets/me/js/base/sign-in-visits/visits/custom_visits.js'
             ], 'public/js/sign-in-visits/visits/create-edit-custom-visits.js');
 
+// Maintainers
+    // Menú
+        mix.scripts([
+            'resources/assets/me/js/base/maintainers/index.js'
+        ], 'public/js/maintainers/index.js');
+
+    // Áreas
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/areas/config_bootstrap_table.js'
+            ], 'public/js/maintainers/areas/index.js');
+
+    // Cities
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/cities/config_bootstrap_table.js'
+            ], 'public/js/maintainers/cities/index.js');
+
+    // Countries
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/countries/config_bootstrap_table.js'
+            ], 'public/js/maintainers/countries/index.js');
+
+    // Daytrips
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/day-trips/config_bootstrap_table.js'
+            ], 'public/js/maintainers/day-trips/index.js');
+
+    // Forecast
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/forecasts/config_bootstrap_table.js'
+            ], 'public/js/maintainers/forecasts/index.js');
+
+    // Fuels
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/fuels/config_bootstrap_table.js'
+            ], 'public/js/maintainers/fuels/index.js');
+
+    // Institutions
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/institutions/config_bootstrap_table.js'
+            ], 'public/js/maintainers/institutions/index.js');
+
+    // Labor Unions
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/labor-unions/config_bootstrap_table.js'
+            ], 'public/js/maintainers/labor-unions/index.js');
+
+    // Marital Status
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/marital-statuses/config_bootstrap_table.js'
+            ], 'public/js/maintainers/marital-statuses/index.js');
+
+    // Measuring Units
+        // Menú
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/measuring-units/index.js'
+            ], 'public/js/maintainers/measuring-units/index.js');
+
+        // Engine Cubics
+            // Index
+                mix.scripts([
+                    'resources/assets/me/js/base/maintainers/measuring-units/engine-cubics/config_bootstrap_table.js'
+                ], 'public/js/maintainers/measuring-units/engine-cubics/index.js');
+
+        // Weights
+            // Index
+                mix.scripts([
+                    'resources/assets/me/js/base/maintainers/measuring-units/weights/config_bootstrap_table.js'
+                ], 'public/js/maintainers/measuring-units/weights/index.js');
+
+    // Model Vehicles
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/model-vehicles/config_bootstrap_table.js'
+            ], 'public/js/maintainers/model-vehicles/index.js');
+
+    // Mutualities
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/mutualities/config_bootstrap_table.js'
+            ], 'public/js/maintainers/mutualities/index.js');
+
+    // Piece Vehicles
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/piece-vehicles/config_bootstrap_table.js'
+            ], 'public/js/maintainers/piece-vehicles/index.js');
+
+    // Positions
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/positions/config_bootstrap_table.js'
+            ], 'public/js/maintainers/positions/index.js');
+
+    // Professions
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/professions/config_bootstrap_table.js'
+            ], 'public/js/maintainers/professions/index.js');
+
+    // Relationships
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/relationships/config_bootstrap_table.js'
+            ], 'public/js/maintainers/relationships/index.js');
+
+    // Terminals
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/terminals/config_bootstrap_table.js'
+            ], 'public/js/maintainers/terminals/index.js');
+
+    // Terms-and-obligatories
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/terms-and-obligatories/config_bootstrap_table.js'
+            ], 'public/js/maintainers/terms-and-obligatories/index.js');
+
+    // Trademarks
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/trademarks/config_bootstrap_table.js'
+            ], 'public/js/maintainers/trademarks/index.js');
+
+    // Type Certifications
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-certifications/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-certifications/index.js');
+
+    // Type Companies
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-companies/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-companies/index.js');
+
+    // Type Contracts
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-contracts/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-contracts/index.js');
+
+    // Type Disabilities
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-disabilities/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-disabilities/index.js');
+
+    // Type Diseases
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-diseases/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-diseases/index.js');
+
+    // Type Exams
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-exams/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-exams/index.js');
+
+    // Type Institutions
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-institutions/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-institutions/index.js');
+
+    // Type Professional Licenses
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-professional-licenses/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-professional-licenses/index.js');
+
+    // Type Specialities
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-specialities/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-specialities/index.js');
+
+    // Type Vehicles
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/maintainers/type-vehicles/config_bootstrap_table.js'
+            ], 'public/js/maintainers/type-vehicles/index.js');
+
+
 // Versioning
     mix.version();
