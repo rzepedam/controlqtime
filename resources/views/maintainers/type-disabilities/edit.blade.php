@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@endsection
-
 @section('title_header') Editar Discapacidad: <span class="text-primary">{{ $typeDisability->id }}</span> @stop
 
 @section('breadcumb')

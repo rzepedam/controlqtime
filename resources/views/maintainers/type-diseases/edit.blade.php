@@ -2,12 +2,6 @@
 
 @section('title_header') Editar Enfermedad: <span class="text-primary">{{ $typeDisease->id }}</span> @stop
 
-@section('css')
-
-
-
-@endsection
-
 @section('breadcumb')
     <li><a href="{{ route('maintainers') }}"><i class="fa fa-cogs"></i> Mantenedores</a></li>
     <li><a href="{{ route('type-diseases.index') }}"><i class="fa fa-bed"></i> Enfermedades</a></li>

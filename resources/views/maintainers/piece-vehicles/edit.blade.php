@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@stop
-
 @section('title_header') Editar Pieza de Vehículo: <span class="text-primary">{{ $pieceVehicle->id }}</span> @stop
 
 @section('breadcumb')

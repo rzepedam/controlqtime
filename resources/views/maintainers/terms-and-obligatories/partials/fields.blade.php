@@ -3,9 +3,9 @@
         <div class="pull-right">
             <label for="act">Predeterminar</label> <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="top" data-toggle="tooltip" data-original-title="Determina si la cláusula será activada por defecto en la creación de un Contrato"></i>
             @if (Route::is('terms-and-obligatories.create'))
-                <input type="checkbox" name="default" id="default" data-plugin="switchery" data-color="#3949AB" />
+                <input type="checkbox" name="default" id="default" data-color="#3949AB" />
             @else
-                <input type="checkbox" name="default" id="default" data-plugin="switchery" data-color="#3949AB" {{ $termAndObligatory->default ? 'checked' : null }} />
+                <input type="checkbox" name="default" id="default" data-color="#3949AB" {{ $termAndObligatory->default ? 'checked' : null }} />
             @endif
         </div>
     </div>

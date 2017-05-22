@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-    <link rel="stylesheet" href="{{ asset('css/create-edit-common.css') }}">
-
-@stop
-
 @section('title_header') Editar País: <span class="text-primary">{{ $country->id }}</span> @stop
 
 @section('breadcumb')

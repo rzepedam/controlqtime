@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@stop
-
 @section('title_header') Editar Profesión: <span class="text-primary">{{ $profession->id }}</span> @stop
 
 @section('breadcumb')

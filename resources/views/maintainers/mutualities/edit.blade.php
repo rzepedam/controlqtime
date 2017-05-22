@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@endsection
-
 @section('title_header') Editar Mutualidad: <span class="text-primary">{{ $mutuality->id }}</span> @stop
 
 @section('breadcumb')

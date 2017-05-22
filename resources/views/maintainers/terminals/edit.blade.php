@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@stop
-
 @section('title_header') Editar Terminal: <span class="text-primary">{{ $terminal->id }}</span> @stop
 
 @section('breadcumb')
@@ -52,7 +46,7 @@
 @section('scripts')
 
     <script src="{{ mix('js/create-edit-common.js') }}"></script>
-    <script src="{{ mix('js/maintainers/terminals/create-edit-custom-terminals.js') }}"></script>
     <script src="{{ mix('js/edit-common.js') }}"></script>
+    <script src="{{ mix('js/maintainers/terminals/create-edit.js') }}"></script>
 
 @stop

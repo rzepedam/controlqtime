@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@endsection
-
 @section('title_header') Editar Licencia Profesional: <span class="text-primary">{{ $typeProfessionalLicense->id }}</span> @stop
 
 @section('breadcumb')

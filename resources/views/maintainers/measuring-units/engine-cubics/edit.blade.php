@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@stop
-
 @section('title_header') Editar Unidad de Medida: <span class="text-primary">{{ $engineCubic->id }}</span> @stop
 
 @section('breadcumb')

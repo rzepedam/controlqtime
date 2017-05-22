@@ -1,7 +1,6 @@
 @extends('layout.index')
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/human-resources/employees/create-edit-custom-employees.css') }}">
 @stop
 

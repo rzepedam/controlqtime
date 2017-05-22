@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@endsection
-
 @section('title_header') Editar Especialidad: <span class="text-primary">{{ $typeSpeciality->id }}</span> @stop
 
 @section('breadcumb')

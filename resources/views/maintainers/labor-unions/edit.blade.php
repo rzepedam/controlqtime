@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@stop
-
 @section('title_header') Editar Sindicato: <span class="text-primary">{{ $laborUnion->id }}</span> @stop
 
 @section('breadcumb')

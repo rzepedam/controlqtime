@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@endsection
-
 @section('title_header') Editar Modelo de Vehículo: <span class="text-primary">{{ $modelVehicle->id }}</span> @stop
 
 @section('breadcumb')

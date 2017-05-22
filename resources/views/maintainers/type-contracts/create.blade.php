@@ -39,7 +39,6 @@
 @stop
 
 @section('scripts')
-
-    <script src="{{ mix('js/maintainers/type-contracts/create-edit-custom-type-contracts.js') }}"></script>
-
+    <script src="{{ mix('js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('js/maintainers/type-contracts/create-edit.js') }}"></script>
 @stop

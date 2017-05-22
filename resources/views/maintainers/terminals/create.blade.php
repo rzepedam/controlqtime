@@ -40,6 +40,6 @@
 @section('scripts')
 
     <script src="{{ mix('js/create-edit-common.js') }}"></script>
-    <script src="{{ mix('js/maintainers/terminals/create-edit-custom-terminals.js') }}"></script>
+    <script src="{{ mix('js/maintainers/terminals/create-edit.js') }}"></script>
 
 @stop

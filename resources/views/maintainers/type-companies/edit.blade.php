@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@stop
-
 @section('title_header') Editar Tipo Empresa: <span class="text-primary">{{ $typeCompany->id }}</span> @stop
 
 @section('breadcumb')

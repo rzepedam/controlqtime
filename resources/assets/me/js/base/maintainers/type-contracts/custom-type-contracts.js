@@ -40,10 +40,11 @@ $('#btnSubmit').click(function (e) {
         type: 'POST',
         url: action,
         data: form.serialize() + "&full_name=" + full_name,
-        dataType: "json",
         success: function (response) {
             if (response.status) {
                 window.location.href = response.url;
+            } else {
+                alert("Oops, ha ocurrido un error. No es posible conectar con el servidor.");
             }
         },
         error: function (response) {

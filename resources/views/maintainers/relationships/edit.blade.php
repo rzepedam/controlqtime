@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@stop
-
 @section('title_header') Editar Relación Familiar: <span class="text-primary">{{ $relationship->id }}</span> @stop
 
 @section('breadcumb')

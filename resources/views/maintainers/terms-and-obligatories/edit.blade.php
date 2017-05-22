@@ -1,10 +1,7 @@
 @extends('layout.index')
 
 @section('css')
-
-
-    <link rel="stylesheet" href="{{ mix('css/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ mix('css/maintainers/terms-and-obligatories/create-edit.css') }}">
 @stop
 
 @section('title_header') Editar Cláusula y Obligación: <span class="text-primary">{{ $termAndObligatory->id }}</span> @stop
@@ -53,7 +50,7 @@
 @section('scripts')
 
     <script src="{{ mix('js/create-edit-common.js') }}"></script>
-    <script src="{{ mix('js/maintainers/terms-and-obligatories/create-edit-custom-terms-and-obligatories.js') }}"></script>
     <script src="{{ mix('js/edit-common.js') }}"></script>
+    <script src="{{ mix('js/maintainers/terms-and-obligatories/create-edit.js') }}"></script>
 
 @stop

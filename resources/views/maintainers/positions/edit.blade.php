@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@endsection
-
 @section('title_header') Editar Cargo: <span class="text-primary">{{ $position->id }}</span> @stop
 
 @section('breadcumb')

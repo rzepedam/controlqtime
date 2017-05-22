@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@endsection
-
 @section('title_header') Editar Institución: <span class="text-primary">{{ $institution->id }}</span> @stop
 
 @section('breadcumb')

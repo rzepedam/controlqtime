@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@endsection
-
 @section('title_header') Editar Certificación: <span class="text-primary">{{ $typeCertification->id }}</span> @stop
 
 @section('breadcumb')

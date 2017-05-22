@@ -1,11 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-
-
-@endsection
-
 @section('title_header') Editar Marca: <span class="text-primary">{{ $trademark->id }}</span> @stop
 
 @section('breadcumb')

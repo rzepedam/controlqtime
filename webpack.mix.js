@@ -443,11 +443,26 @@ const { mix } = require('laravel-mix');
                 'resources/assets/me/js/base/maintainers/terminals/config_bootstrap_table.js'
             ], 'public/js/maintainers/terminals/index.js');
 
+        // Create Edit
+            mix.scripts([
+                'resources/assets/me/js/utilities/verifica_ultimos_numeros.js',
+                'resources/assets/me/js/change/change_region_province.js'
+            ], 'public/js/maintainers/terminals/create-edit.js');
+
     // Terms-and-obligatories
         // Index
             mix.scripts([
                 'resources/assets/me/js/base/maintainers/terms-and-obligatories/config_bootstrap_table.js'
             ], 'public/js/maintainers/terms-and-obligatories/index.js');
+
+        // Create Edit
+            mix.combine([
+                'node_modules/switchery/switchery.css'
+            ], 'public/css/maintainers/terms-and-obligatories/create-edit.css');
+            
+            mix.scripts([
+                'node_modules/switchery/switchery.js'
+            ], 'public/js/maintainers/terms-and-obligatories/create-edit.js');
 
     // Trademarks
         // Index
@@ -472,6 +487,12 @@ const { mix } = require('laravel-mix');
             mix.scripts([
                 'resources/assets/me/js/base/maintainers/type-contracts/config_bootstrap_table.js'
             ], 'public/js/maintainers/type-contracts/index.js');
+
+        // Create Edit
+            mix.scripts([
+                'me/js/utilities/capitalize.js',
+                'me/js/base/maintainers/type-contracts/custom-type-contracts.js'
+            ], 'public/js/maintainers/type-contracts/create-edit.js');
 
     // Type Disabilities
         // Index
