@@ -27,7 +27,7 @@ class VisitController extends Controller
     /**
      * @var string
      */
-    private $baseUrl = '/sign-in-visits/visits/form-visits/';
+    private $baseUrl = '/form-visits/';
 
     /**
      * @var Employee
@@ -97,7 +97,10 @@ class VisitController extends Controller
      */
     public function getVisits()
     {
-        $visits = $this->visit->all();
+        $visits = $this->visit
+                    ->with(['typeVisit'])
+                    ->orderBy('created_at', 'DESC')
+                    ->get();
 
         return $visits;
     }
@@ -109,8 +112,17 @@ class VisitController extends Controller
      */
     public function create()
     {
-        $typeVisits = $this->typeVisit->pluck('name', 'id');
-        $employees  = $this->employee->enabled()->pluck('full_name', 'id');
+        try
+        {
+            $typeVisits = $this->typeVisit->pluck('name', 'id');
+            $employees  = $this->employee->enabled()->pluck('full_name', 'id');
+        } catch (\Exception $e)
+        {
+            $this->log->error('Error create Visit: ' . $e->getMessage());
+            session()->flash('error', 'Hubo un error en el servidor. Comunique con personal especializado.');
+
+            return response()->json(['status' => false, 'url' => '/sign-in-visits/visits']);
+        }
 
         return view('sign-in-visits.visits.create', compact(
             'employees', 'typeVisits'
@@ -124,8 +136,12 @@ class VisitController extends Controller
      */
     public function store()
     {
-        // Add Url and key field for generate form in email
-        request()->request->add(['url' => $this->baseUrl, 'key' => Str::random(10), 'user_id' => auth()->user()->id]);
+        // Add Url, key and current user field for generate form in email
+        request()->request->add([
+            'url' => $this->baseUrl, 
+            'key' => Str::random(10), 
+            'user_id' => auth()->id()        
+        ]);
 
         DB::beginTransaction();
 

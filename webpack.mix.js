@@ -304,13 +304,13 @@ const { mix } = require('laravel-mix');
         // Index
             mix.scripts([
                 'resources/assets/me/js/base/sign-in-visits/visits/config_bootstrap_table.js'
-            ], 'public/js/sign-in-visits/visits/index-custom-visits.js');
+            ], 'public/js/sign-in-visits/visits/index.js');
 
         // Create-Edit
             mix.combine([
                 'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
                 'node_modules/clockpicker/dist/bootstrap-clockpicker.min.css'
-            ], 'public/css/sign-in-visits/visits/create-edit-custom-visits.css')
+            ], 'public/css/sign-in-visits/visits/create-edit.css')
             .scripts([
                 'resources/assets/me/js/utilities/capitalize.js',
                 'resources/assets/me/js/validations/valida_rut.js',
@@ -319,9 +319,9 @@ const { mix } = require('laravel-mix');
                 'node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
                 'resources/assets/components/bootstrap-datepicker.js',
                 'node_modules/clockpicker/dist/bootstrap-clockpicker.min.js',
-                'resources/assets/me/js/validations/valida_email.js',
-                'resources/assets/me/js/base/sign-in-visits/visits/custom_visits.js'
-            ], 'public/js/sign-in-visits/visits/create-edit-custom-visits.js');
+                'resources/assets/components/bootstrap-clockpicker.js',
+                'resources/assets/me/js/validations/valida_email.js'
+            ], 'public/js/sign-in-visits/visits/create-edit.js');
 
 // Maintainers
     // Menú

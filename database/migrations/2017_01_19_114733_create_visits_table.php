@@ -23,7 +23,7 @@ class CreateVisitsTable extends Migration
             $table->string('female_surname');
             $table->string('first_name');
             $table->string('second_name');
-            $table->string('rut')->unique();
+            $table->string('rut');
             $table->string('position');
             $table->string('company');
             $table->string('phone');
@@ -31,7 +31,7 @@ class CreateVisitsTable extends Migration
 			$table->string('hour', 4)->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->text('obs');
             $table->string('url')->default(NULL);
             $table->string('key');

@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <div class="col-xs-º12 col-sm-12 col-md-12">
+    <div class="col-xs-12 col-sm-12 col-md-12">
         <table class="table table-striped table-bordered">
             <tbody>
                 <tr>

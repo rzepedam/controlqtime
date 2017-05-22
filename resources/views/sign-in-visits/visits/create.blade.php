@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ mix('css/sign-in-visits/visits/create-edit-custom-visits.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/sign-in-visits/visits/create-edit.css') }}">
 
 @stop
 
@@ -41,7 +41,8 @@
 @section('scripts')
 
     <script src="{{ mix('/js/create-edit-common.js') }}"></script>
-    <script src="{{ mix('/js/sign-in-visits/visits/create-edit-custom-visits.js') }}"></script>
+    <script src="{{ mix('/js/sign-in-visits/visits/create-edit.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     <script type="text/javascript">
 

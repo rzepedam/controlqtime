@@ -1,5 +1,5 @@
 $('#visit_table').bootstrapTable({
-    url: "/sign-in-visits/visits/getVisits",
+    url: "/sign-in-visits/getVisits",
     columns: [
         {
             formatter : function(value,row,index) {
@@ -10,7 +10,12 @@ $('#visit_table').bootstrapTable({
                     return row.id;
                 }
             }
-        }, {}, {}, {},
+        }, 
+        {
+            formatter : function(value,row,index) {
+                return row.type_visit.name;
+            }
+        }, {}, {},
         {
             formatter : function(value,row,index) {
                 return  '<a href="/sign-in-visits/visits/' + row.id + '" class="btn btn-squared btn-info btn-sm waves-effect waves-light hidden-xs hidden-sm tooltip-info" data-toggle="tooltip" data-original-title="Ver"><i class="fa fa-search"></i></a> ' +

@@ -1,5 +1,12 @@
 <?php
 
+// visible url's
+Route::resource('form-visits', 'FormVisitController');
+Route::group(['prefix' => 'form-visits'], function() {
+    Route::post('addImages', ['as' => 'VisitAddImages', 'uses' => 'FormVisitController@addImages']);
+    Route::post('deleteImages', ['as' => 'VisitDeleteImages', 'uses' => 'FormVisitController@deleteImages']);
+});
+
 Route::group(['middleware' => 'auth'], function ()
 {
     require base_path() . '/app/Http/Routes/home/admin.php';

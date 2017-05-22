@@ -7,8 +7,8 @@
 @section('title_header') Detalle Visita @stop
 
 @section('breadcumb')
-    <li><a href="{{ route('visits') }}"><i class="fa fa-tasks" aria-hidden="true"></i> Registro Visitas</a></li>
-    <li><a href="{{ route('visits') }}"><i class="fa fa-id-card-o" aria-hidden="true"></i> Visitas</a></li>
+    <li><a href="{{ route('sign-in-visits') }}"><i class="fa fa-tasks" aria-hidden="true"></i> Registro Visitas</a></li>
+    <li><a href="{{ route('visits.index') }}"><i class="fa fa-id-card-o" aria-hidden="true"></i> Visitas</a></li>
     <li class="active">Detalle</li>
 @stop
 

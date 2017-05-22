@@ -8,7 +8,7 @@ use Controlqtime\Core\Entities\Visit;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class VisitRegister extends Mailable
+class VisitRegister extends Mailable implements ShouldQueue
 {
 	use Queueable, SerializesModels;
 
