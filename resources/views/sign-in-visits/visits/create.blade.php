@@ -42,7 +42,6 @@
 
     <script src="{{ mix('/js/create-edit-common.js') }}"></script>
     <script src="{{ mix('/js/sign-in-visits/visits/create-edit.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
 
     <script type="text/javascript">
 

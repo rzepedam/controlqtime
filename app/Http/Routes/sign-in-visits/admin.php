@@ -8,6 +8,7 @@ Route::get('sign-in-visits', ['as' => 'sign-in-visits', function () {
 // Sign In Visit
 Route::group(['prefix' => 'sign-in-visits'], function () {
 	// Visit
+	Route::get('visit-authorization', 'VisitController@authorization');
 	Route::get('getVisits', ['as' => 'getVisits', 'uses' => 'VisitController@getVisits']);
     Route::resource('visits', 'VisitController');
 });

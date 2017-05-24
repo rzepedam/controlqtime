@@ -615,9 +615,12 @@ $factory->define(Visit::class, function (Faker\Generator $faker) {
 		null
 	];
 
+	$randUserEmployee = rand(1, 2);
+
 	return [
+		'user_id'    => $randUserEmployee,	
 		'type_visit_id'  => $rand,
-		'employee_id'    => rand(1, 2),
+		'employee_id'    => $randUserEmployee,
 		'is_walking'     => $faker->randomElement(['0', '1']),
 		'rut'            => rand(3, 24) . '.' . rand(100, 999) . '.' . rand(100, 999) . '-' . rand(1, 9),
 		'male_surname'   => $maleSurname,

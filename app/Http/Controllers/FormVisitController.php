@@ -2,12 +2,12 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Mail\VisitCompleteForm;
 use Exception;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Controlqtime\Core\Entities\Visit;
+use Controlqtime\Mail\VisitCompleteForm;
 use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Core\Entities\ActivateVisit;
 use Controlqtime\Http\Requests\FormVisitRequest;
@@ -70,12 +70,12 @@ class FormVisitController extends Controller
 		}
 	}
 
+	
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return \Illuminate\Http\Response
+	 * @param  Controlqtime\Http\Requests\FormVisitRequest $request
+	 * @return \Illuminate\Http\Response                    
 	 */
-	public function store()
+	public function store(FormVisitRequest $request)
 	{
 		DB::beginTransaction();
 
@@ -83,10 +83,13 @@ class FormVisitController extends Controller
 		{
 			$visit = $this->visit->with(['imageable'])->findOrFail(request('id'));
 			$visit->formVisit()->create(request()->all());
-			$this->activateVisit->checkStateVisit($visit);
+			if ( $this->activateVisit->checkStateVisit($visit) )
+			{
+				Mail::to($visit->user)->send(new VisitCompleteForm($visit));
+			}
 			DB::commit();
 
-			return response()->json(['status' => true, 'message' => 'El formulario fue almacenado satisfactoriamente']);
+			return response()->json(['status' => true]);
 		} catch ( Exception $e )
 		{
 			$this->log->error('Error Store FormVisit: ' . $e->getMessage());
@@ -100,7 +103,7 @@ class FormVisitController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param FormVisitRequest $request
+	 * @param  Controlqtime\Http\Requests\FormVisitRequest $request
 	 * @param string $id
 	 *
 	 * @return \Illuminate\Http\Response
@@ -119,7 +122,7 @@ class FormVisitController extends Controller
 			}
 			DB::commit();
 
-			return response()->json(['status' => true, 'message' => 'El formulario fue actualizado satisfactoriamente']);
+			return response()->json(['status' => true, 'url' => '/']);
 		} catch ( Exception $e )
 		{
 			$this->log->error('Error Update FormVisit: ' . $e->getMessage());

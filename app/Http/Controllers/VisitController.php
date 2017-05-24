@@ -6,11 +6,14 @@ use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
+use Controlqtime\Mail\VisitDenied;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Mail\VisitApproved;
 use Controlqtime\Mail\VisitRegister;
 use Illuminate\Support\Facades\Mail;
 use Controlqtime\Core\Entities\Image;
 use Controlqtime\Core\Entities\Visit;
+use Controlqtime\Mail\VisitUpdateForm;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\TypeVisit;
 use Controlqtime\Core\Factory\ImageFactory;
@@ -119,7 +122,6 @@ class VisitController extends Controller
         } catch (\Exception $e)
         {
             $this->log->error('Error create Visit: ' . $e->getMessage());
-            session()->flash('error', 'Hubo un error en el servidor. Comunique con personal especializado.');
 
             return response()->json(['status' => false, 'url' => '/sign-in-visits/visits']);
         }
@@ -149,14 +151,13 @@ class VisitController extends Controller
         {
             $visit = $this->visit->create(request()->all());
             session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
-            DB::commit();
             Mail::to($visit)->send(new VisitRegister($visit));
+            DB::commit();
 
             return response()->json(['status' => true, 'url' => '/sign-in-visits/visits']);
         } catch ( Exception $e )
         {
             $this->log->error('Error Store Visit: ' . $e->getMessage());
-            session()->flash('error', 'Hubo un error en el servidor. Comunique con personal especializado.');
             DB::rollBack();
 
             return response()->json(['status' => false, 'url' => '/sign-in-visits/visits']);
@@ -180,7 +181,6 @@ class VisitController extends Controller
         } catch ( Exception $e )
         {
             $this->log->error('Error Store Visit: ' . $e->getMessage());
-            session()->flash('error', 'Hubo un error en el servidor. Comunique con personal especializado.');
 
             return response()->json(['status' => false, 'url' => '/sign-in-visits/visits']);
         }
@@ -218,8 +218,11 @@ class VisitController extends Controller
         try
         {
             $visit = $this->visit->findOrFail($id);
+            $request->request->add(['status' => 'pending']);
+            dd(request()->all());
             $visit->update($request->all());
             $visit->contactsable->update($request->all());
+            Mail::to($visit)->send(new VisitUpdateForm($visit));
             session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
             DB::commit();
 
@@ -227,7 +230,6 @@ class VisitController extends Controller
         } catch ( Exception $e )
         {
             $this->log->error('Error Update Visit: ' . $e->getMessage());
-            session()->flash('error', 'Hubo un error en el servidor. Comunique con personal especializado.');
             DB::rollBack();
 
             return response()->json(['status' => false]);
@@ -246,11 +248,6 @@ class VisitController extends Controller
         $this->image->findOrFail($id)->delete();
 
         return back();
-    }
-
-    public function createVisitForm()
-    {
-        dd('...');
     }
 
     public function addPhotos($id, Request $request)
@@ -275,7 +272,33 @@ class VisitController extends Controller
         } catch ( Exception $e )
         {
             $this->log->error('Error AddPhotos Visit: ' . $e->getMessage());
-            session()->flash('error', 'Hubo un error en el servidor. Comunique con personal especializado.');
+            DB::rollBack();
+
+            return response()->json(['status' => false]);
+        }
+    }
+
+    public function authorization()
+    {
+        try
+        {   
+            $visit = $this->visit->findOrFail(request('id'));
+            $visit->state = request('status');
+            
+            if ( $visit->save() && request('status') === 'approved' )
+            {
+                Mail::to($visit)->send(new VisitApproved($visit));
+            }
+
+            if ( $visit->save() && request('status') === 'denied' )
+            {
+                Mail::to($visit)->send(new VisitDenied($visit));
+            }
+
+            return response()->json(['status' => true]);
+        } catch( \Exception $e)
+        {
+            $this->log->error('Error Authorization Visit: ' . $e->getMessage());
             DB::rollBack();
 
             return response()->json(['status' => false]);

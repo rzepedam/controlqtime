@@ -11,9 +11,10 @@ $('#btnSubmit').click(function (e) {
         form.serialize(),
         function (response) {
             if (response.status) {
-                
+                sweetAlert("Yeah!", "Información registrada exitosamente!. Queda atento, pronto te notificaremos el estado de tu visita.", "success");
+                button.removeClass('btn-success').html('<i class="fa fa-floppy-o"></i> Guardar');
             } else {
-                alert("Oops, ha ocurrido un error. No es posible conectar con el servidor.");
+                sweetAlert("Oops...", "Ha ocurrido un error. No es posible conectar con el servidor!", "error");
             }
         }).fail(function (response) {
             button.removeClass('btn-success').html('<i class="fa fa-floppy-o"></i> Guardar');

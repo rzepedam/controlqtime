@@ -92,7 +92,8 @@ const { mix } = require('laravel-mix');
         .scripts([
             'resources/assets/custom-remark/js/bootstrap-table.js',
             'node_modules/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js',
-            'resources/assets/custom-remark/js/bootstrap-table-es-ES.js'
+            'resources/assets/custom-remark/js/bootstrap-table-es-ES.js',
+            'resources/assets/utilities/delete.js'
         ], 'public/js/index-common.js');
 
 // Create-Edit
@@ -322,6 +323,20 @@ const { mix } = require('laravel-mix');
                 'resources/assets/components/bootstrap-clockpicker.js',
                 'resources/assets/me/js/validations/valida_email.js'
             ], 'public/js/sign-in-visits/visits/create-edit.js');
+
+        // Show
+            mix.scripts([
+                'resources/assets/me/js/base/sign-in-visits/visits/visit_authorization.js'
+            ], 'public/js/sign-in-visits/visits/show.js');
+
+    // Form Visit
+        //  Create
+            mix.scripts([
+                'node_modules/bootstrap-maxlength/bootstrap-maxlength.min.js',
+                'resources/assets/components/bootstrap-maxlength.js',
+                'resources/assets/me/js/base/sign-in-visits/visits/custom-submit-form-ajax.js',
+                'resources/assets/me/js/utilities/add_csrf_token.js',
+            ], 'public/js/sign-in-visits/form-visits/create-edit.js');
 
 // Maintainers
     // Menú

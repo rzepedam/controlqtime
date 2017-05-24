@@ -55,4 +55,8 @@ return [
         5 => 800199,
         6 => 1075323,
     ],
+
+    'pending' => 'warning',
+    'approved' => 'success',
+    'denied' => 'danger'
 ];

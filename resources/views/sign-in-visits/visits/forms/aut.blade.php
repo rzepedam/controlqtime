@@ -7,7 +7,8 @@
     <meta name="description" content="CQTime - Where questions find answers">
     <meta name="author" content="Raúl Elías Meza Mora">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>ControlQTime</title>
+    <link rel="icon" href="{{ asset('img/logo.png') }}">
+    <title>Controlqtime</title>
     <link rel="stylesheet" href="{{ mix('css/core.css') }}">
     <link rel="stylesheet" href="{{ mix('css/plugins.css') }}">
     <link rel="stylesheet" href="{{ mix('css/fonts.css') }}">
@@ -113,7 +114,7 @@
 <script src="{{ mix('js/plugins.js') }}"></script>
 <script src="{{ mix('js/components.js') }}"></script>
 <script src="{{ mix('js/upload-common.js') }}"></script>
-<script type="text/javascript" src="{{ mix('js/create-edit-common.js') }}"></script>
+<script type="text/javascript" src="{{ mix('js/sign-in-visits/form-visits/create-edit.js') }}"></script>
 
 <script type="text/javascript">
 
@@ -138,6 +139,7 @@
             }
         });
     });
+
 </script>
 
 @include('layout.messages.success')

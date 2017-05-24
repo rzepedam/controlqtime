@@ -8,7 +8,7 @@ use Controlqtime\Core\Entities\Visit;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class VisitCompleteForm extends Mailable
+class VisitCompleteForm extends Mailable implements ShouldQueue
 {
 	use Queueable, SerializesModels;
 
@@ -37,6 +37,6 @@ class VisitCompleteForm extends Mailable
 		$url = env('APP_URL');
 
 		return $this->subject('Formulario Registro Visita Completo')
-			->markdown('emails.visits.form_visit_complete', compact('visit', 'url'));
+					->markdown('emails.visits.form_visit_complete', compact('visit', 'url'));
 	}
 }

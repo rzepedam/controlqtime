@@ -7,7 +7,7 @@
     <meta name="description" content="CQTime - Where questions find answers">
     <meta name="author" content="Raúl Elías Meza Mora">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>ControlQTime</title>
+    <title>Controlqtime</title>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ mix('css/index-layout-core.css') }}">
     <!-- Plugins -->

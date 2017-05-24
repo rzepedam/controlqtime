@@ -7,37 +7,29 @@
     <meta name="description" content="CQTime - Where questions find answers">
     <meta name="author" content="Raúl Elías Meza Mora">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>ControlQTime</title>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ mix('css/index-layout-core.css') }}">
-    <!-- Plugins -->
-    <link rel="stylesheet" href="{{ mix('css/index-layout-plugin.css') }}">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="{{ mix('css/index-layout-fonts.css') }}">
-    <!-- Style Owned -->
-    <link rel="stylesheet" href="{{ mix('css/style.css') }}">
+    <link rel="icon" href="{{ asset('img/logo.png') }}">
+    <title>Controlqtime</title>
+    <link rel="stylesheet" href="{{ mix('css/core.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/fonts.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/upload-common.css') }}">
     <style>
         body {
             padding-top: 0px;
         }
-
     </style>
-    <!-- Script Default Laravel -->
     <script>
         window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
+                'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-    <!-- Browsers Utilities -->
-    <script src="{{ mix('js/index-layout-browser-utilities.js') }}"></script>
-    <script>
-        Breakpoints();
-    </script>
+    <script src="{{ mix('js/breakpoints.js') }}"></script>
+    <script>Breakpoints();</script>
 </head>
 <body>
 <div id="app">
-    {{-- Content --}}
+
     <div class="page animsition">
         <div class="page-header">
             <h1 class="page-title">
@@ -112,7 +104,7 @@
                 <div class="panel-body">
 
                     @if ( is_null( $visit->formVisit ) )
-                        {{ Form::open(['route' => 'visits', 'method' => 'POST', 'id' => 'form-submit']) }}
+                        {{ Form::open(['route' => 'form-visits.store', 'method' => 'POST', 'id' => 'form-submit']) }}
                         {{ Form::hidden('id', $visit->id) }}
                     @else
                         {{ Form::model($visit, ['route' => ['form-visits.update', $visit], 'method' => 'PUT', 'id' => 'form-submit']) }}
@@ -173,14 +165,11 @@
     </div>
 </div>
 
-<!-- Core  -->
-<script src="{{ mix('js/index-layout-core.js') }}"></script>
-<!-- Scripts -->
-<script src="{{ mix('js/index-layout-scripts.js') }}"></script>
-<!-- Components -->
-<script src="{{ mix('js/index-layout-components.js') }}"></script>
-<script src="{{ mix('js/sign-in-visits/form-visits/create-edit-custom-form-visits.js') }}"></script>
+<script src="{{ mix('js/core.js') }}"></script>
+<script src="{{ mix('js/plugins.js') }}"></script>
+<script src="{{ mix('js/components.js') }}"></script>
 <script src="{{ mix('js/upload-common.js') }}"></script>
+<script type="text/javascript" src="{{ mix('js/sign-in-visits/form-visits/create-edit.js') }}"></script>
 
 <script type="text/javascript">
 

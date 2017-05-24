@@ -1,12 +1,10 @@
 @component('mail::message')
-# Bienvenido(a) {{ $visit->full_name }}
+# Buenos días {{ $visit->full_name }}
 
-Para finalizar el proceso de registro de su visita, es necesario que complete la información faltante de su perfil.
-Esto lo puede efectuar haciendo click en el botón que se encuentra más abajo.<br /><br />
-Una vez recibida la información le confirmaremos a la brevedad el estado de su visita.
+Le informamos que la documentación ingresada para la visita a realizar el día {{ $visit->date_more_hour }} no ha superado nuestro proceso de validación. Le rogamos revisar nuevamente su documentación. Puede hacerlo desde el botón que se encuentra más abajo.
 
 @component('mail::button', ['url' => $visit->url . '&key=' . $visit->key])
-    Completar Formulario
+    Verificar Formulario
 @endcomponent
 <br />
 <br />

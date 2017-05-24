@@ -1,6 +1,6 @@
 <?php
 
-// visible url's
+// Visible url's
 Route::resource('form-visits', 'FormVisitController');
 Route::group(['prefix' => 'form-visits'], function() {
     Route::post('addImages', ['as' => 'VisitAddImages', 'uses' => 'FormVisitController@addImages']);

@@ -191,7 +191,7 @@
 			( ! is_null($this->date) )
 				? $expired = $this->date->format('Y-m-d') . ' ' . $this->hour
 				: $expired = $this->start_date->format('Y-m-d') . ' ' . '00:00:00';
-
+			
 			$this->attributes['url'] = UrlSigner::sign(env('APP_URL') . $value, Carbon::parse($expired));
 		}
 

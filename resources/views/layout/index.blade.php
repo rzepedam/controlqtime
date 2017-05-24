@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ mix('css/style.css') }}">
     <script>
         window.Laravel = <?php echo json_encode([
-                'csrfToken' => csrf_token(),
+            'csrfToken' => csrf_token(),
         ]); ?>
     </script>
     <script src="{{ mix('js/breakpoints.js') }}"></script>

@@ -1,9 +1,5 @@
 @extends('layout.index')
 
-@section('css')
-
-@endsection
-
 @section('title_header') Detalle Visita @stop
 
 @section('breadcumb')
@@ -33,7 +29,5 @@
 @stop
 
 @section('scripts')
-
-
-
+    <script type="text/javascript" src="{{ mix('js/sign-in-visits/visits/show.js') }}"></script>
 @stop
