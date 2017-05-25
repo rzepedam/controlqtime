@@ -62,6 +62,7 @@
     <script src="{{ mix('js/core.js') }}"></script>
     <script src="{{ mix('js/plugins.js') }}"></script>
     <script src="{{ mix('js/components.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     @yield('scripts')
 

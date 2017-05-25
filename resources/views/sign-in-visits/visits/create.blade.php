@@ -15,7 +15,7 @@
 @section('content')
 
     @include('layout.messages.errors-js')
-
+    
     {{ Form::open(array('route' => 'visits.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
         <div class="panel">
