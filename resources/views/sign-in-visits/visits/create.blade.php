@@ -3,9 +3,7 @@
 @section('title_header') Crear Nueva Visita @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/sign-in-visits/visits/create-edit.css') }}">
-
 @stop
 
 @section('breadcumb')
@@ -39,26 +37,6 @@
 @stop
 
 @section('scripts')
-
     <script src="{{ mix('/js/create-edit-common.js') }}"></script>
     <script src="{{ mix('/js/sign-in-visits/visits/create-edit.js') }}"></script>
-
-    <script type="text/javascript">
-
-        $(document).ready(function() {
-
-            $('#type_visit_id').on('change', function() {
-                if ( $(this).val() == 1 || $(this).val() == 5 )
-                {
-                    $('#span_date').html('<div class="col-xs-12 col-sm-3 col-md-3 form-group">{{Form::label("start_date", "Fecha Inicio")}}{{Form::text("start_date", null, ["class"=> "form-control"])}}</div><div class="col-xs-12 col-sm-3 col-md-3 form-group">{{Form::label("end_date", "Fecha Fin")}}{{Form::text("end_date", null, ["class"=> "form-control"])}}</div>');
-                } else {
-                    $('#span_date').html('<div class="col-xs-12 col-sm-3 col-md-3 form-group">{{Form::label("date", "Fecha Visita")}}{{Form::text("date", null, ["class"=> "form-control"])}}</div><div class="col-xs-12 col-sm-3 col-md-3 form-group">{{Form::label("hour", "Hora")}}{{Form::text("hour", null, ["class"=> "form-control"])}}</div>');
-                }
-            });
-
-        });
-
-    </script>
-
-
 @stop

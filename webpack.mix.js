@@ -321,7 +321,8 @@ const { mix } = require('laravel-mix');
                 'resources/assets/components/bootstrap-datepicker.js',
                 'node_modules/clockpicker/dist/bootstrap-clockpicker.min.js',
                 'resources/assets/components/bootstrap-clockpicker.js',
-                'resources/assets/me/js/validations/valida_email.js'
+                'resources/assets/me/js/validations/valida_email.js',
+                'resources/assets/me/js/base/sign-in-visits/visits/changeTypeVisit.js'
             ], 'public/js/sign-in-visits/visits/create-edit.js');
 
         // Show

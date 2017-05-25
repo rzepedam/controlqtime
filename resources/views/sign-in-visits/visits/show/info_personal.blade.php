@@ -87,6 +87,10 @@
                     <td class="text-center">{{ $visit->obs }}</td>
                 </tr>
             @endif
+            <tr>
+                <td class="col-md-3">Ingresado</td>
+                <td class="text-center">{{ $visit->created_at_to_spanish_format }}</td>
+            </tr>
         </tbody>
     </table>
 </div>

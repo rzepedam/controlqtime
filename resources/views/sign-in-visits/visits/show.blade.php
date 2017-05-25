@@ -10,14 +10,30 @@
 
 @section('content')
 
-    <div class="panel panel-bordered panel-info">
-        <div class="panel-heading">
-            &nbsp;
-        </div>
-        <div class="panel-body">
+    <div class="nav-tabs-horizontal">
+        <ul class="nav nav-tabs" data-plugin="nav-tabs" role="tablist">
+            <li class="active" role="presentation"><a data-toggle="tab" href="#tab_1" aria-controls="tab_1" role="tab"><i class="fa fa-pencil"></i> Información General</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> Documentación</a></li>
+        </ul>
+        <div class="tab-content padding-top-20">
+            <div class="tab-pane active" id="tab_1" role="tabpanel">
+                <div class="panel">
+                    <div class="panel-body">
 
-            @include('sign-in-visits.visits.show.info_personal')
+                        @include('sign-in-visits.visits.show.info_personal')
 
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="tab_2" role="tabpanel">   
+                <div class="panel">
+                    <div class="panel-body">
+                        
+                        @include('sign-in-visits.visits.show.images')
+                    
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

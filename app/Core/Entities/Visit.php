@@ -24,7 +24,7 @@
 		 */
 		protected $dates = [
 			'startDate', 'endDate', 'date'
-		];
+		];	
 
 
 		/**
@@ -241,7 +241,25 @@
 				return ucfirst(Date::parse($this->date)->format('l j F Y')) . ' a las ' . $this->hour;
 			}
 
-			return $this->start_date . ' a ' . $this->end_date;
+			return ucfirst(Date::parse($this->start_date)->format('l j F Y')) . ' a ' . ucfirst(Date::parse($this->end_date)->format('l j F Y'));
+		}
+
+		/**
+		 * @param  date->format('Y-m-d')
+		 * 
+		 * @return date->format('d-m-Y')
+		 */
+		public function getDateAttribute($value)
+		{
+			return Carbon::parse($value)->format('d-m-Y');
+		}
+
+		/**
+		* @return string 'Lunes 12 Diciembre 2016'
+		*/
+		public function getCreatedAtToSpanishFormatAttribute()
+		{
+			return ucfirst(Date::parse($this->created_at)->format('l j F Y H:i:s'));
 		}
 
 

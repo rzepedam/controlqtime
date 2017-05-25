@@ -17,7 +17,6 @@ use Controlqtime\Mail\VisitUpdateForm;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\TypeVisit;
 use Controlqtime\Core\Factory\ImageFactory;
-use Controlqtime\Core\Entities\Relationship;
 use Controlqtime\Core\Entities\ActivateVisit;
 
 class VisitController extends Controller
@@ -48,11 +47,6 @@ class VisitController extends Controller
     protected $log;
 
     /**
-     * @var Relationship
-     */
-    protected $relationship;
-
-    /**
      * @var Visit
      */
     protected $visit;
@@ -69,18 +63,15 @@ class VisitController extends Controller
      * @param Employee $employee
      * @param Image $image
      * @param Log $log
-     * @param Relationship $relationship
      * @param TypeVisit $typeVisit
      * @param Visit $visit
      */
-    public function __construct(ActivateVisit $activateVisit, Employee $employee, Image $image, Log $log,
-        Relationship $relationship, TypeVisit $typeVisit, Visit $visit)
+    public function __construct(ActivateVisit $activateVisit, Employee $employee, Image $image, Log $log, TypeVisit $typeVisit, Visit $visit)
     {
         $this->activateVisit = $activateVisit;
         $this->employee      = $employee;
         $this->image         = $image;
         $this->log           = $log;
-        $this->relationship  = $relationship;
         $this->typeVisit     = $typeVisit;
         $this->visit         = $visit;
     }
@@ -124,6 +115,11 @@ class VisitController extends Controller
             $this->log->error('Error create Visit: ' . $e->getMessage());
 
             return response()->json(['status' => false, 'url' => '/sign-in-visits/visits']);
+        }
+
+        if ( request()->ajax() )
+        {
+            return response()->json(['employees' => $employees, 'typeVisits' => $typeVisits]);
         }
 
         return view('sign-in-visits.visits.create', compact(
@@ -195,11 +191,12 @@ class VisitController extends Controller
      */
     public function edit($id)
     {
-        $relationships = $this->relationship->pluck('name', 'id');
         $visit         = $this->visit->findOrFail($id);
+        $typeVisits = $this->typeVisit->pluck('name', 'id');
+        $employees  = $this->employee->enabled()->pluck('full_name', 'id');
 
         return view('sign-in-visits.visits.edit', compact(
-            'relationships', 'signInVisit'
+            'visit', 'typeVisits', 'employees'
         ));
     }
 
@@ -218,15 +215,22 @@ class VisitController extends Controller
         try
         {
             $visit = $this->visit->findOrFail($id);
-            $request->request->add(['status' => 'pending']);
-            dd(request()->all());
+            if (auth()->id() === $visit->id)
+            {
+                $request->request->add(['status' => 'pending']);
+            }
+            
             $visit->update($request->all());
-            $visit->contactsable->update($request->all());
-            Mail::to($visit)->send(new VisitUpdateForm($visit));
+
+            if (auth()->id() === $visit->id)
+            {
+                Mail::to($visit)->send(new VisitUpdateForm($visit));
+            }
+
             session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
             DB::commit();
 
-            return response()->json(['status' => true, 'url' => 'sign-in-visits/visits']);
+            return response()->json(['status' => true, 'url' => '/sign-in-visits/visits']);
         } catch ( Exception $e )
         {
             $this->log->error('Error Update Visit: ' . $e->getMessage());
