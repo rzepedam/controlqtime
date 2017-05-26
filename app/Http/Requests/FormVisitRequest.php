@@ -29,8 +29,8 @@ class FormVisitRequest extends FormRequest
             {
                 return [
                     'address' => ['required'], 
-                    'city' => ['required'], 
-                    'phone' => ['required']
+                    'city'    => ['required'], 
+                    'phone'   => ['required']
                 ];
             }
 

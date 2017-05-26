@@ -136,10 +136,7 @@
 		 */
 		public function setDateAttribute($value)
 		{
-			if ( ! is_null($value) )
-			{
-				$this->attributes['date'] = Carbon::parse($value);
-			}
+			$this->attributes['date'] = Carbon::parse($value);
 		}
 
 		/**
@@ -147,10 +144,7 @@
 		 */
 		public function setHourAttribute($value)
 		{
-			if ( ! is_null($value) )
-			{
-				$this->attributes['hour'] = str_replace(':', '', $value);
-			}
+			$this->attributes['hour'] = str_replace(':', '', $value);
 		}
 
 		/**
@@ -158,10 +152,7 @@
 		 */
 		public function setStartDateAttribute($value)
 		{
-			if ( ! is_null($value) )
-			{
-				$this->attributes['start_date'] = Carbon::parse($value);
-			}
+			$this->attributes['start_date'] = Carbon::parse($value);
 		}
 
 		/**
@@ -169,10 +160,7 @@
 		 */
 		public function setEndDateAttribute($value)
 		{
-			if ( ! is_null($value) )
-			{
-				$this->attributes['end_date'] = Carbon::parse($value);
-			}
+			$this->attributes['end_date'] = Carbon::parse($value);
 		}
 
 		/**
@@ -188,9 +176,8 @@
 		 */
 		public function setUrlAttribute($value)
 		{
-			( ! is_null($this->date) )
-				? $expired = $this->date->format('Y-m-d') . ' ' . $this->hour
-				: $expired = $this->start_date->format('Y-m-d') . ' ' . '00:00:00';
+			is_null($this->start_date) ? $expired = Carbon::parse($this->date)->format('Y-m-d') . ' ' . $this->hour
+				: $expired = Carbon::parse($this->start_date)->format('Y-m-d') . ' ' . '00:00:00';
 			
 			$this->attributes['url'] = UrlSigner::sign(env('APP_URL') . $value, Carbon::parse($expired));
 		}
