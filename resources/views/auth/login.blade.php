@@ -7,8 +7,8 @@
     <meta name="description" content="CQTime - Where questions find answers">
     <meta name="author" content="Raúl Elías Meza Mora">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="icon" href="{{ asset('img/logo.png') }}">
     <title>Login</title>
-    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ mix('css/core.css') }}">
     <link rel="stylesheet" href="{{ mix('css/plugins.css') }}">
     <link rel="stylesheet" href="{{ mix('css/login.css') }}">

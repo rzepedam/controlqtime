@@ -183,6 +183,7 @@
 			Laravel\Passport\PassportServiceProvider::class,
 			Laravel\Tinker\TinkerServiceProvider::class,
 			Spatie\UrlSigner\Laravel\UrlSignerServiceProvider::class,
+			Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 		],
 
 		/*
@@ -229,7 +230,7 @@
 			'URL'          => Illuminate\Support\Facades\URL::class,
 			'Validator'    => Illuminate\Support\Facades\Validator::class,
 			'View'         => Illuminate\Support\Facades\View::class,
-
+			
 			'Date'      => Jenssegers\Date\Date::class,
 			'Form'      => Collective\Html\FormFacade::class,
 			'Html'      => Collective\Html\HtmlFacade::class,
@@ -237,6 +238,7 @@
 			'Image'     => Barryvdh\Snappy\Facades\SnappyImage::class,
 			'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
 			'UrlSigner' => Spatie\UrlSigner\Laravel\UrlSignerFacade::class,
+			'Bugsnag'   => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
 		],
 
 	];
