@@ -11,6 +11,7 @@ storage
 _ide_helper.php
 .rnd
 .DS_Store
+resources/assets/.DS_Store
 public/.DS_Store
 resources/views/layout/.DS_Store
 public/fonts/
