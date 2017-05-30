@@ -575,7 +575,8 @@ $factory->state(Vehicle::class, 'disable', function () {
 	];
 });
 
-$factory->define(Visit::class, function (Faker\Generator $faker) {
+$factory->define(Visit::class, function (Faker\Generator $faker) 
+{
 	$maleSurname   = $faker->lastName;
 	$femaleSurname = $faker->lastName;
 	$firstName     = $faker->firstName;
@@ -618,7 +619,7 @@ $factory->define(Visit::class, function (Faker\Generator $faker) {
 	$randUserEmployee = rand(1, 2);
 
 	return [
-		'user_id'    => $randUserEmployee,	
+		'user_id'        => $randUserEmployee,	
 		'type_visit_id'  => $rand,
 		'employee_id'    => $randUserEmployee,
 		'is_walking'     => $faker->randomElement(['0', '1']),

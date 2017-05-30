@@ -18,12 +18,10 @@ $('#employee_table').bootstrapTable({
         },
         {
             formatter : function(value, row) {
-                return  '<a href="/human-resources/employees/' + row.id + '" class="btn btn-squared btn-info btn-sm waves-effect waves-light hidden-xs hidden-sm tooltip-info" data-toggle="tooltip" data-original-title="Ver"><i class="fa fa-search"></i></a> ' +
-                        '<a href="/human-resources/employees/' + row.id + '" class="btn btn-squared btn-info btn-xs waves-effect waves-light hidden-md hidden-lg"><i class="fa fa-search"></i></a> ' +
-                        '<a href="/human-resources/employees/' + row.id +'/edit" class="btn btn-squared btn-warning btn-sm waves-effect waves-light hidden-xs hidden-sm tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i></a> ' +
-                        '<a href="/human-resources/employees/' + row.id +'/edit" class="btn btn-squared btn-warning btn-xs waves-effect waves-light hidden-md hidden-lg"><i class="fa fa-pencil"></i></a> ' +
-                        '<a href="/human-resources/employees/attachFiles/' + row.id + '" class="btn btn-squared btn-primary btn-sm waves-effect waves-light hidden-xs hidden-sm tooltip-primary" data-toggle="tooltip" data-original-title="Adjuntar Archivos"><i class="fa fa-cloud-upload"></i></a> ' +
-                        '<a href="/human-resources/employees/attachFiles/' + row.id + '" class="btn btn-squared btn-primary btn-xs waves-effect waves-light hidden-md hidden-lg"><i class="fa fa-cloud-upload"></i></a>';
+                return  '<a href="/human-resources/employees/' + row.id + '"><i class="fa fa-search text-info" aria-hidden="true"></i></a>&nbsp ' +
+                        '<a href="/human-resources/employees/' + row.id +'/edit"><i class="fa fa-pencil text-warning" aria-hidden="true"></i></a>&nbsp ' +
+                        '<a href="/human-resources/employees/attachFiles/' + row.id + '"><i class="fa fa-cloud-upload text-primary" aria-hidden="true"></i></a>&nbsp ' + 
+                        '<a href="javascript:void(0)"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
             }
         }
     ],

@@ -1,10 +1,8 @@
 @extends('layout.index')
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/index-common.css') }}">
     <link rel="stylesheet" href="{{ mix('css/human-resources/daily-assistances/index-custom-daily-assistances.css') }}">
-
 @stop
 
 @section('title_header')
@@ -19,23 +17,18 @@
 @section('content')
 
     <div class="panel">
-        <div class="panel-heading">
-            <br>
-            <br>
-            @include('human-resources.daily-assistances.partials.heading')
-
-        </div>
-        <br>
         <div class="panel-body">
 
-            @include('human-resources.daily-assistances.partials.access')
+            @include('human-resources.daily-assistances.partials.heading')
+
+            {{--@include('human-resources.daily-assistances.partials.access')--}}
 
             <br>
             <br>
             <br>
             <br>
 
-            @include('human-resources.daily-assistances.partials.assistances')
+            {{--@include('human-resources.daily-assistances.partials.assistances')--}}
 
         </div>
     </div>

@@ -6,6 +6,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
+        // Others
+        $this->call(DeviceTableSeeder::class);
+
         // Maintainers tables
         $this->call(CountryTableSeeder::class);
         $this->call(CityTableSeeder::class);

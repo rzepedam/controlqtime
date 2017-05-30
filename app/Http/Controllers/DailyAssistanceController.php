@@ -2,20 +2,32 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Carbon\Carbon;
-use Controlqtime\Core\Api\Entities\AccessControlApi;
-use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
-use Controlqtime\Core\Entities\Employee;
 use Exception;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
+use Controlqtime\Core\Entities\Area;
+use Controlqtime\Core\Entities\Company;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Api\Entities\AccessControlApi;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class DailyAssistanceController extends Controller
 {
     /**
+     * @var Area
+     */
+    protected $area;
+
+    /**
      * @var AccessControlApi
      */
     protected $accessControl;
+
+    /**
+     * @var Company
+     */
+    protected $company;
 
     /**
      * @var DailyAssistanceApi
@@ -35,18 +47,22 @@ class DailyAssistanceController extends Controller
     /**
      * DailyAssistanceController constructor.
      *
+     * @param Area $area
      * @param AccessControlApi   $accessControl
+     * @param Company $company
      * @param DailyAssistanceApi $dailyAssistance
      * @param Employee           $employee
      * @param Log                $log
      */
-    public function __construct(AccessControlApi $accessControl, DailyAssistanceApi $dailyAssistance,
+    public function __construct(Area $area, AccessControlApi $accessControl, Company $company, DailyAssistanceApi $dailyAssistance,
         Employee $employee, Log $log)
     {
-        $this->accessControl = $accessControl;
+        $this->area            = $area;
+        $this->accessControl   = $accessControl;
+        $this->company         = $company;
         $this->dailyAssistance = $dailyAssistance;
-        $this->employee = $employee;
-        $this->log = $log;
+        $this->employee        = $employee;
+        $this->log             = $log;
     }
 
     /**
@@ -56,12 +72,14 @@ class DailyAssistanceController extends Controller
      */
     public function index()
     {
-        $date = Carbon::today();
+        $date      = Carbon::today();
+        $areas     = $this->area->get();
+        $companies = $this->company->get();
         $employees = $this->employee->enabled()->get();
         list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDate($date);
 
         return view('human-resources.daily-assistances.index', compact(
-            'accessControls', 'dailyAssistances', 'num_employees', 'entry', 'output', 'employees'
+            'accessControls', 'areas', 'companies', 'dailyAssistances', 'num_employees', 'entry', 'output', 'employees'
         ));
     }
 
