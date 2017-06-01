@@ -17,19 +17,19 @@
 @section('content')
 
     <div class="panel">
-        <div class="panel-body">
+        <div class="panel-body">    
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    
+                    @include('human-resources.daily-assistances.partials.filters')
 
-            @include('human-resources.daily-assistances.partials.heading')
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    
+                    @include('human-resources.daily-assistances.partials.table')
 
-            {{--@include('human-resources.daily-assistances.partials.access')--}}
-
-            <br>
-            <br>
-            <br>
-            <br>
-
-            {{--@include('human-resources.daily-assistances.partials.assistances')--}}
-
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -41,8 +41,20 @@
 @stop
 
 @section('scripts')
-
     <script src="{{ mix('js/index-common.js') }}"></script>
     <script src="{{ mix('js/human-resources/daily-assistances/index-custom-daily-assistances.js') }}"></script>
 
+    <script type="text/javascript">
+        
+        $(document).ready(function() {
+
+            $('.date').datepicker().on("change", function (e) 
+            {
+                var start = $("#startDate").datepicker({ dateFormat: 'dd, mm, yy' });
+                console.log(start);
+            });
+
+        });
+
+    </script>
 @stop

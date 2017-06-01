@@ -16,7 +16,7 @@ class DailyAssistanceApi extends Eloquent
      */
     protected $fillable = [
         'rut', 'num_device', 'status', 'created_at',
-    ];
+    ];         
 
     /**
      * @var bool
@@ -27,7 +27,7 @@ class DailyAssistanceApi extends Eloquent
      * @var array
      */
     protected $dates = [
-        'deleted_at',
+        'deleted_at'
     ];
 
     /**
@@ -41,8 +41,13 @@ class DailyAssistanceApi extends Eloquent
     /**
      * @return mixed "17:08:05"
      */
-    public function getCreatedAtToHisFormatAttribute()
+    public function getCreatedAtAttribute($value)
     {
-        return Carbon::parse($this->created_at)->format('H:i:s');
+        return Carbon::parse($value)->format('H:i:s');
+    }
+
+    public function getNowAttribute()
+    {
+        return \Carbon\Carbon::now();
     }
 }

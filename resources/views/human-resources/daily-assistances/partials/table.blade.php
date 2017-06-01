@@ -1,10 +1,7 @@
-<div class="row">
-    <div class="col-md-12 strike">
-        <span class="font-size-26"><b>Asistencias</b></span>
-    </div>
+<div class="col-sm-offset-1 form-group">
+    <h3>Asistencia</h3>
 </div>
-<br>
-<br>
+<br />
 <div class="row">
     <div class="col-sm-offset-1 col-sm-10 col-md-10">
         <span id="data-daily-table">
@@ -15,7 +12,7 @@
                         <tr>
                             <th>#</th>
                             <th>Trabajador</th>
-                            <th class="text-center">Dispositivo</th>
+                            <th class="text-center">Rut</th>
                             <th class="text-center">Hora</th>
                             <th class="text-center"></th>
                         </tr>
@@ -30,13 +27,13 @@
                                         {{ $dailyAssistance->employee->full_name }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $dailyAssistance->num_device }}
+                                        {{ $dailyAssistance->employee->rut }}
                                     </td>
                                     <td class="text-center">
                                         {{ $dailyAssistance->created_at }}
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('employees.show', $dailyAssistance->employee->id) }}" class="btn btn-squared btn-info waves-effect waves-light tooltip-info">
+                                        <a href="{{ route('employees.show', $dailyAssistance->employee->id) }}" class="text-info">
                                             <i class="fa fa-search" aria-hidden="true"></i>
                                         </a>
                                     </td>

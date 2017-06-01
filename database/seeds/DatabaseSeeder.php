@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StatePieceVehicleTableSeeder::class);
         $this->call(TermAndObligatoryTableSeeder::class);
         $this->call(TypeVisitTableSeeder::class);
-        $this->call(VisitTableSeeder::class);
+        // $this->call(VisitTableSeeder::class);
 
         // Importants tables
         $this->call(CompanyTableSeeder::class);

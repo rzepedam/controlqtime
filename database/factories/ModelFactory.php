@@ -615,7 +615,7 @@ $factory->define(Visit::class, function (Faker\Generator $faker)
 		Carbon::parse('+2 months')->format('d-m-Y'),
 		null
 	];
-
+	
 	$randUserEmployee = rand(1, 2);
 
 	return [

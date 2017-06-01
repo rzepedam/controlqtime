@@ -9,7 +9,6 @@ use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Employee;
-use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class DailyAssistanceController extends Controller
@@ -18,11 +17,6 @@ class DailyAssistanceController extends Controller
      * @var Area
      */
     protected $area;
-
-    /**
-     * @var AccessControlApi
-     */
-    protected $accessControl;
 
     /**
      * @var Company
@@ -54,11 +48,9 @@ class DailyAssistanceController extends Controller
      * @param Employee           $employee
      * @param Log                $log
      */
-    public function __construct(Area $area, AccessControlApi $accessControl, Company $company, DailyAssistanceApi $dailyAssistance,
-        Employee $employee, Log $log)
+    public function __construct(Area $area, Company $company, DailyAssistanceApi $dailyAssistance, Employee $employee, Log $log)
     {
         $this->area            = $area;
-        $this->accessControl   = $accessControl;
         $this->company         = $company;
         $this->dailyAssistance = $dailyAssistance;
         $this->employee        = $employee;
@@ -72,38 +64,15 @@ class DailyAssistanceController extends Controller
      */
     public function index()
     {
-        $date      = Carbon::today();
-        $areas     = $this->area->get();
-        $companies = $this->company->get();
-        $employees = $this->employee->enabled()->get();
-        list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDate($date);
+        $date             = Carbon::today();
+        $areas            = $this->area->get();
+        $companies        = $this->company->get();
+        $employees        = $this->employee->enabled()->get();
+        $dailyAssistances = $this->dailyAssistance->with(['employee'])->whereDate('created_at', $date)->get();
 
         return view('human-resources.daily-assistances.index', compact(
-            'accessControls', 'areas', 'companies', 'dailyAssistances', 'num_employees', 'entry', 'output', 'employees'
+            'areas', 'companies', 'dailyAssistances', 'employees'
         ));
-    }
-
-    /**
-     * @param $date
-     *
-     * @return array
-     */
-    private function getRecordPerDate($date)
-    {
-        try {
-            $accessControls = $this->accessControl->with(['employee'])->whereDate('created_at', $date)->get();
-            $dailyAssistances = $this->dailyAssistance->with(['employee'])->whereDate('created_at', $date)->get();
-            $num_employees = $accessControls->unique('rut');
-            $entry = $accessControls->groupBy('rut')->transform(function ($item) {
-                return $item->min('created_at');
-            });
-
-            return [$accessControls, $dailyAssistances, $num_employees, $entry];
-        } catch (Exception $e) {
-            $this->log->error('Error Get DailyAssistance: '.$e->getMessage());
-
-            return response()->json(['status' => false]);
-        }
     }
 
     /**
@@ -118,16 +87,15 @@ class DailyAssistanceController extends Controller
 
         switch ($employee) {
             case '*':
-                list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDate($date);
+                list($dailyAssistances, $num_employees, $entry) = $this->getRecordPerDate($date);
                 break;
 
             default:
-                list($accessControls, $dailyAssistances, $num_employees, $entry) = $this->getRecordPerDateAndEmployee($employee, $date);
+                list($dailyAssistances, $num_employees, $entry) = $this->getRecordPerDateAndEmployee($employee, $date);
                 break;
         }
 
         return response()->json([
-            'accessControls'   => $accessControls,
             'dailyAssistances' => $dailyAssistances,
             'num_employees'    => $num_employees,
             'entry'            => $entry,
@@ -143,13 +111,12 @@ class DailyAssistanceController extends Controller
      */
     private function getRecordPerDateAndEmployee($employee, $date)
     {
-        $accessControls = $this->accessControl->with(['employee'])->whereDate('created_at', $date)->where('employee_id', $employee)->get();
         $dailyAssistances = $this->dailyAssistance->with(['employee'])->whereDate('created_at', $date)->where('employee_id', $employee)->get();
         $num_employees = $accessControls->unique('rut');
         $entry = $accessControls->groupBy('rut')->transform(function ($item) {
             return $item->min('created_at');
         });
 
-        return [$accessControls, $dailyAssistances, $num_employees, $entry];
+        return [$dailyAssistances, $num_employees, $entry];
     }
 }
