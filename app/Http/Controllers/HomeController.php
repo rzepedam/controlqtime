@@ -19,6 +19,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        abort(500);
         return view('home.home');
     }
 }
