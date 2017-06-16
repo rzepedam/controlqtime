@@ -185,6 +185,7 @@ return [
         Spatie\UrlSigner\Laravel\UrlSignerServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Rollbar\Laravel\RollbarServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
     ],
 
     /*
@@ -239,7 +240,8 @@ return [
         'Image'     => Barryvdh\Snappy\Facades\SnappyImage::class,
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
         'UrlSigner' => Spatie\UrlSigner\Laravel\UrlSignerFacade::class,
-        'Debugbar'  => Barryvdh\Debugbar\Facade::class
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 
 ];
