@@ -48,9 +48,4 @@ return [
     'biometry' => [
         'bearer' => env('BIOMETRY_BEARER'),
     ],
-
-    'rollbar' => [
-        'access_token' => env('ROLLBAR_TOKEN'),
-        'level'        => env('ROLLBAR_LEVEL'),
-    ],
 ];

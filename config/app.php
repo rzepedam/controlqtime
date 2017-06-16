@@ -184,7 +184,6 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Spatie\UrlSigner\Laravel\UrlSignerServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Rollbar\Laravel\RollbarServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
     ],
 
