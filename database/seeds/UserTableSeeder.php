@@ -15,14 +15,12 @@ class UserTableSeeder extends Seeder
         DB::table('users')->truncate();
 
         User::create([
-            'id'          => 1,
             'employee_id' => 1,
             'email'       => 'raulmeza@controlqtime.cl',
             'password'    => bcrypt('grupo@lfr@12'),
         ]);
 
         User::create([
-            'id'          => 2,
             'employee_id' => 2,
             'email'       => 'robertozepeda@controlqtime.cl',
             'password'    => bcrypt('grupo@lfr@12'),
