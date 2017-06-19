@@ -31,7 +31,7 @@
 		}else {
 			$('div#' + input).removeClass('hide');
 			$.ajax ({
-				type: 'POST',
+				type: 'GET',
 				url: '/verificaEmail',
 				data: { email: element.val(), element: input },
 				dataType: "json",

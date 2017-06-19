@@ -2,8 +2,13 @@
 
 return [
     'position' => 'Cargo',
-    'pending' => 'Pendiente',
+    'pending'  => 'Pendiente',
     'approved' => 'Aprobado',
-    'denied' => 'Denegado',
-    'null' => 'En Proceso'
+    'denied'   => 'Denegado',
+    'null'     => 'En Proceso',
+
+    // Employees
+    'rut'      => 'Nacional',     // doc enum
+    'passport' => 'Pasaporte',       // doc enum
+    'foreign'  => 'Extranjero'     // doc enum
 ];

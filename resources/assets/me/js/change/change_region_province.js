@@ -1,6 +1,6 @@
 $('#region_id').change(function(){
 
-    $.post('/loadProvinces',
+    $.get('/loadProvinces',
         { id: $('#region_id').val() },
         function(data) {
             $('#province_id').empty();
@@ -21,7 +21,7 @@ $('#province_id').change(function(){
         $('#commune_id').empty();
         $('#commune_id').append("<option value='comuna'>Seleccione Comuna...</option>");
     }else {
-        $.post('/loadCommunes',
+        $.get('/loadCommunes',
             { id: $('#province_id').val() },
             function(data) {
                 $('#commune_id').empty();
@@ -35,7 +35,7 @@ $('#province_id').change(function(){
 
 $('#region_legal_id').change(function(){
 
-    $.post('/loadProvinces',
+    $.get('/loadProvinces',
         { id: $('#region_legal_id').val() },
         function(data) {
             $('#province_legal_id').empty();
@@ -56,7 +56,7 @@ $('#province_legal_id').change(function(){
         $('#commune_legal_id').empty();
         $('#commune_legal_id').append("<option value='comuna'>Seleccione Comuna...</option>");
     }else {
-        $.post('/loadCommunes',
+        $.get('/loadCommunes',
             { id: $('#province_legal_id').val() },
             function(data) {
                 $('#commune_legal_id').empty();

@@ -437,6 +437,23 @@
 
     <script type="text/javascript">
 
+        $(document).on( "change", "input[name=doc]", function()
+        {
+            if ($(this).val() == 'rut') {
+                $('#rutField').html('<label for="rut" class="control-label">Rut Nacional</label> <i data-placement="right" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class=\'text-center\'>Ej: 19317518k</p>" data-html="true" class="fa fa-info-circle tooltip-primary text-primary"></i><input id="rut" name="rut" type="text" class="form-control check_rut">');
+            }
+
+            if ($(this).val() == 'passport') {
+                $('#rutField').html('<label for="passport" class="control-label">Pasaporte</label><input name="rut" type="text" class="form-control">');
+            }
+
+            if ($(this).val() == 'foreign') {
+                $('#rutField').html('<label for="foreign" class="control-label">Rut Extranjero</label> <i data-placement="right" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class=\'text-center\'>Ej: 19317518k</p>" data-html="true" class="fa fa-info-circle tooltip-primary text-primary"></i><input id="foreign" name="rut" type="text" class="form-control format_rut">');
+            }
+
+            $('.tooltip-primary').tooltip();
+        });
+
         $(document).ready(function () {
 
             var count_contacts                = {{ ($employee->num_contact_employees > 0) ? ($employee->num_contact_employees) : 0 }};

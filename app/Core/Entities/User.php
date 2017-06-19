@@ -64,6 +64,15 @@ class User extends Authenticatable
         return $this->employee->address->phone1;
     }
 
+
+    /**
+     * @param string
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     /**
      * @return int
      */

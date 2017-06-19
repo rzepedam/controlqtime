@@ -21,9 +21,10 @@ class CreateEmployeesTable extends Migration
             $table->string('first_name', 30);
             $table->string('second_name', 30);
             $table->string('full_name', 120);
+            $table->enum('doc', ['rut', 'passport', 'foreign'])->default('rut');
             $table->string('rut', 10)->unique();
             $table->date('birthday');
-            $table->boolean('is_male')->default(false);
+            $table->boolean('is_male')->default(0);
             $table->string('email_employee', 60)->unique();
             $table->string('url')->nullable();
             $table->enum('state', ['enable', 'disable'])->default('disable');

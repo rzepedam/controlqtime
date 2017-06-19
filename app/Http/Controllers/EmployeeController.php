@@ -2,17 +2,24 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Entities\ActivateEmployee;
-use Controlqtime\Core\Entities\Address;
-use Controlqtime\Core\Entities\Certification;
-use Controlqtime\Core\Entities\Commune;
-use Controlqtime\Core\Entities\ContactEmployee;
-use Controlqtime\Core\Entities\Degree;
-use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
-use Controlqtime\Core\Entities\Disability;
-use Controlqtime\Core\Entities\Disease;
-use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Mail\SignUp;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
+use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Exam;
+use Illuminate\Support\Facades\Mail;
+use Controlqtime\Core\Entities\Degree;
+use Controlqtime\Core\Entities\Address;
+use Controlqtime\Core\Entities\Commune;
+use Controlqtime\Core\Entities\Disease;
+use Illuminate\Support\Facades\Session;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\Disability;
+use Controlqtime\Core\Entities\Certification;
+use Controlqtime\Core\Entities\ContactEmployee;
+use Controlqtime\Core\Entities\ActivateEmployee;
+use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
 use Controlqtime\Core\Entities\FamilyRelationship;
 use Controlqtime\Core\Entities\FamilyResponsability;
 use Controlqtime\Core\Entities\Institution;
@@ -36,11 +43,6 @@ use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
 use Controlqtime\Notifications\EmployeeWasRegistered;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Log\Writer as Log;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
@@ -229,13 +231,13 @@ class EmployeeController extends Controller
      * @param User $user
      */
     public function __construct(ActivateEmployee $activateEmployee, Address $address, Certification $certification,
-                                Commune $commune, ContactEmployee $contactEmployee, Degree $degree, DetailAddressLegalEmployee $detailAddress,
-                                Disability $disability, Disease $disease, Employee $employee, Exam $exam, FamilyRelationship $familyRelationship,
-                                FamilyResponsability $familyResponsability, Institution $institution, Log $log, MaritalStatus $maritalStatus,
-                                Nationality $nationality, ProfessionalLicense $professionalLicense, Province $province, Region $region,
-                                Relationship $relationship, Speciality $speciality, Study $study, TypeCertification $typeCertification,
-                                TypeDisability $typeDisability, TypeDisease $typeDisease, TypeExam $typeExam,
-                                TypeProfessionalLicense $typeProfessionalLicense, TypeSpeciality $typeSpeciality, User $user)
+        Commune $commune, ContactEmployee $contactEmployee, Degree $degree, DetailAddressLegalEmployee $detailAddress,
+        Disability $disability, Disease $disease, Employee $employee, Exam $exam, FamilyRelationship $familyRelationship,
+        FamilyResponsability $familyResponsability, Institution $institution, Log $log, MaritalStatus $maritalStatus,
+        Nationality $nationality, ProfessionalLicense $professionalLicense, Province $province, Region $region,
+        Relationship $relationship, Speciality $speciality, Study $study, TypeCertification $typeCertification,
+        TypeDisability $typeDisability, TypeDisease $typeDisease, TypeExam $typeExam,
+        TypeProfessionalLicense $typeProfessionalLicense, TypeSpeciality $typeSpeciality, User $user)
     {
         $this->activateEmployee        = $activateEmployee;
         $this->address                 = $address;
@@ -274,9 +276,18 @@ class EmployeeController extends Controller
      */
     public function getEmployees()
     {
-        $employees = $this->employee->with(['nationality'])->get();
+        try
+        {
+            $employees = $this->employee->with(['nationality'])->get();
 
-        return $employees;
+            return $employees;
+        } catch ( Exception $e )
+        {
+            $this->log->error('Error Store Employee: ' . $e->getMessage());
+            DB::rollBack();
+
+            return response()->json(['status' => false]);
+        }
     }
 
     /**
@@ -324,13 +335,15 @@ class EmployeeController extends Controller
      */
     public function store(Step3Request $request)
     {
+        $password = str_random(10);
         DB::beginTransaction();
 
-        try {
+        try
+        {
             $employee = $this->employee->create(Session::get('step1'));
             $user     = $employee->user()->create([
                 'email'    => Session::get('email_employee'),
-                'password' => bcrypt(Session::get('email_employee')),
+                'password' => $password,
             ]);
             $address  = $employee->address()->create(Session::get('step1'));
             $address->detailAddressLegalEmployee()->create(Session::get('step1'));
@@ -344,13 +357,14 @@ class EmployeeController extends Controller
             $employee->createDiseases($request->all());
             $employee->createExams($request->all());
             $employee->createFamilyResponsabilities($request->all());
-            $user->notify(new EmployeeWasRegistered($employee));
+            Mail::to($user)->queue(new SignUp($password, $user));   // Sending email with credentials...
             $this->destroySessionStoreEmployee();
             session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
             DB::commit();
 
             return response()->json(['status' => true, 'url' => '/human-resources/employees']);
-        } catch (Exception $e) {
+        } catch ( Exception $e )
+        {
             $this->log->error('Error Store Employee: ' . $e->getMessage());
             DB::rollBack();
 
@@ -378,7 +392,7 @@ class EmployeeController extends Controller
         $institutions             = $this->institution->pluck('name', 'id');
         $regionsColl              = $this->region->all();
         $provincesColl            = $this->region->findOrFail($employee->address->commune->province->region->id)->provinces;
-        $communes                 = $this->province->findOrFail($id)->communes->pluck('name', 'id');
+        $communes                 = $this->province->findOrFail($employee->address->commune->province->id)->communes->pluck('name', 'id');
         $regions                  = $regionsColl->pluck('name', 'id');
         $provinces                = $provincesColl->pluck('name', 'id');
         $relationships            = $this->relationship->pluck('name', 'id');
@@ -406,7 +420,8 @@ class EmployeeController extends Controller
     {
         DB::beginTransaction();
 
-        try {
+        try
+        {
             // Update Step1
             $employee = $this->employee->findOrFail($id);
             $employee->fill(Session::get('step1_update'))->saveOrFail();
@@ -422,29 +437,30 @@ class EmployeeController extends Controller
             $employee->deleteStudies(Session::get('id_delete_study'));
             $employee->createStudies(Session::get('step2_update'));
             $employee->deleteCertifications(Session::get('id_delete_certification'));
-			$employee->createCertifications(Session::get('step2_update'));
-			$employee->deleteSpecialities(Session::get('id_delete_speciality'));
-			$employee->createSpecialities(Session::get('step2_update'));
-			$employee->deleteProfessionalLicenses(Session::get('id_delete_professional_license'));
-			$employee->createLicenses(Session::get('step2_update'));
+            $employee->createCertifications(Session::get('step2_update'));
+            $employee->deleteSpecialities(Session::get('id_delete_speciality'));
+            $employee->createSpecialities(Session::get('step2_update'));
+            $employee->deleteProfessionalLicenses(Session::get('id_delete_professional_license'));
+            $employee->createLicenses(Session::get('step2_update'));
 
-			// Update Step3
+            // Update Step3
             $employee->deleteDisabilities($request->get('id_delete_disability'));
-			$employee->createDisabilities($request->all());
-			$employee->deleteDiseases($request->get('id_delete_disease'));
-			$employee->createDiseases($request->all());
-			$employee->deleteExams($request->get('id_delete_exam'));
-			$employee->createExams($request->all());
-			$employee->deleteFamilyResponsabilities($request->get('id_delete_family_responsability'));
-			$employee->createFamilyResponsabilities($request->all());
-			$this->activateEmployee->checkStateUpdateEmployee($id);
-			$employee->user->notify(new EmployeeWasRegistered($employee));
+            $employee->createDisabilities($request->all());
+            $employee->deleteDiseases($request->get('id_delete_disease'));
+            $employee->createDiseases($request->all());
+            $employee->deleteExams($request->get('id_delete_exam'));
+            $employee->createExams($request->all());
+            $employee->deleteFamilyResponsabilities($request->get('id_delete_family_responsability'));
+            $employee->createFamilyResponsabilities($request->all());
+            $this->activateEmployee->checkStateUpdateEmployee($id);
+            // $employee->user->notify(new EmployeeWasRegistered($employee));
             $this->destroySessionUpdateEmployee();
             session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
             DB::commit();
 
             return response()->json(['status' => true, 'url' => '/human-resources/employees']);
-        } catch (Exception $e) {
+        } catch ( Exception $e )
+        {
             $this->log->error('Error update Employee: ' . $e->getMessage());
             session()->flash('error', 'Hubo un error en el servidor. Comunique con personal especializado.');
             DB::rollBack();
@@ -480,14 +496,16 @@ class EmployeeController extends Controller
     {
         DB::beginTransaction();
 
-        try {
+        try
+        {
             $employee = $this->employee->findOrFail($id);
             $this->activateEmployee->saveStateDisableEmployee($employee);
             $employee->delete();
             DB::commit();
 
             return redirect()->route('employees.index');
-        } catch (Exception $e) {
+        } catch ( Exception $e )
+        {
             $this->log->error('Error delete Employee: ' . $e->getMessage());
             DB::rollBack();
 
@@ -519,7 +537,8 @@ class EmployeeController extends Controller
     {
         $save = new ImageFactory($request->get('employee_id'), 'employee/', $request->get('repo_id'), $request->get('type'), $request->file('file_data'), null, $request->get('subClass'));
 
-        if ($save) {
+        if ( $save )
+        {
             $this->activateEmployee->checkStateUpdateEmployee($request->get('employee_id'));
 
             return response()->json(['status' => true]);
@@ -537,7 +556,8 @@ class EmployeeController extends Controller
     {
         $destroy = new ImageFactory($request->get('key'), 'employee/', null, $request->get('type'), null, $request->get('path'));
 
-        if ($destroy) {
+        if ( $destroy )
+        {
             $this->activateEmployee->checkStateUpdateEmployee($request->get('id'));
 
             return response()->json(['status' => true]);
@@ -558,7 +578,10 @@ class EmployeeController extends Controller
         Session::put('female_surname', $request->get('female_surname'));
         Session::put('first_name', $request->get('first_name'));
         Session::put('second_name', $request->get('second_name'));
+        Session::put('doc', $request->get('doc'));
         Session::put('rut', $request->get('rut'));
+        Session::put('passport', $request->get('passport'));
+        Session::put('foreign', $request->get('foreign'));
         Session::put('birthday', $request->get('birthday'));
         Session::put('nationality_id', $request->get('nationality_id'));
         Session::put('is_male', $request->get('is_male'));
@@ -625,7 +648,8 @@ class EmployeeController extends Controller
         Session::put('expired_license', $request->get('expired_license'));
         Session::put('detail_license', $request->get('detail_license'));
 
-        for ($i = 0; $i < $request->get('count_professional_licenses'); $i++) {
+        for ( $i = 0; $i < $request->get('count_professional_licenses'); $i++ )
+        {
             Session::put('is_donor' . $i, $request->get('is_donor' . $i));
         }
 
@@ -678,7 +702,10 @@ class EmployeeController extends Controller
         Session::forget('female_surname');
         Session::forget('first_name');
         Session::forget('second_name');
+        Session::forget('doc');
         Session::forget('rut');
+        Session::forget('passport');
+        Session::forget('foreign');
         Session::forget('birthday');
         Session::forget('nationality_id');
         Session::forget('is_male');
@@ -731,7 +758,8 @@ class EmployeeController extends Controller
         Session::forget('expired_license');
         Session::forget('detail_license');
 
-        for ($i = 0; $i < Session::get('count_professional_licenses'); $i++) {
+        for ( $i = 0; $i < Session::get('count_professional_licenses'); $i++ )
+        {
             Session::forget('is_donor');
         }
 

@@ -23,26 +23,31 @@
 <div class="row">
     {{-- Rut Radio field --}}
     <div class="col-xs-12 col-sm-6 col-md-3 form-group margin-0">
-    	{{ Form::label('is_rut', 'Documento') }}
+    	{{ Form::label('doc', 'Documento') }}
     	<ul class="list-unstyled list-inline text-center">
     	    <li>
     	        <div class="radio-custom radio-primary">
-    	        	<input type="radio" id="rut" name="is_rut" value="1" checked />
-    	            <label for="rut">Rut</label>
+    	        	<input type="radio" id="rut" name="doc" value="rut" {{ Session::get('doc') == 'rut' || Route::is('employees.create') ? 'checked' : '' }} />
+    	            <label for="rut">Nac</label>
     	        </div>
     	    </li>
-    	    <li></li>
     	    <li>
     	        <div class="radio-custom radio-primary">
-    	            <input type="radio" id="passport" name="is_rut" value="0" />
-    	            <label for="passport">Pasaporte</label>
+    	            <input type="radio" id="passport" name="doc" value="passport" {{ Session::get('doc') == 'passport' ? 'checked' : '' }} />
+    	            <label for="passport">Pasap</label>
     	        </div>
     	    </li>
+            <li>
+                <div class="radio-custom radio-primary">
+                    <input type="radio" id="foreign" name="doc" value="foreign" {{ Session::get('doc') == 'foreign' ? 'checked' : '' }} />
+                    <label for="foreign">Extranj</label>
+                </div>
+            </li>
     	</ul>
     </div>
     {{-- Rut Form Input --}}
-    <div class="col-sm-6 col-md-3 form-group">
-        {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
+    <div id="rutField" class="col-sm-6 col-md-3 form-group">
+        {{ Form::label('rut', 'Rut Nacional', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
         {{ Form::text('rut', Session::get('rut'), ['class' => 'form-control check_rut']) }}
     </div>
     {{-- Birthday Form Input --}}
@@ -61,7 +66,7 @@
         <ul class="list-unstyled list-inline text-center">
             <li>
                 <div class="radio-custom radio-primary">
-                    <input type="radio" id="male" name="is_male" value="M" {{ Session::get('is_male') == 'M' ? 'checked' : '' }} />
+                    <input type="radio" id="male" name="is_male" value="M" {{ Session::get('is_male') == 'M' || Route::is('employees.create') ? 'checked' : '' }} />
                     <label for="male">M</label>
                 </div>
             </li>
@@ -111,17 +116,17 @@
     {{-- Region Form Select --}}
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('region_id', 'Región', ['class' => 'control-label']) }}
-        {{ Form::select('region_id', $regions, Session::get('region_id'), ['class' => 'form-control']) }}
+        {{ Form::select('region_id', Session::get('region_id') ? ['' => 'Seleccione Región...'] + $regions->toArray() : $regions, null, ['class' => 'form-control']) }}
     </div>
     {{-- Province Form Select --}}
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('province_id', 'Provincia', ['class' => 'control-label']) }}
-        {{ Form::select('province_id', $provinces, Session::get('province_id'), ['class' => 'form-control']) }}
+        {{ Form::select('province_id', Session::get('province_id') ? ['' => 'Seleccione Provincia...'] + $provinces->toArray() : $provinces, null, ['class' => 'form-control']) }}
     </div>
     {{-- Commune Form Select --}}
     <div class="col-sm-6 col-md-3 form-group">
         {{ Form::label('commune_id', 'Comuna', ['class' => 'control-label']) }}
-        {{ Form::select('commune_id', $communes, Session::get('commune_id'), ['class' => 'form-control']) }}
+        {{ Form::select('commune_id', Session::get('commune_id') ? ['' => 'Seleccione Comuna...'] + $communes->toArray() : $communes, null, ['class' => 'form-control']) }}
     </div>
 </div>
 <div class="row">

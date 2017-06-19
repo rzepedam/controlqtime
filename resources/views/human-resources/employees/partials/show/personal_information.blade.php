@@ -46,7 +46,13 @@
                 <table class="table table-striped table-bordered">
                     <tbody>
                     <tr>
-                        <td class="col-md-3">Rut</td>
+                        <td class="col-md-3">Tipo Documento</td>
+                        <td class="text-center text-capitalize">
+                            @lang('messages.' . $employee->doc)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">{{ $employee->type_doc ? 'Rut' : 'Pasaporte' }}</td>
                         <td class="text-center">
                             {{ $employee->rut }}
                         </td>
@@ -66,7 +72,7 @@
                     <tr>
                         <td class="col-md-3">Género</td>
                         <td class="text-center">
-                            {{ $employee->is_male }}
+                            {{ $employee->is_male_text }}
                         </td>
                     </tr>
                     <tr>
