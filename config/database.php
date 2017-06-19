@@ -61,8 +61,7 @@ return [
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
-            'strict'    => false,
-            'timezone'  => '-03:00',
+            'strict'    => false
         ],
 
         'mysql_tests' => [
@@ -75,7 +74,6 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
             'strict'    => false,
-            'timezone'  => '-03:00',
         ],
 
         'pgsql' => [

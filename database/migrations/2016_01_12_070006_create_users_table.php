@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('employee_id')->nullable();
             $table->string('email')->unique();
             $table->string('password', 60);
+            $table->timestamp('last_logged_at')->nullable();
             $table->rememberToken();
-            $table->timestamp('last_logged_at')->default(null);
             $table->softDeletes();
             $table->timestamps();
         });

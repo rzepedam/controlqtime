@@ -1,7 +1,7 @@
 <?php
 
-use Controlqtime\Core\Entities\Employee;
 use Illuminate\Database\Seeder;
+use Controlqtime\Core\Entities\Employee;
 
 class EmployeeTableSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class EmployeeTableSeeder extends Seeder
             'is_male'           => true,
             'email_employee'    => 'raulmeza@controlqtime.cl',
             'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
-            'state'             => 'enable',
+            'state'             => 'enable'
         ]);
 
         Employee::create([

@@ -29,8 +29,6 @@ class Employee extends Eloquent
         'birthday', 'deleted_at',
     ];
 
-    protected $is_male;
-
     /**
      * @param $query
      *
@@ -575,6 +573,7 @@ class Employee extends Eloquent
     {
         return $this->hasOne(User::class);
     }
+
 
     /**
      * @param string $value
