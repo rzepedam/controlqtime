@@ -2,6 +2,4 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('home.guest');
-});
+Route::get('/', 'Auth\LoginController@showLoginForm');

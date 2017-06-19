@@ -1,9 +1,7 @@
 <?php
 
 // Index
-Route::get('maintainers', ['as' => 'maintainers', function () {
-    return view('maintainers.index');
-}]);
+Route::get('maintainers', 'SidebarMenuController@getMaintainers')->name('maintainers');
 
 // Features List
 Route::group(['prefix' => 'maintainers'], function () {

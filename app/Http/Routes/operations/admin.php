@@ -1,9 +1,7 @@
 <?php
 
-// Index
-Route::get('operations', ['as' => 'operations', function () {
-    return view('operations.index');
-}, ]);
+// SidebarMenu
+Route::get('operations', 'SidebarMenuController@getOperations')->name('operations');
 
 // Operations
 Route::group(['prefix' => 'operations'], function () {

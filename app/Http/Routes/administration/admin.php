@@ -1,9 +1,7 @@
 <?php
 
-// Index
-Route::get('administration', ['as' => 'administration', function () {
-    return view('administration.index');
-}, ]);
+// SidebarMenu
+Route::get('administration', 'SidebarMenuController@getAdministration')->name('administration');
 
 // Administration
 Route::group(['prefix' => 'administration'], function () {

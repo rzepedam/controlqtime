@@ -1,9 +1,7 @@
 <?php
 
 // Index
-Route::get('human-resources', ['as' => 'human-resources', function () {
-    return view('human-resources.index');
-}, ]);
+Route::get('human-resources', 'SidebarMenuController@getHumanResources')->name('human-resources');
 
 // Human-Resources
 Route::group(['prefix' => 'human-resources'], function () {

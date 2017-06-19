@@ -552,9 +552,15 @@ const { mix } = require('laravel-mix');
                 'resources/assets/me/js/base/maintainers/type-vehicles/config_bootstrap_table.js'
             ], 'public/js/maintainers/type-vehicles/index.js');
 
-// Passport
-    mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');
-    mix.copy('resources/assets/passport/app.js', 'public/js/passport.js');
+    // Support
+        // Index
+            mix.scripts([
+                'resources/assets/me/js/base/support/index.js'
+            ], 'public/js/support/index.js');
+
+        // Passport
+            mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');
+            mix.copy('resources/assets/passport/app.js', 'public/js/passport.js');
 
 // Versioning
     mix.version();

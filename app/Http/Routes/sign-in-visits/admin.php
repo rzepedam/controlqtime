@@ -1,9 +1,7 @@
 <?php
 
-// Index
-Route::get('sign-in-visits', ['as' => 'sign-in-visits', function () {
-    return view('sign-in-visits.index');
-}, ]);
+// SidebarMenu
+Route::get('sign-in-visits', 'SidebarMenuController@getSignInVisits')->name('sign-in-visits');
 
 // Sign In Visit
 Route::group(['prefix' => 'sign-in-visits'], function () {
