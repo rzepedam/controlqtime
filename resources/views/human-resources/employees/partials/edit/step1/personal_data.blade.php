@@ -50,7 +50,7 @@
         {{ Form::label('rut', 'Rut', ['class' => 'control-label']) }} <i class="fa fa-info-circle tooltip-primary text-primary" data-placement="right" data-toggle="tooltip" data-original-title="Ingrese rut sin puntos ni guión. <p class='text-center'>Ej: 19317518k</p>" data-html="true"></i>
         @if ($employee->doc === 'rut')
             {{ Form::text('rut', null, ['class' => 'form-control check_rut']) }}
-        @elseif ($employee->doc === 'passport')
+        @elseif ($employee->doc === 'foreign')
             {{ Form::text('rut', null, ['class' => 'form-control format_rut']) }}
         @else
             {{ Form::text('rut', null, ['class' => 'form-control']) }}
