@@ -38,8 +38,7 @@ class Step1Request extends Request
      */
     public function rules()
     {
-        switch ( $this->method() )
-        {
+        switch ($this->method()) {
             case 'POST':
             {
                 $rules = [
@@ -65,26 +64,22 @@ class Step1Request extends Request
                     'phone2'            => 'max:20',
                 ];
 
-                if ( Request::get('count_contacts') > 0 )
-                {
-                    foreach ( range(0, Request::get('count_contacts') - 1) as $index )
-                    {
-                        $rules[ 'id_contact.' . $index ]              = 'required|in:0';
-                        $rules[ 'contact_relationship_id.' . $index ] = 'required|regex:/[0-9 -()+]+$/';
-                        $rules[ 'name_contact.' . $index ]            = 'required|max:120';
-                        $rules[ 'email_contact.' . $index ]           = 'email|max:60|unique:contact_employees,email_contact';
-                        $rules[ 'address_contact.' . $index ]         = 'required';
-                        $rules[ 'tel_contact.' . $index ]             = 'required|max:20';
+                if (Request::get('count_contacts') > 0) {
+                    foreach (range(0, Request::get('count_contacts') - 1) as $index) {
+                        $rules['id_contact.'.$index] = 'required|in:0';
+                        $rules['contact_relationship_id.'.$index] = 'required|regex:/[0-9 -()+]+$/';
+                        $rules['name_contact.'.$index] = 'required|max:120';
+                        $rules['email_contact.'.$index] = 'email|max:60|unique:contact_employees,email_contact';
+                        $rules['address_contact.'.$index] = 'required';
+                        $rules['tel_contact.'.$index] = 'required|max:20';
                     }
                 }
 
-                if ( Request::get('count_family_relationships') > 0 )
-                {
-                    foreach ( range(0, Request::get('count_family_relationships') - 1) as $index )
-                    {
-                        $rules[ 'id_family_relationship.' . $index ] = 'required|in:0';
-                        $rules[ 'relationship_id.' . $index ]        = 'required|regex:/[0-9 -()+]+$/';
-                        $rules[ 'employee_family_id.' . $index ]     = 'required|regex:/[0-9 -()+]+$/';
+                if (Request::get('count_family_relationships') > 0) {
+                    foreach (range(0, Request::get('count_family_relationships') - 1) as $index) {
+                        $rules['id_family_relationship.'.$index] = 'required|in:0';
+                        $rules['relationship_id.'.$index] = 'required|regex:/[0-9 -()+]+$/';
+                        $rules['employee_family_id.'.$index] = 'required|regex:/[0-9 -()+]+$/';
                     }
                 }
 
@@ -98,7 +93,7 @@ class Step1Request extends Request
                     'female_surname'    => 'required|max:30',
                     'first_name'        => 'required|max:30',
                     'second_name'       => 'max:30',
-                    'rut'               => 'required|max:15|unique:employees,rut,' . $this->id,
+                    'rut'               => 'required|max:15|unique:employees,rut,'.$this->id,
                     'birthday'          => 'required|date',
                     'nationality_id'    => 'required|regex:/[0-9 -()+]+$/',
                     'is_male'           => 'required|max:1',
@@ -110,39 +105,33 @@ class Step1Request extends Request
                     'region_id'         => 'required|regex:/[0-9 -()+]+$/',
                     'province_id'       => 'required|regex:/[0-9 -()+]+$/',
                     'commune_id'        => 'required|regex:/[0-9 -()+]+$/',
-                    'email_employee'    => 'required|email|max:100|unique:employees,email_employee,' . $this->id,
+                    'email_employee'    => 'required|email|max:100|unique:employees,email_employee,'.$this->id,
                     'phone1'            => 'required|max:20',
                     'phone2'            => 'max:20',
                 ];
 
-                if ( Request::get('count_family_relationships') > 0 )
-                {
-                    foreach ( range(0, Request::get('count_family_relationships') - 1) as $index )
-                    {
-                        $rules[ 'id_family_relationship.' . $index ] = 'required|regex:/[0-9 -()+]+$/';
-                        $rules[ 'relationship_id.' . $index ]        = 'required|regex:/[0-9 -()+]+$/';
-                        $rules[ 'employee_family_id.' . $index ]     = 'required|regex:/[0-9 -()+]+$/';
+                if (Request::get('count_family_relationships') > 0) {
+                    foreach (range(0, Request::get('count_family_relationships') - 1) as $index) {
+                        $rules['id_family_relationship.'.$index] = 'required|regex:/[0-9 -()+]+$/';
+                        $rules['relationship_id.'.$index] = 'required|regex:/[0-9 -()+]+$/';
+                        $rules['employee_family_id.'.$index] = 'required|regex:/[0-9 -()+]+$/';
                     }
                 }
 
-                if ( Request::get('count_contacts') > 0 )
-                {
-                    foreach ( range(0, Request::get('count_contacts') - 1) as $index )
-                    {
-                        $rules[ 'id_contact.' . $index ]              = 'required|regex:/[0-9 -()+]+$/';
-                        $rules[ 'contact_relationship_id.' . $index ] = 'required|regex:/[0-9 -()+]+$/';
-                        $rules[ 'name_contact.' . $index ]            = 'required|max:120';
+                if (Request::get('count_contacts') > 0) {
+                    foreach (range(0, Request::get('count_contacts') - 1) as $index) {
+                        $rules['id_contact.'.$index] = 'required|regex:/[0-9 -()+]+$/';
+                        $rules['contact_relationship_id.'.$index] = 'required|regex:/[0-9 -()+]+$/';
+                        $rules['name_contact.'.$index] = 'required|max:120';
 
-                        if ( Request::get('id_contact')[ $index ] == 0 )
-                        {
-                            $rules[ 'email_contact.' . $index ] = 'email|max:60|unique:contact_employees,email_contact';
-                        } else
-                        {
-                            $rules[ 'email_contact.' . $index ] = 'email|max:60|unique:contact_employees,email_contact,' . Request::get('id_contact')[ $index ];
+                        if (Request::get('id_contact')[$index] == 0) {
+                            $rules['email_contact.'.$index] = 'email|max:60|unique:contact_employees,email_contact';
+                        } else {
+                            $rules['email_contact.'.$index] = 'email|max:60|unique:contact_employees,email_contact,'.Request::get('id_contact')[$index];
                         }
 
-                        $rules[ 'address_contact.' . $index ] = 'required';
-                        $rules[ 'tel_contact.' . $index ]     = 'required|max:20';
+                        $rules['address_contact.'.$index] = 'required';
+                        $rules['tel_contact.'.$index] = 'required|max:20';
                     }
                 }
 

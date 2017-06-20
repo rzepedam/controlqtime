@@ -105,8 +105,8 @@ class EmployeeDeleteExamTest extends BrowserKitTestCase
                 'detail_exam'   => 'Lorem ipsum dolor sit amet', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image->id,
-                'imageable_id'   => $this->exam->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\Exam',
+                'imageable_id'    => $this->exam->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\Exam',
                 'path'            => $image->path,
                 'orig_name'       => $image->orig_name,
                 'size'            => $image->size,
@@ -181,8 +181,8 @@ class EmployeeDeleteExamTest extends BrowserKitTestCase
                 'detail_exam'   => 'Lorem ipsum dolor sit amet', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image1->id,
-                'imageable_id'   => $this->exam->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\Exam',
+                'imageable_id'    => $this->exam->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\Exam',
                 'path'            => $image1->path,
                 'orig_name'       => $image1->orig_name,
                 'size'            => $image1->size, ])
@@ -195,8 +195,8 @@ class EmployeeDeleteExamTest extends BrowserKitTestCase
                 'detail_exam'   => 'Lorem', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image2->id,
-                'imageable_id'   => $exam->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\Exam',
+                'imageable_id'    => $exam->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\Exam',
                 'path'            => $image2->path,
                 'orig_name'       => $image2->orig_name,
                 'size'            => $image2->size,

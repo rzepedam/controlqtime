@@ -2,11 +2,10 @@
 
 namespace Controlqtime\Mail;
 
+use Controlqtime\Core\Entities\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Controlqtime\Core\Entities\User;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SignUp extends Mailable
 {
@@ -31,7 +30,7 @@ class SignUp extends Mailable
     public function __construct($password, User $user)
     {
         $this->password = $password;
-        $this->user     = $user;
+        $this->user = $user;
     }
 
     /**

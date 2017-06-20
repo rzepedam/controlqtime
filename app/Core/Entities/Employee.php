@@ -3,12 +3,12 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Jenssegers\Date\Date;
-use Controlqtime\Core\Helpers\FormatField;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Model as Eloquent;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
+use Controlqtime\Core\Helpers\FormatField;
+use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Jenssegers\Date\Date;
 
 class Employee extends Eloquent
 {
@@ -78,11 +78,9 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($decodeRequest) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $contact = $this->contactsable()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($decodeRequest)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $contact = $this->contactsable()->findOrFail($decodeRequest[$i]);
                 $contact->delete();
             }
         }
@@ -93,16 +91,15 @@ class Employee extends Eloquent
      */
     public function createContacts($request)
     {
-        for ( $i = 0; $i < $request['count_contacts']; $i++ )
-        {
+        for ($i = 0; $i < $request['count_contacts']; $i++) {
             $this->contactsable()->updateOrCreate(
-                ['id' => $request['id_contact'][ $i ]], [
+                ['id' => $request['id_contact'][$i]], [
                 'contactsable_type'       => 'Controlqtime\Core\Entities\Employee',
-                'contact_relationship_id' => $request['contact_relationship_id'][ $i ],
-                'name_contact'            => $request['name_contact'][ $i ],
-                'email_contact'           => $request['email_contact'][ $i ],
-                'address_contact'         => $request['address_contact'][ $i ],
-                'tel_contact'             => $request['tel_contact'][ $i ],
+                'contact_relationship_id' => $request['contact_relationship_id'][$i],
+                'name_contact'            => $request['name_contact'][$i],
+                'email_contact'           => $request['email_contact'][$i],
+                'address_contact'         => $request['address_contact'][$i],
+                'tel_contact'             => $request['tel_contact'][$i],
             ]);
         }
     }
@@ -122,11 +119,9 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($request) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $familyRelationship = $this->familyRelationships()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($request)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $familyRelationship = $this->familyRelationships()->findOrFail($decodeRequest[$i]);
                 $familyRelationship->delete();
             }
         }
@@ -137,12 +132,11 @@ class Employee extends Eloquent
      */
     public function createFamilyRelationships($request)
     {
-        for ( $i = 0; $i < $request['count_family_relationships']; $i++ )
-        {
+        for ($i = 0; $i < $request['count_family_relationships']; $i++) {
             $this->familyRelationships()->updateOrCreate(
-                ['id' => $request['id_family_relationship'][ $i ]], [
-                'relationship_id'    => $request['relationship_id'][ $i ],
-                'employee_family_id' => $request['employee_family_id'][ $i ],
+                ['id' => $request['id_family_relationship'][$i]], [
+                'relationship_id'    => $request['relationship_id'][$i],
+                'employee_family_id' => $request['employee_family_id'][$i],
             ]);
         }
     }
@@ -162,14 +156,11 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($decodeRequest) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $study = $this->studies()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($decodeRequest)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $study = $this->studies()->findOrFail($decodeRequest[$i]);
 
-                switch ( $study->degree_id )
-                {
+                switch ($study->degree_id) {
                     case 1:
                     case 2:
                         $study->detailSchoolStudy()->delete();
@@ -196,28 +187,26 @@ class Employee extends Eloquent
      */
     public function createStudies($request)
     {
-        for ( $i = 0; $i < $request['count_studies']; $i++ )
-        {
-            $method = ($request['id_study'][ $i ] == '0') ? 'create' : 'update';
+        for ($i = 0; $i < $request['count_studies']; $i++) {
+            $method = ($request['id_study'][$i] == '0') ? 'create' : 'update';
 
             $study = $this->studies()->updateOrCreate(
-                ['id' => $request['id_study'][ $i ]], [
-                'degree_id'      => $request['degree_id'][ $i ],
-                'date_obtention' => $request['date_obtention'][ $i ],
+                ['id' => $request['id_study'][$i]], [
+                'degree_id'      => $request['degree_id'][$i],
+                'date_obtention' => $request['date_obtention'][$i],
             ]);
 
-            switch ( $request['degree_id'][ $i ] )
-            {
+            switch ($request['degree_id'][$i]) {
                 case 1:
                 case 2:
                     $study->detailSchoolStudy()->$method([
-                        'name_institution' => $request['name_institution'][ $i ],
+                        'name_institution' => $request['name_institution'][$i],
                     ]);
                     break;
                 case 3:
                     $study->detailTechnicalStudy()->$method([
-                        'name_study'       => $request['name_study'][ $i ],
-                        'name_institution' => $request['name_institution'][ $i ],
+                        'name_study'       => $request['name_study'][$i],
+                        'name_institution' => $request['name_institution'][$i],
                     ]);
                     break;
                 case 4:
@@ -226,8 +215,8 @@ class Employee extends Eloquent
                 case 7:
                 case 8:
                     $study->detailCollegeStudy()->$method([
-                        'name_study'           => $request['name_study'][ $i ],
-                        'institution_study_id' => $request['institution_study_id'][ $i ],
+                        'name_study'           => $request['name_study'][$i],
+                        'institution_study_id' => $request['institution_study_id'][$i],
                     ]);
                     break;
             }
@@ -249,11 +238,9 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($decodeRequest) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $certification = $this->certifications()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($decodeRequest)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $certification = $this->certifications()->findOrFail($decodeRequest[$i]);
                 $certification->imageable()->delete();
                 $certification->delete();
             }
@@ -265,14 +252,13 @@ class Employee extends Eloquent
      */
     public function createCertifications($request)
     {
-        for ( $i = 0; $i < $request['count_certifications']; $i++ )
-        {
+        for ($i = 0; $i < $request['count_certifications']; $i++) {
             $this->certifications()->updateOrCreate(
-                ['id' => $request['id_certification'][ $i ]], [
-                'type_certification_id'        => $request['type_certification_id'][ $i ],
-                'institution_certification_id' => $request['institution_certification_id'][ $i ],
-                'emission_certification'       => $request['emission_certification'][ $i ],
-                'expired_certification'        => $request['expired_certification'][ $i ],
+                ['id' => $request['id_certification'][$i]], [
+                'type_certification_id'        => $request['type_certification_id'][$i],
+                'institution_certification_id' => $request['institution_certification_id'][$i],
+                'emission_certification'       => $request['emission_certification'][$i],
+                'expired_certification'        => $request['expired_certification'][$i],
             ]);
         }
     }
@@ -292,11 +278,9 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($decodeRequest) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $speciality = $this->specialities()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($decodeRequest)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $speciality = $this->specialities()->findOrFail($decodeRequest[$i]);
                 $speciality->imageable()->delete();
                 $speciality->delete();
             }
@@ -308,14 +292,13 @@ class Employee extends Eloquent
      */
     public function createSpecialities($request)
     {
-        for ( $i = 0; $i < $request['count_specialities']; $i++ )
-        {
+        for ($i = 0; $i < $request['count_specialities']; $i++) {
             $this->specialities()->updateOrCreate(
-                ['id' => $request['id_speciality'][ $i ]], [
-                'type_speciality_id'        => $request['type_speciality_id'][ $i ],
-                'institution_speciality_id' => $request['institution_speciality_id'][ $i ],
-                'emission_speciality'       => $request['emission_speciality'][ $i ],
-                'expired_speciality'        => $request['expired_speciality'][ $i ],
+                ['id' => $request['id_speciality'][$i]], [
+                'type_speciality_id'        => $request['type_speciality_id'][$i],
+                'institution_speciality_id' => $request['institution_speciality_id'][$i],
+                'emission_speciality'       => $request['emission_speciality'][$i],
+                'expired_speciality'        => $request['expired_speciality'][$i],
             ]);
         }
     }
@@ -335,11 +318,9 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($decodeRequest) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $professionalLicense = $this->professionalLicenses()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($decodeRequest)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $professionalLicense = $this->professionalLicenses()->findOrFail($decodeRequest[$i]);
                 $professionalLicense->imageable()->delete();
                 $professionalLicense->delete();
             }
@@ -351,15 +332,14 @@ class Employee extends Eloquent
      */
     public function createLicenses($request)
     {
-        for ( $i = 0; $i < $request['count_professional_licenses']; $i++ )
-        {
+        for ($i = 0; $i < $request['count_professional_licenses']; $i++) {
             $this->professionalLicenses()->updateOrCreate(
-                ['id' => $request['id_professional_license'][ $i ]], [
-                'type_professional_license_id' => $request['type_professional_license_id'][ $i ],
-                'emission_license'             => $request['emission_license'][ $i ],
-                'expired_license'              => $request['expired_license'][ $i ],
-                'is_donor'                     => $request[ 'is_donor' . $i ],
-                'detail_license'               => $request['detail_license'][ $i ],
+                ['id' => $request['id_professional_license'][$i]], [
+                'type_professional_license_id' => $request['type_professional_license_id'][$i],
+                'emission_license'             => $request['emission_license'][$i],
+                'expired_license'              => $request['expired_license'][$i],
+                'is_donor'                     => $request['is_donor'.$i],
+                'detail_license'               => $request['detail_license'][$i],
             ]);
         }
     }
@@ -379,11 +359,9 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($decodeRequest) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $disability = $this->disabilities()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($decodeRequest)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $disability = $this->disabilities()->findOrFail($decodeRequest[$i]);
                 $disability->imageable()->delete();
                 $disability->delete();
             }
@@ -395,13 +373,12 @@ class Employee extends Eloquent
      */
     public function createDisabilities($request)
     {
-        for ( $i = 0; $i < $request['count_disabilities']; $i++ )
-        {
+        for ($i = 0; $i < $request['count_disabilities']; $i++) {
             $this->disabilities()->updateOrCreate(
-                ['id' => $request['id_disability'][ $i ]], [
-                'type_disability_id'   => $request['type_disability_id'][ $i ],
-                'treatment_disability' => $request[ 'treatment_disability' . $i ],
-                'detail_disability'    => $request['detail_disability'][ $i ],
+                ['id' => $request['id_disability'][$i]], [
+                'type_disability_id'   => $request['type_disability_id'][$i],
+                'treatment_disability' => $request['treatment_disability'.$i],
+                'detail_disability'    => $request['detail_disability'][$i],
             ]);
         }
     }
@@ -421,11 +398,9 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($decodeRequest) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $disease = $this->diseases()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($decodeRequest)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $disease = $this->diseases()->findOrFail($decodeRequest[$i]);
                 $disease->imageable()->delete();
                 $disease->delete();
             }
@@ -437,13 +412,12 @@ class Employee extends Eloquent
      */
     public function createDiseases($request)
     {
-        for ( $i = 0; $i < $request['count_diseases']; $i++ )
-        {
+        for ($i = 0; $i < $request['count_diseases']; $i++) {
             $this->diseases()->updateOrCreate(
-                ['id' => $request['id_disease'][ $i ]], [
-                'type_disease_id'   => $request['type_disease_id'][ $i ],
-                'treatment_disease' => $request[ 'treatment_disease' . $i ],
-                'detail_disease'    => $request['detail_disease'][ $i ],
+                ['id' => $request['id_disease'][$i]], [
+                'type_disease_id'   => $request['type_disease_id'][$i],
+                'treatment_disease' => $request['treatment_disease'.$i],
+                'detail_disease'    => $request['detail_disease'][$i],
             ]);
         }
     }
@@ -463,11 +437,9 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($decodeRequest) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $exam = $this->exams()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($decodeRequest)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $exam = $this->exams()->findOrFail($decodeRequest[$i]);
                 $exam->imageable()->delete();
                 $exam->delete();
             }
@@ -479,14 +451,13 @@ class Employee extends Eloquent
      */
     public function createExams($request)
     {
-        for ( $i = 0; $i < $request['count_exams']; $i++ )
-        {
+        for ($i = 0; $i < $request['count_exams']; $i++) {
             $this->exams()->updateOrCreate(
-                ['id' => $request['id_exam'][ $i ]], [
-                'type_exam_id'  => $request['type_exam_id'][ $i ],
-                'emission_exam' => $request['emission_exam'][ $i ],
-                'expired_exam'  => $request['expired_exam'][ $i ],
-                'detail_exam'   => $request['detail_exam'][ $i ],
+                ['id' => $request['id_exam'][$i]], [
+                'type_exam_id'  => $request['type_exam_id'][$i],
+                'emission_exam' => $request['emission_exam'][$i],
+                'expired_exam'  => $request['expired_exam'][$i],
+                'detail_exam'   => $request['detail_exam'][$i],
             ]);
         }
     }
@@ -506,11 +477,9 @@ class Employee extends Eloquent
     {
         $decodeRequest = json_decode($request);
 
-        if ( ! empty($decodeRequest) )
-        {
-            for ( $i = 0; $i < count($decodeRequest); $i++ )
-            {
-                $familyResponsability = $this->familyResponsabilities()->findOrFail($decodeRequest[ $i ]);
+        if (!empty($decodeRequest)) {
+            for ($i = 0; $i < count($decodeRequest); $i++) {
+                $familyResponsability = $this->familyResponsabilities()->findOrFail($decodeRequest[$i]);
                 $familyResponsability->imageable()->delete();
                 $familyResponsability->delete();
             }
@@ -522,13 +491,12 @@ class Employee extends Eloquent
      */
     public function createFamilyResponsabilities($request)
     {
-        for ( $i = 0; $i < $request['count_family_responsabilities']; $i++ )
-        {
+        for ($i = 0; $i < $request['count_family_responsabilities']; $i++) {
             $this->familyResponsabilities()->updateOrCreate(
-                ['id' => $request['id_family_responsability'][ $i ]], [
-                'name_responsability' => $request['name_responsability'][ $i ],
-                'rut_responsability'  => $request['rut_responsability'][ $i ],
-                'relationship_id'     => $request['relationship_id'][ $i ],
+                ['id' => $request['id_family_responsability'][$i]], [
+                'name_responsability' => $request['name_responsability'][$i],
+                'rut_responsability'  => $request['rut_responsability'][$i],
+                'relationship_id'     => $request['relationship_id'][$i],
             ]);
         }
     }
@@ -574,7 +542,6 @@ class Employee extends Eloquent
         return $this->hasOne(User::class);
     }
 
-
     /**
      * @param string $value
      */
@@ -614,8 +581,7 @@ class Employee extends Eloquent
      */
     public function setRutAttribute($value)
     {
-        if ( $this->attributes['doc'] !== 'passport' )
-        {
+        if ($this->attributes['doc'] !== 'passport') {
             return $this->attributes['rut'] = str_replace('.', '', $value);
         }
 
@@ -629,8 +595,7 @@ class Employee extends Eloquent
      */
     public function setIsMaleAttribute($value)
     {
-        if ( 'M' === $value )
-        {
+        if ('M' === $value) {
             return $this->attributes['is_male'] = true;
         }
 
@@ -670,7 +635,7 @@ class Employee extends Eloquent
     {
         return $this->doc !== 'passport';
     }
-    
+
     /**
      * @param string $value format 12345678-9 or O3000400B passport
      *
@@ -678,8 +643,7 @@ class Employee extends Eloquent
      */
     public function getRutAttribute($value)
     {
-        if ( $this->doc !== 'passport' )
-        {
+        if ($this->doc !== 'passport') {
             return FormatField::rut($value);
         }
 
@@ -898,8 +862,7 @@ class Employee extends Eloquent
     public function getNumImagesCertificationAttribute()
     {
         $sum = 0;
-        foreach ( $this->certifications as $certification )
-        {
+        foreach ($this->certifications as $certification) {
             $sum += count($certification->imageable);
         }
 
@@ -912,8 +875,7 @@ class Employee extends Eloquent
     public function getNumImagesSpecialityAttribute()
     {
         $sum = 0;
-        foreach ( $this->specialities as $speciality )
-        {
+        foreach ($this->specialities as $speciality) {
             $sum += count($speciality->imageable);
         }
 
@@ -926,8 +888,7 @@ class Employee extends Eloquent
     public function getNumImagesProfessionalLicensesAttribute()
     {
         $sum = 0;
-        foreach ( $this->professionalLicenses as $professionalLicense )
-        {
+        foreach ($this->professionalLicenses as $professionalLicense) {
             $sum += count($professionalLicense->imageable);
         }
 
@@ -940,8 +901,7 @@ class Employee extends Eloquent
     public function getNumImagesDisabilitiesAttribute()
     {
         $sum = 0;
-        foreach ( $this->disabilities as $disability )
-        {
+        foreach ($this->disabilities as $disability) {
             $sum += count($disability->imageable);
         }
 
@@ -954,8 +914,7 @@ class Employee extends Eloquent
     public function getNumImagesDiseasesAttribute()
     {
         $sum = 0;
-        foreach ( $this->diseases as $disease )
-        {
+        foreach ($this->diseases as $disease) {
             $sum += count($disease->imageable);
         }
 
@@ -968,8 +927,7 @@ class Employee extends Eloquent
     public function getNumImagesExamsAttribute()
     {
         $sum = 0;
-        foreach ( $this->exams as $exam )
-        {
+        foreach ($this->exams as $exam) {
             $sum += count($exam->imageable);
         }
 
@@ -982,8 +940,7 @@ class Employee extends Eloquent
     public function getNumImagesFamilyResponsabilitiesAttribute()
     {
         $sum = 0;
-        foreach ( $this->familyResponsabilities as $family_responsability )
-        {
+        foreach ($this->familyResponsabilities as $family_responsability) {
             $sum += count($family_responsability->imageable);
         }
 
@@ -1009,13 +966,12 @@ class Employee extends Eloquent
     private function dailyAssistanceForRemuneration()
     {
         $initMonth = Carbon::parse('first day of this month 00:00:00');
-        $endMonth  = Carbon::now();
+        $endMonth = Carbon::now();
 
         $dailyAssistances = $this->dailyAssistances()
             ->whereBetween('created_at', [$initMonth, $endMonth])
             ->get()
-            ->groupBy(function ($item)
-            {
+            ->groupBy(function ($item) {
                 return Carbon::parse($item->created_at)->format('d');
             });
 
@@ -1027,24 +983,19 @@ class Employee extends Eloquent
      */
     public function getDaysWorkedInTheMonthAttribute()
     {
-        $assistance     = collect();
+        $assistance = collect();
         $realAssistance = collect();
-        $initMonth      = Carbon::parse('first day of this month 00:00:00');
-        $endMonth       = Carbon::now();
+        $initMonth = Carbon::parse('first day of this month 00:00:00');
+        $endMonth = Carbon::now();
 
-        if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
-        {
-            $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance)
-            {
+        if ($this->contract->dayTrip->name === 'Lunes a viernes') {
+            $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance) {
                 $assistance[] = Carbon::parse($item->min('created_at'))->format('Y-m-d');
             });
 
-            while ( $endMonth >= $initMonth )
-            {
-                if ( $initMonth->isWeekday() )
-                {
-                    if ( $assistance->contains($initMonth->format('Y-m-d')) )
-                    {
+            while ($endMonth >= $initMonth) {
+                if ($initMonth->isWeekday()) {
+                    if ($assistance->contains($initMonth->format('Y-m-d'))) {
                         $realAssistance[] = 1;
                     }
                 }
@@ -1063,10 +1014,8 @@ class Employee extends Eloquent
     {
         $assistance = collect();
 
-        if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
-        {
-            $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance)
-            {
+        if ($this->contract->dayTrip->name === 'Lunes a viernes') {
+            $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance) {
                 $assistance[] = Carbon::parse($item->min('created_at'));
             });
         }
@@ -1081,12 +1030,9 @@ class Employee extends Eloquent
     {
         $delays = collect();
 
-        $this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays)
-        {
-            if ( $item->isWeekday() )
-            {
-                if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
-                {
+        $this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays) {
+            if ($item->isWeekday()) {
+                if ($item->format('H:i:s') > config('constants.time_limit')->format('H:i:s')) {
                     $delays[] = 1;
                 }
             }
@@ -1102,15 +1048,12 @@ class Employee extends Eloquent
     {
         $delays = collect();
 
-        $this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays)
-        {
-            $timeLimitString = $item->format('Y-m-d') . ' ' . config('constants.time_limit')->format('H:i:s');
+        $this->daysDelaysInTheMonthAttribute()->each(function ($item) use ($delays) {
+            $timeLimitString = $item->format('Y-m-d').' '.config('constants.time_limit')->format('H:i:s');
             $timeLimitCarbon = Carbon::createFromFormat('Y-m-d H:i:s', $timeLimitString);
 
-            if ( $item->isWeekday() )
-            {
-                if ( $item->format('H:i:s') > config('constants.time_limit')->format('H:i:s') )
-                {
+            if ($item->isWeekday()) {
+                if ($item->format('H:i:s') > config('constants.time_limit')->format('H:i:s')) {
                     $delays[] = $timeLimitCarbon->diffInHours($item);
                 }
             }
@@ -1124,25 +1067,20 @@ class Employee extends Eloquent
      */
     public function getDaysNonAssistanceInTheMonthAttribute()
     {
-        $assistance          = collect();
-        $realAssistance      = collect();
+        $assistance = collect();
+        $realAssistance = collect();
         $totalDaysAssistance = collect();
-        $initMonth           = Carbon::parse('first day of this month 00:00:00');
-        $now                 = Carbon::now();
+        $initMonth = Carbon::parse('first day of this month 00:00:00');
+        $now = Carbon::now();
 
-        if ( $this->contract->dayTrip->name === 'Lunes a viernes' )
-        {
-            $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance)
-            {
+        if ($this->contract->dayTrip->name === 'Lunes a viernes') {
+            $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance) {
                 $assistance[] = Carbon::parse($item->min('created_at'))->format('Y-m-d');
             });
 
-            while ( $now >= $initMonth )
-            {
-                if ( $initMonth->isWeekday() )
-                {
-                    if ( $assistance->contains($initMonth->format('Y-m-d')) )
-                    {
+            while ($now >= $initMonth) {
+                if ($initMonth->isWeekday()) {
+                    if ($assistance->contains($initMonth->format('Y-m-d'))) {
                         $realAssistance[] = 1;
                     }
 
@@ -1165,19 +1103,15 @@ class Employee extends Eloquent
         $assistance = collect();
         $extraHours = collect();
 
-        $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance)
-        {
+        $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance) {
             $assistance[] = Carbon::parse($item->max('created_at'));
         });
 
-        $assistance->each(function ($item) use ($extraHours)
-        {
-            $workOut = Carbon::createFromFormat('Y-m-d H:i', $item->format('Y-m-d') . ' ' . $this->contract->end_afternoon);
+        $assistance->each(function ($item) use ($extraHours) {
+            $workOut = Carbon::createFromFormat('Y-m-d H:i', $item->format('Y-m-d').' '.$this->contract->end_afternoon);
 
-            if ( $item->isWeekday() )
-            {
-                if ( $item > $workOut )
-                {
+            if ($item->isWeekday()) {
+                if ($item > $workOut) {
                     $extraHours[] = $item->diffInHours($workOut);
                 }
             }

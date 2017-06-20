@@ -23,23 +23,22 @@ class FormVisitRequest extends FormRequest
      */
     public function rules()
     {
-        switch ( $this->method() )
-        {
+        switch ($this->method()) {
             case 'POST':
             {
                 return [
-                    'address' => ['required'], 
-                    'city'    => ['required'], 
-                    'phone'   => ['required']
+                    'address' => ['required'],
+                    'city'    => ['required'],
+                    'phone'   => ['required'],
                 ];
             }
 
             case 'PUT':
             {
                 return [
-                    'address' => ['required'], 
-                    'city' => ['required'], 
-                    'phone' => ['required']
+                    'address' => ['required'],
+                    'city'    => ['required'],
+                    'phone'   => ['required'],
                 ];
             }
         }

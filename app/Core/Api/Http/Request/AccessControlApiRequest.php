@@ -23,8 +23,7 @@ class AccessControlApiRequest extends Request
      */
     public function rules()
     {
-        switch (request('num_device')) 
-        {
+        switch (request('num_device')) {
             case 'DDFF4EC6-182B-4E37-961D-28211D63E45B':
                 $rules = [
                     'rut'        => 'required|max:10|unique_with:access_control_apis,created_at',

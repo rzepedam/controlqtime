@@ -102,8 +102,8 @@ class EmployeeDeleteFamilyResponsabilityTest extends BrowserKitTestCase
                 'relationship_id'     => $this->relationship->id, ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image->id,
-                'imageable_id'   => $this->familyResponsability->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
+                'imageable_id'    => $this->familyResponsability->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\FamilyResponsability',
                 'path'            => $image->path,
                 'orig_name'       => $image->orig_name,
                 'size'            => $image->size,
@@ -173,8 +173,8 @@ class EmployeeDeleteFamilyResponsabilityTest extends BrowserKitTestCase
                 'relationship_id'     => $this->relationship->id, ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image1->id,
-                'imageable_id'   => $this->familyResponsability->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
+                'imageable_id'    => $this->familyResponsability->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\FamilyResponsability',
                 'path'            => $image1->path,
                 'orig_name'       => $image1->orig_name,
                 'size'            => $image1->size, ])
@@ -186,8 +186,8 @@ class EmployeeDeleteFamilyResponsabilityTest extends BrowserKitTestCase
                 'relationship_id'     => $relationship->id, ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image2->id,
-                'imageable_id'   => $familyResponsability->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\FamilyResponsability',
+                'imageable_id'    => $familyResponsability->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\FamilyResponsability',
                 'path'            => $image2->path,
                 'orig_name'       => $image2->orig_name,
                 'size'            => $image2->size,

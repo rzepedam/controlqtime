@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class FormVisit extends Eloquent
 {
-	/**
-	 * @var array
-	 */
-	protected $fillable = [
-    	'address', 'city', 'phone'
-	];
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'address', 'city', 'phone',
+    ];
 
-	/**
-	 * @var bool
-	 */
-	public $timestamps = false;
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 }

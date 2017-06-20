@@ -41,18 +41,18 @@ class VisitRequest extends Request
             {
                 return [
                     'type_visit_id'  => ['required', 'exists:type_visits,id'],
-                    'employee_id'    => ['required', 'exists:employees,id'], 
-                    'is_walking'     => ['required', 'in:0,1'], 
-                    'rut'            => ['required'], 
-                    'male_surname'   => ['required'], 
+                    'employee_id'    => ['required', 'exists:employees,id'],
+                    'is_walking'     => ['required', 'in:0,1'],
+                    'rut'            => ['required'],
+                    'male_surname'   => ['required'],
                     'female_surname' => ['required'],
-                    'first_name'     => ['required'], 
+                    'first_name'     => ['required'],
                     'position'       => ['required'],
-                    'company'        => ['required'], 
-                    'phone'          => ['required'], 
-                    'email'          => ['required', 'email'], 
-                    'date'           => ['required'], 
-                    'hour'           => ['required']
+                    'company'        => ['required'],
+                    'phone'          => ['required'],
+                    'email'          => ['required', 'email'],
+                    'date'           => ['required'],
+                    'hour'           => ['required'],
                 ];
             }
 

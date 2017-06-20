@@ -1,7 +1,6 @@
 <?php
 
 use Controlqtime\Core\Entities\City;
-use Controlqtime\Core\Entities\Country;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CityCreateTest extends BrowserKitTestCase

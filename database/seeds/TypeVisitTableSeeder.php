@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Controlqtime\Core\Entities\TypeVisit;
+use Illuminate\Database\Seeder;
 
 class TypeVisitTableSeeder extends Seeder
 {
@@ -12,9 +12,9 @@ class TypeVisitTableSeeder extends Seeder
      */
     public function run()
     {
-    	DB::table('type_visits')->truncate();
+        DB::table('type_visits')->truncate();
 
-		TypeVisit::create([
+        TypeVisit::create([
             'name' => 'Autoridades',
         ]);
 
