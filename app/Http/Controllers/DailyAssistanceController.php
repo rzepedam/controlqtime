@@ -41,7 +41,6 @@ class DailyAssistanceController extends Controller
      * DailyAssistanceController constructor.
      *
      * @param Area               $area
-     * @param AccessControlApi   $accessControl
      * @param Company            $company
      * @param DailyAssistanceApi $dailyAssistance
      * @param Employee           $employee
