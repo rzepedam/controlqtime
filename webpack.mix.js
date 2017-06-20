@@ -5,8 +5,11 @@ const { mix } = require('laravel-mix');
        .sass('resources/assets/sass/app.scss', 'public/css');
 
 // Login
-    mix.combine('resources/assets/custom-remark/css/login.css', 'public/css/login.css')
-        .scripts('resources/assets/components/material.js', 'public/js/login.js');
+    mix.combine([
+        'resources/assets/custom-remark/css/login.css',
+        'node_modules/material-design-iconic-font/dist/css/material-design-iconic-font.min.css'
+    ], 'public/css/login.css')
+    .scripts('resources/assets/components/material.js', 'public/js/login.js');
 
 // Fonts
     mix.combine([
@@ -15,7 +18,7 @@ const { mix } = require('laravel-mix');
     ], 'public/css/fonts.css')
     .copy([
         'node_modules/font-awesome/fonts',
-        'resources/assets/custom-remark/fonts'
+        'node_modules/material-design-iconic-font/dist/fonts'
     ], 'public/fonts');
 
 // Style owned

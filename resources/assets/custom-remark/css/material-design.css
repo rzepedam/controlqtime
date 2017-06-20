@@ -11,8 +11,8 @@
     font-weight: normal;
     font-style: normal; 
 
-    src: url('../fonts/material-design.eot?v=2.2.0');
-    src: url('../fonts/material-design.eot?#iefix&v=2.2.0') format('embedded-opentype'), url('../fonts/material-design.woff2?v=2.2.0') format('woff2'), url('../fonts/material-design.woff?v=2.2.0') format('woff'), url('../fonts/material-design.ttf?v=2.2.0') format('truetype'), url('../fonts/material-design.svg?v=2.2.0#material-design') format('svg');
+    src: url('../fonts/Material-Design-Iconic-Font.eot?v=2.2.0');
+    src: url('../fonts/Material-Design-Iconic-Font.eot?#iefix&v=2.2.0') format('embedded-opentype'), url('../fonts/Material-Design-Iconic-Font.woff2?v=2.2.0') format('woff2'), url('../fonts/Material-Design-Iconic-Font.woff?v=2.2.0') format('woff'), url('../fonts/Material-Design-Iconic-Font.ttf?v=2.2.0') format('truetype'), url('../fonts/Material-Design-Iconic-Font.svg?v=2.2.0#Material-Design-Iconic-Font') format('svg');
 }
 
 [class^='md-'],
