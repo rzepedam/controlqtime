@@ -105,8 +105,8 @@ class EmployeeDeleteCertificationTest extends BrowserKitTestCase
                 'expired_certification'        => '2010-03-28', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image->id,
-                'imageable_id'   => $this->certification->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\Certification',
+                'imageable_id'    => $this->certification->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\Certification',
                 'path'            => $image->path,
                 'orig_name'       => $image->orig_name,
                 'size'            => $image->size,
@@ -179,8 +179,8 @@ class EmployeeDeleteCertificationTest extends BrowserKitTestCase
                 'expired_certification'        => '2010-03-28', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image1->id,
-                'imageable_id'   => $this->certification->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\Certification',
+                'imageable_id'    => $this->certification->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\Certification',
                 'path'            => $image1->path,
                 'orig_name'       => $image1->orig_name,
                 'size'            => $image1->size, ])
@@ -193,8 +193,8 @@ class EmployeeDeleteCertificationTest extends BrowserKitTestCase
                 'expired_certification'        => '2007-01-31', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image2->id,
-                'imageable_id'   => $certification->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\Certification',
+                'imageable_id'    => $certification->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\Certification',
                 'path'            => $image2->path,
                 'orig_name'       => $image2->orig_name,
                 'size'            => $image2->size,

@@ -2,8 +2,6 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class SidebarMenuController extends Controller
 {
     /**

@@ -44,8 +44,7 @@ class AccessControlApiController extends Controller
         try {
             $employee = $this->employee->where('rut', request('rut'))->firstOrFail();
 
-            switch( request('num_device') )  
-            {
+            switch (request('num_device')) {
                 case 'DDFF4EC6-182B-4E37-961D-28211D63E45B':
                     $employee->accessControls()->create($request->all());
                     break;

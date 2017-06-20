@@ -102,8 +102,8 @@ class EmployeeDeleteDiseaseTest extends BrowserKitTestCase
                 'detail_disease'    => 'Lorem ipsum dolor sit amet', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image->id,
-                'imageable_id'   => $this->disease->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\Disease',
+                'imageable_id'    => $this->disease->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\Disease',
                 'path'            => $image->path,
                 'orig_name'       => $image->orig_name,
                 'size'            => $image->size,
@@ -183,15 +183,15 @@ class EmployeeDeleteDiseaseTest extends BrowserKitTestCase
                 'detail_disease'    => 'Lorem', ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image1->id,
-                'imageable_id'   => $this->disease->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\Disease',
+                'imageable_id'    => $this->disease->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\Disease',
                 'path'            => $image1->path,
                 'orig_name'       => $image1->orig_name,
                 'size'            => $image1->size, ])
             ->dontSeeInDatabase('images', [
                 'id'              => $image2->id,
-                'imageable_id'   => $disease->id,
-                'imageable_type' => 'Controlqtime\Core\Entities\Disease',
+                'imageable_id'    => $disease->id,
+                'imageable_type'  => 'Controlqtime\Core\Entities\Disease',
                 'path'            => $image2->path,
                 'orig_name'       => $image2->orig_name,
                 'size'            => $image2->size,

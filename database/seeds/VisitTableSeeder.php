@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Controlqtime\Core\Entities\Visit;
+use Illuminate\Database\Seeder;
 
 class VisitTableSeeder extends Seeder
 {

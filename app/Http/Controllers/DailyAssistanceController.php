@@ -2,14 +2,13 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Exception;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Log\Writer as Log;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Employee;
-use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
+use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
 
 class DailyAssistanceController extends Controller
 {
@@ -41,20 +40,20 @@ class DailyAssistanceController extends Controller
     /**
      * DailyAssistanceController constructor.
      *
-     * @param Area $area
+     * @param Area               $area
      * @param AccessControlApi   $accessControl
-     * @param Company $company
+     * @param Company            $company
      * @param DailyAssistanceApi $dailyAssistance
      * @param Employee           $employee
      * @param Log                $log
      */
     public function __construct(Area $area, Company $company, DailyAssistanceApi $dailyAssistance, Employee $employee, Log $log)
     {
-        $this->area            = $area;
-        $this->company         = $company;
+        $this->area = $area;
+        $this->company = $company;
         $this->dailyAssistance = $dailyAssistance;
-        $this->employee        = $employee;
-        $this->log             = $log;
+        $this->employee = $employee;
+        $this->log = $log;
     }
 
     /**
@@ -64,10 +63,10 @@ class DailyAssistanceController extends Controller
      */
     public function index()
     {
-        $date             = Carbon::today();
-        $areas            = $this->area->get();
-        $companies        = $this->company->get();
-        $employees        = $this->employee->enabled()->get();
+        $date = Carbon::today();
+        $areas = $this->area->get();
+        $companies = $this->company->get();
+        $employees = $this->employee->enabled()->get();
         $dailyAssistances = $this->dailyAssistance->with(['employee'])->whereDate('created_at', $date)->get();
 
         return view('human-resources.daily-assistances.index', compact(

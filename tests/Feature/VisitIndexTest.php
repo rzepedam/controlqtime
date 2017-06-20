@@ -12,7 +12,7 @@ class VisitIndexTest extends BrowserKitTestCase
         $this->signIn();
     }
 
-    /** @test */                                                                                                                                                                            
+    /** @test */
     public function url_visit()
     {
         $this->visit('sign-in-visits/visits')

@@ -28,12 +28,12 @@ class CreateVisitsTable extends Migration
             $table->string('company');
             $table->string('phone');
             $table->date('date')->nullable();
-			$table->string('hour', 4)->nullable();
+            $table->string('hour', 4)->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('email');
             $table->text('obs');
-            $table->string('url')->default(NULL);
+            $table->string('url')->default(null);
             $table->string('key');
             $table->enum('state', ['pending', 'approved', 'denied'])->nullable();
             $table->timestamps();

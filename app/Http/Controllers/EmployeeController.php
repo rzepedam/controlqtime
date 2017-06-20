@@ -2,24 +2,17 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Mail\SignUp;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Log\Writer as Log;
-use Illuminate\Support\Facades\DB;
-use Controlqtime\Core\Entities\Exam;
-use Illuminate\Support\Facades\Mail;
-use Controlqtime\Core\Entities\Degree;
-use Controlqtime\Core\Entities\Address;
-use Controlqtime\Core\Entities\Commune;
-use Controlqtime\Core\Entities\Disease;
-use Illuminate\Support\Facades\Session;
-use Controlqtime\Core\Entities\Employee;
-use Controlqtime\Core\Entities\Disability;
-use Controlqtime\Core\Entities\Certification;
-use Controlqtime\Core\Entities\ContactEmployee;
 use Controlqtime\Core\Entities\ActivateEmployee;
+use Controlqtime\Core\Entities\Address;
+use Controlqtime\Core\Entities\Certification;
+use Controlqtime\Core\Entities\Commune;
+use Controlqtime\Core\Entities\ContactEmployee;
+use Controlqtime\Core\Entities\Degree;
 use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
+use Controlqtime\Core\Entities\Disability;
+use Controlqtime\Core\Entities\Disease;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\Exam;
 use Controlqtime\Core\Entities\FamilyRelationship;
 use Controlqtime\Core\Entities\FamilyResponsability;
 use Controlqtime\Core\Entities\Institution;
@@ -42,7 +35,14 @@ use Controlqtime\Core\Factory\ImageFactory;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
+use Controlqtime\Mail\SignUp;
 use Controlqtime\Notifications\EmployeeWasRegistered;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
@@ -199,36 +199,36 @@ class EmployeeController extends Controller
     /**
      * EmployeeController constructor.
      *
-     * @param ActivateEmployee $activateEmployee
-     * @param Address $address
-     * @param Certification $certification
-     * @param Commune $commune
-     * @param ContactEmployee $contactEmployee
-     * @param Degree $degree
+     * @param ActivateEmployee           $activateEmployee
+     * @param Address                    $address
+     * @param Certification              $certification
+     * @param Commune                    $commune
+     * @param ContactEmployee            $contactEmployee
+     * @param Degree                     $degree
      * @param DetailAddressLegalEmployee $detailAddress
-     * @param Disability $disability
-     * @param Disease $disease
-     * @param Employee $employee
-     * @param Exam $exam
-     * @param FamilyRelationship $familyRelationship
-     * @param FamilyResponsability $familyResponsability
-     * @param Institution $institution
-     * @param Log $log
-     * @param MaritalStatus $maritalStatus
-     * @param Nationality $nationality
-     * @param ProfessionalLicense $professionalLicense
-     * @param Province $province
-     * @param Region $region
-     * @param Relationship $relationship
-     * @param Speciality $speciality
-     * @param Study $study
-     * @param TypeCertification $typeCertification
-     * @param TypeDisability $typeDisability
-     * @param TypeDisease $typeDisease
-     * @param TypeExam $typeExam
-     * @param TypeProfessionalLicense $typeProfessionalLicense
-     * @param TypeSpeciality $typeSpeciality
-     * @param User $user
+     * @param Disability                 $disability
+     * @param Disease                    $disease
+     * @param Employee                   $employee
+     * @param Exam                       $exam
+     * @param FamilyRelationship         $familyRelationship
+     * @param FamilyResponsability       $familyResponsability
+     * @param Institution                $institution
+     * @param Log                        $log
+     * @param MaritalStatus              $maritalStatus
+     * @param Nationality                $nationality
+     * @param ProfessionalLicense        $professionalLicense
+     * @param Province                   $province
+     * @param Region                     $region
+     * @param Relationship               $relationship
+     * @param Speciality                 $speciality
+     * @param Study                      $study
+     * @param TypeCertification          $typeCertification
+     * @param TypeDisability             $typeDisability
+     * @param TypeDisease                $typeDisease
+     * @param TypeExam                   $typeExam
+     * @param TypeProfessionalLicense    $typeProfessionalLicense
+     * @param TypeSpeciality             $typeSpeciality
+     * @param User                       $user
      */
     public function __construct(ActivateEmployee $activateEmployee, Address $address, Certification $certification,
         Commune $commune, ContactEmployee $contactEmployee, Degree $degree, DetailAddressLegalEmployee $detailAddress,
@@ -239,36 +239,36 @@ class EmployeeController extends Controller
         TypeDisability $typeDisability, TypeDisease $typeDisease, TypeExam $typeExam,
         TypeProfessionalLicense $typeProfessionalLicense, TypeSpeciality $typeSpeciality, User $user)
     {
-        $this->activateEmployee        = $activateEmployee;
-        $this->address                 = $address;
-        $this->certification           = $certification;
-        $this->commune                 = $commune;
-        $this->contactEmployee         = $contactEmployee;
-        $this->degree                  = $degree;
-        $this->detailAddress           = $detailAddress;
-        $this->disability              = $disability;
-        $this->disease                 = $disease;
-        $this->employee                = $employee;
-        $this->exam                    = $exam;
-        $this->familyRelationship      = $familyRelationship;
-        $this->familyResponsability    = $familyResponsability;
-        $this->institution             = $institution;
-        $this->log                     = $log;
-        $this->maritalStatus           = $maritalStatus;
-        $this->nationality             = $nationality;
-        $this->professionalLicense     = $professionalLicense;
-        $this->province                = $province;
-        $this->region                  = $region;
-        $this->relationship            = $relationship;
-        $this->speciality              = $speciality;
-        $this->study                   = $study;
-        $this->typeCertification       = $typeCertification;
-        $this->typeDisability          = $typeDisability;
-        $this->typeDisease             = $typeDisease;
-        $this->typeExam                = $typeExam;
+        $this->activateEmployee = $activateEmployee;
+        $this->address = $address;
+        $this->certification = $certification;
+        $this->commune = $commune;
+        $this->contactEmployee = $contactEmployee;
+        $this->degree = $degree;
+        $this->detailAddress = $detailAddress;
+        $this->disability = $disability;
+        $this->disease = $disease;
+        $this->employee = $employee;
+        $this->exam = $exam;
+        $this->familyRelationship = $familyRelationship;
+        $this->familyResponsability = $familyResponsability;
+        $this->institution = $institution;
+        $this->log = $log;
+        $this->maritalStatus = $maritalStatus;
+        $this->nationality = $nationality;
+        $this->professionalLicense = $professionalLicense;
+        $this->province = $province;
+        $this->region = $region;
+        $this->relationship = $relationship;
+        $this->speciality = $speciality;
+        $this->study = $study;
+        $this->typeCertification = $typeCertification;
+        $this->typeDisability = $typeDisability;
+        $this->typeDisease = $typeDisease;
+        $this->typeExam = $typeExam;
         $this->typeProfessionalLicense = $typeProfessionalLicense;
-        $this->typeSpeciality          = $typeSpeciality;
-        $this->user                    = $user;
+        $this->typeSpeciality = $typeSpeciality;
+        $this->user = $user;
     }
 
     /**
@@ -276,14 +276,12 @@ class EmployeeController extends Controller
      */
     public function getEmployees()
     {
-        try
-        {
+        try {
             $employees = $this->employee->with(['nationality'])->get();
 
             return $employees;
-        } catch ( Exception $e )
-        {
-            $this->log->error('Error Store Employee: ' . $e->getMessage());
+        } catch (Exception $e) {
+            $this->log->error('Error Store Employee: '.$e->getMessage());
             DB::rollBack();
 
             return response()->json(['status' => false]);
@@ -303,23 +301,23 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $nationalities            = $this->nationality->pluck('name', 'id');
-        $degrees                  = $this->degree->pluck('name', 'id');
-        $employees                = $this->employee->pluck('full_name', 'id');
-        $maritalStatuses          = $this->maritalStatus->pluck('name', 'id');
-        $institutions             = $this->institution->pluck('name', 'id');
-        $regionsColl              = $this->region->all();
-        $provincesColl            = $this->region->findOrFail($regionsColl->first()->id)->provinces;
-        $communes                 = $this->province->findOrFail($provincesColl->first()->id)->communes->pluck('name', 'id');
-        $regions                  = $regionsColl->pluck('name', 'id');
-        $provinces                = $provincesColl->pluck('name', 'id');
-        $relationships            = $this->relationship->pluck('name', 'id');
-        $typeCertifications       = $this->typeCertification->pluck('name', 'id');
-        $typeDisabilities         = $this->typeDisability->pluck('name', 'id');
-        $typeDiseases             = $this->typeDisease->pluck('name', 'id');
-        $typeExams                = $this->typeExam->pluck('name', 'id');
+        $nationalities = $this->nationality->pluck('name', 'id');
+        $degrees = $this->degree->pluck('name', 'id');
+        $employees = $this->employee->pluck('full_name', 'id');
+        $maritalStatuses = $this->maritalStatus->pluck('name', 'id');
+        $institutions = $this->institution->pluck('name', 'id');
+        $regionsColl = $this->region->all();
+        $provincesColl = $this->region->findOrFail($regionsColl->first()->id)->provinces;
+        $communes = $this->province->findOrFail($provincesColl->first()->id)->communes->pluck('name', 'id');
+        $regions = $regionsColl->pluck('name', 'id');
+        $provinces = $provincesColl->pluck('name', 'id');
+        $relationships = $this->relationship->pluck('name', 'id');
+        $typeCertifications = $this->typeCertification->pluck('name', 'id');
+        $typeDisabilities = $this->typeDisability->pluck('name', 'id');
+        $typeDiseases = $this->typeDisease->pluck('name', 'id');
+        $typeExams = $this->typeExam->pluck('name', 'id');
         $typeProfessionalLicenses = $this->typeProfessionalLicense->pluck('name', 'id');
-        $typeSpecialities         = $this->typeSpeciality->pluck('name', 'id');
+        $typeSpecialities = $this->typeSpeciality->pluck('name', 'id');
 
         return view('human-resources.employees.create', compact(
             'communes', 'nationalities', 'degrees', 'employees', 'maritalStatuses', 'institutions',
@@ -338,14 +336,13 @@ class EmployeeController extends Controller
         $password = str_random(10);
         DB::beginTransaction();
 
-        try
-        {
+        try {
             $employee = $this->employee->create(Session::get('step1'));
-            $user     = $employee->user()->create([
+            $user = $employee->user()->create([
                 'email'    => Session::get('email_employee'),
                 'password' => $password,
             ]);
-            $address  = $employee->address()->create(Session::get('step1'));
+            $address = $employee->address()->create(Session::get('step1'));
             $address->detailAddressLegalEmployee()->create(Session::get('step1'));
             $employee->createContacts(Session::get('step1'));
             $employee->createFamilyRelationships(Session::get('step1'));
@@ -363,9 +360,8 @@ class EmployeeController extends Controller
             DB::commit();
 
             return response()->json(['status' => true, 'url' => '/human-resources/employees']);
-        } catch ( Exception $e )
-        {
-            $this->log->error('Error Store Employee: ' . $e->getMessage());
+        } catch (Exception $e) {
+            $this->log->error('Error Store Employee: '.$e->getMessage());
             DB::rollBack();
 
             return response()->json(['status' => false]);
@@ -385,23 +381,23 @@ class EmployeeController extends Controller
             'studies.detailTechnicalStudy', 'studies.detailCollegeStudy.institution',
         ])->findOrFail($id);
 
-        $nationalities            = $this->nationality->pluck('name', 'id');
-        $degrees                  = $this->degree->pluck('name', 'id');
-        $employees                = $this->employee->pluck('full_name', 'id');
-        $maritalStatuses          = $this->maritalStatus->pluck('name', 'id');
-        $institutions             = $this->institution->pluck('name', 'id');
-        $regionsColl              = $this->region->all();
-        $provincesColl            = $this->region->findOrFail($employee->address->commune->province->region->id)->provinces;
-        $communes                 = $this->province->findOrFail($employee->address->commune->province->id)->communes->pluck('name', 'id');
-        $regions                  = $regionsColl->pluck('name', 'id');
-        $provinces                = $provincesColl->pluck('name', 'id');
-        $relationships            = $this->relationship->pluck('name', 'id');
-        $typeCertifications       = $this->typeCertification->pluck('name', 'id');
-        $typeDisabilities         = $this->typeDisability->pluck('name', 'id');
-        $typeDiseases             = $this->typeDisease->pluck('name', 'id');
-        $typeExams                = $this->typeExam->pluck('name', 'id');
+        $nationalities = $this->nationality->pluck('name', 'id');
+        $degrees = $this->degree->pluck('name', 'id');
+        $employees = $this->employee->pluck('full_name', 'id');
+        $maritalStatuses = $this->maritalStatus->pluck('name', 'id');
+        $institutions = $this->institution->pluck('name', 'id');
+        $regionsColl = $this->region->all();
+        $provincesColl = $this->region->findOrFail($employee->address->commune->province->region->id)->provinces;
+        $communes = $this->province->findOrFail($employee->address->commune->province->id)->communes->pluck('name', 'id');
+        $regions = $regionsColl->pluck('name', 'id');
+        $provinces = $provincesColl->pluck('name', 'id');
+        $relationships = $this->relationship->pluck('name', 'id');
+        $typeCertifications = $this->typeCertification->pluck('name', 'id');
+        $typeDisabilities = $this->typeDisability->pluck('name', 'id');
+        $typeDiseases = $this->typeDisease->pluck('name', 'id');
+        $typeExams = $this->typeExam->pluck('name', 'id');
         $typeProfessionalLicenses = $this->typeProfessionalLicense->pluck('name', 'id');
-        $typeSpecialities         = $this->typeSpeciality->pluck('name', 'id');
+        $typeSpecialities = $this->typeSpeciality->pluck('name', 'id');
 
         return view('human-resources.employees.edit', compact(
             'employee', 'communes', 'nationalities', 'degrees', 'employees', 'maritalStatuses',
@@ -420,8 +416,7 @@ class EmployeeController extends Controller
     {
         DB::beginTransaction();
 
-        try
-        {
+        try {
             // Update Step1
             $employee = $this->employee->findOrFail($id);
             $employee->fill(Session::get('step1_update'))->saveOrFail();
@@ -459,9 +454,8 @@ class EmployeeController extends Controller
             DB::commit();
 
             return response()->json(['status' => true, 'url' => '/human-resources/employees']);
-        } catch ( Exception $e )
-        {
-            $this->log->error('Error update Employee: ' . $e->getMessage());
+        } catch (Exception $e) {
+            $this->log->error('Error update Employee: '.$e->getMessage());
             session()->flash('error', 'Hubo un error en el servidor. Comunique con personal especializado.');
             DB::rollBack();
 
@@ -496,17 +490,15 @@ class EmployeeController extends Controller
     {
         DB::beginTransaction();
 
-        try
-        {
+        try {
             $employee = $this->employee->findOrFail($id);
             $this->activateEmployee->saveStateDisableEmployee($employee);
             $employee->delete();
             DB::commit();
 
             return redirect()->route('employees.index');
-        } catch ( Exception $e )
-        {
-            $this->log->error('Error delete Employee: ' . $e->getMessage());
+        } catch (Exception $e) {
+            $this->log->error('Error delete Employee: '.$e->getMessage());
             DB::rollBack();
 
             return response()->json(['status' => false]);
@@ -537,8 +529,7 @@ class EmployeeController extends Controller
     {
         $save = new ImageFactory($request->get('employee_id'), 'employee/', $request->get('repo_id'), $request->get('type'), $request->file('file_data'), null, $request->get('subClass'));
 
-        if ( $save )
-        {
+        if ($save) {
             $this->activateEmployee->checkStateUpdateEmployee($request->get('employee_id'));
 
             return response()->json(['status' => true]);
@@ -556,8 +547,7 @@ class EmployeeController extends Controller
     {
         $destroy = new ImageFactory($request->get('key'), 'employee/', null, $request->get('type'), null, $request->get('path'));
 
-        if ( $destroy )
-        {
+        if ($destroy) {
             $this->activateEmployee->checkStateUpdateEmployee($request->get('id'));
 
             return response()->json(['status' => true]);
@@ -648,9 +638,8 @@ class EmployeeController extends Controller
         Session::put('expired_license', $request->get('expired_license'));
         Session::put('detail_license', $request->get('detail_license'));
 
-        for ( $i = 0; $i < $request->get('count_professional_licenses'); $i++ )
-        {
-            Session::put('is_donor' . $i, $request->get('is_donor' . $i));
+        for ($i = 0; $i < $request->get('count_professional_licenses'); $i++) {
+            Session::put('is_donor'.$i, $request->get('is_donor'.$i));
         }
 
         return response()->json([
@@ -758,8 +747,7 @@ class EmployeeController extends Controller
         Session::forget('expired_license');
         Session::forget('detail_license');
 
-        for ( $i = 0; $i < Session::get('count_professional_licenses'); $i++ )
-        {
+        for ($i = 0; $i < Session::get('count_professional_licenses'); $i++) {
             Session::forget('is_donor');
         }
 

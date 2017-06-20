@@ -240,7 +240,7 @@ return [
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
         'UrlSigner' => Spatie\UrlSigner\Laravel\UrlSignerFacade::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
-        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
+        'Bugsnag'   => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 
 ];

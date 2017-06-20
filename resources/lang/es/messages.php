@@ -10,5 +10,5 @@ return [
     // Employees
     'rut'      => 'Nacional',     // doc enum
     'passport' => 'Pasaporte',       // doc enum
-    'foreign'  => 'Extranjero'     // doc enum
+    'foreign'  => 'Extranjero',     // doc enum
 ];

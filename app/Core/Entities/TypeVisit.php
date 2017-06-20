@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class TypeVisit extends Eloquent
 {
-	/**
-	 * @var array
-	 */
+    /**
+     * @var array
+     */
     protected $fillable = [
-    	'name'
-	];
+        'name',
+    ];
 
-	/**
-	 * @var boolean
-	 */
-	public $timestamps = false;
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 }
