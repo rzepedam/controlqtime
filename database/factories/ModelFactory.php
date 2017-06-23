@@ -147,15 +147,20 @@
 
 	$factory->define(Contract::class, function (Faker\Generator $faker)
 	{
+		$companies 	= Company::all();
+		$areas 		= Area::all();
+		$company   	= $companies->random();
+		$area 		= $areas->random();
+
 		return [
-			'company_id'       => factory(Company::class)->states('enable')->create()->id,
-			'employee_id'      => factory(Employee::class)->states('enable')->create()->id,
+			'company_id'       => $company->id,
+			'employee_id'      => '',
 			'start_contract'   => Carbon::parse('2016-12-13')->format('d-m-Y'),
 			'position_id'      => factory(Position::class)->create()->id,
-			'area_id'          => factory(Area::class)->create()->id,
+			'area_id'          => $area->id,
 			'type_contract_id' => factory(TypeContract::class)->create([ 'name' => 'Plazo Fijo' ])->id,
-			'num_hour'         => '45',
 			'day_trip_id'      => factory(DayTrip::class)->create()->id,
+			'num_hour'         => '45',
 			'forecast_id'      => factory(Forecast::class)->create()->id,
 			'pension_id'       => factory(Pension::class)->create()->id,
 			'init_morning'     => '09:00',
@@ -193,7 +198,7 @@
 	{
 		$employees = \Controlqtime\Core\Entities\Employee::all();
 		$employee  = $employees->random();
-		$mark      = mt_rand(Carbon::today()->timestamp, Carbon::now()->timestamp);
+		$mark      = mt_rand(Carbon::parse('-3 days')->timestamp, Carbon::now()->timestamp);
 
 		return [
 			'employee_id' => $employee->id,

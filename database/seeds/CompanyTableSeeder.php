@@ -1,13 +1,12 @@
 <?php
 
-use Controlqtime\Core\Entities\Company;
 use Illuminate\Database\Seeder;
+use Controlqtime\Core\Entities\Company;
 
 class CompanyTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('companies')->truncate();
 
         $state = getenv('APP_ENV') === 'local' ? 'enable' : 'disable';
@@ -24,6 +23,6 @@ class CompanyTableSeeder extends Seeder
             'state'           => $state,
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        factory(\Controlqtime\Core\Entities\Company::class, 3)->create();
     }
 }

@@ -185,6 +185,7 @@ return [
         Spatie\UrlSigner\Laravel\UrlSignerServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+		Yajra\Datatables\DatatablesServiceProvider::class
     ],
 
     /*

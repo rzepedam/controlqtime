@@ -6,9 +6,8 @@ Route::get('human-resources', 'SidebarMenuController@getHumanResources')->name('
 // Human-Resources
 Route::group(['prefix' => 'human-resources'], function () {
     // Daily Assistance
-    Route::get('getDailyAssistances', ['as' => 'getDailyAssistances', 'uses' => 'DailyAssistanceController@getDailyAssistances']);
-    Route::resource('daily-assistances', 'DailyAssistanceController');
-    Route::post('daily-assistances-by-date', 'DailyAssistanceController@getAssistanceByDate');
+	Route::get('getAssistances', 'DailyAssistanceController@getAssistances');
+	Route::resource('daily-assistances', 'DailyAssistanceController');
 
     // Contracts
     Route::get('getContracts', ['as' => 'getContracts', 'uses' => 'ContractController@getContracts']);

@@ -42,5 +42,7 @@ class EmployeeTableSeeder extends Seeder
             'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/06/29/163531241838.jpg',
             'state'             => 'enable',
         ]);
+
+        factory(Employee::class, 8)->states('enable')->create();
     }
 }

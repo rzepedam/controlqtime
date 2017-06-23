@@ -18,7 +18,8 @@ const { mix } = require('laravel-mix');
     ], 'public/css/fonts.css')
     .copy([
         'node_modules/font-awesome/fonts',
-        'node_modules/material-design-iconic-font/dist/fonts'
+        'node_modules/material-design-iconic-font/dist/fonts',
+        'node_modules/bootstrap-sass/assets/fonts/bootstrap'
     ], 'public/fonts');
 
 // Style owned
@@ -173,8 +174,10 @@ const { mix } = require('laravel-mix');
         // Index
             mix.combine([
                 'resources/assets/custom-remark/css/bootstrap-select.css',
-                'resources/assets/me/css/human-resources/daily-assistances/index.css',
-                'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
+                'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+                // Datatables
+                'node_modules/datatables.net-bs/css/dataTables.bootstrap.css',
+                'resources/assets/custom-remark/css/datatables-custom.css'
             ], 'public/css/human-resources/daily-assistances/index-custom-daily-assistances.css')
             .scripts([
                 'resources/assets/me/js/utilities/add_csrf_token.js',
@@ -183,7 +186,11 @@ const { mix } = require('laravel-mix');
                 'resources/assets/components/bootstrap-datepicker.js',
                 'node_modules/bootstrap-select/dist/js/bootstrap-select.min.js',
                 'resources/assets/components/bootstrap-select.js',
-                'resources/assets/me/js/base/human-resources/daily-assistances/index-custom.js'
+                'node_modules/moment/moment.js',
+                'node_modules/moment/locale/es.js',
+                // Datatables
+                'node_modules/datatables.net/js/jquery.dataTables.js',
+                'node_modules/datatables.net-bs/js/dataTables.bootstrap.js'
             ], 'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js');
 
     // Contracts

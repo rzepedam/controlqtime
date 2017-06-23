@@ -10,9 +10,7 @@ $('.date').datepicker({
     todayHighlight: true,
     endDate: new Date()
 }).on('changeDate', function (e) {
-
     callAjaxForReloadTablesInformation();
-
 });
 
 $(document).on('change', '#employee_id', function () {

@@ -1,7 +1,7 @@
 <?php
 
-use Controlqtime\Core\Entities\Area;
 use Illuminate\Database\Seeder;
+use Controlqtime\Core\Entities\Area;
 
 class AreaTableSeeder extends Seeder
 {
@@ -12,7 +12,6 @@ class AreaTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('areas')->truncate();
 
         Area::create([
@@ -32,7 +31,5 @@ class AreaTableSeeder extends Seeder
             'terminal_id' => 1,
             'name'        => 'Gerencia',
         ]);
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
