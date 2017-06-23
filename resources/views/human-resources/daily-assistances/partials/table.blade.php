@@ -1,4 +1,4 @@
-<table id="tblAssistances" class="table table-striped">
+<table id="tblAssistances" class="table table-hover table-condensed table-striped display" width="100%">
     <thead>
         <tr>
             <th>Trabajador</th>

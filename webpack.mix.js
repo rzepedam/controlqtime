@@ -190,7 +190,7 @@ const { mix } = require('laravel-mix');
                 'node_modules/moment/locale/es.js',
                 // Datatables
                 'node_modules/datatables.net/js/jquery.dataTables.js',
-                'node_modules/datatables.net-bs/js/dataTables.bootstrap.js'
+                'node_modules/datatables.net-bs/js/dataTables.bootstrap.js',
             ], 'public/js/human-resources/daily-assistances/index-custom-daily-assistances.js');
 
     // Contracts

@@ -3,7 +3,7 @@
 @section('css')
     <link rel="stylesheet" href="{{ mix('css/index-common.css') }}">
     <link rel="stylesheet" href="{{ mix('css/human-resources/daily-assistances/index-custom-daily-assistances.css') }}">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
 @stop
 
 @section('title_header')
@@ -27,12 +27,6 @@
         </div>
         <div class="panel-body">
             <div class="row col-sm-offset-1 col-sm-10">
-                <div class="input-search input-group-sm pull-right">
-                    <button type="submit" class="input-search-btn">
-                        <i class="icon md-search" aria-hidden="true"></i>
-                    </button>
-                    <input id="search" type="text" class="form-control" name="" placeholder="Search...">
-                </div>
                 @include('human-resources.daily-assistances.partials.table')
             </div>
         </div>
@@ -48,6 +42,8 @@
 @section('scripts')
     <script src="{{ mix('js/index-common.js') }}"></script>
     <script src="{{ mix('js/human-resources/daily-assistances/index-custom-daily-assistances.js') }}"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -62,7 +58,11 @@
                     url: "/human-resources/getAssistances",
                 },
                 "drawCallback": function () {
-                    $('.dataTables_paginate > .pagination').addClass('pagination-sm pagination-no-border');
+                    if ($(".datatables_search_custom").length === 0)
+                    {
+                        $('.top').append('<div class="datatables_search_custom"><div class="input-search input-group-sm pull-right"> <button type="submit" class="input-search-btn"> <i class="icon md-search" aria-hidden="true"></i> </button> <input id="search" type="text" class="form-control" placeholder="Search..."> </div></div>');
+                    }
+                    $('.dataTables_paginate > .pagination').addClass('pagination-sm pagination-no-border col-xs-12');
                 },
                 "language": {
                     "sProcessing": '<i class="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></i>',
@@ -87,13 +87,13 @@
                     {
                         data: 'firm_name', name: 'firm_name', className: 'text-center', searchable: false,
                         'render': function (data, type, row, meta) {
-                            return '<span class="label label-round label-info">' + data + '</span>';
+                            return '<a class="label label-round label-info">' + data + '</a>';
                         }
                     },
                     {
                         data: 'name', name: 'name', className: 'text-center', searchable: false,
                         'render': function (data, type, row, meta) {
-                            return '<span class="label label-round label-success">' + data + '</span>';
+                            return '<a class="label label-round label-success">' + data + '</a>';
                         }
                     },
                     {
@@ -119,11 +119,6 @@
                 data.end         = $('#end').val();
             }).DataTable(params);
 
-            // Reload table to the change employee select
-            $('#employee_id').on('change', function () {
-                table.ajax.reload();
-            });
-
             // Reload table to the change company select
             $('#company_id').on('change', function () {
                 table.ajax.reload();
@@ -132,6 +127,28 @@
             // Reload table to the change area select
             $('#area_id').on('change', function () {
                 table.ajax.reload();
+            });
+
+            // Reload table to the change employee select
+            $(document).on('change', '#employee_id', function () {
+                table.ajax.reload();
+                $.get('/human-resources/daily-assistances/loadEmployee',
+                    { employee_id: $(this).val() }
+                    ).done(function( data ) {
+                        $('#company_id').empty();
+                        $('#area_id').empty();
+                        $('#company_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
+                        $('#area_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
+                        $.each(data, function(key, element) {
+                            console.log(key);
+                            console.log(element);
+                            return false;
+                            $('#company_id').append("<option value='" + Object.keys(element.companies) + "'>" + Object.values(element.companies) + "</option>");
+                            $('#area_id').append("<option value='" + Object.keys(element.areas)[0] + "'>" + this[Object.keys(element.areas)[0]] + "</option>");
+                        });
+                        $('#company_id').selectpicker('refresh');
+                        $('#area_id').selectpicker('refresh');
+                    });
             });
 
             // Reload table to the change init input
@@ -155,7 +172,7 @@
             });
 
             // Search method
-            $('#search').keyup(function () {
+            $(document).on('keyup', '#search', function () {
                 table.search($(this).val()).draw();
             })
         });

@@ -1,12 +1,37 @@
 .dataTable {
     padding-top: 10px !important;
-    padding-bottom: 60px !important;
+    padding-bottom: 40px !important;
+}
+.dataTables_length {
+    float: left !important;
 }
 .dataTables_info {
     float: left !important;
+}
+.dataTables_paginate {
+    float: right !important;
+}
+.dataTables_paginate > .pagination {
+    padding: 0;
 }
 @font-face {
     font-family: 'Glyphicons Halflings';
     src: url('../../../fonts/glyphicons-halflings-regular.eot');
     src: url('../../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+@media (max-width: 576px){
+    .dataTables_length{
+        padding-left:50px;
+        padding-bottom: 10px;
+    }
+    .top > .datatables_search_custom{
+        padding-right: 62px !important;
+    }
+    .dataTables_info{
+        padding-left:50px;
+        padding-bottom: 10px;
+    }
+    .dataTables_paginate{
+        padding-right: 30px;
+    }
 }

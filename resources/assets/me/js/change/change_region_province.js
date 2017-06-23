@@ -1,5 +1,4 @@
 $('#region_id').change(function(){
-
     $.get('/loadProvinces',
         { id: $('#region_id').val() },
         function(data) {
@@ -16,7 +15,6 @@ $('#region_id').change(function(){
 
 
 $('#province_id').change(function(){
-
     if ($('#province_id').val() == 'provincia') {
         $('#commune_id').empty();
         $('#commune_id').append("<option value='comuna'>Seleccione Comuna...</option>");
