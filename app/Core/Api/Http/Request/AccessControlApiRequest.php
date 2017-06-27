@@ -23,27 +23,12 @@ class AccessControlApiRequest extends Request
      */
     public function rules()
     {
-        switch (request('num_device')) {
-            case 'DDFF4EC6-182B-4E37-961D-28211D63E45B':
-                $rules = [
-                    'rut'        => 'required|max:10|unique_with:access_control_apis,created_at',
-                    'num_device' => 'required',
-                    'status'     => 'required',
-                    'created_at' => 'required|date',
-                ];
-
-                return $rules;
-
-            case '06787B04-2454-4896-ACEB-D459610C4E61':
-                $rules = [
-                    'rut'        => 'required|max:10|unique_with:daily_assistance_apis,created_at',
-                    'num_device' => 'required',
-                    'status'     => 'required',
-                    'created_at' => 'required|date',
-                ];
-
-                return $rules;
-        }
+		return [
+			'rut'        => 'required|max:10|unique_with:access_control_apis,created_at',
+			'num_device' => ['required', 'in:DDFF4EC6-182B-4E37-961D-28211D63E45B,06787B04-2454-4896-ACEB-D459610C4E61'],
+			'status'     => 'required',
+			'created_at' => 'required|date',
+		];
     }
 
     public function messages()

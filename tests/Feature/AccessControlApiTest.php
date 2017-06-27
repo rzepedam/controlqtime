@@ -11,17 +11,17 @@ class AccessControlApiTest extends BrowserKitTestCase
 
     public function setUp()
     {
-        parent::setUp();
-        $this->signIn();
-        $this->token = $this->user->createToken('Biometry')->accessToken;
-    }
+		parent::setUp();
+		$this->signIn();
+		$this->token = $this->user->createToken('Biometry')->accessToken;
+	}
 
     /** @test */
     public function url_access_control_api()
     {
-        $response = $this->call('POST', '/api/access-control');
+        $response = $this->post('/api/access-control');
 
-        $this->assertEquals(302, $response->getStatusCode());
+		$response->assertResponseStatus(302);
     }
 
     /** @test */
@@ -29,15 +29,32 @@ class AccessControlApiTest extends BrowserKitTestCase
     {
         $headers = [
             'Authorization' => 'Bearer test',
-            'Accept'        => 'application/json',
         ];
 
-        $this->post('/api/access-control', [], $headers)
+        $this->json('POST', '/api/access-control', [], $headers)
             ->dontSeeJson([
                 'error' => 'Unauthenticated.',
             ]);
     }
 
+	/** @test */
+    public function does_not_store_mark_when_device_number_is_wrong()
+    {
+		$rut = str_replace('.', '', $this->employee->rut);
+
+		$data = [
+			'rut'        => $rut,
+			'num_device' => 'CE9D8A76-AD2C-40A0-9A61-007259F42CBA',
+			'status'     => 1,
+			'created_at' => Carbon::now(),
+		];
+
+		$this->json('POST', '/api/access-control', $data, [
+			'Authorization' => 'Bearer ' . $this->token ])
+			->seeJson(['status' => true]);
+		dd($r->decodeResponseJson());
+    }
+    
     /** @test */
     public function create_access_control_api_success()
     {
@@ -50,12 +67,9 @@ class AccessControlApiTest extends BrowserKitTestCase
             'created_at' => Carbon::now(),
         ];
 
-        $this->post('/api/access-control', $data, [
-            'Authorization' => 'Bearer '.$this->token,
-            'Accept'        => 'application/json', ])
-            ->seeJson([
-                'status' => true,
-            ]);
+        $this->json('POST', '/api/access-control', $data, [
+					'Authorization' => 'Bearer ' . $this->token ])
+			->seeJson(['status' => true]);
     }
 
     /** @test */

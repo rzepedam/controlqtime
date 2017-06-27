@@ -2,11 +2,11 @@
 
 namespace Controlqtime\Core\Api\Http\Controllers;
 
-use Controlqtime\Core\Api\Http\Request\AccessControlApiRequest;
-use Controlqtime\Core\Entities\Employee;
-use Controlqtime\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Log\Writer as Log;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Http\Controllers\Controller;
+use Controlqtime\Core\Api\Http\Request\AccessControlApiRequest;
 
 class AccessControlApiController extends Controller
 {
@@ -41,6 +41,7 @@ class AccessControlApiController extends Controller
      */
     public function store(AccessControlApiRequest $request)
     {
+    	dd('...');
         try {
             $employee = $this->employee->where('rut', request('rut'))->firstOrFail();
 
