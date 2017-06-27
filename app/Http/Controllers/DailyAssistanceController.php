@@ -306,11 +306,27 @@
 			return view('human-resources.daily-assistances.index', compact('areas', 'companies', 'dailyAssistances', 'employees'));
 		}
 
+		/**
+		 * @return \Illuminate\Http\JsonResponse
+		 */
 		public function loadEmployee()
 		{
 			$employee 	= $this->employee->with(['contract.area'])->where('id', request('employee_id'))->get();
 			$areas 		= $employee->pluck('contract')->pluck('area')->pluck('name', 'id');
 			$companies	= $employee->pluck('contract')->pluck('company')->pluck('firm_name', 'id');
+
+			return response()->json(['areas' => $areas, 'companies' => $companies]);
+		}
+
+		/**
+		 * @return \Illuminate\Http\JsonResponse
+		 */
+		public function loadCompany()
+		{
+			$company 	= $this->company->with(['contract.employee', 'contract.area'])->where('id', request('company_id'))->get();
+			$areas 		= $company->pluck('contract')->pluck('area')->pluck('name', 'id');
+			dd($areas);
+			$employees	= $company->pluck('contract')->pluck('company')->pluck('firm_name', 'id');
 
 			return response()->json(['areas' => $areas, 'companies' => $companies]);
 		}

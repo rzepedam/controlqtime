@@ -8,6 +8,7 @@ Route::group(['prefix' => 'human-resources'], function () {
     // Daily Assistance
 	Route::get('getAssistances', 'DailyAssistanceController@getAssistances');
 	Route::get('daily-assistances/loadEmployee', 'DailyAssistanceController@loadEmployee');
+	Route::get('daily-assistances/loadCompany', 'DailyAssistanceController@loadCompany');
 	Route::resource('daily-assistances', 'DailyAssistanceController');
 
     // Contracts

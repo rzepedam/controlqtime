@@ -58,13 +58,13 @@
                     url: "/human-resources/getAssistances",
                 },
                 "drawCallback": function () {
-                    if ($(".datatables_search_custom").length === 0)
-                    {
+                    if ($(".datatables_search_custom").length === 0) {
                         $('.top').append('<div class="datatables_search_custom"><div class="input-search input-group-sm pull-right"> <button type="submit" class="input-search-btn"> <i class="icon md-search" aria-hidden="true"></i> </button> <input id="search" type="text" class="form-control" placeholder="Search..."> </div></div>');
                     }
                     $('.dataTables_paginate > .pagination').addClass('pagination-sm pagination-no-border col-xs-12');
                 },
                 "language": {
+                    "thousands": ".",
                     "sProcessing": '<i class="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></i>',
                     "sInfo": 'Mostrando <span class="text-primary">_START_</span> a <span class="text-primary">_END_</span> de _TOTAL_ registros',
                     "sInfoEmpty": "No existen coincidencias",
@@ -122,6 +122,23 @@
             // Reload table to the change company select
             $('#company_id').on('change', function () {
                 table.ajax.reload();
+                $.get('/human-resources/daily-assistances/loadCompany',
+                    { company_id: $(this).val() }
+                    ).done(function( data ) {
+                        $('#company_id').empty();
+                        $('#company_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
+                        $.each(data.companies, function(key, element) {
+                            $('#company_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
+                        });
+                        $('#area_id').empty();
+                        $('#area_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
+                        $.each(data.areas, function(key, element) {
+                            $('#area_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
+                        });
+                        $('#company_id').selectpicker('refresh');
+                        $('#area_id').selectpicker('refresh');
+                    }
+                );
             });
 
             // Reload table to the change area select
@@ -136,19 +153,19 @@
                     { employee_id: $(this).val() }
                     ).done(function( data ) {
                         $('#company_id').empty();
-                        $('#area_id').empty();
                         $('#company_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
+                        $.each(data.companies, function(key, element) {
+                            $('#company_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
+                        });
+                        $('#area_id').empty();
                         $('#area_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
-                        $.each(data, function(key, element) {
-                            console.log(key);
-                            console.log(element);
-                            return false;
-                            $('#company_id').append("<option value='" + Object.keys(element.companies) + "'>" + Object.values(element.companies) + "</option>");
-                            $('#area_id').append("<option value='" + Object.keys(element.areas)[0] + "'>" + this[Object.keys(element.areas)[0]] + "</option>");
+                        $.each(data.areas, function(key, element) {
+                            $('#area_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
                         });
                         $('#company_id').selectpicker('refresh');
                         $('#area_id').selectpicker('refresh');
-                    });
+                    }
+                );
             });
 
             // Reload table to the change init input

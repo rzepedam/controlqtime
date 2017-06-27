@@ -77,6 +77,14 @@ class Company extends Eloquent
             ->withTrashed();
     }
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function contract()
+    {
+		return $this->hasOne(Contract::class);
+    }
+
     /**
      * @param string $value format 123.456.789-k
      */

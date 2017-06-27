@@ -41,7 +41,6 @@ class AccessControlApiController extends Controller
      */
     public function store(AccessControlApiRequest $request)
     {
-    	dd('...');
         try {
             $employee = $this->employee->where('rut', request('rut'))->firstOrFail();
 
