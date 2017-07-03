@@ -8,6 +8,7 @@ class DatabaseSeeder extends Seeder
     {
         // Others
         $this->call(DeviceTableSeeder::class);
+        $this->call(PeriodEveryEightHourTableSeeder::class);
 
         // Maintainers tables
         $this->call(CountryTableSeeder::class);

@@ -85,6 +85,14 @@ class Company extends Eloquent
 		return $this->hasOne(Contract::class);
     }
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function areas()
+    {
+		return $this->belongsToMany(Area::class);
+    }
+
     /**
      * @param string $value format 123.456.789-k
      */

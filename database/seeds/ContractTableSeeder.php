@@ -14,11 +14,17 @@ class ContractTableSeeder extends Seeder
     {
         DB::table('contracts')->truncate();
 
-        $employees = \Controlqtime\Core\Entities\Employee::all();
+        $employees 	= \Controlqtime\Core\Entities\Employee::all();
+		$companies 	= \Controlqtime\Core\Entities\Company::with(['areas'])->get();
+
         foreach ($employees as $employee)
 		{
+			$company 	= $companies->random();
+			$area 		= $company->areas->pluck('id')->random();
 			factory(Controlqtime\Core\Entities\Contract::class, 1)->create([
-				'employee_id' => $employee->id
+				'employee_id' 	=> $employee->id,
+				'company_id' 	=> $company->id,
+				'area_id' 		=> $area
 			]);
 		}
     }

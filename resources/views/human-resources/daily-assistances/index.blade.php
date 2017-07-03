@@ -7,8 +7,7 @@
 @stop
 
 @section('title_header')
-    Control Asistencia <span
-            class="text-capitalize text-primary">{{ Date::parse(\Carbon\Carbon::now())->format('l j F') }}</span>
+    Control Asistencia <span class="text-capitalize text-primary">{{ Date::parse(\Carbon\Carbon::now())->format('l j F') }}</span>
 @stop
 
 @section('breadcumb')

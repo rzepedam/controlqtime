@@ -44,6 +44,14 @@ class SidebarMenuController extends Controller
         return view('maintainers.index');
     }
 
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function getGraphics()
+    {
+		return view('graphics.index');
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

@@ -16,6 +16,7 @@ class CreateDailyAssistanceApisTable extends Migration
         Schema::create('daily_assistance_apis', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('employee_id')->nullable();
+            $table->unsignedInteger('period_every_eight_hour_id');
             $table->string('rut', 10);
             $table->string('num_device');
             $table->boolean('status')->default(0);

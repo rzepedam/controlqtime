@@ -10,7 +10,6 @@
                             <span class="site-menu-title">Inicio</span>
                         </a>
                     </li>
-
                     {{-- Administración --}}
                     <li class="site-menu-item {{ Request::is('administration*') ? 'active' : '' }} has-sub">
                         <a class="animsition-link" href="{{ route('administration') }}">
@@ -18,7 +17,6 @@
                             <span class="site-menu-title">Administración</span>
                         </a>
                     </li>
-
                     {{-- Recursos Humanos --}}
                     <li class="site-menu-item {{ Request::is('human-resources*') ? 'active' : '' }} has-sub">
                         <a class="animsition-link" href="{{ route('human-resources') }}">
@@ -26,7 +24,6 @@
                             <span class="site-menu-title">Recursos Humanos</span>
                         </a>
                     </li>
-
                     {{-- Operaciones --}}
                     <li class="site-menu-item {{ Request::is('operations*') ? 'active' : '' }} has-sub">
                         <a class="animsition-link" href="{{ route('operations') }}">
@@ -34,7 +31,6 @@
                             <span class="site-menu-title">Operaciones</span>
                         </a>
                     </li>
-
                     {{-- Registro de Visitas --}}
                     <li class="site-menu-item {{ Request::is('sign-in-visits*') ? 'active' : '' }} has-sub">
                         <a class="animsition-link" href="{{ route('sign-in-visits') }}">
@@ -42,12 +38,18 @@
                             <span class="site-menu-title">Registro de Visitas</span>
                         </a>
                     </li>
-
                     {{-- Mantenedores --}}
                     <li class="site-menu-item {{ Request::is('maintainers*') ? 'active' : '' }}">
                         <a class="animsition-link" href="{{ route('maintainers') }}">
                             <i class="site-menu-icon fa fa-cogs" aria-hidden="true"></i>
                             <span class="site-menu-title">Mantenedores</span>
+                        </a>
+                    </li>
+                    {{-- Gráficas --}}
+                    <li class="site-menu-item {{ Request::is('graphics*') ? 'active' : '' }}">
+                        <a class="animsition-link" href="{{ route('graphics') }}">
+                            <i class="site-menu-icon fa fa-pie-chart" aria-hidden="true"></i>
+                            <span class="site-menu-title">Gráficas</span>
                         </a>
                     </li>
 

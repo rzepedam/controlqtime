@@ -24,5 +24,20 @@ class CompanyTableSeeder extends Seeder
         ]);
 
         factory(\Controlqtime\Core\Entities\Company::class, 3)->create();
+
+        $companies 	= \Controlqtime\Core\Entities\Company::all();
+        $areas 		= \Controlqtime\Core\Entities\Area::all();
+
+        foreach($companies as $company)
+		{
+			$num = rand(1, 3);
+			for ($i = 0; $i < $num; $i ++)
+			{
+				DB::table('area_company')->insert([
+					'company_id' 	=> $company->id,
+					'area_id' 		=> $areas[$i]->id
+				]);
+			}
+		}
     }
 }

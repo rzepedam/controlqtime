@@ -25,6 +25,13 @@ class CreateCompaniesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+		Schema::create('area_company', function (Blueprint $table) {
+			$table->unsignedInteger('company_id')->nullable();
+			$table->unsignedInteger('area_id')->nullable();
+
+			$table->primary(['area_id', 'company_id']);
+		});
     }
 
     /**
@@ -35,5 +42,7 @@ class CreateCompaniesTable extends Migration
     public function down()
     {
         Schema::drop('companies');
+
+		Schema::dropIfExists('area_company');
     }
 }

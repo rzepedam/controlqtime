@@ -27,6 +27,7 @@
     "bootstrap-select": "^1.12.2",
     "bootstrap-table": "1.11.0",
     "breakpoints-js": "^1.0.4",
+    "chart.js": "^2.6.0",
     "clockpicker": "^0.0.7",
     "datatables.net-bs": "^1.10.15",
     "font-awesome": "^4.7.0",

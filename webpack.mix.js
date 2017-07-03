@@ -562,15 +562,36 @@ const { mix } = require('laravel-mix');
                 'resources/assets/me/js/base/maintainers/type-vehicles/config_bootstrap_table.js'
             ], 'public/js/maintainers/type-vehicles/index.js');
 
-    // Support
-        // Index
-            mix.scripts([
-                'resources/assets/me/js/base/support/index.js'
-            ], 'public/js/support/index.js');
+// Graphics
+    // Index
+    mix.scripts([
+        'resources/assets/me/js/base/graphics/index.js'
+    ], 'public/js/graphics/index.js');
 
-        // Passport
-            mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');
-            mix.copy('resources/assets/passport/app.js', 'public/js/passport.js');
+    // Assistance
+        mix.combine([
+            'resources/assets/custom-remark/css/bootstrap-select.css',
+            'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+        ], 'public/css/graphics/assistance.css')
+        .scripts([
+            'node_modules/chart.js/dist/Chart.min.js',
+            'node_modules/bootstrap-select/dist/js/bootstrap-select.min.js',
+            'resources/assets/components/bootstrap-select.js',
+            'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+            'node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+            'resources/assets/components/bootstrap-datepicker.js',
+            'node_modules/moment/moment.js',
+        ], 'public/js/graphics/assistance.js');
+
+// Support
+    // Index
+    mix.scripts([
+        'resources/assets/me/js/base/support/index.js',
+    ], 'public/js/support/index.js');
+
+    // Passport
+        mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');
+        mix.copy('resources/assets/passport/app.js', 'public/js/passport.js');
 
 // Versioning
     mix.version();
