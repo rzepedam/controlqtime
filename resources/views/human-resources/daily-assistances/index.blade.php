@@ -175,7 +175,7 @@
                     { company_id: $('#company_id').val(), employee_id: $(this).val() }
                     ).done(function( data ) {
                         $('#area_id').empty();
-                        $('#area_id').append("<option sele data-icon='fa fa-search' value=''>Seleccione</option>");
+                        $('#area_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
                         $.each(data.areas, function (key, element) {
                             if ( $('#employee_id').val() ) {
                                 $('#area_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");

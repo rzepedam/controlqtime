@@ -94,6 +94,14 @@ class Company extends Eloquent
     }
 
     /**
+     * @param $areas [1,2,3]
+     */
+    public function syncAreas($areas)
+    {
+        $this->areas()->sync($areas);
+    }
+
+    /**
      * @param string $value format 123.456.789-k
      */
     public function setRutAttribute($value)

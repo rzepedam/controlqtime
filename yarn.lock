@@ -881,9 +881,9 @@ bootstrap-sass@^3.3.7:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/bootstrap-sass/-/bootstrap-sass-3.3.7.tgz#6596c7ab40f6637393323ab0bc80d064fc630498"
 
-bootstrap-select@^1.12.2:
-  version "1.12.2"
-  resolved "https://registry.yarnpkg.com/bootstrap-select/-/bootstrap-select-1.12.2.tgz#58d095b3fd584b31443866fbe39b6fdd4e4e12a4"
+bootstrap-select@^1.12.3:
+  version "1.12.3"
+  resolved "https://registry.yarnpkg.com/bootstrap-select/-/bootstrap-select-1.12.3.tgz#b170d23cb0be083ed3c496f8d66813e1b3bbc9ce"
   dependencies:
     jquery ">=1.8"
 
@@ -1213,6 +1213,10 @@ chokidar@1.6.1, chokidar@^1.4.3, chokidar@^1.6.0, chokidar@^1.6.1:
   optionalDependencies:
     fsevents "^1.0.0"
 
+chosen-js@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/chosen-js/-/chosen-js-1.7.0.tgz#8ceb2e929e2a072886edd384d78989dfbffa58c3"
+
 cipher-base@^1.0.0, cipher-base@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/cipher-base/-/cipher-base-1.0.3.tgz#eeabf194419ce900da3018c207d212f2a6df0a07"
@@ -1310,10 +1314,6 @@ coa@~1.0.1:
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
-
-collect.js@^3.0.40:
-  version "3.0.40"
-  resolved "https://registry.yarnpkg.com/collect.js/-/collect.js-3.0.40.tgz#68d4f4fdb8246a8588b411bf85daa3c382dae812"
 
 color-convert@^0.5.3:
   version "0.5.3"

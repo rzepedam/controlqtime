@@ -170,6 +170,7 @@ class CompanyController extends Controller
             $legal = $company->legalRepresentative()->create($request);
             $address = $legal->address()->create($request);
             $address->detailAddressLegalEmployee()->create($request);
+            $company->syncAreas(request('areas'));
             session()->flash('success', 'El registro fue almacenado satisfactoriamente.');
             DB::commit();
 
@@ -247,6 +248,7 @@ class CompanyController extends Controller
             $company->legalRepresentative->update($request);
             $company->legalRepresentative->address->update($request);
             $company->legalRepresentative->address->detailAddressLegalEmployee->update($request);
+            $company->syncAreas(request('areas'));
             session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
             DB::commit();
 
