@@ -37,6 +37,11 @@ class Area extends Eloquent
             ->withTrashed();
     }
 
+    public function contracts()
+    {
+		return $this->hasMany(Contract::class);
+    }
+
     /**
      * @param string $value
      */

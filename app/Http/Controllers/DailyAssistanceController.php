@@ -162,13 +162,13 @@
 		public function getAssistanceFilterCompany($id, $init, $end)
 		{
 			return $this->dailyAssistance
+				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
 				->join('employees', 'daily_assistance_apis.employee_id', 'employees.id')
 				->join('contracts', 'employees.id', 'contracts.employee_id')
 				->join('companies', 'contracts.company_id', 'companies.id')
 				->join('areas', 'contracts.area_id', 'areas.id')
 				->where('companies.id', $id)
 				->whereBetween('daily_assistance_apis.created_at', [$init, $end])
-				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
 				->get();
 		}
 
@@ -284,7 +284,7 @@
 				->join('contracts', 'employees.id', 'contracts.employee_id')
 				->join('companies', 'contracts.company_id', 'companies.id')
 				->join('areas', 'contracts.area_id', 'areas.id')
-				->where('companies.id', $areaId)
+				->where('companies.id', $companyId)
 				->where('areas.id', $areaId)
 				->where('employees.id', $employeeId)
 				->whereBetween('daily_assistance_apis.created_at', [$init, $end])
@@ -299,23 +299,18 @@
 		 */
 		public function index()
 		{
-			$areas     = $this->area->get();
-			$companies = $this->company->get();
-			$employees = $this->employee->enabled()->get();
+			$companiesAux 	= $this->company->with(['areas', 'contracts.employee'])->get();
+			$companies 		= $companiesAux->pluck('firm_name', 'id');
+			$company 		= $companiesAux->first();
+			$areas 			= $company->areas;
+			$employees 		= $companiesAux->pluck('contracts')
+											->collapse()
+											->where('company_id', $company->id)
+											->pluck('employee');
 
-			return view('human-resources.daily-assistances.index', compact('areas', 'companies', 'dailyAssistances', 'employees'));
-		}
-
-		/**
-		 * @return \Illuminate\Http\JsonResponse
-		 */
-		public function loadEmployee()
-		{
-			$employee 	= $this->employee->with(['contract.area'])->where('id', request('employee_id'))->get();
-			$areas 		= $employee->pluck('contract')->pluck('area')->pluck('name', 'id');
-			$companies	= $employee->pluck('contract')->pluck('company')->pluck('firm_name', 'id');
-
-			return response()->json(['areas' => $areas, 'companies' => $companies]);
+			return view('human-resources.daily-assistances.index', compact(
+				'areas', 'companies', 'employees'
+			));
 		}
 
 		/**
@@ -323,11 +318,73 @@
 		 */
 		public function loadCompany()
 		{
-			$company 	= $this->company->with(['contract.employee', 'contract.area'])->where('id', request('company_id'))->get();
-			$areas 		= $company->pluck('contract')->pluck('area')->pluck('name', 'id');
-			dd($areas);
-			$employees	= $company->pluck('contract')->pluck('company')->pluck('firm_name', 'id');
+			$company 	= $this->company->with(['contracts.employee', 'areas'])->where('id', request('company_id'))->get();
+			$areas 		= $company->pluck('areas')->collapse()->pluck('name', 'id');
+			$employees	= $company->pluck('contracts')
+									->collapse()
+									->pluck('employee')
+									->pluck('full_name', 'id');
 
-			return response()->json(['areas' => $areas, 'companies' => $companies]);
+			return response()->json(['areas' => $areas, 'employees' => $employees]);
+		}
+
+		/**
+		 * @return \Illuminate\Http\JsonResponse
+		 */
+		public function loadArea()
+		{
+			$company = $this->company->with(['contracts.employee', 'areas'])
+										->findOrFail(request('company_id'));
+
+			// With area null, all employees
+			if ( is_null(request('area_id')) )
+			{
+				$areas = $company->areas->pluck('name', 'id');
+
+				return response()->json([
+					'employees' => $company->contracts->pluck('employee')->pluck('full_name', 'id'),
+					'areas' 	=> $areas
+				]);
+			}
+
+			// Employees belongsTo area selected
+			return response()->json([
+				'employees' => $company->contracts->where('area_id', request('area_id'))->pluck('employee')->pluck('full_name', 'id')
+			]);
+		}
+
+		/**
+		 * @return \Illuminate\Http\JsonResponse
+		 */
+		public function loadEmployee()
+		{
+			if ( is_null(request('employee_id')) )
+			{
+				$areas = $this->company->with(['contracts.employee', 'areas'])
+										->findOrFail(request('company_id'))
+										->areas
+										->pluck('name', 'id');
+
+				return response()->json(['areas' => $areas]);
+			}
+
+			$area = $this->employee->with(['contract.area'])
+									->where('id', request('employee_id'))
+									->get()
+									->pluck('contract')
+									->pluck('area')
+									->pluck('name', 'id');
+
+			$employees = $this->area->with(['contracts.employee'])
+									->findOrFail($area->keys())
+									->pluck('contracts')
+									->collapse()
+									->where('company_id', request('company_id'))
+									->pluck('employee')
+									->pluck('full_name', 'id');
+
+			return response()->json([
+				'employees' => $employees, 'areas' => $area, 'selected' => request('employee_id')
+			]);
 		}
 	}

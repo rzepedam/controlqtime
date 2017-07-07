@@ -15,7 +15,7 @@ class AccessControlApi extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'rut', 'num_device', 'status', 'created_at',
+		'rut', 'num_device', 'status', 'created_at',
     ];
 
     /**

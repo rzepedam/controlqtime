@@ -119,50 +119,84 @@
             }).DataTable(params);
 
             // Reload table to the change company select
-            $('#company_id').on('change', function () {
+            $(document).on('change', '#company_id', function () {
+                $('#area_id').val('');
+                $('#employee_id').val('');
                 table.ajax.reload();
                 $.get('/human-resources/daily-assistances/loadCompany',
                     { company_id: $(this).val() }
                     ).done(function( data ) {
-                        $('#company_id').empty();
-                        $('#company_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
-                        $.each(data.companies, function(key, element) {
-                            $('#company_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
-                        });
                         $('#area_id').empty();
                         $('#area_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
                         $.each(data.areas, function(key, element) {
-                            $('#area_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
+                            $('#area_id').append("<option value='" + key + "'>" + element + "</option>");
                         });
-                        $('#company_id').selectpicker('refresh');
                         $('#area_id').selectpicker('refresh');
+                        $('#employee_id').empty();
+                        $('#employee_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
+                        $.each(data.employees, function(key, element) {
+                            $('#employee_id').append("<option value='" + key + "'>" + element + "</option>");
+                        });
+                        $('#employee_id').selectpicker('refresh');
                     }
                 );
             });
 
             // Reload table to the change area select
-            $('#area_id').on('change', function () {
+            $(document).on('change', '#area_id', function () {
+                $('#employee_id').val('');
                 table.ajax.reload();
+                $.get('/human-resources/daily-assistances/loadArea',
+                    { company_id: $('#company_id').val(), area_id: $(this).val(), employee_id: $('#employee_id').val() }
+                    ).done(function( data ) {
+                        if (data.areas) {
+                            $('#area_id').empty();
+                            $('#area_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
+                            $.each(data.areas, function (key, element) {
+                                $('#area_id').append("<option value='" + key + "'>" + element + "</option>");
+                            });
+                            $('#area_id').selectpicker('refresh');
+                        }
+                        $('#employee_id').empty();
+                        $('#employee_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
+                        $.each(data.employees, function(key, element) {
+                            $('#employee_id').append("<option value='" + key + "'>" + element + "</option>");
+                        });
+                        $('#employee_id').selectpicker('refresh');
+                    }
+                );
             });
 
             // Reload table to the change employee select
             $(document).on('change', '#employee_id', function () {
+                $('#area_id').val('');
                 table.ajax.reload();
                 $.get('/human-resources/daily-assistances/loadEmployee',
-                    { employee_id: $(this).val() }
+                    { company_id: $('#company_id').val(), employee_id: $(this).val() }
                     ).done(function( data ) {
-                        $('#company_id').empty();
-                        $('#company_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
-                        $.each(data.companies, function(key, element) {
-                            $('#company_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
-                        });
                         $('#area_id').empty();
-                        $('#area_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
-                        $.each(data.areas, function(key, element) {
-                            $('#area_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
+                        $('#area_id').append("<option sele data-icon='fa fa-search' value=''>Seleccione</option>");
+                        $.each(data.areas, function (key, element) {
+                            if ( $('#employee_id').val() ) {
+                                $('#area_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
+                            } else {
+                                $('#area_id').append("<option value='" + key + "'>" + element + "</option>");
+                            }
                         });
-                        $('#company_id').selectpicker('refresh');
                         $('#area_id').selectpicker('refresh');
+
+                        if ( $('#employee_id').val() ) {
+                            $('#employee_id').empty();
+                            $('#employee_id').append("<option data-icon='fa fa-search' value=''>Seleccione</option>");
+                            $.each(data.employees, function (key, element) {
+                                if (data.selected === key) {
+                                    $('#employee_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
+                                } else {
+                                    $('#employee_id').append("<option value='" + key + "'>" + element + "</option>");
+                                }
+                            });
+                            $('#employee_id').selectpicker('refresh');
+                        }
                     }
                 );
             });

@@ -80,9 +80,9 @@ class Company extends Eloquent
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
 	 */
-	public function contract()
+	public function contracts()
     {
-		return $this->hasOne(Contract::class);
+		return $this->hasMany(Contract::class);
     }
 
 	/**

@@ -23,16 +23,33 @@ class AccessControlApiRequest extends Request
      */
     public function rules()
     {
-		return [
-			'rut'        => 'required|max:10|unique_with:access_control_apis,created_at',
-			'num_device' => ['required', 'in:DDFF4EC6-182B-4E37-961D-28211D63E45B,06787B04-2454-4896-ACEB-D459610C4E61'],
-			'status'     => 'required',
-			'created_at' => 'required|date',
-		];
-    }
+    	switch ( request('num_device') )
+		{
+			case 'DDFF4EC6-182B-4E37-961D-28211D63E45B':
+				$rules = [
+					'rut' 			=> [ 'required', 'max:10', 'exists:employees,rut', 'unique_with:access_control_apis,created_at' ],
+					'num_device' 	=> [ 'required', 'in:DDFF4EC6-182B-4E37-961D-28211D63E45B' ],
+					'status' 		=> [ 'required' ],
+					'created_at' 	=> [ 'required', 'date' ]
+				];
+				break;
 
-    public function messages()
-    {
-        return ['unique_with' => 'La combinación de valores ingresados ya existe.'];
+			case '06787B04-2454-4896-ACEB-D459610C4E61':
+				$rules = [
+					'rut' 			=> [ 'required', 'max:10', 'exists:employees,rut', 'unique_with:daily_assistance_apis,created_at' ],
+					'num_device' 	=> [ 'required', 'in:06787B04-2454-4896-ACEB-D459610C4E61' ],
+					'status' 		=> [ 'required' ],
+					'created_at' 	=> [ 'required', 'date' ]
+				];
+				break;
+
+			default:
+				// Se define cualquier Nº de dispositivo para que retorne mensaje de validación
+				$rules = [
+					'num_device' => ['in:JOIWWXP-763483HADJH-POLKSJSM' ]
+				];
+		}
+
+		return $rules;
     }
 }

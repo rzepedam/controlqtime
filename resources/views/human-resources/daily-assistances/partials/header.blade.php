@@ -16,14 +16,9 @@
         </div>
     </div>
 </div>
-<div class="form-group col-sm-2">
+<div class="form-group col-sm-3">
     {{ Form::label('company_id', 'Empresa', ['class' => 'control-label']) }}
-    <select id="company_id" name="company_id" class="form-control input-sm" data-plugin="selectpicker" data-live-search="true">
-        <option data-icon="fa fa-search" value="">Seleccione</option>
-        @foreach($companies as $company)
-            <option value="{{ $company->id }}">{{ $company->firm_name }}</option>
-        @endforeach
-    </select>
+    {{ Form::select('company_id', $companies, null, ['class' => 'form-control', 'data-plugin' => 'selectpicker', 'data-live-search' => "true"]) }}
 </div>
 <div class="form-group col-sm-2">
     {{ Form::label('area_id', 'Área', ['class' => 'control-label']) }}

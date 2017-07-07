@@ -16,7 +16,7 @@ class DailyAssistanceApi extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'rut', 'num_device', 'status', 'created_at',
+        'period_every_eight_hour_id', 'rut', 'num_device', 'status', 'created_at',
     ];
 
     /**
