@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CompanyEditTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
+	use DatabaseTransactions;
 
     protected $company;
 
@@ -170,8 +170,8 @@ class CompanyEditTest extends BrowserKitTestCase
                 'gyre'            => 'Venta de productos e insumos marinos',
                 'start_act'       => '1985-07-16',
                 'muni_license'    => '37489327835',
-                'email_company'   => 'pag@gmail.com', ]);
-            /*->seeInDatabase('addresses', [
+                'email_company'   => 'pag@gmail.com' ])
+            ->seeInDatabase('addresses', [
                 'addressable_id'   => $this->company->id,
                 'addressable_type' => 'Controlqtime\Core\Entities\Company',
                 'address'          => 'Rosa Pérez 19',
@@ -179,10 +179,11 @@ class CompanyEditTest extends BrowserKitTestCase
                 'phone1'           => '+56973001909',
                 'phone2'           => '2227041109'])
             ->seeInDatabase('detail_address_companies', [
-                'lot'   => '',
-                'bod'   => '',
-                'ofi'   => '',
-                'floor' => ''])
+                'address_id' => $this->company->address->id,
+            	'lot'   	=> null,
+                'bod'   	=> null,
+                'ofi'   	=> null,
+                'floor' 	=> null])
             ->seeInDatabase('legal_representatives', [
                 'company_id'           => $this->company->id,
                 'male_surname'         => 'Valenzuela',
@@ -202,9 +203,9 @@ class CompanyEditTest extends BrowserKitTestCase
                 'phone2'           => '2228780990'])
             ->seeInDatabase('detail_address_legal_employees', [
                 'address_id' => $this->company->legalRepresentative->address->id,
-                'depto'      => '',
-                'block'      => '',
-                'num_home'   => ''
-            ]);*/
+                'depto'      => null,
+                'block'      => null,
+                'num_home'   => null
+            ]);
     }
 }

@@ -112,7 +112,7 @@ class CompanyShowTest extends BrowserKitTestCase
             ->see('8924798374')
             ->see('Domingo 11 Diciembre 2016 20:50:18')
             ->see('17.638.322-4')
-            ->see('36 años')
+            ->see($this->company->legalRepresentative->birthday->age . ' años')
             ->see('Av. La Florida 1909, Depto 839, Block 12, Nº Casa 14. La Florida. Santiago. Región Metropolitana de Santiago')
             ->see('+56981002912')
             ->see('2225601029')

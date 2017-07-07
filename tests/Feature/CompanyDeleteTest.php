@@ -6,44 +6,42 @@ class CompanyDeleteTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
-    protected $company;
+	protected $addressCompany;
+	protected $addressLegal;
+	protected $company;
+	protected $detailAddressCompany;
+	protected $legalRepresentative;
+	protected $typeCompany;
 
-    protected $legalRepresentative;
-
-    protected $detailAddressCompany;
-
-    protected $addressCompany;
-
-    protected $addressLegal;
-
-    public function setUp()
+	public function setUp()
     {
         parent::setUp();
         $this->signIn();
 
-        $this->company = factory(\Controlqtime\Core\Entities\Company::class)->states('enable')->create();
+        $this->typeCompany 	= factory(\Controlqtime\Core\Entities\TypeCompany::class)->create();
+        $this->company 		= factory(\Controlqtime\Core\Entities\Company::class)->states('enable')->create();
 
         $this->addressCompany = factory(\Controlqtime\Core\Entities\Address::class)->create([
             'addressable_id'   => $this->company->id,
             'addressable_type' => 'Controlqtime\Core\Entities\Company',
         ]);
 
-        $this->detailAddressCompany = factory(\Controlqtime\Core\Entities\DetailAddressCompany::class)->create([
+		$this->detailAddressCompany = factory(\Controlqtime\Core\Entities\DetailAddressCompany::class)->create([
             'address_id' => $this->addressCompany->id,
         ]);
 
-        $this->legalRepresentative = factory(\Controlqtime\Core\Entities\LegalRepresentative::class)->create([
+		$this->legalRepresentative = factory(\Controlqtime\Core\Entities\LegalRepresentative::class)->create([
             'company_id'         => $this->company->id,
             'rut_representative' => '12.077.637-1',
             'birthday'           => '14-08-1986',
         ]);
 
-        $this->addressLegal = factory(\Controlqtime\Core\Entities\Address::class)->create([
+		$this->addressLegal = factory(\Controlqtime\Core\Entities\Address::class)->create([
             'addressable_id'   => $this->legalRepresentative->id,
             'addressable_type' => 'Controlqtime\Core\Entities\LegalRepresentative',
         ]);
 
-        $this->detailAddressLegalEmployee = factory(\Controlqtime\Core\Entities\DetailAddressLegalEmployee::class)->create([
+		$this->detailAddressLegalEmployee = factory(\Controlqtime\Core\Entities\DetailAddressLegalEmployee::class)->create([
             'address_id' => $this->addressLegal->id,
             'depto'      => '',
             'block'      => '',
@@ -54,8 +52,9 @@ class CompanyDeleteTest extends BrowserKitTestCase
     /** @test */
     public function delete_url_company()
     {
-        $response = $this->call('DELETE', 'administration/companies/'.$this->company->id);
-        $this->assertEquals(302, $response->getStatusCode());
+        $response = $this->delete('administration/companies/' . $this->company->id);
+		$response->assertResponseStatus(302);
+		$response->assertRedirectedTo('administration/companies');
     }
 
     /** @test */

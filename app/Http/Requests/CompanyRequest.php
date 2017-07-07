@@ -52,7 +52,7 @@ class CompanyRequest extends Request
                     'lot'                   => 'max:5',
                     'bod'                   => 'max:5',
                     'ofi'                   => 'max:5',
-                    'floor'                 => 'regex:/[0-9 -()+]+$/|digits_between:1,3',
+                    'floor'                 => 'max:3',
                     'muni_license'          => 'required|max:50',
                     'phone1'                => 'required|max:20',
                     'phone2'                => 'max:20',
