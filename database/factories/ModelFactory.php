@@ -103,10 +103,8 @@ $factory->define(Commune::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Company::class, function (Faker\Generator $faker) {
-    $typeCompanies = \Controlqtime\Core\Entities\TypeCompany::all();
-
-    return [
-        'type_company_id' => $typeCompanies->random()->id,
+	return [
+        'type_company_id' => factory(\Controlqtime\Core\Entities\TypeCompany::class)->create()->id,
         'rut'             => rand(100, 110) . rand(100, 999) . rand(100, 999) . '-' . rand(1, 9),
         'firm_name'       => $faker->company . ' ' . $faker->companySuffix,
         'gyre'            => $faker->sentence,

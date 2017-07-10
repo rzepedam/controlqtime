@@ -1,28 +1,16 @@
 @extends('layout.index')
-
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/administrations/companies/create-edit-custom-companies.css') }}">
-
 @stop
-
 @section('title_header') Crear Nueva Empresa @stop
-
 @section('breadcumb')
     <li><a href="{{ route('administration') }}"><i class="fa fa-th-large"></i> Administración</a></li>
     <li><a href="{{ route('companies.index') }}"><i class="fa fa-building-o"></i> Empresas</a></li>
     <li class="active">Nuevo</li>
 @stop
-
 @section('content')
 
-    {{-- Show Errors Validations --}}
-    <div class="clearfix">
-        <div class="col-md-12 col-xs-12 alert alert-danger alert-dismissible hide" role="alert" id="js">
-        </div>
-    </div>
-    {{-- End Show Errors --}}
-
+    @include('layout.messages.errors-js')
     {{ Form::open(array('route' => 'companies.store', 'method' => 'POST', 'id' => 'form-submit')) }}
 
         <div class="panel panel-bordered">
@@ -65,10 +53,14 @@
     {{ Form::close() }}
 
 @stop
-
 @section('scripts')
-
     <script src="{{ mix('js/administrations/companies/create-edit-custom-companies.js') }}"></script>
-
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".js-example-basic-single").select2({
+                placeholder: "Seleccione Áreas...",
+            });
+        });
+    </script>
 @stop
 

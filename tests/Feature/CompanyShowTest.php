@@ -93,6 +93,9 @@ class CompanyShowTest extends BrowserKitTestCase
             'block'      => '12',
             'num_home'   => '14',
         ]);
+
+        $areas = factory(\Controlqtime\Core\Entities\Area::class, 3)->create();
+        $this->company->syncAreas([$areas[0]->id, $areas[2]->id]);
     }
 
     /** @test */
@@ -111,6 +114,8 @@ class CompanyShowTest extends BrowserKitTestCase
             ->see('Domingo 11 Diciembre 2016')
             ->see('8924798374')
             ->see('Domingo 11 Diciembre 2016 20:50:18')
+	        ->see($this->company->areas->pluck('name')[0])
+	        ->see($this->company->areas->pluck('name')[1])
             ->see('17.638.322-4')
             ->see($this->company->legalRepresentative->birthday->age . ' años')
             ->see('Av. La Florida 1909, Depto 839, Block 12, Nº Casa 14. La Florida. Santiago. Región Metropolitana de Santiago')

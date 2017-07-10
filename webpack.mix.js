@@ -147,7 +147,7 @@ const { mix } = require('laravel-mix');
         // Create-Edit
             mix.combine([
                 'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
-                'node_modules/chosen-js/chosen.css'
+                'node_modules/select2/dist/css/select2.min.css'
             ], 'public/css/administrations/companies/create-edit-custom-companies.css')
             .scripts([
                 'resources/assets/me/js/utilities/capitalize.js',
@@ -162,7 +162,7 @@ const { mix } = require('laravel-mix');
                 'resources/assets/components/bootstrap-datepicker.js',
                 'node_modules/bootstrap-maxlength/bootstrap-maxlength.min.js',
                 'resources/assets/components/bootstrap-maxlength.js',
-                'node_modules/chosen-js/chosen.jquery.js',
+                'node_modules/select2/dist/js/select2.min.js',
                 'resources/assets/me/js/base/administrations/companies/custom_companies.js'
             ], 'public/js/administrations/companies/create-edit-custom-companies.js');
 

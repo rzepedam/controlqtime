@@ -104,6 +104,11 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-6 col-md-6">
+        {{ Form::select('area_id[]', $areas, null, ['class' => 'form-control js-example-basic-single', 'multiple' => 'multiple', 'id' => 'area_id']) }}
+    </div>
+</div>
 <br />
 <div id="Company" class="row hide">
     <div class="col-md-12 text-center">

@@ -64,6 +64,16 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Áreas</td>
+                                <td class="text-center">
+                                    @foreach($company->areas as $area)
+                                        <a href="{{ route('areas.index') }}" class="label label-round label-primary margin-left-3">
+                                            {{ $area->name }}
+                                        </a>
+                                    @endforeach
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="col-md-3">Ingresado</td>
                                 <td class="text-center text-capitalize">
                                     {{ $company->created_at_to_spanish_format }}
