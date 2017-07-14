@@ -2,8 +2,9 @@
 
 namespace Controlqtime\Providers;
 
+use Controlqtime\Events\AccessNotification;
+use Controlqtime\Notifications\Assistance\Access;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -15,11 +16,11 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'Illuminate\Auth\Events\Login' => [
             'Controlqtime\Listeners\LogLastLogin',
-            'Controlqtime\Listeners\UpdateLastLoggedAt',
+            'Controlqtime\Listeners\UpdateLastLoggedAt'
         ],
-        'Controlqtime\Events\UserMessageSend' => [
-            'Controlqtime\Listeners\SendEmailUser',
-        ],
+	    AccessNotification::class => [
+			Access::class
+	    ]
     ];
 
     /**

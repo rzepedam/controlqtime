@@ -32,7 +32,6 @@ class ContractIndexTest extends BrowserKitTestCase
         $this->visit('human-resources/contracts')
             ->seeInElement('h1', 'Listado de Contratos')
             ->seeInElement('a', 'Crear Nuevo Contrato Laboral')
-            ->seeInElement('th', 'Nº')
             ->seeInElement('th', 'Trabajador')
             ->seeInElement('th', 'Empresa')
             ->seeInElement('th', 'Inicio')

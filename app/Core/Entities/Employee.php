@@ -15,6 +15,13 @@ class Employee extends Eloquent
     use SoftDeletes;
 
     /**
+	 * @var array
+	 */
+	protected $dates = [
+		'birthday', 'deleted_at',
+	];
+
+    /**
      * @var array
      */
     protected $fillable = [
@@ -22,11 +29,11 @@ class Employee extends Eloquent
         'birthday', 'is_male', 'nationality_id', 'marital_status_id', 'email_employee', 'state',
     ];
 
-    /**
-     * @var array
-     */
-    protected $dates = [
-        'birthday', 'deleted_at',
+	/**
+	 * @var array
+	 */
+	protected $with = [
+    	'contract.company', 'user'
     ];
 
     /**

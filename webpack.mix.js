@@ -570,7 +570,7 @@ const { mix } = require('laravel-mix');
         'resources/assets/me/js/base/graphics/index.js'
     ], 'public/js/graphics/index.js');
 
-    // Assistance
+    // assistances
         mix.combine([
             'resources/assets/custom-remark/css/bootstrap-select.css',
             'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',

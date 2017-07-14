@@ -60,7 +60,7 @@
 			$init = Carbon::parse(request('init') . ' 00:00:00')->format('Y-m-d H:i:s');
 			$end  = Carbon::parse(request('end') . ' 23:59:59')->format('Y-m-d H:i:s');
 
-			// Assistance filter company, area and employee
+			// assistances filter company, area and employee
 			if ( ! is_null(request('company_id')) && ! is_null(request('area_id')) && ! is_null(request('employee_id')) )
 			{
 				$assistances = $this->getAssistanceFilterCompanyAndAreaAndEmployee(request('company_id'), request('area_id'), request('employee_id'), $init, $end);
@@ -68,7 +68,7 @@
 				return Datatables::of($assistances)->make(true);
 			}
 
-			// Assistance filter company and area
+			// assistances filter company and area
 			if ( ! is_null(request('company_id')) && ! is_null(request('area_id')) )
 			{
 				$assistances = $this->getAssistanceFilterCompanyAndArea(request('company_id'), request('area_id'), $init, $end);
@@ -76,7 +76,7 @@
 				return Datatables::of($assistances)->make(true);
 			}
 
-			// Assistance filter company and employee
+			// assistances filter company and employee
 			if ( ! is_null(request('company_id')) && ! is_null(request('employee_id')) )
 			{
 				$assistances = $this->getAssistanceFilterCompanyAndEmployee(request('company_id'), request('employee_id'), $init, $end);
@@ -84,7 +84,7 @@
 				return Datatables::of($assistances)->make(true);
 			}
 
-			// Assistance filter area and employee
+			// assistances filter area and employee
 			if ( ! is_null(request('area_id')) && ! is_null(request('employee_id')) )
 			{
 				$assistances = $this->getAssistanceFilterAreaAndEmployee(request('area_id'), request('employee_id'), $init, $end);
@@ -92,7 +92,7 @@
 				return Datatables::of($assistances)->make(true);
 			}
 
-			// Assistance filter company
+			// assistances filter company
 			if ( ! is_null(request('company_id')))
 			{
 				$assistances = $this->getAssistanceFilterCompany(request('company_id'), $init, $end);
@@ -100,7 +100,7 @@
 				return Datatables::of($assistances)->make(true);
 			}
 
-			// Assistance filter employee
+			// assistances filter employee
 			if ( ! is_null(request('employee_id')) )
 			{
 				$assistances = $this->getAssistanceFilterEmployee(request('employee_id'), $init, $end);
@@ -108,7 +108,7 @@
 				return Datatables::of($assistances)->make(true);
 			}
 
-			// Assistance employees filter per Area
+			// assistances employees filter per Area
 			if ( ! is_null(request('area_id')))
 			{
 				$assistances = $this->getAssistanceFilterArea(request('area_id'), $init, $end);

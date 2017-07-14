@@ -5,7 +5,7 @@ Route::get('human-resources', 'SidebarMenuController@getHumanResources')->name('
 
 // Human-Resources
 Route::group(['prefix' => 'human-resources'], function () {
-    // Daily Assistance
+    // Daily assistances
 	Route::get('getAssistances', 'DailyAssistanceController@getAssistances');
 	Route::get('daily-assistances/loadEmployee', 'DailyAssistanceController@loadEmployee');
 	Route::get('daily-assistances/loadCompany', 'DailyAssistanceController@loadCompany');

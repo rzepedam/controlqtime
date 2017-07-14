@@ -10,6 +10,5 @@
             </div>
         </li>
         @php ($i ++)
-
     @endforeach
 </ul>

@@ -138,7 +138,7 @@ $factory->define(ContactEmployee::class, function (Faker\Generator $faker) {
 
 $factory->define(Contract::class, function (Faker\Generator $faker) {
     return [
-        'company_id'       => '',
+        'company_id'       => factory(\Controlqtime\Core\Entities\Company::class)->create()->id,
         'employee_id'      => '',
         'start_contract'   => Carbon::parse('2016-12-13')->format('d-m-Y'),
         'position_id'      => factory(Position::class)->create()->id,

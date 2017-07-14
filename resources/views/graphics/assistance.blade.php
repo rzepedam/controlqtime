@@ -15,12 +15,30 @@
         <div class="panel-body">
             <div class="col-xs-12 col-sm-4 col-md-4">
                 <canvas id="byTypeCompany" width="400" height="300"></canvas>
+                <br />
+                <br />
+                <div class="alert alert-alt alert-success alert-dismissible text-center" role="alert">
+                    <i class="fa fa-hashtag text-success" aria-hidden="true"></i>
+                    <span id="num_type_company_assistance" class="text-success">{{ $marksTypeCompany->sum() }}</span> asistencias
+                </div>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
                 <canvas id="byCompany" width="400" height="300"></canvas>
+                <br />
+                <br />
+                <div class="alert alert-alt alert-warning alert-dismissible text-center" role="alert">
+                    <i class="fa fa-hashtag text-warning" aria-hidden="true"></i>
+                    <span id="num_company_assistance" class="text-warning">{{ $marksCompany->sum() }}</span> asistencias
+                </div>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
                 <canvas id="byArea" width="400" height="300"></canvas>
+                <br />
+                <br />
+                <div class="alert alert-alt alert-danger alert-dismissible text-center" role="alert">
+                    <i class="fa fa-hashtag text-danger" aria-hidden="true"></i>
+                    <span id="num_area_assistance" class="text-danger">{{ $marksArea->sum() }}</span> asistencias
+                </div>
             </div>
         </div>
     </div>
@@ -45,20 +63,25 @@
                     })
                     .done(function (response) {
                         // Update areas chart
-                        for (var i = 0; i < response.area.length; i++) {
-                            areaChart.data.datasets[0].data[0] = response.area[0];
-                            areaChart.data.datasets[0].data[1] = response.area[1];
-                            areaChart.data.datasets[0].data[2] = response.area[2];
-                        }
+                        areaChart.data.datasets[0].data[0] = response.area[0];
+                        areaChart.data.datasets[0].data[1] = response.area[1];
+                        areaChart.data.datasets[0].data[2] = response.area[2];
                         areaChart.update();
+                        $('#num_area_assistance').text(response.area[0] + response.area[1] + response.area[2]);
 
                         // Update companies chart
-                        for (var i = 0; i < response.company.length; i++) {
-                            companyChart.data.datasets[0].data[0] = response.company[0];
-                            companyChart.data.datasets[0].data[1] = response.company[1];
-                            companyChart.data.datasets[0].data[2] = response.company[2];
-                        }
+                        companyChart.data.datasets[0].data[0] = response.company[0];
+                        companyChart.data.datasets[0].data[1] = response.company[1];
+                        companyChart.data.datasets[0].data[2] = response.company[2];
                         companyChart.update();
+                        $('#num_company_assistance').text(response.company[0] + response.company[1] + response.company[2]);
+
+                        // Update type companies chart
+                        typeCompanyChart.data.datasets[0].data[0] = response.typeCompany[0];
+                        typeCompanyChart.data.datasets[0].data[1] = response.typeCompany[1];
+                        typeCompanyChart.data.datasets[0].data[2] = response.typeCompany[2];
+                        typeCompanyChart.update();
+                        $('#num_type_company_assistance').text(response.typeCompany[0] + response.typeCompany[1] + response.typeCompany[2]);
                     }
                 );
             }
@@ -97,20 +120,18 @@
                         $('#area_id').selectpicker('refresh');
 
                         // Update areas chart
-                        for (var i = 0; i < response.area.length; i ++) {
-                            areaChart.data.datasets[0].data[0] = response.area[0];
-                            areaChart.data.datasets[0].data[1] = response.area[1];
-                            areaChart.data.datasets[0].data[2] = response.area[2];
-                        }
+                        areaChart.data.datasets[0].data[0] = response.area[0];
+                        areaChart.data.datasets[0].data[1] = response.area[1];
+                        areaChart.data.datasets[0].data[2] = response.area[2];
                         areaChart.update();
+                        $('#num_area_assistance').text(response.area[0] + response.area[1] + response.area[2]);
 
                         // Update companies chart
-                        for (var i = 0; i < response.company.length; i ++) {
-                            companyChart.data.datasets[0].data[0] = response.company[0];
-                            companyChart.data.datasets[0].data[1] = response.company[1];
-                            companyChart.data.datasets[0].data[2] = response.company[2];
-                        }
+                        companyChart.data.datasets[0].data[0] = response.company[0];
+                        companyChart.data.datasets[0].data[1] = response.company[1];
+                        companyChart.data.datasets[0].data[2] = response.company[2];
                         companyChart.update();
+                        $('#num_company_assistance').text(response.company[0] + response.company[1] + response.company[2]);
                     }
                 );
             });
@@ -119,17 +140,16 @@
                 $.get('/graphics/changeAreaSelect',
                     { company_id: $('#company_id').val(), area_id: $('#area_id').val(), init: $('#init').val(), end: $('#end').val() })
                     .done(function (response) {
-                        for (var i = 0; i < response.area.length; i ++) {
-                            areaChart.data.datasets[0].data[0] = response.area[0];
-                            areaChart.data.datasets[0].data[1] = response.area[1];
-                            areaChart.data.datasets[0].data[2] = response.area[2];
-                        }
+                        areaChart.data.datasets[0].data[0] = response.area[0];
+                        areaChart.data.datasets[0].data[1] = response.area[1];
+                        areaChart.data.datasets[0].data[2] = response.area[2];
                         areaChart.update();
+                        $('#num_area_assistance').text(response.area[0] + response.area[1] + response.area[2]);
                     }
                 );
             });
 
-            new Chart(ctx3,{
+            var typeCompanyChart = new Chart(ctx3,{
                 type: 'pie',
                 data: {
                     labels: {!! $marksTypeCompany->keys() !!},

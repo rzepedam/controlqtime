@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d7c751f92720a99d949da1571ee9dc6",
+    "content-hash": "3d5781eab35889867b03a48b1241928f",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.31.2",
+            "version": "3.31.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "582e7764e0fa389c3248450cd6db2564dd656d99"
+                "reference": "785dbe7d78c60e9478770dc42db5495e521dd668"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/582e7764e0fa389c3248450cd6db2564dd656d99",
-                "reference": "582e7764e0fa389c3248450cd6db2564dd656d99",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/785dbe7d78c60e9478770dc42db5495e521dd668",
+                "reference": "785dbe7d78c60e9478770dc42db5495e521dd668",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-07-06T21:11:49+00:00"
+            "time": "2017-07-13T19:06:25+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",

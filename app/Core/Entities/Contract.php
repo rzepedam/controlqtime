@@ -3,15 +3,21 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
-use Controlqtime\Core\Helpers\FormatField;
-use Illuminate\Database\Eloquent\Model as Eloquent;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Config;
 use Jenssegers\Date\Date;
+use Controlqtime\Core\Helpers\FormatField;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Contract extends Eloquent
 {
     use SoftDeletes;
+
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'start_contract', 'expires_at', 'deleted_at',
+	];
 
     /**
      * @var array
@@ -22,11 +28,11 @@ class Contract extends Eloquent
         'salary', 'mobilization', 'collation', 'forecast_id', 'pension_id', 'expires_at',
     ];
 
-    /**
-     * @var array
-     */
-    protected $dates = [
-        'start_contract', 'expires_at', 'deleted_at',
+	/**
+	 * @var array
+	 */
+	protected $with = [
+		'company', 'employee', 'position', 'area', 'dayTrip', 'typeContract', 'termsAndObligatories'
     ];
 
     /**
@@ -101,7 +107,10 @@ class Contract extends Eloquent
         return $this->belongsToMany(TermAndObligatory::class);
     }
 
-    public function setStartContractAttribute($value)
+	/**
+	 * @param $value
+	 */
+	public function setStartContractAttribute($value)
     {
         $this->attributes['start_contract'] = Carbon::createFromFormat('d-m-Y', $value);
     }
