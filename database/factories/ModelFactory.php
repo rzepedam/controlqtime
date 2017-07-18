@@ -139,10 +139,10 @@ $factory->define(ContactEmployee::class, function (Faker\Generator $faker) {
 $factory->define(Contract::class, function (Faker\Generator $faker) {
     return [
         'company_id'       => factory(\Controlqtime\Core\Entities\Company::class)->create()->id,
-        'employee_id'      => '',
+        'employee_id'      => factory(\Controlqtime\Core\Entities\Employee::class)->create()->id,
         'start_contract'   => Carbon::parse('2016-12-13')->format('d-m-Y'),
         'position_id'      => factory(Position::class)->create()->id,
-        'area_id'          => '',
+        'area_id'          => factory(\Controlqtime\Core\Entities\Area::class)->create()->id,
         'type_contract_id' => factory(TypeContract::class)->create(['name' => 'Plazo Fijo'])->id,
         'day_trip_id'      => factory(DayTrip::class)->create()->id,
         'num_hour'         => '45',

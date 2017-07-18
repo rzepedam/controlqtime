@@ -30,7 +30,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('contracts.index') }}">Volver</a>
+            <a href="{{ route('contracts.index') }}"><i class="fa fa-reply" aria-hidden="true"></i> Volver</a>
         </div>
     </div>
 

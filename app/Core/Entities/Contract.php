@@ -28,13 +28,6 @@ class Contract extends Eloquent
         'salary', 'mobilization', 'collation', 'forecast_id', 'pension_id', 'expires_at',
     ];
 
-	/**
-	 * @var array
-	 */
-	protected $with = [
-		'company', 'employee', 'position', 'area', 'dayTrip', 'typeContract', 'termsAndObligatories'
-    ];
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

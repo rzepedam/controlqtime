@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.31.4",
+            "version": "3.31.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "785dbe7d78c60e9478770dc42db5495e521dd668"
+                "reference": "4e066559063683aa4574aee3ed54fcb90b2b10b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/785dbe7d78c60e9478770dc42db5495e521dd668",
-                "reference": "785dbe7d78c60e9478770dc42db5495e521dd668",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4e066559063683aa4574aee3ed54fcb90b2b10b2",
+                "reference": "4e066559063683aa4574aee3ed54fcb90b2b10b2",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-07-13T19:06:25+00:00"
+            "time": "2017-07-17T21:18:04+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1952,16 +1952,16 @@
         },
         {
             "name": "laravel/passport",
-            "version": "v1.0.17",
+            "version": "v1.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/passport.git",
-                "reference": "f2a8af3a48adac02288779f59de95f46fef69b7a"
+                "reference": "f4ec49664be83f2a641cbfbb6d43cfb79f4aa95e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/passport/zipball/f2a8af3a48adac02288779f59de95f46fef69b7a",
-                "reference": "f2a8af3a48adac02288779f59de95f46fef69b7a",
+                "url": "https://api.github.com/repos/laravel/passport/zipball/f4ec49664be83f2a641cbfbb6d43cfb79f4aa95e",
+                "reference": "f4ec49664be83f2a641cbfbb6d43cfb79f4aa95e",
                 "shasum": ""
             },
             "require": {
@@ -2012,7 +2012,7 @@
                 "oauth",
                 "passport"
             ],
-            "time": "2016-12-21T13:51:02+00:00"
+            "time": "2017-07-12T20:03:53+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2371,16 +2371,16 @@
         },
         {
             "name": "league/oauth2-server",
-            "version": "5.1.4",
+            "version": "5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-server.git",
-                "reference": "26889abdd3dc04b7b9d633991e807159f6d410f9"
+                "reference": "8e5df6d6286d0010861a708b70f00345d074bce9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/26889abdd3dc04b7b9d633991e807159f6d410f9",
-                "reference": "26889abdd3dc04b7b9d633991e807159f6d410f9",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/8e5df6d6286d0010861a708b70f00345d074bce9",
+                "reference": "8e5df6d6286d0010861a708b70f00345d074bce9",
                 "shasum": ""
             },
             "require": {
@@ -2444,7 +2444,7 @@
                 "secure",
                 "server"
             ],
-            "time": "2017-07-01T17:37:54+00:00"
+            "time": "2017-07-11T06:31:36+00:00"
         },
         {
             "name": "league/url",
@@ -4962,16 +4962,16 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v7.9.2",
+            "version": "v7.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables.git",
-                "reference": "df205c536bb1017e5604cbdb4797c787f67369e4"
+                "reference": "97168bfeb4a3317bc27e61a579302d6a26380d5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/df205c536bb1017e5604cbdb4797c787f67369e4",
-                "reference": "df205c536bb1017e5604cbdb4797c787f67369e4",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/97168bfeb4a3317bc27e61a579302d6a26380d5d",
+                "reference": "97168bfeb4a3317bc27e61a579302d6a26380d5d",
                 "shasum": ""
             },
             "require": {
@@ -5019,7 +5019,7 @@
                 "jquery",
                 "laravel"
             ],
-            "time": "2017-07-05T01:50:21+00:00"
+            "time": "2017-07-12T02:33:08+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
