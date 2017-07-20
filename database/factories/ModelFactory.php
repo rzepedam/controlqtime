@@ -190,7 +190,7 @@ $factory->define(DailyAssistanceApi::class, function (Faker\Generator $faker) {
     } else {
         $periodId = 3;
     }
-
+	DailyAssistanceApi::unsetEventDispatcher();
     return [
         'employee_id'                => $employee->id,
         'period_every_eight_hour_id' => $periodId,
