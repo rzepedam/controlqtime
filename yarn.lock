@@ -873,9 +873,9 @@ bootstrap-datepicker@^1.6.4:
   dependencies:
     jquery ">=1.7.1"
 
-bootstrap-fileinput@4.3.5:
-  version "4.3.6"
-  resolved "https://registry.yarnpkg.com/bootstrap-fileinput/-/bootstrap-fileinput-4.3.6.tgz#6eeb36204cb713ace30679b4f314814717c9d7de"
+bootstrap-fileinput@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/bootstrap-fileinput/-/bootstrap-fileinput-4.4.2.tgz#55aac15e1563b6855f6df131245bf75a4270597a"
 
 bootstrap-maxlength@^1.6.0:
   version "1.6.0"
@@ -4882,10 +4882,6 @@ seek-bzip@^1.0.3:
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
-
-select2-bootstrap-theme@^0.1.0-beta.10:
-  version "0.1.0-beta.10"
-  resolved "https://registry.yarnpkg.com/select2-bootstrap-theme/-/select2-bootstrap-theme-0.1.0-beta.10.tgz#b9426ecfc03bf4a235e76a132377574310469ac0"
 
 select2@^4.0.3:
   version "4.0.3"

@@ -86,7 +86,7 @@
                     {
                         data: 'firm_name', name: 'firm_name', className: 'text-center', searchable: false,
                         'render': function (data, type, row, meta) {
-                            return '<a class="label label-round label-info">' + data + '</a>';
+                            return '<a class="label label-round label-info">' + data.substring(0,20) + '...'  + '</a>';
                         }
                     },
                     {

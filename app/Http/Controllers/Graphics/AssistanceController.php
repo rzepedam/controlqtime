@@ -3,11 +3,11 @@
 namespace Controlqtime\Http\Controllers\Graphics;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Area;
 use Controlqtime\Core\Entities\Company;
-use Controlqtime\Core\Entities\PeriodEveryEightHour;
 use Controlqtime\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use Controlqtime\Core\Entities\PeriodEveryEightHour;
 
 class AssistanceController extends Controller
 {
@@ -131,7 +131,8 @@ class AssistanceController extends Controller
 		$marksCompany = $this->getMarksCompany($companyId, $init, $end);
 		$marksArea    = $this->getMarksArea($companyId, $areaId, $init, $end);
 
-		if (is_null($areas)) {
+		if ( is_null($areas) )
+		{
 			return response()->json([ 'area' => $marksArea, 'company' => $marksCompany ]);
 		}
 
