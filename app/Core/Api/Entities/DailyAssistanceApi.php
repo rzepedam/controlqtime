@@ -24,7 +24,7 @@ class DailyAssistanceApi extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'period_every_eight_hour_id', 'rut', 'num_device', 'status', 'created_at',
+        'period_every_eight_hour_id', 'rut', 'num_device', 'status', 'log_in', 'log_out', 'created_at',
     ];
 
     /**
@@ -36,7 +36,7 @@ class DailyAssistanceApi extends Eloquent
      * @var array
      */
     protected $dates = [
-        'deleted_at',
+        'deleted_at'
     ];
 
     /**

@@ -29,8 +29,7 @@ class Access extends Notification implements ShouldQueue
 		$rut              = str_replace('.', '', $this->assistance->rut);
 		$this->employee   = Employee::where('rut', $rut)->firstOrFail();
 
-		app(Dispatcher::class)
-			->sendNow($this->employee->user, $this);
+		app(Dispatcher::class)->sendNow($this->employee->user, $this);
 	}
 
 	/**
