@@ -17,7 +17,7 @@ class DailyAssistanceApi extends Eloquent
 	 * @var array
 	 */
 	protected $events = [
-        'saved' => AccessNotification::class,
+        'created' => AccessNotification::class,
     ];
 
     /**
