@@ -98,7 +98,16 @@
                     {
                         data: 'created_at', name: 'created_at', className: 'text-center', searchable: false,
                         'render': function (data, type, row, meta) {
-                            return moment(data).format('DD MMM HH:mm:ss');
+                            if ( row.log_in )
+                            {
+                                return moment(data).format('DD MMM HH:mm:ss') + ' <i class="fa fa-sign-in text-success" aria-hidden="true"></i>';
+                            }
+
+                            if ( row.log_out )
+                            {
+                                return moment(data).format('DD MMM HH:mm:ss') + ' <i class="fa fa-sign-out text-danger" aria-hidden="true"></i>';
+                            }
+                            return moment(data).format('DD MMM HH:mm:ss') + ' <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>';
                         }
                     },
                     {
