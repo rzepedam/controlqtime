@@ -122,7 +122,7 @@
 								->join('companies', 'contracts.company_id', 'companies.id')
 								->join('areas', 'contracts.area_id', 'areas.id')
 								->whereBetween('daily_assistance_apis.created_at', [ $init, $end ])
-								->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id AS employee_id', 'employees.full_name', 'companies.id AS company_id', 'companies.firm_name', 'areas.id AS area_id', 'areas.name')
+								->select('daily_assistance_apis.created_at', 'daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'employees.id AS employee_id', 'employees.full_name', 'companies.id AS company_id', 'companies.firm_name', 'areas.id AS area_id', 'areas.name')
 								->get();
 
 			return Datatables::of($assistances)->make(true);
@@ -146,7 +146,7 @@
 						->join('areas', 'contracts.area_id', 'areas.id')
 						->where('daily_assistance_apis.employee_id', $id)
 						->whereBetween('daily_assistance_apis.created_at', [$init, $end])
-						->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
+						->select('daily_assistance_apis.created_at', 'daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
 						->get();
 		}
 
@@ -162,7 +162,7 @@
 		public function getAssistanceFilterCompany($id, $init, $end)
 		{
 			return $this->dailyAssistance
-				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
+				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
 				->join('employees', 'daily_assistance_apis.employee_id', 'employees.id')
 				->join('contracts', 'employees.id', 'contracts.employee_id')
 				->join('companies', 'contracts.company_id', 'companies.id')
@@ -190,7 +190,7 @@
 				->join('areas', 'contracts.area_id', 'areas.id')
 				->where('areas.id', $id)
 				->whereBetween('daily_assistance_apis.created_at', [$init, $end])
-				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
+				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
 				->get();
 		}
 
@@ -214,7 +214,7 @@
 				->where('companies.id', $companyId)
 				->where('areas.id', $areaId)
 				->whereBetween('daily_assistance_apis.created_at', [$init, $end])
-				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
+				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
 				->get();
 		}
 
@@ -238,7 +238,7 @@
 				->where('companies.id', $companyId)
 				->where('employees.id', $employeeId)
 				->whereBetween('daily_assistance_apis.created_at', [$init, $end])
-				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
+				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
 				->get();
 		}
 
@@ -262,7 +262,7 @@
 				->where('areas.id', $areaId)
 				->where('employees.id', $employeeId)
 				->whereBetween('daily_assistance_apis.created_at', [$init, $end])
-				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
+				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.id', 'companies.firm_name', 'areas.id', 'areas.name')
 				->get();
 		}
 
@@ -288,7 +288,7 @@
 				->where('areas.id', $areaId)
 				->where('employees.id', $employeeId)
 				->whereBetween('daily_assistance_apis.created_at', [$init, $end])
-				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.firm_name', 'areas.id', 'areas.name')
+				->select('daily_assistance_apis.created_at', 'daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'employees.id', 'employees.full_name', 'companies.firm_name', 'areas.id', 'areas.name')
 				->get();
 		}
 

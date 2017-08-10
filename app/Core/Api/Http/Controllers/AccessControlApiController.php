@@ -8,6 +8,7 @@ use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Http\Controllers\Controller;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 use Controlqtime\Core\Api\Http\Request\AccessControlApiRequest;
 
 class AccessControlApiController extends Controller
@@ -23,15 +24,22 @@ class AccessControlApiController extends Controller
 	protected $log;
 
 	/**
+	 * @var DailyAssistanceApi
+	 */
+	protected $assistance;
+
+	/**
 	 * AccessControlApiController constructor.
 	 *
-	 * @param Employee $employee
-	 * @param Log      $log
+	 * @param DailyAssistanceApi $assistance
+	 * @param Employee           $employee
+	 * @param Log                $log
 	 */
-	public function __construct(Employee $employee, Log $log)
+	public function __construct(DailyAssistanceApi $assistance, Employee $employee, Log $log)
 	{
-		$this->employee = $employee;
-		$this->log      = $log;
+		$this->assistance = $assistance;
+		$this->employee   = $employee;
+		$this->log        = $log;
 	}
 
 	/**
@@ -71,7 +79,12 @@ class AccessControlApiController extends Controller
 
 		try
 		{
-			$employee = $this->employee->where('rut', request('rut'))->firstOrFail();
+			$init     = Carbon::today();
+			$end      = Carbon::now();
+			$employee = $this->employee->with('dailyAssistances')
+				->where('rut', request('rut'))
+				->firstOrFail();
+
 			switch ( request('num_device') )
 			{
 				case 'DDFF4EC6-182B-4E37-961D-28211D63E45B':
@@ -79,7 +92,21 @@ class AccessControlApiController extends Controller
 					break;
 
 				case '06787B04-2454-4896-ACEB-D459610C4E61':
-					$employee->dailyAssistances()->create($request->all());
+					$assistances = $employee->dailyAssistances
+						->where('created_at', '>=', $init)
+						->where('created_at', '<', $end)
+						->values();
+
+					if ( $assistances->isEmpty() )
+					{
+						request()->request->add([ 'log_in' => true ]);
+					} else
+					{
+						$this->UpdateEachLogOutToNull($assistances);
+						request()->request->add([ 'log_out' => true ]);
+					}
+
+					$employee->dailyAssistances()->create(request()->all());
 					break;
 			}
 			DB::commit();
@@ -91,5 +118,16 @@ class AccessControlApiController extends Controller
 
 			return response()->json([ 'status' => false ]);
 		}
+	}
+
+	/**
+	 * @param $assistances
+	 */
+	protected function UpdateEachLogOutToNull($assistances)
+	{
+		$assistances->each(function ($item, $key) {
+			$assistance = $this->assistance->findOrFail($item->id);
+			$assistance->update([ 'log_out' => null ]);
+		});
 	}
 }

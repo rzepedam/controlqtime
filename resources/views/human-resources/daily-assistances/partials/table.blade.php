@@ -5,8 +5,7 @@
             <th class="text-center">Rut</th>
             <th class="text-center">Empresa</th>
             <th class="text-center">Area</th>
-            <th class="text-center">Entrada</th>
-            <th class="text-center">Salida</th>
+            <th class="text-center">Marca</th>
             <th class="text-center"></th>
         </tr>
     </thead>

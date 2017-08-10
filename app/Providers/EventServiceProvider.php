@@ -2,8 +2,8 @@
 
 namespace Controlqtime\Providers;
 
-use Controlqtime\Events\AccessNotification;
-use Controlqtime\Notifications\Assistance\Access;
+use Controlqtime\Events\AssistanceNotification;
+use Controlqtime\Notifications\Assistance\Assistance;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -18,8 +18,8 @@ class EventServiceProvider extends ServiceProvider
             'Controlqtime\Listeners\LogLastLogin',
             'Controlqtime\Listeners\UpdateLastLoggedAt'
         ],
-	    AccessNotification::class => [
-			Access::class
+	    AssistanceNotification::class => [
+			Assistance::class
 	    ]
     ];
 

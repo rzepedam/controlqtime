@@ -30,7 +30,7 @@
                         You have not created any personal access tokens.
                     </p>
 
-                    <!-- Personal Access Tokens -->
+                    <!-- Personal Assistance Tokens -->
                     <table class="table table-borderless m-b-none" v-if="tokens.length > 0">
                         <thead>
                             <tr>
@@ -127,7 +127,7 @@
             </div>
         </div>
 
-        <!-- Access Token Modal -->
+        <!-- Assistance Token Modal -->
         <div class="modal fade" id="modal-access-token" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
