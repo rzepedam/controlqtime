@@ -5,8 +5,8 @@ namespace Controlqtime\Core\Api\Entities;
 use Carbon\Carbon;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Helpers\FormatField;
-use Controlqtime\Events\AccessNotification;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Controlqtime\Events\AssistanceNotification;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DailyAssistanceApi extends Eloquent
@@ -17,7 +17,7 @@ class DailyAssistanceApi extends Eloquent
 	 * @var array
 	 */
 	protected $events = [
-        'created' => AccessNotification::class,
+        'created' => AssistanceNotification::class,
     ];
 
     /**

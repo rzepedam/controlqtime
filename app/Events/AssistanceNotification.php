@@ -7,7 +7,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
-class AccessNotification
+class AssistanceNotification
 {
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 

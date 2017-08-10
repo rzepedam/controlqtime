@@ -5,12 +5,12 @@ namespace Controlqtime\Notifications\Assistance;
 use Illuminate\Bus\Queueable;
 use Controlqtime\Core\Entities\Employee;
 use Illuminate\Notifications\Notification;
-use Controlqtime\Events\AccessNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Controlqtime\Events\AssistanceNotification;
 use Illuminate\Contracts\Notifications\Dispatcher;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class Access extends Notification implements ShouldQueue
+class Assistance extends Notification implements ShouldQueue
 {
 	use Queueable;
 
@@ -21,9 +21,9 @@ class Access extends Notification implements ShouldQueue
 	/**
 	 * Handle the event here
 	 *
-	 * @param AccessNotification $event
+	 * @param AssistanceNotification $event
 	 */
-	public function handle(AccessNotification $event)
+	public function handle(AssistanceNotification $event)
 	{
 		$this->assistance = $event->assistance;
 		$rut              = str_replace('.', '', $this->assistance->rut);
