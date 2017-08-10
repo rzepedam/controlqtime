@@ -38,7 +38,7 @@ class SendEmailWeeklyAssistance extends Command
      */
     public function handle()
     {
-        $assistances = Assistance::all();
+        $assistances = \Controlqtime\Core\Entities\Employee::all();
 
 	    Notification::send($assistances, new WeeklyAssistance());
     }
