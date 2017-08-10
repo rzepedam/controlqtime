@@ -11,16 +11,12 @@ class WeeklyAssistance extends Notification
 {
     use Queueable;
 
-    protected $user;
-
 	/**
 	 * Create a new notification instance.
-	 *
-	 * @param $user
 	 */
-    public function __construct($user)
+    public function __construct()
     {
-        $this->user = $user;
+    	//
     }
 
     /**
