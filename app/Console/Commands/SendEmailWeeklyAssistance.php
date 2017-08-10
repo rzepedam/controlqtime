@@ -3,6 +3,7 @@
 namespace Controlqtime\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
 use Controlqtime\Notifications\Assistance\WeeklyAssistance;
 
 class SendEmailWeeklyAssistance extends Command
