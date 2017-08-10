@@ -41,6 +41,6 @@ class SendEmailWeeklyAssistance extends Command
     {
         $user = \Controlqtime\Core\Entities\User::findOrFail(1);
 
-	    $user->notify(new WeeklyAssistance());
+	    $user->notify(new WeeklyAssistance($user));
     }
 }

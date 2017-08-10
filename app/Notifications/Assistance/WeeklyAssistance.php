@@ -6,20 +6,26 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Log;
 
-class WeeklyAssistance extends Notification
+class WeeklyAssistance extends Notification implements ShouldQueue
 {
 	use Queueable;
 
 	/**
-	 * Create a new notification instance.
+	 * @var
 	 */
-	public function __construct()
+	public $user;
+
+	/**
+	 * Create a new notification instance.
+	 *
+	 * @param $user
+	 */
+	public function __construct($user)
 	{
-		\Controlqtime\Core\Entities\Area::create([
-			'terminal_id' => 1,
-			'name'        => 'test'
-		]);
+		$this->user = $user;
+		Log::info('Showing user profile for user: '.$user->email);
 	}
 
 	/**
