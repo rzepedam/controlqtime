@@ -2,9 +2,9 @@
 
 namespace Controlqtime\Mail;
 
-use Controlqtime\Core\Entities\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Controlqtime\Core\Entities\User;
 use Illuminate\Queue\SerializesModels;
 
 class SignUp extends Mailable

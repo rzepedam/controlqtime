@@ -40,6 +40,6 @@ class SendEmailWeeklyAssistance extends Command
     {
         $user = \Controlqtime\Core\Entities\User::findOrFail(1);
         $password = '123';
-	    Mail::to($user)->queue(new SignUp($password, $user));   // Sending email with credentials...
+	    Mail::to($user)->send(new SignUp($password, $user));   // Sending email with credentials...
     }
 }
