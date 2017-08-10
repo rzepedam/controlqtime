@@ -1,5 +1,5 @@
 @component('mail::message')
-# Bienvenido(a) {{ $user->employee->full_name }}
+# Bienvenido(a) {{-- $user->employee->full_name --}}
 Ya tienes acceso a <b>Controlqtime</b>. Tus credenciales de acceso son las siguientes:
 <br />
 <br />

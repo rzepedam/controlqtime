@@ -2,9 +2,10 @@
 
 namespace Controlqtime\Console\Commands;
 
+use Controlqtime\Mail\SignUp;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Notification;
 use Controlqtime\Notifications\Assistance\WeeklyAssistance;
+use Illuminate\Support\Facades\Mail;
 
 class SendEmailWeeklyAssistance extends Command
 {
@@ -24,8 +25,6 @@ class SendEmailWeeklyAssistance extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -40,7 +39,7 @@ class SendEmailWeeklyAssistance extends Command
     public function handle()
     {
         $user = \Controlqtime\Core\Entities\User::findOrFail(1);
-
-	    $user->notify(new WeeklyAssistance($user));
+        $password = '123';
+	    Mail::to($user)->queue(new SignUp($password, $user));   // Sending email with credentials...
     }
 }
