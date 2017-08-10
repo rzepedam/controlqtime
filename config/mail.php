@@ -55,7 +55,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@controlqtime.cl'),
         'name'    => env('MAIL_FROM_NAME'),
     ],
 
