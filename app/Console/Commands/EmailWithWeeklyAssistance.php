@@ -39,7 +39,7 @@ class EmailWithWeeklyAssistance extends Command
     public function handle()
     {
         $user = User::findOrFail(1);
-		dd($user);
+		
         Mail::to($user)->send(new TestEmail());
     }
 }
