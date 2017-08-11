@@ -26,7 +26,6 @@ class TestEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Bienvenido')
-                    ->markdown('emails.test');
+        return $this->markdown('emails.test');
     }
 }
