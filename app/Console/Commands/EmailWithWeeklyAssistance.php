@@ -2,6 +2,7 @@
 
 namespace Controlqtime\Console\Commands;
 
+use Controlqtime\Core\Entities\User;
 use Illuminate\Console\Command;
 use Controlqtime\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
