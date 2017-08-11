@@ -39,7 +39,7 @@ class SendEmailWeeklyAssistance extends Command
     public function handle()
     {
         $user = \Controlqtime\Core\Entities\User::findOrFail(1);
-        dd($user);
+        $password = '123123';
 	    Mail::to($user)->send(new SignUp($password, $user));   // Sending email with credentials...
     }
 }
