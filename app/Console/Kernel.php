@@ -4,6 +4,7 @@ namespace Controlqtime\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Controlqtime\Console\Commands\EmailWithWeeklyAssistance;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\SendEmailWeeklyAssistance::class,
+        EmailWithWeeklyAssistance::class
     ];
 
     /**

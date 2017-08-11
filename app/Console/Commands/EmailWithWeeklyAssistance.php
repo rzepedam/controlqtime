@@ -2,26 +2,25 @@
 
 namespace Controlqtime\Console\Commands;
 
-use Controlqtime\Mail\SignUp;
 use Illuminate\Console\Command;
-use Controlqtime\Notifications\Assistance\WeeklyAssistance;
+use Controlqtime\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
 
-class SendEmailWeeklyAssistance extends Command
+class EmailWithWeeklyAssistance extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:send-email-weekly-assistance';
+    protected $signature = 'app:email-with-weekly-assistance';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send email to employee with weekly sum assistance';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -38,8 +37,8 @@ class SendEmailWeeklyAssistance extends Command
      */
     public function handle()
     {
-        $user = \Controlqtime\Core\Entities\User::findOrFail(1);
-        $password = '123123';
-	    Mail::to($user)->send(new SignUp($password, $user));   // Sending email with credentials...
+        $user = User::findOrFail(1);
+
+        Mail::to($user)->send(new TestEmail());
     }
 }
