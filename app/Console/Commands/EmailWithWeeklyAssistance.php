@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\User;
+use Controlqtime\Notifications\Test;
 use Illuminate\Console\Command;
 use Controlqtime\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
@@ -71,6 +72,8 @@ class EmailWithWeeklyAssistance extends Command
 
 		foreach ( $employees as $employee )
 		{
+			Mail::to($employee->email_employee)->send(new Test());
+			break;
 			$assistances = $assistancesAux
 				->where('employee_id', $employee->id)
 				->values()
