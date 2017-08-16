@@ -81,9 +81,11 @@ class EmailWithWeeklyAssistance extends Command
 					return $item->created_at->format('d-m');
 				});
 
-			Queue::pushOn('mail', new TestEmail($assistances, $employee));
+			$message = (new TestEmail($assistances, $employee))
+				->onQueue('emails');
+
 			Mail::to($employee->email_employee)
-				->send(new TestEmail($assistances, $employee));
+				->queue($message);
 
 			break;
 		}
