@@ -17,6 +17,9 @@ class TestEmail extends Mailable
 
 	/**
 	 * Create a new message instance.
+	 *
+	 * @param $assistances
+	 * @param $employee
 	 */
 	public function __construct($assistances, $employee)
 	{

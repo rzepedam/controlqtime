@@ -81,7 +81,5 @@ class EmailWithWeeklyAssistance extends Command
 			Mail::to($employee->email_employee)->send(new TestEmail($assistances, $employee));
 			break;
 		}
-
-		Mail::to($user)->send(new TestEmail());
 	}
 }
