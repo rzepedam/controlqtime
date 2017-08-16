@@ -9,6 +9,7 @@ use Controlqtime\Core\Entities\User;
 use Controlqtime\Notifications\Test;
 use Illuminate\Console\Command;
 use Controlqtime\Mail\TestEmail;
+use Illuminate\Contracts\Queue\Queue;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
@@ -80,8 +81,8 @@ class EmailWithWeeklyAssistance extends Command
 					return $item->created_at->format('d-m');
 				});
 
+			Queue::pushOn('mail', new TestEmail($assistances, $employee));
 			Mail::to($employee->email_employee)
-				->onQueue('mail')
 				->send(new TestEmail($assistances, $employee));
 
 			break;
