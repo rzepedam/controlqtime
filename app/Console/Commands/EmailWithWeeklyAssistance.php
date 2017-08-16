@@ -73,6 +73,7 @@ class EmailWithWeeklyAssistance extends Command
 
 		foreach ( $employees as $employee )
 		{
+			dd($employee);
 			Notification::send($employee, new Test());
 			break;
 			$assistances = $assistancesAux
