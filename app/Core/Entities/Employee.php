@@ -667,10 +667,6 @@ class Employee extends Eloquent
         return Carbon::parse($value)->format('d-m-Y');
     }
 	
-    public function routeNotificationFor()
-    {
-        return $this->email_employee;
-    }
     /**
      * @return string 'Lunes 12 Diciembre 2016'
      */

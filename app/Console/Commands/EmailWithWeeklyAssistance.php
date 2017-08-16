@@ -73,8 +73,6 @@ class EmailWithWeeklyAssistance extends Command
 
 		foreach ( $employees as $employee )
 		{
-			Notification::send($employee, new Test());
-			break;
 			$assistances = $assistancesAux
 				->where('employee_id', $employee->id)
 				->values()
