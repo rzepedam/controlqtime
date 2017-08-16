@@ -55,7 +55,7 @@ class Assistance extends Notification implements ShouldQueue
 	{
 		return (new MailMessage)
 			->subject('Asistencia Diaria')
-			->markdown('emails.assistances.access', [
+			->markdown('emails.assistances.assistance', [
 				'assistance' => $this->assistance,
 				'employee'   => $this->employee,
 			]);

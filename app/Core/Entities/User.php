@@ -36,7 +36,7 @@ class User extends Authenticatable
         'deleted_at',
     ];
 
-    /**
+	/**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function employee()

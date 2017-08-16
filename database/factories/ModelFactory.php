@@ -180,7 +180,7 @@ $factory->define(DateDocumentationVehicle::class, function (Faker\Generator $fak
 $factory->define(DailyAssistanceApi::class, function (Faker\Generator $faker) {
     $employees     = \Controlqtime\Core\Entities\Employee::all();
     $employee      = $employees->random();
-    $mark          = mt_rand(Carbon::parse('-3 days')->timestamp, Carbon::now()->timestamp);
+    $mark          = mt_rand(Carbon::parse('-5 days')->timestamp, Carbon::now()->timestamp);
     $markForPeriod = Carbon::createFromFormat('U', $mark)->setTimezone('America/Santiago')->format('H:i:s');
 
     if ($markForPeriod >= '00:00:00' && $markForPeriod <= '07:59:59') {

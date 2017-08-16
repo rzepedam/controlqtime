@@ -9,23 +9,28 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TestEmail extends Mailable
 {
-    use Queueable, SerializesModels;
+	use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+	public $assistances;
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        return $this->markdown('emails.test');
-    }
+	public $employee;
+
+	/**
+	 * Create a new message instance.
+	 */
+	public function __construct($assistances, $employee)
+	{
+		$this->assistances = $assistances;
+		$this->employee    = $employee;
+	}
+
+	/**
+	 * Build the message.
+	 *
+	 * @return $this
+	 */
+	public function build()
+	{
+		return $this->markdown('emails.assistances.weekly-assistance');
+	}
 }
