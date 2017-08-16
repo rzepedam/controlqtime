@@ -10,6 +10,7 @@ use Controlqtime\Notifications\Test;
 use Illuminate\Console\Command;
 use Controlqtime\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class EmailWithWeeklyAssistance extends Command
 {
@@ -72,7 +73,7 @@ class EmailWithWeeklyAssistance extends Command
 
 		foreach ( $employees as $employee )
 		{
-			Mail::to($employee->email_employee)->send(new Test());
+			Notification::send($employee->email_employee, new Test());
 			break;
 			$assistances = $assistancesAux
 				->where('employee_id', $employee->id)
