@@ -80,7 +80,10 @@ class EmailWithWeeklyAssistance extends Command
 					return $item->created_at->format('d-m');
 				});
 
-			Mail::to($employee->email_employee)->send(new TestEmail($assistances, $employee));
+			Mail::to($employee->email_employee)
+				->onQueue('mail')
+				->send(new TestEmail($assistances, $employee));
+
 			break;
 		}
 	}
