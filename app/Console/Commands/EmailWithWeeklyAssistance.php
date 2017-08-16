@@ -3,6 +3,8 @@
 namespace Controlqtime\Console\Commands;
 
 use Carbon\Carbon;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
+use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Entities\User;
 use Illuminate\Console\Command;
 use Controlqtime\Mail\TestEmail;
@@ -25,11 +27,26 @@ class EmailWithWeeklyAssistance extends Command
 	protected $description = 'Command description';
 
 	/**
-	 * Create a new command instance.
+	 * @var Employee
 	 */
-	public function __construct()
+	protected $employee;
+
+	/**
+	 * @var DailyAssistanceApi
+	 */
+	protected $assistance;
+
+	/**
+	 * Create a new command instance.
+	 *
+	 * @param DailyAssistanceApi $assistance
+	 * @param Employee           $employee
+	 */
+	public function __construct(DailyAssistanceApi $assistance, Employee $employee)
 	{
 		parent::__construct();
+		$this->assistance = $assistance;
+		$this->employee   = $employee;
 	}
 
 	/**
@@ -42,10 +59,9 @@ class EmailWithWeeklyAssistance extends Command
 		// $init = Carbon::now()->startOfWeek()->toDateString();
 		// $end  = Carbon::now()->startOfWeek()->addDays(4)->toDateString() . ' 23:59:59';
 
-		$date = \Carbon\Carbon::parse('2017-08-10 00:00:00');
-		$init = $date->toDateString() . ' 00:00:00';
-		$end  = $date->addDays(4)->toDateString() . ' 23:59:59';
-
+		$date      = \Carbon\Carbon::parse('2017-08-10 00:00:00');
+		$init      = $date->toDateString() . ' 00:00:00';
+		$end       = $date->addDays(4)->toDateString() . ' 23:59:59';
 		$employees = $this->employee->all();
 
 		$assistancesAux = $this->assistance
