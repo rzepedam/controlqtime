@@ -16,15 +16,29 @@ class TestEmail extends Mailable
 	public $employee;
 
 	/**
+	 * @var
+	 */
+	public $init;
+
+	/**
+	 * @var
+	 */
+	public $end;
+
+	/**
 	 * Create a new message instance.
 	 *
 	 * @param $assistances
 	 * @param $employee
+	 * @param $init
+	 * @param $end
 	 */
-	public function __construct($assistances, $employee)
+	public function __construct($assistances, $employee, $init, $end)
 	{
 		$this->assistances = $assistances;
 		$this->employee    = $employee;
+		$this->init        = $init;
+		$this->end         = $end;
 	}
 
 	/**

@@ -65,7 +65,7 @@ class EmailWithWeeklyAssistance extends Command
 		$date      = \Carbon\Carbon::parse('2017-08-10 00:00:00');
 		$init      = $date->toDateString() . ' 00:00:00';
 		$end       = $date->addDays(4)->toDateString() . ' 23:59:59';
-		$employees = $this->employee->all();
+		$employees = $this->employee->with(['contract.company'])->get();
 
 		$assistancesAux = $this->assistance
 			->whereBetween('created_at', [ $init, $end ])
@@ -81,11 +81,8 @@ class EmailWithWeeklyAssistance extends Command
 					return $item->created_at->format('d-m');
 				});
 
-			$message = (new TestEmail($assistances, $employee))
-				->onQueue('emails');
-
-			Mail::to($employee->email_employee)
-				->queue($message);
+			$message = (new TestEmail($assistances, $employee, $init, $end))->onQueue('emails');
+			Mail::to($employee->email_employee)->queue($message);
 
 			break;
 		}
