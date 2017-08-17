@@ -56,8 +56,19 @@ class EmailWithWeeklyAssistance extends Command
 	 */
 	public function handle()
 	{
-		$init      = Carbon::now()->startOfWeek()->toDateString() . ' 00:00:00';
-		$end       = Carbon::now()->startOfWeek()->addDays(4)->toDateString() . ' 23:59:59';
+		/*
+		 * Fix Call to a member function format() on string
+		 */
+
+		/*
+			$init = Carbon::now()->startOfWeek()->toDateString() . ' 00:00:00';
+			$end  = Carbon::now()->startOfWeek()->addDays(4)->toDateString() . ' 23:59:59';
+		*/
+
+		$date = \Carbon\Carbon::parse('2017-08-10 00:00:00');
+		$init = $date->toDateString() . ' 00:00:00';
+		$end  = $date->addDays(4)->toDateString() . ' 23:59:59';
+
 		$employees = $this->employee->with([
 			'contract.company.address.detailAddressCompany', 'contract.company.address.commune.province.region'
 		])->get();
@@ -73,10 +84,9 @@ class EmailWithWeeklyAssistance extends Command
 				->where('employee_id', $employee->id)
 				->values()
 				->groupBy(function ($item, $key) {
-					dd($item->created_at->format('d-m'));
 					return $item->created_at->format('d-m');
 				});
-			dd('...');
+
 			$message = (new Weekly($assistances, $employee, $init, $end))->onQueue('emails');
 			Mail::to($employee->email_employee)->queue($message);
 			break;
