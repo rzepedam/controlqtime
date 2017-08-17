@@ -66,7 +66,7 @@ class EmailWithWeeklyAssistance extends Command
 			->whereBetween('created_at', [ $init, $end ])
 			->orderBy('created_at')
 			->get();
-		dd($assistancesAux);
+		dd($init, $end);
 		foreach ( $employees as $employee )
 		{
 			$assistances = $assistancesAux
