@@ -73,10 +73,9 @@ class EmailWithWeeklyAssistance extends Command
 				->where('employee_id', $employee->id)
 				->values()
 				->groupBy(function ($item, $key) {
-					dd($item);
 					return $item->created_at->format('d-m');
 				});
-
+			dd('...');
 			$message = (new Weekly($assistances, $employee, $init, $end))->onQueue('emails');
 			Mail::to($employee->email_employee)->queue($message);
 			break;
