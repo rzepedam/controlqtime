@@ -46,7 +46,7 @@
             Dirección
         </td>
         <td align="center">
-            Palacio Riesco 3819, Bodega 14. Huechuraba, Santiago. Región Metropolitana de Santiago
+            {{ $employee->contract->address->address }}{{ ($employee->contract->address->detailAddressCompany->lot) ? ', Lote ' . $employee->contract->address->detailAddressCompany->lot : '' }}{{ ($employee->contract->address->detailAddressCompany->bod) ? ', Bodega ' . $employee->contract->address->detailAddressCompany->bod : '' }}{{ ($employee->contract->address->detailAddressCompany->ofi) ? ', Oficina ' . $employee->contract->address->detailAddressCompany->ofi : '' }}{{ ($employee->contract->address->detailAddressCompany->floor) ? ', Piso ' . $employee->contract->address->detailAddressCompany->floor : '' }}{{ ". " . $employee->contract->address->commune->name . ", " . $employee->contract->address->commune->province->name . ". " . $employee->contract->address->commune->province->region->name }}
         </td>
     </tr>
 </table>
