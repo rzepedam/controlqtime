@@ -66,14 +66,13 @@ class EmailWithWeeklyAssistance extends Command
 			->whereBetween('created_at', [ $init, $end ])
 			->orderBy('created_at')
 			->get();
-
+		dd($assistancesAux);
 		foreach ( $employees as $employee )
 		{
 			$assistances = $assistancesAux
 				->where('employee_id', $employee->id)
 				->values()
 				->groupBy(function ($item, $key) {
-					var_dump($item);
 					return $item->created_at->format('d-m');
 				});
 
