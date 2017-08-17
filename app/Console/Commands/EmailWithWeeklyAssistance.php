@@ -3,7 +3,7 @@
 namespace Controlqtime\Console\Commands;
 
 use Carbon\Carbon;
-use Controlqtime\Mail\Weekly;
+use Controlqtime\Mail\Assistance\Weekly;
 use Illuminate\Console\Command;
 use Controlqtime\Notifications\Test;
 use Illuminate\Support\Facades\Mail;
@@ -56,9 +56,8 @@ class EmailWithWeeklyAssistance extends Command
 	 */
 	public function handle()
 	{
-		$init = Carbon::now()->startOfWeek()->toDateString() . ' 00:00:00';
-		$end  = Carbon::now()->startOfWeek()->addDays(4)->toDateString() . ' 23:59:59';
-
+		$init      = Carbon::now()->startOfWeek()->toDateString() . ' 00:00:00';
+		$end       = Carbon::now()->startOfWeek()->addDays(4)->toDateString() . ' 23:59:59';
 		$employees = $this->employee->with([
 			'contract.company.address.detailAddressCompany', 'contract.company.address.commune.province.region'
 		])->get();
