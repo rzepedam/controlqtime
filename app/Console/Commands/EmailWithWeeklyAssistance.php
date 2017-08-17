@@ -65,10 +65,10 @@ class EmailWithWeeklyAssistance extends Command
 		$date = \Carbon\Carbon::parse('2017-08-10 00:00:00');
 		$init = $date->toDateString() . ' 00:00:00';
 		$end  = $date->addDays(4)->toDateString() . ' 23:59:59';
-		/*$employees = $this->employee->with([
+		$employees = $this->employee->with([
 			'contract.company.address.detailAddressCompany', 'contract.company.address.commune.province.region'
-		])->get();*/
-		$employees      = $this->employee->with([ 'contract.company' ])->get();
+		])->get();
+		
 		$assistancesAux = $this->assistance
 			->whereBetween('created_at', [ $init, $end ])
 			->orderBy('created_at')
