@@ -61,7 +61,7 @@ class EmailWithWeeklyAssistance extends Command
 		$employees = $this->employee->with([
 			'contract.company.address.detailAddressCompany', 'contract.company.address.commune.province.region'
 		])->get();
-		
+
 		$assistancesAux = $this->assistance
 			->whereBetween('created_at', [ $init, $end ])
 			->orderBy('created_at')
@@ -73,9 +73,11 @@ class EmailWithWeeklyAssistance extends Command
 				->where('employee_id', $employee->id)
 				->values()
 				->groupBy(function ($item, $key) {
-					return $item->created_at->format('d-m');
+					$t = $item->created_at->format('d-m')
+					dd($t);
+					return $t;
 				});
-			dd('...');
+
 			$message = (new Weekly($assistances, $employee, $init, $end))->onQueue('emails');
 			Mail::to($employee->email_employee)->queue($message);
 			break;
