@@ -1,11 +1,7 @@
 @extends('layout.index')
-
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/show-with-image-common.css') }}">
-
 @stop
-
 @section('title_header') Detalle Trabajador: <span class="text-primary">{{ $employee->id }}</span> @stop
 
 @section('breadcumb')
@@ -22,6 +18,7 @@
         <li role="presentation"><a data-toggle="tab" href="#tab_2" aria-controls="tab_2" role="tab"><i class="fa fa-star"></i> Competencias Laborales</a></li>
         <li role="presentation"><a data-toggle="tab" href="#tab_3" aria-controls="tab_3" role="tab"><i class="fa fa-heartbeat"></i> Información de Salud</a></li>
         <li role="presentation"><a data-toggle="tab" href="#tab_4" aria-controls="tab_4" role="tab"><i class="fa fa-file-text-o"></i> Documentos Adjuntos <span class="badge badge-warning up">{{ $employee->num_total_images }}</span></a></li>
+        <li role="presentation"><a data-toggle="tab" href="#tab_5" aria-controls="tab_5" role="tab"><i class="fa fa-check-square-o"></i> Registro de Asistencia </a></li>
     </ul>
     <div class="tab-content padding-top-20">
         <div class="tab-pane active" id="tab_1" role="tabpanel">
@@ -42,6 +39,11 @@
         <div class="tab-pane" id="tab_4" role="tabpanel">
 
             @include('human-resources.employees.partials.show.files_attach')
+
+        </div>
+        <div class="tab-pane" id="tab_5" role="tabpanel">
+
+            @include('human-resources.employees.partials.show.assistance')
 
         </div>
     </div>
