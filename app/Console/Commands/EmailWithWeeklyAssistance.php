@@ -76,7 +76,6 @@ class EmailWithWeeklyAssistance extends Command
 
 		foreach ( $employees as $employee )
 		{
-			dd($employee);
 			$assistances = $assistancesAux
 				->where('employee_id', $employee->id)
 				->values()
