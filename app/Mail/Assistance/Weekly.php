@@ -1,18 +1,24 @@
 <?php
 
-namespace Controlqtime\Mail;
+namespace Controlqtime\Mail\Assistance;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TestEmail extends Mailable
+class Weekly extends Mailable
 {
 	use Queueable, SerializesModels;
 
+	/**
+	 * @var
+	 */
 	public $assistances;
 
+	/**
+	 * @var
+	 */
 	public $employee;
 
 	/**

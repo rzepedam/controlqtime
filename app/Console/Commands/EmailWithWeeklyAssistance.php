@@ -3,15 +3,12 @@
 namespace Controlqtime\Console\Commands;
 
 use Carbon\Carbon;
-use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
-use Controlqtime\Core\Entities\Employee;
-use Controlqtime\Core\Entities\User;
-use Controlqtime\Notifications\Test;
+use Controlqtime\Mail\Weekly;
 use Illuminate\Console\Command;
-use Controlqtime\Mail\TestEmail;
-use Illuminate\Contracts\Queue\Queue;
+use Controlqtime\Notifications\Test;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class EmailWithWeeklyAssistance extends Command
 {
@@ -62,12 +59,6 @@ class EmailWithWeeklyAssistance extends Command
 		$init = Carbon::now()->startOfWeek()->toDateString() . ' 00:00:00';
 		$end  = Carbon::now()->startOfWeek()->addDays(4)->toDateString() . ' 23:59:59';
 
-		$date = \Carbon\Carbon::parse('2017-08-10 00:00:00');
-		$init2 = $date->toDateString() . ' 00:00:00';
-		$end2 = $date->addDays(4)->toDateString() . ' 23:59:59';
-
-		dd($init, $end, $init2, $end2);
-
 		$employees = $this->employee->with([
 			'contract.company.address.detailAddressCompany', 'contract.company.address.commune.province.region'
 		])->get();
@@ -86,9 +77,8 @@ class EmailWithWeeklyAssistance extends Command
 					return $item->created_at->format('d-m');
 				});
 
-			$message = (new TestEmail($assistances, $employee, $init, $end))->onQueue('emails');
+			$message = (new Weekly($assistances, $employee, $init, $end))->onQueue('emails');
 			Mail::to($employee->email_employee)->queue($message);
-
 			break;
 		}
 	}
