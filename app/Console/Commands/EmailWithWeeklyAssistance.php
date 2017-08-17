@@ -62,13 +62,13 @@ class EmailWithWeeklyAssistance extends Command
 		// $init = Carbon::now()->startOfWeek()->toDateString();
 		// $end  = Carbon::now()->startOfWeek()->addDays(4)->toDateString() . ' 23:59:59';
 
-		$date      = \Carbon\Carbon::parse('2017-08-10 00:00:00');
-		$init      = $date->toDateString() . ' 00:00:00';
-		$end       = $date->addDays(4)->toDateString() . ' 23:59:59';
-		$employees = $this->employee->with([
+		$date = \Carbon\Carbon::parse('2017-08-10 00:00:00');
+		$init = $date->toDateString() . ' 00:00:00';
+		$end  = $date->addDays(4)->toDateString() . ' 23:59:59';
+		/*$employees = $this->employee->with([
 			'contract.company.address.detailAddressCompany', 'contract.company.address.commune.province.region'
-		])->get();
-
+		])->get();*/
+		$employees      = $this->employee->with([ 'contract.company' ])->get();
 		$assistancesAux = $this->assistance
 			->whereBetween('created_at', [ $init, $end ])
 			->orderBy('created_at')
