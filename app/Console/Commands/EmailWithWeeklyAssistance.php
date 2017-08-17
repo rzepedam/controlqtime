@@ -56,8 +56,10 @@ class EmailWithWeeklyAssistance extends Command
 	 */
 	public function handle()
 	{
-		$init      = Carbon::now()->startOfWeek()->toDateString() . ' 00:00:00';
-		$end       = Carbon::now()->startOfWeek()->addDays(4)->toDateString() . ' 23:59:59';
+		$date = \Carbon\Carbon::parse('2017-08-10 00:00:00');
+		$init = $date->toDateString() . ' 00:00:00';
+		$end  = $date->addDays(4)->toDateString() . ' 23:59:59';
+
 		$employees = $this->employee->with([
 			'contract.company.address.detailAddressCompany', 'contract.company.address.commune.province.region'
 		])->get();
