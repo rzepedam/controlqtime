@@ -73,7 +73,8 @@ class EmailWithWeeklyAssistance extends Command
 				->where('employee_id', $employee->id)
 				->values()
 				->groupBy(function ($item, $key) {
-					dd($item->created_at->format('d-m'));
+					dd($item);
+					dd(Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d-m'));
 					$t = $item->created_at->format('d-m');
 					dd($t);
 					return $t;
