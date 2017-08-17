@@ -18,24 +18,20 @@ class EmailWithWeeklyAssistance extends Command
 	 * @var string
 	 */
 	protected $signature = 'app:email-with-weekly-assistance';
-
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
 	protected $description = 'Command description';
-
 	/**
 	 * @var Employee
 	 */
 	protected $employee;
-
 	/**
 	 * @var DailyAssistanceApi
 	 */
 	protected $assistance;
-
 	/**
 	 * Create a new command instance.
 	 *
@@ -48,7 +44,6 @@ class EmailWithWeeklyAssistance extends Command
 		$this->assistance = $assistance;
 		$this->employee   = $employee;
 	}
-
 	/**
 	 * Execute the console command.
 	 *
@@ -57,25 +52,22 @@ class EmailWithWeeklyAssistance extends Command
 	public function handle()
 	{
 		$init      = Carbon::now()->startOfWeek()->toDateString() . ' 00:00:00';
-		$end       = Carbon::now()->startOfWeek()->addDays(3)->toDateString() . ' 23:59:59';
+		$end       = Carbon::now()->startOfWeek()->addDays(4)->toDateString() . ' 23:59:59';
 		$employees = $this->employee->with([
 			'contract.company.address.detailAddressCompany', 'contract.company.address.commune.province.region'
 		])->get();
-
 		$assistancesAux = $this->assistance
 			->whereBetween('created_at', [ $init, $end ])
 			->orderBy('created_at')
 			->get();
-
 		foreach ( $employees as $employee )
 		{
 			$assistances = $assistancesAux
 				->where('employee_id', $employee->id)
 				->values()
 				->groupBy(function ($item, $key) {
-					return Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d-m');
+					return $item->created_at->format('d-m');
 				});
-
 			$message = (new Weekly($assistances, $employee, $init, $end))->onQueue('emails');
 			Mail::to($employee->email_employee)->queue($message);
 			break;
