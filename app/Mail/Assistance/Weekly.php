@@ -41,6 +41,7 @@ class Weekly extends Mailable
 	 */
 	public function __construct($assistances, $employee, $init, $end)
 	{
+		dd('...');
 		$this->assistances = $assistances;
 		$this->employee    = $employee;
 		$this->init        = $init;
