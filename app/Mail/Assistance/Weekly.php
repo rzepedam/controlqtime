@@ -54,7 +54,6 @@ class Weekly extends Mailable
 	 */
 	public function build()
 	{
-		dd('...');
 		return $this->subject('Asistencia Semanal Controlqtime')
 					->markdown('emails.assistances.weekly-assistance');
 	}

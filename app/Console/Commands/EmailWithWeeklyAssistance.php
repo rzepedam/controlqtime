@@ -17,7 +17,7 @@ class EmailWithWeeklyAssistance extends Command
 	 *
 	 * @var string
 	 */
-	protected $signature = 'app:email-with-weekly-assistance';
+	protected $signature = 'app:email-with-partials';
 	/**
 	 * The console command description.
 	 *

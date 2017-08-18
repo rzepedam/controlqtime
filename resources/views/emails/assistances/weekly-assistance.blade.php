@@ -10,14 +10,14 @@ A continuación el resumen semanal de su asistencia desde el <span style="color:
                 <tr>
                     <td align="center">
 
-                        @include('emails.assistances.weekly-assistance.company_employee')
+                        @include('emails.assistances.partials.company_employee')
 
                     </td>
                 </tr>
                 <tr>
                     <td align="center">
 
-                        @include('emails.assistances.weekly-assistance.weekly')
+                        @include('emails.assistances.partials.weekly')
 
                     </td>
                 </tr>
