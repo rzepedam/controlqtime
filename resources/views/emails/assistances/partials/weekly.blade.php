@@ -2,7 +2,7 @@
     <tr style="background-color: #1E88E5; font-size: 14px; color: #FFFFFF"">
         <td align="center" colspan="4">Asistencia Semanal</td>
     </tr>
-    <tr style="background-color: #E0E0E0" font-size: 13px; color: #FFFFFF">
+    <!--<tr style="background-color: #E0E0E0" font-size: 13px; color: #FFFFFF">
         <th align="left">Día</th>
         <th align="center">Entrada</th>
         <th align="center">Salida</th>
@@ -37,8 +37,8 @@
         <td align="center">10:25:09</td>
         <td align="center">18:30:40</td>
         <td align="center">8 hrs 40 min</td>
-    </tr>
-    {{--@foreach($assistances as $assistance)
+    </tr>-->
+    @foreach($assistances as $assistance)
         @php
             $effectiveHrs = $assistance->last()->created_at->diff($assistance->first()->created_at)
         @endphp
@@ -50,5 +50,5 @@
             <td align="center">{{ $assistance->last()->created_at->format('H:i:s') }}</td>
             <td align="center">{{ $effectiveHrs->h . " hrs. " . $effectiveHrs->i . "min." }}</td>
         </tr>
-    @endforeach--}}
+    @endforeach
 </table>
