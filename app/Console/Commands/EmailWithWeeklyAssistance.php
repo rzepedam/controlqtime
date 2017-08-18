@@ -72,8 +72,8 @@ class EmailWithWeeklyAssistance extends Command
 				});
 
 			$message = (new Weekly($assistances, $employee, $init, $end))->onQueue('emails');
-			dd('...');
 			Mail::to($employee->email_employee)->queue($message);
+			dd('...');
 			break;
 		}
 	}
