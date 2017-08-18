@@ -72,8 +72,9 @@ class EmailWithWeeklyAssistance extends Command
 					return Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d-m');
 				});
 
-			$message = (new TestMail($assistances, $employee, $init, $end))->onQueue('emails');
-			Mail::to($employee->email_employee)->queue($message);
+			//$message = (new TestMail($assistances, $employee, $init, $end))->onQueue('emails');
+			//Mail::to($employee->email_employee)->queue($message);
+			Mail::to($employee->email_employee)->send(new TestMail());
 			break;
 		}
 	}
