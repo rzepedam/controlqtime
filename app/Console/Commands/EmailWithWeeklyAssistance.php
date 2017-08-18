@@ -3,11 +3,11 @@
 namespace Controlqtime\Console\Commands;
 
 use Carbon\Carbon;
-use Controlqtime\Mail\Assistance\Weekly;
 use Illuminate\Console\Command;
 use Controlqtime\Notifications\Test;
 use Illuminate\Support\Facades\Mail;
 use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Mail\Assistance\Weekly;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class EmailWithWeeklyAssistance extends Command
