@@ -3,6 +3,7 @@
 namespace Controlqtime\Console\Commands;
 
 use Carbon\Carbon;
+use Controlqtime\Mail\TestMail;
 use Illuminate\Console\Command;
 use Controlqtime\Notifications\Test;
 use Illuminate\Support\Facades\Mail;
@@ -71,7 +72,7 @@ class EmailWithWeeklyAssistance extends Command
 					return Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d-m');
 				});
 
-			$message = (new Weekly($assistances, $employee, $init, $end))->onQueue('emails');
+			$message = (new TestMail($assistances, $employee, $init, $end))->onQueue('emails');
 			Mail::to($employee->email_employee)->queue($message);
 			break;
 		}
