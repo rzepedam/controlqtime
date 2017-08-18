@@ -73,7 +73,7 @@ class EmailWithWeeklyAssistance extends Command
 
 			//$message = (new Weekly($assistances, $employee, $init, $end))->onQueue('emails');
 			//Mail::to($employee->email_employee)->queue($message);
-			Mail::to($employee->email_employee)->send(new TestMail($assistances, $employee, $init, $end));
+			Mail::to($employee->email_employee)->send(new Weekly($assistances, $employee, $init, $end));
 			break;
 		}
 	}
