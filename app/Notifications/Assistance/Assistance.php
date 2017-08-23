@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
+use Jenssegers\Date\Date;
 
 class Assistance extends Notification implements ShouldQueue
 {
@@ -25,6 +26,7 @@ class Assistance extends Notification implements ShouldQueue
 	 */
     public function __construct(Employee $employee, DailyAssistanceApi $assistance)
     {
+    	dd(Date::parse($assistance->created_at)->format('l j F Y'));
 	    $this->assistance = $assistance;
 	    $this->employee   = $employee;
     }
