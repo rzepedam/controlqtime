@@ -3,16 +3,17 @@
 namespace Controlqtime\Core\Entities;
 
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
+use Illuminate\Notifications\Notifiable;
+use Controlqtime\Core\Helpers\FormatField;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 use Controlqtime\Core\Api\Entities\AccessControlApi;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
-use Controlqtime\Core\Helpers\FormatField;
-use Illuminate\Database\Eloquent\Model as Eloquent;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Jenssegers\Date\Date;
 
 class Employee extends Eloquent
 {
-    use SoftDeletes;
+    use SoftDeletes, Notifiable;
 
     /**
 	 * @var array
@@ -45,6 +46,16 @@ class Employee extends Eloquent
     {
         return $query->whereState('enable');
     }
+
+	/**
+	 * Route notifications for the mail channel.
+	 *
+	 * @return string
+	 */
+	public function routeNotificationForMail()
+	{
+		return $this->email_employee;
+	}
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

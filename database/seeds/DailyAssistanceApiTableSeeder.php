@@ -9,6 +9,6 @@ class DailyAssistanceApiTableSeeder extends Seeder
     {
 		DB::table('daily_assistance_apis')->truncate();
 
-		factory(DailyAssistanceApi::class, 2000)->create();
+		factory(DailyAssistanceApi::class, 500)->create();
     }
 }

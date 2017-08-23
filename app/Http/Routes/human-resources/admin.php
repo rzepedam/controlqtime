@@ -22,8 +22,9 @@ Route::group(['prefix' => 'human-resources'], function () {
 
     // Employees
     Route::get('getEmployees', ['as' => 'getEmployees', 'uses' => 'EmployeeController@getEmployees']);
-    Route::resource('employees', 'EmployeeController');
-    Route::group(['prefix' => 'employees'], function () {
+	Route::get('getShowAssistance', ['as' => 'getShowAssistance', 'uses' => 'EmployeeController@getShowAssistance']);
+	Route::resource('employees', 'EmployeeController');
+	Route::group(['prefix' => 'employees'], function () {
         /* Upload Images */
         Route::get('attachFiles/{id}', ['as' => 'EmployeeAttachFiles', 'uses' => 'EmployeeController@getImages']);
         Route::post('attachFiles', ['as' => 'EmployeeAddImages', 'uses' => 'EmployeeController@addImages']);

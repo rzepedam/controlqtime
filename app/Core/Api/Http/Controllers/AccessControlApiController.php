@@ -8,6 +8,7 @@ use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Http\Controllers\Controller;
+use Controlqtime\Notifications\Assistance\Assistance;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 use Controlqtime\Core\Api\Http\Request\AccessControlApiRequest;
 
@@ -106,7 +107,8 @@ class AccessControlApiController extends Controller
 						request()->request->add([ 'log_out' => true ]);
 					}
 
-					$employee->dailyAssistances()->create(request()->all());
+					$assistance = $employee->dailyAssistances()->create(request()->all());
+					$employee->notify(new Assistance($employee, $assistance));
 					break;
 			}
 			DB::commit();

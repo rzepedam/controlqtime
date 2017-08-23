@@ -6,72 +6,66 @@ use Illuminate\Bus\Queueable;
 use Controlqtime\Core\Entities\Employee;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Controlqtime\Events\AssistanceNotification;
-use Illuminate\Contracts\Notifications\Dispatcher;
 use Illuminate\Notifications\Messages\MailMessage;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 
 class Assistance extends Notification implements ShouldQueue
 {
-	use Queueable;
+    use Queueable;
 
-	protected $employee;
+	public $employee;
 
-	protected $assistance;
-
-	/**
-	 * Handle the event here
-	 *
-	 * @param AssistanceNotification $event
-	 */
-	public function handle(AssistanceNotification $event)
-	{
-		$this->assistance = $event->assistance;
-		$rut              = str_replace('.', '', $this->assistance->rut);
-		$this->employee   = Employee::where('rut', $rut)->firstOrFail();
-
-		app(Dispatcher::class)->sendNow($this->employee->user, $this);
-	}
+	public $assistance;
 
 	/**
-	 * Get the notification's delivery channels.
+	 * Create a new notification instance.
 	 *
-	 * @param  mixed $notifiable
-	 *
-	 * @return array
+	 * @param Employee           $employee
+	 * @param DailyAssistanceApi $assistance
 	 */
-	public function via($notifiable)
-	{
-		return [ 'mail' ];
-	}
+    public function __construct(Employee $employee, DailyAssistanceApi $assistance)
+    {
+	    $this->assistance = $assistance;
+	    $this->employee   = $employee;
+    }
 
-	/**
-	 * Get the mail representation of the notification.
-	 *
-	 * @param  mixed $notifiable
-	 *
-	 * @return \Illuminate\Notifications\Messages\MailMessage
-	 */
-	public function toMail($notifiable)
-	{
-		return (new MailMessage)
-			->subject('Asistencia Diaria')
-			->markdown('emails.assistances.assistance', [
-				'assistance' => $this->assistance,
-				'employee'   => $this->employee,
-			]);
-	}
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return ['mail'];
+    }
 
-	/**
-	 * Get the array representation of the notification.
-	 *
-	 * @param  mixed $notifiable
-	 *
-	 * @return array
-	 */
-	public function toArray($notifiable)
-	{
-		return [
-			//
-		];
-	}
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toMail($notifiable)
+    {
+	    return (new MailMessage)
+		    ->subject('Asistencia Diaria')
+		    ->markdown('emails.assistances.assistance', [
+			    'assistance' => $this->assistance,
+			    'employee'   => $this->employee,
+		    ]);
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            //
+        ];
+    }
 }

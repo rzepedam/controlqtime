@@ -261,6 +261,22 @@ const { mix } = require('laravel-mix');
                 'resources/assets/me/js/utilities/scrollTop.js'
             ], 'public/js/human-resources/employees/create-edit-custom-employees.js');
 
+        // Show
+            mix.combine([
+                'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+                // Datatables
+                'node_modules/datatables.net-bs/css/dataTables.bootstrap.css',
+                'resources/assets/custom-remark/css/datatables-custom.css'
+            ], 'public/css/human-resources/employees/show.css')
+            .scripts([
+                'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+                'node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
+                'resources/assets/components/bootstrap-datepicker.js',
+                // Datatables
+                'node_modules/datatables.net/js/jquery.dataTables.js',
+                'node_modules/datatables.net-bs/js/dataTables.bootstrap.js',
+            ], 'public/js/human-resources/employees/show.js');
+
 // Operations
     // Menú
         mix.scripts([

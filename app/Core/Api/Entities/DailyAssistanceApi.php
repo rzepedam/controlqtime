@@ -13,13 +13,6 @@ class DailyAssistanceApi extends Eloquent
 {
     use SoftDeletes;
 
-	/**
-	 * @var array
-	 */
-	protected $events = [
-        'created' => AssistanceNotification::class,
-    ];
-
     /**
      * @var array
      */
