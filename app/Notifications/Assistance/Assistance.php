@@ -26,7 +26,6 @@ class Assistance extends Notification implements ShouldQueue
 	 */
     public function __construct(Employee $employee, DailyAssistanceApi $assistance)
     {
-    	dd(Date::parse($assistance->created_at)->format('l j F Y'));
 	    $this->assistance = $assistance;
 	    $this->employee   = $employee;
     }
