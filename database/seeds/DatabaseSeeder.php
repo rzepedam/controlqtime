@@ -64,10 +64,11 @@ class DatabaseSeeder extends Seeder
 		$this->call(DetailAddressLegalEmployeeTableSeeder::class);
 		$this->call(AccessControlApiTableSeeder::class);
 
-		// if ( config('app.env') === 'local' )
-		// {
+		if ( config('app.env') === 'local' )
+		{
 			$this->call(DailyAssistanceApiTableSeeder::class);
-		// }
+		}
+
 		$this->call(MasterFormPieceVehicleTableSeeder::class);
 	}
 }
