@@ -81,7 +81,7 @@
                         typeCompanyChart.data.datasets[0].data[1] = response.typeCompany[1];
                         typeCompanyChart.data.datasets[0].data[2] = response.typeCompany[2];
                         typeCompanyChart.update();
-                        $('#num_type_company_assistance').text(response.typeCompany[0] + response.typeCompany[1] + response.typeCompany[2]);
+                        $('#num_type_company_assistance').text(response.typeCompany[0]);
                     }
                 );
             }

@@ -613,5 +613,12 @@ const { mix } = require('laravel-mix');
         mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');
         mix.copy('resources/assets/passport/app.js', 'public/js/passport.js');
 
+    // Pdf-Contracts
+    mix.copy([
+        'resources/assets/me/css/human-resources/contracts/pdf/index-pdf-contracts.css',
+        'resources/assets/me/css/human-resources/contracts/pdf/header-pdf-contracts.css',
+        'resources/assets/me/css/human-resources/contracts/pdf/footer-pdf-contracts.css'
+    ], 'public/css/human-resources/contracts/pdf');
+
 // Versioning
     mix.version();

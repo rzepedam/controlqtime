@@ -15,6 +15,7 @@ class LegalRepresentativeTableSeeder extends Seeder
             'female_surname'        => 'Ocayo',
             'first_name'            => 'Alejandro',
             'second_name'           => 'Ulises',
+            'full_name'             => '', 
             'rut_representative'    => '8635558-2',
             'birthday'              => '01-12-1964',
             'nationality_id'        => 4,

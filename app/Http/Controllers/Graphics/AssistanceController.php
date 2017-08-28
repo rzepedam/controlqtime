@@ -56,7 +56,7 @@ class AssistanceController extends Controller
 			" JOIN employees ON daily_assistance_apis.employee_id = employees.id" .
 			" JOIN contracts ON employees.id = contracts.employee_id" .
 			" JOIN companies ON contracts.company_id = companies.id" .
-			" ON daily_assistance_apis.created_at" .
+			" ON daily_assistance_apis.log_in" .
 			" BETWEEN CONCAT(?, ' ', period_every_eight_hours.begin) " .
 			" AND CONCAT(?,' ', period_every_eight_hours.end)" .
 			" AND period_every_eight_hours.id = daily_assistance_apis.period_every_eight_hour_id" .
@@ -83,7 +83,7 @@ class AssistanceController extends Controller
 			" JOIN contracts ON employees.id = contracts.employee_id" .
 			" JOIN companies ON contracts.company_id = companies.id" .
 			" JOIN areas ON contracts.area_id = areas.id" .
-			" ON daily_assistance_apis.created_at" .
+			" ON daily_assistance_apis.log_in" .
 			" BETWEEN CONCAT(?, ' ', period_every_eight_hours.begin) " .
 			" AND CONCAT(?,' ', period_every_eight_hours.end)" .
 			" AND companies.id = ?" .
@@ -176,12 +176,12 @@ class AssistanceController extends Controller
 			" JOIN contracts ON employees.id = contracts.employee_id" .
 			" JOIN companies ON contracts.company_id = companies.id" .
 			" JOIN type_companies ON companies.type_company_id = type_companies.id" .
-			" WHERE daily_assistance_apis.created_at" .
+			" WHERE daily_assistance_apis.log_in" .
 			" BETWEEN ?" .
 			" AND ?" .
 			" GROUP BY type_companies.name", [ $init, $end ]
 		))->pluck('marks', 'name');
-
+		
 		return $marksTypeCompany;
 	}
 

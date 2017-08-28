@@ -1,9 +1,6 @@
 <div class="panel">
     <div class="panel-body">
-        <table id="contract_table"
-               data-toggle="table"
-               data-mobile-responsive="true"
-               data-classes="table table-condensed table-no-bordered table-hover">
+        <table class="table-hover table-condensed" id="contract_table" data-mobile-responsive="true">
             <thead>
                 <tr>
                     <th class="col-sm-3 col-md-3" data-field="employee_id" data-sortable="true">Trabajador</th>

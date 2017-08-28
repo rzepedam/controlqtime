@@ -17,12 +17,12 @@ class DailyAssistanceApiTableSeeder extends Seeder
 			$end 		= \Carbon\Carbon::now();
 			for ( $i = $init; $i <= $end; $i->addDay() )
 			{
-				$logIn = mt_rand(\Carbon\Carbon::parse($i)->timestamp, \Carbon\Carbon::parse($i->addHours(10))->timestamp);
-    			$logInPeriod = \Carbon\Carbon::createFromFormat('U', $logIn)->setTimezone('America/Santiago')->format('Y-m-d H:i:s');
+				$logInTamp = mt_rand(\Carbon\Carbon::parse($i)->timestamp, \Carbon\Carbon::parse($i->addHours(10))->timestamp);
+				$login = \Carbon\Carbon::createFromFormat('U', $logInTamp)->setTimezone('America/Santiago');
 				
-				if ($logInPeriod >= '00:00:00' && $logInPeriod <= '07:59:59') {
+				if ($login->format('H:i:s') >= '00:00:00' && $login->format('H:i:s') <= '07:59:59') {
 		        	$periodId = 1;
-			    } elseif ($logInPeriod >= '08:00:00' && $logInPeriod <= '15:59:59') {
+			    } elseif ($login->format('H:i:s') >= '08:00:00' && $login->format('H:i:s') <= '15:59:59') {
 			        $periodId = 2;
 			    } else {
 			        $periodId = 3;
@@ -33,16 +33,16 @@ class DailyAssistanceApiTableSeeder extends Seeder
 				$logOut = null;
 				if ($random % 2 == 0)
 				{
-					$logOut = \Carbon\Carbon::parse($logInPeriod)->addHours(9)->format('Y-m-d H:i:s');
+					$logOut = \Carbon\Carbon::parse($login)->addHours(9)->format('Y-m-d H:i:s');
 				}
-
+				
 				\Controlqtime\Core\Api\Entities\DailyAssistanceApi::create([
 					'employee_id' => $employee->id,
 					'period_every_eight_hour_id' => $periodId, 
 					'rut' => $employee->getOriginal('rut'), 
 					'num_device' => '06787B04-2454-4896-ACEB-D459610C4E61', 
 					'status' => 1, 
-					'log_in' => $logInPeriod, 
+					'log_in' => $login->format('Y-m-d H:i:s'), 
 					'log_out' => $logOut
 				]);	
 			}

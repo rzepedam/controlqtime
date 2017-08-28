@@ -95,6 +95,16 @@ class LegalRepresentative extends Eloquent
         $this->attributes['rut_representative'] = str_replace('.', '', $value);
     }
 
+    public function setFullNameAttribute()
+    {
+        if ( $this->second_name == '' )
+        {
+            $this->attributes['full_name'] = $this->first_name . ' ' . $this->male_surname . ' ' . $this->female_surname;
+        } else {
+            $this->attributes['full_name'] = $this->first_name . ' ' . $this->second_name . ' ' . $this->male_surname . ' ' . $this->female_surname;
+        }
+    }
+
     /**
      * @param string $value (01-01-2010)
      */

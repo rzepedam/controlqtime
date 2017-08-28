@@ -24,9 +24,9 @@ $('#vehicle_table').bootstrapTable({
         },
         {
             formatter : function(value, row, index) {
-                return '<a href="/operations/vehicles/' + row.id + '" class="btn btn-squared btn-info waves-effect waves-light tooltip-info" data-toggle="tooltip" data-original-title="Ver"><i class="fa fa-search"></i></a> ' +
-                    '<a href="/operations/vehicles/' + row.id +'/edit" class="btn btn-squared btn-warning waves-effect waves-light tooltip-warning" data-toggle="tooltip" data-original-title="Editar"><i class="fa fa-pencil"></i></a> ' +
-                    '<a href="/operations/vehicles/attachFiles/' + row.id + '" class="btn btn-squared btn-primary waves-effect waves-light tooltip-primary" data-toggle="tooltip" data-original-title="Adjuntar Archivos"><i class="fa fa-cloud-upload"></i></a>';
+                return '<a href="/operations/vehicles/' + row.id + '"><i class="fa fa-search text-info" aria-hidden="true"></i></a>&nbsp ' +
+                    '<a href="/operations/vehicles/' + row.id +'/edit"><i class="fa fa-pencil text-warning" aria-hidden="true"></i></a>&nbsp ' +
+                    '<a href="/operations/vehicles/attachFiles/' + row.id + '"><i class="fa fa-cloud-upload text-primary" aria-hidden="true"></i></a>&nbsp ';
             }
         }
     ],
