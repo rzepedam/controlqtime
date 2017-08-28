@@ -72,33 +72,84 @@
         $(document).ready(function () {
             var i = 0;
             var params = {
+                "processing": true,
+                "serverSide": true,
+                "destroy": true,
+                "responsive": true,
+                "pageLength": 25,
+                "sDom": '<"top"l>t<"F"ip><"clear"><"clear">',
                 "ajax": {
                     url: "/human-resources/getShowAssistance"
                 },
-                "order": [[0, 'desc']],
+                "order": [[2, 'desc']],
+                "language": {
+                    "thousands": ".",
+                    "sProcessing": '<i class="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></i>',
+                    "sInfo": 'Mostrando <span class="text-primary">_START_</span> a <span class="text-primary">_END_</span> de _TOTAL_ registros',
+                    "sInfoEmpty": "No existen coincidencias",
+                    "sInfoFiltered": '(filtrado de un total de <span class="text-primary">_MAX_</span> registros)',
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "oPaginate": {
+                        "sNext": '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+                        "sPrevious": '<i class="fa fa-angle-left" aria-hidden="true"></i>'
+                    },
+                },
                 "columns": [
                     {
                         data: 'count', name: 'count', orderable: false,
                         'render': function (data, type, row, meta) {
-                            i ++;
-                            return i;
+                            return meta.row + 1;
                         }
                     },
                     {
-                        data: 'num_device', name: 'num_device', className: 'text-center'
+                        data: 'num_device', name: 'num_device', className: 'text-center', orderable: false,
                     },
                     {
-                        data: 'created_at', name: 'created_at', className: 'text-center', orderable: false,
+                        data: 'log_in', name: 'log_in', className: 'text-center', searchable: false,
                         'render': function (data, type, row, meta) {
-                            return '<a class="label label-round label-info">' + data.substring(0, 20) + '...' + '</a>';
+                            return moment(data).format('DD MMM HH:mm:ss') + ' <i class="fa fa-sign-in text-success" aria-hidden="true"></i>';
+                        }
+                    },
+                    {
+                        data: 'log_out', name: 'log_out', className: 'text-center', searchable: false,
+                        'render': function (data, type, row, meta) {
+                            if ( data )
+                            {
+                                return moment(data).format('DD MMM HH:mm:ss') + ' <i class="fa fa-sign-out text-danger" aria-hidden="true"></i>';
+                            }
+
+                            return '-';
                         }
                     }
                 ]
             }
 
-            $('#tblAssistances').on('preXhr.dt', function (e, settings, data) {
+            var table = $('#tblAssistances').on('preXhr.dt', function (e, settings, data) {
                 data.id = window.location.pathname.split("/").pop();
+                data.init = $('#init').val();
+                data.end = $('#end').val();
             }).DataTable(params);
+
+            // Reload table to the change init input
+            $('#init').on('change', function () {
+                if ($(this).val() > $('#end').val()) {
+                    $('#js').html('<i class="fa fa-times"></i> Las fechas ingresadas no son válidas. Intente nuevamente.').removeClass('hide');
+                    return false;
+                }
+                $('#js').addClass('hide');
+                table.ajax.reload();
+            });
+
+            // Reload table to the change end input
+            $('#end').on('change', function () {
+                if ($(this).val() < $('#init').val()) {
+                    $('#js').html('<i class="fa fa-times"></i> Las fechas ingresadas no son válidas. Intente nuevamente.').removeClass('hide');
+                    return false;
+                }
+                $('#js').addClass('hide');
+                table.ajax.reload();
+            });
         });
     </script>
 @stop

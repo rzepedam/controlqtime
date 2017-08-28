@@ -27,7 +27,7 @@ class AccessControlApiRequest extends Request
 		{
 			case 'DDFF4EC6-182B-4E37-961D-28211D63E45B':
 				$rules = [
-					'rut' 			=> [ 'required', 'max:10', 'exists:employees,rut', 'unique_with:access_control_apis,created_at' ],
+					'rut' 			=> [ 'required', 'max:10', 'exists:employees,rut', 'unique_with:access_control_apis,log_in' ],
 					'num_device' 	=> [ 'required', 'in:DDFF4EC6-182B-4E37-961D-28211D63E45B' ],
 					'status' 		=> [ 'required' ],
 					'created_at' 	=> [ 'required', 'date' ]
@@ -36,7 +36,7 @@ class AccessControlApiRequest extends Request
 
 			case '06787B04-2454-4896-ACEB-D459610C4E61':
 				$rules = [
-					'rut' 			=> [ 'required', 'max:10', 'exists:employees,rut', 'unique_with:daily_assistance_apis,created_at' ],
+					'rut' 			=> [ 'required', 'max:10', 'exists:employees,rut', 'unique_with:daily_assistance_apis,log_in' ],
 					'num_device' 	=> [ 'required', 'in:06787B04-2454-4896-ACEB-D459610C4E61' ],
 					'status' 		=> [ 'required' ],
 					'created_at' 	=> [ 'required', 'date' ]

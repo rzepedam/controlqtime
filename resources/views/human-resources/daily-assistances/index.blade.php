@@ -4,6 +4,21 @@
     <link rel="stylesheet" href="{{ mix('css/index-common.css') }}">
     <link rel="stylesheet" href="{{ mix('css/human-resources/daily-assistances/index-custom-daily-assistances.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
+    <style type="text/css">
+        @media screen and (min-width: 768px) {
+            .header-custom {
+                padding-top: 20px; 
+                padding-left: 96px; 
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .header-custom {
+                padding-top: 20px; 
+                padding-left: 46px; 
+                padding-right: 46px; 
+            }
+        }
+    </style>
 @stop
 
 @section('title_header')
@@ -20,12 +35,12 @@
     @include('layout.messages.errors-js')
     <div class="panel panel-bordered">
         <div class="panel-heading">
-            <div class="row col-sm-offset-1 padding-top-20 padding-left-20 padding-right-20">
+            <div class="row header-custom">
                 @include('human-resources.daily-assistances.partials.header')
             </div>
         </div>
         <div class="panel-body">
-            <div class="row col-sm-offset-1 col-sm-10">
+            <div class="row col-sm-12">
                 @include('human-resources.daily-assistances.partials.table')
             </div>
         </div>
@@ -96,18 +111,20 @@
                         }
                     },
                     {
-                        data: 'created_at', name: 'created_at', className: 'text-center', searchable: false,
+                        data: 'log_in', name: 'log_in', className: 'text-center', searchable: false,
                         'render': function (data, type, row, meta) {
-                            if ( row.log_in )
-                            {
-                                return moment(data).format('DD MMM HH:mm:ss') + ' <i class="fa fa-sign-in text-success" aria-hidden="true"></i>';
-                            }
-
-                            if ( row.log_out )
+                            return moment(data).format('DD MMM HH:mm:ss') + ' <i class="fa fa-sign-in text-success" aria-hidden="true"></i>';
+                        }
+                    },
+                    {
+                        data: 'log_out', name: 'log_out', className: 'text-center', searchable: false,
+                        'render': function (data, type, row, meta) {
+                            if ( data )
                             {
                                 return moment(data).format('DD MMM HH:mm:ss') + ' <i class="fa fa-sign-out text-danger" aria-hidden="true"></i>';
                             }
-                            return moment(data).format('DD MMM HH:mm:ss') + ' <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>';
+
+                            return '-';
                         }
                     },
                     {

@@ -177,8 +177,8 @@ $factory->define(DateDocumentationVehicle::class, function (Faker\Generator $fak
     ];
 });
 
-$factory->define(DailyAssistanceApi::class, function (Faker\Generator $faker) {
-    $employees     = \Controlqtime\Core\Entities\Employee::all();
+/*$factory->define(DailyAssistanceApi::class, function (Faker\Generator $faker) {
+    $employees     = \Controlqtime\Core\Entities\Employee::enabled()->get();
     $employee      = $employees->random();
     $mark          = mt_rand(Carbon::parse('-5 days')->timestamp, Carbon::now()->timestamp);
     $markForPeriod = Carbon::createFromFormat('U', $mark)->setTimezone('America/Santiago')->format('H:i:s');
@@ -197,9 +197,10 @@ $factory->define(DailyAssistanceApi::class, function (Faker\Generator $faker) {
         'rut'                        => $employee->getOriginal('rut'),
         'num_device'                 => '06787B04-2454-4896-ACEB-D459610C4E61',
         'status'                     => $faker->boolean,
-        'created_at'                 => Carbon::createFromFormat('U', $mark)->setTimezone('America/Santiago')
+        'log_in'                     => Carbon::createFromFormat('U', $mark)->setTimezone('America/Santiago'),
+        'log_out'                    => Carbon::createFromFormat('U', $mark)->setTimezone('America/Santiago')
     ];
-});
+});*/
 
 $factory->define(DayTrip::class, function (Faker\Generator $faker) {
     return [

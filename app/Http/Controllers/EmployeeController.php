@@ -3,47 +3,48 @@
 namespace Controlqtime\Http\Controllers;
 
 use Exception;
-use Controlqtime\Core\Entities\ActivateEmployee;
-use Controlqtime\Core\Entities\Address;
-use Controlqtime\Core\Entities\Certification;
-use Controlqtime\Core\Entities\Commune;
-use Controlqtime\Core\Entities\ContactEmployee;
-use Controlqtime\Core\Entities\Degree;
+use Illuminate\Http\Request;
+use Controlqtime\Mail\SignUp;
+use Yajra\Datatables\Datatables;
+use Illuminate\Log\Writer as Log;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Exam;
-use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
-use Controlqtime\Core\Entities\Disability;
-use Controlqtime\Core\Entities\Disease;
-use Controlqtime\Core\Entities\Employee;
-use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
-use Controlqtime\Core\Entities\FamilyRelationship;
-use Controlqtime\Core\Entities\FamilyResponsability;
-use Controlqtime\Core\Entities\Institution;
-use Controlqtime\Core\Entities\MaritalStatus;
-use Controlqtime\Core\Entities\Nationality;
-use Controlqtime\Core\Entities\ProfessionalLicense;
-use Controlqtime\Core\Entities\Province;
-use Controlqtime\Core\Entities\Region;
-use Controlqtime\Core\Entities\Relationship;
-use Controlqtime\Core\Entities\Speciality;
-use Controlqtime\Core\Entities\Study;
-use Controlqtime\Core\Entities\TypeCertification;
-use Controlqtime\Core\Entities\TypeDisability;
-use Controlqtime\Core\Entities\TypeDisease;
-use Controlqtime\Core\Entities\TypeExam;
-use Controlqtime\Core\Entities\TypeProfessionalLicense;
-use Controlqtime\Core\Entities\TypeSpeciality;
 use Controlqtime\Core\Entities\User;
+use Illuminate\Support\Facades\Mail;
+use Controlqtime\Core\Entities\Study;
+use Controlqtime\Core\Entities\Degree;
+use Controlqtime\Core\Entities\Region;
+use Controlqtime\Core\Entities\Address;
+use Controlqtime\Core\Entities\Commune;
+use Controlqtime\Core\Entities\Disease;
+use Illuminate\Support\Facades\Session;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\Province;
+use Controlqtime\Core\Entities\TypeExam;
+use Controlqtime\Core\Entities\Disability;
+use Controlqtime\Core\Entities\Speciality;
+use Controlqtime\Core\Entities\Institution;
+use Controlqtime\Core\Entities\Nationality;
+use Controlqtime\Core\Entities\TypeDisease;
 use Controlqtime\Core\Factory\ImageFactory;
+use Controlqtime\Core\Entities\Relationship;
 use Controlqtime\Http\Requests\Step1Request;
 use Controlqtime\Http\Requests\Step2Request;
 use Controlqtime\Http\Requests\Step3Request;
-use Controlqtime\Mail\SignUp;
-use Illuminate\Http\Request;
-use Illuminate\Log\Writer as Log;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
-use Yajra\Datatables\Datatables;
+use Controlqtime\Core\Entities\Certification;
+use Controlqtime\Core\Entities\MaritalStatus;
+use Controlqtime\Core\Entities\TypeDisability;
+use Controlqtime\Core\Entities\TypeSpeciality;
+use Controlqtime\Core\Entities\ContactEmployee;
+use Controlqtime\Core\Entities\ActivateEmployee;
+use Controlqtime\Core\Entities\TypeCertification;
+use Controlqtime\Core\Entities\FamilyRelationship;
+use Controlqtime\Core\Entities\ProfessionalLicense;
+use Controlqtime\Core\Entities\FamilyResponsability;
+use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
+use Controlqtime\Core\Entities\TypeProfessionalLicense;
+use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
 
 class EmployeeController extends Controller
 {
@@ -498,11 +499,12 @@ class EmployeeController extends Controller
 
 	public function getShowAssistance()
 	{
+		$init = \Carbon\Carbon::parse(request('init'))->setTime(00, 00, 00);
+		$end = \Carbon\Carbon::parse(request('end'))->setTime(23, 59, 59);
 		$assistances = $this->assistance
+			->select('num_device', 'log_in', 'log_out')
 			->where('employee_id', request('id'))
-			->whereNotNull('log_in')
-			->orWhereNotNull('log_out')
-			->select('daily_assistance_apis.num_device', 'daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.created_at')
+			->whereBetween('log_in', [$init, $end])
 			->get();
 
 		return Datatables::of($assistances)->make(true);

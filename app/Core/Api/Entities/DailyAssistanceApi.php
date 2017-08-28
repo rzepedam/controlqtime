@@ -11,26 +11,17 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class DailyAssistanceApi extends Eloquent
 {
-    use SoftDeletes;
-
     /**
      * @var array
      */
     protected $fillable = [
-        'period_every_eight_hour_id', 'rut', 'num_device', 'status', 'log_in', 'log_out', 'created_at',
+        'period_every_eight_hour_id', 'rut', 'num_device', 'status', 'log_in', 'log_out'
     ];
 
     /**
      * @var bool
      */
     public $timestamps = false;
-
-    /**
-     * @var array
-     */
-    protected $dates = [
-        'deleted_at'
-    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

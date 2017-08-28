@@ -71,17 +71,18 @@ class AccessControlApiController extends Controller
 	 */
 	public function store(AccessControlApiRequest $request)
 	{
+		$mark = request('created_at');
 		DB::beginTransaction();
 
 		// Busca periodo al cual pertenece marca 1, 2, 3
-		$date   = Carbon::parse(request('created_at'))->format('H:i:s');
+		$date   = Carbon::parse($mark)->format('H:i:s');
 		$period = $this->findPeriodToAssociateMark($date);
 		request()->request->add([ 'period_every_eight_hour_id' => $period ]);
 
 		try
 		{
-			$init     = Carbon::today();
-			$end      = Carbon::now();
+			$init     = Carbon::parse($mark)->setTime(00, 00, 00);
+			$end      = Carbon::parse($mark)->setTime(23,59, 59);
 			$employee = $this->employee->with('dailyAssistances')
 				->where('rut', request('rut'))
 				->firstOrFail();
@@ -90,27 +91,29 @@ class AccessControlApiController extends Controller
 			{
 				case 'DDFF4EC6-182B-4E37-961D-28211D63E45B':
 					$employee->accessControls()->create($request->all());
+					
 					break;
 
 				case '06787B04-2454-4896-ACEB-D459610C4E61':
 					$assistances = $employee->dailyAssistances
-						->where('created_at', '>=', $init)
-						->where('created_at', '<', $end)
+						->where('log_in', '>=', $init)
+						->where('log_in', '<', $end)
 						->values();
 
 					if ( $assistances->isEmpty() )
 					{
-						request()->request->add([ 'log_in' => true ]);
+						request()->request->add([ 'log_in' => $mark ]);
+						$assistance = $employee->dailyAssistances()->create(request()->all());
+						$employee->notify(new Assistance($employee, $assistance));
 					} else
 					{
-						$this->UpdateEachLogOutToNull($assistances);
-						request()->request->add([ 'log_out' => true ]);
+						$assistance = $this->assistance->findOrFail($assistances->pluck('id')[0]);
+						$assistance->update(['log_out' => $mark]);
 					}
-
-					$assistance = $employee->dailyAssistances()->create(request()->all());
-					$employee->notify(new Assistance($employee, $assistance));
-					break;
+					
+					break;	
 			}
+
 			DB::commit();
 
 			return response()->json([ 'status' => true ]);
@@ -120,16 +123,5 @@ class AccessControlApiController extends Controller
 
 			return response()->json([ 'status' => false ]);
 		}
-	}
-
-	/**
-	 * @param $assistances
-	 */
-	protected function UpdateEachLogOutToNull($assistances)
-	{
-		$assistances->each(function ($item, $key) {
-			$assistance = $this->assistance->findOrFail($item->id);
-			$assistance->update([ 'log_out' => null ]);
-		});
 	}
 }

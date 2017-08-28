@@ -272,6 +272,8 @@ const { mix } = require('laravel-mix');
                 'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
                 'node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
                 'resources/assets/components/bootstrap-datepicker.js',
+                'node_modules/moment/moment.js',
+                'node_modules/moment/locale/es.js',
                 // Datatables
                 'node_modules/datatables.net/js/jquery.dataTables.js',
                 'node_modules/datatables.net-bs/js/dataTables.bootstrap.js',

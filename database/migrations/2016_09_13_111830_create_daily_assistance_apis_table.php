@@ -20,10 +20,8 @@ class CreateDailyAssistanceApisTable extends Migration
             $table->string('rut', 10);
             $table->string('num_device');
             $table->boolean('status')->default(0);
-            $table->boolean('log_in')->nullable();
-	        $table->boolean('log_out')->nullable();
-            $table->timestamp('created_at')->nullable();
-            $table->softDeletes();
+            $table->timestamp('log_in')->nullable();
+	        $table->timestamp('log_out')->nullable();
         });
     }
 
