@@ -31,7 +31,7 @@ class RemunerationController extends Controller
     {
         $employees = $this->employee->enabled()->pluck('full_name', 'id');
         $employee = $this->employee->with(['contract'])->firstOrFail();
-
+        
         return view('human-resources.remunerations.index', compact(
             'employees', 'employee'
         ));

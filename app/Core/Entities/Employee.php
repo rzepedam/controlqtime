@@ -987,10 +987,10 @@ class Employee extends Eloquent
         $endMonth = Carbon::now();
 
         $dailyAssistances = $this->dailyAssistances()
-            ->whereBetween('created_at', [$initMonth, $endMonth])
+            ->whereBetween('log_in', [$initMonth, $endMonth])
             ->get()
             ->groupBy(function ($item) {
-                return Carbon::parse($item->created_at)->format('d');
+                return Carbon::parse($item->log_in)->format('d');
             });
 
         return $dailyAssistances;
@@ -1008,7 +1008,7 @@ class Employee extends Eloquent
 
         if ($this->contract->dayTrip->name === 'Lunes a viernes') {
             $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance) {
-                $assistance[] = Carbon::parse($item->min('created_at'))->format('Y-m-d');
+                $assistance[] = Carbon::parse($item->min('log_in'))->format('Y-m-d');
             });
 
             while ($endMonth >= $initMonth) {
@@ -1034,7 +1034,7 @@ class Employee extends Eloquent
 
         if ($this->contract->dayTrip->name === 'Lunes a viernes') {
             $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance) {
-                $assistance[] = Carbon::parse($item->min('created_at'));
+                $assistance[] = Carbon::parse($item->min('log_in'));
             });
         }
 
@@ -1093,7 +1093,7 @@ class Employee extends Eloquent
 
         if ($this->contract->dayTrip->name === 'Lunes a viernes') {
             $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance) {
-                $assistance[] = Carbon::parse($item->min('created_at'))->format('Y-m-d');
+                $assistance[] = Carbon::parse($item->min('log_in'))->format('Y-m-d');
             });
 
             while ($now >= $initMonth) {
@@ -1122,7 +1122,7 @@ class Employee extends Eloquent
         $extraHours = collect();
 
         $this->dailyAssistanceForRemuneration()->each(function ($item) use ($assistance) {
-            $assistance[] = Carbon::parse($item->max('created_at'));
+            $assistance[] = Carbon::parse($item->max('log_in'));
         });
 
         $assistance->each(function ($item) use ($extraHours) {
