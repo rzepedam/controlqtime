@@ -11,8 +11,7 @@ class CompanyTableSeeder extends Seeder
 
         $state = getenv('APP_ENV') === 'local' ? 'enable' : 'disable';
 
-        Company::create([
-            'id'              => 1,
+        $company = Company::create([
             'type_company_id' => 1,
             'rut'             => '76150396-0',
             'firm_name'       => 'Stop Frenos, Alejandro Ulises Piña Ocayo, E.I.R.L.',
@@ -23,21 +22,9 @@ class CompanyTableSeeder extends Seeder
             'state'           => $state,
         ]);
 
-        factory(\Controlqtime\Core\Entities\Company::class, 3)->create();
-
-        $companies 	= \Controlqtime\Core\Entities\Company::all();
-        $areas 		= \Controlqtime\Core\Entities\Area::all();
-
-        foreach($companies as $company)
-		{
-			$num = rand(1, 3);
-			for ($i = 0; $i < $num; $i ++)
-			{
-				DB::table('area_company')->insert([
-					'company_id' 	=> $company->id,
-					'area_id' 		=> $areas[$i]->id
-				]);
-			}
-		}
+		DB::table('area_company')->insert([
+			'company_id' 	=> $company->id,
+			'area_id' 		=> 1
+		]);
     }
 }

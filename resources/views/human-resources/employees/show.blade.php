@@ -2,6 +2,7 @@
 @section('css')
     <link rel="stylesheet" href="{{ mix('css/show-with-image-common.css') }}">
     <link rel="stylesheet" href="{{ mix('css/human-resources/employees/show.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
 @stop
 @section('title_header')
     Detalle Trabajador: <span class="text-primary">{{ $employee->id }}</span>
@@ -68,6 +69,8 @@
 @section('scripts')
     <script src="{{ mix('js/show-with-image-common.js') }}"></script>
     <script src="{{ mix('js/human-resources/employees/show.js') }}"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
             var i = 0;
@@ -80,6 +83,9 @@
                 "sDom": '<"top"l>t<"F"ip><"clear"><"clear">',
                 "ajax": {
                     url: "/human-resources/getShowAssistance"
+                },
+                "drawCallback": function () {
+                    $('.dataTables_paginate > .pagination').addClass('pagination-sm pagination-no-border col-xs-12');
                 },
                 "order": [[2, 'desc']],
                 "language": {

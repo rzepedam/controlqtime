@@ -16,12 +16,6 @@ class UserTableSeeder extends Seeder
 
         User::create([
             'employee_id' => 1,
-            'email'       => 'raulmeza@controlqtime.cl',
-            'password'    => 'grupo@lfr@12',
-        ]);
-
-        User::create([
-            'employee_id' => 2,
             'email'       => 'robertozepeda@controlqtime.cl',
             'password'    => 'grupo@lfr@12',
         ]);

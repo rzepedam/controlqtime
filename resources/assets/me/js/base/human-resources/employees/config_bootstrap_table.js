@@ -20,8 +20,7 @@ $('#employee_table').bootstrapTable({
             formatter : function(value, row) {
                 return  '<a href="/human-resources/employees/' + row.id + '"><i class="fa fa-search text-info" aria-hidden="true"></i></a>&nbsp ' +
                         '<a href="/human-resources/employees/' + row.id +'/edit"><i class="fa fa-pencil text-warning" aria-hidden="true"></i></a>&nbsp ' +
-                        '<a href="/human-resources/employees/attachFiles/' + row.id + '"><i class="fa fa-cloud-upload text-primary" aria-hidden="true"></i></a>&nbsp ' + 
-                        '<a href="javascript:void(0)"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
+                        '<a href="/human-resources/employees/attachFiles/' + row.id + '"><i class="fa fa-cloud-upload text-primary" aria-hidden="true"></i></a>&nbsp ';
             }
         }
     ],

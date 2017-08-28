@@ -12,15 +12,6 @@ class AddressTableSeeder extends Seeder
         Address::create([
             'addressable_id'   => 1,
             'addressable_type' => 'Controlqtime\Core\Entities\Employee',
-            'address'          => 'Pérez Valenzuela 1209',
-            'commune_id'       => '118',
-            'phone1'           => '+56974155784',
-            'phone2'           => '+56222624050',
-        ]);
-
-        Address::create([
-            'addressable_id'   => 2,
-            'addressable_type' => 'Controlqtime\Core\Entities\Employee',
             'address'          => 'José Pedro Alessandri 61',
             'commune_id'       => '115',
             'phone1'           => '+56994979953',

@@ -15,19 +15,16 @@ class AreaTableSeeder extends Seeder
         DB::table('areas')->truncate();
 
         Area::create([
-            'id'          => 1,
             'terminal_id' => 1,
             'name'        => 'COF',
         ]);
 
         Area::create([
-            'id'          => 2,
             'terminal_id' => 1,
             'name'        => 'Mantención',
         ]);
 
         Area::create([
-            'id'          => 3,
             'terminal_id' => 1,
             'name'        => 'Gerencia',
         ]);

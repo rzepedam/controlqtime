@@ -12,17 +12,14 @@ class DetailAddressCompanyTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('detail_address_companies')->truncate();
 
         DetailAddressCompany::create([
-            'address_id' => 3,
+            'address_id' => 2,
             'lot'        => '',
             'bod'        => 14,
             'ofi'        => '',
             'floor'      => '',
         ]);
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

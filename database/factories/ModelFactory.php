@@ -137,17 +137,22 @@ $factory->define(ContactEmployee::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Contract::class, function (Faker\Generator $faker) {
+    $dayTrips = DayTrip::all();
+    $forecasts = Forecast::all();
+    $pensions = Pension::all();
+    $positions = Position::all();
+
     return [
-        'company_id'       => factory(\Controlqtime\Core\Entities\Company::class)->create()->id,
-        'employee_id'      => factory(\Controlqtime\Core\Entities\Employee::class)->create()->id,
+        'company_id'       => '',
+        'employee_id'      => '',
+        'area_id'          => '',
         'start_contract'   => Carbon::parse('2016-12-13')->format('d-m-Y'),
-        'position_id'      => factory(Position::class)->create()->id,
-        'area_id'          => factory(\Controlqtime\Core\Entities\Area::class)->create()->id,
+        'position_id'      => $positions->random(),
         'type_contract_id' => factory(TypeContract::class)->create(['name' => 'Plazo Fijo'])->id,
-        'day_trip_id'      => factory(DayTrip::class)->create()->id,
+        'day_trip_id'      => $dayTrips->random(),
         'num_hour'         => '45',
-        'forecast_id'      => factory(Forecast::class)->create()->id,
-        'pension_id'       => factory(Pension::class)->create()->id,
+        'forecast_id'      => $forecasts->random(),
+        'pension_id'       => $pensions->random(),
         'init_morning'     => '09:00',
         'end_morning'      => '13:00',
         'init_afternoon'   => '14:00',

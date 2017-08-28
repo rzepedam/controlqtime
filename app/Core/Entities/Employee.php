@@ -725,9 +725,9 @@ class Employee extends Eloquent
      *
      * @return string Masculino or Femenino
      */
-    public function getIsMaleTextAttribute($value)
+    public function getIsMaleTextAttribute()
     {
-        return $value ? 'Masculino' : 'Femenino';
+        return $this->is_male ? 'Masculino' : 'Femenino';
     }
 
     /**

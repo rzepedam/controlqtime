@@ -12,12 +12,10 @@ class ImageTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('images')->truncate();
 
         if (getenv('APP_ENV') === 'local') {
             Image::create([
-                'id'             => 1,
                 'imageable_id'   => 1,
                 'imageable_type' => 'Controlqtime\Core\Entities\Company',
                 'path'           => 'company/1/Rol/14790871284R21I7qMyakUjiI.jpg',
@@ -26,7 +24,6 @@ class ImageTableSeeder extends Seeder
             ]);
 
             Image::create([
-                'id'             => 2,
                 'imageable_id'   => 1,
                 'imageable_type' => 'Controlqtime\Core\Entities\Company',
                 'path'           => 'company/1/Patent/1479087473rG8GcPtiIeFaM1Q.JPG',
@@ -35,7 +32,6 @@ class ImageTableSeeder extends Seeder
             ]);
 
             Image::create([
-                'id'             => 3,
                 'imageable_id'   => 1,
                 'imageable_type' => 'Controlqtime\Core\Entities\Company',
                 'path'           => 'company/1/Carnet/1479087399YpK2Wg2f3DvVcuj.png',
@@ -44,7 +40,6 @@ class ImageTableSeeder extends Seeder
             ]);
 
             Image::create([
-                'id'             => 4,
                 'imageable_id'   => 1,
                 'imageable_type' => 'Controlqtime\Core\Entities\Company',
                 'path'           => 'company/1/Carnet/1479087461vo2OlYDkbWEfuX0.png',
@@ -52,7 +47,5 @@ class ImageTableSeeder extends Seeder
                 'size'           => '371219',
             ]);
         }
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
