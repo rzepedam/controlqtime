@@ -76,4 +76,4 @@ jQuery.Rut = {
 
         return strRut;
     }
-}
+};

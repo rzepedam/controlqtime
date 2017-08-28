@@ -135,7 +135,7 @@ class Visit extends Eloquent
      */
     public function setDateAttribute($value)
     {
-        // $this->attributes['date'] = Carbon::parse($value);
+        $this->attributes['date'] = Carbon::parse($value)->format('Y-m-d');
     }
 
     /**
@@ -151,7 +151,7 @@ class Visit extends Eloquent
      */
     public function setStartDateAttribute($value)
     {
-        //$this->attributes['start_date'] = Carbon::parse($value);
+        $this->attributes['start_date'] = Carbon::parse($value)->format('Y-m-d');
     }
 
     /**
@@ -159,7 +159,7 @@ class Visit extends Eloquent
      */
     public function setEndDateAttribute($value)
     {
-        //$this->attributes['end_date'] = Carbon::parse($value);
+        $this->attributes['end_date'] = Carbon::parse($value)->format('Y-m-d');
     }
 
     /**
@@ -175,10 +175,9 @@ class Visit extends Eloquent
      */
     public function setUrlAttribute($value)
     {
-        echo $this->hour;
-        is_null($this->start_date) ? $expired = Carbon::parse($this->date)->format('Y-m-d').' '.$this->hour
-            : $expired = Carbon::parse($this->start_date)->format('Y-m-d').' 00:00:00';
-        dd($expired, is_null($this->start_date), Carbon::parse($this->date)->format('Y-m-d').' '.$this->hour);
+        is_null($this->start_date) ? $expired = Carbon::parse($this->date)->format('Y-m-d') . ' ' . $this->hour
+            : $expired = $this->start_date . ' 00:00:00';
+
         $this->attributes['url'] = UrlSigner::sign(env('APP_URL').$value, Carbon::parse($expired));
     }
 

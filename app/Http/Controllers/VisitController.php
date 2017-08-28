@@ -92,9 +92,9 @@ class VisitController extends Controller
     public function getVisits()
     {
         $visits = $this->visit
-                    ->with(['typeVisit'])
-                    ->orderBy('created_at', 'DESC')
-                    ->get();
+            ->with(['typeVisit'])
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         return $visits;
     }
