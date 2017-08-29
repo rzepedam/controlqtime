@@ -30,8 +30,8 @@
                     <td style="vertical-align: middle;">
                         {{ $employee->first_name . ' ' . $employee->male_surname . ' ' . $employee->female_surname }}</td>
                     <td class="text-center" style="vertical-align: middle;">{{ $employee->rut }}</td>
-                    <td class="text-center" style="vertical-align: middle;">{{-- $employee->contract->company->firm_name --}}</td>
-                    <td class="text-center" style="vertical-align: middle;">{{-- $employee->address->phone1 --}}</td>
+                    <td class="text-center" style="vertical-align: middle;">{{ $employee->contract->company->firm_name }}</td>
+                    <td class="text-center" style="vertical-align: middle;">{{ $employee->address->phone1 }}</td>
                 </tr>
             @endforeach
         </tbody>

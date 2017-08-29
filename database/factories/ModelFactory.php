@@ -265,10 +265,12 @@ $factory->define(Employee::class, function (Faker\Generator $faker) {
     $femaleSurname = $faker->lastName;
     $firstName     = $faker->firstName;
     $secondName    = $faker->firstName;
+    $nationalities = \Controlqtime\Core\Entities\Nationality::all();
+    $maritalStatuses = \Controlqtime\Core\Entities\MaritalStatus::all();
 
     return [
-        'nationality_id'    => factory(Nationality::class)->create()->id,
-        'marital_status_id' => factory(MaritalStatus::class)->create()->id,
+        'nationality_id'    => $nationalities->random(),
+        'marital_status_id' => $maritalStatuses->random(),
         'male_surname'      => $maleSurname,
         'female_surname'    => $femaleSurname,
         'first_name'        => $firstName,

@@ -10,10 +10,10 @@ $('#employee_table').bootstrapTable({
                     return row.id;
                 }
             }
-        }, {}, {},
+        }, {}, {}, {},
         {
-            formatter : function(value, row) {
-                return row.nationality.name;
+            formatter : function(value, row, index) {
+                return row.address.phone1;
             }
         },
         {

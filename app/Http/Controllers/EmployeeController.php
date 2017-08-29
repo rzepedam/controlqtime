@@ -288,7 +288,7 @@ class EmployeeController extends Controller
 	{
 		try
 		{
-			$employees = $this->employee->with([ 'nationality' ])->get();
+			$employees = $this->employee->with(['nationality', 'address'])->get();
 
 			return $employees;
 		} catch ( Exception $e )

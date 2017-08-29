@@ -2,11 +2,11 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Entities\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
-use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+use Controlqtime\Core\Entities\Employee;
 
 class DownloadController extends Controller
 {
@@ -72,13 +72,14 @@ class DownloadController extends Controller
     {
         Excel::create('excel', function ($excel) {
             $excel->sheet('Listado de Empleados', function ($sheet) {
-                $employees = $this->employee->with(['company'])->get();
+                $employees = $this->employee->get();
+                
                 $sheet->setBorder('A1:D1', 'thin', 'medium');
                 $sheet->setHeight(['1' => '25']);
 
                 for ($i = 1; $i <= count($employees) + 1; $i++) {
                     $sheet->cells('A'.$i.':D'.$i, function ($cells) {
-                        $cells->setFontFamily('Open Sans');
+                        $cells->setFontFamily('Arial');
                         $cells->setBorder('thin', 'thin');
                     });
 
@@ -86,9 +87,9 @@ class DownloadController extends Controller
                         $cells->setBackground('#3498db');
                         $cells->setValignment('center');
                     });
-                }
+                }   
 
-                $sheet->loadView('human-resources.employees.partials.pdf.index', compact('employees'));
+                $sheet->loadView('human-resources.employees.partials.excel.index', compact('employees'));
             });
         })->download('xls');
     }

@@ -26,6 +26,6 @@ class EmployeeTableSeeder extends Seeder
             'state'             => 'enable',
         ]);
 
-        factory(\Controlqtime\Core\Entities\Employee::class, 199)->create();
+        // factory(\Controlqtime\Core\Entities\Employee::class, 199)->create();
     }
 }
