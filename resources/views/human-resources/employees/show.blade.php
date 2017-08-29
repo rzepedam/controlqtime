@@ -147,7 +147,7 @@
                     $('#js').html('<i class="fa fa-times"></i> Las fechas ingresadas no son válidas. Intente nuevamente.').removeClass('hide');
                     return false;
                 }
-                $('#initForm').val($(this).val());
+                $('.initForm').val($(this).val());
                 $('#js').addClass('hide');
                 table.ajax.reload();
             });
@@ -162,7 +162,7 @@
                     $('#js').html('<i class="fa fa-times"></i> Las fechas ingresadas no son válidas. Intente nuevamente.').removeClass('hide');
                     return false;
                 }
-                $('#endForm').val($(this).val());
+                $('.endForm').val($(this).val());
                 $('#js').addClass('hide');
                 table.ajax.reload();
             });

@@ -29,17 +29,21 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li role="presentation">
-                            <a target="_blank" href="javascript:void(0)" role="menuitem">
+                            <a href="javascript:void(0)" role="menuitem" onclick="event.preventDefault(); document.getElementById('getShowExcel').submit();">
                                 <i class="fa fa-file-excel-o text-success" aria-hidden="true"></i> Exportar a Excel
                             </a>
+                            {{ Form::open(['route' => ['getExcelShowEmployee', basename(request()->path())], 'method' => 'GET', 'id' => 'getShowExcel', 'style' => 'display: none;']) }}
+                                {{ Form::hidden('init', \Carbon\Carbon::parse(date('d-m-Y'))->subMonth()->format('d-m-Y'), ['class'  => 'initForm']) }}
+                                {{ Form::hidden('end', date('d-m-Y'), ['class' => 'endForm']) }}
+                            {{ Form::close() }}
                         </li>
                         <li role="presentation">
                             <a href="javascript:void(0)" role="menuitem" onclick="event.preventDefault(); document.getElementById('getShowPdf').submit();"> 
                                 <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i> Exportar a PDF
                             </a>
                             {{ Form::open(['route' => ['getPdfShowEmployee', basename(request()->path())], 'method' => 'GET', 'id' => 'getShowPdf', 'style' => 'display: none;']) }}
-                                {{ Form::hidden('init', \Carbon\Carbon::parse(date('d-m-Y'))->subMonth()->format('d-m-Y'), ['id'  => 'initForm']) }}
-                                {{ Form::hidden('end', date('d-m-Y'), ['id' => 'endForm']) }}
+                                {{ Form::hidden('init', \Carbon\Carbon::parse(date('d-m-Y'))->subMonth()->format('d-m-Y'), ['class'  => 'initForm']) }}
+                                {{ Form::hidden('end', date('d-m-Y'), ['class' => 'endForm']) }}
                             {{ Form::close() }}
                         </li>
                     </ul>

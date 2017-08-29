@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Controlqtime\Core\Entities\Exam;
 use Controlqtime\Core\Entities\User;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use Controlqtime\Core\Entities\Study;
 use Controlqtime\Core\Entities\Degree;
 use Controlqtime\Core\Entities\Region;
@@ -840,6 +841,56 @@ class EmployeeController extends Controller
 			
 		} catch (\Exception $e) {
 			$this->log->error('Error getPdfShow: ' . $e->getMessage());
+
+			return response()->json([ 'status' => false ]);
+		}
+	}
+
+	public function getExcelShow($id)
+	{
+		$init = \Carbon\Carbon::parse(request('init') . ' 00:00:00')->format('Y-m-d H:i:s');
+		$end  = \Carbon\Carbon::parse(request('end') . ' 23:59:59')->format('Y-m-d H:i:s');
+		
+		try {
+			Excel::create('excel', function ($excel) use ($id, $init, $end) {
+	            $excel->sheet('Listado de Empleados', function ($sheet) use ($id, $init, $end) {
+	                $employee = $this->employee->findOrFail($id);
+					$assistances = $this->assistance
+						->where('employee_id', $id)
+						->whereBetween('log_in', [$init, $end])
+						->orderBy('log_in', 'DESC')
+						->get();
+	                
+	                $sheet->setBorder('A1:C1', 'thin', 'medium');
+	                $sheet->setHeight(['1' => '25']);
+
+	                for ($i = 1; $i <= count($assistances) + 3; $i++) {
+	                    $sheet->cells('A' . $i . ':C' . $i, function ($cells) {
+	                        $cells->setFontFamily('Arial');
+	                        $cells->setBorder('thin', 'thin');
+	                    });
+	                }   
+
+	                $sheet->cells('A1:C1', function ($cells) {
+                        $cells->setBackground('#C8E6C9');
+                        $cells->setValignment('center');
+                    });
+
+                    $sheet->cells('A2:C2', function ($cells) {
+                        $cells->setBackground('#B3E5FC');
+                        $cells->setValignment('center');
+                    });
+
+                    $sheet->cells('A3:C3', function ($cells) {
+                        $cells->setBackground('#CFD8DC');
+                        $cells->setValignment('center');
+                    });
+
+	                $sheet->loadView('human-resources.employees.partials.excel.show', compact('assistances', 'employee', 'init', 'end'));
+	            });
+	        })->download('xls');
+		} catch (\Exception $e) {
+			$this->log->error('Error getExcelShow: ' . $e->getMessage());
 
 			return response()->json([ 'status' => false ]);
 		}
