@@ -54,14 +54,14 @@ class DatabaseSeeder extends Seeder
 
 		// Importants tables
 		$this->call(CompanyTableSeeder::class);
-		$this->call(EmployeeTableSeeder::class);
-		$this->call(ContractTableSeeder::class);
-		// $this->call(ImageTableSeeder::class);
-		$this->call(LegalRepresentativeTableSeeder::class);
-		$this->call(UserTableSeeder::class);
 		$this->call(AddressTableSeeder::class);
 		$this->call(DetailAddressCompanyTableSeeder::class);
 		$this->call(DetailAddressLegalEmployeeTableSeeder::class);
+		$this->call(ContractTableSeeder::class);
+		$this->call(EmployeeTableSeeder::class);
+		// $this->call(ImageTableSeeder::class);
+		$this->call(LegalRepresentativeTableSeeder::class);
+		$this->call(UserTableSeeder::class);
 		// $this->call(AccessControlApiTableSeeder::class);
 
 		if ( config('app.env') === 'local' )

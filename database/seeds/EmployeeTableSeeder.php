@@ -26,6 +26,25 @@ class EmployeeTableSeeder extends Seeder
             'state'             => 'enable',
         ]);
 
-        // factory(\Controlqtime\Core\Entities\Employee::class, 199)->create();
+        factory(\Controlqtime\Core\Entities\Employee::class, 199)->create();
+
+        $employees = \Controlqtime\Core\Entities\Employee::all()->except(1);
+
+        foreach ($employees as $employee)
+        {
+            $contract = factory(\Controlqtime\Core\Entities\Contract::class)->create([
+                'company_id' => 1,
+                'employee_id' => $employee->id,
+                'area_id' => 1
+            ]);
+
+            $address = factory(\Controlqtime\Core\Entities\Address::class)->create([
+                'addressable_id' => $employee->id,
+            ]);
+
+            $detalAddressEmployee = factory(\Controlqtime\Core\Entities\DetailAddressLegalEmployee::class)->create([
+                'address_id' => $address->id
+            ]);
+        }
     }
 }

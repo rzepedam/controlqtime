@@ -71,13 +71,15 @@ $factory->define(AccessControlApi::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Address::class, function (Faker\Generator $faker) {
+    $communes = \Controlqtime\Core\Entities\Commune::all();
+
     return [
-        'addressable_id'   => factory(Employee::class)->states('enable')->create(),
+        'addressable_id'   => '',
         'addressable_type' => 'Controlqtime\Core\Entities\Employee',
-        'address'          => $faker->address,
-        'commune_id'       => 1,
-        'phone1'           => $faker->word,
-        'phone2'           => $faker->word,
+        'address'          => $faker->streetName . ' ' . $faker->buildingNumber, 
+        'commune_id'       => $communes->random(),
+        'phone1'           => $faker->e164PhoneNumber,
+        'phone2'           => $faker->e164PhoneNumber,
     ];
 });
 
