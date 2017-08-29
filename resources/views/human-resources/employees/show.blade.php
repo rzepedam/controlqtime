@@ -139,23 +139,34 @@
 
             // Reload table to the change init input
             $('#init').on('change', function () {
-                if ($(this).val() > $('#end').val()) {
+                var init = moment($(this).val(), "DD-MM-YYYY", true);
+                var end = moment($('#end').val(), "DD-MM-YYYY", true);
+
+                if ( init.isAfter(end) ) 
+                {
                     $('#js').html('<i class="fa fa-times"></i> Las fechas ingresadas no son válidas. Intente nuevamente.').removeClass('hide');
                     return false;
                 }
+                $('#initForm').val($(this).val());
                 $('#js').addClass('hide');
                 table.ajax.reload();
             });
 
             // Reload table to the change end input
             $('#end').on('change', function () {
-                if ($(this).val() < $('#init').val()) {
+                var init = moment($('#init').val(), "DD-MM-YYYY", true);
+                var end = moment($(this).val(), "DD-MM-YYYY", true);
+
+                if ( init.isAfter(end) ) 
+                {
                     $('#js').html('<i class="fa fa-times"></i> Las fechas ingresadas no son válidas. Intente nuevamente.').removeClass('hide');
                     return false;
                 }
+                $('#endForm').val($(this).val());
                 $('#js').addClass('hide');
                 table.ajax.reload();
             });
+
         });
     </script>
 @stop

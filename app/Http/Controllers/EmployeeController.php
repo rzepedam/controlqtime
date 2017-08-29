@@ -802,4 +802,46 @@ class EmployeeController extends Controller
 		Session::forget('id_delete_speciality');
 		Session::forget('id_delete_professional_license');
 	}
+
+	/**
+	 * 
+	 * @param string $id 
+	 * 
+	 * @return mixed $pdf->inline()
+	 */
+	public function getPdfShow($id)
+	{
+		$init = \Carbon\Carbon::parse(request('init') . ' 00:00:00')->format('Y-m-d H:i:s');
+		$end  = \Carbon\Carbon::parse(request('end') . ' 23:59:59')->format('Y-m-d H:i:s');
+		
+		try {
+			$employee = $this->employee->findOrFail($id);
+			$assistances = $this->assistance
+				->where('employee_id', $id)
+				->whereBetween('log_in', [$init, $end])
+				->orderBy('log_in', 'DESC')
+				->get();
+			
+			$header = view('global/pdf/header');
+	        $footer = view('global/pdf/footer');
+	        $pdf = \PDF::loadView('human-resources.employees.partials.pdf.show', compact(
+	        			'assistances', 'employee', 'init', 'end'
+	        		))
+	            ->setOption('page-size', 'letter')
+	            ->setOption('margin-top', '25mm')
+	            ->setOption('margin-bottom', '14mm')
+	            ->setOption('margin-left', '20mm')
+	            ->setOption('margin-right', '20mm')
+	            ->setOption('header-spacing', '4')
+	            ->setOption('header-html', $header)
+	            ->setOption('footer-html', $footer);
+
+        	return $pdf->inline();
+			
+		} catch (\Exception $e) {
+			$this->log->error('Error getPdfShow: ' . $e->getMessage());
+
+			return response()->json([ 'status' => false ]);
+		}
+	}
 }

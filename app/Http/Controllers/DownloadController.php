@@ -51,13 +51,16 @@ class DownloadController extends Controller
      */
     public function getPdf()
     {
-        $employees = $this->employee->with(['nationality'])->get();
-        $header = view('human-resources.employees.partials.pdf.header');
-        $footer = view('human-resources.employees.partials.pdf.footer');
+        $employees = $this->employee->with(['contract.company', 'address'])->get();
+
+        $header = view('global/pdf/header');
+        $footer = view('global/pdf/footer');
         $pdf = \PDF::loadView('human-resources.employees.partials.pdf.index', compact('employees'))
             ->setOption('page-size', 'letter')
             ->setOption('margin-top', '25mm')
             ->setOption('margin-bottom', '14mm')
+            ->setOption('margin-left', '20mm')
+            ->setOption('margin-right', '20mm')
             ->setOption('header-spacing', '4')
             ->setOption('header-html', $header)
             ->setOption('footer-html', $footer);

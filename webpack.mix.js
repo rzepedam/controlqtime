@@ -224,6 +224,12 @@ const { mix } = require('laravel-mix');
                 'resources/assets/me/js/base/human-resources/contracts/custom-contracts.js'
             ], 'public/js/human-resources/contracts/create-custom-contracts.js');
 
+        // Pdf
+        mix.copy(
+            'resources/assets/me/css/human-resources/contracts/pdf/index.css', 
+            'public/css/human-resources/contracts/pdf/index.css'
+        );
+
     // Remunerations
         // Index
             mix.scripts([
@@ -278,6 +284,12 @@ const { mix } = require('laravel-mix');
                 'node_modules/datatables.net/js/jquery.dataTables.js',
                 'node_modules/datatables.net-bs/js/dataTables.bootstrap.js'
             ], 'public/js/human-resources/employees/show.js');
+
+        // Pdf
+        mix.copy(
+            'resources/assets/me/css/human-resources/employees/pdf/index.css',
+            'public/css/human-resources/employees/pdf/index.css'
+        );
 
 // Operations
     // Menú
@@ -613,12 +625,11 @@ const { mix } = require('laravel-mix');
         mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');
         mix.copy('resources/assets/passport/app.js', 'public/js/passport.js');
 
-    // Pdf-Contracts
+    // Global Pdf
     mix.copy([
-        'resources/assets/me/css/human-resources/contracts/pdf/index-pdf-contracts.css',
-        'resources/assets/me/css/human-resources/contracts/pdf/header-pdf-contracts.css',
-        'resources/assets/me/css/human-resources/contracts/pdf/footer-pdf-contracts.css'
-    ], 'public/css/human-resources/contracts/pdf');
+        'resources/assets/me/css/pdf/header.css',
+        'resources/assets/me/css/pdf/footer.css'
+    ], 'public/css/pdf');
 
 // Versioning
     mix.version();

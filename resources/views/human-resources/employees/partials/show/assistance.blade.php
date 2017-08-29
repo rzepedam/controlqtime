@@ -21,6 +21,30 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group col-xs-12 col-sm-3" style="margin-top: 27px;">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation">
+                            <a target="_blank" href="javascript:void(0)" role="menuitem">
+                                <i class="fa fa-file-excel-o text-success" aria-hidden="true"></i> Exportar a Excel
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="javascript:void(0)" role="menuitem" onclick="event.preventDefault(); document.getElementById('getShowPdf').submit();"> 
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i> Exportar a PDF
+                            </a>
+                            {{ Form::open(['route' => ['getPdfShowEmployee', basename(request()->path())], 'method' => 'GET', 'id' => 'getShowPdf', 'style' => 'display: none;']) }}
+                                {{ Form::hidden('init', \Carbon\Carbon::parse(date('d-m-Y'))->subMonth()->format('d-m-Y'), ['id'  => 'initForm']) }}
+                                {{ Form::hidden('end', date('d-m-Y'), ['id' => 'endForm']) }}
+                            {{ Form::close() }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="panel-body">

@@ -3,11 +3,10 @@ body {
 }
 
 .text-footer {
-    color: black;
+    color: #757575;
 }
 
 hr {
     margin: 0;
     margin-bottom: 5px;
-    color: black;
 }

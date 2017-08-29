@@ -3,11 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/human-resources/contracts/pdf/index-pdf-contracts.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/human-resources/contracts/pdf/index.css') }}">
     <title>Contrato de Trabajo</title>
 </head>
 <body>
-
     <p></p>
     <div class="row">
         <div class="col-xs-12 text-center">

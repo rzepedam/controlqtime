@@ -20,10 +20,12 @@ class EmployeeTableSeeder extends Seeder
             'doc'               => 'rut',
             'rut'               => '15679634-4',
             'birthday'          => '15-08-1984',
-            'is_male'           => true,
+            'is_male'           => 'M',
             'email_employee'    => 'robertozepeda@controlqtime.cl',
             'url'               => 'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/06/29/163531241838.jpg',
             'state'             => 'enable',
         ]);
+
+        factory(\Controlqtime\Core\Entities\Employee::class, 199)->create();
     }
 }

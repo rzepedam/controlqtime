@@ -261,8 +261,8 @@ class ContractController extends Controller
 			'employee.address.detailAddressLegalEmployee',
 		])->findOrFail($id);
 
-		$header = view('human-resources.contracts.partials.pdf.header');
-		$footer = view('human-resources.contracts.partials.pdf.footer');
+		$header = view('global/pdf/header');
+		$footer = view('global/pdf/footer');
 		$pdf    = \PDF::loadView('human-resources.contracts.partials.pdf.index', compact('contract'))
 			->setOption('page-size', 'letter')
 			->setOption('margin-top', '25mm')

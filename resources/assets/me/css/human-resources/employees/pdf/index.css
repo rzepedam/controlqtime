@@ -1,0 +1,15 @@
+body {
+	font-size: 11px;
+}
+
+thead {
+    display: table-header-group;
+}
+
+tfoot {
+    display: table-row-group;
+}
+
+tr {
+    page-break-inside: avoid;
+}
