@@ -82,12 +82,13 @@ class DownloadController extends Controller
                         $cells->setFontFamily('Arial');
                         $cells->setBorder('thin', 'thin');
                     });
-
-                    $sheet->cells('A1:D1', function ($cells) {
-                        $cells->setBackground('#3498db');
-                        $cells->setValignment('center');
-                    });
                 }   
+
+                $sheet->cells('A1:D1', function ($cells) {
+                    $cells->setBackground('#B2DFDB');
+                    $cells->setValignment('center');
+                    $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                });
 
                 $sheet->loadView('human-resources.employees.partials.excel.index', compact('employees'));
             });

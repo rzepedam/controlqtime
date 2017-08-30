@@ -17,7 +17,7 @@
     </div>
     <table class="table table-bordered table-condensed">
         <thead>
-            <tr class="active">
+            <tr class="success">
                 <th class="col-xs-6 text-center">Dispositivo</th>
                 <th class="col-xs-3 text-center">Entrada</th>
                 <th class="col-xs-3 text-center">Salida</th>

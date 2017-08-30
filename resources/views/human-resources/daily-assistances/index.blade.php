@@ -8,14 +8,15 @@
         @media screen and (min-width: 768px) {
             .header-custom {
                 padding-top: 20px; 
-                padding-left: 96px; 
+                padding-left: 30px; 
+                padding-right: 52px; 
             }
         }
         @media screen and (max-width: 768px) {
             .header-custom {
                 padding-top: 20px; 
-                padding-left: 46px; 
-                padding-right: 46px; 
+                padding-left: 20px; 
+                padding-right: 20px; 
             }
         }
     </style>
@@ -36,12 +37,16 @@
     <div class="panel panel-bordered">
         <div class="panel-heading">
             <div class="row header-custom">
+
                 @include('human-resources.daily-assistances.partials.header')
+
             </div>
         </div>
         <div class="panel-body">
             <div class="row col-sm-12">
+
                 @include('human-resources.daily-assistances.partials.table')
+                
             </div>
         </div>
     </div>
@@ -146,6 +151,7 @@
 
             // Reload table to the change company select
             $(document).on('change', '#company_id', function () {
+                $('.companyForm').val($(this).val());
                 $('#area_id').val('');
                 $('#employee_id').val('');
                 table.ajax.reload();
@@ -170,6 +176,8 @@
 
             // Reload table to the change area select
             $(document).on('change', '#area_id', function () {
+                $('.areaForm').val($(this).val());
+                $('.employeeForm').val('');
                 $('#employee_id').val('');
                 table.ajax.reload();
                 $.get('/human-resources/daily-assistances/loadArea',
@@ -195,6 +203,7 @@
 
             // Reload table to the change employee select
             $(document).on('change', '#employee_id', function () {
+                $('.employeeForm').val($(this).val());
                 $('#area_id').val('');
                 table.ajax.reload();
                 $.get('/human-resources/daily-assistances/loadEmployee',
@@ -205,7 +214,9 @@
                         $.each(data.areas, function (key, element) {
                             if ( $('#employee_id').val() ) {
                                 $('#area_id').append("<option selected='selected' value='" + key + "'>" + element + "</option>");
+                                $('.areaForm').val(key);
                             } else {
+                                $('.areaForm').val('');
                                 $('#area_id').append("<option value='" + key + "'>" + element + "</option>");
                             }
                         });
@@ -229,20 +240,38 @@
 
             // Reload table to the change init input
             $('#init').on('change', function () {
-                if ($(this).val() > $('#end').val()) {
+                var init = moment($(this).val(), "DD-MM-YYYY", true);
+                var end = moment($('#end').val(), "DD-MM-YYYY", true);
+                
+                if ( init.isAfter(end) ) 
+                {
+                    var aux = $(this).val();
+                    $('#end').datepicker({ format: 'dd-mm-yyyy', autoclose: true }).datepicker("update", aux);
+                    $('.initForm').val(aux);
+                    $('.endForm').val(aux);
                     $('#js').html('<i class="fa fa-times"></i> Las fechas ingresadas no son válidas. Intente nuevamente.').removeClass('hide');
                     return false;
                 }
+                $('.initForm').val($(this).val());
                 $('#js').addClass('hide');
                 table.ajax.reload();
             });
 
             // Reload table to the change end input
             $('#end').on('change', function () {
-                if ($(this).val() < $('#init').val()) {
+                var init = moment($('#init').val(), "DD-MM-YYYY", true);
+                var end = moment($(this).val(), "DD-MM-YYYY", true);
+
+                if ( init.isAfter(end) ) 
+                {
+                    var aux = $(this).val();
+                    $('#init').datepicker({ format: 'dd-mm-yyyy', autoclose: true }).datepicker("update", aux);
+                    $('.initForm').val(aux);
+                    $('.endForm').val(aux);
                     $('#js').html('<i class="fa fa-times"></i> Las fechas ingresadas no son válidas. Intente nuevamente.').removeClass('hide');
                     return false;
                 }
+                $('.endForm').val($(this).val());
                 $('#js').addClass('hide');
                 table.ajax.reload();
             });

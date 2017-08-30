@@ -860,30 +860,30 @@ class EmployeeController extends Controller
 						->whereBetween('log_in', [$init, $end])
 						->orderBy('log_in', 'DESC')
 						->get();
-	                
-	                $sheet->setBorder('A1:C1', 'thin', 'medium');
-	                $sheet->setHeight(['1' => '25']);
 
 	                for ($i = 1; $i <= count($assistances) + 3; $i++) {
 	                    $sheet->cells('A' . $i . ':C' . $i, function ($cells) {
 	                        $cells->setFontFamily('Arial');
-	                        $cells->setBorder('thin', 'thin');
+	                        $cells->setBorder('thin', 'thin', 'thin', 'thin');
 	                    });
 	                }   
 
 	                $sheet->cells('A1:C1', function ($cells) {
-                        $cells->setBackground('#C8E6C9');
+                        $cells->setBackground('#B2DFDB');
                         $cells->setValignment('center');
+                        $cells->setBorder('thin', 'thin', 'thin', 'thin');
                     });
 
                     $sheet->cells('A2:C2', function ($cells) {
-                        $cells->setBackground('#B3E5FC');
+                        $cells->setBackground('#C8E6C9');
                         $cells->setValignment('center');
+                        $cells->setBorder('thin', 'thin', 'thin', 'thin');
                     });
 
                     $sheet->cells('A3:C3', function ($cells) {
                         $cells->setBackground('#CFD8DC');
                         $cells->setValignment('center');
+                        $cells->setBorder('thin', 'thin', 'thin', 'thin');
                     });
 
 	                $sheet->loadView('human-resources.employees.partials.excel.show', compact('assistances', 'employee', 'init', 'end'));

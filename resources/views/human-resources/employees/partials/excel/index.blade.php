@@ -1,20 +1,20 @@
-<table class="table table-striped table-condensed table-responsive table-bordered">
-      <thead>
-          <tr>
-                <th>Nombre</th>
-                <th>Rut</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-          </tr>
-      </thead>
-      <tbody>
-          @foreach($employees as $employee)
+<table>
+    <thead>
+        <tr>
+            <th style="border: 1px solid">Nombre</th>
+            <th style="border: 1px solid; text-align: center">Rut</th>
+            <th style="border: 1px solid; text-align: center">Email</th>
+            <th style="border: 1px solid; text-align: center">Teléfono</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($employees as $employee)
             <tr>
-                 <td>{{ $employee->full_name }}</td>
-                 <td>{{ $employee->rut }}</td>
-                 <td>{{ $employee->email_employee }}</td>
-                 <td>{{ $employee->address->phone1 }}</td>
+                <td style="border: 1px solid">{{ $employee->full_name }}</td>
+                <td style="border: 1px solid; text-align: center">{{ $employee->rut }}</td>
+                <td style="border: 1px solid; text-align: center">{{ $employee->email_employee }}</td>
+                <td style="border: 1px solid; text-align: center">{{ $employee->address->phone1 }}</td>
             </tr>
-          @endforeach
-     </tbody>
+        @endforeach
+    </tbody>
 </table>

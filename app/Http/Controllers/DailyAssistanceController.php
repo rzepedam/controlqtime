@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Yajra\Datatables\Datatables;
 use Illuminate\Log\Writer as Log;
 use Controlqtime\Core\Entities\Area;
+use Maatwebsite\Excel\Facades\Excel;
 use Controlqtime\Core\Entities\Company;
 use Controlqtime\Core\Entities\Employee;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
@@ -65,7 +66,12 @@ class DailyAssistanceController extends Controller
 		{
 			$assistances = $this->getAssistanceFilterCompanyAndAreaAndEmployee(request('company_id'), request('area_id'), request('employee_id'), $init, $end);
 
-			return Datatables::of($assistances)->make(true);
+			if ( request()->ajax() )
+			{
+				return Datatables::of($assistances)->make(true);
+			}
+
+			return $assistances;
 		}
 
 		// assistances filter company and area
@@ -73,7 +79,12 @@ class DailyAssistanceController extends Controller
 		{
 			$assistances = $this->getAssistanceFilterCompanyAndArea(request('company_id'), request('area_id'), $init, $end);
 
-			return Datatables::of($assistances)->make(true);
+			if ( request()->ajax() )
+			{
+				return Datatables::of($assistances)->make(true);
+			}
+
+			return $assistances;
 		}
 
 		// assistances filter company and employee
@@ -81,7 +92,12 @@ class DailyAssistanceController extends Controller
 		{
 			$assistances = $this->getAssistanceFilterCompanyAndEmployee(request('company_id'), request('employee_id'), $init, $end);
 
-			return Datatables::of($assistances)->make(true);
+			if ( request()->ajax() )
+			{
+				return Datatables::of($assistances)->make(true);
+			}
+
+			return $assistances;
 		}
 
 		// assistances filter area and employee
@@ -89,7 +105,12 @@ class DailyAssistanceController extends Controller
 		{
 			$assistances = $this->getAssistanceFilterAreaAndEmployee(request('area_id'), request('employee_id'), $init, $end);
 
-			return Datatables::of($assistances)->make(true);
+			if ( request()->ajax() )
+			{
+				return Datatables::of($assistances)->make(true);
+			}
+
+			return $assistances;
 		}
 
 		// assistances filter company
@@ -97,7 +118,12 @@ class DailyAssistanceController extends Controller
 		{
 			$assistances = $this->getAssistanceFilterCompany(request('company_id'), $init, $end);
 
-			return Datatables::of($assistances)->make(true);
+			if ( request()->ajax() )
+			{
+				return Datatables::of($assistances)->make(true);
+			}
+
+			return $assistances;
 		}
 
 		// assistances filter employee
@@ -105,27 +131,42 @@ class DailyAssistanceController extends Controller
 		{
 			$assistances = $this->getAssistanceFilterEmployee(request('employee_id'), $init, $end);
 
-			return Datatables::of($assistances)->make(true);
+			if ( request()->ajax() )
+			{
+				return Datatables::of($assistances)->make(true);
+			}
+
+			return $assistances;
 		}
 
 		// assistances employees filter per Area
 		if ( ! is_null(request('area_id')))
 		{
 			$assistances = $this->getAssistanceFilterArea(request('area_id'), $init, $end);
+			
+			if ( request()->ajax() )
+			{
+				return Datatables::of($assistances)->make(true);
+			}
 
-			return Datatables::of($assistances)->make(true);
+			return $assistances;
 		}
 
 		$assistances = $this->dailyAssistance
-				->join('employees', 'daily_assistance_apis.employee_id', 'employees.id')
-				->join('contracts', 'employees.id', 'contracts.employee_id')
-				->join('companies', 'contracts.company_id', 'companies.id')
-				->join('areas', 'contracts.area_id', 'areas.id')
-				->whereBetween('daily_assistance_apis.log_in', [ $init, $end ])
-				->select('daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'daily_assistance_apis.employee_id', 'employees.full_name', 'companies.id AS company_id', 'companies.firm_name', 'areas.id AS area_id', 'areas.name')
-				->get();
+			->join('employees', 'daily_assistance_apis.employee_id', 'employees.id')
+			->join('contracts', 'employees.id', 'contracts.employee_id')
+			->join('companies', 'contracts.company_id', 'companies.id')
+			->join('areas', 'contracts.area_id', 'areas.id')
+			->whereBetween('daily_assistance_apis.log_in', [ $init, $end ])
+			->select('daily_assistance_apis.log_in', 'daily_assistance_apis.log_out', 'daily_assistance_apis.rut', 'daily_assistance_apis.employee_id', 'employees.full_name', 'companies.id AS company_id', 'companies.firm_name', 'areas.id AS area_id', 'areas.name')
+			->get();
+		
+		if ( request()->ajax() )
+		{
+			return Datatables::of($assistances)->make(true);
+		}
 
-		return Datatables::of($assistances)->make(true);
+		return $assistances;
 	}
 
 	/**
@@ -386,5 +427,60 @@ class DailyAssistanceController extends Controller
 		return response()->json([
 			'employees' => $employees, 'areas' => $area, 'selected' => request('employee_id')
 		]);
+	}
+
+	public function getPdf()
+	{
+		$assistances = $this->getAssistances();
+
+		$header = view('global/pdf/header');
+        $footer = view('global/pdf/footer');
+        $pdf = \PDF::loadView('human-resources.daily-assistances.partials.pdf', [
+        	'assistances' => $assistances, 'init' => request('init'), 'end' => request('end'), 'area' => request('area_id'), 'employee' => request('employee_id')])
+        	->setOption('page-size', 'letter')
+	        ->setOption('margin-top', '25mm')
+	        ->setOption('margin-bottom', '14mm')
+	        ->setOption('margin-left', '20mm')
+	        ->setOption('margin-right', '20mm')
+	        ->setOption('header-spacing', '4')
+	        ->setOption('header-html', $header)
+	        ->setOption('footer-html', $footer);
+
+        return $pdf->inline();
+	}
+
+	public function getExcel()
+	{
+		$assistances = $this->getAssistances();
+
+		Excel::create('excel', function ($excel) use ($assistances) {
+            $excel->sheet('Control de Asistencia', function ($sheet) use ($assistances) {
+                $sheet->setBorder('A1:E1', 'thin', 'medium');
+                $sheet->setHeight(['1' => '25']);
+
+                for ($i = 1; $i <= count($assistances) + 2; $i++) {
+                    $sheet->cells('A'.$i.':D'.$i, function ($cells) {
+                        $cells->setFontFamily('Arial');
+                        $cells->setBorder('thin', 'thin');
+                    });
+                }   
+
+            	$sheet->cells('A1:E1', function ($cells) {
+                	$cells->setBackground('#C8E6C9');
+                    $cells->setValignment('center');
+                    $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                });
+
+                $sheet->cells('A2:E2', function ($cells) {
+                    $cells->setBackground('#B2DFDB');
+                    $cells->setValignment('center');
+                    $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                });
+
+                $sheet->loadView('human-resources.daily-assistances.partials.excel', [
+        			'assistances' => $assistances, 'init' => request('init'), 'end' => request('end'), 'area' => request('area_id'), 'employee' => request('employee_id')
+    			]);
+            });
+        })->download('xls');
 	}
 }

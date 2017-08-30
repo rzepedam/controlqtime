@@ -17,7 +17,7 @@
     </div>
     <table class="table table-bordered table-condensed">
         <thead>
-            <tr class="active">
+            <tr class="success">
                 <th class="col-xs-3">Nombre</th>
                 <th class="col-xs-2 text-center">Rut</th>
                 <th class="col-xs-5 text-center">Empresa</th>

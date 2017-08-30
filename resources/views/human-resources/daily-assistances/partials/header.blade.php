@@ -38,3 +38,37 @@
         @endforeach
     </select>
 </div>
+<div class="form-group col-xs-12 col-sm-1" style="margin-top: 27px;">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+                <a href="javascript:void(0)" role="menuitem" onclick="event.preventDefault(); document.getElementById('getExcel').submit();">
+                    <i class="fa fa-file-excel-o text-success" aria-hidden="true"></i> Exportar a Excel
+                </a>
+                {{ Form::open(['route' => 'getExcelDailyAssistance', 'method' => 'GET', 'id' => 'getExcel', 'style' => 'display: none;']) }}
+                    {{ Form::hidden('init', date('d-m-Y'), ['class'  => 'initForm']) }}
+                    {{ Form::hidden('end', date('d-m-Y'), ['class' => 'endForm']) }}
+                    {{ Form::hidden('company_id', $companies->keys()[0], ['class' => 'companyForm']) }}
+                    {{ Form::hidden('area_id', null, ['class' => 'areaForm']) }}
+                    {{ Form::hidden('employee_id', null, ['class' => 'employeeForm']) }}
+                {{ Form::close() }}
+            </li>
+            <li role="presentation">
+                <a href="javascript:void(0)" role="menuitem" onclick="event.preventDefault(); document.getElementById('getPdf').submit();"> 
+                    <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i> Exportar a PDF
+                </a>
+                {{ Form::open(['route' => 'getPdfDailyAssistance', 'method' => 'GET', 'id' => 'getPdf', 'style' => 'display: none;']) }}
+                    {{ Form::hidden('init', date('d-m-Y'), ['class'  => 'initForm']) }}
+                    {{ Form::hidden('end', date('d-m-Y'), ['class' => 'endForm']) }}
+                    {{ Form::hidden('company_id', $companies->keys()[0], ['class' => 'companyForm']) }}
+                    {{ Form::hidden('area_id', null, ['class' => 'areaForm']) }}
+                    {{ Form::hidden('employee_id', null, ['class' => 'employeeForm']) }}
+                {{ Form::close() }}
+            </li>
+        </ul>
+    </div>
+</div>

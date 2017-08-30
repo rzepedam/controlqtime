@@ -5,11 +5,14 @@ Route::get('human-resources', 'SidebarMenuController@getHumanResources')->name('
 
 // Human-Resources
 Route::group(['prefix' => 'human-resources'], function () {
+    
     // Daily assistances
 	Route::get('getAssistances', 'DailyAssistanceController@getAssistances');
 	Route::get('daily-assistances/loadEmployee', 'DailyAssistanceController@loadEmployee');
 	Route::get('daily-assistances/loadCompany', 'DailyAssistanceController@loadCompany');
 	Route::get('daily-assistances/loadArea', 'DailyAssistanceController@loadArea');
+    Route::get('daily-assistances/pdf', ['as' => 'getPdfDailyAssistance', 'uses' => 'DailyAssistanceController@getPdf']);
+    Route::get('daily-assistances/excel', ['as' => 'getExcelDailyAssistance', 'uses' => 'DailyAssistanceController@getExcel']);
 	Route::resource('daily-assistances', 'DailyAssistanceController');
 
     // Contracts
