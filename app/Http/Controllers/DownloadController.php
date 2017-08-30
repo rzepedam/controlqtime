@@ -65,7 +65,7 @@ class DownloadController extends Controller
             ->setOption('header-html', $header)
             ->setOption('footer-html', $footer);
 
-        return $pdf->inline();
+        return $pdf->download();
     }
 
     public function getExcel()

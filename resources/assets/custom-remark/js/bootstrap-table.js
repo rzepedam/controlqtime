@@ -1064,7 +1064,7 @@
                     '" type="text" placeholder="%s">',
                     this.options.formatSearch()),
                 '</div>');*/
-                '<div class="columns margin-top-0 columns-right btn-group pull-right"><div class="btn-group"><button class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-download" aria-hidden="true"></i><span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li data-type="excel"><a target="_blank" href="/download/excel"><i class="fa fa-file-excel-o text-success" aria-hidden="true"></i> Exportar a Excel </a></li><li data-type="pdf"><a target="_blank" href="/download/pdf"><i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i> Exportar a PDF </a></li></ul></div></div>' +
+                '<div class="columns margin-top-0 columns-right btn-group pull-right"><div class="btn-group"><button class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-download" aria-hidden="true"></i><span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li data-type="excel"><a href="/download/excel"><i class="fa fa-file-excel-o text-success" aria-hidden="true"></i> Exportar a Excel </a></li><li data-type="pdf"><a href="/download/pdf"><i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i> Exportar a PDF </a></li></ul></div></div>' +
                 '<div class="col-xs-12 col-sm-6 col-md-4 margin-bottom-20 padding-left-0 margin-top-0 padding-right-0 pull-' + this.options.searchAlign + ' search"><div class="input-group">',
                 sprintf('<input class="form-control' +
                     sprintf(' input-%s', this.options.iconSize) +

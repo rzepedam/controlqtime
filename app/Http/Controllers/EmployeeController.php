@@ -837,7 +837,7 @@ class EmployeeController extends Controller
 	            ->setOption('header-html', $header)
 	            ->setOption('footer-html', $footer);
 
-        	return $pdf->inline();
+        	return $pdf->download();
 			
 		} catch (\Exception $e) {
 			$this->log->error('Error getPdfShow: ' . $e->getMessage());
