@@ -18,7 +18,7 @@ class CompanyTableSeeder extends Seeder
             'gyre'            => 'Servicios integrales informáticos, desarrollos experimentales',
             'start_act'       => '31-07-2015',
             'muni_license'    => '000000',
-            'email_company'   => 'contacto@controlqtime.cl’',
+            'email_company'   => 'contacto@controlqtime.cl',
             'state'           => $state,
         ]); 
 
