@@ -178,7 +178,7 @@ class Visit extends Eloquent
         is_null($this->start_date) ? $expired = Carbon::parse($this->date)->format('Y-m-d') . ' ' . $this->hour
             : $expired = $this->start_date . ' 00:00:00';
 
-        $this->attributes['url'] = UrlSigner::sign(env('APP_URL').$value, Carbon::parse($expired));
+        $this->attributes['url'] = UrlSigner::sign(config('app.url') . $value, Carbon::parse($expired));
     }
 
     /**
