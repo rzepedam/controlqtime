@@ -11,15 +11,15 @@ class LegalRepresentativeTableSeeder extends Seeder
 
         LegalRepresentative::create([
             'company_id'            => 1,
-            'male_surname'          => 'Piña',
-            'female_surname'        => 'Ocayo',
-            'first_name'            => 'Alejandro',
-            'second_name'           => 'Ulises',
-            'full_name'             => '', 
-            'rut_representative'    => '8635558-2',
-            'birthday'              => '01-12-1964',
+            'male_surname'          => 'Zepeda',
+            'female_surname'        => 'Muñoz',
+            'first_name'            => 'Roberto',
+            'second_name'           => 'Andrés',
+            'full_name'             => 'Roberto Andrés Zepeda Muñoz', 
+            'rut_representative'    => '15679634-4',
+            'birthday'              => '15-08-1984',
             'nationality_id'        => 4,
-            'email_representative'  => 'apina@grupoalfra.cl',
+            'email_representative'  => 'robertozepeda@controlqtime.cl',
         ]);
     }
 }

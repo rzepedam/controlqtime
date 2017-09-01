@@ -16,7 +16,7 @@ class DetailAddressLegalEmployeeTableSeeder extends Seeder
 
         DetailAddressLegalEmployee::create([
             'address_id' => 1,
-            'depto'      => '1506',
+            'depto'      => '',
             'block'      => '',
             'num_home'   => '',
         ]);
@@ -25,7 +25,7 @@ class DetailAddressLegalEmployeeTableSeeder extends Seeder
             'address_id' => 3,
             'depto'      => '',
             'block'      => '',
-            'num_home'   => '1A',
+            'num_home'   => '',
         ]);
     }
 }

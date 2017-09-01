@@ -17,9 +17,9 @@ class DetailAddressCompanyTableSeeder extends Seeder
         DetailAddressCompany::create([
             'address_id' => 2,
             'lot'        => '',
-            'bod'        => 14,
-            'ofi'        => '',
-            'floor'      => '',
+            'bod'        => '',
+            'ofi'        => '201B',
+            'floor'      => '2',
         ]);
     }
 }

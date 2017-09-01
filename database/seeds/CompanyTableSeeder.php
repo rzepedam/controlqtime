@@ -13,12 +13,12 @@ class CompanyTableSeeder extends Seeder
 
         $company = Company::create([
             'type_company_id' => 1,
-            'rut'             => '76150396-0',
-            'firm_name'       => 'Stop Frenos, Alejandro Ulises Piña Ocayo, E.I.R.L.',
-            'gyre'            => 'Venta de partes, piezas y accesorios',
-            'start_act'       => '01-08-2010',
-            'muni_license'    => '203939',
-            'email_company'   => 'ventas@grupoalfra.cl',
+            'rut'             => '76530927-1',
+            'firm_name'       => 'Control Qtime S.p.A',
+            'gyre'            => 'Servicios integrales informáticos, desarrollos experimentales',
+            'start_act'       => '31-07-2015',
+            'muni_license'    => '000000',
+            'email_company'   => 'contacto@controlqtime.cl’',
             'state'           => $state,
         ]); 
 
