@@ -43,6 +43,7 @@ use Controlqtime\Core\Entities\TypeCertification;
 use Controlqtime\Core\Entities\FamilyRelationship;
 use Controlqtime\Core\Entities\ProfessionalLicense;
 use Controlqtime\Core\Entities\FamilyResponsability;
+use Controlqtime\Notifications\EmployeeWasRegistered;
 use Controlqtime\Core\Api\Entities\DailyAssistanceApi;
 use Controlqtime\Core\Entities\TypeProfessionalLicense;
 use Controlqtime\Core\Entities\DetailAddressLegalEmployee;
