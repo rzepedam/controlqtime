@@ -26,7 +26,7 @@ class EmployeeTableSeeder extends Seeder
             'state'             => 'enable',
         ]);
 
-        factory(\Controlqtime\Core\Entities\Employee::class, 199)->create();
+        // factory(\Controlqtime\Core\Entities\Employee::class, 199)->create();
 
         $employees = \Controlqtime\Core\Entities\Employee::all()->except(1);
 
