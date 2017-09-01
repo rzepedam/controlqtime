@@ -20,7 +20,9 @@ class CompanyTableSeeder extends Seeder
             'muni_license'    => '203939',
             'email_company'   => 'ventas@grupoalfra.cl',
             'state'           => $state,
-        ]);
+        ]); 
+
+        DB::table('area_company')->truncate();
 
 		DB::table('area_company')->insert([
 			'company_id' 	=> $company->id,
