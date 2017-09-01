@@ -2,10 +2,11 @@
 
 namespace Controlqtime\Core\Factory;
 
-use Controlqtime\Core\Entities\Image;
 use DB;
 use Exception;
 use Illuminate\Support\Str;
+use Controlqtime\Core\Entities\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ImageFactory
 {
@@ -88,6 +89,7 @@ class ImageFactory
 
         try {
             ($this->repoId === '/') ? $this->addImagesWithClassEmployeeVehicleAndCompany() : $this->addImagesWithSubClass();
+            
             $this->moveImage();
 
             DB::commit();
@@ -118,7 +120,7 @@ class ImageFactory
         $this->name = $this->getName();
         $model = $this->entity->findOrFail($this->repoId);
 
-        $model->imagesable()->create([
+        $model->imageable()->create([
             'path'      => $this->getPath().$this->name,
             'orig_name' => $this->name,
             'size'      => $this->file->getSize(),
@@ -167,7 +169,7 @@ class ImageFactory
             $image = new Image();
             $img = $image->findOrFail($this->id);
             if ($img->delete()) {
-                // Storage::disk('s3')->delete($img->path);
+                Storage::disk('s3')->delete($img->path);
                 DB::commit();
             }
         } catch (Exception $e) {

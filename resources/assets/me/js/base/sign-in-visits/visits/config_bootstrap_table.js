@@ -29,8 +29,7 @@ $('#visit_table').bootstrapTable({
         {
             formatter : function(value,row,index) {
                 return  '<a href="/sign-in-visits/visits/' + row.id + '"><i class="fa fa-search text-info" aria-hidden="true"></i></a>&nbsp ' +
-                        '<a href="/sign-in-visits/visits/' + row.id +'/edit"><i class="fa fa-pencil text-warning" aria-hidden="true"></i></a>&nbsp ' +
-                        '<a href="javascript:void(0)"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a> ';
+                        '<a href="/sign-in-visits/visits/' + row.id +'/edit"><i class="fa fa-pencil text-warning" aria-hidden="true"></i></a>&nbsp ';
             }
         },
     ],

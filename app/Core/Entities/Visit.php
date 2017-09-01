@@ -2,11 +2,11 @@
 
 namespace Controlqtime\Core\Entities;
 
+use UrlSigner;
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 use Controlqtime\Core\Helpers\FormatField;
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Jenssegers\Date\Date;
-use UrlSigner;
 
 class Visit extends Eloquent
 {

@@ -2,22 +2,22 @@
 
 namespace Controlqtime\Http\Controllers;
 
-use Controlqtime\Core\Entities\ActivateVisit;
-use Controlqtime\Core\Entities\Employee;
-use Controlqtime\Core\Entities\Image;
-use Controlqtime\Core\Entities\TypeVisit;
-use Controlqtime\Core\Entities\Visit;
-use Controlqtime\Core\Factory\ImageFactory;
-use Controlqtime\Mail\VisitApproved;
-use Controlqtime\Mail\VisitDenied;
-use Controlqtime\Mail\VisitRegister;
-use Controlqtime\Mail\VisitUpdateForm;
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
+use Controlqtime\Mail\VisitDenied;
 use Illuminate\Support\Facades\DB;
+use Controlqtime\Mail\VisitApproved;
+use Controlqtime\Mail\VisitRegister;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
+use Controlqtime\Core\Entities\Image;
+use Controlqtime\Core\Entities\Visit;
+use Controlqtime\Mail\VisitUpdateForm;
+use Controlqtime\Core\Entities\Employee;
+use Controlqtime\Core\Entities\TypeVisit;
+use Controlqtime\Core\Factory\ImageFactory;
+use Controlqtime\Core\Entities\ActivateVisit;
 
 class VisitController extends Controller
 {
@@ -236,11 +236,19 @@ class VisitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Visit $visit)
     {
-        $this->image->findOrFail($id)->delete();
+        try {
+            $visit->delete();
+            session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
 
-        return back();
+            return redirect()->route('visits.index');
+        } catch (Exception $e) {
+            $this->log->error('Error Delete Visit: '.$e->getMessage()); 
+            session()->flash('error', 'Hubo un error al eliminar la Visita. Contacte administrador.');
+
+            return redirect()->route('visits.index');
+        }
     }
 
     public function addPhotos($id, Request $request)

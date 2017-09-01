@@ -2,7 +2,11 @@
 	{{-- Tipo Visita select field --}}
 	<div class="col-xs-12 col-sm-6 col-md-3 form-group">
 		{{ Form::label('type_visit_id', 'Tipo Visita') }}
-		{{ Form::select('type_visit_id', $typeVisits, null, ['class' => 'form-control']) }}
+		@if ( Route::is('visits.create') )
+			{{ Form::select('type_visit_id', $typeVisits, null, ['class' => 'form-control']) }}
+		@else
+			{{ Form::select('type_visit_id', $typeVisits, null, ['class' => 'form-control', 'disabled']) }}
+		@endif
 	</div>
 	{{-- Guía select field --}}
 	<div class="col-xs-12 col-sm-6 col-md-3 form-group">
@@ -94,8 +98,8 @@
 			{{-- Fecha Visita date field --}}
 			<div class="col-xs-12 col-sm-3 col-md-3 form-group">
 			    {{ Form::label("date", "Fecha Visita", ["class" => "control-label"]) }}
-			    <div class="input-group date" data-plugin="datepicker" data-start-date="{{ date("d-m-Y") }}">
-			        {{ Form::text("date", Route::is('visits.create') ? null : $visit->date, ["class" => "form-control text-center", "readonly"]) }}
+			    <div class="input-group date" data-plugin="datepicker" data-start-date="{{ \Carbon\Carbon::parse(date("d-m-Y"))->addDay()->format('d-m-Y') }}">
+			        {{ Form::text("date", Route::is('visits.create') ? \Carbon\Carbon::parse(date("d-m-Y"))->addDay()->format('d-m-Y') : $visit->date, ["class" => "form-control text-center", "readonly"]) }}
 			        <div class="input-group-addon">
 			            <i class="fa fa-calendar"></i>
 			        </div>
@@ -115,8 +119,8 @@
 			{{-- Fecha Visita date field --}}
 			<div class="col-xs-12 col-sm-3 col-md-3 form-group">
 			    {{ Form::label("date", "Fecha Visita", ["class" => "control-label"]) }}
-			    <div class="input-group date" data-plugin="datepicker" data-start-date="{{ date("d-m-Y") }}">
-			        {{ Form::text("date", null, ["class" => "form-control text-center", "readonly"]) }}
+			    <div class="input-group date" data-plugin="datepicker" data-start-date="{{ \Carbon\Carbon::parse(date("d-m-Y"))->addDay()->format('d-m-Y') }}">
+			        {{ Form::text("date", \Carbon\Carbon::parse(date("d-m-Y"))->addDay()->format('d-m-Y'), ["class" => "form-control text-center", "readonly"]) }}
 			        <div class="input-group-addon">
 			            <i class="fa fa-calendar"></i>
 			        </div>
@@ -135,8 +139,8 @@
 		@else
 			<div class="col-xs-12 col-sm-3 col-md-3 form-group">
 				{{ Form::label("start_date", "Fecha Inicio Visita", ["class" => "control-label"]) }}
-				<div class="input-group date" data-plugin="datepicker" data-start-date="{{ date("d-m-Y") }}">
-					{{ Form::text("start_date", null, ["class" => "form-control text-center", "readonly"]) }}
+				<div class="input-group date" data-plugin="datepicker" data-start-date="{{ \Carbon\Carbon::parse(date("d-m-Y"))->addDay()->format('d-m-Y') }}">
+					{{ Form::text("start_date", \Carbon\Carbon::parse($visit->start_date)->format('d-m-Y'), ["class" => "form-control text-center", "readonly"]) }}
 					<div class="input-group-addon">
 						<i class="fa fa-calendar"></i>
 					</div>
@@ -144,8 +148,8 @@
 			</div>
 			<div class="col-xs-12 col-sm-3 col-md-3 form-group">
 				{{ Form::label("end_date", "Fecha Fin Visita", ["class" => "control-label"]) }}
-				<div class="input-group date" data-plugin="datepicker" data-start-date="{{ date("d-m-Y") }}">
-					{{ Form::text("end_date", null, ["class" => "form-control text-center", "readonly"]) }}
+				<div class="input-group date" data-plugin="datepicker" data-start-date="{{ \Carbon\Carbon::parse(date("d-m-Y"))->addDay()->format('d-m-Y') }}">
+					{{ Form::text("end_date", \Carbon\Carbon::parse($visit->end_date)->format('d-m-Y'), ["class" => "form-control text-center", "readonly"]) }}
 					<div class="input-group-addon">
 						<i class="fa fa-calendar"></i>
 					</div>
