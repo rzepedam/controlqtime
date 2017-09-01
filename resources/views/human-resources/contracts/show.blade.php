@@ -24,14 +24,21 @@
             <div class="tab-pane" id="tab_2" role="tabpanel">
 
                 @include('human-resources.contracts.partials.show.terms_and_obligatories')
-
+            
             </div>
         </div>
+
+        @include('human-resources.contracts.partials.delete')
+
     </div>
+    <br><br>
     <div class="row">
         <div class="col-md-12">
             <a href="{{ route('contracts.index') }}"><i class="fa fa-reply" aria-hidden="true"></i> Volver</a>
         </div>
     </div>
 
+@stop
+@section('scripts')
+    <script type="text/javascript" src="{{ mix('js/human-resources/contracts/show.js') }}"></script>
 @stop

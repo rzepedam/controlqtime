@@ -31,7 +31,6 @@ class CreateContractsTable extends Migration
             $table->string('mobilization', 8);
             $table->string('collation', 8);
             $table->timestamp('expires_at')->default(null);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

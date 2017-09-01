@@ -224,6 +224,9 @@ const { mix } = require('laravel-mix');
                 'resources/assets/me/js/base/human-resources/contracts/custom-contracts.js'
             ], 'public/js/human-resources/contracts/create-custom-contracts.js');
 
+        // Show
+            mix.scripts('resources/assets/me/js/utilities/delete.js', 'public/js/human-resources/contracts/show.js');
+
         // Pdf
         mix.copy(
             'resources/assets/me/css/human-resources/contracts/pdf/index.css', 

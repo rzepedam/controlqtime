@@ -5,18 +5,15 @@ namespace Controlqtime\Core\Entities;
 use Carbon\Carbon;
 use Jenssegers\Date\Date;
 use Controlqtime\Core\Helpers\FormatField;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Contract extends Eloquent
 {
-    use SoftDeletes;
-
 	/**
 	 * @var array
 	 */
 	protected $dates = [
-		'start_contract', 'expires_at', 'deleted_at',
+		'start_contract', 'expires_at'
 	];
 
     /**

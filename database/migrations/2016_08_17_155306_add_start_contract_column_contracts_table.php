@@ -14,7 +14,7 @@ class AddStartContractColumnContractsTable extends Migration
     public function up()
     {
         Schema::table('contracts', function (Blueprint $table) {
-            $table->date('start_contract');
+            $table->date('start_contract')->after('collation');
         });
     }
 

@@ -217,6 +217,28 @@ class ContractController extends Controller
 		return view('human-resources.contracts.show', compact('contract'));
 	}
 
+	public function destroy($id)
+	{
+		DB::beginTransaction();
+
+		try
+		{
+			$contract = $this->contract->with(['employee'])->findOrFail($id);
+			$contract->delete();
+			$this->activateEmployee->checkStateUpdateEmployee($contract->employee->id);
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+			DB::commit();
+
+            return redirect()->route('contracts.index');
+		} catch ( Exception $e )
+		{
+			$this->log->info('Error Delete Contract: ' . $e->getMessage());
+			session()->flash('success', 'El registro fue eliminado satisfactoriamente.');
+
+            return redirect()->route('contracts.index');
+		}
+	}
+
 	/**
 	 * @param Request $request
 	 *

@@ -39,7 +39,7 @@ class ActivateEmployee extends Eloquent
             'certifications.imageable', 'specialities.imageable', 'professionalLicenses.imageable',
             'disabilities.imageable', 'diseases.imageable', 'exams.imageable', 'contract',
         ])->findOrFail($id);
-
+        
         if (is_null($employee->contract)) {
             return $this->saveStateDisableEmployee($employee);
         }
