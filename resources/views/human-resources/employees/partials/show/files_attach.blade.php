@@ -180,7 +180,7 @@
                     </div>
                     @if ($employee->num_images_certification > 0)
                         @foreach($employee->certifications as $certification)
-                            @foreach($certification->imagesable as $image_certification)
+                            @foreach($certification->imageable as $image_certification)
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -227,7 +227,7 @@
                     </div>
                     @if ($employee->num_images_speciality > 0)
                         @foreach($employee->specialities as $speciality)
-                            @foreach($speciality->imagesable as $image_speciality)
+                            @foreach($speciality->imageable as $image_speciality)
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -273,7 +273,7 @@
                     </div>
                     @if ($employee->num_images_professional_licenses > 0)
                         @foreach($employee->professionalLicenses as $professional_license)
-                            @foreach($professional_license->imagesable as $image_professional_license)
+                            @foreach($professional_license->imageable as $image_professional_license)
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -319,7 +319,7 @@
                     </div>
                     @if ($employee->num_images_disabilities > 0)
                         @foreach($employee->disabilities as $disability)
-                            @foreach($disability->imagesable as $image_disability)
+                            @foreach($disability->imageable as $image_disability)
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -365,7 +365,7 @@
                     </div>
                     @if ($employee->num_images_diseases > 0)
                         @foreach($employee->diseases as $disease)
-                            @foreach($disease->imagesable as $image_disease)
+                            @foreach($disease->imageable as $image_disease)
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -411,7 +411,7 @@
                     </div>
                     @if ($employee->num_images_exams > 0)
                         @foreach($employee->exams as $exam)
-                            @foreach($exam->imagesable as $image_exam)
+                            @foreach($exam->imageable as $image_exam)
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
@@ -457,7 +457,7 @@
                     </div>
                     @if ($employee->num_images_family_responsabilities > 0)
                         @foreach($employee->familyResponsabilities as $family_responsability)
-                            @foreach($family_responsability->imagesable as $image_family_responsability)
+                            @foreach($family_responsability->imageable as $image_family_responsability)
                                 <div class="col-sm-4 col-md-4">
                                     <div class="widget widget-shadow">
                                         <figure class="widget-header overlay-hover overlay">
