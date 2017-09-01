@@ -35,7 +35,7 @@ class VisitRegister extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->subject('Formulario Registro Visita')
-                    ->attach(storage_path().'/mail/attach/visits/DAS.pdf')
+                    ->attach(storage_path() . '/mail/attach/visits/DAS.pdf')
                     ->markdown('emails.visits.form_visit', compact('visit'));
     }
 }

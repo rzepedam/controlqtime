@@ -464,7 +464,7 @@ class EmployeeController extends Controller
 			$employee->deleteFamilyResponsabilities($request->get('id_delete_family_responsability'));
 			$employee->createFamilyResponsabilities($request->all());
 			$this->activateEmployee->checkStateUpdateEmployee($id);
-			// $employee->user->notify(new EmployeeWasRegistered($employee));
+			$employee->user->notify(new EmployeeWasRegistered($employee));
 			$this->destroySessionUpdateEmployee();
 			session()->flash('success', 'El registro fue actualizado satisfactoriamente.');
 			DB::commit();
